@@ -260,6 +260,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
     commandTable.registerCommand("cmd_renderedHTMLEnabler", cmdDummyHTML);
 
+    commandTable.registerCommand("cmd_table",       cmdInsertOrEditTableCommand);
+
     commandTable.registerCommand("cmd_class", cmdClass);
   },
 
@@ -315,4 +317,5 @@ var ComposerCommands = {
 #include viewCommands.inc
 #include dummyCommands.inc
 #include formatCommands.inc
+#include insertionCommands.inc
 

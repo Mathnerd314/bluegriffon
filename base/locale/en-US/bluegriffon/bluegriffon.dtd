@@ -149,3 +149,6 @@
 
 <!ENTITY applyClassToSelectionCmd.tooltip "Apply a class to the selection">
 <!ENTITY noClass.label "(no class)">
+
+<!ENTITY tableToolbarCmd.label "Table">
+<!ENTITY tableToolbarCmd.tooltip "Insert new table or edit selected table's properties">

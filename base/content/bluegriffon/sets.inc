@@ -14,8 +14,8 @@
   <command id="cmd_new"                         oncommand="goDoCommand('cmd_new')"/>
   <command id="cmd_newWizard"                   oncommand="goDoCommand('cmd_newWizard')"/>
 
-    <command id="Tasks:Inspector" oncommand="inspectDOMDocument();"/>
-    <command id="Tasks:InspectPage" oncommand="inspectDOMDocument(_content.document);"/>
+  <command id="Tasks:Inspector" oncommand="inspectDOMDocument();"/>
+  <command id="Tasks:InspectPage" oncommand="inspectDOMDocument(_content.document);"/>
 </commandset>
 
 <commandset id="commonEditorMenuItems"
@@ -23,6 +23,13 @@
             events="create"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <command id="cmd_open"         oncommand="goDoCommand('cmd_open')"/>
+</commandset>
+
+<commandset id="composerMenuItems"
+            commandupdater="true"
+            events="create,style,mode_switch"
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+  <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"
@@ -47,6 +54,7 @@
 
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
+
 </commandset>
 
 <commandset id="selectionBasedCommands"

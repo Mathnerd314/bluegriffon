@@ -434,5 +434,26 @@ var EditorUtils = {
       display = CssUtils.getComputedStyle(e).getPropertyValue("display");
   	}
   	return {classes: e.className, node: e};
+  },
+
+  getCurrentTableEditor: function()
+  {
+    var editor = this.getCurrentEditor();
+    return (editor &&
+            (editor instanceof Components.interfaces.nsITableEditor)) ? editor : null;
+  },
+
+  isStrictDTD: function()
+  {
+    var doctype = this.getCurrentEditor().document.doctype;
+    return (doctype.publicId.lastIndexOf("Strict") != -1);
+  },
+  
+  isCSSDisabledAndStrictDTD: function()
+  {
+    var prefs = GetPrefs();
+    var IsCSSPrefChecked = prefs.getBoolPref("editor.use_css");
+    return !IsCSSPrefChecked && this.isStrictDTD();
   }
+
 };

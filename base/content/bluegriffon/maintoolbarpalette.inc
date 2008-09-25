@@ -29,6 +29,10 @@
                      disabled="true"
                      command="cmd_stopLoading"/>
 
+      <toolbarbutton id="tableButton" class="toolbarbutton-1"
+                     label="&tableToolbarCmd.label;" observes="cmd_table"
+                     tooltiptext="&tableToolbarCmd.tooltip;"/>
+
       <toolbaritem id="throbber-box"  align="center" pack="center">
         <image id="composer-throbber" tooltiptext="&throbber.tooltip;" onclick="AboutComposer()"/>
       </toolbaritem> 
