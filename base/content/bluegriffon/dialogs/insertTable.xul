@@ -278,7 +278,7 @@
               <label value="&cellSpacing.label;"/>
               <hbox>
                 <textbox value="2" type="number" id="cellSpacing" oninput="forceInteger(this.id);"
-                         preference="bluegriffon.defaults.table.cell_spacing">
+                         preference="bluegriffon.defaults.table.cell_spacing" />
                 <label value="&pixels.label;"/>
               </hbox>
             </row>
@@ -286,7 +286,7 @@
               <label value="&cellPadding.label;"/>
               <hbox>
                 <textbox value="2" type="number" id="cellPadding" oninput="forceInteger(this.id);"
-                         preference="bluegriffon.defaults.table.cell_padding">
+                         preference="bluegriffon.defaults.table.cell_padding" />
                 <label value="&pixels.label;"/>
               </hbox>
   
