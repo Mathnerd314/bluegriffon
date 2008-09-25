@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Diavolo.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (glazman@disruptive-innovations.com), Original author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<bindings id="sourceeditorBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="sourceeditor">
+
+    <content>
+      <xul:editor flex="1" anonid="editor" editortype="html" type="content-primary"
+                  onmousedown="this.parentNode.mSelector.selectLine(event, this)"
+                  onmouseover="this.parentNode.mSelector.extendSelection(event, this)"
+                  onmouseup="this.parentNode.mSelector.stopSelectLine(event, this)"
+                  />
+    </content>
+
+    <implementation>
+
+      <!-- ******************************************************
+           * CONSTRUCTOR AND DESTRUCTOR
+           ****************************************************** -->
+
+      <destructor>
+        <![CDATA[
+          if (this.mEditor)
+            this.mEditor.shutdown();
+        ]]>
+      </destructor>
+
+      <!-- ******************************************************
+           * FIELDS AND PROPERTIES
+           ****************************************************** -->
+
+      <field name="mSelector">null</field>
+      <field name="mEditor">null</field>
+
+      <property name="mXULEditor"
+                readonly="true"
+                onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'editor')" />
+
+      <property name="editorCore"
+                readonly="true"
+                onget="return this.mEditor.mEditorCore" />
+
+      <property name="roles"
+                readonly="true"
+                onget="return this.mEditor.mHighlighter.mTokenizer.mGrammar.getRoles()" />
+
+      <property name="tokens"
+                readonly="true"
+                onget="return this.mEditor.mHighlighter.mTokenizer.mGrammar.getTokens()" />
+
+      <property name="textContent">
+        <getter>
+          return this.mEditor.textContent();
+        </getter>
+        <setter>
+          <![CDATA[
+            this.mEditor.clear();
+            this.editorCore.QueryInterface(Components.interfaces.nsIPlaintextEditor)
+              .insertText(val);
+          ]]>
+        </setter>
+      </property>
+
+      <property name="styles">
+        <getter>
+          return this.mEditor.mHighlighter.mTokenizer.mGrammar.getStyles();
+        </getter>
+        <setter>
+          <![CDATA[
+            this.mEditor.mHighlighter.mTokenizer.mGrammar.getStyles(val);
+            this.mEditor.mHighlighter.installStylesheet();
+          ]]>
+        </setter>
+      </property>
+
+      <property name="errorStyle">
+        <getter>
+          return this.mEditor.mHighlighter.mTokenizer.mGrammar.getErrorStyle();
+        </getter>
+        <setter>
+          <![CDATA[
+            this.mEditor.mHighlighter.mTokenizer.mGrammar.setErrorStyle(val);
+          ]]>
+        </setter>
+      </property>
+
+      <property name="skipuntilStyle">
+        <getter>
+          return this.mEditor.mHighlighter.mTokenizer.mGrammar.getSkipuntilStyle();
+        </getter>
+        <setter>
+          <![CDATA[
+            this.mEditor.mHighlighter.mTokenizer.mGrammar.setSkipuntilStyle(val);
+          ]]>
+        </setter>
+      </property>
+
+      <!-- ******************************************************
+           * PRIVATE METHODS
+           ****************************************************** -->
+
+      <!-- ******************************************************
+           * PUBLIC METHODS
+           ****************************************************** -->
+
+      <method name="init">
+        <body>
+        <![CDATA[
+          this.mXULEditor.makeEditable("html", false);
+          if (!this.hasAttribute("grammarURL"))
+            return;
+
+          this.mEditor = new DiavoloEditor("",
+                                           this.getAttribute("grammarURL"),
+                                           this.mXULEditor);
+          this.editorCore instanceof Components.interfaces.nsIEditorStyleSheets;
+          this.editorCore.replaceOverrideStyleSheet("chrome://diavolo/content/EditorOverride.css");
+
+          this.mXULEditor.docShell.allowJavascript = true;
+
+          this.mSelector = new DiavoloSelector(this.mEditor);
+          this.mXULEditor.contentWindow.focus();
+        ]]>
+        </body>
+      </method>
+
+      <method name="clear">
+        <body>
+        <![CDATA[
+          this.mEditor.clear();
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+</bindings>

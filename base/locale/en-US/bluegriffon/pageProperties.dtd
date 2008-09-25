@@ -1,0 +1,33 @@
+<!ENTITY window.title "Document properties">
+
+<!ENTITY pageLocation.label "Location:">
+<!ENTITY pageLastModified.label "Last Modified:">
+<!ENTITY pageTitle.label "Title:">
+<!ENTITY pageAuthor.label "Author:">
+<!ENTITY pageDescription.label "Description:">
+<!ENTITY pageTitle.accesskey "T">
+<!ENTITY pageAuthor.accesskey "A">
+<!ENTITY pageDescription.accesskey "D">
+<!ENTITY pageKeywords.label "Keywords:">
+<!ENTITY pageKeywords.accesskey "K">
+
+<!ENTITY backgroundImage.label "Background Image:">
+<!ENTITY backgroundImage.accesskey "B">
+
+<!ENTITY filepickerForBgImage.title "Select a background image">
+<!ENTITY pagePreview.label "Preview:">
+
+<!ENTITY useSystemColors.label "Reader's defaults colors (Don't set colors in page)">
+<!ENTITY userDefinedColors.label "Use custom colors:">
+
+<!ENTITY backgroundColor.label "Background:">
+<!ENTITY textColor.label "Text:">
+<!ENTITY linksColor.label "Links:">
+<!ENTITY activeLinksColor.label "Active Links:">
+<!ENTITY visitedLinksColor.label "Visited Links:">
+
+<!ENTITY relativeURLForBgImage.label "URL is relative to page location">
+
+<!ENTITY generalTab.label "General">
+<!ENTITY styleTab.label "Style">
+<!ENTITY advancedTab.label "Advanced">

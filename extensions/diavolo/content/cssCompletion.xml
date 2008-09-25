@@ -1,0 +1,408 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Diavolo.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL
+   - Portions created by the Initial Developer are Copyright (C) 2006-2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (glazman@disruptive-innovations.com), Original author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE codeCompletion [
+ <!ATTLIST type id ID #IMPLIED>
+]>
+
+<codeCompletion name="css">
+
+  <type id="type">
+    <suggestion value="h1" />
+    <suggestion value="h2" />
+    <suggestion value="h3" />
+    <suggestion value="h4" />
+    <suggestion value="h5" />
+    <suggestion value="h6" />
+    <suggestion value="a" />
+    <suggestion value="abbr" />
+    <suggestion value="acronym" />
+    <suggestion value="address" />
+    <suggestion value="applet" />
+    <suggestion value="area" />
+    <suggestion value="b" />
+    <suggestion value="bdo" />
+    <suggestion value="big" />
+    <suggestion value="blockquote" />
+    <suggestion value="body" />
+    <suggestion value="br" />
+    <suggestion value="button" />
+    <suggestion value="caption" />
+    <suggestion value="center" />
+    <suggestion value="cite" />
+    <suggestion value="code" />
+    <suggestion value="col" />
+    <suggestion value="colgroup" />
+    <suggestion value="dd" />
+    <suggestion value="del" />
+    <suggestion value="dfn" />
+    <suggestion value="dir" />
+    <suggestion value="div" />
+    <suggestion value="dl" />
+    <suggestion value="dt" />
+    <suggestion value="em" />
+    <suggestion value="fieldset" />
+    <suggestion value="font" />
+    <suggestion value="form" />
+    <suggestion value="frame" />
+    <suggestion value="frameset" />
+    <suggestion value="hr" />
+    <suggestion value="html" />
+    <suggestion value="iframe" />
+    <suggestion value="img" />
+    <suggestion value="input" />
+    <suggestion value="ins" />
+    <suggestion value="isindex" />
+    <suggestion value="kbd" />
+    <suggestion value="label" />
+    <suggestion value="legend" />
+    <suggestion value="li" />
+    <suggestion value="map" />
+    <suggestion value="menu" />
+    <suggestion value="noframes" />
+    <suggestion value="object" />
+    <suggestion value="ol" />
+    <suggestion value="optgroup" />
+    <suggestion value="option" />
+    <suggestion value="p" />
+    <suggestion value="param" />
+    <suggestion value="pre" />
+    <suggestion value="q" />
+    <suggestion value="s" />
+    <suggestion value="samp" />
+    <suggestion value="select" />
+    <suggestion value="small" />
+    <suggestion value="span" />
+    <suggestion value="strike" />
+    <suggestion value="strong" />
+    <suggestion value="sub" />
+    <suggestion value="sup" />
+    <suggestion value="table" />
+    <suggestion value="tbody" />
+    <suggestion value="td" />
+    <suggestion value="textarea" />
+    <suggestion value="tfoot" />
+    <suggestion value="th" />
+    <suggestion value="thead" />
+    <suggestion value="tr" />
+    <suggestion value="tt" />
+    <suggestion value="u" />
+    <suggestion value="ul" />
+    <suggestion value="var" />
+  </type>
+
+  <type id="property">
+    <suggestion value="azimuth" />
+    <suggestion value="background" />
+    <suggestion value="background-attachment" />
+    <suggestion value="background-color" />
+    <suggestion value="background-image" />
+    <suggestion value="background-position" />
+    <suggestion value="background-repeat" />
+    <suggestion value="border" />
+    <suggestion value="border-collapse" />
+    <suggestion value="border-color" />
+    <suggestion value="border-spacing" />
+    <suggestion value="border-style" />
+    <suggestion value="border-top" />
+    <suggestion value="border-right" />
+    <suggestion value="border-bottom" />
+    <suggestion value="border-left" />
+    <suggestion value="border-top-color" />
+    <suggestion value="border-right-color" />
+    <suggestion value="border-bottom-color" />
+    <suggestion value="border-left-color" />
+    <suggestion value="border-top-style" />
+    <suggestion value="border-right-style" />
+    <suggestion value="border-bottom-style" />
+    <suggestion value="border-left-style" />
+    <suggestion value="border-top-width" />
+    <suggestion value="border-right-width" />
+    <suggestion value="border-bottom-width" />
+    <suggestion value="border-left-width" />
+    <suggestion value="border-width" />
+    <suggestion value="bottom" />
+    <suggestion value="caption-side" />
+    <suggestion value="clear" />
+    <suggestion value="clip" />
+    <suggestion value="color" />
+    <suggestion value="content" />
+    <suggestion value="counter-increment" />
+    <suggestion value="counter-reset" />
+    <suggestion value="cue" />
+    <suggestion value="cue-after" />
+    <suggestion value="cue-before" />
+    <suggestion value="cursor" />
+    <suggestion value="direction" />
+    <suggestion value="display" />
+    <suggestion value="elevation" />
+    <suggestion value="empty-cells" />
+    <suggestion value="float" />
+    <suggestion value="font" />
+    <suggestion value="font-family" />
+    <suggestion value="font-size" />
+    <suggestion value="font-size-adjust" />
+    <suggestion value="font-stretch" />
+    <suggestion value="font-style" />
+    <suggestion value="font-variant" />
+    <suggestion value="font-weight" />
+    <suggestion value="height" />
+    <suggestion value="left" />
+    <suggestion value="letter-spacing" />
+    <suggestion value="line-height" />
+    <suggestion value="list-style" />
+    <suggestion value="list-style-image" />
+    <suggestion value="list-style-position" />
+    <suggestion value="list-style-type" />
+    <suggestion value="margin" />
+    <suggestion value="margin-top" />
+    <suggestion value="margin-right" />
+    <suggestion value="margin-bottom" />
+    <suggestion value="margin-left" />
+    <suggestion value="marker-offset" />
+    <suggestion value="marks" />
+    <suggestion value="max-height" />
+    <suggestion value="max-width" />
+    <suggestion value="min-height" />
+    <suggestion value="min-width" />
+    <suggestion value="orphans" />
+    <suggestion value="outline" />
+    <suggestion value="outline-color" />
+    <suggestion value="outline-style" />
+    <suggestion value="outline-width" />
+    <suggestion value="overflow" />
+    <suggestion value="padding" />
+    <suggestion value="padding-top" />
+    <suggestion value="padding-right" />
+    <suggestion value="padding-bottom" />
+    <suggestion value="padding-left" />
+    <suggestion value="page" />
+    <suggestion value="page-break-after" />
+    <suggestion value="page-break-before" />
+    <suggestion value="page-break-inside" />
+    <suggestion value="pause" />
+    <suggestion value="pause-after" />
+    <suggestion value="pause-before" />
+    <suggestion value="pitch" />
+    <suggestion value="pitch-range" />
+    <suggestion value="play-during" />
+    <suggestion value="position" />
+    <suggestion value="quotes" />
+    <suggestion value="richness" />
+    <suggestion value="right" />
+    <suggestion value="size" />
+    <suggestion value="speak" />
+    <suggestion value="speak-header" />
+    <suggestion value="speak-numeral" />
+    <suggestion value="speak-punctuation" />
+    <suggestion value="speech-after" />
+    <suggestion value="stress" />
+    <suggestion value="table-layout" />
+    <suggestion value="text-align" />
+    <suggestion value="text-decoration" />
+    <suggestion value="text-indent" />
+    <suggestion value="text-shadow" />
+    <suggestion value="text-transform" />
+    <suggestion value="top" />
+    <suggestion value="unicode-bidi" />
+    <suggestion value="vertical-align" />
+    <suggestion value="visibility" />
+    <suggestion value="voice-family" />
+    <suggestion value="volume" />
+    <suggestion value="volume" />
+    <suggestion value="width" />
+    <suggestion value="z-index" />
+  </type>
+
+  <type id="value">
+    <context name="property" />
+
+    <always><suggestion value="inherit" /><suggestion value="initial" /></always>
+
+    <suggestiongroup forcontext="azimuth"><suggestion value="behind" /><suggestion value="center" /><suggestion value="center-left" /><suggestion value="center-right" /><suggestion value="far-left" /><suggestion value="far-right" /><suggestion value="left" /><suggestion value="left-side" /><suggestion value="leftwards" /><suggestion value="right" /><suggestion value="right-side" /><suggestion value="rightwards" /></suggestiongroup>
+    <suggestiongroup forcontext="background-attachment"><suggestion value="fixed" /><suggestion value="scroll" /></suggestiongroup>
+    <suggestiongroup forcontext="background-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="background-image"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="background-position"><suggestion value="bottom" /><suggestion value="center" /><suggestion value="left" /><suggestion value="right" /><suggestion value="top" /></suggestiongroup>
+    <suggestiongroup forcontext="background-repeat"><suggestion value="no-repeat" /><suggestion value="repeat" /><suggestion value="repeat-x" /><suggestion value="repeat-y" /></suggestiongroup>
+    <suggestiongroup forcontext="border-collapse"><suggestion value="collapse" /><suggestion value="separate" /></suggestiongroup>
+    <suggestiongroup forcontext="border-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="border-top-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="border-bottom-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="border-left-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="border-right-color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="transparent" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="border-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="border-top-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="border-bottom-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="border-left-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="border-right-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="bottom"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="caption-side"><suggestion value="bottom" /><suggestion value="left" /><suggestion value="right" /><suggestion value="top" /></suggestiongroup>
+    <suggestiongroup forcontext="clear"><suggestion value="both" /><suggestion value="left" /><suggestion value="none" /><suggestion value="right" /></suggestiongroup>
+    <suggestiongroup forcontext="color"><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="content"><suggestion value="open-quote" /><suggestion value="close-quote" /><suggestion value="no-open-quote" /><suggestion value="no-close-quote" /></suggestiongroup>
+    <suggestiongroup forcontext="counter-increment"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="counter-reset"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="cue"><suggestion value="cue-after" /><suggestion value="cue-before" /></suggestiongroup>
+    <suggestiongroup forcontext="cue-after"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="cue-before"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="cursor"><suggestion value="auto" /><suggestion value="crosshair" /><suggestion value="default" /><suggestion value="pointer" /><suggestion value="move" /><suggestion value="e-resize" /><suggestion value="ne-resize" /><suggestion value="nw-resize" /><suggestion value="n-resize" /><suggestion value="se-resize" /><suggestion value="sw-resize" /><suggestion value="s-resize" /><suggestion value="w-resize" /><suggestion value="text" /><suggestion value="wait" /><suggestion value="help" /></suggestiongroup>
+    <suggestiongroup forcontext="direction"><suggestion value="ltr" /><suggestion value="rtl" /></suggestiongroup>
+    <suggestiongroup forcontext="display"><suggestion value="none" /><suggestion value="block" /><suggestion value="inline" /><suggestion value="inline-block" /><suggestion value="inline-table" /><suggestion value="list-item" /><suggestion value="compact" /><suggestion value="run-in" /><suggestion value="marker" />
+                                    <suggestion value="table" /><suggestion value="table-caption" /><suggestion value="table-cell" /><suggestion value="table-column" /><suggestion value="table-column-group" /><suggestion value="table-footer-group" /><suggestion value="table-header-group" /><suggestion value="table-row" /><suggestion value="table-row-group" /></suggestiongroup>
+    <suggestiongroup forcontext="elevation"><suggestion value="above" /><suggestion value="below" /><suggestion value="higher" /><suggestion value="level" /><suggestion value="lower" /></suggestiongroup>
+    <suggestiongroup forcontext="empty-cells"><suggestion value="hide" /><suggestion value="show" /></suggestiongroup>
+    <suggestiongroup forcontext="float"><suggestion value="none" /><suggestion value="left" /><suggestion value="right" /></suggestiongroup>
+    <suggestiongroup forcontext="font-family"><suggestion value="serif" /><suggestion value="sans-serif" /><suggestion value="monospace" /><suggestion value="fantasy" /><suggestion value="cursive" /></suggestiongroup>
+    <suggestiongroup forcontext="font-size"><suggestion value="xx-small" /><suggestion value="x-small" /><suggestion value="small" /><suggestion value="medium" /><suggestion value="large" /><suggestion value="x-large" /><suggestion value="xx-large" /><suggestion value="smaller" /><suggestion value="larger" /></suggestiongroup>
+    <suggestiongroup forcontext="font-size-adjust"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="font-stretch"><suggestion value="normal" /><suggestion value="wider" /><suggestion value="narrower" /><suggestion value="ultra-condensed" /><suggestion value="extra-condensed" /><suggestion value="condensed" /><suggestion value="semi-condensed" /><suggestion value="semi-expanded" /><suggestion value="expanded" /><suggestion value="extra-expanded" /><suggestion value="ultra-expanded" /></suggestiongroup>
+    <suggestiongroup forcontext="font-style"><suggestion value="normal" /><suggestion value="italic" /><suggestion value="oblique" /></suggestiongroup>
+    <suggestiongroup forcontext="font-variant"><suggestion value="normal" /><suggestion value="small-caps" /></suggestiongroup>
+    <suggestiongroup forcontext="font-weight"><suggestion value="normal" /><suggestion value="bold" /><suggestion value="bolder" /><suggestion value="lighter" /></suggestiongroup>
+    <suggestiongroup forcontext="height"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="left"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="letter-spacing"><suggestion value="normal" /></suggestiongroup>
+    <suggestiongroup forcontext="line-height"><suggestion value="normal" /></suggestiongroup>
+    <suggestiongroup forcontext="list-style-image"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="list-style-position"><suggestion value="inside" /><suggestion value="outside" /></suggestiongroup>
+    <suggestiongroup forcontext="list-style-type"><suggestion value="none" /><suggestion value="disc" /><suggestion value="circle" /><suggestion value="square" /><suggestion value="decimal" /><suggestion value="decimal-leading-zero" /><suggestion value="lower-roman" /><suggestion value="upper-roman" /><suggestion value="lower-greek" /><suggestion value="upper-greek" /><suggestion value="lower-alpha" /><suggestion value="upper-alpha" /><suggestion value="lower-latin" /><suggestion value="upper-latin" /><suggestion value="hebrew" /><suggestion value="armenian" /><suggestion value="georgian" /><suggestion value="cjk-ideographic" /><suggestion value="hiragana" /><suggestion value="katakana" /><suggestion value="hiragana-iroha" /><suggestion value="katakana-iroha" /></suggestiongroup>
+    <suggestiongroup forcontext="marker-offser"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="marks"><suggestion value="crop" /><suggestion value="cross" /><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="max-height"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="max-width"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="outline-color"><suggestion value="invert" /><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="outline-style"><suggestion value="dashed" /><suggestion value="dotted" /><suggestion value="double" /><suggestion value="groove" /><suggestion value="hidden" /><suggestion value="inset" /><suggestion value="none" /><suggestion value="outset" /><suggestion value="ridge" /><suggestion value="solid" /></suggestiongroup>
+    <suggestiongroup forcontext="overflow"><suggestion value="auto" /><suggestion value="hidden" /><suggestion value="scroll" /><suggestion value="visible" /></suggestiongroup>
+    <suggestiongroup forcontext="page-break-after"><suggestion value="auto" /><suggestion value="always" /><suggestion value="avoid" /><suggestion value="left" /><suggestion value="right" /></suggestiongroup>
+    <suggestiongroup forcontext="page-break-before"><suggestion value="auto" /><suggestion value="always" /><suggestion value="avoid" /><suggestion value="left" /><suggestion value="right" /></suggestiongroup>
+    <suggestiongroup forcontext="page-break-inside"><suggestion value="auto" /><suggestion value="avoid" /></suggestiongroup>
+    <suggestiongroup forcontext="pitch"><suggestion value="x-low" /><suggestion value="low" /><suggestion value="medium" /><suggestion value="high" /><suggestion value="x-high" /></suggestiongroup>
+    <suggestiongroup forcontext="play-during"><suggestion value="mix" /><suggestion value="repeat" /><suggestion value="auto" /><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="position"><suggestion value="static" /><suggestion value="relative" /><suggestion value="absolute" /><suggestion value="fixed" /></suggestiongroup>
+    <suggestiongroup forcontext="quotes"><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="right"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="size"><suggestion value="portrait" /><suggestion value="landscape" /></suggestiongroup>
+    <suggestiongroup forcontext="speak"><suggestion value="normal" /><suggestion value="none" /><suggestion value="spell-out" /></suggestiongroup>
+    <suggestiongroup forcontext="speak-header"><suggestion value="once" /><suggestion value="always" /></suggestiongroup>
+    <suggestiongroup forcontext="speak-numeral"><suggestion value="digits" /><suggestion value="continuous" /></suggestiongroup>
+    <suggestiongroup forcontext="speak-punctuation"><suggestion value="code" /><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="speech-rate"><suggestion value="x-slow" /><suggestion value="slow" /><suggestion value="medium" /><suggestion value="fast" /><suggestion value="x-fast" /><suggestion value="faster" /><suggestion value="slower" /></suggestiongroup>
+    <suggestiongroup forcontext="table-layout"><suggestion value="auto" /><suggestion value="fixed" /></suggestiongroup>
+    <suggestiongroup forcontext="text-align"><suggestion value="left" /><suggestion value="right" /><suggestion value="center" /><suggestion value="justify" /></suggestiongroup>
+    <suggestiongroup forcontext="text-decoration"><suggestion value="none" /><suggestion value="underline" /><suggestion value="overline" /><suggestion value="line-through" /><suggestion value="blink" /></suggestiongroup>
+    <suggestiongroup forcontext="text-shadow"><suggestion value="invert" /><suggestion value="aqua" /><suggestion value="black" /><suggestion value="blue" /><suggestion value="fuchsia" /><suggestion value="gray" /><suggestion value="green" /><suggestion value="lime" /><suggestion value="maroon" /><suggestion value="navy" /><suggestion value="olive" /><suggestion value="orange" /><suggestion value="purple" /><suggestion value="red" /><suggestion value="silver" /><suggestion value="teal" /><suggestion value="white" /><suggestion value="yellow" /></suggestiongroup>
+    <suggestiongroup forcontext="text-transform"><suggestion value="capitalize" /><suggestion value="uppercase" /><suggestion value="lowercase" /><suggestion value="none" /></suggestiongroup>
+    <suggestiongroup forcontext="top"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="unicode-bidi"><suggestion value="normal" /><suggestion value="embed" /><suggestion value="bidi-override" /></suggestiongroup>
+    <suggestiongroup forcontext="vertical-align"><suggestion value="baseline" /><suggestion value="sub" /><suggestion value="super" /><suggestion value="top" /><suggestion value="text-top" /><suggestion value="middle" /><suggestion value="bottom" /><suggestion value="text-bottom" /></suggestiongroup>
+    <suggestiongroup forcontext="visibility"><suggestion value="visible" /><suggestion value="hidden" /><suggestion value="collapse" /></suggestiongroup>
+    <suggestiongroup forcontext="voice-family"><suggestion value="male" /><suggestion value="female" /><suggestion value="child" /></suggestiongroup>
+    <suggestiongroup forcontext="volume"><suggestion value="silent" /><suggestion value="x-soft" /><suggestion value="soft" /><suggestion value="medium" /><suggestion value="loud" /><suggestion value="x-loud" /></suggestiongroup>
+    <suggestiongroup forcontext="white-space"><suggestion value="normal" /><suggestion value="pre" /><suggestion value="nowrap" /></suggestiongroup>
+    <suggestiongroup forcontext="width"><suggestion value="auto" /></suggestiongroup>
+    <suggestiongroup forcontext="word-spacing"><suggestion value="normal" /></suggestiongroup>
+    <suggestiongroup forcontext="z-index"><suggestion value="auto" /></suggestiongroup>
+  </type>
+
+  <type id="pseudo-selector">
+    <suggestion value="root"/>
+    <suggestion value="nth-child"/>
+    <suggestion value="nth-last-child"/>
+    <suggestion value="nth-last-of-type"/>
+    <suggestion value="nth-of-type"/>
+    <suggestion value="first-child"/>
+    <suggestion value="last-child"/>
+    <suggestion value="first-of-type"/>
+    <suggestion value="last-of-type"/>
+    <suggestion value="only-child"/>
+    <suggestion value="only-of-type"/>
+    <suggestion value="empty"/>
+    <suggestion value="link"/>
+    <suggestion value="visited"/>
+    <suggestion value="active"/>
+    <suggestion value="hover"/>
+    <suggestion value="focus"/>
+    <suggestion value="target"/>
+    <suggestion value="lang("/>
+    <suggestion value="enabled"/>
+    <suggestion value="disabled"/>
+    <suggestion value="checked"/>
+    <suggestion value="first-line"/>
+    <suggestion value="first-letter"/>
+    <suggestion value="selection"/>
+    <suggestion value="before"/>
+    <suggestion value="after"/>
+  </type>
+
+  <type id="colon-pseudo">
+    <suggestion value=":root"/>
+    <suggestion value=":nth-child"/>
+    <suggestion value=":nth-last-child"/>
+    <suggestion value=":nth-last-of-type"/>
+    <suggestion value=":nth-of-type"/>
+    <suggestion value=":first-child"/>
+    <suggestion value=":last-child"/>
+    <suggestion value=":first-of-type"/>
+    <suggestion value=":last-of-type"/>
+    <suggestion value=":only-child"/>
+    <suggestion value=":only-of-type"/>
+    <suggestion value=":empty"/>
+    <suggestion value=":link"/>
+    <suggestion value=":visited"/>
+    <suggestion value=":active"/>
+    <suggestion value=":hover"/>
+    <suggestion value=":focus"/>
+    <suggestion value=":target"/>
+    <suggestion value=":lang("/>
+    <suggestion value=":enabled"/>
+    <suggestion value=":disabled"/>
+    <suggestion value=":checked"/>
+    <suggestion value=":first-line"/>
+    <suggestion value=":first-letter"/>
+    <suggestion value=":selection"/>
+    <suggestion value=":before"/>
+    <suggestion value=":after"/>
+  </type>
+
+  <type id="bang">
+    <suggestion value="!important"/>
+  </type>
+
+</codeCompletion>

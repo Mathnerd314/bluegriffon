@@ -1,0 +1,16 @@
+diavolo.jar:
+% content   diavolo    			%content/diavolo/
+  content/diavolo/css.xml        (content/css.xml)
+  content/diavolo/css.css        (content/css.css)
+  content/diavolo/tokeniser.js        (content/tokeniser.js)
+  content/diavolo/highlighter.js        (content/highlighter.js)
+  content/diavolo/editor.js        (content/editor.js)
+  content/diavolo/linenumbering.xml        (content/linenumbering.xml)
+  content/diavolo/linenumbering.css        (content/linenumbering.css)
+  content/diavolo/grammar.js        (content/grammar.js)
+  content/diavolo/selector.js        (content/selector.js)
+  content/diavolo/sourceeditor.xml        (content/sourceeditor.xml)
+  content/diavolo/codecompletion.js        (content/codecompletion.js)
+  content/diavolo/cssCompletion.xml        (content/cssCompletion.xml)
+  content/diavolo/completionPopup.xml        (content/completionPopup.xml)
+  content/diavolo/EditorOverride.css        (content/EditorOverride.css)

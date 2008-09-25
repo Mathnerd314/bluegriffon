@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        background-color: white;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+      }
+      ul {
+        padding-left: 20px;
+        list-style-image: none;
+        list-style-type: none;
+      }
+
+      li > .plusTwisty {
+        display: none;
+      }
+      li > .minusTwisty {
+        display: inline;
+      }
+      li[open="true"] > .plusTwisty {
+        display: inline;
+      }
+      li[open="true"] > .minusTwisty {
+        display: none;
+      }
+
+      li:not([open="true"]) > ul {
+        display: none;
+      }
+      .tagName {
+        color: blue;
+      }
+      .attrName {
+        color: darkblue;
+      }
+      .attrValue {
+        color: red;
+      }
+      .textNode {
+        white-space: pre-wrap;
+      }
+      .pre-content > ul {
+        white-space: pre;
+      }
+      li[selected="true"] {
+        background-color: darkblue;
+        color: white;
+        -moz-border-radius: 3px;
+      }
+      li[selected="true"] span {
+        color: white;
+      }
+    </style>
+    <title></title>
+    <script>
+      function startup()
+      {
+        document.addEventListener("click", onClick, true);
+      }
+
+      function shutdown()
+      {
+        document.removeEventListener("click", onClick, true);
+      }
+
+      function onClick(aEvent)
+      {
+        var e = aEvent.explicitOriginalTarget;
+
+        if (e.nodeName.toLowerCase() == "img")
+        {
+          e = e.parentNode;
+          if (e.hasAttribute("open"))
+            e.removeAttribute("open");
+          else
+            e.setAttribute("open", "true");
+        }
+      }
+    </script>
+  </head>
+  <body onload="startup();" onunload="shutdown();"></body>
+</html>

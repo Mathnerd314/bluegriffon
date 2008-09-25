@@ -1,0 +1,97 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Diavolo.
+ *
+ * The Initial Developer of the Original Code is
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2006-2008
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+body {
+  background-color: white;
+}
+
+.CDO,.CDC {
+  font-style: italic;
+}
+
+.property {
+  color: red;
+}
+.value {
+  color: #0000cd;
+}
+
+.begin-pseudo-selector,
+.colon-pseudo,
+.end-pseudo-selector,
+.pseudo-selector {
+  color: #336666;
+}
+.funcnotation-value { color: #cc33cc; }
+
+.class-selector,
+.period-class {
+  color: #ff6600;
+}
+
+.attribute-name { color: #666666; }
+.attribute-value,.value[token="STRING"] { color : #cc33cc; }
+.openbracket, .closebracket { color: #666666; }
+
+.type { color: #993200; }
+.namespace { color: #993399 }
+.ID { color: #772100; }
+
+.comment { color: #009900; }
+
+.media { color: rgb(204, 102, 0); }
+
+.at-media,
+.at-charset,
+.at-fontface,
+.at-import,
+.at-namespace,
+.at-page { color: rgb(51, 102, 102); }
+
+.url-call, .function-call { color: #009900; }
+.url-value[token="STRING"] { color : #cc33cc; }
+.url-value[token="URL"] { color : #aa11aa; }
+
+*[error="true"] {
+  border-bottom: red dotted 1px;
+}
+
+.importance { font-style: italic; }
+
+.SKIPUNTIL { border-bottom: lime dotted 1px; }
+ 
+
