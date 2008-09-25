@@ -41,4 +41,6 @@ pref("bluegriffon.defaults.table.cols", "2");
 pref("bluegriffon.defaults.table.width", "100");
 pref("bluegriffon.defaults.table.width_unit", "percentage");
 pref("bluegriffon.defaults.table.text_wrap", "");
+pref("bluegriffon.defaults.table.cell_spacing", "2");
+pref("bluegriffon.defaults.table.cell_padding", "2");
 

@@ -1,27 +1,44 @@
 
 var gCellID = 12;
-var gDefaults = {};
-
+var gActiveEditor = null;
 var gPrefs = null;
+
 function Startup()
 {
-  GetUIElements();
-
-  gPrefs = GetPrefs();
-  if (!gPrefs)
+  gActiveEditor = EditorUtils.getCurrentTableEditor();
+  if (!gActiveEditor)
+  {
+    dump("Failed to get active editor!\n");
+    window.close();
     return;
+  }
 
-  gDefaults.halign      = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.halign");
-  gDefaults.valign      = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.valign");
-  gDefaults.border      = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.border");
-  gDefaults.rows        = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.rows");
-  gDefaults.cols        = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.cols");
-  gDefaults.width       = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.width");
-  gDefaults.width_unit  = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.width_unit");
-  gDefaults.text_wrap   = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.text_wrap");
-  gDefaults.width       = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.width");
-  gDefaults.width       = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.width");
-  gDefaults.width       = gPrefs.gPrefs.getCharPref("bluegriffon.defaults.table.width");
+  GetUIElements();
+  SetWidthTextBoxMax(null);
+}
+
+function SetWidthTextBoxMax(aElt)
+{
+  var defaultWidth_unit;
+  if (aElt)
+  {
+    defaultWidth_unit = aElt.getAttribute("value");
+  }
+  else
+  {
+    gPrefs = GetPrefs();
+    if (!gPrefs)
+      return;
+  
+    defaultWidth_unit  = gPrefs.getCharPref("bluegriffon.defaults.table.width_unit");
+  }
+
+  if (defaultWidth_unit == "percentage")
+    gDialog.widthInput.setAttribute("max", "100");
+  else
+    gDialog.widthInput.removeAttribute("max");
+  var foo = gDialog.widthInput.value;
+  gDialog.widthInput.value = foo;
 }
 
 function SelectArea(cell)
@@ -63,5 +80,61 @@ function ShowSize()
   var columns  = (gCellID % 10);
   var rows     = Math.ceil(gCellID / 10);
   gDialog.sizeLabel.value = rows + " x " + columns;
+}
+
+function onAccept()
+{
+  var wrapping = gDialog.textWrapping.selectedItem.value;
+  var align = gDialog.horizAlignment.value;
+  var valign = gDialog.vertAlignment.value;
+  var cellSpacing = gDialog.cellSpacing.value;
+  var cellPadding = gDialog.cellPadding.value;
+
+  var rows = 
+  gActiveEditor.beginTransaction();
+
+  var tableElement = gActiveEditor.createElementWithDefaults("table");
+  var tableBody = gActiveEditor.createElementWithDefaults("tbody");
+  if (tableBody)
+  {
+    tableElement.appendChild(tableBody);
+
+    // Create necessary rows and cells for the table
+    for (var i = 0; i < gDialog.rowsInput.value; i++)
+    {
+      var newRow = gActiveEditor.createElementWithDefaults("tr");
+      if (newRow)
+      {
+        tableBody.appendChild(newRow);
+        for (var j = 0; j < gDialog.columnsInput.value; j++)
+        {
+          var newCell = gActiveEditor.createElementWithDefaults("td");
+          if (newCell)
+          {
+            newRow.appendChild(newCell);
+          }
+        }
+      }
+    }
+    // true means delete selection when inserting
+    gActiveEditor.insertElementAtSelection(tableElement, true);
+    gActiveEditor.setAttribute(tableElement, "border", gDialog.borderInput.value);
+    gActiveEditor.setAttribute(tableElement, "width", Number(gDialog.widthInput.value) +
+                                        (gDialog.widthPixelOrPercentMenulist.value == "pixels" ? "" : "%"));
+
+  }
+  gActiveEditor.endTransaction();
+}
+
+function SelectSize(cell)
+{
+  var columns  = (gCellID % 10);
+  var rows     = Math.ceil(gCellID / 10);
+
+  gDialog.rowsInput.value    = rows;
+  gDialog.columnsInput.value = columns;
+
+  onAccept();
+  window.close();
 }
 
