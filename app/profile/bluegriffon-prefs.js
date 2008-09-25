@@ -32,3 +32,13 @@ pref("browser.visited_color", "#551a8b");
 // document preferences
 pref("bluegriffon.author", "");
 
+// table preferences
+pref("bluegriffon.defaults.table.halign", "");
+pref("bluegriffon.defaults.table.valign", "");
+pref("bluegriffon.defaults.table.border", "1");
+pref("bluegriffon.defaults.table.rows", "2");
+pref("bluegriffon.defaults.table.cols", "2");
+pref("bluegriffon.defaults.table.width", "100");
+pref("bluegriffon.defaults.table.width_unit", "percentage");
+pref("bluegriffon.defaults.table.text_wrap", "");
+

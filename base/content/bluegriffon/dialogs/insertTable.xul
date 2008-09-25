@@ -69,6 +69,12 @@
       <preference id="bluegriffon.defaults.table.text_wrap"
                   name="bluegriffon.defaults.table.text_wrap"
                   type="string" />
+      <preference id="bluegriffon.defaults.table.cell_spacing"
+                  name="bluegriffon.defaults.table.cell_spacing"
+                  type="string" />
+      <preference id="bluegriffon.defaults.table.cell_padding"
+                  name="bluegriffon.defaults.table.cell_padding"
+                  type="string" />
     </preferences>
     <spacer  id="location" offsetY="50" persist="offsetX offsetY"/>
     <broadcaster id="args" value=""/>
@@ -181,6 +187,7 @@
                   <textbox value="2"
                            type="number"
                            id="rowsInput"
+                           preference="bluegriffon.defaults.table.rows"
                            oninput="ChangeRowOrColumn(this.id); MakePersistsValue(this)" persist="value"/>
   
                   <spacer/>
@@ -192,6 +199,7 @@
                   <textbox value="2"
                            type="number"
                            id="columnsInput" 
+                           preference="bluegriffon.defaults.table.cols"
                            oninput="ChangeRowOrColumn(this.id); MakePersistsValue(this)" persist="value"/>
                   <spacer/>
                 </row>
@@ -202,9 +210,11 @@
                   <textbox value="100"
                            type="number"
                            max="100" min="0"
+                           preference="bluegriffon.defaults.table.width"
                            id="widthInput"
                            oninput="forceInteger(this.id); MakePersistsValue(this)" persist="value"/>
-                  <menulist id="widthPixelOrPercentMenulist" flex="1" persist="value">
+                  <menulist id="widthPixelOrPercentMenulist" flex="1" persist="value"
+                            preference="bluegriffon.defaults.table.width_unit" >
                     <menupopup>
                       <menuitem label="%"  value="percentage"/>
                       <menuitem label="&pixels.label;" value="pixels"/>
@@ -224,6 +234,7 @@
             <textbox value="1"
                      type="number"
                      id="borderInput"
+                     preference="bluegriffon.defaults.table.border"
                      oninput="forceInteger(this.id); MakePersistsValue(this)" persist="value"/>
             <label value="&pixels.label;"/>
           </hbox>
@@ -233,7 +244,8 @@
           <rows>
             <row align="center">
               <label value="&horizAlignment.label;" id="horizAlignmentLabel"/>
-              <menulist id="horizAlignment">
+              <menulist id="horizAlignment"
+                        preference="bluegriffon.defaults.table.halign">
                 <menupopup>
                   <menuitem label="&unspecifiedHAlignment.label;" value=""/>
                   <menuitem label="&leftHAlignment.label;"        value="left"/>
@@ -244,7 +256,8 @@
             </row>
             <row align="center">
               <label value="&vertAlignment.label;" id="vertAlignmentLabel"/>
-              <menulist id="vertAlignment">
+              <menulist id="vertAlignment"
+                        preference="bluegriffon.defaults.table.valign">
                 <menupopup>
                   <menuitem label="&unspecifiedVAlignment.label;" value=""/>
                   <menuitem label="&topVAlignment.label;"         value="top"/>
@@ -255,7 +268,8 @@
             </row>
             <row align="center">
               <label value="&textWrapping.label;" id="textWrappingLabel"/>
-              <radiogroup id="textWrapping" orient="horizontal">
+              <radiogroup id="textWrapping" orient="horizontal"
+                          preference="bluegriffon.defaults.table.text_wrap" >
                 <radio id="wrapRadio"   label="&wrapWrapping.label;"       value=""/>
                 <radio id="nowrapRadio" label="&nowrapWrapping.label;" value="nowrap"/>
               </radiogroup>
@@ -263,14 +277,16 @@
             <row align="center">
               <label value="&cellSpacing.label;"/>
               <hbox>
-                <textbox value="2" type="number" id="cellSpacing" oninput="forceInteger(this.id);"/>
+                <textbox value="2" type="number" id="cellSpacing" oninput="forceInteger(this.id);"
+                         preference="bluegriffon.defaults.table.cell_spacing">
                 <label value="&pixels.label;"/>
               </hbox>
             </row>
             <row align="center">
               <label value="&cellPadding.label;"/>
               <hbox>
-                <textbox value="2" type="number" id="cellPadding" oninput="forceInteger(this.id);"/>
+                <textbox value="2" type="number" id="cellPadding" oninput="forceInteger(this.id);"
+                         preference="bluegriffon.defaults.table.cell_padding">
                 <label value="&pixels.label;"/>
               </hbox>
   
