@@ -168,7 +168,11 @@ function(aEvent)
       target.nodeType == Node.ELEMENT_NODE &&
       target.getAttribute("contenteditable") == "true")
     this.mRefuseNextMergeTransaction = true;
-};
+
+  this.mOneEltSelected = false;
+  if (this.mOldSelectedLi)
+    this.mOldSelectedLi.removeAttribute("selected");
+  this.mOldSelectedLi = null;};
 
 ActiveSourceTree.prototype.serializeInSourceTree =
 function()
@@ -561,6 +565,22 @@ function(aEvent)
     {
       this.mEditing = true;
       this.mEditedNode = p;
+      this.mOneEltSelected = true;
+      switch (p.className)
+      {
+        case "textNode":
+          this._onSourceViewMouseMove(
+            { originalTarget: p.parentNode.parentNode.firstChild }
+          );
+          break;
+        case "attrName":
+        case "attrValue":
+          this._onSourceViewMouseMove(
+            { originalTarget: p.parentNode }
+          );
+          break;
+        default: break;
+      }
     }
   }
   else if (this.mOneEltSelected &&

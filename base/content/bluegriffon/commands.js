@@ -280,7 +280,7 @@ var ComposerCommands = {
     } catch (e) { alert(e); }
   },
 
-  updateSelectionBased: function updateSelectionBased()
+  updateSelectionBased: function updateSelectionBased(aElt, aEvent)
   {
     try {
       var mixed = EditorUtils.getSelectionContainer();
@@ -309,6 +309,14 @@ var ComposerCommands = {
     var state = commandNode.getAttribute("state");
   
     button.checked = state == onState;
+  },
+
+  selectionListener: {
+    notifySelectionChanged: function(doc, sel, reason)
+    {
+      ComposerCommands.updateSelectionBased();
+    }
+
   }
 };
 
