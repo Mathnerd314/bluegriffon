@@ -117,7 +117,7 @@
                     observes="cmd_renderedHTMLEnabler">
             <grippy observes="cmd_renderedHTMLEnabler"/>
           </splitter>
-          <deck id="sourceTreeDeck"/>
+          <deck id="sourceTreeDeck" flex="1"/>
         </vbox>
       </hbox>
       <hbox id="propertiesBar"/>
