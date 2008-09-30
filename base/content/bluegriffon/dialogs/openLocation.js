@@ -65,7 +65,11 @@ function onChooseFile()
     fp.appendFilters(nsIFilePicker.filterAll);
 
     if (fp.show() == nsIFilePicker.returnOK && fp.fileURL.spec && fp.fileURL.spec.length > 0)
+    {
       gDialog.input.value = fp.fileURL.spec;
+      // give focus to the OK buton
+      document.documentElement.getButton("accept").focus();
+    }
   }
   catch(ex) {
   }
