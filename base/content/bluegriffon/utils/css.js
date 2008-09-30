@@ -43,7 +43,8 @@ var CssUtils = {
 
   _enumerateStyleSheet: function CssUtils__enumerateStyleSheet(aSheet, aCallback)
   {
-    aCallback(aSheet);
+    if (aCallback(aSheet))
+      return;
     var rules = aSheet.cssRules;
     for (var j = 0; j < rules.length; j++)
     {
@@ -107,6 +108,7 @@ var CssUtils = {
               classList.push(matches[j].substr(1));
         }
       }
+      return false;
     }
   
     CssUtils.enumerateStyleSheets(aDocument, enumerateClass);
@@ -122,6 +124,187 @@ var CssUtils = {
   getAllIdsForDocument: function CssUtils_getAllClassesForDocument(aDocument)
   {
     return this.getCssHintsFromDocument(aDocument, this.findIdsInSelector);
+  },
+
+  getAllLocalRulesForSelector: function CssUtils_getAllRulesForSelector(aDocument, aSelector)
+  {
+    var ruleList = [];
+  
+    function enumerateRules(aSheet)
+    {
+      if (aSheet.ownerNode instanceof HTMLStyleElement)
+      {
+        var cssRules = aSheet.cssRules;
+        for (var i = 0; i < cssRules.length; i++)
+        {
+          var rule = cssRules.item(i);
+          if (rule.type == CSSRule.STYLE_RULE)
+          {
+            var selectorText = rule.selectorText;
+            if (selectorText == aSelector)
+              ruleList.push({rule:rule, index:i});
+          }
+        }
+        return false;
+      }
+      return true;
+    }
+  
+    CssUtils.enumerateStyleSheets(aDocument, enumerateRules);
+
+    return ruleList;
+  },
+
+  deleteAllLocalRulesForSelector: function CssUtils_deleteAllLocalRulesForSelector(aDocument, aSelector, aDeclarations)
+  {
+    var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
+    var l = ruleList.length;
+    for (var i = 0; i < l; i++)
+    {
+      var rule = ruleList[i].rule;
+      var parentRule = rule.parentRule;
+      var parentStyleSheet = rule.parentStyleSheet;
+      if (rule.type == CSSRule.STYLE_RULE && !parentRule)
+      {
+        if (aDeclarations)
+        {
+          for (var j = 0; j < aDeclarations.length; j++)
+            rule.style.removeProperty(aDeclarations[j].property);
+          if (!rule.style.length)
+            parentStyleSheet.deleteRule(ruleList[i].index);
+        }
+        else
+          parentStyleSheet.deleteRule(ruleList[i].index);
+      }
+      this.reserializeEmbeddedStylesheet(parentStyleSheet);
+    }
+  },
+
+  getStyleSheetForScreen: function CssUtils_getStyleSheetForScreen(aDocument)
+  {
+    var styleElements = aDocument.getElementsByTagName("style");
+    var stylesheet = null;
+    if (styleElements.length)
+    {
+      // try to find a stylesheet for the correct media
+      for (var i = 0; !stylesheet && i < styleElements.length; i++)
+      {
+        var styleElement = styleElements[i];
+        if (styleElement.hasAttribute("media"))
+        {
+          var mediaAttr = styleElement.getAttribute("media");
+          if (mediaAttr.indexOf("screen") != -1||
+              mediaAttr.indexOf("all") != -1)
+            stylesheet = styleElement.sheet;
+        }
+        else
+          stylesheet = styleElement.sheet;
+      }
+    }
+    if (!stylesheet)
+    {
+      var styleElement = aDocument.createElement("style");
+      styleElement.setAttribute("type", "text/css");
+      var textNode = aDocument.createTextNode("/* created by BlueGriffon */");
+      styleElement.appendChild(textNode);
+      aDocument.getElementsByTagName("head")[0].appendChild(styleElement);
+      stylesheet = styleElement.sheet;
+    }
+    return stylesheet;
+  },
+
+  addRuleForSelector: function CssUtils_addRuleForSelector(aDocument, aSelector, aDeclarations)
+  {
+    this.deleteAllLocalRulesForSelector(aDocument, aSelector, aDeclarations);
+    var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
+
+    if (!ruleList)
+    {
+      var stylesheet = this.getStyleSheetForScreen(aDocument);
+      var str = stylesheet.ownerNode.textContent;
+      str += "\n" + aSelector + " {";
+      for (var j = 0; j < aDeclarations.length; j++)
+      {
+        var property = aDeclarations[j].property;
+        var value = aDeclarations[j].value;
+        var priority = aDeclarations[j].priority;
+        str += "\n  " + property + ": " +
+               value +
+               (priority ? ";" : " !important;");
+      }
+      str += "\n}\n";
+      stylesheet.ownerNode.firstChild.data = str;
+      return;
+    }
+
+    var rule = ruleList[ruleList.length -1].rule;
+    for (var j = 0; j < aDeclarations.length; j++)
+    {
+        var property = aDeclarations[j].property;
+        var value = aDeclarations[j].value;
+        var priority = aDeclarations[j].priority;
+        rule.style.setProperty(property,
+                               value,
+                               priority);
+    }
+
+    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet);
+  },
+
+  reserializeEmbeddedStylesheet: function CssUtils_reserializeEmbeddedStylesheet(aSheet)
+  {
+    var cssRules = aSheet.cssRules;
+    var str = "";
+    for (var i = 0; i < cssRules.length; i++)
+    {
+      var rule = cssRules[i];
+      switch (rule.type)
+      {
+        case CSSRule.CHARSET_RULE:
+        case CSSRule.IMPORT_RULE:
+          str += (i ? "\n" : "") + rule.cssText;
+          break;
+        case CSSRule.STYLE_RULE:
+          {
+            str += (i ? "\n" : "") + rule.selectorText + " {";
+            var declarations = rule.style;
+            for (var j = 0; j < declarations.length; j++)
+            {
+              var property = declarations.item(j);
+              var value = declarations.getPropertyValue(property);
+              var priority = declarations.getPropertyPriority(property);
+              str += "\n  " + property + ": " +
+                     value +
+                     (priority ? ";" : " !important;");
+            }
+          }
+          break;
+        default:
+          break;
+      }
+      str += "\n}\n";
+    }
+    var styleElt = aSheet.ownerNode;
+    var child = styleElt.firstChild;
+    while (child)
+    {
+      var tmp = child.nextSibling;
+      styleElt.removeChild(child);
+      child = tmp;
+    }
+    var textNode = styleElt.ownerDocument.createTextNode(str);
+    styleElt.appendChild(textNode);
+  },
+
+  getUseCSSPref: function()
+  {
+    try {
+      var useCSS = GetPrefs().getIntPref("bluegriffon.css.policy");
+      return useCSS;
+    }
+    catch(e) { dump("Cannot get preference bluegriffon.css.policy; defaulting to HTML attributes") }
+
+    return 0;
   }
 };
 
