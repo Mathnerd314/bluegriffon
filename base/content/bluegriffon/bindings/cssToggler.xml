@@ -193,6 +193,7 @@
           }
           catch(e) {}
           this.mCSSPolicy.value = useCssPref;
+          // adapt dialog depending on the pref
           this.showOrHideBoxes(useCssPref);
         ]]>
         </body>
@@ -201,17 +202,22 @@
       <method name="toggle">
         <body>
         <![CDATA[
+          // get user's choice for CSS policy
           var useCssPref = parseInt(this.mCSSPolicy.value);
           try {
+            // early way out if no change
             if (GetPrefs().getIntPref("bluegriffon.css.policy") == useCssPref)
               return;
           }
           catch(e) {}
 
+          // save in pref
           try {
             GetPrefs().setIntPref("bluegriffon.css.policy", useCssPref);
           }
           catch(e) {}
+
+          // update dialog
           this.showOrHideBoxes(useCssPref);
         ]]>
         </body>
@@ -223,7 +229,7 @@
         <![CDATA[
           switch(useCssPref)
           {
-            case 3:
+            case 3: // reuse existing CSS rule
               this.mChildrenBox.setAttribute("collapsed", "true");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.removeAttribute("collapsed");
@@ -231,19 +237,19 @@
               initIdMenu(this.mIDList.menupopup);
               this.onClassOrIdChange(this.mClassList);
               break;
-            case 2:
+            case 2: // create style rules if possible
               this.mChildrenBox.removeAttribute("collapsed");
               this.mIdBox.removeAttribute("collapsed");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
               this.onIdOrClassBoxChange();
               break;
-            case 1:
+            case 1: // create inline styles if possible
               this.mChildrenBox.removeAttribute("collapsed");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
               document.documentElement.getButton("accept").removeAttribute("disabled");
               break;
-            case 0:
+            case 0: // OMG, user really wants HTML attributes, OMG!!!
               this.mChildrenBox.setAttribute("collapsed", "true");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
@@ -256,6 +262,8 @@
           this.removeAttribute("style");
 
           try {
+            // ugly hack needed because sizeToContent() can suck if window
+            // was never resized before...
             window.resizeTo(window.outerWidth, window.outerHeight + 1); 
             window.sizeToContent();
           }
@@ -267,12 +275,18 @@
       <method name="onIdOrClassBoxChange">
         <body>
         <![CDATA[
+          // make the alert on existing ID visible by default
           this.mExistingIdAlert.removeAttribute("class");
           if (this.mIdTextBox.value || this.mClassTextBox.value)
           {
-            var elt = EditorUtils.getCurrentDocument().getElementById(this.mIdTextBox.value)
+            // ah, we have at least class or ID... if we have an ID, is there already
+            // an element with that ID in the document ?
+            var elt = this.mIdTextBox.value ?
+                        EditorUtils.getCurrentDocument().getElementById(this.mIdTextBox.value)
+                        : null;
             if (!elt)
             {
+              // lucky man...
               this.mExistingIdAlert.setAttribute("class", "hiddenAlert");
               document.documentElement.getButton("accept").removeAttribute("disabled");
               return;
@@ -281,6 +295,7 @@
           else
             this.mExistingIdAlert.setAttribute("class", "hiddenAlert");
 
+          // cannot create the element in that case
           document.documentElement.getButton("accept").setAttribute("disabled", "true");
         ]]>
         </body>
@@ -292,6 +307,7 @@
         <![CDATA[
           if (this.mIDList.value || this.mClassList.value)
           {
+            // we have at least an ID or a class, we can create an element
             document.documentElement.getButton("accept").removeAttribute("disabled");
             return;
           }
@@ -306,6 +322,8 @@
         <![CDATA[
           var prefix;
           try {
+            // not sure this is needed, but I wanted to reserve user-defined
+            // prefices for future use
             var useCssPref = GetPrefs().getCharPref("bluegriffon.css.id_prefix");
           }
           catch(e) { prefix = "BGelt"; }
