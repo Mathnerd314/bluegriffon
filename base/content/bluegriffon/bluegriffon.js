@@ -41,10 +41,6 @@
 
 #include shutdown.inc
 
-var BlueGriffonVars = {
-  kXUL_NS: "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
-};
-
 function OpenLocation(aEvent, type)
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/openLocation.xul","_blank",
@@ -340,88 +336,6 @@ function onFontFaceChange(fontFaceMenuList, commandID)
 }
 
 /************** CLASS MANAGEMENT **************/
-
-function initClassMenu(menuPopup)
-{
-  deleteAllChildren(menuPopup);
-
-  var mixedObj = new Object();
-  var classes  = EditorUtils.getClasses(EditorUtils.getSelectionContainer().node).classes;
-  var classesArray, classesArrayLength;
-  if (classes)
-  {
-    classesArray = classes.split(" ");
-    classesArray.sort();
-    classesArrayLength = classesArray.length;
-    var index;
-    for (index = 0; index < classesArrayLength; index++)
-    {
-      var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-      menuEntry.setAttribute("type",    "checkbox");
-      menuEntry.setAttribute("checked", "true");
-      menuEntry.setAttribute("class",   "menuitem-iconic");
-      menuEntry.setAttribute("label",   classesArray[index]);
-      menuEntry.setAttribute("value",   classesArray[index]);
-
-      menuPopup.appendChild(menuEntry);
-    }
-  }
-
-  var classList =  CssUtils.getAllClassesForDocument(EditorUtils.getCurrentEditor().document);
-
-  if (classList && classList.length)
-  {
-    if (classesArrayLength)
-    {
-      var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
-      menuPopup.appendChild(menuSep);
-    }
-
-
-    var classListLength = classList.length;
-
-    classList.sort();
-
-    var previousClass = "";
-    for (index = 0; index < classListLength; index++)
-    {
-      var classEntry = classList[index];
-      if (classEntry != previousClass)
-      {
-        previousClass = classEntry;
-
-        var found = false;
-        if (classesArrayLength)
-        {
-          var existingClassesIndex;
-          for (existingClassesIndex = 0; existingClassesIndex < classesArrayLength; existingClassesIndex++)
-            if (classesArray[existingClassesIndex] == classEntry)
-            {
-              found = true;
-              break;
-            }
-        }
-        if (!found)
-        {
-          menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-          menuEntry.setAttribute("type",    "checkbox");
-          menuEntry.setAttribute("class",   "menuitem-iconic");
-          menuEntry.setAttribute("label",   classEntry);
-          menuEntry.setAttribute("value",   classEntry);
-          menuPopup.appendChild(menuEntry);
-        }
-      }
-    }
-  }
-  else
-  {
-    // no class defined in the document
-    menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-    menuEntry.setAttribute("type",    "checkbox");
-    menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
-    menuPopup.appendChild(menuEntry);
-  }
-}
 
 function onClassChange(classMenuList, commandID)
 {

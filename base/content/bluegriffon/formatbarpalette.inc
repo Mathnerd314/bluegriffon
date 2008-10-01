@@ -127,7 +127,7 @@
                 observes="cmd_renderedHTMLEnabler"
                 tooltiptext="&applyClassToSelectionCmd.tooltip;">
         <observes element="cmd_class" attribute="state" onbroadcast="onClassChange(this.parentNode, 'cmd_class')"/>
-        <menupopup id="ClassPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)" onpopupshowing="initClassMenu(this);">
+        <menupopup id="ClassPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)" onpopupshowing="initClassMenu(this, true);">
           <menuitem label="&noClass.label;" id="NoClassMenuItem"/>
         </menupopup>
       </menulist>

@@ -426,14 +426,14 @@ var EditorUtils = {
 
   getClasses: function(aElt)
   {
-  	var e = aElt;
-  	var display = CssUtils.getComputedStyle(e).getPropertyValue("display");
-  	while (e && display == "inline" && e.className == "")
-  	{
+    var e = aElt;
+    var display = CssUtils.getComputedStyle(e).getPropertyValue("display");
+    while (e && display == "inline" && e.className == "")
+    {
       e = e.parentNode;
       display = CssUtils.getComputedStyle(e).getPropertyValue("display");
-  	}
-  	return {classes: e.className, node: e};
+    }
+    return {classes: e.className, node: e};
   },
 
   getCurrentTableEditor: function()

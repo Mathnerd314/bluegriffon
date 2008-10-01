@@ -1,11 +1,15 @@
 <!ENTITY cssPolicy.label "CSS policy:">
 
-<!ENTITY htmlAttr.label "use HTML attributes">
-<!ENTITY inlineStyles.label "use CSS inline styles when possible">
-<!ENTITY cssRules.label "use CSS rules or inline styles when possible">
+<!ENTITY htmlAttr.label "Set HTML attributes only">
+<!ENTITY inlineStyles.label "Set CSS inline styles when possible">
+<!ENTITY cssRules.label "Set CSS rules or inline styles when possible">
+<!ENTITY reuseExistingStyle.label "Reuse existing style rules">
 
-<!ENTITY elementName.label "Element's name">
-<!ENTITY mandatoryId.decsription "You must provide an ID for the element:">
+<!ENTITY styleRule.label "CSS Selector">
+<!ENTITY mandatoryId.description "You must provide an ID or class for the element:">
 <!ENTITY pickOne.button "Pick one for me">
 
 <!ENTITY existingId.alert "Error: this ID already exists in your document">
+
+<!ENTITY classList.label "Class:">
+<!ENTITY idList.label "ID:">

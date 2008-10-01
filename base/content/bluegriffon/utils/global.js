@@ -44,6 +44,11 @@ const nsIPlaintextEditor = interfaces.nsIPlaintextEditor;
 const nsIHTMLEditor = interfaces.nsIHTMLEditor;
 const nsIEditingSession = interfaces.nsIEditingSession;
 
+var BlueGriffonVars = {
+  kXUL_NS: "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
+};
+
+
 function TrimStringLeft(string)
 {
   if(!string) return "";
@@ -149,5 +154,148 @@ function deleteAllChildren(aElt)
     var tmp = child.previousSibling;
     aElt.removeChild(child);
     child = tmp;
+  }
+}
+
+function initClassMenu(menuPopup, aUseSelection)
+{
+  deleteAllChildren(menuPopup);
+
+  var mixedObj = new Object();
+  var classesArray, classesArrayLength = 0;
+  
+  if (aUseSelection)
+  {
+    var classes  = EditorUtils.getClasses(EditorUtils.getSelectionContainer().node).classes;
+    if (classes)
+    {
+      classesArray = classes.split(" ");
+      classesArray.sort();
+      classesArrayLength = classesArray.length;
+
+      for (var index = 0; index < classesArrayLength; index++)
+      {
+        var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+        menuEntry.setAttribute("type",    "checkbox");
+        menuEntry.setAttribute("checked", "true");
+        menuEntry.setAttribute("class",   "menuitem-iconic");
+        menuEntry.setAttribute("label",   classesArray[index]);
+        menuEntry.setAttribute("value",   classesArray[index]);
+  
+        menuPopup.appendChild(menuEntry);
+      }
+    }
+  }
+  else
+  {
+    var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+    menuEntry.setAttribute("type",    "checkbox");
+    menuEntry.setAttribute("class",   "menuitem-iconic");
+    menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
+    menuEntry.setAttribute("value",   "");
+    menuPopup.appendChild(menuEntry);
+
+    var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
+    menuPopup.appendChild(menuSep);
+
+    menuPopup.parentNode.selectedIndex = 0;
+  }
+
+  var classList =  CssUtils.getAllClassesForDocument(EditorUtils.getCurrentEditor().document);
+
+  if (classList && classList.length)
+  {
+    if (classesArrayLength)
+    {
+      var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
+      menuPopup.appendChild(menuSep);
+    }
+
+
+    var classListLength = classList.length;
+
+    classList.sort();
+
+    var previousClass = "";
+    for (var index = 0; index < classListLength; index++)
+    {
+      var classEntry = classList[index];
+      if (classEntry != previousClass)
+      {
+        previousClass = classEntry;
+
+        var found = false;
+        if (classesArrayLength)
+        {
+          var existingClassesIndex;
+          for (existingClassesIndex = 0; existingClassesIndex < classesArrayLength; existingClassesIndex++)
+            if (classesArray[existingClassesIndex] == classEntry)
+            {
+              found = true;
+              break;
+            }
+        }
+        if (!found)
+        {
+          menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+          menuEntry.setAttribute("type",    "checkbox");
+          menuEntry.setAttribute("class",   "menuitem-iconic");
+          menuEntry.setAttribute("label",   classEntry);
+          menuEntry.setAttribute("value",   classEntry);
+          menuPopup.appendChild(menuEntry);
+        }
+      }
+    }
+  }
+  else if (aUseSelection)
+  {
+    // no class defined in the document
+    menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+    menuEntry.setAttribute("type",    "checkbox");
+    menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
+    menuPopup.appendChild(menuEntry);
+  }
+}
+
+function initIdMenu(menuPopup)
+{
+  deleteAllChildren(menuPopup);
+
+  var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+  menuEntry.setAttribute("type",    "checkbox");
+  menuEntry.setAttribute("class",   "menuitem-iconic");
+  menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
+  menuEntry.setAttribute("value",   "");
+  menuPopup.appendChild(menuEntry);
+
+  var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
+  menuPopup.appendChild(menuSep);
+
+  menuPopup.parentNode.selectedIndex = 0;
+
+  var idList =  CssUtils.getAllIdsForDocument(EditorUtils.getCurrentEditor().document);
+
+  if (idList && idList.length)
+  {
+    var idListLength = idList.length;
+
+    idList.sort();
+
+    var previousId = "";
+    for (var index = 0; index < idListLength; index++)
+    {
+      var idEntry = idList[index];
+      if (idEntry != previousId)
+      {
+        previousId = idEntry;
+
+        menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+        menuEntry.setAttribute("type",    "checkbox");
+        menuEntry.setAttribute("class",   "menuitem-iconic");
+        menuEntry.setAttribute("label",   idEntry);
+        menuEntry.setAttribute("value",   idEntry);
+        menuPopup.appendChild(menuEntry);
+      }
+    }
   }
 }

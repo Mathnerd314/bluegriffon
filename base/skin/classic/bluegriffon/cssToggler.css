@@ -42,3 +42,11 @@
 *[anonid="idBox"] {
   font-size: smaller;
 }
+
+*[anonid="existingIdAlert"] {
+  color: red;
+}
+
+.hiddenAlert {
+  visibility: hidden;
+}
