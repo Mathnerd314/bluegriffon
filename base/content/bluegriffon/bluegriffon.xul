@@ -71,7 +71,7 @@
              mode="full"
              context="main-toolbar-context-menu"
              customizable="true"
-             defaultset="newButton,openButton,stopButton,spring,throbber-box,spacer"/>
+             defaultset="newButton,openButton,stopButton,tableButton,spring,throbber-box,spacer"/>
     <toolbarset id="customMainToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 

@@ -3,7 +3,8 @@
   padding: 4px;
 }
 
-#MainToolbar toolbarbutton {
+#MainToolbar toolbarbutton,
+#CustomizeToolbarWindow toolbarbutton {
   -moz-image-region: rect(0px 32px 32px 0px);
   -moz-box-orient: vertical;
 }
@@ -39,19 +40,19 @@
   -moz-image-region: rect(64px 32px 96px 0px);
 }
 
-#MainToolbar #newButton {
+#newButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/new.png");
 }
 
-#MainToolbar #openButton {
+#openButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/open.png");
 }
 
-#MainToolbar #stopButton {
+#stopButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/stop.png");
 }
 
-#MainToolbar #tableButton {
+#tableButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/table.png");
 }
 /************ SMALL ICONS **************/
@@ -87,11 +88,11 @@
 }
 /***************** THROBBER **************/
 
-#MainToolbar #composer-throbber {
+#composer-throbber {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/logo.png');
 }
 
-#MainToolbar #composer-throbber:hover {
+#composer-throbber:hover {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/logo-hover.png');
 }
 
