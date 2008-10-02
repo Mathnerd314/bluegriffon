@@ -160,6 +160,9 @@ function onAccept()
                             ";";
           styleAttr += "border-spacing: " + gDialog.cellPadding.value + "px;";
           styleAttr += "border: outset " + gDialog.borderInput.value + "px;";
+          styleAttr += "border-collapse: " + (gDialog.collapseBorders.checked ? "collapse" : "separate");
+          styleAttr += "empty-cells: " + (gDialog.hideEmptyCells.checked ? "hide" : "show");
+          styleAttr += "table-layout: " + (gDialog.fixedLayout.checked ? "fixed" : "auto");
           if (gDialog.horizAlignment.value)
             styleAttr += "text-align:" + gDialog.horizAlignment.value;
           tableElement.setAttribute("style", styleAttr);
@@ -198,7 +201,13 @@ function onAccept()
               value: Number(gDialog.widthInput.value) +
                        (gDialog.widthPixelOrPercentMenulist.value == "pixels" ? "px" : "%") },
             { priority: false, property:  "text-align",
-              value: gDialog.horizAlignment.value }
+              value: gDialog.horizAlignment.value },
+            { priority: false, property:  "border-collapse",
+              value: (gDialog.collapseBorders.checked ? "collapse" : "separate") },
+            { priority: false, property:  "empty-cells",
+              value: (gDialog.hideEmptyCells.checked ? "hide" : "show") },
+            { priority: false, property:  "table-layout",
+              value: (gDialog.fixedLayout.checked ? "fixed" : "auto") }
           ];
           CssUtils.addRuleForSelector(gActiveEditor.document,
                                       selectorText,

@@ -296,9 +296,12 @@
     <csstoggler id="cssToggler">
       <groupbox orient="vertical">
         <caption label="&cssExtras.label;"/>
-        <checkbox label="Collapse borders"/>
-        <checkbox label="Hide empty cells"/>
-        <checkbox label="Use fixed table layout"/>
+        <checkbox id="collapseBorders"
+                  label="&collapseBorders.label;"/>
+        <checkbox id="hideEmptyCells"
+                  label="&hideEmptyCells.label;"/>
+        <checkbox id="fixedLayout"
+                  label="&fixedLayout.label;"/>
       </groupbox>
     </csstoggler>
   </prefpane>
