@@ -7,23 +7,24 @@
 # Mandatory if you use VC7 (see Windows build instructions
 # in http://mozilla.org/build/win32.html
 # you may have to edit the lines according to your directory settings
-GLIB_PREFIX=e:/apps/vc71
-LIBIDL_PREFIX=e:/apps/vc71
+#GLIB_PREFIX=e:/apps/vc71
+#LIBIDL_PREFIX=e:/apps/vc71
 
-mk_add_options MOZ_OBJDIR=/cygdrive/e/bin/debug/xrt3
+# Change the following according to your wishes
+mk_add_options MOZ_OBJDIR=/d/bin/opt/xr_trunk_20080919
+
 mk_add_options MOZ_BUILD_PROJECTS="xulrunner composer"
-mk_add_options MOZ_CO_PROJECT="xulrunner composer"
+mk_add_options MOZ_CO_PROJECT="xulrunner"
 ac_add_app_options xulrunner --enable-application=xulrunner
 ac_add_app_options composer --enable-application=composer
 ac_add_app_options composer --with-libxul-sdk=../xulrunner/dist/
 ac_add_app_options composer --enable-libxul
-ac_add_app_options xulrunner --enable-extensions=inspector
 
-# Uncomment the following lines for an optimized build
-#ac_add_options --disable-debug
-#ac_add_options --enable-optimize
-ac_add_options --enable-debug
-ac_add_options --disable-optimize
+# Comment/Uncomment the following lines for an optimized build
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+#ac_add_options --enable-debug
+#ac_add_options --disable-optimize
 
 ac_add_options --disable-installer
 ac_add_options --disable-javaxpcom
@@ -31,3 +32,7 @@ ac_add_options --disable-activex
 ac_add_options --disable-activex-scripting
 ac_add_options --disable-tests
 ac_add_options --disable-airbag
+
+# See Windows build instructions ; I don't have Vista and did
+# upgrade the SDK so...
+ac_add_options --disable-vista-sdk-requirements
