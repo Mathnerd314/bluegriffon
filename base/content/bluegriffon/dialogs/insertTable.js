@@ -235,6 +235,17 @@ function onAccept()
                                       cellProperties);
         }
         break;
+
+      case 3:
+        CreateRowsAndCells(tableBody, null);
+        if (cssToggler.reusedID)
+          tableElement.setAttribute("id", cssToggler.reusedID);
+        if (cssToggler.reusedClass)
+          tableElement.setAttribute("class", cssToggler.reusedClass);
+        break;
+
+      default: // we should never hit this one
+        break
     }
 
     // true means delete selection when inserting
