@@ -71,27 +71,26 @@ table[empty-cells],
   table[border="0"] > tr > td, table[border="0"] > tr > th,
   table[border="0"] > thead > tr > td, table[border="0"] > tbody > tr > td, table[border="0"] > tfoot > tr > td,
   table[border="0"] > thead > tr > th, table[border="0"] > tbody > tr > th, table[border="0"] > tfoot > tr > th,
-  table:not([border]),
   /* next two selectors on line below for the case where tbody is omitted */
   table:not([border]) > tr > td, table:not([border]) > tr >  th,
   table:not([border]) > thead > tr > td, table:not([border]) > tbody > tr > td, table:not([border]) > tfoot > tr > td,
   table:not([border]) > thead > tr > th, table:not([border]) > tbody > tr > th, table:not([border]) > tfoot > tr > th
 {
-  border: 1px dotted red;
+  outline: 1px dotted;
 }
 
 /* give a green dashed border to forms otherwise they are invisible
 */
 form
 {
-  border: 1px dashed #66cccc;
+  outline: 1px dashed #66cccc;
 }
 
 /* give a green dotted border to labels otherwise they are invisible
 */
 label
 {
-  border: 1px dotted green;
+  outline: 1px dotted green;
 }
 
 
