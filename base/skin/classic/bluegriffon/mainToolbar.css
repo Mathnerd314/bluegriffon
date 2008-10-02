@@ -55,6 +55,11 @@
 #tableButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/table.png");
 }
+
+#saveButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/save.png");
+}
+
 /************ SMALL ICONS **************/
 
 #MainToolbar[iconsize="small"] toolbarbutton {
@@ -86,6 +91,11 @@
 #MainToolbar[iconsize="small"] #tableButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/table.png");
 }
+
+#MainToolbar[iconsize="small"] #saveButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/save.png");
+}
+
 /***************** THROBBER **************/
 
 #composer-throbber {

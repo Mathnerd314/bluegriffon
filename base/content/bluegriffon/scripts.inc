@@ -6,6 +6,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/prompter.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/css.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/utils/fileUtils.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/bluegriffon.js"/>
   <script type="application/javascript" src="chrome://global/content/globalOverlay.js"/>
   <script type="application/javascript" src="chrome://global/content/nsDragAndDrop.js"/>

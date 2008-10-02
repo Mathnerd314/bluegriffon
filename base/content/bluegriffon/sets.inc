@@ -64,6 +64,13 @@
   <command id="cmd_selectionChanged"/>
 </commandset>
 
+<commandset id="composerSaveMenuItems"
+            commandupdater="true"
+            events="create,style,save"
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+  <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
+</commandset>
+
 <keyset id="editorKeys">
   <key id="key_newNavigator" key="n" modifiers="control" />
 </keyset>

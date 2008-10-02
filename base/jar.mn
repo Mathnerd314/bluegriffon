@@ -55,6 +55,7 @@ bluegriffon.jar:
   content/bluegriffon/utils/css.js	(content/bluegriffon/utils/css.js)
   content/bluegriffon/utils/dgid.js	(content/bluegriffon/utils/dgid.js)
   content/bluegriffon/utils/editorUtils.js	(content/bluegriffon/utils/editorUtils.js)
+  content/bluegriffon/utils/fileUtils.js	(content/bluegriffon/utils/fileUtils.js)
   content/bluegriffon/utils/global.js	(content/bluegriffon/utils/global.js)
   content/bluegriffon/utils/l10n.js	(content/bluegriffon/utils/l10n.js)
   content/bluegriffon/utils/notifiers.js	(content/bluegriffon/utils/notifiers.js)

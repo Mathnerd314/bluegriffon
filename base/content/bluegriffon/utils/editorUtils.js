@@ -454,6 +454,38 @@ var EditorUtils = {
     var prefs = GetPrefs();
     var IsCSSPrefChecked = prefs.getBoolPref("editor.use_css");
     return !IsCSSPrefChecked && this.isStrictDTD();
-  }
+  },
 
+  getDocumentUrl: function()
+  {
+    try {
+      var aDOMHTMLDoc = this.getCurrentEditor().document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument);
+      return aDOMHTMLDoc.URL;
+    }
+    catch (e) {}
+    return "";
+  },
+
+  isXHTMLDocument: function()
+  {
+    var doctype = this.getCurrentEditor().document.doctype;
+    return (doctype.publicId == "-//W3C//DTD XHTML 1.0 Transitional//EN" ||
+            doctype.publicId == "-//W3C//DTD XHTML 1.0 Strict//EN");
+  },
+
+  getWrapColumn: function()
+  {
+    try {
+      return this.getCurrentEditor().wrapWidth;
+    } catch (e) {}
+    return 0;
+  },
+
+  setDocumentURI: function(uri)
+  {
+    try {
+      // XXX WE'LL NEED TO GET "CURRENT" CONTENT FRAME ONCE MULTIPLE EDITORS ARE ALLOWED
+      this.getCurrentEditorElement().docShell.setCurrentURI(uri);
+    } catch (e) { dump("SetDocumentURI:\n"+e +"\n"); }
+  }
 };

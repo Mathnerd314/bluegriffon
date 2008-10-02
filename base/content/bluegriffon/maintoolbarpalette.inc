@@ -22,6 +22,9 @@
         </menupopup>
       </toolbarbutton>
 
+      <toolbarbutton id="saveButton" class="toolbarbutton-1" observes="cmd_save"
+                     tooltiptext="&saveToolbarCmd.tooltip;"/>
+
       <toolbarbutton id="stopButton"
                      label="&stopButton.label;"
                      class="toolbarbutton-1"

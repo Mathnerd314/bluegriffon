@@ -90,7 +90,10 @@ var PromptUtils = {
                                      aOkBtnText, aCancelBtnText, null, null, {value:0}) == 0;
     }
     return false;
+  },
+
+  prompt: function(window, captionStr, msgStr, result)
+  {
+    return this._getPromptService().prompt(window, captionStr, msgStr, result, null, {value:0});
   }
-
-
 };

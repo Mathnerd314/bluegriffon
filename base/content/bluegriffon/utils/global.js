@@ -105,6 +105,21 @@ function GetPrefs()
   return pref;
 }
 
+function GetPrefsService()
+{
+  if (gPrefsService)
+    return gPrefsService;
+
+  try {
+    gPrefsService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+  }
+  catch(ex) {
+    dump("failed to get prefs service!\n");
+  }
+
+  return gPrefsService;
+}
+
 function toOpenWindowByType(inType, uri)
 {
   window.open(uri, "_blank", "chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar");

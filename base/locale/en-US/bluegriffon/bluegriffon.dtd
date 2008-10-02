@@ -152,3 +152,7 @@
 
 <!ENTITY tableToolbarCmd.label "Table">
 <!ENTITY tableToolbarCmd.tooltip "Insert new table or edit selected table's properties">
+
+<!ENTITY saveCmd.label "Save">
+<!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
+
