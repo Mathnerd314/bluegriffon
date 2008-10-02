@@ -57,3 +57,5 @@
 
 <!ENTITY cellSpacing.label "Cellspacing">
 <!ENTITY cellPadding.label "Cellpadding">
+
+<!ENTITY cssExtras.label "CSS extra properties">

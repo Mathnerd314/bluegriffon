@@ -32,6 +32,7 @@
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     onload = "Startup()"
     buttons="accept,cancel"
+    style="height: auto"
     ondialogaccept="return onAccept();"
     persist="screenX screenY"
     screenX="24" screenY="24">
@@ -40,6 +41,8 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/css.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/l10n.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertTable.js"/>
 
   <prefpane>
@@ -290,5 +293,13 @@
         </grid>
       </tabpanels>
     </tabbox>
+    <csstoggler id="cssToggler">
+      <groupbox orient="vertical">
+        <caption label="&cssExtras.label;"/>
+        <checkbox label="Collapse borders"/>
+        <checkbox label="Hide empty cells"/>
+        <checkbox label="Use fixed table layout"/>
+      </groupbox>
+    </csstoggler>
   </prefpane>
 </prefwindow>

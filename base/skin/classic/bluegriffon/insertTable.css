@@ -15,10 +15,15 @@
   min-width: 10em;
 }
 
-textbox {
+tabbox textbox {
   max-width: 5em;
 }
 
 .spinbuttons-button {
   min-height: 8px ! important;
+}
+
+csstoggler {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/cssToggler.xml#cssToggler');
+  -moz-box-orient: vertical;
 }
