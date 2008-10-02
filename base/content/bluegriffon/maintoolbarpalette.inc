@@ -24,9 +24,8 @@
 
       <toolbarbutton id="stopButton"
                      label="&stopButton.label;"
-                     class="toolbarbutton-1 chromeclass-toolbar-additional"
+                     class="toolbarbutton-1"
                      tooltiptext="&stopButton.tooltip;"
-                     disabled="true"
                      command="cmd_stopLoading"/>
 
       <toolbarbutton id="tableButton" class="toolbarbutton-1"

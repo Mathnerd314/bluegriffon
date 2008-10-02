@@ -10,7 +10,7 @@
             commandupdater="true"
             events="navigation"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
-  <command id="cmd_stopLoading"                 oncommand="goDoCommand('cmd_stopLoading')"/>
+  <command id="cmd_stopLoading" disabled="true" oncommand="goDoCommand('cmd_stopLoading')"/>
   <command id="cmd_new"                         oncommand="goDoCommand('cmd_new')"/>
   <command id="cmd_newWizard"                   oncommand="goDoCommand('cmd_newWizard')"/>
 
