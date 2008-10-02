@@ -218,7 +218,7 @@ var CssUtils = {
     this.deleteAllLocalRulesForSelector(aDocument, aSelector, aDeclarations);
     var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
 
-    if (!ruleList)
+    if (!ruleList || !ruleList.length)
     {
       var stylesheet = this.getStyleSheetForScreen(aDocument);
       var str = stylesheet.ownerNode.textContent;
@@ -230,7 +230,7 @@ var CssUtils = {
         var priority = aDeclarations[j].priority;
         str += "\n  " + property + ": " +
                value +
-               (priority ? ";" : " !important;");
+               (priority ? " !important;" : ";");
       }
       str += "\n}\n";
       stylesheet.ownerNode.firstChild.data = str;
