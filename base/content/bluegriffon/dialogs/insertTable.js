@@ -247,10 +247,10 @@ function onAccept()
 
       case 3:
         CreateRowsAndCells(tableBody, null);
-        if (cssToggler.reusedID)
-          tableElement.setAttribute("id", cssToggler.reusedID);
-        if (cssToggler.reusedClass)
-          tableElement.setAttribute("class", cssToggler.reusedClass);
+        if (gDialog.cssToggler.reusedID)
+          tableElement.setAttribute("id", gDialog.cssToggler.reusedID);
+        if (gDialog.cssToggler.reusedClass)
+          tableElement.setAttribute("class", gDialog.cssToggler.reusedClass);
         break;
 
       default: // we should never hit this one
