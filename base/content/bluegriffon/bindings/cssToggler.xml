@@ -79,16 +79,16 @@
             <xul:row align="center">
               <xul:label value="&idList.label;"/>
               <xul:textbox anonid="idTextbox" flex="1"
-                           oninput="this.parentNode.parentNode.parentNode.parentNode.parentNode.onIdOrClassBoxChange()"/>
+                           oninput="onIdOrClassBoxChange()"/>
               <xul:button label="&pickOne.button;"
-                          oncommand="this.parentNode.parentNode.parentNode.parentNode.parentNode.pickId(this.parentNode.parentNode.parentNode.parentNode.parentNode.mIdTextBox)"/>
+                          oncommand="pickId(mIdTextBox)"/>
             </xul:row>
             <xul:row align="center">
               <xul:label value="&classList.label;"/>
               <xul:textbox anonid="classTextbox" flex="1"
-                           oninput="this.parentNode.parentNode.parentNode.parentNode.parentNode.onIdOrClassBoxChange()"/>
+                           oninput="onIdOrClassBoxChange()"/>
               <xul:button label="&pickOne.button;"
-                          oncommand="this.parentNode.parentNode.parentNode.parentNode.parentNode.pickId(this.parentNode.parentNode.parentNode.parentNode.parentNode.mClassTextBox)"/>
+                          oncommand="pickId(mClassTextBox)"/>
             </xul:row>
           </xul:rows>
         </xul:grid>
@@ -102,14 +102,14 @@
             <xul:row align="center">
               <xul:label value="&classList.label;"/>
               <xul:menulist anonid="ClassList"
-                            oncommand="this.parentNode.parentNode.parentNode.parentNode.parentNode.onClassOrIdChange()">
+                            oncommand="onClassOrIdChange()">
                 <xul:menupopup id="ClassPopup" onpopupshowing="initClassMenu(this, false);"/>
               </xul:menulist>
             </xul:row>
             <xul:row align="center">
               <xul:label value="&idList.label;"/>
               <xul:menulist anonid="IDList"
-                            oncommand="this.parentNode.parentNode.parentNode.parentNode.parentNode.onClassOrIdChange()">
+                            oncommand="onClassOrIdChange()">
                 <xul:menupopup id="ClassPopup" onpopupshowing="initIdMenu(this);"/>
               </xul:menulist>
             </xul:row>

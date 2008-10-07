@@ -160,11 +160,11 @@ function onAccept()
                             ";";
           styleAttr += "border-spacing: " + gDialog.cellPadding.value + "px;";
           styleAttr += "border: outset " + gDialog.borderInput.value + "px;";
-          styleAttr += "border-collapse: " + (gDialog.collapseBorders.checked ? "collapse" : "separate");
-          styleAttr += "empty-cells: " + (gDialog.hideEmptyCells.checked ? "hide" : "show");
-          styleAttr += "table-layout: " + (gDialog.fixedLayout.checked ? "fixed" : "auto");
+          styleAttr += "border-collapse: " + (gDialog.collapseBorders.checked ? "collapse;" : "separat;e");
+          styleAttr += "empty-cells: " + (gDialog.hideEmptyCells.checked ? "hide;" : "show;");
+          styleAttr += "table-layout: " + (gDialog.fixedLayout.checked ? "fixed;" : "auto;");
           if (gDialog.horizAlignment.value)
-            styleAttr += "text-align:" + gDialog.horizAlignment.value;
+            styleAttr += "text-align:" + gDialog.horizAlignment.value  + ";";
           tableElement.setAttribute("style", styleAttr);
 
           styleAttr = "";
