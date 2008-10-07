@@ -12,26 +12,26 @@
     </menu>
 
     <menu id="editMenu"   label="&editMenu.label;"   accesskey="&editMenu.accesskey;">
-      <menupopup/>
+      <menupopup id="editMenuPopup"/>
     </menu>
 
     <menu id="viewMenu"   label="&viewMenu.label;"   accesskey="&viewMenu.accesskey;">
-      <menupopup>
+      <menupopup id="viewMenuPopup">
         <menuitem label="&fullScreen.label;" accesskey="&fullScreen.accesskey;"
                   key="key_fullScreen" command="cmd_fullScreen"/>
       </menupopup>
     </menu>
 
     <menu id="insertMenu" label="&insertMenu.label;" accesskey="&insertMenu.accesskey;">
-      <menupopup/>
+      <menupopup id="insertMenuPopup"/>
     </menu>
 
     <menu id="formatMenu" label="&formatMenu.label;" accesskey="&formatMenu.accesskey;">
-      <menupopup/>
+      <menupopup id="formatMenuPopup"/>
     </menu>
 
     <menu id="tableMenu" label="&tableMenu.label;" accesskey="&tableMenu.accesskey;">
-      <menupopup/>
+      <menupopup id="tableMenuPopup"/>
     </menu>
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
@@ -44,7 +44,7 @@
     </menu>
 
     <menu id="helpMenu" label="&helpMenu.label;" accesskey="&helpMenu.accesskey;">
-      <menupopup>
+      <menupopup id="helpMenuPopup">
         <menuitem label="&aboutComposer.label;" oncommand="AboutComposer()"/>
       </menupopup>
     </menu>
