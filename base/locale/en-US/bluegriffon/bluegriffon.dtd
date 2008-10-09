@@ -100,6 +100,8 @@
 <!ENTITY strongToolbarCmd.label           "Strong emphasis">
 <!ENTITY emToolbarCmd.tooltip             "Emphasis">
 <!ENTITY emToolbarCmd.label               "Emphasis">
+<!ENTITY codeToolbarCmd.label             "Code">
+<!ENTITY codeToolbarCmd.tooltip           "Code">
 
 <!ENTITY ParagraphSelect.tooltip "Choose a paragraph format">
 <!-- Shared in Paragraph, and Toolbar menulist -->

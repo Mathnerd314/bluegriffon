@@ -25,6 +25,11 @@
         <observes element="cmd_em" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_em')"/>
       </toolbarbutton>
 
+      <toolbarbutton id="codeButton" type="checkbox" autoCheck="false" observes="cmd_code" label="&codeToolbarCmd.label;"
+                     tooltiptext="&codeToolbarCmd.tooltip;">
+        <observes element="cmd_code" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_code')"/>
+      </toolbarbutton>
+
       <toolbaritem id="ParagraphSelectBox">
         <menulist class="toolbar-focustarget" id="ParagraphSelect" observes="cmd_renderedHTMLEnabler"
           tooltiptext="&ParagraphSelect.tooltip;" crop="right">

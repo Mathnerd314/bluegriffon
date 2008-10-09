@@ -113,6 +113,7 @@ var ComposerCommands = {
         case "cmd_underline":
         case "cmd_strong":
         case "cmd_em":
+        case "cmd_code":
 
         case "cmd_ul":
         case "cmd_ol":

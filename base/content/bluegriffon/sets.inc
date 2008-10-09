@@ -14,7 +14,7 @@
   <command id="cmd_new"                         oncommand="goDoCommand('cmd_new')"/>
   <command id="cmd_newWizard"                   oncommand="goDoCommand('cmd_newWizard')"/>
 
-  <command id="Tasks:Inspector" oncommand="inspectDOMDocument();"/>
+  <command id="Tasks:Inspector"   oncommand="inspectDOMDocument();"/>
   <command id="Tasks:InspectPage" oncommand="inspectDOMDocument(_content.document);"/>
 </commandset>
 
@@ -41,6 +41,8 @@
   <command id="cmd_underline"    state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_underline')"/>
   <command id="cmd_strong"       state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_strong')"/>
   <command id="cmd_em"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_em')"/>
+  <command id="cmd_code"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_code')"/>
+
   <command id="cmd_paragraphState" state=""        oncommand="ComposerCommands.doStatefulCommand('cmd_paragraphState', event.target.value)"/>
   <command id="cmd_fontFace"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"/>
   <command id="cmd_class"        state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"/>

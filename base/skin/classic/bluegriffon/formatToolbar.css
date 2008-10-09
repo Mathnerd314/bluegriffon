@@ -213,3 +213,12 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/dt-disabled.png");
 }
 
+/****** CODE ******/
+
+#codeButton{
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code.png");
+}
+
+#codeButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code-disabled.png");
+}
