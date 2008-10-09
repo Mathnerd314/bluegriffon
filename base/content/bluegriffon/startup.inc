@@ -26,5 +26,5 @@ function Startup()
 
   ResizeEventNotifier.startup();
   EditorScrolledNotifier.startup();
-
+  BGZoomManager.startup();
 }

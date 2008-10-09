@@ -264,6 +264,7 @@
                   window.updateCommands("navigation");
                   window.updateCommands("create");
 
+                  NotifierUtils.notify("tabCreated");
                 }
               },
             
@@ -438,6 +439,8 @@
            window.updateCommands("style");
 
            window.UpdateWindowTitle();
+
+           NotifierUtils.notify("tabSelected");
         ]]>
         </body>
       </method>

@@ -50,3 +50,4 @@ pref("bluegriffon.css.policy", 2); // 0: HTML Attr; 1: Inline styles; 2: embedde
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
 
+pref("bluegriffon.zoom.default", "1");

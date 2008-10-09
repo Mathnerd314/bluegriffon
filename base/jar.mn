@@ -64,6 +64,7 @@ bluegriffon.jar:
   content/bluegriffon/utils/notifiers.js	(content/bluegriffon/utils/notifiers.js)
   content/bluegriffon/utils/prompter.js	(content/bluegriffon/utils/prompter.js)
   content/bluegriffon/utils/urls.js	(content/bluegriffon/utils/urls.js)
+  content/bluegriffon/zoomManager.js	(content/bluegriffon/zoomManager.js)
   skin/classic/bluegriffon/bluegriffon.css	(skin/classic/bluegriffon/bluegriffon.css)
   skin/classic/bluegriffon/bluegriffon.ico	(skin/classic/bluegriffon/bluegriffon.ico)
   skin/classic/bluegriffon/colourPicker.css	(skin/classic/bluegriffon/colourPicker.css)

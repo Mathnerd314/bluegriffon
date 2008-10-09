@@ -156,3 +156,4 @@
 <!ENTITY saveCmd.label "Save">
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 
+<!ENTITY setZoomFactor.label "Set zoom factor">

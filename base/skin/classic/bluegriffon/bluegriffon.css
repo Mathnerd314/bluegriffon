@@ -107,3 +107,8 @@ grippy[disabled="true"] {
   display: none;
 }
 
+/******* ZOOM *******/
+
+#menulist-zoompanel {
+  max-width: 5em;
+}
