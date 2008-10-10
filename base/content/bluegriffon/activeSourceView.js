@@ -210,8 +210,12 @@ function(aDoc, aNode, aCurrentUL)
             li.setAttribute("style", "display: none");
           break;
         case Node.ELEMENT_NODE:
-          li = this.createSourceViewForElementNode(aDoc, aNode, aCurrentUL, null);
-          aCurrentUL.appendChild(li);
+          if (aNode.nodeName.toLowerCase() != "br" ||
+              aNode.getAttribute("type") != "_moz")
+          {
+            li = this.createSourceViewForElementNode(aDoc, aNode, aCurrentUL, null);
+            aCurrentUL.appendChild(li);
+          }
           break;
         default:
           break;
@@ -225,12 +229,12 @@ function(aDoc, aNode, aCurrentUL)
 {
   var span = aDoc.createElement("span");
   span.setAttribute("class", "textNode");
-  span.setAttribute("contenteditable", "true");
 
   var t = aDoc.createTextNode(aNode.data);
   var li = aDoc.createElement("li");
   var id = this.getRandomID();
   li.setAttribute("id", id);
+  li.setAttribute("contenteditable", "true");
   span.appendChild(t);
   li.appendChild(span);
   li.setUserData("originalNode", aNode, null);
@@ -351,7 +355,17 @@ function(aEvent)
   if (removal)
   {
     var sourceViewID = target.getUserData("sourceViewID");
+    if (!sourceViewID)
+    {
+      this.mMutationsEnabled = true;
+      return;
+    }
     var sourceTarget = sourceDoc.getElementById(sourceViewID);
+    if (!sourceTarget)
+    {
+      this.mMutationsEnabled = true;
+      return;
+    }
     var sourceParent = sourceTarget.parentNode;
     sourceParent.removeChild(sourceTarget);
     if (!sourceParent.childNodes.length)
@@ -390,6 +404,9 @@ function(aEvent)
           
         break;
       case Node.ELEMENT_NODE:
+        if (target.nodeName.toLowerCase() == "br" &&
+            target.getAttribute("type") == "_moz")
+          break;
         li = this.createSourceViewForElementNode(sourceDoc, target, currentUL, null);
         li.setAttribute("open", "true");
         currentUL.insertBefore(li, sourceNextSibling);
