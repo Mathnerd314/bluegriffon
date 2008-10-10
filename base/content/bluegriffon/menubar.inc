@@ -6,6 +6,13 @@
                   command="cmd_new"/>
         <menuitem label="&newWizardMenu.label;"
                   command="cmd_newWizard"/>
+        <menu id="menu_RecentFiles" accesskey="&filerecentmenu.accesskey;" label="&fileRecentMenu.label;"
+              onpopupshowing="RecentPagesHandler.buildRecentPagesMenu();">
+          <menupopup id="menupopup_RecentFiles"
+                      oncommand="OpenFile(event.target.getAttribute('value'), true);"/>
+            <!-- menuitems appended at runtime -->
+        </menu>
+
         <menuseparator/>
         <menuitem label="&quit.label;" accesskey="&quit.accesskey;" oncommand="goQuitApplication()"/>
       </menupopup>

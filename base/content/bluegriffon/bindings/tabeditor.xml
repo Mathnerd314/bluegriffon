@@ -265,6 +265,7 @@
                   window.updateCommands("create");
 
                   NotifierUtils.notify("tabCreated");
+                  RecentPagesHandler.saveRecentFilesPrefs();
                 }
               },
             

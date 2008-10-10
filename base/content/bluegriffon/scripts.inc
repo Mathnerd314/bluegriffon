@@ -16,6 +16,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/colourPickerHelper.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/activeSourceView.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/zoomManager.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/recentPages.js"/>
 
   <script type="application/javascript" src="chrome://diavolo/content/tokeniser.js"/>
   <script type="application/javascript" src="chrome://diavolo/content/highlighter.js"/>

@@ -143,7 +143,7 @@ var EditorUtils = {
   
     var windowManager = Components.classes[kWINDOWMEDIATOR_CID].getService();
     var windowManagerInterface = windowManager.QueryInterface(nsIWindowMediator);
-    var enumerator = windowManagerInterface.getEnumerator( "composer" );
+    var enumerator = windowManagerInterface.getEnumerator( "bluegriffon" );
     while ( enumerator.hasMoreElements() )
     {
       var win = enumerator.getNext().QueryInterface(nsIDOMWindowInternal);

@@ -53,6 +53,7 @@ bluegriffon.jar:
   content/bluegriffon/hsPanel.png	(content/bluegriffon/hsPanel.png)
   content/bluegriffon/propertiesDeck.js	(content/bluegriffon/propertiesDeck.js)
   content/bluegriffon/propertiesDeck.xul	(content/bluegriffon/propertiesDeck.xul)
+  content/bluegriffon/recentPages.js	(content/bluegriffon/recentPages.js)
   content/bluegriffon/sourceViewTemplate.html	(content/bluegriffon/sourceViewTemplate.html)
   content/bluegriffon/utils/colors.js	(content/bluegriffon/utils/colors.js)
   content/bluegriffon/utils/css.js	(content/bluegriffon/utils/css.js)

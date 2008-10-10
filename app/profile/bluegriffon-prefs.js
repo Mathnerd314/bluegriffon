@@ -51,3 +51,5 @@ pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
 
 pref("bluegriffon.zoom.default", "1");
+
+pref("bluegriffon.history.url_maximum", 10);

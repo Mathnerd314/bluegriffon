@@ -83,6 +83,7 @@ function OpenFile(aURL, aInTab)
     win.document.getElementById("tabeditor").mTabpanels.selectedPanel = editor;
 
     // nothing else to do here...
+    win.focus();
     return;
   }
 

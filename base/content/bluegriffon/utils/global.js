@@ -48,6 +48,7 @@ var BlueGriffonVars = {
   kXUL_NS: "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
 };
 
+var gPrefs = null;
 
 function TrimStringLeft(string)
 {
@@ -95,14 +96,15 @@ function delayedOpenWindow(chrome, flags, param1, param2)
 
 function GetPrefs()
 {
-  var pref = null;
+  if (gPrefs)
+    return gPrefs;
   try {
-    pref = Components.classes["@mozilla.org/preferences-service;1"]
+    gPrefs = Components.classes["@mozilla.org/preferences-service;1"]
                      .getService(Components.interfaces.nsIPrefBranch);
   } catch (ex) {
     // not critical, remain silent
   }
-  return pref;
+  return gPrefs;
 }
 
 function GetPrefsService()
@@ -118,6 +120,34 @@ function GetPrefsService()
   }
 
   return gPrefsService;
+}
+
+function GetUnicharPref(aPrefName, aDefVal)
+{
+  var prefs = GetPrefs();
+  if (prefs)
+  {
+    try {
+      return prefs.getComplexValue(aPrefName, Components.interfaces.nsISupportsString).data;
+    }
+    catch(e) {}
+  }
+  return "";
+}
+
+function SetUnicharPref(aPrefName, aPrefValue)
+{
+  var prefs = GetPrefs();
+  if (prefs)
+  {
+    try {
+      var str = Components.classes["@mozilla.org/supports-string;1"]
+                          .createInstance(Components.interfaces.nsISupportsString);
+      str.data = aPrefValue;
+      prefs.setComplexValue(aPrefName, Components.interfaces.nsISupportsString, str);
+    }
+    catch(e) {}
+  }
 }
 
 function toOpenWindowByType(inType, uri)
@@ -314,3 +344,4 @@ function initIdMenu(menuPopup)
     }
   }
 }
+

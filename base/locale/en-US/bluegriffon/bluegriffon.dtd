@@ -159,3 +159,6 @@
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 
 <!ENTITY setZoomFactor.label "Set zoom factor">
+
+<!ENTITY fileRecentMenu.label "Recent Pages">
+<!ENTITY filerecentmenu.accesskey "r">
