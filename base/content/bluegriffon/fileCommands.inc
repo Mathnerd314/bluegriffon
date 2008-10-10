@@ -54,3 +54,27 @@ var cmdSave =
     return result;
   }
 }
+
+var cmdSaveAs =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.isDocumentEditable());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var editor = EditorUtils.getCurrentEditor();
+    if (editor)
+    {
+      // FinishHTMLSource();
+      var result = FileUtils.saveDocument(true, false, editor.contentsMIMEType);
+      window.content.focus();
+      return result;
+    }
+    return false;
+  }
+}

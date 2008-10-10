@@ -14,6 +14,10 @@
         </menu>
 
         <menuseparator/>
+        <menuitem id="saveMenuitem" accesskey="&filesave.accesskey;" key="savekb" observes="cmd_save"/>
+        <menuitem accesskey="&filesaveas.accesskey;" observes="cmd_saveAs"/>
+
+        <menuseparator/>
         <menuitem label="&quit.label;" accesskey="&quit.accesskey;" oncommand="goQuitApplication()"/>
       </menupopup>
     </menu>

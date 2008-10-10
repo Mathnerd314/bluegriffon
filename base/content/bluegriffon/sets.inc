@@ -3,7 +3,8 @@
 </broadcasterset>
 
 <keyset id="mainKeySet">
-  <key id="key_fullScreen" keycode="VK_F11" command="cmd_fullScreen"/>
+  <key id="key_fullScreen" keycode="VK_F11"             command="cmd_fullScreen"/>
+  <key id="savekb"         key="&filesave.keybinding;"  observes="cmd_save" modifiers="accel"/>
 </keyset>
 
 <commandset id="webNavigationItems"
@@ -71,6 +72,7 @@
             events="create,style,save"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
+  <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
 </commandset>
 
 <keyset id="editorKeys">

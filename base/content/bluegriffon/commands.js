@@ -257,6 +257,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_stopLoading", cmdStopLoading);
     commandTable.registerCommand("cmd_open",        cmdOpen);
     commandTable.registerCommand("cmd_save",        cmdSave);
+    commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);

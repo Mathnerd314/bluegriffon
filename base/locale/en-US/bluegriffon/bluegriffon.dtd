@@ -157,6 +157,10 @@
 
 <!ENTITY saveCmd.label "Save">
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
+<!ENTITY filesave.accesskey "s">
+<!ENTITY filesave.keybinding "s">
+<!ENTITY saveAsCmd.label "Save As...">
+<!ENTITY filesaveas.accesskey "A">
 
 <!ENTITY setZoomFactor.label "Set zoom factor">
 
