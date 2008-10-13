@@ -169,3 +169,5 @@
 
 <!ENTITY markupCleanerCmd.label "Markup cleaner">
 <!ENTITY markupcleaner.accesskey "m">
+
+<!ENTITY viewToolbars.label "Toolbars">

@@ -28,6 +28,11 @@
 
     <menu id="viewMenu"   label="&viewMenu.label;"   accesskey="&viewMenu.accesskey;">
       <menupopup id="viewMenuPopup">
+        <menu label="&viewToolbars.label;">
+          <menupopup id="viewToolbarsPopup"
+                     onpopupshowing="BGToolbarManager.listToolbars(this)"/>
+        </menu>
+        <menuseparator/>
         <menuitem label="&fullScreen.label;" accesskey="&fullScreen.accesskey;"
                   key="key_fullScreen" command="cmd_fullScreen"/>
       </menupopup>

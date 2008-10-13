@@ -53,6 +53,7 @@ bluegriffon.jar:
   content/bluegriffon/js/markupCleaner.js	(content/bluegriffon/js/markupCleaner.js)
   content/bluegriffon/js/propertiesDeck.js	(content/bluegriffon/js/propertiesDeck.js)
   content/bluegriffon/js/recentPages.js	(content/bluegriffon/js/recentPages.js)
+  content/bluegriffon/js/toolbars.js	(content/bluegriffon/js/toolbars.js)
   content/bluegriffon/js/zoomManager.js	(content/bluegriffon/js/zoomManager.js)
   content/bluegriffon/sourceViewTemplate.html	(content/bluegriffon/sourceViewTemplate.html)
   content/bluegriffon/utils/colors.js	(content/bluegriffon/utils/colors.js)
