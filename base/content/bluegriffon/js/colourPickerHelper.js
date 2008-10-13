@@ -6,7 +6,7 @@ var ColorPickerHelper = {
 
 // CONSTANTS
 
-  kCOLOUR_PICKER_URL: "chrome://bluegriffon/content/colourPicker.xul",
+  kCOLOUR_PICKER_URL: "chrome://bluegriffon/content/xul/colourPicker.xul",
 
 // PUBLIC
 

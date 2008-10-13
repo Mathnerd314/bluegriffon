@@ -1,6 +1,6 @@
 #filter substitution
 
-pref("toolkit.defaultChromeURI", "chrome://bluegriffon/content/bluegriffon.xul");
+pref("toolkit.defaultChromeURI", "chrome://bluegriffon/content/xul/bluegriffon.xul");
 
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", true);

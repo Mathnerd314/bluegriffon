@@ -1,17 +1,14 @@
 bluegriffon.jar:
 % content   bluegriffon    			%content/bluegriffon/
 % skin		bluegriffon    classic/1.0 %skin/classic/bluegriffon/
-% style  chrome://global/content/customizeToolbar.xul    chrome://global/skin/
-% style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/bluegriffon.css
-% style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
+% style  chrome://global/content/xul/customizeToolbar.xul    chrome://global/skin/
+% style  chrome://global/content/xul/customizeToolbar.xul    chrome://bluegriffon/skin/bluegriffon.css
+% style  chrome://global/content/xul/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
 % content venkman jar:venkman.jar!/content/venkman/
 % locale venkman en-US jar:venkman.jar!/locale/en-US/venkman/
 % skin   venkman modern/1.0 jar:venkman.jar!/skin/modern/venkman/
   content/bluegriffon/about-logo.png	(content/bluegriffon/about-logo.png)
   content/bluegriffon/aboutDialog.css	(content/bluegriffon/aboutDialog.css)
-* content/bluegriffon/aboutDialog.js	(content/bluegriffon/aboutDialog.js)
-* content/bluegriffon/aboutDialog.xul	(content/bluegriffon/aboutDialog.xul)
-  content/bluegriffon/activeSourceView.js	(content/bluegriffon/activeSourceView.js)
   content/bluegriffon/bindings/cssToggler.xml	(content/bluegriffon/bindings/cssToggler.xml)
   content/bluegriffon/bindings/filepickerbutton.css	(content/bluegriffon/bindings/filepickerbutton.css)
   content/bluegriffon/bindings/filepickerbutton.xml	(content/bluegriffon/bindings/filepickerbutton.xml)
@@ -27,18 +24,10 @@ bluegriffon.jar:
   content/bluegriffon/blanks/strict.xhtml	(content/bluegriffon/blanks/strict.xhtml)
   content/bluegriffon/blanks/transitional.html	(content/bluegriffon/blanks/transitional.html)
   content/bluegriffon/blanks/transitional.xhtml	(content/bluegriffon/blanks/transitional.xhtml)
-* content/bluegriffon/bluegriffon.js	(content/bluegriffon/bluegriffon.js)
-* content/bluegriffon/bluegriffon.xul	(content/bluegriffon/bluegriffon.xul)
   content/bluegriffon/brightness.png	(content/bluegriffon/brightness.png)
-  content/bluegriffon/col.js	(content/bluegriffon/col.js)
-  content/bluegriffon/colourPicker.js	(content/bluegriffon/colourPicker.js)
-  content/bluegriffon/colourPicker.xul	(content/bluegriffon/colourPicker.xul)
   content/bluegriffon/colourPickerArrow.gif	(content/bluegriffon/colourPickerArrow.gif)
   content/bluegriffon/colourPickerCrosshair.gif	(content/bluegriffon/colourPickerCrosshair.gif)
-  content/bluegriffon/colourPickerHelper.js	(content/bluegriffon/colourPickerHelper.js)
-* content/bluegriffon/commands.js	(content/bluegriffon/commands.js)
   content/bluegriffon/credits.xhtml	(content/bluegriffon/credits.xhtml)
-  content/bluegriffon/customize.js	(content/bluegriffon/customize.js)
   content/bluegriffon/DI.png	(content/bluegriffon/DI.png)
   content/bluegriffon/dialogs/insertTable.js	(content/bluegriffon/dialogs/insertTable.js)
   content/bluegriffon/dialogs/insertTable.xul	(content/bluegriffon/dialogs/insertTable.xul)
@@ -53,10 +42,18 @@ bluegriffon.jar:
   content/bluegriffon/EditorContent.css	(content/bluegriffon/EditorContent.css)
   content/bluegriffon/EditorOverride.css	(content/bluegriffon/EditorOverride.css)
   content/bluegriffon/hsPanel.png	(content/bluegriffon/hsPanel.png)
-  content/bluegriffon/markupCleaner.js	(content/bluegriffon/markupCleaner.js)
-  content/bluegriffon/propertiesDeck.js	(content/bluegriffon/propertiesDeck.js)
-  content/bluegriffon/propertiesDeck.xul	(content/bluegriffon/propertiesDeck.xul)
-  content/bluegriffon/recentPages.js	(content/bluegriffon/recentPages.js)
+* content/bluegriffon/js/aboutDialog.js	(content/bluegriffon/js/aboutDialog.js)
+  content/bluegriffon/js/activeSourceView.js	(content/bluegriffon/js/activeSourceView.js)
+* content/bluegriffon/js/bluegriffon.js	(content/bluegriffon/js/bluegriffon.js)
+  content/bluegriffon/js/col.js	(content/bluegriffon/js/col.js)
+  content/bluegriffon/js/colourPicker.js	(content/bluegriffon/js/colourPicker.js)
+  content/bluegriffon/js/colourPickerHelper.js	(content/bluegriffon/js/colourPickerHelper.js)
+* content/bluegriffon/js/commands.js	(content/bluegriffon/js/commands.js)
+  content/bluegriffon/js/customize.js	(content/bluegriffon/js/customize.js)
+  content/bluegriffon/js/markupCleaner.js	(content/bluegriffon/js/markupCleaner.js)
+  content/bluegriffon/js/propertiesDeck.js	(content/bluegriffon/js/propertiesDeck.js)
+  content/bluegriffon/js/recentPages.js	(content/bluegriffon/js/recentPages.js)
+  content/bluegriffon/js/zoomManager.js	(content/bluegriffon/js/zoomManager.js)
   content/bluegriffon/sourceViewTemplate.html	(content/bluegriffon/sourceViewTemplate.html)
   content/bluegriffon/utils/colors.js	(content/bluegriffon/utils/colors.js)
   content/bluegriffon/utils/css.js	(content/bluegriffon/utils/css.js)
@@ -68,7 +65,10 @@ bluegriffon.jar:
   content/bluegriffon/utils/notifiers.js	(content/bluegriffon/utils/notifiers.js)
   content/bluegriffon/utils/prompter.js	(content/bluegriffon/utils/prompter.js)
   content/bluegriffon/utils/urls.js	(content/bluegriffon/utils/urls.js)
-  content/bluegriffon/zoomManager.js	(content/bluegriffon/zoomManager.js)
+* content/bluegriffon/xul/aboutDialog.xul	(content/bluegriffon/xul/aboutDialog.xul)
+* content/bluegriffon/xul/bluegriffon.xul	(content/bluegriffon/xul/bluegriffon.xul)
+  content/bluegriffon/xul/colourPicker.xul	(content/bluegriffon/xul/colourPicker.xul)
+  content/bluegriffon/xul/propertiesDeck.xul	(content/bluegriffon/xul/propertiesDeck.xul)
   skin/classic/bluegriffon/bluegriffon.css	(skin/classic/bluegriffon/bluegriffon.css)
   skin/classic/bluegriffon/bluegriffon.ico	(skin/classic/bluegriffon/bluegriffon.ico)
   skin/classic/bluegriffon/colourPicker.css	(skin/classic/bluegriffon/colourPicker.css)

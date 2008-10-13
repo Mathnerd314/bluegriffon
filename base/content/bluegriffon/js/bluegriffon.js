@@ -52,7 +52,7 @@ function OpenNewWindow(aURL)
 {
   // warning, the first argument MUST be null here because when the
   // first window is created, it gets the cmdLine as an argument
-  window.delayedOpenWindow("chrome://bluegriffon/content/bluegriffon.xul", "chrome,all,dialog=no", null, aURL);
+  window.delayedOpenWindow("chrome://bluegriffon/content/xul/bluegriffon.xul", "chrome,all,dialog=no", null, aURL);
 }
 
 function NewDocument(aEvent)
@@ -111,7 +111,7 @@ function EditorLoadUrl(aElt, aURL)
 
 function AboutComposer()
 {
-  window.openDialog('chrome://bluegriffon/content/aboutDialog.xul',
+  window.openDialog('chrome://bluegriffon/content/xul/aboutDialog.xul',
                     "", "resizable=no");
 }
 

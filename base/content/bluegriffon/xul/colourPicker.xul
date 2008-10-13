@@ -49,7 +49,7 @@
     ondialogcancel="return onCancelColor();"> 
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/colourPicker.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/colourPicker.js"/>
 
   <broadcaster id="args" value=""/>
   <spacer id="location" offsetY="50" persist="offsetX offsetY"/>

@@ -66,7 +66,7 @@
         persist="screenX screenY"
         screenX="24" screenY="24">
     
-  <script type="application/x-javascript" src="chrome://bluegriffon/content/aboutDialog.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/js/aboutDialog.js"/>
 
   <deck id="modes" flex="1">
     <vbox id="clientBox">
