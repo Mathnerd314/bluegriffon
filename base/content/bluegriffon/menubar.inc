@@ -47,6 +47,8 @@
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
       <menupopup id="toolsPopup">
+        <menuitem id="menu_cleanup" observes="cmd_cleanup"/>
+        <menuseparator/>
         <menuitem label="Extensions"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>

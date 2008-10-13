@@ -32,7 +32,7 @@
 
       <toolbaritem id="ParagraphSelectBox">
         <menulist class="toolbar-focustarget" id="ParagraphSelect" observes="cmd_renderedHTMLEnabler"
-          tooltiptext="&ParagraphSelect.tooltip;" crop="right">
+                  tooltiptext="&ParagraphSelect.tooltip;" crop="right">
           <observes element="cmd_paragraphState" attribute="state" onbroadcast="onParagraphFormatChange(this.parentNode, 'cmd_paragraphState')"/>
           <menupopup id="ParagraphPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_paragraphState', event.target.value)">
             <!-- TODO : add an onpopupshowing handler to hide the body text

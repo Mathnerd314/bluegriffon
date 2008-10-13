@@ -166,3 +166,6 @@
 
 <!ENTITY fileRecentMenu.label "Recent Pages">
 <!ENTITY filerecentmenu.accesskey "r">
+
+<!ENTITY markupCleanerCmd.label "Markup cleaner">
+<!ENTITY markupcleaner.accesskey "m">

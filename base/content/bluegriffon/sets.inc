@@ -75,6 +75,13 @@
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
 </commandset>
 
+<commandset id="composerEditMenuItems"
+            commandupdater="true"
+            events="create, mode_switch"
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+  <command id="cmd_cleanup"         oncommand="goDoCommand('cmd_cleanup')"      label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
+</commandset>
+
 <keyset id="editorKeys">
   <key id="key_newNavigator" key="n" modifiers="control" />
 </keyset>

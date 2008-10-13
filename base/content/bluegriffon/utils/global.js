@@ -345,3 +345,15 @@ function initIdMenu(menuPopup)
   }
 }
 
+function GetIndexOfNode(aNode)
+{
+  if (aNode)
+  {
+    // the following 3 lines are an excellent suggestion from Neil Rashbrook
+    var range = aNode.ownerDocument.createRange();
+    range.selectNode(aNode);
+    return range.startOffset;
+  }
+  return null;
+}
+
