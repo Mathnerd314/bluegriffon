@@ -32,6 +32,8 @@
           <menupopup id="viewToolbarsPopup"
                      onpopupshowing="BGToolbarManager.listToolbars(this)"/>
         </menu>
+        <menuitem label="&viewStatusbar.label;"
+                  oncommand="BGToolbarManager.goToggleToolbar('statusbar')" />
         <menuseparator/>
         <menuitem label="&fullScreen.label;" accesskey="&fullScreen.accesskey;"
                   key="key_fullScreen" command="cmd_fullScreen"/>

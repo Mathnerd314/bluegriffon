@@ -171,3 +171,7 @@
 <!ENTITY markupcleaner.accesskey "m">
 
 <!ENTITY viewToolbars.label "Toolbars">
+<!ENTITY viewStatusbar.label "Status bar">
+
+<!ENTITY formatToolbar.name "Format (primary)">
+<!ENTITY formatToolbar2.name "Format (secondary)">
