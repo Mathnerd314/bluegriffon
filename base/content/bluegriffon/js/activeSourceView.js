@@ -286,8 +286,11 @@ function(aDoc, aNode, aCurrentUL, aCurrentLI)
       if (name.substr(0, 4) == "_moz")
         continue;
 
-      // the @ in the line below is here because of bug 455992 
-      li.appendChild(aDoc.createTextNode(" @"));
+      // the @ in the line below is here because of bug 455992
+      span = aDoc.createElement("span");
+      span.setAttribute("class", "at-separator");
+      span.appendChild(aDoc.createTextNode("@"));
+      li.appendChild(span);
 
       span = aDoc.createElement("span");
       span.setAttribute("class", "attrName");
