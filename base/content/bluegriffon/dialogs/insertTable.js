@@ -44,6 +44,8 @@ function SetWidthTextBoxMax(aElt)
 
 function SelectArea(cell)
 {
+  if (gDialog.sizeSelector.hasAttribute("disabled"))
+    return;
   var cellID    = cell.id;
   var numCellID = Number(cellID.substr(1));
 

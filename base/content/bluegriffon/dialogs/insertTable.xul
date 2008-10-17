@@ -89,7 +89,7 @@
       <tabpanels>
         <vbox flex="1">
           <spacer class="spacer" flex="1"/>
-          <grid class="sizeSelector">
+          <grid id="sizeSelector">
             <columns><column flex="1"/><column/><column flex="1"/></columns>
             <rows>
               <row>
@@ -293,7 +293,8 @@
         </grid>
       </tabpanels>
     </tabbox>
-    <csstoggler id="cssToggler">
+    <csstoggler id="cssToggler"
+                controls="sizeSelector">
       <groupbox orient="vertical">
         <caption label="&cssExtras.label;"/>
         <checkbox id="collapseBorders"

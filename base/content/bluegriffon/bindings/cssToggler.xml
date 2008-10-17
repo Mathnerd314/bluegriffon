@@ -248,12 +248,14 @@
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
               document.documentElement.getButton("accept").removeAttribute("disabled");
+              this.enableControls(true);
               break;
             case 0: // OMG, user really wants HTML attributes, OMG!!!
               this.mChildrenBox.setAttribute("collapsed", "true");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
               document.documentElement.getButton("accept").removeAttribute("disabled");
+              this.enableControls(true);
               break;
             default: break;
           }
@@ -289,6 +291,7 @@
               // lucky man...
               this.mExistingIdAlert.setAttribute("class", "hiddenAlert");
               document.documentElement.getButton("accept").removeAttribute("disabled");
+              this.enableControls(true);
               return;
             }
           }
@@ -297,6 +300,7 @@
 
           // cannot create the element in that case
           document.documentElement.getButton("accept").setAttribute("disabled", "true");
+          this.enableControls(false);
         ]]>
         </body>
       </method>
@@ -309,11 +313,35 @@
           {
             // we have at least an ID or a class, we can create an element
             document.documentElement.getButton("accept").removeAttribute("disabled");
+            this.enableControls(true);
             return;
           }
           document.documentElement.getButton("accept").setAttribute("disabled", "true");
+          this.enableControls(false);
         ]]>
         </body>
+      </method>
+
+      <method name="enableControls">
+        <parameter name="aEnable"/>
+        <body>
+        <![CDATA[
+          var allControls = this.getAttribute("controls").split(',');
+          for (var i = 0; i < allControls.length; i++)
+          {
+            var c = allControls[i];
+            var elt = document.getElementById(c);
+            if (elt)
+            {
+              if (aEnable)
+                elt.removeAttribute("disabled");
+              else
+                elt.setAttribute("disabled", "true");
+            }
+          }
+        ]]>
+        </body>
+        
       </method>
 
       <method name="pickId">
