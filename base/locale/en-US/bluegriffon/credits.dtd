@@ -1,5 +1,6 @@
 <!ENTITY brandMotto       "You've never really edited a web site before.">
 <!ENTITY credit.leads     "Engineering Leads">
+<!ENTITY credit.contributors "Contributors">
 <!ENTITY credit.core      "Core Development Posse">
 <!ENTITY credit.gecko     "Gecko Layout Engine">
 <!ENTITY credit.thanks    "Special Thanks To">

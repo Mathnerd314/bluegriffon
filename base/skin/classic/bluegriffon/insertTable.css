@@ -32,7 +32,4 @@ tabbox textbox {
   min-height: 8px ! important;
 }
 
-csstoggler {
-  -moz-binding: url('chrome://bluegriffon/content/bindings/cssToggler.xml#cssToggler');
-  -moz-box-orient: vertical;
-}
+

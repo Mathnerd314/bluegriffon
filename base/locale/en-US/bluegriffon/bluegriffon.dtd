@@ -175,3 +175,6 @@
 
 <!ENTITY formatToolbar.name "Format (primary)">
 <!ENTITY formatToolbar2.name "Format (secondary)">
+
+<!ENTITY elementLanguage.label "Language">
+<!ENTITY elementLanguage.accesskey "L">

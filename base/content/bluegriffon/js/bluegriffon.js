@@ -359,3 +359,16 @@ function ToggleSplitter(aElt, aId)
   }
 }
 
+function ShowLanguageDialog(aEvent)
+{
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target)
+      window.openDialog("chrome://bluegriffon/content/dialogs/languages.xul","_blank",
+                        "chrome,modal,titlebar", target);
+  }
+}
+
+

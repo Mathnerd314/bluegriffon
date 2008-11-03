@@ -111,6 +111,8 @@
               newLabel.setAttribute("checked", "true");
 
             newLabel.setUserData("node", node, null);
+            newLabel.setAttribute("context", "structureBarContextMenu");
+
             this.insertBefore(newLabel, this.firstChild);
 
             node = node.parentNode;

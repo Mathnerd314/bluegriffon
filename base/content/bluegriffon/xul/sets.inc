@@ -93,4 +93,16 @@
   <popup id="format-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
   </popup>
+  <popup id="structureBarContextMenu">
+    <menuitem label="&elementLanguage.label;"
+              accesskey="&elementLanguage.accesskey;"
+              oncommand="ShowLanguageDialog(event)" />
+  </popup>
 </popupset>
+
+<stringbundleset id="languageSet">
+  <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
+  <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
+  <stringbundle id="bundlePreferences"  src="chrome://bluegriffon/locale/language.properties"/>
+  <stringbundle id="bundleAccepted"     src="resource://gre/res/language.properties"/>
+</stringbundleset>
