@@ -41,6 +41,5 @@ composer/Makefile
 composer/app/Makefile
 composer/app/profile/Makefile
 composer/base/Makefile
-composer/src
-xpfe/components/build2/Makefile
+composer/src/Makefile
 "
