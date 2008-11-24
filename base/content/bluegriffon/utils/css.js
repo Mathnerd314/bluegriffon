@@ -126,7 +126,7 @@ var CssUtils = {
     return this.getCssHintsFromDocument(aDocument, this.findIdsInSelector);
   },
 
-  getAllLocalRulesForSelector: function CssUtils_getAllRulesForSelector(aDocument, aSelector)
+  getAllLocalRulesForSelector: function CssUtils_getAllLocalRulesForSelector(aDocument, aSelector)
   {
     var ruleList = [];
   
@@ -266,8 +266,9 @@ var CssUtils = {
           break;
         case CSSRule.STYLE_RULE:
           {
-            str += (i ? "\n" : "") + rule.selectorText + " {";
-            var declarations = rule.style;
+            str += (i ? "\n" : "") + rule.selectorText + " {" +
+                   rule.style.cssText.replace( /;/g , ";\n");
+            /*var declarations = rule.style;
             for (var j = 0; j < declarations.length; j++)
             {
               var property = declarations.item(j);
@@ -276,7 +277,7 @@ var CssUtils = {
               str += "\n  " + property + ": " +
                      value +
                      (priority ? ";" : " !important;");
-            }
+            }*/
           }
           break;
         default:
