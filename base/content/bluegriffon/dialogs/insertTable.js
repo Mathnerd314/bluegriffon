@@ -239,8 +239,7 @@ function onAccept()
             cellProperties.push( { priority: false,
                                   property: "border",
                                   value: "inset 1px" } );
-          cellSelectorText = selectorText + " > * > tr > td," +
-                             selectorText + " > * > tr > th";
+          cellSelectorText = selectorText + " > * > tr > *";
           CssUtils.addRuleForSelector(gActiveEditor.document,
                                       cellSelectorText + "",
                                       cellProperties);
