@@ -6,11 +6,10 @@
 
 ac_add_options  --enable-application=bluegriffon
 
-# Mandatory if you use VC8.
-# (see http://developer.mozilla.org/en/Windows_Build_Prerequisites)
-# you may have to edit the lines according to your directory settings
-#GLIB_PREFIX=e:/apps/vc8
-#LIBIDL_PREFIX=e:/apps/vc8
+# Copy files from C:\Program Files\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT
+# to a new directory which has no whitespace in its path, and indicates this path
+# into this variable:
+#WIN32_REDIST_DIR=/c/apps/vc9_redist
 
 # Comment out the following lines for an optimized build
 #mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-opt
@@ -27,10 +26,11 @@ ac_add_options  --enable-application=bluegriffon
 
 mk_add_options MOZ_MAKE_FLAGS=-j2
 
-ac_add_options --enable-default-toolkit=cairo-windows
-ac_add_options --enable-image-decoders=default,-xbm
-
 # If you have Vista, comment the following line
 ac_add_options --disable-vista-sdk-requirements
 
+ac_add_options --disable-installer
+ac_add_options --disable-javaxpcom
+ac_add_options --disable-activex
+ac_add_options --disable-activex-scripting
 ac_add_options --disable-crashreporter
