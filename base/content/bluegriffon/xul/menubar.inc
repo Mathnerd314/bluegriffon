@@ -17,8 +17,10 @@
         <menuitem id="saveMenuitem" accesskey="&filesave.accesskey;" key="savekb" observes="cmd_save"/>
         <menuitem accesskey="&filesaveas.accesskey;" observes="cmd_saveAs"/>
 
+#ifndef XP_MACOSX
         <menuseparator/>
         <menuitem label="&quit.label;" accesskey="&quit.accesskey;" oncommand="goQuitApplication()"/>
+#endif
       </menupopup>
     </menu>
 
