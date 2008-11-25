@@ -71,7 +71,11 @@
              mode="full"
              context="main-toolbar-context-menu"
              customizable="true"
+#ifdef XP_MACOSX
+             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,spring,throbber-box"/>
+#else
              defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,spring,throbber-box,spacer"/>
+#endif
     <toolbarset id="customMainToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 

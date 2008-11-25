@@ -73,7 +73,7 @@ bluegriffon.jar:
 * content/bluegriffon/xul/bluegriffon.xul	(content/bluegriffon/xul/bluegriffon.xul)
   content/bluegriffon/xul/colourPicker.xul	(content/bluegriffon/xul/colourPicker.xul)
   content/bluegriffon/xul/propertiesDeck.xul	(content/bluegriffon/xul/propertiesDeck.xul)
-  skin/classic/bluegriffon/bluegriffon.css	(skin/classic/bluegriffon/bluegriffon.css)
+* skin/classic/bluegriffon/bluegriffon.css	(skin/classic/bluegriffon/bluegriffon.css)
   skin/classic/bluegriffon/bluegriffon.ico	(skin/classic/bluegriffon/bluegriffon.ico)
   skin/classic/bluegriffon/bluegriffonDialogs.css	(skin/classic/bluegriffon/bluegriffonDialogs.css)
   skin/classic/bluegriffon/colourPicker.css	(skin/classic/bluegriffon/colourPicker.css)
