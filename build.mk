@@ -50,5 +50,17 @@ tier_app_dirs += $(MOZ_BRANDING_DIRECTORY)
 endif
 
 tier_app_dirs += \
-	composer \
+	bluegriffon \
 	$(NULL)
+
+installer:
+	@echo "BlueGriffon doesn't have an installer yet."
+	@exit 1
+
+package:
+	@$(MAKE) -C bluegriffon/installer
+
+install::
+	@echo "BlueGriffon can't be installed directly."
+	@exit 1
+

@@ -1,0 +1,34 @@
+# sh
+# Build configuration script for MacOSX
+#
+# See http://developer.mozilla.org/en/Configuring_Build_Options for build options.
+#
+
+ac_add_options  --enable-application=bluegriffon
+
+# Comment out the following lines for an optimized build
+#mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-opt
+#ac_add_options --enable-optimize
+#ac_add_options --enable-strip
+#ac_add_options --disable-debug
+#ac_add_options --disable-tests
+
+# Comment out the following lines for a debug build
+#mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-debug
+#ac_add_options --disable-optimize
+#ac_add_options --enable-debug
+#ac_add_options --enable-tests
+
+mk_add_options MOZ_MAKE_FLAGS=-j2
+
+#ac_add_options  --with-pthreads
+
+ac_add_options  --enable-default-toolkit=mac
+ac_add_options  --enable-macos-target=10.2
+ac_add_options --with-macos-sdk=/Developer/SDKs/MacOSX10.2.8.sdk
+ac_add_options --enable-prebinding
+
+# Note: Only include icon for mac, windows and os2
+ac_add_options --enable-image-decoders=default,-xbm
+
+ac_add_options --disable-crashreporter

@@ -43,6 +43,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS		= src app base sidebars extensions
+DIRS		= src app base sidebars extensions installer
 
 include $(topsrcdir)/config/rules.mk

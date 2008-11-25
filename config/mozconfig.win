@@ -1,0 +1,36 @@
+# sh
+# Build configuration script for Windows
+#
+# See http://developer.mozilla.org/en/Configuring_Build_Options for build options.
+#
+
+ac_add_options  --enable-application=bluegriffon
+
+# Mandatory if you use VC8.
+# (see http://developer.mozilla.org/en/Windows_Build_Prerequisites)
+# you may have to edit the lines according to your directory settings
+#GLIB_PREFIX=e:/apps/vc8
+#LIBIDL_PREFIX=e:/apps/vc8
+
+# Comment out the following lines for an optimized build
+#mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-opt
+#ac_add_options --enable-optimize
+#ac_add_options --enable-strip
+#ac_add_options --disable-debug
+#ac_add_options --disable-tests
+
+# Comment out the following lines for a debug build
+#mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-debug
+#ac_add_options --disable-optimize
+#ac_add_options --enable-debug
+#ac_add_options --enable-tests
+
+mk_add_options MOZ_MAKE_FLAGS=-j2
+
+ac_add_options --enable-default-toolkit=cairo-windows
+ac_add_options --enable-image-decoders=default,-xbm
+
+# If you have Vista, comment the following line
+ac_add_options --disable-vista-sdk-requirements
+
+ac_add_options --disable-crashreporter

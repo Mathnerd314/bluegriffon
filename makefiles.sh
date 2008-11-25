@@ -37,9 +37,11 @@
 # ***** END LICENSE BLOCK *****
 
 add_makefiles "
-composer/Makefile
-composer/app/Makefile
-composer/app/profile/Makefile
-composer/base/Makefile
-composer/src/Makefile
+bluegriffon/Makefile
+bluegriffon/app/Makefile
+bluegriffon/base/Makefile
+bluegriffon/extensions/Makefile
+bluegriffon/installer/Makefile
+bluegriffon/sidebars/Makefile
+bluegriffon/src/Makefile
 "
