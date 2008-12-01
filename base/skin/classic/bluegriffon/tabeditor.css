@@ -37,6 +37,79 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
+/* ::::: tabs ::::: */
+
+.tabs-left,
+.tabs-right {
+  border-bottom: 1px solid black;
+}
+
+/* ::::: tabpanels ::::: */
+
+tabpanels {
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  /*margin-top: 4px;*/
+  border-top: 2px solid;
+  -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-bottom-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-top-colors: ThreeDShadow black;
+  padding: 0px;
+  background-color: transparent;
+  color: -moz-DialogText;
+}
+
+/* ::::: tab ::::: */
+
+tab 
+{
+  -moz-appearance: none;
+  margin-top: 2px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  border-left: 2px solid;
+  border-bottom: 1px solid black;
+  -moz-border-top-colors: black ThreeDLightShadow;
+  -moz-border-right-colors: black ThreeDShadow;
+  -moz-border-left-colors: black ThreeDLightShadow;
+  -moz-border-radius-topleft: 2px;
+  -moz-border-radius-topright: 2px;
+  -moz-border-radius-bottomright: 1px;
+  padding: 1px 4px 2px 4px;
+  background-color: rgb(203, 204, 207);
+  color: -moz-DialogText;
+}
+
+.tab-text {
+  margin: 0 !important;
+}
+
+tab[selected="true"] {
+  margin-top: 0;
+  border-bottom-style: none;
+  background-color: transparent;
+  padding: 1px 6px 4px 6px;
+}
+
+tab[first-tab="true"][selected="true"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.tabbrowser-tabs {
+  padding-top: 2px;
+}
+
+tabbox {
+  /*background-color: rgb(230, 236, 238) ! important;*/
+}
+
+tabs tab:not([selected="true"]) {
+  border-bottom: solid 1px black;
+}
+
 .tabs-closebutton {
   margin: 0px 4px;
   padding: 1px 2px 2px 2px;
@@ -60,28 +133,9 @@ tab[busy]  .tab-icon {
 
 tab[modified]  .tab-icon {
   list-style-image: url("chrome://bluegriffon/skin/icons/modified.gif");
+	width: 8px;
+	max-height: 8px;
   margin-right: 3px;
 }
 
-tabpanels {
-  -moz-appearance: none; 
-  border-right: 2px solid;
-  border-bottom: 2px solid;
-  border-left: 1px solid;
-  border-top: 1px solid;
-  -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow;
-  -moz-border-bottom-colors: ThreeDDarkShadow ThreeDShadow;
-  -moz-border-top-colors: ThreeDDarkShadow;
-  -moz-border-left-colors: ThreeDShadow;
-  padding: 8px;
-  background-color: -moz-Dialog;
-  color: -moz-DialogText;
-}
 
-tabs {
-  border-bottom: 1px solid threedshadow;
-}
-
-column {
-  border-bottom: threedhighlight 1px solid;
-}

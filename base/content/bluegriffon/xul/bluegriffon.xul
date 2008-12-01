@@ -114,7 +114,9 @@
     <sidebar id="sidebar1" sidebaritems="" persist="sidebaritems"/>
     <splitter id="splitter1" collapse="before" resizebefore="closest"
               oncommand="document.persist('splitter1', 'state');">
+#ifndef XP_MACOSX
       <grippy/>
+#endif
     </splitter>
     <vbox flex="1">
     	<hbox flex="1">
@@ -128,7 +130,9 @@
           <splitter id="splitterSourceView" collapse="after"
                     state="collapsed"
                     observes="cmd_renderedHTMLEnabler">
+#ifndef XP_MACOSX
             <grippy observes="cmd_renderedHTMLEnabler"/>
+#endif
           </splitter>
           <deck id="sourceTreeDeck" flex="1"/>
         </vbox>
@@ -140,10 +144,20 @@
     </vbox>
     <splitter id="splitter2" collapse="after" resizeafter="closest"
               oncommand="document.persist('splitter2', 'state');">
+#ifndef XP_MACOSX
       <grippy/>
+#endif
     </splitter>
     <sidebar id="sidebar2" sidebaritems="" persist="sidebaritems"/>
   </hbox>
+
+#ifdef TOOLBAR_CUSTOMIZATION_SHEET
+  <panel id="customizeToolbarSheetPopup" noautohide="true">
+    <iframe id="customizeToolbarSheetIFrame"
+            style="width: 635px; height: 400px;"
+            hidden="true"/>
+  </panel>
+#endif
 
   <statusbar id="statusbar">
     <deck flex="1" id="statusbarDeck">

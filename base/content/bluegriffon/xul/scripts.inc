@@ -28,3 +28,4 @@
   
   <script type="application/x-javascript" src="chrome://inspector/content/hooks.js"/>
   
+	<script src="chrome://venkman/content/venkman-overlay.js"/>

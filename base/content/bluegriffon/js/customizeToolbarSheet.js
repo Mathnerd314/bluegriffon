@@ -11,15 +11,15 @@
 # for the specific language governing rights and limitations under the
 # License.
 #
-# The Original Code is BlueGriffon.
+# The Original Code is mozilla.org Code.
 #
 # The Initial Developer of the Original Code is
-# Disruptive Innovations SARL.
-# Portions created by the Initial Developer are Copyright (C) 2006
+# Mozilla Corporation
+# Portions created by the Initial Developer are Copyright (C) 2005-2006
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s):
-#   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+#   Asaf Romano <mozilla.mano@sent.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -33,16 +33,12 @@
 # the provisions above, a recipient may use your version of this file under
 # the terms of any one of the MPL, the GPL or the LGPL.
 #
-# ***** END LICENSE BLOCK ***** */
+# ***** END LICENSE BLOCK *****
 
-
-DEPTH		= ..
-topsrcdir	= @top_srcdir@
-srcdir		= @srcdir@
-VPATH		= @srcdir@
-
-include $(DEPTH)/config/autoconf.mk
-
-DIRS		= src base sidebars extensions app installer
-
-include $(topsrcdir)/config/rules.mk
+var gCustomizeToolbarSheet = {
+  init: function() {
+    var popup = window.parent.document.getElementById("customizeToolbarSheetPopup");
+    var refid = popup.getAttribute("refid");
+    InitWithToolbox(window.parent.document.getElementById(refid));
+  }
+};

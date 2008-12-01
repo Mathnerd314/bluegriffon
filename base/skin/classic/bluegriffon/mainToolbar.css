@@ -4,7 +4,8 @@
 }
 
 #MainToolbar toolbarbutton,
-#CustomizeToolbarWindow toolbarbutton {
+#CustomizeToolbarWindow toolbarbutton,
+#CustomizeToolbarSheet toolbarbutton {
   -moz-image-region: rect(0px 32px 32px 0px);
   -moz-box-orient: vertical;
 }

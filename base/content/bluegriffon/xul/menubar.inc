@@ -62,6 +62,7 @@
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <menuitem id="menu_inspector" label="DOMI" command="Tasks:Inspector"/>
+        <menuitem label="Venkman" oncommand="start_venkman()"/>
       </menupopup>
     </menu>
 

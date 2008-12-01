@@ -117,7 +117,6 @@
                            tooltiptext="&closeSidebar.tooltip;"
                            oncommand="this.parentNode.parentNode._close()"/>
       </xul:hbox>
-      <xul:separator class="groove-thin"/>
       <xul:vbox flex="1" anonid="content">
         <children/>
       </xul:vbox>
@@ -540,7 +539,6 @@
           </xul:menupopup>
         </xul:toolbarbutton>
       </xul:hbox>
-      <xul:separator class="groove-thin"/>
       <children/>
     </content>
 

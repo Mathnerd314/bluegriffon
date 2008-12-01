@@ -36,16 +36,13 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+
 function CustomizeToolbar(id)
 {
-  // make sure our toolbar buttons have the correct enabled state restored to them...
-  if (this.UpdateMainToolbar == undefined)
-      dump("UPDATEMAINTOOLBAR undefined\n");
-
   // Disable the toolbar context menu items
-  // var menubar = document.getElementById("main-menubar");
-  // for (var i = 0; i < menubar.childNodes.length; ++i)
-  //   menubar.childNodes[i].setAttribute("disabled", true);
+  var menubar = document.getElementById("composer-main-menubar");
+  for (var i = 0; i < menubar.childNodes.length; ++i)
+    menubar.childNodes[i].setAttribute("disabled", true);
 
   var customizePopup = document.getElementById("CustomizeMainToolbar");
   if (customizePopup)
@@ -53,19 +50,45 @@ function CustomizeToolbar(id)
   customizePopup = document.getElementById("CustomizeFormatToolbar");
   if (customizePopup)
     customizePopup.setAttribute("disabled", "true");
-   
-  window.openDialog("chrome://global/content/customizeToolbar.xul", "CustomizeToolbar",
-                    "chrome,close=no,resizable=yes,dependent", document.getElementById(id));
+
+  var customizeURL = "chrome://global/content/customizeToolbar.xul";
+#ifdef TOOLBAR_CUSTOMIZATION_SHEET
+  var sheetFrame = document.getElementById("customizeToolbarSheetIFrame");
+  sheetFrame.hidden = false;
+
+  // The document might not have been loaded yet, if this is the first time.
+  // If it is already loaded, reload it so that the onload initialization code
+  // re-runs.
+  if (sheetFrame.getAttribute("src") == customizeURL)
+    sheetFrame.contentWindow.location.reload()
+  else
+    sheetFrame.setAttribute("src", customizeURL);
+
+  // XXXmano: there's apparently no better way to get this when the iframe is
+  // hidden
+  var sheetWidth = sheetFrame.style.width.match(/([0-9]+)px/)[1];
+  var popup = document.getElementById("customizeToolbarSheetPopup");
+  popup.setAttribute("refid", id);
+  popup.openPopup(document.getElementById(id), "after_start", (window.innerWidth - sheetWidth) / 2, 0);
+#else
+  window.openDialog(customizeURL,
+                    "CustomizeToolbar",
+                    "chrome,titlebar,toolbar,resizable,dependent",
+                    document.getElementById(id));
+#endif
 }
 
 function ToolboxCustomizeDone(aToolboxChanged)
 {
-  // Update global UI elements that may have been added or removed
+#ifdef TOOLBAR_CUSTOMIZATION_SHEET
+  document.getElementById("customizeToolbarSheetIFrame").hidden = true;
+  document.getElementById("customizeToolbarSheetPopup").hidePopup();
+#endif
 
   // Re-enable parts of the UI we disabled during the dialog
-  // var menubar = document.getElementById("main-menubar");
-  //for (var i = 0; i < menubar.childNodes.length; ++i)
-  //   menubar.childNodes[i].setAttribute("disabled", false);
+  var menubar = document.getElementById("composer-main-menubar");
+  for (var i = 0; i < menubar.childNodes.length; ++i)
+    menubar.childNodes[i].removeAttribute("disabled");
 
   var customizePopup = document.getElementById("CustomizeMainToolbar");
   if (customizePopup)

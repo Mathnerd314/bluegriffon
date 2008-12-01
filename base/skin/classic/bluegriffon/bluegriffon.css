@@ -110,6 +110,39 @@ grippy[disabled="true"] {
 /******* ZOOM *******/
 
 #menulist-zoompanel {
+%ifdef XP_MACOSX
+  max-width: 7em;
+%else
   max-width: 5em;
+%endif
 }
+
+#CustomizeToolbarSheet > #main-box {
+  border-top: none !important;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-bottom: 3px solid;
+  -moz-border-right-colors: -moz-mac-menushadow ThreeDLightShadow  !important;
+  -moz-border-bottom-colors: -moz-mac-menushadow -moz-mac-menushadow ThreeDShadow  !important;
+  -moz-border-left-colors: ThreeDLightShadow ThreeDHighlight !important;
+}
+
+/********* splitters **********/
+
+#splitter1 {
+  border-right: thin solid silver;
+  border-left: thin solid silver;
+}
+
+#splitter2 {
+  border-left: thin solid rgb(80, 80, 80);
+  border-right: thin solid rgb(80, 80, 80);
+}
+
+
+
+
+
+
+
 

@@ -43,6 +43,7 @@ label {
 .titlebox {
   padding-left: 0.5em;
   font-size: smaller;
+	border-bottom: thin groove black;
 }
 
 .sidebar-closebutton > .toolbarbutton-icon {
@@ -67,11 +68,11 @@ label {
   -moz-image-region: rect(0px, 42px, 14px, 28px);
 }
 
-.sidebar-morebutton {
+/*.sidebar-morebutton {
   border: thin groove;
   -moz-border-radius: 3px;
   -moz-margin-end: 4px;
-}
+}*/
 
 .sidebar-morebutton > .toolbarbutton-menu-dropmarker {
   -moz-margin-start: 2px;

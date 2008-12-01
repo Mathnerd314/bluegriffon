@@ -1,9 +1,9 @@
 bluegriffon.jar:
 % content   bluegriffon    			%content/bluegriffon/
 % skin		bluegriffon    classic/1.0 %skin/classic/bluegriffon/
-% style  chrome://global/content/xul/customizeToolbar.xul    chrome://global/skin/
-% style  chrome://global/content/xul/customizeToolbar.xul    chrome://bluegriffon/skin/bluegriffon.css
-% style  chrome://global/content/xul/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
+% style  chrome://global/content/customizeToolbar.xul    chrome://global/skin/
+% style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/bluegriffon.css
+% style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
 % content venkman jar:venkman.jar!/content/venkman/
 % locale venkman en-US jar:venkman.jar!/locale/en-US/venkman/
 % skin   venkman modern/1.0 jar:venkman.jar!/skin/modern/venkman/
@@ -51,13 +51,16 @@ bluegriffon.jar:
   content/bluegriffon/js/colourPicker.js	(content/bluegriffon/js/colourPicker.js)
   content/bluegriffon/js/colourPickerHelper.js	(content/bluegriffon/js/colourPickerHelper.js)
 * content/bluegriffon/js/commands.js	(content/bluegriffon/js/commands.js)
-  content/bluegriffon/js/customize.js	(content/bluegriffon/js/customize.js)
+* content/bluegriffon/js/customize.js	(content/bluegriffon/js/customize.js)
   content/bluegriffon/js/languages.js	(content/bluegriffon/js/languages.js)
   content/bluegriffon/js/markupCleaner.js	(content/bluegriffon/js/markupCleaner.js)
   content/bluegriffon/js/propertiesDeck.js	(content/bluegriffon/js/propertiesDeck.js)
   content/bluegriffon/js/recentPages.js	(content/bluegriffon/js/recentPages.js)
   content/bluegriffon/js/toolbars.js	(content/bluegriffon/js/toolbars.js)
   content/bluegriffon/js/zoomManager.js	(content/bluegriffon/js/zoomManager.js)
+#ifdef TOOLBAR_CUSTOMIZATION_SHEET
+*  content/bluegriffon/js/customizeToolbarSheet.js          (content/bluegriffon/js/customizeToolbarSheet.js)
+#endif
   content/bluegriffon/sourceViewTemplate.html	(content/bluegriffon/sourceViewTemplate.html)
   content/bluegriffon/utils/colors.js	(content/bluegriffon/utils/colors.js)
   content/bluegriffon/utils/css.js	(content/bluegriffon/utils/css.js)
@@ -212,3 +215,9 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/tabeditor.properties	(locale/en-US/bluegriffon/tabeditor.properties)
 * locale/en-US/branding/brand.dtd	(locale/en-US/branding/brand.dtd)
   locale/en-US/branding/brand.properties	(locale/en-US/branding/brand.properties)
+
+#ifdef TOOLBAR_CUSTOMIZATION_SHEET
+toolkit.jar:
+*+      content/global/customizeToolbar.xul           (content/bluegriffon/xul/customizeToolbarSheet.xul)
+#endif
+
