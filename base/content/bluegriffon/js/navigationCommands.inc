@@ -62,7 +62,7 @@ var cmdNewWizard =
   {
 
     OpenFile("chrome://bluegriffon/content/blanks/transitional.html", true);
-    window.openDialog("chrome://bluegriffon/content/dialogs/pageProperties.xul","_blank",
+    window.openDialog("chrome://bluegriffon/content/dialogs/newPageWizard.xul","_blank",
                       "chrome,modal,titlebar");
   }
 };

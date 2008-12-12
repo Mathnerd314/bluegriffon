@@ -242,7 +242,8 @@ var CssUtils = {
     {
         var property = aDeclarations[j].property;
         var value = aDeclarations[j].value;
-        var priority = aDeclarations[j].priority;
+        var priority = aDeclarations[j].priority ? " !important" : "";
+
         rule.style.setProperty(property,
                                value,
                                priority);
@@ -266,7 +267,7 @@ var CssUtils = {
           break;
         case CSSRule.STYLE_RULE:
           {
-            str += (i ? "\n" : "") + rule.selectorText + " {" +
+            str += (i ? "\n" : "") + rule.selectorText + " {\n " +
                    rule.style.cssText.replace( /;/g , ";\n");
             /*var declarations = rule.style;
             for (var j = 0; j < declarations.length; j++)
@@ -283,7 +284,7 @@ var CssUtils = {
         default:
           break;
       }
-      str += "\n}\n";
+      str += "}\n";
     }
     var styleElt = aSheet.ownerNode;
     var child = styleElt.firstChild;

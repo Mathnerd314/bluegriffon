@@ -35,8 +35,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
  
- var gNode = null;
- var gOkButton = null;
+var gNode = null;
+var gOkButton = null;
+var returnValue = null;
 
  function Startup()
 {
@@ -67,6 +68,8 @@
 
     window.sizeToContent();
   }
+  else
+    returnValue = window.arguments[1];
   gOkButton = document.documentElement.getButton("accept");
   gOkButton.setAttribute("disabled", "true");
 }
@@ -98,6 +101,8 @@ function onAccept()
     if (clearSubtree)
       editor.endTransaction();
   }
+  else
+    returnValue.lang = lang;
 }
 
 function onListboxSelect()
