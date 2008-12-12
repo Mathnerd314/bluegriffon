@@ -69,7 +69,6 @@ DEFINES += \
 	-DAPP_UA_NAME="$(APP_UA_NAME)" \
 	-DGRE_BUILDID=$(GRE_BUILDID) \
 	-DGRE_MILESTONE=$(GRE_MILESTONE) \
-	-DCOMPOSER_VERSION=$(COMPOSER_VERSION) \
 	-DMOZ_APP_NAME=$(MOZ_APP_NAME) \
 	-DAB_CD=$(AB_CD) \
    $(NULL)
@@ -185,9 +184,9 @@ OS_LIBS += $(call EXPAND_LIBNAME,comctl32 comdlg32 uuid shell32 ole32 oleaut32 v
 OS_LIBS += $(call EXPAND_LIBNAME,usp10 msimg32)
 RCINCLUDE = splash.rc
 ifndef GNU_CC
-RCFLAGS += -DMOZ_COMPOSER -I$(srcdir)
+RCFLAGS += -I$(srcdir)
 else
-RCFLAGS += -DMOZ_COMPOSER --include-dir $(srcdir)
+RCFLAGS += --include-dir $(srcdir)
 endif
 ifdef BUILD_STATIC_LIBS
 RCFLAGS += -DMOZ_STATIC_BUILD
@@ -206,7 +205,6 @@ endif
 
 #ifeq ($(OS_ARCH),OS2)
 #RESFILE=splashos2.res
-#RCFLAGS += -DMOZ_COMPOSER
 #ifdef BUILD_STATIC_LIBS
 #EXE_DEF_FILE = bluegriffon.def
 #RCFLAGS += -DMOZ_STATIC_BUILD -i $(DIST)/include/widget

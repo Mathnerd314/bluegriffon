@@ -74,7 +74,7 @@
         <image src="chrome://bluegriffon/content/about-logo.png"/>
       </hbox>
 
-      <label id="version" value="&aboutVersion; @COMPOSER_VERSION@"/>
+      <label id="version" value="&aboutVersion; @APP_VERSION@"/>
 
       <description id="copyright">&copyrightText;</description>
       <vbox id="detailsBox" align="center" flex="1">

@@ -43,8 +43,9 @@ VPATH		= @srcdir@
 include $(DEPTH)/config/autoconf.mk
 
 DEFINES += \
-    -DCOMPOSER_VERSION=$(COMPOSER_VERSION) \
-    $(NULL)
+	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
+	-DAPP_VERSION=$(MOZ_APP_VERSION) \
+	$(NULL)
 
 ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))
 DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET

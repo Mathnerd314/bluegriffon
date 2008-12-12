@@ -9,7 +9,7 @@ pref("javascript.options.strict", true);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
-pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@COMPOSER_VERSION@");
+pref("general.useragent.extra.mybrowser", "@APP_UA_NAME@/@APP_VERSION@");
 
 pref("extensions.update.enabled", true);
 pref("extensions.update.url", "chrome://mozapps/locale/extensions/extensions.properties");
