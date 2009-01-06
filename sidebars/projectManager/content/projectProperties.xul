@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2008
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://projectmanager/skin/projectProperties.css" type="text/css"?>
+
+<!DOCTYPE page [
+  <!ENTITY % projectManagerDTD SYSTEM "chrome://projectmanager/locale/projectProperties.dtd">
+  <!ENTITY % filePickingDTD SYSTEM "chrome://bluegriffon/locale/filePicking.dtd" >
+  %projectManagerDTD;
+  %filePickingDTD;
+]>
+
+<dialog id         = "projectProperties"
+        title      = "&window.title;"
+        xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	      xmlns:html = "http://www.w3.org/1999/xhtml"
+        persist    = "screenX screenY"
+        onload     = "Startup()"
+	      orient     = "vertical"
+	      ondialogaccept = "Apply()">
+
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/l10n.js"/>
+  <script type="application/x-javascript"  src="chrome://projectmanager/content/projectProperties.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/login.js"/>
+
+  <hbox align="center">
+    <label value="&projectName.label;"
+           accesskey="&projectName.accesskey;"
+           control="projectNameBox"/>
+    <textbox flex="1"
+             id="projectNameBox"
+             oninput="onProjectNameChanged(this)"/>
+  </hbox>
+
+  <groupbox>
+    <caption label="&remoteSiteInformation.caption;"/>
+    <label value="&url.label;"
+           accesskey="&url.accesskey;"
+           control="urlBox"/>
+    <textbox flex="1" id="urlBox"/>
+  </groupbox>
+
+  <radiogroup orient="horizontal"
+              class="indent"
+              id="storageChoice"
+              onselect="onStorageChoice(this)">
+    <radio label="&ftpAccess.label;"
+           accesskey="&ftpAccess.accesskey;"
+           selected="true"
+           value="ftp"/>
+    <radio label="&localCopy.label;"
+           accesskey="&localCopy.accesskey;"
+           value="copy"/>
+    <radio label="&localStore.label;"
+           accesskey="&localStore.accesskey;"
+           value="local"/>
+  </radiogroup>
+
+  <groupbox id="localStoreGroupbox" hidden="true">
+    <caption label="&localStore.label;"/>
+    <hbox align="center">
+	    <label value="&localStoreHome.label;"
+	           id="localStoreHomeBoxController"
+	           accesskey="&localStoreHome.accesskey;"
+	           control="localStoreHomeBox"/>
+	    <textbox id="localStoreHomeBox" flex="1"/>
+      <filepickerbutton id="filepickerbutton"
+                        mode="2"
+                        control="localStoreHomeBox"
+                        title="&filepickerForLocalStoreHome.title;"/>
+    </hbox>
+  </groupbox>
+
+  <groupbox id="ftpAccessGroupbox">
+    <caption label="&ftpAccess.label;"/>
+    <grid>
+      <columns><column/><column flex="1"/></columns>
+      <rows>
+        <row align="center">
+          <label value="&hostname.label;"
+                 id="hostnameBoxController"
+                 accesskey="&hostname.accesskey;"
+                 control="hostnameBox"/>
+          <textbox id="hostnameBox"/>
+        </row>
+        <row align="center">
+          <label value="&rootpath.label;"
+                 accesskey="&rootpath.accesskey;"
+                 control="rootpathBox"/>
+          <textbox id="rootpathBox"/>
+        </row>
+        <row align="center">
+          <label value="&user.label;"
+                 accesskey="&user.accesskey;"
+                 control="userBox"/>
+          <textbox id="userBox"/>
+        </row>
+        <row align="center">
+          <label value="&password.label;"
+                 accesskey="&password.accesskey;"
+                 control="passwordBox"/>
+          <textbox type="password" id="passwordBox"/>
+        </row>
+      </rows>
+    </grid>
+  </groupbox>
+
+  <groupbox>
+    <caption label="&directories.caption;"/>
+    <grid>
+      <columns><column/><column flex="1"/></columns>
+      <rows>
+        <row align="center">
+          <label value="&pathhtml.label;"
+                 accesskey="&pathhtml.accesskey;"
+                 control="pathhtmlBox"/>
+          <textbox id="pathhtmlBox"/>
+        </row>
+        <row align="center">
+          <label value="&pathmedia.label;"
+                 accesskey="&pathmedia.accesskey;"
+                 control="pathmediaBox"/>
+          <textbox id="pathmediaBox"/>
+        </row>
+        <row align="center">
+          <label value="&pathJS.label;"
+                 accesskey="&pathJS.accesskey;"
+                 control="pathJSBox"/>
+          <textbox id="pathJSBox"/>
+        </row>
+        <row align="center">
+          <label value="&pathCSS.label;"
+                 accesskey="&pathCSS.accesskey;"
+                 control="pathCSSBox"/>
+          <textbox id="pathCSSBox"/>
+        </row>
+      </rows>
+    </grid>
+
+  </groupbox>
+</dialog>
+

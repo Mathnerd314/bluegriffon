@@ -1,0 +1,26 @@
+
+projectmanager.jar:
+% content   projectmanager    			%content/projectmanager/
+% skin		projectmanager    classic/1.0 %skin/classic/projectmanager/
+% overlay   chrome://bluegriffon/content/xul/bluegriffon.xul		chrome://projectmanager/content/bluegriffonOverlay.xul
+	content/projectmanager/bluegriffonOverlay.xul			(content/bluegriffonOverlay.xul)
+	content/projectmanager/bluegriffonOverlay.js			(content/bluegriffonOverlay.js)
+*	content/projectmanager/projectManager.xul				  (content/projectManager.xul)
+	content/projectmanager/projectManager.js	        (content/projectManager.js)
+	content/projectmanager/projectProperties.xul      (content/projectProperties.xul)
+	content/projectmanager/projectProperties.js       (content/projectProperties.js)
+* content/projectmanager/localDirParser.js          (content/localDirParser.js)
+  content/projectmanager/ftpDirParser.js            (content/ftpDirParser.js)
+  content/projectmanager/url-loader.js              (content/url-loader.js)
+  content/projectmanager/ftpProgressListener.js     (content/ftpProgressListener.js)
+*	skin/classic/projectmanager/projectManager.css    (skin/projectManager.css)
+	skin/classic/projectmanager/projectProperties.css (skin/projectProperties.css)
+  skin/classic/projectmanager/plus.png              (skin/plus.png)
+  skin/classic/projectmanager/minus.png             (skin/minus.png)
+
+projectmanager-locale.jar:
+% locale    projectmanager    en-US		%locale/en-US/projectmanager/
+	locale/en-US/projectmanager/bluegriffonOverlay.dtd		(locale/en-US/bluegriffonOverlay.dtd)
+	locale/en-US/projectmanager/projectManager.dtd			  (locale/en-US/projectManager.dtd)
+	locale/en-US/projectmanager/projectManager.properties			  (locale/en-US/projectManager.properties)
+	locale/en-US/projectmanager/projectProperties.dtd			(locale/en-US/projectProperties.dtd)

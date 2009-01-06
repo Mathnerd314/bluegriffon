@@ -1,0 +1,3 @@
+filepickerbutton {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/filepickerbutton.xml#filepickerbutton');
+}

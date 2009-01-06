@@ -1,0 +1,39 @@
+<!ENTITY window.title "Project properties">
+
+<!ENTITY projectName.label "Project name:">
+<!ENTITY projectName.accesskey "P">
+
+<!ENTITY remoteSiteInformation.caption "Remote Site Information">
+<!ENTITY url.label "HTTP address of your home page (e.g. http://www.example.com)">
+<!ENTITY url.accesskey "a">
+
+<!ENTITY ftpAccess.caption "FTP Access">
+<!ENTITY hostname.label "Host name:">
+<!ENTITY hostname.accesskey "n">
+<!ENTITY rootpath.label "Path from root:">
+<!ENTITY rootpath.accesskey "r">
+<!ENTITY user.label "User:">
+<!ENTITY user.accesskey "U">
+<!ENTITY password.label "Password:">
+<!ENTITY password.accesskey "w">
+
+<!ENTITY directories.caption "Directories">
+<!ENTITY pathhtml.label "Path to HTML:">
+<!ENTITY pathmedia.label "Path to Media:">
+<!ENTITY pathJS.label "Path to JavaScript:">
+<!ENTITY pathCSS.label "Path to CSS and Themes:">
+<!ENTITY pathhtml.accesskey "H">
+<!ENTITY pathmedia.accesskey "M">
+<!ENTITY pathJS.accesskey "J">
+<!ENTITY pathCSS.accesskey "C">
+
+<!ENTITY ftpAccess.label "Remote site (FTP)">
+<!ENTITY ftpAccess.accesskey "F">
+<!ENTITY localCopy.label "Local copy of a remote site">
+<!ENTITY localCopy.accesskey "c">
+<!ENTITY localStore.label "Local storage">
+<!ENTITY localStore.accesskey "L">
+ 
+<!ENTITY localStoreHome.label "Local storage's root:">
+<!ENTITY localStoreHome.accesskey "s">
+<!ENTITY filepickerForLocalStoreHome.title "Select directory">
