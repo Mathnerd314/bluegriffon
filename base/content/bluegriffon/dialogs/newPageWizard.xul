@@ -127,6 +127,7 @@
     <checkbox id="userDefinedColors"
               label="&userDefinedColors.label;"
               oncommand="EnableUserDefinedColorsControls()"/>
+
 	  <hbox class="indent">
 	    <grid>
 	      <columns><column/><column/></columns>
@@ -136,55 +137,60 @@
                    accesskey="&backgroundColor.accesskey;"
                    id="backgroundColorColorpickerLabel"
                    control="backgroundColorColorpicker"/>
-	          <colorpicker color="transparent"
-                         onchange="onColorChange(this)"
-                         type="button"
-                         disabled="true"
-                         id="backgroundColorColorpicker"/>
+			      <ecolorpicker id="backgroundColorColorpicker"
+			                    color="transparent"
+			                    disabled="true"
+			                    colorObjectId="TextColor"
+			                    windowTitle="Background color"
+			                    showTransparency="true"/>
 	        </row>
 	        <row align="center">
 	          <label value="&textColor.label;" disabled="true"
 	                 accesskey="&textColor.accesskey;"
                    id="textColorColorpickerLabel"
 	                 control="textColorColorpicker"/>
-	          <colorpicker color="transparent"
-                         onchange="onColorChange(this)"
-                         type="button"
-                         disabled="true"
-                         id="textColorColorpicker"/>
+            <ecolorpicker id="textColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Text color"
+                          showTransparency="false"/>
 	        </row>
 	        <row align="center">
 	          <label value="&linksColor.label;" disabled="true"
 	                 accesskey="&linksColor.accesskey;"
                    id="linksColorColorpickerLabel"
 	                 control="linksColorColorpicker"/>
-	          <colorpicker color="transparent"
-                         onchange="onColorChange(this)"
-                         type="button"
-                         disabled="true"
-                         id="linksColorColorpicker"/>
+            <ecolorpicker id="linksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Links color"
+                          showTransparency="false"/>
 	        </row>
 	        <row align="center">
 	          <label value="&activeLinksColor.label;" disabled="true"
 	                 accesskey="&activeLinksColor.accesskey;"
                    id="activeLinksColorColorpickerLabel"
 	                 control="activeLinksColorColorpicker"/>
-	          <colorpicker color="transparent"
-                         onchange="onColorChange(this)"
-                         type="button"
-                         disabled="true"
-                         id="activeLinksColorColorpicker"/>
+            <ecolorpicker id="activeLinksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Active links color"
+                          showTransparency="false"/>
 	        </row>
 	        <row align="center">
 	          <label value="&visitedLinksColor.label;" disabled="true"
 	                 accesskey="&visitedLinksColor.accesskey;"
                    id="visitedLinksColorColorpickerLabel"
 	                 control="visitedLinksColorColorpicker"/>
-	          <colorpicker color="transparent"
-                         onchange="onColorChange(this)"
-                         type="button"
-                         disabled="true"
-                         id="visitedLinksColorColorpicker"/>
+            <ecolorpicker id="visitedLinksColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Visited links color"
+                          showTransparency="false"/>
 	        </row>
 	      </rows>
 	    </grid>
@@ -226,7 +232,8 @@
 		      <textbox id="backgroundImage" flex="1"/>
 		      <filepickerbutton id="filepickerbutton"
 		                        control="backgroundImage"
-		                        title="&filepickerForBgImage.title;"/>
+                            mode="0"
+                            title="&filepickerForBgImage.title;"/>
         </row>
         <row align="center">
           <label value="&tile.label;"

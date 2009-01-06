@@ -58,4 +58,5 @@ var cmdClass =
   	// be kind with the rest of the world
   	NotifierUtils.notify("selection", node, false);
   }
-}
+};
+

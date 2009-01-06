@@ -1,3 +1,4 @@
+
 var cmdInsertOrEditTableCommand =
 {
   isCommandEnabled: function(aCommand, dummy)

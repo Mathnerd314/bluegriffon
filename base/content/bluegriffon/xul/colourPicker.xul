@@ -44,7 +44,7 @@
 <dialog
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
-    onload="StartUp()"
+    onload="StartUp();"
     ondialogaccept="return onAccept();"
     ondialogcancel="return onCancelColor();"
     persist="screenX screenY"
@@ -56,51 +56,31 @@
   <broadcaster id="args" value=""/>
   <spacer id="location" offsetY="50" persist="offsetX offsetY"/>
 
-  <vbox>
-    <hbox id="TableOrCellGroup" align="center" collapsed="true">
-      <label control="CellOrTableGroup" value="&background.label;" accesskey="&background.accessKey;"/>
-      <radiogroup id="CellOrTableGroup" orient="horizontal">
-        <radio id="TableRadio" label="&table.label;" accesskey="&table.accessKey;"/>
-        <radio id="CellRadio"  label="&cell.label;"  accesskey="&cell.accessKey;"/>
-      </radiogroup>
-    </hbox>
+  <hbox id="TableOrCellGroup" align="center" collapsed="true">
+    <label control="CellOrTableGroup" value="&background.label;" accesskey="&background.accessKey;"/>
+    <radiogroup id="CellOrTableGroup" orient="horizontal">
+      <radio id="TableRadio" label="&table.label;" accesskey="&table.accessKey;"/>
+      <radio id="CellRadio"  label="&cell.label;"  accesskey="&cell.accessKey;"/>
+    </radiogroup>
+  </hbox>
 
-    <hbox>
-      <spacer flex="1"/>
-      <vbox>
-        <html:div style="position: relative;">
-          <html:img id="hueAndSaturationImg" src="chrome://bluegriffon/content/hsPanel.png"
-                    style="width: 200px; height: 200px; max-width: 200px; max-height: 200px; border: inset thin; margin: 8px" />
-          <html:img id="hueAndSaturationCrosshair"
-                    src="chrome://bluegriffon/content/colourPickerCrosshair.gif" style="position: absolute; top: 35px; left: 65px" />
-        </html:div>
-        <spacer class="spacer" />
-        <html:div style="position: relative; height: 34px;">
-          <html:img id="brightnessImg"
-                    src="chrome://bluegriffon/content/brightness.png" style="width: 200px; height: 25px; border: inset thin; margin-left: 8px; margin-right: 8px" />
-          <html:img id="brightnessArrow"
-                    src="chrome://bluegriffon/content/colourPickerArrow.gif" style="position: absolute; bottom: 0px; left: 35px" />
-        </html:div>
-      </vbox>
-      <spacer flex="1"/>
-      <vbox>
-        <label value="&predef.label;" />
-        <colorpicker id="colorpicker"
-                     onselect="SelectColor();"/>
-        <spacer flex="1"/>
-        <button id="LastPickedButton" crop="right" oncommand="SelectLastPickedColor();">
-          <spacer id="LastPickedColor"
-                      LastTextColor="" LastBackgroundColor=""
-                      persist="LastTextColor LastBackgroundColor"/>
-          <label value="&lastPickedColor.label;" accesskey="&lastPickedColor.accessKey;" flex="1" style="text-align: center;"/>
-        </button>
-      </vbox>
-      <spacer flex="1"/>
-    </hbox>
-    <spacer class="spacer" />
-    <hbox>
+  <hbox>
+    <vbox>
+      <html:div style="position: relative;">
+        <html:img id="hueAndSaturationImg" src="chrome://bluegriffon/content/hsPanel.png"
+                  style="width: 200px; height: 200px; max-width: 200px; max-height: 200px; border: inset thin; margin: 8px" />
+        <html:img id="hueAndSaturationCrosshair"
+                  src="chrome://bluegriffon/content/colourPickerCrosshair.gif" style="position: absolute; top: 35px; left: 65px" />
+      </html:div>
+      <spacer class="spacer" />
+      <html:div style="position: relative; height: 34px;">
+        <html:img id="brightnessImg"
+                  src="chrome://bluegriffon/content/brightness.png" style="width: 200px; height: 25px; border: inset thin; margin-left: 8px; margin-right: 8px" />
+        <html:img id="brightnessArrow"
+                  src="chrome://bluegriffon/content/colourPickerArrow.gif" style="position: absolute; bottom: 0px; left: 35px" />
+      </html:div>
       <grid>
-        <columns><column/><column/><column/><column flex="1"/><column/><column/><column/></columns>
+        <columns><column/><column/><column/><column/><column/><column/><column/></columns>
         <rows>
           <row align="center">
             <label value="&hue.label;"
@@ -161,35 +141,46 @@
           </row>
         </rows>
       </grid>
-      <spacer class="bigspacer" />
-      <vbox>
-        <html:p id="swatch" style="border: 1px solid black; width: 75px; height: 75px; min-width: 75px; min-height: 75px; margin: 0px">   </html:p>
-      </vbox>
-      <spacer class="bigspacer"/>
-      <vbox>
-        <grid>
-          <columns><column/><column/></columns>
-          <rows>
-            <row align="center">
-              <label value="&hexColor.label;"
-                     control="hexColour"
-                     id="hexColourLabel" />
-              <textbox size="7" id="hexColour"/>
-            </row>
-            <row align="center">
-              <label value="&nameColor.label;"
-                     control="nameColour" 
-                     id="nameColourLabel" />
-              <textbox size="7"
-                       id="nameColour"
-                       oninput="onNamedColourChanged(this)"/>
-            </row>
-          </rows>
-        </grid>
-        <checkbox label="&transparency.label;"
-                  id="transparencyCheckbox"
-                  oncommand="ToggleTransparency(this)"/>
-      </vbox>
-    </hbox>
-  </vbox>
+        
+    </vbox>
+
+    <vbox>
+      <label value="&predef.label;" />
+      <colorpicker id="colorpicker"
+                   onselect="SelectColor();"/>
+      <spacer flex="1"/>
+      <button id="LastPickedButton" crop="right" oncommand="SelectLastPickedColor();">
+        <spacer id="LastPickedColor"
+                    LastTextColor="" LastBackgroundColor=""
+                    persist="LastTextColor LastBackgroundColor"/>
+        <label value="&lastPickedColor.label;" accesskey="&lastPickedColor.accessKey;" flex="1" style="text-align: center;"/>
+      </button>
+      <hbox>
+	      <grid>
+	        <columns><column/><column/></columns>
+	        <rows>
+	          <row align="center">
+	            <label value="&hexColor.label;"
+	                   control="hexColour"
+	                   id="hexColourLabel" />
+	            <textbox size="7" id="hexColour"/>
+	          </row>
+	          <row align="center">
+	            <label value="&nameColor.label;"
+	                   control="nameColour" 
+	                   id="nameColourLabel" />
+	            <textbox size="7"
+	                     id="nameColour"
+	                     oninput="onNamedColourChanged(this)"/>
+	          </row>
+	        </rows>
+	      </grid>
+        <html:p flex="1" id="swatch">   </html:p>
+      </hbox>
+      <checkbox label="&transparency.label;"
+                id="transparencyCheckbox"
+                oncommand="ToggleTransparency(this)"/>
+    </vbox>
+  </hbox>
+
 </dialog>

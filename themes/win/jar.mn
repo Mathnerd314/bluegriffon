@@ -125,3 +125,8 @@ bluegriffon.jar:
   skin/classic/bluegriffon/minus-disabled.png      (classic/minus-disabled.png)
   skin/classic/bluegriffon/config-disabled.png      (classic/config-disabled.png)
   skin/classic/bluegriffon/ecolorpicker.css       (classic/ecolorpicker.css)
+  skin/classic/bluegriffon/tab-active-bkgnd.png       (classic/tab-active-bkgnd.png)
+  skin/classic/bluegriffon/tab-bkgnd.png              (classic/tab-bkgnd.png)
+  skin/classic/bluegriffon/tab-hover-bkgnd.png        (classic/tab-hover-bkgnd.png)
+  skin/classic/bluegriffon/tabeditor-tabs-bkgnd.png   (classic/tabeditor-tabs-bkgnd.png)
+  skin/classic/bluegriffon/tabstrip-bottom.png        (classic/tabstrip-bottom.png)

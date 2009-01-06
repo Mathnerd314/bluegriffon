@@ -57,9 +57,9 @@
 
     <content>
       <xul:tabbox anonid="EditorTabbox" flex="1" onselect="">
-        <xul:hbox class="tabbrowser-strip chromeclass-toolbar">
-
+        <xul:hbox class="tabeditor-strip">
           <xul:tabs flex="1" anonid="EditorTabs" closebutton="true"
+                    class="tabeditor-tabs"
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
         </xul:hbox>
         <xul:grid flex="1">
@@ -308,7 +308,7 @@
 
             var newTab = this.mTabs.appendItem(aTitle, aURL);
             newTab.setAttribute("label", aTitle);
-            newTab.setAttribute("class", "tabbrowser-tab");
+            newTab.setAttribute("class", "tabeditor-tab");
             newTab.setAttribute("maxwidth", 200);
             newTab.setAttribute("width", 0);
             newTab.setAttribute("minwidth", 30);

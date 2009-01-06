@@ -38,104 +38,88 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /* ::::: tabs ::::: */
-
-.tabs-left,
-.tabs-right {
-  border-bottom: 1px solid black;
+/* Tabstrip */
+.tabeditor-tabs {
+  -moz-appearance: -moz-win-browsertabbar-toolbox;
+  background: -moz-dialog url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
 }
 
-/* ::::: tabpanels ::::: */
-
-tabpanels {
-  border-right: 2px solid;
-  border-bottom: 2px solid;
-  border-left: 2px solid;
-  /*margin-top: 4px;*/
-  border-top: 2px solid;
-  -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow;
-  -moz-border-bottom-colors: ThreeDDarkShadow ThreeDShadow;
-  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
-  -moz-border-top-colors: ThreeDShadow black;
-  padding: 0px;
-  background-color: transparent;
-  color: -moz-DialogText;
+.tabs-container:not([overflow="true"]) {
+  -moz-padding-start: 3px;
 }
 
-/* ::::: tab ::::: */
-
-tab 
-{
+/* Tabs */
+.tabeditor-tab {
   -moz-appearance: none;
-  margin-top: 2px;
-  border-top: 2px solid;
-  border-right: 2px solid;
-  border-left: 2px solid;
-  border-bottom: 1px solid black;
-  -moz-border-top-colors: black ThreeDLightShadow;
-  -moz-border-right-colors: black ThreeDShadow;
-  -moz-border-left-colors: black ThreeDLightShadow;
+  background: url("chrome://bluegriffon/skin/tab-bkgnd.png") repeat-x;
+  margin: 3px 0px 4px;
+  padding: 0px 1px 1px 0px;
+  border: 2px solid;
+  border-right-width: 1px;
+  border-bottom: none;
   -moz-border-radius-topleft: 2px;
   -moz-border-radius-topright: 2px;
-  -moz-border-radius-bottomright: 1px;
-  padding: 1px 4px 2px 4px;
-  background-color: rgb(203, 204, 207);
-  color: -moz-DialogText;
+  -moz-border-top-colors: ThreeDShadow rgba(255,255,255,.3);
+  -moz-border-right-colors: rgba(0,0,0,.1);
+  -moz-border-left-colors: ThreeDShadow rgba(255,255,255,.3);
 }
 
+.tabeditor-tab:hover,
+.tabeditor-tab[selected="true"] {
+  border-width: 1px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-top-colors: ThreeDShadow;
+  -moz-border-right-colors: ThreeDShadow;
+  -moz-border-left-colors: ThreeDShadow;
+}
+
+.tabeditor-tab:not([selected="true"]):hover {
+  margin: 2px 0px 4px;
+  padding: 2px 1px 1px;
+  background-image: url("chrome://bluegriffon/skin/tab-hover-bkgnd.png");
+}
+
+.tabeditor-tab[selected="true"] {
+  margin: 2px 0px 3px;
+  padding: 1px;
+  background-image: url("chrome://bluegriffon/skin/tab-active-bkgnd.png");
+  background-color: -moz-dialog;
+  font-weight: bold;
+}
+
+.tabeditor-tab[busy] > .tab-icon-image {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png") !important;
+}
+
+.tab-icon-image {
+  margin-top: 1px;
+  -moz-margin-start: 7px;
+  -moz-margin-end: 3px;
+  width: 16px;
+  height: 16px;
+  list-style-image: url("chrome://global/skin/icons/folder-item.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+.tabs-bottom {
+  height: 4px;
+  margin: 0px;
+  background: -moz-dialog url("chrome://bluegriffon/skin/tabstrip-bottom.png") repeat;
+  border-top: 1px solid threedshadow;
+  border-bottom: 1px solid threedshadow;
+}
+
+tabpanels {
+  -moz-appearance: none;
+}
+
+/* tabeditor-tab focus ring */
 .tab-text {
-  margin: 0 !important;
+  border: 1px dotted transparent;
 }
 
-tab[selected="true"] {
-  margin-top: 0;
-  border-bottom-style: none;
-  background-color: transparent;
-  padding: 1px 6px 4px 6px;
+.tabeditor-tab[selected="true"]:focus > .tab-text {
+  border: 1px dotted -moz-DialogText;
 }
-
-tab[first-tab="true"][selected="true"] {
-  padding-right: 5px;
-  padding-left: 5px;
-}
-
-.tabbrowser-tabs {
-  padding-top: 2px;
-}
-
-tabbox {
-  /*background-color: rgb(230, 236, 238) ! important;*/
-}
-
-tabs tab:not([selected="true"]) {
-  border-bottom: solid 1px black;
-}
-
-.tabs-closebutton {
-  margin: 0px 4px;
-  padding: 1px 2px 2px 2px;
-  border: none;
-  list-style-image: url("chrome://bluegriffon/skin/icons/close-button.png");
-  -moz-image-region: rect(0px 16px 16px 0px);
-}
-
-.tabs-closebutton:hover {
-  -moz-image-region: rect(16px 16px 32px 0px);
-}
-
-.tabs-closebutton:hover:active {
-  -moz-image-region: rect(16px 16px 32px 0px);
-}
-
-tab[busy]  .tab-icon {
-  list-style-image: url("chrome://bluegriffon/skin/icons/loading.gif");
-  margin-right: 3px;
-}
-
-tab[modified]  .tab-icon {
-  list-style-image: url("chrome://bluegriffon/skin/icons/modified.gif");
-	width: 8px;
-	max-height: 8px;
-  margin-right: 3px;
-}
-
 

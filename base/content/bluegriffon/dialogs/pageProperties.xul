@@ -180,6 +180,7 @@
                  accesskey="&backgroundImage.accesskey;"/>
           <textbox id="backgroundImage" flex="1"/>
           <filepickerbutton id="filepickerbutton"
+                            mode="0"
                             control="backgroundImage"
                             title="&filepickerForBgImage.title;"/>
           <toolbarbutton id="removeBackground" />

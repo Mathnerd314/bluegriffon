@@ -357,3 +357,17 @@ function GetIndexOfNode(aNode)
   return null;
 }
 
+function OpenAppModalWindow(aParentWindow, aChromeURL, aWindowName) 
+{
+  var ww = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
+                     .getService(Components.interfaces.nsIWindowWatcher);
+#ifdef XP_MACOSX
+  ww.openWindow(null, // make this an app-modal window on Mac
+#else
+  ww.openWindow(aParentWindow,
+#endif
+                aChromeURL,
+                aWindowName,
+                "chrome,titlebar,centerscreen,modal",
+                null);
+};

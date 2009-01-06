@@ -56,8 +56,7 @@
     </resources>
 
     <content>
-      <xul:toolbarbutton xbl:inherits="disabled"
-                         tooltiptext="&filepickerbutton.tooltip;"
+      <xul:toolbarbutton xbl:inherits="disabled,tooltiptext=title"
                          anonid="button" />
       <children/>
     </content>
@@ -84,7 +83,7 @@
             this.fp = Components.classes["@mozilla.org/filepicker;1"].
                         createInstance(this.nsIFP);
             this.fp.init(window, this.getAttribute("title"),
-                         this.nsIFP.modeOpen);
+                         parseInt(this.getAttribute("mode")));
           }
           catch(e) {}
         ]]>

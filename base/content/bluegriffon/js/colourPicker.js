@@ -1,4 +1,4 @@
-var gColorObj = null;
+var gColorObj = {};
 var gWindowTitle = "";
 var gShowTransparency = false;
 
@@ -44,6 +44,7 @@ function StartUp()
 {
   GetUIElements();
 
+
   if (!window.arguments[0])
   {
     dump("colourPicker: Missing color object param\n");
@@ -52,10 +53,10 @@ function StartUp()
 
   // window.arguments[0] is object to get initial values and return color data
   gColorObj = window.arguments[0];
-  gColorObj.cancelled = false;
-
   gWindowTitle  = window.arguments[1];
   gShowTransparency = window.arguments[2];
+
+  gColorObj.cancelled = false;
 
   colours = new objColour();
 

@@ -42,13 +42,13 @@
 <!ENTITY rgb.label               "RGB">
 <!ENTITY hsb.label               "HSB">
 
-<!ENTITY red.label               "Red:">
-<!ENTITY green.label             "Green:">
-<!ENTITY blue.label              "Blue:">
+<!ENTITY red.label               "R:">
+<!ENTITY green.label             "G:">
+<!ENTITY blue.label              "B:">
 
-<!ENTITY hue.label               "Hue:">
-<!ENTITY saturation.label        "Saturation:">
-<!ENTITY brightness.label        "Brightness:">
+<!ENTITY hue.label               "H:">
+<!ENTITY saturation.label        "S:">
+<!ENTITY brightness.label        "B:">
 
 <!ENTITY transparency.label       "Transparent">
 

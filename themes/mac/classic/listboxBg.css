@@ -53,6 +53,11 @@ hbox.listboxBg toolbarbutton {
 	font-weight: bold;
 }
 
+hbox.listboxBg spacer[flex="1"] ~ toolbarbutton {
+  border-left: thin solid silver;
+  border-right: 0px none;
+}
+
 hbox.listboxBg toolbarbutton:not([disabled]):active:hover {
 	background-image: url("chrome://bluegriffon/skin/listboxBgActive.png");
 }
@@ -94,4 +99,6 @@ hbox.listboxBg .listboxBgConfigButton[disabled] {
 	list-style-image: url("chrome://bluegriffon/skin/config-disabled.png")
 }
 
-
+hbox.listboxBg .listboxBgThrobberButton {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+}

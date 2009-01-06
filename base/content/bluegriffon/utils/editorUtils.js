@@ -42,6 +42,17 @@ var EditorUtils = {
   getCurrentTabEditor: function getCurrentTabEditor()
   {
     var tmpWindow = window;
+
+#ifdef XP_MACOSX
+    // do we have an app-modal window on MAC OS X ?
+    if (window.location.href != "chrome://bluegriffon/content/xul/bluegriffon.xul" &&
+        !tmpWindow.opener)
+    {
+	    var windowManager = Components.classes[kWINDOWMEDIATOR_CID].getService();
+	    var windowManagerInterface = windowManager.QueryInterface(nsIWindowMediator);
+      tmpWindow = windowManagerInterface.getMostRecentWindow("bluegriffon");
+    }
+#endif
     
     do {
       var tabeditor = tmpWindow.document.getElementById("tabeditor");

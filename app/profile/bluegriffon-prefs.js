@@ -22,12 +22,13 @@ pref("extensions.dss.enabled", false);          // Dynamic Skin Switching
 pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
                                                 // restart.
 // browser preferences
-pref("browser.display.use_system_colors", true);
-pref("browser.display.foreground_color", "#000000");
-pref("browser.display.background_color", "#ffffff");
-pref("browser.active_color", "#ee0000");
-pref("browser.anchor_color", "#0000ee");
-pref("browser.visited_color", "#551a8b");
+pref("bluegriffon.display.use_system_colors", true);
+pref("bluegriffon.display.foreground_color", "#000000");
+pref("bluegriffon.display.background_color", "#ffffff");
+pref("bluegriffon.display.active_color", "#ee0000");
+pref("bluegriffon.display.anchor_color", "#0000ee");
+pref("bluegriffon.display.visited_color", "#551a8b");
+pref("bluegriffon.display.underline_links", true);
 
 // document preferences
 pref("bluegriffon.author", "");
@@ -53,3 +54,7 @@ pref("bluegriffon.encode_entity", "html");
 pref("bluegriffon.zoom.default", "1");
 
 pref("bluegriffon.history.url_maximum", 10);
+
+pref("signon.rememberSignons", true);
+pref("signon.expireMasterPassword", false);
+pref("signon.SignonFileName", "signons.txt");

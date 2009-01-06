@@ -37,7 +37,13 @@
 
 var UrlUtils = {
 
-  /********** ATTRIBUTES **********/
+  /********** CONSTANTS ***********/
+
+  gWin: "Win",
+	gUNIX: "UNIX",
+  gMac: "Mac",
+
+ /********** ATTRIBUTES **********/
 
   mIOService: null,
   mOS: null,
@@ -161,7 +167,7 @@ var UrlUtils = {
     // We only return "urlPath", so we can convert
     //  the entire docPath for case-insensitive comparisons
     var os = this.getOS();
-    var doCaseInsensitive = (docScheme == "file" && os == gWin);
+    var doCaseInsensitive = (docScheme == "file" && os == this.gWin);
     if (doCaseInsensitive)
       docPath = docPath.toLowerCase();
 
@@ -227,7 +233,7 @@ var UrlUtils = {
           //   relativize to different drives/volumes.
           // UNIX doesn't have volumes, so we must not do this else
           //  the first directory will be misinterpreted as a volume name
-          if (firstDirTest && docScheme == "file" && os != gUNIX)
+          if (firstDirTest && docScheme == "file" && os != this.gUNIX)
             return inputUrl;
         }
       }
@@ -503,11 +509,11 @@ var UrlUtils = {
     var platform = navigator.platform.toLowerCase();
 
     if (platform.indexOf("win") != -1)
-      this.mOS = gWin;
+      this.mOS = this.gWin;
     else if (platform.indexOf("mac") != -1)
-      this.mOS = gMac;
+      this.mOS = this.gMac;
     else if (platform.indexOf("unix") != -1 || platform.indexOf("linux") != -1 || platform.indexOf("sun") != -1)
-      this.mOS = gUNIX;
+      this.mOS = this.gUNIX;
     else
       this.mOS = "";
     // Add other tests?

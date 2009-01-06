@@ -34,7 +34,9 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
+Components.utils.import("resource://gre/modules/colourPickerHelper.jsm");
+
 var gFpb = null;     // file picker
 var gPreview = null; // preview iframe for colors
 var gAuthor = "";
@@ -297,7 +299,7 @@ function Apply()
     var linkElt = doc.createElement("link");
     linkElt.setAttribute("type", "text/css");
     linkElt.setAttribute("rel", "stylesheet");
-    linkElt.setAttribute("href", "http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css");
+    linkElt.setAttribute("href", "http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css");
     EditorUtils.getHeadElement().appendChild(linkElt);
     linkElt = doc.createElement("link");
     linkElt.setAttribute("type", "text/css");
@@ -555,3 +557,12 @@ function Apply()
 }
 
 
+function OpenColorDialog(aColorObjectId, aElt)
+{
+  var cph = ColorPickerHelper;
+  cph.openColorPicker(window, aColorObjectId, "tagada", true);
+  if (!cph.isCancelled(aColorObjectId))
+  {
+    aElt.firstChild.style.backgroundColor = cph.getCurrentColor(aColorObjectId);
+  }
+}

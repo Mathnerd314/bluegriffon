@@ -1,3 +1,6 @@
+var EXPORTED_SYMBOLS = ["ColorPickerHelper"];
+
+
 var ColorPickerHelper = {
 
 // MEMBERS
@@ -57,7 +60,7 @@ var ColorPickerHelper = {
     return this.mPersistentColorObjects[aColorObjectId].cancelled;
   },
 
-  openColorPicker: function(aColorObjectId, aWindowTitle, aShowTransparency)
+  openColorPicker: function(aWindow, aColorObjectId, aWindowTitle, aShowTransparency)
   {
     if (!aColorObjectId)
       return null;
@@ -65,7 +68,7 @@ var ColorPickerHelper = {
     var colorObject = this.newPersistentColorObject(aColorObjectId);
     this._resetCancelledFlag(colorObject);
 
-    window.openDialog(this.kCOLOUR_PICKER_URL,
+    aWindow.openDialog(this.kCOLOUR_PICKER_URL,
                       "_blank",
                       "chrome,close,titlebar,modal",
                       colorObject, aWindowTitle, aShowTransparency);
