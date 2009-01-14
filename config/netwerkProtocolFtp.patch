@@ -1,6 +1,52 @@
+diff -r 51249e968f24 netwerk/protocol/ftp/public/nsIFTPChannel.idl
+--- a/netwerk/protocol/ftp/public/nsIFTPChannel.idl	Mon Nov 24 11:36:44 2008 +0100
++++ b/netwerk/protocol/ftp/public/nsIFTPChannel.idl	Wed Jan 14 18:15:50 2009 +0100
+@@ -37,12 +37,41 @@
+ 
+ #include "nsISupports.idl"
+ 
++interface nsIURI;
++
+ /**
+  * This interface may be used to determine if a channel is a FTP channel.
+  */
+-[scriptable, uuid(2315d831-8b40-446a-9138-fe09ebb1b720)]
++[scriptable, uuid(deb19f2a-ad32-47c4-85f4-b799fd7f1e51)]
+ interface nsIFTPChannel : nsISupports
+ {
++  /**
++   * This method prepares the channel for the deletion of a file. The
++   * deletion itself will be performed when the channel is opened,
++   * synchronously or not.
++   */
++  void deleteFile();
++
++  /**
++   * This method prepares the channel for the creation of a new directory.
++   * The creation itself will be performed when the channel is opened,
++   * synchronously or not.
++   */
++  void createDirectory();
++
++  /**
++   * This method prepares the channel for the removal of a directory.
++   * The removal itself will be performed when the channel is opened,
++   * synchronously or not.
++   */
++  void removeDirectory();
++
++  /*
++   * This method prepares the channel for renaming. The renaming itself
++   * will be performed when the channel is opened,
++   * synchronously or not.
++   */
++  void renameTo(in nsIURI aNewURI);
+ };
+ 
+ /**
 diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFTPChannel.cpp
 --- a/netwerk/protocol/ftp/src/nsFTPChannel.cpp	Mon Nov 24 11:36:44 2008 +0100
-+++ b/netwerk/protocol/ftp/src/nsFTPChannel.cpp	Tue Jan 06 14:27:32 2009 +0100
++++ b/netwerk/protocol/ftp/src/nsFTPChannel.cpp	Wed Jan 14 18:15:50 2009 +0100
 @@ -154,6 +154,14 @@
          return NS_ERROR_OUT_OF_MEMORY;
      NS_ADDREF(state);
@@ -57,7 +103,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFTPChannel.cpp
 +}
 diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFTPChannel.h
 --- a/netwerk/protocol/ftp/src/nsFTPChannel.h	Mon Nov 24 11:36:44 2008 +0100
-+++ b/netwerk/protocol/ftp/src/nsFTPChannel.h	Tue Jan 06 14:27:32 2009 +0100
++++ b/netwerk/protocol/ftp/src/nsFTPChannel.h	Wed Jan 14 18:15:50 2009 +0100
 @@ -80,11 +80,16 @@
      NS_DECL_NSIUPLOADCHANNEL
      NS_DECL_NSIRESUMABLECHANNEL
@@ -113,7 +159,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFTPChannel.h
  #endif /* nsFTPChannel_h___ */
 diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
 --- a/netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp	Mon Nov 24 11:36:44 2008 +0100
-+++ b/netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp	Tue Jan 06 14:27:32 2009 +0100
++++ b/netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp	Wed Jan 14 18:15:50 2009 +0100
 @@ -1,4 +1,4 @@
 -/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* -*- Mode: C+; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
@@ -241,37 +287,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
      }
      
      return FTP_ERROR;
-@@ -1200,28 +1300,7 @@
- nsresult
- nsFtpState::S_stor() {
-     NS_ENSURE_STATE(mChannel->UploadStream());
--
--    NS_ASSERTION(mAction == PUT, "Wrong state to be here");
--    
--    nsCOMPtr<nsIURL> url = do_QueryInterface(mChannel->URI());
--    NS_ASSERTION(url, "I thought you were a nsStandardURL");
--
--    nsCAutoString storStr;
--    url->GetFilePath(storStr);
--    NS_ASSERTION(!storStr.IsEmpty(), "What does it mean to store a empty path");
--        
--    // kill the first slash since we want to be relative to CWD.
--    if (storStr.First() == '/')
--        storStr.Cut(0,1);
--
--    if (mServerType == FTP_VMS_TYPE)
--        ConvertFilespecToVMS(storStr);
--
--    NS_UnescapeURL(storStr);
--    storStr.Insert("STOR ",0);
--    storStr.Append(CRLF);
--
--    return SendFTPCommand(storStr);
-+    return SingleAbsolutePathCommand(PUT);
- }
- 
- FTP_STATE
-@@ -1354,6 +1433,15 @@
+@@ -1354,6 +1454,15 @@
  
          port = ((PRInt32) (p0<<8)) + p1;
      }
@@ -287,7 +303,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
  
      PRBool newDataConn = PR_TRUE;
      if (mDataTransport) {
-@@ -1604,11 +1692,12 @@
+@@ -1604,11 +1713,12 @@
  
      nsresult rv;
      nsCAutoString path;
@@ -302,7 +318,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
      }
      if (NS_FAILED(rv))
          return rv;
-@@ -2217,3 +2306,126 @@
+@@ -2217,3 +2327,123 @@
          free(p);
      return rv;
  }
@@ -316,12 +332,11 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
 +    NS_ASSERTION(url, "I thought you were a nsStandardURL");
 +
 +    nsCAutoString str;
-+    url->GetFilePath(str);
++    str.Append(mPwd);
++    str.Append(mPath);
++
 +    NS_ASSERTION(!str.IsEmpty(), "What does it mean to deal with a empty path");
 +
-+    // we need to cut leading slash because a user's home dir on a ftp
-+    // server may not be the root of that server
-+        
 +    if (mServerType == FTP_VMS_TYPE)
 +        ConvertFilespecToVMS(str);
 +
@@ -338,9 +353,6 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
 +        break;
 +      case RENAME:
 +        str.Insert("RNFR ", 0);
-+        break;
-+      case PUT:
-+        str.Insert("STOR ", 0);
 +        break;
 +      default:
 +        // we never hit this
@@ -405,12 +417,13 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
 +nsFtpState::S_rnto() {
 +    nsCAutoString sizeBuf;
 +    mNewURI->GetPath(sizeBuf);
-+    
-+    if (sizeBuf.IsEmpty() || sizeBuf.First() != '/')
-+        sizeBuf.Insert(mPwd,0);
++
++    NS_UnescapeURL(sizeBuf);
++ 
++    sizeBuf.Insert(mPwd,0);
 +
 +    if (mServerType == FTP_VMS_TYPE)
-+        ConvertFilespecToVMS(sizeBuf);
++      ConvertFilespecToVMS(sizeBuf);
 +    sizeBuf.Insert("RNTO ",0);
 +    sizeBuf.Append(CRLF);
 +
@@ -431,7 +444,7 @@ diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.cpp
 +}
 diff -r 51249e968f24 netwerk/protocol/ftp/src/nsFtpConnectionThread.h
 --- a/netwerk/protocol/ftp/src/nsFtpConnectionThread.h	Mon Nov 24 11:36:44 2008 +0100
-+++ b/netwerk/protocol/ftp/src/nsFtpConnectionThread.h	Tue Jan 06 14:27:32 2009 +0100
++++ b/netwerk/protocol/ftp/src/nsFtpConnectionThread.h	Wed Jan 14 18:15:50 2009 +0100
 @@ -104,11 +104,16 @@
      FTP_S_STOR, FTP_R_STOR,
      FTP_S_LIST, FTP_R_LIST,
