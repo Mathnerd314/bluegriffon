@@ -283,7 +283,8 @@ function (data)
     switch (this.entries[i])
     {
       case FILENAME_ENTRY:
-        dirIndex.location = UnEscape(token);
+        dirIndex.location = L10NUtils.convertStringToUTF8(UnEscape(token)) ||
+                            UnEscape(token);
         break;
       case DESCRIPTION_ENTRY:
         // we do nothing here, we use the nsIDirIndex description attribute

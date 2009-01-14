@@ -152,9 +152,9 @@ function onContainerOpened(aEvent)
 
     var url = GetRemoteUrl(treeitem);
     ShowThrobber(true);
-	  var foo = new FTPDirParser(url,
-	                             treeitem,
-	                             AddFTPDirSubdirs, OnFtpEnd, OnFtpError);
+    var foo = new FTPDirParser(url,
+                               treeitem,
+                               AddFTPDirSubdirs, OnFtpEnd, OnFtpError);
   }
   
 }
@@ -194,7 +194,7 @@ function AddFTPDirSubdirs(url, dirEntry, aRQdata)
 
   var isDir = (type == Components.interfaces.nsIDirIndex.TYPE_DIRECTORY);
   var hostname = aRQdata.getAttribute("hostname");
-  var rootpath = aRQdata.getAttribute("rootpath") + "/" + name;
+  var rootpath = (aRQdata.getAttribute("rootpath") + "/" + name);
   var user = aRQdata.getAttribute("user");
 
   var treeitem = document.createElement("treeitem");
@@ -220,11 +220,11 @@ function AddFTPDirSubdirs(url, dirEntry, aRQdata)
   {
     treeitem.setAttribute("container", "true");
 
-	  var child = treechildren.firstChild;
-	  while (child &&
-	         child.getAttribute("name") <= name &&
-	         child.hasAttribute("container"))
-	    child = child.nextSibling;
+    var child = treechildren.firstChild;
+    while (child &&
+           child.getAttribute("name") <= name &&
+           child.hasAttribute("container"))
+      child = child.nextSibling;
     
     treechildren.insertBefore(treeitem, child);
   }
@@ -276,21 +276,21 @@ function RefreshEntry()
       OpenLocalDirectory(treeitem.getAttribute("localStoreHome"), treeitem);
     else
     {
-	    var hostname = treeitem.getAttribute("hostname");
-	    var user = treeitem.getAttribute("user");
-	    var rootpath = treeitem.getAttribute("rootpath");
-	    var password = LoginUtils.findPassword("ftp://" + hostname,
-	                                           null,
-	                                           "bluegriffon",
-	                                           user);
-	
-	    var url = "ftp://" + (user ? user + ":" + password + "@" : "") +
-	              hostname + "/" + rootpath;
-	
-	    ShowThrobber(true);
-	    var foo = new FTPDirParser(url,
-	                               treeitem,
-	                               AddFTPDirSubdirs, OnFtpEnd, OnFtpError);
+      var hostname = treeitem.getAttribute("hostname");
+      var user = treeitem.getAttribute("user");
+      var rootpath = treeitem.getAttribute("rootpath");
+      var password = LoginUtils.findPassword("ftp://" + hostname,
+                                             null,
+                                             "bluegriffon",
+                                             user);
+  
+      var url = "ftp://" + (user ? user + ":" + password + "@" : "") +
+                hostname + "/" + rootpath;
+  
+      ShowThrobber(true);
+      var foo = new FTPDirParser(url,
+                                 treeitem,
+                                 AddFTPDirSubdirs, OnFtpEnd, OnFtpError);
     }
   }
   else if (treeitem.getAttribute("localStoreHome"))
@@ -302,21 +302,21 @@ function RefreshEntry()
       return;
     }
     var fileEntry = localFile.QueryInterface(Components.interfaces.nsIFile);
-	  var size = localFile.fileSize;
-	  var lastModifiedDate = new Date(localFile.lastModifiedTime);
-	  var isDir = localFile.isDirectory();
+    var size = localFile.fileSize;
+    var lastModifiedDate = new Date(localFile.lastModifiedTime);
+    var isDir = localFile.isDirectory();
 
     var treerow = treeitem.firstChild;
     deleteAllChildren(treerow);
-	  var treecell1 = document.createElement("treecell");
-	  var treecell2 = document.createElement("treecell");
-	  var treecell3 = document.createElement("treecell");
-	  treecell1.setAttribute("label", treeitem.getAttribute("name"));
-	  treecell2.setAttribute("label", isDir ? "" : size);
-	  treecell3.setAttribute("label", GetNormalizedDate(lastModifiedDate));
-	  treerow.appendChild(treecell1);
-	  treerow.appendChild(treecell2);
-	  treerow.appendChild(treecell3);
+    var treecell1 = document.createElement("treecell");
+    var treecell2 = document.createElement("treecell");
+    var treecell3 = document.createElement("treecell");
+    treecell1.setAttribute("label", treeitem.getAttribute("name"));
+    treecell2.setAttribute("label", isDir ? "" : size);
+    treecell3.setAttribute("label", GetNormalizedDate(lastModifiedDate));
+    treerow.appendChild(treecell1);
+    treerow.appendChild(treecell2);
+    treerow.appendChild(treecell3);
     treeitem.setAttribute("lastModifiedTime", localFile.lastModifiedTime);
   }
 }
@@ -510,6 +510,8 @@ function RemoveLocalDir(aSpec, aTreeitem)
 
 function TweakTableProjectsPopup()
 {
+  NotifierUtils.notify("treePopupShowing");
+
   var tree = gDialog.tableProjects;
   var contentView = tree.contentView;
   var view = tree.view;
@@ -639,9 +641,19 @@ function Rename()
     }
     else
     {
-	    var url = GetRemoteUrl(treeitem);
-	    var URL = GetURLFromUrl(url);
-	    URL.fileName = result.value;
+      var url = GetRemoteUrl(treeitem);
+      var URL = GetURLFromUrl(url);
+      // do we deal with a UTF-8 name or a special charset like windows1252 ?
+      if (L10NUtils.convertStringToUTF8(url))
+      {
+        url = URL.spec;
+      }
+      /*else
+      {
+        URL.fileName = "";
+        url = URL.spec + escape(treeitem.getAttribute("name"));
+      }*/
+      URL.fileName = result.value;
       ShowThrobber(true);
       renameURLAsync(url, URL, treeitem);
     }
@@ -650,12 +662,14 @@ function Rename()
 
 function RenameTo(aNewURI, aTreeitem)
 {
-  var filename = aNewURI.fileName;
-  aTreeitem.setAttribute("rootpath", filename);
+  var filename = L10NUtils.convertStringToUTF8(unescape(aNewURI.fileName)) ||
+                 unescape(aNewURI.fileName);
+  aTreeitem.setAttribute("rootpath", aTreeitem.parentNode.parentNode.getAttribute("rootpath") + "/" + filename);
 
   var mainCell = aTreeitem.firstChild.firstChild;
   var dateCell = mainCell.nextSibling.nextSibling;
   mainCell.setAttribute("label", filename);
+  aTreeitem.setAttribute("name", filename);
 }
 
 function GetURLFromUrl(url)
@@ -727,8 +741,9 @@ function StopFtpConnection()
 function AppendNewRemoteDir(aSpec, aTreeitem)
 {
   var URL = GetURLFromUrl(aSpec);
-  var fileName = URL.fileName;
-  var rootpath = URL.filePath;
+  var fileName = L10NUtils.convertStringToUTF8(unescape(URL.fileName)) ||
+                 unescape(URL.fileName);
+  var rootpath = aTreeitem.getAttribute("rootpath") + "/" + fileName;
 
   var hostname = aTreeitem.getAttribute("hostname");
   var user = aTreeitem.getAttribute("user");

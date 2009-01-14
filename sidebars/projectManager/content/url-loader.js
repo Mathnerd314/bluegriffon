@@ -54,7 +54,7 @@ function _getChannelForURL (url)
     if (!serv)
         return null;
     
-    return serv.newChannel(url, null, null);
+    return serv.newChannel(url, "UTF-8", null);
 
 }
 
@@ -88,10 +88,16 @@ function (request, context, inStr, sourceOffset, count)
     // dump ("onDataAvailable(): " + count + "\n");
     // sometimes the inStr changes between onDataAvailable calls, so we
     // can't cache it.
-    var sis = 
+    /*var sis = 
         Components.classes[SIS_CTRID].createInstance(cnsIScriptableInputStream);
     sis.init(inStr);
-    this.data += sis.read(count);
+    var str = sis.read(count);*/
+    var sis = Components.classes['@mozilla.org/binaryinputstream;1']
+                            .createInstance(Components.interfaces.nsIBinaryInputStream);
+    sis.setInputStream(inStr);
+    var str = sis.readBytes(count);
+
+    this.data += str;
 }
 
 

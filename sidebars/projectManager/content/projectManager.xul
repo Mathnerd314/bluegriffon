@@ -60,6 +60,8 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/urls.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/editorUtils.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/notifiers.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/l10n.js"/>
   <script type="application/x-javascript"  src="chrome://projectmanager/content/ftpDirParser.js"/>
   <script type="application/x-javascript"  src="chrome://projectmanager/content/localDirParser.js"/>
   <script type="application/x-javascript"  src="chrome://projectmanager/content/url-loader.js"/>
@@ -69,7 +71,7 @@
 
   <popupset id="projectManagerPopupSet">
     <popup id="tableProjectsPopup"
-           onpopupshowing="TweakTableProjectsPopup()">
+           onpopupshowing="TweakTableProjectsPopup(); ">
       <menuitem label="&refresh.label;"
                 id="refreshMenuItem"
                 accesskey="&refresh.accesskey;"

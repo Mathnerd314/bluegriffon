@@ -89,6 +89,7 @@
            selected="true"
            value="ftp"/>
     <radio label="&localCopy.label;"
+           hidden="true"
            accesskey="&localCopy.accesskey;"
            value="copy"/>
     <radio label="&localStore.label;"
