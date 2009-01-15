@@ -794,3 +794,59 @@ function AppendNewRemoteDir(aSpec, aTreeitem)
   var index = contentView.getIndexOfItem(treeitem);
   view.selection.select(index);
 }
+
+function OnTreeSelect()
+{
+  var tree = gDialog.tableProjects;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view.selection.count) // No selection yet in the tree
+  {
+    SetEnabledElement(gDialog.ProjectMinusButton, false);
+    return;
+  }
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+
+  // the selection is a project, not a file or a dir
+  if (treeitem.parentNode.parentNode.nodeName.toLowerCase() == "tree")
+  {
+    SetEnabledElement(gDialog.ProjectMinusButton, true);
+    return;
+  }
+
+  // finally, we have a file or a dir selected in the tree
+  SetEnabledElement(gDialog.ProjectMinusButton, false);
+
+}
+
+function DeleteProject()
+{
+  var tree = gDialog.tableProjects;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+
+  // confirmation needed to delete the project...
+  var bundle = gDialog.projectManagerBundle;
+  var title  = bundle.getString("DeleteProject");
+  var msg    = bundle.getString("ConfirmProjectDeletion");
+  var ok     = bundle.getString("DeleteOk");
+  var cancel = bundle.getString("DeleteCancel");
+  
+  if (PromptUtils.confirmWithTitle(title, msg, ok, cancel))
+  {
+    treeitem.parentNode.removeChild(treeitem);
+
+    var dbConn = GetDBConn();
+    var statement = dbConn.createStatement("DELETE FROM 'projects' WHERE name=?1");
+  
+    statement.bindUTF8StringParameter(0, treeitem.getAttribute("name"));
+     
+    statement.execute();
+    statement.finalize();
+  
+    dbConn.close();
+  }
+}
