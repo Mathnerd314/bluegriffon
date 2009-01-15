@@ -95,16 +95,16 @@
 
 #ifndef XP_MACOSX
   <hbox id="ProjectMgrBox">
-    <toolbarbutton image="chrome://projectmanager/skin/plus.png"
-                   id="ProjectPlusButton"
+    <toolbarbutton id="ProjectPlusButton"
                    oncommand="OpenAddProjectDialog()"/>
-    <toolbarbutton image="chrome://projectmanager/skin/minus.png"
-                   disabled="true"
-                   oncommand="DeleteProject()
+    <toolbarbutton disabled="true"
+                   oncommand="DeleteProject()"
                    id="ProjectMinusButton"/>
+    <toolbarbutton disabled="true"
+                   oncommand="OpenConfigProjectDialog()"
+                   id="ProjectConfigButton"/>
     <spacer flex="1"/>
-    <toolbarbutton image="chrome://global/skin/icons/loading_16.png"
-                   hidden="true"
+    <toolbarbutton hidden="true"
                    oncommand="StopFtpConnection()"
                    id="ProjectThrobberButton"
                    />
@@ -138,6 +138,7 @@
                    oncommand="DeleteProject()"/>
     <toolbarbutton class="listboxBgConfigButton"
                    disabled="true"
+                   oncommand="OpenConfigProjectDialog()"
                    id="ProjectConfigButton"/>
     <spacer flex="1"/>
     <toolbarbutton class="listboxBgThrobberButton"

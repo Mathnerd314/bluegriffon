@@ -75,40 +75,40 @@
     this.currentProjects = [];
 
     var dbConn = this.getDBConn();
-	  var statement = dbConn.createStatement("SELECT * from projects");
-	  
-	  while (statement.executeStep()) {
-	    var id = statement.getInt32(0);
-	    var name = statement.getString(1);
-	    var url = statement.getString(2);
-	    var storageChoice = statement.getString(3);
-	    var localStoreHome = statement.getString(4);
-	    var hostname = statement.getString(5);
-	    var rootpath = statement.getString(6);
-	    var user = statement.getString(7);
-	    var pathhtml = statement.getString(8);
-	    var pathmedia = statement.getString(9);
-	    var pathJS = statement.getString(10);
-	    var pathCSS = statement.getString(11);
-	
-	    this.currentProjects.push( {
-	      id: id,
-	      name: name,
-	      url: url,
-	      storageChoice: storageChoice,
-	      localStoreHome: localStoreHome,
-	      hostname: hostname,
-	      rootpath: rootpath,
-	      user: user,
-	      pathhtml: pathhtml,
-	      pathmedia: pathmedia,
-	      pathJS: pathJS,
-	      pathCSS: pathCSS
-	    });
-	  }
-	
-	  statement.finalize();
-	  dbConn.close();
+    var statement = dbConn.createStatement("SELECT * from projects");
+    
+    while (statement.executeStep()) {
+      var id = statement.getInt32(0);
+      var name = statement.getString(1);
+      var url = statement.getString(2);
+      var storageChoice = statement.getString(3);
+      var localStoreHome = statement.getString(4);
+      var hostname = statement.getString(5);
+      var rootpath = statement.getString(6);
+      var user = statement.getString(7);
+      var pathhtml = statement.getString(8);
+      var pathmedia = statement.getString(9);
+      var pathJS = statement.getString(10);
+      var pathCSS = statement.getString(11);
+  
+      this.currentProjects.push( {
+        id: id,
+        name: name,
+        url: url,
+        storageChoice: storageChoice,
+        localStoreHome: localStoreHome,
+        hostname: hostname,
+        rootpath: rootpath,
+        user: user,
+        pathhtml: pathhtml,
+        pathmedia: pathmedia,
+        pathJS: pathJS,
+        pathCSS: pathCSS
+      });
+    }
+  
+    statement.finalize();
+    dbConn.close();
 
   }
 };

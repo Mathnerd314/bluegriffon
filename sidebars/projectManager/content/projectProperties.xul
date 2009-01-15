@@ -50,11 +50,11 @@
 <dialog id         = "projectProperties"
         title      = "&window.title;"
         xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	      xmlns:html = "http://www.w3.org/1999/xhtml"
+        xmlns:html = "http://www.w3.org/1999/xhtml"
         persist    = "screenX screenY"
         onload     = "Startup()"
-	      orient     = "vertical"
-	      ondialogaccept = "Apply()">
+        orient     = "vertical"
+        ondialogaccept = "Apply()">
 
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
@@ -100,11 +100,11 @@
   <groupbox id="localStoreGroupbox" hidden="true">
     <caption label="&localStore.label;"/>
     <hbox align="center">
-	    <label value="&localStoreHome.label;"
-	           id="localStoreHomeBoxController"
-	           accesskey="&localStoreHome.accesskey;"
-	           control="localStoreHomeBox"/>
-	    <textbox id="localStoreHomeBox" flex="1"/>
+      <label value="&localStoreHome.label;"
+             id="localStoreHomeBoxController"
+             accesskey="&localStoreHome.accesskey;"
+             control="localStoreHomeBox"/>
+      <textbox id="localStoreHomeBox" flex="1"/>
       <filepickerbutton id="filepickerbutton"
                         mode="2"
                         control="localStoreHomeBox"

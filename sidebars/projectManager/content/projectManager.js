@@ -15,7 +15,7 @@
  *
  * The Initial Developer of the Original Code is
  * Disruptive Innovations SARL.
- * Portions created by the Initial Developer are Copyright (C) 2008
+ * Portions created by the Initial Developer are Copyright (C) 2008-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -105,6 +105,7 @@ function ListProjects()
     treeitem.appendChild(treerow);
     treeitem.setAttribute("container", "true");
 
+    treeitem.setAttribute("projectid", id);
     treeitem.setAttribute("localStoreHome", localStoreHome);
     treeitem.setAttribute("url", url);
     treeitem.setAttribute("storageChoice", storageChoice);
@@ -803,6 +804,7 @@ function OnTreeSelect()
   if (!view.selection.count) // No selection yet in the tree
   {
     SetEnabledElement(gDialog.ProjectMinusButton, false);
+    SetEnabledElement(gDialog.ProjectConfigButton, false);
     return;
   }
   var index = view.selection.currentIndex;
@@ -812,21 +814,26 @@ function OnTreeSelect()
   if (treeitem.parentNode.parentNode.nodeName.toLowerCase() == "tree")
   {
     SetEnabledElement(gDialog.ProjectMinusButton, true);
+    SetEnabledElement(gDialog.ProjectConfigButton, true);
     return;
   }
 
   // finally, we have a file or a dir selected in the tree
   SetEnabledElement(gDialog.ProjectMinusButton, false);
+  SetEnabledElement(gDialog.ProjectConfigButton, false);
+}
 
+function GetSelectedTreeitem(aTree)
+{
+  var contentView = aTree.contentView;
+  var view = aTree.view;
+  var index = view.selection.currentIndex;
+  return contentView.getItemAtIndex(index);
 }
 
 function DeleteProject()
 {
-  var tree = gDialog.tableProjects;
-  var contentView = tree.contentView;
-  var view = tree.view;
-  var index = view.selection.currentIndex;
-  var treeitem = contentView.getItemAtIndex(index);
+  var treeitem = GetSelectedTreeitem(gDialog.tableProjects);
 
   // confirmation needed to delete the project...
   var bundle = gDialog.projectManagerBundle;
@@ -849,4 +856,11 @@ function DeleteProject()
   
     dbConn.close();
   }
+}
+
+function OpenConfigProjectDialog()
+{
+  var treeitem = GetSelectedTreeitem(gDialog.tableProjects);
+  window.openDialog("chrome://projectmanager/content/projectProperties.xul", "",
+                    "modal, centerscreen, resizable=no", treeitem);
 }
