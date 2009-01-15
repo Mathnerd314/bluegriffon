@@ -88,7 +88,9 @@ function OpenFile(aURL, aInTab)
   }
 
   if (aInTab)
-    document.getElementById("tabeditor").addEditor(aURL, aURL);
+    document.getElementById("tabeditor").addEditor(
+         UrlUtils.stripUsernamePassword(aURL, null, null),
+         aURL);
   else
     OpenNewWindow(aURL);
 }

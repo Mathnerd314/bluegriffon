@@ -164,8 +164,8 @@
       </property>
 
       <method name="addEditor">
-        <parameter name="aURL"/>
         <parameter name="aTitle"/>
+        <parameter name="aURL"/>
         <body>
           <![CDATA[
             function EditorContentListener(aTabeditor, aEditor, aURL, aTab)
@@ -306,7 +306,8 @@
 
             var newEditorElement = this._newEditor();
 
-            var newTab = this.mTabs.appendItem(aTitle, aURL);
+            var newTab = this.mTabs.appendItem(aTitle,
+                           UrlUtils.stripUsernamePassword(aURL, null, null));
             newTab.setAttribute("label", aTitle);
             newTab.setAttribute("class", "tabeditor-tab");
             newTab.setAttribute("maxwidth", 200);
