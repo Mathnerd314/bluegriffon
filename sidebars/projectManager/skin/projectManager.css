@@ -53,3 +53,29 @@ tree {
   margin: 4px 4px 0px 4px;
 %endif
 }
+
+%ifndef XP_MACOSX
+#ProjectPlusButton {
+  list-style-image: url("chrome://projectmanager/skin/plus.png");
+}
+
+#ProjectMinusButton {
+  list-style-image: url("chrome://projectmanager/skin/minus.png");
+}
+
+#ProjectMinusButton[disabled="true"] {
+  list-style-image: url("chrome://projectmanager/skin/minus-disabled.png");
+}
+
+#ProjectConfigButton {
+  list-style-image: url("chrome://projectmanager/skin/config.png");
+}
+
+#ProjectConfigButton[disabled="true"] {
+  list-style-image: url("chrome://projectmanager/skin/config-disabled.png");
+}
+
+#ProjectThrobberButton {
+  list-style-image: url("chrome://projectmanager/skin/loading_16.png");
+}
+%endif
