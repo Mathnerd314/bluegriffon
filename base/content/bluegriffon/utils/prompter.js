@@ -92,6 +92,18 @@ var PromptUtils = {
     return false;
   },
 
+  confirm: function(aTitle, aMsg)
+  {
+    var promptService = this._getPromptService();
+    if (promptService)
+    {
+      return promptService.confirm(window,
+                                   aTitle,
+                                   aMsg)
+    }
+    return false;
+  },
+
   prompt: function(window, captionStr, msgStr, result)
   {
     return this._getPromptService().prompt(window, captionStr, msgStr, result, null, {value:0});
