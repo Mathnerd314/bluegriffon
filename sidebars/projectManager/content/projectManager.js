@@ -401,11 +401,8 @@ function ShowThrobber(aShow)
 
 function DeleteFileOrDir()
 {
-  var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                      .getService(Components.interfaces.nsIPromptService);
-
-  if (!promptService.confirm(window, gDialog.projectManagerBundle.getString("ConfirmDeletion"),
-                             gDialog.projectManagerBundle.getString("SureToDelete")))
+  if (!PromptUtils.confirm(gDialog.projectManagerBundle.getString("ConfirmDeletion"),
+                           gDialog.projectManagerBundle.getString("SureToDelete")))
     return;
 
   var tree = gDialog.tableProjects;
@@ -451,12 +448,8 @@ function DeleteFileOrDir()
 
 function RemoveLocalFile(aSpec, aTreeitem)
 {
-  // get a reference to the prompt service component.
-  var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                      .getService(Components.interfaces.nsIPromptService);
-
-  if (promptService.confirm(window, gDialog.projectManagerBundle.getString("ConfirmDeletion"),
-                            gDialog.projectManagerBundle.getString("SureToDelete")))
+  if (PromptUtils.confirm(gDialog.projectManagerBundle.getString("ConfirmDeletion"),
+                          gDialog.projectManagerBundle.getString("SureToDelete")))
   {
     if (IsFileUrl(aSpec)) // sanity check
     {
@@ -479,13 +472,8 @@ function IsFileUrl(url)
 
 function RemoveLocalDir(aSpec, aTreeitem)
 {
-  // get a reference to the prompt service component.
-  var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                      .getService(Components.interfaces.nsIPromptService);
-
-  if (promptService.confirm(window,
-                            gDialog.projectManagerBundle.getString("ConfirmDirRemoval"),
-                            gDialog.projectManagerBundle.getString("SureToRemoveDir")))
+  if (PromptUtils.confirm(gDialog.projectManagerBundle.getString("ConfirmDirRemoval"),
+                          gDialog.projectManagerBundle.getString("SureToRemoveDir")))
   {
     if (IsFileUrl(aSpec)) // sanity check
     {
@@ -497,9 +485,8 @@ function RemoveLocalDir(aSpec, aTreeitem)
         while (dirEntries.hasMoreElements())
           var junk = dirEntries.getNext();
 
-        if (promptService.confirm(window,
-                                  gDialog.projectManagerBundle.getString("RemoveDirAlert"),
-                                  gDialog.projectManagerBundle.getString("DirNotEmptyAlert")))
+        if (PromptUtils.confirm(gDialog.projectManagerBundle.getString("RemoveDirAlert"),
+                                gDialog.projectManagerBundle.getString("DirNotEmptyAlert")))
           removeAll = true;
 
       }
@@ -559,17 +546,11 @@ function MakeNewDir()
   if (!treeitem.hasAttribute("container"))
     treeitem = treeitem.parentNode.parentNode;
 
-  // get a reference to the prompt service component.
-  var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                      .getService(Components.interfaces.nsIPromptService);
-
   var result = {value:null};
-  if (promptService.prompt(window,
-                           gDialog.projectManagerBundle.getString("ConfirmDirCreation"),
-                           gDialog.projectManagerBundle.getString("EnterDirName"),
-                           result,
-                           null,
-                           {value:0}))
+  if (PromptUtils.prompt(window,
+                         gDialog.projectManagerBundle.getString("ConfirmDirCreation"),
+                         gDialog.projectManagerBundle.getString("EnterDirName"),
+                         result))
   {
     var url = treeitem.getAttribute("localStoreHome");
     if (IsFileUrl(url))
@@ -584,7 +565,7 @@ function MakeNewDir()
     {
       url = GetRemoteUrl(treeitem) + "/" + result.value;
       var URL = GetURLFromUrl(url);
-      createDirURLAsync(url, URL.filePath, treeitem);
+      createDirURLAsync(url, URL.filePath, treeitem, false);
     }
   }
 }
@@ -601,17 +582,11 @@ function Rename()
   var treeitem = contentView.getItemAtIndex(index);
   var name = treeitem.getAttribute("name");
 
-  // get a reference to the prompt service component.
-  var promptService = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-                      .getService(Components.interfaces.nsIPromptService);
-
   var result = {value: name};
-  if (promptService.prompt(window,
-                           gDialog.projectManagerBundle.getString("FileOrDirRenaming"),
-                           gDialog.projectManagerBundle.getString("FileOrDirRenamingPrompt"),
-                           result,
-                           null,
-                           {value:0}) &&
+  if (PromptUtils.prompt(window,
+                         gDialog.projectManagerBundle.getString("FileOrDirRenaming"),
+                         gDialog.projectManagerBundle.getString("FileOrDirRenamingPrompt"),
+                         result) &&
       name != result.value)
   {
     // ok, user did not cancel and we have a new name for the file/directory

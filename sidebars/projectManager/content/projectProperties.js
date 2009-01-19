@@ -162,7 +162,6 @@ pathCSS=?11 WHERE id=?12");
   statement.bindUTF8StringParameter(9, pathJS);
   statement.bindUTF8StringParameter(10, pathCSS);
 
-   
   statement.execute();
   statement.finalize();
 

@@ -113,6 +113,39 @@ function loadURLAsync (url, observer)
   return chan.asyncOpen (new StreamListener (chan, url, observer), null);
 }
 
+function newFileInputStream(file, buffered)
+{
+  const PR_RDONLY = 0x1;
+  var stream =
+      Components.classes["@mozilla.org/network/file-input-stream;1"].
+      createInstance(Components.interfaces.nsIFileInputStream);
+  stream.init(file, PR_RDONLY, 0, 0);
+  if (!buffered)
+    return stream;
+
+  var buffer =
+      Components.classes["@mozilla.org/network/buffered-input-stream;1"].
+      createInstance(Components.interfaces.nsIBufferedInputStream);
+  buffer.init(stream, 4096);
+  return buffer;
+}
+
+function StoreURLAsync (aURLSpec, aFile, observer)
+{
+  var chan = _getChannelForURL (aURLSpec);
+  chan.loadFlags |= cnsIRequest.LOAD_BYPASS_CACHE;
+  
+  // chan.contentType = "application/http-index-format";
+  gCurrentChannel = chan;
+
+  var uploadstream = newFileInputStream(aFile, true);
+
+  chan.QueryInterface(Components.interfaces.nsIUploadChannel);
+  chan.setUploadStream(uploadstream, "", aFile.fileSize);
+
+  return chan.asyncOpen (new StreamListener (chan, aURLSpec, observer), null);
+}
+
 function loadURL(url, caller)
 {
   function onComplete(data, url, status)
@@ -165,14 +198,17 @@ function removeDirURLAsync (url, treeitem)
   return chan.asyncOpen (new StreamListener (chan, url, null), null);
 }
 
-function createDirURLAsync (url, aDirName, aRequestData)
+function createDirURLAsync (url, aDirName, aRequestData, aEnableNotifs)
 {
   var chan = _getChannelForURL (url);
   chan.loadFlags |= cnsIRequest.LOAD_BYPASS_CACHE;
 
   chan instanceof Components.interfaces.nsIFTPChannel;
-  var p = new progressListener(chan, FTP_MKDIR, url, aDirName, aRequestData)
-  chan.notificationCallbacks = p.QueryInterface(Components.interfaces.nsIInterfaceRequestor) ;
+  if (aEnableNotifs)
+  {
+	  var p = new progressListener(chan, FTP_MKDIR, url, aDirName, aRequestData)
+	  chan.notificationCallbacks = p.QueryInterface(Components.interfaces.nsIInterfaceRequestor);
+  }
   chan.createDirectory();
   gError = false;
 
