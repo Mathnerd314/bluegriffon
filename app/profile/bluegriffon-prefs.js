@@ -46,7 +46,7 @@ pref("bluegriffon.defaults.table.cell_spacing", "2");
 pref("bluegriffon.defaults.table.cell_padding", "2");
 
 // CSS policy
-pref("bluegriffon.css.policy", 2); // 0: HTML Attr; 1: Inline styles; 2: embedded CSS Rules; 3: existing rule 
+pref("bluegriffon.css.policy", 0); // 0: HTML Attr; 1: Inline styles; 2: embedded CSS Rules; 3: existing rule 
 
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
@@ -58,3 +58,16 @@ pref("bluegriffon.history.url_maximum", 10);
 pref("signon.rememberSignons", true);
 pref("signon.expireMasterPassword", false);
 pref("signon.SignonFileName", "signons.txt");
+
+// suppress external-load warning for standard browser schemes
+pref("network.protocol-handler.warn-external.http", false);
+pref("network.protocol-handler.warn-external.https", false);
+pref("network.protocol-handler.warn-external.ftp", false);
+
+// XPI
+pref("xpinstall.dialog.confirm", "chrome://mozapps/content/xpinstall/xpinstallConfirm.xul");
+pref("xpinstall.dialog.progress.skin", "chrome://mozapps/content/extensions/extensions.xul");
+pref("xpinstall.dialog.progress.chrome", "chrome://mozapps/content/extensions/extensions.xul");
+pref("xpinstall.dialog.progress.type.skin", "Extension:Manager");
+pref("xpinstall.dialog.progress.type.chrome", "Extension:Manager");
+
