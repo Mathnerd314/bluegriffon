@@ -47,8 +47,13 @@
 <!ENTITY pageKeywords.accesskey "K">
 <!ENTITY language.label "Language:">
 <!ENTITY language.accesskey "L">
-<!ENTITY charset.label "Character Set:">
+<!ENTITY charset.label "Character set:">
 <!ENTITY charset.accesskey "C">
+<!ENTITY direction.label "Text direction:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "Left to right">
+<!ENTITY rtl.label "Right to left">
+<!ENTITY unspecified.label "Unspecified">
 
 <!ENTITY selectLanguage.label "Select a language">
 

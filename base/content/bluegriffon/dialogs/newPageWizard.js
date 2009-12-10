@@ -57,6 +57,7 @@ var gVertPosition = "50%";
 
 function Startup()
 {
+  window.sizeToContent();
   GetUIElements();
 
   var gFpb = gDialog["filepickerbutton"];
@@ -97,6 +98,7 @@ function Startup()
   gRootElement = EditorUtils.getCurrentEditor().rootElement;
   InitDialog();
 
+  window.sizeToContent();
   SetTextboxFocus(gDialog.pageTitle);
 }
 
@@ -213,7 +215,7 @@ function SelectLanguage(aElt)
 {
   var retValue = { lang: "" };
   window.openDialog("chrome://bluegriffon/content/dialogs/languages.xul","_blank",
-                    "chrome,modal=no,dialog=yes,titlebar", null, retValue);
+                    "chrome,modal,dialog=yes,titlebar", null, retValue);
   gDialog.pageLanguage.value = retValue.lang;
 }
 
@@ -512,6 +514,10 @@ function Apply()
     EditorUtils.getCurrentDocument().documentElement.
       setAttribute("lang", gDialog.pageLanguage.value);
 
+  if (gDialog.directionRadio.value)
+    EditorUtils.getCurrentDocument().documentElement.
+      setAttribute("dir", gDialog.directionRadio.value);
+
   // COLORS
   var prefs = GetPrefs();
   if (gDialog.makeColorsDefault.checked)
@@ -585,7 +591,6 @@ function Apply()
   }
 
   /* character set */
-
   EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
 }
 

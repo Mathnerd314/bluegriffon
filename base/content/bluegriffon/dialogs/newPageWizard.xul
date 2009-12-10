@@ -52,6 +52,7 @@
         title="&window.title;"
         onload="Startup()"
         onwizardfinish="Apply()"
+        height="350" width="450"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY">
 
@@ -78,8 +79,8 @@
             hidden="true"/>
   </panel>
 
-  <wizardpage label="&generalTab.label;">
-    <grid flex="1">
+  <wizardpage label="&generalTab.label;" flex="1">
+    <grid flex="1" style="overflow: hidden">
       <columns><column/><column flex="1"/></columns>
       <rows>
         <row align="center">
@@ -129,11 +130,21 @@
             <menupopup id="charsetMenupopup"/>
           </menulist>
         </row>
+        <row align="center">
+          <label value="&direction.label;"
+                 control="directionRadio"
+                 accesskey="&direction.accesskey;"/>
+          <radiogroup id="directionRadio" orient="horizontal">
+            <radio label="&unspecified.label;" value=""/>
+            <radio label="&ltr.label;" value="ltr"/>
+            <radio label="&rtl.label;" value="rtl"/>
+          </radiogroup>
+        </row>
       </rows>
     </grid>
   </wizardpage>
 
-  <wizardpage label="&colorsTab.label;">
+  <wizardpage label="&colorsTab.label;" flex="1">
     <checkbox id="userDefinedColors"
               label="&userDefinedColors.label;"
               oncommand="EnableUserDefinedColorsControls()"/>
@@ -227,7 +238,7 @@
               checked="true"/>
   </wizardpage>
 
-  <wizardpage label="&bgTab.label;">
+  <wizardpage label="&bgTab.label;" flex="1">
     <grid>
       <columns>
         <column/>
@@ -299,7 +310,7 @@
     </grid>
   </wizardpage>
 
-  <wizardpage label="&layoutsTab.label;" orient="vertical">
+  <wizardpage label="&layoutsTab.label;" orient="vertical" flex="1">
     <checkbox id="usePageLayout"
               checked="true"
               oncommand="onUsePageLayoutChanged(this)"
