@@ -65,6 +65,35 @@ function Startup()
 
   gPreview = gDialog["pagePreview"];
 
+  var strings = gDialog.bundle.strings;
+  var charsets = [];
+  while (strings.hasMoreElements())
+  {
+    var s = strings.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
+    var key = s.key.replace( /\.title/g , "");
+    var value = s.value;
+    if (key.substr(0, 7) != "chardet")
+      charsets.push( { key: key, value: value } );
+  }
+
+  function compareCharsets(a, b)
+  {
+    if (a.value > b.value)
+      return 1;
+    if (a.value < b.value)
+      return -1;
+    return 0;
+  }
+  charsets.sort(compareCharsets);
+  for (var i = 0; i < charsets.length; i++)
+  {
+    var menuitem = document.createElement("menuitem");
+    menuitem.setAttribute("label", charsets[i].value);
+    menuitem.setAttribute("value", charsets[i].key);
+    gDialog.charsetMenupopup.appendChild(menuitem);
+  }
+  gDialog.charsetMenulist.value = "utf-8";
+
   gRootElement = EditorUtils.getCurrentEditor().rootElement;
   InitDialog();
 
@@ -377,7 +406,7 @@ function Apply()
       var ihtml = "";
       switch (value)
       {
-	      case "1": // .yui-g
+        case "1": // .yui-g
           ihtml = "<div class='yui-g'>" + loremIpsumStr + "</div>";
           break;  // oneColumn100
 
@@ -510,9 +539,9 @@ function Apply()
                                                  value: linksColor,
                                                  priority: false } ] );
     if (!gDialog.underlineLinks.checked)
-	    CssUtils.addRuleForSelector(doc, ":link", [ { property: "text-decoration",
-	                                                 value: "none",
-	                                                 priority: false } ] );
+      CssUtils.addRuleForSelector(doc, ":link", [ { property: "text-decoration",
+                                                   value: "none",
+                                                   priority: false } ] );
     CssUtils.addRuleForSelector(doc, ":link:active", [ { property: "color",
                                                           value: activeColor,
                                                           priority: false } ] );
@@ -522,12 +551,12 @@ function Apply()
 
     if (gDialog.makeColorsDefault.checked)
     {
-	    prefs.setCharPref("bluegriffon.display.foreground_color", fgColor);
-	    prefs.setCharPref("bluegriffon.display.background_color", bgColor);
-	    prefs.setCharPref("bluegriffon.display.active_color", activeColor);
-	    prefs.setCharPref("bluegriffon.display.anchor_color", linksColor);
-	    prefs.setCharPref("bluegriffon.display.visited_color", visitedColor);
-	    prefs.setBoolPref("bluegriffon.display.underline_links", gDialog.underlineLinks.checked);
+      prefs.setCharPref("bluegriffon.display.foreground_color", fgColor);
+      prefs.setCharPref("bluegriffon.display.background_color", bgColor);
+      prefs.setCharPref("bluegriffon.display.active_color", activeColor);
+      prefs.setCharPref("bluegriffon.display.anchor_color", linksColor);
+      prefs.setCharPref("bluegriffon.display.visited_color", visitedColor);
+      prefs.setBoolPref("bluegriffon.display.underline_links", gDialog.underlineLinks.checked);
     }
   }
 
@@ -554,6 +583,10 @@ function Apply()
                                                  value: bgPosition,
                                                  priority: false } ] );
   }
+
+  /* character set */
+
+  EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
 }
 
 

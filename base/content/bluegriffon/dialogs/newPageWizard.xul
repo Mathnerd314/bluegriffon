@@ -65,6 +65,8 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/js/colourPickerHelper.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/newPageWizard.js"/>
 
+  <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
+
   <panel id="colorPickerPopup"
 #ifndef XP_MACOSX
          noautohide="true">
@@ -112,12 +114,20 @@
           <label value="&language.label;"
                  control="pageLanguage"
                  accesskey="&language.accesskey;"/>
-          <hbox>
+          <hbox align="center">
 	          <textbox id="pageLanguage" flex="1"
 	                   oninput="TextboxChanged(this.id);"/>
             <button label="&selectLanguage.label;"
                     oncommand="SelectLanguage(this)"/>
          </hbox>
+        </row>
+        <row align="center">
+          <label value="&charset.label;"
+                 control="charsetMenulist"
+                 accesskey="&charset.accesskey;"/>
+	        <menulist id="charsetMenulist" value="utf-8">
+            <menupopup id="charsetMenupopup"/>
+          </menulist>
         </row>
       </rows>
     </grid>

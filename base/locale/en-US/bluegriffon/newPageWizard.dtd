@@ -47,6 +47,8 @@
 <!ENTITY pageKeywords.accesskey "K">
 <!ENTITY language.label "Language:">
 <!ENTITY language.accesskey "L">
+<!ENTITY charset.label "Character Set:">
+<!ENTITY charset.accesskey "C">
 
 <!ENTITY selectLanguage.label "Select a language">
 

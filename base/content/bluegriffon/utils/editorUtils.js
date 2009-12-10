@@ -48,8 +48,8 @@ var EditorUtils = {
     if (window.location.href != "chrome://bluegriffon/content/xul/bluegriffon.xul" &&
         !tmpWindow.opener)
     {
-	    var windowManager = Components.classes[kWINDOWMEDIATOR_CID].getService();
-	    var windowManagerInterface = windowManager.QueryInterface(nsIWindowMediator);
+      var windowManager = Components.classes[kWINDOWMEDIATOR_CID].getService();
+      var windowManagerInterface = windowManager.QueryInterface(nsIWindowMediator);
       tmpWindow = windowManagerInterface.getMostRecentWindow("bluegriffon");
     }
 #endif
@@ -69,7 +69,7 @@ var EditorUtils = {
   
   getCurrentEditorElement: function getCurrentEditorElement()
   {
-  	var tabeditor = this.getCurrentTabEditor();
+    var tabeditor = this.getCurrentTabEditor();
     if (tabeditor)
       return tabeditor.getCurrentEditorElement() ;
     return null;
@@ -498,5 +498,43 @@ var EditorUtils = {
       // XXX WE'LL NEED TO GET "CURRENT" CONTENT FRAME ONCE MULTIPLE EDITORS ARE ALLOWED
       this.getCurrentEditorElement().docShell.setCurrentURI(uri);
     } catch (e) { dump("SetDocumentURI:\n"+e +"\n"); }
+  },
+
+  documentReloadListener:
+  {
+    NotifyDocumentCreated: function() {},
+    NotifyDocumentWillBeDestroyed: function() {},
+  
+    NotifyDocumentStateChanged:function( isNowDirty )
+    {
+      var editor = EditorUtils.getCurrentEditor();
+      try {
+        // unregister the listener to prevent multiple callbacks
+        editor.removeDocumentStateListener( EditorUtils.documentReloadListener );
+  
+        var charset = editor.documentCharacterSet;
+  
+        // update the META charset with the current presentation charset
+        editor.documentCharacterSet = charset;
+  
+      } catch (e) {}
+    }
+  },
+
+  setDocumentCharacterSet: function(aCharset)
+  {
+    try {
+      var editor = this.getCurrentEditor();
+      var editorElement = this.getCurrentEditorElement();
+      editor.documentCharacterSet = aCharset;
+      var docUrl = this.getDocumentUrl();
+      if( !UrlUtils.isUrlAboutBlank(docUrl))
+      {
+        // reloading the document will reverse any changes to the META charset, 
+        // we need to put them back in, which is achieved by a dedicated listener
+        editor.addDocumentStateListener( this.documentReloadListener );
+        EditorLoadUrl(editorElement, docUrl);
+      }
+    } catch (e) {}
   }
 };
