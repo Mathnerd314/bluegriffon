@@ -57,9 +57,6 @@ bluegriffon.jar:
   content/bluegriffon/js/recentPages.js  (content/bluegriffon/js/recentPages.js)
   content/bluegriffon/js/toolbars.js  (content/bluegriffon/js/toolbars.js)
   content/bluegriffon/js/zoomManager.js  (content/bluegriffon/js/zoomManager.js)
-#ifdef TOOLBAR_CUSTOMIZATION_SHEET
-*  content/bluegriffon/js/customizeToolbarSheet.js          (content/bluegriffon/js/customizeToolbarSheet.js)
-#endif
   content/bluegriffon/sourceViewTemplate.html  (content/bluegriffon/sourceViewTemplate.html)
   content/bluegriffon/utils/colors.js  (content/bluegriffon/utils/colors.js)
   content/bluegriffon/utils/css.js  (content/bluegriffon/utils/css.js)
@@ -103,12 +100,6 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/tabeditor.dtd  (locale/en-US/bluegriffon/tabeditor.dtd)
   locale/en-US/bluegriffon/tabeditor.properties  (locale/en-US/bluegriffon/tabeditor.properties)
 	locale/en-US/bluegriffon/masterPasswordQuery.properties (locale/en-US/bluegriffon/masterPasswordQuery.properties)
-  
 * locale/en-US/branding/brand.dtd  (locale/en-US/branding/brand.dtd)
   locale/en-US/branding/brand.properties  (locale/en-US/branding/brand.properties)
-
-#ifdef TOOLBAR_CUSTOMIZATION_SHEET
-toolkit.jar:
-*+      content/global/customizeToolbar.xul           (content/bluegriffon/xul/customizeToolbarSheet.xul)
-#endif
 
