@@ -176,5 +176,16 @@
 <!ENTITY formatToolbar.name "Format (primary)">
 <!ENTITY formatToolbar2.name "Format (secondary)">
 
-<!ENTITY elementLanguage.label "Language">
-<!ENTITY elementLanguage.accesskey "L">
+<!ENTITY setElementLanguage.label "Set language">
+<!ENTITY setElementLanguage.accesskey "L">
+<!ENTITY resetElementLanguage.label "Reset language">
+<!ENTITY resetElementLanguage.accesskey "s">
+<!ENTITY deleteElement.label "Delete element">
+<!ENTITY deleteElement.accesskey "D">
+<!ENTITY removeTag.label "Remove tag">
+<!ENTITY removeTag.accesskey "R">
+<!ENTITY changeTag.label "Change tag">
+<!ENTITY changeTag.accesskey "C">
+
+<!ENTITY wysiwygMode.label "Wysiwyg">
+<!ENTITY sourceMode.label "Source">

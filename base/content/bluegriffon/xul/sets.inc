@@ -93,10 +93,28 @@
   <popup id="format-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
   </popup>
-  <popup id="structureBarContextMenu">
-    <menuitem label="&elementLanguage.label;"
-              accesskey="&elementLanguage.accesskey;"
+  <popup id="structureBarContextMenu"
+         onpopupshowing="UpdateStructureBarContextMenu()">
+    <menuitem label="&resetElementLanguage.label;"
+              id="resetElementLanguageMenuitem"
+              accesskey="&resetElementLanguage.accesskey;"
+              oncommand="ResetLanguage(event)" />
+    <menuitem label="&setElementLanguage.label;"
+              accesskey="&setElementLanguage.accesskey;"
               oncommand="ShowLanguageDialog(event)" />
+    <menuseparator/>
+    <menuitem label="&deleteElement.label;"
+              id="deleteElementMenuitem"
+              accesskey="&deleteElement.accesskey;"
+              oncommand="DeleteElement(event)"/>
+    <menuitem label="&removeTag.label;"
+              id="removeTagMenuitem"
+              accesskey="&removeTag.accesskey;"
+              oncommand="ExplodeElement(event)"/>
+     <menuitem label="&changeTag.label;"
+              id="changeTagMenuitem"
+              accesskey="&changeTag.accesskey;"
+              oncommand="ChangeTag(event)"/>
   </popup>
 </popupset>
 

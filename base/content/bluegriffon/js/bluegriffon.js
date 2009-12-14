@@ -154,7 +154,7 @@ function UpdateWindowTitle()
 
     // Append just the 'leaf' filename to the Doc. Title for the window caption
     var docUrl = UrlUtils.getDocumentUrl();
-    if (docUrl && !UrlUtils.isUrlAboutBlank(docUrl))
+    if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl))
     {
       var scheme = UrlUtils.getScheme(docUrl);
       var filename = UrlUtils.getFilename(docUrl);
@@ -363,6 +363,46 @@ function ToggleSplitter(aElt, aId)
   }
 }
 
+function UpdateStructureBarContextMenu()
+{
+  var popupNode = document.popupNode;
+  var target    = null;
+  if (popupNode)
+    target = popupNode.getUserData("node");
+
+  if (target && target.hasAttribute("lang"))
+    gDialog.resetElementLanguageMenuitem.removeAttribute("disabled");
+  else
+    gDialog.resetElementLanguageMenuitem.setAttribute("disabled", "true");
+
+  if (target && target == target.ownerDocument.body)
+  {
+    gDialog.deleteElementMenuitem.setAttribute("disabled", "true");
+    gDialog.removeTagMenuitem.label.setAttribute("disabled", "true");
+    gDialog.changeTagMenuitem.label.setAttribute("disabled", "true");
+  }
+  else
+  {
+    gDialog.deleteElementMenuitem.removeAttribute("disabled");
+    gDialog.removeTagMenuitem.label.removeAttribute("disabled");
+    gDialog.changeTagMenuitem.label.removeAttribute("disabled");
+  }
+}
+
+function ResetLanguage(aEvent)
+{
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target)
+    {
+      var editor = EditorUtils.getCurrentEditor();
+      editor.removeAttribute(target, "lang");
+    }
+  }
+}
+
 function ShowLanguageDialog(aEvent)
 {
   var popupNode = document.popupNode;
@@ -372,6 +412,131 @@ function ShowLanguageDialog(aEvent)
     if (target)
       window.openDialog("chrome://bluegriffon/content/dialogs/languages.xul","_blank",
                         "chrome,modal,titlebar", target);
+  }
+}
+
+function DeleteElement(aEvent)
+{
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target)
+    {
+      var editor = EditorUtils.getCurrentEditor();
+      editor.deleteNode(target);
+    }
+  }
+}
+
+function ExplodeElement(aEvent)
+{
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target)
+    {
+      var editor = EditorUtils.getCurrentEditor();
+      var offset = 0;
+      var parent = target.parentNode.wrappedJSObject;
+      var childNodes = parent.childNodes;
+    
+      while (childNodes[offset] != target)
+        ++offset;
+
+      childNodes = target.childNodes;
+      var childNodesLength = childNodes.length;
+      for (var i = childNodesLength - 1; i >= 0; i--) {
+        var clone = childNodes.item(i).cloneNode(true);
+        editor.insertNode(clone, parent, offset + 1);
+      }
+
+      editor.deleteNode(target);
+
+      editor.endTransaction();
+    }
+  }
+}
+
+function ChangeTag(aEvent)
+{
+  var popupNode = document.popupNode;
+  var textbox = document.createElement("textbox");
+  textbox.setAttribute("value", popupNode.getAttribute("value"));
+  textbox.setAttribute("width", popupNode.boxObject.width);
+  textbox.className = "struct-textbox";
+
+  var target = popupNode.getUserData("node");
+  textbox.setUserData("node", target, null);
+  popupNode.parentNode.replaceChild(textbox, popupNode);
+
+  textbox.addEventListener("keypress", OnKeyPressWhileChangingTag, false);
+  textbox.addEventListener("blur", ResetStructToolbar, true);
+
+  textbox.select();
+}
+
+function ResetStructToolbar(event)
+{
+  var editor = EditorUtils.getCurrentEditor();
+  var textbox = event.target;
+  var element = textbox.getUserData("node");
+  textbox.parentNode.removeChild(textbox);
+  editor.selectElement(element);
+}
+
+function OnKeyPressWhileChangingTag(event)
+{
+  var editor = EditorUtils.getCurrentEditor();
+  var textbox = event.target;
+
+  var keyCode = event.keyCode;
+  if (keyCode == 13) {
+    var newTag = textbox.value;
+    var element = textbox.getUserData("node");
+    textbox.parentNode.removeChild(textbox);
+
+    if (newTag.toLowerCase() == element.nodeName.toLowerCase())
+    {
+      // nothing to do
+      window.content.focus();
+      return;
+    }
+
+    var offset = 0;
+    var childNodes = element.parentNode.childNodes;
+    while (childNodes.item(offset) != element) {
+      offset++;
+    }
+
+    editor.beginTransaction();
+
+    try {
+      var newElt = editor.document.createElement(newTag);
+      if (newElt) {
+        childNodes = element.childNodes;
+        var childNodesLength = childNodes.length;
+        var i;
+        for (i = 0; i < childNodesLength; i++) {
+          var clone = childNodes.item(i).cloneNode(true);
+          newElt.appendChild(clone);
+        }
+        editor.insertNode(newElt, element.parentNode, offset+1);
+        editor.deleteNode(element);
+        editor.selectElement(newElt);
+
+        window.content.focus();
+      }
+    }
+    catch (e) {}
+
+    editor.endTransaction();
+
+  }
+  else if (keyCode == 27) {
+    // if the user hits Escape, we discard the changes
+    window.content.focus();
   }
 }
 
@@ -431,13 +596,13 @@ function RebuildFromSource(aDoc, aContext)
   try {
     editor.transactionManager.maxTransactionCount = 1;
 
-	  editor.beginTransaction();
+    editor.beginTransaction();
     // clone html attributes
     editor.cloneAttributes(editor.document.documentElement, aDoc.documentElement);
     // clone body attributes
     editor.cloneAttributes(editor.document.body, aDoc.body);
     // clone body
-	  editor.document.body.innerHTML = aDoc.body.innerHTML;
+    editor.document.body.innerHTML = aDoc.body.innerHTML;
     // clone head
     var destHead  = editor.document.querySelector("head");
     var destChild = destHead.firstChild;
@@ -451,11 +616,11 @@ function RebuildFromSource(aDoc, aContext)
     while (sourceChild) {
       if (sourceChild.nodeType == Node.ELEMENT_NODE)
       {
-	      destChild = editor.document.createElement(sourceChild.nodeName);
-	      destHead.appendChild(destChild);
-	      editor.cloneAttributes(destChild, sourceChild);
-	      if (sourceChild.textContent)
-	        destChild.textContent = sourceChild.textContent;
+        destChild = editor.document.createElement(sourceChild.nodeName);
+        destHead.appendChild(destChild);
+        editor.cloneAttributes(destChild, sourceChild);
+        if (sourceChild.textContent)
+          destChild.textContent = sourceChild.textContent;
       }
 
       sourceChild = sourceChild.nextSibling;
@@ -464,11 +629,12 @@ function RebuildFromSource(aDoc, aContext)
     editor.cloneAttributes(destHead, sourceHead);
     // update the window title
     UpdateWindowTitle();
-	
+  
     editor.endTransaction();
     editor.transactionManager.maxTransactionCount = -1;
   } catch(ex) {
     dump(ex);
   }
   gDialog.editorsDeck.selectedIndex = 0;
+  window.content.focus();
 }
