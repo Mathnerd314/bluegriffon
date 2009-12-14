@@ -41,6 +41,8 @@
 
 #include shutdown.inc
 
+var gBespinEditor = null;
+
 function OpenLocation(aEvent, type)
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/openLocation.xul","_blank",
@@ -373,4 +375,100 @@ function ShowLanguageDialog(aEvent)
   }
 }
 
+/************ VIEW MODE ********/
+function ToggleViewMode(aTabsElement)
+{
+  var mode =  aTabsElement.selectedItem.value;
+  if (mode == aTabsElement.getAttribute("previousMode"))
+    return;
 
+  var editor = EditorUtils.getCurrentEditor();
+  if (mode == "source")
+  {
+    flags = 1 << 1; // OutputFormatted
+    flags |= 1 << 5; // OutputWrap
+    flags |= 1 << 10; // OutputLF
+
+    var source = editor.outputToString("text/html", flags);
+    gBespinEditor = new gDialog.bespinIframe.contentWindow.bespin.editor.Component(
+        "editor",
+        {language: "html",
+         loadfromdiv: false,
+         set: {
+           autoindent: "on",
+           codecomplete: "on",
+           highlightline: "on",
+           smartmove: "on",
+           strictlines: "on",
+           syntaxcheck: "on",
+           tabsize: 4,
+           tabmode: "spaces",
+           tabshowspace: "off",
+           tabarrow: "on",
+           theme: "coffee",
+           trimonsave: "on"
+         }
+        });
+    gBespinEditor.setContent(source);
+    gDialog.editorsDeck.selectedIndex = 1;
+  }
+  else if (mode == "wysiwyg")
+  {
+    // Reduce the undo count so we don't use too much memory
+    //   during multiple uses of source window 
+    //   (reinserting entire doc caches all nodes)
+    source = gBespinEditor.getContent();
+    var hp = new htmlParser(gDialog.parserIframe);
+    hp.parseHTML(source, EditorUtils.getDocumentUrl(), function(aDoc, ctx){RebuildFromSource(aDoc, ctx)}, hp);
+  }
+  aTabsElement.setAttribute("previousMode", mode);
+}
+
+function RebuildFromSource(aDoc, aContext)
+{
+  delete aContext;
+  var editor = EditorUtils.getCurrentEditor();
+  try {
+    editor.transactionManager.maxTransactionCount = 1;
+
+	  editor.beginTransaction();
+    // clone html attributes
+    editor.cloneAttributes(editor.document.documentElement, aDoc.documentElement);
+    // clone body attributes
+    editor.cloneAttributes(editor.document.body, aDoc.body);
+    // clone body
+	  editor.document.body.innerHTML = aDoc.body.innerHTML;
+    // clone head
+    var destHead  = editor.document.querySelector("head");
+    var destChild = destHead.firstChild;
+    while (destChild) {
+      var tmp = destChild.nextSibling;
+      destHead.removeChild(destChild);
+      destChild = tmp;
+    }
+    var sourceHead  = aDoc.querySelector("head");
+    var sourceChild = sourceHead.firstChild;
+    while (sourceChild) {
+      if (sourceChild.nodeType == Node.ELEMENT_NODE)
+      {
+	      destChild = editor.document.createElement(sourceChild.nodeName);
+	      destHead.appendChild(destChild);
+	      editor.cloneAttributes(destChild, sourceChild);
+	      if (sourceChild.textContent)
+	        destChild.textContent = sourceChild.textContent;
+      }
+
+      sourceChild = sourceChild.nextSibling;
+    }
+    // clone head attributes
+    editor.cloneAttributes(destHead, sourceHead);
+    // update the window title
+    UpdateWindowTitle();
+	
+    editor.endTransaction();
+    editor.transactionManager.maxTransactionCount = -1;
+  } catch(ex) {
+    dump(ex);
+  }
+  gDialog.editorsDeck.selectedIndex = 0;
+}

@@ -3,8 +3,6 @@ bluegriffon.jar:
 % style  chrome://global/content/customizeToolbar.xul    chrome://global/skin/
 % style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/bluegriffon.css
 % style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
-% content venkman jar:venkman.jar!/content/venkman/ contentaccessible=yes
-% locale venkman en-US jar:venkman.jar!/locale/en-US/venkman/
   content/bluegriffon/about-logo.png  (content/bluegriffon/about-logo.png)
   content/bluegriffon/aboutDialog.css  (content/bluegriffon/aboutDialog.css)
   content/bluegriffon/bindings/cssToggler.xml  (content/bluegriffon/bindings/cssToggler.xml)
@@ -68,11 +66,14 @@ bluegriffon.jar:
   content/bluegriffon/utils/notifiers.js  (content/bluegriffon/utils/notifiers.js)
   content/bluegriffon/utils/prompter.js  (content/bluegriffon/utils/prompter.js)
   content/bluegriffon/utils/urls.js  (content/bluegriffon/utils/urls.js)
+  content/bluegriffon/utils/htmlParser.js  (content/bluegriffon/utils/htmlParser.js)
 * content/bluegriffon/xul/aboutDialog.xul  (content/bluegriffon/xul/aboutDialog.xul)
 * content/bluegriffon/xul/bluegriffon.xul  (content/bluegriffon/xul/bluegriffon.xul)
   content/bluegriffon/xul/colourPicker.xul  (content/bluegriffon/xul/colourPicker.xul)
   content/bluegriffon/xul/propertiesDeck.xul  (content/bluegriffon/xul/propertiesDeck.xul)
   content/bluegriffon/utils/login.js  (content/bluegriffon/utils/login.js)
+  content/bluegriffon/js/bespin-embedded.js  (content/bluegriffon/js/bespin-embedded.js)
+  content/bluegriffon/utils/bespin.html  (content/bluegriffon/utils/bespin.html)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
