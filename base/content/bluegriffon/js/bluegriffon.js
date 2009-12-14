@@ -41,7 +41,6 @@
 
 #include shutdown.inc
 
-var gBespinEditor = null;
 
 function OpenLocation(aEvent, type)
 {
@@ -378,14 +377,14 @@ function UpdateStructureBarContextMenu()
   if (target && target == target.ownerDocument.body)
   {
     gDialog.deleteElementMenuitem.setAttribute("disabled", "true");
-    gDialog.removeTagMenuitem.label.setAttribute("disabled", "true");
-    gDialog.changeTagMenuitem.label.setAttribute("disabled", "true");
+    gDialog.removeTagMenuitem.setAttribute("disabled", "true");
+    gDialog.changeTagMenuitem.setAttribute("disabled", "true");
   }
   else
   {
     gDialog.deleteElementMenuitem.removeAttribute("disabled");
-    gDialog.removeTagMenuitem.label.removeAttribute("disabled");
-    gDialog.changeTagMenuitem.label.removeAttribute("disabled");
+    gDialog.removeTagMenuitem.removeAttribute("disabled");
+    gDialog.changeTagMenuitem.removeAttribute("disabled");
   }
 }
 
@@ -555,7 +554,7 @@ function ToggleViewMode(aTabsElement)
     flags |= 1 << 10; // OutputLF
 
     var source = editor.outputToString("text/html", flags);
-    gBespinEditor = new gDialog.bespinIframe.contentWindow.bespin.editor.Component(
+    BlueGriffonVars.bespinEditor = new gDialog.bespinIframe.contentWindow.bespin.editor.Component(
         "editor",
         {language: "html",
          loadfromdiv: false,
@@ -574,7 +573,7 @@ function ToggleViewMode(aTabsElement)
            trimonsave: "on"
          }
         });
-    gBespinEditor.setContent(source);
+    BlueGriffonVars.bespinEditor.setContent(source);
     gDialog.editorsDeck.selectedIndex = 1;
   }
   else if (mode == "wysiwyg")
@@ -582,9 +581,15 @@ function ToggleViewMode(aTabsElement)
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
-    source = gBespinEditor.getContent();
-    var hp = new htmlParser(gDialog.parserIframe);
-    hp.parseHTML(source, EditorUtils.getDocumentUrl(), function(aDoc, ctx){RebuildFromSource(aDoc, ctx)}, hp);
+    if (BlueGriffonVars.bespinEditor)
+    {
+	    source = BlueGriffonVars.bespinEditor.getContent();
+	    var hp = new htmlParser(gDialog.parserIframe);
+	    hp.parseHTML(source,
+                   EditorUtils.getDocumentUrl(),
+                   function(aDoc, ctx) { RebuildFromSource(aDoc, ctx); },
+                   hp);
+    }
   }
   aTabsElement.setAttribute("previousMode", mode);
 }
