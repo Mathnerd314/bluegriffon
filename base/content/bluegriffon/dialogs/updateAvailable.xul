@@ -19,18 +19,18 @@
 
   <vbox flex="1" style="margin: 15px !important">
     <spacer flex="1"/>
-	  <hbox align="center">
-	    <image src="chrome://bluegriffon/skin/mainToolbar/logo.png"/>
-	    <vbox class="indent">
-	      <description style="font-size: larger">&warningMessage.description;</description>
+    <hbox align="center">
+      <image src="chrome://bluegriffon/skin/mainToolbar/logo.png"/>
+      <vbox class="indent">
+        <description style="font-size: larger">&warningMessage.description;</description>
         <hbox>
           <spacer flex="1"/>
           <button label="&download.button;"
                   oncommand="ShowUpdatePage()"/>
           <spacer flex="1"/>
         </hbox>
-	    </vbox>
-	  </hbox>
+      </vbox>
+    </hbox>
     <spacer flex="1"/>
   </vbox>
 </window>

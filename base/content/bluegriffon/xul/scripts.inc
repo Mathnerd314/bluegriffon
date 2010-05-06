@@ -19,4 +19,3 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
 
   <script type="application/x-javascript" src="chrome://inspector/content/hooks.js"/>
- 	

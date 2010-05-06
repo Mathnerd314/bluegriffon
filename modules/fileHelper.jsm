@@ -360,26 +360,26 @@ var FileUtils = {
            L10NUtils.getString("untitled") + extension;
   },
 
-	setFilePickerDirectory: function(filePicker, fileType)
-	{
-	  if (filePicker)
-	  {
-	    try {
-	      var prefBranch = GetPrefs();
-	      if (prefBranch)
-	      {
-	        // Save current directory so we can reset it in SaveFilePickerDirectory
-	        this.mFilePickerDirectory = filePicker.displayDirectory;
-	
-	        var location = prefBranch.getComplexValue(this.kLAST_FILE_LOCATION_PREFIX + fileType,
-	                                                  Components.interfaces.nsILocalFile);
-	        if (location)
-	          filePicker.displayDirectory = location;
-	      }
-	    }
-	    catch(e) {}
-	  }
-	},
+  setFilePickerDirectory: function(filePicker, fileType)
+  {
+    if (filePicker)
+    {
+      try {
+        var prefBranch = GetPrefs();
+        if (prefBranch)
+        {
+          // Save current directory so we can reset it in SaveFilePickerDirectory
+          this.mFilePickerDirectory = filePicker.displayDirectory;
+  
+          var location = prefBranch.getComplexValue(this.kLAST_FILE_LOCATION_PREFIX + fileType,
+                                                    Components.interfaces.nsILocalFile);
+          if (location)
+            filePicker.displayDirectory = location;
+        }
+      }
+      catch(e) {}
+    }
+  },
 
   saveFilePickerDirectory: function(filePicker, fileType)
   {

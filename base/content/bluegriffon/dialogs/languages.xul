@@ -53,10 +53,10 @@
 
   <groupbox id="currentLanguageBox">
     <caption label="Current language"/>
-	  <hbox align="center">
-	    <label value="&currentLanguage.label;"/>
-	    <label id="currentLanguage"/>
-	  </hbox>
+    <hbox align="center">
+      <label value="&currentLanguage.label;"/>
+      <label id="currentLanguage"/>
+    </hbox>
   </groupbox>
 
   <label value="&languagesList.label;" />

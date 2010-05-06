@@ -77,11 +77,11 @@
           var cph = ColorPickerHelper;
           cph.openColorPicker(window, aColorObjectId, aWindowTitle, aShowTransparency);
           if (!cph.isCancelled(aColorObjectId))
-				  {
+          {
             var currentColor = cph.getCurrentColor(aColorObjectId)
-				    this.mColorBox.style.backgroundColor = currentColor;
+            this.mColorBox.style.backgroundColor = currentColor;
             this.setAttribute("color", currentColor);
-				  }
+          }
         ]]>
         </body>
       </method>
@@ -91,9 +91,9 @@
       <handler event="click" phase="capturing">
         <![CDATA[
           if (!this.getAttribute("disabled"))
-	          this.open(this.getAttribute("colorObjectId"),
-	                    this.getAttribute("windowTitle"),
-	                    this.getAttribute("showTransparency"));
+            this.open(this.getAttribute("colorObjectId"),
+                      this.getAttribute("windowTitle"),
+                      this.getAttribute("showTransparency"));
         ]]>
       </handler>
     </handlers>

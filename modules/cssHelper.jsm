@@ -38,10 +38,10 @@
 var EXPORTED_SYMBOLS = ["CssUtils"];
 
 var CssUtils = {
-	getStyleSheets: function(aDoc)
-	{
-		return aDoc.styleSheets;
-	},
+  getStyleSheets: function(aDoc)
+  {
+    return aDoc.styleSheets;
+  },
 
   _enumerateStyleSheet: function(aSheet, aCallback)
   {
@@ -53,14 +53,14 @@ var CssUtils = {
       var rule = rules.item(j);
       switch (rule.type)
       {
-      	case CSSRule.IMPORT_RULE:
-      	  this._enumerateStyleSheet(rule.styleSheet, aCallback);
-      	  break;
-      	case CSSRule.MEDIA_RULE:
-      	  this._enumerateStyleSheet(rule, aCallback);
-      	  break;
-      	default:
-      	  break;
+        case CSSRule.IMPORT_RULE:
+          this._enumerateStyleSheet(rule.styleSheet, aCallback);
+          break;
+        case CSSRule.MEDIA_RULE:
+          this._enumerateStyleSheet(rule, aCallback);
+          break;
+        default:
+          break;
       }
 
     }
@@ -68,7 +68,7 @@ var CssUtils = {
 
   enumerateStyleSheets: function(aDocument, aCallback)
   {
-  	var stylesheetsList = aDocument.styleSheets;
+    var stylesheetsList = aDocument.styleSheets;
     for (var i = 0; i < stylesheetsList.length; i++)
     {
       var sheet = stylesheetsList.item(i);
@@ -78,7 +78,7 @@ var CssUtils = {
 
   getComputedStyle: function(aElt)
   {
-  	return aElt.ownerDocument.defaultView.getComputedStyle(aElt, "");
+    return aElt.ownerDocument.defaultView.getComputedStyle(aElt, "");
   },
 
   findClassesInSelector: function(aSelector)

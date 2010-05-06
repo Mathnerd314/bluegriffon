@@ -121,7 +121,7 @@ var ResizeEventNotifier = {
 var EditorScrolledNotifier =  {
   startup: function EditorScrolledNotifier_startup()
   {
-  	var tabeditor = document.getElementById("tabeditor");
+    var tabeditor = document.getElementById("tabeditor");
     tabeditor.addEventListener("scroll", this.onEditorScrolled, false);
   },
 

@@ -10,18 +10,18 @@
   </style>
   <script>
     function installBespin() {
-			var e = tiki.require("embedded")
-			    .useBespin(document.getElementById("editor"),
-			    {
-			      syntax: "html",
-			      stealFocus: true,
-			      settings: {
-			                  tabstop: 2,
-			                  fontface: "Courier New, Courier, monospace",
-			                }
-			    });
-			postMessage("bespin", "*");
-			return e;
+      var e = tiki.require("embedded")
+          .useBespin(document.getElementById("editor"),
+          {
+            syntax: "html",
+            stealFocus: true,
+            settings: {
+                        tabstop: 2,
+                        fontface: "Courier New, Courier, monospace",
+                      }
+          });
+      postMessage("bespin", "*");
+      return e;
     }
   </script>
 </head>
@@ -30,7 +30,7 @@
   <tbody>
     <tr>
       <td>
-  			<div id="editor"></div>
+        <div id="editor"></div>
       </td>
     </tr>
   </tbody>
