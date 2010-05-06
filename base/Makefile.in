@@ -45,25 +45,25 @@ include $(DEPTH)/config/autoconf.mk
 APP_VERSION = $(shell cat $(srcdir)/../config/version.txt)
 
 DEFINES += \
-  -DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
-  -DAPP_VERSION=$(APP_VERSION) \
-  $(NULL)
+	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
+	-DAPP_VERSION=$(APP_VERSION) \
+	$(NULL)
 
 ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))
 DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET
 endif
 
 _FILES = \
-  $(srcdir)/res/BespinEmbedded.css \
-  $(srcdir)/res/BespinEmbedded.compressed.js \
-  $(srcdir)/res/bespin.html \
-  $(NULL)
+	$(srcdir)/res/BespinEmbedded.css \
+	$(srcdir)/res/BespinEmbedded.compressed.js \
+	$(srcdir)/res/bespin.html \
+	$(NULL)
 
 libs::
-  $(INSTALL) $(_FILES) $(DIST)/bin/res
+	$(INSTALL) $(_FILES) $(DIST)/bin/res
 
 install::
-  $(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
+	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
 
 include $(topsrcdir)/config/rules.mk
 
