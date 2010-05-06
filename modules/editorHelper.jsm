@@ -63,9 +63,9 @@ var EditorUtils = {
     try {
       var tmpWindow = this.getCurrentEditorWindow();
       if (tmpWindow) {
-	      var tabeditor = tmpWindow.document.getElementById("tabeditor");
-	      if (tabeditor)
-	        return tabeditor;
+        var tabeditor = tmpWindow.document.getElementById("tabeditor");
+        if (tabeditor)
+          return tabeditor;
       }
     }
     catch(e)

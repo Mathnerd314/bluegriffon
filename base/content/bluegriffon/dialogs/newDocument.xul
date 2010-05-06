@@ -41,12 +41,12 @@
   </groupbox>
   <groupbox>
     <caption label="&where.label;"/>
-	  <radiogroup id="whereRadiogroup"
-	              orient="horizontal">
-	    <radio label="&tab.label;"
-	           value="tab"/>
-	    <radio label="&window.label;"
-	           value="window"/>
-	  </radiogroup>
+    <radiogroup id="whereRadiogroup"
+                orient="horizontal">
+      <radio label="&tab.label;"
+             value="tab"/>
+      <radio label="&window.label;"
+             value="window"/>
+    </radiogroup>
   </groupbox>
 </dialog>

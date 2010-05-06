@@ -726,6 +726,6 @@ function doQuit()
 
 function OpenPreferences()
 {
-	var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
-	window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
+  var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
+  window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
 }

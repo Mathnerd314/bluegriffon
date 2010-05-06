@@ -42,7 +42,7 @@ var UrlUtils = {
   /********** CONSTANTS ***********/
 
   gWin: "Win",
-	gUNIX: "UNIX",
+  gUNIX: "UNIX",
   gMac: "Mac",
 
  /********** ATTRIBUTES **********/

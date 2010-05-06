@@ -115,8 +115,8 @@
                  control="pageLanguage"
                  accesskey="&language.accesskey;"/>
           <hbox align="center">
-	          <textbox id="pageLanguage" flex="1"
-	                   oninput="TextboxChanged(this.id);"/>
+            <textbox id="pageLanguage" flex="1"
+                     oninput="TextboxChanged(this.id);"/>
             <button label="&selectLanguage.label;"
                     oncommand="SelectLanguage(this)"/>
          </hbox>
@@ -125,7 +125,7 @@
           <label value="&charset.label;"
                  control="charsetMenulist"
                  accesskey="&charset.accesskey;"/>
-	        <menulist id="charsetMenulist" value="utf-8">
+          <menulist id="charsetMenulist" value="utf-8">
             <menupopup id="charsetMenupopup"/>
           </menulist>
         </row>
@@ -148,86 +148,86 @@
               label="&userDefinedColors.label;"
               oncommand="EnableUserDefinedColorsControls()"/>
 
-	  <hbox class="indent">
-	    <grid>
-	      <columns><column/><column/></columns>
-	      <rows>
-	        <row align="center">
-	          <label value="&backgroundColor.label;" disabled="true"
+    <hbox class="indent">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&backgroundColor.label;" disabled="true"
                    accesskey="&backgroundColor.accesskey;"
                    id="backgroundColorColorpickerLabel"
                    control="backgroundColorColorpicker"/>
-			      <ecolorpicker id="backgroundColorColorpicker"
-			                    color="transparent"
-			                    disabled="true"
-			                    colorObjectId="TextColor"
-			                    windowTitle="Background color"
-			                    showTransparency="true"/>
-	        </row>
-	        <row align="center">
-	          <label value="&textColor.label;" disabled="true"
-	                 accesskey="&textColor.accesskey;"
+            <ecolorpicker id="backgroundColorColorpicker"
+                          color="transparent"
+                          disabled="true"
+                          colorObjectId="TextColor"
+                          windowTitle="Background color"
+                          showTransparency="true"/>
+          </row>
+          <row align="center">
+            <label value="&textColor.label;" disabled="true"
+                   accesskey="&textColor.accesskey;"
                    id="textColorColorpickerLabel"
-	                 control="textColorColorpicker"/>
+                   control="textColorColorpicker"/>
             <ecolorpicker id="textColorColorpicker"
                           color="transparent"
                           disabled="true"
                           colorObjectId="TextColor"
                           windowTitle="Text color"
                           showTransparency="false"/>
-	        </row>
-	        <row align="center">
-	          <label value="&linksColor.label;" disabled="true"
-	                 accesskey="&linksColor.accesskey;"
+          </row>
+          <row align="center">
+            <label value="&linksColor.label;" disabled="true"
+                   accesskey="&linksColor.accesskey;"
                    id="linksColorColorpickerLabel"
-	                 control="linksColorColorpicker"/>
+                   control="linksColorColorpicker"/>
             <ecolorpicker id="linksColorColorpicker"
                           color="transparent"
                           disabled="true"
                           colorObjectId="TextColor"
                           windowTitle="Links color"
                           showTransparency="false"/>
-	        </row>
-	        <row align="center">
-	          <label value="&activeLinksColor.label;" disabled="true"
-	                 accesskey="&activeLinksColor.accesskey;"
+          </row>
+          <row align="center">
+            <label value="&activeLinksColor.label;" disabled="true"
+                   accesskey="&activeLinksColor.accesskey;"
                    id="activeLinksColorColorpickerLabel"
-	                 control="activeLinksColorColorpicker"/>
+                   control="activeLinksColorColorpicker"/>
             <ecolorpicker id="activeLinksColorColorpicker"
                           color="transparent"
                           disabled="true"
                           colorObjectId="TextColor"
                           windowTitle="Active links color"
                           showTransparency="false"/>
-	        </row>
-	        <row align="center">
-	          <label value="&visitedLinksColor.label;" disabled="true"
-	                 accesskey="&visitedLinksColor.accesskey;"
+          </row>
+          <row align="center">
+            <label value="&visitedLinksColor.label;" disabled="true"
+                   accesskey="&visitedLinksColor.accesskey;"
                    id="visitedLinksColorColorpickerLabel"
-	                 control="visitedLinksColorColorpicker"/>
+                   control="visitedLinksColorColorpicker"/>
             <ecolorpicker id="visitedLinksColorColorpicker"
                           color="transparent"
                           disabled="true"
                           colorObjectId="TextColor"
                           windowTitle="Visited links color"
                           showTransparency="false"/>
-	        </row>
-	      </rows>
-	    </grid>
-	    <vbox id="pagePreview" flex="1">
-	       <spacer flex="1"/>
-	       <label class="larger" id="textPreview" value="&normalText.preview;" disabled="true"/>
-	       <spacer flex="1"/>
-	       <label class="larger" id="linksPreview" value="&links.preview;" disabled="true"/>
-	       <spacer flex="1"/>
-	       <label class="larger" id="activeLinksPreview" value="&activeLinks.preview;" disabled="true"/>
-	       <spacer flex="1"/>
-	       <label class="larger" id="visitedLinksPreview" value="&visitedLinks.preview;" disabled="true"/>
-	       <spacer flex="1"/>
-	    </vbox>
-	  </hbox>
-	  <checkbox id="underlineLinks" class="indent"
-	            label="&underlineLinks.label;"
+          </row>
+        </rows>
+      </grid>
+      <vbox id="pagePreview" flex="1">
+         <spacer flex="1"/>
+         <label class="larger" id="textPreview" value="&normalText.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="linksPreview" value="&links.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="activeLinksPreview" value="&activeLinks.preview;" disabled="true"/>
+         <spacer flex="1"/>
+         <label class="larger" id="visitedLinksPreview" value="&visitedLinks.preview;" disabled="true"/>
+         <spacer flex="1"/>
+      </vbox>
+    </hbox>
+    <checkbox id="underlineLinks" class="indent"
+              label="&underlineLinks.label;"
               oncommand="EnableUserDefinedColorsControls()"
               checked="true"/>
 
@@ -246,12 +246,12 @@
       </columns>
       <rows>
         <row align="center">
-		      <label value="&backgroundImage.label;"
-		             control="backgroundImage"
-		             accesskey="&backgroundImage.accesskey;"/>
-		      <textbox id="backgroundImage" flex="1"/>
-		      <filepickerbutton id="filepickerbutton"
-		                        control="backgroundImage"
+          <label value="&backgroundImage.label;"
+                 control="backgroundImage"
+                 accesskey="&backgroundImage.accesskey;"/>
+          <textbox id="backgroundImage" flex="1"/>
+          <filepickerbutton id="filepickerbutton"
+                            control="backgroundImage"
                             mode="0"
                             title="&filepickerForBgImage.title;"/>
         </row>
@@ -315,12 +315,12 @@
               oncommand="onUsePageLayoutChanged(this)"
               label="&usePageLayout.checkbox;"/>
     <vbox flex="1" class="indent">
-	    <hbox align="center">
-	      <label value="&layoutType.label;"
+      <hbox align="center">
+        <label value="&layoutType.label;"
                id="LayoutTypeMenulistLabel"
                control="LayoutTypeMenulist"
                accesskey="&layoutType.accesskey;" />
-	      <menulist id="LayoutTypeMenulist">
+        <menulist id="LayoutTypeMenulist">
           <menupopup>
             <menuitem label="&layout100percent.label;" selected="true"
                       value="doc3"/>
@@ -332,7 +332,7 @@
                       value="doc4"/>
           </menupopup>
         </menulist>
-	      <spacer flex="1"/>
+        <spacer flex="1"/>
         <label value="&layoutSubtype.label;"
                id="LayoutSubtypeMenulistLabel"
                control="LayoutSubtypeMenulist"
@@ -355,10 +355,10 @@
                       value="yui-t6"/>
           </menupopup>
         </menulist>
-	    </hbox>
+      </hbox>
       <hbox flex="1" style="margin: 1em">
         <vbox flex="1">
-	        <listbox id="ContentRowsListbox" class="listboxBg" flex="1"/>
+          <listbox id="ContentRowsListbox" class="listboxBg" flex="1"/>
 #ifdef XP_MACOSX
           <hbox class="listboxBg" align="center">
             <toolbarbutton class="listboxBgPlusButton"
@@ -390,8 +390,8 @@
           <hbox>
             <button label="&newRow.label;"
                     id="ContentRowsPlusButton"
-	                  type="menu"
-	                  oncommand="AddContentRow(event)">
+                    type="menu"
+                    oncommand="AddContentRow(event)">
               <menupopup>
                 <menuitem value="1"  label="&oneColumn100.label;"/>
                 <menuitem value="2"  label="&twoColumns5050.label;"/>

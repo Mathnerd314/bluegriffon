@@ -79,81 +79,81 @@ var BGUpdateManager = {
                    .getService(Components.interfaces.nsIXULAppInfo)
                    .QueryInterface(Components.interfaces.nsIXULRuntime);
       // ok we have to look for an app update...
-	    var rq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
-	               .createInstance();
+      var rq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+                 .createInstance();
 
-	    var loadHandler = {
-	      _self: this,
-	
-	      handleEvent: function(aEvent)
-	      {
-	        if (this._self._loadTimer)
-	          this._self._loadTimer.cancel();
-	
-	        this._self.status = aEvent.target.status;
-	
-	        if (this._self._authFailer || this._self.status >= 400)
-	        {
-	          this._self = null;
-				    if (gDialog.updateThrobber)
-				      gDialog.updateThrobber.hidden = true;
+      var loadHandler = {
+        _self: this,
+  
+        handleEvent: function(aEvent)
+        {
+          if (this._self._loadTimer)
+            this._self._loadTimer.cancel();
+  
+          this._self.status = aEvent.target.status;
+  
+          if (this._self._authFailer || this._self.status >= 400)
+          {
+            this._self = null;
+            if (gDialog.updateThrobber)
+              gDialog.updateThrobber.hidden = true;
             if ("ErrorOnUpdate" in window)
               ErrorOnUpdate();
-	        }
-	        else
-	        {
-	          try     { this._self._handleLoad(aEvent) }
-	          finally { this._self = null }
-	        }
-	      }
-	    };
-	
-	    var errorHandler = {
-	      _self: this,
-	
-	      handleEvent: function(event) {
-	        if (this._self._loadTimer)
-	          this._self._loadTimer.cancel();
-	
-	        this._self = null;
+          }
+          else
+          {
+            try     { this._self._handleLoad(aEvent) }
+            finally { this._self = null }
+          }
+        }
+      };
+  
+      var errorHandler = {
+        _self: this,
+  
+        handleEvent: function(event) {
+          if (this._self._loadTimer)
+            this._self._loadTimer.cancel();
+  
+          this._self = null;
           if (gDialog.updateThrobber)
             gDialog.updateThrobber.hidden = true;
           if ("ErrorOnUpdate" in window)
             ErrorOnUpdate();
-	      }
-	    };
+        }
+      };
       // cancel loads that take too long
-	    var timeout = 120 * 1000;
-	    var timerObserver = {
-	      _self: this,
-	      observe: function() {
-	        rq.abort();
-	        try     { this._self.destroy() }
-	        finally { this._self = null }
+      var timeout = 120 * 1000;
+      var timerObserver = {
+        _self: this,
+        observe: function() {
+          rq.abort();
+          try     { this._self.destroy() }
+          finally { this._self = null }
           if (gDialog.updateThrobber)
             gDialog.updateThrobber.hidden = true;
           if ("ErrorOnUpdate" in window)
             ErrorOnUpdate();
-	      }
-	    };
-	    this._loadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-	    this._loadTimer.init(timerObserver, timeout, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-	
-	    rq = rq.QueryInterface(Components.interfaces.nsIDOMEventTarget);
-	    rq.addEventListener("load", loadHandler, false);
-	    rq.addEventListener("error", errorHandler, false);
-	
-	    rq = rq.QueryInterface(Components.interfaces.nsIXMLHttpRequest);
-	    rq.open("GET", this.kURL_UPDATE + "v=" + gApp.version
+        }
+      };
+      this._loadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+      this._loadTimer.init(timerObserver, timeout, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+  
+      rq = rq.QueryInterface(Components.interfaces.nsIDOMEventTarget);
+      rq.addEventListener("load", loadHandler, false);
+      rq.addEventListener("error", errorHandler, false);
+  
+      rq = rq.QueryInterface(Components.interfaces.nsIXMLHttpRequest);
+      rq.open("GET", this.kURL_UPDATE + "v=" + gApp.version
                                       + "&id=" + appId, true);
-	    rq.setRequestHeader("Pragma", "no-cache");
-	    rq.channel.loadFlags |= Components.interfaces.nsIRequest.LOAD_BYPASS_CACHE;
-	    // Register ourselves as a listener for notification callbacks so we
-	    // can handle authorization requests and SSL issues like cert mismatches.
-	    // XMLHttpRequest will handle the notifications we don't handle.
-	    rq.channel.notificationCallbacks = this;
-	
-	    rq.send(null);
+      rq.setRequestHeader("Pragma", "no-cache");
+      rq.channel.loadFlags |= Components.interfaces.nsIRequest.LOAD_BYPASS_CACHE;
+      // Register ourselves as a listener for notification callbacks so we
+      // can handle authorization requests and SSL issues like cert mismatches.
+      // XMLHttpRequest will handle the notifications we don't handle.
+      rq.channel.notificationCallbacks = this;
+  
+      rq.send(null);
     }
   },
 
@@ -180,8 +180,8 @@ var BGUpdateManager = {
         child = child.nextElementSibling;
       }
       if (currentVersion && homeURL) {
-			  var gApp = Components.classes["@mozilla.org/xre/app-info;1"]
-			               .getService(Components.interfaces.nsIXULAppInfo)
+        var gApp = Components.classes["@mozilla.org/xre/app-info;1"]
+                     .getService(Components.interfaces.nsIXULAppInfo)
                      .QueryInterface(Components.interfaces.nsIXULRuntime);
         var appVersionArray     = gApp.version.split(".");
         var currentVersionArray = currentVersion.split(".");

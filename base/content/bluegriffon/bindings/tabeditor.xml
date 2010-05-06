@@ -63,17 +63,17 @@
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
         </xul:hbox>
         <xul:grid flex="1">
-        	<xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
-        	<xul:rows>
-        		<xul:row>
-        			<xul:spacer/>
+          <xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
+          <xul:rows>
+            <xul:row>
+              <xul:spacer/>
               <xul:hruler anonid="hruler" disabled="true"/>
-        		</xul:row>
-        		<xul:row flex="1">
-        			<xul:vruler anonid="vruler" disabled="true" />
-        			<xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px"/>
-        		</xul:row>
-        	</xul:rows>
+            </xul:row>
+            <xul:row flex="1">
+              <xul:vruler anonid="vruler" disabled="true" />
+              <xul:tabpanels anonid="EditorTabpanels" selectedIndex="0" flex="1" style="margin:0px; padding:0px"/>
+            </xul:row>
+          </xul:rows>
         </xul:grid>
         
       </xul:tabbox>
@@ -238,10 +238,10 @@
 
                     this.mTab.removeAttribute("busy");
                     try {
-	                    var thisURI = Components.classes["@mozilla.org/network/io-service;1"]
-	                                            .getService(Components.interfaces.nsIIOService)
-	                                            .newURI(this.mURL, null, null);
-	                    this.mTab.setAttribute("image", "http://www.google.com/s2/favicons?domain=" + thisURI.host);
+                      var thisURI = Components.classes["@mozilla.org/network/io-service;1"]
+                                              .getService(Components.interfaces.nsIIOService)
+                                              .newURI(this.mURL, null, null);
+                      this.mTab.setAttribute("image", "http://www.google.com/s2/favicons?domain=" + thisURI.host);
                     }
                     catch(e) {}
 
@@ -251,13 +251,13 @@
                     var editor = this.mEditor.getEditor(this.mEditor.contentWindow);
                     if (editor) {
                       if (UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl())) {
-	                      try {
-		                      // add author's meta
-	                        var author = GetPrefs().getCharPref("bluegriffon.author");
-		                      var meta = EditorUtils.createMetaElement("author");
-		                      EditorUtils.insertMetaElement(meta, author, true, false);
-	                      }
-	                      catch(e) {}
+                        try {
+                          // add author's meta
+                          var author = GetPrefs().getCharPref("bluegriffon.author");
+                          var meta = EditorUtils.createMetaElement("author");
+                          EditorUtils.insertMetaElement(meta, author, true, false);
+                        }
+                        catch(e) {}
                       }
 
                       try {
