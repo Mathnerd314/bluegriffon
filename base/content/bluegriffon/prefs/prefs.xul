@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://global/skin/preferences.css" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/prefs/prefs.css" type="text/css"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://bluegriffon/locale/prefs.dtd">
+
+<prefwindow
+  id     = "bluegriffon-prefs"
+  windowtype = "bluegriffon-prefs"
+  type   = "prefwindow"
+  title  = "&window.title;"
+  onload = "Startup()"
+  width="400" style="min-width: 35em"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <prefpane id="generalPrefPane"
+            label="&general.title;"
+            image="chrome://bluegriffon/skin/prefs/general.png"
+            src="chrome://bluegriffon/content/prefs/general.xul"/>
+  <prefpane id="newPagePrefPane"
+            label="&newPage.title;"
+            onpaneload="OnNewPagePaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/newPage.png"
+            src="chrome://bluegriffon/content/prefs/newPage.xul"/>
+  <prefpane id="updatePrefPane"
+            label="&update.title;"
+            onpaneload="OnUpdatePaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/update.png"
+            src="chrome://bluegriffon/content/prefs/update.xul"/>
+
+  <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/prefs.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/newPage.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
+
+</prefwindow>

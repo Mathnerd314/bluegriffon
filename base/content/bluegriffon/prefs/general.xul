@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/general.dtd">
+
+<overlay
+  id     = "generalPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="generalPrefPane">
+		<preferences>
+		  <preference id="pref-historyCount" name="bluegriffon.history.url_maximum" type="int"/>
+      <preference id="pref-showIDs"      name="bluegriffon.structurebar.id.show" type="bool"/>
+      <preference id="pref-showClasses"  name="bluegriffon.structurebar.class.show" type="bool"/>
+      <preference id="pref-showLangs"    name="bluegriffon.structurebar.lang.show" type="bool"/>
+      <preference id="pref-returnKey"    name="bluegriffon.returnKey.createsParagraph" type="bool"/>
+		</preferences>
+    <groupbox>
+      <caption label="&fileHistory.caption;"/>
+      <hbox align="center">
+        <label value="&fileHistoryDepth.label;"/>
+        <textbox id="historyCount" preference="pref-historyCount"
+                 type="number" size="3" maxlength="3"
+                 min="1" max="50" increment="1"/>
+        <label value="&files.label;"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&structureBar.caption;"/>
+      <hbox>
+        <checkbox id="showIDsCheckbox" flex="1"
+                  preference="pref-showIDs"
+                  label="Show IDs"/>
+        <checkbox id="showClassesCheckbox" flex="1"
+                  preference="pref-showClasses"
+                  label="Show classes"/>
+        <checkbox id="showIDsCheckbox" flex="1"
+                  preference="pref-showLangs"
+                  label="Show language"/>
+      </hbox>
+    </groupbox>
+
+	  <groupbox>
+	    <caption label="&returnKey.caption;" />
+	    <hbox align="center">
+	      <checkbox label="&returnKey.label;"
+	                id="crInPCreatesNewP"
+	                preference="pref-returnKey"
+	                />
+	    </hbox>
+	  </groupbox>
+  </prefpane>
+
+</overlay>
