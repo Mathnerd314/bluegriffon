@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><head>
+  <link rel="stylesheet" type="text/css" href="BespinEmbedded.css/">
+  <script type="text/javascript" src="BespinEmbedded.compressed.js"></script>
+  <style>
+   body { overflow: hidden }
+   table { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 2px; border-collapse: collapse}
+   tbody, tr, td, div { height: 100%}
+   * { padding: 0px !important: margin: 0px !important; border: 0px none !important}
+  </style>
+  <script>
+    function installBespin() {
+			var e = tiki.require("embedded")
+			    .useBespin(document.getElementById("editor"),
+			    {
+			      syntax: "html",
+			      stealFocus: true,
+			      settings: {
+			                  tabstop: 2,
+			                  fontface: "Courier New, Courier, monospace",
+			                }
+			    });
+			postMessage("bespin", "*");
+			return e;
+    }
+  </script>
+</head>
+<body>
+<table style="width: 100%">
+  <tbody>
+    <tr>
+      <td>
+  			<div id="editor"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

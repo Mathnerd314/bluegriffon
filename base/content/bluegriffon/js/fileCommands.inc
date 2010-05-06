@@ -1,0 +1,115 @@
+var cmdOpen =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;    // we can always do this
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/openLocation.xul","_blank",
+                      "chrome,modal,titlebar", "tab");
+  }
+};
+
+var cmdSave =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    // Always allow saving when editing a remote document,
+    //  otherwise the document modified state would prevent that
+    //  when you first open a remote file.
+    try {
+      var docUrl = EditorUtils.getDocumentUrl();
+      return EditorUtils.isDocumentEditable() &&
+        (EditorUtils.isDocumentModified() ||
+         UrlUtils.isUrlOfBlankDocument(docUrl) || UrlUtils.getScheme(docUrl) != "file");
+    } catch (e) {return false;}
+  },
+  
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var result = false;
+    var editor = EditorUtils.getCurrentEditor();
+    if (editor)
+    {
+      // FinishHTMLSource();
+      // for the time being, we use the HTML serializer
+      var editorMimeType = editor.contentsMIMEType;
+      if (editorMimeType == "application/xhtml+xml")
+        editorMimeType = "text/html";
+
+      result = FileUtils.saveDocument(
+                 UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
+                 false,
+                 editorMimeType);
+      window.content.focus();
+    }
+    return result;
+  }
+}
+
+var cmdSaveAs =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.isDocumentEditable());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var editor = EditorUtils.getCurrentEditor();
+    if (editor)
+    {
+      // FinishHTMLSource();
+      var result = FileUtils.saveDocument(true, false, editor.contentsMIMEType);
+      window.content.focus();
+      return result;
+    }
+    return false;
+  }
+}
+
+var cmdCloseTab =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    // Always allow saving when editing a remote document,
+    //  otherwise the document modified state would prevent that
+    //  when you first open a remote file.
+    try {
+      return EditorUtils.isDocumentEditable();
+    } catch (e) {return false;}
+  },
+  
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    if (EditorUtils.isDocumentModified()) {
+      var rv = PromptUtils.confirmWithTitle(
+                             L10NUtils.getString("FileNotSaved"),
+                             L10NUtils.getString("SaveFileBeforeClosing"),
+                             L10NUtils.getString("YesSaveFile"),
+                             L10NUtils.getString("DontCloseTab"),
+                             L10NUtils.getString("NoDiscardChanges"));
+       switch(rv) {
+         case 1: return rv;
+         case 0: if (!cmdSave.doCommand()) return rv;
+         default: break;
+       }
+    }
+    doCloseTab(EditorUtils.getCurrentTabEditor().selectedTab);
+    return rv;
+  }
+}

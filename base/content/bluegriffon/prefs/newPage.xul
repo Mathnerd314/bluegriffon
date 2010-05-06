@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/newPage.dtd">
+
+<overlay
+  id     = "newPagePrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="newPagePrefPane">
+    <preferences>
+      <preference id="pref-author" name="bluegriffon.author" type="string"/>
+    </preferences>
+    <groupbox>
+      <caption label="&author.caption;"/>
+      <hbox align="center">
+        <label value="&authorName.label;"/>
+        <textbox flex="1"
+                 preference="pref-author"/>
+      </hbox>
+    </groupbox>
+    <groupbox>
+      <caption label="Zoom"/>
+      <hbox align="center">
+        <label value="Default zoom factor:"/>
+        <scale id="zoomScale"
+               flex="1"
+               min="1" max="300" increment="1"
+               onchange="OnScaleChange(true)"/>
+        <textbox value="100%" id="zoomText"
+                 style="text-align: right"
+                 size="3" maxlength="3"
+                 oninput="OnZoomTextInput(this)"/>
+        <label value="%"/>
+      </hbox>
+    </groupbox>
+  </prefpane>
+
+</overlay>
