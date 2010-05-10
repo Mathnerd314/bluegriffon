@@ -35,9 +35,13 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+
 var EXPORTED_SYMBOLS = ["CssUtils"];
 
 var CssUtils = {
+  kCSSRule: Components.interfaces.nsIDOMCSSRule,
+  
   getStyleSheets: function(aDoc)
   {
     return aDoc.styleSheets;
@@ -53,10 +57,10 @@ var CssUtils = {
       var rule = rules.item(j);
       switch (rule.type)
       {
-        case CSSRule.IMPORT_RULE:
+        case CssUtils.kCSSRule.IMPORT_RULE:
           this._enumerateStyleSheet(rule.styleSheet, aCallback);
           break;
-        case CSSRule.MEDIA_RULE:
+        case CssUtils.kCSSRule.MEDIA_RULE:
           this._enumerateStyleSheet(rule, aCallback);
           break;
         default:
@@ -101,7 +105,7 @@ var CssUtils = {
       for (var i = 0; i < cssRules.length; i++)
       {
         var rule = cssRules.item(i);
-        if (rule.type == CSSRule.STYLE_RULE)
+        if (rule.type == CssUtils.kCSSRule.STYLE_RULE)
         {
           var selectorText = rule.selectorText;
           var matches = aDetector(selectorText);
@@ -134,13 +138,13 @@ var CssUtils = {
   
     function enumerateRules(aSheet)
     {
-      if (aSheet.ownerNode instanceof HTMLStyleElement)
+      if (aSheet.ownerNode instanceof Components.interfaces.nsIDOMHTMLStyleElement)
       {
         var cssRules = aSheet.cssRules;
         for (var i = 0; i < cssRules.length; i++)
         {
           var rule = cssRules.item(i);
-          if (rule.type == CSSRule.STYLE_RULE)
+          if (rule.type == CssUtils.kCSSRule.STYLE_RULE)
           {
             var selectorText = rule.selectorText;
             if (selectorText == aSelector)
@@ -166,7 +170,7 @@ var CssUtils = {
       var rule = ruleList[i].rule;
       var parentRule = rule.parentRule;
       var parentStyleSheet = rule.parentStyleSheet;
-      if (rule.type == CSSRule.STYLE_RULE && !parentRule)
+      if (rule.type == CssUtils.kCSSRule.STYLE_RULE && !parentRule)
       {
         if (aDeclarations)
         {
@@ -209,7 +213,8 @@ var CssUtils = {
       styleElement.setAttribute("type", "text/css");
       var textNode = aDocument.createTextNode("/* created by BlueGriffon */");
       styleElement.appendChild(textNode);
-      aDocument.getElementsByTagName("head")[0].appendChild(styleElement);
+      var head = aDocument.getElementsByTagName("head")[0]; 
+      EditorUtils.getCurrentEditor().insertNode(styleElement, head, head.childNodes.length);
       stylesheet = styleElement.sheet;
     }
     return stylesheet;
@@ -263,11 +268,11 @@ var CssUtils = {
       var rule = cssRules[i];
       switch (rule.type)
       {
-        case CSSRule.CHARSET_RULE:
-        case CSSRule.IMPORT_RULE:
+        case CssUtils.kCSSRule.CHARSET_RULE:
+        case CssUtils.kCSSRule.IMPORT_RULE:
           str += (i ? "\n" : "") + rule.cssText;
           break;
-        case CSSRule.STYLE_RULE:
+        case CssUtils.kCSSRule.STYLE_RULE:
           {
             str += (i ? "\n" : "") + rule.selectorText + " {\n " +
                    rule.style.cssText.replace( /;/g , ";\n");
@@ -288,16 +293,17 @@ var CssUtils = {
       }
       str += "}\n";
     }
+    var editor = EditorUtils.getCurrentEditor();
     var styleElt = aSheet.ownerNode;
     var child = styleElt.firstChild;
     while (child)
     {
       var tmp = child.nextSibling;
-      styleElt.removeChild(child);
+      editor.deleteNode(child);
       child = tmp;
     }
     var textNode = styleElt.ownerDocument.createTextNode(str);
-    styleElt.appendChild(textNode);
+    editor.insertNode(textNode, styleElt, 0);
   },
 
   getUseCSSPref: function()

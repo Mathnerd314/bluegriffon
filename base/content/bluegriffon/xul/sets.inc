@@ -1,11 +1,17 @@
 <broadcasterset id="broadcasterset"/>
 
 <keyset id="mainKeySet">
-  <key id="savekb"              key="&filesave.keybinding;"  observes="cmd_save"      modifiers="accel"/>
-  <key id="key_quitApplication" key="q"                                               modifiers="accel"/>
-  <key id="closetabkb"          key="w"                      observes="cmd_closeTab"  modifiers="accel"/>
-  <key id="openpagekb"          key="o"                      observes="cmd_open"      modifiers="accel"/>
+  <key id="savekb"              key="&filesave.key;"         observes="cmd_save"      modifiers="accel"/>
+  <key id="key_quitApplication" key="&quit.key;"                                      modifiers="accel"/>
+  <key id="closetabkb"          key="&closeWindow.key;"      observes="cmd_closeTab"  modifiers="accel"/>
+  <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel"/>
 </keyset>
+
+<!-- magic from chrome://global/content/editMenuOverlay.xul -->
+<keyset id="editMenuKeys"/>
+
+<!-- magic from chrome://global/content/editMenuOverlay.xul -->
+<commandset id="editMenuCommands"/>
 
 <commandset id="webNavigationItems"
             commandupdater="true"

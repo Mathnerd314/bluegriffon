@@ -158,9 +158,13 @@
 <!ENTITY saveCmd.label "Save">
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 <!ENTITY filesave.accesskey "s">
-<!ENTITY filesave.keybinding "s">
 <!ENTITY saveAsCmd.label "Save As...">
 <!ENTITY filesaveas.accesskey "A">
+
+<!ENTITY undoCmd.label "Undo">
+<!ENTITY undoCmd.accesskey "U">
+<!ENTITY redoCmd.label "Redo">
+<!ENTITY redoCmd.accesskey "R">
 
 <!ENTITY setZoomFactor.label "Set zoom factor">
 
@@ -194,3 +198,13 @@
 <!ENTITY columnsToolbarCmd.tooltip "Set columns">
 
 <!ENTITY closeTabCmd.label "Close current tab">
+
+<!ENTITY filesave.key "s">
+<!ENTITY quit.key "q">
+<!ENTITY closeWindow.key "w">
+<!ENTITY openPage.key "o">
+<!ENTITY undoCmd.key "z">
+<!ENTITY redoCmd.key "y">
+<!ENTITY cutCmd.key "x">
+<!ENTITY copyCmd.key "c">
+<!ENTITY pasteCmd.key "v">

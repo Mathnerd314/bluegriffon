@@ -43,7 +43,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS		= modules base themes app extensions components
+DIRS		= modules base themes app extensions components sidebars
 
 
 include $(topsrcdir)/config/rules.mk

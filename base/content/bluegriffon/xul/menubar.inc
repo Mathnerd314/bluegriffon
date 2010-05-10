@@ -34,7 +34,16 @@
     </menu>
 
     <menu id="editMenu"   label="&editMenu.label;"   accesskey="&editMenu.accesskey;">
-      <menupopup id="editMenuPopup"/>
+      <menupopup id="editMenuPopup">
+        <!-- magic from chrome://global/content/editMenuOverlay.xul -->
+        <menuitem id="menu_undo" />
+        <menuitem id="menu_redo" />
+        <menuseparator/>
+        <menuitem id="menu_cut"/>
+        <menuitem id="menu_copy"/>
+        <menuitem id="menu_paste"/>
+        <menuitem id="menu_delete"/>
+      </menupopup>
     </menu>
 
     <menu id="viewMenu"   label="&viewMenu.label;"   accesskey="&viewMenu.accesskey;">
