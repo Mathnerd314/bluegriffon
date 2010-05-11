@@ -60,8 +60,6 @@ var cmdNewWizard =
   doCommandParams: function(aCommand, aParams, aRefCon) {},
   doCommand: function(aCommand)
   {
-
-    OpenFile(kHTML_TRANSITIONAL, true);
     OpenAppModalWindow(window,
                        "chrome://bluegriffon/content/dialogs/newPageWizard.xul",
                        "newPageWizard", false);

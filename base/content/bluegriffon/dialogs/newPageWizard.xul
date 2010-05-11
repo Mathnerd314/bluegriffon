@@ -51,7 +51,8 @@
 <wizard id="newPageWizard"
         title="&window.title;"
         onload="Startup()"
-        onwizardfinish="Apply()"
+        onunload="Shutdown()"
+        onwizardfinish="CreateNewDocument()"
         height="350" width="450"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY">
@@ -63,6 +64,7 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/l10n.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/css.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/js/colourPickerHelper.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/newPageWizard.js"/>
 
   <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
@@ -78,6 +80,30 @@
             hidden="true"/>
   </panel>
 
+  <wizardpage label="&documentType.label;" flex="1">
+    <description>&documentType.description;</description>
+	  <groupbox>
+	    <caption label="&language.label;"/>
+	    <radiogroup id="languageRadiogroup"
+	                orient="horizontal">
+	      <radio label="&html.label;"
+	             value="HTML"/>
+	      <radio label="&xhtml.label;"
+	             value="XHTML"/>
+	    </radiogroup>
+	  </groupbox>
+	  <groupbox>
+	    <caption label="&doctype.label;"/>
+	    <radiogroup id="doctypeRadiogroup"
+	                orient="horizontal">
+	      <radio label="&transitional.label;"
+	             value="TRANSITIONAL"/>
+	      <radio label="&strict.label;"
+	             value="STRICT"/>
+	    </radiogroup>
+	  </groupbox>
+  </wizardpage>
+
   <wizardpage label="&generalTab.label;" flex="1">
     <grid flex="1" style="overflow: hidden">
       <columns><column/><column flex="1"/></columns>
@@ -86,29 +112,25 @@
           <label value="&pageTitle.label;"
                  control="pageTitle"
                  accesskey="&pageTitle.accesskey;"/>
-          <textbox id="pageTitle" spellcheck="true"
-                   oninput="TextboxChanged(this.id);"/>
+          <textbox id="pageTitle" spellcheck="true"/>
         </row>
         <row align="center">
           <label value="&pageAuthor.label;"
                  control="pageAuthor"
                  accesskey="&pageAuthor.accesskey;"/>
-          <textbox id="pageAuthor"
-                   oninput="TextboxChanged(this.id);"/>
+          <textbox id="pageAuthor"/>
         </row>
         <row align="center">
           <label value="&pageDescription.label;"
                  control="pageDescription"
                  accesskey="&pageDescription.accesskey;"/>
-          <textbox id="pageDescription" spellcheck="true"
-                   oninput="TextboxChanged(this.id);"/>
+          <textbox id="pageDescription" spellcheck="true"/>
         </row>
         <row align="center">
           <label value="&pageKeywords.label;"
                  control="pageKeywords"
                  accesskey="&pageKeywords.accesskey;"/>
-          <textbox id="pageKeywords" spellcheck="true"
-                   oninput="TextboxChanged(this.id);"/>
+          <textbox id="pageKeywords" spellcheck="true"/>
         </row>
         <row align="center">
           <label value="&language.label;"

@@ -67,6 +67,7 @@ var gEditorDocumentObserver =
         UpdateWindowTitle();
 
         window.content.focus();
+        NotifierUtils.notify("documentCreated");
         break;
 
       case "cmd_setDocumentModified":

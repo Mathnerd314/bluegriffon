@@ -46,7 +46,6 @@ var gPreview = null; // preview iframe for colors
 var gAuthor = "";
 var gDescription = "";
 var gKeywords = "";
-var gRootElement;
 var gTitleWasEdited = false;
 var gAuthorWasEdited = false;
 var gDescriptionWasEdited = false;
@@ -59,10 +58,18 @@ var gUseSystemColors = true;
 var gHorizPosition = "50%";
 var gVertPosition = "50%";
 
+function Shutdown()
+{
+  var w = EditorUtils.getCurrentEditorWindow();
+  w.NotifierUtils.removeNotifierCallback("documentCreated", DocumentCreated, this);
+}
+
 function Startup()
 {
   window.sizeToContent();
   GetUIElements();
+  var w = EditorUtils.getCurrentEditorWindow();
+  w.NotifierUtils.addNotifierCallback("documentCreated", DocumentCreated, this);
 
   var gFpb = gDialog["filepickerbutton"];
   if (gFpb)
@@ -99,16 +106,15 @@ function Startup()
   }
   gDialog.charsetMenulist.value = "utf-8";
 
-  gRootElement = EditorUtils.getCurrentEditor().rootElement;
   InitDialog();
-
-  window.sizeToContent();
-  SetTextboxFocus(gDialog.pageTitle);
+  window.sizeToContent();  
 }
 
 function InitDialog()
 {
-  gDialog.pageTitle.value = EditorUtils.getDocumentTitle();
+  SetTextboxFocus(gDialog.pageTitle);
+
+  gDialog.pageTitle.value = "";
   try {
     // Fill in with value from editor prefs
     gPrefs = GetPrefs();
@@ -607,4 +613,24 @@ function OpenColorDialog(aColorObjectId, aElt)
   {
     aElt.firstChild.style.backgroundColor = cph.getCurrentColor(aColorObjectId);
   }
+}
+
+function CreateNewDocument()
+{
+  var w = EditorUtils.getCurrentEditorWindow();
+  document.persist("languageRadiogroup", "value");
+  document.persist("doctypeRadiogroup", "value");
+  document.persist("whereRadiogroup", "value");
+  
+  var docType = "k" +
+              gDialog.languageRadiogroup.value +
+              "_" +
+              gDialog.doctypeRadiogroup.value;
+
+  w.OpenFile(w[docType], true);
+}
+
+function DocumentCreated()
+{
+  Apply();
 }
