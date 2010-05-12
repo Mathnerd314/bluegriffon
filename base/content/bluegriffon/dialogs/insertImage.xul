@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/insertImage.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertImage.dtd">
+
+<dialog title="&window.title;"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    onload = "Startup()"
+    buttons="accept,cancel"
+    style="height: auto"
+    ondialogaccept="return onAccept();"
+    persist="screenX screenY"
+    screenX="24" screenY="24">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertImage.js"/>
+
+  <csstoggler id="cssToggler">
+    <groupbox orient="vertical">
+      <caption label="&cssExtras.label;"/>
+      <checkbox label="Apply a box shadow (lengths in pixels)"/>
+      <hbox class="indent" align="center">
+        <label value="Width:"/>
+        <textbox type="number" size="3"/>
+        <label value="Height:"/>
+        <textbox type="number" size="3"/>
+        <label value="Blur radius:"/>
+        <textbox type="number" size="3"/>
+        <label value="Color:"/>
+        <ecolorpicker id="shadowColorpicker"
+                      color="transparent"
+                      colorObjectId="TextColor"
+                      windowTitle="Background color"
+                      showTransparency="true"/>
+      </hbox>
+    </groupbox>
+  </csstoggler>
+
+
+</dialog>

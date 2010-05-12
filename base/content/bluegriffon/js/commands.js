@@ -278,6 +278,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_table",       cmdInsertOrEditTableCommand);
     commandTable.registerCommand("cmd_columns",     cmdColumnsCommand);
 
+    commandTable.registerCommand("cmd_image",       cmdInsertImageCommand);
+
     commandTable.registerCommand("cmd_class",       cmdClass);
   },
 

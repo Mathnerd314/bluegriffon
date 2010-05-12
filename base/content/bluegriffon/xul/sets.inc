@@ -37,6 +37,7 @@
             events="create,style,mode_switch"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
+  <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

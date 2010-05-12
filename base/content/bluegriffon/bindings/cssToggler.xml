@@ -263,6 +263,9 @@
           this.setAttribute("style", "display: none");
           this.removeAttribute("style");
 
+          if (NotifierUtils)
+            NotifierUtils.notify("cssPolicyChanged", useCssPref);
+
           try {
             // ugly hack needed because sizeToContent() can suck if window
             // was never resized before...

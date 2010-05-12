@@ -62,3 +62,6 @@
 <!ENTITY collapseBorders.label "Collapse all borders">
 <!ENTITY hideEmptyCells.label "Hide empty cells (will not apply to editing view)">
 <!ENTITY fixedLayout.label "Use fixed table layout">
+
+<!ENTITY okButton.label "OK">
+<!ENTITY cancelButton.label "Cancel">

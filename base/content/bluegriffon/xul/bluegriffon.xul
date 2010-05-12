@@ -120,9 +120,9 @@
           <spacer flex="1"/>
         </vbox>
         <deck flex="1" id="editorsDeck" selectedIndex="0">
-          <vbox flex="1" id="tabeditorContainer">
+          <box flex="1" id="tabeditorContainer" >
             <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
-          </vbox>
+          </box>
           <iframe id="bespinIframe" src="resource://gre/res/bespin.html" flex="1"/>
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>

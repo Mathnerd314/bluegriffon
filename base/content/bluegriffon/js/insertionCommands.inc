@@ -3,8 +3,9 @@ var cmdInsertOrEditTableCommand =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    //return (EditorUtils.isDocumentEditable() && this.isEditingRenderedHTML());
-    return true;
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -18,6 +19,26 @@ var cmdInsertOrEditTableCommand =
       EditorInsertOrEditTable(true);*/
 
     window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes");
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
+  }
+};
+
+
+var cmdInsertImageCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertImage.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
   }
 };

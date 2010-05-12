@@ -78,6 +78,20 @@
     </preferences>
 
     <broadcaster id="args" value=""/>
+
+    <csstoggler id="cssToggler"
+                controls="sizeSelector,okButton">
+      <groupbox orient="vertical">
+        <caption label="&cssExtras.label;"/>
+        <checkbox id="collapseBorders"
+                  label="&collapseBorders.label;"/>
+        <checkbox id="hideEmptyCells"
+                  label="&hideEmptyCells.label;"/>
+        <checkbox id="fixedLayout"
+                  label="&fixedLayout.label;"/>
+      </groupbox>
+    </csstoggler>
+
     <tabbox>
       <tabs>
         <tab label="&quicklyTab.label;"/>
@@ -171,6 +185,7 @@
           </hbox>
           <spacer class="spacer" flex="1"/>
         </vbox>
+
         <vbox>
           <groupbox><caption label="&size.label;"/>
             <grid>
@@ -235,6 +250,7 @@
             <label value="&pixels.label;"/>
           </hbox>
         </vbox>
+
         <grid>
           <columns><column/><column/></columns>
           <rows>
@@ -291,17 +307,10 @@
         </grid>
       </tabpanels>
     </tabbox>
-    <csstoggler id="cssToggler"
-                controls="sizeSelector">
-      <groupbox orient="vertical">
-        <caption label="&cssExtras.label;"/>
-        <checkbox id="collapseBorders"
-                  label="&collapseBorders.label;"/>
-        <checkbox id="hideEmptyCells"
-                  label="&hideEmptyCells.label;"/>
-        <checkbox id="fixedLayout"
-                  label="&fixedLayout.label;"/>
-      </groupbox>
-    </csstoggler>
+    <hbox>
+      <spacer flex="1"/>
+      <button label="&cancelButton.label;" oncommand="window.close()"/>
+      <button id="okButton" label="&okButton.label;" oncommand="onAccept(); window.close()"/>
+    </hbox>
   </prefpane>
 </prefwindow>

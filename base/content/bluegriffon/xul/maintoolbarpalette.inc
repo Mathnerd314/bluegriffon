@@ -35,6 +35,10 @@
                      label="&tableToolbarCmd.label;" observes="cmd_table"
                      tooltiptext="&tableToolbarCmd.tooltip;"/>
 
+      <toolbarbutton id="imageButton" class="toolbarbutton-1"
+                     label="&imageToolbarCmd.label;" observes="cmd_image"
+                     tooltiptext="&imageToolbarCmd.tooltip;"/>
+
       <toolbaritem id="throbber-box"  align="center" pack="center">
         <image id="composer-throbber" tooltiptext="&throbber.tooltip;" onclick="AboutComposer()"/>
       </toolbaritem> 
