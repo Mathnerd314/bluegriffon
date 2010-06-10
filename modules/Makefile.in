@@ -49,6 +49,8 @@ EXTRA_JS_MODULES = colourPickerHelper.jsm \
 	editorHelper.jsm \
 	fileHelper.jsm \
 	cssHelper.jsm \
+	fireFtp.jsm \
+	projectManager.jsm \
 	$(NULL)
 
 include $(topsrcdir)/config/rules.mk

@@ -56,7 +56,12 @@ endif
 _FILES = \
 	$(srcdir)/res/BespinEmbedded.css \
 	$(srcdir)/res/BespinEmbedded.compressed.js \
+	$(srcdir)/res/BespinEmbedded.js \
 	$(srcdir)/res/bespin.html \
+	$(srcdir)/res/html_transitional.html \
+	$(srcdir)/res/html_strict.html \
+	$(srcdir)/res/xhtml_transitional.html \
+	$(srcdir)/res/xhtml_strict.html \
 	$(NULL)
 
 libs::

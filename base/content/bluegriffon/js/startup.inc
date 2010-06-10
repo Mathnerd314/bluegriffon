@@ -36,4 +36,6 @@ function Startup()
   } catch(ex) {
     dump("Failed to observe prefs: " + ex + "\n");
   }
+
+  ProjectManager.init();
 }

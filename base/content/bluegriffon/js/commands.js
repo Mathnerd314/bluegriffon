@@ -265,6 +265,7 @@ var ComposerCommands = {
     
     //dump("Registering plain text editor commands\n");
     commandTable.registerCommand("cmd_stopLoading", cmdStopLoading);
+    commandTable.registerCommand("cmd_copy",        cmdCopy);
     commandTable.registerCommand("cmd_open",        cmdOpen);
     commandTable.registerCommand("cmd_save",        cmdSave);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
@@ -345,3 +346,20 @@ var ComposerCommands = {
 #include formatCommands.inc
 #include insertionCommands.inc
 
+var cmdCopy =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    // do nothing
+    alert("Hey, who's calling the dummy command?\n");
+  }
+
+};

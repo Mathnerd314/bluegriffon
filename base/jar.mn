@@ -22,6 +22,7 @@ bluegriffon.jar:
   content/bluegriffon/bindings/structurebar.xml         (content/bluegriffon/bindings/structurebar.xml)
   content/bluegriffon/bindings/tab.xml                  (content/bluegriffon/bindings/tab.xml)
   content/bluegriffon/bindings/tabeditor.xml            (content/bluegriffon/bindings/tabeditor.xml)
+  content/bluegriffon/bindings/rotator.xml              (content/bluegriffon/bindings/rotator.xml)
 * content/bluegriffon/js/commands.js                    (content/bluegriffon/js/commands.js)
 * content/bluegriffon/js/customize.js                   (content/bluegriffon/js/customize.js)
   content/bluegriffon/js/zoomManager.js                 (content/bluegriffon/js/zoomManager.js)
@@ -68,6 +69,7 @@ bluegriffon.jar:
   content/bluegriffon/colourPickerCrosshair.gif         (content/bluegriffon/colourPickerCrosshair.gif)
   content/bluegriffon/hsPanel.png                       (content/bluegriffon/hsPanel.png)
   content/bluegriffon/brightness.png                    (content/bluegriffon/brightness.png)
+  content/bluegriffon/utils/login.js                    (content/bluegriffon/utils/login.js)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/

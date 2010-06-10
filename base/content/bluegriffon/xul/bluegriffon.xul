@@ -107,7 +107,7 @@
   <sidebaritems id="sidebaritems"/>
 
   <hbox flex="1" id="maincontainer">
-    <sidebar id="sidebar1" sidebaritems="projectmanager" persist="sidebaritems"/>
+    <sidebar id="sidebar1" sidebaritems="projectmanager" persist="sidebaritems width"/>
     <splitter id="splitter1" collapse="before" resizebefore="closest"
               oncommand="document.persist('splitter1', 'state');">
 #ifndef XP_MACOSX
@@ -145,7 +145,7 @@
       <grippy/>
 #endif
     </splitter>
-    <sidebar id="sidebar2" sidebaritems="" persist="sidebaritems"/>
+    <sidebar id="sidebar2" sidebaritems="" persist="sidebaritems width"/>
   </hbox>
 
 #ifdef TOOLBAR_CUSTOMIZATION_SHEET

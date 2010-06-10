@@ -195,9 +195,41 @@
           this.mCSSPolicy.value = useCssPref;
           // adapt dialog depending on the pref
           this.showOrHideBoxes(useCssPref);
-        ]]>
+          this.updateButtons();
+         ]]>
         </body>
       </method>
+
+      <method name="updateButtons">
+        <body>
+        <![CDATA[
+
+          var constraints = this.checkConstraints();
+          switch (this.cssPolicy) {
+            case 0:
+            case 1:
+              if (constraints)
+                document.documentElement.getButton("accept").removeAttribute("disabled");
+              else
+                document.documentElement.getButton("accept").setAttribute("disabled", "true");
+              break;
+            case 2:
+              if (constraints && (this.mIdTextBox.value || this.mClassTextBox.value))
+                document.documentElement.getButton("accept").removeAttribute("disabled");
+              else
+                document.documentElement.getButton("accept").setAttribute("disabled", "true");
+              break;
+            case 3:
+              if (constraints && (this.mIDList.value || this.mClassList.value))
+                document.documentElement.getButton("accept").removeAttribute("disabled");
+              else
+                document.documentElement.getButton("accept").setAttribute("disabled", "true");
+              break;
+            default: break;
+          }
+        ]]>
+        </body>
+        </method>
 
       <method name="toggle">
         <body>
@@ -219,6 +251,7 @@
 
           // update dialog
           this.showOrHideBoxes(useCssPref);
+          window.sizeToContent();
         ]]>
         </body>
       </method>
@@ -247,23 +280,29 @@
               this.mChildrenBox.removeAttribute("collapsed");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
-              document.documentElement.getButton("accept").removeAttribute("disabled");
+              if (this.checkConstraints())
+                document.documentElement.getButton("accept").removeAttribute("disabled");
+              else
+                document.documentElement.getButton("accept").setAttribute("disabled", "true");
               this.enableControls(true);
               break;
             case 0: // OMG, user really wants HTML attributes, OMG!!!
               this.mChildrenBox.setAttribute("collapsed", "true");
               this.mIdBox.setAttribute("collapsed", "true");
               this.mReuseStylesBox.setAttribute("collapsed", "true");
-              document.documentElement.getButton("accept").removeAttribute("disabled");
+              if (this.checkConstraints())
+                document.documentElement.getButton("accept").removeAttribute("disabled");
+              else
+                document.documentElement.getButton("accept").setAttribute("disabled", "true");
               this.enableControls(true);
               break;
             default: break;
           }
 
-          this.setAttribute("style", "display: none");
-          this.removeAttribute("style");
+          //this.setAttribute("style", "display: none");
+          //this.removeAttribute("style");
 
-          if (NotifierUtils)
+          if ("NotifierUtils" in window)
             NotifierUtils.notify("cssPolicyChanged", useCssPref);
 
           try {
@@ -282,6 +321,7 @@
         <![CDATA[
           // make the alert on existing ID visible by default
           this.mExistingIdAlert.removeAttribute("class");
+
           if (this.mIdTextBox.value || this.mClassTextBox.value)
           {
             // ah, we have at least class or ID... if we have an ID, is there already
@@ -293,9 +333,11 @@
             {
               // lucky man...
               this.mExistingIdAlert.setAttribute("class", "hiddenAlert");
-              document.documentElement.getButton("accept").removeAttribute("disabled");
-              this.enableControls(true);
-              return;
+              if (this.checkConstraints()) {
+	              document.documentElement.getButton("accept").removeAttribute("disabled");
+	              this.enableControls(true);
+	              return;
+              }
             }
           }
           else
@@ -312,7 +354,7 @@
         <parameter name="aElt"/>
         <body>
         <![CDATA[
-          if (this.mIDList.value || this.mClassList.value)
+          if (this.checkConstraints() && (this.mIDList.value || this.mClassList.value))
           {
             // we have at least an ID or a class, we can create an element
             document.documentElement.getButton("accept").removeAttribute("disabled");
@@ -325,6 +367,21 @@
         </body>
       </method>
 
+      <method name="checkConstraints">
+        <body>
+          <![CDATA[
+            var constraints = this.getAttribute("constraints").split(',');
+
+            for (var i = 0; i < constraints.length; i++) {
+              var c = constraints[i];
+              var elt = document.getElementById(c); 
+              if (!elt.value)
+                return false;
+            }
+            return true;
+          ]]>
+        </body>
+      </method>
       <method name="enableControls">
         <parameter name="aEnable"/>
         <body>

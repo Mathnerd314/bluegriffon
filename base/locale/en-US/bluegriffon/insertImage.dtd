@@ -2,3 +2,24 @@
 
 <!ENTITY cssExtras.label "CSS extra properties">
 
+<!ENTITY general.tab "General">
+
+<!ENTITY imageLocation.label "Image location:">
+<!ENTITY selectImageButton.label "Select Image">
+<!ENTITY relativeURL.label "URL is relative to page location">
+<!ENTITY title.label "Title:">
+<!ENTITY alternateText.label "Mandatory alternate text:">
+<!ENTITY documentMustBeSaved.label "(document must be saved to enable this feature)">
+
+<!ENTITY preview.label "Preview">
+
+<!ENTITY width.label "Width:">
+<!ENTITY height.label "Height:">
+<!ENTITY preserveRatio.tooltip "Preserve image ratio">
+<!ENTITY px.label "pixels">
+<!ENTITY percent.label "percents">
+<!ENTITY resetSize.label "Reset to natural width and height">
+
+<!ENTITY rotation.label "Rotation">
+<!ENTITY horizPosition.label "Horiz. origin:">
+<!ENTITY vertPosition.label "Vert. origin:">

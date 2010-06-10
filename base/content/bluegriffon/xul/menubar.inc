@@ -39,8 +39,8 @@
         <menuitem id="menu_undo" />
         <menuitem id="menu_redo" />
         <menuseparator/>
-        <menuitem id="menu_cut"/>
-        <menuitem id="menu_copy"/>
+        <menuitem id="menu_cut" command="cmd_cut" label="Cut"/>
+        <menuitem id="menu_copy" command="cmd_copy" label="Copie"/>
         <menuitem id="menu_paste"/>
         <menuitem id="menu_delete"/>
       </menupopup>

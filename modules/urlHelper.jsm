@@ -37,6 +37,8 @@
 
 var EXPORTED_SYMBOLS = ["UrlUtils"];
 
+Components.utils.import("resource://gre/modules/editorHelper.jsm");
+
 var UrlUtils = {
 
   /********** CONSTANTS ***********/
@@ -50,7 +52,44 @@ var UrlUtils = {
   mIOService: null,
   mOS: null,
 
+  /********** PRIVATE **********/
+  url2path : function(url) {
+    var path = url;
+
+    if (/^file/i.test(url)) try {
+      var uri = Components.classes['@mozilla.org/network/standard-url;1']
+                          .createInstance(Components.interfaces.nsIURL);
+      var file = Components.classes['@mozilla.org/file/local;1']
+                           .createInstance(Components.interfaces.nsILocalFile);
+      uri.spec = url;
+        
+      try { // decent OS
+        file.initWithPath(uri.path);
+      } catch (e) {}
+      try { // Windows sucks
+        file.initWithPath(uri.path.replace(/^\//,"").replace(/\//g,"\\"));
+      } catch (e) {}
+      path = decodeURI(file.path);
+    } catch(e) {
+      dump(e);
+    }
+    
+    return path;
+  },
+
   /********** PUBLIC **********/
+
+  newLocalFile:  function(url) {
+    var filePath = this.url2path(url);
+    try {
+      var nsFile = Components.classes['@mozilla.org/file/local;1']
+                             .createInstance(Components.interfaces.nsILocalFile);
+      nsFile.initWithPath(filePath);
+    } catch(e) {
+      dump("could not create LocalFile interface on " + FilePath);
+    }
+    return nsFile;
+  },
 
   normalizeURL: function normalizeURL(url)
   {
@@ -99,7 +138,7 @@ var UrlUtils = {
 
   isUrlOfBlankDocument: function isUrlOfBlankDocument(urlString)
   {
-    const kDATA_URL_PREFIX = "data:text/html,";
+    const kDATA_URL_PREFIX = "resource://gre/res";
     return (urlString.substr(0, kDATA_URL_PREFIX.length) == kDATA_URL_PREFIX);
   },
 
@@ -295,11 +334,12 @@ var UrlUtils = {
 
   getDocumentBaseUrl: function getDocumentBaseUrl()
   {
+    Components.utils.import("resource://gre/modules/editorHelper.jsm");
     try {
       var docUrl;
 
       // if document supplies a <base> tag, use that URL instead 
-      var baseList = EditorUtils.getCurrentEditor().document.getElementsByTagName("base");
+      var baseList = EditorUtils.getCurrentDocument().getElementsByTagName("base");
       if (baseList)
       {
         var base = baseList.item(0);
@@ -509,11 +549,13 @@ var UrlUtils = {
     if (this.mOS)
       return this.mOS;
 
-    var platform = navigator.platform.toLowerCase();
-
-    if (platform.indexOf("win") != -1)
+    var xrt = Components.classes["@mozilla.org/xre/app-info;1"]
+		                    .getService(Components.interfaces.nsIXULAppInfo)
+		                    .QueryInterface(Components.interfaces.nsIXULRuntime);
+    var platform = xrt.OS.toLowerCase();
+    if (platform == "windows")
       this.mOS = this.gWin;
-    else if (platform.indexOf("mac") != -1)
+    else if (platform == "darwin")
       this.mOS = this.gMac;
     else if (platform.indexOf("unix") != -1 || platform.indexOf("linux") != -1 || platform.indexOf("sun") != -1)
       this.mOS = this.gUNIX;

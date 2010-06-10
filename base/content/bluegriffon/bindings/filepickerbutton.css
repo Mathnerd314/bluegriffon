@@ -17,3 +17,7 @@ filepickerbutton:hover  {
   padding: 0px;
   margin: 2px ! important;
 }
+
+.toolbarbutton-text {
+  display: none;
+}

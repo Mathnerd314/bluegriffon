@@ -11,15 +11,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Mozilla Communicator client code, released
- * March 31, 1998.
+ * The Original Code is BlueGriffon.
  *
  * The Initial Developer of the Original Code is
- * Netscape Communications Corporation.
- * Portions created by the Initial Developer are Copyright (C) 1998-1999
+ * Disruptive Innovations SARL.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -34,56 +34,57 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-
-/* ===== colorpicker.css ================================================
-  == Styles used by the XUL colorpicker element.
-  ======================================================================= */
-
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-/* ::::: colorpicker button ::::: */
  
-/* colorpicker button */
+ @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-ecolorpicker {
-  width: 24px;
-  height: 24px;
-  -moz-border-radius: 12px;
-  border: 1px solid #858585;
-  background-color: ThreeDFace;
-  padding: 3px;
+rotator {
+  -moz-box-align: center;
+}
+
+[anonid="outerRotator"] {
   -moz-appearance: none;
+  -moz-box-align: center;
+  padding: 0px;
+  height: 41px;
+  width: 41px;
+  background:  -moz-linear-gradient(45deg, #a0a0a0, #d0d0d0);
+  -moz-border-radius: 100px;
+  -moz-box-shadow: #606060 1px 1px 3px;
 }
 
-ecolorpicker:hover:active {
-	background-color: ThreeDLightShadow;
+[anonid="innerRotator"] {
+  -moz-appearance: none;
+  margin: 2px;
+  padding: 0px;
+  height: 37px;
+  width: 37px;
+  background-color: rgba(80%,80%,80%, 0.5);
+  -moz-border-radius: 100px;
 }
 
-.colorpicker-button-colorbox {
-  border: 1px solid #d0d0d0;
-  -moz-border-radius: 11px;
-  background-color: ThreeDFace;
+rotateGrippy {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/rotator.xml#rotateGrippy");
+   cursor: -moz-grab;
+  -moz-appearance: none;
+  margin: 2px;
+  padding: 0px;
+  height: 10px;
+  width: 10px;
+  background: -moz-linear-gradient(top -45deg, #808080, #a0a0a0);
+  border: thin solid #909090;
+  -moz-border-radius: 100px;
+  border: #a0a0a0 thin groove;
 }
 
-/* ::::: colorpicker tiles ::::: */
-
-.colorpickertile {
-  width                 : 22px;
-  height                : 22px;
-  margin                : 1px;
+rotator[disabled="true"] rotateGrippy {
+  cursor: default;
 }
 
-.colorpickertile[selected="true"] {
-  border : 1px outset #C0C0C0;
-
+rotateGrippy[rotating="true"] {
+  cursor: -moz-grabbing;
 }
 
-.colorpickertile[hover="true"] {
-  border : 1px dotted #A7A7A7;
+[anonid="textbox"] {
+  margin-left: 1em;
 }
-
-.cp-light[hover="true"] {
-  border : 1px dotted #000000;
-}
-
 

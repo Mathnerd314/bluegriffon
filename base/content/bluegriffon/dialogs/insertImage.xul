@@ -9,6 +9,7 @@
 
 <dialog title="&window.title;"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml"
     onload = "Startup()"
     buttons="accept,cancel"
     style="height: auto"
@@ -19,29 +20,155 @@
   <!-- Methods common to all editor dialogs -->
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
-  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertImage.js"/>
 
-  <csstoggler id="cssToggler">
-    <groupbox orient="vertical">
-      <caption label="&cssExtras.label;"/>
-      <checkbox label="Apply a box shadow (lengths in pixels)"/>
-      <hbox class="indent" align="center">
-        <label value="Width:"/>
-        <textbox type="number" size="3"/>
-        <label value="Height:"/>
-        <textbox type="number" size="3"/>
-        <label value="Blur radius:"/>
-        <textbox type="number" size="3"/>
-        <label value="Color:"/>
-        <ecolorpicker id="shadowColorpicker"
-                      color="transparent"
-                      colorObjectId="TextColor"
-                      windowTitle="Background color"
-                      showTransparency="true"/>
-      </hbox>
-    </groupbox>
-  </csstoggler>
+  <tabbox id="tabbox">
+    <tabs>
+      <tab label="&general.tab;"/>
+      <tab label="Dimensions"/>
+      <tab label="Style"/>
+      <tab label="Link"/>
+    </tabs>
+    <tabpanels>
+      <vbox>
+        <label value="&imageLocation.label;"/>
+        <hbox align="center">
+          <textbox flex="1" id="imageURLTextbox"
+                   oninput="UpdateButtons()"/>
+          <filepickerbutton id="filepickerbutton"
+                            control="imageURLTextbox"
+                            mode="0"
+                            filters="filterImages"
+                            oncommand="UpdateButtons();MakeRelativeUrl()"
+                            title="&selectImageButton.label;"/>
+        </hbox>
+        <hbox align="center">
+          <checkbox id="relativeURLCheckbox"
+                    disabled="true"
+                    oncommand="ToggleRelativeOrAbsolute()"
+                    label="&relativeURL.label;"/>
+          <label value="&documentMustBeSaved.label;"
+                 disabled="true"
+                 id="relativeURLCheckboxWarning"/>
+        </hbox>
+        <grid>
+          <columns><column/><column flex="1"/></columns>
+          <rows>
+            <row align="center">
+              <label value="&title.label;"/>
+              <textbox/>
+            </row>
+            <row align="center">
+              <label value="&alternateText.label;"/>
+              <textbox id="alternateTextTextbox"
+                       oninput="UpdateButtons()"/>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
 
+      <vbox>
+        <hbox>
+          <grid>
+            <columns><column/><column/></columns>
+            <rows>
+              <row align="center">
+                <label value="&width.label;"/>
+                <textbox size="4" type="number" id="widthTextbox" disabled="true"
+                         decimalPlaces="2"
+                         min="1"
+                         oninput="onWidthChanged()"
+                         onchange="onWidthChanged()"/>
+              </row>
+              <row align="center">
+                <label value="&height.label;"/>
+                <textbox size="4" type="number" id="heightTextbox" disabled="true"
+                         decimalPlaces="2"
+                         min="1"
+                         oninput="onHeightChanged()"
+                         onchange="onHeightChanged()"/>
+              </row>
+            </rows>
+          </grid>
+          <vbox>
+            <spacer flex="1"/>
+            <toolbarbutton id="preserveRatioButton"
+                           disabled="true"
+                           preserveRatio="true"
+                           tooltiptext="&preserveRatio.tooltip;"
+                           oncommand="TogglePreserveRatio(this)"/>
+            <spacer flex="1"/>
+          </vbox>
+          <vbox>
+            <menulist id="unitTypeMenulist" oncommand="ToggleUnit()"
+                      disabled="true">
+              <menupopup>
+                <menuitem label="&px.label;" value="px"/>
+                <menuitem label="&percent.label;" value="percent"/>
+              </menupopup>
+            </menulist>
+          </vbox>
+        </hbox>
+        <hbox>
+          <button label="&resetSize.label;" id="resetSizeButton"
+                  disabled="true"
+                  oncommand="PreviewImageLoaded()"/>
+        </hbox> 
+      </vbox>
+
+      <vbox>
+        <csstoggler id="cssToggler"
+                    constraints="imageURLTextbox,alternateTextTextbox"
+                    controls="okButton">
+		      <hbox align="center">
+		        <checkbox label="Image is floating to the "/>
+		        <menulist>
+		          <menupopup>
+		            <menuitem label="left"/>
+		            <menuitem label="right"/>
+		          </menupopup>
+		        </menulist>
+	        </hbox>
+	        <hbox align="center">
+	          <checkbox label="&rotation.label;" id="enableRotationCheckbox"
+	                    oncommand="ToggleRotation()"/>
+					  <rotator id="rotator" value="0" onchange="UpdatePreviewRotation(angle)"/>
+	          <grid>
+	            <columns><column/><column/><column/></columns>
+	            <rows>
+	              <row align="center">
+	                <label value="&horizPosition.label;" id="horizPositionLabel"/>
+	                <textbox size="3" type="number" min="-1000" max="1000" id="horizPosition"/>
+	                <menulist id="horizPositionUnit">
+	                  <menupopup>
+	                    <menuitem label="pixels" value="px"/>
+	                    <menuitem label="percents" value="percent" selected="true"/>
+	                  </menupopup>
+	                </menulist>
+	              </row>
+	              <row align="center">
+	                <label value="&vertPosition.label;" id="vertPositionLabel"/>
+	                <textbox id="vertPosition" size="3" type="number" min="-1000" max="1000"/>
+	                <menulist id="vertPositionUnit">
+	                  <menupopup>
+	                    <menuitem label="pixels" value="px"/>
+	                    <menuitem label="percents" value="percent" selected="true"/>
+	                  </menupopup>
+	                </menulist>
+	              </row>
+	            </rows>
+	          </grid>
+	        </hbox>
+        </csstoggler>
+      </vbox>
+    </tabpanels>
+  </tabbox>
+
+  <groupbox>
+    <caption label="&preview.label;"/>
+    <html:p style="text-align: center; height: 100px; padding: 0px; margin: 0px;">
+      <html:img id="previewImage"/>
+    </html:p>
+  </groupbox>
 
 </dialog>

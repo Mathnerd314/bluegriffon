@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
   <link rel="stylesheet" type="text/css" href="BespinEmbedded.css/">
-  <script type="text/javascript" src="BespinEmbedded.compressed.js"></script>
+  <script type="text/javascript" src="BespinEmbedded.js"></script>
   <style>
    body { overflow: hidden }
    table { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 2px; border-collapse: collapse}
@@ -21,6 +21,7 @@
                       }
           });
       postMessage("bespin", "*");
+      document.getElementById("editor").addEventListener("copy", function() { alert(12) }, false);
       return e;
     }
   </script>

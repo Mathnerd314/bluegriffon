@@ -11,7 +11,7 @@
 <keyset id="editMenuKeys"/>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->
-<commandset id="editMenuCommands"/>
+<!--commandset id="editMenuCommands"/-->
 
 <commandset id="webNavigationItems"
             commandupdater="true"
