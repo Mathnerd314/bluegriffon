@@ -40,7 +40,7 @@
 *[anonid="prefBox"],
 *[anonid="childrenBox"],
 *[anonid="idBox"] {
-  font-size: smaller;
+  /*font-size: smaller;*/
 }
 
 *[anonid="existingIdAlert"] {

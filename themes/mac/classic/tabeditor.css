@@ -37,9 +37,12 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
+#Bluegriffon .tabeditor-tab[selected="true"] {
+  background-color: -moz-mac-chrome-active;
+}
 /* ----- INACTIVE WINDOW ----- */
 
-#Bluegriffon:not([active="true"]).tabeditor-strip {
+#Bluegriffon:not([active="true"]) .tabeditor-strip {
   background-color: #e2e2e2;
 }
 
@@ -47,9 +50,10 @@
   color: #575757;
 }
 
-#Bluegriffon:not([active="true"]) .tabeditor-tab[selected="true"] {
+#Bluegriffon:-moz-window-inactive .tabeditor-tab[selected="true"] {
   background-color: -moz-mac-chrome-inactive;
 }
+
 
 
 /* ::::: tabeditor ::::: */
