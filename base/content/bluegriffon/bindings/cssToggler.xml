@@ -238,8 +238,10 @@
           var useCssPref = parseInt(this.mCSSPolicy.value);
           try {
             // early way out if no change
-            if (GetPrefs().getIntPref("bluegriffon.css.policy") == useCssPref)
+            var policy = GetPrefs().getIntPref("bluegriffon.css.policy"); 
+            if (policy == useCssPref) {
               return;
+            }
           }
           catch(e) {}
 
@@ -248,7 +250,6 @@
             GetPrefs().setIntPref("bluegriffon.css.policy", useCssPref);
           }
           catch(e) {}
-
           // update dialog
           this.showOrHideBoxes(useCssPref);
           window.sizeToContent();

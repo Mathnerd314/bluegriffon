@@ -7,7 +7,6 @@ function Startup()
   GetUIElements();
   gDialog.previewImage.addEventListener("load", PreviewImageLoaded, true);
 
-  //gDialog.cssToggler.init();
   var docUrl = EditorUtils.getDocumentUrl();
   var docUrlScheme = UrlUtils.getScheme(docUrl);
   if (docUrlScheme && docUrlScheme != "resource") {
@@ -19,16 +18,122 @@ function Startup()
   ToggleRotation();
   ResetRotation();
 
+  gDialog.cssToggler.init();
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
 }
 
 function onAccept()
 {
-  
+  // general
+  var url = gDialog.imageURLTextbox.value;
+  var title = gDialog.titleTextbox.value;
+  var altText = gDialog.alternateTextTextbox.value;
+  // dimensions
+  var w = gDialog.widthTextbox.value;
+  var h = gDialog.heightTextbox.value;
+  if (gDialog.unitTypeMenulist.value == "percent") {
+    w = w * gNaturalWidth / 100;
+    h = h * gNaturalHeight / 100;
+  }
+  // style
+  var useCSS = CssUtils.getUseCSSPref();
+  var angle = parseInt(gDialog.rotator.value);
+  var hCenter = gDialog.horizPosition.value + (gDialog.horizPositionUnit.value == "px") ? "px" : "%";
+  var vCenter = gDialog.vertPosition.value + (gDialog.vertPositionUnit.value == "px") ? "px" : "%";
+
+  var imgElement = EditorUtils.getCurrentDocument().createElement("img");
+  imgElement.setAttribute("src", url);
+  imgElement.setAttribute("alt", altText);
+  if (title)
+    imgElement.setAttribute("title", title);
+
+  switch (useCSS)
+  {
+    case 0: // HTML attributes only
+      if (w != gNaturalWidth)
+        imgElement.setAttribute("width", w);
+      if (w != gNaturalHeight)
+        imgElement.setAttribute("height", h);
+      break;
+
+    case 1: // use style attribute
+      {
+        var styleAttr = "";
+        if (angle)
+          styleAttr += "-moz-transform: rotate(" + angle + "deg);";
+        if (hCenter != "50%" || vCenter != "50%")
+          styleAttr += "-moz-transform-origin: " + hCenter + " " + vCenter + ";";
+        if (w != gNaturalWidth)
+          styleAttr += "width: " + w + "px;" ;
+        if (h != gNaturalHeight)
+          styleAttr += "height: " + h + "px;" ;
+
+        imgElement.setAttribute("style", styleAttr)
+      }
+      break;
+
+    case 2: // use embedded stylesheets
+      {
+        var cssToggler = gDialog.cssToggler;
+        var selectorText = (cssToggler.newID ?   '#' + cssToggler.newID : "") +
+                           (cssToggler.newClass? '.' + cssToggler.newClass : "");
+        var properties = [];
+        if (angle)
+          properties.push({ priority: false,
+                            property: "-moz-transform",
+                            value: "rotate(" + angle + "deg)"
+                          });
+        if (hCenter != "50%" || vCenter != "50%")
+          properties.push({ priority: false,
+                            property: "-moz-transform-origin",
+                            value: hCenter + " " + vCenter
+                          });
+        if (w != gNaturalWidth)
+          properties.push({ priority: false,
+                            property: "width",
+                            value: w + "px"
+                          });
+        if (w != gNaturalHeight)
+          properties.push({ priority: false,
+                            property: "height",
+                            value: h + "px"
+                          });
+        CssUtils.addRuleForSelector(EditorUtils.getCurrentDocument(),
+                                    selectorText,
+                                    properties);
+        if (cssToggler.newID)
+          imgElement.setAttribute("id", cssToggler.newID);
+        if (cssToggler.newClass)
+          imgElement.setAttribute("class", cssToggler.newClass);
+
+      }
+      break;
+
+    case 3: // reuse ID or class
+      {
+        var styleAttr = "";
+        if (w != gNaturalWidth)
+          styleAttr += "width: " + w + "px;" ;
+        if (h != gNaturalHeight)
+          styleAttr += "height: " + h + "px;" ;
+
+        imgElement.setAttribute("style", styleAttr)
+
+	      if (gDialog.cssToggler.reusedID)
+	        imgElement.setAttribute("id", gDialog.cssToggler.reusedID);
+	      if (gDialog.cssToggler.reusedClass)
+	        imgElement.setAttribute("class", gDialog.cssToggler.reusedClass);
+      }
+      break;
+
+    default: break;
+  }
+
+  EditorUtils.getCurrentEditor().insertElementAtSelection(imgElement, true);
 }
 
 
-function UpdateButtons()
+function LoadImage()
 {
   var img = document.createElementNS("http://www.w3.org/1999/xhtml", "img");
   gDialog.previewImage.parentNode.appendChild(img);
@@ -38,6 +143,12 @@ function UpdateButtons()
   gDialog.previewImage = img;
   img.addEventListener("load", PreviewImageLoaded, true);
   img.setAttribute("src", UrlUtils.makeAbsoluteUrl(gDialog.imageURLTextbox.value.trim()));
+  UpdateButtons();
+}
+
+function UpdateButtons()
+{
+  gDialog.cssToggler.updateButtons();
 }
 
 function MakeRelativeUrl()
