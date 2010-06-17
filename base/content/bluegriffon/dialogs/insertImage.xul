@@ -31,26 +31,36 @@
     </tabs>
     <tabpanels>
       <vbox>
-        <label value="&imageLocation.label;"/>
-        <hbox align="center">
-          <textbox flex="1" id="imageURLTextbox"
-                   oninput="LoadImage()"/>
-          <filepickerbutton id="filepickerbutton"
-                            control="imageURLTextbox"
-                            mode="0"
-                            filters="filterImages"
-                            oncommand="LoadImage();MakeRelativeUrl()"
-                            title="&selectImageButton.label;"/>
-        </hbox>
-        <hbox align="center">
-          <checkbox id="relativeURLCheckbox"
-                    disabled="true"
-                    oncommand="ToggleRelativeOrAbsolute()"
-                    label="&relativeURL.label;"/>
-          <label value="&documentMustBeSaved.label;"
-                 disabled="true"
-                 id="relativeURLCheckboxWarning"/>
-        </hbox>
+        <groupbox>
+          <caption label="Select image"/>
+	        <label value="&imageLocation.label;"/>
+	        <hbox align="center">
+	          <textbox flex="1" id="imageURLTextbox"
+	                   oninput="LoadImage()"/>
+	          <filepickerbutton id="filepickerbutton"
+	                            control="imageURLTextbox"
+	                            mode="0"
+	                            filters="filterImages"
+	                            oncommand="LoadImage();MakeRelativeUrl()"
+	                            title="&selectImageButton.label;"/>
+	        </hbox>
+          <hbox>
+            <spacer flex="1"/>
+            <button label="Select from projects"
+                    id="selectfromProjectButton"
+                    oncommand="OpenInProjectPicker()"
+                    hidden="true"/>
+          </hbox>
+	        <hbox align="center">
+	          <checkbox id="relativeURLCheckbox"
+	                    disabled="true"
+	                    oncommand="ToggleRelativeOrAbsolute()"
+	                    label="&relativeURL.label;"/>
+	          <label value="&documentMustBeSaved.label;"
+	                 disabled="true"
+	                 id="relativeURLCheckboxWarning"/>
+	        </hbox>
+        </groupbox>
         <grid>
           <columns><column/><column flex="1"/></columns>
           <rows>
@@ -68,6 +78,13 @@
       </vbox>
 
       <vbox>
+        <hbox align="center" style="margin-bottom: 1em">
+          <label value="&naturalSize.label;"/>
+          <label id="naturalWidthLabel" value="0"/>
+          <label value="x"/>
+          <label id="naturalHeightLabel" value="0"/>
+          <label value="&pixels.label;"/>
+        </hbox>
         <hbox>
           <grid>
             <columns><column/><column/></columns>
@@ -113,10 +130,29 @@
           <button label="&resetSize.label;" id="resetSizeButton"
                   disabled="true"
                   oncommand="PreviewImageLoaded()"/>
-        </hbox> 
+        </hbox>
       </vbox>
 
       <vbox>
+        <grid>
+          <columns><column/><column/><column/><column flex="1"/><column/><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&horizMargin.label;"/>
+              <textbox size="3" type="number" id="horizMarginTextbox"/>
+              <label value="&pixels.label;"/>
+              <spacer/>
+              <label value="Vertical margin:"/>
+              <textbox size="3" type="number" id="vertMarginTextbox"/>
+              <label value="&pixels.label;"/>
+            </row>
+            <row align="center">
+              <label value="&borderWidth.label;"/>
+              <textbox size="3" type="number" id="borderWidthTextbox"/>
+              <label value="&pixels.label;"/>
+            </row>
+          </rows>
+        </grid>
         <csstoggler id="cssToggler"
                     constraints="imageURLTextbox,alternateTextTextbox"
                     controls="okButton">
@@ -161,6 +197,31 @@
 	        </hbox>
         </csstoggler>
       </vbox>
+
+      <!-- linking -->
+      <vbox>
+        <description>&linkTarget.label;</description>
+        <hbox align="center">
+	        <textbox flex="1"
+	                 id="linkTextbox"
+	                 oninput="ValidateEmail(this)"/>
+          <filepickerbutton id="filepickerFileButton"
+                            control="linkTextbox"
+                            mode="0"
+                            oncommand="CallBackFromLinkFilePicker()"
+                            title="&selectFileButton.label;"/>
+        </hbox>
+        <hbox align="center">
+          <checkbox id="relativeLinkURLCheckbox"
+                    disabled="true"
+                    oncommand="ToggleRelativeOrAbsoluteLink()"
+                    label="&relativeURL.label;"/>
+          <label value="&documentMustBeSaved.label;"
+                 disabled="true"
+                 id="relativeLinkURLCheckboxWarning"/>
+        </hbox>
+        <checkbox id="emailCheckbox" label="This is an email address"/>
+      </vbox>      
     </tabpanels>
   </tabbox>
 

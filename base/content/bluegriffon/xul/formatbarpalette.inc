@@ -141,4 +141,6 @@
     <toolbarbutton id="columnsButton" observes="cmd_columns" label="&columnsToolbarCmd.label;"
                    tooltiptext="&columnsToolbarCmd.tooltip;"/>
 
+    <toolbarbutton id="rotateButton" observes="cmd_renderedHTMLEnabler" label="Rotate" tooltiptext="Rotate"
+                   type="checkbox" oncommand="CSSRotationsHandler.toggle(this)"/>
   </toolbarpalette>

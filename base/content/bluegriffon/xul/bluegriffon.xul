@@ -100,7 +100,7 @@
              mode="full"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,ClassButtonsBox,FontFaceSelectBox,separator,dtButton,ddButton"/>
+             defaultset="spacer,ClassButtonsBox,FontFaceSelectBox,separator,dtButton,ddButton, rotateButton"/>
     <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 

@@ -50,3 +50,6 @@
 
 <!ENTITY classList.label "Class:">
 <!ENTITY idList.label "ID:">
+
+<!ENTITY uniqueId.label "Unique ID">
+<!ENTITY reusableClass.label "Reusable class">

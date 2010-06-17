@@ -39,6 +39,7 @@ Components.utils.import("resource://gre/modules/urlHelper.jsm");
 Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/l10nHelper.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
 
 var EXPORTED_SYMBOLS = ["FileUtils"];
 
@@ -62,6 +63,7 @@ var FileUtils = {
   // throws an error or returns true if user attempted save; false if user canceled save
   saveDocument: function(aSaveAs, aSaveCopy, aMimeType)
   {
+    HandlersManager.hideAllHandlers();
     var editor = EditorUtils.getCurrentEditor();
     if (!aMimeType || aMimeType == "" || !editor)
       throw NS_ERROR_NOT_INITIALIZED;

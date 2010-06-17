@@ -1,3 +1,4 @@
+  <script type="application/x-javascript" src="chrome://inspector/content/hooks.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diInnerHtmlChangedTxn.js"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
@@ -17,5 +18,6 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/htmlParser.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/recentPages.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/rotate.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/js/cssRotations.js"/>
 
-  <script type="application/x-javascript" src="chrome://inspector/content/hooks.js"/>

@@ -71,7 +71,7 @@
 <commandset id="selectionBasedCommands"
             commandupdater="true"
             events="style,create"
-            oncommandupdate="ComposerCommands.updateSelectionBased(this, event)">
+            oncommandupdate="/*ComposerCommands.updateSelectionBased(this, event)*/">
   <command id="cmd_selectionChanged"/>
 </commandset>
 

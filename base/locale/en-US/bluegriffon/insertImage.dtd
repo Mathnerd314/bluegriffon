@@ -6,7 +6,7 @@
 
 <!ENTITY imageLocation.label "Image location:">
 <!ENTITY selectImageButton.label "Select Image">
-<!ENTITY relativeURL.label "URL is relative to page location">
+<!ENTITY relativeURL.label "Make URL relative to page location">
 <!ENTITY title.label "Title:">
 <!ENTITY alternateText.label "Mandatory alternate text:">
 <!ENTITY documentMustBeSaved.label "(document must be saved to enable this feature)">
@@ -23,3 +23,13 @@
 <!ENTITY rotation.label "Rotation">
 <!ENTITY horizPosition.label "Horiz. origin:">
 <!ENTITY vertPosition.label "Vert. origin:">
+
+<!ENTITY naturalSize.label "Natural Size:">
+<!ENTITY pixels.label "pixels">
+
+<!ENTITY horizMargin.label "Horizontal margin:">
+<!ENTITY vertMargin.label "Vertical margin:">
+<!ENTITY borderWidth.label "Border width:">
+
+<!ENTITY linkTarget.label "Enter a URL, a mail address or select an anchor in the document">
+<!ENTITY selectFileButton.label "Select File">

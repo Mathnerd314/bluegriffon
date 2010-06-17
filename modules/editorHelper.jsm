@@ -546,6 +546,19 @@ var EditorUtils = {
     } catch (e) {}
   },
 
+  createAnonymousElement: function(tag, parentNode, anonClass, isCreatedHidden)
+  {
+    var a = EditorUtils.getCurrentEditor().createAnonymousElement(tag,
+								     parentNode ? parentNode : EditorUtils.getCurrentDocument().body,
+								     anonClass, isCreatedHidden);
+    return a;
+  },
+
+  deleteAnonymousElement: function(node, parent)
+  {
+    //var ps = EditorUtils.
+  },
+
   get activeViewActive()    { return this.mActiveViewActive; },
   set activeViewActive(val) { this.mActiveViewActive = val; }
 };

@@ -60,8 +60,12 @@ _FILES = \
 	$(srcdir)/res/bespin.html \
 	$(srcdir)/res/html_transitional.html \
 	$(srcdir)/res/html_strict.html \
-	$(srcdir)/res/xhtml_transitional.html \
-	$(srcdir)/res/xhtml_strict.html \
+	$(srcdir)/res/xhtml_transitional.xhtml \
+	$(srcdir)/res/xhtml_strict.xhtml \
+	$(srcdir)/res/html5.html \
+	$(srcdir)/res/xhtml5.xhtml \
+	$(srcdir)/res/rotatorCenterBG.png \
+	$(srcdir)/res/rotate_icon.png \
 	$(NULL)
 
 libs::

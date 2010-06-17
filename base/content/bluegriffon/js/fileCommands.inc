@@ -1,3 +1,4 @@
+
 var cmdOpen =
 {
   isCommandEnabled: function(aCommand, dummy)
@@ -41,9 +42,7 @@ var cmdSave =
     {
       // FinishHTMLSource();
       // for the time being, we use the HTML serializer
-      var editorMimeType = editor.contentsMIMEType;
-      if (editorMimeType == "application/xhtml+xml")
-        editorMimeType = "text/html";
+      var editorMimeType = EditorUtils.getCurrentDocument().contentType;
 
       result = FileUtils.saveDocument(
                  UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
@@ -71,7 +70,8 @@ var cmdSaveAs =
     if (editor)
     {
       // FinishHTMLSource();
-      var result = FileUtils.saveDocument(true, false, editor.contentsMIMEType);
+      var editorMimeType = EditorUtils.getCurrentDocument().contentType;
+      var result = FileUtils.saveDocument(true, false, editorMimeType);
       window.content.focus();
       return result;
     }

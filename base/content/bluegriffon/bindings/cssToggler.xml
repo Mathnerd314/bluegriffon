@@ -73,26 +73,18 @@
       <xul:groupbox anonid="idBox" collapsed="true">
         <xul:caption label="&styleRule.label;"/>
         <xul:description>&mandatoryId.description;</xul:description>
-        <xul:grid flex="1">
-          <xul:columns><xul:column /><xul:column flex="1"/><xul:column/></xul:columns>
-          <xul:rows>
-            <xul:row align="center">
-              <xul:label value="&idList.label;"/>
-              <xul:textbox anonid="idTextbox" flex="1"
-                           oninput="onIdOrClassBoxChange()"/>
-              <xul:button label="&pickOne.button;"
-                          oncommand="pickId(mIdTextBox)"/>
-            </xul:row>
-            <xul:row align="center">
-              <xul:label value="&classList.label;"/>
-              <xul:textbox anonid="classTextbox" flex="1"
-                           oninput="onIdOrClassBoxChange()"/>
-              <xul:button label="&pickOne.button;"
-                          oncommand="pickId(mClassTextBox)"/>
-            </xul:row>
-          </xul:rows>
-        </xul:grid>
-        <xul:label value="&existingId.alert;" class="hiddenAlert" anonid="existingIdAlert"/>
+        <xul:radiogroup anonid="idOrClassRadiogroup" orient="horizontal">
+          <xul:radio label="&uniqueId.label;" value="id"/>
+          <xul:radio label="&reusableClass.label;" value="class"/>
+        </xul:radiogroup>
+        <xul:hbox align="center" class="indent">
+          <xul:label value="&idList.label;"/>
+          <xul:textbox anonid="idTextbox" flex="1"
+                       oninput="onIdOrClassBoxChange()"/>
+          <xul:button label="&pickOne.button;"
+                      oncommand="pickId(mIdTextBox)"/>
+        </xul:hbox>
+       <xul:label value="&existingId.alert;" class="hiddenAlert" anonid="existingIdAlert"/>
       </xul:groupbox>
       <xul:groupbox anonid="reuseStylesBox" collapsed="true">
         <xul:caption label="&reuseExistingStyle.label;"/>
@@ -137,9 +129,9 @@
       <property name="newID"
                 readonly="true"
                 onget="return this.mIdTextBox.value" />
-      <property name="newClass"
+      <property name="classOrId"
                 readonly="true"
-                onget="return this.mClassTextBox.value" />
+                onget="return this.mIdOrClassRadiogroup.value" />
 
 
       <property name="mCSSPolicy"
@@ -154,13 +146,14 @@
                 readonly="true"
                 onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'idBox')" />
 
+      <property name="mIdOrClassRadiogroup"
+                readonly="true"
+                onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'idOrClassRadiogroup')" />
+
       <property name="mIdTextBox"
                 readonly="true"
                 onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'idTextbox')" />
 
-      <property name="mClassTextBox"
-                readonly="true"
-                onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'classTextbox')" />
 
       <property name="mReuseStylesBox"
                 readonly="true"
@@ -214,7 +207,7 @@
                 document.documentElement.getButton("accept").setAttribute("disabled", "true");
               break;
             case 2:
-              if (constraints && (this.mIdTextBox.value || this.mClassTextBox.value))
+              if (constraints && this.mIdTextBox.value)
                 document.documentElement.getButton("accept").removeAttribute("disabled");
               else
                 document.documentElement.getButton("accept").setAttribute("disabled", "true");
@@ -323,11 +316,11 @@
           // make the alert on existing ID visible by default
           this.mExistingIdAlert.removeAttribute("class");
 
-          if (this.mIdTextBox.value || this.mClassTextBox.value)
+          if (this.mIdTextBox.value)
           {
             // ah, we have at least class or ID... if we have an ID, is there already
             // an element with that ID in the document ?
-            var elt = this.mIdTextBox.value ?
+            var elt = (this.classOrId == "id") ?
                         EditorUtils.getCurrentDocument().getElementById(this.mIdTextBox.value)
                         : null;
             if (!elt)

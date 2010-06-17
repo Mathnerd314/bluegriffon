@@ -87,3 +87,6 @@ pref("bluegriffon.structurebar.lang.show", false);
 // updates
 pref("bluegriffon.updates.check.enabled", true);
 pref("bluegriffon.updates.frequency", "launch");
+
+pref("html5.enable", true);
+pref("bluegriffon.defaults.doctype", "kXHTML5");

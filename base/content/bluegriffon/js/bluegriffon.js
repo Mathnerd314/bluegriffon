@@ -42,6 +42,7 @@ Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/fileHelper.jsm");
 Components.utils.import("resource://gre/modules/l10nHelper.jsm");
 Components.utils.import("resource://gre/modules/projectManager.jsm");
+Components.utils.import("resource://gre/modules/handlersManager.jsm");
 
 #include blanks.inc
 
@@ -66,15 +67,30 @@ function OpenNewWindow(aURL)
   window.delayedOpenWindow("chrome://bluegriffon/content/xul/bluegriffon.xul", "chrome,all,dialog=no", null, aURL);
 }
 
+function GetPreferredNewDocumentURL()
+{
+  var url = window["kHTML_TRANSITIONAL"];
+  try {
+    urlId = GetPrefs().getCharPref("bluegriffon.defaults.doctype");
+    url = window[urlId]; 
+  }
+  catch(e) {}
+  return url;
+}
+
 function NewDocument(aEvent)
 {
-  OpenFile(kHTML_TRANSITIONAL, true);
+  var url = GetPreferredNewDocumentURL();
+
+  OpenFile(url, true);
   if (aEvent) aEvent.stopPropagation();
 }
 
 function NewDocumentInNewWindow(aEvent)
 {
-  OpenFile(kHTML_TRANSITIONAL, false);
+  var url = GetPreferredNewDocumentURL();
+
+  OpenFile(url, false);
   if (aEvent) aEvent.stopPropagation();
 }
 
@@ -560,16 +576,18 @@ function ToggleViewMode(aTabsElement)
   var editor = EditorUtils.getCurrentEditor();
   if (mode == "source")
   {
+    HandlersManager.hideAllHandlers();
+
     flags = 1 << 1; // OutputFormatted
     flags |= 1 << 5; // OutputWrap
     //flags |= 1 << 2; // OutputRaw
     flags |= 1 << 10; // OutputLF
 
-    var mimeType = EditorUtils.isXHTMLDocument() ? "application/xhtml+xml" : "text/html";
+    var mimeType = EditorUtils.getCurrentDocument().contentType;
     var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + mimeType]
                    .createInstance(Components.interfaces.nsIDocumentEncoder);
     encoder.setCharset("UTF-8");
-    encoder.init(EditorUtils.getCurrentDocument(), "application/xhtml+xml", flags);
+    encoder.init(EditorUtils.getCurrentDocument(), mimeType, flags);
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();

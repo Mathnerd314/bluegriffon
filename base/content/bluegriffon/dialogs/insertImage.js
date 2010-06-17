@@ -1,6 +1,7 @@
 Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/projectManager.jsm");
 
 function Startup()
 {
@@ -12,6 +13,8 @@ function Startup()
   if (docUrlScheme && docUrlScheme != "resource") {
     gDialog.relativeURLCheckbox.disabled = false;
     gDialog.relativeURLCheckboxWarning.hidden = true;
+    gDialog.relativeLinkURLCheckbox.disabled = false;
+    gDialog.relativeLinkURLCheckboxWarning.hidden = true;
   }
 
   gDialog.enableRotationCheckbox.checked = false;
@@ -20,6 +23,12 @@ function Startup()
 
   gDialog.cssToggler.init();
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
+  var nproj = 0;
+  if ("ProjectManager" in window)
+    for (var i in ProjectManager.projects)
+      nproj++
+  gDialog.selectfromProjectButton.hidden = (nproj == 0);
+  window.sizeToContent();
 }
 
 function onAccept()
@@ -38,8 +47,8 @@ function onAccept()
   // style
   var useCSS = CssUtils.getUseCSSPref();
   var angle = parseInt(gDialog.rotator.value);
-  var hCenter = gDialog.horizPosition.value + (gDialog.horizPositionUnit.value == "px") ? "px" : "%";
-  var vCenter = gDialog.vertPosition.value + (gDialog.vertPositionUnit.value == "px") ? "px" : "%";
+  var hCenter = gDialog.horizPosition.value + ((gDialog.horizPositionUnit.value == "px") ? "px" : "%");
+  var vCenter = gDialog.vertPosition.value + ((gDialog.vertPositionUnit.value == "px") ? "px" : "%");
 
   var imgElement = EditorUtils.getCurrentDocument().createElement("img");
   imgElement.setAttribute("src", url);
@@ -68,15 +77,15 @@ function onAccept()
         if (h != gNaturalHeight)
           styleAttr += "height: " + h + "px;" ;
 
-        imgElement.setAttribute("style", styleAttr)
+        if (styleAttr)
+          imgElement.setAttribute("style", styleAttr)
       }
       break;
 
     case 2: // use embedded stylesheets
       {
         var cssToggler = gDialog.cssToggler;
-        var selectorText = (cssToggler.newID ?   '#' + cssToggler.newID : "") +
-                           (cssToggler.newClass? '.' + cssToggler.newClass : "");
+        var selectorText = (cssToggler.classOrId == "id" ?   '#' : ".") + cssToggler.newID;
         var properties = [];
         if (angle)
           properties.push({ priority: false,
@@ -101,10 +110,11 @@ function onAccept()
         CssUtils.addRuleForSelector(EditorUtils.getCurrentDocument(),
                                     selectorText,
                                     properties);
-        if (cssToggler.newID)
-          imgElement.setAttribute("id", cssToggler.newID);
-        if (cssToggler.newClass)
-          imgElement.setAttribute("class", cssToggler.newClass);
+        if (cssToggler.classOrId == "id")
+          imgElement.setAttribute("id", cssToggler.mIdTextBox.value);
+        else {
+          imgElement.setAttribute("class", cssToggler.mIdTextBox.value);
+        }
 
       }
       break;
@@ -117,7 +127,8 @@ function onAccept()
         if (h != gNaturalHeight)
           styleAttr += "height: " + h + "px;" ;
 
-        imgElement.setAttribute("style", styleAttr)
+        if (styleAttr)
+          imgElement.setAttribute("style", styleAttr)
 
 	      if (gDialog.cssToggler.reusedID)
 	        imgElement.setAttribute("id", gDialog.cssToggler.reusedID);
@@ -144,6 +155,7 @@ function LoadImage()
   img.addEventListener("load", PreviewImageLoaded, true);
   img.setAttribute("src", UrlUtils.makeAbsoluteUrl(gDialog.imageURLTextbox.value.trim()));
   UpdateButtons();
+  gDialog.alternateTextTextbox.focus();
 }
 
 function UpdateButtons()
@@ -202,6 +214,9 @@ function PreviewImageLoaded()
   gNaturalHeight = gDialog.previewImage.naturalHeight;
   gPreserveRatio = true;
   gRatio = gNaturalHeight / gNaturalWidth;
+
+  gDialog.naturalWidthLabel.setAttribute("value", gNaturalWidth);
+  gDialog.naturalHeightLabel.setAttribute("value", gNaturalHeight);
 
   gDialog.preserveRatioButton.setAttribute("preserveRatio", "true");
   gDialog.widthTextbox.value = gNaturalWidth;
@@ -340,3 +355,69 @@ function ResetRotation()
   gDialog.vertPositionUnit.value = "percent";
 }
 
+function OpenInProjectPicker()
+{
+  var rv = { value: "" };
+  window.openDialog("chrome://projectmanager/content/dialogs/inprojectPicker.xul","_blank",
+                    "chrome,modal,titlebar,resizable=yes", rv, "images");  
+  gDialog.imageURLTextbox.value = rv.value;
+  gDialog.relativeURLCheckbox.checked = false;
+  LoadImage();
+  gDialog.alternateTextTextbox.focus();
+}
+
+function ValidateEmail(aElt) 
+{ 
+ var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/  ;
+ if (aElt.value.match(re)) {
+   gDialog.emailCheckbox.checked = true;
+   gDialog.relativeLinkURLCheckbox.checked = false;
+   gDialog.relativeLinkURLCheckbox.disabled = true;
+ }
+ else {
+   gDialog.emailCheckbox.checked = false;
+   gDialog.relativeLinkURLCheckbox.disabled = false;
+ }
+}
+
+function MakeRelativeUrlForLink()
+{
+  var spec = gDialog.linkTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeRelativeUrl(spec);
+    gDialog.linkTextbox.value = spec;
+    gDialog.relativeLinkURLCheckbox.checked = true;
+  }
+}
+
+function ToggleRelativeOrAbsoluteLink()
+{
+  if (gDialog.relativeLinkURLCheckbox.checked) {
+    MakeRelativeUrlForLink();
+  }
+  else {
+    MakeAbsoluteUrlForLink();
+  }
+}
+
+function MakeAbsoluteUrlForLink()
+{
+  var spec = gDialog.linkTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeAbsoluteUrl(spec);
+    gDialog.linkTextbox.value = spec;
+    gDialog.relativeLinkURLCheckbox.checked = false;
+  }
+}
+
+function CallBackFromLinkFilePicker()
+{
+ gDialog.emailCheckbox.checked = false;
+ gDialog.relativeLinkURLCheckbox.disabled = false;
+ gDialog.relativeLinkURLCheckbox.checked = false;
+ MakeRelativeUrlForLink();
+}

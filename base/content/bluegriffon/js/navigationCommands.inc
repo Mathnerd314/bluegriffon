@@ -45,7 +45,8 @@ var cmdNew =
   doCommandParams: function(aCommand, aParams, aRefCon) {},
   doCommand: function(aCommand)
   {
-    OpenFile(kHTML_TRANSITIONAL, true);
+    var url = GetPreferredNewDocumentURL();
+    OpenFile(url, true);
   }
 };
 

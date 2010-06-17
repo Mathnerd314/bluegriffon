@@ -22,11 +22,16 @@
   <groupbox>
     <caption label="&language.label;"/>
     <radiogroup id="languageRadiogroup"
+                oncommand="onDoctypeToggle(this)"
                 orient="horizontal">
       <radio label="&html.label;"
              value="HTML"/>
       <radio label="&xhtml.label;"
              value="XHTML"/>
+      <radio label="&html5.label;"
+             value="HTML5"/>
+      <radio label="&xhtml5.label;"
+             value="XHTML5"/>
     </radiogroup>
   </groupbox>
   <groupbox>
@@ -34,8 +39,10 @@
     <radiogroup id="doctypeRadiogroup"
                 orient="horizontal">
       <radio label="&transitional.label;"
+             id="transitionalRadio"
              value="TRANSITIONAL"/>
       <radio label="&strict.label;"
+             id="strictRadio"
              value="STRICT"/>
     </radiogroup>
   </groupbox>

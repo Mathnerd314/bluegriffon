@@ -233,3 +233,12 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns-disabled.png");
 }
 
+
+
+
+
+
+
+#rotateButton {
+  list-style-image: url("resource://gre/res/rotate_icon.png");
+}
