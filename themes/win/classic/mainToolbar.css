@@ -1,0 +1,124 @@
+
+#MainToolbar {
+  padding: 4px;
+}
+
+#MainToolbar toolbarbutton,
+#CustomizeToolbarWindow toolbarbutton,
+#CustomizeToolbarSheet toolbarbutton {
+  -moz-image-region: rect(0px 32px 32px 0px);
+  -moz-box-orient: vertical;
+}
+
+#MainToolbar .toolbarbutton-icon {
+  margin: 2px;
+}
+
+#MainToolbar .toolbarbutton-text {
+  padding-bottom: 4px;
+}
+
+#MainToolbar[mode="icons"] .toolbarbutton-text {
+  display: none;
+}
+
+#MainToolbar[mode="text"] .toolbarbutton-icon,
+#MainToolbar[mode="text"] #composer-throbber {
+  display: none;
+}
+
+#MainToolbar[mode="text"] .toolbarbutton-text {
+  padding: 4px;
+}
+
+#MainToolbar toolbarbutton:hover,
+#MainToolbar toolbarbutton:hover:active {
+  -moz-image-region: rect(32px 32px 64px 0px);
+}
+
+#MainToolbar toolbarbutton[disabled="true"]
+{
+  -moz-image-region: rect(64px 32px 96px 0px);
+}
+
+#newButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/new.png");
+}
+
+#openButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/open.png");
+}
+
+#stopButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/stop.png");
+}
+
+#tableButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/table.png");
+}
+
+#saveButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/save.png");
+}
+
+#imageButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/image.png");
+}
+
+/************ SMALL ICONS **************/
+
+#MainToolbar[iconsize="small"] toolbarbutton {
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+
+#MainToolbar[iconsize="small"] toolbarbutton:hover,
+#MainToolbar[iconsize="small"] toolbarbutton:hover:active {
+  -moz-image-region: rect(24px 24px 48px 0px);
+}
+
+#MainToolbar[iconsize="small"] toolbarbutton[disabled="true"]
+{
+  -moz-image-region: rect(48px 24px 72px 0px);
+}
+
+#MainToolbar[iconsize="small"] #newButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/new.png");
+}
+
+#MainToolbar[iconsize="small"] #openButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/open.png");
+}
+
+#MainToolbar[iconsize="small"] #stopButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/stop.png");
+}
+
+#MainToolbar[iconsize="small"] #tableButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/table.png");
+}
+
+#MainToolbar[iconsize="small"] #saveButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/save.png");
+}
+
+#MainToolbar[iconsize="small"] #imageButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/image.png");
+}
+
+/***************** THROBBER **************/
+
+#composer-throbber {
+  list-style-image: url('chrome://bluegriffon/skin/mainToolbar/logo.png');
+}
+
+#composer-throbber:hover {
+  list-style-image: url('chrome://bluegriffon/skin/mainToolbar/logo-hover.png');
+}
+
+#MainToolbar[iconsize="small"] #composer-throbber {
+  list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo.png');
+}
+
+#MainToolbar[iconsize="small"] #composer-throbber:hover {
+  list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo-hover.png');
+}

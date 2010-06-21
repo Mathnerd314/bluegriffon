@@ -1,0 +1,12 @@
+csstoggler {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/cssToggler.xml#cssToggler');
+  -moz-box-orient: vertical;
+}
+
+ecolorpicker {
+	-moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
+}
+
+filepickerbutton {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/filepickerbutton.xml#filepickerbutton');
+}
