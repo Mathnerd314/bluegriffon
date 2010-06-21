@@ -144,4 +144,48 @@ grippy[disabled="true"] {
   margin-bottom: 2em;
 }
 
+#modeTabbox tab {
+  -moz-appearance: none;
+  font-size: smaller;
+  text-transform:uppercase;
+  padding: 0px;
+  min-width: 20px;
+  border-top: 4px solid #ccc;
+  border-left: 4px solid #ccc;
+  border-right: 4px solid #ccc;
+  border-bottom: 4px solid #aaa;
+  -moz-border-top-colors:#aaa #fff #fff #fff;
+  -moz-border-right-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-left-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-bottom-colors:#aaa #dedede #efefef #fafafa;
+  background-color: #fafafa;
+}
 
+#modeTabbox tab.left,
+#modeTabbox tab:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topleft: 0.5em;
+  -moz-border-radius-bottomleft: 0.5em;
+}
+
+#modeTabbox tab.right,
+#modeTabbox tab:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topright: 0.5em;
+  -moz-border-radius-bottomright: 0.5em;
+}
+
+#modeTabbox tab:not([disabled]):active {
+  -moz-border-top-colors:#aaa #ccc #ccc #ccc ;
+  -moz-border-right-colors:#aaa #ccc #ccc #ccc ;
+  -moz-border-left-colors:#aaa #ccc #ccc #ccc ;
+  -moz-border-bottom-colors:#aaa #ccc #ccc #ccc ;
+  background-color: #ccc;
+  color: white;
+}
+
+#modeTabbox tab[disabled] {
+  opacity: 0.5;
+}
+
+#modeTabbox tab:not([label]) image {
+  margin-left: 6px;
+}
