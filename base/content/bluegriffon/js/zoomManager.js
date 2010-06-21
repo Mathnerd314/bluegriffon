@@ -109,7 +109,7 @@ var BGZoomManager = {
   enlarge: function BGZoomManager_enlarge(aMenulist)
   {
     var zoomValues = this.zoomValues();
-    var currentZoom = Math.floor(this.getCurrentZoom() * 100) / 100;
+    var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
     if (i >= 0 && i < zoomValues.length - 1)
     {
@@ -131,7 +131,7 @@ var BGZoomManager = {
   reduce: function BGZoomManager_reduce(aMenulist)
   {
     var zoomValues = this.zoomValues();
-    var currentZoom = Math.floor(this.getCurrentZoom() * 100) / 100;
+    var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
     if (i > 0)
     {
