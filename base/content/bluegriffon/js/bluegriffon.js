@@ -757,3 +757,18 @@ function OpenPreferences()
   var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
   window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
 }
+
+function UpdateSidebarsMenuStatus()
+{
+  gDialog.leftSidebarMenuitem.setAttribute("checked",  (gDialog.splitter1.getAttribute("state") != "collapsed"));
+  gDialog.rightSidebarMenuitem.setAttribute("checked", (gDialog.splitter2.getAttribute("state") != "collapsed"));
+}
+
+function ToggleSidebarCollapsing(aElt, aId)
+{
+  var checked = aElt.getAttribute("checked");
+  if (checked == "true")
+    gDialog[aId].removeAttribute("state");
+  else
+    gDialog[aId].setAttribute("state", "collapsed");
+}

@@ -54,6 +54,16 @@
         </menu>
         <menuitem label="&viewStatusbar.label;"
                   oncommand="BGToolbarManager.goToggleToolbar('statusbar')" />
+        <menu label="&sidebars.label;">
+          <menupopup onpopupshowing="UpdateSidebarsMenuStatus()">
+            <menuitem label="&leftSidebar.label;" type="checkbox"
+                      oncommand="ToggleSidebarCollapsing(this, 'splitter1')"
+                      id="leftSidebarMenuitem"/>
+            <menuitem label="&rightSidebar.label;" type="checkbox"
+                      oncommand="ToggleSidebarCollapsing(this, 'splitter2')"
+                      id="rightSidebarMenuitem"/>
+          </menupopup>
+        </menu>
       </menupopup>
     </menu>
 
