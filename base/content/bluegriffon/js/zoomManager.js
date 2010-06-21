@@ -115,7 +115,7 @@ var BGZoomManager = {
     {
       var value = zoomValues[i+1];
       this.setCurrentZoom(value);
-      aMenulist.value = value * 100 + "%";
+      aMenulist.value = Math.round(value * 100) + "%";
     }
     else if (i == -1)
       for (var index = 0; index < zoomValues.length; index++)
@@ -123,7 +123,7 @@ var BGZoomManager = {
         {
           var value = zoomValues[index];
           this.setCurrentZoom(value);
-          aMenulist.value = value * 100 + "%";
+          aMenulist.value = Math.round(value * 100) + "%";
           return;
         }
   },
@@ -137,7 +137,7 @@ var BGZoomManager = {
     {
       var value = zoomValues[i-1];
       this.setCurrentZoom(value);
-      aMenulist.value = value * 100 + "%";
+      aMenulist.value = Math.round(value * 100) + "%";
     }
     else if (i == -1)
       for (var index = 0; index < zoomValues.length; index++)
@@ -146,7 +146,7 @@ var BGZoomManager = {
         {
           var value = zoomValues[index];
           this.setCurrentZoom(value);
-          aMenulist.value = value * 100 + "%";
+          aMenulist.value = Math.round(value * 100) + "%";
           return;
         }
   },
