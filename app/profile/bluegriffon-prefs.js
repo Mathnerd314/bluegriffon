@@ -56,7 +56,7 @@ pref("bluegriffon.css.policy", 0); // 0: HTML Attr; 1: Inline styles; 2: embedde
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
 
-pref("bluegriffon.zoom.default", "1.5");
+pref("bluegriffon.zoom.default", "1");
 
 pref("bluegriffon.history.url_maximum", 10);
 
