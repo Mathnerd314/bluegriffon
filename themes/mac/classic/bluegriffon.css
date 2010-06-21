@@ -144,4 +144,49 @@ grippy[disabled="true"] {
   margin-bottom: 2em;
 }
 
+.multiButton {
+  -moz-appearance: none;
+  font-size: smaller;
+  text-transform:uppercase;
+  padding: 0px;
+  min-width: 20px;
+  border-top: 4px solid #ddd;
+  border-left: 4px solid #ddd;
+  border-right: 4px solid #ddd;
+  border-bottom: 4px solid #aaa;
+  -moz-border-top-colors:#aaa #fff #fff #fff;
+  -moz-border-right-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-left-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-bottom-colors:#aaa #dedede #efefef #fafafa;
+  background-color: #fafafa;
+}
 
+.multiButton.left,
+.multiButton:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topleft: 0.5em;
+  -moz-border-radius-bottomleft: 0.5em;
+}
+
+.multiButton.right,
+.multiButton:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topright: 0.5em;
+  -moz-border-radius-bottomright: 0.5em;
+}
+
+.multiButton:not([disabled]):active,
+.multiButton[selected="true"]:not([disabled]) {
+  -moz-border-top-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-right-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-left-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-bottom-colors:#aaa #ddd #ddd #ddd ;
+  background-color: #ddd;
+  color: black;
+}
+
+.multiButton[disabled] {
+  opacity: 0.5;
+}
+
+.multiButton:not([label]) image {
+  margin-left: 6px;
+}
