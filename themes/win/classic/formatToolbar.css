@@ -42,7 +42,7 @@
 #FormatToolbox toolbarbutton {
   margin: 2px;
   -moz-appearance: none;
-  
+  padding: 0px ! important;  
 }
 
 #FormatToolbox toolbarbutton .toolbarbutton-icon {
