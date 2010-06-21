@@ -141,6 +141,18 @@ function InitDialog()
   gDialog.underlineLinks.checked = gPrefs.getBoolPref("bluegriffon.display.underline_links");
   gDialog.userDefinedColors.checked = !gUseSystemColors;
   EnableUserDefinedColorsControls();
+  ToggleDoctype(gDialog.languageRadiogroup);
+}
+
+function ToggleDoctype(aElt)
+{
+  if (!("strictRadio" in gDialog)) // sanity check
+    return;
+
+  var value = aElt.value;
+  var isHtml5 = (value == "HTML5" || value == "XHTML5");
+  SetEnabledElement(gDialog.transitionalRadio, !isHtml5);
+  SetEnabledElement(gDialog.strictRadio, !isHtml5);
 }
 
 function EnableUserDefinedColorsControls()
@@ -602,6 +614,8 @@ function Apply()
 
   /* character set */
   EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
+
+  window.close();
 }
 
 
@@ -621,13 +635,15 @@ function CreateNewDocument()
   document.persist("languageRadiogroup", "value");
   document.persist("doctypeRadiogroup", "value");
   document.persist("whereRadiogroup", "value");
-  
-  var docType = "k" +
-              gDialog.languageRadiogroup.value +
-              "_" +
-              gDialog.doctypeRadiogroup.value;
+
+  var value = gDialog.languageRadiogroup.value;
+  var isHtml5 = (value == "HTML5" || value == "XHTML5");
+
+  var docType = "k" + value +
+                (isHtml5 ? "" : "_" + gDialog.doctypeRadiogroup.value);
 
   w.OpenFile(w[docType], true);
+  return false;
 }
 
 function DocumentCreated()

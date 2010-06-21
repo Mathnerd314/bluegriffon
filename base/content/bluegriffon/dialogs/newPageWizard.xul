@@ -52,7 +52,7 @@
         title="&window.title;"
         onload="Startup()"
         onunload="Shutdown()"
-        onwizardfinish="CreateNewDocument()"
+        onwizardfinish="return CreateNewDocument();"
         height="350" width="450"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY">
@@ -85,11 +85,16 @@
 	  <groupbox>
 	    <caption label="&language.label;"/>
 	    <radiogroup id="languageRadiogroup"
-	                orient="horizontal">
+                  onselect="ToggleDoctype(this)"
+                  orient="horizontal">
 	      <radio label="&html.label;"
 	             value="HTML"/>
-	      <radio label="&xhtml.label;"
-	             value="XHTML"/>
+        <radio label="&xhtml.label;"
+               value="XHTML"/>
+        <radio label="&html5.label;"
+               value="HTML5"/>
+        <radio label="&xhtml5.label;"
+               value="XHTML5"/>
 	    </radiogroup>
 	  </groupbox>
 	  <groupbox>
@@ -97,9 +102,11 @@
 	    <radiogroup id="doctypeRadiogroup"
 	                orient="horizontal">
 	      <radio label="&transitional.label;"
-	             value="TRANSITIONAL"/>
+               id="transitionalRadio"
+               value="TRANSITIONAL"/>
 	      <radio label="&strict.label;"
-	             value="STRICT"/>
+               id="strictRadio"
+               value="STRICT"/>
 	    </radiogroup>
 	  </groupbox>
   </wizardpage>
