@@ -567,11 +567,20 @@ function OnKeyPressWhileChangingTag(event)
 }
 
 /************ VIEW MODE ********/
-function ToggleViewMode(aTabsElement)
+function ToggleViewMode(aElement)
 {
-  var mode =  aTabsElement.selectedItem.value;
-  if (mode == aTabsElement.getAttribute("previousMode"))
+  var mode =  aElement.getAttribute("value");
+  if (mode == aElement.parentNode.getAttribute("previousMode"))
     return;
+
+  var child = aElement.parentNode.firstChild;
+  while (child) {
+  	if (child == aElement)
+  	  child.setAttribute("selected", "true");
+  	else
+  	  child.removeAttribute("selected");
+  	child = child.nextSibling;
+  }
 
   var editor = EditorUtils.getCurrentEditor();
   if (mode == "source")
@@ -622,7 +631,7 @@ function ToggleViewMode(aTabsElement)
       }
     }
   }
-  aTabsElement.setAttribute("previousMode", mode);
+  aElement.parentNode.setAttribute("previousMode", mode);
 }
 
 function CloneElementContents(editor, sourceElt, destElt)

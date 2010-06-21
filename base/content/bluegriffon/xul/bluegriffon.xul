@@ -129,14 +129,23 @@
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>
       </hbox>
-      <tabbox id="modeTabbox">
-        <tabs onselect="ToggleViewMode(this)" peviousMode="wysiwyg">
-          <tab label="&wysiwygMode.label;" value="wysiwyg"
-               observes="cmd_renderedHTMLEnabler"/>
-          <tab label="&sourceMode.label;" value="source"
-               observes="cmd_renderedHTMLEnabler"/>
-        </tabs>
-      </tabbox>
+      <hbox id="modeTabbox">
+      	<spacer flex="1"/>
+      	<toolbarbutton class="multiButton left"
+      				   selected="true"
+      				   id="wysiwygModeButton"
+      				   label="&wysiwygMode.label;"
+      				   oncommand="ToggleViewMode(this)"
+      				   value="wysiwyg"
+      				   observes="cmd_renderedHTMLEnabler"/>
+      	<toolbarbutton class="multiButton right"
+      				   id="sourceModeButton"
+      				   label="&sourceMode.label;"
+      				   oncommand="ToggleViewMode(this)"
+      				   value="source"
+      				   observes="cmd_renderedHTMLEnabler"/>
+      	<spacer flex="1"/>
+      </hbox>
       <structurebar id="structurebar" orient="horizontal">
         <spacer id="structbarflexer" flex="1"/>
       </structurebar>
