@@ -67,6 +67,9 @@ function Shutdown()
 function Startup()
 {
   window.sizeToContent();
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
   GetUIElements();
   var w = EditorUtils.getCurrentEditorWindow();
   w.NotifierUtils.addNotifierCallback("documentCreated", DocumentCreated, this);

@@ -18,6 +18,10 @@ function Startup()
   GetUIElements();
   SetWidthTextBoxMax(null);
   gDialog.cssToggler.init();
+#ifndef XP_MACOSX
+  window.sizeToContent();
+  CenterDialogOnOpener();
+#endif
 }
 
 function SetWidthTextBoxMax(aElt)

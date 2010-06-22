@@ -38,6 +38,9 @@
 function Startup()
 {
   GetUIElements();
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function RunCleanup()

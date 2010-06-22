@@ -51,6 +51,9 @@ function Startup()
 
   gDialog.tabOrWindow.value = type;
   gDialog.prefs = GetPrefs();
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onChooseFile()

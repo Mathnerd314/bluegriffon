@@ -5,6 +5,9 @@ function Startup()
   GetUIElements();
   gRv = window.arguments[0];
   onDoctypeToggle(gDialog.languageRadiogroup);
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

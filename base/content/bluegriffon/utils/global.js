@@ -394,3 +394,17 @@ function OpenAppModalWindow(aParentWindow, aChromeURL, aWindowName, aResizable)
                   (aResizable ? ",resizable" : ""),
                 args);
 };
+
+function CenterDialogOnOpener()
+{
+  var opener = window.opener;
+  if (!opener || document.documentElement.hasAttribute("screenX"))
+    return;
+
+  var dialogWidth  = window.outerWidth;
+  var dialogHeight = window.outerHeight;
+  var centerX = opener.screenX + (opener.outerWidth / 2);
+  var centerY = opener.screenY + (opener.outerHeight / 2);
+
+  window.moveTo(centerX - (dialogWidth / 2), centerY - (dialogHeight / 2));
+}

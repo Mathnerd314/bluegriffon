@@ -54,8 +54,7 @@
         ondialogaccept="return onAccept()"
         ondialogcancel="return onCancel()"
         style="width: 40em;"
-        persist="screenX screenY"
-        screenX="24" screenY="24">
+        persist="screenX screenY">
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>

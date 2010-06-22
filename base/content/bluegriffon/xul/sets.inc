@@ -134,3 +134,6 @@
   <stringbundle id="bundlePreferences"  src="chrome://bluegriffon/locale/language.properties"/>
   <stringbundle id="bundleAccepted"     src="resource://gre/res/language.properties"/>
 </stringbundleset>
+
+<stringbundleset id="otherBundles"/>
+

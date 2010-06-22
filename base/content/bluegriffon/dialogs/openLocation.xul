@@ -50,8 +50,7 @@
         onload="Startup()"
         ondialogaccept="OpenFile()"
         style="width: 40em;"
-        persist="screenX screenY"
-        screenX="24" screenY="24">
+        persist="screenX screenY">
 
   <stringbundle id="openLocationBundle" src="chrome://bluegriffon/locale/openLocation.properties"/>
 

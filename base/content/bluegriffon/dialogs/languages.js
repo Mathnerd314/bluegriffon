@@ -79,6 +79,9 @@ var returnValue = null;
     returnValue = window.arguments[1];
   gOkButton = document.documentElement.getButton("accept");
   gOkButton.setAttribute("disabled", "true");
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()

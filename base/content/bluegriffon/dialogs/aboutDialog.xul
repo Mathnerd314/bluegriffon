@@ -62,9 +62,9 @@
 #endif
         creditslabel="&copyright;"
         aboutlabel="&aboutLink;"
-        persist="screenX screenY"
-        screenX="24" screenY="24">
+        persist="screenX screenY">
     
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/aboutDialog.js"/>
 
   <deck id="modes" flex="1">

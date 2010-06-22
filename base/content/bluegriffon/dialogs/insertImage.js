@@ -29,6 +29,9 @@ function Startup()
       nproj++
   gDialog.selectfromProjectButton.hidden = (nproj == 0);
   window.sizeToContent();
+#ifndef XP_MACOSX
+  CenterDialogOnOpener();
+#endif
 }
 
 function onAccept()
