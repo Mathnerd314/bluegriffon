@@ -79,8 +79,9 @@ var cmdColumnsCommand =
     while (node && doc.defaultView.getComputedStyle(node, "").getPropertyValue("display") != "block")
       node = node.parentNode;
     // we have null or a block
-    window.openDialog("chrome://bluegriffon/content/dialogs/columns.xul","_blank",
-                      "chrome,modal,titlebar", node);
+    if (node)
+      window.openDialog("chrome://bluegriffon/content/dialogs/columns.xul","_blank",
+                        "chrome,modal,titlebar,resizable=yes", node);
 
   }
 };

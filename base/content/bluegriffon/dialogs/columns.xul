@@ -2,6 +2,7 @@
 
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/columns.css" type="text/css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/columns.dtd">
 
@@ -18,7 +19,12 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/editorUtils.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/columns.js"/>
 
-  <groupbox>
+  <stringbundle id="bundleString"  src="chrome://bluegriffon/locale/columns.properties"/>
+
+  <checkbox label="&enableColumns.label;"
+            id="enableColumnsCheckbox"
+            oncommand="ToggleColumns(this)"/>
+  <groupbox class="indent">
     <caption label="&columnCount.label;"/>
     <hbox align="center">
       <textbox type="number"
@@ -26,12 +32,78 @@
                size="2"
                id="columnCount"/>
       <spacer flex="1"/>
-      <toolbarbutton image="chrome://bluegriffon/skin/icons/one-column.png"
+      <toolbarbutton id="oneColumnButton"
+                     tooltiptext="&oneColumn.label;"
                      oncommand="SetColumnCount(1)"/>
-      <toolbarbutton image="chrome://bluegriffon/skin/icons/two-columns.png"
+      <toolbarbutton id="twoColumnsButton"
+                     tooltiptext="&twoColumns.label;"
                      oncommand="SetColumnCount(2)"/>
-      <toolbarbutton image="chrome://bluegriffon/skin/icons/three-columns.png"
+      <toolbarbutton id="threeColumnsButton"
+                     tooltiptext="&threeColumns.label;"
                      oncommand="SetColumnCount(3)"/>
+    </hbox>
+    <hbox align="center">
+      <label value="&columnWidth.label;"
+             control="columnWidthLengthbox"
+             id="columnWidthLengthboxLabel"/>
+      <lengthbox id="columnWidthLengthbox"
+                 type="positive"
+                 units="%,px,em,pt,cm,mm,in,pc,ex"/>
+    </hbox>
+  </groupbox>
+
+  <groupbox class="indent">
+    <caption label="&columnGap.label;"/>
+    <hbox align="center">
+      <label value="&columnGapWidth.label;"
+             control="gapLengthbox"
+             id="gapLengthboxLabel"/>
+      <lengthbox id="gapLengthbox"
+                 type="positive"
+                 units="%,px,em,pt,cm,mm,in,pc,ex"/>
+    </hbox>
+  </groupbox>
+
+  <groupbox class="indent">
+    <caption label="&columnRule.label;"/>
+    <hbox align="center">
+      <label value="&columnRuleWidth.label;"
+             control="ruleLengthbox"
+             id="ruleLengthboxLabel"/>
+      <lengthbox id="ruleLengthbox"
+                 type="positive"
+                 units="%,px,em,pt,cm,mm,in,pc,ex"/>
+    </hbox>
+    <hbox align="center">
+      <label value="&columnRuleStyle.label;"
+             control="columnRuleStyleMenulist"
+             id="columnRuleStyleLabel"/>
+      <menulist id="columnRuleStyleMenulist">
+        <menupopup>
+          <menuitem label="&solid.label;" value="solid"/>
+          <menuitem label="&dashed.label;" value="dashed"/>
+          <menuitem label="&dotted.label;" value="dotted"/>
+          <menuitem label="&double.label;" value="double"/>
+          <menuitem label="&groove.label;" value="groove"/>
+          <menuitem label="&inset.label;" value="inset"/>
+          <menuitem label="&outset.label;" value="outset"/>
+          <menuitem label="&ridge.label;" value="ridge"/>
+          <menuseparator/>
+          <menuitem label="&none.label;" value="none"/>
+          <menuseparator/>
+          <menuitem label="&hidden.label;" value="hidden"/>
+        </menupopup>
+      </menulist>
+    </hbox>
+    <hbox align="center">
+      <label value="&columnRuleColor.label;"
+             control="columnRuleColorpicker"
+             id="columnRuleColorpickerLabel"/>
+      <ecolorpicker id="columnRuleColorpicker"
+                    color="transparent"
+                    colorObjectId="BorderColor"
+                    windowTitle="Column rule color"
+                    showTransparency="true"/>
     </hbox>
   </groupbox>
 </dialog>
