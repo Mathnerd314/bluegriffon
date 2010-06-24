@@ -1,0 +1,12 @@
+<!ENTITY window.title "CSS Policy">
+
+<!ENTITY throughId.label "Through a stylesheet, using a unique ID">
+<!ENTITY thoughId.warning "(changes will affect only the element carrying that ID)">
+<!ENTITY id.label "ID:">
+<!ENTITY throughClass.label "Through a stylesheet, using a reusable class">
+<!ENTITY thoughClass.warning "(changes will affect all elements carrying that class)">
+<!ENTITY class.label "Class:">
+<!ENTITY throughInlineStyles.label "Through inline styles, directly applied to the element">
+<!ENTITY thoughInline.warning "(changes will affect only the current element)">
+
+<!ENTITY pickButton.label "Pick one for me">

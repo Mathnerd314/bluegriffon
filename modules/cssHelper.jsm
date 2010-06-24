@@ -234,10 +234,12 @@ var CssUtils = {
       {
         var property = aDeclarations[j].property;
         var value = aDeclarations[j].value;
-        var priority = aDeclarations[j].priority;
-        str += "\n  " + property + ": " +
-               value +
-               (priority ? " !important;" : ";");
+        if (value) {
+	        var priority = aDeclarations[j].priority;
+	        str += "\n  " + property + ": " +
+	               value +
+	               (priority ? " !important;" : ";");
+        }
       }
       str += "\n}\n";
       stylesheet.ownerNode.firstChild.data = str;
@@ -249,11 +251,13 @@ var CssUtils = {
     {
         var property = aDeclarations[j].property;
         var value = aDeclarations[j].value;
-        var priority = aDeclarations[j].priority ? " !important" : "";
-
-        rule.style.setProperty(property,
-                               value,
-                               priority);
+        if (value) {
+	        var priority = aDeclarations[j].priority ? " !important" : "";
+	
+	        rule.style.setProperty(property,
+	                               value,
+	                               priority);
+        }
     }
 
     this.reserializeEmbeddedStylesheet(rule.parentStyleSheet);

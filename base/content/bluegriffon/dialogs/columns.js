@@ -72,7 +72,8 @@ function onAccept()
 
   var styles = {
     inline: true,
-    embedded: true,
+    embeddedID: true,
+    embeddedClass: true,
     values: [
               { property: "-moz-column-count",        value: mozColumnEnabled ? mozColumnCount : "" },
               { property: "-moz-column-width",        value: mozColumnEnabled ? mozColumnWidth : "" },
@@ -82,5 +83,9 @@ function onAccept()
               { property: "-moz-column-rule-color",   value: mozColumnEnabled ? mozColumnRuleColor : "" }
             ]
   };
+
+  window.openDialog("chrome://bluegriffon/content/dialogs/csspolicy.xul","_blank",
+                    "chrome,modal,titlebar", gNode, styles);
+
   return true;
 }
