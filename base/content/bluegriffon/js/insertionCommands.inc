@@ -38,7 +38,10 @@ var cmdInsertImageCommand =
 
   doCommand: function(aCommand)
   {
+    var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "img")
+      element = null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertImage.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };

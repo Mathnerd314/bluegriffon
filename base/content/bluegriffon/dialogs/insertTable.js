@@ -286,4 +286,3 @@ function SelectSize(cell)
   onAccept();
   window.close();
 }
-

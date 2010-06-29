@@ -90,10 +90,15 @@
     <handlers>
       <handler event="click" phase="capturing">
         <![CDATA[
-          if (!this.getAttribute("disabled"))
+          if (!this.getAttribute("disabled")) {
             this.open(this.getAttribute("colorObjectId"),
                       this.getAttribute("windowTitle"),
                       this.getAttribute("showTransparency"));
+            if (this.hasAttribute("oncommand")) {
+              var fn = new Function(this.getAttribute("oncommand"));
+              fn.call(this) == false;
+            }
+          }
         ]]>
       </handler>
     </handlers>

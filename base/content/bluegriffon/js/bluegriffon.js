@@ -645,7 +645,7 @@ function CloneElementContents(editor, sourceElt, destElt)
   var sourceChild = sourceElt.firstChild;
   while (sourceChild) {
     if (sourceChild.nodeType == Node.ELEMENT_NODE) {
-      destChild = editor.document.createElement(sourceChild.nodeName);
+      destChild = editor.document.createElement(sourceChild.nodeName.toLowerCase());
       if (sourceChild.innerHTML)
         destChild.innerHTML = sourceChild.innerHTML;
       editor.insertNode(destChild, destElt, destElt.childNodes.length);

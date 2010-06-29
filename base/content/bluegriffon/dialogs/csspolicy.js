@@ -121,12 +121,17 @@ function ClearStylesForClass(aClass)
 function ClearInlineStyles()
 {
   var s = gNode.style;
+  var oldStyle = gNode.getAttribute("style");
   for (var i = 0; i < gStyles.values.length; i++) {
     var property = gStyles.values[i].property;
     s.removeProperty(property);
   }
-  if (gNode.getAttribute("style") == "")
-    gNode.removeAttribute("style");
+  var newStyle = gNode.getAttribute("style");
+  gNode.setAttribute("style", oldStyle);
+  if (newStyle)
+    EditorUtils.getCurrentEditor().setAttribute(gNode, "style", newStyle);
+  else
+    EditorUtils.getCurrentEditor().removeAttribute(gNode, "style");
 }
 
 function onAccept()
@@ -138,6 +143,7 @@ function onAccept()
     case "inline":
 	    {
 	      var s = gNode.style;
+        var oldStyle = gNode.getAttribute("style");
         for (var i = 0; i < gStyles.values.length; i++) {
           var property = gStyles.values[i].property;
           var value    = gStyles.values[i].value;
@@ -146,8 +152,10 @@ function onAccept()
           else
             s.removeProperty(property);
         }
-			  if (gNode.getAttribute("style"))
-			    editor.setAttribute(gNode, "style", gNode.getAttribute("style"));
+        var newStyle = gNode.getAttribute("style");;
+        gNode.setAttribute("style", oldStyle);
+			  if (newStyle)
+			    editor.setAttribute(gNode, "style", newStyle);
         else
           editor.removeAttribute(gNode, "style");
 	    }
@@ -158,7 +166,7 @@ function onAccept()
       CssUtils.addRuleForSelector(gDoc,
                                   "#" + gDialog.idTextbox.value,
                                   gStyles.values);
-      gNode.id = gDialog.idTextbox.value;
+      editor.setAttribute(gNode, "id", gDialog.idTextbox.value);
       break;
 
     case "class":
@@ -170,7 +178,7 @@ function onAccept()
       CssUtils.addRuleForSelector(gDoc,
                                   "." + gDialog.classTextbox.value,
                                   gStyles.values);
-      gNode.className = gDialog.classTextbox.value;
+      editor.setAttribute(gNode, "class", gDialog.classTextbox.value);
       break;
 
     default: break;

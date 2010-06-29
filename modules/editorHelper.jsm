@@ -560,6 +560,60 @@ var EditorUtils = {
     //var ps = EditorUtils.
   },
 
+  getObjectForProperties: function()
+	{
+	  var editor = this.getCurrentEditor();
+	  if (!editor)
+	    return null;
+	
+	  var element;
+	  try {
+	    element = editor.getSelectedElement("");
+	  } catch (e) {}
+	  if (element)
+	    return element;
+	
+	  // Find nearest parent of selection anchor node
+	  //   that is a link, list, table cell, or table
+	
+	  var anchorNode
+	  var node;
+	  try {
+	    anchorNode = editor.selection.anchorNode;
+	    if (anchorNode.firstChild)
+	    {
+	      // Start at actual selected node
+	      var offset = editor.selection.anchorOffset;
+	      // Note: If collapsed, offset points to element AFTER caret,
+	      //  thus node may be null
+	      node = anchorNode.childNodes.item(offset);
+	    }
+	    if (!node)
+	      node = anchorNode;
+	  } catch (e) {}
+	
+	  while (node)
+	  {
+	    if (node.nodeName)
+	    {
+	      var nodeName = node.nodeName.toLowerCase();
+	
+	      // Done when we hit the body
+	      if (nodeName == "body") break;
+	
+	      if ((nodeName == "a" && node.href) ||
+	          nodeName == "ol" || nodeName == "ul" || nodeName == "dl" ||
+	          nodeName == "td" || nodeName == "th" ||
+	          nodeName == "table")
+	      {
+	        return node;
+	      }
+	    }
+	    node = node.parentNode;
+	  }
+	  return null;
+	},
+
   get activeViewActive()    { return this.mActiveViewActive; },
   set activeViewActive(val) { this.mActiveViewActive = val; }
 };

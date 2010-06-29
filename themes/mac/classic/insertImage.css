@@ -56,3 +56,73 @@ stack {
 }
 
 
+lengthbox {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/lengthbox.xml#lengthbox");
+}
+
+lengthbox menulist {
+  width: 5em;
+}
+
+lengthbox .menulist-editable-input {
+  text-align: right;
+}
+
+ecolorpicker {
+  margin-left: 2em;
+  margin-right: 2em;
+	-moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
+}
+
+.multiButton {
+  -moz-appearance: none;
+  font-size: smaller;
+  text-transform:uppercase;
+  padding: 0px;
+  margin: 0px;
+  min-width: 20px;
+  border-top: 4px solid #ddd;
+  border-left: 4px solid #ddd;
+  border-right: 4px solid #ddd;
+  border-bottom: 4px solid #aaa;
+  -moz-border-top-colors:#aaa #fff #fff #fff;
+  -moz-border-right-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-left-colors:#aaa #dedede #efefef #fafafa;
+  -moz-border-bottom-colors:#aaa #dedede #efefef #fafafa;
+  background-color: #fafafa;
+}
+
+.multiButton.left,
+.multiButton:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topleft: 0.5em;
+  -moz-border-radius-bottomleft: 0.5em;
+}
+
+.multiButton.right,
+.multiButton:not(.left):not(.right):not(.center) {
+  -moz-border-radius-topright: 0.5em;
+  -moz-border-radius-bottomright: 0.5em;
+}
+
+.multiButton:not([disabled]):active,
+.multiButton[selected="true"]:not([disabled]),
+.multiButton[checked="true"]:not([disabled]) {
+  -moz-border-top-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-right-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-left-colors:#aaa #ddd #ddd #ddd ;
+  -moz-border-bottom-colors:#aaa #ddd #ddd #ddd ;
+  background-color: #bbb;
+  color: black;
+}
+
+.multiButton[disabled] {
+  opacity: 0.5;
+}
+
+.multiButton:not([label]) image {
+  margin-left: 6px;
+}
+
+cssClassPicker {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/cssClassPicker.xml#cssClassPicker");
+}

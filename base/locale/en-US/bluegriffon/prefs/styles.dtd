@@ -1,0 +1,7 @@
+<!ENTITY bgDecidesAll.radio "Automatic">
+<!ENTITY bgDecidesAll.desc "Let BlueGriffon decide by itself how it adds styles and let it pick IDs and classes for me when needed">
+<!ENTITY prefixPrompt.label "Enter a prefix for IDs and classes:">
+<!ENTITY bgDecidesAndPrompts.radio "Semi-automatic">
+<!ENTITY bgDecidesAndPrompts.desc "Let BlueGriffon decide by itself how it adds styles but prompt me when a new ID or class is needed">
+<!ENTITY iDecide.radio "Manual">
+<!ENTITY iDecide.desc "Let me decide">

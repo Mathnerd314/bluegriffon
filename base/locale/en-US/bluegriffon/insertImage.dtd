@@ -3,12 +3,13 @@
 <!ENTITY cssExtras.label "CSS extra properties">
 
 <!ENTITY general.tab "General">
+<!ENTITY appearance.tab "Appearance">
 
 <!ENTITY imageLocation.label "Image location:">
 <!ENTITY selectImageButton.label "Select Image">
 <!ENTITY relativeURL.label "Make URL relative to page location">
 <!ENTITY title.label "Title:">
-<!ENTITY alternateText.label "Mandatory alternate text:">
+<!ENTITY alternateText.label "Alternate text:">
 <!ENTITY documentMustBeSaved.label "(document must be saved to enable this feature)">
 
 <!ENTITY preview.label "Preview">
@@ -29,7 +30,24 @@
 
 <!ENTITY horizMargin.label "Horizontal margin:">
 <!ENTITY vertMargin.label "Vertical margin:">
-<!ENTITY borderWidth.label "Border width:">
+<!ENTITY border.label "Border:">
 
 <!ENTITY linkTarget.label "Enter a URL, a mail address or select an anchor in the document">
 <!ENTITY selectFileButton.label "Select File">
+
+<!ENTITY solid.label "Solid">
+<!ENTITY dashed.label "Dashed">
+<!ENTITY dotted.label "Dotted">
+<!ENTITY double.label "Double">
+<!ENTITY groove.label "Groove">
+<!ENTITY inset.label "Inset">
+<!ENTITY outset.label "Outset">
+<!ENTITY ridge.label "Ridge">
+<!ENTITY none.label "None">
+<!ENTITY hidden.label "Hidden">
+
+<!ENTITY emptyAltOk.checkbox "Allow an empty alternate text">
+
+<!ENTITY float.checkbox "Image is floating to the">
+<!ENTITY leftFloat.label "left">
+<!ENTITY rightFloat.label "right">

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://bluegriffon/locale/prefs/styles.dtd">
+
+<overlay
+  id     = "stylesPrefsOverlay"
+  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="stylesPrefPane">
+    <preferences>
+      <preference id="pref-csspolicy"       name="bluegriffon.css.policy" type="string"/>
+      <preference id="pref-cssprefix"       name="bluegriffon.css.prefix" type="string"/>
+    </preferences>
+    <groupbox flex="1">
+      <caption label="CSS policy"/>
+      <radiogroup orient="vertical" preference="pref-csspolicy"
+                  id="cssPolicyRadiogroup"
+                  onselect="TogglePolicyRadiogroup(this)">
+        <radio label="&bgDecidesAll.radio;"
+               id="automaticRadio"
+               value="automatic"
+               tooltiptext="&bgDecidesAll.desc;"/>
+        <hbox align="center" class="indent">
+          <label value="&prefixPrompt.label;" id="cssPrefixLabel"
+                 control="cssPrefixTextbox"/>
+          <textbox preference="pref-cssprefix"
+                   size="4"
+                   id="cssPrefixTextbox"/>
+        </hbox>
+        <radio label="&bgDecidesAndPrompts.radio;"
+               id="semiAutomaticRadio"
+               value="semi-automatic"
+               tooltiptext="&bgDecidesAndPrompts.desc;"/>
+        <radio label="&iDecide.radio;"
+               id="manualRadio"
+               value="manual"
+               tooltiptext="&iDecide.desc;"/>
+      </radiogroup>
+    </groupbox>
+  </prefpane>
+
+</overlay>

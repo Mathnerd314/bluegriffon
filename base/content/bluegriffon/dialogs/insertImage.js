@@ -3,10 +3,16 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/urlHelper.jsm");
 Components.utils.import("resource://gre/modules/projectManager.jsm");
 
+var gNode = null;
+
 function Startup()
 {
+  gNode = window.arguments[0];
+
   GetUIElements();
   gDialog.previewImage.addEventListener("load", PreviewImageLoaded, true);
+
+  InitDialog();
 
   var docUrl = EditorUtils.getDocumentUrl();
   var docUrlScheme = UrlUtils.getScheme(docUrl);
@@ -17,11 +23,8 @@ function Startup()
     gDialog.relativeLinkURLCheckboxWarning.hidden = true;
   }
 
-  gDialog.enableRotationCheckbox.checked = false;
   ToggleRotation();
-  ResetRotation();
 
-  gDialog.cssToggler.init();
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
   var nproj = 0;
   if ("ProjectManager" in window)
@@ -48,10 +51,6 @@ function onAccept()
     h = h * gNaturalHeight / 100;
   }
   // style
-  var useCSS = CssUtils.getUseCSSPref();
-  var angle = parseInt(gDialog.rotator.value);
-  var hCenter = gDialog.horizPosition.value + ((gDialog.horizPositionUnit.value == "px") ? "px" : "%");
-  var vCenter = gDialog.vertPosition.value + ((gDialog.vertPositionUnit.value == "px") ? "px" : "%");
 
   var imgElement = EditorUtils.getCurrentDocument().createElement("img");
   imgElement.setAttribute("src", url);
@@ -59,95 +58,98 @@ function onAccept()
   if (title)
     imgElement.setAttribute("title", title);
 
-  switch (useCSS)
-  {
-    case 0: // HTML attributes only
-      if (w != gNaturalWidth)
-        imgElement.setAttribute("width", w);
-      if (w != gNaturalHeight)
-        imgElement.setAttribute("height", h);
-      break;
-
-    case 1: // use style attribute
-      {
-        var styleAttr = "";
-        if (angle)
-          styleAttr += "-moz-transform: rotate(" + angle + "deg);";
-        if (hCenter != "50%" || vCenter != "50%")
-          styleAttr += "-moz-transform-origin: " + hCenter + " " + vCenter + ";";
-        if (w != gNaturalWidth)
-          styleAttr += "width: " + w + "px;" ;
-        if (h != gNaturalHeight)
-          styleAttr += "height: " + h + "px;" ;
-
-        if (styleAttr)
-          imgElement.setAttribute("style", styleAttr)
-      }
-      break;
-
-    case 2: // use embedded stylesheets
-      {
-        var cssToggler = gDialog.cssToggler;
-        var selectorText = (cssToggler.classOrId == "id" ?   '#' : ".") + cssToggler.newID;
-        var properties = [];
-        if (angle)
-          properties.push({ priority: false,
-                            property: "-moz-transform",
-                            value: "rotate(" + angle + "deg)"
-                          });
-        if (hCenter != "50%" || vCenter != "50%")
-          properties.push({ priority: false,
-                            property: "-moz-transform-origin",
-                            value: hCenter + " " + vCenter
-                          });
-        if (w != gNaturalWidth)
-          properties.push({ priority: false,
-                            property: "width",
-                            value: w + "px"
-                          });
-        if (w != gNaturalHeight)
-          properties.push({ priority: false,
-                            property: "height",
-                            value: h + "px"
-                          });
-        CssUtils.addRuleForSelector(EditorUtils.getCurrentDocument(),
-                                    selectorText,
-                                    properties);
-        if (cssToggler.classOrId == "id")
-          imgElement.setAttribute("id", cssToggler.mIdTextBox.value);
-        else {
-          imgElement.setAttribute("class", cssToggler.mIdTextBox.value);
-        }
-
-      }
-      break;
-
-    case 3: // reuse ID or class
-      {
-        var styleAttr = "";
-        if (w != gNaturalWidth)
-          styleAttr += "width: " + w + "px;" ;
-        if (h != gNaturalHeight)
-          styleAttr += "height: " + h + "px;" ;
-
-        if (styleAttr)
-          imgElement.setAttribute("style", styleAttr)
-
-	      if (gDialog.cssToggler.reusedID)
-	        imgElement.setAttribute("id", gDialog.cssToggler.reusedID);
-	      if (gDialog.cssToggler.reusedClass)
-	        imgElement.setAttribute("class", gDialog.cssToggler.reusedClass);
-      }
-      break;
-
-    default: break;
+  var properties = [];
+  if (gDialog.borderCheckbox.checked) {
+    var borderWidth = gDialog.borderWidthLengthbox.value;
+    var borderColor = gDialog.borderColorpicker.color;
+    var borderStyle = gDialog.borderStyleMenulist.value;
+    properties.push(
+                    { priority: false,
+                      property: "border-width",
+                      value: borderWidth
+                    },
+                    { priority: false,
+                      property: "border-color",
+                      value: borderColor
+                    },
+                    { priority: false,
+                      property: "border-style",
+                      value: borderStyle
+                    }
+                   );
   }
+  if (gDialog.horizMarginCheckbox.checked) {
+    var horizMargin = gDialog.horizMarginTextbox.value;
+    properties.push(
+                    { priority: false,
+                      property: "margin-left",
+                      value: horizMargin
+                    },
+                    { priority: false,
+                      property: "margin-right",
+                      value: horizMargin
+                    }
+                   );
+  }
+  if (gDialog.vertMarginCheckbox.checked) {
+    var vertMargin = gDialog.vertMarginTextbox.value;
+    properties.push(
+                    { priority: false,
+                      property: "margin-top",
+                      value: vertMargin
+                    },
+                    { priority: false,
+                      property: "margin-bottom",
+                      value: vertMargin
+                    }
+                   );
+  }
+  if (gDialog.floatCheckbox.checked) {
+    var floating = gDialog.floatMenulist.value;
+    properties.push(
+                    { priority: false,
+                      property: "float",
+                      value: floating
+                    }
+                   );
+  }
+  if (gDialog.enableRotationCheckbox.checked) {
+	  if (angle)
+		  var angle = parseInt(gDialog.rotator.value);
+		  var hCenter = gDialog.horizPosition.value + ((gDialog.horizPositionUnit.value == "px") ? "px" : "%");
+		  var vCenter = gDialog.vertPosition.value + ((gDialog.vertPositionUnit.value == "px") ? "px" : "%");
+	    properties.push({ priority: false,
+	                      property: "-moz-transform",
+	                      value: "rotate(" + angle + "deg)"
+	                    });
+	  if (hCenter != "50%" || vCenter != "50%")
+	    properties.push({ priority: false,
+	                      property: "-moz-transform-origin",
+	                      value: hCenter + " " + vCenter
+	                    });
+  }
+  if (w != gNaturalWidth)
+    properties.push({ priority: false,
+                      property: "width",
+                      value: w + "px"
+                    });
+  if (w != gNaturalHeight)
+    properties.push({ priority: false,
+                      property: "height",
+                      value: h + "px"
+                    });
 
   EditorUtils.getCurrentEditor().insertElementAtSelection(imgElement, true);
+  // finalize
+  window.openDialog("chrome://bluegriffon/content/dialogs/csspolicy.xul","_blank",
+                    "chrome,modal,titlebar", imgElement,
+                    { inline: true, embeddedID: true, embeddedClass: true,
+                      values: properties
+                    });
 }
 
 
-function LoadImage()
+function LoadImage(aResetSizeUI)
 {
   var img = document.createElementNS("http://www.w3.org/1999/xhtml", "img");
   gDialog.previewImage.parentNode.appendChild(img);
@@ -155,15 +157,19 @@ function LoadImage()
   gDialog.previewImage.parentNode.removeChild(gDialog.previewImage);
   img.setAttribute("id", "previewImage");
   gDialog.previewImage = img;
+  img.setAttribute("resetSizeUI", aResetSizeUI ? "true" : "false");
   img.addEventListener("load", PreviewImageLoaded, true);
   img.setAttribute("src", UrlUtils.makeAbsoluteUrl(gDialog.imageURLTextbox.value.trim()));
   UpdateButtons();
-  gDialog.alternateTextTextbox.focus();
 }
 
 function UpdateButtons()
 {
-  gDialog.cssToggler.updateButtons();
+  var ok = (gDialog.imageURLTextbox.value &&
+            (gDialog.emptyAltOkCheckbox.checked || gDialog.alternateTextTextbox.value));
+  if (ok && gDialog.cssClassPicker.checked && !gDialog.cssClassPicker.value)
+      ok = false;
+  SetEnabledElement(document.documentElement.getButton("accept"), ok);
 }
 
 function MakeRelativeUrl()
@@ -176,6 +182,11 @@ function MakeRelativeUrl()
     gDialog.imageURLTextbox.value = spec;
     gDialog.relativeURLCheckbox.checked = true;
   }
+}
+
+function SetFocusToAlt()
+{
+  gDialog.alternateTextTextbox.focus();
 }
 
 function MakeAbsoluteUrl()
@@ -205,6 +216,12 @@ var gNaturalHeight = 0;
 var gPreserveRatio = true;
 var gRatio = 0;
 
+function ResetToNaturalSize()
+{
+  gDialog.previewImage.setAttribute("resetSizeUI", "true");
+  PreviewImageLoaded();
+}
+
 function PreviewImageLoaded()
 {
   gDialog.widthTextbox.disabled = false;
@@ -221,14 +238,16 @@ function PreviewImageLoaded()
   gDialog.naturalWidthLabel.setAttribute("value", gNaturalWidth);
   gDialog.naturalHeightLabel.setAttribute("value", gNaturalHeight);
 
-  gDialog.preserveRatioButton.setAttribute("preserveRatio", "true");
-  gDialog.widthTextbox.value = gNaturalWidth;
-  gDialog.heightTextbox.value = gNaturalHeight;
-  gDialog.unitTypeMenulist.value = "px";
-
-  gDialog.enableRotationCheckbox.checked = false;
-  ToggleRotation();
-  ResetRotation();
+  if (gDialog.previewImage.getAttribute("resetSizeUI") == "true") {
+	  gDialog.preserveRatioButton.setAttribute("preserveRatio", "true");
+	  gDialog.widthTextbox.value = gNaturalWidth;
+	  gDialog.heightTextbox.value = gNaturalHeight;
+	  gDialog.unitTypeMenulist.value = "px";
+	
+	  gDialog.enableRotationCheckbox.checked = false;
+	  ToggleRotation();
+	  ResetRotation();
+  }
 }
 
 function ToggleRotation()
@@ -346,7 +365,10 @@ function StopRotate(e)
 
 function UpdatePreviewRotation(angle)
 {
-  gDialog.previewImage.style.MozTransform = "rotate(" + angle + "deg)";
+  if (gDialog.enableRotationCheckbox.checked)
+    gDialog.previewImage.style.MozTransform = "rotate(" + angle + "deg)";
+  else
+    gDialog.previewImage.style.removeProperty("-moz-transform");
 }
 
 function ResetRotation()
@@ -365,7 +387,7 @@ function OpenInProjectPicker()
                     "chrome,modal,titlebar,resizable=yes", rv, "images");  
   gDialog.imageURLTextbox.value = rv.value;
   gDialog.relativeURLCheckbox.checked = false;
-  LoadImage();
+  LoadImage(true);
   gDialog.alternateTextTextbox.focus();
 }
 
@@ -423,4 +445,45 @@ function CallBackFromLinkFilePicker()
  gDialog.relativeLinkURLCheckbox.disabled = false;
  gDialog.relativeLinkURLCheckbox.checked = false;
  MakeRelativeUrlForLink();
+}
+
+function InitDialog()
+{
+  if (!gNode)
+    return;
+
+  gDialog.imageURLTextbox.value = gNode.getAttribute("src");
+  LoadImage(false);
+  gDialog.titleTextbox.value = gNode.getAttribute("title");
+  gDialog.alternateTextTextbox.value = gNode.getAttribute("alt");
+
+  var cs = CssUtils.getComputedStyle(gNode);
+  var width  = parseFloat(cs.getPropertyValue("width"));
+  var height = parseFloat(cs.getPropertyValue("height"));
+  if (isNaN(width)) width = gNaturalWidth;
+  if (isNaN(height)) width = gNaturalHeight;
+  gDialog.preserveRatioButton.removeAttribute("preserveRatio");
+  gDialog.widthTextbox.value = width;
+  gDialog.heightTextbox.value = height;
+  gDialog.unitTypeMenulist.value = "px";
+
+  gDialog.borderWidthLengthbox.value = cs.getPropertyValue("border-top-width");
+  gDialog.borderStyleMenulist.value = cs.getPropertyValue("border-top-style");
+  gDialog.borderColorpicker.color = cs.getPropertyValue("border-top-color");
+}
+
+
+function UpdatePreviewBorder()
+{
+  var s = gDialog.previewImage.style;
+  if (gDialog.borderCheckbox.checked) {
+	  s.borderColor = gDialog.borderColorpicker.color;
+	  s.borderWidth = gDialog.borderWidthLengthbox.value;
+	  s.borderStyle = gDialog.borderStyleMenulist.value;
+  }
+  else {
+    s.removeProperty("border-color");
+    s.removeProperty("border-style");
+    s.removeProperty("border-width");
+  }
 }

@@ -51,7 +51,8 @@ pref("bluegriffon.defaults.table.cell_spacing", "2");
 pref("bluegriffon.defaults.table.cell_padding", "2");
 
 // CSS policy
-pref("bluegriffon.css.policy", 0); // 0: HTML Attr; 1: Inline styles; 2: embedded CSS Rules; 3: existing rule 
+pref("bluegriffon.css.policy", "automatic");
+pref("bluegriffon.css.prefix", "BG_");
 
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");
