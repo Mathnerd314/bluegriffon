@@ -45,3 +45,25 @@ var cmdInsertImageCommand =
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
+
+var cmdInsertAnchorCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties();
+    if (!element)
+      return;
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertAnchor.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+  }
+};
