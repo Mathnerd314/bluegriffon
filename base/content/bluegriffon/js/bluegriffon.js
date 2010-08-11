@@ -1051,5 +1051,21 @@ function onBespinFindKeypress(aEvent)
 
 function OnDoubleClick(aEvent)
 {
-  alert(1)
+  var node = EditorUtils.getSelectionContainer().node;
+  if (!node) // sanity check
+    return;
+
+  switch (node.nodeName.toLowerCase()) {
+    case "a":
+      if (node.hasAttribute("name") || node.id)
+        cmdInsertAnchorCommand.doCommand();
+      break;
+    case "img":
+      cmdInsertImageCommand.doCommand();
+      break;
+    default: break;
+  }
 }
+
+
+
