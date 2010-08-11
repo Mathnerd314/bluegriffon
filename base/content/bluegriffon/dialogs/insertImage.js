@@ -59,93 +59,114 @@ function onAccept()
     imgElement.setAttribute("title", title);
 
   var properties = [];
-  if (gDialog.borderCheckbox.checked) {
-    var borderWidth = gDialog.borderWidthLengthbox.value;
-    var borderColor = gDialog.borderColorpicker.color;
-    var borderStyle = gDialog.borderStyleMenulist.value;
-    properties.push(
-                    { priority: false,
-                      property: "border-width",
-                      value: borderWidth
-                    },
-                    { priority: false,
-                      property: "border-color",
-                      value: borderColor
-                    },
-                    { priority: false,
-                      property: "border-style",
-                      value: borderStyle
-                    }
-                   );
-  }
-  if (gDialog.horizMarginCheckbox.checked) {
-    var horizMargin = gDialog.horizMarginTextbox.value;
-    properties.push(
-                    { priority: false,
-                      property: "margin-left",
-                      value: horizMargin
-                    },
-                    { priority: false,
-                      property: "margin-right",
-                      value: horizMargin
-                    }
-                   );
-  }
-  if (gDialog.vertMarginCheckbox.checked) {
-    var vertMargin = gDialog.vertMarginTextbox.value;
-    properties.push(
-                    { priority: false,
-                      property: "margin-top",
-                      value: vertMargin
-                    },
-                    { priority: false,
-                      property: "margin-bottom",
-                      value: vertMargin
-                    }
-                   );
-  }
-  if (gDialog.floatCheckbox.checked) {
-    var floating = gDialog.floatMenulist.value;
-    properties.push(
-                    { priority: false,
-                      property: "float",
-                      value: floating
-                    }
-                   );
-  }
-  if (gDialog.enableRotationCheckbox.checked) {
-	  if (angle)
-		  var angle = parseInt(gDialog.rotator.value);
-		  var hCenter = gDialog.horizPosition.value + ((gDialog.horizPositionUnit.value == "px") ? "px" : "%");
-		  var vCenter = gDialog.vertPosition.value + ((gDialog.vertPositionUnit.value == "px") ? "px" : "%");
-	    properties.push({ priority: false,
-	                      property: "-moz-transform",
-	                      value: "rotate(" + angle + "deg)"
-	                    });
-	  if (hCenter != "50%" || vCenter != "50%")
-	    properties.push({ priority: false,
-	                      property: "-moz-transform-origin",
-	                      value: hCenter + " " + vCenter
-	                    });
-  }
+
   if (w != gNaturalWidth)
     properties.push({ priority: false,
                       property: "width",
                       value: w + "px"
                     });
-  if (w != gNaturalHeight)
+  if (h != gNaturalHeight)
     properties.push({ priority: false,
                       property: "height",
                       value: h + "px"
                     });
 
-  EditorUtils.getCurrentEditor().insertElementAtSelection(imgElement, true);
+  if (!gDialog.cssClassPicker.checked || !gDialog.cssClassPicker.value) {
+	  if (gDialog.borderCheckbox.checked) {
+	    var borderWidth = gDialog.borderWidthLengthbox.value;
+	    var borderColor = gDialog.borderColorpicker.color;
+	    var borderStyle = gDialog.borderStyleMenulist.value;
+	    properties.push(
+	                    { priority: false,
+	                      property: "border-width",
+	                      value: borderWidth
+	                    },
+	                    { priority: false,
+	                      property: "border-color",
+	                      value: borderColor
+	                    },
+	                    { priority: false,
+	                      property: "border-style",
+	                      value: borderStyle
+	                    }
+	                   );
+	  }
+	  if (gDialog.horizMarginCheckbox.checked) {
+	    var horizMargin = gDialog.horizMarginTextbox.value;
+	    properties.push(
+	                    { priority: false,
+	                      property: "margin-left",
+	                      value: horizMargin
+	                    },
+	                    { priority: false,
+	                      property: "margin-right",
+	                      value: horizMargin
+	                    }
+	                   );
+	  }
+	  if (gDialog.vertMarginCheckbox.checked) {
+	    var vertMargin = gDialog.vertMarginTextbox.value;
+	    properties.push(
+	                    { priority: false,
+	                      property: "margin-top",
+	                      value: vertMargin
+	                    },
+	                    { priority: false,
+	                      property: "margin-bottom",
+	                      value: vertMargin
+	                    }
+	                   );
+	  }
+	  if (gDialog.floatCheckbox.checked) {
+	    var floating = gDialog.floatMenulist.value;
+	    properties.push(
+	                    { priority: false,
+	                      property: "float",
+	                      value: floating
+	                    }
+	                   );
+	  }
+	  if (gDialog.enableRotationCheckbox.checked) {
+	    var angle = parseInt(gDialog.rotator.value);
+		  if (angle)
+			  var hCenter = gDialog.horizPosition.value + ((gDialog.horizPositionUnit.value == "px") ? "px" : "%");
+			  var vCenter = gDialog.vertPosition.value + ((gDialog.vertPositionUnit.value == "px") ? "px" : "%");
+		    properties.push({ priority: false,
+		                      property: "-moz-transform",
+		                      value: "rotate(" + angle + "deg)"
+		                    });
+		  if (hCenter != "50%" || vCenter != "50%")
+		    properties.push({ priority: false,
+		                      property: "-moz-transform-origin",
+		                      value: hCenter + " " + vCenter
+		                    });
+	  }
+  }
+
   // finalize
-  window.openDialog("chrome://bluegriffon/content/dialogs/csspolicy.xul","_blank",
-                    "chrome,modal,titlebar", imgElement,
-                    { inline: true, embeddedID: true, embeddedClass: true,
-                      values: properties
-                    });
+  if (gDialog.cssClassPicker.checked) {
+    imgElement.className = gDialog.cssClassPicker.value;
+    var styleStr = "";
+    for (var i = 0; i < properties.length; i++) {
+      var p = properties[i];
+      styleStr += p.property + ": " + p.value +
+                  (p.priority ? " !important" : "") +
+                  ";";
+    }
+    if (styleStr)
+      imgElement.setAttribute("style", styleStr);
+    else
+      imgElement.removeAttribute("style");
+    EditorUtils.getCurrentEditor().insertElementAtSelection(imgElement, true);
+  }
+  else {
+    EditorUtils.getCurrentEditor().insertElementAtSelection(imgElement, true);
+    window.openDialog("chrome://bluegriffon/content/dialogs/csspolicy.xul","_blank",
+                      "chrome,modal,titlebar", imgElement,
+                      { inline: true, embeddedID: true, embeddedClass: true,
+                        values: properties
+                      });
+  }
 }
 
 
@@ -248,6 +269,8 @@ function PreviewImageLoaded()
 	  ToggleRotation();
 	  ResetRotation();
   }
+  else
+    InitDialog2();
 }
 
 function ToggleRotation()
@@ -456,7 +479,10 @@ function InitDialog()
   LoadImage(false);
   gDialog.titleTextbox.value = gNode.getAttribute("title");
   gDialog.alternateTextTextbox.value = gNode.getAttribute("alt");
+}
 
+function InitDialog2()
+{
   var cs = CssUtils.getComputedStyle(gNode);
   var width  = parseFloat(cs.getPropertyValue("width"));
   var height = parseFloat(cs.getPropertyValue("height"));
@@ -467,9 +493,64 @@ function InitDialog()
   gDialog.heightTextbox.value = height;
   gDialog.unitTypeMenulist.value = "px";
 
-  gDialog.borderWidthLengthbox.value = cs.getPropertyValue("border-top-width");
-  gDialog.borderStyleMenulist.value = cs.getPropertyValue("border-top-style");
+  var borderWidth = cs.getPropertyValue("border-top-width");
+  var borderStyle = cs.getPropertyValue("border-top-style");
+  gDialog.borderWidthLengthbox.value = borderWidth;
+  gDialog.borderStyleMenulist.value = borderStyle;
   gDialog.borderColorpicker.color = cs.getPropertyValue("border-top-color");
+  gDialog.borderCheckbox.checked =  (borderWidth != "0px" || borderStyle != "none");
+  gDialog.cssClassPicker.toggleCssProperty(gDialog.borderCheckbox);
+  UpdatePreviewBorder();
+
+  var hMargin = cs.getPropertyValue("margin-left");
+  gDialog.horizMarginTextbox.value = hMargin;
+  gDialog.horizMarginCheckbox.checked = (hMargin != "0px");
+  gDialog.cssClassPicker.toggleCssProperty(gDialog.horizMarginCheckbox);
+
+  var vMargin = cs.getPropertyValue("margin-top");
+  gDialog.vertMarginTextbox.value = vMargin;
+  gDialog.vertMarginCheckbox.checked = (vMargin != "0px");
+  gDialog.cssClassPicker.toggleCssProperty(gDialog.vertMarginCheckbox);
+
+  var floating = cs.getPropertyValue("float");
+  gDialog.floatMenulist.value = floating;
+  gDialog.floatCheckbox.checked = (floating != "none");
+  gDialog.cssClassPicker.toggleCssProperty(gDialog.floatCheckbox);
+
+  var transform = cs.getPropertyValue("-moz-transform");
+  var r = /matrix\((\-?[0-9]*\.[0-9]+), (\-?[0-9]*\.[0-9]+), (\-?[0-9]*\.[0-9]+), (\-?[0-9]*\.[0-9]+)/ ;
+  var m = transform.match(r);
+  if (m) {
+    var angle = Math.round(Math.asin(m[2]) * 180 / Math.PI);
+    if (angle) {
+      gDialog.rotator.value = angle;
+
+      var origin = cs.getPropertyValue("-moz-transform-origin");
+      m = origin.match( /(\-?[1-9][0-9]*|\-?[0-9]*\.[0-9]*)px (\-?[1-9][0-9]*|\-?[0-9]*\.[0-9]*)px/ );
+      var originX = parseFloat(m[1]);
+      var originY = parseFloat(m[2]);
+      var sizeX = gNaturalWidth +
+                  parseFloat(cs.getPropertyValue("border-left-width")) +
+                  parseFloat(cs.getPropertyValue("border-right-width")) +
+                  parseFloat(cs.getPropertyValue("padding-left")) +
+                  parseFloat(cs.getPropertyValue("padding-right"));
+      var sizeY = gNaturalHeight +
+                  parseFloat(cs.getPropertyValue("border-top-width")) +
+                  parseFloat(cs.getPropertyValue("border-bottom-width")) +
+                  parseFloat(cs.getPropertyValue("padding-top")) +
+                  parseFloat(cs.getPropertyValue("padding-bottom"));
+
+      gDialog.horizPosition.value = Math.round(100 * originX / sizeX);
+      gDialog.horizPositionUnit.value = "percent";
+      gDialog.vertPosition.value = Math.round(100 * originY / sizeY);
+      gDialog.vertPositionUnit.value = "percent";
+
+      gDialog.enableRotationCheckbox.checked = true;
+      gDialog.cssClassPicker.toggleCssProperty(gDialog.enableRotationCheckbox);
+      UpdatePreviewRotation(gDialog.rotator.value);
+    }
+  }
+  UpdateButtons();
 }
 
 

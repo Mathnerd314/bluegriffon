@@ -74,9 +74,9 @@
              context="main-toolbar-context-menu"
              customizable="true"
 #ifdef XP_MACOSX
-             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,spring,throbber-box"/>
+             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,spring,throbber-box"/>
 #else
-             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,imageButton,spring,throbber-box,spacer"/>
+             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,spring,throbber-box,spacer"/>
 #endif
     <toolbarset id="customMainToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
@@ -125,7 +125,34 @@
           <box flex="1" id="tabeditorContainer" >
             <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
           </box>
-          <iframe id="bespinIframe" src="resource://gre/res/bespin.html" flex="1"/>
+          <vbox flex="1">
+            <iframe id="bespinIframe" src="resource://gre/res/bespin.html" flex="1"
+                    onclick="onBespinFocus()"/>
+            <hbox id="bespinToolbox" align="center">
+              <label value="Line:"/>
+              <textbox id="bespinLineTextbox"
+                       size="5"
+                       onkeypress="onBespinLineKeypress(event, this)"
+                       onblur="onBespinLineBlur(this)"/>
+              <spacer flex="1"/>
+              <label  id="bespinFindPrevious"
+                      onclick="onBespinFindPrevious()"
+                      hidden="true"
+                      value="Previous"/>
+              <label  id="bespinFindNext"
+                      onclick="onBespinFindNext()"
+                      hidden="true"
+                      value="Next"/>
+              <label value="Find:"/>
+              <textbox id="bespinFindTextbox"
+                       size="5"
+                       type="search"
+                       oncommand="onBespinFindClear(event, this)"
+                       onkeypress="onBespinFindKeypress(event)"
+                       onblur="onBespinFindClear(event, this)"
+                       oninput="onBespinFindInput(this)"/>
+            </hbox>
+          </vbox>
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>
       </hbox>
@@ -137,13 +164,13 @@
                  label="&wysiwygMode.label;"
                  oncommand="ToggleViewMode(this)"
                  value="wysiwyg"
-                 observes="cmd_renderedHTMLEnabler"/>
+                 observes="cmd_renderedHTMLEnabler2"/>
         <tab
                  id="sourceModeButton"
                  label="&sourceMode.label;"
                  oncommand="ToggleViewMode(this)"
                  value="source"
-                 observes="cmd_renderedHTMLEnabler"/>
+                 observes="cmd_renderedHTMLEnabler2"/>
       </tabs>
 #else
       <hbox id="modeTabbox">
@@ -154,13 +181,13 @@
       				   label="&wysiwygMode.label;"
       				   oncommand="ToggleViewMode(this)"
       				   value="wysiwyg"
-      				   observes="cmd_renderedHTMLEnabler"/>
+      				   observes="cmd_renderedHTMLEnabler2"/>
       	<toolbarbutton class="multiButton right"
       				   id="sourceModeButton"
       				   label="&sourceMode.label;"
       				   oncommand="ToggleViewMode(this)"
       				   value="source"
-      				   observes="cmd_renderedHTMLEnabler"/>
+      				   observes="cmd_renderedHTMLEnabler2"/>
       	<spacer flex="1"/>
       </hbox>
 #endif

@@ -55,8 +55,9 @@ endif
 
 _FILES = \
 	$(srcdir)/res/BespinEmbedded.css \
-	$(srcdir)/res/BespinEmbedded.compressed.js \
 	$(srcdir)/res/BespinEmbedded.js \
+	$(srcdir)/res/BespinMain.js \
+	$(srcdir)/res/BespinWorker.js \
 	$(srcdir)/res/bespin.html \
 	$(srcdir)/res/html_transitional.html \
 	$(srcdir)/res/html_strict.html \
@@ -68,11 +69,34 @@ _FILES = \
 	$(srcdir)/res/rotate_icon.png \
 	$(NULL)
 
+_BESPIN_RESOURCE_FILES = \
+	$(srcdir)/res/resources/screen_theme/theme.less \
+	$(NULL)
+
+_BESPIN_IMAGE_FILES = \
+  $(srcdir)/res/resources/screen_theme/images/bespin-s.png \
+	$(srcdir)/res/resources/screen_theme/images/check-selected.png \
+	$(srcdir)/res/resources/screen_theme/images/check-unselected.png \
+	$(srcdir)/res/resources/screen_theme/images/lines.png \
+	$(srcdir)/res/resources/screen_theme/images/radio-selected.png \
+	$(srcdir)/res/resources/screen_theme/images/radio-unselected.png \
+	$(srcdir)/res/resources/screen_theme/images/scroll-down.png \
+	$(srcdir)/res/resources/screen_theme/images/scroll-left.png \
+	$(srcdir)/res/resources/screen_theme/images/scroll-right.png \
+	$(srcdir)/res/resources/screen_theme/images/scroll-up.png \
+	$(NULL)
+
 libs::
 	$(INSTALL) $(_FILES) $(DIST)/bin/res
+	mkdir -p $(DIST)/bin/res/resources/screen_theme/images/
+	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DIST)/bin/res/resources/screen_theme
+	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DIST)/bin/res/resources/screen_theme/images
 
 install::
 	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
+	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images/
+	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme
+	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images
 
 include $(topsrcdir)/config/rules.mk
 

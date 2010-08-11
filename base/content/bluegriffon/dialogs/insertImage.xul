@@ -193,7 +193,7 @@
               <checkbox label="&vertMargin.label;"
                         id="vertMarginCheckbox"
                         class="disableOnClass" mainCheckbox="true"/>
-              <lengthbox type="positive" id="borderWidthTextbox"
+              <lengthbox type="positive" id="vertMarginTextbox"
                          units="%,px,em,pt,cm,mm,in,pc,ex"
                          class="disableOnClass"/>
             </row>

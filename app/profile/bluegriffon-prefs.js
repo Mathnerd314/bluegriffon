@@ -6,6 +6,8 @@ pref("toolkit.defaultChromeURI", "chrome://bluegriffon/content/xul/bluegriffon.x
 // see https://developer.mozilla.org/en/XUL/prefwindow
 pref("browser.preferences.instantApply", true);
 
+pref("toolbar.customization.usesheet", true); // true for Mac
+
 /* debugging prefs */
 pref("browser.dom.window.dump.enabled", true);
 pref("javascript.options.showInConsole", true);

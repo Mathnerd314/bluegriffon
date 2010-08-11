@@ -6,7 +6,8 @@ var cmdClass =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function (aCommandName, aParams, aRefcon)
@@ -66,7 +67,8 @@ var cmdColumnsCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML());
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

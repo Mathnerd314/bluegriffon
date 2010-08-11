@@ -90,6 +90,8 @@
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences" label="Preferences"
                   oncommand="OpenPreferences()"/>
+        <menuitem label="Venkman"
+                  oncommand="start_venkman()"/>
       </menupopup>
     </menu>
 

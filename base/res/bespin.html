@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html><head>
-  <link rel="stylesheet" type="text/css" href="BespinEmbedded.css/">
-  <script type="text/javascript" src="BespinEmbedded.js"></script>
+  <link rel="stylesheet" type="text/css" href="resource://gre/res/BespinEmbedded.css/">
+  <link id="bespin_base" href="resource://gre/res/"/>
+  <script type="text/javascript" src="resource://gre/res/BespinEmbedded.js"></script>
   <style>
    body { overflow: hidden }
    table { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 2px; border-collapse: collapse}
@@ -10,8 +11,8 @@
   </style>
   <script>
     function installBespin() {
-      var e = tiki.require("embedded")
-          .useBespin(document.getElementById("editor"),
+      var elt = getEditableElement();
+      var e = bespin.useBespin("editor",
           {
             syntax: "html",
             stealFocus: true,
@@ -21,8 +22,10 @@
                       }
           });
       postMessage("bespin", "*");
-      document.getElementById("editor").addEventListener("copy", function() { alert(12) }, false);
       return e;
+    }
+    function getEditableElement() {
+      return document.getElementById("editor");
     }
   </script>
 </head>

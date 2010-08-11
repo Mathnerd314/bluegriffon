@@ -567,6 +567,11 @@ function OnKeyPressWhileChangingTag(event)
 }
 
 /************ VIEW MODE ********/
+function GetCurrentViewMode()
+{
+  return gDialog.modeTabbox.getAttribute("value");
+}
+
 function ToggleViewMode(aElement)
 {
   var mode =  aElement.getAttribute("value");
@@ -600,13 +605,24 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    if (!BlueGriffonVars.bespinEditor)
-      BlueGriffonVars.bespinEditor = gDialog.bespinIframe.contentWindow.installBespin();
-    BlueGriffonVars.bespinEditor.value = "";
-    BlueGriffonVars.bespinEditor.value = source;
+    if (!BlueGriffonVars.bespinEditor) {
+      var bespinTmp = gDialog.bespinIframe.contentWindow.installBespin();
+      bespinTmp.then(function(env) {
+        var editor = env.editor;
+        BlueGriffonVars.bespinEditor = editor;
+        editor.value = "";
+        editor.value = source;
+      });
+    }
+    else {
+	    BlueGriffonVars.bespinEditor.value = "";
+	    BlueGriffonVars.bespinEditor.value = source;
+    }
     BlueGriffonVars.oldSource = source;
     NotifierUtils.notify("afterEnteringSourceMode");
     gDialog.editorsDeck.selectedIndex = 1;
+    gDialog.bespinIframe.focus();
+    window.updateCommands("style");
   }
   else if (mode == "wysiwyg")
   {
@@ -618,11 +634,33 @@ function ToggleViewMode(aElement)
       NotifierUtils.notify("beforeLeavingSourceMode");
       source = BlueGriffonVars.bespinEditor.value;
       if (source != BlueGriffonVars.oldSource) {
-        var hp = new htmlParser(gDialog.parserIframe);
-        hp.parseHTML(source,
-                     EditorUtils.getDocumentUrl(),
-                     function(aDoc, ctx) { RebuildFromSource(aDoc, ctx); },
-                     hp);
+        var doctype = EditorUtils.getCurrentDocument().doctype.publicId;
+        var isXML = false;
+        switch (doctype) {
+          case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+          case "http://www.w3.org/TR/html4/loose.dtd":
+            isXML = false;
+            break;
+          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+            isXML = true;
+            break;
+          case "":
+            isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") != "");
+            break;
+        }
+        if (isXML) {
+          var xmlParser = new DOMParser();
+          var doc = xmlParser.parseFromString(source, "text/xml");
+          RebuildFromSource(doc);
+        }
+        else {
+	        var hp = new htmlParser(gDialog.parserIframe);
+	        hp.parseHTML(source,
+	                     EditorUtils.getDocumentUrl(),
+	                     function(aDoc, ctx) { RebuildFromSource(aDoc, ctx); },
+	                     hp);
+        }
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
@@ -648,8 +686,8 @@ function CloneElementContents(editor, sourceElt, destElt)
       destChild = editor.document.createElement(sourceChild.nodeName.toLowerCase());
       if (sourceChild.innerHTML)
         destChild.innerHTML = sourceChild.innerHTML;
-      editor.insertNode(destChild, destElt, destElt.childNodes.length);
       editor.cloneAttributes(destChild, sourceChild);
+      editor.insertNode(destChild, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.TEXT_NODE) {
       t = editor.document.createTextNode(sourceChild.data);
@@ -666,7 +704,8 @@ function CloneElementContents(editor, sourceElt, destElt)
 
 function RebuildFromSource(aDoc, aContext)
 {
-  delete aContext;
+  if (aContext)
+    delete aContext;
   gDialog.editorsDeck.selectedIndex = 0;
   var editor = EditorUtils.getCurrentEditor();
   try {
@@ -676,7 +715,7 @@ function RebuildFromSource(aDoc, aContext)
     // clone html attributes
     editor.cloneAttributes(editor.document.documentElement, aDoc.documentElement);
     // clone body
-    CloneElementContents(editor, aDoc.body, editor.document.body);
+    CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
     // clone head
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     editor.endTransaction();
@@ -771,4 +810,246 @@ function ToggleSidebarCollapsing(aElt, aId)
     gDialog[aId].removeAttribute("state");
   else
     gDialog[aId].setAttribute("state", "collapsed");
+}
+
+var JSEditor = {
+
+  deleteSelection: function(aEvent) {
+    if (!aEvent.isChar || aEvent.which != 97)
+      return;
+    aEvent.preventDefault();
+
+    var doc = EditorUtils.getCurrentDocument();
+    var selection = EditorUtils.getCurrentEditor().selection;
+    if (selection.isCollapsed) // early way out if we can
+      return;
+
+    var nodes = [];
+    for (var count = 0; count < selection.rangeCount; count++) {
+      var range = selection.getRangeAt(count);
+      var startContainer = range.startContainer;
+      var endContainer   = range.endContainer;
+      var startOffset    = range.startOffset;
+      var endOffset      = range.endOffset;
+      var node;
+      if (startContainer.nodeType == Node.TEXT_NODE)
+        node = startContainer;
+      else
+        node = startContainer.childNodes.item(startOffset);
+
+      var endNode;
+      if (endContainer.nodeType == Node.TEXT_NODE)
+        endNode = endContainer;
+      else
+        endNode = endContainer.childNodes.item(endOffset);
+
+      selection.collapseToStart();
+      var nextOrUp = false;
+      do {
+        var dir = "";
+        if (nextOrUp) {
+          if (node.nextSibling) {
+            node = node.nextSibling;
+            dir = "next";
+            nextOrUp = false;
+          }
+          else {
+            node = node.parentNode;
+            dir = "up";
+          }
+        }
+        else if (node.firstChild) {
+          node = node.firstChild;
+          dir = "down";
+        }
+        else if (node.nextSibling) {
+          node = node.nextSibling;
+          dir = "next";
+        }
+        else
+          nextOrUp = true;
+        nodes.push({node: node, dir: dir});
+      }
+      while (node && node != endNode);
+
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        if (i && n.dir == "next" && n.node.nodeType == Node.ELEMENT_NODE) {
+          var previousNode = this.getPreviousVisibleNode(n.node);
+          if (previousNode &&
+              previousNode.nodeType == Node.ELEMENT_NODE &&
+              previousNode.nodeName.toLowerCase() == n.node.nodeName.toLowerCase()) {
+            var mergeable = false;
+            switch (n.node.nodeName.toLowerCase()) {
+              case "dl":
+              case "ul":
+              case "ol":
+              case "p":
+              case "h1":
+              case "h2":
+              case "h3":
+              case "h4":
+              case "h5":
+              case "h6":
+                mergeable = true;
+                break;
+              default: break;
+            }
+            if (mergeable) {
+              while (n.node.firstChild)
+                previousNode.appendChild(n.node.firstChild);
+              n.node.parentNode.removeChild(n.node);
+            }
+          }
+        }
+      }
+
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i].node;
+        if (node.firstChild || !node.parentNode)
+          continue;
+
+        if (node == range.startContainer &&
+            range.startOffset) {
+          var t = doc.createTextNode(node.data.substr(0, range.startOffset));
+          node.parentNode.insertBefore(t, node);
+        }
+        if (node == endContainer &&
+                 endOffset != node.data.length) {
+          var t = doc.createTextNode(node.data.substr(range.endOffset));
+          node.parentNode.insertBefore(t, node.nextSibling);
+        }
+
+        var parent = node.parentNode;
+        if (parent) {
+	        parent.removeChild(node);
+	        while (!parent.firstChild) {
+	          var tmp = parent.parentNode;
+	          tmp.removeChild(parent);
+	          parent = tmp;
+	        }
+        }
+      }
+    }
+  },
+
+  getPreviousVisibleNode: function (aNode) {
+    var node = aNode.previousSibling;
+    var retNode = null;
+    while (!retNode && node) {
+      if (node.nodeType != Node.TEXT_NODE ||
+          node.data.match ( /\S/g ))
+        retNode = node;
+      else
+        node = node.previousSibling;
+    }
+    return retNode;
+  }
+};
+
+function onBespinFocus()
+{
+  gDialog.bespinIframe.focus();
+}
+
+function onBespinLineBlur(aElt)
+{
+  aElt.value = "";
+}
+
+function onBespinLineKeypress(aEvent, aElt)
+{
+  if (aEvent.keyCode == 13) {
+	  var line = aElt.value;
+	  BlueGriffonVars.bespinEditor.setLineNumber(parseInt(line));
+    onBespinLineBlur(aElt);
+    onBespinFocus();
+  }
+}
+
+function onBespinFindInput(aElt)
+{
+  var query = aElt.value;
+  var selStart = BlueGriffonVars.bespinEditor.selection.start;
+  var searchController = BlueGriffonVars.bespinEditor.searchController;
+  searchController.setSearchText(query, false /* don't treat this as RegExp */);
+  var range = searchController.findNext(selStart, true);
+
+	if (!range) {
+    gDialog.bespinFindPrevious.hidden = true;
+    gDialog.bespinFindNext.hidden = true;
+	  aElt.className = "notfound";
+	//} else if (range.end.row == selStart.row && range.end.col == selStart.col) {
+	    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
+	} else {
+    gDialog.bespinFindPrevious.hidden = false;
+    gDialog.bespinFindNext.hidden = false;
+    aElt.className = "";
+    BlueGriffonVars.bespinEditor.selection = range;
+  }
+}
+
+function onBespinFindNext()
+{
+  var query = gDialog.bespinFindTextbox.value;
+  var selEnd = BlueGriffonVars.bespinEditor.selection.end;
+  var searchController = BlueGriffonVars.bespinEditor.searchController;
+  searchController.setSearchText(query, false /* don't treat this as RegExp */);
+  var range = searchController.findNext(selEnd, true);
+
+  if (!range) {
+    gDialog.bespinFindPrevious.hidden = true;
+    gDialog.bespinFindNext.hidden = true;
+    gDialog.bespinFindTextbox.className = "notfound";
+  //} else if (range.end.row == selEnd.row && range.end.col == selEnd.col) {
+  //    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
+  } else {
+    gDialog.bespinFindPrevious.hidden = false;
+    gDialog.bespinFindNext.hidden = false;
+    gDialog.bespinFindTextbox.className = "";
+    BlueGriffonVars.bespinEditor.selection = range;
+  }
+}
+
+function onBespinFindPrevious()
+{
+  var query = gDialog.bespinFindTextbox.value;
+  var selStart = BlueGriffonVars.bespinEditor.selection.start;
+  var searchController = BlueGriffonVars.bespinEditor.searchController;
+  searchController.setSearchText(query, false /* don't treat this as RegExp */);
+  var range = searchController.findPrevious(null, true);
+
+  if (!range) {
+    gDialog.bespinFindPrevious.hidden = true;
+    gDialog.bespinFindNext.hidden = true;
+    gDialog.bespinFindTextbox.className = "notfound";
+  //} else if (range.end.row == selStart.row && range.end.col == selStart.col) {
+  //    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
+  } else {
+    gDialog.bespinFindPrevious.hidden = false;
+    gDialog.bespinFindNext.hidden = false;
+    gDialog.bespinFindTextbox.className = "";
+    BlueGriffonVars.bespinEditor.selection = range;
+  }
+}
+
+function onBespinFindClear(aEvent, aElt)
+{
+  if (!aElt.value) {
+    aElt.className = "";
+    gDialog.bespinFindPrevious.hidden = true;
+    gDialog.bespinFindNext.hidden = true;
+  }
+}
+
+function onBespinFindKeypress(aEvent)
+{
+  if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
+    gDialog.bespinIframe.focus();
+  }
+}
+
+function OnDoubleClick(aEvent)
+{
+  alert(1)
 }

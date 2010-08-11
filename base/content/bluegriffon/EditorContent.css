@@ -47,10 +47,10 @@
 @namespace nvu url("http://disruptive-innovations.com/zoo/nvu");
 
 
-a[name] {
+a[name], a[id] {
   min-height: 17px; margin-left: 2px; margin-top: 2px;
   padding-left: 20px; 
-  background-image: url(chrome://bluegriffon/content/images/tag-anchor.gif);
+  background-image: url(chrome://bluegriffon/skin/tags/tag-anchor.gif);
   background-repeat: no-repeat; 
   background-position: top left;
 }

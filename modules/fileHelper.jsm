@@ -269,10 +269,12 @@ var FileUtils = {
       fp.appendFilters(this.nsIFilePicker.filterText);
     /* else if (CurrentDocumentIsTemplate())
       fp.appendFilter(GetString("HTMLtemplates"), "*.mzt"); */
-    else if (EditorUtils.isXHTMLDocument())
+    else if (EditorUtils.isXHTMLDocument()) // only if XHTML 1 file
       fp.appendFilter(L10NUtils.getString("XHTMLfiles"), "*.xhtml");
-    else
+    else {
+      aMIMEType = "text/html";
       fp.appendFilters(this.nsIFilePicker.filterHTML);
+    }
     fp.appendFilters(this.nsIFilePicker.filterAll);
   
     // now let's actually set the filepicker's suggested filename

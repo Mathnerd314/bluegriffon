@@ -123,7 +123,7 @@
 
       <constructor>
         <![CDATA[
-          this.setAttribute("empty", "true");
+          // this.setAttribute("empty", "true");
         ]]>
       </constructor>
 
@@ -352,6 +352,8 @@
 
             newEditorElement.addEventListener("pageshow", function(evt) { if (evt.originalTarget == content.document){} }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            // newEditorElement.addEventListener("keypress", function(evt) { JSEditor.deleteSelection(evt) }, true);
+            newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
 
             // select that new tab
             this.selectedTab = newTab;

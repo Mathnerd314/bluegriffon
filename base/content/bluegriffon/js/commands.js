@@ -91,7 +91,8 @@ var ComposerCommands = {
        if (EditorUtils.getCurrentEditorElement() &&
            EditorUtils.isDocumentEditable() &&
            EditorUtils.isEditingRenderedHTML() &&
-           !EditorUtils.activeViewActive)
+           !EditorUtils.activeViewActive  &&
+           (commandID == "cmd_renderedHTMLEnabler2" || GetCurrentViewMode() == "wysiwyg"))
           commandNode.removeAttribute("disabled");
         else
           commandNode.setAttribute("disabled", "true");
@@ -273,7 +274,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
-    commandTable.registerCommand("cmd_renderedHTMLEnabler", cmdDummyHTML);
+    commandTable.registerCommand("cmd_renderedHTMLEnabler",  cmdDummyHTML);
+    commandTable.registerCommand("cmd_renderedHTMLEnabler2", cmdDummy2HTML);
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
 
     commandTable.registerCommand("cmd_table",       cmdInsertOrEditTableCommand);
