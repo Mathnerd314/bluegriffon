@@ -132,7 +132,7 @@
         </deck>
       </hbox>
 #ifdef XP_MACOSX
-      <tabs id="modeTabbox">
+      <tabs id="modeTabbox" previousMode="wysiwyg">
         <tab
                  selected="true"
                  id="wysiwygModeButton"
@@ -148,7 +148,7 @@
                  observes="cmd_viewModeEnabler"/>
       </tabs>
 #else
-      <tabs id="modeTabbox">
+      <tabs id="modeTabbox" previousMode="wysiwyg">
       	<spacer flex="1"/>
       	<label class="multiButton left"
       				   selected="true"
