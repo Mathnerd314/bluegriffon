@@ -569,13 +569,13 @@ function OnKeyPressWhileChangingTag(event)
 /************ VIEW MODE ********/
 function GetCurrentViewMode()
 {
-  return gDialog.modeTabbox.getAttribute("value");
+  return gDialog.modeTabbox.getAttribute("previousMode");
 }
 
 function ToggleViewMode(aElement)
 {
   var mode =  aElement.getAttribute("value");
-  if (mode == aElement.parentNode.getAttribute("previousMode"))
+  if (mode == gDialog.modeTabbox.getAttribute("previousMode"))
     return;
 
   var child = aElement.parentNode.firstChild;
@@ -669,7 +669,7 @@ function ToggleViewMode(aElement)
       }
     }
   }
-  aElement.parentNode.setAttribute("previousMode", mode);
+  gDialog.modeTabbox.setAttribute("previousMode", mode);
 }
 
 function CloneElementContents(editor, sourceElt, destElt)
