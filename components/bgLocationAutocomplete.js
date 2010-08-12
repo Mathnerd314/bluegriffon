@@ -1,11 +1,12 @@
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
+////////////////////////////////////////////////////////////////////////////////
+//// Constants
+
+const Cc = Components.classes;
 const Ci = Components.interfaces;
+const Cr = Components.results;
 
-const CLASS_ID = Components.ID("14CCAF0F-2BE5-4F7E-AE7A-A8871CD8DAD3");
-const CLASS_NAME = "BlueGriffon Location AutoComplete";
-const CONTRACT_ID = "@mozilla.org/autocomplete/search;1?name=bluegriffonlocation-autocomplete";
-
-// Implements nsIAutoCompleteResult
 function bgLocationAutocompleteResult(searchString, searchResult,
                                   defaultIndex, errorDescription,
                                   results, comments) {
@@ -116,8 +117,9 @@ bgLocationAutocompleteResult.prototype = {
   }
 };
 
+////////////////////////////////////////////////////////////////////////////////
+//// bgLocationAutocomplete
 
-// Implements nsIAutoCompleteSearch
 function bgLocationAutocomplete() {
 }
 
@@ -169,50 +171,16 @@ bgLocationAutocomplete.prototype = {
   stopSearch: function() {
   },
     
-  QueryInterface: function(aIID) {
-    if (!aIID.equals(Ci.nsIAutoCompleteSearch) && !aIID.equals(Ci.nsISupports))
-        throw Components.results.NS_ERROR_NO_INTERFACE;
-    return this;
-  }
+  //////////////////////////////////////////////////////////////////////////////
+  //// nsISupports
+
+  classID: Components.ID("D96C4CF7-DEEB-4C61-8C39-789A97B49546"),
+
+  QueryInterface: XPCOMUtils.generateQI([
+    Ci.nsIAutoCompleteSearch,
+    Ci.nsISupports
+  ])
 };
 
-// Factory
-var bgLocationAutocompleteFactory = {
-  singleton: null,
-  createInstance: function (aOuter, aIID) {
-    if (aOuter != null)
-      throw Components.results.NS_ERROR_NO_AGGREGATION;
-    if (this.singleton == null)
-      this.singleton = new bgLocationAutocomplete();
-    return this.singleton.QueryInterface(aIID);
-  }
-};
-
-// Module
-var bgLocationAutocompleteModule = {
-  registerSelf: function(aCompMgr, aFileSpec, aLocation, aType) {
-    aCompMgr = aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    aCompMgr.registerFactoryLocation(CLASS_ID, CLASS_NAME, CONTRACT_ID, aFileSpec, aLocation, aType);
-  },
-
-  unregisterSelf: function(aCompMgr, aLocation, aType) {
-    aCompMgr = aCompMgr.QueryInterface(Components.interfaces.nsIComponentRegistrar);
-    aCompMgr.unregisterFactoryLocation(CLASS_ID, aLocation);        
-  },
-  
-  getClassObject: function(aCompMgr, aCID, aIID) {
-    if (!aIID.equals(Components.interfaces.nsIFactory))
-      throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
-
-    if (aCID.equals(CLASS_ID))
-      return bgLocationAutocompleteFactory;
-
-    throw Components.results.NS_ERROR_NO_INTERFACE;
-  },
-
-  canUnload: function(aCompMgr) { return true; }
-};
-
-// Module initialization
-function NSGetModule(aCompMgr, aFileSpec) { return bgLocationAutocompleteModule; }
-
+let components = [bgLocationAutocomplete];
+const NSGetFactory = XPCOMUtils.generateNSGetFactory(components);
