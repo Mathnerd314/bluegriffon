@@ -44,5 +44,7 @@ include $(DEPTH)/config/autoconf.mk
 
 DIRS += 
 
+#DIRS += activeview tableLayout fullscreen scripteditor jquery wordcount
+
 include $(topsrcdir)/config/rules.mk
 

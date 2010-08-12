@@ -131,7 +131,7 @@
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>
       </hbox>
-#ifndef XP_MACOSX
+#ifdef XP_MACOSX
       <tabs id="modeTabbox">
         <tab
                  selected="true"
