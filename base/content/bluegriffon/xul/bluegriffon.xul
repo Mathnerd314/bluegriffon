@@ -148,7 +148,7 @@
                  observes="cmd_viewModeEnabler"/>
       </tabs>
 #else
-      <tabs id="modeTabbox" previousMode="wysiwyg">
+      <hbox id="modeTabbox" previousMode="wysiwyg">
       	<spacer flex="1"/>
       	<label class="multiButton left"
       				   selected="true"
@@ -164,7 +164,7 @@
       				   value="source"
       				   observes="cmd_viewModeEnabler"/>
       	<spacer flex="1"/>
-      </tabs>
+      </hbox>
 #endif
       <structurebar id="structurebar" orient="horizontal">
         <spacer id="structbarflexer" flex="1"/>

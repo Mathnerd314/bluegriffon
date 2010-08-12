@@ -622,7 +622,6 @@ function ToggleViewMode(aElement)
     NotifierUtils.notify("afterEnteringSourceMode");
     gDialog.editorsDeck.selectedIndex = 1;
     gDialog.bespinIframe.focus();
-    window.updateCommands("style");
   }
   else if (mode == "wysiwyg")
   {
@@ -670,6 +669,7 @@ function ToggleViewMode(aElement)
     }
   }
   gDialog.modeTabbox.setAttribute("previousMode", mode);
+  window.updateCommands("style");
 }
 
 function CloneElementContents(editor, sourceElt, destElt)
