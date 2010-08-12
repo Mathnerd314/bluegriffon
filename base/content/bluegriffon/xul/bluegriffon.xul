@@ -126,37 +126,12 @@
             <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
           </box>
           <vbox flex="1">
-            <iframe id="bespinIframe" src="resource://gre/res/bespin.html" flex="1"
-                    onclick="onBespinFocus()"/>
-            <hbox id="bespinToolbox" align="center">
-              <label value="Line:"/>
-              <textbox id="bespinLineTextbox"
-                       size="5"
-                       onkeypress="onBespinLineKeypress(event, this)"
-                       onblur="onBespinLineBlur(this)"/>
-              <spacer flex="1"/>
-              <label  id="bespinFindPrevious"
-                      onclick="onBespinFindPrevious()"
-                      hidden="true"
-                      value="Previous"/>
-              <label  id="bespinFindNext"
-                      onclick="onBespinFindNext()"
-                      hidden="true"
-                      value="Next"/>
-              <label value="Find:"/>
-              <textbox id="bespinFindTextbox"
-                       size="5"
-                       type="search"
-                       oncommand="onBespinFindClear(event, this)"
-                       onkeypress="onBespinFindKeypress(event)"
-                       onblur="onBespinFindClear(event, this)"
-                       oninput="onBespinFindInput(this)"/>
-            </hbox>
+#include bespin.inc
           </vbox>
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>
       </hbox>
-#ifdef XP_MACOSX
+#ifndef XP_MACOSX
       <tabs id="modeTabbox">
         <tab
                  selected="true"
@@ -164,32 +139,32 @@
                  label="&wysiwygMode.label;"
                  oncommand="ToggleViewMode(this)"
                  value="wysiwyg"
-                 observes="cmd_renderedHTMLEnabler2"/>
+                 observes="cmd_viewModeEnabler"/>
         <tab
                  id="sourceModeButton"
                  label="&sourceMode.label;"
                  oncommand="ToggleViewMode(this)"
                  value="source"
-                 observes="cmd_renderedHTMLEnabler2"/>
+                 observes="cmd_viewModeEnabler"/>
       </tabs>
 #else
-      <hbox id="modeTabbox">
+      <tabs id="modeTabbox">
       	<spacer flex="1"/>
-      	<toolbarbutton class="multiButton left"
+      	<label class="multiButton left"
       				   selected="true"
       				   id="wysiwygModeButton"
       				   label="&wysiwygMode.label;"
-      				   oncommand="ToggleViewMode(this)"
+      				   onclick="ToggleViewMode(this)"
       				   value="wysiwyg"
-      				   observes="cmd_renderedHTMLEnabler2"/>
-      	<toolbarbutton class="multiButton right"
+      				   observes="cmd_viewModeEnabler"/>
+      	<label class="multiButton right"
       				   id="sourceModeButton"
       				   label="&sourceMode.label;"
-      				   oncommand="ToggleViewMode(this)"
+      				   onclick="ToggleViewMode(this)"
       				   value="source"
-      				   observes="cmd_renderedHTMLEnabler2"/>
+      				   observes="cmd_viewModeEnabler"/>
       	<spacer flex="1"/>
-      </hbox>
+      </tabs>
 #endif
       <structurebar id="structurebar" orient="horizontal">
         <spacer id="structbarflexer" flex="1"/>

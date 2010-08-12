@@ -56,7 +56,7 @@
   <command id="cmd_fontFace"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"/>
   <command id="cmd_class"        state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"/>
   <command id="cmd_renderedHTMLEnabler"/>
-  <command id="cmd_renderedHTMLEnabler2"/>
+  <command id="cmd_viewModeEnabler"/>
   <command id="cmd_ul"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ul')"/>
   <command id="cmd_ol"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ol')"/>
   <command id="cmd_align"        state="left"      oncommand="ComposerCommands.doStatefulCommand('cmd_align', event.target.value)"/>

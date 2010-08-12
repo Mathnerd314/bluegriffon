@@ -1324,6 +1324,7 @@ bespin.tiki.module("text_editor:controllers/search",function(require,exports,mod
  *
  * Contributor(s):
  *   Bespin Team (bespin@mozilla.com)
+ *   Daniel Glazman (daniel@glazman.org)
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -1423,15 +1424,20 @@ exports.EditorSearchController.prototype = {
     /**
      * Sets the search query.
      *
-     * @param text     The search query to set.
-     * @param isRegExp True if the text is a regex, false if it's a literal
-     *                 string.
+     * @param text            The search query to set.
+     * @param isRegExp        True if the text is a regex, false if it's
+     *                        a literal string.
+     * @param isCaseSensitive Used only if isRegExp is false; true for a
+     *                        case sensitive query, false for a case
+     *                        insensitive one. Can be omitted for a
+     *                        case insensitive query.
      */
-    setSearchText: function(text, isRegExp) {
+    setSearchText: function(text, isRegExp, isCaseSensitive) {
         var regExp;
         // If the search string is not a RegExp make sure to escape the
         if (!isRegExp) {
-            regExp = new RegExp(text.replace(this._escapeString, '\\$1'), 'gi');
+            regExp = new RegExp(text.replace(this._escapeString, '\\$1'),
+                                isCaseSensitive ? 'g' : 'gi');
         } else {
             regExp = new RegExp(text);
         }
