@@ -754,7 +754,7 @@ function SetLocationDB()
 {
   var mDBConn = GetDBConn();
 
-  mDBConn.executeSimpleSQL("CREATE TABLE IF NOT EXISTS 'bgLocations' ('id' INTEGER PRIMARY KEY NOT NULL, 'query' VARCHAR NOT NULL, UNIQUE(query))");
+  mDBConn.executeSimpleSQL("CREATE TABLE IF NOT EXISTS 'bgLocations' ('id' INTEGER PRIMARY KEY NOT NULL, 'query' VARCHAR NOT NULL, 'querydate' INTEGER NOT NULL, UNIQUE(query))");
   mDBConn.close();
 }
 
@@ -947,108 +947,6 @@ var JSEditor = {
   }
 };
 
-function onBespinFocus()
-{
-  gDialog.bespinIframe.focus();
-}
-
-function onBespinLineBlur(aElt)
-{
-  aElt.value = "";
-}
-
-function onBespinLineKeypress(aEvent, aElt)
-{
-  if (aEvent.keyCode == 13) {
-	  var line = aElt.value;
-	  BlueGriffonVars.bespinEditor.setLineNumber(parseInt(line));
-    onBespinLineBlur(aElt);
-    onBespinFocus();
-  }
-}
-
-function onBespinFindInput(aElt)
-{
-  var query = aElt.value;
-  var selStart = BlueGriffonVars.bespinEditor.selection.start;
-  var searchController = BlueGriffonVars.bespinEditor.searchController;
-  searchController.setSearchText(query, false /* don't treat this as RegExp */);
-  var range = searchController.findNext(selStart, true);
-
-	if (!range) {
-    gDialog.bespinFindPrevious.hidden = true;
-    gDialog.bespinFindNext.hidden = true;
-	  aElt.className = "notfound";
-	//} else if (range.end.row == selStart.row && range.end.col == selStart.col) {
-	    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
-	} else {
-    gDialog.bespinFindPrevious.hidden = false;
-    gDialog.bespinFindNext.hidden = false;
-    aElt.className = "";
-    BlueGriffonVars.bespinEditor.selection = range;
-  }
-}
-
-function onBespinFindNext()
-{
-  var query = gDialog.bespinFindTextbox.value;
-  var selEnd = BlueGriffonVars.bespinEditor.selection.end;
-  var searchController = BlueGriffonVars.bespinEditor.searchController;
-  searchController.setSearchText(query, false /* don't treat this as RegExp */);
-  var range = searchController.findNext(selEnd, true);
-
-  if (!range) {
-    gDialog.bespinFindPrevious.hidden = true;
-    gDialog.bespinFindNext.hidden = true;
-    gDialog.bespinFindTextbox.className = "notfound";
-  //} else if (range.end.row == selEnd.row && range.end.col == selEnd.col) {
-  //    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
-  } else {
-    gDialog.bespinFindPrevious.hidden = false;
-    gDialog.bespinFindNext.hidden = false;
-    gDialog.bespinFindTextbox.className = "";
-    BlueGriffonVars.bespinEditor.selection = range;
-  }
-}
-
-function onBespinFindPrevious()
-{
-  var query = gDialog.bespinFindTextbox.value;
-  var selStart = BlueGriffonVars.bespinEditor.selection.start;
-  var searchController = BlueGriffonVars.bespinEditor.searchController;
-  searchController.setSearchText(query, false /* don't treat this as RegExp */);
-  var range = searchController.findPrevious(null, true);
-
-  if (!range) {
-    gDialog.bespinFindPrevious.hidden = true;
-    gDialog.bespinFindNext.hidden = true;
-    gDialog.bespinFindTextbox.className = "notfound";
-  //} else if (range.end.row == selStart.row && range.end.col == selStart.col) {
-  //    //alert("The end position is the same as the position given to nextMatch as starting position. This means the entire file was searched.");
-  } else {
-    gDialog.bespinFindPrevious.hidden = false;
-    gDialog.bespinFindNext.hidden = false;
-    gDialog.bespinFindTextbox.className = "";
-    BlueGriffonVars.bespinEditor.selection = range;
-  }
-}
-
-function onBespinFindClear(aEvent, aElt)
-{
-  if (!aElt.value) {
-    aElt.className = "";
-    gDialog.bespinFindPrevious.hidden = true;
-    gDialog.bespinFindNext.hidden = true;
-  }
-}
-
-function onBespinFindKeypress(aEvent)
-{
-  if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
-    gDialog.bespinIframe.focus();
-  }
-}
-
 function OnDoubleClick(aEvent)
 {
   var node = EditorUtils.getSelectionContainer().node;
@@ -1067,5 +965,5 @@ function OnDoubleClick(aEvent)
   }
 }
 
-
+#include bespin.inc
 

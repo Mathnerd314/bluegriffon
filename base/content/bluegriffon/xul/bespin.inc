@@ -7,12 +7,16 @@
                        onkeypress="onBespinLineKeypress(event, this)"
                        onblur="onBespinLineBlur(this)"/>
               <spacer flex="1"/>
+              <checkbox label="Case sensitive"
+                        hidden="true"
+                        id="bespinFindCaseSensitive"
+                        oncommand="ToggleBespinFindCaseSensitivity()"/>
               <label  id="bespinFindPrevious"
-                      onclick="onBespinFindPrevious()"
+                      onclick="BespinFind(false, false)"
                       hidden="true"
                       value="Previous"/>
               <label  id="bespinFindNext"
-                      onclick="onBespinFindNext()"
+                      onclick="BespinFind(true, false)"
                       hidden="true"
                       value="Next"/>
               <label value="Find:"/>
@@ -22,5 +26,5 @@
                        oncommand="onBespinFindClear(event, this)"
                        onkeypress="onBespinFindKeypress(event)"
                        onblur="onBespinFindClear(event, this)"
-                       oninput="onBespinFindInput(this)"/>
+                       oninput="BespinFind(true, true)"/>
             </hbox>
