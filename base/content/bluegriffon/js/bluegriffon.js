@@ -645,7 +645,7 @@ function ToggleViewMode(aElement)
             isXML = true;
             break;
           case "":
-            isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") != "");
+            isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
             break;
         }
         if (isXML) {
