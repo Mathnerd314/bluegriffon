@@ -10,7 +10,7 @@
    * { padding: 0px !important: margin: 0px !important; border: 0px none !important}
   </style>
   <script>
-    function installBespin() {
+    function installBespin(aKeyPressCallback) {
       var elt = getEditableElement();
       var e = bespin.useBespin("editor",
           {
@@ -18,10 +18,13 @@
             stealFocus: true,
             settings: {
                         tabstop: 2,
-                        fontface: "Courier New, Courier, monospace",
+                        fontface: "Courier New, Courier, monospace"
                       }
           });
       postMessage("bespin", "*");
+
+      getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
+
       return e;
     }
     function getEditableElement() {

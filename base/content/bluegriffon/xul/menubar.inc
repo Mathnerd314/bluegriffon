@@ -43,6 +43,9 @@
         <menuitem id="menu_copy" command="cmd_copy" label="Copie"/>
         <menuitem id="menu_paste"/>
         <menuitem id="menu_delete"/>
+        <menuseparator/>
+        <menuitem id="menu_find" command="cmd_bgfind"
+                  key="findkb"/>
       </menupopup>
     </menu>
 

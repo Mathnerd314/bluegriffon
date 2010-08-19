@@ -14,13 +14,10 @@ var cmdInsertOrEditTableCommand =
 
   doCommand: function(aCommand)
   {
-    /*if (IsInTableCell())
-      EditorTableCellProperties();
-    else
-      EditorInsertOrEditTable(true);*/
-
-    window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
+    // reset
+    AutoInsertTable.reset();
+    
+    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0);
   }
 };
 

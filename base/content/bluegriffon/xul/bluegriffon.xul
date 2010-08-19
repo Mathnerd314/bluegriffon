@@ -187,6 +187,8 @@
   </panel>
 #endif
 
+#include autoInsertTable.inc
+
   <statusbar id="statusbar">
     <deck flex="1" id="statusbarDeck">
       <hbox id="editorBar" align="center">

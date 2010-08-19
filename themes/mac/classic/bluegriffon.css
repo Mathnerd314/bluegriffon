@@ -280,3 +280,26 @@ grippy[disabled="true"] {
 #bespinFindPrevious:active, #bespinFindNext:active {
   background-color: silver;
 }
+
+/* autoInsertTable */
+*#AutoInsertTableSizeSelector label {
+  width: 2em;
+  margin: 0px ! important;
+}
+
+*#AutoInsertTableSizeSelector:not([disabled]) label:hover,
+*#AutoInsertTableSizeSelector label.selected {
+  background-color: rgb(10,36,106) ! important;
+}
+
+*#AutoInsertTableSizeSelector[disabled] label.selected {
+  background-color: silver ! important;
+}
+
+*#AutoInsertTableSizeSelector label {
+  border: 2px ridge !important;
+}
+
+*#AutoInsertTableSizeSelector[disabled] label {
+  border: silver 2px ridge !important;
+}

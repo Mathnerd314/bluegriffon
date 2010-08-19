@@ -77,3 +77,39 @@ function onBespinFindKeypress(aEvent)
   }
 }
 
+function BespinKeyPressCallback(aEvent)
+{
+  if (aEvent.metaKey &&
+      !aEvent.ctrlKey &&
+      !aEvent.altKey) {
+    switch (aEvent.which) {
+      case 102: // meta-f
+        aEvent.preventDefault();
+        gDialog.bespinFindTextbox.focus();
+        break;
+      case 108: // meta-l
+        aEvent.preventDefault();
+        gDialog.bespinLineTextbox.focus();
+        break;
+      case 99: // meta-c XXX Workaround for Copy horked in Bespin0.9+Gecko2
+	      {
+	        aEvent.preventDefault();
+          var selection = BlueGriffonVars.bespinEditor.selectedText;
+	        var clipboardSvc = Components.classes["@mozilla.org/widget/clipboard;1"].
+	                           getService(Components.interfaces.nsIClipboard);
+	        var xferable = Components.classes["@mozilla.org/widget/transferable;1"].
+	                       createInstance(Components.interfaces.nsITransferable);
+          xferable.addDataFlavor("text/unicode");
+			    var s = Components.classes["@mozilla.org/supports-string;1"].
+			            createInstance(Components.interfaces.nsISupportsString);
+			    s.data = selection;
+          xferable.setTransferData("text/unicode", s, selection.length * 2);
+          clipboardSvc.setData(xferable, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
+	      }
+        break;
+      default:
+        break;
+    }
+  }
+}
+

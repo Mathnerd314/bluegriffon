@@ -38,7 +38,7 @@
 var EXPORTED_SYMBOLS = ["EditorUtils"];
 
 Components.utils.import("resource://gre/modules/urlHelper.jsm");
-Components.utils.import("resource://gre/modules/cssHelper.jsm");
+//Components.utils.import("resource://gre/modules/cssHelper.jsm");
 
 var EditorUtils = {
 

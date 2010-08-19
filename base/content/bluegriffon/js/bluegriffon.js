@@ -606,7 +606,7 @@ function ToggleViewMode(aElement)
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
     if (!BlueGriffonVars.bespinEditor) {
-      var bespinTmp = gDialog.bespinIframe.contentWindow.installBespin();
+      var bespinTmp = gDialog.bespinIframe.contentWindow.installBespin(BespinKeyPressCallback);
       bespinTmp.then(function(env) {
         var editor = env.editor;
         BlueGriffonVars.bespinEditor = editor;
@@ -966,4 +966,7 @@ function OnDoubleClick(aEvent)
 }
 
 #include bespin.inc
+
+#include autoInsertTable.inc
+
 

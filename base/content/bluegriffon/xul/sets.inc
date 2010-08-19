@@ -5,6 +5,7 @@
   <key id="key_quitApplication" key="&quit.key;"                                      modifiers="accel"/>
   <key id="closetabkb"          key="&closeWindow.key;"      observes="cmd_closeTab"  modifiers="accel"/>
   <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel"/>
+  <key id="findkb"              key="u"                      observes="cmd_bgfind"    modifiers="accel"/>
 </keyset>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->
@@ -84,6 +85,8 @@
   <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
+
+  <command id="cmd_bgfind"         label="Find"                      oncommand="goDoCommand('cmd_bgfind')"/>
 </commandset>
 
 <commandset id="composerEditMenuItems"

@@ -285,6 +285,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);
 
     commandTable.registerCommand("cmd_class",       cmdClass);
+
+    commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
+
   },
 
   setupFormatCommands: function setupFormatCommands()
@@ -348,6 +351,7 @@ var ComposerCommands = {
 #include dummyCommands.inc
 #include formatCommands.inc
 #include insertionCommands.inc
+#include editCommands.inc
 
 var cmdCopy =
 {
