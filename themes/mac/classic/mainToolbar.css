@@ -130,3 +130,12 @@
 #MainToolbar[iconsize="small"] #composer-throbber:hover {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo-hover.png');
 }
+
+#MainToolbox toolbarseparator {
+  height: 32px;
+  background-color: transparent;
+}
+
+#MainToolbox[iconsize="small"] toolbarseparator {
+  height: 24px;
+}

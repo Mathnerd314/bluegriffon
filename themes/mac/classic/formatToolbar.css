@@ -246,3 +246,8 @@ toolbaritem  menulist {
 #rotateButton[disabled="true"] {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/rotate_icon-disabled.png");
 }
+
+#FormatToolbox toolbarseparator {
+  height: 16px;
+  background-color: transparent;
+}
