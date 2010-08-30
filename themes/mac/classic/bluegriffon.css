@@ -35,7 +35,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-@import url("chrome://bluegriffon/content/bindings/sidebar.css");
 @import url("chrome://bluegriffon/content/bindings/structurebar.css");
 @import url("chrome://bluegriffon/skin/mainToolbar.css");
 @import url("chrome://bluegriffon/skin/formatToolbar.css");
@@ -56,10 +55,6 @@ tabeditor[visibility="hidden"]  tabpanels
 
 tabeditor[visibility="hidden"] {
   background-color: rgb(128,128,128);
-}
-
-sidebar {
-  width: 200px;
 }
 
 sourceeditor {
@@ -302,4 +297,16 @@ grippy[disabled="true"] {
 
 *#AutoInsertTableSizeSelector[disabled] label {
   border: silver 2px ridge !important;
+}
+
+/***** FLOATING PANELS *****/
+
+panel[floating="true"] {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
+  -moz-appearance: none;
+  opacity: 0.9;
+  background-color: #303030;
+  color: white;
+  -moz-border-radius: 5px;
+  -moz-transition: opacity 0.5s;
 }

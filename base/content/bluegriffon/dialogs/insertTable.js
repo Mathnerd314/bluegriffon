@@ -217,7 +217,8 @@ function onAccept()
             { priority: false, property:  "table-layout",
               value: (gDialog.fixedLayout.checked ? "fixed" : "auto") }
           ];
-          CssUtils.addRuleForSelector(gActiveEditor.document,
+          CssUtils.addRuleForSelector(gActiveEditor,
+                                      gActiveEditor.document,
                                       selectorText,
                                       tableProperties);
           if (cssToggler.newID)
@@ -246,7 +247,8 @@ function onAccept()
                                   property: "border",
                                   value: "inset 1px" } );
           cellSelectorText = selectorText + " > * > tr > *";
-          CssUtils.addRuleForSelector(gActiveEditor.document,
+          CssUtils.addRuleForSelector(gActiveEditor,
+                                      gActiveEditor.document,
                                       cellSelectorText + "",
                                       cellProperties);
         }

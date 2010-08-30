@@ -748,6 +748,7 @@ function doCloseTab(aTab)
     tabbox.parentNode.setAttribute("visibility", "hidden");
   }
   window.updateCommands("style");
+  NotifierUtils.notify("tabClosed");
 }
 
 function SetLocationDB()
@@ -968,5 +969,93 @@ function OnDoubleClick(aEvent)
 #include bespin.inc
 
 #include autoInsertTable.inc
+
+
+function AlignAllPanels()
+{
+  var x = window.screenX;
+  var y = window.screenY;
+  var w = window.outerWidth;
+  var availableWidth = screen.availWidth - x - w;
+  var h = window.outerHeight;
+  var panelsData = [];
+  var panels = document.querySelectorAll('panel[floating="true"]');
+  for (var i = 0; i < panels.length; i++) {
+    if (panels[i].popupBoxObject.popupState == "open") {
+      panelsData.push( {
+                         panel: panels[i],
+                         x: panels[i].boxObject.screenX,
+                         w: panels[i].boxObject.width
+                       });
+    }
+  }
+
+  function comparePanelsData(a, b) {
+    if (a.x < b.x)
+      return -1;
+    if (a.x > b.x)
+      return +1;
+    return 0;
+  }
+  panelsData.sort(comparePanelsData);
+
+  for (var i = 0; i < panelsData.length; i++) {
+    if (i+1 >= panelsData.length)
+      break;
+    if (panelsData[i+1].x >= panelsData[i].x &&
+        panelsData[i+1].x <= panelsData[i].x + panelsData[i].w)
+      panelsData[i+1].x = panelsData[i].x;
+  }
+
+  var weightData = {};
+  var flex = 0;
+  for (var i = 0; i < panelsData.length; i++) {
+    if (panelsData[i].x in weightData)
+      weightData[panelsData[i].x]++;
+    else {
+      weightData[panelsData[i].x] = 1;
+      flex++;
+    }
+    panelsData[i].vPos = weightData[panelsData[i].x] - 1;
+  }
+
+  var currentX = x + w + 1;
+  var lastX = panelsData[0].x;
+  for (var i = 0; i < panelsData.length; i++) {
+    if (panelsData[i].x != lastX) {
+      currentX += availableWidth / flex;
+      lastX = panelsData[i].x;
+    }
+    panelsData[i].panel.moveTo(currentX + 10 , y + (h / weightData[panelsData[i].x]) * panelsData[i].vPos);
+    panelsData[i].panel.sizeTo((availableWidth / flex) - 14 , h / weightData[panelsData[i].x] - 4);
+  }
+}
+
+function UpdatePanelsStatusInMenu()
+{
+  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+  while (child) {
+    var panel = gDialog[child.getAttribute("panel")];
+    if (panel.popupBoxObject.popupState == "open")
+      child.setAttribute("checked", "true");
+    else
+      child.removeAttribute("checked");
+
+    child = child.nextSibling;
+  }
+}
+
+function TogglePanel(aEvent)
+{
+  var menuitem = aEvent.originalTarget;
+  if (!menuitem.hasAttribute("panel"))
+    return;
+
+  var panel = gDialog[aEvent.originalTarget.getAttribute("panel")];
+  if (menuitem.getAttribute("checked") == "true")
+    panel.openPanel();
+  else
+    panel.closePanel();
+}
 
 

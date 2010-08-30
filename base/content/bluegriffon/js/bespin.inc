@@ -92,6 +92,7 @@ function BespinKeyPressCallback(aEvent)
         gDialog.bespinLineTextbox.focus();
         break;
       case 99: // meta-c XXX Workaround for Copy horked in Bespin0.9+Gecko2
+      case 120: // meta-x XXX
 	      {
 	        aEvent.preventDefault();
           var selection = BlueGriffonVars.bespinEditor.selectedText;
@@ -106,6 +107,8 @@ function BespinKeyPressCallback(aEvent)
           xferable.setTransferData("text/unicode", s, selection.length * 2);
           clipboardSvc.setData(xferable, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
 	      }
+        if (aEvent.which == 120)
+          BlueGriffonVars.bespinEditor.selectedText = "";
         break;
       default:
         break;

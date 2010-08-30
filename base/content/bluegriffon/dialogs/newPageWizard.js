@@ -345,6 +345,7 @@ function RemoveContentRow()
 
 function Apply()
 {
+  var editor = EditorUtils.getCurrentEditor();
   var doc = EditorUtils.getCurrentDocument();
 
   // UI CSS GRID LAYOUT
@@ -555,30 +556,36 @@ function Apply()
     var activeColor  = gDialog.activeLinksColorColorpicker.color;
     var visitedColor = gDialog.visitedLinksColorColorpicker.color;
 
-    CssUtils.getStyleSheetForScreen(doc);
-    CssUtils.addRuleForSelector(doc, "html", [ { property: "background-color",
-                                                 value: bgColor,
-                                                 priority: false } ] );
-    CssUtils.addRuleForSelector(doc, "body", [ { property: "background-color",
-                                                 value: bgColor,
-                                                 priority: false },
-                                               {
-                                                 property: "color",
-                                                 value: fgColor,
-                                                 priority: false } ] );
-    CssUtils.addRuleForSelector(doc, ":link", [ { property: "color",
-                                                 value: linksColor,
-                                                 priority: false } ] );
+    CssUtils.getStyleSheetForScreen(doc, editor);
+    CssUtils.addRuleForSelector(editor, doc, "html",
+                                [ { property: "background-color",
+                                    value: bgColor,
+                                    priority: false } ] );
+    CssUtils.addRuleForSelector(editor, doc, "body",
+                                [ { property: "background-color",
+                                    value: bgColor,
+                                    priority: false },
+                                  {
+                                    property: "color",
+                                    value: fgColor,
+                                    priority: false } ] );
+    CssUtils.addRuleForSelector(editor, doc, ":link",
+                                [ { property: "color",
+                                    value: linksColor,
+                                    priority: false } ] );
     if (!gDialog.underlineLinks.checked)
-      CssUtils.addRuleForSelector(doc, ":link", [ { property: "text-decoration",
-                                                   value: "none",
-                                                   priority: false } ] );
-    CssUtils.addRuleForSelector(doc, ":link:active", [ { property: "color",
-                                                          value: activeColor,
-                                                          priority: false } ] );
-    CssUtils.addRuleForSelector(doc, ":link:visited", [ { property: "color",
-                                                          value: visitedColor,
-                                                          priority: false } ] );
+      CssUtils.addRuleForSelector(editor, doc, ":link",
+                                  [ { property: "text-decoration",
+                                      value: "none",
+                                      priority: false } ] );
+    CssUtils.addRuleForSelector(editor, doc, ":link:active",
+                                [ { property: "color",
+                                    value: activeColor,
+                                    priority: false } ] );
+    CssUtils.addRuleForSelector(editor, doc, ":link:visited",
+                                [ { property: "color",
+                                    value: visitedColor,
+                                    priority: false } ] );
 
     if (gDialog.makeColorsDefault.checked)
     {
@@ -598,21 +605,22 @@ function Apply()
     var bgRepeat     = gDialog.backgroundTile.value;
     var bgAttachment = gDialog.backgroundScroll.value;
     var bgPosition   = gDialog.horizPosition.value + " " + gDialog.vertPosition.value;
-    CssUtils.addRuleForSelector(doc, "body", [ { property: "background-image",
-                                                 value: 'url("' + bgImage + '")',
-                                                 priority: false },
-                                               {
-                                                 property: "background-repeat",
-                                                 value: bgRepeat,
-                                                 priority: false },
-                                               {
-                                                 property: "background-attachment",
-                                                 value: bgAttachment,
-                                                 priority: false },
-                                               {
-                                                 property: "background-position",
-                                                 value: bgPosition,
-                                                 priority: false } ] );
+    CssUtils.addRuleForSelector(editor, doc, "body",
+                                [ { property: "background-image",
+                                    value: 'url("' + bgImage + '")',
+                                    priority: false },
+                                  {
+                                    property: "background-repeat",
+                                    value: bgRepeat,
+                                    priority: false },
+                                  {
+                                    property: "background-attachment",
+                                    value: bgAttachment,
+                                    priority: false },
+                                  {
+                                    property: "background-position",
+                                    value: bgPosition,
+                                    priority: false } ] );
   }
 
   /* character set */

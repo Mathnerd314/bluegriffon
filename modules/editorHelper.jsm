@@ -616,4 +616,5 @@ var EditorUtils = {
 
   get activeViewActive()    { return this.mActiveViewActive; },
   set activeViewActive(val) { this.mActiveViewActive = val; }
+
 };

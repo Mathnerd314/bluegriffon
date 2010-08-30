@@ -17,7 +17,7 @@ var cmdInsertOrEditTableCommand =
     // reset
     AutoInsertTable.reset();
     
-    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0);
+    gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0, false);
   }
 };
 

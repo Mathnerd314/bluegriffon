@@ -65,6 +65,11 @@
 <!ENTITY toolsMenu.accesskey              "t">
 <!ENTITY consoleMenu.label                "JavaScript Console">
 
+<!ENTITY panelsMenu.label                 "Panels">
+<!ENTITY panelsMenu.accesskey             "p">
+
+<!ENTITY alignPanels.label                "Align on panels">
+
 <!ENTITY helpMenu.label                   "Help">
 <!ENTITY helpMenu.accesskey               "h">
 <!ENTITY aboutComposer.label              "About BlueGriffon">

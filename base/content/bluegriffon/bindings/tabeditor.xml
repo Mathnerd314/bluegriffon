@@ -286,11 +286,13 @@
                       var sourceElt = source.mSourceTreeXULElement;
                     }
                   }
-                  window.updateCommands("navigation");
-                  window.updateCommands("create");
-
-                  NotifierUtils.notify("tabCreated");
-                  RecentPagesHandler.saveRecentFilesPrefs();
+                  if (editor) {
+                    window.updateCommands("navigation");
+                    window.updateCommands("create");
+  
+                    NotifierUtils.notify("tabCreated");
+                    RecentPagesHandler.saveRecentFilesPrefs();
+                  }
                 }
               },
             

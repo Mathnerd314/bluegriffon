@@ -42,9 +42,13 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
+MODULE = FUEL
+
 EXTRA_PP_COMPONENTS = \
 	bgLocationAutocomplete.js \
 	bgLocationAutocomplete.manifest \
+	fuelApplication.js \
+	fuelApplication.manifest \
 	$(NULL)
 
 include $(topsrcdir)/config/rules.mk

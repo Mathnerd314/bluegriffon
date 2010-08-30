@@ -85,6 +85,11 @@ var CssUtils = {
     return aElt.ownerDocument.defaultView.getComputedStyle(aElt, "");
   },
 
+  getComputedValue: function(aElt, aProperty)
+  {
+    return this.getComputedStyle(aElt).getPropertyValue(aProperty);
+  },
+
   findClassesInSelector: function(aSelector)
   {
     return aSelector.match( /\.-?([_a-z]|[\200-\377]|((\\[0-9a-f]{1,6}(\r\n|[ \t\r\n\f])?)|\\[^\r\n\f0-9a-f]))([_a-z0-9-]|[\200-\377]|((\\[0-9a-f]{1,6}(\r\n|[ \t\r\n\f])?)|\\[^\r\n\f0-9a-f]))*/gi );
@@ -161,7 +166,7 @@ var CssUtils = {
     return ruleList;
   },
 
-  deleteAllLocalRulesForSelector: function(aDocument, aSelector, aDeclarations)
+  deleteAllLocalRulesForSelector: function(aEditor, aDocument, aSelector, aDeclarations)
   {
     var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
     var l = ruleList.length;
@@ -182,11 +187,11 @@ var CssUtils = {
         else
           parentStyleSheet.deleteRule(ruleList[i].index);
       }
-      this.reserializeEmbeddedStylesheet(parentStyleSheet);
+      this.reserializeEmbeddedStylesheet(parentStyleSheet, aEditor);
     }
   },
 
-  getStyleSheetForScreen: function(aDocument)
+  getStyleSheetForScreen: function(aDocument, aEditor)
   {
     var styleElements = aDocument.getElementsByTagName("style");
     var stylesheet = null;
@@ -214,20 +219,20 @@ var CssUtils = {
       var textNode = aDocument.createTextNode("/* created by BlueGriffon */");
       styleElement.appendChild(textNode);
       var head = aDocument.getElementsByTagName("head")[0]; 
-      EditorUtils.getCurrentEditor().insertNode(styleElement, head, head.childNodes.length);
+      aEditor.insertNode(styleElement, head, head.childNodes.length);
       stylesheet = styleElement.sheet;
     }
     return stylesheet;
   },
 
-  addRuleForSelector: function(aDocument, aSelector, aDeclarations)
+  addRuleForSelector: function(aEditor, aDocument, aSelector, aDeclarations)
   {
-    this.deleteAllLocalRulesForSelector(aDocument, aSelector, aDeclarations);
+    this.deleteAllLocalRulesForSelector(aEditor, aDocument, aSelector, aDeclarations);
     var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
 
     if (!ruleList || !ruleList.length)
     {
-      var stylesheet = this.getStyleSheetForScreen(aDocument);
+      var stylesheet = this.getStyleSheetForScreen(aDocument, aEditor);
       var str = stylesheet.ownerNode.textContent;
       str += "\n" + aSelector + " {";
       for (var j = 0; j < aDeclarations.length; j++)
@@ -260,10 +265,10 @@ var CssUtils = {
         }
     }
 
-    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet);
+    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet, aEditor);
   },
 
-  reserializeEmbeddedStylesheet: function(aSheet)
+  reserializeEmbeddedStylesheet: function(aSheet, editor)
   {
     var cssRules = aSheet.cssRules;
     var str = "";
@@ -297,7 +302,6 @@ var CssUtils = {
       }
       str += "}\n";
     }
-    var editor = EditorUtils.getCurrentEditor();
     var styleElt = aSheet.ownerNode;
     var child = styleElt.firstChild;
     while (child)

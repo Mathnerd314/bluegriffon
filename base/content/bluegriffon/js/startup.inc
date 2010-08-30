@@ -17,10 +17,6 @@ function Startup()
   ComposerCommands.setupMainCommands();
   window.updateCommands("style");
 
-  gDialog.sidebaritems.init();
-  gDialog.sidebar1.init(gDialog.sidebaritems, gDialog.sidebar2, gDialog.splitter1);
-  gDialog.sidebar2.init(gDialog.sidebaritems, gDialog.sidebar1, gDialog.splitter2);
-
   InstallCustomizationDoneCallbacks();
 
   gDialog.structurebar.init();
@@ -38,4 +34,7 @@ function Startup()
   }
 
   ProjectManager.init();
+
+  window.addEventListener("deactivate", DeactivateMainWindow, true);
 }
+

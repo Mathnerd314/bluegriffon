@@ -106,21 +106,8 @@
     <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 
-  <sidebaritems id="sidebaritems"/>
-
-  <hbox flex="1" id="maincontainer">
-    <sidebar id="sidebar1" sidebaritems="projectmanager" persist="sidebaritems width"/>
-    <splitter id="splitter1" collapse="before" resizebefore="closest"
-              oncommand="document.persist('splitter1', 'state');">
-#ifndef XP_MACOSX
-      <grippy/>
-#endif
-    </splitter>
-    <vbox flex="1">
+    <vbox flex="1" id="maincontainer">
       <hbox flex="1">
-        <vbox id="helperButtons">
-          <spacer flex="1"/>
-        </vbox>
         <deck flex="1" id="editorsDeck" selectedIndex="0">
           <box flex="1" id="tabeditorContainer" >
             <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
@@ -131,53 +118,47 @@
           <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
         </deck>
       </hbox>
+      <hbox align="center" id="helperButtons">
 #ifdef XP_MACOSX
-      <tabs id="modeTabbox" previousMode="wysiwyg">
-        <tab
-                 selected="true"
-                 id="wysiwygModeButton"
-                 label="&wysiwygMode.label;"
-                 oncommand="ToggleViewMode(this)"
-                 value="wysiwyg"
-                 observes="cmd_viewModeEnabler"/>
-        <tab
-                 id="sourceModeButton"
-                 label="&sourceMode.label;"
-                 oncommand="ToggleViewMode(this)"
-                 value="source"
-                 observes="cmd_viewModeEnabler"/>
-      </tabs>
+	      <tabs id="modeTabbox" previousMode="wysiwyg" flex="1">
+	        <tab
+	                 selected="true"
+	                 id="wysiwygModeButton"
+	                 label="&wysiwygMode.label;"
+	                 oncommand="ToggleViewMode(this)"
+	                 value="wysiwyg"
+	                 observes="cmd_viewModeEnabler"/>
+	        <tab
+	                 id="sourceModeButton"
+	                 label="&sourceMode.label;"
+	                 oncommand="ToggleViewMode(this)"
+	                 value="source"
+	                 observes="cmd_viewModeEnabler"/>
+	      </tabs>
 #else
-      <hbox id="modeTabbox" previousMode="wysiwyg">
-      	<spacer flex="1"/>
-      	<label class="multiButton left"
-      				   selected="true"
-      				   id="wysiwygModeButton"
-      				   label="&wysiwygMode.label;"
-      				   onclick="ToggleViewMode(this)"
-      				   value="wysiwyg"
-      				   observes="cmd_viewModeEnabler"/>
-      	<label class="multiButton right"
-      				   id="sourceModeButton"
-      				   label="&sourceMode.label;"
-      				   onclick="ToggleViewMode(this)"
-      				   value="source"
-      				   observes="cmd_viewModeEnabler"/>
-      	<spacer flex="1"/>
-      </hbox>
+	      <hbox id="modeTabbox" previousMode="wysiwyg" flex="1">
+	      	<spacer flex="1"/>
+	      	<label class="multiButton left"
+	      				   selected="true"
+	      				   id="wysiwygModeButton"
+	      				   label="&wysiwygMode.label;"
+	      				   onclick="ToggleViewMode(this)"
+	      				   value="wysiwyg"
+	      				   observes="cmd_viewModeEnabler"/>
+	      	<label class="multiButton right"
+	      				   id="sourceModeButton"
+	      				   label="&sourceMode.label;"
+	      				   onclick="ToggleViewMode(this)"
+	      				   value="source"
+	      				   observes="cmd_viewModeEnabler"/>
+	      	<spacer flex="1"/>
+	      </hbox>
 #endif
+      </hbox>
       <structurebar id="structurebar" orient="horizontal">
         <spacer id="structbarflexer" flex="1"/>
       </structurebar>
     </vbox>
-    <splitter id="splitter2" collapse="after" resizeafter="closest"
-              oncommand="document.persist('splitter2', 'state');">
-#ifndef XP_MACOSX
-      <grippy/>
-#endif
-    </splitter>
-    <sidebar id="sidebar2" sidebaritems="" persist="sidebaritems width"/>
-  </hbox>
 
 #ifdef TOOLBAR_CUSTOMIZATION_SHEET
   <panel id="customizeToolbarSheetPopup" noautohide="true">
@@ -186,6 +167,8 @@
             hidden="true"/>
   </panel>
 #endif
+
+  <panelset id="panels"/>
 
 #include autoInsertTable.inc
 

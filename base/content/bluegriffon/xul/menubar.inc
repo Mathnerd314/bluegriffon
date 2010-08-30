@@ -57,16 +57,6 @@
         </menu>
         <menuitem label="&viewStatusbar.label;"
                   oncommand="BGToolbarManager.goToggleToolbar('statusbar')" />
-        <menu label="&sidebars.label;">
-          <menupopup onpopupshowing="UpdateSidebarsMenuStatus()">
-            <menuitem label="&leftSidebar.label;" type="checkbox"
-                      oncommand="ToggleSidebarCollapsing(this, 'splitter1')"
-                      id="leftSidebarMenuitem"/>
-            <menuitem label="&rightSidebar.label;" type="checkbox"
-                      oncommand="ToggleSidebarCollapsing(this, 'splitter2')"
-                      id="rightSidebarMenuitem"/>
-          </menupopup>
-        </menu>
       </menupopup>
     </menu>
 
@@ -80,6 +70,15 @@
 
     <menu id="tableMenu" label="&tableMenu.label;" accesskey="&tableMenu.accesskey;">
       <menupopup id="tableMenuPopup"/>
+    </menu>
+
+    <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
+          oncommand="TogglePanel(event)">
+      <menupopup id="panelsMenuPopup" onpopupshowing="UpdatePanelsStatusInMenu()">
+        <menuitem label="&alignPanels.label;"
+                  oncommand="AlignAllPanels()"/>
+        <menuseparator id="beforeAllPanelsMenuseparator"/>
+      </menupopup>
     </menu>
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
