@@ -68,7 +68,7 @@
 <!ENTITY panelsMenu.label                 "Panels">
 <!ENTITY panelsMenu.accesskey             "p">
 
-<!ENTITY alignPanels.label                "Align on panels">
+<!ENTITY alignPanels.label                "Align all panels">
 
 <!ENTITY helpMenu.label                   "Help">
 <!ENTITY helpMenu.accesskey               "h">
