@@ -1,0 +1,102 @@
+
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+#mainBox {
+  font-size: smaller;
+  margin: 0px;
+  padding: 0px;
+  overflow: auto;
+}
+
+#warningBox > vbox {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#classPicker, #IDPicker {
+  max-width: 7em;
+  min-width: 7em;
+}
+
+hbox.csspropertiesHeader {
+  border-top: thin solid silver;
+  padding-left: 3px;
+}
+
+hbox.csspropertiesHeader > image {
+  -moz-transform: rotate(-90deg);
+  -moz-transition: -moz-transform 0.2s;
+}
+
+hbox.csspropertiesHeader.last {
+  border-bottom: thin solid silver;
+}
+
+hbox.cssPropertiesHeader > image[selected="true"] {
+  -moz-transform: rotate(0deg) !mportant;
+}
+
+.section {
+  -moz-transition: display 2s;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  background-color: transparent;
+}
+
+toolbarbutton.multibutton[checked] {
+	text-shadow: rgba(129, 211, 255, 1) 0 0 3px;
+	-moz-box-shadow: 
+		inset rgba(0, 0, 0, 1) 0 2px 8px, 
+		inset rgba(0, 0, 0, 1) 0 1px 1px,
+		inset rgba(255, 255, 255, 0.5) 0 -16px 8px,
+		rgba(255, 255, 255, 0.1) 0 1px;
+}
+
+toolbarbutton.multibutton {
+  margin: 4px 0px;
+	padding: 1px 1px;
+	-moz-border-radius-topleft: 5px; 
+	-moz-border-radius-bottomleft: 5px;
+	-moz-box-shadow: 
+		inset rgba(128, 128, 128, 1) 0 2px 8px, 
+		inset rgba(255, 255, 255, 1) 0 1px 1px,
+		inset rgba(255, 255, 255, 0.2) 0 -16px 8px,
+		rgba(255, 255, 255, 0.1) 0 1px;
+	background-color: #ccc;
+  -moz-appearance: none;
+}
+toolbarbutton.multibutton + toolbarbutton.multibutton {
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-left: 0px;
+}
+
+toolbarbutton.multibutton:last-child {
+	-moz-border-radius-topright: 5px; 
+	-moz-border-radius-bottomright: 5px;
+  margin-right: 1em;
+}
+
+#fontFamilyListbox {
+  margin: 0px;
+}
+
+
+.listboxBg {
+  -moz-box-align: center;
+}
+
+#oneColumnButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/one-column.png");
+}
+
+#twoColumnsButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/two-columns.png");
+}
+
+#threeColumnsButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/three-columns.png");
+}

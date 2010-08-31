@@ -1,0 +1,20 @@
+
+cssproperties.jar:
+% content   cssproperties          %content/cssproperties/
+% skin      cssproperties         classic/1.0 %skin/classic/cssproperties/
+% overlay   chrome://bluegriffon/content/xul/bluegriffon.xul    chrome://cssproperties/content/csspropertiesOverlay.xul
+  content/cssproperties/csspropertiesOverlay.xul      (content/csspropertiesOverlay.xul)
+* content/cssproperties/cssproperties.xul             (content/cssproperties.xul)
+* content/cssproperties/cssproperties.js              (content/cssproperties.js)
+  skin/classic/cssproperties/cssproperties.css        (skin/cssproperties.css)
+  skin/classic/cssproperties/filter.png               (skin/filter.png)
+  skin/classic/cssproperties/columns/one-column.png   (skin/columns/one-column.png)
+  skin/classic/cssproperties/columns/two-columns.png  (skin/columns/two-columns.png)
+  skin/classic/cssproperties/columns/three-columns.png (skin/columns/three-columns.png)
+
+cssproperties-locale.jar:
+% locale    cssproperties    en-US    %locale/en-US/cssproperties/
+  locale/en-US/cssproperties/csspropertiesOverlay.dtd    (locale/en-US/csspropertiesOverlay.dtd)
+  locale/en-US/cssproperties/cssproperties.dtd    (locale/en-US/cssproperties.dtd)
+  locale/en-US/cssproperties/cssproperties.properties    (locale/en-US/cssproperties.properties)
+  

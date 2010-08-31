@@ -1,0 +1,16 @@
+<!ENTITY useInlineStyles.label "Use inline styles">
+<!ENTITY modifyClass.label "Modify class">
+<!ENTITY modifyID.label "Modify ID">
+
+<!ENTITY generalSectionHeader.label "General">
+
+<!ENTITY columnsSectionHeader.label "Columns">
+<!ENTITY columnCount.label "Columns">
+<!ENTITY oneColumn.label "One column">
+<!ENTITY twoColumns.label "Two columns">
+<!ENTITY threeColumns.label "Three columns">
+
+<!ENTITY fontWeight.label "Weight:">
+<!ENTITY fontStyle.label "Style:">
+<!ENTITY textDecoration.label "Decorations:">
+<!ENTITY textTransform.label "Case:">
