@@ -11,6 +11,22 @@
 <!ENTITY threeColumns.label "Three columns">
 
 <!ENTITY fontWeight.label "Weight:">
+<!ENTITY fontWeightBold.label "Bold">
+<!ENTITY fontWeightLighter.label "lighter">
+<!ENTITY fontWeightBolder.label "bolder">
+
 <!ENTITY fontStyle.label "Style:">
+<!ENTITY fontStyleItalic.label "Italic">
+<!ENTITY fontStyleOblique.label "Oblique">
+
 <!ENTITY textDecoration.label "Decorations:">
+<!ENTITY textDecorationUnderline.label "Underlined">
+<!ENTITY textDecorationOverline.label "Overlined">
+<!ENTITY textDecorationLinethrough.label "Line-through">
+
 <!ENTITY textTransform.label "Case:">
+<!ENTITY textTransformLowercase.label "lower case">
+<!ENTITY textTransformUppercase.label "UPPER CASE">
+<!ENTITY textTransformCapitalize.label "Capitalized">
+
+<!ENTITY textAlign.label "Alignment:">

@@ -80,6 +80,10 @@ toolbarbutton.multibutton:last-child {
   margin-right: 1em;
 }
 
+toolbarbutton.multibutton .toolbarbutton-icon[src] {
+  margin-left: 1em;
+}
+
 #fontFamilyListbox {
   margin: 0px;
 }

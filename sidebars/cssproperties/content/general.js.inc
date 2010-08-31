@@ -30,4 +30,10 @@ function GeneralSectionIniter(aElt)
   CheckToggle(gDialog.textTransformLowercaseButton,   tt == "lowercase");
   CheckToggle(gDialog.textTransformUppercaseButton,   tt == "uppercase");
   CheckToggle(gDialog.textTransformLinethroughButton, tt == "line-through");
+
+  var ta = CssUtils.getComputedValue(aElt, "text-align");
+  CheckToggle(gDialog.textAlignLeftButton,    ta == "left");
+  CheckToggle(gDialog.textAlignCenterButton,  ta == "center");
+  CheckToggle(gDialog.textAlignRightButton,   ta == "right");
+  CheckToggle(gDialog.textAlignJustifyButton, ta == "justify");
 }

@@ -8,6 +8,7 @@
                  rows="4">
           <listitem label="qsdqsd"/>
         </listbox>
+
         <hbox class="listboxBg">
           <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu">
             <menupopup>
@@ -23,64 +24,91 @@
           <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"/>
           <label value="Font family"/>
         </hbox>
+
         <grid>
           <columns><column/><column/></columns>
           <rows>
+
             <row align="center">
               <label value="&fontWeight.label;"/>
 		          <hbox align="center">
-		            <toolbarbutton class="multibutton" label="Bold" value="bold" property="font-weight" type="checkbox"
+		            <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
 		                           style="font-weight:bold" id="fontWeightBoldButton" group="font-weight"
 		                           oncommand="ToggleProperty(this)"/>
-		            <toolbarbutton class="multibutton" label="lighter" value="lighter" property="font-weight" type="checkbox"
+		            <toolbarbutton class="multibutton" label="&fontWeightLighter.label;" value="lighter" property="font-weight" type="checkbox"
 		                           style="font-weight: lighter" id="fontWeightLighterButton" group="font-weight"
 		                           oncommand="ToggleProperty(this)"/>
-		            <toolbarbutton class="multibutton" label="bolder" value="bolder" property="font-weight" type="checkbox"
+		            <toolbarbutton class="multibutton" label="&fontWeightBolder.label;" value="bolder" property="font-weight" type="checkbox"
 		                           style="font-weight: bolder" id="fontWeightBolderButton" group="font-weight"
 		                           oncommand="ToggleProperty(this)"/>
 		          </hbox>
             </row>
+
             <row align="center">
               <label value="&fontStyle.label;"/>
               <hbox align="center">
-                <toolbarbutton class="multibutton" label="Italic" value="italic" property="font-style" type="checkbox"
+                <toolbarbutton class="multibutton" label="&fontStyleItalic.label;" value="italic" property="font-style" type="checkbox"
                                style="font-style: italic" id="fontStyleItalicButton"
                                oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" label="Oblique" value="oblique" property="font-style" type="checkbox"
+                <toolbarbutton class="multibutton" label="&fontStyleOblique.label;" value="oblique" property="font-style" type="checkbox"
                                style="font-style: oblique" id="fontStyleObliqueButton"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
             <row align="center">
               <label value="&textDecoration.label;"/>
 			        <hbox align="center">
-			          <toolbarbutton class="multibutton" label="Underlined" value="underline" property="text-decoration" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
 			                         style="text-decoration: underline" agregator="text-decoration"
                                id="textDecorationUnderlineButton"
                                oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="Overlined" value="overline" property="text-decoration" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
 			                         style="text-decoration: overline" agregator="text-decoration"
                                id="textDecorationOverlineButton"
                                oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="Line-through" value="line-through" property="text-decoration" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
 			                         style="text-decoration: line-through" agregator="text-decoration"
                                id="textDecorationLinethroughButton"
                                oncommand="ToggleProperty(this)"/>
 			        </hbox>
             </row>
+
             <row align="center">
               <label value="&textTransform.label;"/>
 			        <hbox align="center">
-			          <toolbarbutton class="multibutton" label="lower case" value="lowercase" property="text-transform" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
 			                         group="text-transform" id="textTransformLowercaseButton"
 			                         oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="UPPER CASE" value="uppercase" property="text-transform" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textTransformUppercase.label;" value="uppercase" property="text-transform" type="checkbox"
 			                         group="text-transform" id="textTransformUppercaseButton"
 			                         oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="Capitalized" value="capitalize" property="text-transform" type="checkbox"
+			          <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
 			                         group="text-transform" id="textTransformLinethroughButton"
 			                         oncommand="ToggleProperty(this)"/>
 			        </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&textAlign.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-left.png"
+                               value="left" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignLeftButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-center.png"
+                               value="center" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignCenterButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-right.png"
+                               value="right" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignRightButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-justify.png"
+                               value="justify" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignJustifyButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
             </row>
           </rows>
         </grid>
