@@ -36,8 +36,16 @@
       <field name="_initialW">0</field>
       <field name="_initialH">0</field>
 
+      <constructor><![CDATA[
+        if (this.getAttribute("open") == "true") {
+          var _self = this;
+          setTimeout(function(){_self.openPanel(null, true);}, 500);
+        }
+      ]]></constructor>
+      
       <method name="openPanel">
         <parameter name="aAnchorElement"/>
+        <parameter name="aDoResize"/>
         <body>
         <![CDATA[
           try {
@@ -47,6 +55,8 @@
             else
               this.openPopup(document.documentElement, "start_before", 10, 10,
                              false, true);
+            if (aDoResize && this.hasAttribute("width") && this.hasAttribute("height"))
+              this(this.getAttribute("width"), this.getAttribute("height"));
             BlueGriffonVars.lastPanelRaised = this;
           } catch(e) {}
         ]]>
@@ -66,10 +76,16 @@
           try {
             var screenX = this.boxObject.screenX;
             var screenY = this.boxObject.screenY;
-            this.setAttribute("left", screenX);
-            this.setAttribute("top", screenY);
+            var width   = this.boxObject.width;
+            var height  = this.boxObject.height;
+            this.setAttribute("left",   screenX);
+            this.setAttribute("top",    screenY);
+            this.setAttribute("width",  width);
+            this.setAttribute("height", height);
             document.persist(this.id, "left");
             document.persist(this.id, "top");
+            document.persist(this.id, "width");
+            document.persist(this.id, "height");
           } catch (e) {
           }
         ]]></body>
@@ -164,7 +180,7 @@
           }
           BlueGriffonVars.lastPanelRaisedDidNotIntersect = false;
           this.hidePopup();
-          this.openPanel();
+          this.openPanel(null, false);
         }
       ]]></handler>
 

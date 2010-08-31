@@ -1053,7 +1053,7 @@ function TogglePanel(aEvent)
 
   var panel = gDialog[aEvent.originalTarget.getAttribute("panel")];
   if (menuitem.getAttribute("checked") == "true")
-    panel.openPanel();
+    panel.openPanel(null, false);
   else
     panel.closePanel();
 }
