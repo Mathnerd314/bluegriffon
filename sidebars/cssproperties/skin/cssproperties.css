@@ -116,3 +116,10 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
   list-style-image: url("chrome://cssproperties/skin/columns/three-columns.png");
 }
 
+#addFontMenupopup .checkbox-icon {
+  list-style-image: none ! important;
+}
+
+#addFontMenupopup #viewFontsCheckbox:not([checked="true"]) ~ menuitem {
+  font: message-box !important;
+}

@@ -6,13 +6,15 @@
 
       <vbox class="section" >
         <listbox id="fontFamilyListbox"
-                 rows="4">
-          <listitem label="qsdqsd"/>
-        </listbox>
+                 onselect="OnFontFamilySelect(this)"
+                 rows="6"/>
 
         <hbox class="listboxBg">
-          <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu">
-            <menupopup>
+          <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
+                         oncommand="AddFont(event)">
+            <menupopup id="addFontMenupopup">
+              <checkbox id="viewFontsCheckbox" label="View fonts"/>
+              <menuseparator/>
               <menuitem label="Arial, Helvetica, sans-serif" global="true"
                         style="font-family: Arial, Helvetica, sans-serif" />
               <menuitem label="Time New Roman, Time, serif" global="true"
@@ -22,7 +24,9 @@
               <menuseparator/>
             </menupopup>
           </toolbarbutton>
-          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"/>
+          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
+                         disabled="true"
+                         oncommand="DeleteFont()"/>
           <label value="Font family"/>
         </hbox>
 

@@ -10,6 +10,8 @@ function Startup()
 {
   GetUIElements();
 
+  InitLocalFontFaceMenu(gDialog.addFontMenupopup);
+
   gInUtils = Components.classes["@mozilla.org/inspector/dom-utils;1"]
               .getService(Components.interfaces.inIDOMUtils);
 
@@ -326,6 +328,43 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
 	                  value: value
 	                }
 	              ]);
+  }
+}
+
+function InitLocalFontFaceMenu(menuPopup)
+{
+  // fill in the menu only once...
+  var callingId = menuPopup.parentNode.id;
+
+  if(!BlueGriffonVars.fontMenuOk)
+    BlueGriffonVars.fontMenuOk = {};
+  if (BlueGriffonVars.fontMenuOk[callingId])
+    return;
+  BlueGriffonVars.fontMenuOk[callingId ] = callingId ;
+
+  if (!BlueGriffonVars.localFonts)
+  {
+    // Build list of all local fonts once per editor
+    try 
+    {
+      var enumerator = Components.classes["@mozilla.org/gfx/fontenumerator;1"]
+                                 .getService(Components.interfaces.nsIFontEnumerator);
+      var localFontCount = { value: 0 }
+      BlueGriffonVars.localFonts = enumerator.EnumerateAllFonts(localFontCount);
+    }
+    catch(e) { }
+  }
+  
+  for (var i = 0; i < BlueGriffonVars.localFonts.length; ++i)
+  {
+    if (BlueGriffonVars.localFonts[i] != "")
+    {
+      var itemNode = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+      itemNode.setAttribute("label", BlueGriffonVars.localFonts[i]);
+      itemNode.setAttribute("value", BlueGriffonVars.localFonts[i]);
+      itemNode.setAttribute("style", "font-family: " + BlueGriffonVars.localFonts[i]);
+      menuPopup.appendChild(itemNode);
+    }
   }
 }
 
