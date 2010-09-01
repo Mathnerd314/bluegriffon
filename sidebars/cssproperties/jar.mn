@@ -6,6 +6,7 @@ cssproperties.jar:
   content/cssproperties/csspropertiesOverlay.xul      (content/csspropertiesOverlay.xul)
 * content/cssproperties/cssproperties.xul             (content/cssproperties.xul)
 * content/cssproperties/cssproperties.js              (content/cssproperties.js)
+  content/cssproperties/cssParser.js                  (content/cssParser.js)
   skin/classic/cssproperties/cssproperties.css        (skin/cssproperties.css)
   skin/classic/cssproperties/filter.png               (skin/filter.png)
   skin/classic/cssproperties/columns/one-column.png   (skin/columns/one-column.png)

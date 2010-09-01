@@ -30,20 +30,31 @@ hbox.csspropertiesHeader > image {
   -moz-transition: -moz-transform 0.2s;
 }
 
-hbox.csspropertiesHeader.last {
-  border-bottom: thin solid silver;
-}
-
-hbox.cssPropertiesHeader > image[selected="true"] {
-  -moz-transform: rotate(0deg) !mportant;
+hbox.csspropertiesHeader[open="true"] > image {
+  -moz-transform: rotate(0deg) !important;
 }
 
 .section {
-  -moz-transition: display 2s;
-  margin-left: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
+  -moz-transition: height 2s;
+  height: 0px;
+  overflow: hidden;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
   background-color: transparent;
+}
+
+.section:last-child {
+  border-bottom: thin solid silver;
+}
+
+hbox.csspropertiesHeader[open="true"] + .section {
+  height: auto;
+  overflow: visible;
+}
+
+menulist {
+  width: 10em;
 }
 
 toolbarbutton.multibutton[checked] {
@@ -104,3 +115,4 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 #threeColumnsButton {
   list-style-image: url("chrome://cssproperties/skin/columns/three-columns.png");
 }
+

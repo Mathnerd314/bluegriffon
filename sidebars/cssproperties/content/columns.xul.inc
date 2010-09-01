@@ -1,9 +1,10 @@
-      <hbox align="center" class="csspropertiesHeader last">
+      <hbox align="center" class="csspropertiesHeader last"
+            id="columnSectionHeader">
         <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this)"/>
         <label value="&columnsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" hidden="true">
+      <vbox class="section">
         <hbox align="center">
           <textbox type="number"
                    min="1"

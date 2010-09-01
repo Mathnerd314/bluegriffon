@@ -1,8 +1,8 @@
 RegisterIniter(ColumnsSectionIniter);
 
-function ColumnsSectionIniter(aElt)
+function ColumnsSectionIniter(aElt, aRuleset)
 {
-  var columnCount = CssUtils.getComputedValue(aElt, "-moz-column-count");
+  var columnCount = CssInspector.getCascadedValue(aRuleset, "-moz-column-count");
   if (columnCount == "auto")
     columnCount = "1";
   gDialog.columnCount.value = columnCount;

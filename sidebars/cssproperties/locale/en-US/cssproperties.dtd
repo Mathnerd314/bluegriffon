@@ -1,3 +1,4 @@
+<!ENTITY automatic.label "Automatic">
 <!ENTITY useInlineStyles.label "Use inline styles">
 <!ENTITY modifyClass.label "Modify class">
 <!ENTITY modifyID.label "Modify ID">
@@ -30,3 +31,19 @@
 <!ENTITY textTransformCapitalize.label "Capitalized">
 
 <!ENTITY textAlign.label "Alignment:">
+<!ENTITY textAlignStart.label "Start">
+<!ENTITY textAlignEnd.label "End">
+
+<!ENTITY fontSize.label "Size:">
+<!ENTITY fontSizeSmaller.label "Smaller">
+<!ENTITY fontSizeLarger.label "Larger">
+<!ENTITY fontSizeXxsmall.label "Extra small">
+<!ENTITY fontSizeXsmall.label "Very small">
+<!ENTITY fontSizeSmall.label "Small">
+<!ENTITY fontSizeMedium.label "Medium">
+<!ENTITY fontSizeLarge.label "Large">
+<!ENTITY fontSizeXlarge.label "Very large">
+<!ENTITY fontSizeXxlarge.label "Extra large">
+
+<!ENTITY lineHeight.label "Line height:">
+<!ENTITY lineHeightNormal.label "Normal">

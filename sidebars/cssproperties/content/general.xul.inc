@@ -1,9 +1,10 @@
-      <hbox align="center" class="csspropertiesHeader">
+      <hbox align="center" class="csspropertiesHeader"
+            id="generalSectionHeader">
         <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this)"/>
         <label value="&generalSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" hidden="true">
+      <vbox class="section" >
         <listbox id="fontFamilyListbox"
                  rows="4">
           <listitem label="qsdqsd"/>
@@ -28,6 +29,49 @@
         <grid>
           <columns><column/><column/></columns>
           <rows>
+
+            <row align="center">
+              <label value="&fontSize.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="fontSizeMenulist" property="font-size"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'smaller larger xx-small x-small small medium large x-large xx-large', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'smaller larger xx-small x-small small medium large x-large xx-large', false)">
+                  <menupopup id="fontSizeMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                    <menuseparator/>
+                    <menuitem label="&fontSizeSmaller.label;" value="smaller"/>
+                    <menuitem label="&fontSizeLarger.label;"  value="larger"/>
+                    <menuseparator/>
+                    <menuitem label="&fontSizeXxsmall.label;" value="xx-small"/>
+                    <menuitem label="&fontSizeXsmall.label;"  value="x-small"/>
+                    <menuitem label="&fontSizeSmall.label;"   value="small"/>
+                    <menuitem label="&fontSizeMedium.label;"  value="medium"/>
+                    <menuitem label="&fontSizeLarge.label;"   value="large"/>
+                    <menuitem label="&fontSizeXlarge.label;"  value="x-large"/>
+                    <menuitem label="&fontSizeXxlarge.label;" value="xx-large"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(gDialog.fontSizeMenulist, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(gDialog.fontSizeMenulist, '% px pt cm in mm pc em ex', false)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&lineHeight.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="lineHeightMenulist" property="line-height"
+                          oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex', 'normal', false)"
+                          oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex', 'normal', false)">
+                  <menupopup id="lineHeightMenupopup"
+                             onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex')">
+                    <menuseparator/>
+                    <menuitem label="&lineHeightNormal.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(gDialog.lineHeightMenulist, ' % px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(gDialog.lineHeightMenulist, ' % px pt cm in mm pc em ex', false)"/>
+              </hbox>
+            </row>
 
             <row align="center">
               <label value="&fontWeight.label;"/>
@@ -107,6 +151,19 @@
                 <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-justify.png"
                                value="justify" property="text-align" type="checkbox" group="text-align"
                                id="textAlignJustifyButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+            <row align="center">
+              <spacer flex="1"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&textAlignStart.label;"
+                               value="start" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignStartButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textAlignEnd.label;"
+                               value="end" property="text-align" type="checkbox" group="text-align"
+                               id="textAlignEndButton"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>

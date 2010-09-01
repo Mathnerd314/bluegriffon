@@ -1,5 +1,6 @@
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/cssHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
@@ -78,8 +79,9 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   if (item)
     gDialog.classPicker.selectedItem = item;
 
+  var ruleset = CssInspector.getCSSStyleRules(aElt);
   for (var i = 0; i < gIniters.length; i++)
-    gIniters[i](aElt);
+    gIniters[i](aElt, ruleset);
 }
 
 function onCssPolicyChange(aElt)
@@ -95,14 +97,14 @@ function onCssPolicyChange(aElt)
 
 function ToggleSection(aImage)
 {
-  if (aImage.hasAttribute("style")) {
-    aImage.removeAttribute("style");
-    aImage.parentNode.nextSibling.hidden = true;
+  var header = aImage.parentNode;
+  if (header.hasAttribute("open")) {
+    header.removeAttribute("open");
   }
   else {
-	  aImage.setAttribute("style", "-moz-transform: rotate(0deg)");
-	  aImage.parentNode.nextSibling.hidden = false;
+	  header.setAttribute("open", "true");
   }
+  document.persist(header.id, "open");
 }
 
 var gIniters = [];
@@ -208,6 +210,123 @@ function CheckToggle(aToggle, aChecked)
     aToggle.setAttribute("checked", "true");
   else
     aToggle.removeAttribute("checked");
+}
+
+function PopulateLengths(aElt, aUnitsString)
+{
+  var menuseparator = aElt.querySelector("menuseparator");
+  if (menuseparator) {
+    var child = aElt.firstChild;
+    while (child && child != menuseparator) {
+      var tmp = child.nextSibling;
+      aElt.removeChild(child);
+      child = tmp;
+    }
+  }
+  else
+    deleteAllChildren(aElt);
+
+  var v = parseFloat(aElt.parentNode.value);
+  if (isNaN(v))
+    v = 0;
+  var unitsArray = aUnitsString.split(" ");
+  unitsArray.forEach(function(aArrayElt, aIndex, aArray) {
+    var menuitem = document.createElement("menuitem");
+    menuitem.setAttribute("label", v + aArrayElt);
+    menuitem.setAttribute("value", v + aArrayElt);
+    aElt.insertBefore(menuitem, menuseparator);
+  });
+}
+
+function IncreaseLength(aElt, aUnitsString)
+{
+  var value;
+  if (aElt.selectedItem)
+    value = aElt.selectedItem.value;
+  else
+    value = aElt.value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (match) {
+    var unit = match[2];
+    var v    = parseFloat(match[1]);
+    switch (unit) {
+      case "in":
+      case "cm":
+        v += 0.1;
+        v = Math.round( v * 10) / 10;
+        break;
+      case "em":
+      case "ex":
+        v += 0.5;
+        v = Math.round( v * 10) / 10;
+        break;
+      default:
+        v += 1;
+        break;
+    }
+    aElt.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(aElt, aUnitsString, '', false);
+  }
+}
+
+function DecreaseLength(aElt, aUnitsString, aAllowNegative)
+{
+  var value;
+  if (aElt.selectedItem)
+    value = aElt.selectedItem.value;
+  else
+    value = aElt.value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (match) {
+    var unit = match[2];
+    var v    = parseFloat(match[1]);
+    switch (unit) {
+      case "in":
+      case "cm":
+        v -= 0.1;
+        v = Math.round( v * 10) / 10;
+        break;
+      case "em":
+      case "ex":
+        v -= 0.5;
+        v = Math.round( v * 10) / 10;
+        break;
+      default:
+        v -= 1;
+        break;
+    }
+    if (!aAllowNegative && v < 0)
+      v = 0;
+    aElt.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(aElt, aUnitsString, '', aAllowNegative);
+  }
+}
+
+function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegative)
+{
+  var idents = aIdentsString.split(" ");
+  var value;
+  if (aElt.selectedItem)
+    value = aElt.selectedItem.value;
+  else
+    value = aElt.value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (!value ||
+      (match && !(!aAllowNegative && parseFloat(match[1]) < 0)) ||
+      idents.indexOf(value) != -1) {
+	  ApplyStyles([
+	                {
+	                  property: aElt.getAttribute("property"),
+	                  value: value
+	                }
+	              ]);
+  }
 }
 
 #include general.js.inc

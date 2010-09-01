@@ -57,6 +57,7 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/x-javascript"  src="chrome://cssproperties/content/cssproperties.js"/>
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/cssParser.js"/>
 
   <stringbundle id="bundle" src="chrome://cssproperties/locale/cssproperties.properties"/>
 
@@ -64,6 +65,7 @@
     <hbox id="cssPolicyBox" class="indent">
       <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
         <menupopup>
+          <menuitem label="&automatic.label;" value="automatic"/>
 		      <menuitem label="&useInlineStyles.label;" value="inline"/>
 		      <menuitem label="&modifyClass.label;" value="class"/>
 		      <menuitem label="&modifyID.label;" value="id"/>
