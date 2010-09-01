@@ -5,34 +5,39 @@
       </hbox>
 
       <vbox class="section" >
-        <listbox id="fontFamilyListbox"
-                 onselect="OnFontFamilySelect(this)"
-                 rows="6"/>
-
-        <hbox class="listboxBg">
-          <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
-                         oncommand="AddFont(event)">
-            <menupopup id="addFontMenupopup">
-              <checkbox id="viewFontsCheckbox" label="View fonts"/>
-              <menuseparator/>
-              <menuitem label="Arial, Helvetica, sans-serif" global="true"
-                        style="font-family: Arial, Helvetica, sans-serif" />
-              <menuitem label="Time New Roman, Time, serif" global="true"
-                        style="font-family: Time New Roman, Time, serif"/>
-              <menuitem label="Courier New, Courier, monospace" global="true"
-                        style="font-family: Courier New, Courier, monospace"/>
-              <menuseparator/>
-            </menupopup>
-          </toolbarbutton>
-          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
-                         disabled="true"
-                         oncommand="DeleteFont()"/>
-          <label value="Font family"/>
-        </hbox>
 
         <grid>
           <columns><column/><column/></columns>
           <rows>
+            <row align="top">
+              <label value="Font family:"/>
+              <vbox>
+				        <listbox id="fontFamilyListbox"
+				                 onselect="OnFontFamilySelect(this)"
+				                 rows="6"/>
+				
+				        <hbox class="listboxBg">
+				          <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
+				                         oncommand="AddFont(event)">
+				            <menupopup id="addFontMenupopup">
+				              <checkbox id="viewFontsCheckbox" label="View fonts"/>
+				              <menuseparator/>
+				              <menuitem label="Arial, Helvetica, sans-serif" global="true"
+				                        style="font-family: Arial, Helvetica, sans-serif" />
+				              <menuitem label="Time New Roman, Time, serif" global="true"
+				                        style="font-family: Time New Roman, Time, serif"/>
+				              <menuitem label="Courier New, Courier, monospace" global="true"
+				                        style="font-family: Courier New, Courier, monospace"/>
+				              <menuseparator/>
+				            </menupopup>
+				          </toolbarbutton>
+				          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
+				                         disabled="true"
+				                         oncommand="DeleteFont()"/>
+				          
+				        </hbox>
+              </vbox>
+            </row>
 
             <row align="center">
               <label value="&fontSize.label;"/>

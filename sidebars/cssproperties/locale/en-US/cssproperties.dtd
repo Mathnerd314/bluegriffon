@@ -1,7 +1,8 @@
-<!ENTITY automatic.label "Automatic">
-<!ENTITY useInlineStyles.label "Use inline styles">
-<!ENTITY modifyClass.label "Modify class">
-<!ENTITY modifyID.label "Modify ID">
+<!ENTITY applyStyles.label "Apply styles">
+<!ENTITY automatic.label "automatically">
+<!ENTITY useInlineStyles.label "through inline styles">
+<!ENTITY modifyClass.label "through class">
+<!ENTITY modifyID.label "through ID">
 
 <!ENTITY generalSectionHeader.label "General">
 
@@ -47,3 +48,11 @@
 
 <!ENTITY lineHeight.label "Line height:">
 <!ENTITY lineHeightNormal.label "Normal">
+
+<!ENTITY colorsSectionHeader.label "Colors">
+<!ENTITY color.label "Color:">
+<!ENTITY backgrounds.label "Backgrounds:">
+<!ENTITY addBackgroundColorMenuitem.label "Add a background color">
+<!ENTITY addBackgroundImageMenuitem.label "Add a background image">
+<!ENTITY addBackgroundLinearGradientMenuitem.label "Add a linear gradient">
+<!ENTITY addBackgroundRadialGradientMenuitem.label "Add a radial gradient">

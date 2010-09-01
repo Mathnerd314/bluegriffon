@@ -123,3 +123,26 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 #addFontMenupopup #viewFontsCheckbox:not([checked="true"]) ~ menuitem {
   font: message-box !important;
 }
+
+#backgroundsRichlistbox {
+  margin: 0px;
+}
+
+#addBackgroundButton menuitem {
+  font: message-box;
+}
+
+#backgroundsRichlistbox {
+  min-height: 12em;
+}
+
+#backgroundsRichlistbox richlistitem {
+  height: 8em;
+}
+
+#backgroundsRichlistbox richlistitem > :first-child {
+  width: 8em;
+  border: 0px none;
+  background-color: transparent;
+}
+

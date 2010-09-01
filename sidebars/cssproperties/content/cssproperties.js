@@ -369,4 +369,5 @@ function InitLocalFontFaceMenu(menuPopup)
 }
 
 #include general.js.inc
+#include colors.js.inc
 #include columns.js.inc

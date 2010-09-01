@@ -40,6 +40,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://cssproperties/skin/cssproperties.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
 <!DOCTYPE page [
   <!ENTITY % composerOverlayDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
@@ -61,7 +62,8 @@
   <stringbundle id="bundle" src="chrome://cssproperties/locale/cssproperties.properties"/>
 
   <vbox id="mainBox" flex="1" hidden="true">
-    <hbox id="cssPolicyBox" class="indent">
+    <hbox id="cssPolicyBox" class="indent" align="center">
+      <label value="&applyStyles.label;"/>
       <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
         <menupopup>
           <menuitem label="&automatic.label;" value="automatic"/>
@@ -78,6 +80,7 @@
 
     <vbox flex="1">
 #include general.xul.inc
+#include colors.xul.inc
 #include columns.xul.inc
     </vbox>
   </vbox>
