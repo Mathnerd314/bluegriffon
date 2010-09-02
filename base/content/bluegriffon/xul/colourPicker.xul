@@ -177,9 +177,18 @@
 	      </grid>
         <html:p flex="1" id="swatch">   </html:p>
       </hbox>
-      <checkbox label="&transparency.label;"
+      <!--checkbox label="&transparency.label;"
                 id="transparencyCheckbox"
-                oncommand="ToggleTransparency(this)"/>
+                oncommand="ToggleTransparency(this)"/-->
+      <hbox align="center">
+	      <label value="&opacity.label;"/>
+	      <scale min="0" max="100" id="opacityScale" value="100"
+               onchange="gDialog.opacityTextbox.value = this.value; ToggleTransparency(this)"/>
+        <textbox type="number" min="0" max="100" id="opacityTextbox"
+                 size="3" value="100"
+                 oninput="gDialog.opacityScale.value = this.value;"
+                 onchange="gDialog.opacityScale.value = this.value;"/>
+      </hbox>
     </vbox>
   </hbox>
 

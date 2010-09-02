@@ -51,6 +51,7 @@
 <!ENTITY brightness.label        "B:">
 
 <!ENTITY transparency.label       "Transparent">
+<!ENTITY opacity.label            "Opacity:">
 
 <!ENTITY background.label "Background for:">
 <!ENTITY background.accessKey "B">

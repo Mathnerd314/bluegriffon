@@ -1,6 +1,7 @@
 var gColorObj = {};
 var gWindowTitle = "";
 var gShowTransparency = false;
+var gLastColor = "";
 
 var colours;
 var satSlider = new objColour();
@@ -72,16 +73,18 @@ function StartUp()
   if (!gShowTransparency)
     gDialog.transparencyCheckbox.setAttribute("hidden", true);
 
+  gLastColor = gColorObj.currentColor;
   gColorObj.currentColor = ConvertRGBColorIntoHEXColor(gColorObj.currentColor);
   gColorObj.lastPickedColor = ConvertRGBColorIntoHEXColor(gColorObj.lastPickedColor);
 
   gDialog.LastPickedColor.setAttribute("style", "background-color: " +
-                                       gColorObj.lastPickedColor);
+                                       gColorObj.lastPickedColor.color);
 
   // Set initial color in input field and in the colorpicker
-  SetCurrentColor(gColorObj.currentColor);
+  SetCurrentColor(gColorObj.currentColor.color);
+  gDialog.opacityScale.value = Math.floor(gColorObj.currentColor.opacity * 100);
   if (!showTransparencyCheckbox)
-    gDialog.colorpicker.initColor(gColorObj.currentColor);
+    gDialog.colorpicker.initColor(gColorObj.currentColor.color);
 
   // Caller can prevent user from submitting an empty, i.e., default color
   NoDefault = gColorObj.NoDefault;
@@ -260,8 +263,9 @@ function SetCurrentColor(color)
   if (!color)
     color = "transparent";
 
-  if (color == "transparent")
-    gDialog.transparencyCheckbox.checked = true;
+  if (color == "transparent") {
+    gDialog.opacityScale.value = "0";
+  }
   else
   {
     var hexCol = getHexColorFromColorName(color);
@@ -270,7 +274,7 @@ function SetCurrentColor(color)
     gDialog.hexColour.value = color;
     changeHex();
   }
-  ToggleTransparency(gDialog.transparencyCheckbox);
+  ToggleTransparency(gDialog.opacityScale);
 }
 
 function changeHex()
@@ -291,8 +295,8 @@ function changeHex()
 
 function redrawEverything()
 {
-   gDialog.transparencyCheckbox.checked = false;
-   ToggleTransparency(gDialog.transparencyCheckbox);
+   //gDialog.opacityScale.value = "100";
+   ToggleTransparency(gDialog.opacityScale);
 
    LastPickedIsDefault = false;  
 
@@ -578,10 +582,22 @@ function SelectColor()
 
 function onAccept()
 {
-  if (gDialog.transparencyCheckbox.checked)
-    gColorObj.currentColor = "transparent";
-  else
-    gColorObj.currentColor = gDialog.hexColour.value;
+  if (gDialog.opacityScale.value == "0") {
+    if (gShowTransparency)
+      gColorObj.currentColor = "transparent";
+    else
+      gColorObj.currentColor = "rgba(0,0,0,0)"
+  }
+  else {
+    if (gDialog.opacityScale.value == "100")
+      gColorObj.currentColor = gDialog.hexColour.value;
+    else {
+      gColorObj.currentColor = "rgba(" + gDialog.red.value + "," +
+                                         gDialog.green.value + "," +
+                                         gDialog.blue.value + "," +
+                                         parseInt(gDialog.opacityTextbox.value) / 100 + ")";
+    }
+  }
   gColorObj.lastPickedColor = gColorObj.currentColor;
   return true;
 }
@@ -593,6 +609,8 @@ function ValidateData()
 function onCancelColor()
 {
   // Tells caller that user canceled
+  gColorObj.currentColor = gLastColor;
+  gColorObj.lastPickedColor = gLastColor;
   gColorObj.cancelled = true;
   //SaveWindowLocation();
   return true;
@@ -670,7 +688,7 @@ function onTextboxValueChanged(e, id)
 
 function ToggleTransparency(elt)
 {
-  if (elt.checked)
+  if (elt.value == "0")
   {
     gDialog.red.setAttribute("disabled", true);
     gDialog.blue.setAttribute("disabled", true);
@@ -689,7 +707,7 @@ function ToggleTransparency(elt)
     gDialog.hexColourLabel.setAttribute("disabled", true);
     gDialog.nameColourLabel.setAttribute("disabled", true);
 
-    gDialog.swatch.style.backgroundColor = "#ffffff";
+    gDialog.swatch.style.opacity = "0";
   }
   else
   {
@@ -711,6 +729,7 @@ function ToggleTransparency(elt)
     gDialog.nameColourLabel.removeAttribute("disabled");
 
     gDialog.swatch.style.backgroundColor = "#" + colours.getHex();
+    gDialog.swatch.style.opacity = parseInt(gDialog.opacityTextbox.value) / 100;
   }
 }
 
@@ -731,7 +750,8 @@ function onNamedColourChanged(elt)
 
 function SelectLastPickedColor()
 {
-  SetCurrentColor(gColorObj.lastPickedColor);
+  SetCurrentColor(gColorObj.currentColorcolor);
+  gDialog.opacityScale.value = Math.floor(gColorObj.currentColor.opacity * 100);
   LastPickedIsDefault = true;  
   if ( onAccept() )
   {
@@ -770,10 +790,18 @@ function ConvertRGBColorIntoHEXColor(color)
     if (g.length == 1) g = "0"+g;
     var b = Number(RegExp.$3).toString(16);
     if (b.length == 1) b = "0"+b;
-    return "#"+r+g+b;
+    return { color: "#"+r+g+b, opacity: 1};
   }
-  else
-  {
-    return color;
+  else if ( /rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*(\d+(\.?\d+)))?\)/.test(color)) {
+    var r = Number(RegExp.$1).toString(16);
+    if (r.length == 1) r = "0"+r;
+    var g = Number(RegExp.$2).toString(16);
+    if (g.length == 1) g = "0"+g;
+    var b = Number(RegExp.$3).toString(16);
+    if (b.length == 1) b = "0"+b;
+    return { color: "#"+r+g+b, opacity: parseFloat(RegExp.$5) };
+  }
+  else {
+    return {color: color, opacity: 1};
   }
 }
