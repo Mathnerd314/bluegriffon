@@ -134,10 +134,7 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 
 #backgroundsRichlistbox {
   min-height: 12em;
-}
-
-#backgroundsRichlistbox richlistitem {
-  height: 8em;
+  overflow: visible;
 }
 
 #backgroundsRichlistbox richlistitem > :first-child {
@@ -146,3 +143,11 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
   background-color: transparent;
 }
 
+richlistitem.backgrounditem {
+  -moz-binding: url("chrome://cssproperties/content/backgrounditem.xml#backgrounditem");
+  border-bottom: gray thin solid;
+}
+
+#backgroundsRichlistbox > scrollbox {
+  overflow: visible !important;
+}

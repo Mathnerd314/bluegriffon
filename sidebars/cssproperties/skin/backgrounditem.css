@@ -1,0 +1,45 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+richlistbox:focus > richlistitem[selected="true"] {
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+}
+
+.backgrounditem-button {
+  width: 8em;
+  border-right: gray thin solid;
+  margin: 0px;
+}
+
+.backgrounditem-title {
+  font-size: larger;
+  border-bottom: gray thin solid;
+  margin: 0px ! important;
+  padding: 0.25em;
+  font-weight: bold;
+}
+
+richlistbox:focus > richlistitem[selected="true"] .backgrounditem-title {
+  background-color: Highlight;
+  color: HighlightText;
+}
+
+.background-properties label[onclick]:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: red;
+}
+
+.background-properties {
+  padding: 0 2em;
+}
+
+.multipane-menu menuitem {
+  font-size: smaller;
+}
+
+.background-properties > rows > row > * {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

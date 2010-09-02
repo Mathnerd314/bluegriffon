@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<bindings id="backgrounditemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="backgrounditem"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/backgrounditem.css"/>
+    </resources>
+
+    <content>
+      <xul:toolbarbutton class="backgrounditem-button"
+                         anonid="backgrounditemButton"
+                         oncommand="openEditor()"/>
+      <xul:vbox flex="1">
+        <xul:label class="backgrounditem-title"
+                   anonid="backgrounditemTitle"/>
+        <xul:grid class="background-properties">
+          <xul:columns><xul:column/><xul:column/><xul:column flex="1"/><xul:column/><xul:column/></xul:columns>
+          <xul:rows>
+            <xul:row align="center">
+              <xul:label value="&backgroundAttachment.label;"/>
+              <xul:menulist anonid="backgrounditem-attachment" sizetopopup="none">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundAttachmentScroll.label;" value="scroll"/>
+                  <xul:menuitem label="&backgroundAttachmentLocal.label;" value="local"/>
+                  <xul:menuitem label="&backgroundAttachmentFixed.label;" value="fixed"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundSize.label;"/>
+              <xul:menulist anonid="backgrounditem-size" sizetopopup="none" editable="true">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundSizeAuto.label;"    value="auto"/>
+                  <xul:menuitem label="&backgroundSizeContain.label;" value="contain"/>
+                  <xul:menuitem label="&backgroundSizeCover.label;"   value="cover"/>
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundSizeUserDefined.label;"
+                                oncommand=""/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundRepeat.label;"/>
+              <xul:menulist anonid="backgrounditem-repeat" sizetopopup="none" editable="true">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
+                  <xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
+                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/>
+                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundRepeatUserDefined.label;"
+                                oncommand=""/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundClip.label;"/>
+              <xul:menulist anonid="backgrounditem-clip" sizetopopup="none">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
+                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundPosition.label;"/>
+              <xul:menulist anonid="backgrounditem-position" sizetopopup="none" editable="true">
+                <xul:menupopup>
+                  <xul:grid class="multipane-menu"
+                            oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+                    <xul:columns><xul:column/><xul:column/><xul:column/></xul:columns>
+                    <xul:rows>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                        <xul:menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+                        <xul:menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                      </xul:row>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+                        <xul:menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+                        <xul:menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
+                      </xul:row>
+                      <xul:row align="center">
+                        <xul:menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                        <xul:menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+                        <xul:menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                      </xul:row>
+                    </xul:rows>
+                  </xul:grid>
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundPositionUserDefined.label;"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundOrigin.label;"/>
+              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
+                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+          </xul:rows>
+        </xul:grid>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <constructor>
+        <![CDATA[
+          this.setTitleFromType();
+          this.reset();
+        ]]>
+      </constructor>
+
+      <property name="type">
+        <getter>
+        <![CDATA[
+          return this.getAttribute("type");
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.setAttribute("type", val);
+        ]]>
+        </setter>
+      </property>
+
+      <method name="reset">
+        <body><![CDATA[
+          this.getChild("backgrounditem-attachment").value = "";
+          this.getChild("backgrounditem-size").value = "";
+          this.getChild("backgrounditem-repeat").value = "";
+          this.getChild("backgrounditem-clip").value = "";
+          this.getChild("backgrounditem-attachment").value = "";
+          this.getChild("backgrounditem-position").value = "";
+          this.getChild("backgrounditem-origin").value = "";
+        ]]></body>
+      </method>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <method name="setTitleFromType">
+        <body><![CDATA[
+          var type = this.type;
+          var title = this.getChild("backgrounditemTitle");
+          switch (type) {
+            case "color":    title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundColorTitle")); break;
+            case "image":    title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundImageTitle")); break;
+            case "linear-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundLinearGradientTitle")); break;
+            case "radial-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundRadialGradientTitle")); break;
+            default:         break;
+          }
+        ]]></body>
+      </method>
+
+      <method name="openEditor">
+        <body>
+          <![CDATA[
+            var type = this.type;
+            switch (type) {
+              case "color":
+                {
+                  var cph = ColorPickerHelper;
+                  cph.openColorPicker(window, "BackgroundColor", "aaa", true);
+                  if (!cph.isCancelled("BackgroundColor"))
+                  {
+                    var currentColor = cph.getCurrentColor("BackgroundColor")
+                    this.getChild("backgrounditemButton").style.backgroundColor = currentColor;
+                    this.setAttribute("color", currentColor);
+                  }
+                }
+                break;
+              default: break;
+            }
+          ]]>
+        </body>
+      </method>
+    </implementation>
+
+  </binding>
+
+</bindings>

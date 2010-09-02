@@ -59,7 +59,8 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/x-javascript"  src="chrome://cssproperties/content/cssproperties.js"/>
 
-  <stringbundle id="bundle" src="chrome://cssproperties/locale/cssproperties.properties"/>
+  <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
+  <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
 
   <vbox id="mainBox" flex="1" hidden="true">
     <hbox id="cssPolicyBox" class="indent" align="center">
