@@ -24,7 +24,8 @@
       <xul:vbox flex="1">
         <xul:label class="backgrounditem-title"
                    anonid="backgrounditemTitle"/>
-        <xul:grid class="background-properties">
+        <xul:grid class="background-properties"
+                  anonid="backgrounditemProperties">
           <xul:columns><xul:column/><xul:column/><xul:column flex="1"/><xul:column/><xul:column/></xul:columns>
           <xul:rows>
             <xul:row align="center">
@@ -139,6 +140,9 @@
 
       <method name="reset">
         <body><![CDATA[
+          if (this.type == "color") {
+	          this.getChild("backgrounditemProperties").style.visibility = "hidden";
+          }
           this.getChild("backgrounditem-attachment").value = "";
           this.getChild("backgrounditem-size").value = "";
           this.getChild("backgrounditem-repeat").value = "";

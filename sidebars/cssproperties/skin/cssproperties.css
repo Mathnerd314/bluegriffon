@@ -133,7 +133,7 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 }
 
 #backgroundsRichlistbox {
-  min-height: 12em;
+  min-height: 4em;
   overflow: visible;
 }
 

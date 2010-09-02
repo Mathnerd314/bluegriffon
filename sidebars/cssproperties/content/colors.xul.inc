@@ -15,17 +15,19 @@
 					                    color="transparent"
 					                    colorObjectId="ForegroundColor"
 					                    windowTitle="Foreground color"
-					                    showTransparency="false"/>
+					                    showTransparency="false"
+                              oncommand="SetColor(this)"/>
               </hbox>
             </row>
             <row align="top">
               <label value="&backgrounds.label;"/>
               <vbox flex="1">
-	              <richlistbox id="backgroundsRichlistbox" rows="6"/>
+	              <richlistbox id="backgroundsRichlistbox" rows="6"
+                             onselect="OnBackgroundSelect(this)"/>
 	              <hbox class="listboxBg">
 	                <toolbarbutton id="addBackgroundButton" class="listboxBgPlusButton" type="menu"
 	                               oncommand="AddBackground(event)">
-	                  <menupopup id="addBackgroundMenupopup">
+	                  <menupopup id="addBackgroundMenupopup" onpopupshowing="UpdateAddBackgroundMenupopup(this)">
                       <menuitem label="&addBackgroundColorMenuitem.label;" value="color"/>
                       <menuitem label="&addBackgroundLinearGradientMenuitem.label;" value="linear-gradient"/>
                       <menuitem label="&addBackgroundRadialGradientMenuitem.label;" value="radial-gradient"/>
