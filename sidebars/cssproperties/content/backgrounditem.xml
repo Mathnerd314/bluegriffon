@@ -177,6 +177,7 @@
         <body>
           <![CDATA[
             var type = this.type;
+            this.parentNode.selectItem(this);
             switch (type) {
               case "color":
                 {
@@ -186,11 +187,47 @@
                   {
                     var currentColor = cph.getCurrentColor("BackgroundColor")
                     this.getChild("backgrounditemButton").style.backgroundColor = currentColor;
-                    this.setAttribute("color", currentColor);
+                    if (this.getAttribute("color") != currentColor) {
+                      this.setAttribute("color", currentColor);
+                      ReapplyBackgrounds();
+                    }
+                  }
+                }
+                break;
+              case "image":
+                {
+                  var e = this.getChild("backgrounditemButton");
+                  gDialog.backgroundImagePanel.openPopupAtScreen(e.boxObject.screenX,
+                                                                 e.boxObject.screenY,
+                                                                 false);
+                  if (this.hasAttribute("image")) {
+                    var url = this.getAttribute("image");
+                    gDialog.imageURLTextbox.inputField.value = url;
+                    gDialog.previewBackgroundImage.style.backgroundImage =
+                      'url("' + url + '")';
+                  }
+                  else {
+                    if (gDialog.imageURLTextbox.inputField)
+                      gDialog.imageURLTextbox.inputField.value = "";
+                    gDialog.previewBackgroundImage.style.backgroundImage = "none";
                   }
                 }
                 break;
               default: break;
+            }
+          ]]>
+        </body>
+      </method>
+
+      <method name="applyBackgroundImage">
+        <parameter name="aImageURL"/>
+        <body>
+          <![CDATA[
+            this.getChild("backgrounditemButton").style.backgroundImage =
+              'url("' + aImageURL + '")';
+            if (this.getAttribute("image") != aImageURL) {
+              this.setAttribute("image", aImageURL);
+              ReapplyBackgrounds();
             }
           ]]>
         </body>

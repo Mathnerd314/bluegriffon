@@ -11,6 +11,9 @@ richlistbox:focus > richlistitem[selected="true"] {
   border-right: gray thin solid;
   margin: 0px;
   cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .backgrounditem-title {

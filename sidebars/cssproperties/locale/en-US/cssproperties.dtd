@@ -56,3 +56,9 @@
 <!ENTITY addBackgroundImageMenuitem.label "Add a background image">
 <!ENTITY addBackgroundLinearGradientMenuitem.label "Add a linear gradient">
 <!ENTITY addBackgroundRadialGradientMenuitem.label "Add a radial gradient">
+
+<!ENTITY imageURL.caption "Enter an image URL">
+<!ENTITY selectImageButton.label "Select an image file">
+<!ENTITY preview.caption "Preview">
+<!ENTITY cancelButton.label "Cancel">
+<!ENTITY okButton.label "OK">

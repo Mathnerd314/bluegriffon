@@ -151,3 +151,11 @@ richlistitem.backgrounditem {
 #backgroundsRichlistbox > scrollbox {
   overflow: visible !important;
 }
+
+#previewBackgroundImage {
+  width: 4cm;
+  height: 4cm;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

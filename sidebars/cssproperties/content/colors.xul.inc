@@ -32,7 +32,7 @@
                       <menuitem label="&addBackgroundLinearGradientMenuitem.label;" value="linear-gradient"/>
                       <menuitem label="&addBackgroundRadialGradientMenuitem.label;" value="radial-gradient"/>
                       <menuseparator/>
-                      <menuitem label="&addBackgroundImageMenuitem.label;" value="url"/>
+                      <menuitem label="&addBackgroundImageMenuitem.label;" value="image"/>
 	                  </menupopup>
 	                </toolbarbutton>
 	                <toolbarbutton id="removeBackgroundButton" class="listboxBgMinusButton"

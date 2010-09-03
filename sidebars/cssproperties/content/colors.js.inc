@@ -42,6 +42,8 @@ function DeleteBackground()
   var item = gDialog.backgroundsRichlistbox.selectedItem;
   if (!item) return; // sanity check
   item.parentNode.removeChild(item);
+  SetEnabledElement(gDialog.removeBackgroundButton, (gDialog.backgroundsRichlistbox.itemCount != 0));
+  ReapplyBackgrounds();
 }
 
 function SetColor(aElt)
@@ -54,3 +56,45 @@ function SetColor(aElt)
                 }
               ]);
 }
+
+function LoadImage()
+{
+  gDialog.previewBackgroundImage.style.backgroundImage =
+    'url("' + gDialog.imageURLTextbox.inputField.value + '")';
+}
+
+function BackgroundImageSelected()
+{
+  gDialog.backgroundImagePanel.hidePopup();
+  var item = gDialog.backgroundsRichlistbox.selectedItem;
+  item.applyBackgroundImage(gDialog.imageURLTextbox.inputField.value);
+}
+
+function ReapplyBackgrounds()
+{
+  var items = gDialog.backgroundsRichlistbox.querySelectorAll("richlistitem");
+  var bgColor = "", bgImages = [];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    switch (item.type) {
+      case "color":
+        bgColor = item.getAttribute("color");
+        break;
+      default:
+        bgImages.push('url("' + item.getAttribute("image") + '")');
+        break;
+    }
+  }
+  ApplyStyles([
+                {
+                  property: "background-color",
+                  value: bgColor
+                },
+                {
+                  property: "background-image",
+                  value: bgImages.join(", ")
+                }
+              ]);
+}
+
+

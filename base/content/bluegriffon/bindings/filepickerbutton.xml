@@ -144,7 +144,7 @@
               if (this.hasAttribute("control"))
               {
                 var c = document.getElementById(this.getAttribute("control"));
-                c.value = spec;
+                c.inputField.value = spec;
               }
             }
           }

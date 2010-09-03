@@ -62,10 +62,42 @@
   <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
 
+  <panelset>
+    <panel level="floating" id="backgroundImagePanel" noautohide="true">
+      <groupbox style="width: 400px">
+		    <caption label="&imageURL.caption;"/>
+		    <hbox align="center">
+		      <textbox flex="1" id="imageURLTextbox"
+		               oninput="LoadImage()"/>
+		      <filepickerbutton id="filepickerbutton"
+		                        control="imageURLTextbox"
+		                        mode="0"
+		                        filters="filterImages"
+		                        oncommand="LoadImage();"
+		                        title="&selectImageButton.label;"/>
+	      </hbox>
+      </groupbox>
+      <groupbox>
+        <caption label="&preview.caption;"/>
+        <hbox align="center">
+          <spacer flex="1"/>
+          <vbox id="previewBackgroundImage"/>
+          <spacer flex="1"/>
+        </hbox>
+      </groupbox>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&cancelButton.label;" oncommand="gDialog.backgroundImagePanel.hidePopup()"/>
+        <button label="&okButton.label;" oncommand="BackgroundImageSelected()"/>
+      </hbox>
+    </panel>
+  </panelset>
+
   <vbox id="mainBox" flex="1" hidden="true">
     <hbox id="cssPolicyBox" class="indent" align="center">
       <label value="&applyStyles.label;"/>
-      <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
+      <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)"
+                sizetopopup="none" style="width: 15em">
         <menupopup>
           <menuitem label="&automatic.label;" value="automatic"/>
 		      <menuitem label="&useInlineStyles.label;" value="inline"/>
