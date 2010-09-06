@@ -50,7 +50,51 @@ var CssInspector = {
 
   kINIDOMUTILS: Components.interfaces.inIDOMUtils,
   kINIDOMUTILS_CID: "@mozilla.org/inspector/dom-utils;1",
+
+  serializeFileStyleSheet: function(aSheet, aHref)
+  {
+    var cssRules = aSheet.cssRules;
+    var str = "";
+    for (var i = 0; i < cssRules.length; i++)
+    {
+      var rule = cssRules[i];
+      switch (rule.type)
+      {
+        case Components.interfaces.nsIDOMCSSRule.STYLE_RULE:
+          {
+            str += (i ? "\n" : "") + rule.selectorText + " {\n " +
+                   rule.style.cssText.replace( /;/g , ";\n");
+            str += "}\n";
+          }
+          break;
+        default:
+          str += (i ? "\n" : "") + rule.cssText;
+          break;
+      }
+    }
+
+    const classes             = Components.classes;
+    const interfaces          = Components.interfaces;
+    const nsILocalFile        = interfaces.nsILocalFile;
+    const nsIFileOutputStream = interfaces.nsIFileOutputStream;
+    const FILEOUT_CTRID       = '@mozilla.org/network/file-output-stream;1';
+
+    var ios = Components.classes["@mozilla.org/network/io-service;1"]
+                      .getService(Components.interfaces.nsIIOService)
+    var handler = ios.getProtocolHandler("file");
+    var fileHandler = handler.QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var localFile = fileHandler.getFileFromURLSpec(aHref).QueryInterface(nsILocalFile);  
+    var fileOuputStream = classes[FILEOUT_CTRID].createInstance(nsIFileOutputStream);
+    try {
+      fileOuputStream.init(localFile, -1, -1, 0);
   
+      fileOuputStream.write(str, str.length);
+      fileOuputStream.close();
+    }
+    catch (ex) {}
+  },
+
+
   getCSSStyleRules: function(aElement, aNoInlineStyles)
   {
     var inspector = Components.classes[this.kINIDOMUTILS_CID]

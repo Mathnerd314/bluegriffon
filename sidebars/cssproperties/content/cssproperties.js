@@ -152,6 +152,7 @@ function ApplyStyles(aStyles)
 
             // is that rule dependent on the ID selector for that ID?
             // if yes, let's try to tweak it
+            var priority = inspectedRule.rule.style.getPropertyPriority(property);
             var selector = inspectedRule.rule.selectorText;
             var r = new RegExp( "#" + gCurrentElement.id + "$|#" + gCurrentElement.id + "[\.:,\\[]", "g");
             if (selector.match(r)) {
@@ -163,11 +164,10 @@ function ApplyStyles(aStyles)
               if (topSheet.ownerNode &&
                   (!sheet.href || sheet.href.substr(0, 4) != "http")) {
                 // yes we can edit it...
-                var priority = inspectedRule.rule.style.getPropertyPriority(property);
                 if (sheet.href) { // external stylesheet
-				          var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
+                  var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
                                                           property, value, priority);
-				          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
                 }
                 else { // it's an embedded stylesheet
                   if (value) {
@@ -184,14 +184,24 @@ function ApplyStyles(aStyles)
             }
             // we need to check if the rule
             // has a specificity no greater than an ID's one
+
+            // we need to find the last locally editable stylesheet
+            // attached to the document
+            var sheet = FindLastEditableStyleSheet();
             var spec = inspectedRule.specificity;
             if (!spec.a &&
                 ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
                  !spec.b)) { 
               // cool, we can just create a new rule with an ID selector
               // but don't forget to set the priority...
-              var ownerNodes = gCurrentElement.ownerDocument
-                                 .querySelectorAll("link[rel='stylesheet'], style");
+              sheet.insertRule("#" + gCurrentElement.id + "{" +
+                                 property + ": " + value + " " +
+                                 (priority ? "!important" : "") + "}",
+                               sheet.cssRules.length);
+              if (sheet.ownerNode.href)
+                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+              else
+                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
               break;
             }
             // at this point, we have a greater specificity; hum, then what's
@@ -210,17 +220,14 @@ function ApplyStyles(aStyles)
           else {
             // oh, the property is not applied yet, let's just create a rule
             // with the ID selector for that property
-            CssUtils.addRuleForSelector(editor,
-                                        EditorUtils.getCurrentDocument(),
-                                        "#" + gCurrentElement.id,
-                                        [
-                                          {
-                                            property: property,
-                                            value: value,
-                                            priority: false
-                                          }
-                                        ]);
-
+            var sheet = FindLastEditableStyleSheet();
+            sheet.insertRule("#" + gCurrentElement.id + "{" +
+                               property + ": " + value + " " + "}",
+                             sheet.cssRules.length);
+            if (sheet.ownerNode.href)
+              CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+            else
+              CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
             break;
           }
         }
@@ -272,6 +279,33 @@ function ApplyStyles(aStyles)
     // reselect the element
     EditorUtils.getCurrentEditor().selectElement(gCurrentElement);
   }
+}
+
+function FindLastEditableStyleSheet()
+{
+  var doc = EditorUtils.getCurrentDocument();
+  var headElt = doc.querySelector("head");
+  var child = headElt.lastElementChild;
+  var found = false;
+  while (!found && child) {
+    var name = child.nodeName.toLowerCase();
+    if (name == "style" ||
+        (name == "link" &&
+         child.getAttribute("rel").toLowerCase() == "stylesheet" &&
+         !child.hasAttribute("title")))
+      found = true;
+    else
+      child = child.previousElementSibling;
+  }
+  if (found)
+    sheet = child.sheet;
+  else { // no editable stylesheet in the document, create one
+    var styleElt = doc.createElement("style");
+    styleElt.setattribute("type", "text/css");
+    EditorUtils.insertNode(styleElt, headElt, headElt.childNodes.length);
+    sheet = styleElt.sheet;
+  }
+  return sheet;
 }
 
 function ToggleProperty(aElt)

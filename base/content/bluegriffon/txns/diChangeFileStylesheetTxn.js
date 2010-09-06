@@ -1,3 +1,5 @@
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
+
 function diChangeFileStylesheetTxn(aHref, aRule, aProperty, aValue, aPriority)
 {
   this.mHref = aHref;
@@ -21,49 +23,6 @@ diChangeFileStylesheetTxn.prototype = {
     throw Components.results.NS_NOINTERFACE;
   },
 
-  _serialize: function(aSheet, aHref)
-  {
-    var cssRules = aSheet.cssRules;
-    var str = "";
-    for (var i = 0; i < cssRules.length; i++)
-    {
-      var rule = cssRules[i];
-      switch (rule.type)
-      {
-        case CssUtils.kCSSRule.STYLE_RULE:
-          {
-            str += (i ? "\n" : "") + rule.selectorText + " {\n " +
-                   rule.style.cssText.replace( /;/g , ";\n");
-            str += "}\n";
-          }
-          break;
-        default:
-          str += (i ? "\n" : "") + rule.cssText;
-          break;
-      }
-    }
-
-	  const classes             = Components.classes;
-	  const interfaces          = Components.interfaces;
-	  const nsILocalFile        = interfaces.nsILocalFile;
-	  const nsIFileOutputStream = interfaces.nsIFileOutputStream;
-	  const FILEOUT_CTRID       = '@mozilla.org/network/file-output-stream;1';
-
-    var ios = Components.classes["@mozilla.org/network/io-service;1"]
-                      .getService(Components.interfaces.nsIIOService)
-    var handler = ios.getProtocolHandler("file");
-    var fileHandler = handler.QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-	  var localFile = fileHandler.getFileFromURLSpec(this.mHref).QueryInterface(nsILocalFile);	
-	  var fileOuputStream = classes[FILEOUT_CTRID].createInstance(nsIFileOutputStream);
-	  try {
-	    fileOuputStream.init(localFile, -1, -1, 0);
-	
-	    fileOuputStream.write(str, str.length);
-	    fileOuputStream.close();
-	  }
-	  catch (ex) {}
-  },
-
   doTransaction: function()
   {
     this.mOldValue    = this.mRule.style.getPropertyValue(this.mProperty);
@@ -72,7 +31,7 @@ diChangeFileStylesheetTxn.prototype = {
       this.mRule.style.setProperty(this.mProperty, this.mNewValue, this.mNewPriority);
     else
       this.mRule.style.removeProperty(this.mProperty);
-    this._serialize(this.mRule.parentStyleSheet, this.mHref);
+    CssInspector.serializeFileStyleSheet(this.mRule.parentStyleSheet, this.mHref);
   },
 
   undoTransaction: function()
@@ -81,7 +40,7 @@ diChangeFileStylesheetTxn.prototype = {
       this.mRule.style.setProperty(this.mProperty, this.mOldValue, this.mOldPriority);
     else
       this.mRule.style.removeProperty(this.mProperty);
-    this._serialize(this.mRule.parentStyleSheet, this.mHref);
+    CssInspector.serializeFileStyleSheet(this.mRule.parentStyleSheet, this.mHref);
   },
 
   redoTransaction: function()
