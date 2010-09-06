@@ -190,7 +190,8 @@ function ApplyStyles(aStyles)
                  !spec.b)) { 
               // cool, we can just create a new rule with an ID selector
               // but don't forget to set the priority...
-              // XXX
+              var ownerNodes = gCurrentElement.ownerDocument
+                                 .querySelectorAll("link[rel='stylesheet'], style");
               break;
             }
             // at this point, we have a greater specificity; hum, then what's

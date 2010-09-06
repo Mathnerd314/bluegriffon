@@ -278,26 +278,14 @@ var CssUtils = {
       switch (rule.type)
       {
         case CssUtils.kCSSRule.STYLE_RULE:
-          {
-            str += (i ? "\n" : "") + rule.selectorText + " {\n " +
-                   rule.style.cssText.replace( /;/g , ";\n");
-            /*var declarations = rule.style;
-            for (var j = 0; j < declarations.length; j++)
-            {
-              var property = declarations.item(j);
-              var value = declarations.getPropertyValue(property);
-              var priority = declarations.getPropertyPriority(property);
-              str += "\n  " + property + ": " +
-                     value +
-                     (priority ? ";" : " !important;");
-            }*/
-          }
+          str += (i ? "\n" : "") + rule.selectorText + " {\n " +
+                 rule.style.cssText.replace( /;/g , ";\n");
+          str += "}\n";
           break;
         default:
           str += (i ? "\n" : "") + rule.cssText;
           break;
       }
-      str += "}\n";
     }
     var styleElt = aSheet.ownerNode;
     var child = styleElt.firstChild;
