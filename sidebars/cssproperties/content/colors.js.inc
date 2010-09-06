@@ -2,7 +2,34 @@ RegisterIniter(ColorsSectionIniter);
 
 function ColorsSectionIniter(aElt, aRuleset)
 {
-  //deleteAllChildren(gDialog.backgroundsRichlistbox);
+  deleteAllChildren(gDialog.backgroundsRichlistbox);
+  var color = CssInspector.getCascadedValue(aRuleset, "color");
+  gDialog.colorColorpicker.color = color;
+
+  var bgColor = CssInspector.getCascadedValue(aRuleset, "background-color");
+  gDialog.bgColorColorpicker.color = bgColor;
+
+  var bgImages = CssInspector.getCascadedValue(aRuleset, "background-image");
+  var parsedImages = CssInspector.parseBackgroundImages(bgImages);
+  for (var i = 0; i < parsedImages.length; i++) {
+    var item = document.createElement("richlistitem");
+    item.className = "backgrounditem";
+    var type = parsedImages[i].type;
+    item.setAttribute("type", type);
+    gDialog.backgroundsRichlistbox.appendChild(item);
+    item.reset();
+    var button = item.getChild("backgrounditemButton");
+    item.parsedValue = parsedImages[i].value;
+    switch (type) {
+      case "image":
+        button.style.backgroundImage = item.parsedValue;
+        break;
+      default:
+        button.style.backgroundImage =
+          CssInspector.serializeGradient(item.parsedValue);
+        break;
+    }
+  }
 }
 
 function AddBackground(aEvent)
@@ -14,21 +41,6 @@ function AddBackground(aEvent)
   gDialog.backgroundsRichlistbox.appendChild(item);
   item.reset();
   item.openEditor();
-}
-
-function UpdateAddBackgroundMenupopup(aPopup)
-{
-  var count = gDialog.backgroundsRichlistbox.itemCount;
-  var disabled = false;
-  if (count) {
-    var item = gDialog.backgroundsRichlistbox.getItemAtIndex(count - 1);
-    if (item.type == "color") {
-      disabled = true;
-    }
-  }
-  var items = document.querySelectorAll("#addBackgroundMenupopup menuitem");
-  for (var i = 0; i < items.length; i++)
-    items[i].disabled = disabled;
 }
 
 function OnBackgroundSelect(aElt)
@@ -51,7 +63,7 @@ function SetColor(aElt)
   var color = aElt.color;
   ApplyStyles([
                 {
-                  property: "color",
+                  property: aElt.getAttribute("property"),
                   value: color
                 }
               ]);
@@ -76,20 +88,9 @@ function ReapplyBackgrounds()
   var bgColor = "", bgImages = [];
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
-    switch (item.type) {
-      case "color":
-        bgColor = item.getAttribute("color");
-        break;
-      default:
-        bgImages.push('url("' + item.getAttribute("image") + '")');
-        break;
-    }
+    bgImages.push(item.serializedValue);
   }
   ApplyStyles([
-                {
-                  property: "background-color",
-                  value: bgColor
-                },
                 {
                   property: "background-image",
                   value: bgImages.join(", ")

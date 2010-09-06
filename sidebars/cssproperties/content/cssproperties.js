@@ -1,6 +1,7 @@
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
@@ -47,9 +48,9 @@ function Shutdown()
 {
   if (gMain)
   {
-	  gMain.NotifierUtils.removeNotifierCallback("selection",
-			                                         SelectionChanged,
-			                                         window);
+    gMain.NotifierUtils.removeNotifierCallback("selection",
+                                               SelectionChanged,
+                                               window);
     gMain.NotifierUtils.removeNotifierCallback("tabClosed",
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("tabCreated",
@@ -71,7 +72,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   gCurrentElement = aElt;
 
   deleteAllChildren(gDialog.classPickerPopup);
-  gDialog.IDPicker.value = aElt.id;
 
   var item;
   for (var i = aElt.classList.length -1; i >= 0; i--) {
@@ -81,7 +81,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   if (item)
     gDialog.classPicker.selectedItem = item;
 
-  var ruleset = CssInspector.getCSSStyleRules(aElt);
+  var ruleset = CssInspector.getCSSStyleRules(aElt, false);
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
 }
@@ -90,11 +90,8 @@ function onCssPolicyChange(aElt)
 {
   var cssPolicy = aElt.value;
   gDialog.classPicker.hidden = (cssPolicy !="class");
-  gDialog.IDPicker.hidden = (cssPolicy !="id");
   if (cssPolicy == "class")
     gDialog.classPicker.focus();
-  else if (cssPolicy == "id")
-    gDialog.IDPicker.focus();
 }
 
 function ToggleSection(aImage)
@@ -104,7 +101,7 @@ function ToggleSection(aImage)
     header.removeAttribute("open");
   }
   else {
-	  header.setAttribute("open", "true");
+    header.setAttribute("open", "true");
   }
   document.persist(header.id, "open");
 }
@@ -123,12 +120,110 @@ function GetComputedValue(aElt, aProperty)
 
 function ApplyStyles(aStyles)
 {
+  var editor = EditorUtils.getCurrentEditor();
+  editor.beginTransaction();
   for (var i = 0; i < aStyles.length; i++) {
     var s = aStyles[i];
     var property = s.property;
     var value = s.value;
 
-	  switch (gDialog.cssPolicyMenulist.value) {
+    switch (gDialog.cssPolicyMenulist.value) {
+
+      case "id":
+        {
+          // first, clean the style attribute for the style to apply
+          var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
+          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+
+          // if the element has no ID, ask for one...
+          if (!gCurrentElement.id) {
+            var result = {};
+            if (!PromptUtils.prompt(window, "Enter an ID", "You must give a unique ID to the element:", result))
+              return;
+            editor.setAttribute(gCurrentElement, "id", result.value);
+          }
+
+          // see if the element has an ID ; if it does, let's apply the style to
+          // that ID
+          var ruleset = CssInspector.getCSSStyleRules(gCurrentElement, true);
+          var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
+          if (inspectedRule && inspectedRule.rule) {
+            // ok, that property is already applied through a CSS rule
+
+            // is that rule dependent on the ID selector for that ID?
+            // if yes, let's try to tweak it
+            var selector = inspectedRule.rule.selectorText;
+            var r = new RegExp( "#" + gCurrentElement.id + "$|#" + gCurrentElement.id + "[\.:,\\[]", "g");
+            if (selector.match(r)) {
+              // yes! can we edit the corresponding stylesheet or not?
+              var sheet = inspectedRule.rule.parentStyleSheet;
+              var topSheet = sheet;
+              while (topSheet.parentStyleSheet)
+                topSheet = topSheet.parentStyleSheet;
+              if (topSheet.ownerNode &&
+                  (!sheet.href || sheet.href.substr(0, 4) != "http")) {
+                // yes we can edit it...
+                var priority = inspectedRule.rule.style.getPropertyPriority(property);
+                if (sheet.href) { // external stylesheet
+				          var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
+                                                          property, value, priority);
+				          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                }
+                else { // it's an embedded stylesheet
+                  if (value) {
+                    inspectedRule.rule.style.setProperty(property, value, priority);
+                  }
+                  else
+                    inspectedRule.rule.style.removeProperty(property);
+                  if (!inspectedRule.rule.style.length)
+                    sheet.deleteRule(inspectedRule.rule);
+                  CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+                }
+                break;
+              }
+            }
+            // we need to check if the rule
+            // has a specificity no greater than an ID's one
+            var spec = inspectedRule.specificity;
+            if (!spec.a &&
+                ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
+                 !spec.b)) { 
+              // cool, we can just create a new rule with an ID selector
+              // but don't forget to set the priority...
+              // XXX
+              break;
+            }
+            // at this point, we have a greater specificity; hum, then what's
+            // the priority of the declaration?
+            if (!inspectedRule.rule.style.getPropertyPriority(property)) {
+              // no priority, so cool we can create a !important declaration
+              // for the ID
+              // XXX
+              break;
+            }
+            // argl, it's already a !important declaration :-( our only
+            // choice is a !important style attribute...
+            var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "important");
+            EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+          }
+          else {
+            // oh, the property is not applied yet, let's just create a rule
+            // with the ID selector for that property
+            CssUtils.addRuleForSelector(editor,
+                                        EditorUtils.getCurrentDocument(),
+                                        "#" + gCurrentElement.id,
+                                        [
+                                          {
+                                            property: property,
+                                            value: value,
+                                            priority: false
+                                          }
+                                        ]);
+
+            break;
+          }
+        }
+        break;
 
       case "inline":
         {
@@ -139,7 +234,6 @@ function ApplyStyles(aStyles)
 
       case "class":
         {
-          var editor = EditorUtils.getCurrentEditor();
           editor.beginTransaction();
           var rules = gInUtils.getCSSStyleRules(gCurrentElement);
           // user agent rules have parentStyleSheet.ownerNode
@@ -158,22 +252,22 @@ function ApplyStyles(aStyles)
             CssUtils.reserializeEmbeddedStylesheet(modifiedSheets[j], editor);
 
           if (value)
-	          CssUtils.addRuleForSelector(editor,
+            CssUtils.addRuleForSelector(editor,
                                         EditorUtils.getCurrentDocument(),
-	                                      "." + gDialog.classPicker.value,
-	                                      [
-	                                        {
-	                                          property: property,
-	                                          value: value,
-	                                          priority: false
-	                                        }
-	                                      ]);
-          editor.endTransaction();
+                                        "." + gDialog.classPicker.value,
+                                        [
+                                          {
+                                            property: property,
+                                            value: value,
+                                            priority: false
+                                          }
+                                        ]);
         }
         break;
       default:
         break;
-	  }
+    }
+    editor.endTransaction();
     // reselect the element
     EditorUtils.getCurrentEditor().selectElement(gCurrentElement);
   }
@@ -322,12 +416,12 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   if (!value ||
       (match && !(!aAllowNegative && parseFloat(match[1]) < 0)) ||
       idents.indexOf(value) != -1) {
-	  ApplyStyles([
-	                {
-	                  property: aElt.getAttribute("property"),
-	                  value: value
-	                }
-	              ]);
+    ApplyStyles([
+                  {
+                    property: aElt.getAttribute("property"),
+                    value: value
+                  }
+                ]);
   }
 }
 

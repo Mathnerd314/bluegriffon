@@ -1,8 +1,7 @@
 <!ENTITY applyStyles.label "Apply styles">
-<!ENTITY automatic.label "automatically">
-<!ENTITY useInlineStyles.label "through inline styles">
-<!ENTITY modifyClass.label "through class">
-<!ENTITY modifyID.label "through ID">
+<!ENTITY modifyID.label "to this element only through its ID">
+<!ENTITY modifyClass.label "to all elements of class...">
+<!ENTITY useInlineStyles.label "to this element only through inline styles">
 
 <!ENTITY generalSectionHeader.label "General">
 
@@ -50,9 +49,9 @@
 <!ENTITY lineHeightNormal.label "Normal">
 
 <!ENTITY colorsSectionHeader.label "Colors">
-<!ENTITY color.label "Color:">
-<!ENTITY backgrounds.label "Backgrounds:">
-<!ENTITY addBackgroundColorMenuitem.label "Add a background color">
+<!ENTITY color.label "Foreground:">
+<!ENTITY bgColor.label "Background:">
+<!ENTITY backgrounds.label "Images:">
 <!ENTITY addBackgroundImageMenuitem.label "Add a background image">
 <!ENTITY addBackgroundLinearGradientMenuitem.label "Add a linear gradient">
 <!ENTITY addBackgroundRadialGradientMenuitem.label "Add a radial gradient">

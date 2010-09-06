@@ -53,7 +53,7 @@ hbox.csspropertiesHeader[open="true"] + .section {
   overflow: visible;
 }
 
-menulist {
+menulist:not(#cssPolicyMenulist) {
   width: 10em;
 }
 

@@ -23,6 +23,7 @@ XPIDLSRCS   = diITextNodeChangedTxn.idl \
               diINodeInsertionTxn \
               diIInnerHtmlChangedTxn.idl \
               diIStyleAttrChangeTxn.idl \
+              diIChangeFileStylesheetTxn.idl \
               $(NULL)
 
 include $(topsrcdir)/config/rules.mk

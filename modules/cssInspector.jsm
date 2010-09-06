@@ -51,7 +51,7 @@ var CssInspector = {
   kINIDOMUTILS: Components.interfaces.inIDOMUtils,
   kINIDOMUTILS_CID: "@mozilla.org/inspector/dom-utils;1",
   
-  getCSSStyleRules: function(aElement)
+  getCSSStyleRules: function(aElement, aNoInlineStyles)
   {
     var inspector = Components.classes[this.kINIDOMUTILS_CID]
                       .getService(this.kINIDOMUTILS);
@@ -61,7 +61,10 @@ var CssInspector = {
     var parser = new CSSParser();
     for (var i = 0; i < rules.Count(); i++) {
       var r = rules.GetElementAt(i);
-      if (r.parentStyleSheet.ownerNode) {
+      var sheet = r.parentStyleSheet;
+      while (sheet.parentStyleSheet)
+        sheet = sheet.parentStyleSheet;
+      if (sheet.ownerNode) {
         parser._init();
         parser.mPreserveWS       = false;
         parser.mPreserveComments = false;
@@ -78,10 +81,10 @@ var CssInspector = {
         }
       }
     }
-    // don't forget the style attribute
-    ruleset.push( { rule: aElement,
-                    specificity: {a:1, b:0, c:0, d:0},
-                    order: order });
+    if (!aNoInlineStyles) // don't forget the style attribute
+	    ruleset.push( { rule: aElement,
+	                    specificity: {a:1, b:0, c:0, d:0},
+	                    order: order });
     return ruleset;
   },
 
@@ -371,6 +374,8 @@ var CssInspector = {
     s += ")";
     return s;
   }
+
+  
 };
 
 
@@ -3555,7 +3560,7 @@ function jscsspErrorRule(aErrorMsg)
 jscsspErrorRule.prototype = {
   cssText: function() {
     return this.parsedCssText;
-  },
+  }
 };
 
 /* kJscsspCOMMENT */
@@ -3596,7 +3601,7 @@ function jscsspWhitespace()
 jscsspWhitespace.prototype = {
   cssText: function() {
     return this.parsedCssText;
-  },
+  }
 };
 
 /* kJscsspIMPORT_RULE */

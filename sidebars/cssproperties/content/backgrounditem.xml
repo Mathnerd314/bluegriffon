@@ -125,6 +125,18 @@
         ]]>
       </constructor>
 
+      <field name="parsedValue">null</field>
+
+      <property name="serializedValue">
+        <getter>
+        <![CDATA[
+          if (typeof this.parsedValue == "string")
+            return this.parsedValue;
+          return CssInspector.serializeGradient(this.parsedValue);
+        ]]>
+        </getter>
+      </property>
+
       <property name="type">
         <getter>
         <![CDATA[
@@ -140,9 +152,6 @@
 
       <method name="reset">
         <body><![CDATA[
-          if (this.type == "color") {
-	          this.getChild("backgrounditemProperties").style.visibility = "hidden";
-          }
           this.getChild("backgrounditem-attachment").value = "";
           this.getChild("backgrounditem-size").value = "";
           this.getChild("backgrounditem-repeat").value = "";
@@ -164,7 +173,6 @@
           var type = this.type;
           var title = this.getChild("backgrounditemTitle");
           switch (type) {
-            case "color":    title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundColorTitle")); break;
             case "image":    title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundImageTitle")); break;
             case "linear-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundLinearGradientTitle")); break;
             case "radial-gradient": title.setAttribute("value", gDialog.backgrounditemBundle.getString("backgroundRadialGradientTitle")); break;
@@ -179,21 +187,6 @@
             var type = this.type;
             this.parentNode.selectItem(this);
             switch (type) {
-              case "color":
-                {
-                  var cph = ColorPickerHelper;
-                  cph.openColorPicker(window, "BackgroundColor", "aaa", true);
-                  if (!cph.isCancelled("BackgroundColor"))
-                  {
-                    var currentColor = cph.getCurrentColor("BackgroundColor")
-                    this.getChild("backgrounditemButton").style.backgroundColor = currentColor;
-                    if (this.getAttribute("color") != currentColor) {
-                      this.setAttribute("color", currentColor);
-                      ReapplyBackgrounds();
-                    }
-                  }
-                }
-                break;
               case "image":
                 {
                   var e = this.getChild("backgrounditemButton");
@@ -223,10 +216,10 @@
         <parameter name="aImageURL"/>
         <body>
           <![CDATA[
-            this.getChild("backgrounditemButton").style.backgroundImage =
-              'url("' + aImageURL + '")';
-            if (this.getAttribute("image") != aImageURL) {
-              this.setAttribute("image", aImageURL);
+            aImageURL = 'url("' + aImageURL + '")';
+            this.getChild("backgrounditemButton").style.backgroundImage = aImageURL;
+            if (this.parsedValue != aImageURL) {
+              this.parsedValue = aImageURL;
               ReapplyBackgrounds();
             }
           ]]>

@@ -277,10 +277,6 @@ var CssUtils = {
       var rule = cssRules[i];
       switch (rule.type)
       {
-        case CssUtils.kCSSRule.CHARSET_RULE:
-        case CssUtils.kCSSRule.IMPORT_RULE:
-          str += (i ? "\n" : "") + rule.cssText;
-          break;
         case CssUtils.kCSSRule.STYLE_RULE:
           {
             str += (i ? "\n" : "") + rule.selectorText + " {\n " +
@@ -298,6 +294,7 @@ var CssUtils = {
           }
           break;
         default:
+          str += (i ? "\n" : "") + rule.cssText;
           break;
       }
       str += "}\n";

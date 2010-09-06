@@ -5,20 +5,31 @@
       </hbox>
 
       <vbox class="section">
+        <hbox align="center" style="margin-bottom:1em">
+          <label value="&color.label;"/>
+          <hbox>
+            <ecolorpicker id="colorColorpicker"
+                          color="black"
+                          colorObjectId="ForegroundColor"
+                          windowTitle="Foreground color"
+                          showTransparency="false"
+                          property="color"
+                          oncommand="SetColor(this)"/>
+          </hbox>
+          <label value="&bgColor.label;"/>
+          <hbox>
+            <ecolorpicker id="bgColorColorpicker"
+                          color="transparent"
+                          colorObjectId="BackgroundColor"
+                          windowTitle="Background color"
+                          showTransparency="true"
+                          property="background-color"
+                          oncommand="SetColor(this)"/>
+          </hbox>
+        </hbox>
         <grid>
           <columns><column/><column flex="1"/></columns>
           <rows>
-            <row align="center" style="margin-bottom: 1em">
-              <label value="&color.label;"/>
-              <hbox>
-					      <ecolorpicker id="colorColorpicker"
-					                    color="transparent"
-					                    colorObjectId="ForegroundColor"
-					                    windowTitle="Foreground color"
-					                    showTransparency="false"
-                              oncommand="SetColor(this)"/>
-              </hbox>
-            </row>
             <row align="top">
               <label value="&backgrounds.label;"/>
               <vbox flex="1">
@@ -27,8 +38,7 @@
 	              <hbox class="listboxBg">
 	                <toolbarbutton id="addBackgroundButton" class="listboxBgPlusButton" type="menu"
 	                               oncommand="AddBackground(event)">
-	                  <menupopup id="addBackgroundMenupopup" onpopupshowing="UpdateAddBackgroundMenupopup(this)">
-                      <menuitem label="&addBackgroundColorMenuitem.label;" value="color"/>
+	                  <menupopup id="addBackgroundMenupopup">
                       <menuitem label="&addBackgroundLinearGradientMenuitem.label;" value="linear-gradient"/>
                       <menuitem label="&addBackgroundRadialGradientMenuitem.label;" value="radial-gradient"/>
                       <menuseparator/>
