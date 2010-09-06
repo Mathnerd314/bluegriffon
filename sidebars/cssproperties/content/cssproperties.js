@@ -138,7 +138,10 @@ function ApplyStyles(aStyles)
           // if the element has no ID, ask for one...
           if (!gCurrentElement.id) {
             var result = {};
-            if (!PromptUtils.prompt(window, "Enter an ID", "You must give a unique ID to the element:", result))
+            if (!PromptUtils.prompt(window,
+                                    gDialog.csspropertiesBundle.getString("EnterAnId"),
+                                    gDialog.csspropertiesBundle.getString("EnterUniqueId"),
+                                    result))
               return;
             editor.setAttribute(gCurrentElement, "id", result.value);
           }
@@ -206,14 +209,23 @@ function ApplyStyles(aStyles)
             }
             // at this point, we have a greater specificity; hum, then what's
             // the priority of the declaration?
-            if (!inspectedRule.rule.style.getPropertyPriority(property)) {
+            if (!priority) {
               // no priority, so cool we can create a !important declaration
               // for the ID
-              // XXX
+              sheet.insertRule("#" + gCurrentElement.id + "{" +
+                                 property + ": " + value + " !important }",
+                               sheet.cssRules.length);
+              if (sheet.ownerNode.href)
+                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+              else
+                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
               break;
+               break;
             }
             // argl, it's already a !important declaration :-( our only
-            // choice is a !important style attribute...
+            // choice is a !important style attribute... We can't just clean the
+            // style on inspectedRule because some other rules could also apply
+            // is that one goes away.
             var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "important");
             EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
           }
@@ -301,8 +313,8 @@ function FindLastEditableStyleSheet()
     sheet = child.sheet;
   else { // no editable stylesheet in the document, create one
     var styleElt = doc.createElement("style");
-    styleElt.setattribute("type", "text/css");
-    EditorUtils.insertNode(styleElt, headElt, headElt.childNodes.length);
+    styleElt.setAttribute("type", "text/css");
+    EditorUtils.getCurrentEditor().insertNode(styleElt, headElt, headElt.childNodes.length);
     sheet = styleElt.sheet;
   }
   return sheet;
