@@ -118,8 +118,40 @@ function GetComputedValue(aElt, aProperty)
   return aElt.ownerDocument.defaultView.getComputedStyle(aElt, "").getPropertyValue(aProperty);
 }
 
+var gSavedSelection;
+function SaveSelection()
+{
+  var editor = EditorUtils.getCurrentEditor();
+  var selection = editor.selection;
+  gSavedSelection = [];
+  for (var i = 0; i < selection.rangeCount; i++) {
+    var r = selection.getRangeAt(i);
+    gSavedSelection.push( {
+                            startContainer: r.startContainer,
+                           startOffset   : r.startOffset,
+                           endContainer  : r.endContainer,
+                           endOffset     : r.endOffset
+                         });
+  }
+}
+
+function RestoreSelection()
+{
+  var editor = EditorUtils.getCurrentEditor();
+  var selection = editor.selection;
+  selection.removeAllRanges();
+  for (var i = 0 ; i < gSavedSelection.length; i++) {
+    var s = gSavedSelection[i];
+    var range = document.createRange();
+    range.setStart(s.startContainer, s.startOffset);
+    range.setEnd(s.endContainer, s.endOffset);
+    selection.addRange(range);
+  }
+}
+
 function ApplyStyles(aStyles)
 {
+  SaveSelection();
   var editor = EditorUtils.getCurrentEditor();
   editor.beginTransaction();
   for (var i = 0; i < aStyles.length; i++) {
@@ -289,7 +321,8 @@ function ApplyStyles(aStyles)
     }
     editor.endTransaction();
     // reselect the element
-    EditorUtils.getCurrentEditor().selectElement(gCurrentElement);
+    //EditorUtils.getCurrentEditor().selectElement(gCurrentElement);
+    RestoreSelection();
   }
 }
 
