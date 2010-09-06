@@ -140,6 +140,236 @@ var CssInspector = {
     if (r && r.rule)
       return r.rule.style.getPropertyValue(aProperty);
     return "";
+  },
+
+  parseColorStop: function(parser, token)
+  {
+    var color = parser.parseColor(token);
+    var position = "";
+    if (!color)
+      return null;
+    token = parser.getToken(true, true);
+    if (token.isPercentage() ||
+        token.isDimensionOfUnit("cm") ||
+        token.isDimensionOfUnit("mm") ||
+        token.isDimensionOfUnit("in") ||
+        token.isDimensionOfUnit("pc") ||
+        token.isDimensionOfUnit("em") ||
+        token.isDimensionOfUnit("ex") ||
+        token.isDimensionOfUnit("pt")) {
+      position = token.value;
+      token = parser.getToken(true, true);
+    }
+    return { color: color, position: position }
+  },
+
+  parseGradient: function (parser, token)
+  {
+    var isRadial = false;
+    var gradient = {};
+    if (token.isNotNull()) {
+      if (token.isFunction("-moz-linear-gradient(") ||
+          token.isFunction("-moz-radial-gradient(")) {
+        if (token.isFunction("-moz-radial-gradient(")) {
+          gradient.isRadial = true;
+        }
+
+        token = parser.getToken(true, true);
+        var haveGradientLine = false;
+        if (token.isPercentage() ||
+            token.isDimensionOfUnit("deg") ||
+            token.isDimensionOfUnit("rad") ||
+            token.isDimensionOfUnit("grad") ||
+            token.isDimensionOfUnit("cm") ||
+            token.isDimensionOfUnit("mm") ||
+            token.isDimensionOfUnit("in") ||
+            token.isDimensionOfUnit("pc") ||
+            token.isDimensionOfUnit("em") ||
+            token.isDimensionOfUnit("ex") ||
+            token.isDimensionOfUnit("pt") ||
+            token.isNumber())
+          haveGradientLine = true;
+        else if (token.isIdent("top") ||
+                 token.isIdent("center") ||
+                 token.isIdent("bottom") ||
+                 token.isIdent("left") ||
+                 token.isIdent("right"))
+          haveGradientLine = true;
+
+        haveAngle = false;
+        if (haveGradientLine) {
+          if (token.isDimensionOfUnit("deg") ||
+              token.isDimensionOfUnit("rad") ||
+              token.isDimensionOfUnit("grad")) { // we have an angle here
+            gradient.angle = token.value;
+            haveAngle = true;
+            token = parser.getToken(true, true);
+          }
+          if (!haveAngle || !token.isSymbol(",")) {
+            // we already know it's a percentage, a length, a number or a position kw
+            gradient.position = token.value;
+            token = parser.getToken(true, true);
+		        if (token.isPercentage() ||
+		            token.isDimensionOfUnit("deg") ||
+		            token.isDimensionOfUnit("rad") ||
+		            token.isDimensionOfUnit("grad") ||
+		            token.isDimensionOfUnit("cm") ||
+		            token.isDimensionOfUnit("mm") ||
+		            token.isDimensionOfUnit("in") ||
+		            token.isDimensionOfUnit("pc") ||
+		            token.isDimensionOfUnit("em") ||
+		            token.isDimensionOfUnit("ex") ||
+		            token.isDimensionOfUnit("pt") ||
+		            token.isNumber() ||
+		            token.isIdent("top") ||
+                token.isIdent("center") ||
+                token.isIdent("bottom")) { // second position
+              gradient.position += " " + token.value;
+              // we can still have an angle :-(
+              var token = parser.getToken(true, true);
+		          if (token.isDimensionOfUnit("deg") ||
+		              token.isDimensionOfUnit("rad") ||
+		              token.isDimensionOfUnit("grad")) { // we have an angle here
+		            gradient.angle = token.value;
+		            haveAngle = true;
+		            token = parser.getToken(true, true);
+		          }
+            }
+          }
+          // we must find a comma here
+          if (!token.isSymbol(","))
+            return null;
+          token = parser.getToken(true, true);
+        }
+
+        // ok... Let's deal with the rest now
+        if (gradient.isRadial) {
+          if (token.isIdent("circle") ||
+              token.isIdent("ellipse")) {
+            gradient.shape = token.value;
+            token = parser.getToken(true, true);
+          }
+          if (token.isIdent("closest-side") ||
+                   token.isIdent("closest-corner") ||
+                   token.isIdent("farthest-side") ||
+                   token.isIdent("contain") ||
+                   token.isIdent("cover")) {
+            gradient.size = token.value;
+            token = parser.getToken(true, true);
+          }
+          if (!("shape" in gradient) &&
+              (token.isIdent("circle") ||
+               token.isIdent("ellipse"))) {
+            // we can still have the second value...
+            gradient.shape = token.value;
+            token = parser.getToken(true, true);
+          }
+          if ((gradient.shape || gradient.size) && !token.isSymbol(","))
+            return null;
+          token = parser.getToken(true, true);
+        }
+
+        // now color stops...
+        var stop1 = this.parseColorStop(parser, token);
+        if (!stop1)
+          return null;
+        token = parser.currentToken();
+        if (!token.isSymbol(","))
+          return null;
+        token = parser.getToken(true, true);
+        var stop2 = this.parseColorStop(parser, token);
+        if (!stop2)
+          return null;
+        token = parser.currentToken();
+        if (token.isSymbol(",")) {
+          token = parser.getToken(true, true);
+        }
+        // ok we have at least two color stops
+        gradient.stops = [stop1, stop2];
+        while (!token.isSymbol(")")) {
+          var colorstop = this.parseColorStop(parser, token);
+          if (!colorstop)
+            return null;
+          token = parser.currentToken();
+          if (!token.isSymbol(")") && !token.isSymbol(","))
+            return null;
+          if (token.isSymbol(","))
+            token = parser.getToken(true, true);
+          gradient.stops.push(colorstop);
+        }
+        return gradient;
+      }
+    }
+    return null;
+  },
+
+  parseBackgroundImages: function(aString)
+  {
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+
+    var backgrounds = [];
+    var token = parser.getToken(true, true);
+    while (token.isNotNull()) {
+	    /*if (token.isFunction("rgb(") ||
+	        token.isFunction("rgba(") ||
+	        token.isFunction("hsl(") ||
+	        token.isFunction("hsla(") ||
+          token.isSymbol("#") ||
+	        token.isIdent()) {
+	      var color = parser.parseColor(token);
+        backgrounds.push( { type: "color", value: color });
+	      token = parser.getToken(true, true);
+	    }
+      else */
+      if (token.isFunction("url(")) {
+	      token = parser.getToken(true, true);
+	      var urlContent = parser.parseURL(token);
+        backgrounds.push( { type: "image", value: "url(" + urlContent });
+        token = parser.getToken(true, true);
+      }
+      else if (token.isFunction("-moz-linear-gradient(") ||
+               token.isFunction("-moz-radial-gradient(")) {
+        var gradient = this.parseGradient(parser, token);
+        backgrounds.push( { type: gradient.isRadial ? "radial-gradient" : "linear-gradient", value: gradient });
+        token = parser.getToken(true, true);
+      }
+      else
+        return null;
+      if (token.isSymbol(",")) {
+        token = parser.getToken(true, true);
+        if (!token.isNotNull())
+          return null;
+      }
+    }
+    return backgrounds;
+  },
+
+  serializeGradient: function(gradient)
+  {
+    var s = gradient.isRadial ? "-moz-radial-gradient(" : "-moz-linear-gradient(";
+    if (gradient.angle || gradient.position)
+      s += (gradient.angle ? gradient.angle : "") +
+           " " +
+           (gradient.position ? gradient.position : "") +
+           ", ";
+    if (gradient.isRadial && (gradient.shape || gradient.size))
+      s += (gradient.shape ? gradient.shape : "") +
+           " " +
+           (gradient.size ? gradient.size : "") +
+           ", ";
+    for (var i = 0; i < gradient.stops.length; i++) {
+      var colorstop = gradient.stops[i];
+      s += colorstop.color + (colorstop.position ? " " + colorstop.position : "");
+      if (i != gradient.stops.length -1)
+        s += ", ";
+    }
+    s += ")";
+    return s;
   }
 };
 
@@ -2290,16 +2520,6 @@ CSSParser.prototype = {
       }
 
     if (token.isSymbol(")")) {
-      var v = this.trim11(value);
-      if ((v[0] == "'" && v[v.length -1] == "'") ||
-          (v[0] == '"' && v[v.length -1] == '"'))
-        v = v.substring(1, v.length - 2)
-      var r = new RegExp("^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?", "");
-      var m = v.match(r)
-      if (m) {
-        if (m[5].match ( /[^a-z0-9\\-_\\.!~\\*'\\(\\)]/g ) )
-          return null;
-      }
       return value + ")";
     }
     return "";
@@ -3260,13 +3480,6 @@ jscsspStylesheet.prototype = {
     return rv;
   },
 
-  htmlText: function() {
-    var rv = "";
-    for (var i = 0; i < this.cssRules.length; i++)
-      rv += this.cssRules[i].htmlText() + "<br>";
-    return rv;    
-  },
-
   resolveVariables: function(aMedium) {
 
     function ItemFoundInArray(aArray, aItem) {
@@ -3312,11 +3525,6 @@ jscsspCharsetRule.prototype = {
     return "@charset " + this.encoding + ";";
   },
 
-  htmlText: function() {
-    return "<span class='atrule'>@charset</span>&nbsp;<span class='string'>"
-           + this.encoding + "</span>;"; 
-  },
-
   setCssText: function(val) {
     var sheet = {cssRules: []};
     var parser = new CSSParser(val);
@@ -3348,13 +3556,6 @@ jscsspErrorRule.prototype = {
   cssText: function() {
     return this.parsedCssText;
   },
-
-  htmlText: function() {
-    return "<span class='error' error='" +
-                this.error +
-                "'>" +
-                this.parsedCssText + "</span>";
-  }
 };
 
 /* kJscsspCOMMENT */
@@ -3370,10 +3571,6 @@ function jscsspComment()
 jscsspComment.prototype = {
   cssText: function() {
     return this.parsedCssText;
-  },
-
-  htmlText: function() {
-    return "<span class='comment'>" + this.parsedCssText + "</span>";
   },
 
   setCssText: function(val) {
@@ -3400,11 +3597,6 @@ jscsspWhitespace.prototype = {
   cssText: function() {
     return this.parsedCssText;
   },
-
-  htmlText: function() {
-    return this.cssText().replace( / /g , "&nbsp;")
-                         .replace( /\n/g , "<br>");
-  },
 };
 
 /* kJscsspIMPORT_RULE */
@@ -3425,17 +3617,6 @@ jscsspImportRule.prototype = {
     return "@import " + (mediaString ? mediaString + " " : "")
                       + this.href
                       + ";";
-  },
-
-  htmlText: function() {
-    var mediaString = "";
-    if (this.media.length)
-      mediaString = "<span class='medium'>" + this.media.join("</span>, <span class='medium'>")
-                    + "</span>";
-    var rv = "<span class='atrule'>@import</span> " + (mediaString ? mediaString + " " : "")
-           + "<span class='url'>" + this.href + "</span>"
-           + ";";
-    return rv;
   },
 
   setCssText: function(val) {
@@ -3471,12 +3652,6 @@ jscsspNamespaceRule.prototype = {
   cssText: function() {
     return "@namespace " + (this.prefix ? this.prefix + " ": "")
                         + this.url
-                        + ";";
-  },
-
-  htmlText: function() {
-    return "<span class='atrule'>@namespace</span> " + (this.prefix ? this.prefix + " ": "")
-                        + "<span class='url'>" + this.url + "</span>"
                         + ";";
   },
 
@@ -3516,17 +3691,6 @@ jscsspDeclaration.prototype = {
     "cursor": true,
     "font-family": true,
     "voice-family": true
-  },
-
-  htmlText: function() {
-    var rv = "<span class='property'>" + this.property + "</span>: ";
-    var separator = (this.property in this.kCOMMA_SEPARATED) ? ", " : " ";
-    for (var i = 0; i < this.values.length; i++)
-      if (this.values[i].cssText() != null)
-        rv += (i ? separator : "") + "<span class='value'>" + this.values[i].cssText() + "</span>";
-      else
-        return null;
-    return rv + (this.priority ? " <span class='bang'>!important</span>" : "") + ";";
   },
 
   cssText: function() {
@@ -3580,16 +3744,6 @@ jscsspFontFaceRule.prototype = {
     return rv + gTABS + "}";
   },
 
-  htmlText: function() {
-    var rv = gTABS + "<span class='atrule'>@font-face</span> {<br>";
-    var preservedGTABS = gTABS;
-    gTABS += "&nbsp;&nbsp;";
-    for (var i = 0; i < this.descriptors.length; i++)
-      rv += gTABS + this.descriptors[i].htmlText() + "<br>";
-    gTABS = preservedGTABS;
-    return rv + gTABS + "}";
-  },
-
   setCssText: function(val) {
     var sheet = {cssRules: []};
     var parser = new CSSParser(val);
@@ -3625,20 +3779,6 @@ jscsspMediaRule.prototype = {
     gTABS += "  ";
     for (var i = 0; i < this.cssRules.length; i++)
       rv += gTABS + this.cssRules[i].cssText() + "\n";
-    gTABS = preservedGTABS;
-    return rv + gTABS + "}";
-  },
-
-  htmlText: function() {
-    var mediaString = "";
-    if (this.media.length)
-      mediaString = "<span class='medium'>" + this.media.join("</span>, <span class='medium'>")
-                    + "</span>";
-    var rv = gTABS + "<span class='atrule'>@media</span> " + mediaString + " {<br>";
-    var preservedGTABS = gTABS;
-    gTABS += "&nbsp;&nbsp;";
-    for (var i = 0; i < this.cssRules.length; i++)
-      rv += gTABS + this.cssRules[i].htmlText() + "<br>";
     gTABS = preservedGTABS;
     return rv + gTABS + "}";
   },
@@ -3681,19 +3821,6 @@ jscsspStyleRule.prototype = {
       var declText = this.declarations[i].cssText();
       if (declText)
         rv += gTABS + this.declarations[i].cssText() + "\n";
-    }
-    gTABS = preservedGTABS;
-    return rv + gTABS + "}";
-  },
-
-  htmlText: function() {
-    var rv = "<span class='selector'>" + this.mSelectorText + "</span> {<br>";
-    var preservedGTABS = gTABS;
-    gTABS += "&nbsp;&nbsp;";
-    for (var i = 0; i < this.declarations.length; i++) {
-      var declText = this.declarations[i].htmlText();
-      if (declText)
-        rv += gTABS + this.declarations[i].htmlText() + "<br>";
     }
     gTABS = preservedGTABS;
     return rv + gTABS + "}";
@@ -3758,18 +3885,6 @@ jscsspPageRule.prototype = {
     return rv + gTABS + "}";
   },
 
-  htmlText: function() {
-    var rv = gTABS + "<span class='atrule'>@page</span> "
-                   + (this.pageSelector ? "<span class='selector'>" + this.pageSelector + "</span> " : "")
-                   + "{<br>";
-    var preservedGTABS = gTABS;
-    gTABS += "&nbsp;&nbsp;";
-    for (var i = 0; i < this.declarations.length; i++)
-      rv += gTABS + this.declarations[i].htmlText() + "<br>";
-    gTABS = preservedGTABS;
-    return rv + gTABS + "}";
-  },
-
   setCssText: function(val) {
     var sheet = {cssRules: []};
     var parser = new CSSParser(val);
@@ -3808,22 +3923,6 @@ jscsspVariablesRule.prototype = {
     gTABS += "  ";
     for (var i = 0; i < this.declarations.length; i++)
       rv += gTABS + this.declarations[i].cssText() + "\n";
-    gTABS = preservedGTABS;
-    return rv + gTABS + "}";
-  },
-
- htmlText: function() {
-    var mediaString = "";
-    if (this.media.length)
-      mediaString = "<span class='medium'>" + this.media.join("</span>, <span class='medium'>")
-                    + "</span>";
-    var rv = gTABS + "<span class='atrule'>@variables</span> " +
-                     (mediaString ? mediaString + " " : "") +
-                     "{<br>";
-    var preservedGTABS = gTABS;
-    gTABS += "&nbsp;&nbsp;";
-    for (var i = 0; i < this.declarations.length; i++)
-      rv += gTABS + this.declarations[i].htmlText() + "<br>";
     gTABS = preservedGTABS;
     return rv + gTABS + "}";
   },
