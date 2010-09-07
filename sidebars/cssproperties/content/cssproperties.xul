@@ -45,6 +45,8 @@
 <!DOCTYPE page [
   <!ENTITY % composerOverlayDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
   %composerOverlayDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
 ]>
 
 <page id         = "cssproperties"
@@ -64,7 +66,7 @@
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
 
   <panelset>
-    <panel level="floating" id="backgroundImagePanel" noautohide="true">
+    <panel level="floating" id="backgroundImagePanel">
       <groupbox style="width: 400px">
 		    <caption label="&imageURL.caption;"/>
 		    <hbox align="center">
@@ -88,13 +90,121 @@
       </groupbox>
       <hbox align="center">
         <spacer flex="1"/>
-        <button label="&cancelButton.label;" oncommand="gDialog.backgroundImagePanel.hidePopup()"/>
         <button label="&okButton.label;" oncommand="BackgroundImageSelected()"/>
+      </hbox>
+    </panel>
+
+    <panel level="floating" id="linearGradientPanel" noautohide="true">
+      <hbox align="top">
+        <groupbox>
+          <caption label="&preview.caption;"/>
+          <spacer flex="1"/>
+          <vbox id="linearGradientPreview"/>
+          <spacer flex="1"/>
+        </groupbox>
+        <tabbox>
+          <tabs>
+            <tab label="&colorStops.tab;"/>
+            <tab label="&angle.tab;"/>
+            <tab label="&startingPoint.tab;"/>
+          </tabs>
+          <tabpanels>
+            <vbox flex="1">
+              <richlistbox id="colorStopsRichlistbox"
+                           onselect="UpdateColorStopsRichlistbox()" flex="1"/>
+              <hbox class="listboxBg">
+                <toolbarbutton id="addColorStopButton" class="listboxBgPlusButton"
+                               oncommand="AddColorStopToLinearGradient()"/>
+                <toolbarbutton id="removeColorStopButton" class="listboxBgMinusButton"
+                               disabled="true"
+                               oncommand="DeleteColorStopFromLinearGradient()"/>
+                <spacer flex="1"/>
+                <toolbarbutton id="upColorStopButton" class="listboxBgPlusButton" disabled="true"/>
+                <toolbarbutton id="downColorStopButton" class="listboxBgPlusButton" disabled="true"/>
+              </hbox>
+            </vbox>
+            <hbox align="center">
+	            <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
+	                      oncommand="RepaintLinearGradient()"/>
+              <rotator id="linearGradientAngleRotator" onchange="RepaintLinearGradient()"/>
+            </hbox>
+		        <grid>
+		          <columns><column/><column/></columns>
+		          <rows>
+		            <row align="center">
+		              <checkbox label="&startingPoint.checkbox;" id="linearGradientStartingPointCheckbox"
+                            oncommand="RepaintLinearGradient()"/>
+		              <hbox>
+		                <menulist sizetopopup="none" editable="true" id="linearGradientStartingPointMenulist"
+                              oncommand="RepaintLinearGradient()">
+		                  <menupopup>
+		                    <grid class="multipane-menu"
+		                              oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+		                      <columns><column/><column/><column/></columns>
+		                      <rows>
+		                        <row align="center">
+		                          <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+		                          <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+		                          <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+		                        </row>
+		                        <row align="center">
+		                          <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+		                          <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+		                          <menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
+		                        </row>
+		                        <row align="center">
+		                          <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+		                          <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+		                          <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+		                        </row>
+		                      </rows>
+		                    </grid>
+		                  </menupopup>
+		                </menulist>
+		              </hbox>
+		            </row>
+		            <row align="center">
+		              <checkbox label="&horizOffset.checkbox;" id="linearGradientHorizOffsetCheckbox"
+                            oncommand="RepaintLinearGradient()"/>
+		              <hbox>
+		                <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()"
+		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()">
+		                  <menupopup id="linearGradientHorizOffsetMenupopup"
+		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+		                  </menupopup>
+		                </menulist>
+                    <spinbuttons onup="IncreaseLength(gDialog.linearGradientHorizOffset, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
+                                 ondown="DecreaseLength(gDialog.linearGradientHorizOffset, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
+		                <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
+                              oncommand="RepaintLinearGradient()"/>
+		                <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
+		                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()"
+		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()">
+		                  <menupopup id="linearGradientVertOffsetMenupopup"
+		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+		                  </menupopup>
+		                </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
+		              </hbox>
+		             </row>
+		          </rows>
+		        </grid>
+          </tabpanels>
+        </tabbox>
+      </hbox>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&okButton.label;" id="linearGradientOkButton" oncommand="SetLinearGradient();"/>
       </hbox>
     </panel>
   </panelset>
 
   <vbox id="mainBox" flex="1" hidden="true">
+    <label id="currentElementBox"
+           class="indent"
+           crop="end"/>
     <hbox id="cssPolicyBox" class="indent" align="center">
       <label value="&applyStyles.label;"/>
       <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">

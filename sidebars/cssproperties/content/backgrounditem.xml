@@ -206,6 +206,14 @@
                   }
                 }
                 break;
+              case "linear-gradient":
+                {
+                  var e = this.getChild("backgrounditemButton");
+                  gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX,
+                                                                e.boxObject.screenY,
+                                                                false);
+                }
+                break;
               default: break;
             }
           ]]>

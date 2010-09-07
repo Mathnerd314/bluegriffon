@@ -72,6 +72,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   gCurrentElement = aElt;
 
   deleteAllChildren(gDialog.classPickerPopup);
+  gDialog.classPickerPopup.value =  "";
 
   var item;
   for (var i = aElt.classList.length -1; i >= 0; i--) {
@@ -84,6 +85,13 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   var ruleset = CssInspector.getCSSStyleRules(aElt, false);
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
+
+  gDialog.currentElementBox.setAttribute("value",
+       "<" + gCurrentElement.nodeName.toLowerCase() +
+       (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
+       (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
+       ">" +
+       gCurrentElement.innerHTML.substr(0, 100));
 }
 
 function onCssPolicyChange(aElt)
@@ -147,6 +155,8 @@ function RestoreSelection()
     range.setEnd(s.endContainer, s.endOffset);
     selection.addRange(range);
   }
+  // don't preserve a reference to nodes !
+  gSavedSelection = null;
 }
 
 function ApplyStyles(aStyles)
@@ -174,12 +184,10 @@ function ApplyStyles(aStyles)
                                     gDialog.csspropertiesBundle.getString("EnterAnId"),
                                     gDialog.csspropertiesBundle.getString("EnterUniqueId"),
                                     result))
-              return;
+              break;
             editor.setAttribute(gCurrentElement, "id", result.value);
           }
 
-          // see if the element has an ID ; if it does, let's apply the style to
-          // that ID
           var ruleset = CssInspector.getCSSStyleRules(gCurrentElement, true);
           var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
           if (inspectedRule && inspectedRule.rule) {
@@ -286,34 +294,116 @@ function ApplyStyles(aStyles)
 
       case "class":
         {
-          editor.beginTransaction();
-          var rules = gInUtils.getCSSStyleRules(gCurrentElement);
-          // user agent rules have parentStyleSheet.ownerNode
-          var modifiedSheets = [];
-          for (var j = 0; j < rules.Count(); j++) {
-            var rule = rules.GetElementAt(j);
-            if (rule.style.getPropertyValue(property)) {
-              var sheet = rule.parentStyleSheet;
-              modifiedSheets.push(sheet);
-              rule.style.removeProperty(property);
-              if (!rule.style.length)
-                sheet.deleteRule(rule);
-            }
+          if (!gDialog.classPicker.value) {
+            PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
+                                       gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
+                                       window);
+            break;
           }
-          for (var j = 0; j < modifiedSheets.length; j++)
-            CssUtils.reserializeEmbeddedStylesheet(modifiedSheets[j], editor);
 
-          if (value)
-            CssUtils.addRuleForSelector(editor,
-                                        EditorUtils.getCurrentDocument(),
-                                        "." + gDialog.classPicker.value,
-                                        [
-                                          {
-                                            property: property,
-                                            value: value,
-                                            priority: false
-                                          }
-                                        ]);
+          // first, clean the style attribute for the style to apply
+          var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
+          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+
+          // make sure the element carries the user-selected class
+          if (!gCurrentElement.classList.contains(gDialog.classPicker.value))
+            gCurrentElement.classList.add(gDialog.classPicker.value);
+          var className = gDialog.classPicker.value;
+
+          var ruleset = CssInspector.getCSSStyleRules(gCurrentElement, true);
+          var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
+          if (inspectedRule && inspectedRule.rule) {
+            // ok, that property is already applied through a CSS rule
+
+            // is that rule dependent on a class selector for that class?
+            // if yes, let's try to tweak it
+            var priority = inspectedRule.rule.style.getPropertyPriority(property);
+            var selector = inspectedRule.rule.selectorText;
+            var r = new RegExp( "\\." + className + "$|\\." + className + "[\.:,\\[]", "g");
+            if (selector.match(r)) {
+              // yes! can we edit the corresponding stylesheet or not?
+              var sheet = inspectedRule.rule.parentStyleSheet;
+              var topSheet = sheet;
+              while (topSheet.parentStyleSheet)
+                topSheet = topSheet.parentStyleSheet;
+              if (topSheet.ownerNode &&
+                  (!sheet.href || sheet.href.substr(0, 4) != "http")) {
+                // yes we can edit it...
+                if (sheet.href) { // external stylesheet
+                  var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
+                                                          property, value, priority);
+                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                }
+                else { // it's an embedded stylesheet
+                  if (value) {
+                    inspectedRule.rule.style.setProperty(property, value, priority);
+                  }
+                  else
+                    inspectedRule.rule.style.removeProperty(property);
+                  if (!inspectedRule.rule.style.length)
+                    sheet.deleteRule(inspectedRule.rule);
+                  CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+                }
+                break;
+              }
+            }
+            // we need to check if the rule
+            // has a specificity no greater than an class selector's one
+
+            // we need to find the last locally editable stylesheet
+            // attached to the document
+            var sheet = FindLastEditableStyleSheet();
+            var spec = inspectedRule.specificity;
+            if (!spec.a && ! spec.b &&
+                ((spec.c == 1 && spec.d == 0) ||
+                 !spec.c)) { 
+              // cool, we can just create a new rule with a class selector
+              // but don't forget to set the priority...
+              sheet.insertRule("." + className + "{" +
+                                 property + ": " + value + " " +
+                                 (priority ? "!important" : "") + "}",
+                               sheet.cssRules.length);
+              if (sheet.ownerNode.href)
+                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+              else
+                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+              break;
+            }
+            // at this point, we have a greater specificity; hum, then what's
+            // the priority of the declaration?
+            if (!priority) {
+              // no priority, so cool we can create a !important declaration
+              // for the class
+              sheet.insertRule("." + className + "{" +
+                                 property + ": " + value + " !important }",
+                               sheet.cssRules.length);
+              if (sheet.ownerNode.href)
+                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+              else
+                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+              break;
+               break;
+            }
+            // argl, it's already a !important declaration :-( our only
+            // choice is a !important style attribute... We can't just clean the
+            // style on inspectedRule because some other rules could also apply
+            // is that one goes away.
+            var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "important");
+            EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+          }
+          else {
+            // oh, the property is not applied yet, let's just create a rule
+            // with the class selector for that property
+            var sheet = FindLastEditableStyleSheet();
+            sheet.insertRule("." + className + "{" +
+                               property + ": " + value + " " + "}",
+                             sheet.cssRules.length);
+            if (sheet.ownerNode.href)
+              CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+            else
+              CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+            break;
+          }
         }
         break;
       default:
@@ -417,10 +507,11 @@ function PopulateLengths(aElt, aUnitsString)
 function IncreaseLength(aElt, aUnitsString)
 {
   var value;
-  if (aElt.selectedItem)
-    value = aElt.selectedItem.value;
+  var menulist = aElt.previousSibling;
+  if (menulist.selectedItem)
+    value = menulist.selectedItem.value;
   else
-    value = aElt.value;
+    value = menulist.value;
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
@@ -442,18 +533,19 @@ function IncreaseLength(aElt, aUnitsString)
         v += 1;
         break;
     }
-    aElt.value = v + (unit ? unit : "");
-    onLengthMenulistCommand(aElt, aUnitsString, '', false);
+    menulist.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(menulist, aUnitsString, '', false);
   }
 }
 
 function DecreaseLength(aElt, aUnitsString, aAllowNegative)
 {
   var value;
-  if (aElt.selectedItem)
-    value = aElt.selectedItem.value;
+  var menulist = aElt.previousSibling;
+  if (menulist.selectedItem)
+    value = menulist.selectedItem.value;
   else
-    value = aElt.value;
+    value = menulist.value;
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
@@ -477,8 +569,8 @@ function DecreaseLength(aElt, aUnitsString, aAllowNegative)
     }
     if (!aAllowNegative && v < 0)
       v = 0;
-    aElt.value = v + (unit ? unit : "");
-    onLengthMenulistCommand(aElt, aUnitsString, '', aAllowNegative);
+    menulist.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(menulist, aUnitsString, '', aAllowNegative);
   }
 }
 
@@ -493,6 +585,8 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
+  if (!aElt.getAttribute("property"))
+    return;
   if (!value ||
       (match && !(!aAllowNegative && parseFloat(match[1]) < 0)) ||
       idents.indexOf(value) != -1) {

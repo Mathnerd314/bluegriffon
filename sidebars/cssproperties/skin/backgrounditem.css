@@ -39,10 +39,6 @@ richlistbox:focus > richlistitem[selected="true"] .backgrounditem-title {
   padding: 0 2em;
 }
 
-.multipane-menu menuitem {
-  font-size: smaller;
-}
-
 .background-properties > rows > row > * {
   margin-top: 0px;
   margin-bottom: 0px;

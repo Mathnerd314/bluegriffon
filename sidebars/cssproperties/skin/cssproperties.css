@@ -15,6 +15,16 @@
   margin-right: 5px;
 }
 
+#currentElementBox {
+  font-family: -moz-fixed;
+  background-color: #28211c;
+  padding: 0.5em;
+  border: inset #28211c 2px;
+  -moz-border-radius: 5px;
+  color: #e6e6e6;
+  font-size: larger;
+}
+
 #classPicker, #IDPicker {
   max-width: 7em;
   min-width: 7em;
@@ -148,6 +158,11 @@ richlistitem.backgrounditem {
   border-bottom: gray thin solid;
 }
 
+richlistitem.colorstopitem {
+  -moz-binding: url("chrome://cssproperties/content/colorstopitem.xml#colorstopitem");
+  border-bottom: gray thin solid;
+}
+
 #backgroundsRichlistbox > scrollbox {
   overflow: visible !important;
 }
@@ -155,7 +170,55 @@ richlistitem.backgrounditem {
 #previewBackgroundImage {
   width: 4cm;
   height: 4cm;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
+
+#backgroundImagePanel, #linearGradientPanel {
+  padding: 0.5em;
+  font-size: smaller;
+  -moz-appearance: none;
+  background-color: #f0f0f0;
+}
+
+#linearGradientPreview {
+  width: 2cm;
+  height: 2cm;
+}
+
+rotator {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+  -moz-binding: url("chrome://bluegriffon/content/bindings/rotator.xml#rotator");
+}
+
+.multipane-menu menuitem {
+  font-size: smaller;
+}
+
+#linearGradientHorizOffset, #linearGradientVertOffset {
+  max-width: 6em;
+}
+
+#colorStopsRichlistbox {
+  margin: 0px;
+  min-height: 10em;
+}
+
+#upColorStopButton {
+  list-style-image: url("chrome://cssproperties/skin/up.png");
+}
+
+#upColorStopButton[disabled="true"] {
+  list-style-image: url("chrome://cssproperties/skin/up-disabled.png");
+}
+
+#downColorStopButton {
+  list-style-image: url("chrome://cssproperties/skin/down.png");
+}
+
+#downColorStopButton[disabled="true"] {
+  list-style-image: url("chrome://cssproperties/skin/down-disabled.png");
+}
+

@@ -61,3 +61,22 @@
 <!ENTITY preview.caption "Preview">
 <!ENTITY cancelButton.label "Cancel">
 <!ENTITY okButton.label "OK">
+
+<!ENTITY backgroundPositionLeftTop.label "Left top">
+<!ENTITY backgroundPositionCenterTop.label "Center top">
+<!ENTITY backgroundPositionRightTop.label "Right top">
+<!ENTITY backgroundPositionLeftCenter.label "Left center">
+<!ENTITY backgroundPositionCenterCenter.label "Center">
+<!ENTITY backgroundPositionRightCenter.label "Right center">
+<!ENTITY backgroundPositionLeftBottom.label "Left bottom">
+<!ENTITY backgroundPositionCenterBottom.label "Center bottom">
+<!ENTITY backgroundPositionRightBottom.label "Right bottom">
+
+<!ENTITY colorStops.tab "Color stops">
+<!ENTITY angle.tab "Angle">
+<!ENTITY startingPoint.tab "Starting point">
+
+<!ENTITY angle.checkbox "Angle:">
+<!ENTITY startingPoint.checkbox "Starting point:">
+<!ENTITY horizOffset.checkbox "Horiz. offset:">
+<!ENTITY vertOffset.checkbox "Vert. offset:">

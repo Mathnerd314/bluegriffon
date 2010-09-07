@@ -98,4 +98,63 @@ function ReapplyBackgrounds()
               ]);
 }
 
+function RepaintLinearGradient()
+{
+  var angle = gDialog.linearGradientAngleCheckbox.checked ? gDialog.linearGradientAngleRotator.value + "deg"
+                                                          : "";
+  var startingPoint = gDialog.linearGradientStartingPointCheckbox.checked ? gDialog.linearGradientStartingPointMenulist.value
+                                                          : "";
+  var hOffset = gDialog.linearGradientHorizOffsetCheckbox.checked ? gDialog.linearGradientHorizOffset.value
+                                                          : "";
+  var str = "-moz-linear-gradient(" +
+            ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
 
+  var stops = gDialog.colorStopsRichlistbox.querySelectorAll("richlistitem.colorstopitem");
+  for (var i = 0; i < stops.length; i++) {
+    if (i)
+      str += ", ";
+    var s = stops[i];
+    str += s.color + (s.offset ? " " + s.offset : "");
+  }
+  str += ")";
+  gDialog.linearGradientPreview.style.backgroundImage = str;
+}
+
+function SetLinearGradient()
+{
+  var gradient = gDialog.linearGradientPreview.style.backgroundImage;
+  gDialog.backgroundsRichlistbox.selectedItem.getChild("backgrounditemButton").style.backgroundImage =
+    gradient;
+  gDialog.linearGradientPanel.hidePopup();
+}
+
+function UpdateColorStopsRichlistbox()
+{
+  var item = gDialog.colorStopsRichlistbox.selectedItem;
+  if (gDialog.colorStopsRichlistbox.itemCount && item &&
+      item.parentNode) {
+    gDialog.removeColorStopButton.disabled = false;
+    gDialog.upColorStopButton.disabled = !item.previousElementSibling;
+    gDialog.downColorStopButton.disabled = !item.nextElementSibling;
+  }
+  else {
+    gDialog.removeColorStopButton.disabled = true;
+    gDialog.upColorStopButton.disabled = true;
+    gDialog.downColorStopButton.disabled = true;
+  }
+  gDialog.linearGradientOkButton.disabled = (gDialog.colorStopsRichlistbox.itemCount < 2);
+}
+
+function AddColorStopToLinearGradient()
+{
+  var e = document.createElement("richlistitem");
+  e.className = "colorstopitem";
+  gDialog.colorStopsRichlistbox.appendChild(e);
+  UpdateColorStopsRichlistbox();
+}
+
+function DeleteColorStopFromLinearGradient()
+{
+  gDialog.colorStopsRichlistbox.removeChild(gDialog.colorStopsRichlistbox.selectedItem);
+  UpdateColorStopsRichlistbox();
+}

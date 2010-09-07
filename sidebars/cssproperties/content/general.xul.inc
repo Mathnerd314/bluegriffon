@@ -60,8 +60,8 @@
                     <menuitem label="&fontSizeXxlarge.label;" value="xx-large"/>
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(gDialog.fontSizeMenulist, '% px pt cm in mm pc em ex')"
-                             ondown="DecreaseLength(gDialog.fontSizeMenulist, '% px pt cm in mm pc em ex', false)"/>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
               </hbox>
             </row>
 
@@ -77,8 +77,8 @@
                     <menuitem label="&lineHeightNormal.label;" value="normal"/>
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(gDialog.lineHeightMenulist, ' % px pt cm in mm pc em ex')"
-                             ondown="DecreaseLength(gDialog.lineHeightMenulist, ' % px pt cm in mm pc em ex', false)"/>
+                <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex', false)"/>
               </hbox>
             </row>
 
