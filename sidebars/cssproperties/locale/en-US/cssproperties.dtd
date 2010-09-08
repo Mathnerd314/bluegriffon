@@ -5,12 +5,6 @@
 
 <!ENTITY generalSectionHeader.label "General">
 
-<!ENTITY columnsSectionHeader.label "Columns">
-<!ENTITY columnCount.label "Columns">
-<!ENTITY oneColumn.label "One column">
-<!ENTITY twoColumns.label "Two columns">
-<!ENTITY threeColumns.label "Three columns">
-
 <!ENTITY fontWeight.label "Weight:">
 <!ENTITY fontWeightBold.label "Bold">
 <!ENTITY fontWeightLighter.label "lighter">
@@ -80,3 +74,15 @@
 <!ENTITY startingPoint.checkbox "Starting point:">
 <!ENTITY horizOffset.checkbox "Horiz. offset:">
 <!ENTITY vertOffset.checkbox "Vert. offset:">
+
+<!ENTITY columnsSectionHeader.label "Columns">
+<!ENTITY columnCount.label "Column count:">
+<!ENTITY oneColumn.label "One column">
+<!ENTITY twoColumns.label "Two columns">
+<!ENTITY threeColumns.label "Three columns">
+
+<!ENTITY columnWidth.label "Optimal column width:">
+<!ENTITY automaticColumnWidth.label "Automatic">
+
+<!ENTITY columnGap.label "Gap between columns:">
+<!ENTITY normalColumnGap.label "Default value">

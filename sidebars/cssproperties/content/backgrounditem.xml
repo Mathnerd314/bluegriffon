@@ -208,7 +208,22 @@
                 break;
               case "linear-gradient":
                 {
+                  deleteAllChildren(gDialog.colorStopsRichlistbox);
                   var e = this.getChild("backgrounditemButton");
+                  var gradient = e.style.backgroundImage;
+                  var parsedGradient = CssInspector.parseBackgroundImages(gradient);
+                  if (parsedGradient.length) {
+                    var parsedGradient = parsedGradient[0].value;
+                    if ("angle" in parsedGradient) {
+                      gDialog.linearGradientAngleCheckbox.checked = true;
+                      gDialog.linearGradientAngleRotator.value = parseFloat(parsedGradient.angle);
+                    }
+                  }
+                  else {
+                      gDialog.linearGradientAngleCheckbox.checked = false;
+                      gDialog.linearGradientAngleRotator.value = "0";
+                  }
+                  UpdateColorStopsRichlistbox();
                   gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX,
                                                                 e.boxObject.screenY,
                                                                 false);

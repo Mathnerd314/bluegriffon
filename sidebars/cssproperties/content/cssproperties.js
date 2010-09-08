@@ -161,9 +161,46 @@ function RestoreSelection()
 
 function ApplyStyles(aStyles)
 {
-  SaveSelection();
+  var className;
   var editor = EditorUtils.getCurrentEditor();
-  editor.beginTransaction();
+  switch (gDialog.cssPolicyMenulist.value) {
+    case "id":
+	    // if the element has no ID, ask for one...
+	    if (!gCurrentElement.id) {
+	      var result = {};
+	      if (!PromptUtils.prompt(window,
+	                              gDialog.csspropertiesBundle.getString("EnterAnId"),
+	                              gDialog.csspropertiesBundle.getString("EnterUniqueId"),
+	                              result))
+	        return;
+        editor.beginTransaction();
+	      editor.setAttribute(gCurrentElement, "id", result.value);
+	    }
+      else
+        editor.beginTransaction();
+      break;
+
+    case "class":
+      if (!gDialog.classPicker.value) {
+        PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
+                                   gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
+                                   window);
+        return;
+      }
+
+      editor.beginTransaction();
+      // make sure the element carries the user-selected class
+      if (!gCurrentElement.classList.contains(gDialog.classPicker.value))
+        gCurrentElement.classList.add(gDialog.classPicker.value); // XXX
+      className = gDialog.classPicker.value;
+      break;
+
+    default:
+      editor.beginTransaction();
+      break;
+  }
+
+  SaveSelection();
   for (var i = 0; i < aStyles.length; i++) {
     var s = aStyles[i];
     var property = s.property;
@@ -172,296 +209,26 @@ function ApplyStyles(aStyles)
     switch (gDialog.cssPolicyMenulist.value) {
 
       case "id":
-        {
-          // first, clean the style attribute for the style to apply
-          var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
-          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
-
-          // if the element has no ID, ask for one...
-          if (!gCurrentElement.id) {
-            var result = {};
-            if (!PromptUtils.prompt(window,
-                                    gDialog.csspropertiesBundle.getString("EnterAnId"),
-                                    gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-                                    result))
-              break;
-            editor.setAttribute(gCurrentElement, "id", result.value);
-          }
-
-          var ruleset = CssInspector.getCSSStyleRules(gCurrentElement, true);
-          var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
-          if (inspectedRule && inspectedRule.rule) {
-            // ok, that property is already applied through a CSS rule
-
-            // is that rule dependent on the ID selector for that ID?
-            // if yes, let's try to tweak it
-            var priority = inspectedRule.rule.style.getPropertyPriority(property);
-            var selector = inspectedRule.rule.selectorText;
-            var r = new RegExp( "#" + gCurrentElement.id + "$|#" + gCurrentElement.id + "[\.:,\\[]", "g");
-            if (selector.match(r)) {
-              // yes! can we edit the corresponding stylesheet or not?
-              var sheet = inspectedRule.rule.parentStyleSheet;
-              var topSheet = sheet;
-              while (topSheet.parentStyleSheet)
-                topSheet = topSheet.parentStyleSheet;
-              if (topSheet.ownerNode &&
-                  (!sheet.href || sheet.href.substr(0, 4) != "http")) {
-                // yes we can edit it...
-                if (sheet.href) { // external stylesheet
-                  var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
-                                                          property, value, priority);
-                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
-                }
-                else { // it's an embedded stylesheet
-                  if (value) {
-                    inspectedRule.rule.style.setProperty(property, value, priority);
-                  }
-                  else
-                    inspectedRule.rule.style.removeProperty(property);
-                  if (!inspectedRule.rule.style.length)
-                    sheet.deleteRule(inspectedRule.rule);
-                  CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-                }
-                break;
-              }
-            }
-            // we need to check if the rule
-            // has a specificity no greater than an ID's one
-
-            // we need to find the last locally editable stylesheet
-            // attached to the document
-            var sheet = FindLastEditableStyleSheet();
-            var spec = inspectedRule.specificity;
-            if (!spec.a &&
-                ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
-                 !spec.b)) { 
-              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                   ruleset, "#" + gCurrentElement.id);
-              if (existingRule) {
-                sheet = existingRule.parentStyleSheet;
-                existingRule.style.setProperty(property, value, priority);
-              }
-              else { 
-	              // cool, we can just create a new rule with an ID selector
-	              // but don't forget to set the priority...
-	              sheet.insertRule("#" + gCurrentElement.id + "{" +
-	                                 property + ": " + value + " " +
-	                                 (priority ? "!important" : "") + "}",
-	                               sheet.cssRules.length);
-              }
-              if (sheet.ownerNode.href)
-                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-              else
-                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-              break;
-            }
-            // at this point, we have a greater specificity; hum, then what's
-            // the priority of the declaration?
-            if (!priority) {
-              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                   ruleset, "#" + gCurrentElement.id);
-              if (existingRule) {
-                sheet = existingRule.parentStyleSheet;
-                existingRule.style.setProperty(property, value, "important");
-              }
-              else {
-	              // no priority, so cool we can create a !important declaration
-	              // for the ID
-	              sheet.insertRule("#" + gCurrentElement.id + "{" +
-	                                 property + ": " + value + " !important }",
-	                               sheet.cssRules.length);
-              }
-              if (sheet.ownerNode.href)
-                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-              else
-                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-              break;
-               break;
-            }
-            // argl, it's already a !important declaration :-( our only
-            // choice is a !important style attribute... We can't just clean the
-            // style on inspectedRule because some other rules could also apply
-            // is that one goes away.
-            var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "important");
-            EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
-          }
-          else {
-            // oh, the property is not applied yet, let's just create a rule
-            // with the ID selector for that property
-            var sheet;
-            var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                 ruleset, "#" + gCurrentElement.id);
-            if (existingRule) {
-              sheet = existingRule.parentStyleSheet;
-              existingRule.style.setProperty(property, value, "");
-            }
-            else {
-	            sheet = FindLastEditableStyleSheet();
-	            sheet.insertRule("#" + gCurrentElement.id + "{" +
-	                               property + ": " + value + " " + "}",
-	                             sheet.cssRules.length);
-            }
-            if (sheet.ownerNode.href)
-              CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-            else
-              CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-            break;
-          }
-        }
+          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
+                                         "#", "#", gCurrentElement.id);
         break;
 
       case "inline":
-        {
+        try {
           var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "");
           EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
         }
+        catch(e) {}
         break;
 
       case "class":
-        {
-          if (!gDialog.classPicker.value) {
-            PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
-                                       gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
-                                       window);
-            break;
-          }
-
-          // first, clean the style attribute for the style to apply
-          var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
-          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
-
-          // make sure the element carries the user-selected class
-          if (!gCurrentElement.classList.contains(gDialog.classPicker.value))
-            gCurrentElement.classList.add(gDialog.classPicker.value);
-          var className = gDialog.classPicker.value;
-
-          var ruleset = CssInspector.getCSSStyleRules(gCurrentElement, true);
-          var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
-          if (inspectedRule && inspectedRule.rule) {
-            // ok, that property is already applied through a CSS rule
-
-            // is that rule dependent on a class selector for that class?
-            // if yes, let's try to tweak it
-            var priority = inspectedRule.rule.style.getPropertyPriority(property);
-            var selector = inspectedRule.rule.selectorText;
-            var r = new RegExp( "\\." + className + "$|\\." + className + "[\.:,\\[]", "g");
-            if (selector.match(r)) {
-              // yes! can we edit the corresponding stylesheet or not?
-              var sheet = inspectedRule.rule.parentStyleSheet;
-              var topSheet = sheet;
-              while (topSheet.parentStyleSheet)
-                topSheet = topSheet.parentStyleSheet;
-              if (topSheet.ownerNode &&
-                  (!sheet.href || sheet.href.substr(0, 4) != "http")) {
-                // yes we can edit it...
-                if (sheet.href) { // external stylesheet
-                  var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
-                                                          property, value, priority);
-                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
-                }
-                else { // it's an embedded stylesheet
-                  if (value) {
-                    inspectedRule.rule.style.setProperty(property, value, priority);
-                  }
-                  else
-                    inspectedRule.rule.style.removeProperty(property);
-                  if (!inspectedRule.rule.style.length)
-                    sheet.deleteRule(inspectedRule.rule);
-                  CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-                }
-                break;
-              }
-            }
-            // we need to check if the rule
-            // has a specificity no greater than an class selector's one
-
-            // we need to find the last locally editable stylesheet
-            // attached to the document
-            var sheet = FindLastEditableStyleSheet();
-            var spec = inspectedRule.specificity;
-            if (!spec.a && ! spec.b &&
-                ((spec.c == 1 && spec.d == 0) ||
-                 !spec.c)) { 
-              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                   ruleset, "." + className);
-              if (existingRule) {
-                sheet = existingRule.parentStyleSheet;
-                existingRule.style.setProperty(property, value, priority);
-              }
-              else {
-	              // cool, we can just create a new rule with a class selector
-	              // but don't forget to set the priority...
-	              sheet.insertRule("." + className + "{" +
-	                                 property + ": " + value + " " +
-	                                 (priority ? "!important" : "") + "}",
-	                               sheet.cssRules.length);
-              }
-              if (sheet.ownerNode.href)
-                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-              else
-                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-              break;
-            }
-            // at this point, we have a greater specificity; hum, then what's
-            // the priority of the declaration?
-            if (!priority) {
-              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                   ruleset, "." + className);
-              if (existingRule) {
-                sheet = existingRule.parentStyleSheet;
-                existingRule.style.setProperty(property, value, "important");
-              }
-              else {
-	              // no priority, so cool we can create a !important declaration
-	              // for the class
-	              sheet.insertRule("." + className + "{" +
-	                                 property + ": " + value + " !important }",
-	                               sheet.cssRules.length);
-              }
-              if (sheet.ownerNode.href)
-                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-              else
-                CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-              break;
-               break;
-            }
-            // argl, it's already a !important declaration :-( our only
-            // choice is a !important style attribute... We can't just clean the
-            // style on inspectedRule because some other rules could also apply
-            // is that one goes away.
-            var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "important");
-            EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
-          }
-          else {
-            // oh, the property is not applied yet, let's just create a rule
-            // with the class selector for that property
-            var sheet;
-            var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                                 ruleset, "." + className);
-            if (existingRule) {
-              sheet = existingRule.parentStyleSheet;
-              existingRule.style.setProperty(property, value, "");
-            }
-            else {
-	            sheet = FindLastEditableStyleSheet();
-	            sheet.insertRule("." + className + "{" +
-	                               property + ": " + value + " " + "}",
-	                             sheet.cssRules.length);
-            }
-            if (sheet.ownerNode.href)
-              CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-            else
-              CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-            break;
-          }
-        }
+          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
+                                         ".", "\\.", className);
         break;
       default:
         break;
     }
     editor.endTransaction();
-    // reselect the element
-    //EditorUtils.getCurrentEditor().selectElement(gCurrentElement);
     RestoreSelection();
   }
 }
@@ -684,6 +451,132 @@ function InitLocalFontFaceMenu(menuPopup)
       itemNode.setAttribute("style", "font-family: " + BlueGriffonVars.localFonts[i]);
       menuPopup.appendChild(itemNode);
     }
+  }
+}
+
+function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
+                                        aDelimitor, aRegExpDelimitor, aIdent)
+{
+  // first, clean the style attribute for the style to apply
+  var txn = new diStyleAttrChangeTxn(aElement, property, "", "");
+  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+
+  var ruleset = CssInspector.getCSSStyleRules(aElement, true);
+  var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
+  if (inspectedRule && inspectedRule.rule) {
+    // ok, that property is already applied through a CSS rule
+
+    // is that rule dependent on the ID selector for that ID?
+    // if yes, let's try to tweak it
+    var priority = inspectedRule.rule.style.getPropertyPriority(property);
+    var selector = inspectedRule.rule.selectorText;
+    var r = new RegExp( aRegExpDelimitor + aIdent + "$|" + aRegExpDelimitor + aIdent + "[\.:,\\[]", "g");
+    if (selector.match(r)) {
+      // yes! can we edit the corresponding stylesheet or not?
+      var sheet = inspectedRule.rule.parentStyleSheet;
+      var topSheet = sheet;
+      while (topSheet.parentStyleSheet)
+        topSheet = topSheet.parentStyleSheet;
+      if (topSheet.ownerNode &&
+          (!sheet.href || sheet.href.substr(0, 4) != "http")) {
+        // yes we can edit it...
+        if (sheet.href) { // external stylesheet
+          var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
+                                                  property, value, priority);
+          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+        }
+        else { // it's an embedded stylesheet
+          if (value) {
+            inspectedRule.rule.style.setProperty(property, value, priority);
+          }
+          else
+            inspectedRule.rule.style.removeProperty(property);
+          if (!inspectedRule.rule.style.length)
+            sheet.deleteRule(inspectedRule.rule);
+          CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+        }
+        return;
+      }
+    }
+    // we need to check if the rule
+    // has a specificity no greater than an ID's one
+
+    // we need to find the last locally editable stylesheet
+    // attached to the document
+    var sheet = FindLastEditableStyleSheet();
+    var spec = inspectedRule.specificity;
+    if (!spec.a &&
+        ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
+         !spec.b)) { 
+      var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                           ruleset, aDelimitor + aIdent);
+      if (existingRule) {
+        sheet = existingRule.parentStyleSheet;
+        existingRule.style.setProperty(property, value, priority);
+      }
+      else { 
+        // cool, we can just create a new rule with an ID selector
+        // but don't forget to set the priority...
+        sheet.insertRule(aDelimitor + aIdent + "{" +
+                           property + ": " + value + " " +
+                           (priority ? "!important" : "") + "}",
+                         sheet.cssRules.length);
+      }
+      if (sheet.ownerNode.href)
+        CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+      else
+        CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+      return;
+    }
+    // at this point, we have a greater specificity; hum, then what's
+    // the priority of the declaration?
+    if (!priority) {
+      var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                           ruleset, aDelimitor + aIdent);
+      if (existingRule) {
+        sheet = existingRule.parentStyleSheet;
+        existingRule.style.setProperty(property, value, "important");
+      }
+      else {
+        // no priority, so cool we can create a !important declaration
+        // for the ID
+        sheet.insertRule(aDelimitor + aIdent + "{" +
+                           property + ": " + value + " !important }",
+                         sheet.cssRules.length);
+      }
+      if (sheet.ownerNode.href)
+        CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+      else
+        CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+      return;
+    }
+    // argl, it's already a !important declaration :-( our only
+    // choice is a !important style attribute... We can't just clean the
+    // style on inspectedRule because some other rules could also apply
+    // is that one goes away.
+    var txn = new diStyleAttrChangeTxn(aElement, property, value, "important");
+    EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+  }
+  else {
+    // oh, the property is not applied yet, let's just create a rule
+    // with the ID selector for that property
+    var sheet;
+    var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                         ruleset, aDelimitor + aIdent);
+    if (existingRule) {
+      sheet = existingRule.parentStyleSheet;
+      existingRule.style.setProperty(property, value, "");
+    }
+    else {
+      sheet = FindLastEditableStyleSheet();
+      sheet.insertRule(aDelimitor + aIdent + "{" +
+                         property + ": " + value + " " + "}",
+                       sheet.cssRules.length);
+    }
+    if (sheet.ownerNode.href)
+      CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+    else
+      CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
   }
 }
 
