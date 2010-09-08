@@ -42,7 +42,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += 
+DIRS += activeview fullscreen
 
 #DIRS += activeview tableLayout fullscreen scripteditor jquery wordcount
 

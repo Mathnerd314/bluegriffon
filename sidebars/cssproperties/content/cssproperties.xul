@@ -174,8 +174,8 @@
 		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
 		                  </menupopup>
 		                </menulist>
-                    <spinbuttons onup="IncreaseLength(gDialog.linearGradientHorizOffset, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
-                                 ondown="DecreaseLength(gDialog.linearGradientHorizOffset, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
 		                <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
                               oncommand="RepaintLinearGradient()"/>
 		                <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
