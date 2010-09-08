@@ -235,12 +235,20 @@ function ApplyStyles(aStyles)
             if (!spec.a &&
                 ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
                  !spec.b)) { 
-              // cool, we can just create a new rule with an ID selector
-              // but don't forget to set the priority...
-              sheet.insertRule("#" + gCurrentElement.id + "{" +
-                                 property + ": " + value + " " +
-                                 (priority ? "!important" : "") + "}",
-                               sheet.cssRules.length);
+              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                   ruleset, "#" + gCurrentElement.id);
+              if (existingRule) {
+                sheet = existingRule.parentStyleSheet;
+                existingRule.style.setProperty(property, value, priority);
+              }
+              else { 
+	              // cool, we can just create a new rule with an ID selector
+	              // but don't forget to set the priority...
+	              sheet.insertRule("#" + gCurrentElement.id + "{" +
+	                                 property + ": " + value + " " +
+	                                 (priority ? "!important" : "") + "}",
+	                               sheet.cssRules.length);
+              }
               if (sheet.ownerNode.href)
                 CssInspector.serializeFileStyleSheet(sheet, sheet.href);
               else
@@ -250,11 +258,19 @@ function ApplyStyles(aStyles)
             // at this point, we have a greater specificity; hum, then what's
             // the priority of the declaration?
             if (!priority) {
-              // no priority, so cool we can create a !important declaration
-              // for the ID
-              sheet.insertRule("#" + gCurrentElement.id + "{" +
-                                 property + ": " + value + " !important }",
-                               sheet.cssRules.length);
+              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                   ruleset, "#" + gCurrentElement.id);
+              if (existingRule) {
+                sheet = existingRule.parentStyleSheet;
+                existingRule.style.setProperty(property, value, "important");
+              }
+              else {
+	              // no priority, so cool we can create a !important declaration
+	              // for the ID
+	              sheet.insertRule("#" + gCurrentElement.id + "{" +
+	                                 property + ": " + value + " !important }",
+	                               sheet.cssRules.length);
+              }
               if (sheet.ownerNode.href)
                 CssInspector.serializeFileStyleSheet(sheet, sheet.href);
               else
@@ -272,10 +288,19 @@ function ApplyStyles(aStyles)
           else {
             // oh, the property is not applied yet, let's just create a rule
             // with the ID selector for that property
-            var sheet = FindLastEditableStyleSheet();
-            sheet.insertRule("#" + gCurrentElement.id + "{" +
-                               property + ": " + value + " " + "}",
-                             sheet.cssRules.length);
+            var sheet;
+            var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                 ruleset, "#" + gCurrentElement.id);
+            if (existingRule) {
+              sheet = existingRule.parentStyleSheet;
+              existingRule.style.setProperty(property, value, "");
+            }
+            else {
+	            sheet = FindLastEditableStyleSheet();
+	            sheet.insertRule("#" + gCurrentElement.id + "{" +
+	                               property + ": " + value + " " + "}",
+	                             sheet.cssRules.length);
+            }
             if (sheet.ownerNode.href)
               CssInspector.serializeFileStyleSheet(sheet, sheet.href);
             else
@@ -357,12 +382,20 @@ function ApplyStyles(aStyles)
             if (!spec.a && ! spec.b &&
                 ((spec.c == 1 && spec.d == 0) ||
                  !spec.c)) { 
-              // cool, we can just create a new rule with a class selector
-              // but don't forget to set the priority...
-              sheet.insertRule("." + className + "{" +
-                                 property + ": " + value + " " +
-                                 (priority ? "!important" : "") + "}",
-                               sheet.cssRules.length);
+              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                   ruleset, "." + className);
+              if (existingRule) {
+                sheet = existingRule.parentStyleSheet;
+                existingRule.style.setProperty(property, value, priority);
+              }
+              else {
+	              // cool, we can just create a new rule with a class selector
+	              // but don't forget to set the priority...
+	              sheet.insertRule("." + className + "{" +
+	                                 property + ": " + value + " " +
+	                                 (priority ? "!important" : "") + "}",
+	                               sheet.cssRules.length);
+              }
               if (sheet.ownerNode.href)
                 CssInspector.serializeFileStyleSheet(sheet, sheet.href);
               else
@@ -372,11 +405,19 @@ function ApplyStyles(aStyles)
             // at this point, we have a greater specificity; hum, then what's
             // the priority of the declaration?
             if (!priority) {
-              // no priority, so cool we can create a !important declaration
-              // for the class
-              sheet.insertRule("." + className + "{" +
-                                 property + ": " + value + " !important }",
-                               sheet.cssRules.length);
+              var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                   ruleset, "." + className);
+              if (existingRule) {
+                sheet = existingRule.parentStyleSheet;
+                existingRule.style.setProperty(property, value, "important");
+              }
+              else {
+	              // no priority, so cool we can create a !important declaration
+	              // for the class
+	              sheet.insertRule("." + className + "{" +
+	                                 property + ": " + value + " !important }",
+	                               sheet.cssRules.length);
+              }
               if (sheet.ownerNode.href)
                 CssInspector.serializeFileStyleSheet(sheet, sheet.href);
               else
@@ -394,10 +435,19 @@ function ApplyStyles(aStyles)
           else {
             // oh, the property is not applied yet, let's just create a rule
             // with the class selector for that property
-            var sheet = FindLastEditableStyleSheet();
-            sheet.insertRule("." + className + "{" +
-                               property + ": " + value + " " + "}",
-                             sheet.cssRules.length);
+            var sheet;
+            var existingRule = CssInspector.findLastRuleInRulesetForSelector(
+                                 ruleset, "." + className);
+            if (existingRule) {
+              sheet = existingRule.parentStyleSheet;
+              existingRule.style.setProperty(property, value, "");
+            }
+            else {
+	            sheet = FindLastEditableStyleSheet();
+	            sheet.insertRule("." + className + "{" +
+	                               property + ": " + value + " " + "}",
+	                             sheet.cssRules.length);
+            }
             if (sheet.ownerNode.href)
               CssInspector.serializeFileStyleSheet(sheet, sheet.href);
             else
@@ -582,6 +632,7 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
     value = aElt.selectedItem.value;
   else
     value = aElt.value;
+  aElt.value = value;
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );

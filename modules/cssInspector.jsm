@@ -132,6 +132,13 @@ var CssInspector = {
     return ruleset;
   },
 
+  findLastRuleInRulesetForSelector: function(aRuleset, aSelectorText) {
+    for (var i = aRuleset.length - 1 ; i >= 0; i--)
+      if (aRuleset[i].rule.selectorText == aSelectorText)
+        return aRuleset[i].rule;
+    return null;
+  },
+
   findRuleForProperty: function(aRuleSet, aProperty)
   {
     function filterByProperty(element, index, array) {
