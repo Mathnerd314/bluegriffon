@@ -66,7 +66,7 @@
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
 
   <panelset>
-    <panel level="floating" id="backgroundImagePanel">
+    <panel level="floating" id="backgroundImagePanel" noautohide="true">
       <groupbox style="width: 400px">
 		    <caption label="&imageURL.caption;"/>
 		    <hbox align="center">
@@ -102,7 +102,7 @@
           <vbox id="linearGradientPreview"/>
           <spacer flex="1"/>
         </groupbox>
-        <tabbox>
+        <tabbox id="linearGradientPropertiesTabbox">
           <tabs>
             <tab label="&colorStops.tab;"/>
             <tab label="&angle.tab;"/>
@@ -123,10 +123,10 @@
                 <toolbarbutton id="downColorStopButton" class="listboxBgPlusButton" disabled="true"/>
               </hbox>
             </vbox>
-            <hbox align="center">
+            <hbox align="center" flex="1">
 	            <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
 	                      oncommand="RepaintLinearGradient()"/>
-              <rotator id="linearGradientAngleRotator" onchange="RepaintLinearGradient()"/>
+              <rotator id="linearGradientAngleRotator" onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintLinearGradient()"/>
             </hbox>
 		        <grid>
 		          <columns><column/><column/></columns>
@@ -196,6 +196,7 @@
       </hbox>
       <hbox align="center">
         <spacer flex="1"/>
+        <button label="&cancelButton.label;" oncommand="this.parentNode.parentNode.hidePopup();"/>
         <button label="&okButton.label;" id="linearGradientOkButton" oncommand="SetLinearGradient();"/>
       </hbox>
     </panel>

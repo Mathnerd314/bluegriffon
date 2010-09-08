@@ -79,7 +79,7 @@ function BackgroundImageSelected()
 {
   gDialog.backgroundImagePanel.hidePopup();
   var item = gDialog.backgroundsRichlistbox.selectedItem;
-  item.applyBackgroundImage(gDialog.imageURLTextbox.inputField.value);
+  item.applyBackgroundImage(gDialog.imageURLTextbox.value);
 }
 
 function ReapplyBackgrounds()
@@ -123,9 +123,11 @@ function RepaintLinearGradient()
 function SetLinearGradient()
 {
   var gradient = gDialog.linearGradientPreview.style.backgroundImage;
-  gDialog.backgroundsRichlistbox.selectedItem.getChild("backgrounditemButton").style.backgroundImage =
-    gradient;
+  var item = gDialog.backgroundsRichlistbox.selectedItem;
+  item.getChild("backgrounditemButton").style.backgroundImage = gradient;
+  item.parsedValue = CssInspector.parseBackgroundImages(gradient)[0].value;
   gDialog.linearGradientPanel.hidePopup();
+  ReapplyBackgrounds();
 }
 
 function UpdateColorStopsRichlistbox()
@@ -151,6 +153,7 @@ function AddColorStopToLinearGradient()
   e.className = "colorstopitem";
   gDialog.colorStopsRichlistbox.appendChild(e);
   UpdateColorStopsRichlistbox();
+  e.openEditor();
 }
 
 function DeleteColorStopFromLinearGradient()

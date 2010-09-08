@@ -193,40 +193,99 @@
                   gDialog.backgroundImagePanel.openPopupAtScreen(e.boxObject.screenX,
                                                                  e.boxObject.screenY,
                                                                  false);
-                  if (this.hasAttribute("image")) {
-                    var url = this.getAttribute("image");
-                    gDialog.imageURLTextbox.inputField.value = url;
-                    gDialog.previewBackgroundImage.style.backgroundImage =
-                      'url("' + url + '")';
-                  }
-                  else {
-                    if (gDialog.imageURLTextbox.inputField)
-                      gDialog.imageURLTextbox.inputField.value = "";
-                    gDialog.previewBackgroundImage.style.backgroundImage = "none";
-                  }
+                  var _self = this;
+                  // WARNING, the following is a workaround because it takes a short
+                  // while before XBLs are instantiated when you open a floating panel...
+                  setTimeout(function() {
+	                  if (_self.hasAttribute("image")) {
+	                    var url = _self.getAttribute("image");
+	                    gDialog.imageURLTextbox.value = url;
+	                    gDialog.previewBackgroundImage.style.backgroundImage =
+	                      'url("' + url + '")';
+	                  }
+	                  else {
+                      gDialog.imageURLTextbox.value = "";
+	                    gDialog.previewBackgroundImage.style.backgroundImage = "none";
+	                  }
+                  }, 1);
                 }
                 break;
               case "linear-gradient":
                 {
                   deleteAllChildren(gDialog.colorStopsRichlistbox);
                   var e = this.getChild("backgrounditemButton");
-                  var gradient = e.style.backgroundImage;
-                  var parsedGradient = CssInspector.parseBackgroundImages(gradient);
-                  if (parsedGradient.length) {
-                    var parsedGradient = parsedGradient[0].value;
-                    if ("angle" in parsedGradient) {
-                      gDialog.linearGradientAngleCheckbox.checked = true;
-                      gDialog.linearGradientAngleRotator.value = parseFloat(parsedGradient.angle);
-                    }
-                  }
-                  else {
-                      gDialog.linearGradientAngleCheckbox.checked = false;
-                      gDialog.linearGradientAngleRotator.value = "0";
-                  }
-                  UpdateColorStopsRichlistbox();
+                  // reset
                   gDialog.linearGradientPanel.openPopupAtScreen(e.boxObject.screenX,
                                                                 e.boxObject.screenY,
                                                                 false);
+                  var _self = this;
+                  // WARNING, the following is a workaround because it takes a short
+                  // while before XBLs are instantiated when you open a floating panel...
+                  setTimeout(function() {
+                    gDialog.linearGradientPropertiesTabbox.selectedIndex = 0;
+                    gDialog.linearGradientAngleRotator.value = "0";
+	                  gDialog.linearGradientAngleCheckbox.checked = false;
+	                  gDialog.linearGradientStartingPointCheckbox.checked = false;
+	                  gDialog.linearGradientStartingPointMenulist.value = "";
+	                  gDialog.linearGradientPreview.style.backgroundImage = "none";
+                    gDialog.linearGradientStartingPointCheckbox.checked = false;
+                    gDialog.linearGradientStartingPointMenulist.value = "";
+                    gDialog.linearGradientHorizOffsetCheckbox.checked = false;
+                    gDialog.linearGradientHorizOffset.value = "";
+                    gDialog.linearGradientVertOffsetCheckbox.checked = false;
+                    gDialog.linearGradientVertOffset.value = "";
+	
+	                  if (_self.parsedValue) {
+	                    var gradient = _self.parsedValue;
+	                    if ("angle" in gradient) {
+	                      gDialog.linearGradientAngleCheckbox.checked = true;
+	                      gDialog.linearGradientAngleRotator.value = parseFloat(gradient.angle);
+	                    }
+	                    if ("position" in gradient) {
+                        var positionArray = gradient.position.split(" ");
+                        var position = "", hOffset = "", vOffset = "";
+                        for (var i = 0; i < positionArray.length; i++) {
+                          switch (positionArray[i]) {
+                            case "left":
+                            case "right":
+                            case "top":
+                            case "bottom":
+                            case "center":
+                              position += positionArray[i] + " ";
+                              break;
+                            default:
+                              if (hOffset)
+                                vOffset = positionArray[i];
+                              else
+                                hOffset = positionArray[i];
+                          }
+                        }
+                        if (position) {
+		                      gDialog.linearGradientStartingPointCheckbox.checked = true;
+		                      gDialog.linearGradientStartingPointMenulist.value = position.trim();
+                        }
+                        if (hOffset) {
+                          gDialog.linearGradientHorizOffsetCheckbox.checked = true;
+                          gDialog.linearGradientHorizOffset.value = hOffset;
+                        }
+                        if (vOffset) {
+                          gDialog.linearGradientVertOffsetCheckbox.checked = true;
+                          gDialog.linearGradientVertOffset.value = vOffset;
+                        }
+	                    }
+		                  gDialog.linearGradientPreview.style.backgroundImage =
+		                    _self.getChild("backgrounditemButton").style.backgroundImage;
+		                  for (var i = 0; i < gradient.stops.length; i++) {
+		                    var cs = gradient.stops[i];
+		                    var item = document.createElement("richlistitem");
+		                    item.className = "colorstopitem";
+		                    gDialog.colorStopsRichlistbox.appendChild(item);
+		                    item.color = cs.color;
+		                    item.offset = cs.position;
+		                  }
+	                  }
+                    UpdateColorStopsRichlistbox();
+                  }, 1);
                 }
                 break;
               default: break;
