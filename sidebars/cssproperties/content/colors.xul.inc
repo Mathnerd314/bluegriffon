@@ -4,7 +4,7 @@
         <label value="&colorsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section">
+      <vbox class="section" id="colorsSection">
         <hbox align="center" style="margin-bottom:1em">
           <label value="&color.label;"/>
           <hbox>

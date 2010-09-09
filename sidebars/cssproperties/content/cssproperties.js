@@ -105,13 +105,18 @@ function onCssPolicyChange(aElt)
 function ToggleSection(aImage)
 {
   var header = aImage.parentNode;
+  var section = header.nextElementSibling;
   if (header.hasAttribute("open")) {
+    section.style.height = "0px";
     header.removeAttribute("open");
   }
   else {
+    section.style.height = "";
     header.setAttribute("open", "true");
+    section.style.height = document.defaultView.getComputedStyle(section, "").getPropertyValue("height");
   }
   document.persist(header.id, "open");
+  document.persist(section.id, "style");
 }
 
 var gIniters = [];
@@ -321,6 +326,21 @@ function PopulateLengths(aElt, aUnitsString)
   });
 }
 
+function ApplyPropertyFromMenulist(aElt)
+{
+  var value;
+  if (aElt.selectedItem)
+    value = aElt.selectedItem.value;
+  else
+    value = aElt.value;
+
+  ApplyStyles([
+                {
+                  property: aElt.getAttribute("property"),
+                  value: value
+                }
+              ]);
+}
 function IncreaseLength(aElt, aUnitsString)
 {
   var value;

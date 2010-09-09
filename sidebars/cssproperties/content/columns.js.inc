@@ -15,6 +15,8 @@ function ColumnsSectionIniter(aElt, aRuleset)
 
   var crc = CssInspector.getCascadedValue(aRuleset, "-moz-column-rule-color");
   gDialog.columnRuleColorpicker.color = crc;
+  var crs = CssInspector.getCascadedValue(aRuleset, "-moz-column-rule-style");
+  gDialog.columnRuleStyleMenulist.value = crs;
 }
 
 function SetColumnCount(aN)

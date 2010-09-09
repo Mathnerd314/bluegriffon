@@ -4,7 +4,7 @@
         <label value="&generalSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" >
+      <vbox class="section" id="generalSection">
 
         <grid>
           <columns><column/><column/></columns>

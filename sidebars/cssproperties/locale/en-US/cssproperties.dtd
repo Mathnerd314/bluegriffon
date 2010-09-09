@@ -87,5 +87,17 @@
 <!ENTITY columnGap.label "Gap between columns:">
 <!ENTITY normalColumnGap.label "Default value">
 
-<!ENTITY columnRule.label "Rule:">
-<!ENTITY columnRuleColor.label "Column rule color">
+<!ENTITY columnRuleColor.label "Rule color:">
+<!ENTITY columnRuleColor.title "Column rule color">
+<!ENTITY noneColumnRuleStyle.label "No rule">
+<!ENTITY hiddenColumnRuleStyle.label "Hidden">
+<!ENTITY solidColumnRuleStyle.label "Solid">
+<!ENTITY doubleColumnRuleStyle.label "Double">
+<!ENTITY dottedColumnRuleStyle.label "Dotted">
+<!ENTITY dashedColumnRuleStyle.label "Dashed">
+<!ENTITY grooveColumnRuleStyle.label "Groove">
+<!ENTITY ridgeColumnRuleStyle.label "Ridge">
+<!ENTITY insetColumnRuleStyle.label "Inset">
+<!ENTITY outsetColumnRuleStyle.label "Outset">
+
+<!ENTITY columnRuleStyle.label "Column rule style:">

@@ -4,7 +4,7 @@
         <label value="&columnsSectionHeader.label;"/>
       </hbox>
 
-      <grid class="section">
+      <grid class="section" id="columnSection">
         <columns><column/><column/></columns>
         <rows>
           <row align="center">
@@ -64,16 +64,37 @@
           </row>
 
           <row align="center">
-            <label value="&columnRule.label;"/>
+            <label value="&columnRuleColor.label;"/>
             <hbox align="center">
 	            <ecolorpicker id="columnRuleColorpicker"
 	                          color=""
 	                          colorObjectId="ColumnRuleColor"
-	                          windowTitle="&columnRuleColor.label;"
+	                          windowTitle="&columnRuleColor.title;"
 	                          showTransparency="false"
 	                          property="-moz-column-rule-color"
 	                          oncommand="SetColor(this)"/>
+            </hbox>
+          </row>
 
+          <row align="center">
+            <label value="&columnRuleStyle.label;"/>
+            <hbox align="center">
+	            <menulist id="columnRuleStyleMenulist" property="-moz-column-rule-style"
+	                      oncommand="ApplyPropertyFromMenulist(this)">
+	              <menupopup>
+	                <menuitem label="&noneColumnRuleStyle.label;" value="none"/>
+	                <menuitem label="&hiddenColumnRuleStyle.label;" value="hidden"/>
+	                <menuseparator/>
+	                <menuitem label="&solidColumnRuleStyle.label;" value="solid"/>
+	                <menuitem label="&doubleColumnRuleStyle.label;" value="double"/>
+	                <menuitem label="&dottedColumnRuleStyle.label;" value="dotted"/>
+	                <menuitem label="&dashedColumnRuleStyle.label;" value="dashed"/>
+	                <menuitem label="&grooveColumnRuleStyle.label;" value="groove"/>
+	                <menuitem label="&ridgeColumnRuleStyle.label;" value="ridge"/>
+	                <menuitem label="&insetColumnRuleStyle.label;" value="inset"/>
+	                <menuitem label="&outsetColumnRuleStyle.label;" value="outset"/>
+	              </menupopup>
+	            </menulist>
             </hbox>
           </row>
         </rows>
