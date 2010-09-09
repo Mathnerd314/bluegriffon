@@ -420,6 +420,8 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   else
     value = aElt.value;
   aElt.value = value;
+  if (String(parseFloat(value)) == value)
+    value += "px";
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );

@@ -97,5 +97,20 @@
 	            </menulist>
             </hbox>
           </row>
+
+          <row align="center">
+            <label value="&columnRuleWidth.label;"/>
+            <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+              <menupopup id="columnRuleWidthMenupopup"
+                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                <menuseparator/>
+                <menuitem label="&noneColumnRuleWidth.label;" value="none"/>
+              </menupopup>
+            </menulist>
+            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+          </row>
         </rows>
       </grid>

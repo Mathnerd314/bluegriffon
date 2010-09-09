@@ -47,8 +47,9 @@ hbox.csspropertiesHeader[open="true"] > image {
 }
 
 .section {
-  -moz-transition: height 0.5s;
+  -moz-transition: height 0.5s, opacity 0.5s;
   height: 0px;
+  opacity: 0;
   overflow: hidden;
   padding: 1em;
   background-color: transparent;
@@ -57,6 +58,7 @@ hbox.csspropertiesHeader[open="true"] > image {
 hbox.csspropertiesHeader[open="true"] + .section {
   height: auto;
   overflow: visible;
+  opacity: 1;
 }
 
 menulist:not(#cssPolicyMenulist) {
