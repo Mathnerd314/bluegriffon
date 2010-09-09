@@ -12,6 +12,9 @@ function ColumnsSectionIniter(aElt, aRuleset)
 
   var cg = CssInspector.getCascadedValue(aRuleset, "-moz-column-gap");
   gDialog.columnGapMenulist.value = cg;
+
+  var crc = CssInspector.getCascadedValue(aRuleset, "-moz-column-rule-color");
+  gDialog.columnRuleColorpicker.color = crc;
 }
 
 function SetColumnCount(aN)

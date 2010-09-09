@@ -580,6 +580,17 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   }
 }
 
+function SetColor(aElt)
+{
+  var color = aElt.color;
+  ApplyStyles([
+                {
+                  property: aElt.getAttribute("property"),
+                  value: color
+                }
+              ]);
+}
+
 #include general.js.inc
 #include colors.js.inc
 #include columns.js.inc

@@ -62,5 +62,19 @@
             </hbox>
 
           </row>
+
+          <row align="center">
+            <label value="&columnRule.label;"/>
+            <hbox align="center">
+	            <ecolorpicker id="columnRuleColorpicker"
+	                          color=""
+	                          colorObjectId="ColumnRuleColor"
+	                          windowTitle="&columnRuleColor.label;"
+	                          showTransparency="false"
+	                          property="-moz-column-rule-color"
+	                          oncommand="SetColor(this)"/>
+
+            </hbox>
+          </row>
         </rows>
       </grid>

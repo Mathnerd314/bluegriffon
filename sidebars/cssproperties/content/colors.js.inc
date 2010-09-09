@@ -58,17 +58,6 @@ function DeleteBackground()
   ReapplyBackgrounds();
 }
 
-function SetColor(aElt)
-{
-  var color = aElt.color;
-  ApplyStyles([
-                {
-                  property: aElt.getAttribute("property"),
-                  value: color
-                }
-              ]);
-}
-
 function LoadImage()
 {
   gDialog.previewBackgroundImage.style.backgroundImage =

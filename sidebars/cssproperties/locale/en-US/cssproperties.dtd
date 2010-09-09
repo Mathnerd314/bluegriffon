@@ -86,3 +86,6 @@
 
 <!ENTITY columnGap.label "Gap between columns:">
 <!ENTITY normalColumnGap.label "Default value">
+
+<!ENTITY columnRule.label "Rule:">
+<!ENTITY columnRuleColor.label "Column rule color">
