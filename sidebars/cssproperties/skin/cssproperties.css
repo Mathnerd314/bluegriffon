@@ -61,6 +61,10 @@ hbox.csspropertiesHeader[open="true"] + .section {
   opacity: 1;
 }
 
+.section:last-child {
+  border-bottom: thin solid gray;
+}
+
 menulist:not(#cssPolicyMenulist) {
   width: 10em;
 }
@@ -77,15 +81,11 @@ toolbarbutton.multibutton[checked] {
 toolbarbutton.multibutton {
   margin: 4px 0px;
 	padding: 1px 1px;
-	-moz-border-radius-topleft: 5px; 
-	-moz-border-radius-bottomleft: 5px;
-	-moz-box-shadow: 
-		inset rgba(128, 128, 128, 1) 0 2px 8px, 
-		inset rgba(255, 255, 255, 1) 0 1px 1px,
-		inset rgba(255, 255, 255, 0.2) 0 -16px 8px,
-		rgba(255, 255, 255, 0.1) 0 1px;
-	background-color: #ccc;
+  background-image: -moz-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240), rgb(224, 224, 224));
   -moz-appearance: none;
+  border: thin silver solid;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
 }
 toolbarbutton.multibutton + toolbarbutton.multibutton {
   -moz-border-radius-topleft: 0px;
@@ -223,3 +223,23 @@ rotator {
 ecolorpicker {
   margin-right: 1em;
 }
+
+#geometry-margin-box {
+}
+
+#geometry-padding-box {
+  background-color: #d0d0d0;
+  border: thin solid gray;
+  margin: 1em;
+}
+
+#geometrySection menulist {
+  max-width: 5em;
+}
+
+#geometry-content-box {
+  height: 4em;
+  background-color: #d8d8d8;
+  margin: 1em;
+}
+

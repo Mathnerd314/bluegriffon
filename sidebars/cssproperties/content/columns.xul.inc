@@ -101,8 +101,8 @@
           <row align="center">
             <label value="&columnRuleWidth.label;"/>
             <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
               <menupopup id="columnRuleWidthMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
                 <menuseparator/>

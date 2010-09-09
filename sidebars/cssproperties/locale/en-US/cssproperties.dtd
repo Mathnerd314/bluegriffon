@@ -104,3 +104,10 @@
 
 <!ENTITY columnRuleWidth.label "Column rule width:">
 <!ENTITY noneColumnRuleWidth.label "None">
+
+<!ENTITY geometrySectionHeader.label "Geometry">
+<!ENTITY margins.label "Margins:">
+<!ENTITY paddings.label "Paddings:">
+<!ENTITY contentArea.label "Content">
+<!ENTITY useSameFourPaddings.label "Use same padding on four edges">
+<!ENTITY useSameFourMargins.label "Use same margin on four edges">

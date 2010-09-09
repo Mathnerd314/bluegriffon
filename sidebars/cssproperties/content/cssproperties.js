@@ -150,6 +150,8 @@ function SaveSelection()
 
 function RestoreSelection()
 {
+  if (!gSavedSelection)
+    return;
   var editor = EditorUtils.getCurrentEditor();
   var selection = editor.selection;
   selection.removeAllRanges();
@@ -233,9 +235,9 @@ function ApplyStyles(aStyles)
       default:
         break;
     }
-    editor.endTransaction();
-    RestoreSelection();
   }
+  editor.endTransaction();
+  RestoreSelection();
 }
 
 function FindLastEditableStyleSheet()
@@ -430,12 +432,19 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   if (!value ||
       (match && !(!aAllowNegative && parseFloat(match[1]) < 0)) ||
       idents.indexOf(value) != -1) {
-    ApplyStyles([
-                  {
-                    property: aElt.getAttribute("property"),
-                    value: value
-                  }
-                ]);
+    var toApply = [ {
+	                    property: aElt.getAttribute("property"),
+	                    value: value
+                    } ];
+    if (aElt.hasAttribute("fouredges")) {
+      var edgesArray = aElt.getAttribute("fouredges").split(",");
+      for (var i = 0; i < edgesArray.length; i++)
+	      toApply.push({
+	                     property: edgesArray[i],
+	                     value: value
+	                   } );
+    }
+    ApplyStyles(toApply);
   }
 }
 
@@ -615,4 +624,5 @@ function SetColor(aElt)
 
 #include general.js.inc
 #include colors.js.inc
+#include geometry.js.inc
 #include columns.js.inc
