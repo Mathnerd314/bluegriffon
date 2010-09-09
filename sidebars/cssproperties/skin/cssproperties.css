@@ -225,6 +225,7 @@ ecolorpicker {
 }
 
 #geometry-margin-box {
+  margin-top: 1em;
 }
 
 #geometry-padding-box {
@@ -234,7 +235,7 @@ ecolorpicker {
 }
 
 #geometrySection menulist {
-  max-width: 5em;
+  max-width: 6em;
 }
 
 #geometry-content-box {

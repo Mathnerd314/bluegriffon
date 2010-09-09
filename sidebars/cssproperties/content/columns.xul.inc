@@ -100,17 +100,23 @@
 
           <row align="center">
             <label value="&columnRuleWidth.label;"/>
-            <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
-              <menupopup id="columnRuleWidthMenupopup"
-                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-                <menuseparator/>
-                <menuitem label="&noneColumnRuleWidth.label;" value="none"/>
-              </menupopup>
-            </menulist>
-            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+            <hbox align="center">
+	            <menulist editable="true" id="columnRuleWidthMenulist" property="-moz-column-rule-width"
+	                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none thin medium thick', false)"
+	                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none thin medium thick', false)">
+	              <menupopup id="columnRuleWidthMenupopup"
+	                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+	                <menuseparator/>
+                  <menuitem label="&thinColumnRuleWidth.label;" value="thin"/>
+                  <menuitem label="&mediumColumnRuleWidth.label;" value="medium"/>
+                  <menuitem label="&thickColumnRuleWidth.label;" value="thick"/>
+                  <menuseparator/>
+                  <menuitem label="&noneColumnRuleWidth.label;" value="none"/>
+	              </menupopup>
+	            </menulist>
+	            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+	                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+            </hbox>
           </row>
         </rows>
       </grid>

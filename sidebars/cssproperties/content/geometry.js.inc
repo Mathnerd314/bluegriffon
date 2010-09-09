@@ -29,6 +29,26 @@ function GeometrySectionIniter(aElt, aRuleset)
   gDialog.paddingBottomMenulist.value = pb;
   gDialog.paddingLeftMenulist.value = pl;
   gDialog.paddingRightMenulist.value = pr;
+
+  var w = CssInspector.getCascadedValue(aRuleset, "width");
+  gDialog.widthMenulist.value = w;
+  var mw = CssInspector.getCascadedValue(aRuleset, "min-width");
+  gDialog.minWidthMenulist.value = mw;
+  var Mw = CssInspector.getCascadedValue(aRuleset, "max-width");
+  gDialog.maxWidthMenulist.value = Mw;
+  var h = CssInspector.getCascadedValue(aRuleset, "height");
+  gDialog.heightMenulist.value = h;
+  var mh = CssInspector.getCascadedValue(aRuleset, "min-height");
+  gDialog.minHeightMenulist.value = mh;
+  var Mh = CssInspector.getCascadedValue(aRuleset, "max-height");
+  gDialog.maxHeightMenulist.value = Mh;
+
+  var isImg = (aElt.nodeName.toLowerCase() == "img");
+  gDialog.preserveImageRatioCheckbox.hidden = !isImg;
+  if (isImg)
+    gDialog.getNaturalSizeButton.removeAttribute("hidden");
+  else
+    gDialog.getNaturalSizeButton.setAttribute("hidden", "true");
 }
 
 function ToggleFourEdges(aCheckbox, aPrefix)
@@ -46,3 +66,18 @@ function ToggleFourEdges(aCheckbox, aPrefix)
   }
 }
 
+function GetNaturalSize()
+{
+  gDialog.widthMenulist.value = gCurrentElement.naturalWidth + "px";
+  gDialog.heightMenulist.value = gCurrentElement.naturalHeight + "px";
+  gDialog.preserveImageRatioCheckbox.checked = true;
+  ApplyStyles( [ {
+							    property: "width",
+                  value: gDialog.widthMenulist.value
+							  },
+                {
+                  property: "height",
+                  value: gDialog.heightMenulist.value
+                }
+  ]);
+}

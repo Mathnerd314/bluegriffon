@@ -104,6 +104,9 @@
 
 <!ENTITY columnRuleWidth.label "Column rule width:">
 <!ENTITY noneColumnRuleWidth.label "None">
+<!ENTITY thinColumnRuleWidth.label "Thin">
+<!ENTITY mediumColumnRuleWidth.label "Medium">
+<!ENTITY thickColumnRuleWidth.label "Thick">
 
 <!ENTITY geometrySectionHeader.label "Geometry">
 <!ENTITY margins.label "Margins:">
@@ -111,3 +114,20 @@
 <!ENTITY contentArea.label "Content">
 <!ENTITY useSameFourPaddings.label "Use same padding on four edges">
 <!ENTITY useSameFourMargins.label "Use same margin on four edges">
+
+<!ENTITY width.label "Width:">
+<!ENTITY autoWidth.label "Automatic">
+<!ENTITY preserveImageRatio.label "Preserve image ratio">
+
+<!ENTITY height.label "Height:">
+<!ENTITY autoHeight.label "Automatic">
+
+<!ENTITY minWidth.label "Min. width:">
+<!ENTITY maxWidth.label "Max. width:">
+<!ENTITY noneMaxWidth.label "None">
+
+<!ENTITY minHeight.label "Min. height:">
+<!ENTITY maxHeight.label "Max. height:">
+<!ENTITY noneMaxHeight.label "None">
+
+<!ENTITY getNaturalSize.label "Get natural size">

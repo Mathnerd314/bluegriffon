@@ -422,15 +422,14 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   else
     value = aElt.value;
   aElt.value = value;
-  if (String(parseFloat(value)) == value)
-    value += "px";
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
   if (!aElt.getAttribute("property"))
     return;
   if (!value ||
-      (match && !(!aAllowNegative && parseFloat(match[1]) < 0)) ||
+      (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
+       (match[2] || units[0] == "|")) ||
       idents.indexOf(value) != -1) {
     var toApply = [ {
 	                    property: aElt.getAttribute("property"),
@@ -443,6 +442,27 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
 	                     property: edgesArray[i],
 	                     value: value
 	                   } );
+    }
+    if (aElt.hasAttribute("checkimageratio") &&
+        gCurrentElement.nodeName.toLowerCase() == "img" &&
+        gDialog.preserveImageRatioCheckbox.checked) {
+      var id = aElt.id;
+      var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
+      var otherValue = null;
+      if (value == "auto" ||
+          (value && value.indexOf("%") != -1))
+        otherValue = value;
+      else if (match) {
+        var ratio = (id == "widthMenulist") ? gCurrentElement.naturalHeight / gCurrentElement.naturalWidth :
+                                              gCurrentElement.naturalWidth / gCurrentElement.naturalHeight;
+        otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
+      }
+
+      if (value)
+        toApply.push({
+                       property: gDialog[otherId].getAttribute("property"),
+                       value: otherValue
+                     } );
     }
     ApplyStyles(toApply);
   }
