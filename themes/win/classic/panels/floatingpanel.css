@@ -6,11 +6,11 @@
 }
 
 .floatingpanel-close {
-  list-style-image: url("chrome://global/skin/icons/closetab.png");
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab.png");
 }
 
 .floatingpanel-close:hover {
-  list-style-image: url("chrome://global/skin/icons/closetab-hover.png");
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-hover.png");
 }
 
 box[anonid="resizer"] {
