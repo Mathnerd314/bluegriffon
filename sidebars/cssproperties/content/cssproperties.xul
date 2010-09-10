@@ -209,9 +209,8 @@
 
   <vbox id="mainBox" flex="1" hidden="true">
     <label id="currentElementBox"
-           class="indent"
            crop="end"/>
-    <hbox id="cssPolicyBox" class="indent" align="center">
+    <hbox id="cssPolicyBox" align="center">
       <label value="&applyStyles.label;"/>
       <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
         <menupopup>

@@ -10,6 +10,12 @@
   overflow: auto;
 }
 
+#cssPolicyBox {
+  background-image: -moz-linear-gradient(#d0d0d0, silver);
+  margin: 0em 2em 1em 2em;
+  -moz-border-radius: 5px;
+}
+
 #sectionHeaderContext menuitem {
   font-size: smaller;
 }
@@ -22,6 +28,7 @@
 #currentElementBox {
   font-family: -moz-fixed;
   background-color: #28211c;
+  margin: 1em 2em;
   padding: 0.5em;
   border: inset #28211c 2px;
   -moz-border-radius: 5px;
@@ -37,7 +44,7 @@
 hbox.csspropertiesHeader {
   border-top: thin solid silver;
   padding-left: 3px;
-  background-image: -moz-linear-gradient( silver, gray );
+  background-image: -moz-linear-gradient( silver, silver 10%, gray );
   font-size: larger; 
 }
 
