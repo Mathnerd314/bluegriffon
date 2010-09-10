@@ -102,9 +102,8 @@ function onCssPolicyChange(aElt)
     gDialog.classPicker.focus();
 }
 
-function ToggleSection(aImage)
+function ToggleSection(header)
 {
-  var header = aImage.parentNode;
   var section = header.nextElementSibling;
   if (header.hasAttribute("open")) {
     section.style.height = "0px";
@@ -640,6 +639,22 @@ function SetColor(aElt)
                   value: color
                 }
               ]);
+}
+
+function CloseAllSection(aAlsoCloseOriginalTarget)
+{
+  var s = document.popupNode;
+  while (s && s.className != "csspropertiesHeader")
+    s = s.parentNode;
+  if (!s) return; // sanity check...
+
+  var sections = document.querySelectorAll(".csspropertiesHeader");
+  for (var i = 0; i < sections.length; i++) {
+    var section = sections[i];
+    if ((aAlsoCloseOriginalTarget || section != s) &&
+        section.hasAttribute("open"))
+      ToggleSection(section);
+  }
 }
 
 #include general.js.inc

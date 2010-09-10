@@ -1,6 +1,6 @@
-      <hbox align="center" class="csspropertiesHeader last"
+      <hbox align="center" class="csspropertiesHeader last" context="sectionHeaderContext"
             id="columnSectionHeader">
-        <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this)"/>
+        <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this.parentNode)"/>
         <label value="&columnsSectionHeader.label;"/>
       </hbox>
 

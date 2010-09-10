@@ -3,6 +3,9 @@
 <!ENTITY modifyClass.label "to all elements of class...">
 <!ENTITY useInlineStyles.label "to this element only through inline styles">
 
+<!ENTITY closeOtherSections.label "Close all other sections">
+<!ENTITY closeAllSections.label "Close all sections">
+
 <!ENTITY generalSectionHeader.label "General">
 
 <!ENTITY fontWeight.label "Weight:">

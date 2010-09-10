@@ -66,6 +66,11 @@
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
 
   <panelset>
+    <popup id="sectionHeaderContext">
+      <menuitem label="&closeOtherSections.label;" oncommand="CloseAllSection(false)"/>
+      <menuitem label="&closeAllSections.label;" oncommand="CloseAllSection(true)"/>
+    </popup>
+
     <panel level="floating" id="backgroundImagePanel" noautohide="true">
       <groupbox style="width: 400px">
 		    <caption label="&imageURL.caption;"/>

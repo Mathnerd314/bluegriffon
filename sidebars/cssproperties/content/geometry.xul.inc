@@ -1,6 +1,6 @@
-      <hbox align="center" class="csspropertiesHeader"
+      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="geometrySectionHeader">
-        <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this)"/>
+        <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this.parentNode)"/>
         <label value="&geometrySectionHeader.label;"/>
       </hbox>
 
