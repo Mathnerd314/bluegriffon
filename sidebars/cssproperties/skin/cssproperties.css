@@ -4,9 +4,9 @@
 @namespace html url("http://www.w3.org/1999/xhtml");
 
 #mainBox {
-#ifdef XP_MACOSX
+%ifdef XP_MACOSX
   font-size: smaller;
-#endif
+%endif
   margin: 0px;
   padding: 0px;
   overflow: auto;
@@ -20,9 +20,9 @@
 }
 
 #cssPolicyBox {
-#ifndef XP_MACOSX
+%ifndef XP_MACOSX
   background-image: -moz-linear-gradient(#d0d0d0, silver);
-#endif
+%endif
   margin-bottom: 1em;
   -moz-border-radius: 5px;
 }
@@ -44,7 +44,9 @@
   -moz-border-radius: 5px;
   color: #e6e6e6;
   font-size: larger;
+%ifndef X¨P_MACOSX
   font-weight: bold;
+%endif
 }
 
 #classPicker, #IDPicker {
