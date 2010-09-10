@@ -140,3 +140,15 @@
 <!ENTITY leftFloat.label "Floating to the left">
 <!ENTITY noneFloat.label "Not floating">
 <!ENTITY rightFloat.label "Floating to the right">
+
+<!ENTITY position.label "Position:">
+<!ENTITY staticPosition.label "Static">
+<!ENTITY relativePosition.label "Relative">
+<!ENTITY absolutePosition.label "Absolute">
+<!ENTITY fixedPosition.label "Fixed">
+
+<!ENTITY zIndex.label "Z-index:">
+<!ENTITY zIndexAuto.label "Automatic">
+
+<!ENTITY offsets.label "Offsets:">
+<!ENTITY offsetAuto.label "Automatic">

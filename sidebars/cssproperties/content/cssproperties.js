@@ -318,7 +318,11 @@ function PopulateLengths(aElt, aUnitsString)
   var v = parseFloat(aElt.parentNode.value);
   if (isNaN(v))
     v = 0;
-  var unitsArray = aUnitsString.split(" ");
+  var unitsArray;
+  if (aUnitsString == " ")
+    unitsArray = [""];
+  else
+    unitsArray = aUnitsString.split(" ");
   unitsArray.forEach(function(aArrayElt, aIndex, aArray) {
     var menuitem = document.createElement("menuitem");
     menuitem.setAttribute("label", v + aArrayElt);
