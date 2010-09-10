@@ -68,7 +68,6 @@
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
 
-  <command id="cmd_columns"                        oncommand="goDoCommand('cmd_columns')"/>
 </commandset>
 
 <commandset id="selectionBasedCommands"

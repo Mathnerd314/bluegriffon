@@ -209,9 +209,6 @@
 <!ENTITY wysiwygMode.label "Wysiwyg">
 <!ENTITY sourceMode.label "Source">
 
-<!ENTITY columnsToolbarCmd.label "Columns">
-<!ENTITY columnsToolbarCmd.tooltip "Set columns">
-
 <!ENTITY closeTabCmd.label "Close current tab">
 
 <!ENTITY filesave.key "s">

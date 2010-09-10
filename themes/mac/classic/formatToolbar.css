@@ -223,21 +223,7 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/code-disabled.png");
 }
 
-/****** COLUMNS ******/
-
-#columnsButton{
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns.png");
-}
-
-#columnsButton[disabled="true"] {
-  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/columns-disabled.png");
-}
-
-
-
-
-
-
+/******* ROTATION *******/
 
 #rotateButton {
   list-style-image: url("resource://gre/res/rotate_icon.png");

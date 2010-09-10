@@ -61,29 +61,3 @@ var cmdClass =
   }
 };
 
-var cmdColumnsCommand =
-{
-  isCommandEnabled: function(aCommand, dummy)
-  {
-    return (EditorUtils.getCurrentEditorElement() &&
-            EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
-  },
-
-  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
-  doCommandParams: function(aCommand, aParams, aRefCon) {},
-
-  doCommand: function(aCommand)
-  {
-    var node = EditorUtils.getSelectionContainer().node;
-    var doc = node.ownerDocument;
-    while (node && doc.defaultView.getComputedStyle(node, "").getPropertyValue("display") != "block")
-      node = node.parentNode;
-    // we have null or a block
-    if (node)
-      window.openDialog("chrome://bluegriffon/content/dialogs/columns.xul","_blank",
-                        "chrome,modal,titlebar,resizable=yes", node);
-
-  }
-};
