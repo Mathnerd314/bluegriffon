@@ -231,6 +231,7 @@
 #include general.xul.inc
 #include colors.xul.inc
 #include geometry.xul.inc
+#include position.xul.inc
 #include columns.xul.inc
     </vbox>
   </vbox>

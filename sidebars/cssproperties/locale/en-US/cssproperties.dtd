@@ -134,3 +134,9 @@
 <!ENTITY noneMaxHeight.label "None">
 
 <!ENTITY getNaturalSize.label "Get natural size">
+
+<!ENTITY positionSectionHeader.label "Position">
+<!ENTITY float.label "Float:">
+<!ENTITY leftFloat.label "Floating to the left">
+<!ENTITY noneFloat.label "Not floating">
+<!ENTITY rightFloat.label "Floating to the right">

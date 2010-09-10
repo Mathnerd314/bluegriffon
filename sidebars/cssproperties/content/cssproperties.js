@@ -660,4 +660,5 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include general.js.inc
 #include colors.js.inc
 #include geometry.js.inc
+#include position.js.inc
 #include columns.js.inc

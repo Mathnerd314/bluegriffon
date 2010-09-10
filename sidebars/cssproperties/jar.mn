@@ -19,6 +19,9 @@ cssproperties.jar:
   skin/classic/cssproperties/columns/one-column.png   (skin/columns/one-column.png)
   skin/classic/cssproperties/columns/two-columns.png  (skin/columns/two-columns.png)
   skin/classic/cssproperties/columns/three-columns.png (skin/columns/three-columns.png)
+  skin/classic/cssproperties/position/left-float.png  (skin/position/left-float.png)
+  skin/classic/cssproperties/position/none-float.png  (skin/position/none-float.png)
+  skin/classic/cssproperties/position/right-float.png (skin/position/right-float.png)
 
 cssproperties-locale.jar:
 % locale    cssproperties    en-US    %locale/en-US/cssproperties/
