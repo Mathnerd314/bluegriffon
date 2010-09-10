@@ -8,7 +8,7 @@ cssproperties.jar:
 * content/cssproperties/cssproperties.js              (content/cssproperties.js)
   content/cssproperties/backgrounditem.xml            (content/backgrounditem.xml)
   content/cssproperties/colorstopitem.xml             (content/colorstopitem.xml)
-  skin/classic/cssproperties/cssproperties.css        (skin/cssproperties.css)
+* skin/classic/cssproperties/cssproperties.css        (skin/cssproperties.css)
   skin/classic/cssproperties/backgrounditem.css       (skin/backgrounditem.css)
   skin/classic/cssproperties/colorstopitem.css        (skin/colorstopitem.css)
   skin/classic/cssproperties/filter.png               (skin/filter.png)

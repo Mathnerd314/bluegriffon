@@ -208,23 +208,25 @@
   </panelset>
 
   <vbox id="mainBox" flex="1" hidden="true">
-    <label id="currentElementBox"
-           crop="end"/>
-    <hbox id="cssPolicyBox" align="center">
-      <label value="&applyStyles.label;"/>
-      <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
-        <menupopup>
-          <menuitem label="&modifyID.label;" value="id"/>
-          <menuitem label="&modifyClass.label;" value="class"/>
-          <menuseparator/>
-		      <menuitem label="&useInlineStyles.label;" value="inline"/>
-        </menupopup>
-      </menulist>
-      <menulist id="classPicker" editable="true" hidden="true">
-        <menupopup id="classPickerPopup"/>
-      </menulist>
-      <textbox id="IDPicker" hidden="true"/>
-    </hbox>
+  	<vbox id="mainBoxHeader">
+	    <label id="currentElementBox"
+	           crop="end"/>
+	    <label value="&applyStyles.label;"/>
+	    <hbox id="cssPolicyBox" align="center">
+	      <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
+	        <menupopup>
+	          <menuitem label="&modifyID.label;" value="id"/>
+	          <menuitem label="&modifyClass.label;" value="class"/>
+	          <menuseparator/>
+			      <menuitem label="&useInlineStyles.label;" value="inline"/>
+	        </menupopup>
+	      </menulist>
+	      <menulist id="classPicker" editable="true" hidden="true">
+	        <menupopup id="classPickerPopup"/>
+	      </menulist>
+	      <textbox id="IDPicker" hidden="true"/>
+	    </hbox>
+  	</vbox>
 
     <vbox flex="1">
 #include general.xul.inc

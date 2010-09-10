@@ -141,7 +141,6 @@ grippy[disabled="true"] {
 
 .multiButton {
   -moz-appearance: none;
-  font-size: smaller;
   text-transform: uppercase;
   padding: 0px;
   margin: 0px;
