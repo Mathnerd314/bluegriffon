@@ -12,7 +12,6 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     onload = "Startup()"
     buttons="accept,cancel"
-    style="height: auto"
     ondialogaccept="return onAccept();"
     persist="screenX screenY">
 
@@ -21,263 +20,61 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertImage.js"/>
 
-  <tabbox id="tabbox">
-    <tabs>
-      <tab label="&general.tab;"/>
-      <tab label="&appearance.tab;"/>
-      <tab label="Style"/>
-      <tab label="Link"/>
-    </tabs>
-    <tabpanels>
-
-      <vbox>
-        <groupbox>
-          <caption label="Select image"/>
-	        <label value="&imageLocation.label;"/>
-	        <hbox align="center">
-	          <textbox flex="1" id="imageURLTextbox"
-	                   oninput="LoadImage(true)"/>
-	          <filepickerbutton id="filepickerbutton"
-	                            control="imageURLTextbox"
-	                            mode="0"
-	                            filters="filterImages"
-	                            oncommand="LoadImage(true);MakeRelativeUrl();SetFocusToAlt()"
-	                            title="&selectImageButton.label;"/>
-	        </hbox>
-          <hbox>
-            <spacer flex="1"/>
-            <button label="Select from projects"
-                    id="selectfromProjectButton"
-                    oncommand="OpenInProjectPicker()"
-                    hidden="true"/>
-          </hbox>
-	        <hbox align="center">
-	          <checkbox id="relativeURLCheckbox"
-	                    disabled="true"
-	                    oncommand="ToggleRelativeOrAbsolute()"
-	                    label="&relativeURL.label;"/>
-	          <label value="&documentMustBeSaved.label;"
-	                 disabled="true"
-	                 id="relativeURLCheckboxWarning"/>
-	        </hbox>
-        </groupbox>
-        <grid>
-          <columns><column/><column flex="1"/></columns>
-          <rows>
-            <row align="center">
-              <label value="&title.label;"/>
-              <textbox id="titleTextbox"/>
-            </row>
-            <row align="center">
-              <label value="&alternateText.label;"/>
-              <textbox id="alternateTextTextbox" oninput="UpdateButtons()"/>
-            </row>
-            <row align="center">
-              <spacer/>
-              <checkbox label="&emptyAltOk.checkbox;"
-                        id="emptyAltOkCheckbox"
-                        oncommand="UpdateButtons()"/>
-            </row>
-          </rows>
-        </grid>
-      </vbox>
-
-      <vbox>
-        <hbox align="center" style="margin-bottom: 1em">
-          <label value="&naturalSize.label;"/>
-          <label id="naturalWidthLabel" value="0"/>
-          <label value="x"/>
-          <label id="naturalHeightLabel" value="0"/>
-          <label value="&pixels.label;"/>
-        </hbox>
-        <hbox>
-          <grid>
-            <columns><column/><column/></columns>
-            <rows>
-              <row align="center">
-                <label value="&width.label;"/>
-                <textbox size="4" type="number" id="widthTextbox" disabled="true"
-                         decimalPlaces="2"
-                         min="1"
-                         oninput="onWidthChanged()"
-                         onchange="onWidthChanged()"/>
-              </row>
-              <row align="center">
-                <label value="&height.label;"/>
-                <textbox size="4" type="number" id="heightTextbox" disabled="true"
-                         decimalPlaces="2"
-                         min="1"
-                         oninput="onHeightChanged()"
-                         onchange="onHeightChanged()"/>
-              </row>
-            </rows>
-          </grid>
-          <vbox>
-            <spacer flex="1"/>
-            <toolbarbutton id="preserveRatioButton"
-                           disabled="true"
-                           preserveRatio="true"
-                           tooltiptext="&preserveRatio.tooltip;"
-                           oncommand="TogglePreserveRatio(this)"/>
-            <spacer flex="1"/>
-          </vbox>
-          <vbox>
-            <menulist id="unitTypeMenulist" onselect="ToggleUnit()"
-                      disabled="true">
-              <menupopup>
-                <menuitem label="&px.label;" value="px"/>
-                <menuitem label="&percent.label;" value="percent"/>
-              </menupopup>
-            </menulist>
-          </vbox>
-        </hbox>
-        <hbox>
-          <button label="&resetSize.label;" id="resetSizeButton"
+  <vbox>
+    <groupbox>
+      <caption label="Select image"/>
+      <label value="&imageLocation.label;"/>
+      <hbox align="center">
+        <textbox flex="1" id="imageURLTextbox"
+                 oninput="LoadImage()"/>
+        <filepickerbutton id="filepickerbutton"
+                          control="imageURLTextbox"
+                          mode="0"
+                          filters="filterImages"
+                          oncommand="LoadImage();MakeRelativeUrl();SetFocusToAlt()"
+                          title="&selectImageButton.label;"/>
+      </hbox>
+      <hbox>
+        <spacer flex="1"/>
+        <button label="Select from projects"
+                id="selectfromProjectButton"
+                oncommand="OpenInProjectPicker()"
+                hidden="true"/>
+      </hbox>
+      <hbox align="center">
+        <checkbox id="relativeURLCheckbox"
                   disabled="true"
-                  oncommand="ResetToNaturalSize()"/>
-        </hbox>
-      </vbox>
-
-      <vbox>
-        <cssClassPicker id="cssClassPicker"
-                        oncommand="UpdateButtons()"
-                        oninput="UpdateButtons()"/>
-        <grid>
-          <columns><column/><column/><column/><column/></columns>
-          <rows>
-            <row align="center">
-              <checkbox id="borderCheckbox"
-                        oncommand="UpdatePreviewBorder()"
-                        label="&border.label;"
-                        class="disableOnClass"  mainCheckbox="true"/>
-              <lengthbox type="positive" id="borderWidthLengthbox"
-                         units="%,px,em,pt,cm,mm,in,pc,ex"
-                         oninput="UpdatePreviewBorder()"
-                         oncommand="UpdatePreviewBorder()"
-                         class="disableOnClass"/>
-              <ecolorpicker id="borderColorpicker"
-                            color="transparent"
-                            colorObjectId="BorderColor"
-                            windowTitle="Border color"
-                            oncommand="UpdatePreviewBorder()"
-                            showTransparency="true"
-                            class="disableOnClass"/>
-              <menulist id="borderStyleMenulist"
-                        oncommand="UpdatePreviewBorder()"
-                        class="disableOnClass">
-                <menupopup>
-                  <menuitem label="&solid.label;" value="solid"/>
-                  <menuitem label="&dashed.label;" value="dashed"/>
-                  <menuitem label="&dotted.label;" value="dotted"/>
-                  <menuitem label="&double.label;" value="double"/>
-                  <menuitem label="&groove.label;" value="groove"/>
-                  <menuitem label="&inset.label;" value="inset"/>
-                  <menuitem label="&outset.label;" value="outset"/>
-                  <menuitem label="&ridge.label;" value="ridge"/>
-                  <menuseparator/>
-                  <menuitem label="&none.label;" value="none"/>
-                  <menuseparator/>
-                  <menuitem label="&hidden.label;" value="hidden"/>
-                </menupopup>
-              </menulist>
-            </row>
-            <row align="center">
-              <checkbox label="&horizMargin.label;"
-                        id="horizMarginCheckbox"
-                        class="disableOnClass"  mainCheckbox="true"/>
-              <lengthbox type="positive" id="horizMarginTextbox"
-                         units="%,px,em,pt,cm,mm,in,pc,ex"
-                         class="disableOnClass"/>
-            </row>
-            <row align="center">
-              <checkbox label="&vertMargin.label;"
-                        id="vertMarginCheckbox"
-                        class="disableOnClass" mainCheckbox="true"/>
-              <lengthbox type="positive" id="vertMarginTextbox"
-                         units="%,px,em,pt,cm,mm,in,pc,ex"
-                         class="disableOnClass"/>
-            </row>
-          </rows>
-        </grid>
-	      <hbox align="center">
-	        <checkbox label="&float.checkbox;"
-                    id="floatCheckbox"
-                    class="disableOnClass" mainCheckbox="true"/>
-	        <menulist class="disableOnClass"
-                    id="floatMenulist">
-	          <menupopup>
-	            <menuitem label="&leftFloat.label;" value="left"/>
-	            <menuitem label="&rightFloat.label;" value="right"/>
-	          </menupopup>
-	        </menulist>
-        </hbox>
-        <hbox align="center">
-          <checkbox label="&rotation.label;"
-                    id="enableRotationCheckbox"
-                    oncommand="UpdatePreviewRotation(gDialog.rotator.value)"
-                    class="disableOnClass" mainCheckbox="true" />
-				  <rotator id="rotator" value="0" onchange="UpdatePreviewRotation(angle)"
-                   class="disableOnClass" />
-          <grid>
-            <columns><column/><column/><column/></columns>
-            <rows>
-              <row align="center">
-                <label value="&horizPosition.label;" id="horizPositionLabel" class="disableOnClass" />
-                <textbox size="3" type="number" min="-1000" max="1000" id="horizPosition" class="disableOnClass" />
-                <menulist id="horizPositionUnit" class="disableOnClass" >
-                  <menupopup>
-                    <menuitem label="pixels" value="px"/>
-                    <menuitem label="percents" value="percent" selected="true"/>
-                  </menupopup>
-                </menulist>
-              </row>
-              <row align="center">
-                <label value="&vertPosition.label;" id="vertPositionLabel" class="disableOnClass" />
-                <textbox id="vertPosition" size="3" type="number" min="-1000" max="1000" class="disableOnClass" />
-                <menulist id="vertPositionUnit" class="disableOnClass" >
-                  <menupopup>
-                    <menuitem label="pixels" value="px"/>
-                    <menuitem label="percents" value="percent" selected="true"/>
-                  </menupopup>
-                </menulist>
-              </row>
-            </rows>
-          </grid>
-        </hbox>
-      </vbox>
-
-      <!-- linking -->
-      <vbox>
-        <description>&linkTarget.label;</description>
-        <hbox align="center">
-	        <textbox flex="1"
-	                 id="linkTextbox"
-	                 oninput="ValidateEmail(this)"/>
-          <filepickerbutton id="filepickerFileButton"
-                            control="linkTextbox"
-                            mode="0"
-                            oncommand="CallBackFromLinkFilePicker()"
-                            title="&selectFileButton.label;"/>
-        </hbox>
-        <hbox align="center">
-          <checkbox id="relativeLinkURLCheckbox"
-                    disabled="true"
-                    oncommand="ToggleRelativeOrAbsoluteLink()"
-                    label="&relativeURL.label;"/>
-          <label value="&documentMustBeSaved.label;"
-                 disabled="true"
-                 id="relativeLinkURLCheckboxWarning"/>
-        </hbox>
-        <checkbox id="emailCheckbox" label="This is an email address"/>
-      </vbox>      
-    </tabpanels>
-  </tabbox>
+                  oncommand="ToggleRelativeOrAbsolute()"
+                  label="&relativeURL.label;"/>
+        <label value="&documentMustBeSaved.label;"
+               disabled="true"
+               id="relativeURLCheckboxWarning"/>
+      </hbox>
+    </groupbox>
+    <grid>
+      <columns><column/><column flex="1"/></columns>
+      <rows>
+        <row align="center">
+          <label value="&title.label;"/>
+          <textbox id="titleTextbox"/>
+        </row>
+        <row align="center">
+          <label value="&alternateText.label;"/>
+          <textbox id="alternateTextTextbox" oninput="UpdateButtons()"/>
+        </row>
+        <row align="center">
+          <spacer/>
+          <checkbox label="&emptyAltOk.checkbox;"
+                    id="emptyAltOkCheckbox"
+                    oncommand="UpdateButtons()"/>
+        </row>
+      </rows>
+    </grid>
+  </vbox>
 
   <groupbox>
     <caption label="&preview.label;"/>
-    <html:p style="text-align: center; height: 100px; padding: 0px; margin: 0px;">
-      <html:img id="previewImage"/>
-    </html:p>
+    <box id="previewImage" flex="1"/>
   </groupbox>
 
 </dialog>

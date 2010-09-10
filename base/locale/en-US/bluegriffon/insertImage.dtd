@@ -1,10 +1,5 @@
 <!ENTITY window.title "Insert an image">
 
-<!ENTITY cssExtras.label "CSS extra properties">
-
-<!ENTITY general.tab "General">
-<!ENTITY appearance.tab "Appearance">
-
 <!ENTITY imageLocation.label "Image location:">
 <!ENTITY selectImageButton.label "Select Image">
 <!ENTITY relativeURL.label "Make URL relative to page location">
@@ -14,40 +9,4 @@
 
 <!ENTITY preview.label "Preview">
 
-<!ENTITY width.label "Width:">
-<!ENTITY height.label "Height:">
-<!ENTITY preserveRatio.tooltip "Preserve image ratio">
-<!ENTITY px.label "pixels">
-<!ENTITY percent.label "percents">
-<!ENTITY resetSize.label "Reset to natural width and height">
-
-<!ENTITY rotation.label "Rotation">
-<!ENTITY horizPosition.label "Horiz. origin:">
-<!ENTITY vertPosition.label "Vert. origin:">
-
-<!ENTITY naturalSize.label "Natural Size:">
-<!ENTITY pixels.label "pixels">
-
-<!ENTITY horizMargin.label "Horizontal margin:">
-<!ENTITY vertMargin.label "Vertical margin:">
-<!ENTITY border.label "Border:">
-
-<!ENTITY linkTarget.label "Enter a URL, a mail address or select an anchor in the document">
-<!ENTITY selectFileButton.label "Select File">
-
-<!ENTITY solid.label "Solid">
-<!ENTITY dashed.label "Dashed">
-<!ENTITY dotted.label "Dotted">
-<!ENTITY double.label "Double">
-<!ENTITY groove.label "Groove">
-<!ENTITY inset.label "Inset">
-<!ENTITY outset.label "Outset">
-<!ENTITY ridge.label "Ridge">
-<!ENTITY none.label "None">
-<!ENTITY hidden.label "Hidden">
-
 <!ENTITY emptyAltOk.checkbox "Allow an empty alternate text">
-
-<!ENTITY float.checkbox "Image is floating to the">
-<!ENTITY leftFloat.label "left">
-<!ENTITY rightFloat.label "right">
