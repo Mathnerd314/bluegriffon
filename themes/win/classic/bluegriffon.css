@@ -186,3 +186,14 @@ grippy[disabled="true"] {
 .multiButton:not([label]) image {
   margin-left: 6px;
 }
+
+/***** FLOATING PANELS *****/
+
+panel[floating="true"] {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
+  -moz-appearance: none;
+  background-color: #606060;
+  color: white;
+  -moz-border-radius: 5px;
+  -moz-transition: opacity 0.5s;
+}
