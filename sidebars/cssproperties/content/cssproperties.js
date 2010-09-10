@@ -269,7 +269,10 @@ function FindLastEditableStyleSheet()
 function ToggleProperty(aElt)
 {
   var checked   = aElt.hasAttribute("checked");
-  var value     = checked ? aElt.getAttribute("value") : "";
+  var value = aElt.getAttribute("value");
+  if (!checked &&
+      (aElt.nodeName.toLowerCase() == "checkbox" || aElt.getAttribute("type") == "checkbox"))
+    value = "";
   var property  = aElt.getAttribute("property");
   var resetter  = aElt.getAttribute("resetter");
   var group     = aElt.getAttribute("group");
@@ -647,17 +650,17 @@ function SetColor(aElt)
 
 function CloseAllSection(aAlsoCloseOriginalTarget)
 {
-  var s = document.popupNode;
-  while (s && s.className != "csspropertiesHeader")
-    s = s.parentNode;
-  if (!s) return; // sanity check...
+  var h = document.popupNode;
+  while (h && !h.classList.contains("csspropertiesHeader"))
+    h = h.parentNode;
+  if (!h) return; // sanity check...
 
-  var sections = document.querySelectorAll(".csspropertiesHeader");
-  for (var i = 0; i < sections.length; i++) {
-    var section = sections[i];
-    if ((aAlsoCloseOriginalTarget || section != s) &&
-        section.hasAttribute("open"))
-      ToggleSection(section);
+  var headers = document.querySelectorAll(".csspropertiesHeader");
+  for (var i = 0; i < headers.length; i++) {
+    var header = headers[i];
+    if ((aAlsoCloseOriginalTarget || header != h) &&
+        header.hasAttribute("open"))
+      ToggleSection(header);
   }
 }
 

@@ -24,15 +24,10 @@ function PositionSectionIniter(aElt, aRuleset)
   gDialog.leftMenulist.value = l;
   gDialog.rightMenulist.value = r;
   gDialog.bottomMenulist.value = b;
-}
 
-function SetZIndex(aElt)
-{
-  var value = aElt.value;
-  ApplyStyles([
-                {
-                  property: aElt.getAttribute("property"),
-                  value: value
-                }
-              ]);
+  var c = CssInspector.getCascadedValue(aRuleset, "clear");
+  CheckToggle(gDialog.clearLeftButton,   c == "left");
+  CheckToggle(gDialog.clearRightButton,  c == "right");
+  CheckToggle(gDialog.clearBothButton,   c == "both");
+  CheckToggle(gDialog.clearNoneButton,   c == "none");
 }

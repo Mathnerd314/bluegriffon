@@ -1,4 +1,4 @@
-      <hbox align="center" class="csspropertiesHeader last" context="sectionHeaderContext"
+      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="positionSectionHeader">
         <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this.parentNode)"/>
         <label value="&positionSectionHeader.label;"/>
@@ -22,6 +22,30 @@
                              image="chrome://cssproperties/skin/position/right-float.png"
                              id="floatRightButton" group="float"
                              oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center">
+            <label value="&clear.label;"/>
+            <hbox>
+	            <hbox align="center">
+	              <toolbarbutton class="multibutton" label="&leftClear.label;" value="left" property="clear" type="checkbox"
+	                             id="clearLeftButton" group="clear"
+	                             oncommand="ToggleProperty(this)"/>
+	              <toolbarbutton class="multibutton" label="&rightClear.label;" value="right" property="clear" type="checkbox"
+	                             id="clearRightButton" group="clear"
+	                             oncommand="ToggleProperty(this)"/>
+	            </hbox>
+	            <hbox align="center">
+	              <toolbarbutton class="multibutton" label="&bothClear.label;" value="both" property="clear" type="checkbox"
+	                             id="clearBothButton" group="clear"
+	                             oncommand="ToggleProperty(this)"/>
+	            </hbox>
+	            <hbox align="center">
+	              <toolbarbutton class="multibutton" label="&noneClear.label;" value="none" property="clear" type="checkbox"
+	                             id="clearNoneButton" group="clear"
+	                             oncommand="ToggleProperty(this)"/>
+	            </hbox>
             </hbox>
           </row>
 

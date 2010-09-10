@@ -135,7 +135,7 @@
 
 <!ENTITY getNaturalSize.label "Get natural size">
 
-<!ENTITY positionSectionHeader.label "Position">
+<!ENTITY positionSectionHeader.label "Position and Layout">
 <!ENTITY float.label "Float:">
 <!ENTITY leftFloat.label "Floating to the left">
 <!ENTITY noneFloat.label "Not floating">
@@ -152,3 +152,9 @@
 
 <!ENTITY offsets.label "Offsets:">
 <!ENTITY offsetAuto.label "Automatic">
+
+<!ENTITY clear.label "Clearance:">
+<!ENTITY leftClear.label "Left side">
+<!ENTITY rightClear.label "Right side">
+<!ENTITY bothClear.label "Both sides">
+<!ENTITY noneClear.label "No clearance">
