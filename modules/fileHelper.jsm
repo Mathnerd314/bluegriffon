@@ -524,7 +524,7 @@ var FileUtils = {
   
       // HACK: in Nvu, always save as text/html...
       persistObj.saveDocument(editorDoc, aDestinationLocation, aRelatedFilesParentDir, 
-                              "text/html", outputFlags, wrapColumn);
+                              aMimeType, outputFlags, wrapColumn);
       gPersistObj = persistObj;
     }
     catch(e) { dump("caught an error, bail\n"); return false; }

@@ -42,12 +42,11 @@ var cmdSave =
     {
       // FinishHTMLSource();
       // for the time being, we use the HTML serializer
-      var editorMimeType = EditorUtils.getCurrentDocument().contentType;
 
       result = FileUtils.saveDocument(
                  UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                  false,
-                 editorMimeType);
+                 EditorUtils.getCurrentDocumentMimeType());
       window.content.focus();
     }
     return result;

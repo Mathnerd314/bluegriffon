@@ -493,6 +493,29 @@ var EditorUtils = {
             doctype.publicId == "-//W3C//DTD XHTML 1.0 Strict//EN");
   },
 
+  getCurrentDocumentMimeType: function()
+  {
+    var doc = this.getCurrentDocument();
+    var editorMimeType = doc.contentType;
+    var doctype = doc.doctype.publicId;
+    var isXML = false;
+    switch (doctype) {
+      case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+      case "http://www.w3.org/TR/html4/loose.dtd":
+        isXML = false;
+        break;
+      case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+      case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+        isXML = true;
+        break;
+      case "":
+        isXML = (doc.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+        break;
+      default: break; // should never happen...
+    }
+    return (isXML ? "application/xhtml+xml" : "text/html");
+  },
+
   getWrapColumn: function()
   {
     try {
