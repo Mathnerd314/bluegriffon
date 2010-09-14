@@ -25,21 +25,27 @@
         <xul:label class="backgrounditem-title"
                    anonid="backgrounditemTitle"/>
         <xul:grid class="background-properties"
-                  anonid="backgrounditemProperties">
+                  anonid="backgrounditemProperties"
+                  oncommand="FlushBackgroundProperties(event)"
+                  oninput="FlushBackgroundProperties(event)">
           <xul:columns><xul:column/><xul:column/><xul:column flex="1"/><xul:column/><xul:column/></xul:columns>
           <xul:rows>
             <xul:row align="center">
               <xul:label value="&backgroundAttachment.label;"/>
-              <xul:menulist anonid="backgrounditem-attachment" sizetopopup="none">
+              <xul:menulist anonid="backgrounditem-attachment" sizetopopup="none"
+                            property="background-attachment">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundAttachmentScroll.label;" value="scroll"/>
-                  <xul:menuitem label="&backgroundAttachmentLocal.label;" value="local"/>
+                  <!-- NOT YET IMPLEMENTED IN GECKO -->
+                  <!--xul:menuitem label="&backgroundAttachmentLocal.label;" value="local"/-->
                   <xul:menuitem label="&backgroundAttachmentFixed.label;" value="fixed"/>
                 </xul:menupopup>
               </xul:menulist>
               <xul:spacer/>
               <xul:label value="&backgroundSize.label;"/>
-              <xul:menulist anonid="backgrounditem-size" sizetopopup="none" editable="true">
+              <xul:menulist anonid="backgrounditem-size" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-size">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundSizeAuto.label;"    value="auto"/>
                   <xul:menuitem label="&backgroundSizeContain.label;" value="contain"/>
@@ -52,7 +58,9 @@
             </xul:row>
             <xul:row align="center">
               <xul:label value="&backgroundRepeat.label;"/>
-              <xul:menulist anonid="backgrounditem-repeat" sizetopopup="none" editable="true">
+              <xul:menulist anonid="backgrounditem-repeat" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-repeat">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
                   <xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
@@ -65,7 +73,8 @@
               </xul:menulist>
               <xul:spacer/>
               <xul:label value="&backgroundClip.label;"/>
-              <xul:menulist anonid="backgrounditem-clip" sizetopopup="none">
+              <xul:menulist anonid="backgrounditem-clip" sizetopopup="none"
+                            property="background-clip">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
                   <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
@@ -75,7 +84,9 @@
             </xul:row>
             <xul:row align="center">
               <xul:label value="&backgroundPosition.label;"/>
-              <xul:menulist anonid="backgrounditem-position" sizetopopup="none" editable="true">
+              <xul:menulist anonid="backgrounditem-position" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-position">
                 <xul:menupopup>
                   <xul:grid class="multipane-menu"
                             oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
@@ -104,7 +115,8 @@
               </xul:menulist>
               <xul:spacer/>
               <xul:label value="&backgroundOrigin.label;"/>
-              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none">
+              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none"
+                            property="background-origin">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
                   <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>

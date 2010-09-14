@@ -11,12 +11,19 @@ function ColorsSectionIniter(aElt, aRuleset)
 
   var bgImages = CssInspector.getCascadedValue(aRuleset, "background-image");
   var parsedImages = CssInspector.parseBackgroundImages(bgImages);
+  var bgAttachment = CssInspector.getCascadedValue(aRuleset, "background-attachment").split(",");
+  var bgRepeat     = CssInspector.getCascadedValue(aRuleset, "background-repeat").split(",");
+  var bgPosition   = CssInspector.getCascadedValue(aRuleset, "background-position").split(",");
+  var bgSize       = CssInspector.getCascadedValue(aRuleset, "background-size").split(",");
+  var bgClip       = CssInspector.getCascadedValue(aRuleset, "background-clip").split(",");
+  var bgOrigin     = CssInspector.getCascadedValue(aRuleset, "background-origin").split(",");
   for (var i = 0; i < parsedImages.length; i++) {
     var item = document.createElement("richlistitem");
     item.className = "backgrounditem";
     var type = parsedImages[i].type;
     item.setAttribute("type", type);
     gDialog.backgroundsRichlistbox.appendChild(item);
+
     item.reset();
     var button = item.getChild("backgrounditemButton");
     item.parsedValue = parsedImages[i].value;
@@ -29,6 +36,19 @@ function ColorsSectionIniter(aElt, aRuleset)
           CssInspector.serializeGradient(item.parsedValue);
         break;
     }
+
+    item.getChild("backgrounditem-attachment").value =
+      (i < bgAttachment.length ? bgAttachment[i].trim() : "");
+    item.getChild("backgrounditem-repeat").value =
+      (i < bgRepeat.length ? bgRepeat[i].trim() : "");
+    item.getChild("backgrounditem-position").value =
+      (i < bgPosition.length ? bgPosition[i].trim() : "");
+    item.getChild("backgrounditem-size").value =
+      (i < bgSize.length ? bgSize[i].trim() : "");
+    item.getChild("backgrounditem-clip").value =
+      (i < bgClip.length ? bgClip[i].trim() : "");
+    item.getChild("backgrounditem-origin").value =
+      (i < bgOrigin.length ? bgOrigin[i].trim() : "");
   }
 }
 
@@ -149,4 +169,32 @@ function DeleteColorStopFromLinearGradient()
 {
   gDialog.colorStopsRichlistbox.removeChild(gDialog.colorStopsRichlistbox.selectedItem);
   UpdateColorStopsRichlistbox();
+}
+
+function FlushBackgroundProperties(aEvent)
+{
+  var target = aEvent.originalTarget;
+  while (target && !target.hasAttribute("property"))
+    target = target.parentNode;
+  var property = target.getAttribute("property");
+  var anonid = target.getAttribute("anonid");
+
+  var valueArray = []
+  var items = document.querySelectorAll("richlistitem.backgrounditem");
+  for (var i = 0; i < items.length; i++) {
+    var xulElt = items[i].getChild(anonid);
+    valueArray.push( xulElt.value );
+  }
+  // cleanup
+  for (var i = valueArray.length - 1 ; i >=0; i++)
+    if (valueArray[i] == "")
+      valueArray.pop();
+    else
+      break;
+  ApplyStyles([
+                {
+                  property: property,
+                  value: valueArray.join(", ")
+                }
+              ]);
 }
