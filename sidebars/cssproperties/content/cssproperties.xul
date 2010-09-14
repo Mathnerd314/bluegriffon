@@ -110,6 +110,7 @@
         <tabbox id="linearGradientPropertiesTabbox">
           <tabs>
             <tab label="&colorStops.tab;"/>
+            <tab label="&shapeAndSize.tab;" id="shapeAndSizeTab"/>
             <tab label="&angle.tab;"/>
             <tab label="&startingPoint.tab;"/>
           </tabs>
@@ -128,20 +129,47 @@
                 <toolbarbutton id="downColorStopButton" class="listboxBgPlusButton" disabled="true"/>
               </hbox>
             </vbox>
+            <grid id="shapeAndSizeTabpanel">
+              <columns><column/><column/></columns>
+              <rows>
+                <row align="center">
+	                <label value="&shape.label;"/>
+	                <radiogroup id="radialGradientShape" orient="horizontal"
+                              oncommand="RepaintGradient()">
+	                  <radio label="&circularShape.label;" value="circle"/>
+	                  <radio label="&ellipticShape.label;" value="ellipse"/>
+	                </radiogroup>
+                </row>
+                <row align="center">
+                  <label value="&size.label;"/>
+                  <menulist id="radioGradientSize" sizetopopup="none"
+                            oncommand="RepaintGradient()">
+                    <menupopup>
+                      <menuitem label="closest-side" value="closest-side"/>
+                      <menuitem label="closest-corner" value="closest-corner"/>
+                      <menuitem label="farthest-side" value="farthest-side"/>
+                      <menuitem label="farthest-corner" value="farthest-corner"/>
+                      <menuitem label="contain" value="contain"/>
+                      <menuitem label="cover" value="cover"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
             <hbox align="center" flex="1">
 	            <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
-	                      oncommand="RepaintLinearGradient()"/>
-              <rotator id="linearGradientAngleRotator" onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintLinearGradient()"/>
+	                      oncommand="RepaintGradient()"/>
+              <rotator id="linearGradientAngleRotator" onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintGradient()"/>
             </hbox>
 		        <grid>
 		          <columns><column/><column/></columns>
 		          <rows>
 		            <row align="center">
 		              <checkbox label="&startingPoint.checkbox;" id="linearGradientStartingPointCheckbox"
-                            oncommand="RepaintLinearGradient()"/>
+                            oncommand="RepaintGradient()"/>
 		              <hbox>
 		                <menulist sizetopopup="none" editable="true" id="linearGradientStartingPointMenulist"
-                              oncommand="RepaintLinearGradient()">
+                              oncommand="RepaintGradient()">
 		                  <menupopup>
 		                    <grid class="multipane-menu"
 		                              oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
@@ -170,28 +198,28 @@
 		            </row>
 		            <row align="center">
 		              <checkbox label="&horizOffset.checkbox;" id="linearGradientHorizOffsetCheckbox"
-                            oncommand="RepaintLinearGradient()"/>
+                            oncommand="RepaintGradient()"/>
 		              <hbox>
 		                <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()"
-		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()">
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
+		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
 		                  <menupopup id="linearGradientHorizOffsetMenupopup"
 		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
 		                  </menupopup>
 		                </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
 		                <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
-                              oncommand="RepaintLinearGradient()"/>
+                              oncommand="RepaintGradient()"/>
 		                <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
-		                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()"
-		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintLinearGradient()">
+		                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
+		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
 		                  <menupopup id="linearGradientVertOffsetMenupopup"
 		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
 		                  </menupopup>
 		                </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintLinearGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintLinearGradient()"/>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
 		              </hbox>
 		             </row>
 		          </rows>

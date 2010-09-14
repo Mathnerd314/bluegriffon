@@ -223,6 +223,7 @@
                 }
                 break;
               case "linear-gradient":
+              case "radial-gradient":
                 {
                   deleteAllChildren(gDialog.colorStopsRichlistbox);
                   var e = this.getChild("backgrounditemButton");
@@ -233,8 +234,11 @@
                   var _self = this;
                   // WARNING, the following is a workaround because it takes a short
                   // while before XBLs are instantiated when you open a floating panel...
-                  setTimeout(function() {
+                  setTimeout(function(aType) {
                     gDialog.linearGradientPropertiesTabbox.selectedIndex = 0;
+                    gDialog.shapeAndSizeTab.hidden = (aType != "radial-gradient");
+                    gDialog.radialGradientShape.value = "";
+                    gDialog.radioGradientSize.value = "";
                     gDialog.linearGradientAngleRotator.value = "0";
 	                  gDialog.linearGradientAngleCheckbox.checked = false;
 	                  gDialog.linearGradientStartingPointCheckbox.checked = false;
@@ -285,6 +289,12 @@
                           gDialog.linearGradientVertOffset.value = vOffset;
                         }
 	                    }
+                      if (aType == "radial-gradient") {
+                        if ("shape" in gradient)
+                          gDialog.radialGradientShape.value = gradient.shape;
+                        if ("size" in gradient)
+                          gDialog.radioGradientSize.value = gradient.size;
+                      }
 		                  gDialog.linearGradientPreview.style.backgroundImage =
 		                    _self.getChild("backgrounditemButton").style.backgroundImage;
 		                  for (var i = 0; i < gradient.stops.length; i++) {
@@ -295,9 +305,10 @@
 		                    item.color = cs.color;
 		                    item.offset = cs.position;
 		                  }
+                      
 	                  }
                     UpdateColorStopsRichlistbox();
-                  }, 1);
+                  }, 1, type);
                 }
                 break;
               default: break;

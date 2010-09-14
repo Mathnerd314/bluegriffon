@@ -306,6 +306,7 @@ var CssInspector = {
           if (token.isIdent("closest-side") ||
                    token.isIdent("closest-corner") ||
                    token.isIdent("farthest-side") ||
+                   token.isIdent("farthest-corner") ||
                    token.isIdent("contain") ||
                    token.isIdent("cover")) {
             gradient.size = token.value;
@@ -318,9 +319,10 @@ var CssInspector = {
             gradient.shape = token.value;
             token = parser.getToken(true, true);
           }
-          if ((gradient.shape || gradient.size) && !token.isSymbol(","))
+          if ((("shape" in gradient) || ("size" in gradient)) && !token.isSymbol(","))
             return null;
-          token = parser.getToken(true, true);
+          else if (("shape" in gradient) || ("size" in gradient))
+            token = parser.getToken(true, true);
         }
 
         // now color stops...

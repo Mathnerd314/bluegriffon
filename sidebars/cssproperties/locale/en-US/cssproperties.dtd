@@ -70,6 +70,7 @@
 <!ENTITY backgroundPositionRightBottom.label "Right bottom">
 
 <!ENTITY colorStops.tab "Color stops">
+<!ENTITY shapeAndSize.tab "Shape and size">
 <!ENTITY angle.tab "Angle">
 <!ENTITY startingPoint.tab "Starting point">
 
@@ -77,6 +78,12 @@
 <!ENTITY startingPoint.checkbox "Starting point:">
 <!ENTITY horizOffset.checkbox "Horiz. offset:">
 <!ENTITY vertOffset.checkbox "Vert. offset:">
+
+<!ENTITY shape.label "Shape:">
+<!ENTITY circularShape.label "Circular">
+<!ENTITY ellipticShape.label "Elliptic">
+<!ENTITY size.label "Size:">
+
 
 <!ENTITY columnsSectionHeader.label "Columns">
 <!ENTITY columnCount.label "Column count:">

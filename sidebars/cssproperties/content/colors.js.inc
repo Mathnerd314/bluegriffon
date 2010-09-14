@@ -107,7 +107,7 @@ function ReapplyBackgrounds()
               ]);
 }
 
-function RepaintLinearGradient()
+function RepaintGradient()
 {
   var angle = gDialog.linearGradientAngleCheckbox.checked ? gDialog.linearGradientAngleRotator.value + "deg"
                                                           : "";
@@ -115,8 +115,13 @@ function RepaintLinearGradient()
                                                           : "";
   var hOffset = gDialog.linearGradientHorizOffsetCheckbox.checked ? gDialog.linearGradientHorizOffset.value
                                                           : "";
-  var str = "-moz-linear-gradient(" +
-            ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
+  var type = gDialog.shapeAndSizeTab.hidden ? "-moz-linear-gradient(" : "-moz-radial-gradient(";
+  var str = type + ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
+  if (!gDialog.shapeAndSizeTab.hidden) {
+    var shape = gDialog.radialGradientShape.value;
+    var size  = gDialog.radioGradientSize.value;
+    str += ((shape || size) ? shape + " " + size + "," : "");
+  }
 
   var stops = gDialog.colorStopsRichlistbox.querySelectorAll("richlistitem.colorstopitem");
   for (var i = 0; i < stops.length; i++) {
