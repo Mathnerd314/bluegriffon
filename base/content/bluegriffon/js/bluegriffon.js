@@ -41,8 +41,11 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/fileHelper.jsm");
 Components.utils.import("resource://gre/modules/l10nHelper.jsm");
-Components.utils.import("resource://gre/modules/projectManager.jsm");
 Components.utils.import("resource://gre/modules/handlersManager.jsm");
+try {
+  Components.utils.import("resource://gre/modules/projectManager.jsm");
+}
+catch(e) {}
 
 #include blanks.inc
 

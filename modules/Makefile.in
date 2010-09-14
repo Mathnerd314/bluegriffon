@@ -50,7 +50,6 @@ EXTRA_JS_MODULES = colourPickerHelper.jsm \
 	fileHelper.jsm \
 	cssHelper.jsm \
 	fireFtp.jsm \
-	projectManager.jsm \
 	handlersManager.jsm \
 	cssInspector.jsm \
 	$(NULL)

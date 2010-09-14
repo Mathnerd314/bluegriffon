@@ -33,7 +33,8 @@ function Startup()
     dump("Failed to observe prefs: " + ex + "\n");
   }
 
-  ProjectManager.init();
+  if ("ProjectManager" in window)
+    ProjectManager.init();
 
   window.addEventListener("deactivate", DeactivateMainWindow, true);
 }
