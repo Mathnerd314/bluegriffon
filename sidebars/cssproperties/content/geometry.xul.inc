@@ -178,7 +178,8 @@
 		            <spacer flex="1"/>
 		                <menulist sizetopopup="none" editable="true" id="paddingBottomMenulist" property="padding-bottom"
                               fouredges="padding-top,padding-left,padding-right"
-		                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
+                              fouredgescontrol="useSameFourPaddingsCheckbox"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
 		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
 		                  <menupopup id="paddingBottomMenupopup"
 		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
@@ -210,6 +211,7 @@
             <spacer flex="1"/>
             <menulist sizetopopup="none" editable="true" id="marginBottomMenulist" property="margin-bottom"
                       fouredges="margin-top,margin-left,margin-right"
+                      fouredgescontrol="useSameFourMarginsCheckbox"
                       oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
                       oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
               <menupopup id="marginBottomMenupopup"

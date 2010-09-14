@@ -165,3 +165,26 @@
 <!ENTITY rightClear.label "Right side">
 <!ENTITY bothClear.label "Both sides">
 <!ENTITY noneClear.label "No clearance">
+
+<!ENTITY bordersSectionHeader.label "Borders">
+<!ENTITY thinBorderWidth.label "Thin">
+<!ENTITY mediumBorderWidth.label "Medium">
+<!ENTITY thickBorderWidth.label "Thick">
+
+<!ENTITY noneBorderStyleStyle.label "None">
+<!ENTITY hiddenBorderStyleStyle.label "Hidden">
+<!ENTITY solidBorderStyleStyle.label "Solid">
+<!ENTITY doubleBorderStyleStyle.label "Double">
+<!ENTITY dottedBorderStyleStyle.label "Dotted">
+<!ENTITY dashedBorderStyleStyle.label "Dashed">
+<!ENTITY grooveBorderStyleStyle.label "Groove">
+<!ENTITY ridgeBorderStyleStyle.label "Ridge">
+<!ENTITY insetBorderStyleStyle.label "Inset">
+<!ENTITY outsetBorderStyleStyle.label "Outset">
+
+<!ENTITY topBorder.label "Top:">
+<!ENTITY rightBorder.label "Right:">
+<!ENTITY leftBorder.label "Left:">
+<!ENTITY bottomBorder.label "Bottom:">
+
+<!ENTITY sameBorderOnFourEdges.label "Use same border on four edges">

@@ -342,13 +342,25 @@ function ApplyPropertyFromMenulist(aElt)
   else
     value = aElt.value;
 
-  ApplyStyles([
-                {
-                  property: aElt.getAttribute("property"),
-                  value: value
-                }
-              ]);
+  var toApply = [
+                  {
+                    property: aElt.getAttribute("property"),
+                    value: value
+                  }
+                ];
+  if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
+    if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
+      var edgesArray = aElt.getAttribute("fouredges").split(",");
+      for (var i = 0; i < edgesArray.length; i++)
+        toApply.push({
+                       property: edgesArray[i],
+                       value: value
+                     } );
+    }
+  }
+  ApplyStyles(toApply);
 }
+
 function IncreaseLength(aElt, aUnitsString)
 {
   var value;
@@ -441,13 +453,15 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
 	                    property: aElt.getAttribute("property"),
 	                    value: value
                     } ];
-    if (aElt.hasAttribute("fouredges")) {
-      var edgesArray = aElt.getAttribute("fouredges").split(",");
-      for (var i = 0; i < edgesArray.length; i++)
-	      toApply.push({
-	                     property: edgesArray[i],
-	                     value: value
-	                   } );
+    if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
+      if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
+	      var edgesArray = aElt.getAttribute("fouredges").split(",");
+	      for (var i = 0; i < edgesArray.length; i++)
+		      toApply.push({
+		                     property: edgesArray[i],
+		                     value: value
+		                   } );
+      }
     }
     if (aElt.hasAttribute("checkimageratio") &&
         gCurrentElement.nodeName.toLowerCase() == "img" &&
@@ -640,12 +654,23 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
 function SetColor(aElt)
 {
   var color = aElt.color;
-  ApplyStyles([
-                {
-                  property: aElt.getAttribute("property"),
-                  value: color
-                }
-              ]);
+  var toApply = [
+	                {
+	                  property: aElt.getAttribute("property"),
+	                  value: color
+	                }
+                ];
+  if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
+    if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
+      var edgesArray = aElt.getAttribute("fouredges").split(",");
+      for (var i = 0; i < edgesArray.length; i++)
+        toApply.push({
+                       property: edgesArray[i],
+                       value: color
+                     } );
+    }
+  }
+  ApplyStyles(toApply);
 }
 
 function CloseAllSection(aAlsoCloseOriginalTarget)
@@ -668,4 +693,5 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include colors.js.inc
 #include geometry.js.inc
 #include position.js.inc
+#include borders.js.inc
 #include columns.js.inc
