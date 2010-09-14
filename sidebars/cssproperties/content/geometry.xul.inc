@@ -111,10 +111,12 @@
             <label value="&margins.label;"/>
             <spacer flex="1"/>
             <menulist sizetopopup="none" editable="true" id="marginTopMenulist" property="margin-top"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)">
               <menupopup id="marginTopMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                <menuseparator/>
+                <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
             <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
@@ -125,10 +127,12 @@
 
           <hbox align="center">
             <menulist sizetopopup="none" editable="true" id="marginLeftMenulist" property="margin-left"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)">
               <menupopup id="marginLeftMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                <menuseparator/>
+                <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
             <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
@@ -197,10 +201,12 @@
               </hbox>
             </vbox>
             <menulist sizetopopup="none" editable="true" id="marginRightMenulist" property="margin-right"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)">
               <menupopup id="marginRightMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                <menuseparator/>
+                <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
             <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
@@ -212,10 +218,12 @@
             <menulist sizetopopup="none" editable="true" id="marginBottomMenulist" property="margin-bottom"
                       fouredges="margin-top,margin-left,margin-right"
                       fouredgescontrol="useSameFourMarginsCheckbox"
-                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', false)">
               <menupopup id="marginBottomMenupopup"
                          onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                <menuseparator/>
+                <menuitem label="&autoMargin.label;" value="auto"/>
               </menupopup>
             </menulist>
             <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"

@@ -124,6 +124,7 @@
 <!ENTITY contentArea.label "Content">
 <!ENTITY useSameFourPaddings.label "Use same padding on four edges">
 <!ENTITY useSameFourMargins.label "Use same margin on four edges">
+<!ENTITY autoMargin.label "Automatic">
 
 <!ENTITY width.label "Width:">
 <!ENTITY autoWidth.label "Automatic">
