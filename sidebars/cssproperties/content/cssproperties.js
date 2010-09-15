@@ -361,7 +361,7 @@ function ApplyPropertyFromMenulist(aElt)
   ApplyStyles(toApply);
 }
 
-function IncreaseLength(aElt, aUnitsString)
+function IncreaseLength(aElt, aUnitsString, aCallback)
 {
   var value;
   var menulist = aElt.previousSibling;
@@ -391,11 +391,11 @@ function IncreaseLength(aElt, aUnitsString)
         break;
     }
     menulist.value = v + (unit ? unit : "");
-    onLengthMenulistCommand(menulist, aUnitsString, '', false);
+    onLengthMenulistCommand(menulist, aUnitsString, '', false, aCallback);
   }
 }
 
-function DecreaseLength(aElt, aUnitsString, aAllowNegative)
+function DecreaseLength(aElt, aUnitsString, aAllowNegative, aCallback)
 {
   var value;
   var menulist = aElt.previousSibling;
@@ -427,11 +427,11 @@ function DecreaseLength(aElt, aUnitsString, aAllowNegative)
     if (!aAllowNegative && v < 0)
       v = 0;
     menulist.value = v + (unit ? unit : "");
-    onLengthMenulistCommand(menulist, aUnitsString, '', aAllowNegative);
+    onLengthMenulistCommand(menulist, aUnitsString, '', aAllowNegative, aCallback);
   }
 }
 
-function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegative)
+function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegative, aCallback)
 {
   var idents = aIdentsString.split(" ");
   var value;
@@ -443,49 +443,51 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
-  if (!aElt.getAttribute("property"))
-    return;
-  if (!value ||
-      (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
-       (match[2] || units[0] == "|")) ||
-      idents.indexOf(value) != -1) {
-    var toApply = [ {
-	                    property: aElt.getAttribute("property"),
-	                    value: value
-                    } ];
-    if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
-      if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
-	      var edgesArray = aElt.getAttribute("fouredges").split(",");
-	      for (var i = 0; i < edgesArray.length; i++)
-		      toApply.push({
-		                     property: edgesArray[i],
-		                     value: value
-		                   } );
-      }
-    }
-    if (aElt.hasAttribute("checkimageratio") &&
-        gCurrentElement.nodeName.toLowerCase() == "img" &&
-        gDialog.preserveImageRatioCheckbox.checked) {
-      var id = aElt.id;
-      var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
-      var otherValue = null;
-      if (value == "auto" ||
-          (value && value.indexOf("%") != -1))
-        otherValue = value;
-      else if (match) {
-        var ratio = (id == "widthMenulist") ? gCurrentElement.naturalHeight / gCurrentElement.naturalWidth :
-                                              gCurrentElement.naturalWidth / gCurrentElement.naturalHeight;
-        otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
-      }
-
-      if (value)
-        toApply.push({
-                       property: gDialog[otherId].getAttribute("property"),
-                       value: otherValue
-                     } );
-    }
-    ApplyStyles(toApply);
+  if (!aElt.getAttribute("property")) {
+	  if (!value ||
+	      (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
+	       (match[2] || units[0] == "|")) ||
+	      idents.indexOf(value) != -1) {
+	    var toApply = [ {
+		                    property: aElt.getAttribute("property"),
+		                    value: value
+	                    } ];
+	    if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
+	      if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
+		      var edgesArray = aElt.getAttribute("fouredges").split(",");
+		      for (var i = 0; i < edgesArray.length; i++)
+			      toApply.push({
+			                     property: edgesArray[i],
+			                     value: value
+			                   } );
+	      }
+	    }
+	    if (aElt.hasAttribute("checkimageratio") &&
+	        gCurrentElement.nodeName.toLowerCase() == "img" &&
+	        gDialog.preserveImageRatioCheckbox.checked) {
+	      var id = aElt.id;
+	      var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
+	      var otherValue = null;
+	      if (value == "auto" ||
+	          (value && value.indexOf("%") != -1))
+	        otherValue = value;
+	      else if (match) {
+	        var ratio = (id == "widthMenulist") ? gCurrentElement.naturalHeight / gCurrentElement.naturalWidth :
+	                                              gCurrentElement.naturalWidth / gCurrentElement.naturalHeight;
+	        otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
+	      }
+	
+	      if (value)
+	        toApply.push({
+	                       property: gDialog[otherId].getAttribute("property"),
+	                       value: otherValue
+	                     } );
+	    }
+	    ApplyStyles(toApply);
+	  }
   }
+  if (aCallback)
+    aCallback(aElt);
 }
 
 function InitLocalFontFaceMenu(menuPopup)

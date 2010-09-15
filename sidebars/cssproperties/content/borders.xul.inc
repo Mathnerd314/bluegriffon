@@ -186,4 +186,116 @@
             </row>
           </rows>
         </grid>
+
+        <checkbox label="&sameFourCorners.label;" id="sameFourCornersCheckbox"
+                  oncommand="ToggleSameFourCorners(this)"/>
+        <grid>
+          <columns><column/><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&topLeftCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="topLeftBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topLeftBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="topLeftBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topLeftBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&topRightCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="topRightBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topRightBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="topRightBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="topRightBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&bottomLeftCorner.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="bottomLeftBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomLeftBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="bottomLeftBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomLeftBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&bottomRightCorner.label;" id="bottomRightCornerLabel"/>
+              <hbox align="center">
+                <menulist editable="true" id="bottomRightBorderRadiusXMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomRightBorderRadiusXMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+              <hbox align="center">
+                <menulist editable="true" id="bottomRightBorderRadiusYMenulist"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, ApplyBorderRadius)">
+                  <menupopup id="bottomRightBorderRadiusYMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ApplyBorderRadius)"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, ApplyBorderRadius)"/>
+              </hbox>
+            </row>
+
+          </rows>
+        </grid>
       </vbox>

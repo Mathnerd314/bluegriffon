@@ -189,3 +189,9 @@
 <!ENTITY bottomBorder.label "Bottom:">
 
 <!ENTITY sameBorderOnFourEdges.label "Use same border on four edges">
+
+<!ENTITY sameFourCorners.label "same style for the four corners">
+<!ENTITY topLeftCorner.label "Top left corner:">
+<!ENTITY topRightCorner.label "Top right corner:">
+<!ENTITY bottomLeftCorner.label "Bottom left corner:">
+<!ENTITY bottomRightCorner.label "Bottom right corner:">
