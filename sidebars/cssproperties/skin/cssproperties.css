@@ -268,3 +268,16 @@ ecolorpicker {
   margin: 1em;
 }
 
+#borderImageFromTop, #borderImageFromBottom {
+  height: 1px;
+  background-color: white;
+  border-bottom: red thin dashed;
+  cursor:move;
+}
+
+#borderImageFromLeft, #borderImageFromRight {
+  width: 1px;
+  background-color: white;
+  border-left: red thin dashed;
+  cursor: move;
+}

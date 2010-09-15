@@ -94,7 +94,6 @@ var CssInspector = {
     catch (ex) {}
   },
 
-
   getCSSStyleRules: function(aElement, aNoInlineStyles)
   {
     var inspector = Components.classes[this.kINIDOMUTILS_CID]
@@ -426,9 +425,85 @@ var CssInspector = {
     }
     s += ")";
     return s;
-  }
+  },
 
-  
+  parseBorderImage: function(aString)
+  {
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+
+    var borderImage = {url: "", offsets: [], widths: [], sizes: []};
+    var token = parser.getToken(true, true);
+    if (token.isFunction("url(")) {
+      token = parser.getToken(true, true);
+      var urlContent = parser.parseURL(token);
+      if (urlContent) {
+        borderImage.url = "url(" + urlContent;
+      }
+      else
+        return null;
+    }
+    else
+      return null; 
+
+    token = parser.getToken(true, true);
+    if (token.isNumber() || token.isPercentage())
+      borderImage.offsets.push(token.value);
+    else
+      return null;
+    var i;
+    for (i= 0; i < 3; i++) {
+      token = parser.getToken(true, true);
+      if (token.isNumber() || token.isPercentage())
+        borderImage.offsets.push(token.value);
+      else
+        break;
+    }
+    if (i == 3)
+      token = parser.getToken(true, true);
+
+    if (token.isSymbol("/")) {
+	    token = parser.getToken(true, true);
+	    if (token.isDimension()
+          || token.isNumber("0")
+          || (token.isIdent() && token.value in parser.kBORDER_WIDTH_NAMES))
+	      borderImage.widths.push(token.value);
+	    else
+	      return null;
+
+      for (var i = 0; i < 3; i++) {
+	      token = parser.getToken(true, true);
+	      if (token.isDimension()
+	          || token.isNumber("0")
+	          || (token.isIdent() && token.value in parser.kBORDER_WIDTH_NAMES))
+	        borderImage.widths.push(token.value);
+	      else
+	        break;
+      }
+	    if (i == 3)
+	      token = parser.getToken(true, true);
+    }
+
+    for (var i = 0; i < 2; i++) {
+      if (token.isIdent("stretch")
+          || token.isIdent("repeat")
+          || token.isIdent("round"))
+        borderImage.sizes.push(token.value);
+      else if (!token.isNotNull())
+        return borderImage;
+      else
+        return null;
+      token = parser.getToken(true, true);
+    }
+    if (!token.isNotNull())
+      return borderImage;
+
+    return null;
+  }
 };
 
 

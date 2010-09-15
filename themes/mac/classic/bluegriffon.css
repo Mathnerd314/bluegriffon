@@ -303,8 +303,8 @@ grippy[disabled="true"] {
 
 panel[floating="true"] {
   -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
-  -moz-appearance: none;
-  background-color: #606060;
+  -moz-appearance: none; 
+  background-color: rgba(96,96,96,0.9);
   color: white;
   -moz-border-radius: 5px;
   -moz-transition: opacity 0.5s;

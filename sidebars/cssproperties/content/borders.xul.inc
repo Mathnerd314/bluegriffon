@@ -298,4 +298,63 @@
 
           </rows>
         </grid>
+
+        <checkbox label="&useImageAsBorder.label;" id="useImageAsBorderCheckbox"
+                  oncommand="ToggleImageAsBorder(this)"/>
+        <vbox class="indent" id="useImageAsBorderVbox">
+          <label value="&enterImageUrl.label;"/>
+		      <hbox align="center">
+		        <textbox flex="1" id="borderImageURLTextbox"
+		                 oninput="LoadBorderImage()"/>
+		        <filepickerbutton id="borderImageURLFilepicker"
+		                          control="borderImageURLTextbox"
+		                          mode="0"
+		                          filters="filterImages"
+		                          oncommand="LoadBorderImage();MakeRelativeUrl();"
+		                          title="&borderImageURLButton.label;"/>
+          </hbox>
+          <hbox align="center" id="borderImagePreviewBox" hidden="true">
+            <vbox align="center">
+              <label value="From left edge:"/>
+              <textbox type="number" size="5" id="leftEdgeSlicingTextbox"/>
+            </vbox>
+            <vbox align="center">
+              <hbox align="center">
+	              <label value="From top edge:"/>
+	              <textbox type="number" size="5" id="topEdgeSlicingTextbox"/>
+              </hbox>
+	            <stack>
+	              <image id="borderImagePreview" top="0" left="0" style="margin: 15px"
+	                     onload="SizeBorderImageRulers(this)"
+	                     onerror="ErrorLoadingBorderImage()"/>
+
+	              <box id="borderImageFromTop" top="15" left="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'top')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'top')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'top')"/>
+	              <box id="borderImageFromRight" right="15" top="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'right')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'right')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'right')"/>
+	              <box id="borderImageFromLeft" left="15" top="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'left')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'left')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'left')"/>
+	              <box id="borderImageFromBottom" bottom="15" left="0"
+                     onmousedown="StartMovingBorderImageSliceEdge(event, this, 'bottom')"
+                     onmousemove="MoveBorderImageSliceEdge(event, this, 'bottom')"
+                     onmouseup="StopMovingBorderImageSliceEdge(event, this, 'bottom')"/>
+	            </stack>
+              <hbox align="center">
+                <label value="From bottom edge:"/>
+                <textbox type="number" size="5" id="bottomEdgeSlicingTextbox"/>
+              </hbox>
+            </vbox>
+            <vbox align="center">
+              <label value="From right edge:"/>
+              <textbox type="number" size="5" id="rightEdgeSlicingTextbox"/>
+            </vbox>
+          </hbox>
+        </vbox>
       </vbox>
+

@@ -1,3 +1,5 @@
+Components.utils.import("resource://gre/modules/urlHelper.jsm");
+
 RegisterIniter(BordersSectionIniter);
 
 function BordersSectionIniter(aElt, aRuleset)
@@ -66,6 +68,12 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.bottomLeftBorderRadiusXMenulist.parentNode.parentNode.hidden = sameFourCorners;
   gDialog.bottomRightCornerLabel.style.visibility = sameFourCorners ? "hidden" : "visible";
   gDialog.sameFourCornersCheckbox.checked = sameFourCorners;
+
+  var bi = CssInspector.getCascadedValue(aRuleset, "-moz-border-image");
+  var hasBorderImage = (bi && bi != "none");
+  gDialog.useImageAsBorderCheckbox.checked = hasBorderImage
+  gDialog.useImageAsBorderVbox.hidden = !hasBorderImage;
+  var parsedBi = CssInspector.parseBorderImage(bi);
 }
 
 function ToggleSameBorderOnFourEdges(aElt)
@@ -210,3 +218,98 @@ function ToggleSameFourCorners(aElt)
   gDialog.bottomRightCornerLabel.style.visibility = sameFourCorners ? "hidden" : "visible";
 }
 
+function ToggleImageAsBorder(aElt)
+{
+  var ok = aElt.checked;
+  gDialog.useImageAsBorderVbox.hidden = !ok;
+  if (!ok) {
+    ApplyStyles([
+                  {
+                    property: "-moz-border-image",
+                    value: ""
+                  }
+                ]);
+  }
+}
+
+function MakeRelativeUrl()
+{
+  var spec = gDialog.borderImageURLTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeRelativeUrl(spec);
+    gDialog.borderImageURLTextbox.value = spec;
+  }
+}
+
+function LoadBorderImage()
+{
+  gDialog.borderImagePreview.setAttribute("src", gDialog.borderImageURLTextbox.value);
+  gDialog.borderImagePreviewBox.hidden = false;
+}
+
+function ErrorLoadingBorderImage()
+{
+  gDialog.borderImagePreview.setAttribute("src", "");
+  gDialog.borderImagePreviewBox.hidden = true;
+}
+
+function SizeBorderImageRulers(aElt)
+{
+  var w = aElt.boxObject.width;
+  var h = aElt.boxObject.height;
+  gDialog.borderImageFromTop.style.width = (w + 30) + "px";
+  gDialog.borderImageFromBottom.style.width = (w + 30) + "px";
+  gDialog.borderImageFromLeft.style.height = (w + 30) + "px";
+  gDialog.borderImageFromRight.style.height = (h + 30) + "px";
+}
+
+var gMoving = false;
+var gX, gY;
+var gOriginal;
+function StartMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
+{
+  gMoving = true;
+  gX = aEvent.clientX;
+  gY = aEvent.clientY;
+  gOriginal = aElt.getAttribute(aEdge);
+  aElt.setCapture(false);
+}
+
+function MoveBorderImageSliceEdge(aEvent, aElt, aEdge)
+{
+  if (!gMoving)
+    return;
+  var x = aEvent.clientX
+  var y = aEvent.clientY;
+  var diff;
+  switch (aEdge)
+  {
+    case "top":    diff = y - gY; break;
+    case "left":   diff = x - gX; break;
+    case "right":  diff = gX - x; break;
+    case "bottom": diff = gY - y; break;
+    default: break; //should never happen
+  }
+  value = parseFloat(gOriginal) + diff;
+  if (value < 15)
+    value = 15;
+  switch (aEdge)
+  {
+    case "top":    
+    case "bottom": value = Math.min(value, gDialog.borderImagePreview.boxObject.height + 15); break;
+
+    case "left":
+    case "right":  value = Math.min(value, gDialog.borderImagePreview.boxObject.width + 15); break;
+    default: break; //should never happen
+  }
+  aElt.setAttribute(aEdge, value);
+  gDialog[aEdge + "EdgeSlicingTextbox"].value = value - 15;
+}
+
+function StopMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
+{
+  aElt.releaseCapture();
+  gMoving = false;
+}
