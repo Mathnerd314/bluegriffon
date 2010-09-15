@@ -309,3 +309,7 @@ panel[floating="true"] {
   -moz-border-radius: 5px;
   -moz-transition: opacity 0.5s;
 }
+
+popup {
+  background-color: white;
+}
