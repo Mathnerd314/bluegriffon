@@ -443,7 +443,7 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   var units = aUnitsString.replace( / /g, "|");
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
-  if (!aElt.getAttribute("property")) {
+  if (aElt.getAttribute("property")) {
 	  if (!value ||
 	      (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
 	       (match[2] || units[0] == "|")) ||
