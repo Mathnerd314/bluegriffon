@@ -35,8 +35,8 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.borderBottomStyleMenulist.value = bbs;
 
   var sameOnFourEdges =  (bbw == btw && bbw == blw && bbw == brw &&
-										      bbs == bts && bbs == bls && bbs == brs &&
-										      bbc == btc && bbc == blc && bbc == brc);
+                          bbs == bts && bbs == bls && bbs == brs &&
+                          bbc == btc && bbc == blc && bbc == brc);
   gDialog.sameBorderOnFourEdgesCheckbox.checked = sameOnFourEdges;
 
   gDialog.borderTopColorpicker.parentNode.hidden = sameOnFourEdges;
@@ -74,18 +74,18 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.useImageAsBorderCheckbox.checked = hasBorderImage
   gDialog.useImageAsBorderVbox.hidden = !hasBorderImage;
   var parsedBi = CssInspector.parseBorderImage(bi);
-  gDialog.borderImageURLTextbox.value = parsedBi ? parsedBi.url : "";
-  gDialog.topEdgeSlicingTextbox.value = "0";
-  gDialog.leftEdgeSlicingTextbox.value = "0";
-  gDialog.rightEdgeSlicingTextbox.value = "0";
-  gDialog.bottomEdgeSlicingTextbox.value = "0";
+  gDialog.borderImageURLTextbox.value = parsedBi ? MakeAbsoluteUrl(parsedBi.url) : "";
+  gDialog.topEdgeSlicingTextbox.value    = 0;
+  gDialog.leftEdgeSlicingTextbox.value   = 0;
+  gDialog.rightEdgeSlicingTextbox.value  = 0;
+  gDialog.bottomEdgeSlicingTextbox.value = 0;
   if (parsedBi) {
-    switch (parsedBi.offsets.length == 1) {
+    switch (parsedBi.offsets.length) {
       case 1:
-			  gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
-			  gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[0];
-			  gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[0];
-			  gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[0];
         break;
       case 2:
         gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
@@ -108,10 +108,11 @@ function BordersSectionIniter(aElt, aRuleset)
       default: break; // should never happen
     }
     LoadBorderImage();
-    gDialog.borderImageFromTop.setAttribute("top", 15 + gDialog.topEdgeSlicingTextbox.value);
-    gDialog.borderImageFromLeft.setAttribute("left", 15 + gDialog.leftEdgeSlicingTextbox.value);
-    gDialog.borderImageFromRight.setAttribute("right", 15 + gDialog.rightEdgeSlicingTextbox.value);
-    gDialog.borderImageFromBottom.setAttribute("bottom", 15 + gDialog.bottomgeSlicingTextbox.value);
+    MakeRelativeUrl();
+    gDialog.borderImageFromTop.setAttribute("top", 15 + parseFloat(gDialog.topEdgeSlicingTextbox.value));
+    gDialog.borderImageFromLeft.setAttribute("left", 15 + parseFloat(gDialog.leftEdgeSlicingTextbox.value));
+    gDialog.borderImageFromRight.setAttribute("right", 15 + parseFloat(gDialog.rightEdgeSlicingTextbox.value));
+    gDialog.borderImageFromBottom.setAttribute("bottom", 15 + parseFloat(gDialog.bottomEdgeSlicingTextbox.value));
   }
 }
 
@@ -222,12 +223,12 @@ function ApplyBorderRadius(aElt)
                   }
                 ]);
   else
-	  ApplyStyles([
-	                {
-	                  property: property,
-	                  value: str
-	                }
-	              ]);
+    ApplyStyles([
+                  {
+                    property: property,
+                    value: str
+                  }
+                ]);
 }
 
 function ToggleSameFourCorners(aElt)
@@ -242,8 +243,8 @@ function ToggleSameFourCorners(aElt)
     gDialog.topLeftBorderRadiusYMenulist.value = brCY;
     gDialog.topRightBorderRadiusYMenulist.value = brCY;
     gDialog.bottomLeftBorderRadiusYMenulist.value = brCY;
-	  var str = brCX;
-	  str += ((str || brCY) ? " " + brCY : "");
+    var str = brCX;
+    str += ((str || brCY) ? " " + brCY : "");
     ApplyStyles([
                   {
                     property: "border-radius",
@@ -282,6 +283,16 @@ function MakeRelativeUrl()
   }
 }
 
+function MakeAbsoluteUrl(spec)
+{
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeAbsoluteUrl(spec);
+  }
+  return spec;
+}
+
 function LoadBorderImage()
 {
   gDialog.borderImagePreview.setAttribute("src", gDialog.borderImageURLTextbox.value);
@@ -302,6 +313,17 @@ function SizeBorderImageRulers(aElt)
   gDialog.borderImageFromBottom.style.width = (w + 30) + "px";
   gDialog.borderImageFromLeft.style.height = (h + 30) + "px";
   gDialog.borderImageFromRight.style.height = (h + 30) + "px";
+
+  // reset all
+  gDialog.topEdgeSlicingTextbox.value    = 0;
+  gDialog.leftEdgeSlicingTextbox.value   = 0;
+  gDialog.rightEdgeSlicingTextbox.value  = 0;
+  gDialog.bottomEdgeSlicingTextbox.value = 0;
+
+	gDialog.borderImageFromTop.setAttribute("top", 15);
+	gDialog.borderImageFromLeft.setAttribute("left", 15);
+	gDialog.borderImageFromRight.setAttribute("right", 15);
+	gDialog.borderImageFromBottom.setAttribute("bottom", 15);
 }
 
 var gMoving = false;
@@ -353,4 +375,69 @@ function StopMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
   aElt.releaseCapture();
   aElt.className = "";
   gMoving = false;
+  ApplyBorderImage(false);
 }
+
+function ApplyBorderImageSliceChangeFromTextbox(aElt)
+{
+  var id = aElt.id;
+  var value = aElt.value;
+  switch (id) {
+    case "leftEdgeSlicingTextbox":
+      gDialog.borderImageFromLeft.setAttribute("left", 15 + Number(value));
+      break;
+    case "rightEdgeSlicingTextbox":
+      gDialog.borderImageFromRight.setAttribute("right", 15 + Number(value));
+      break;
+    case "topEdgeSlicingTextbox":
+      gDialog.borderImageFromTop.setAttribute("top", 15 + Number(value));
+      break;
+    case "bottomEdgeSlicingTextbox":
+      gDialog.borderImageFromBottom.setAttribute("bottom", 15 + Number(value));
+      break;
+    default: break; // should never happen
+  }
+  ApplyBorderImage(false);
+}
+
+function ApplyBorderImage(aZeroWidths)
+{
+  var url = gDialog.borderImageURLTextbox.value;
+
+  var leftOffset    = gDialog.leftEdgeSlicingTextbox.value;
+  var rightOffset   = gDialog.rightEdgeSlicingTextbox.value;
+  var topOffset     = gDialog.topEdgeSlicingTextbox.value;
+  var bottomOffset = gDialog.bottomEdgeSlicingTextbox.value;
+
+  function ZeroTextboxIfNeededed(id)
+  {
+    if (gDialog[id].value == "")
+      gDialog[id].value = "0px";
+  }
+  if (aZeroWidths) {
+	  ZeroTextboxIfNeededed("borderSliceLeftWidthMenulist");
+	  ZeroTextboxIfNeededed("borderSliceRightWidthMenulist");
+	  ZeroTextboxIfNeededed("borderSliceTopWidthMenulist");
+	  ZeroTextboxIfNeededed("borderSliceBottomWidthMenulist");
+  }
+  var leftWidth   = gDialog.borderSliceLeftWidthMenulist.value;
+  var rightWidth  = gDialog.borderSliceRightWidthMenulist.value;
+  var topWidth    = gDialog.borderSliceTopWidthMenulist.value;
+  var bottomWidth = gDialog.borderSliceBottomWidthMenulist.value;
+
+  var repeatHoriz = gDialog.horizontalBorderImageRepeatMenulist.value;
+  var repeatVert  = gDialog.VerticalBorderImageRepeatMenulist.value;
+
+  str = "url('" + url + "') " +
+        topOffset + " " + rightOffset + " " + bottomOffset + " " + leftOffset +
+        (topWidth ? " / " + topWidth + " " + rightWidth + " " + bottomWidth + " " + leftWidth : "") +
+        " " + gDialog.horizontalBorderImageRepeatMenulist.value + " " +
+        gDialog.VerticalBorderImageRepeatMenulist.value;
+  ApplyStyles( [
+                 {
+                  property: "-moz-border-image",
+                  value: str
+                 }
+               ]);
+}
+

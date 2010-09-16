@@ -442,7 +442,10 @@ var CssInspector = {
       token = parser.getToken(true, true);
       var urlContent = parser.parseURL(token);
       if (urlContent) {
-        borderImage.url = "url(" + urlContent;
+        borderImage.url = urlContent.substr(0, urlContent.length - 1).trim();
+        if ((borderImage.url[0] == '"' && borderImage.url[borderImage.url.length - 1] == '"') ||
+             (borderImage.url[0] == "'" && borderImage.url[borderImage.url.length - 1] == "'"))
+        borderImage.url = borderImage.url.substr(1, borderImage.url.length - 2);
       }
       else
         return null;

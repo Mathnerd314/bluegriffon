@@ -199,3 +199,8 @@
 <!ENTITY useImageAsBorder.label "Use a sliced image as border">
 <!ENTITY enterImageUrl.label "Image location:">
 <!ENTITY borderImageURLButton.label "Select an image file">
+
+<!ENTITY fromLeftEdge.label "From left edge:">
+<!ENTITY fromTopEdge.label "From top edge:">
+<!ENTITY fromBottomEdge.label "From bottom edge:">
+<!ENTITY fromRightEdge.label "From right edge:">

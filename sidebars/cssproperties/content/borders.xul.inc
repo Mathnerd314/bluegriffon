@@ -305,24 +305,17 @@
           <label value="&enterImageUrl.label;"/>
 		      <hbox align="center">
 		        <textbox flex="1" id="borderImageURLTextbox"
-		                 oninput="LoadBorderImage()"/>
+		                 oninput="LoadBorderImage();ApplyBorderImage(false)"/>
 		        <filepickerbutton id="borderImageURLFilepicker"
 		                          control="borderImageURLTextbox"
 		                          mode="0"
 		                          filters="filterImages"
-		                          oncommand="LoadBorderImage();MakeRelativeUrl();"
+		                          oncommand="LoadBorderImage();MakeRelativeUrl();ApplyBorderImage(false)"
 		                          title="&borderImageURLButton.label;"/>
           </hbox>
-          <hbox align="center" id="borderImagePreviewBox" hidden="true">
-            <vbox align="center">
-              <label value="From left edge:"/>
-              <textbox type="number" size="5" id="leftEdgeSlicingTextbox"/>
-            </vbox>
-            <vbox align="center">
-              <hbox align="center">
-	              <label value="From top edge:"/>
-	              <textbox type="number" size="5" id="topEdgeSlicingTextbox"/>
-              </hbox>
+          <vbox align="center" id="borderImagePreviewBox" >
+            <hbox align="center">
+              <spacer flex="1"/>
 	            <stack>
 	              <image id="borderImagePreview" top="0" left="0" style="margin: 15px"
 	                     onload="SizeBorderImageRulers(this)"
@@ -345,16 +338,124 @@
                      onmousemove="MoveBorderImageSliceEdge(event, this, 'bottom')"
                      onmouseup="StopMovingBorderImageSliceEdge(event, this, 'bottom')"/>
 	            </stack>
-              <hbox align="center">
-                <label value="From bottom edge:"/>
-                <textbox type="number" size="5" id="bottomEdgeSlicingTextbox"/>
-              </hbox>
-            </vbox>
-            <vbox align="center">
-              <label value="From right edge:"/>
-              <textbox type="number" size="5" id="rightEdgeSlicingTextbox"/>
-            </vbox>
-          </hbox>
+              <spacer flex="1"/>
+            </hbox>
+	          <grid>
+	            <columns>
+	              <column style="border-right: thin solid gray"/>
+	              <column style="border-right: thin solid gray"/>
+	              <column style="border-right: thin solid gray"/>
+	              <column style="border-right: thin solid gray"/>
+	              <column/>
+	            </columns>
+	            <rows>
+	              <row align="center">
+	                <spacer/>
+	                <label value="Top"/>
+	                <label value="Right"/>
+	                <label value="Bottom"/>
+	                <label value="Left"/>
+	              </row>
+	              <row align="center" style="border-top: thin solid gray">
+	                <label value="Slicing:"/>
+	                <textbox type="number" size="5" id="topEdgeSlicingTextbox"
+	                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+	                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+		              <textbox type="number" size="5" id="rightEdgeSlicingTextbox"
+		                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+		                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                  <textbox type="number" size="5" id="bottomEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+		              <textbox type="number" size="5" id="leftEdgeSlicingTextbox"
+		                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+		                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+	              </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="Width:"/>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceTopWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceTopWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceRightWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceRightWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceBottomWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceBottomWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                  <hbox align="center">
+                    <menulist editable="true" id="borderSliceLeftWidthMenulist"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })">
+                      <menupopup id="borderSliceLeftWidthMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                        <menuseparator/>
+                        <menuitem label="&thinBorderWidth.label;" value="thin"/>
+                        <menuitem label="&mediumBorderWidth.label;" value="medium"/>
+                        <menuitem label="&thickBorderWidth.label;" value="thick"/>
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', function() { ApplyBorderImage(true) })"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false, function() { ApplyBorderImage(true) })"/>
+                  </hbox>
+                </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="Repetition:"/>
+                  <menulist id="horizontalBorderImageRepeatMenulist"
+                            oncommand="ApplyBorderImage(false)">
+                    <menupopup>
+                      <menuitem label="Stretch" value="stretch"/>
+                      <menuitem label="Repeat"  value="repeat"/>
+                      <menuitem label="Round"   value="round"/>
+                    </menupopup>
+                  </menulist>
+                  <menulist id="VerticalBorderImageRepeatMenulist"
+                            oncommand="ApplyBorderImage(false)">
+                    <menupopup>
+                      <menuitem label="Stretch" value="stretch"/>
+                      <menuitem label="Repeat"  value="repeat"/>
+                      <menuitem label="Round"   value="round"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+	            </rows>
+	          </grid>
+          </vbox>
         </vbox>
       </vbox>
 
