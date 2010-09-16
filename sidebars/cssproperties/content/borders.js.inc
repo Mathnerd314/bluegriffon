@@ -74,6 +74,45 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.useImageAsBorderCheckbox.checked = hasBorderImage
   gDialog.useImageAsBorderVbox.hidden = !hasBorderImage;
   var parsedBi = CssInspector.parseBorderImage(bi);
+  gDialog.borderImageURLTextbox.value = parsedBi ? parsedBi.url : "";
+  gDialog.topEdgeSlicingTextbox.value = "0";
+  gDialog.leftEdgeSlicingTextbox.value = "0";
+  gDialog.rightEdgeSlicingTextbox.value = "0";
+  gDialog.bottomEdgeSlicingTextbox.value = "0";
+  if (parsedBi) {
+    switch (parsedBi.offsets.length == 1) {
+      case 1:
+			  gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
+			  gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[0];
+			  gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[0];
+			  gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        break;
+      case 2:
+        gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[1];
+        gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[1];
+        gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        break;
+      case 3:
+        gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[1];
+        gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[1];
+        gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[2];
+        break;
+      case 4:
+        gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
+        gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[3];
+        gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[1];
+        gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[2];
+        break;
+      default: break; // should never happen
+    }
+    LoadBorderImage();
+    gDialog.borderImageFromTop.setAttribute("top", 15 + gDialog.topEdgeSlicingTextbox.value);
+    gDialog.borderImageFromLeft.setAttribute("left", 15 + gDialog.leftEdgeSlicingTextbox.value);
+    gDialog.borderImageFromRight.setAttribute("right", 15 + gDialog.rightEdgeSlicingTextbox.value);
+    gDialog.borderImageFromBottom.setAttribute("bottom", 15 + gDialog.bottomgeSlicingTextbox.value);
+  }
 }
 
 function ToggleSameBorderOnFourEdges(aElt)
@@ -261,7 +300,7 @@ function SizeBorderImageRulers(aElt)
   var h = aElt.boxObject.height;
   gDialog.borderImageFromTop.style.width = (w + 30) + "px";
   gDialog.borderImageFromBottom.style.width = (w + 30) + "px";
-  gDialog.borderImageFromLeft.style.height = (w + 30) + "px";
+  gDialog.borderImageFromLeft.style.height = (h + 30) + "px";
   gDialog.borderImageFromRight.style.height = (h + 30) + "px";
 }
 
@@ -275,6 +314,7 @@ function StartMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
   gY = aEvent.clientY;
   gOriginal = aElt.getAttribute(aEdge);
   aElt.setCapture(false);
+  aElt.className = "moving";
 }
 
 function MoveBorderImageSliceEdge(aEvent, aElt, aEdge)
@@ -311,5 +351,6 @@ function MoveBorderImageSliceEdge(aEvent, aElt, aEdge)
 function StopMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
 {
   aElt.releaseCapture();
+  aElt.className = "";
   gMoving = false;
 }
