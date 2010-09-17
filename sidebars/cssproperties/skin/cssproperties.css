@@ -286,3 +286,8 @@ ecolorpicker {
 #borderImageFromLeft.moving, #borderImageFromRight.moving {
   cursor: -moz-grabbing;
 }
+
+#borderImageSubpropertiesGrid textbox,
+#borderImageSubpropertiesGrid menulist[editable="true"] {
+  max-width: 7em;
+}

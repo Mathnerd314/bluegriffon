@@ -340,7 +340,7 @@
 	            </stack>
               <spacer flex="1"/>
             </hbox>
-	          <grid>
+	          <grid id="borderImageSubpropertiesGrid">
 	            <columns>
 	              <column style="border-right: thin solid gray"/>
 	              <column style="border-right: thin solid gray"/>

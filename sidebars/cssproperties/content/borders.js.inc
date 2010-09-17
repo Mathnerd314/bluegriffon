@@ -79,6 +79,10 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.leftEdgeSlicingTextbox.value   = 0;
   gDialog.rightEdgeSlicingTextbox.value  = 0;
   gDialog.bottomEdgeSlicingTextbox.value = 0;
+  gDialog.borderSliceLeftWidthMenulist.value = "";
+  gDialog.borderSliceRightWidthMenulist.value = "";
+  gDialog.borderSliceTopWidthMenulist.value = "";
+  gDialog.borderSliceBottomWidthMenulist.value = "";
   if (parsedBi) {
     switch (parsedBi.offsets.length) {
       case 1:
@@ -104,6 +108,33 @@ function BordersSectionIniter(aElt, aRuleset)
         gDialog.leftEdgeSlicingTextbox.value = parsedBi.offsets[3];
         gDialog.rightEdgeSlicingTextbox.value = parsedBi.offsets[1];
         gDialog.bottomEdgeSlicingTextbox.value = parsedBi.offsets[2];
+        break;
+      default: break; // should never happen
+    }
+    switch (parsedBi.widths.length) {
+      case 1:
+        gDialog.borderSliceTopWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceLeftWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceRightWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceBottomWidthMenulist.value = parsedBi.widths[0];
+        break;
+      case 2:
+        gDialog.borderSliceTopWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceLeftWidthMenulist.value = parsedBi.widths[1];
+        gDialog.borderSliceRightWidthMenulist.value = parsedBi.widths[1];
+        gDialog.borderSliceBottomWidthMenulist.value = parsedBi.widths[0];
+        break;
+      case 3:
+        gDialog.borderSliceTopWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceLeftWidthMenulist.value = parsedBi.widths[1];
+        gDialog.borderSliceRightWidthMenulist.value = parsedBi.widths[1];
+        gDialog.borderSliceBottomWidthMenulist.value = parsedBi.widths[2];
+        break;
+      case 4:
+        gDialog.borderSliceTopWidthMenulist.value = parsedBi.widths[0];
+        gDialog.borderSliceLeftWidthMenulist.value = parsedBi.widths[3];
+        gDialog.borderSliceRightWidthMenulist.value = parsedBi.widths[1];
+        gDialog.borderSliceBottomWidthMenulist.value = parsedBi.widths[2];
         break;
       default: break; // should never happen
     }
