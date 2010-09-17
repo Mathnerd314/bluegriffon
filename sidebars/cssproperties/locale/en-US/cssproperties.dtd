@@ -213,3 +213,6 @@
 <!ENTITY widthBorderImageProps.label "Width:">
 <!ENTITY repeatBorderImageProps.label "Repetition:">
 
+<!ENTITY stretchBorderImageRepeat.label "Stretch">
+<!ENTITY repeatBorderImageRepeat.label "Repeat">
+<!ENTITY roundBorderImageRepeat.label "Round">
