@@ -251,13 +251,17 @@ function FindLastEditableStyleSheet()
         (name == "link" &&
          child.getAttribute("rel").toLowerCase() == "stylesheet" &&
          !child.hasAttribute("title"))) {
-      var uri = Components.classes["@mozilla.org/network/io-service;1"]
-                              .getService(Components.interfaces.nsIIOService)
-                              .newURI(child.sheet.href, null, null);
-      if (uri.scheme == "file")
-        found = true;
+      if (name == "link") {
+	      var uri = Components.classes["@mozilla.org/network/io-service;1"]
+	                              .getService(Components.interfaces.nsIIOService)
+	                              .newURI(child.sheet.href, null, null);
+	      if (uri.scheme == "file")
+	        found = true;
+	      else
+	        child = child.previousElementSibling;
+      }
       else
-        child = child.previousElementSibling;
+        found = true;
     }
     else
       child = child.previousElementSibling;
@@ -590,7 +594,8 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
          !spec.b)) { 
       var existingRule = CssInspector.findLastRuleInRulesetForSelector(
                            ruleset, aDelimitor + aIdent);
-      if (existingRule) {
+      if (existingRule &&
+          (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
         sheet = existingRule.parentStyleSheet;
         existingRule.style.setProperty(property, value, priority);
       }
@@ -613,7 +618,8 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     if (!priority) {
       var existingRule = CssInspector.findLastRuleInRulesetForSelector(
                            ruleset, aDelimitor + aIdent);
-      if (existingRule) {
+      if (existingRule &&
+          (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
         sheet = existingRule.parentStyleSheet;
         existingRule.style.setProperty(property, value, "important");
       }
@@ -643,7 +649,8 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     var sheet;
     var existingRule = CssInspector.findLastRuleInRulesetForSelector(
                          ruleset, aDelimitor + aIdent);
-    if (existingRule) {
+    if (existingRule &&
+          (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
       sheet = existingRule.parentStyleSheet;
       existingRule.style.setProperty(property, value, "");
     }
