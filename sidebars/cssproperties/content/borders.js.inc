@@ -54,14 +54,14 @@ function BordersSectionIniter(aElt, aRuleset)
   trCorner = trCorner.match(r);
   blCorner = blCorner.match(r);
   brCorner = brCorner.match(r);
-  gDialog.topLeftBorderRadiusXMenulist.value = (tlCorner && tlCorner.length) ? tlCorner[0] : "";
-  gDialog.topLeftBorderRadiusYMenulist.value = (tlCorner && tlCorner.length == 2) ? tlCorner[1] : "";
-  gDialog.topRightBorderRadiusXMenulist.value = (trCorner && trCorner.length) ? trCorner[0] : "";
-  gDialog.topRightBorderRadiusYMenulist.value = (trCorner && trCorner.length == 2) ? trCorner[1] : "";
-  gDialog.bottomLeftBorderRadiusXMenulist.value = (blCorner && blCorner.length) ? blCorner[0] : "";
-  gDialog.bottomLeftBorderRadiusYMenulist.value = (blCorner && blCorner.length == 2) ? blCorner[1] : "";
-  gDialog.bottomRightBorderRadiusXMenulist.value = (brCorner && brCorner.length) ? brCorner[0] : "";
-  gDialog.bottomRightBorderRadiusYMenulist.value = (brCorner && brCorner.length == 2) ? brCorner[1] : "";
+  gDialog.topLeftBorderRadiusXMenulist.value = (tlCorner && tlCorner.length) ? tlCorner[0] : "0px";
+  gDialog.topLeftBorderRadiusYMenulist.value = (tlCorner && tlCorner.length == 2) ? tlCorner[1] : gDialog.topLeftBorderRadiusXMenulist.value;
+  gDialog.topRightBorderRadiusXMenulist.value = (trCorner && trCorner.length) ? trCorner[0] : "0px";
+  gDialog.topRightBorderRadiusYMenulist.value = (trCorner && trCorner.length == 2) ? trCorner[1] : gDialog.topRightBorderRadiusXMenulist.value;
+  gDialog.bottomLeftBorderRadiusXMenulist.value = (blCorner && blCorner.length) ? blCorner[0] : "0px";
+  gDialog.bottomLeftBorderRadiusYMenulist.value = (blCorner && blCorner.length == 2) ? blCorner[1] : gDialog.bottomLeftBorderRadiusXMenulist.value;
+  gDialog.bottomRightBorderRadiusXMenulist.value = (brCorner && brCorner.length) ? brCorner[0] : "0px";
+  gDialog.bottomRightBorderRadiusYMenulist.value = (brCorner && brCorner.length == 2) ? brCorner[1] : gDialog.bottomRightBorderRadiusXMenulist.value;
 
   gDialog.topLeftBorderRadiusXMenulist.parentNode.parentNode.hidden = sameFourCorners;
   gDialog.topRightBorderRadiusXMenulist.parentNode.parentNode.hidden = sameFourCorners;
@@ -243,21 +243,21 @@ function ApplyBorderRadius(aElt)
       property = "border-bottom-right-radius";
       break;
   }
-  var str = gDialog[elts[0]].value;
-  str += ((str || gDialog[elts[1]].value) ? " " + gDialog[elts[1]].value : "");
-  str = str.trim();
+  var val1    = gDialog[elts[0]].value;
+  var val2    = (gDialog[elts[1]].value ? "/ " + gDialog[elts[1]].value : "");
+  var val2bis = (gDialog[elts[1]].value ? gDialog[elts[1]].value : "");
   if (gDialog.sameFourCornersCheckbox.checked)
     ApplyStyles([
                   {
                     property: "border-radius",
-                    value: str
+                    value: val1 + val2
                   }
                 ]);
   else
     ApplyStyles([
                   {
                     property: property,
-                    value: str
+                    value: val1 + val2bis
                   }
                 ]);
 }

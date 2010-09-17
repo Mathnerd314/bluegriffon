@@ -58,8 +58,8 @@
       <xul:textbox anonid="textbox" size="4" type="number" min="-1000" max="1000"
                    xbl:inherits="disabled"
                    value="0"
-                   onchange="this.parentNode.reflectPosition(this)"
-                   oninput="this.parentNode.reflectPosition(this)"/>
+                   onchange="this.parentNode.reflectPosition(this, true)"
+                   oninput="this.parentNode.reflectPosition(this, true)"/>
       <xul:label value="degrees" xbl:inherits="disabled"/>
     </content>
 
@@ -80,7 +80,7 @@
         <setter>
         <![CDATA[
           this.getChild("textbox").value = val;
-          this.reflectPosition(this.getChild("textbox"));
+          this.reflectPosition(this.getChild("textbox"), true);
         ]]>
         </setter>
       </property>
@@ -109,16 +109,19 @@
       </method>
       <method name="reflectPosition">
         <parameter name="aElt"/>
+        <parameter name="aForceCallback"/>
         <body><![CDATA[
           var angle = aElt.value;
           this.getChild("innerRotator").style.MozTransform = "rotate(" + angle + "deg)";
-          this.callCallback(angle);
+          this.callCallback(angle, aForceCallback);
         ]]></body>
       </method>
       <method name="callCallback">
         <parameter name="aAngle"/>
+        <parameter name="aForceCallback"/>
         <body><![CDATA[
-          if (this.getAttribute("onchange")) {
+          if (this.getAttribute("onchange") &&
+              (aForceCallback || this.getAttribute("onlyonrelease") != "true")) {
             try {
               var fn = new Function("angle", this.getAttribute("onchange"));
               fn.call(window, aAngle);
@@ -166,7 +169,7 @@
 				  }
 				  this.parentNode.style.MozTransform = "rotate(" + this.mAngle + "deg)";
           this.parentNode.parentNode.parentNode.getChild("textbox").value = this.mAngle;
-          this.parentNode.parentNode.parentNode.callCallback(this.mAngle);
+          this.parentNode.parentNode.parentNode.callCallback(this.mAngle, false);
         ]]>
       </handler>
 
@@ -177,6 +180,14 @@
 				  this.releaseCapture();
 				  this.removeAttribute("rotating");
 				  this.mRotating = false;
+				  var x = event.screenX;
+				  var y = event.screenY;
+				  with (Math) {
+				    this.mAngle = floor(atan2(y - this.mStartY, x - this.mStartX) * 180 / PI);
+				  }
+				  this.parentNode.style.MozTransform = "rotate(" + this.mAngle + "deg)";
+          this.parentNode.parentNode.parentNode.getChild("textbox").value = this.mAngle;
+          this.parentNode.parentNode.parentNode.callCallback(this.mAngle, true);
         ]]>
       </handler>
     </handlers>

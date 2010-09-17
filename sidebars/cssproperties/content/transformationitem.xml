@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE bindings [
+  <!ENTITY % transformationitemDTD SYSTEM "chrome://cssproperties/locale/transformationitem.dtd" >
+  %transformationitemDTD;
+]>
+
+<bindings id="transformationitemBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="rotate"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&rotation.label;"/>
+      <xul:hbox align="center">
+        <xul:rotator anonid="rotator" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="value">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotator").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotator").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="translate"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&translation.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="Horizontally:"/>
+        <xul:textbox anonid="Htextbox"
+                     oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"/>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+        <xul:label value="Vertically:"/>
+        <xul:textbox anonid="Vtextbox"
+                     oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"/>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="horizontally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Htextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Htextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="vertically">
+        <getter>
+        <![CDATA[
+          return this.getChild("Vtextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Vtextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+</bindings>

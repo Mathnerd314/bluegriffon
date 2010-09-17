@@ -216,3 +216,5 @@
 <!ENTITY stretchBorderImageRepeat.label "Stretch">
 <!ENTITY repeatBorderImageRepeat.label "Repeat">
 <!ENTITY roundBorderImageRepeat.label "Round">
+
+<!ENTITY transformsSectionHeader.label "Transformations">

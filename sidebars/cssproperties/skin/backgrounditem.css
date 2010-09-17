@@ -23,6 +23,7 @@ richlistbox:focus > richlistitem[selected="true"] {
   margin: 0px ! important;
   padding: 0.25em;
   font-weight: bold;
+  background-color: silver;
 }
 
 richlistbox:focus > richlistitem[selected="true"] .backgrounditem-title {
