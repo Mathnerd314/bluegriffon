@@ -351,13 +351,13 @@
 	            <rows>
 	              <row align="center">
 	                <spacer/>
-	                <label value="Top"/>
-	                <label value="Right"/>
-	                <label value="Bottom"/>
-	                <label value="Left"/>
+	                <label value="&topBorderImageProps.label;"/>
+	                <label value="&rightBBorderImageProps.label;"/>
+	                <label value="&bottomBorderImageProps.label;"/>
+	                <label value="&leftBorderImageProps.label;"/>
 	              </row>
 	              <row align="center" style="border-top: thin solid gray">
-	                <label value="Slicing:"/>
+	                <label value="&slicingBorderImageProps.label;"/>
 	                <textbox type="number" size="5" id="topEdgeSlicingTextbox"
 	                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
 	                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
@@ -372,7 +372,7 @@
 		                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
 	              </row>
                 <row align="center" style="border-top: thin solid gray">
-                  <label value="Width:"/>
+                  <label value="&widthBorderImageProps.label;"/>
                   <hbox align="center">
                     <menulist editable="true" id="borderSliceTopWidthMenulist"
                               oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'thin medium thick', false, function() { ApplyBorderImage(true) })"
@@ -435,21 +435,21 @@
                   </hbox>
                 </row>
                 <row align="center" style="border-top: thin solid gray">
-                  <label value="Repetition:"/>
+                  <label value="&repeatBorderImageProps.label;"/>
                   <menulist id="horizontalBorderImageRepeatMenulist"
                             oncommand="ApplyBorderImage(false)">
                     <menupopup>
-                      <menuitem label="Stretch" value="stretch"/>
-                      <menuitem label="Repeat"  value="repeat"/>
-                      <menuitem label="Round"   value="round"/>
+                      <menuitem label="&stretchBorderImageRepeat.label;" value="stretch"/>
+                      <menuitem label="&repeatBorderImageRepeat.label;"  value="repeat"/>
+                      <menuitem label="&roundBorderImageRepeat.label;"   value="round"/>
                     </menupopup>
                   </menulist>
                   <menulist id="VerticalBorderImageRepeatMenulist"
                             oncommand="ApplyBorderImage(false)">
                     <menupopup>
-                      <menuitem label="Stretch" value="stretch"/>
-                      <menuitem label="Repeat"  value="repeat"/>
-                      <menuitem label="Round"   value="round"/>
+                      <menuitem label="&stretchBorderImageRepeat.label;" value="stretch"/>
+                      <menuitem label="&repeatBorderImageRepeat.label;"  value="repeat"/>
+                      <menuitem label="&roundBorderImageRepeat.label;"   value="round"/>
                     </menupopup>
                   </menulist>
                 </row>

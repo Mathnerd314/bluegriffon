@@ -204,3 +204,12 @@
 <!ENTITY fromTopEdge.label "From top edge:">
 <!ENTITY fromBottomEdge.label "From bottom edge:">
 <!ENTITY fromRightEdge.label "From right edge:">
+
+<!ENTITY topBorderImageProps.label "Top">
+<!ENTITY rightBBorderImageProps.label "Right">
+<!ENTITY bottomBorderImageProps.label "Bottom">
+<!ENTITY leftBorderImageProps.label "Left">
+<!ENTITY slicingBorderImageProps.label "Slicing:">
+<!ENTITY widthBorderImageProps.label "Width:">
+<!ENTITY repeatBorderImageProps.label "Repetition:">
+
