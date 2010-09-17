@@ -84,6 +84,7 @@ function BordersSectionIniter(aElt, aRuleset)
   gDialog.borderSliceTopWidthMenulist.value = "";
   gDialog.borderSliceBottomWidthMenulist.value = "";
   if (parsedBi) {
+    LoadBorderImage();
     switch (parsedBi.offsets.length) {
       case 1:
         gDialog.topEdgeSlicingTextbox.value = parsedBi.offsets[0];
@@ -138,7 +139,6 @@ function BordersSectionIniter(aElt, aRuleset)
         break;
       default: break; // should never happen
     }
-    LoadBorderImage();
     MakeRelativeUrl();
     gDialog.borderImageFromTop.setAttribute("top", 15 + parseFloat(gDialog.topEdgeSlicingTextbox.value));
     gDialog.borderImageFromLeft.setAttribute("left", 15 + parseFloat(gDialog.leftEdgeSlicingTextbox.value));
@@ -326,8 +326,18 @@ function MakeAbsoluteUrl(spec)
 
 function LoadBorderImage()
 {
-  gDialog.borderImagePreview.setAttribute("src", gDialog.borderImageURLTextbox.value);
   gDialog.borderImagePreviewBox.hidden = false;
+  // reset all
+  gDialog.topEdgeSlicingTextbox.value    = 0;
+  gDialog.leftEdgeSlicingTextbox.value   = 0;
+  gDialog.rightEdgeSlicingTextbox.value  = 0;
+  gDialog.bottomEdgeSlicingTextbox.value = 0;
+
+  gDialog.borderImageFromTop.setAttribute("top", 15);
+  gDialog.borderImageFromLeft.setAttribute("left", 15);
+  gDialog.borderImageFromRight.setAttribute("right", 15);
+  gDialog.borderImageFromBottom.setAttribute("bottom", 15);
+  gDialog.borderImagePreview.setAttribute("src", gDialog.borderImageURLTextbox.value);
 }
 
 function ErrorLoadingBorderImage()
@@ -344,17 +354,6 @@ function SizeBorderImageRulers(aElt)
   gDialog.borderImageFromBottom.style.width = (w + 30) + "px";
   gDialog.borderImageFromLeft.style.height = (h + 30) + "px";
   gDialog.borderImageFromRight.style.height = (h + 30) + "px";
-
-  // reset all
-  gDialog.topEdgeSlicingTextbox.value    = 0;
-  gDialog.leftEdgeSlicingTextbox.value   = 0;
-  gDialog.rightEdgeSlicingTextbox.value  = 0;
-  gDialog.bottomEdgeSlicingTextbox.value = 0;
-
-	gDialog.borderImageFromTop.setAttribute("top", 15);
-	gDialog.borderImageFromLeft.setAttribute("left", 15);
-	gDialog.borderImageFromRight.setAttribute("right", 15);
-	gDialog.borderImageFromBottom.setAttribute("bottom", 15);
 }
 
 var gMoving = false;
