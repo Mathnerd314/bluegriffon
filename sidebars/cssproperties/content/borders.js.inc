@@ -368,6 +368,20 @@ function MoveBorderImageSliceEdge(aEvent, aElt, aEdge)
   }
   aElt.setAttribute(aEdge, value);
   gDialog[aEdge + "EdgeSlicingTextbox"].value = value - 15;
+  switch (aEdge) {
+    case "top":
+      gDialog.borderSliceTopWidthMenulist.value = (value -15) + "px";
+      break;
+    case "right":
+      gDialog.borderSliceRightWidthMenulist.value = (value -15) + "px";
+      break;
+    case "bottom":
+      gDialog.borderSliceBottomWidthMenulist.value = (value -15) + "px";
+      break;
+    case "left":
+      gDialog.borderSliceLeftWidthMenulist.value = (value -15) + "px";
+      break;
+  }
 }
 
 function StopMovingBorderImageSliceEdge(aEvent, aElt, aEdge)
@@ -385,15 +399,19 @@ function ApplyBorderImageSliceChangeFromTextbox(aElt)
   switch (id) {
     case "leftEdgeSlicingTextbox":
       gDialog.borderImageFromLeft.setAttribute("left", 15 + Number(value));
+      gDialog.borderSliceLeftWidthMenulist.value = value + "px";
       break;
     case "rightEdgeSlicingTextbox":
       gDialog.borderImageFromRight.setAttribute("right", 15 + Number(value));
+      gDialog.borderSliceRightWidthMenulist.value = value + "px";
       break;
     case "topEdgeSlicingTextbox":
       gDialog.borderImageFromTop.setAttribute("top", 15 + Number(value));
+      gDialog.borderSliceRightWidthMenulist.value = value + "px";
       break;
     case "bottomEdgeSlicingTextbox":
       gDialog.borderImageFromBottom.setAttribute("bottom", 15 + Number(value));
+      gDialog.borderSliceRightWidthMenulist.value = value + "px";
       break;
     default: break; // should never happen
   }

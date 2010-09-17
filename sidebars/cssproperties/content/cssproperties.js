@@ -250,8 +250,15 @@ function FindLastEditableStyleSheet()
     if (name == "style" ||
         (name == "link" &&
          child.getAttribute("rel").toLowerCase() == "stylesheet" &&
-         !child.hasAttribute("title")))
-      found = true;
+         !child.hasAttribute("title"))) {
+      var uri = Components.classes["@mozilla.org/network/io-service;1"]
+                              .getService(Components.interfaces.nsIIOService)
+                              .newURI(child.sheet.href, null, null);
+      if (uri.scheme == "file")
+        found = true;
+      else
+        child = child.previousElementSibling;
+    }
     else
       child = child.previousElementSibling;
   }
@@ -697,3 +704,4 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include position.js.inc
 #include borders.js.inc
 #include columns.js.inc
+
