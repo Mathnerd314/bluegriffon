@@ -497,7 +497,7 @@ var EditorUtils = {
   {
     var doc = this.getCurrentDocument();
     var editorMimeType = doc.contentType;
-    var doctype = doc.doctype.publicId;
+    var doctype = doc.doctype.systemId;
     var isXML = false;
     switch (doctype) {
       case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
