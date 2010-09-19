@@ -170,7 +170,7 @@
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 <!ENTITY filesave.accesskey "s">
 <!ENTITY saveAsCmd.label "Save As...">
-<!ENTITY filesaveas.accesskey "A">
+<!ENTITY filesaveas.accesskey "s">
 
 <!ENTITY undoCmd.label "Undo">
 <!ENTITY undoCmd.accesskey "U">
