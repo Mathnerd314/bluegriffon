@@ -52,6 +52,16 @@ function GeneralSectionIniter(aElt, aRuleset)
   var fv = CssInspector.getCascadedValue(aRuleset, "font-variant");
   CheckToggle(gDialog.fontVariantNormalButton,    fv == "normal");
   CheckToggle(gDialog.fontVariantSmallCapsButton, fv == "small-caps");
+
+  var ls = CssInspector.getCascadedValue(aRuleset, "letter-spacing");
+  gDialog.letterSpacingMenulist.value = ls;
+
+  var ws = CssInspector.getCascadedValue(aRuleset, "word-spacing");
+  gDialog.wordSpacingMenulist.value = ws;
+
+  var ww = CssInspector.getCascadedValue(aRuleset, "word-wrap");
+  CheckToggle(gDialog.normalWordWrapButton,    ww == "normal");
+  CheckToggle(gDialog.breakWrapWordWrapButton, ww == "break-word");
 }
 
 function AddFont(aEvent)

@@ -175,6 +175,7 @@
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
             <row align="center">
               <spacer flex="1"/>
               <hbox align="center">
@@ -185,6 +186,54 @@
                 <toolbarbutton class="multibutton" label="&textAlignEnd.label;"
                                value="end" property="text-align" type="checkbox" group="text-align"
                                id="textAlignEndButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&letterSpacing.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="letterSpacingMenulist" property="letter-spacing"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'normal', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'normal', true)">
+                  <menupopup id="letterSpacingMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                    <menuseparator/>
+                    <menuitem label="&normalLetterSpacing.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&wordSpacing.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="wordSpacingMenulist" property="word-spacing"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'normal', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'normal', true)">
+                  <menupopup id="wordSpacingMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                    <menuseparator/>
+                    <menuitem label="&normalWordSpacing.label;" value="normal"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&wordWrap.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&normalWordWrap.label;"
+                               value="normal" property="word-wrap" type="checkbox" group="word-wrap"
+                               id="normalWordWrapButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&breakWordWordWrap.label;"
+                               value="end" property="word-wrap" type="checkbox" group="word-wrap"
+                               id="breakWrapWordWrapButton"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>

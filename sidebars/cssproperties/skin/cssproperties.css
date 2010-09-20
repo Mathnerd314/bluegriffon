@@ -89,7 +89,7 @@ hbox.csspropertiesHeader[open="true"] + .section {
   border-bottom: thin solid gray;
 }
 
-menulist:not(#cssPolicyMenulist) {
+menulist:not(#cssPolicyMenulist):not(#listStyleTypeMenulist) {
   width: 10em;
 }
 

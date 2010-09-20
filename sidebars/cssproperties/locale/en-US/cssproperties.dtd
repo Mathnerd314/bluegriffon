@@ -253,3 +253,66 @@
 <!ENTITY centerBoxPack.label "center">
 <!ENTITY endBoxPack.label "end">
 <!ENTITY justifyBoxPack.label "justify">
+
+<!ENTITY letterSpacing.label "Letter spacing:">
+<!ENTITY normalLetterSpacing.label "Normal">
+
+<!ENTITY wordSpacing.label "Word spacing:">
+<!ENTITY normalWordSpacing.label "Normal">
+
+<!ENTITY wordWrap.label "Word wrap:">
+<!ENTITY normalWordWrap.label "normal">
+<!ENTITY breakWordWordWrap.label "break-word">
+
+<!ENTITY listsSectionHeader.label "Lists">
+<!ENTITY listStyleType.label "Type:">
+<!ENTITY disc.label "Disc •">
+<!ENTITY circle.label "Circle ◦">
+<!ENTITY square.label "Square ◾">
+<!ENTITY decimal.label "Decimal 1 2 3 4 5 6 7 8 9">
+<!ENTITY decimalLeadingZero.label "Decimal 01 02 03 04 05 06 07 08 09">
+<!ENTITY lowerRoman.label "Lower Roman ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ">
+<!ENTITY upperRoman.label "Upper Roman Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ">
+<!ENTITY lowerGreek.label "Lower Greek α β γ δ ε ζ η θ ι">
+<!ENTITY lowerAlpha.label "Lower Alpha a b c d e f g h i">
+<!ENTITY upperAlpha.label "Upper Alpha A B C D E F G H I">
+<!ENTITY armenian.label "Armenian ա բ գ դ ե զ է ը թ">
+<!ENTITY georgian.label "Georgian ა ბ გ დ ე ვ ზ ჱ თ">
+<!ENTITY hebrew.label "Hebrew א ב ג ד ה ו ז ח ט">
+<!ENTITY arabicIndic.label "Arabic ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩">
+<!ENTITY bengali.label "Bengali ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯">
+<!ENTITY devanagari.label "Devanagari १ २ ३ ४ ५ ६ ७ ८ ९">
+<!ENTITY gujarati.label "Gujarati ૧ ૨ ૩ ૪ ૫ ૬ ૭ ૮ ૯">
+<!ENTITY gurmukhi.label "Gurmukhi ੧ ੨ ੩ ੪ ੫ ੬ ੭ ੮ ੯">
+<!ENTITY kannada.label "Kannada ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯">
+<!ENTITY malayalam.label "Malayalam ൧ ൨ ൩ ൪ ൫ ൬ ൭ ൮ ൯ ">
+<!ENTITY oriya.label "Oriya ୧ ୨ ୩ ୪ ୫ ୬ ୭ ୮ ୯">
+<!ENTITY tamil.label "Tamil ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯">
+<!ENTITY telugu.label "Telugu ౧ ౨ ౩ ౪ ౫ ౬ ౭ ౮ ౯">
+<!ENTITY ethiopicNumeric.label "Ethiopic ፩ ፪ ፫ ፬ ፭ ፮ ፯ ፰ ፱">
+<!ENTITY ethiopicHalehameAmEt.label "Ethiopic halehame-am-et ሀ ለ ሐ መ ሠ ረ ሰ ሸ ቀ">
+<!ENTITY ethiopicHalehameTiEr.label "Ethiopic halehame-ti-er ሀ ለ ሐ መ ረ ሰ ሸ ቀ ቐ">
+<!ENTITY ethiopicHalehameTiEt.label "Ethiopic halehame-ti-et ሀ ለ ሐ መ ሠ ረ ሰ ሸ ቀ">
+<!ENTITY persian.label "Persian ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹">
+<!ENTITY urdu.label "Urdu ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹">
+<!ENTITY khmer.label "Khmer ១ ២ ៣ ៤ ៥ ៦ ៧ ៨ ៩">
+<!ENTITY lao.label "Lao ໑ ໒ ໓ ໔ ໕ ໖ ໗ ໘ ໙">
+<!ENTITY thai.label "Thai ๑ ๒ ๓ ๔ ๕ ๖ ๗ ๘ ๙">
+<!ENTITY myanmar.label "Myanmar ၁ ၂ ၃ ၄ ၅ ၆ ၇ ၈ ၉">
+<!ENTITY hangul.label "Hangul 나 다 라 마 바 사 아 자 차">
+<!ENTITY hangulConsonant.label "Hangul consonant ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ">
+<!ENTITY hiragana.label "Hiragana い う え お か き く け こ">
+<!ENTITY katakana.label "Katakana イ ウ エ オ カ キ ク ケ コ">
+<!ENTITY hiraganaIroha.label "Hiragana Iroha ろ は に ほ へ と ちり ぬ">
+<!ENTITY katakanaIroha.label "Katakana Iroha ロ ハ ニ ホ ヘ ト チリ ヌ">
+<!ENTITY japaneseFormal.label "Japanese Formal 壹 貳 參 肆 伍 陸 柒 捌 玖">
+<!ENTITY japaneseInformal.label "Japanese Informal 壹 贰 叁 肆 伍 陆 柒 捌 玖">
+<!ENTITY cjkIdeographic.label "CJK Ideographic">
+<!ENTITY cjkIdeographicEarlyBranch.label "CJK Ideographic Early Branch 丑 寅 卯 辰 巳 午 未申 酉">
+<!ENTITY cjkHeavenlyStem.label "CJK Heavenly Stem 乙 丙 丁 戊 己 庚 辛壬 癸">
+<!ENTITY simpChineseFormal.label "Simp. Chinese Formal 壹 貳 參 肆 伍 陸 柒 捌 玖">
+<!ENTITY simpChineseInformal.label "Simp. Chinese Informal 壹 貳 參 肆 伍 陸 柒 捌 玖">
+<!ENTITY tradChineseFormal.label "Trad. Chinese Formal 一 亼 三 四 五 六 七 八 九">
+<!ENTITY tradChineseInormal.label "Trad. Chinese Informal 一 亼 三 四 五 六 七 八 九">
+
+
