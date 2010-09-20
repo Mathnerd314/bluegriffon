@@ -242,3 +242,9 @@
 <!ENTITY boxOrientation.label "Orientation:">
 <!ENTITY horizontalBoxOrientation.label "horizontal">
 <!ENTITY verticalBoxOrientation.label "vertical">
+
+<!ENTITY boxPack.label "Packing:">
+<!ENTITY startBoxPack.label "start">
+<!ENTITY centerBoxPack.label "center">
+<!ENTITY endBoxPack.label "end">
+<!ENTITY justifyBoxPack.label "justify">

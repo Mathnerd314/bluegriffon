@@ -27,6 +27,12 @@ function FlexBoxSectionIniter(aElt, aRuleset)
 
   var bog = CssInspector.getCascadedValue(aRuleset, "-moz-box-ordinal-group");
   gDialog.boxOrdinalGroupTextbox.value = bog;
+
+  var bp = CssInspector.getCascadedValue(aRuleset, "-moz-box-pack");
+  CheckToggle(gDialog.startBoxPackButton,    bp == "start");
+  CheckToggle(gDialog.centerBoxPackButton,   bp == "center");
+  CheckToggle(gDialog.endBoxPackButton,      bp == "end");
+  CheckToggle(gDialog.justifyBoxPackButton,  bp == "justify");
 }
 
 function ToggleFlexBox()

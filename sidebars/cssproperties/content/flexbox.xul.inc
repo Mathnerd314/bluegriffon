@@ -82,6 +82,26 @@
                          oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
+            <row align="center">
+              <label value="&boxPack.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&startBoxPack.label;" value="start" property="-moz-box-pack" type="checkbox"
+                               id="startBoxPackButton" group="-moz-box-pack"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&centerBoxPack.label;" value="center" property="-moz-box-pack" type="checkbox"
+                               id="centerBoxPackButton" group="-moz-box-pack"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&endBoxPack.label;" value="end" property="-moz-box-pack" type="checkbox"
+                               id="endBoxPackButton" group="-moz-box-pack"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+              <hbox>
+                <toolbarbutton class="multibutton" label="&justifyBoxPack.label;" value="justify" property="-moz-box-pack" type="checkbox"
+                               id="justifyBoxPackButton" group="-moz-box-pack"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>

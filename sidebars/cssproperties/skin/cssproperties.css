@@ -320,6 +320,6 @@ richlistitem.skewTransform {
 #transformsRichlistbox textbox,
 #transformsRichlistbox menulist,
 #boxFlexTextbox,
-#boxFlexGroupTextbox {
+#boxOrdinalGroupTextbox {
   max-width: 8em;
 }
