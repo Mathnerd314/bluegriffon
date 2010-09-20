@@ -27,6 +27,11 @@
 <!ENTITY textTransformUppercase.label "UPPER CASE">
 <!ENTITY textTransformCapitalize.label "Capitalized">
 
+<!ENTITY fontVariant.label "Variant:">
+<!ENTITY fontVariantNormal.label "normal">
+<!ENTITY fontVariantSmallCaps.label "SMALL CAPITALS">
+
+
 <!ENTITY textAlign.label "Alignment:">
 <!ENTITY textAlignStart.label "Start">
 <!ENTITY textAlignEnd.label "End">

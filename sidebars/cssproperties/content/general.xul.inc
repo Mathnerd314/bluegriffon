@@ -138,8 +138,20 @@
 			                         oncommand="ToggleProperty(this)"/>
 			          <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
 			                         group="text-transform" id="textTransformLinethroughButton"
-			                         oncommand="ToggleProperty(this)"/>
+                               oncommand="ToggleProperty(this)"/>
 			        </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&fontVariant.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&fontVariantNormal.label;" value="normal" property="font-variant" type="checkbox"
+                               group="font-variant" id="fontVariantNormalButton"
+                               oncommand="ToggleProperty(this)"/>
+                 <toolbarbutton class="multibutton" label="&fontVariantSmallCaps.label;" value="small-caps" property="font-variant" type="checkbox"
+                               group="font-variant" id="fontVariantSmallCapsButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
             </row>
 
             <row align="center">

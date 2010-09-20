@@ -48,6 +48,10 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   var lh = CssInspector.getCascadedValue(aRuleset, "line-height");
   gDialog.lineHeightMenulist.value = lh;
+
+  var fv = CssInspector.getCascadedValue(aRuleset, "font-variant");
+  CheckToggle(gDialog.fontVariantNormalButton,    fv == "normal");
+  CheckToggle(gDialog.fontVariantSmallCapsButton, fv == "small-caps");
 }
 
 function AddFont(aEvent)
