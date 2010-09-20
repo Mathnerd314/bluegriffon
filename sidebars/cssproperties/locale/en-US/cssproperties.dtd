@@ -221,3 +221,12 @@
 <!ENTITY rotation.label "Rotation">
 <!ENTITY translation.label "Translation">
 <!ENTITY skew.label "Skew">
+
+<!ENTITY flexboxSectionHeader.label "Flexibility">
+<!ENTITY enableFlexBox.label "This element and its children are flexible">
+<!ENTITY boxAlign.label "Alignment:">
+<!ENTITY startBoxAlign.label "start">
+<!ENTITY centerBoxAlign.label "center">
+<!ENTITY endBoxAlign.label "end">
+<!ENTITY baselineBoxAlign.label "baseline">
+<!ENTITY stretchBoxAlign.label "stretch">

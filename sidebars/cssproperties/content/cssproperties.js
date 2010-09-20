@@ -714,5 +714,6 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include position.js.inc
 #include borders.js.inc
 #include transforms.js.inc
+#include flexbox.js.inc
 #include columns.js.inc
 
