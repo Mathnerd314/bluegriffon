@@ -159,7 +159,9 @@
             <hbox align="center" flex="1">
 	            <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
 	                      oncommand="RepaintGradient()"/>
-              <rotator id="linearGradientAngleRotator" onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintGradient()"/>
+              <rotator id="linearGradientAngleRotator"
+                       onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintGradient()"
+                       negated="true"/>
             </hbox>
 		        <grid>
 		          <columns><column/><column/></columns>

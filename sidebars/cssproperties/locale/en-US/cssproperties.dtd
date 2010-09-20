@@ -218,3 +218,6 @@
 <!ENTITY roundBorderImageRepeat.label "Round">
 
 <!ENTITY transformsSectionHeader.label "Transformations">
+<!ENTITY rotation.label "Rotation">
+<!ENTITY translation.label "Translation">
+<!ENTITY skew.label "Skew">

@@ -10,11 +10,10 @@
 	        <hbox class="listboxBg">
 	          <toolbarbutton id="addTransformButton" class="listboxBgPlusButton" type="menu"
 	                         oncommand="AddTransform(event)">
-	            <menupopup id="addBackgroundMenupopup">
-	              <menuitem label="&addBackgroundLinearGradientMenuitem.label;" value="linear-gradient"/>
-	              <menuitem label="&addBackgroundRadialGradientMenuitem.label;" value="radial-gradient"/>
-	              <menuseparator/>
-	              <menuitem label="&addBackgroundImageMenuitem.label;" value="image"/>
+	            <menupopup id="addTransformMenupopup">
+	              <menuitem label="&rotation.label;"    value="rotate"/>
+	              <menuitem label="&translation.label;" value="translate"/>
+                <menuitem label="&skew.label;"        value="skew"/>
 	            </menupopup>
 	          </toolbarbutton>
 	          <toolbarbutton id="removeTransformButton" class="listboxBgMinusButton"

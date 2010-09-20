@@ -20,6 +20,6 @@ richlistbox:focus > richlistitem[selected="true"] .transformationitem-title {
   color: HighlightText;
 }
 
-rotator {
-  margin: 10px;
+richlistitem.rotateTransform > hbox,
+richlistitem.skewTransform > hbox {
 }

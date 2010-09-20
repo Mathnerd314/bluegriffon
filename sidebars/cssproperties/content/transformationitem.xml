@@ -58,16 +58,24 @@
     <content>
       <xul:label class="transformationitem-title" value="&translation.label;"/>
       <xul:hbox align="center">
-        <xul:label value="Horizontally:"/>
-        <xul:textbox anonid="Htextbox"
-                     oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"/>
-        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-        <xul:label value="Vertically:"/>
-        <xul:textbox anonid="Vtextbox"
-                     oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"/>
-        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+        <xul:label value="&horizontally.label;"/>
+        <xul:menulist anonid="Htextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="horizontalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true, ReapplyTransforms)"/>
+        <xul:label value="&vertically.label;"/>
+        <xul:menulist anonid="Vtextbox" editable="true"
+                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true, ReapplyTransforms)"
+                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true, ReapplyTransforms)">
+          <xul:menupopup anonid="verticalTranslationMenupopup"
+                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex', ReapplyTransforms)"/>
+        </xul:menulist>
+        <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ReapplyTransforms)"
+                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true, ReapplyTransforms)"/>
       </xul:hbox>
     </content>
 
@@ -101,6 +109,61 @@
         <setter>
         <![CDATA[
           this.getChild("Vtextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+
+  <binding id="skew"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&skew.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&aroundXAxis.label;"/>
+        <xul:rotator anonid="rotatorX" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+        <xul:label value="&aroundYAxis.label;"/>
+        <xul:rotator anonid="rotatorY" onlyonrelease="true"
+                     onchange="ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="valueX">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotatorX").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotatorX").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="valueY">
+        <getter>
+        <![CDATA[
+          return this.getChild("rotatorY").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("rotatorY").value = val;
         ]]>
         </setter>
       </property>

@@ -69,6 +69,9 @@ function Inspect()
 
 function SelectionChanged(aArgs, aElt, aOneElementSelected)
 {
+  if (aElt == gCurrentElement)
+    return;
+
   gCurrentElement = aElt;
 
   deleteAllChildren(gDialog.classPickerPopup);

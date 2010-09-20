@@ -160,7 +160,8 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
   margin: 0px;
 }
 
-#addBackgroundButton menuitem {
+#addBackgroundButton menuitem,
+#addTransformButton menuitem {
   font: message-box;
 }
 
@@ -300,6 +301,12 @@ richlistitem.rotateTransform {
 
 richlistitem.translateTransform {
   -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#translate");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.skewTransform {
+  -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#skew");
   border-bottom: gray thin solid;
   -moz-box-orient: vertical;
 }

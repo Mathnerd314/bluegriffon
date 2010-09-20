@@ -58,8 +58,8 @@
       <xul:textbox anonid="textbox" size="4" type="number" min="-1000" max="1000"
                    xbl:inherits="disabled"
                    value="0"
-                   onchange="this.parentNode.reflectPosition(this, true)"
-                   oninput="this.parentNode.reflectPosition(this, true)"/>
+                   onchange="this.parentNode.reflectPosition(event, true)"
+                   oninput="this.parentNode.reflectPosition(event, true)"/>
       <xul:label value="degrees" xbl:inherits="disabled"/>
     </content>
 
@@ -80,7 +80,7 @@
         <setter>
         <![CDATA[
           this.getChild("textbox").value = val;
-          this.reflectPosition(this.getChild("textbox"), true);
+          this.getChild("innerRotator").style.MozTransform = "rotate(" + val + "deg)";
         ]]>
         </setter>
       </property>
@@ -108,12 +108,15 @@
         ]]></body>
       </method>
       <method name="reflectPosition">
-        <parameter name="aElt"/>
+        <parameter name="aEvent"/>
         <parameter name="aForceCallback"/>
         <body><![CDATA[
-          var angle = aElt.value;
+          var angle = aEvent.originalTarget.value;
+          if (this.getChild("textbox").value != angle)
+            this.getChild("textbox").value = angle;
           this.getChild("innerRotator").style.MozTransform = "rotate(" + angle + "deg)";
           this.callCallback(angle, aForceCallback);
+          this.getChild("textbox").focus();
         ]]></body>
       </method>
       <method name="callCallback">
@@ -143,11 +146,16 @@
       <field name="mStartY">0</field>
       <field name="mRotating">false</field>
       <field name="mAngle">0</field>
+      <field name="mRotator">null</field>
+      <field name="mNegated">false</field>
     </implementation>
 
     <handlers>
       <handler event="mousedown">
         <![CDATA[
+          if (!this.mRotator)
+            this.mRotator = this.parentNode.parentNode.parentNode; 
+          this.mNegated = (this.mRotator.getAttribute("negated") == "true");
           if (this.getAttribute("disabled") == "true")
             return;
           this.mStartX = event.screenX;
@@ -165,11 +173,12 @@
 				  var x = event.screenX;
 				  var y = event.screenY;
 				  with (Math) {
-				    this.mAngle = floor(atan2(y - this.mStartY, x - this.mStartX) * 180 / PI);
+				    this.mAngle = (this.mNegated ? -1 : +1) *
+                          floor(atan2(y - this.mStartY, x - this.mStartX) * 180 / PI);
 				  }
-				  this.parentNode.style.MozTransform = "rotate(" + this.mAngle + "deg)";
-          this.parentNode.parentNode.parentNode.getChild("textbox").value = this.mAngle;
-          this.parentNode.parentNode.parentNode.callCallback(this.mAngle, false);
+				  this.parentNode.style.MozTransform = "rotate(" + (this.mNegated ? -1 : +1) * this.mAngle + "deg)";
+          this.mRotator.getChild("textbox").value = this.mAngle;
+          this.mRotator.callCallback(this.mAngle, false);
         ]]>
       </handler>
 
@@ -182,12 +191,14 @@
 				  this.mRotating = false;
 				  var x = event.screenX;
 				  var y = event.screenY;
+          var rotator = this.parentNode.parentNode.parentNode;
 				  with (Math) {
-				    this.mAngle = floor(atan2(y - this.mStartY, x - this.mStartX) * 180 / PI);
+				    this.mAngle = (this.mNegated ? -1 : +1) *
+                          floor(atan2(y - this.mStartY, x - this.mStartX) * 180 / PI);
 				  }
-				  this.parentNode.style.MozTransform = "rotate(" + this.mAngle + "deg)";
-          this.parentNode.parentNode.parentNode.getChild("textbox").value = this.mAngle;
-          this.parentNode.parentNode.parentNode.callCallback(this.mAngle, true);
+				  this.parentNode.style.MozTransform = "rotate(" + (this.mNegated ? -1 : +1) * this.mAngle + "deg)";
+          this.mRotator.getChild("textbox").value = this.mAngle;
+          this.mRotator.callCallback(this.mAngle, true);
         ]]>
       </handler>
     </handlers>

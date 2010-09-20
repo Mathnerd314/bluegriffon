@@ -29,7 +29,12 @@ function TransformsSectionIniter(aElt, aRuleset)
     switch (t.transformation) {
       case "rotate":
         item.className = "rotateTransform";
-        gDialog.transformsRichlistbox.appendChild(item);
+        if (i >= gDialog.transformsRichlistbox.itemCount)
+          gDialog.transformsRichlistbox.appendChild(item);
+        else if (gDialog.transformsRichlistbox.getItemAtIndex(i).className != "rotateTransform")
+          gDialog.transformsRichlistbox.replaceChild(gDialog.transformsRichlistbox.getItemAtIndex(i), item);
+        else
+          item = gDialog.transformsRichlistbox.getItemAtIndex(i);
         item.value = parseFloat(t.values[0]);
         break;
       case "translate":
@@ -56,6 +61,74 @@ function TransformsSectionIniter(aElt, aRuleset)
       default: break;
     }
   }
+}
+
+function OnTransformSelect(aElt)
+{
+  var item = aElt.selectedItem;
+  SetEnabledElement(gDialog.removeTransformButton, (item != null));    
+}
+
+function AddTransform(aEvent)
+{
+  var type = aEvent.originalTarget.value;
+  var item = document.createElement("richlistitem");
+  item.className = type + "Transform";
+  gDialog.transformsRichlistbox.appendChild(item);
+}
+
+function DeleteTransform()
+{
+  var item = gDialog.transformsRichlistbox.selectedItem;
+  if (!item) return; // sanity check
+  item.parentNode.removeChild(item);
+  SetEnabledElement(gDialog.removeTransformButton, (gDialog.transformsRichlistbox.itemCount != 0));
+  ReapplyTransforms();
+}
+
+function ReapplyTransforms()
+{
+  var items = gDialog.transformsRichlistbox.querySelectorAll("richlistitem");
+  var transforms = [];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    switch (item.className) {
+      case "rotateTransform":
+        transforms.push( "rotate(" + item.value + "deg)");
+        break;
+      case "translateTransform":
+        {
+          var h = item.horizontally;
+          var v = item.vertically;
+          if (h && v && parseFloat(h) && parseFloat(v))
+            transforms.push("translate(" + h + ", " + v + ")");
+          else if (h && parseFloat(h))
+            transforms.push("translateX(" + h + ")");
+          else if (v && parseFloat(v))
+            transforms.push("translateY(" + v + ")");
+        }
+        break;
+      case "skewTransform":
+        {
+          var x = item.valueX;
+          var y = item.valueY;
+          if (x && y && parseFloat(x) && parseFloat(y))
+            transforms.push("skew(" + x + "deg, " + y + "deg)");
+          else if (x && parseFloat(x))
+            transforms.push("skewX(" + x + "deg)");
+          else if (y && parseFloat(y))
+            transforms.push("skewY(" + y + "deg)");
+        }
+        break;
+      default: break;
+    }
+  }
+  ApplyStyles([
+                {
+                  property: "-moz-transform",
+                  value: transforms.join(" ")
+                }
+              ]);
 }
 
 

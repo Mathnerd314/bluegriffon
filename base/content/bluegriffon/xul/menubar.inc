@@ -18,8 +18,8 @@
         <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" observes="cmd_open"/>
 
         <menuseparator/>
-        <menuitem id="saveMenuitem" key="savekb" observes="cmd_save"/>
-        <menuitem accesskey="&filesaveas.accesskey;" key="saveaskb" observes="cmd_saveAs"/>
+        <menuitem id="saveMenuitem"   key="savekb" observes="cmd_save"/>
+        <menuitem id="saveAsMenuitem" key="saveaskb" observes="cmd_saveAs"/>
 
         <menuseparator/>
         <menuitem id="closeTabMenuitem" key="closetabkb" observes="cmd_closeTab"/>
