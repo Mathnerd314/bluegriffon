@@ -235,3 +235,5 @@
 <!ENTITY boxDirection.label "Direction:">
 <!ENTITY normalBoxDirection.label "normal">
 <!ENTITY reverseBoxDirection.label "reverse">
+
+<!ENTITY boxFlex.label "Flexibility:">

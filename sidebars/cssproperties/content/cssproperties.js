@@ -283,7 +283,7 @@ function FindLastEditableStyleSheet()
 function ToggleProperty(aElt)
 {
   var checked   = aElt.hasAttribute("checked");
-  var value = aElt.getAttribute("value");
+  var value = (aElt.hasAttribute("value") ? aElt.getAttribute("value") : aElt.value);
   if (!checked &&
       (aElt.nodeName.toLowerCase() == "checkbox" || aElt.getAttribute("type") == "checkbox"))
     value = "";

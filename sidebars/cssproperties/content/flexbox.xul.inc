@@ -50,6 +50,16 @@
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
+            <row align="center">
+              <label value="&boxFlex.label;"/>
+              <hbox>
+                <textbox id="boxFlexTextbox" type="number" min="0" decimalplaces="2"
+                         property="-moz-box-flex"
+                         oninput="ToggleProperty(this)"
+                         oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>

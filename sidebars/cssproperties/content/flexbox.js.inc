@@ -17,6 +17,9 @@ function FlexBoxSectionIniter(aElt, aRuleset)
   var bd = CssInspector.getCascadedValue(aRuleset, "-moz-box-direction");
   CheckToggle(gDialog.normalBoxDirectionButton,    bd == "normal");
   CheckToggle(gDialog.reverseBoxDirectionButton,   bd == "reverse");
+
+  var bf = CssInspector.getCascadedValue(aRuleset, "-moz-box-flex");
+  gDialog.boxFlexTextbox.value = bf;
 }
 
 function ToggleFlexBox()
