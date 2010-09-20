@@ -314,5 +314,10 @@
 <!ENTITY simpChineseInformal.label "Simp. Chinese Informal 壹 貳 參 肆 伍 陸 柒 捌 玖">
 <!ENTITY tradChineseFormal.label "Trad. Chinese Formal 一 亼 三 四 五 六 七 八 九">
 <!ENTITY tradChineseInormal.label "Trad. Chinese Informal 一 亼 三 四 五 六 七 八 九">
+<!ENTITY none.label "None">
 
+<!ENTITY listStylePosition.label "Position:">
+<!ENTITY insideListStylePosition.label "inside">
+<!ENTITY outsideListStylePosition.label "inside">
 
+<!ENTITY listStyleImage.label "Image:">

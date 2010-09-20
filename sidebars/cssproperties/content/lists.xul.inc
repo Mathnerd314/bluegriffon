@@ -16,6 +16,8 @@
                         oncommand="this.value = event.originalTarget.value;ToggleProperty(this)"
 	                      oninput="ToggleProperty(this)">
 	              <menupopup>
+                  <menuitem label="&none.label;" value="none"/>
+                  <menuseparator/>
 	                <menuitem label="&disc.label;" value="disc"/>
 	                <menuitem label="&circle.label;" value="circle"/>
 	                <menuitem label="&square.label;" value="square"/>
@@ -73,6 +75,32 @@
                   <menuitem label="&tradChineseInormal.label;" value="-moz-trad-chinese-informal"/>
 	              </menupopup>
 	            </menulist>
+            </row>
+
+            <row align="center">
+              <label value="&listStylePosition.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&insideListStylePosition.label;" value="inside" property="list-style-position" type="checkbox"
+                               id="insideListStylePositionButton" group="list-style-position"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&outsideListStylePosition.label;" value="outside" property="list-style-position" type="checkbox"
+                               id="outsideListStylePositionButton" group="list-style-position"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&listStyleImage.label;"/>
+			        <hbox align="center">
+			          <textbox flex="1" id="listStyleImageURLTextbox"
+			                   oninput="LoadListStyleImage()"/>
+			          <filepickerbutton id="listStyleImageURLFilepickerbutton"
+			                            control="listStyleImageURLTextbox"
+			                            mode="0"
+			                            filters="filterImages"
+			                            oncommand="LoadListStyleImage();"
+			                            title="&selectImageButton.label;"/>
+			        </hbox>
             </row>
           </rows>
         </grid>
