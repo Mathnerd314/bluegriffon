@@ -33,8 +33,8 @@
 
 
 <!ENTITY textAlign.label "Alignment:">
-<!ENTITY textAlignStart.label "Start">
-<!ENTITY textAlignEnd.label "End">
+<!ENTITY textAlignStart.label "start">
+<!ENTITY textAlignEnd.label "end">
 
 <!ENTITY fontSize.label "Size:">
 <!ENTITY fontSizeSmaller.label "Smaller">
