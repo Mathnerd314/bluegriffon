@@ -8,6 +8,9 @@
         <checkbox label="&enableFlexBox.label;"
                   id="flexBoxEnabledCheckbox"
                   oncommand="ToggleFlexBox()"/>
+        <checkbox label="&inlineBox.label;" class="indent"
+                  id="inlineBoxCheckbox"
+                  oncommand="ToggleFlexBox()"/>
         <grid>
           <columns><column/><column/></columns>
           <rows>
@@ -32,6 +35,18 @@
               <hbox>
                 <toolbarbutton class="multibutton" label="&stretchBoxAlign.label;" value="stretch" property="-moz-box-align" type="checkbox"
                                id="stretchBoxAlignButton" group="-moz-box-align"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&boxDirection.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&normalBoxDirection.label;" value="normal" property="-moz-box-direction" type="checkbox"
+                               id="normalBoxDirectionButton" group="-moz-box-direction"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&reverseBoxDirection.label;" value="reverse" property="-moz-box-direction" type="checkbox"
+                               id="reverseBoxDirectionButton" group="-moz-box-direction"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>

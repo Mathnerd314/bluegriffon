@@ -224,9 +224,14 @@
 
 <!ENTITY flexboxSectionHeader.label "Flexibility">
 <!ENTITY enableFlexBox.label "This element and its children are flexible">
+<!ENTITY inlineBox.label "This is an inline box">
 <!ENTITY boxAlign.label "Alignment:">
 <!ENTITY startBoxAlign.label "start">
 <!ENTITY centerBoxAlign.label "center">
 <!ENTITY endBoxAlign.label "end">
 <!ENTITY baselineBoxAlign.label "baseline">
 <!ENTITY stretchBoxAlign.label "stretch">
+
+<!ENTITY boxDirection.label "Direction:">
+<!ENTITY normalBoxDirection.label "normal">
+<!ENTITY reverseBoxDirection.label "reverse">
