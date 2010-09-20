@@ -223,7 +223,7 @@
 <!ENTITY skew.label "Skew">
 
 <!ENTITY flexboxSectionHeader.label "Flexibility">
-<!ENTITY enableFlexBox.label "This element and its children are flexible">
+<!ENTITY enableFlexBox.label "This element is flexible">
 <!ENTITY inlineBox.label "This is an inline box">
 <!ENTITY boxAlign.label "Alignment:">
 <!ENTITY startBoxAlign.label "start">
@@ -237,3 +237,8 @@
 <!ENTITY reverseBoxDirection.label "reverse">
 
 <!ENTITY boxFlex.label "Flexibility:">
+<!ENTITY boxOrdinalGroup.label "Ordinal group:">
+
+<!ENTITY boxOrientation.label "Orientation:">
+<!ENTITY horizontalBoxOrientation.label "horizontal">
+<!ENTITY verticalBoxOrientation.label "vertical">

@@ -52,10 +52,32 @@
             </row>
 
             <row align="center">
+              <label value="&boxOrientation.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&horizontalBoxOrientation.label;" value="horizontal" property="-moz-box-orient" type="checkbox"
+                               id="horizontalBoxOrientButton" group="-moz-box-orient"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&verticalBoxOrientation.label;" value="vertical" property="-moz-box-orient" type="checkbox"
+                               id="verticalBoxOrientButton" group="-moz-box-orient"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
               <label value="&boxFlex.label;"/>
               <hbox>
                 <textbox id="boxFlexTextbox" type="number" min="0" decimalplaces="2"
                          property="-moz-box-flex"
+                         oninput="ToggleProperty(this)"
+                         oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&boxOrdinalGroup.label;"/>
+              <hbox>
+                <textbox id="boxOrdinalGroupTextbox" type="number" min="0"
+                         property="-moz-box-ordinal-group"
                          oninput="ToggleProperty(this)"
                          oncommand="ToggleProperty(this)"/>
               </hbox>

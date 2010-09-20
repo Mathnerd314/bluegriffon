@@ -20,6 +20,13 @@ function FlexBoxSectionIniter(aElt, aRuleset)
 
   var bf = CssInspector.getCascadedValue(aRuleset, "-moz-box-flex");
   gDialog.boxFlexTextbox.value = bf;
+
+  var bo = CssInspector.getCascadedValue(aRuleset, "-moz-box-orient");
+  CheckToggle(gDialog.horizontalBoxOrientButton,   bo == "horizontal");
+  CheckToggle(gDialog.verticalBoxOrientButton,     bo == "vertical");
+
+  var bog = CssInspector.getCascadedValue(aRuleset, "-moz-box-ordinal-group");
+  gDialog.boxOrdinalGroupTextbox.value = bog;
 }
 
 function ToggleFlexBox()
