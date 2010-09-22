@@ -22,15 +22,16 @@ function start_svg_edit(aString) {
 function InsertSVGAtSelection(aString)
 {
   var editor = EditorUtils.getCurrentEditor();
-  var doc = EditorUtils.getCurrentDocument();
+  var isHTML = !EditorUtils.isXHTMLDocument();
+  if (isHTML)
+    editor.beginTransaction();
+
   var svgDocument = (new DOMParser()).parseFromString(aString, "application/xml")
+  var doc = EditorUtils.getCurrentDocument();
   var node = doc.importNode(svgDocument.documentElement, true);
   editor.insertElementAtSelection(node, true);
 
-  var doc = EditorUtils.getCurrentDocument();
-  var editorMimeType = doc.contentType;
-  var doctype = doc.doctype.systemId;
-  if (doctype == "http://www.w3.org/TR/html4/strict.dtd" || doctype == "http://www.w3.org/TR/html4/loose.dtd") {
+  if (isHTML) {
     var l = doc.querySelector("link[rel='force-svg']");
     if (!l) {
       var head = doc.querySelector("head");
@@ -46,6 +47,8 @@ function InsertSVGAtSelection(aString)
       editor.insertNode(s, head, head.childNodes.length);
     }
   }
+  if (isHTML)
+    editor.endTransaction();
 }
 
 var _ForceSVGInHTML= function()
