@@ -44,6 +44,7 @@
 */
 
 @namespace nvu url("http://disruptive-innovations.com/zoo/nvu");
+@namespace svg url("http://www.w3.org/2000/svg");
 
 /* Primary cursor is text I-beam */
 
@@ -363,4 +364,8 @@ a[\_moz_anonclass="mozTableRemoveRow"]:active {
 
 nvu|php, nvu|comment {
   display: none ! important;
+}
+
+svg|svg:hover {
+  outline: black dashed thin;
 }

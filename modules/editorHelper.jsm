@@ -488,9 +488,8 @@ var EditorUtils = {
 
   isXHTMLDocument: function()
   {
-    var doctype = this.getCurrentEditor().document.doctype;
-    return (doctype.publicId == "-//W3C//DTD XHTML 1.0 Transitional//EN" ||
-            doctype.publicId == "-//W3C//DTD XHTML 1.0 Strict//EN");
+    var mimetype = this.getCurrentDocumentMimeType();
+    return (mimetype == "application/xhtml+xml");
   },
 
   getCurrentDocumentMimeType: function()

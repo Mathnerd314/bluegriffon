@@ -42,7 +42,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += 
+DIRS += svg-edit
 
 #DIRS += activeview tableLayout fullscreen scripteditor jquery wordcount
 

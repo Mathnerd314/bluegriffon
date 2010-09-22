@@ -115,8 +115,8 @@
             var text = "<" + node.nodeName.toLowerCase();
             if (showIDs && node.id)
               text += "#" + node.id;
-            if (showClasses && node.className)
-              text += "." + node.className.replace( / /g, ".");
+            if (showClasses && node.hasAttribute("class"))
+              text += "." + node.getAttribute("class").replace( / /g, ".");
             if (showLang && node.hasAttribute("lang"))
               text += ":lang(" + node.getAttribute("lang") + ")";
             text += ">"

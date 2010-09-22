@@ -686,10 +686,7 @@ function CloneElementContents(editor, sourceElt, destElt)
   var sourceChild = sourceElt.firstChild;
   while (sourceChild) {
     if (sourceChild.nodeType == Node.ELEMENT_NODE) {
-      destChild = editor.document.createElement(sourceChild.nodeName.toLowerCase());
-      if (sourceChild.innerHTML)
-        destChild.innerHTML = sourceChild.innerHTML;
-      editor.cloneAttributes(destChild, sourceChild);
+      var destChild = editor.document.importNode(sourceChild, true);
       editor.insertNode(destChild, destElt, destElt.childNodes.length);
     }
     else if (sourceChild.nodeType == Node.TEXT_NODE) {
@@ -965,7 +962,21 @@ function OnDoubleClick(aEvent)
     case "img":
       cmdInsertImageCommand.doCommand();
       break;
-    default: break;
+    default:
+      if (node.namespaceURI == "http://www.w3.org/2000/svg")
+	    {
+        while (node.parentNode && node.parentNode.namespaceURI == "http://www.w3.org/2000/svg")
+          node = node.parentNode;
+        EditorUtils.getCurrentEditor().selectElement(node);
+        var serializer = new XMLSerializer();
+        var source = serializer.serializeToString(node);
+        source = '<?xml version="1.0"?>\n' + source;
+        try {
+          start_svg_edit(source);
+        }
+        catch(e) {}
+	    }
+    
   }
 }
 
