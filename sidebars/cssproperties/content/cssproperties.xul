@@ -266,6 +266,7 @@
 #include borders.xul.inc
 #include lists.xul.inc
 #include transforms.xul.inc
+#include transitions.xul.inc
 #include flexbox.xul.inc
 #include columns.xul.inc
     </vbox>

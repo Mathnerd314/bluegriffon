@@ -161,7 +161,8 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 }
 
 #addBackgroundButton menuitem,
-#addTransformButton menuitem {
+#addTransformButton menuitem,
+#addTransitionButton menuitem {
   font: message-box;
 }
 
@@ -311,7 +312,8 @@ richlistitem.skewTransform {
   -moz-box-orient: vertical;
 }
 
-#transformsRichlistbox {
+#transformsRichlistbox,
+#transitionsRichlistbox {
   min-height: 4em;
   overflow: visible;
   margin: 0px;
@@ -323,3 +325,22 @@ richlistitem.skewTransform {
 #boxOrdinalGroupTextbox {
   max-width: 8em;
 }
+
+richlistitem.propertyTransition {
+  -moz-binding: url("chrome://cssproperties/content/transitionitem.xml#property");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.allTransition {
+  -moz-binding: url("chrome://cssproperties/content/transitionitem.xml#all");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.noneTransition {
+  -moz-binding: url("chrome://cssproperties/content/transitionitem.xml#none");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+

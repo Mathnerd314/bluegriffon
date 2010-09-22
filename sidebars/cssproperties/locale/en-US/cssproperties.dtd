@@ -321,3 +321,8 @@
 <!ENTITY outsideListStylePosition.label "inside">
 
 <!ENTITY listStyleImage.label "Image:">
+
+<!ENTITY transitionsSectionHeader.label "Transitions">
+<!ENTITY noneTransition.label "No property">
+<!ENTITY allTransition.label "All properties">
+<!ENTITY propertyTransition.label "One property">
