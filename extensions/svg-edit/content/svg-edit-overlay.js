@@ -21,11 +21,48 @@ function start_svg_edit(aString) {
 
 function InsertSVGAtSelection(aString)
 {
+  var editor = EditorUtils.getCurrentEditor();
   var doc = EditorUtils.getCurrentDocument();
   var svgDocument = (new DOMParser()).parseFromString(aString, "application/xml")
   var node = doc.importNode(svgDocument.documentElement, true);
-  EditorUtils.getCurrentEditor()
-    .insertElementAtSelection(node, true);
+  editor.insertElementAtSelection(node, true);
+
+  var doc = EditorUtils.getCurrentDocument();
+  var editorMimeType = doc.contentType;
+  var doctype = doc.doctype.systemId;
+  if (doctype == "http://www.w3.org/TR/html4/strict.dtd" || doctype == "http://www.w3.org/TR/html4/loose.dtd") {
+    var l = doc.querySelector("link[rel='force-svg']");
+    if (!l) {
+      var head = doc.querySelector("head");
+      l = doc.createElement("link");
+      l.setAttribute("rel", "force-svg");
+      l.setAttribute("href", "http://berjon.com/blog/2009/07/force-svg.html");
+      editor.insertNode(l, head, head.childNodes.length);
+
+      var s = doc.createElement("script");
+      s.setAttribute("type", "application/javascript");
+      var text = doc.createTextNode("(" + _ForceSVGInHTML.toString() + ")();");
+      s.appendChild(text);
+      editor.insertNode(s, head, head.childNodes.length);
+    }
+  }
+}
+
+var _ForceSVGInHTML= function()
+{
+  function ForceSVGInHTML()
+  {
+    window.removeEventListener("load", ForceSVGInHTML, true);
+	  var svgs = document.getElementsByTagName("svg");
+	  for (var i = 0; i < svgs.length; i++) {
+	    var svg = svgs[i];
+			var div = document.createElement("div");
+			div.appendChild(svg.cloneNode(true));
+			var dom = (new DOMParser()).parseFromString(div.innerHTML, "application/xml");
+			svg.parentNode.replaceChild(document.importNode(dom.documentElement, true), svg);
+    }
+  }
+  window.addEventListener("load", ForceSVGInHTML, true);
 }
 
 var Base64 = {
