@@ -1,10 +1,12 @@
-#textShadowRichlistbox {
+#textShadowRichlistbox,
+#boxShadowRichlistbox {
   min-height: 4em;
   overflow: visible;
   margin: 0px;
 }
 
-#addTextShadowButton menuitem {
+#addTextShadowButton menuitem,
+#addBoxShadowButton menuitem {
   font: message-box;
 }
 
@@ -19,3 +21,20 @@ richlistitem.shadowTextShadow {
   border-bottom: gray thin solid;
   -moz-box-orient: vertical;
 }
+
+#boxShadowVbox {
+  margin-top: 1em;
+}
+
+richlistitem.noneBoxShadow {
+  -moz-binding: url("chrome://cssproperties/content/boxshadowitem.xml#none");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.shadowBoxShadow {
+  -moz-binding: url("chrome://cssproperties/content/boxshadowitem.xml#shadow");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+

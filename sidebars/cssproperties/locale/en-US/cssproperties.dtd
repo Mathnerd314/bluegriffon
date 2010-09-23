@@ -328,5 +328,7 @@
 <!ENTITY propertyTransition.label "One property">
 
 <!ENTITY shadowsSectionHeader.label "Shadows">
+<!ENTITY textShadows.label "Text Shadows">
+<!ENTITY boxShadows.label "Box Shadows">
 <!ENTITY noneTextShadow.label "None">
 <!ENTITY oneShadow.label "New shadow">

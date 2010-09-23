@@ -5,3 +5,6 @@
 <!ENTITY blurRadiusTextShadow.label "Blur radius:">
 <!ENTITY offsetXTextShadow.label "Horiz. offset:">
 <!ENTITY offsetYTextShadow.label "Vert. offset:">
+
+<!ENTITY spreadRadiusBoxShadow.label "Spread radius:">
+<!ENTITY inset.label "Inset shadow">

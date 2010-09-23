@@ -10,6 +10,7 @@ cssproperties.jar:
   content/cssproperties/transformationitem.xml        (content/transformationitem.xml)
   content/cssproperties/transitionitem.xml            (content/transitionitem.xml)
   content/cssproperties/textshadowitem.xml            (content/textshadowitem.xml)
+  content/cssproperties/boxshadowitem.xml             (content/boxshadowitem.xml)
   content/cssproperties/colorstopitem.xml             (content/colorstopitem.xml)
 * skin/classic/cssproperties/cssproperties.css        (skin/cssproperties.css)
   skin/classic/cssproperties/backgrounditem.css       (skin/backgrounditem.css)
