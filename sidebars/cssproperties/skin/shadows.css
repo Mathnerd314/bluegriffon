@@ -7,3 +7,15 @@
 #addTextShadowButton menuitem {
   font: message-box;
 }
+
+richlistitem.noneTextShadow {
+  -moz-binding: url("chrome://cssproperties/content/textshadowitem.xml#none");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.shadowTextShadow {
+  -moz-binding: url("chrome://cssproperties/content/textshadowitem.xml#shadow");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}

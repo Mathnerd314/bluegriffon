@@ -4,6 +4,19 @@ function ShadowsSectionIniter(aElt, aRuleset)
 {
   deleteAllChildren(gDialog.textShadowRichlistbox);
   var ts = CssInspector.getCascadedValue(aRuleset, "text-shadow");
+  var shadows = CssInspector.parseTextShadows(ts);
+  for (var i = 0; i < shadows.length; i++) {
+    var s = shadows[i];
+    var item = document.createElement("richlistitem");
+    item.className = s.none ? "noneTextShadow" : "shadowTextShadow";
+    gDialog.textShadowRichlistbox.appendChild(item);
+    if (!s.none) {
+      item.color = s.color;
+      item.offsetX = s.offsetX;
+      item.offsetY = s.offsetY;
+      item.blurRadius = s.blurRadius;
+    }
+  }
 }
 
 function OnTextShadowSelect(aElt)
@@ -33,7 +46,17 @@ function DeleteTextShadow()
 
 function ReapplyTextShadows()
 {
-  
+  var items = gDialog.textShadowRichlistbox.querySelectorAll("richlistitem");
+  var shadows = [];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var s = item.color + " " + item.offsetX + " " + item.offsetY + " " + item.blurRadius;
+    shadows.push(s);
+  }
+  ApplyStyles([{
+                 property: "text-shadow",
+                 value: shadows.join(",")
+               }])
 }
 
 function UpdateTextShadowUI()
