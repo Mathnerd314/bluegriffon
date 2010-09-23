@@ -1,0 +1,78 @@
+#backgroundsRichlistbox {
+  margin: 0px;
+}
+
+#addBackgroundButton menuitem {
+  font: message-box;
+}
+
+#backgroundsRichlistbox {
+  min-height: 4em;
+  overflow: visible;
+}
+
+#backgroundsRichlistbox richlistitem > :first-child {
+  width: 8em;
+  border: 0px none;
+  background-color: transparent;
+}
+
+richlistitem.backgrounditem {
+  -moz-binding: url("chrome://cssproperties/content/backgrounditem.xml#backgrounditem");
+  border-bottom: gray thin solid;
+}
+
+richlistitem.colorstopitem {
+  -moz-binding: url("chrome://cssproperties/content/colorstopitem.xml#colorstopitem");
+  border-bottom: gray thin solid;
+}
+
+#backgroundsRichlistbox > scrollbox {
+  overflow: visible !important;
+}
+
+#previewBackgroundImage {
+  width: 4cm;
+  height: 4cm;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#backgroundImagePanel, #linearGradientPanel {
+  padding: 0.5em;
+  font-size: smaller;
+  -moz-appearance: none;
+  background-color: #f0f0f0;
+}
+
+#linearGradientPreview {
+  width: 2cm;
+  height: 2cm;
+}
+
+#linearGradientHorizOffset, #linearGradientVertOffset {
+  max-width: 6em;
+}
+
+#colorStopsRichlistbox {
+  margin: 0px;
+  min-height: 10em;
+}
+
+#upColorStopButton {
+  list-style-image: url("chrome://cssproperties/skin/up.png");
+}
+
+#upColorStopButton[disabled="true"] {
+  list-style-image: url("chrome://cssproperties/skin/up-disabled.png");
+}
+
+#downColorStopButton {
+  list-style-image: url("chrome://cssproperties/skin/down.png");
+}
+
+#downColorStopButton[disabled="true"] {
+  list-style-image: url("chrome://cssproperties/skin/down-disabled.png");
+}
+

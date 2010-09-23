@@ -264,6 +264,7 @@
 #include geometry.xul.inc
 #include position.xul.inc
 #include borders.xul.inc
+#include shadows.xul.inc
 #include lists.xul.inc
 #include transforms.xul.inc
 #include transitions.xul.inc

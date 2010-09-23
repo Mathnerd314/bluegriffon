@@ -1,0 +1,9 @@
+#textShadowRichlistbox {
+  min-height: 4em;
+  overflow: visible;
+  margin: 0px;
+}
+
+#addTextShadowButton menuitem {
+  font: message-box;
+}

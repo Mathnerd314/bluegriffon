@@ -1,0 +1,32 @@
+#addTransformButton menuitem {
+  font: message-box;
+}
+
+richlistitem.rotateTransform {
+  -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#rotate");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.translateTransform {
+  -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#translate");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+richlistitem.skewTransform {
+  -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#skew");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
+#transformsRichlistbox {
+  min-height: 4em;
+  overflow: visible;
+  margin: 0px;
+}
+
+#transformsRichlistbox textbox,
+#transformsRichlistbox menulist {
+  max-width: 8em;
+}

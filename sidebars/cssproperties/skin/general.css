@@ -1,0 +1,11 @@
+#fontFamilyListbox {
+  margin: 0px;
+}
+
+#addFontMenupopup .checkbox-icon {
+  list-style-image: none ! important;
+}
+
+#addFontMenupopup #viewFontsCheckbox:not([checked="true"]) ~ menuitem {
+  font: message-box !important;
+}

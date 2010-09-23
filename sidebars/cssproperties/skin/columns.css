@@ -1,0 +1,11 @@
+#oneColumnButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/one-column.png");
+}
+
+#twoColumnsButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/two-columns.png");
+}
+
+#threeColumnsButton {
+  list-style-image: url("chrome://cssproperties/skin/columns/three-columns.png");
+}

@@ -1,0 +1,23 @@
+#borderImageFromTop, #borderImageFromBottom {
+  height: 1px;
+  background-color: white;
+  border-bottom: red thin dashed;
+  cursor: -moz-grab;
+}
+
+#borderImageFromLeft, #borderImageFromRight {
+  width: 1px;
+  background-color: white;
+  border-left: red thin dashed;
+  cursor: -moz-grab;
+}
+
+#borderImageFromTop.moving, #borderImageFromBottom.moving,
+#borderImageFromLeft.moving, #borderImageFromRight.moving {
+  cursor: -moz-grabbing;
+}
+
+#borderImageSubpropertiesGrid textbox,
+#borderImageSubpropertiesGrid menulist[editable="true"] {
+  max-width: 7em;
+}

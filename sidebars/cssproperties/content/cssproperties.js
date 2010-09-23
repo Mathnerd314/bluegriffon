@@ -713,6 +713,7 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include geometry.js.inc
 #include position.js.inc
 #include borders.js.inc
+#include shadows.js.inc
 #include lists.js.inc
 #include transforms.js.inc
 #include transitions.js.inc

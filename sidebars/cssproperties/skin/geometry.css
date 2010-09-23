@@ -1,0 +1,19 @@
+#geometry-margin-box {
+  margin-top: 1em;
+}
+
+#geometry-padding-box {
+  background-color: #d0d0d0;
+  border: thin solid gray;
+  margin: 1em;
+}
+
+#geometrySection menulist {
+  max-width: 6em;
+}
+
+#geometry-content-box {
+  height: 4em;
+  background-color: #d8d8d8;
+  margin: 1em;
+}

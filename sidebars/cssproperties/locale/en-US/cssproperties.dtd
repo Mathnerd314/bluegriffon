@@ -326,3 +326,7 @@
 <!ENTITY noneTransition.label "No property">
 <!ENTITY allTransition.label "All properties">
 <!ENTITY propertyTransition.label "One property">
+
+<!ENTITY shadowsSectionHeader.label "Shadows">
+<!ENTITY noneTextShadow.label "None">
+<!ENTITY oneShadow.label "New shadow">
