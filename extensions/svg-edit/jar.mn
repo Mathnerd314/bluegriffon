@@ -222,6 +222,7 @@ svg-edit.jar:
 	content/svg-edit-overlay.js    (content/svg-edit-overlay.js)
 	content/svg-edit-overlay.xul    (content/svg-edit-overlay.xul)
   skin/svg-edit-overlay.css  (skin/svg-edit-overlay.css)
+  skin/logo32.png  (skin/logo32.png)
   skin/logo32-maintoolbar.png  (skin/logo32-maintoolbar.png)
   skin/logo32-maintoolbar-small.png  (skin/logo32-maintoolbar-small.png)
   
