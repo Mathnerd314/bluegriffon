@@ -8,9 +8,12 @@ function GeometrySectionIniter(aElt, aRuleset)
   var mr = CssInspector.getCascadedValue(aRuleset, "margin-right");
   var afm = (mt == mb && mt == ml && mt == mr);
   gDialog.useSameFourMarginsCheckbox.checked = afm;
-  gDialog.marginRightMenulist.disabled = afm;
-  gDialog.marginLeftMenulist.disabled = afm;
-  gDialog.marginTopMenulist.disabled = afm;
+  gDialog.marginRightMenulist.style.visibility = (afm ? "hidden": "");
+  gDialog.marginLeftMenulist.style.visibility = (afm ? "hidden": "");
+  gDialog.marginTopMenulist.style.visibility = (afm ? "hidden": "");
+  gDialog.marginRightMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
+  gDialog.marginLeftMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
+  gDialog.marginTopMenulist.nextElementSibling.style.visibility = afm ? "hidden": "";
   gDialog.marginTopMenulist.value = mt;
   gDialog.marginBottomMenulist.value = mb;
   gDialog.marginLeftMenulist.value = ml;
@@ -22,9 +25,12 @@ function GeometrySectionIniter(aElt, aRuleset)
   var pr = CssInspector.getCascadedValue(aRuleset, "padding-right");
   var afp = (pt == pb && pt == pl && pt == pr);
   gDialog.useSameFourPaddingsCheckbox.checked = afp;
-  gDialog.paddingRightMenulist.disabled = afp;
-  gDialog.paddingLeftMenulist.disabled = afp;
-  gDialog.paddingTopMenulist.disabled = afp;
+  gDialog.paddingRightMenulist.style.visibility = (afp ? "hidden" : "");
+  gDialog.paddingLeftMenulist.style.visibility = (afp ? "hidden" : "");
+  gDialog.paddingTopMenulist.style.visibility = (afp ? "hidden" : "");
+  gDialog.paddingRightMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
+  gDialog.paddingLeftMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
+  gDialog.paddingTopMenulist.nextElementSibling.style.visibility = (afp ? "hidden" : "");
   gDialog.paddingTopMenulist.value = pt;
   gDialog.paddingBottomMenulist.value = pb;
   gDialog.paddingLeftMenulist.value = pl;
@@ -54,9 +60,12 @@ function GeometrySectionIniter(aElt, aRuleset)
 function ToggleFourEdges(aCheckbox, aPrefix)
 {
   var checked = aCheckbox.checked;
-  gDialog[aPrefix + "RightMenulist"].disabled = checked;
-  gDialog[aPrefix + "LeftMenulist"].disabled = checked;
-  gDialog[aPrefix + "TopMenulist"].disabled = checked;
+  gDialog[aPrefix + "RightMenulist"].style.visibility = (checked ? "hidden": "");
+  gDialog[aPrefix + "LeftMenulist"].style.visibility = (checked ? "hidden": "");
+  gDialog[aPrefix + "TopMenulist"].style.visibility = (checked ? "hidden": "");
+  gDialog[aPrefix + "RightMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
+  gDialog[aPrefix + "LeftMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
+  gDialog[aPrefix + "TopMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
   if (checked) {
     var value = gDialog[aPrefix + "BottomMenulist"].value;
 	  gDialog[aPrefix + "RightMenulist"].value= value;

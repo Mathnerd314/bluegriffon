@@ -154,6 +154,7 @@ ecolorpicker {
 %include general.css
 %include colors.css
 %include geometry.css
+%include position.css
 %include borders.css
 %include transforms.css
 %include flexbox.css

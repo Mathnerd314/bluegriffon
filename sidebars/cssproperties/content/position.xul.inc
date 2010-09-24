@@ -138,74 +138,76 @@
 
           <row align="top">
             <label value="&offsets.label;"/>
-            <grid style="background-color: #e0e0e0">
-              <columns><column/><column/><column/></columns>
-              <rows>
-                <row>
-                  <spacer/>
-                  <hbox align="center">
-	                  <menulist editable="true" id="topMenulist" property="top"
-	                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-	                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-	                    <menupopup id="topMenupopup"
-	                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-	                      <menuseparator/>
-	                      <menuitem label="&offsetAuto.label;" value="auto"/>
-	                    </menupopup>
-	                  </menulist>
-	                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-	                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-                 </hbox>
-               </row>
-
-                <row align="center">
-                  <hbox align="center">
-	                  <menulist editable="true" id="leftMenulist" property="left"
-	                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-	                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-	                    <menupopup id="leftMenupopup"
-	                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-	                      <menuseparator/>
-	                      <menuitem label="&offsetAuto.label;" value="auto"/>
-	                    </menupopup>
-	                  </menulist>
-	                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-	                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-                  </hbox>
-                  <spacer/>
-                  <hbox align="center">
-                    <menulist editable="true" id="rightMenulist" property="right"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-                      <menupopup id="rightMenupopup"
-                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-                        <menuseparator/>
-                        <menuitem label="&offsetAuto.label;" value="auto"/>
-                      </menupopup>
-                    </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-                  </hbox>
-                </row>
-
-                <row>
-                  <spacer/>
-                  <hbox align="center">
-	                  <menulist editable="true" id="bottomMenulist" property="bottom"
-	                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-	                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-	                    <menupopup id="bottomMenupopup"
-	                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-	                      <menuseparator/>
-	                      <menuitem label="&offsetAuto.label;" value="auto"/>
-	                    </menupopup>
-	                  </menulist>
-	                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-	                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-                  </hbox>
-                 </row>
-              </rows>
-            </grid>
+            <hbox>
+	            <grid style="background-color: #e0e0e0" id="positionOffsetsGrid">
+	              <columns><column/><column/><column/></columns>
+	              <rows>
+	                <row>
+	                  <spacer/>
+	                  <hbox align="center">
+		                  <menulist editable="true" id="topMenulist" property="top" sizetopopup="none"
+		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+		                    <menupopup id="topMenupopup"
+		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+		                      <menuseparator/>
+		                      <menuitem label="&offsetAuto.label;" value="auto"/>
+		                    </menupopup>
+		                  </menulist>
+		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+	                 </hbox>
+	               </row>
+	
+	                <row align="center">
+	                  <hbox align="center">
+		                  <menulist editable="true" id="leftMenulist" property="left" sizetopopup="none"
+		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+		                    <menupopup id="leftMenupopup"
+		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+		                      <menuseparator/>
+		                      <menuitem label="&offsetAuto.label;" value="auto"/>
+		                    </menupopup>
+		                  </menulist>
+		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+	                  </hbox>
+	                  <spacer/>
+	                  <hbox align="center">
+	                    <menulist editable="true" id="rightMenulist" property="right" sizetopopup="none"
+	                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+	                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+	                      <menupopup id="rightMenupopup"
+	                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+	                        <menuseparator/>
+	                        <menuitem label="&offsetAuto.label;" value="auto"/>
+	                      </menupopup>
+	                    </menulist>
+	                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+	                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+	                  </hbox>
+	                </row>
+	
+	                <row>
+	                  <spacer/>
+	                  <hbox align="center">
+		                  <menulist editable="true" id="bottomMenulist" property="bottom" sizetopopup="none"
+		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+		                    <menupopup id="bottomMenupopup"
+		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+		                      <menuseparator/>
+		                      <menuitem label="&offsetAuto.label;" value="auto"/>
+		                    </menupopup>
+		                  </menulist>
+		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+	                  </hbox>
+	                 </row>
+	              </rows>
+	            </grid>
+            </hbox>
           </row>
         </rows>
       </grid>
