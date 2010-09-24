@@ -294,6 +294,9 @@
 <!ENTITY normalWordWrap.label "normal">
 <!ENTITY breakWordWordWrap.label "break-word">
 
+<!ENTITY textIndent.label "Text indentation:">
+
+
 <!ENTITY listsSectionHeader.label "Lists">
 <!ENTITY listStyleType.label "Type:">
 <!ENTITY disc.label "Disc •">

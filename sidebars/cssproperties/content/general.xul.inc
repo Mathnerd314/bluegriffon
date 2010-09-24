@@ -251,6 +251,20 @@
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
+            <row align="center">
+              <label value="&textIndent.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="textIndentMenulist" property="text-indent"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)">
+                  <menupopup id="textIndentMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>

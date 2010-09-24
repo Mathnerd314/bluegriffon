@@ -66,6 +66,9 @@ function GeneralSectionIniter(aElt, aRuleset)
   var d = CssInspector.getCascadedValue(aRuleset, "direction");
   CheckToggle(gDialog.ltrDirectionButton,    d == "ltr");
   CheckToggle(gDialog.rtlDirectionButton,    d == "rtl");
+
+  var ti = CssInspector.getCascadedValue(aRuleset, "text-indent");
+  gDialog.textIndentMenulist.value = ti;
 }
 
 function AddFont(aEvent)
