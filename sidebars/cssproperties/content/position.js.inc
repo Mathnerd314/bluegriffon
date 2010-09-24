@@ -5,6 +5,11 @@ function PositionSectionIniter(aElt, aRuleset)
   var d = CssInspector.getCascadedValue(aRuleset, "display");
   gDialog.displayMenulist.value = d;
 
+  var v = CssInspector.getCascadedValue(aRuleset, "visibility");
+  CheckToggle(gDialog.visibleVisibilityButton,   v == "visible");
+  CheckToggle(gDialog.hiddenVisibilityButton,    v == "hidden");
+  CheckToggle(gDialog.collapseVisibilityButton,  v == "collapse");
+
   var f = CssInspector.getCascadedValue(aRuleset, "float");
   CheckToggle(gDialog.floatLeftButton,   f == "left");
   CheckToggle(gDialog.floatNoneButton,   f == "none");

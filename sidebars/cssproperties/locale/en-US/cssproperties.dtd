@@ -168,6 +168,11 @@
 <!ENTITY tableColumn.label "Table column">
 <!ENTITY tableCell.label "Table cell">
 
+<!ENTITY visibility.label "Visibility:">
+<!ENTITY visibleVisibility.label "visible">
+<!ENTITY hiddenVisibility.label "hidden">
+<!ENTITY collapseVisibility.label "collapse">
+
 <!ENTITY float.label "Float:">
 <!ENTITY leftFloat.label "Floating to the left">
 <!ENTITY noneFloat.label "Not floating">

@@ -42,6 +42,21 @@
           </row>
 
           <row align="center">
+            <label value="&visibility.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&visibleVisibility.label;" value="visible" property="visibility" type="checkbox"
+                             id="visibleVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&hiddenVisibility.label;" value="hidden" property="visibility" type="checkbox"
+                             id="hiddenVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&collapseVisibility.label;" value="collapse" property="visibility" type="checkbox"
+                             id="collapseVisibilityButton" group="visibility"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center">
             <label value="&float.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" tooltiptext="&leftFloat.label;" value="left" property="float" type="checkbox"
