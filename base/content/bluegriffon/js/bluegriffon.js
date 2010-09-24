@@ -956,6 +956,8 @@ function OnDoubleClick(aEvent)
 
   switch (node.nodeName.toLowerCase()) {
     case "a":
+      if (node.hasAttribute("href"))
+        cmdInsertLinkCommand.doCommand();
       if (node.hasAttribute("name") || node.id)
         cmdInsertAnchorCommand.doCommand();
       break;

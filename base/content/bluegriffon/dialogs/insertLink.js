@@ -4,8 +4,11 @@ Components.utils.import("resource://gre/modules/urlHelper.jsm");
 var gNode = null;
 var gEditor = null;
 var gDocUrlScheme = null;
+var gCollapsedSelection = false;
+
 function Startup()
 {
+  window.sizeToContent();
   gNode = window.arguments[0];
   gEditor = EditorUtils.getCurrentEditor();
 
@@ -20,15 +23,21 @@ function Startup()
 
 function InitDialog()
 {
-  document.documentElement.getButton("accept").setAttribute("disabled", "true");
+  //document.documentElement.getButton("accept").setAttribute("disabled", "true");
 
   if (gNode) {
     gDialog.linkTextbox.hidden = true;
     gDialog.linkLabel.setAttribute("value", gNode.textContent.trim());
+    var url = gNode.getAttribute("href")
+    gDialog.urlMenulist.value = url;
+    gDialog.relativeURLCheckbox.checked =
+       !(url.substr(0,7) == "http://" ||
+         url.substr(0,8) == "https://" ||
+         url.substr(0,6) == "ftp://");
   }
   else {
-    var collapsedSelection = gEditor.selection.isCollapsed;
-    if (collapsedSelection) {
+    gCollapsedSelection = gEditor.selection.isCollapsed;
+    if (gCollapsedSelection) {
 	    gDialog.linkTextbox.hidden = false;
 	    gDialog.linkLabel.hidden = true;
     }
@@ -84,5 +93,87 @@ function CheckURL()
     gDialog.relativeURLCheckbox.checked = false;
     gDialog.emailCheckbox.disabled = true;
     gDialog.relativeURLCheckbox.disabled = true;
+  }
+}
+
+function MakeRelativeUrl()
+{
+  var spec = gDialog.urlMenulist.value;
+  if (gDocUrlScheme && gDocUrlScheme != "resource") {
+    spec = UrlUtils.makeRelativeUrl(spec);
+    gDialog.urlMenulist.value = spec;
+    gDialog.relativeURLCheckbox.checked = true;
+  }
+}
+
+function MakeAbsoluteUrl()
+{
+  var spec = gDialog.urlMenulist.value;
+  if (gDocUrlScheme && gDocUrlScheme != "resource") {
+    spec = UrlUtils.makeAbsoluteUrl(spec);
+    gDialog.urlMenulist.value = spec;
+    gDialog.relativeURLCheckbox.checked = false;
+  }
+}
+
+function ToggleRelativeOrAbsolute()
+{
+  if (gDialog.relativeURLCheckbox.checked) {
+    MakeRelativeUrl();
+  }
+  else {
+    MakeAbsoluteUrl();
+  }
+}
+
+function onAccept()
+{
+  var url = gDialog.urlMenulist.value;
+  if (url && gDialog.emailCheckbox.checked)
+    url = "mailto:" + url;
+
+  if (gNode) {
+    if (url)
+      gEditor.setAttribute(gNode, "href", url);
+    else {
+      var offset = 0;
+      var parent = gNode.parentNode;
+      var childNodes = parent.childNodes;
+      gEditor.setShouldTxnSetSelection(false);
+      gEditor.beginTransaction();
+
+      while (childNodes[offset] != gNode)
+        ++offset;
+
+      childNodes = gNode.childNodes;
+      var childNodesLength = childNodes.length;
+      for (var i = childNodesLength - 1; i >= 0; i--) {
+        var clone = childNodes.item(i).cloneNode(true);
+        gEditor.insertNode(clone, parent, offset + 1);
+      }
+
+      gEditor.deleteNode(gNode);
+
+      gEditor.endTransaction();
+      gEditor.setShouldTxnSetSelection(true);
+    }
+  }
+  else if (gCollapsedSelection) {
+    var textNode = gEditor.document.createTextNode(gDialog.linkTextbox.value);
+    var anchor = gEditor.document.createElement("a");
+    anchor.appendChild(textNode);
+    anchor.setAttribute("href", url);
+    try {
+      gEditor.insertElementAtSelection(anchor, false);
+    }
+    catch (e) {}
+  }
+  else {
+    var anchor = gEditor.document.createElement("a");
+    anchor.setAttribute("href", url);
+    try {
+      gEditor.insertLinkAroundSelection(anchor);
+    }
+    catch (e) {}
   }
 }

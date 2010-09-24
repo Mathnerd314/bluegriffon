@@ -12,7 +12,7 @@
     onload = "Startup()"
     buttons="accept,cancel"
     ondialogaccept="return onAccept();"
-    width="300" height="300"
+    width="300"
     persist="screenX screenY">
 
   <!-- Methods common to all editor dialogs -->
@@ -34,7 +34,8 @@
       <menulist flex="1" sizetopopup="none"
                 id="urlMenulist"
                 editable="true"
-                oninput="CheckURL()">
+                oninput="CheckURL()"
+                oncommand="CheckURL()">
         <menupopup id="urlMenupopup"/>
       </menulist>
       <filepickerbutton id="urlFilepickerbutton"
@@ -47,6 +48,7 @@
     <checkbox class="indent" id="emailCheckbox"
               label="&isMail.label;"/>
     <checkbox class="indent" id="relativeURLCheckbox"
-              label="&relativeUrl.label;"/>
+              label="&relativeUrl.label;"
+              oncommand="ToggleRelativeOrAbsolute()"/>
   </groupbox>
 </dialog>

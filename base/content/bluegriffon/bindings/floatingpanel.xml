@@ -12,7 +12,7 @@
       <stylesheet src="chrome://bluegriffon/skin/panels/floatingpanel.css"/>
     </resources>
 
-    <content noautohide="true" level="floating">
+    <content noautohide="true">
       <xul:hbox align="center" class="titleholder">
         <xul:image class="floatingpanel-close"
                    onclick="this.parentNode.parentNode.closePanel()"/>
