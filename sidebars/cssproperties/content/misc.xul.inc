@@ -96,7 +96,7 @@
             <row align="center">
               <label value="&pageBreakInside.label;"/>
               <hbox>
-                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                <menulist id="pageBreakInsideMenulist" sizetopopup="none"
                           property="page-break-inside"
                           oncommand="ToggleProperty(this)">
                   <menupopup>
@@ -110,7 +110,7 @@
             <row align="center">
               <label value="&pageBreakAfter.label;"/>
               <hbox>
-                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                <menulist id="pageBreakAfterMenulist" sizetopopup="none"
                           property="page-break-after"
                           oncommand="ToggleProperty(this)">
                   <menupopup>
@@ -123,6 +123,7 @@
                 </menulist>
               </hbox>
             </row>
+
           </rows>
         </grid>
       </vbox>

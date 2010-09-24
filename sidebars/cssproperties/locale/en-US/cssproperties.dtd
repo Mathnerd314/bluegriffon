@@ -416,3 +416,8 @@
 <!ENTITY avoidPageBreak.label "avoid">
 <!ENTITY leftPageBreak.label "left page">
 <!ENTITY rightPageBreak.label "right page">
+
+<!ENTITY tablesSectionHeader.label "Tables">
+<!ENTITY tableLayout.label "Table layout:">
+<!ENTITY autoTableLayout.label "automatic">
+<!ENTITY fixedTableLayout.label "fixed">
