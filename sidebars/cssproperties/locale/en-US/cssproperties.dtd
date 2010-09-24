@@ -366,6 +366,17 @@
 <!ENTITY noneTextShadow.label "None">
 <!ENTITY oneShadow.label "New shadow">
 
+<!ENTITY verticalAlign.label "Vert. alignment:">
+<!ENTITY baselineVerticalAlign.label "Baselines">
+<!ENTITY subVerticalAlign.label "Baseline with subscripts of parent's box">
+<!ENTITY superVerticalAlign.label "Baseline with superscripts of parent's box">
+<!ENTITY topVerticalAlign.label "Tops">
+<!ENTITY textTopVerticalAlign.label "Top with top of parent's content aread">
+<!ENTITY middleVerticalAlign.label "Midpoint with baseline of parent + 1/2 of 'x' height">
+<!ENTITY bottomVerticalAlign.label "Bottoms">
+<!ENTITY textBottomVerticalAlign.label "Bottom with bottom of parent's content area">
+
+
 <!ENTITY direction.label "Text direction:">
 <!ENTITY ltrDirection.label "Left to right">
 <!ENTITY rtlDirection.label "Right to left">

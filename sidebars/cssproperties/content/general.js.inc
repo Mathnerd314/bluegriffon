@@ -69,6 +69,9 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   var ti = CssInspector.getCascadedValue(aRuleset, "text-indent");
   gDialog.textIndentMenulist.value = ti;
+
+  var va = CssInspector.getCascadedValue(aRuleset, "vertical-align");
+  gDialog.verticalAlignMenulist.value = va;
 }
 
 function AddFont(aEvent)

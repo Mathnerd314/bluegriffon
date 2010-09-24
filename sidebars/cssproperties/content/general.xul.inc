@@ -191,6 +191,31 @@
             </row>
 
             <row align="center">
+              <label value="&verticalAlign.label;"/>
+              <hbox align="center">
+                <menulist editable="true" id="verticalAlignMenulist" property="vertical-align"
+                          sizetopopup="none"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'baseline sub super top text-top middle bottom text-bottom', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'baseline sub super top text-top middle bottom text-bottom', true)">
+                  <menupopup id="verticalAlignMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                    <menuseparator/>
+                    <menuitem label="&baselineVerticalAlign.label;" value="baseline"/>
+                    <menuitem label="&subVerticalAlign.label;" value="sub"/>
+                    <menuitem label="&superVerticalAlign.label;" value="super"/>
+                    <menuitem label="&topVerticalAlign.label;" value="top"/>
+                    <menuitem label="&textTopVerticalAlign.label;" value="text-top"/>
+                    <menuitem label="&middleVerticalAlign.label;" value="middle"/>
+                    <menuitem label="&bottomVerticalAlign.label;" value="bottom"/>
+                    <menuitem label="&textBottomVerticalAlign.label;" value="text-bottom"/>
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
               <label value="&direction.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-right.png"
