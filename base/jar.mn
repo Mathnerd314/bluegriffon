@@ -113,4 +113,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertImage.dtd  (locale/en-US/bluegriffon/insertImage.dtd)
   locale/en-US/bluegriffon/insertAnchor.dtd  (locale/en-US/bluegriffon/insertAnchor.dtd)
   locale/en-US/bluegriffon/insertLink.dtd  (locale/en-US/bluegriffon/insertLink.dtd)
+  locale/en-US/bluegriffon/insertLink.properties  (locale/en-US/bluegriffon/insertLink.properties)
   locale/en-US/bluegriffon/cssClassPicker.dtd (locale/en-US/bluegriffon/cssClassPicker.dtd)

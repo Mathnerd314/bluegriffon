@@ -42,6 +42,7 @@
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
   <command id="cmd_anchor"           oncommand="goDoCommand('cmd_anchor')"/>
   <command id="cmd_link"             oncommand="goDoCommand('cmd_link')"/>
+  <command id="cmd_css"              oncommand="goDoCommand('cmd_css')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

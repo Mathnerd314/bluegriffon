@@ -283,6 +283,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_image",       cmdInsertImageCommand);
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);
     commandTable.registerCommand("cmd_link",        cmdInsertLinkCommand);
+    commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
 
     commandTable.registerCommand("cmd_class",       cmdClass);
 

@@ -169,6 +169,9 @@
 <!ENTITY linkToolbarCmd.label "Link">
 <!ENTITY linkToolbarCmd.tooltip "Insert or edit a link">
 
+<!ENTITY cssToolbarCmd.label "CSS">
+<!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
+
 <!ENTITY saveCmd.label "Save">
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 <!ENTITY filesave.key "s">
