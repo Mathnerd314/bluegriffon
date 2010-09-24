@@ -30,4 +30,10 @@ function PositionSectionIniter(aElt, aRuleset)
   CheckToggle(gDialog.clearRightButton,  c == "right");
   CheckToggle(gDialog.clearBothButton,   c == "both");
   CheckToggle(gDialog.clearNoneButton,   c == "none");
+
+  var o = CssInspector.getCascadedValue(aRuleset, "overflow");
+  CheckToggle(gDialog.visibleOverflowButton,  o == "visible");
+  CheckToggle(gDialog.hiddenOverflowButton,   o == "hidden");
+  CheckToggle(gDialog.scrollOverflowButton,   o == "scroll");
+  CheckToggle(gDialog.autoOverflowButton,     o == "auto");
 }

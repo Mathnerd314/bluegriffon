@@ -50,6 +50,24 @@
           </row>
 
           <row align="center">
+            <label value="&overflow.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&visibleOverlow.label;" value="visible" property="overflow" type="checkbox"
+                             id="visibleOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&hiddenOverlow.label;" value="hidden" property="overflow" type="checkbox"
+                             id="hiddenOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&scrollOverlow.label;" value="scroll" property="overflow" type="checkbox"
+                             id="scrollOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&autoOverlow.label;" value="auto" property="overflow" type="checkbox"
+                             id="autoOverflowButton" group="overflow"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
+          <row align="center">
             <label value="&position.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" label="&staticPosition.label;" value="static" property="position" type="checkbox"

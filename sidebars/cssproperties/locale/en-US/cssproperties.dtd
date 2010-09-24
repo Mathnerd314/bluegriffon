@@ -154,6 +154,12 @@
 <!ENTITY noneFloat.label "Not floating">
 <!ENTITY rightFloat.label "Floating to the right">
 
+<!ENTITY overflow.label "Overflow:">
+<!ENTITY visibleOverlow.label "Visible">
+<!ENTITY hiddenOverlow.label "Hidden">
+<!ENTITY scrollOverlow.label "Show scrollbars">
+<!ENTITY autoOverlow.label "Automatic">
+
 <!ENTITY position.label "Position:">
 <!ENTITY staticPosition.label "Static">
 <!ENTITY relativePosition.label "Relative">
