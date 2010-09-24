@@ -125,6 +125,11 @@ toolbarbutton.multibutton:last-child {
 
 toolbarbutton.multibutton .toolbarbutton-icon[src] {
   margin-left: 1em;
+  margin-right: 1em;
+}
+
+toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
+  display: none;
 }
 
 .listboxBg {

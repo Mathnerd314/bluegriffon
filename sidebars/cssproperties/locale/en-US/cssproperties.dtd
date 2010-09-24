@@ -149,6 +149,25 @@
 <!ENTITY getNaturalSize.label "Get natural size">
 
 <!ENTITY positionSectionHeader.label "Position and Layout">
+
+<!ENTITY display.label "Display:">
+<!ENTITY noneDisplay.label "No display">
+<!ENTITY inlineDisplay.label "Inline">
+<!ENTITY runInDisplay.label "Running in">
+<!ENTITY blockDisplay.label "Block">
+<!ENTITY inlineBlockDisplay.label "Inline block">
+<!ENTITY listItem.label "List item">
+<!ENTITY table.label "Table">
+<!ENTITY inlineTable.label "Inline table">
+<!ENTITY tableHeaderGroup.label "Table header group">
+<!ENTITY tableRowGroup.label "Table row group">
+<!ENTITY tableFooterGroup.label "Table footer group">
+<!ENTITY tableColumnGroup.label "Table column group">
+<!ENTITY tableCaption.label "Table caption">
+<!ENTITY tableRow.label "Table row">
+<!ENTITY tableColumn.label "Table column">
+<!ENTITY tableCell.label "Table cell">
+
 <!ENTITY float.label "Float:">
 <!ENTITY leftFloat.label "Floating to the left">
 <!ENTITY noneFloat.label "Not floating">
@@ -324,7 +343,7 @@
 
 <!ENTITY listStylePosition.label "Position:">
 <!ENTITY insideListStylePosition.label "inside">
-<!ENTITY outsideListStylePosition.label "inside">
+<!ENTITY outsideListStylePosition.label "outside">
 
 <!ENTITY listStyleImage.label "Image:">
 

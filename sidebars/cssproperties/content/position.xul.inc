@@ -8,6 +8,40 @@
         <columns><column/><column/></columns>
         <rows>
           <row align="center">
+            <label value="&display.label;"/>
+            <hbox>
+	            <menulist id="displayMenulist" sizetopopup="none"
+                        property="display"
+                        oncommand="ToggleProperty(this)">
+	              <menupopup>
+		              <menuitem label="&noneDisplay.label;"         value="none"/>
+		              <menuseparator/>
+		              <menuitem label="&inlineDisplay.label;"       value="inline"/>
+		              <menuitem label="&runInDisplay.label;"        value="run-in"/>
+		              <menuseparator/>
+		              <menuitem label="&blockDisplay.label;"        value="block"/>
+		              <menuitem label="&inlineBlockDisplay.label;"  value="inline-block"/>
+		              <menuseparator/>
+		              <menuitem label="&listItem.label;"            value="list-item"/>
+		              <menuseparator/>
+		              <menuitem label="&table.label;"               value="table"/>
+		              <menuitem label="&inlineTable.label;"         value="inline-table"/>
+		              <menuseparator/>
+		              <menuitem label="&tableHeaderGroup.label;"    value="table-header-group"/>
+		              <menuitem label="&tableRowGroup.label;"       value="table-row-group"/>
+		              <menuitem label="&tableFooterGroup.label;"    value="table-footer-group"/>
+		              <menuitem label="&tableColumnGroup.label;"    value="table-column-group"/>
+		              <menuseparator/>
+		              <menuitem label="&tableCaption.label;"        value="table-caption"/>
+		              <menuitem label="&tableRow.label;"            value="table-row"/>
+		              <menuitem label="&tableColumn.label;"         value="table-column"/>
+		              <menuitem label="&tableCell.label;"           value="table-cell"/>
+	              </menupopup>
+	            </menulist>
+            </hbox>
+          </row>
+
+          <row align="center">
             <label value="&float.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" tooltiptext="&leftFloat.label;" value="left" property="float" type="checkbox"

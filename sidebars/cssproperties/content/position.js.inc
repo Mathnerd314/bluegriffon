@@ -2,6 +2,9 @@ RegisterIniter(PositionSectionIniter);
 
 function PositionSectionIniter(aElt, aRuleset)
 {
+  var d = CssInspector.getCascadedValue(aRuleset, "display");
+  gDialog.displayMenulist.value = d;
+
   var f = CssInspector.getCascadedValue(aRuleset, "float");
   CheckToggle(gDialog.floatLeftButton,   f == "left");
   CheckToggle(gDialog.floatNoneButton,   f == "none");
