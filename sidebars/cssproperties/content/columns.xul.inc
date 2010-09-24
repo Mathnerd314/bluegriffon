@@ -1,4 +1,4 @@
-      <hbox align="center" class="csspropertiesHeader last" context="sectionHeaderContext"
+      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="columnSectionHeader">
         <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this.parentNode)"/>
         <label value="&columnsSectionHeader.label;"/>

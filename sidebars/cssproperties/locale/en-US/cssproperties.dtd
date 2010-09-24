@@ -369,3 +369,23 @@
 <!ENTITY direction.label "Text direction:">
 <!ENTITY ltrDirection.label "Left to right">
 <!ENTITY rtlDirection.label "Right to left">
+
+<!ENTITY miscSectionHeader.label "Miscellaneous">
+<!ENTITY cursor.label "Cursor:">
+<!ENTITY autoCursor.label "Automatic">
+<!ENTITY defaultCursor.label "Platform-dependant default cursor">
+<!ENTITY crossHairCursor.label "Crosshair">
+<!ENTITY pointerCursor.label "Pointer that indicates a link">
+<!ENTITY moveCursor.label "Move">
+<!ENTITY eResizeCursor.label "Resizable from left edge">
+<!ENTITY neResizeCursor.label "Resizable from upper-left corner">
+<!ENTITY nwResizeCursor.label "Resizable from upper-right corner">
+<!ENTITY nResizeCursor.label "Resizable from upper edge">
+<!ENTITY sResizeCursor.label "Resizable from bottom edge">
+<!ENTITY wResizeCursor.label "Resizable from right edge">
+<!ENTITY seResizeCursor.label "Resizable from bottom-left corner">
+<!ENTITY swResizeCursor.label "Resizable from bottom-right corner">
+<!ENTITY textCursor.label "Selectable text">
+<!ENTITY busyCursor.label "Busy, please wait">
+<!ENTITY helpCursor.label "Help available">
+<!ENTITY progress.label "Progress indicator">

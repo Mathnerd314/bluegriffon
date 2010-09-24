@@ -270,6 +270,7 @@
 #include transitions.xul.inc
 #include flexbox.xul.inc
 #include columns.xul.inc
+#include misc.xul.inc
     </vbox>
   </vbox>
 
