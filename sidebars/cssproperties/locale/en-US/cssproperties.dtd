@@ -405,3 +405,14 @@
 <!ENTITY normalUnicodeBidi.label "normal">
 <!ENTITY embedUnicodeBidi.label "embed">
 <!ENTITY bidiOverrideUnicodeBidi.label "bidi-override">
+
+<!ENTITY orphans.label "Orphans:">
+<!ENTITY widows.label "Widows:">
+<!ENTITY pageBreakAfter.label "Page break after:">
+<!ENTITY pageBreakInside.label "Page break inside:">
+<!ENTITY pageBreakBefore.label "Page break before:">
+<!ENTITY autoPageBreak.label "automatic">
+<!ENTITY alwaysPageBreak.label "always">
+<!ENTITY avoidPageBreak.label "avoid">
+<!ENTITY leftPageBreak.label "left page">
+<!ENTITY rightPageBreak.label "right page">

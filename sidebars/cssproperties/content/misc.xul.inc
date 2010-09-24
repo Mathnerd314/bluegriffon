@@ -55,6 +55,74 @@
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
+
+            <row align="center">
+              <label value="&orphans.label;"/>
+              <hbox>
+                <textbox id="orphansTextbox" type="number" size="3"
+                         property="orphans"
+                         oncommand="ToggleProperty(this)"
+                         oninput="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&widows.label;"/>
+              <hbox>
+                <textbox id="widowsTextbox" type="number" size="3"
+                         property="widows"
+                         oncommand="ToggleProperty(this)"
+                         oninput="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakBefore.label;"/>
+              <hbox>
+                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                          property="page-break-before"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&alwaysPageBreak.label;" value="always"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                    <menuitem label="&leftPageBreak.label;" value="left"/>
+                    <menuitem label="&rightPageBreak.label;" value="right"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakInside.label;"/>
+              <hbox>
+                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                          property="page-break-inside"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&pageBreakAfter.label;"/>
+              <hbox>
+                <menulist id="pageBreakBeforeMenulist" sizetopopup="none"
+                          property="page-break-after"
+                          oncommand="ToggleProperty(this)">
+                  <menupopup>
+                    <menuitem label="&autoPageBreak.label;" value="auto"/>
+                    <menuitem label="&alwaysPageBreak.label;" value="always"/>
+                    <menuitem label="&avoidPageBreak.label;" value="avoid"/>
+                    <menuitem label="&leftPageBreak.label;" value="left"/>
+                    <menuitem label="&rightPageBreak.label;" value="right"/>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>
