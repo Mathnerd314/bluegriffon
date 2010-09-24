@@ -421,3 +421,17 @@
 <!ENTITY tableLayout.label "Table layout:">
 <!ENTITY autoTableLayout.label "automatic">
 <!ENTITY fixedTableLayout.label "fixed">
+
+<!ENTITY captionSide.label "Caption position:">
+<!ENTITY topCaptionSide.label "top">
+<!ENTITY bottomCaptionSide.label "bottom">
+
+<!ENTITY borderCollapse.label "Table borders:">
+<!ENTITY collapseBorderCollapse.label "collapsed">
+<!ENTITY separateBorderCollapse.label "separated">
+
+<!ENTITY borderSpacing.label "Border spacing:">
+
+<!ENTITY emptyCells.label "Empty cells:">
+<!ENTITY showEmptyCells.label "shown">
+<!ENTITY hideEmptyCells.label "hidden">
