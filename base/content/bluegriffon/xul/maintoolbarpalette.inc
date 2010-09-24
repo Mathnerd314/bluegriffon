@@ -43,6 +43,10 @@
                      label="&anchorToolbarCmd.label;" observes="cmd_anchor"
                      tooltiptext="&anchorToolbarCmd.tooltip;"/>
 
+      <toolbarbutton id="linkButton" class="toolbarbutton-1"
+                     label="&linkToolbarCmd.label;" observes="cmd_link"
+                     tooltiptext="&linkToolbarCmd.tooltip;"/>
+
       <toolbaritem id="throbber-box"  align="center" pack="center">
         <image id="composer-throbber" tooltiptext="&throbber.tooltip;" onclick="AboutComposer()"/>
       </toolbaritem> 

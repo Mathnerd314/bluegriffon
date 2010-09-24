@@ -74,6 +74,8 @@ bluegriffon.jar:
   content/bluegriffon/utils/login.js                    (content/bluegriffon/utils/login.js)
   content/bluegriffon/dialogs/insertAnchor.xul          (content/bluegriffon/dialogs/insertAnchor.xul)
   content/bluegriffon/dialogs/insertAnchor.js           (content/bluegriffon/dialogs/insertAnchor.js)
+  content/bluegriffon/dialogs/insertLink.js             (content/bluegriffon/dialogs/insertLink.js)
+  content/bluegriffon/dialogs/insertLink.xul            (content/bluegriffon/dialogs/insertLink.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -110,4 +112,5 @@ bluegriffon-locale.jar:
   locale/en-US/branding/brand.properties  (locale/en-US/branding/brand.properties)
   locale/en-US/bluegriffon/insertImage.dtd  (locale/en-US/bluegriffon/insertImage.dtd)
   locale/en-US/bluegriffon/insertAnchor.dtd  (locale/en-US/bluegriffon/insertAnchor.dtd)
+  locale/en-US/bluegriffon/insertLink.dtd  (locale/en-US/bluegriffon/insertLink.dtd)
   locale/en-US/bluegriffon/cssClassPicker.dtd (locale/en-US/bluegriffon/cssClassPicker.dtd)
