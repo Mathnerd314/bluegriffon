@@ -338,3 +338,7 @@
 <!ENTITY boxShadows.label "Box Shadows">
 <!ENTITY noneTextShadow.label "None">
 <!ENTITY oneShadow.label "New shadow">
+
+<!ENTITY direction.label "Text direction:">
+<!ENTITY ltrDirection.label "Left to right">
+<!ENTITY rtlDirection.label "Right to left">

@@ -191,6 +191,20 @@
             </row>
 
             <row align="center">
+              <label value="&direction.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-right.png"
+                               value="ltr" property="direction" type="checkbox" group="direction"
+                               id="ltrDirectionButton" tooltiptext="&ltrDirection.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-left.png"
+                               value="rtl" property="direction" type="checkbox" group="direction"
+                               id="rtlDirectionButton" tooltiptext="&rtlDirection.label;"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
               <label value="&letterSpacing.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="letterSpacingMenulist" property="letter-spacing"

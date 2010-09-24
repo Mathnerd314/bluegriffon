@@ -62,6 +62,10 @@ function GeneralSectionIniter(aElt, aRuleset)
   var ww = CssInspector.getCascadedValue(aRuleset, "word-wrap");
   CheckToggle(gDialog.normalWordWrapButton,    ww == "normal");
   CheckToggle(gDialog.breakWrapWordWrapButton, ww == "break-word");
+
+  var d = CssInspector.getCascadedValue(aRuleset, "direction");
+  CheckToggle(gDialog.ltrDirectionButton,    d == "ltr");
+  CheckToggle(gDialog.rtlDirectionButton,    d == "rtl");
 }
 
 function AddFont(aEvent)

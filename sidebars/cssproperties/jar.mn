@@ -28,6 +28,8 @@ cssproperties.jar:
   skin/classic/cssproperties/position/left-float.png  (skin/position/left-float.png)
   skin/classic/cssproperties/position/none-float.png  (skin/position/none-float.png)
   skin/classic/cssproperties/position/right-float.png (skin/position/right-float.png)
+  skin/classic/cssproperties/general/arrow-left.png   (skin/general/arrow-left.png)
+  skin/classic/cssproperties/general/arrow-right.png  (skin/general/arrow-right.png)
 
 cssproperties-locale.jar:
 % locale    cssproperties    en-US    %locale/en-US/cssproperties/
