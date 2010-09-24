@@ -8,8 +8,8 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 
 function bgLocationAutocompleteResult(searchString, searchResult,
-                                  defaultIndex, errorDescription,
-                                  results, comments) {
+		                                  defaultIndex, errorDescription,
+		                                  results, comments) {
   this._searchString = searchString;
   this._searchResult = searchResult;
   this._defaultIndex = defaultIndex;
@@ -69,6 +69,10 @@ bgLocationAutocompleteResult.prototype = {
    * Get the value of the result at the given index
    */
   getValueAt: function(index) {
+    return this._results[index];
+  },
+
+  getLabelAt: function(index) {
     return this._results[index];
   },
 
