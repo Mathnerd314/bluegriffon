@@ -400,3 +400,8 @@
 <!ENTITY busyCursor.label "Busy, please wait">
 <!ENTITY helpCursor.label "Help available">
 <!ENTITY progress.label "Progress indicator">
+
+<!ENTITY unicodeBidi.label "Unicode bidi:">
+<!ENTITY normalUnicodeBidi.label "normal">
+<!ENTITY embedUnicodeBidi.label "embed">
+<!ENTITY bidiOverrideUnicodeBidi.label "bidi-override">

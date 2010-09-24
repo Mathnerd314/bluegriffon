@@ -37,6 +37,24 @@
 	              </menulist>
               </hbox>
             </row>
+
+            <row align="center">
+              <label value="&unicodeBidi.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton"
+                               value="normal" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="normalUnicodeBidiButton" label="&normalUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton"
+                               value="embed" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="embedUnicodeBidiButton" label="&embedUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton"
+                               value="bidi-override" property="unicode-bidi" type="checkbox" group="unicode-bidi"
+                               id="bidiOverrideUnicodeBidiButton" label="&bidiOverrideUnicodeBidi.label;"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
           </rows>
         </grid>
       </vbox>
