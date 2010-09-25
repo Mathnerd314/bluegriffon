@@ -14,9 +14,25 @@ var cmdInsertOrEditTableCommand =
 
   doCommand: function(aCommand)
   {
-    // reset
+    var element = EditorUtils.getObjectForProperties();
+    if (element) {
+      var name = element.nodeName.toLowerCase();
+      if (name == "table" ||
+          name == "thead" ||
+          name == "tfoot" ||
+          name == "tbody" ||
+          name == "tr" ||
+          name == "th" ||
+          name == "td" ||
+          name == "caption") {
+		    window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
+		                      "chrome,modal,titlebar,dialog=yes", element);
+        return;
+      }
+    }
+
+    // reset the table insertion panel
     AutoInsertTable.reset();
-    
     gDialog.AutoInsertTableSheetPopup.openPopup(gDialog["tableButton"], "after_start", 0, 0, false);
   }
 };
