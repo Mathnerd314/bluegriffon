@@ -89,6 +89,7 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/filepickerbutton.dtd  (locale/en-US/bluegriffon/filepickerbutton.dtd)
   locale/en-US/bluegriffon/filePicking.dtd  (locale/en-US/bluegriffon/filePicking.dtd)
   locale/en-US/bluegriffon/insertTable.dtd  (locale/en-US/bluegriffon/insertTable.dtd)
+  locale/en-US/bluegriffon/insertTable.properties  (locale/en-US/bluegriffon/insertTable.properties)
   locale/en-US/bluegriffon/language.properties  (locale/en-US/bluegriffon/language.properties)
   locale/en-US/bluegriffon/languages.dtd  (locale/en-US/bluegriffon/languages.dtd)
   locale/en-US/bluegriffon/markupCleaner.dtd  (locale/en-US/bluegriffon/markupCleaner.dtd)

@@ -104,12 +104,12 @@ var PromptUtils = {
     return false;
   },
 
-  confirm: function(aTitle, aMsg)
+  confirm: function(aTitle, aMsg, aWindow)
   {
     var promptService = this._getPromptService();
     if (promptService)
     {
-      return promptService.confirm(EditorUtils.getCurrentEditorWindow(),
+      return promptService.confirm(aWindow ? aWindow : EditorUtils.getCurrentEditorWindow(),
                                    aTitle,
                                    aMsg)
     }

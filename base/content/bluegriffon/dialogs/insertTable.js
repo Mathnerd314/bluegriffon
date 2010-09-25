@@ -1,9 +1,16 @@
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 
 var gNode = null;
 var gTable = null;
 var gRows, gColumns, gRowsInHeader, gRowsInFooter;
+var gTableTabChanged = false;
+
+function TableTabChanged()
+{
+  gTableTabChanged = true;
+}
 
 function Startup()
 {
@@ -202,12 +209,12 @@ function InitTableData(aNode)
     (cellPadding && cellPadding.indexOf("%") != -1) ? "%" : ""; 
 }
 
-function ValidateData()
+function ValidateData(aTabValue)
 {
-  var tab = gDialog.tabbox.selectedTab.value;
+  var tab = aTabValue || gDialog.tabbox.selectedTab.value;
   var editor = EditorUtils.getCurrentEditor();
   editor.beginTransaction();
-  switch(tab) {
+  switch (tab) {
     case "table":
       editor.setAttribute(gTable, "border", gDialog.tableBorderTextbox.value);
       if (gDialog.tableCellPaddingTextbox.value)
@@ -331,13 +338,31 @@ function UpdateListOfRows(aElement, aOldRows, aNewRows, aCellTag)
       row.appendChild(cell);
     }
   }
-  // and finally get rid of the supplementary rows if any
+
+  // and finally get rid of the extra rows if any
   for (var i = aOldRows - 1 ; i >= aNewRows; i--) {
     if (i < rows.length)
       editor.deleteNode(rows[i]);
   }
 }
 
+function onTabSelect()
+{
+  if (!("tabbox" in gDialog))
+    return;
+  var tab = gDialog.tabbox.selectedTab.value;
+  switch (tab) {
+    case "cell":
+      if (gTableTabChanged) {
+        if (PromptUtils.confirm(gDialog.bundleString.getString("TableTabModified"),
+                                gDialog.bundleString.getString("ApplyAndCloseWindow"),
+                                window)) {
+	        ValidateData("table");
+          window.close();
+	      }
+      }
+  }
+}
 /********************** diInsertNodeBeforeTxn **********************/
 
 function diInsertNodeBeforeTxn(aNode, aParent, aRef)

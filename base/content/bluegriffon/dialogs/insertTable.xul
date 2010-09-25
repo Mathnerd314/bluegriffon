@@ -21,13 +21,16 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertTable.js"/>
 
+  <stringbundle id="bundleString"         src="chrome://bluegriffon/locale/insertTable.properties"/>
+
   <tabbox id="tabbox">
-    <tabs>
+    <tabs onselect="onTabSelect()">
       <tab label="&table.tab;" value="table"/>
       <tab label="&cell.tab;"  value="cell"/>
     </tabs>
     <tabpanels>
-      <vbox>
+      <vbox oncommand="TableTabChanged()"
+            oninput="TableTabChanged()">
         <groupbox>
           <caption label="&size.label;"/>
           <grid>
