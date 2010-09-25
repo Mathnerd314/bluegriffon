@@ -1,290 +1,188 @@
-Components.utils.import("resource://gre/modules/cssHelper.jsm");
 Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/cssInspector.jsm");
 
-var gCellID = 12;
-var gActiveEditor = null;
-var gPrefs = null;
+var gNode = null;
+var gTable = null;
 
 function Startup()
 {
-  gActiveEditor = EditorUtils.getCurrentTableEditor();
-  if (!gActiveEditor)
-  {
-    dump("Failed to get active editor!\n");
-    window.close();
-    return;
-  }
-
   GetUIElements();
-  SetWidthTextBoxMax(null);
-  gDialog.cssToggler.init();
-#ifndef XP_MACOSX
-  window.sizeToContent();
-  CenterDialogOnOpener();
-#endif
+  gNode = window.arguments[0];
+
+  InitTableData(gNode);
 }
 
-function SetWidthTextBoxMax(aElt)
+function onCssPolicyChange(aElt)
 {
-  var defaultWidth_unit;
-  if (aElt)
-  {
-    defaultWidth_unit = aElt.getAttribute("value");
+  var cssPolicy = aElt.value;
+  gDialog.classPicker.style.visibility = (cssPolicy !="class") ? "hidden" : "visible";
+  if (cssPolicy == "class")
+    gDialog.classPicker.focus();
+}
+
+function IncreaseLength(aElt, aUnitsString, aCallback)
+{
+  var value;
+  var menulist = aElt.previousSibling;
+  if (menulist.selectedItem)
+    value = menulist.selectedItem.value;
+  else
+    value = menulist.value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (match) {
+    var unit = match[2];
+    var v    = parseFloat(match[1]);
+    switch (unit) {
+      case "in":
+      case "cm":
+        v += 0.1;
+        v = Math.round( v * 10) / 10;
+        break;
+      case "em":
+      case "ex":
+        v += 0.5;
+        v = Math.round( v * 10) / 10;
+        break;
+      default:
+        v += 1;
+        break;
+    }
+    menulist.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(menulist, aUnitsString, '', false, aCallback);
+  }
+}
+
+function DecreaseLength(aElt, aUnitsString, aAllowNegative, aCallback)
+{
+  var value;
+  var menulist = aElt.previousSibling;
+  if (menulist.selectedItem)
+    value = menulist.selectedItem.value;
+  else
+    value = menulist.value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (match) {
+    var unit = match[2];
+    var v    = parseFloat(match[1]);
+    switch (unit) {
+      case "in":
+      case "cm":
+        v -= 0.1;
+        v = Math.round( v * 10) / 10;
+        break;
+      case "em":
+      case "ex":
+        v -= 0.5;
+        v = Math.round( v * 10) / 10;
+        break;
+      default:
+        v -= 1;
+        break;
+    }
+    if (!aAllowNegative && v < 0)
+      v = 0;
+    menulist.value = v + (unit ? unit : "");
+    onLengthMenulistCommand(menulist, aUnitsString, '', aAllowNegative, aCallback);
+  }
+}
+
+function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegative, aCallback)
+{
+  var idents = aIdentsString.split(" ");
+  var value;
+  if (aElt.selectedItem)
+    value = aElt.selectedItem.value;
+  else
+    value = aElt.value;
+  aElt.value = value;
+  var units = aUnitsString.replace( / /g, "|");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
+  var match = value.match( r );
+  if (match) {
+    var unit = match[2];
+    var v    = parseFloat(match[1]);
+    if (!aAllowNegative && v < 0) {
+      v = 0;
+      menulist.value = v + (unit ? unit : "");
+    }
+  }
+}
+
+function PopulateLengths(aElt, aUnitsString)
+{
+  var menuseparator = aElt.querySelector("menuseparator");
+  if (menuseparator) {
+    var child = aElt.firstChild;
+    while (child && child != menuseparator) {
+      var tmp = child.nextSibling;
+      aElt.removeChild(child);
+      child = tmp;
+    }
   }
   else
-  {
-    gPrefs = GetPrefs();
-    if (!gPrefs)
-      return;
-  
-    defaultWidth_unit  = gPrefs.getCharPref("bluegriffon.defaults.table.width_unit");
-  }
+    deleteAllChildren(aElt);
 
-  if (defaultWidth_unit == "percentage")
-    gDialog.widthInput.setAttribute("max", "100");
+  var v = parseFloat(aElt.parentNode.value);
+  if (isNaN(v))
+    v = 0;
+  var unitsArray;
+  if (aUnitsString == " ")
+    unitsArray = [""];
   else
-    gDialog.widthInput.removeAttribute("max");
-  var foo = gDialog.widthInput.value;
-  gDialog.widthInput.value = foo;
+    unitsArray = aUnitsString.split(" ");
+  unitsArray.forEach(function(aArrayElt, aIndex, aArray) {
+    var menuitem = document.createElement("menuitem");
+    menuitem.setAttribute("label", v + aArrayElt);
+    menuitem.setAttribute("value", v + aArrayElt);
+    aElt.insertBefore(menuitem, menuseparator);
+  });
 }
 
-function SelectArea(cell)
+function InitTableData(aNode)
 {
-  if (gDialog.sizeSelector.hasAttribute("disabled"))
-    return;
-  var cellID    = cell.id;
-  var numCellID = Number(cellID.substr(1));
+  var node = aNode;
+  while (node && node.nodeName.toLowerCase() != "table")
+    node = node.parentNode;
+  gTable = node;
 
-  // early way out if we can...
-  if (gCellID == numCellID)
-    return;
+  var ruleset = CssInspector.getCSSStyleRules(gTable, false);
 
-  gCellID = numCellID;
-
-  var i, anyCell;
-  for (i = 1; i < 60; i += 10)
-  {
-    anyCell = gDialog["c"+i];
-    while (anyCell)
-    {
-      anyCell.removeAttribute("class");
-      anyCell = anyCell.nextSibling;
-    }
+  var w = CssInspector.getCascadedValue(ruleset, "width");
+  if (!w && gTable.hasAttribute("width")) {
+    w = gTable.getAttribute("width");
+    if (w.indexOf("%") == -1)
+      w += "px";
   }
+  gDialog.widthMenulist.value = w;
 
-  for (i = numCellID; i > 0; i -= 10)
-  {
-    anyCell = gDialog["c"+i];
-    while (anyCell)
-    {
-      anyCell.setAttribute("class", "selected");
-      anyCell = anyCell.previousSibling;
-    }
+  var h = CssInspector.getCascadedValue(ruleset, "height");
+  if (!h && gTable.hasAttribute("height")) {
+    h = gTable.getAttribute("height");
+    if (h.indexOf("%") == -1)
+      h += "px";
   }
-  ShowSize();
-}
+  gDialog.heightMenulist.value = h;
 
-function ShowSize()
-{
-  var columns  = (gCellID % 10);
-  var rows     = Math.ceil(gCellID / 10);
-  gDialog.sizeLabel.value = rows + " x " + columns;
-}
-
-function CreateRowsAndCells(aTbody, aAttributes)
-{
-  // Create necessary rows and cells for the table
-  for (var i = 0; i < gDialog.rowsInput.value; i++)
-  {
-    var newRow = gActiveEditor.document.createElement("tr");
-    if (newRow)
-    {
-      aTbody.appendChild(newRow);
-      for (var j = 0; j < gDialog.columnsInput.value; j++)
-      {
-        var newCell = gActiveEditor.document.createElement("td");
-        if (aAttributes)
-          for (var k = 0; k < aAttributes.length; k++)
-          {
-            var attr = aAttributes[k];
-            newCell.setAttribute(attr.name, attr.value);
-          }
-        if (newCell)
-        {
-          newRow.appendChild(newCell);
-        }
-      }
-    }
+  var rows = gTable.querySelectorAll("tbody > tr");
+  gDialog.tableRowsTextbox.value = rows.length;
+  var columns = 0;
+  for (var i = 0; i < rows.length; i++) {
+    columns = Math.max(columns, rows[i].querySelectorAll("td,th").length);
   }
+  gDialog.tableColumnsTextbox.value = columns;
+
+  var headerRows = gTable.querySelector("thead > tr");
+  gDialog.rowsInHeaderTextbox.value = headerRows ? headerRows.length : 0;
+
+  var footerRows = gTable.querySelector("tfoot > tr");
+  gDialog.rowsInFooterTextbox.value = footerRows ? footerRows.length : 0;
 }
 
-function onAccept()
-{
-  var wrapping = gDialog.textWrapping.selectedItem.value;
-  var align = gDialog.horizAlignment.value;
-  var valign = gDialog.vertAlignment.value;
-  var cellSpacing = gDialog.cellSpacing.value;
-  var cellPadding = gDialog.cellPadding.value;
-
-  var useCSS = CssUtils.getUseCSSPref();
-
-  gActiveEditor.beginTransaction();
-
-  var tableElement = gActiveEditor.document.createElement("table");
-  var tableBody = gActiveEditor.document.createElement("tbody");
-  
-  if (tableBody)
-  {
-    
-    tableElement.appendChild(tableBody);
-
-    switch(useCSS)
-    {
-      case 0:
-        tableElement.setAttribute("border", gDialog.borderInput.value);
-        tableElement.setAttribute("width", Number(gDialog.widthInput.value) +
-                                            (gDialog.widthPixelOrPercentMenulist.value == "pixels" ? "" : "%"));
-        tableElement.setAttribute("cellpadding", gDialog.cellSpacing.value);
-        tableElement.setAttribute("cellspacing", gDialog.cellPadding.value);
-        {
-          var attributes = [];
-          if (gDialog.horizAlignment.value)
-            attributes.push( { name: "align",
-                               value: gDialog.horizAlignment.value });
-          if (gDialog.vertAlignment.value)
-            attributes.push( { name: "valign",
-                               value: gDialog.vertAlignment.value });
-          if (gDialog.textWrapping.value)
-            attributes.push( { name: "nowrap",
-                               value: "nowrap" });
-        }
-        CreateRowsAndCells(tableBody, attributes);
-        break;
-
-      case 1:
-        {
-          var styleAttr = "width: " + Number(gDialog.widthInput.value) +
-                            (gDialog.widthPixelOrPercentMenulist.value == "pixels" ? "px" : "%") +
-                            ";";
-          styleAttr += "border-spacing: " + gDialog.cellPadding.value + "px;";
-          styleAttr += "border: outset " + gDialog.borderInput.value + "px;";
-          styleAttr += "border-collapse: " + (gDialog.collapseBorders.checked ? "collapse;" : "separat;e");
-          styleAttr += "empty-cells: " + (gDialog.hideEmptyCells.checked ? "hide;" : "show;");
-          styleAttr += "table-layout: " + (gDialog.fixedLayout.checked ? "fixed;" : "auto;");
-          if (gDialog.horizAlignment.value)
-            styleAttr += "text-align:" + gDialog.horizAlignment.value  + ";";
-          tableElement.setAttribute("style", styleAttr);
-
-          styleAttr = "";
-          if (gDialog.vertAlignment.value)
-            styleAttr += "vertical-align: " + gDialog.vertAlignment.value + ";";
-          if (gDialog.textWrapping.value)
-            styleAttr += "white-space: nowrap;";
-          if (gDialog.cellPadding.value)
-            styleAttr += "padding: " + gDialog.cellPadding.value + "px;";
-          if (gDialog.borderInput.value != "0")
-            styleAttr += "border: inset 1px;";
-          if (styleAttr)
-            CreateRowsAndCells(tableBody, [ { name: "style",
-                                              value: styleAttr} ] ); 
-          else
-            CreateRowsAndCells(tableBody, null);
-          
-        }
-        break;
-
-      case 2:
-        {
-          CreateRowsAndCells(tableBody, null);
-          // first, build the selector we're going to use
-          var cssToggler = gDialog.cssToggler;
-          var selectorText = (cssToggler.newID ?   '#' + cssToggler.newID : "") +
-                             (cssToggler.newClass? '.' + cssToggler.newClass : "");
-          var tableProperties = [
-            { priority: false, property: "border",
-              value: "outset " + gDialog.borderInput.value + "px" },
-            { priority: false, property: "border-spacing",
-              value: gDialog.cellPadding.value + "px" },
-            { priority: false, property: "width",
-              value: Number(gDialog.widthInput.value) +
-                       (gDialog.widthPixelOrPercentMenulist.value == "pixels" ? "px" : "%") },
-            { priority: false, property:  "text-align",
-              value: gDialog.horizAlignment.value },
-            { priority: false, property:  "border-collapse",
-              value: (gDialog.collapseBorders.checked ? "collapse" : "separate") },
-            { priority: false, property:  "empty-cells",
-              value: (gDialog.hideEmptyCells.checked ? "hide" : "show") },
-            { priority: false, property:  "table-layout",
-              value: (gDialog.fixedLayout.checked ? "fixed" : "auto") }
-          ];
-          CssUtils.addRuleForSelector(gActiveEditor,
-                                      gActiveEditor.document,
-                                      selectorText,
-                                      tableProperties);
-          if (cssToggler.newID)
-            tableElement.setAttribute("id", cssToggler.newID);
-          if (cssToggler.newClass)
-            tableElement.setAttribute("class", cssToggler.newClass);
-
-          var cellProperties = [];
-          if (gDialog.vertAlignment.value)
-            cellProperties.push( { priority: false,
-                                  property: "vertical-align",
-                                  value: gDialog.vertAlignment.value } );
-
-          if (gDialog.textWrapping.value)
-            cellProperties.push( { priority: false,
-                                  property: "white-space",
-                                  value: "nowrap" } );
-
-          if (gDialog.cellPadding.value)
-            cellProperties.push( { priority: false,
-                                  property: "padding",
-                                  value: gDialog.cellPadding.value + "px" } );
-
-          if (gDialog.borderInput.value != "0")
-            cellProperties.push( { priority: false,
-                                  property: "border",
-                                  value: "inset 1px" } );
-          cellSelectorText = selectorText + " > * > tr > *";
-          CssUtils.addRuleForSelector(gActiveEditor,
-                                      gActiveEditor.document,
-                                      cellSelectorText + "",
-                                      cellProperties);
-        }
-        break;
-
-      case 3:
-        CreateRowsAndCells(tableBody, null);
-        if (gDialog.cssToggler.reusedID)
-          tableElement.setAttribute("id", gDialog.cssToggler.reusedID);
-        if (gDialog.cssToggler.reusedClass)
-          tableElement.setAttribute("class", gDialog.cssToggler.reusedClass);
-        break;
-
-      default: // we should never hit this one
-        break
-    }
-
-    // true means delete selection when inserting
-    gActiveEditor.insertElementAtSelection(tableElement, true);
 
 
-  }
-  gActiveEditor.endTransaction();
-}
 
-function SelectSize(cell)
-{
-  if (document.documentElement.getButton("accept").hasAttribute("disabled"))
-    return;
 
-  var columns  = (gCellID % 10);
-  var rows     = Math.ceil(gCellID / 10);
-
-  gDialog.rowsInput.value    = rows;
-  gDialog.columnsInput.value = columns;
-
-  onAccept();
-  window.close();
-}
