@@ -292,6 +292,7 @@
   
                     NotifierUtils.notify("tabCreated");
                     RecentPagesHandler.saveRecentFilesPrefs();
+                    editor.beginningOfDocument();
                   }
                 }
               },
@@ -352,7 +353,7 @@
             var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
             progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 
-            newEditorElement.addEventListener("pageshow", function(evt) { if (evt.originalTarget == content.document){} }, true);
+            newEditorElement.addEventListener("load", function(evt) { if (evt.originalTarget == content.document){ } }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
             // newEditorElement.addEventListener("keypress", function(evt) { JSEditor.deleteSelection(evt) }, true);
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
