@@ -85,8 +85,12 @@ function CustomizeToolbar(id)
 
 function ToolboxCustomizeDone(aToolboxChanged)
 {
-  document.getElementById("customizeToolbarSheetIFrame").hidden = true;
-  document.getElementById("customizeToolbarSheetPopup").hidePopup();
+  var customizeToolbarSheetIFrame = document.getElementById("customizeToolbarSheetIFrame");
+  if (customizeToolbarSheetIFrame)
+    customizeToolbarSheetIFrame.hidden = true;
+  var customizeToolbarSheetPopup = document.getElementById("customizeToolbarSheetPopup")
+  if (customizeToolbarSheetPopup)
+    customizeToolbarSheetPopup.hidePopup();
 
   // Re-enable parts of the UI we disabled during the dialog
   var menubar = document.getElementById("composer-main-menubar");
