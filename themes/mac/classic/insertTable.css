@@ -2,7 +2,7 @@
   font-size: smaller;
 }
 
-textbox[type="number"] {
+textbox {
   max-width: 6em;
 }
 

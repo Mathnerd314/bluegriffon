@@ -18,31 +18,16 @@
   <!-- Methods common to all editor dialogs -->
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertTable.js"/>
 
   <tabbox id="tabbox">
     <tabs>
-      <tab label="&table.tab;"/>
-      <tab label="&cell.tab;"/>
+      <tab label="&table.tab;" value="table"/>
+      <tab label="&cell.tab;"  value="cell"/>
     </tabs>
     <tabpanels>
       <vbox>
-	      <hbox id="cssPolicyBox" align="center">
-          <label value="&applyStyles.label;"/>
-	        <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
-	          <menupopup>
-	            <menuitem label="&modifyID.label;" value="id"/>
-	            <menuitem label="&modifyClass.label;" value="class"/>
-	            <menuseparator/>
-	            <menuitem label="&useInlineStyles.label;" value="inline"/>
-	          </menupopup>
-	        </menulist>
-	        <menulist id="classPicker" editable="true" style="visibility: hidden">
-	          <menupopup id="classPickerPopup"/>
-	        </menulist>
-	        <textbox id="IDPicker" hidden="true"/>
-	      </hbox>
-
         <groupbox>
           <caption label="&size.label;"/>
           <grid>
@@ -84,16 +69,57 @@
 
               <row align="center">
                 <label value="&rowsInHeader.label;"/>
-                <textbox type="number" id="rowsInHeaderTextbox" min="0"/>
+                <textbox id="rowsInHeaderTextbox" type="number" min="0"/>
                 <checkbox label="&onlyHeaderCells.label;"
                           id="onlyHeaderCellsInHeaderCheckbox"/>
               </row>
 
               <row align="center">
                 <label value="&rowsInFooter.label;"/>
-                <textbox type="number" id="rowsInFooterTextbox" min="0"/>
+                <textbox id="rowsInFooterTextbox" type="number" min="0"/>
                 <checkbox label="&onlyHeaderCells.label;"
                           id="onlyHeaderCellsInFooterCheckbox"/>
+              </row>
+            </rows>
+          </grid>
+        </groupbox>
+        <groupbox>
+          <caption label="&layout.label;"/>
+          <grid>
+            <columns><column/><column/><column/></columns>
+            <rows>
+              <row align="center">
+                <label value="&border.label;"/>
+                <textbox type="number" id="tableBorderTextbox" min="0"/>
+                <label value="&pixels.label;"/>
+              </row>
+              <row align="center">
+                <label value="&cellSpacing.label;"/>
+                <hbox align="center">
+                  <textbox id="tableCellSpacingTextbox" oninput="OnlyDigits(this)"/>
+                  <spinbuttons onup="Increase('tableCellSpacingTextbox')"
+                               ondown="Decrease('tableCellSpacingTextbox')"/>
+                </hbox>
+                <menulist id="tableCellSpacingUnitMenulist">
+                  <menupopup>
+                    <menuitem label="&pixels.label;" value=""/>
+                    <menuitem label="&percent.label;" value="%"/>
+                  </menupopup>
+                </menulist>
+              </row>
+              <row align="center">
+                <label value="&cellPadding.label;"/>
+                <hbox align="center">
+                  <textbox id="tableCellPaddingTextbox" oninput="OnlyDigits(this)"/>
+                  <spinbuttons onup="Increase('tableCellPaddingTextbox')"
+                               ondown="Decrease('tableCellPaddingTextbox')"/>
+                </hbox>
+                <menulist id="tableCellPaddingUnitMenulist">
+                  <menupopup>
+                    <menuitem label="&pixels.label;" value=""/>
+                    <menuitem label="&percent.label;" value="%"/>
+                  </menupopup>
+                </menulist>
               </row>
             </rows>
           </grid>

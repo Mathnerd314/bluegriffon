@@ -17,3 +17,10 @@
 <!ENTITY rowsInHeader.label "Rows in header:">
 <!ENTITY onlyHeaderCells.label "Only header cells">
 <!ENTITY rowsInFooter.label "Rows in footer:">
+
+<!ENTITY layout.label "Layout">
+<!ENTITY border.label "Border:">
+<!ENTITY pixels.label "pixels">
+<!ENTITY cellSpacing.label "Cell spacing:">
+<!ENTITY percent.label "percents">
+<!ENTITY cellPadding.label "Cell padding:">
