@@ -311,5 +311,5 @@ panel[floating="true"] {
 }
 
 popup {
-  background-color: white;
+  -moz-appearance: menupopup;
 }
