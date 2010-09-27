@@ -79,6 +79,7 @@
           if (!cph.isCancelled(aColorObjectId))
           {
             var currentColor = cph.getCurrentColor(aColorObjectId)
+            this.color = currentColor;
             this.mColorBox.style.backgroundColor = currentColor;
             this.setAttribute("color", currentColor);
           }
