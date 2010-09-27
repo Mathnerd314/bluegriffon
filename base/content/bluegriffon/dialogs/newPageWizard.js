@@ -58,6 +58,29 @@ var gUseSystemColors = true;
 var gHorizPosition = "50%";
 var gVertPosition = "50%";
 
+function ReadFileContents(aFile)
+{
+  // |file| is nsIFile
+  var data = "";
+  var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+                          createInstance(Components.interfaces.nsIFileInputStream);
+  var cstream = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+                          createInstance(Components.interfaces.nsIConverterInputStream);
+  fstream.init(aFile, -1, 0, 0);
+  cstream.init(fstream, "UTF-8", 0, 0); // you can use another encoding here if you wish
+  
+  let (str = {}) {
+    let read = 0;
+    do { 
+      read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
+      data += str.value;
+    } while (read != 0);
+  }
+  cstream.close(); // this closes fstream
+  
+  return data;
+}
+
 function Shutdown()
 {
   var w = EditorUtils.getCurrentEditorWindow();
@@ -353,16 +376,24 @@ function Apply()
   {
     var loremIpusm = gDialog.LoremIpsumCheckbox.checked;
 
-    var linkElt = doc.createElement("link");
-    linkElt.setAttribute("type", "text/css");
-    linkElt.setAttribute("rel", "stylesheet");
-    linkElt.setAttribute("href", "http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css");
-    EditorUtils.getHeadElement().appendChild(linkElt);
-    linkElt = doc.createElement("link");
-    linkElt.setAttribute("type", "text/css");
-    linkElt.setAttribute("rel", "stylesheet");
-    linkElt.setAttribute("href", "http://yui.yahooapis.com/2.6.0/build/base/base-min.css");
-    EditorUtils.getHeadElement().appendChild(linkElt);
+
+	  var file = Components.classes["@mozilla.org/file/directory_service;1"].  
+	                       getService(Components.interfaces.nsIProperties).  
+	                       get("CurProcD", Components.interfaces.nsIFile);    
+	  file.append("res");
+	  var resetFontsGridsFile = file.clone();
+	  resetFontsGridsFile.append("reset-fonts-grids.css");
+    var baseMinFile = file.clone();
+    baseMinFile.append("base-min.css");
+    
+    var styleElt = doc.createElement("style");
+    styleElt.setAttribute("type", "text/css");
+    styleElt.textContent = ReadFileContents(resetFontsGridsFile); 
+    EditorUtils.getHeadElement().appendChild(styleElt);
+    styleElt = doc.createElement("style");
+    styleElt.setAttribute("type", "text/css");
+    styleElt.textContent = ReadFileContents(baseMinFile);
+    EditorUtils.getHeadElement().appendChild(styleElt);
 
     var docId    = gDialog.LayoutTypeMenulist.value;
     var docClass = gDialog.LayoutSubtypeMenulist.value;

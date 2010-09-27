@@ -17,11 +17,7 @@ var BGUpdateManager = {
     if (!this.interfaces.some( function(v) { return iid.equals(v) } ))
       throw Components.results.NS_ERROR_NO_INTERFACE;
 
-    // nsIAuthPrompt and nsIPrompt need separate implementations because
-    // their method signatures conflict.  The other interfaces we implement
-    // within MicrosummaryResource itself.
     return this;
-
   },
 
   getInterface: function(iid) {

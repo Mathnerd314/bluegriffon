@@ -36,7 +36,7 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/languages.xul             (content/bluegriffon/dialogs/languages.xul)
 * content/bluegriffon/dialogs/markupCleaner.js          (content/bluegriffon/dialogs/markupCleaner.js)
   content/bluegriffon/dialogs/markupCleaner.xul         (content/bluegriffon/dialogs/markupCleaner.xul)
-*  content/bluegriffon/dialogs/openLocation.js           (content/bluegriffon/dialogs/openLocation.js)
+* content/bluegriffon/dialogs/openLocation.js           (content/bluegriffon/dialogs/openLocation.js)
   content/bluegriffon/dialogs/openLocation.xul          (content/bluegriffon/dialogs/openLocation.xul)
 * content/bluegriffon/dialogs/newPageWizard.js          (content/bluegriffon/dialogs/newPageWizard.js)
 * content/bluegriffon/dialogs/newPageWizard.xul         (content/bluegriffon/dialogs/newPageWizard.xul)
