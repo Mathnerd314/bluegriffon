@@ -93,7 +93,8 @@ menulist:not(#cssPolicyMenulist):not(#listStyleTypeMenulist) {
   width: 10em;
 }
 
-toolbarbutton.multibutton[checked] {
+toolbarbutton.multibutton[checked],
+toolbarbutton.multibutton:hover:active {
 	text-shadow: rgba(129, 211, 255, 1) 0 0 3px;
 	-moz-box-shadow: 
 		inset rgba(0, 0, 0, 1) 0 2px 8px, 
@@ -162,3 +163,16 @@ ecolorpicker {
 %include transitions.css
 %include shadows.css
 %include columns.css
+
+#bezierPanel {
+  padding: 1em;
+}
+
+#p1_point, #p2_point {
+  cursor: -moz-grab;
+}
+
+#p1_point.grabbing, #p2_point.grabbing {
+  cursor: -moz-grabbing;
+}
+

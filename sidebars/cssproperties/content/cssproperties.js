@@ -11,6 +11,8 @@ function Startup()
 {
   GetUIElements();
 
+  Bezier.init();
+
   InitLocalFontFaceMenu(gDialog.addFontMenupopup);
 
   gInUtils = Components.classes["@mozilla.org/inspector/dom-utils;1"]

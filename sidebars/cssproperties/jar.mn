@@ -6,6 +6,7 @@ cssproperties.jar:
   content/cssproperties/csspropertiesOverlay.xul      (content/csspropertiesOverlay.xul)
 * content/cssproperties/cssproperties.xul             (content/cssproperties.xul)
 * content/cssproperties/cssproperties.js              (content/cssproperties.js)
+  content/cssproperties/bezier.js                     (content/bezier.js)
   content/cssproperties/backgrounditem.xml            (content/backgrounditem.xml)
   content/cssproperties/transformationitem.xml        (content/transformationitem.xml)
   content/cssproperties/transitionitem.xml            (content/transitionitem.xml)

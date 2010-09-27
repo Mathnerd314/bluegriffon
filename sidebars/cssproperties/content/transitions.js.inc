@@ -129,3 +129,12 @@ function UpdateTransitionUI()
   SetEnabledElement(gDialog.noneTransitionMenuitem, isEmpty);
   SetEnabledElement(gDialog.allTransitionMenuitem, isEmpty);
 }
+
+function OpenPanelIfBezier(e)
+{
+  var v = e.value.trim();
+  gDialog.bezierPanel.openPopupAtScreen(e.boxObject.screenX,
+                                        e.boxObject.screenY,
+                                        false);
+  Bezier.initWithBezier(v, e);
+}
