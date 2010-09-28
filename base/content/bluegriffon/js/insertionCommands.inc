@@ -118,7 +118,26 @@ var cmdCssPanelCommand =
 
   doCommand: function(aCommand)
   {
-	  var panel = gDialog["panel-cssproperties"];
+    var panel = gDialog["panel-cssproperties"];
     panel.openPanel(null, false);
+  }
+};
+
+var cmdInsertVideoCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    
   }
 };

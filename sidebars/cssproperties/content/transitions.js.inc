@@ -137,4 +137,6 @@ function OpenPanelIfBezier(e)
                                         e.boxObject.screenY,
                                         false);
   Bezier.initWithBezier(v, e);
+  setTimeout(function() {
+    gDialog.p1_x.focus(); }, 100);
 }
