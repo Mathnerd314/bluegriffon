@@ -964,6 +964,9 @@ function OnDoubleClick(aEvent)
     case "img":
       cmdInsertImageCommand.doCommand();
       break;
+    case "video":
+      cmdInsertVideoCommand.doCommand();
+      break;
     case "td":
     case "th":
 		  window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",

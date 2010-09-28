@@ -138,6 +138,8 @@ var cmdInsertVideoCommand =
 
   doCommand: function(aCommand)
   {
-    
+    var element = EditorUtils.getObjectForProperties();
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertVideo.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
