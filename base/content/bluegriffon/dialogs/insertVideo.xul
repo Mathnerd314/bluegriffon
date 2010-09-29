@@ -100,12 +100,17 @@
 			    </hbox>
 			    <checkbox class="indent" id="relativeURLPosterCheckbox"
 			              label="&relativeUrl.label;"
-			              oncommand="ToggleRelativeOrAbsolutePoster('urlPosterTextbox', 'relativeURLPosterCheckbox')"/>
+			              oncommand="ToggleRelativeOrAbsolute('urlPosterTextbox', 'relativeURLPosterCheckbox')"/>
           <vbox id="posterPreviewBox" hidden="true">
             <hbox align="center">
               <spacer flex="1"/>
               <html:img id="previewPoster" onerror="CantLoadPoster()" onload="PosterLoaded()"/>
               <spacer flex="1"/>
+            </hbox>
+            <hbox>
+              <spacer flex="1"/>
+              <button label="&saveAsFile.label;" oncommand="SavePosterAsFile()"
+                      id="savePosterAsFileButton"/>
             </hbox>
           </vbox>
         </vbox>

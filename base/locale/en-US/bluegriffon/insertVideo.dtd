@@ -21,3 +21,4 @@
 <!ENTITY posterFileLocation.label "Poster file location:">
 
 <!ENTITY useCurrentFrameAsPoster.label "Use current frame as poster">
+<!ENTITY saveAsFile.label "Save poster as PNG file">

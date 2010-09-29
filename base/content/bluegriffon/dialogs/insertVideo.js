@@ -17,7 +17,8 @@ function Startup()
 
   GetUIElements();
 
-  document.documentElement.getButton("accept").disabled = true;
+  if (!gNode)
+    document.documentElement.getButton("accept").disabled = true;
 
   InitDialog();
   CheckURL('urlTextbox', 'relativeURLCheckbox');
@@ -38,10 +39,15 @@ function InitDialog()
 
   gDialog.urlTextbox.value = gNode.getAttribute("src");
   gDialog.urlPosterTextbox.value = gNode.hasAttribute("poster") ? gNode.getAttribute("poster") : "";
-  if (gDialog.urlTextbox.value)
+  if (gDialog.urlTextbox.value) {
     LoadVideoFile();
-  if (gDialog.urlPosterTextbox.value)
+    CheckURL('urlTextbox', 'relativeURLCheckbox')
+  }
+
+  if (gDialog.urlPosterTextbox.value) {
     LoadPosterFile();
+    CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox');
+  }
 }
 
 function CheckURL(aTextboxId, aCheckboxId)
@@ -49,6 +55,7 @@ function CheckURL(aTextboxId, aCheckboxId)
   var url = gDialog[aTextboxId].value;
   if (url) {
     gDialog[aCheckboxId].disabled = !(gDocUrlScheme && gDocUrlScheme != "resource");
+    gDialog[aCheckboxId].checked = (url == UrlUtils.makeRelativeUrl(url));
   }
   else {
     gDialog[aCheckboxId].checked = false;
@@ -72,7 +79,7 @@ function MakeAbsoluteUrl(aTextboxId, aCheckboxId)
   if (gDocUrlScheme && gDocUrlScheme != "resource") {
     spec = UrlUtils.makeAbsoluteUrl(spec);
     gDialog[aTextboxId].value = spec;
-    ggDialog[aCheckboxId].checked = false;
+    gDialog[aCheckboxId].checked = false;
   }
 }
 
@@ -88,12 +95,12 @@ function ToggleRelativeOrAbsolute(aTextboxId, aCheckboxId)
 
 function LoadVideoFile()
 {
-  gDialog.preview.setAttribute("src", gDialog.urlTextbox.value);
+  gDialog.preview.setAttribute("src", UrlUtils.makeAbsoluteUrl(gDialog.urlTextbox.value));
 }
 
 function LoadPosterFile()
 {
-  gDialog.previewPoster.setAttribute("src", gDialog.urlPosterTextbox.value);
+  gDialog.previewPoster.setAttribute("src", UrlUtils.makeAbsoluteUrl(gDialog.urlPosterTextbox.value));
 }
 
 function VideoLoaded()
@@ -111,13 +118,21 @@ function VideoLoaded()
 function CantLoadVideo()
 {
   gDialog.videoPreviewBox.hidden = true;
-  document.documentElement.getButton("accept").disabled = (gDialog.urlTextbox.value != "");
+  document.documentElement.getButton("accept").disabled = gDialog.urlTextbox.value || !gNode;
   window.sizeToContent();
 }
 
 function PosterLoaded()
 {
   gDialog.posterPreviewBox.hidden = false;
+  gDialog.savePosterAsFileButton.hidden =
+    (gDialog.urlPosterTextbox.value.trim().substr(0, 5) != "data:");
+  window.sizeToContent();
+}
+
+function CantLoadPoster()
+{
+  gDialog.posterPreviewBox.hidden = true;
   window.sizeToContent();
 }
 
@@ -194,6 +209,50 @@ function onAccept()
 
   gEditor.endTransaction();
   return true;
+}
+
+function SavePosterAsFile()
+{
+  try {
+    var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
+    canvas.style.width = gDialog.previewPoster.naturalWidth + "px";
+    canvas.setAttribute("width", gDialog.previewPoster.naturalWidth);
+    canvas.style.height = gDialog.previewPoster.naturalHeight + "px";
+    canvas.setAttribute("height", gDialog.previewPoster.naturalHeight);
+    canvas.style.display = "none";
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(gDialog.previewPoster, 0, 0);
+
+    fp = Components.classes["@mozilla.org/filepicker;1"]
+           .createInstance(Components.interfaces.nsIFilePicker);
+    fp.init(window, gDialog.bundleString.getString("SavePosterAsPng"), 1);
+    fp.appendFilter(gDialog.bundleString.getString("PNGFiles"), "*.png");
+
+    if (fp.show() == Components.interfaces.nsIFilePicker.returnCancel)
+      return;
+
+    var file = fp.file;
+	
+	  // create a data url from the canvas and then create URIs of the source and targets  
+	  var io = Components.classes["@mozilla.org/network/io-service;1"]
+	                     .getService(Components.interfaces.nsIIOService);
+	  var source = io.newURI(canvas.toDataURL("image/png", ""), "UTF8", null);
+	  var target = io.newFileURI(file)
+	    
+	  // prepare to save the canvas data
+	  var persist = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
+	                          .createInstance(Components.interfaces.nsIWebBrowserPersist);
+	  
+	  persist.persistFlags = Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
+	  persist.persistFlags |= Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
+	  
+	  // save the canvas data to the file
+	  persist.saveURI(source, null, null, null, null, file);
+    gDialog.urlPosterTextbox.value = fp.fileURL.spec;
+    LoadPosterFile();
+    CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox');
+  }
+  catch(e) {alert(e)}
 }
 
 /********************** diNodeInsertionTxn **********************/
