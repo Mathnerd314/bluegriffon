@@ -141,7 +141,7 @@ function UseCurrentFrameAsPoster()
 
 function CheckPixels(aElt)
 {
-  aElt.value = aElt.value.replace( /[0-9]/g , "");
+  aElt.value = aElt.value.replace( /[^0-9]/g , "");
 }
 
 function onAccept()
