@@ -2,6 +2,23 @@ RegisterIniter(TransformsSectionIniter);
 
 function TransformsSectionIniter(aElt, aRuleset)
 {
+  var mto = CssInspector.getCascadedValue(aRuleset, "-moz-transform-origin");
+  var mtoArray = mto.split(" ");
+  switch (mtoArray.length) {
+    case 1:
+      gDialog.transformOriginXMenulist.value = mtoArray[0];
+      gDialog.transformOriginYMenulist.value = "";
+      break;
+    case 2:
+      gDialog.transformOriginXMenulist.value = mtoArray[0];
+      gDialog.transformOriginYMenulist.value = mtoArray[1];
+      break;
+    default:
+      gDialog.transformOriginXMenulist.value = "";
+      gDialog.transformOriginYMenulist.value = "";
+      break;
+  }
+
   deleteAllChildren(gDialog.transformsRichlistbox);
   var mt = CssInspector.getCascadedValue(aRuleset, "-moz-transform");
   var transformsArray = [];
@@ -75,6 +92,12 @@ function TransformsSectionIniter(aElt, aRuleset)
         gDialog.transformsRichlistbox.appendChild(item);
         item.valueX = "";
         item.valueY = t.values[0];
+        break;
+      case "scale":
+        item.className = "scaleTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.horizontally = t.values[0];
+        item.vertically = t.values[1];
         break;
       case "scalex":
         item.className = "scaleTransform";
@@ -169,6 +192,12 @@ function ReapplyTransforms()
                 {
                   property: "-moz-transform",
                   value: transforms.join(" ")
+                },
+                {
+                  property: "-moz-transform-origin",
+                  value: (gDialog.transformOriginXMenulist.value || gDialog.transformOriginYMenulist.value)
+                           ? (gDialog.transformOriginXMenulist.value + " " + gDialog.transformOriginYMenulist.value).trim()
+                           : ""
                 }
               ]);
 }

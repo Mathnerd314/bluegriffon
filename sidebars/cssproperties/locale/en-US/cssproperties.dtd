@@ -436,3 +436,11 @@
 <!ENTITY emptyCells.label "Empty cells:">
 <!ENTITY showEmptyCells.label "shown">
 <!ENTITY hideEmptyCells.label "hidden">
+
+<!ENTITY hTransformOrigin.label "Horiz. origin:">
+<!ENTITY vTransformOrigin.label "Vert. origin:">
+<!ENTITY leftTransformOrigin.label "Left">
+<!ENTITY centerTransformOrigin.label "Center">
+<!ENTITY rightTransformOrigin.label "Right">
+<!ENTITY topTransformOrigin.label "Top">
+<!ENTITY bottomTransformOrigin.label "Bottom">
