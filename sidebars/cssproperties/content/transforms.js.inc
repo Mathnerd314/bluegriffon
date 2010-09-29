@@ -26,7 +26,7 @@ function TransformsSectionIniter(aElt, aRuleset)
   for (var i = 0; i < transformsArray.length; i++) {
     var t = transformsArray[i];
     var item = document.createElement("richlistitem");
-    switch (t.transformation) {
+    switch (t.transformation.toLowerCase()) {
       case "rotate":
         item.className = "rotateTransform";
         if (i >= gDialog.transformsRichlistbox.itemCount)
@@ -46,17 +46,47 @@ function TransformsSectionIniter(aElt, aRuleset)
         else
           item.vertically = "";
         break;
-      case "translateX":
+      case "translatex":
         item.className = "translateTransform";
         gDialog.transformsRichlistbox.appendChild(item);
         item.horizontally = t.values[0];
         item.vertically = "";
         break;
-      case "translateY":
+      case "translatey":
         item.className = "translateTransform";
         gDialog.transformsRichlistbox.appendChild(item);
-        item.vertically = t.values[0];
         item.horizontally = "";
+        item.vertically = t.values[0];
+        break;
+      case "skew":
+        item.className = "skewTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.valueX = t.values[0];
+        item.valueY = t.values[1];
+        break;
+      case "skewx":
+        item.className = "skewTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.valueX = t.values[0];
+        item.valueY = "";
+        break;
+      case "skewy":
+        item.className = "skewTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.valueX = "";
+        item.valueY = t.values[0];
+        break;
+      case "scalex":
+        item.className = "scaleTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.horizontally = t.values[0];
+        item.vertically = "";
+        break;
+      case "scaley":
+        item.className = "scaleTransform";
+        gDialog.transformsRichlistbox.appendChild(item);
+        item.horizontally = "";
+        item.vertically = t.values[0];
         break;
       default: break;
     }
@@ -118,6 +148,18 @@ function ReapplyTransforms()
             transforms.push("skewX(" + x + "deg)");
           else if (y && parseFloat(y))
             transforms.push("skewY(" + y + "deg)");
+        }
+        break;
+      case "scaleTransform":
+        {
+          var h = item.horizontally;
+          var v = item.vertically;
+          if (h && v && parseFloat(h) && parseFloat(v))
+            transforms.push("scale(" + h + ", " + v + ")");
+          else if (h && parseFloat(h))
+            transforms.push("scaleX(" + h + ")");
+          else if (v && parseFloat(v))
+            transforms.push("scaleY(" + v + ")");
         }
         break;
       default: break;

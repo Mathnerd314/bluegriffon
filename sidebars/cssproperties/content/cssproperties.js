@@ -6,6 +6,7 @@ Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 var gMain = null;
 var gCurrentElement = null;
 var gInUtils;
+var gIsPanelActive = false;
 
 function Startup()
 {
@@ -37,8 +38,14 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("tabCreated",
                                           Inspect,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("redrawPanel",
+                                          RedrawAll,
+                                          window);
+  gMain.NotifierUtils.addNotifierCallback("panelClosed",
+                                          PanelClosed,
+                                          window);
   Inspect();
-  if (gMain && gMain.EditorUtils &&
+  if (gMain && gMain.EditorUtils && gIsPanelActive &&
       gMain.EditorUtils.getCurrentEditor()) {
     var c = gMain.EditorUtils.getSelectionContainer();
     if (c)
@@ -69,13 +76,33 @@ function Inspect()
   }
 }
 
+function RedrawAll(aNotification, aPanelId)
+{
+  if (aPanelId == "panel-cssproperties") {
+    gIsPanelActive = true;
+    if (gCurrentElement) {
+      // force query of all properties on the current element
+      var elt = gCurrentElement;
+      gCurrentElement = null;
+      SelectionChanged(null, elt, true);
+    }
+  }
+}
+
+function PanelClosed(aNotification, aPanelId)
+{
+  if (aPanelId == "panel-cssproperties")
+    gIsPanelActive = false;
+}
+
 function SelectionChanged(aArgs, aElt, aOneElementSelected)
 {
-  if (aElt == gCurrentElement)
+  if (!gIsPanelActive || (gCurrentElement == aElt)) {
+    gCurrentElement = aElt;
     return;
+  }
 
   gCurrentElement = aElt;
-
   deleteAllChildren(gDialog.classPickerPopup);
   gDialog.classPickerPopup.value =  "";
 

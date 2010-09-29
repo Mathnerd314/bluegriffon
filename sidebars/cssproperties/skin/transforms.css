@@ -20,6 +20,12 @@ richlistitem.skewTransform {
   -moz-box-orient: vertical;
 }
 
+richlistitem.scaleTransform {
+  -moz-binding: url("chrome://cssproperties/content/transformationitem.xml#scale");
+  border-bottom: gray thin solid;
+  -moz-box-orient: vertical;
+}
+
 #transformsRichlistbox {
   min-height: 4em;
   overflow: visible;

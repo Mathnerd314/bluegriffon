@@ -14,6 +14,7 @@
 	              <menuitem label="&rotation.label;"    value="rotate"/>
 	              <menuitem label="&translation.label;" value="translate"/>
                 <menuitem label="&skew.label;"        value="skew"/>
+                <menuitem label="&scale.label;"       value="scale"/>
 	            </menupopup>
 	          </toolbarbutton>
 	          <toolbarbutton id="removeTransformButton" class="listboxBgMinusButton"

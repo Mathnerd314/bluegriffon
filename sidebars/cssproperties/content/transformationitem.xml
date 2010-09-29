@@ -170,4 +170,67 @@
     </implementation>
   </binding>
 
+  <binding id="scale"
+           extends="chrome://global/content/bindings/richlistbox.xml#richlistitem">
+
+    <resources>
+      <stylesheet src="chrome://cssproperties/skin/transformationitem.css"/>
+    </resources>
+
+    <content>
+      <xul:label class="transformationitem-title" value="&scale.label;"/>
+      <xul:hbox align="center">
+        <xul:label value="&horizontally.label;"/>
+        <xul:textbox anonid="Htextbox" oninput="this.parentNode.parentNode.checkNumber(this); ReapplyTransforms()"/>
+        <xul:label value="&vertically.label;"/>
+        <xul:textbox anonid="Vtextbox" oninput="this.parentNode.parentNode.checkNumber(this); ReapplyTransforms()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+      <property name="horizontally">
+        <getter>
+        <![CDATA[
+          return this.getChild("Htextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Htextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <property name="vertically">
+        <getter>
+        <![CDATA[
+          return this.getChild("Vtextbox").value;
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          this.getChild("Vtextbox").value = val;
+        ]]>
+        </setter>
+      </property>
+
+      <method name="checkNumber">
+        <parameter name="aElt"/>
+        <body>
+          <![CDATA[
+            aElt.value = aElt.value.replace( /[^0-9\.]/g , "");
+          ]]>
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+
 </bindings>

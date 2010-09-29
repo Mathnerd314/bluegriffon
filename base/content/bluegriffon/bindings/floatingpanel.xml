@@ -39,7 +39,10 @@
       <constructor><![CDATA[
         if (this.getAttribute("open") == "true") {
           var _self = this;
-          setTimeout(function(){_self.openPanel(null, true);}, 500);
+          setTimeout(function() {
+              _self.openPanel(null, true);
+              NotifierUtils.notify("redrawPanel", _self.id);
+            }, 500);
         }
       ]]></constructor>
       
@@ -55,6 +58,8 @@
             else
               this.openPopup(document.documentElement, "start_before", 10, 10,
                              false, true);
+            this.setAttribute("open", "true");
+            document.persist(this.id, "open");
             if (aDoResize && this.hasAttribute("width") && this.hasAttribute("height"))
               this(this.getAttribute("width"), this.getAttribute("height"));
             BlueGriffonVars.lastPanelRaised = this;
@@ -67,7 +72,12 @@
         <body><![CDATA[
           this.setAttribute("style", "opacity: 0");
           var _self = this;
-          setTimeout(function() { _self.hidePopup(); _self.removeAttribute("style"); }, 500);
+          setTimeout(function() {
+              _self.hidePopup();
+              _self.removeAttribute("style");
+              _self.setAttribute("open", "false");
+              document.persist(_self.id, "open");
+            }, 500);
         ]]></body>
       </method>
 

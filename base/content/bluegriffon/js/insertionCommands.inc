@@ -120,6 +120,7 @@ var cmdCssPanelCommand =
   {
     var panel = gDialog["panel-cssproperties"];
     panel.openPanel(null, false);
+    NotifierUtils.notify("redrawPanel", panel.id);
   }
 };
 
