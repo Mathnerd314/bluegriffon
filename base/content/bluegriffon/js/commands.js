@@ -277,6 +277,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_renderedHTMLEnabler",  cmdDummyHTML);
     commandTable.registerCommand("cmd_viewModeEnabler", cmdDummy2HTML);
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
+    commandTable.registerCommand("cmd_browse",      cmdBrowseCommand);
 
     commandTable.registerCommand("cmd_table",       cmdInsertOrEditTableCommand);
 

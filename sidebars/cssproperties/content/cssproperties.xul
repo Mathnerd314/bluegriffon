@@ -368,9 +368,14 @@
 	      </menulist>
 	      <textbox id="IDPicker" hidden="true"/>
 	    </hbox>
+      <hbox class="indent">
+        <checkbox label="when the pointer hovers over the element"
+                  id="hoverStateCheckbox"
+                  oncommand="ToggleHover(this)"/>
+      </hbox>
   	</vbox>
 
-    <vbox flex="1">
+    <vbox flex="1" id="propertiesBox">
 #include general.xul.inc
 #include colors.xul.inc
 #include geometry.xul.inc

@@ -175,6 +175,9 @@
 <!ENTITY videoToolbarCmd.label "Video">
 <!ENTITY videoToolbarCmd.tooltip "Insert or edit a video">
 
+<!ENTITY browseToolbarCmd.label "Preview">
+<!ENTITY browseToolbarCmd.tooltip "Preview in browser">
+
 <!ENTITY saveCmd.label "Save">
 <!ENTITY saveToolbarCmd.tooltip "Save file to a local location">
 <!ENTITY filesave.key "s">

@@ -94,7 +94,7 @@ var CssInspector = {
     catch (ex) {}
   },
 
-  getCSSStyleRules: function(aElement, aNoInlineStyles)
+  getCSSStyleRules: function(aElement, aNoInlineStyles, aDynamicPseudoClass)
   {
     var inspector = Components.classes[this.kINIDOMUTILS_CID]
                       .getService(this.kINIDOMUTILS);
@@ -116,6 +116,15 @@ var CssInspector = {
         var token = parser.getToken(false, false);
         if (token.isNotNull()) {
           var selector = parser.parseSelector(token, true);
+          if (aDynamicPseudoClass) {
+            // find the last sequence of simple selectors
+            var match = r.selectorText.match( /[^>~+\s]+/g );
+            var lastSequence = match ? match[match.length - 1] : r.selectorText;
+            if (lastSequence.toLowerCase().indexOf(":" + aDynamicPseudoClass) == -1) {
+              // throw away if it's not matching the dynamic pseudo-class
+              selector = null;
+            }
+          }
           if (selector) {
             ruleset.push( { rule: r,
                             specificity: selector.specificity,

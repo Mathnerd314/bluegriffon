@@ -31,3 +31,24 @@ var cmdFullScreen =
   }
 };
 
+
+var cmdBrowseCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML());
+  },
+  
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var rv = cmdSave.doCommand();
+    if (rv)
+      loadExternalURL(EditorUtils.getDocumentUrl());
+    return rv;
+  }
+};

@@ -90,6 +90,7 @@
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
 
   <command id="cmd_bgfind"         label="Find"                      oncommand="goDoCommand('cmd_bgfind')"/>
+  <command id="cmd_browse"                                           oncommand="goDoCommand('cmd_browse')"/>
 </commandset>
 
 <commandset id="composerEditMenuItems"

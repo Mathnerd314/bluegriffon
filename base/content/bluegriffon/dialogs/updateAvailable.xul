@@ -11,6 +11,7 @@
         onload="Startup(event);"
         >
     
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/updateAvailable.js"/>
 
   <keyset>

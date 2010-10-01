@@ -114,7 +114,20 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   if (item)
     gDialog.classPicker.selectedItem = item;
 
-  var ruleset = CssInspector.getCSSStyleRules(aElt, false);
+  var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
+                    .getService(Components.interfaces.inIDOMUtils);
+  var state;
+  var dynamicPseudo = "";
+  if (gDialog.hoverStateCheckbox.checked) {
+    state = inspector.getContentState(gCurrentElement);
+    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    dynamicPseudo = "hover";
+  }
+  var ruleset = CssInspector.getCSSStyleRules(aElt, false, dynamicPseudo);
+  if (gDialog.hoverStateCheckbox.checked) {
+    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, 4); // NS_EVENT_STATE_HOVER
+    var display = gCurrentElement.style.display;
+  }
   for (var i = 0; i < gIniters.length; i++)
     gIniters[i](aElt, ruleset);
 
@@ -201,6 +214,8 @@ function ApplyStyles(aStyles)
 {
   var className;
   var editor = EditorUtils.getCurrentEditor();
+  if (gDialog.hoverStateCheckbox.checked)
+    gDialog.cssPolicyMenulist.value = "id";
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
 	    // if the element has no ID, ask for one...
@@ -577,7 +592,20 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   var txn = new diStyleAttrChangeTxn(aElement, property, "", "");
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
 
-  var ruleset = CssInspector.getCSSStyleRules(aElement, true);
+  var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
+                    .getService(Components.interfaces.inIDOMUtils);
+  var state;
+  var dynamicPseudo = "";
+  if (gDialog.hoverStateCheckbox.checked) {
+    state = inspector.getContentState(gCurrentElement);
+    inspector.setContentState(gCurrentElement, state | 4); // NS_EVENT_STATE_HOVER
+    aIdent += ":hover";
+    dynamicPseudo = "hover";
+  }
+  var ruleset = CssInspector.getCSSStyleRules(aElement, true, dynamicPseudo);
+  if (gDialog.hoverStateCheckbox.checked) {
+    inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
+  }
   var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
   if (inspectedRule && inspectedRule.rule) {
     // ok, that property is already applied through a CSS rule
@@ -751,3 +779,11 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 #include tables.js.inc
 #include misc.js.inc
 
+function ToggleHover(aElt)
+{
+  if (aElt.checked)
+    gDialog.cssPolicyMenulist.value = "id";
+  var node = gCurrentElement;
+  gCurrentElement = null;
+  SelectionChanged(null, node, null);
+}

@@ -55,6 +55,10 @@
                      label="&videoToolbarCmd.label;" observes="cmd_video"
                      tooltiptext="&videoToolbarCmd.tooltip;"/>
 
+      <toolbarbutton id="browseButton" class="toolbarbutton-1"
+                     label="&browseToolbarCmd.label;" observes="cmd_browse"
+                     tooltiptext="&browseToolbarCmd.tooltip;"/>
+
       <toolbaritem id="throbber-box"  align="center" pack="center">
         <image id="composer-throbber" tooltiptext="&throbber.tooltip;" onclick="AboutComposer()"/>
       </toolbaritem> 

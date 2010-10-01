@@ -9,6 +9,9 @@
 %endif
   margin: 0px;
   padding: 0px;
+}
+
+#propertiesBox {
   overflow: auto;
 }
 
@@ -23,7 +26,7 @@
 %ifndef XP_MACOSX
   background-image: -moz-linear-gradient(#d0d0d0, silver);
 %endif
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   -moz-border-radius: 5px;
 }
 

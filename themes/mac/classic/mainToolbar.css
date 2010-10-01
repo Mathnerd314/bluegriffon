@@ -81,6 +81,10 @@
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.png");
 }
 
+#browseButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/browser.png");
+}
+
 /************ SMALL ICONS **************/
 
 #MainToolbar[iconsize="small"] toolbarbutton {
@@ -135,6 +139,10 @@
 
 #MainToolbar[iconsize="small"] #videoButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
+}
+
+#MainToolbar[iconsize="small"] #browseButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/browser.png");
 }
 
 /***************** THROBBER **************/
