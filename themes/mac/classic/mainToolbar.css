@@ -81,6 +81,10 @@
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/video.png");
 }
 
+#audioButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/audio.png");
+}
+
 #browseButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/browser.png");
 }
@@ -139,6 +143,10 @@
 
 #MainToolbar[iconsize="small"] #videoButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
+}
+
+#MainToolbar[iconsize="small"] #audioButton {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/audio.png");
 }
 
 #MainToolbar[iconsize="small"] #browseButton {

@@ -357,6 +357,7 @@
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
             // newEditorElement.addEventListener("keypress", function(evt) { JSEditor.deleteSelection(evt) }, true);
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
+            newEditorElement.addEventListener("click", function(evt) { OnClick(evt) }, true);
 
             // select that new tab
             this.selectedTab = newTab;

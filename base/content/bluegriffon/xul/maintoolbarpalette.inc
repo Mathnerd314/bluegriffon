@@ -55,6 +55,10 @@
                      label="&videoToolbarCmd.label;" observes="cmd_video"
                      tooltiptext="&videoToolbarCmd.tooltip;"/>
 
+      <toolbarbutton id="audioButton" class="toolbarbutton-1"
+                     label="&audioToolbarCmd.label;" observes="cmd_audio"
+                     tooltiptext="&audioToolbarCmd.tooltip;"/>
+
       <toolbarbutton id="browseButton" class="toolbarbutton-1"
                      label="&browseToolbarCmd.label;" observes="cmd_browse"
                      tooltiptext="&browseToolbarCmd.tooltip;"/>

@@ -78,6 +78,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertLink.xul            (content/bluegriffon/dialogs/insertLink.xul)
   content/bluegriffon/dialogs/insertVideo.js            (content/bluegriffon/dialogs/insertVideo.js)
   content/bluegriffon/dialogs/insertVideo.xul           (content/bluegriffon/dialogs/insertVideo.xul)
+  content/bluegriffon/dialogs/insertAudio.js            (content/bluegriffon/dialogs/insertAudio.js)
+  content/bluegriffon/dialogs/insertAudio.xul           (content/bluegriffon/dialogs/insertAudio.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -119,5 +121,6 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertLink.properties  (locale/en-US/bluegriffon/insertLink.properties)
   locale/en-US/bluegriffon/cssClassPicker.dtd (locale/en-US/bluegriffon/cssClassPicker.dtd)
   locale/en-US/bluegriffon/insertVideo.dtd  (locale/en-US/bluegriffon/insertVideo.dtd)
+  locale/en-US/bluegriffon/insertAudio.dtd  (locale/en-US/bluegriffon/insertAudio.dtd)
   locale/en-US/bluegriffon/insertVideo.properties  (locale/en-US/bluegriffon/insertVideo.properties)
   

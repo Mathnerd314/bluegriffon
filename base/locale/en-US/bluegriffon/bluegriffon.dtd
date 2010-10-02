@@ -175,6 +175,9 @@
 <!ENTITY videoToolbarCmd.label "Video">
 <!ENTITY videoToolbarCmd.tooltip "Insert or edit a video">
 
+<!ENTITY audioToolbarCmd.label "Audio">
+<!ENTITY audioToolbarCmd.tooltip "Insert or edit an audio file">
+
 <!ENTITY browseToolbarCmd.label "Preview">
 <!ENTITY browseToolbarCmd.tooltip "Preview in browser">
 

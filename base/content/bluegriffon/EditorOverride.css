@@ -365,7 +365,3 @@ a[\_moz_anonclass="mozTableRemoveRow"]:active {
 nvu|php, nvu|comment {
   display: none ! important;
 }
-
-svg|svg:hover {
-  outline: black dashed thin;
-}

@@ -144,3 +144,25 @@ var cmdInsertVideoCommand =
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
+
+var cmdInsertAudioCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties();
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertAudio.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+  }
+};
+

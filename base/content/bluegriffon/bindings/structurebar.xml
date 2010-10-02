@@ -65,6 +65,17 @@
         <body>
         <![CDATA[
           var node = aNode;
+          while (node && node.namespaceURI == "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul") // XUL
+            node = node.parentNode;
+          while (node && node.parentNode &&
+                 node.namespaceURI == "http://www.w3.org/2000/svg" &&
+                 node.parentNode.namespaceURI == "http://www.w3.org/2000/svg") // SVG container only
+            node = node.parentNode;
+          if (node != aNode) {
+            EditorUtils.getCurrentEditor().selectElement(node);
+            return;
+          }
+
           var toolbarbutton;
           if (this.mLastNode == node)
           {

@@ -1087,3 +1087,13 @@ function TogglePanel(aEvent)
 }
 
 
+function OnClick(aEvent)
+{
+  // this is necessary to be able to select for instance video elements
+  var target = aEvent.explicitOriginalTarget;
+	if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement ||
+                 target instanceof Components.interfaces.nsIDOMHTMLAudioElement)) {
+    EditorUtils.getCurrentEditor().selectElement(target);
+  }
+}
+

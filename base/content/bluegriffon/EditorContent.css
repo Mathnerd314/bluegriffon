@@ -112,3 +112,19 @@ tfoot > nvu|*,
 tr > nvu|* {
   display: none ! important}
 
+
+svg|svg:hover,
+audio:hover {
+  outline: black dashed thin;
+}
+
+audio {
+  min-width: 300px;
+  min-height: 64px;
+  background-color: silver;
+  background-image: url("chrome://bluegriffon/skin/icons/audio.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-clip: rect(0px, 32px, 32px, 0px);
+}
+
