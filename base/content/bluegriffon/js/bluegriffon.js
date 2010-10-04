@@ -166,7 +166,7 @@ function AboutComposer()
     return;
   }
   window.open('chrome://bluegriffon/content/dialogs/aboutDialog.xul',"_blank",
-              "chrome,resizable,scrollbars");
+              "chrome,resizable,scrollbars=yes");
 }
 
 function OpenConsole()

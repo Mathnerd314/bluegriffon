@@ -7,3 +7,7 @@
 tabbox {
   margin-top: 5px;
 }
+
+#iframe {
+  overflow: auto;
+}

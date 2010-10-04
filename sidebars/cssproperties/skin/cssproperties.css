@@ -23,13 +23,16 @@
 }
 
 #cssPolicyBox {
-%ifndef XP_MACOSX
+%ifdef XP_MACOSX
   background-image: -moz-linear-gradient(#d0d0d0, silver);
 %endif
   margin-bottom: 0.5em;
   -moz-border-radius: 5px;
 }
 
+#sectionHeaderContext {
+  background-color: white;
+}
 #sectionHeaderContext menuitem {
   font-size: smaller;
 }
@@ -41,15 +44,10 @@
 
 #currentElementBox {
   font-family: -moz-fixed;
-  background-color: #28211c;
   padding: 0.5em;
-  border: inset #28211c 2px;
+  border: thin solid gray;
   -moz-border-radius: 5px;
-  color: #e6e6e6;
   font-size: larger;
-%ifndef X¨P_MACOSX
-  font-weight: bold;
-%endif
 }
 
 #classPicker, #IDPicker {
@@ -60,7 +58,12 @@
 hbox.csspropertiesHeader {
   border-top: thin solid silver;
   padding-left: 3px;
+%ifdef XP_MACOSX
   background-image: -moz-linear-gradient( silver, silver 10%, gray );
+%else
+  background-color: #cac7b6;
+  background-image: -moz-linear-gradient( #cac7b6, #dad8b7 50%, #cac7b6 );
+%endif
   font-size: larger; 
 }
 
@@ -108,8 +111,12 @@ toolbarbutton.multibutton:hover:active {
 
 toolbarbutton.multibutton {
   margin: 4px 0px;
-	padding: 1px 1px;
-  background-image: -moz-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240), rgb(224, 224, 224));
+  padding: 1px 1px;
+%ifdef XP_MACOSX
+  background-image: -moz-linear-gradient(#e0e0e0, #d0d0d0, #e0e0e0);
+%else
+  background-image: -moz-linear-gradient(#cac7b6, #dbd8b7, #cac7b6);
+%endif
   -moz-appearance: none;
   border: thin silver solid;
   -moz-border-radius-topleft: 5px;
