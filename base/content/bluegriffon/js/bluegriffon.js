@@ -156,8 +156,17 @@ function EditorLoadUrl(aElt, aURL)
 
 function AboutComposer()
 {
-  window.openDialog('chrome://bluegriffon/content/dialogs/aboutDialog.xul',
-                    "", "resizable=yes,modal,chrome");
+  var windowManager = Components.classes[this.kWINDOWMEDIATOR_CID].getService();
+  var windowManagerInterface = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator);
+  var enumerator = windowManagerInterface.getEnumerator( "BlueGriffon:About" );
+  while ( enumerator.hasMoreElements() )
+  {
+    var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindowInternal);
+    win.focus();
+    return;
+  }
+  window.open('chrome://bluegriffon/content/dialogs/aboutDialog.xul',"_blank",
+              "chrome,resizable,scrollbars");
 }
 
 function OpenConsole()

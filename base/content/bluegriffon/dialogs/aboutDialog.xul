@@ -58,7 +58,7 @@
 #else
         buttons=","
 #endif
-        windowtype="Composer:About"
+        windowtype="BlueGriffon:About"
         title="&aboutDialog.title;"
         onload="Startup()"
         persist="screenX screenY width height">
@@ -95,8 +95,7 @@
 	        <description id="userAgent"/>
 	      </vbox>
 	    </vbox>
-      <iframe flex="1"
-              src="chrome://bluegriffon/content/credits.xhtml"/>
+      <iframe flex="1" id="iframe"/>
     </tabpanels>
   </tabbox>
 </dialog>

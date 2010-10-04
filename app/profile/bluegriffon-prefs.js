@@ -72,9 +72,10 @@ pref("signon.expireMasterPassword", false);
 pref("signon.SignonFileName", "signons.txt");
 
 // suppress external-load warning for standard browser schemes
-pref("network.protocol-handler.warn-external.http", false);
-pref("network.protocol-handler.warn-external.https", false);
-pref("network.protocol-handler.warn-external.ftp", false);
+pref("network.protocol-handler.warn-external.http", true);
+pref("network.protocol-handler.warn-external.https", true);
+pref("network.protocol-handler.warn-external.ftp", true);
+pref("network.protocol-handler.expose-all", false);
 
 // XPI
 pref("xpinstall.dialog.confirm", "chrome://mozapps/content/xpinstall/xpinstallConfirm.xul");

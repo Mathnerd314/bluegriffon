@@ -134,6 +134,7 @@
       a {
         color: blue;
         text-decoration: underline;
+        cursor: pointer;
       }
 
       :not(blockquote) > ul {
@@ -159,7 +160,16 @@
         padding-left: 2px;
       }
     </style>
-
+    <script>
+      var callback = null;
+      function onClick(event) {
+        event.preventDefault();
+        var url = event.originalTarget.getAttribute("href");
+        callback(url);
+      }
+      function setCallback(c) { callback = c; }
+      window.addEventListener("click", onClick, true);
+    </script>
  </head>
   <body>
 
@@ -186,15 +196,15 @@
         <!---p id="gecko" class="center">&credit.poweredByGecko;</p-->
 
         <p class="footnote">
-          &brandFullName; &tm.part0; Disruptive Innovations SAS.
+          &brandFullName; &tm.part0; <a href="http://disruptive-innovations.com">Disruptive Innovations SAS</a>.
         </p>
         <p class="footnote">
           BlueGriffon is copyright &copy;1998-2010 by its
           contributors,
           according to terms set out in the
-          <a href="chrome://global/content/MPL-1.1.html">Mozilla Public License</a>
+          <a href="http://www.mozilla.org/MPL/MPL-1.1.html">Mozilla Public License</a>
           and
-          <a href="chrome://global/content/NPL-1.1.html">Netscape Public License</a> documents. All Rights Reserved.</p>
+          <a href="http://www.mozilla.org/MPL/NPL-1.1.html">Netscape Public License</a> documents. All Rights Reserved.</p>
 
         <p class="footnote">
           Portions of this software are Copyright &copy;1994 The Regents of the
@@ -209,17 +219,17 @@
           from Jean-Yves Cronier, used with permission.</p>
 
         <p class="footnote">
-          <a href="https://mozillalabs.com/skywriter/">SkyWriter</a> (formerly used as Bespin) is
+          <a href="https://mozillalabs.com/skywriter/">SkyWriter</a> (formerly known as Bespin) is
           copyright (c) 2009-2010 Mozilla and used under the terms of the Mozilla Public License.</p>
 
-        <p class="footnote">FireFTP is copyright (c) 2004-2010 Mime Cuvalo.</p>
+        <p class="footnote"><a href="https://addons.mozilla.org/fr/firefox/addon/684/">FireFTP</a> is copyright (c) 2004-2010 Mime Cuvalo.</p>
         <blockquote class="footnote">
           <p>Code from FireFTP is reused under the Mozilla Public License inside
           file fireFtp.jsm. We would like to thank Mime Cuvalo giving us his formal
           authorization to reuse his code in BlueGriffon.</p>
         </blockquote>
 
-        <p class="footnote">The Yahoo! UI Library is copyright (c) 2008, Yahoo! Inc.</p>
+        <p class="footnote">The <a href="http://developer.yahoo.com/yui/grids/">Yahoo! UI Library</a> is copyright (c) 2008, Yahoo! Inc.</p>
         <blockquote class="footnote">
           <p>Copyright
           (c) 2008, Yahoo! Inc. All rights reserved.</p>
@@ -253,7 +263,7 @@
           ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
         </blockquote>
 
-        <p class="footnote">jQuery is copyright (c) 2008 John Resig.</p>
+        <p class="footnote"><a href="http://jquery.com/">jQuery</a> is copyright (c) 2008 John Resig.</p>
         <blockquote class="footnote">
           <p>Copyright (c) 2008 John Resig, http://jquery.com/</p>
           <p>Permission is hereby granted, free of charge, to any person obtaining

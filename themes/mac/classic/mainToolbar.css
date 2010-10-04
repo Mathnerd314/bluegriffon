@@ -1,42 +1,42 @@
 
-#MainToolbar {
+#MainToolbox > toolbar{
   padding: 4px;
 }
 
-#MainToolbar toolbarbutton,
+#MainToolbox toolbarbutton,
 #CustomizeToolbarWindow toolbarbutton,
 #CustomizeToolbarSheet toolbarbutton {
   -moz-image-region: rect(0px 32px 32px 0px);
   -moz-box-orient: vertical;
 }
 
-#MainToolbar .toolbarbutton-icon {
+#MainToolbox .toolbarbutton-icon {
   margin: 2px;
 }
 
-#MainToolbar .toolbarbutton-text {
+#MainToolbox .toolbarbutton-text {
   padding-bottom: 4px;
 }
 
-#MainToolbar[mode="icons"] .toolbarbutton-text {
+#MainToolbox > toolbar[mode="icons"] .toolbarbutton-text {
   display: none;
 }
 
-#MainToolbar[mode="text"] .toolbarbutton-icon,
-#MainToolbar[mode="text"] #composer-throbber {
+#MainToolbox > toolbar[mode="text"] .toolbarbutton-icon,
+#MainToolbox > toolbar[mode="text"] #composer-throbber {
   display: none;
 }
 
-#MainToolbar[mode="text"] .toolbarbutton-text {
+#MainToolbox > toolbar[mode="text"] .toolbarbutton-text {
   padding: 4px;
 }
 
-#MainToolbar toolbarbutton:hover,
-#MainToolbar toolbarbutton:hover:active {
+#MainToolbox toolbarbutton:hover,
+#MainToolbox toolbarbutton:hover:active {
   -moz-image-region: rect(32px 32px 64px 0px);
 }
 
-#MainToolbar toolbarbutton[disabled="true"]
+#MainToolbox toolbarbutton[disabled="true"]
 {
   -moz-image-region: rect(64px 32px 96px 0px);
 }
@@ -91,65 +91,65 @@
 
 /************ SMALL ICONS **************/
 
-#MainToolbar[iconsize="small"] toolbarbutton {
+#MainToolbox > toolbar[iconsize="small"] toolbarbutton {
   -moz-image-region: rect(0px 24px 24px 0px);
 }
 
-#MainToolbar[iconsize="small"] toolbarbutton:hover,
-#MainToolbar[iconsize="small"] toolbarbutton:hover:active {
+#MainToolbox > toolbar[iconsize="small"] toolbarbutton:hover,
+#MainToolbox > toolbar[iconsize="small"] toolbarbutton:hover:active {
   -moz-image-region: rect(24px 24px 48px 0px);
 }
 
-#MainToolbar[iconsize="small"] toolbarbutton[disabled="true"]
+#MainToolbox > toolbar[iconsize="small"] toolbarbutton[disabled="true"]
 {
   -moz-image-region: rect(48px 24px 72px 0px);
 }
 
-#MainToolbar[iconsize="small"] #newButton {
+#MainToolbox > toolbar[iconsize="small"] #newButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/new.png");
 }
 
-#MainToolbar[iconsize="small"] #openButton {
+#MainToolbox > toolbar[iconsize="small"] #openButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/open.png");
 }
 
-#MainToolbar[iconsize="small"] #stopButton {
+#MainToolbox > toolbar[iconsize="small"] #stopButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/stop.png");
 }
 
-#MainToolbar[iconsize="small"] #tableButton {
+#MainToolbox > toolbar[iconsize="small"] #tableButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/table.png");
 }
 
-#MainToolbar[iconsize="small"] #saveButton {
+#MainToolbox > toolbar[iconsize="small"] #saveButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/save.png");
 }
 
-#MainToolbar[iconsize="small"] #imageButton {
+#MainToolbox > toolbar[iconsize="small"] #imageButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/image.png");
 }
 
-#MainToolbar[iconsize="small"] #anchorButton {
+#MainToolbox > toolbar[iconsize="small"] #anchorButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/anchor.png");
 }
 
-#MainToolbar[iconsize="small"] #linkButton {
+#MainToolbox > toolbar[iconsize="small"] #linkButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/link.png");
 }
 
-#MainToolbar[iconsize="small"] #cssButton {
+#MainToolbox > toolbar[iconsize="small"] #cssButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/css.png");
 }
 
-#MainToolbar[iconsize="small"] #videoButton {
+#MainToolbox > toolbar[iconsize="small"] #videoButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/video.png");
 }
 
-#MainToolbar[iconsize="small"] #audioButton {
+#MainToolbox > toolbar[iconsize="small"] #audioButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/audio.png");
 }
 
-#MainToolbar[iconsize="small"] #browseButton {
+#MainToolbox > toolbar[iconsize="small"] #browseButton {
   list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/browser.png");
 }
 
@@ -163,11 +163,11 @@
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/logo-hover.png');
 }
 
-#MainToolbar[iconsize="small"] #composer-throbber {
+#MainToolbox > toolbar[iconsize="small"] #composer-throbber {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo.png');
 }
 
-#MainToolbar[iconsize="small"] #composer-throbber:hover {
+#MainToolbox > toolbar[iconsize="small"] #composer-throbber:hover {
   list-style-image: url('chrome://bluegriffon/skin/mainToolbar/small/logo-hover.png');
 }
 

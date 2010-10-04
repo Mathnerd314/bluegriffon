@@ -390,7 +390,7 @@ function OpenAppModalWindow(aParentWindow, aChromeURL, aWindowName, aResizable)
 #endif
                 aChromeURL,
                 aWindowName,
-                "chrome,titlebar,centerscreen" +
+                "chrome,titlebar,centerscreen,modal" +
                   (aResizable ? ",resizable" : ""),
                 args);
 };
@@ -419,6 +419,6 @@ function loadExternalURL( url )
     var extProtocolSvc = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
                                    .getService(Components.interfaces.nsIExternalProtocolService);
 
-    extProtocolSvc.loadUrl(uri);
+    extProtocolSvc.loadURI(uri);
   }
 }

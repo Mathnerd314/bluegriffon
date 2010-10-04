@@ -42,15 +42,8 @@
   %composerOverlayDTD;
 ]>
 
-<overlay id="scripteditorOverlay"
+<overlay id="csspropertiesOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-  <sidebaritems id="sidebaritems">
-    <sidebaritem id="sidebaritem-cssproperties"
-                 src="chrome://cssproperties/content/cssproperties.xul"
-                 name="cssproperties"
-                 title="&cssproperties.label;"/>
-  </sidebaritems>
 
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-cssproperties-menuitem"
