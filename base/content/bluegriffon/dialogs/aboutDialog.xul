@@ -42,48 +42,62 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?> 
 <?xml-stylesheet href="chrome://bluegriffon/skin/aboutDialog.css" type="text/css"?> 
 
-<!DOCTYPE window [
+<!DOCTYPE dialog [
 <!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd" >
 %brandDTD;
 <!ENTITY % aboutDialogDTD SYSTEM "chrome://bluegriffon/locale/aboutDialog.dtd" >
 %aboutDialogDTD;
 ]>
 
+    
 <dialog xmlns:html="http://www.w3.org/1999/xhtml"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         id="aboutDialog"
-        windowtype="Composer:About"
-        onload="init(event);" onunload="uninit(event);"
 #ifdef XP_MACOSX
-        buttons="extra2"
+        buttons="accept"
 #else
-        title="&aboutDialog.title;"
-        buttons="accept,extra2"
+        buttons=","
 #endif
-        creditslabel="&copyright;"
-        aboutlabel="&aboutLink;"
-        persist="screenX screenY">
-    
+        windowtype="Composer:About"
+        title="&aboutDialog.title;"
+        onload="Startup()"
+        persist="screenX screenY width height">
+
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/aboutDialog.js"/>
 
-  <deck id="modes" flex="1">
-    <vbox id="clientBox">
-      <hbox>
-        <image src="chrome://bluegriffon/skin/about-logo.png"/>
-      </hbox>
+  <tabbox flex="1">
+    <tabs>
+      <tab label="About"/>
+      <tab label="Credits"/>
+    </tabs>
+    <tabpanels flex="1">
+	    <vbox flex="1">
+	      <hbox>
+          <spacer flex="1"/>
+	        <image src="chrome://bluegriffon/skin/about-logo.png"/>
+          <spacer flex="1"/>
+	      </hbox>
+	
+        <hbox>
+          <spacer flex="1"/>
+          <label id="version" value="&aboutVersion; @APP_VERSION@"/>
+          <spacer flex="1"/>
+        </hbox>
+	
+        <hbox>
+          <spacer flex="1"/>
+  	      <description id="copyright">&copyrightText;</description>
+          <spacer flex="1"/>
+        </hbox>
 
-      <label id="version" value="&aboutVersion; @APP_VERSION@"/>
-
-      <description id="copyright">&copyrightText;</description>
-      <vbox id="detailsBox" align="center" flex="1">
-        <description id="userAgent"/>
-      </vbox>
-    </vbox>
-    <vbox flex="1" id="creditsBox">
-      <iframe id="creditsIframe" src="about:blank" flex="1"/>
-    </vbox>    
-  </deck>
-  <separator class="groove" id="groove"/>
+	      <vbox id="detailsBox" align="center" flex="1">
+	        <description id="userAgent"/>
+	      </vbox>
+	    </vbox>
+      <iframe flex="1"
+              src="chrome://bluegriffon/content/credits.xhtml"/>
+    </tabpanels>
+  </tabbox>
 </dialog>
 

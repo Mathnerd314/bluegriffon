@@ -157,7 +157,7 @@ function EditorLoadUrl(aElt, aURL)
 function AboutComposer()
 {
   window.openDialog('chrome://bluegriffon/content/dialogs/aboutDialog.xul',
-                    "", "resizable=no");
+                    "", "resizable=yes,modal,chrome");
 }
 
 function OpenConsole()

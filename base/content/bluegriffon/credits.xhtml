@@ -55,13 +55,12 @@
 
     <style>
       html {
-        background-color: white;
+        background-color: transparent;
       }
 
       * {
         cursor: default;
         -moz-user-select: none;
-        /*overflow: hidden;*/
       }
 
       #titleBox {
@@ -86,11 +85,8 @@
         position: absolute;
         left: 0px;
         top: 0px;
-        overflow: hidden;
         z-index: 1;
-        height: 285px;
-        width: 280px;
-        margin-left: 10px;
+         margin-left: 10px;
         margin-right: 10px;
         font-family: Arial, sans-serif;
         font-size: small;
@@ -104,8 +100,10 @@
       }
 
       .creditsGroup {
-        margin-bottom: 1px;
+        margin-bottom: 4em;
         text-align: center;
+        border: thin solid gray;
+        border-radius: 11px;
       }
 
       .footnote {
@@ -162,82 +160,11 @@
       }
     </style>
 
-    <script type="application/x-javascript">
-    <![CDATA[
+ </head>
+  <body>
 
-      var gCreditsInterval = -1;
-
-      function uninit()
-      {
-        if (gCreditsInterval > -1)
-          clearInterval(gCreditsInterval);
-      }
-
-      function init()
-      {
-        var cb = document.getElementById("creditsBox");
-        cb.scrollTop = 0;
-        setTimeout(runCredits, 3000);
-      }
-
-      function runCredits()
-      {
-        gCreditsInterval = setInterval("creditsCallback()", 25);
-      }
-
-      function creditsCallback()
-      {
-        var cb = document.getElementById("creditsBox");
-        var newtop = cb.scrollTop + 1;
-        cb.scrollTop = newtop;
-        if (cb.scrollTop != newtop) {
-          // we're at the bottom
-          clearInterval(gCreditsInterval);
-          setTimeout(function() { cb.scrollTop = 0 }, 3000);
-        }
-      }
-
-      function visitLink(aEvent) {
-        var node = aEvent.target;
-        while (node.nodeType != Node.ELEMENT_NODE)
-          node = node.parentNode;
-        var url = node.getAttribute("link");
-        if (!url)
-          return;
-
-        window.top.openURL(url);
-      }
-
-      function StopScrolling()
-      {
-        if (gCreditsInterval)
-        {
-          clearInterval(gCreditsInterval);
-          gCreditsInterval = 0;
-          window.setCursor("wait");
-        }
-      }
-
-      function StartAgainScrolling()
-      {
-        if (!gCreditsInterval)
-        {
-          gCreditsInterval = setInterval("creditsCallback()", 25);
-          window.setCursor("wait");
-        }
-      }
-    ]]>
-    </script>
-  </head>
-  <body onload="init();" onunload="uninit();">
-
-    <div id="creditsBox" onmouseover="StopScrolling()"
-                         onmouseout="StartAgainScrolling()">
-        <h2 class="title">&brandFullName;
-          <div class="motto">&brandMotto;</div>
-        </h2>
-
-        <div class="creditsGroup">
+    <div id="creditsBox">
+        <div>
           <img src="chrome://bluegriffon/content/DI.png"/>
         </div>
 
@@ -250,6 +177,7 @@
           <h3>&credit.contributors;</h3>
           <ul>
             <li>Laurent Jouanneau</li>
+            <li>Jean-Yves Cronier</li>
           </ul>
 
           &credit.translation;
@@ -258,12 +186,12 @@
         <!---p id="gecko" class="center">&credit.poweredByGecko;</p-->
 
         <p class="footnote">
-          &brandFullName; &tm.part0; Disruptive Innovations SARL.
+          &brandFullName; &tm.part0; Disruptive Innovations SAS.
         </p>
         <p class="footnote">
-          BlueGriffon is copyright &copy;1998-2009 by its
+          BlueGriffon is copyright &copy;1998-2010 by its
           contributors,
-          according to terms set out in the;
+          according to terms set out in the
           <a href="chrome://global/content/MPL-1.1.html">Mozilla Public License</a>
           and
           <a href="chrome://global/content/NPL-1.1.html">Netscape Public License</a> documents. All Rights Reserved.</p>
@@ -271,6 +199,18 @@
         <p class="footnote">
           Portions of this software are Copyright &copy;1994 The Regents of the
           University of California. All Rights Reserved.</p>
+
+        <p class="footnote">
+          Many icons inside BlueGriffon borrowed from <a href="http://tango.freedesktop.org/Tango_Desktop_Project">The
+          Tango Desktop Project</a>, released in the public domain.</p>
+
+        <p class="footnote">
+          The Bezier Curve editor in the CSS Properties panel is a contribution
+          from Jean-Yves Cronier, used with permission.</p>
+
+        <p class="footnote">
+          <a href="https://mozillalabs.com/skywriter/">SkyWriter</a> (formerly used as Bespin) is
+          copyright (c) 2009-2010 Mozilla and used under the terms of the Mozilla Public License.</p>
 
         <p class="footnote">FireFTP is copyright (c) 2004-2010 Mime Cuvalo.</p>
         <blockquote class="footnote">
