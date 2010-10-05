@@ -27,8 +27,10 @@ function Startup()
 
 function InitDialog()
 {
-  if (!gNode)
+  if (!gNode || gNode.nodeName.toLowerCase() != "video") {
+    gNode = null;
     return;
+  }
   
   gDialog.widthTextbox.value = gNode.hasAttribute("width") ? gNode.getAttribute("width") : "";
   gDialog.heightTextbox.value = gNode.hasAttribute("height") ? gNode.getAttribute("height") : "";
@@ -194,7 +196,7 @@ function onAccept()
           p.appendChild(gEditor.document.createElement("br"));
           
           p.appendChild(gNode);
-		      gEditor.insertElementAtSelection(p, false);
+		      gEditor.insertElementAtSelection(p, true);
 		      txn = new diNodeInsertionTxn(gNode,
 		                                   p.parentNode,
 		                                   p.nextSibling);

@@ -26,8 +26,10 @@ function Startup()
 
 function InitDialog()
 {
-  if (!gNode)
+  if (!gNode || gNode.nodeName.toLowerCase() != "audio") {
+    gNode = null;
     return;
+  }
   
   gDialog.preloadMenulist.value = gNode.hasAttribute("preload") ? gNode.getAttribute("preload") : "";
   gDialog.audioControlsCheckbox.checked = gNode.hasAttribute("controls");
@@ -124,7 +126,6 @@ function onAccept()
     }
     gEditor.setAttribute(gNode, "src", gDialog.urlTextbox.value);
 
-    setAttribute("poster",   gDialog.urlPosterTextbox.value);
     setAttribute("preload",  gDialog.preloadMenulist.value);
     setAttribute("controls", gDialog.audioControlsCheckbox.checked ? "controls" : "");
     setAttribute("autoplay", gDialog.autoplayCheckbox.checked ? "autoplay" : "");
@@ -137,7 +138,7 @@ function onAccept()
           p.appendChild(gEditor.document.createElement("br"));
           
           p.appendChild(gNode);
-          gEditor.insertElementAtSelection(p, false);
+          gEditor.insertElementAtSelection(p, true);
           txn = new diNodeInsertionTxn(gNode,
                                        p.parentNode,
                                        p.nextSibling);

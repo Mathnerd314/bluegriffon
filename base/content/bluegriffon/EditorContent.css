@@ -114,17 +114,20 @@ tr > nvu|* {
 
 
 svg|svg:hover,
+video:hover,
 audio:hover {
   outline: black dashed thin;
 }
 
 audio {
-  min-width: 300px;
-  min-height: 64px;
+  min-height: 40px;
   background-color: silver;
   background-image: url("chrome://bluegriffon/skin/icons/audio.png");
   background-position: center center;
   background-repeat: no-repeat;
-  background-clip: rect(0px, 32px, 32px, 0px);
+}
+
+audio:not([controls]) {
+  display: inline-block !important;
 }
 

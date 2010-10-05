@@ -58,7 +58,7 @@
 	    <checkbox label="&loop.label;"          id="loopCheckbox"/>
 	    <spacer flex="1"/>
 	  </hbox>
-	  <hbox align="center">
+	  <hbox align="center" style="margin-top: 2em">
 	    <spacer flex="1"/>
 	    <html:audio id="preview" controls="controls"
 	                onloadeddata="AudioLoaded()"
