@@ -5,11 +5,12 @@ Components.utils.import("resource://gre/modules/prompterHelper.jsm");
 var gNode = null;
 var gTable = null;
 var gRows, gColumns, gRowsInHeader, gRowsInFooter;
-var gTableTabChanged = false;
+var gDataChanged = false;
 
-function TableTabChanged()
+function DataChanged()
 {
-  gTableTabChanged = true;
+  gDataChanged = true;
+  document.documentElement.getButton("extra1").disabled = false;
 }
 
 function Startup()
@@ -17,7 +18,10 @@ function Startup()
   GetUIElements();
   gNode = window.arguments[0];
 
+  document.documentElement.getButton("extra1").disabled = true;
+
   InitTableData(gNode);
+  InitCellsData(gNode);
 }
 
 function onCssPolicyChange(aElt)
@@ -211,69 +215,80 @@ function InitTableData(aNode)
 
 function ValidateData(aTabValue)
 {
-  var tab = aTabValue || gDialog.tabbox.selectedTab.value;
-  var editor = EditorUtils.getCurrentEditor();
-  editor.beginTransaction();
-  switch (tab) {
-    case "table":
-      editor.setAttribute(gTable, "border", gDialog.tableBorderTextbox.value);
-      if (gDialog.tableCellPaddingTextbox.value)
-        editor.setAttribute(gTable, "cellpadding", gDialog.tableCellPaddingTextbox.value + gDialog.tableCellPaddingUnitMenulist.value);
-      else
-        editor.removeAttribute(gTable, "cellpadding");
-      if (gDialog.tableCellSpacingTextbox.value)
-        editor.setAttribute(gTable, "cellspacing", gDialog.tableCellSpacingTextbox.value + gDialog.tableCellSpacingUnitMenulist.value);
-      else
-        editor.removeAttribute(gTable, "cellspacing");
-      editor.removeAttribute(gTable, "width");
-      editor.removeAttribute(gTable, "height");
-      var txn = new diStyleAttrChangeTxn(gTable, "width", gDialog.widthMenulist.value, "");
-      editor.transactionManager.doTransaction(txn);
-      txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
-      editor.transactionManager.doTransaction(txn);
-      var header = gTable.querySelector("thead");
-      if (!gDialog.rowsInHeaderTextbox.value) {
-        // delete the header if it exists...
-        if (header)
-          editor.deleteNode(header);
-      }
-      else {
-        // add or remove rows as needed
-        if (!header) {
-          // ah, we need to create the header first...
-          header = editor.document.createElement("thead");
-          var where = gTable.querySelector("tfoot") || gTable.querySelector("tbody");
-		      txn = new diInsertNodeBeforeTxn(header, gTable, where);
-		      editor.transactionManager.doTransaction(txn);
-        }
-        UpdateListOfRows(header, gRowsInHeader, gDialog.rowsInHeaderTextbox.value,
-                         gDialog.onlyHeaderCellsInHeaderCheckbox.checked ? "th" : "td");
-      }
-      var footer = gTable.querySelector("tfoot");
-      if (!gDialog.rowsInFooterTextbox.value) {
-        // delete the header if it exists...
-        if (footer)
-          editor.deleteNode(footer);
-      }
-      else {
-        // add or remove rows as needed
-        if (!footer) {
-          // ah, we need to create the header first...
-          footer = editor.document.createElement("tfoot");
-          var where = gTable.querySelector("tbody");
-          txn = new diInsertNodeBeforeTxn(footer, gTable, where);
-          editor.transactionManager.doTransaction(txn);
-        }
-        UpdateListOfRows(footer, gRowsInFooter, gDialog.rowsInFooterTextbox.value,
-                         gDialog.onlyHeaderCellsInFooterCheckbox.checked ? "th" : "td");
-      }
-
-      UpdateListOfRows(gTable.querySelector("tbody"), gRows, gDialog.tableRowsTextbox.value,
-                       "td");
-      break;
-    default: break;
+  if (gDataChanged) {
+	  var tab = aTabValue || gDialog.tabbox.selectedTab.value;
+	  var editor = EditorUtils.getCurrentEditor();
+	  editor.beginTransaction();
+	  switch (tab) {
+	    case "table":
+	      editor.setAttribute(gTable, "border", gDialog.tableBorderTextbox.value);
+	      if (gDialog.tableCellPaddingTextbox.value)
+	        editor.setAttribute(gTable, "cellpadding", gDialog.tableCellPaddingTextbox.value + gDialog.tableCellPaddingUnitMenulist.value);
+	      else
+	        editor.removeAttribute(gTable, "cellpadding");
+	      if (gDialog.tableCellSpacingTextbox.value)
+	        editor.setAttribute(gTable, "cellspacing", gDialog.tableCellSpacingTextbox.value + gDialog.tableCellSpacingUnitMenulist.value);
+	      else
+	        editor.removeAttribute(gTable, "cellspacing");
+	      editor.removeAttribute(gTable, "width");
+	      editor.removeAttribute(gTable, "height");
+	      var txn = new diStyleAttrChangeTxn(gTable, "width", gDialog.widthMenulist.value, "");
+	      editor.doTransaction(txn);
+	      txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
+	      editor.doTransaction(txn);
+	      var header = gTable.querySelector("thead");
+	      if (!parseInt(gDialog.rowsInHeaderTextbox.value)) {
+	        // delete the header if it exists...
+	        if (header)
+	          editor.deleteNode(header);
+	      }
+	      else {
+	        // add or remove rows as needed
+	        if (!header) {
+	          // ah, we need to create the header first...
+	          header = editor.document.createElement("thead");
+	          var where = gTable.querySelector("tfoot") || gTable.querySelector("tbody");
+			      txn = new diInsertNodeBeforeTxn(header, gTable, where);
+			      editor.doTransaction(txn);
+	        }
+	        UpdateListOfRows(header, gRowsInHeader, gDialog.rowsInHeaderTextbox.value,
+	                         gDialog.onlyHeaderCellsInHeaderCheckbox.checked ? "th" : "td");
+	      }
+	      var footer = gTable.querySelector("tfoot");
+	      if (!parseInt(gDialog.rowsInFooterTextbox.value)) {
+	        // delete the header if it exists...
+	        if (footer)
+	          editor.deleteNode(footer);
+	      }
+	      else {
+	        // add or remove rows as needed
+	        if (!footer) {
+	          // ah, we need to create the header first...
+	          footer = editor.document.createElement("tfoot");
+	          var where = gTable.querySelector("tbody");
+	          txn = new diInsertNodeBeforeTxn(footer, gTable, where);
+	          editor.doTransaction(txn);
+	        }
+	        UpdateListOfRows(footer, gRowsInFooter, gDialog.rowsInFooterTextbox.value,
+	                         gDialog.onlyHeaderCellsInFooterCheckbox.checked ? "th" : "td");
+	      }
+	
+	      UpdateListOfRows(gTable.querySelector("tbody"), gRows, gDialog.tableRowsTextbox.value,
+	                       "td");
+	      break;
+	
+	    case "cell":
+	      switch (gDialog.selectionType.value) {
+	        case "cells": UpdateCells(editor); break;
+          case "rows":  UpdateRows(editor);  break;
+	        default: break;
+	      }
+	      break;
+	
+	    default: break;
+	  }
+	  editor.endTransaction();
   }
-  editor.endTransaction();
 }
 
 function onAccept()
@@ -353,16 +368,216 @@ function onTabSelect()
   var tab = gDialog.tabbox.selectedTab.value;
   switch (tab) {
     case "cell":
-      if (gTableTabChanged) {
+      if (gDataChanged) {
         if (PromptUtils.confirm(gDialog.bundleString.getString("TableTabModified"),
                                 gDialog.bundleString.getString("ApplyAndCloseWindow"),
                                 window)) {
 	        ValidateData("table");
-          window.close();
+          gDataChanged = false;
+          document.documentElement.getButton("extra1").disabled = false;
 	      }
       }
+      break;
+    case "table":
+      break;
+    default: break; // should never happen
   }
 }
+
+function InitCellsData(aNode)
+{
+  var nodeName = aNode.nodeName.toLowerCase();
+  var editing = "cells";
+  if (nodeName == "tr")
+    editing = "row";
+
+  var ruleset = CssInspector.getCSSStyleRules(aNode, false);
+
+  var w = CssInspector.getCascadedValue(ruleset, "width");
+  if (!w && aNode.hasAttribute("width")) {
+    w = aNode.getAttribute("width");
+    if (w.indexOf("%") == -1)
+      w += "px";
+  }
+  gDialog.cellsWidthMenulist.value = w;
+
+  var h = CssInspector.getCascadedValue(ruleset, "height");
+  if (!h && aNode.hasAttribute("height")) {
+    h = aNode.getAttribute("height");
+    if (h.indexOf("%") == -1)
+      h += "px";
+  }
+  gDialog.cellsHeightMenulist.value = h;
+
+  var hAlign = CssInspector.getCascadedValue(ruleset, "text-align");
+  if (!hAlign && aNode.hasAttribute("align")) {
+    hAlign = aNode.getAttribute("align"); 
+  }
+  gDialog.cellsHAlignMenulist.value = hAlign;
+
+  var vAlign = CssInspector.getCascadedValue(ruleset, "vertical-align");
+  if (!vAlign && aNode.hasAttribute("valign")) {
+    vAlign = aNode.getAttribute("valign"); 
+  }
+  gDialog.cellsVAlignMenulist.value = vAlign;
+
+  var bg = CssInspector.getCascadedValue(ruleset, "background-color");
+  gDialog.bgColorColorpicker.color = bg;
+
+  gDialog.cellsHeadersCheckbox.checked = (aNode.nodeName.toLowerCase() == "th");
+
+  var bg = CssInspector.getCascadedValue(ruleset, "white-space");
+  if (!bg && aNode.hasAttribute("nowrap"))
+    bg = "no-wrap";
+  gDialog.cellsNoWrapCheckbox.checked = (bg == "no-wrap");
+}
+
+function GetSelectedCells(selection)
+{
+  var rangeCount = selection.rangeCount;
+  var cells = [];
+  for (var i = 0; i < rangeCount; i++) {
+    var range = selection.getRangeAt(i);
+    var startContainer = range.startContainer;
+    var startOffset    = range.startOffset;
+    var endContainer   = range.endContainer;
+    var endOffset      = range.endOffset;
+    if (startContainer.nodeType == Node.ELEMENT_NODE)
+      startContainer = startContainer.childNodes.item(startOffset);
+    if (endContainer.nodeType == Node.ELEMENT_NODE)
+      endContainer = endContainer.childNodes.item(endOffset-1);
+  
+    var node = startContainer;
+    var direction = "down";
+    var nextNode = node;
+    do {
+      node = nextNode;
+      var tmp = node;
+      // find a potential th/td ancestor
+      while (tmp) {
+        if (tmp instanceof Components.interfaces.nsIDOMHTMLTableCellElement &&
+            cells.indexOf(tmp) == -1) {
+          cells.push(tmp);
+          break;
+        }
+        tmp = tmp.parentNode;
+      }
+  
+      // let's traverse the tree
+      if (direction == "down") {
+        if (node.firstChild)
+          nextNode = node.firstChild
+        else if (node.nextSibling)
+          nextNode = node.nextSibling;
+        else {
+          direction = "up";
+          nextNode = node.parentNode;
+        }
+      }
+      else {
+        if (node.nextSibling) {
+          nextNode = node.nextSibling;
+          direction = "down";
+        }
+        else
+          nextNode = node.parentNode;
+      }
+    } while (node != endContainer);
+  }
+  return cells;
+}
+
+function UpdateCells(editor)
+{
+	var selection = editor.selection;
+	var cells = GetSelectedCells(selection);
+	// at this points cells array contains all the cells to impact
+	for (var i = 0; i < cells.length; i++) {
+    var c = cells[i];
+
+    var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "height", gDialog.cellsHeightMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "text-align", gDialog.cellsHAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "background-color", gDialog.bgColorColorpicker.color, "");
+    editor.doTransaction(txn);
+
+    if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
+      editor.switchTableCellHeaderType(c);
+  }
+}
+
+function UpdateRows(editor)
+{
+  var selection = editor.selection;
+  var cells = GetSelectedCells(selection);
+  var rows = [];
+  for (var i = 0; i < cells.length; i++) {
+    var row = cells[i].parentNode;
+    if (rows.indexOf(row) == -1)
+      rows.push(row);
+  }
+
+  // at this point the rows array has all the rows we need to impact
+  for (var i = 0; i < rows.length; i++) {
+    var r = rows[i];
+
+    txn = new diStyleAttrChangeTxn(r, "height", gDialog.cellsHeightMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(r, "text-align", gDialog.cellsHAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(r, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(r, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(r, "background-color", gDialog.bgColorColorpicker.color, "");
+    editor.doTransaction(txn);
+
+    var c = r.firstElementChild;
+    while (c) {
+	    var txn = new diStyleAttrChangeTxn(c, "width", "", "");
+	    editor.doTransaction(txn);
+	
+	    txn = new diStyleAttrChangeTxn(c, "height", "", "");
+	    editor.doTransaction(txn);
+	
+	    txn = new diStyleAttrChangeTxn(c, "text-align", "", "");
+	    editor.doTransaction(txn);
+	
+	    txn = new diStyleAttrChangeTxn(c, "vertical-align", "", "");
+	    editor.doTransaction(txn);
+	
+	    txn = new diStyleAttrChangeTxn(c, "white-space", "", "");
+	    editor.doTransaction(txn);
+	
+	    txn = new diStyleAttrChangeTxn(c, "background-color", "", "");
+	    editor.doTransaction(txn);
+
+      if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
+	      editor.switchTableCellHeaderType(c);
+
+      c = c.nextElementSibling;
+    }
+  }
+}
+
+
+
 /********************** diInsertNodeBeforeTxn **********************/
 
 function diInsertNodeBeforeTxn(aNode, aParent, aRef)
@@ -405,6 +620,7 @@ diInsertNodeBeforeTxn.prototype = {
 
   merge: function(aTransaction)
   {
-    return false;
+    return true;
   }
 };
+

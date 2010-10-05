@@ -10,7 +10,8 @@
 <dialog title="&windowTitle.label;"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     onload = "Startup()"
-    buttons="accept,cancel"
+    buttons="extra1,accept,cancel"
+    buttonlabelextra1="&applyButton.label;"
     style="height: auto"
     ondialogaccept="return onAccept();"
     persist="screenX screenY">
@@ -29,8 +30,8 @@
       <tab label="&cell.tab;"  value="cell"/>
     </tabs>
     <tabpanels>
-      <vbox oncommand="TableTabChanged()"
-            oninput="TableTabChanged()">
+      <vbox oncommand="DataChanged()"
+            oninput="DataChanged()">
         <groupbox>
           <caption label="&size.label;"/>
           <grid>
@@ -129,6 +130,123 @@
         </groupbox>
       </vbox>
 
+      <vbox flex="1">
+        <groupbox>
+          <caption label="&selection.caption;"/>
+          <hbox align="center">
+            <grid>
+              <columns><column/></columns>
+              <rows>
+                <row>
+		              <menulist id="selectionType"
+                            oncommand="event.preventDefault()">
+		                <menupopup>
+		                  <menuitem label="&cells.label;" value="cells"/>
+		                  <menuitem label="&rowsSelection.label;" value="rows"/>
+		                  <menuitem label="&columnsSelection.label;" value="columns"/>
+		                </menupopup>
+		              </menulist>
+                </row>
+                <row align="center">
+                  <hbox>
+                    <button flex="1" label="&previous.label;"
+                            image="chrome://global/skin/arrow/arrow-lft.gif"/>
+                    <button flex="1" label="&next.label;"
+                            image="chrome://global/skin/arrow/arrow-rit.gif"
+                            dir="reverse"/>
+                  </hbox>
+                </row>
+              </rows>
+            </grid>
+            <description style="margin: 1em">&warning.description;</description>
+          </hbox>
+        </groupbox>
+
+        <hbox oncommand="DataChanged()"
+              oninput="DataChanged()">
+	        <groupbox flex="1">
+	          <caption label="&size.caption;"/>
+	          <grid>
+	            <columns><column/><column/><column/></columns>
+	            <rows>
+	              <row align="center">
+	                <label value="&width.label;"/>
+	                <menulist sizetopopup="none" editable="true" id="cellsWidthMenulist"
+	                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+	                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+	                  <menupopup id="cellsWidthMenupopup"
+	                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+	                </menulist>
+	                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+	                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+	              </row>
+	              <row align="center">
+	                <label value="&height.label;"/>
+	                <menulist sizetopopup="none" editable="true" id="cellsHeightMenulist"
+	                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false);"
+	                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', false)">
+	                  <menupopup id="cellsHeightMenupopup"
+	                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+	                </menulist>
+	                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+	                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+	              </row>
+	            </rows>
+	          </grid>
+	        </groupbox>
+          <groupbox flex="1">
+            <caption label="&alignment.caption;"/>
+            <grid>
+              <columns><column/><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <label value="&hAlign.label;"/>
+                  <menulist id="cellsHAlignMenulist">
+                    <menupopup>
+                      <menuitem label="&unspecified.label;" value=""/>
+                      <menuseparator/>
+                      <menuitem label="&left.label;" value="left"/>
+                      <menuitem label="&center.label;" value="center"/>
+                      <menuitem label="&right.label;" value="right"/>
+                      <menuseparator/>
+                      <menuitem label="&justify.label;" value="justify"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+                <row align="center">
+                  <label value="&vAlign.label;"/>
+                  <menulist id="cellsVAlignMenulist">
+                    <menupopup>
+                      <menuitem label="&unspecified.label;" value=""/>
+                      <menuseparator/>
+                      <menuitem label="&top.label;" value="top"/>
+                      <menuitem label="&center.label;" value="middle"/>
+                      <menuitem label="&bottom.label;" value="bottom"/>
+                    </menupopup>
+                  </menulist>
+                </row>
+              </rows>
+            </grid>
+          </groupbox>
+        </hbox>
+        <groupbox oncommand="DataChanged()"
+                  oninput="DataChanged()">
+          <caption label="Style"/>
+          <hbox align="center">
+            <hbox flex="1">
+	            <label value="&bgColor.label;"/>
+	            <ecolorpicker id="bgColorColorpicker"
+	                          color="transparent"
+	                          colorObjectId="BackgroundColor"
+	                          windowTitle="&bgColor.windowTitle;"
+	                          showTransparency="true"
+	                          oncommand="DataChanged()"/>
+            </hbox>
+            <checkbox label="&headers.checkbox;" id="cellsHeadersCheckbox" flex="1"/>
+            <checkbox label="&nowrap.checkbox;"  id="cellsNoWrapCheckbox"  flex="1"/>
+          </hbox>
+        </groupbox>
+      </vbox>
     </tabpanels>
   </tabbox>
 
