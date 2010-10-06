@@ -5,6 +5,7 @@ bluegriffon.jar:
 % style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
 * content/bluegriffon/xul/bluegriffon.xul               (content/bluegriffon/xul/bluegriffon.xul)
 * content/bluegriffon/js/bluegriffon.js                 (content/bluegriffon/js/bluegriffon.js)
+  content/bluegriffon/js/panels.js                      (content/bluegriffon/js/panels.js)
   content/bluegriffon/utils/dgid.js                     (content/bluegriffon/utils/dgid.js)
 * content/bluegriffon/utils/global.js                   (content/bluegriffon/utils/global.js)
   content/bluegriffon/utils/htmlParser.js               (content/bluegriffon/utils/htmlParser.js)

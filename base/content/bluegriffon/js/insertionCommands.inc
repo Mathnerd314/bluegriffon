@@ -119,19 +119,9 @@ var cmdCssPanelCommand =
 
   doCommand: function(aCommand)
   {
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
     var panel = gDialog["panel-cssproperties"];
-    panel.openPanel(null, false);
+    BlueGriffonPanels.openPanel(panel, null, false);
     NotifierUtils.notify("redrawPanel", panel.id);
-#else
-    start_css();
-#endif
-#else
-    var panel = gDialog["panel-cssproperties"];
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
-#endif
   }
 };
 

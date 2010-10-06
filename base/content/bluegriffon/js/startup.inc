@@ -37,5 +37,6 @@ function Startup()
     ProjectManager.init();
 
   window.addEventListener("deactivate", DeactivateMainWindow, true);
+  BlueGriffonPanels.init();
 }
 

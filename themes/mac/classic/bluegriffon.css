@@ -302,7 +302,7 @@ grippy[disabled="true"] {
 /***** FLOATING PANELS *****/
 
 panel[floating="true"] {
-  -moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");
+  /*-moz-binding: url("chrome://bluegriffon/content/bindings/floatingpanel.xml#floatingpanel");*/
   -moz-appearance: none; 
   background-color: rgba(96,96,96,0.9);
   color: white;
@@ -312,4 +312,26 @@ panel[floating="true"] {
 
 popup {
   -moz-appearance: menupopup;
+}
+
+
+panel[floating="true"] .titleholder {
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+}
+
+panel[floating="true"] .floatingpanel-close {
+  list-style-image: url("chrome://global/skin/icons/closetab.png");
+}
+
+panel[floating="true"] .floatingpanel-close:hover {
+  list-style-image: url("chrome://global/skin/icons/closetab-hover.png");
+}
+
+panel[floating="true"] .resizer {
+  width: 25px;
+  height: 25px;
+  background-image: url("chrome://bluegriffon/skin/panels/resizer.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
 }
