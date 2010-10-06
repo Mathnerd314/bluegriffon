@@ -1088,28 +1088,12 @@ function TogglePanel(aEvent)
 
   var panel = gDialog[aEvent.originalTarget.getAttribute("panel")];
   if (menuitem.getAttribute("checked") == "true") {
-    BlueGriffonPanels.openPanel(panel, null, true);
+    panel.openPanel(null, false);
     NotifierUtils.notify("redrawPanel", panel.id);
   }
   else {
-    try {
-      var screenX = panel.boxObject.screenX;
-      var screenY = panel.boxObject.screenY;
-      var width   = panel.boxObject.width;
-      var height  = panel.boxObject.height;
-      panel.setAttribute("left",   screenX);
-      panel.setAttribute("top",    screenY);
-      panel.setAttribute("width",  width);
-      panel.setAttribute("height", height);
-      document.persist(panel.id, "left");
-      document.persist(panel.id, "top");
-      document.persist(panel.id, "width");
-      document.persist(panel.id, "height");
-      panel.setAttribute("open", "false");
-      document.persist(panel.id, "open");
-    } catch (e) {}
     NotifierUtils.notify("panelClosed", panel.id);
-    BlueGriffonPanels.closePanel(panel);
+    panel.closePanel();
   }
 }
 
@@ -1122,4 +1106,20 @@ function OnClick(aEvent)
                  target instanceof Components.interfaces.nsIDOMHTMLAudioElement)) {
     EditorUtils.getCurrentEditor().selectElement(target);
   }
+}
+
+// LINUX ONLY :-(
+function start_css()
+{
+  var w = null;
+  try {
+    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:CSSProperties");
+  }
+  catch(e){}
+  if (w)
+    w.focus();
+  else
+    window.open('chrome://cssproperties/content/cssproperties.xul',"_blank",
+               "chrome,resizable,scrollbars=yes");
 }

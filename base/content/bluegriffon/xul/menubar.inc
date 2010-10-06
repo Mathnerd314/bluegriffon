@@ -75,10 +75,25 @@
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
           oncommand="TogglePanel(event)">
       <menupopup id="panelsMenuPopup"
-                 onpopupshowing="UpdatePanelsStatusInMenu()">
+#ifdef XP_UNIX
+#ifdef XP_MACOSX
+                 onpopupshowing="UpdatePanelsStatusInMenu()"
+#endif
+#else
+                 onpopupshowing="UpdatePanelsStatusInMenu()"
+#endif
+                 >
+#ifdef XP_UNIX
+#ifdef XP_MACOSX
         <menuitem label="&alignPanels.label;"
                   oncommand="AlignAllPanels()"/>
         <menuseparator id="beforeAllPanelsMenuseparator"/>
+#endif
+#else
+        <menuitem label="&alignPanels.label;"
+                  oncommand="AlignAllPanels()"/>
+        <menuseparator id="beforeAllPanelsMenuseparator"/>
+#endif
       </menupopup>
     </menu>
 
@@ -95,6 +110,7 @@
                   oncommand="OpenPreferences()"/>
         <menuitem label="Venkman"
                   oncommand="start_venkman()"/>
+        <menuitem label="css" oncommand="start_css()"/>
       </menupopup>
     </menu>
 
