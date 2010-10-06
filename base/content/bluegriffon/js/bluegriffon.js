@@ -1105,6 +1105,8 @@ function TogglePanel(aEvent)
       document.persist(panel.id, "top");
       document.persist(panel.id, "width");
       document.persist(panel.id, "height");
+      panel.setAttribute("open", "false");
+      document.persist(panel.id, "open");
     } catch (e) {}
     NotifierUtils.notify("panelClosed", panel.id);
     BlueGriffonPanels.closePanel(panel);

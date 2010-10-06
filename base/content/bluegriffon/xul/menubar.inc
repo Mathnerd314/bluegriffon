@@ -79,9 +79,6 @@
         <menuitem label="&alignPanels.label;"
                   oncommand="AlignAllPanels()"/>
         <menuseparator id="beforeAllPanelsMenuseparator"/>
-        <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels()"/>
-        <menuseparator id="beforeAllPanelsMenuseparator"/>
       </menupopup>
     </menu>
 

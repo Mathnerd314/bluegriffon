@@ -55,10 +55,10 @@ var BlueGriffonPanels = {
 	  try {
 	    if (aAnchorElement)
 	      aPanel.openPopup(aAnchorElement, "after_start", 0, 0,
-	                     false, true);
+	                       false, true);
 	    else
 	      aPanel.openPopup(document.documentElement, "start_before", 10, 10,
-	                     false, true);
+	                       false, true);
 	    aPanel.setAttribute("open", "true");
 	    document.persist(aPanel.id, "open");
 	    if (aDoResize && aPanel.hasAttribute("width") && aPanel.hasAttribute("height"))

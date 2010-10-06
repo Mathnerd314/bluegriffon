@@ -49,8 +49,7 @@
     <menuitem id="panel-cssproperties-menuitem"
               type="checkbox"
               panel="panel-cssproperties"
-              label="&cssproperties.label;"
-              />
+              label="&cssproperties.label;"/>
   </menupopup>
 
   <panelset id="panels">
