@@ -25,8 +25,9 @@ var cmdInsertOrEditTableCommand =
           name == "th" ||
           name == "td" ||
           name == "caption") {
-		    window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
-		                      "chrome,modal,titlebar,dialog=yes", element);
+		    /*window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
+		                      "chrome,modal,titlebar,dialog=yes", element);*/
+        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
         return;
       }
     }

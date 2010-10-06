@@ -16,7 +16,15 @@ function DataChanged()
 function Startup()
 {
   GetUIElements();
-  gNode = window.arguments[0];
+
+  try {
+    var args = window.arguments[0];
+    args instanceof Components.interfaces.nsIDialogParamBlock;
+    var objects = args.objects;
+    gNode = objects.queryElementAt(0,
+                                   Components.interfaces.nsIDOMElement);
+  }
+  catch(e) { return; }
 
   document.documentElement.getButton("extra1").disabled = true;
 
@@ -380,6 +388,15 @@ function onTabSelect()
       }
       break;
     case "table":
+      if (gDataChanged) {
+        if (PromptUtils.confirm(gDialog.bundleString.getString("CellTabModified"),
+                                gDialog.bundleString.getString("ApplyAndCloseWindow"),
+                                window)) {
+          ValidateData("cell");
+          gDataChanged = false;
+          document.documentElement.getButton("extra1").disabled = false;
+        }
+      }
       break;
     default: break; // should never happen
   }
@@ -457,9 +474,9 @@ function GetSelectedCells(selection)
       var tmp = node;
       // find a potential th/td ancestor
       while (tmp) {
-        if (tmp instanceof Components.interfaces.nsIDOMHTMLTableCellElement &&
-            cells.indexOf(tmp) == -1) {
-          cells.push(tmp);
+        if (tmp instanceof Components.interfaces.nsIDOMHTMLTableCellElement) {
+          if (cells.indexOf(tmp) == -1)
+            cells.push(tmp);
           break;
         }
         tmp = tmp.parentNode;
@@ -657,7 +674,426 @@ function UpdateRows(editor)
   }
 }
 
+function Next()
+{
+  if (gDataChanged) {
+    ValidateData("cell");
+    gDataChanged = false;
+  }
 
+  switch (gDialog.selectionType.value) {
+    case "cells":
+      NextCell();
+      break;
+
+    case "rows":
+      NextRow();
+      break;
+
+    case "columns":
+      NextColumn();
+      break;
+
+    default: break; //should never happen
+  }
+  InitCellsData(gNode);
+}
+
+function GetCurrentCellFromSelection()
+{
+  var cell = null;
+  switch (gNode.nodeName.toLowerCase()) {
+    case "td":
+    case "th": cell = gNode; break;
+    case "tr": cell = gNode.lastElementChild; break;
+    case "tbody":
+    case "thead":
+    case "tfoot": cell = gNode.lastElementChild.lastElementChild; break;
+    case "table": cell = gNode.lastElementChild.lastElementChild.lastElementChild; break;
+    default: break; // should never happen
+  }
+
+  return cell;  
+}
+
+function GetNumberOfColumnsInSection(section)
+{
+  var rows = section.querySelectorAll("tr");
+  var n = 0;
+  for (var i = 0; i < rows.length; i++) {
+    var m = 0;
+    var child = rows[i].firstElementChild;
+    while (child) {
+      if (child.hasAttribute("colspan")) {
+        m += parseInt(child.getAttribute("colspan"))
+      }
+      else
+        m++;
+      child = child.nextElementSibling;
+    }
+    n = Math.max(n, m);
+  }
+  return n;
+}
+
+function NextColumn()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+
+  var child = cell.parentNode.firstElementChild;
+  var index = 0;
+  while (child && child != cell)
+  {
+    if (child.hasAttribute("colspan")) {
+      index += parseInt(child.getAttribute("colspan"))
+    }
+    else
+      index++;
+    child = child.nextElementSibling;
+  }
+
+  index++;
+  var section = cell.parentNode.parentNode;
+  if (index >= GetNumberOfColumnsInSection(section)) {
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("tbody")
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tfoot") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("tbody"); // always exists
+        break;
+    }
+    if (newSection) { // sanity check
+      section = newSection;
+      index = 0;
+    }
+    else return;
+  }
+  var rows = section.querySelectorAll("tr");
+  var columnsCells = [];
+  for (var j = 0; j < rows.length; j++) {
+    // we have to count to find the nth cell
+    child = rows[j].firstElementChild;
+    var cellIndex = 0;
+    while (child && cellIndex < index) {
+      if (child.hasAttribute("colspan")) {
+        cellIndex += parseInt(child.getAttribute("colspan"))
+      }
+      else
+        cellIndex++;
+      child = child.nextElementSibling;
+    }
+    // cell is ok only if cellIndex == index strictly
+    if (child && cellIndex == index) {
+      if (columnsCells.indexOf(child) == -1)
+        columnsCells.push(child);
+      if (child.hasAttribute("rowspan"))
+        j += parseInt(child.getsAttribute("rowspan")) - 1;
+    }
+  }
+  var editor = EditorUtils.getCurrentEditor();
+  var selection = editor.selection;
+  selection.removeAllRanges();
+  for (var i = 0; i < columnsCells.length; i++) {
+    var range = editor.document.createRange();
+    range.selectNode(columnsCells[i]);
+    selection.addRange(range);
+  }
+  gNode = columnsCells[0];
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
+
+function NextRow()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+  var row = cell.parentNode;
+
+  if (row.nextElementSibling)
+    row = row.nextElementSibling;
+  else {
+    // thead -> tbody, tbody -> tfoot, tfoot -> thead
+    var section = row.parentNode;
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tbody"); // must exist...
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("thead") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tbody");
+        break;
+    }
+    if (newSection) { // sanity check
+      row = newSection.firstElementChild;
+    }
+  }
+  var editor = EditorUtils.getCurrentEditor();
+  var cells = row.querySelectorAll("td,th");
+  var selection = editor.selection;
+  selection.removeAllRanges();
+  for (var i = 0; i < cells.length; i++) {
+    var range = editor.document.createRange();
+    range.selectNode(cells[i]);
+    selection.addRange(range);
+  }
+  gNode = cells[0];
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
+
+function NextCell()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+
+  if (cell.nextElementSibling)
+    cell = cell.nextElementSibling;
+  else if (cell.parentNode.nextElementSibling)
+    cell = cell.parentNode.nextElementSibling.firstElementChild;
+  else {
+    // thead -> tbody, tbody -> tfoot, tfoot -> thead
+    var section = cell.parentNode.parentNode;
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tbody"); // must exist...
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("thead") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tbody");
+        break;
+    }
+    if (newSection) { // sanity check
+      cell = newSection.firstElementChild.firstElementChild;
+    }
+  }
+  gNode = cell;
+  var editor = EditorUtils.getCurrentEditor();
+  editor.selectElement(cell);
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
+
+function Previous()
+{
+  if (gDataChanged) {
+    ValidateData("cell");
+    gDataChanged = false;
+  }
+
+  switch (gDialog.selectionType.value) {
+    case "cells":
+      PreviousCell();
+      break;
+
+    case "rows":
+      PreviousRow();
+      break;
+
+    case "columns":
+      PreviousColumn();
+      break;
+
+    default: break; //should never happen
+  }
+  InitCellsData(gNode);
+}
+
+function PreviousCell()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+
+  if (cell.previousElementSibling)
+    cell = cell.previousElementSibling;
+  else if (cell.parentNode.previousElementSibling)
+    cell = cell.parentNode.previousElementSibling.lastElementChild;
+  else {
+    // thead <- tbody, tbody <- tfoot, tfoot <- thead
+    var section = cell.parentNode.parentNode;
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("tbody")
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tfoot") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("tbody"); // always exists
+        break;
+    }
+    if (newSection) { // sanity check
+      cell = newSection.lastElementChild.lastElementChild;
+    }
+  }
+  gNode = cell;
+  var editor = EditorUtils.getCurrentEditor();
+  editor.selectElement(cell);
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
+
+function PreviousRow()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+  var row = cell.parentNode;
+
+  if (row.previousElementSibling)
+    row = row.previousElementSibling;
+  else {
+    // thead <- tbody, tbody <- tfoot, tfoot <- thead
+    var section = row.parentNode;
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("tbody")
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tfoot") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("tbody"); // always exists
+        break;
+    }
+    if (newSection) { // sanity check
+      row = newSection.lastElementChild;
+    }
+  }
+  var editor = EditorUtils.getCurrentEditor();
+  var cells = row.querySelectorAll("td,th");
+  var selection = editor.selection;
+  selection.removeAllRanges();
+  for (var i = 0; i < cells.length; i++) {
+    var range = editor.document.createRange();
+    range.selectNode(cells[i]);
+    selection.addRange(range);
+  }
+  gNode = cells[0];
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
+
+function PreviousColumn()
+{
+  var cell = GetCurrentCellFromSelection();
+
+  if (!cell) // sanity check
+    return;
+
+  var child = cell.parentNode.firstElementChild;
+  var index = 0;
+  while (child && child != cell)
+  {
+    if (child.hasAttribute("colspan")) {
+      index += parseInt(child.getAttribute("colspan"))
+    }
+    else
+      index++;
+    child = child.nextElementSibling;
+  }
+
+  index--;
+  var section = cell.parentNode.parentNode;
+  if (index < 0) {
+    var sectionName = section.nodeName.toLowerCase();
+    var tableElement = section.parentNode;
+    var newSection;
+    switch (sectionName) {
+      case "thead":
+        newSection = tableElement.querySelector("tfoot") ||
+                     tableElement.querySelector("tbody")
+        break;
+      case "tbody":
+        newSection = tableElement.querySelector("thead") ||
+                     tableElement.querySelector("tfoot") ||
+                     section;
+        break;
+      case "tfoot":
+        newSection = tableElement.querySelector("tbody"); // always exists
+        break;
+    }
+    if (newSection) { // sanity check
+      section = newSection;
+      index = GetNumberOfColumnsInSection(section) - 1;
+    }
+    else return;
+  }
+  var rows = section.querySelectorAll("tr");
+  var columnsCells = [];
+  for (var j = 0; j < rows.length; j++) {
+    // we have to count to find the nth cell
+    child = rows[j].firstElementChild;
+    var cellIndex = 0;
+    while (child && cellIndex < index) {
+      if (child.hasAttribute("colspan")) {
+        cellIndex += parseInt(child.getAttribute("colspan"))
+      }
+      else
+        cellIndex++;
+      child = child.nextElementSibling;
+    }
+    // cell is ok only if cellIndex == index strictly
+    if (child && cellIndex == index) {
+      if (columnsCells.indexOf(child) == -1)
+        columnsCells.push(child);
+      if (child.hasAttribute("rowspan"))
+        j += parseInt(child.getsAttribute("rowspan")) - 1;
+    }
+  }
+  var editor = EditorUtils.getCurrentEditor();
+  var selection = editor.selection;
+  selection.removeAllRanges();
+  for (var i = 0; i < columnsCells.length; i++) {
+    var range = editor.document.createRange();
+    range.selectNode(columnsCells[i]);
+    selection.addRange(range);
+  }
+  gNode = columnsCells[0];
+  editor.checkSelectionStateForAnonymousButtons(editor.selection);
+}
 
 /********************** diInsertNodeBeforeTxn **********************/
 

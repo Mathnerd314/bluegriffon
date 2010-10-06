@@ -8,13 +8,14 @@
 <!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertTable.dtd">
 
 <dialog title="&windowTitle.label;"
-    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-    onload = "Startup()"
-    buttons="extra1,accept,cancel"
-    buttonlabelextra1="&applyButton.label;"
-    style="height: auto"
-    ondialogaccept="return onAccept();"
-    persist="screenX screenY">
+        id="tablePropertiesDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		    onload = "Startup()"
+		    buttons="extra1,accept,cancel"
+		    buttonlabelextra1="&applyButton.label;"
+		    style="height: auto"
+		    ondialogaccept="return onAccept();"
+		    persist="screenX screenY">
 
   <!-- Methods common to all editor dialogs -->
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
@@ -150,10 +151,12 @@
                 <row align="center">
                   <hbox>
                     <button flex="1" label="&previous.label;"
-                            image="chrome://global/skin/arrow/arrow-lft.gif"/>
+                            image="chrome://global/skin/arrow/arrow-lft.gif"
+                            oncommand="Previous()"/>
                     <button flex="1" label="&next.label;"
                             image="chrome://global/skin/arrow/arrow-rit.gif"
-                            dir="reverse"/>
+                            dir="reverse"
+                            oncommand="Next()"/>
                   </hbox>
                 </row>
               </rows>

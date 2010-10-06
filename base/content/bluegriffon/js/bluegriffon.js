@@ -981,8 +981,7 @@ function OnDoubleClick(aEvent)
       break;
     case "td":
     case "th":
-		  window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
-		                    "chrome,modal,titlebar", node);
+        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 
       break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")
