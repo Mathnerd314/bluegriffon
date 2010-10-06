@@ -1082,6 +1082,12 @@ function UpdatePanelsStatusInMenu()
 
 function TogglePanel(aEvent)
 {
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  start_css();
+  return;
+#endif
+#endif
   var menuitem = aEvent.originalTarget;
   if (!menuitem.hasAttribute("panel"))
     return;
