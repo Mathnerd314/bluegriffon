@@ -1108,3 +1108,18 @@ function OnClick(aEvent)
   }
 }
 
+// LINUX ONLY :-(
+function start_css()
+{
+  var w = null;
+  try {
+    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:CSSProperties");
+  }
+  catch(e){}
+  if (w)
+    w.focus();
+  else
+    window.open('chrome://cssproperties/content/cssproperties.xul',"_blank",
+               "chrome,resizable,scrollbars=yes");
+}

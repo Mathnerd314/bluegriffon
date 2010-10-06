@@ -49,9 +49,16 @@
     <menuitem id="panel-cssproperties-menuitem"
               type="checkbox"
               panel="panel-cssproperties"
-              label="&cssproperties.label;"/>
+              label="&cssproperties.label;"
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+              oncommand="start_css"
+#endif
+#endif
+              />
   </menupopup>
 
+#ifdef XP_MACOSX
   <panelset id="panels">
     <panel id="panel-cssproperties"
            floating="true"
@@ -61,5 +68,18 @@
               src="chrome://cssproperties/content/cssproperties.xul"/>
     </panel>
   </panelset>
+#else
+#ifndef XP_UNIX
+  <panelset id="panels">
+    <panel id="panel-cssproperties"
+           floating="true"
+           label="&cssproperties.label;">
+      <iframe type="chrome"
+              flex="1"
+              src="chrome://cssproperties/content/cssproperties.xul"/>
+    </panel>
+  </panelset>
+#endif
+#endif
 </overlay>         
 

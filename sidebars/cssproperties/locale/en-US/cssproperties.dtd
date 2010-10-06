@@ -1,3 +1,5 @@
+<!ENTITY window.title "CSS Properties">
+
 <!ENTITY applyStyles.label "Apply styles to:">
 <!ENTITY modifyID.label "this element only through its ID">
 <!ENTITY modifyClass.label "all elements of class...">
