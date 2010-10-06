@@ -11,7 +11,7 @@ var gIsPanelActive = false;
 #else
 #ifdef XP_UNIX
 var gIsPanelActive = true;
-else
+#else
 var gIsPanelActive = false;
 #endif
 #endif
