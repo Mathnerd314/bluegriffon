@@ -1068,6 +1068,11 @@ function AlignAllPanels()
 
 function UpdatePanelsStatusInMenu()
 {
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  return;
+#endif
+#endif
   var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
   while (child) {
     var panel = gDialog[child.getAttribute("panel")];

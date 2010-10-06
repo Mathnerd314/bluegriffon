@@ -47,13 +47,16 @@
 
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-cssproperties-menuitem"
-              type="checkbox"
               panel="panel-cssproperties"
               label="&cssproperties.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
               oncommand="start_css"
+#else
+              type="checkbox"
 #endif
+#else
+              type="checkbox"
 #endif
               />
   </menupopup>
