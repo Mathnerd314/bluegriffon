@@ -62,7 +62,8 @@ var BlueGriffonPanels = {
 	    aPanel.setAttribute("open", "true");
 	    document.persist(aPanel.id, "open");
 	    if (aDoResize && aPanel.hasAttribute("width") && aPanel.hasAttribute("height"))
-	      aPanel.sizeTo(aPanel.getAttribute("width"), aPanel.getAttribute("height"));
+	      aPanel.sizeTo(parseInt(aPanel.getAttribute("width")),
+                      parseInt(aPanel.getAttribute("height")));
 	    BlueGriffonVars.lastPanelRaised = aPanel;
 	  } catch(e) {}
   },

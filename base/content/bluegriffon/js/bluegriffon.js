@@ -1088,7 +1088,7 @@ function TogglePanel(aEvent)
 
   var panel = gDialog[aEvent.originalTarget.getAttribute("panel")];
   if (menuitem.getAttribute("checked") == "true") {
-    BlueGriffonPanels.openPanel(panel,null, false);
+    BlueGriffonPanels.openPanel(panel, null, true);
     NotifierUtils.notify("redrawPanel", panel.id);
   }
   else {
