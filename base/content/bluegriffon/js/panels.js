@@ -40,7 +40,7 @@ var BlueGriffonPanels = {
       hbox.appendChild(box);
       panel.appendChild(box);
 
-      if (true /*panel.getAttribute("open") == "true"*/) {
+      if (panel.getAttribute("open") == "true") {
         var _self = panel;
         setTimeout(function() {
             BlueGriffonPanels.openPanel(_self, null, true);
