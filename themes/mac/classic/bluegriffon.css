@@ -321,11 +321,11 @@ panel[floating="true"] .titleholder {
 }
 
 panel[floating="true"] .floatingpanel-close {
-  list-style-image: url("chrome://bluegriffon/skin/panels/closetab.png");
+  list-style-image: url("chrome://global/skin/icons/closetab.png");
 }
 
 panel[floating="true"] .floatingpanel-close:hover {
-  list-style-image: url("chrome://bluegriffon/skin/panels/closetab-hover.png");
+  list-style-image: url("chrome://global/skin/icons/closetab-hover.png");
 }
 
 panel[floating="true"] .resizer {
