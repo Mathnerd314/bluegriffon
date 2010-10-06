@@ -279,8 +279,9 @@ function ValidateData(aTabValue)
 	
 	    case "cell":
 	      switch (gDialog.selectionType.value) {
-	        case "cells": UpdateCells(editor); break;
-          case "rows":  UpdateRows(editor);  break;
+	        case "cells":   UpdateCells(editor); break;
+          case "rows":    UpdateRows(editor);  break;
+          case "columns": UpdateColumns(editor); break;
 	        default: break;
 	      }
 	      break;
@@ -445,7 +446,8 @@ function GetSelectedCells(selection)
     if (startContainer.nodeType == Node.ELEMENT_NODE)
       startContainer = startContainer.childNodes.item(startOffset);
     if (endContainer.nodeType == Node.ELEMENT_NODE)
-      endContainer = endContainer.childNodes.item(endOffset-1);
+      endContainer = endContainer.childNodes.item(endOffset -
+                       (selection.isCollapsed ? 0 : 1));
   
     var node = startContainer;
     var direction = "down";
@@ -494,6 +496,85 @@ function UpdateCells(editor)
 	// at this points cells array contains all the cells to impact
 	for (var i = 0; i < cells.length; i++) {
     var c = cells[i];
+
+    var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "height", gDialog.cellsHeightMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "text-align", gDialog.cellsHAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
+    editor.doTransaction(txn);
+
+    txn = new diStyleAttrChangeTxn(c, "background-color", gDialog.bgColorColorpicker.color, "");
+    editor.doTransaction(txn);
+
+    if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
+      editor.switchTableCellHeaderType(c);
+  }
+}
+
+function UpdateColumns(editor)
+{
+  var selection = editor.selection;
+  var cells = GetSelectedCells(selection);
+  var columnsCells = [];
+  for (var i = 0; i < cells.length; i++) {
+    var c = cells[i];
+    if (columnsCells.indexOf(c) == -1) { // only if not already here
+      // let's find the column index of the cell
+      var child = c.parentNode.firstElementChild;
+      var index = 0;
+      while (child && child != c)
+      {
+        if (child.hasAttribute("colspan")) {
+          index += parseInt(child.getAttribute("colspan"))
+        }
+        else
+          index++;
+        child = child.nextElementSibling;
+      }
+
+      // now find the enclosing thead/tbody/tfoot
+      var enclosing = c;
+      while (enclosing && !(enclosing instanceof Components.interfaces.nsIDOMHTMLTableSectionElement))
+        enclosing = enclosing.parentNode;
+      if (!enclosing) // sanity check
+        return; // uuuh well should never happen
+
+      // find all the rows in the enclosing element
+      var rows = enclosing.querySelectorAll("tr");
+      for (var j = 0; j < rows.length; j++) {
+        // we have to count to find the nth cell
+        child = rows[j].firstElementChild;
+        var cellIndex = 0;
+        while (child && cellIndex < index) {
+	        if (child.hasAttribute("colspan")) {
+	          cellIndex += parseInt(child.getAttribute("colspan"))
+	        }
+	        else
+	          cellIndex++;
+	        child = child.nextElementSibling;
+        }
+        // cell is ok only if cellIndex == index strictly
+        if (child && cellIndex == index) {
+	        if (columnsCells.indexOf(child) == -1)
+	          columnsCells.push(child);
+          if (child.hasAttribute("rowspan"))
+            j += parseInt(child.getsAttribute("rowspan")) - 1;
+        }
+      }
+    }
+  }
+
+  for (var i = 0; i < columnsCells.length; i++) {
+    var c = columnsCells[i];
 
     var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
     editor.doTransaction(txn);
