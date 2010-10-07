@@ -1,6 +1,6 @@
-function onBespinFocus()
+function onBespinFocus(aIframe)
 {
-  gDialog.bespinIframe.focus();
+  aIframe.focus();
 }
 
 function onBespinLineBlur(aElt)
@@ -12,7 +12,7 @@ function onBespinLineKeypress(aEvent, aElt)
 {
   if (aEvent.keyCode == 13) {
     var line = aElt.value;
-    BlueGriffonVars.bespinEditor.setLineNumber(parseInt(line));
+    EditorUtils.getCurrentSourceEditor().setLineNumber(parseInt(line));
     onBespinLineBlur(aElt);
     onBespinFocus();
   }
@@ -20,28 +20,32 @@ function onBespinLineKeypress(aEvent, aElt)
 
 function ToggleBespinFindCaseSensitivity()
 {
-  BlueGriffonVars.bespinEditor.setCursor(BlueGriffonVars.bespinSelPoint);
-  BespinFind(BlueGriffonVars.bespinFindLastDirection);
+  var bespinIframe = EditorUtils.getCurrentSourceEditorElement(); 
+  var selPoint = bespinIframe.getUserData("selPoint");
+  EditorUtils.getCurrentSourceEditor().setCursor(selPoint);
+  BespinFind(bespinIframe.getUserData("findLastDirection"));
 }
 
 function BespinFind(aForward, aInitial)
 {
-  BlueGriffonVars.bespinFindLastDirection = aForward;
+  var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
+  var bespinEditor = EditorUtils.getCurrentSourceEditor();
+  bespinIframe.setUserData("findLastDirection", aForward, null);
   var query = gDialog.bespinFindTextbox.value;
   var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
-  var searchController = BlueGriffonVars.bespinEditor.searchController;
+  var searchController = bespinEditor.searchController;
   searchController.setSearchText(query, false, isCaseSensitive);
   var range;
   if (aForward) {
     if (aInitial)
-      BlueGriffonVars.bespinSelPoint = BlueGriffonVars.bespinEditor.selection.start;
+      bespinIframe.setUserData("selPoint", bespinEditor.selection.start, null);
     else
-      BlueGriffonVars.bespinSelPoint = BlueGriffonVars.bespinEditor.selection.end;
-    range = searchController.findNext(BlueGriffonVars.bespinSelPoint, true);
+      bespinIframe.setUserData("selPoint", bespinEditor.selection.end, null);
+    range = searchController.findNext(bespinIframe.getUserData("selPoint"), true);
   }
   else {
-    BlueGriffonVars.bespinSelPoint = BlueGriffonVars.bespinEditor.selection.start;
-    range = searchController.findPrevious(BlueGriffonVars.bespinSelPoint, true);
+    bespinIframe.setUserData("selPoint", bespinEditor.selection.start, null);
+    range = searchController.findPrevious(bespinIframe.getUserData("selPoint"), true);
   }
 
   if (!range) {
@@ -54,9 +58,9 @@ function BespinFind(aForward, aInitial)
     gDialog.bespinFindPrevious.hidden = false;
     gDialog.bespinFindNext.hidden = false;
     gDialog.bespinFindTextbox.className = "";
-    BlueGriffonVars.bespinEditor.setLineNumber(range.start.row + 1);
-    BlueGriffonVars.bespinEditor.setCursor(range.start);
-    BlueGriffonVars.bespinEditor.selection = range;
+    bespinEditor.setLineNumber(range.start.row + 1);
+    bespinEditor.setCursor(range.start);
+    bespinEditor.selection = range;
   }
 }
 
@@ -73,7 +77,7 @@ function onBespinFindClear(aEvent, aElt)
 function onBespinFindKeypress(aEvent)
 {
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
-    gDialog.bespinIframe.focus();
+    EditorUtils.getCurrentSourceEditorElement().focus();
   }
 }
 
@@ -95,7 +99,8 @@ function BespinKeyPressCallback(aEvent)
       case 120: // meta-x XXX
 	      {
 	        aEvent.preventDefault();
-          var selection = BlueGriffonVars.bespinEditor.selectedText;
+          var bespinEditor = EditorUtils.getCurrentSourceEditor();
+          var selection = bespinEditor.selectedText;
 	        var clipboardSvc = Components.classes["@mozilla.org/widget/clipboard;1"].
 	                           getService(Components.interfaces.nsIClipboard);
 	        var xferable = Components.classes["@mozilla.org/widget/transferable;1"].
@@ -108,7 +113,7 @@ function BespinKeyPressCallback(aEvent)
           clipboardSvc.setData(xferable, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
 	      }
         if (aEvent.which == 120)
-          BlueGriffonVars.bespinEditor.selectedText = "";
+          bespinEditor.selectedText = "";
         break;
       default:
         break;

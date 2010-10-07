@@ -95,6 +95,13 @@ var cmdCloseTab =
 
   doCommand: function(aCommand)
   {
+	  var editorElement = EditorUtils.getCurrentEditorElement();
+    if (!editorElement) // sanity check
+      return;
+    var mode = editorElement.parentNode.getAttribute("previousMode");
+	  if (mode == "source") {
+	    ToggleViewMode(gDialog.wysiwygModeButton);
+	  }
     if (EditorUtils.isDocumentModified()) {
       var rv = PromptUtils.confirmWithTitle(
                              L10NUtils.getString("FileNotSaved"),

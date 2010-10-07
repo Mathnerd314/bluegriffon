@@ -82,8 +82,28 @@ var EditorUtils = {
     if (tabeditor)
       return tabeditor.getCurrentEditorElement() ;
     return null;
+  },  
+
+  getCurrentSourceEditorElement: function()
+  {
+    var editorElement = this.getCurrentEditorElement();
+    if (editorElement) {
+      return editorElement.previousSibling;
+    }
+    return null;
   },
-  
+
+  getCurrentSourceEditor: function()
+  {
+    var editorElement = this.getCurrentEditorElement();
+    if (editorElement) {
+      var bespinIframe = editorElement.previousSibling;
+      var bespinEditor = bespinIframe.getUserData("editor");
+      return bespinEditor;
+    }
+    return null;
+  },
+
   getCurrentEditor: function getCurrentEditor()
   {
     // Get the active editor from the <editor> tag

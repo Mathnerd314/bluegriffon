@@ -132,7 +132,7 @@
           const editors = this.mTabPanels.childNodes;
           for (var i = 0; i < editors.length; i++)
           {
-            editors[i].removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
           }
         ]]>
       </destructor>
@@ -332,7 +332,8 @@
             this.mHruler.addObject("foo", 50, 200);
             this.mVruler.removeAttribute("disabled");
 
-            var newEditorElement = this._newEditor();
+            var newBox = this._newEditor();
+            var newEditorElement = newBox.lastChild;
 
             var newTab = this.mTabs.appendItem(aTitle,
                            UrlUtils.stripUsernamePassword(aURL, null, null));
@@ -344,7 +345,7 @@
             newTab.setAttribute("flex", 100);
             newTab.setAttribute("crop", "end");
 
-            this.mTabpanels.appendChild(newEditorElement);
+            this.mTabpanels.appendChild(newBox);
 
             newEditorElement.makeEditable("html", true);
 
@@ -384,13 +385,13 @@
             title = L10NUtils.getString("untitled");
           }
 
-          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
           var tabs      = tabeditor.mTabs.childNodes;
           var editors   = tabeditor.mTabpanels.childNodes;
           var l = editors.length;
           for (var i = 0; i < l; i++)
           {
-            if (editors.item(i) == e)
+            if (editors.item(i).lastChild == e)
             {
               var tab = tabs.item(i);
               tab.label = title;
@@ -412,18 +413,45 @@
         </body>
       </method>
 
+      <method name="_installBespin">
+        <parameter name="aIframe"/>
+        <body>
+        <![CDATA[
+            var _self = this; 
+            aIframe.removeEventListener("load", function() {_self._installBespin(iframe);}, true);
+
+            var bespinTmp = aIframe.contentWindow.installBespin(BespinKeyPressCallback);
+            bespinTmp.then(function(env) {
+              var editor = env.editor;
+              aIframe.setUserData("editor", editor, null);
+              editor.value = "";
+            });
+        ]]>
+        </body>
+      </method>
+
       <method name="_newEditor">
         <body>
         <![CDATA[
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
-              editors.item(i).removeAttribute("type");
+              editors.item(i).lastChild.removeAttribute("type");
+
+            var newBox = document.createElement("deck");
+
+            var iframe = document.createElement("iframe");
+            var _self = this; 
+            iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
+            iframe.setAttribute("src", "resource://gre/res/bespin.html");
+            iframe.setAttribute("onclick", "onBespinFocus(this)");
+            newBox.appendChild(iframe);
 
             var newEditorElement = document.createElement("editor");
             //newEditorElement.setAttribute("editortype", "html");
             newEditorElement.setAttribute("type", "content-primary");
+            newBox.appendChild(newEditorElement);
 
-            return newEditorElement;
+            return newBox;
         ]]>
         </body>
       </method>
@@ -431,7 +459,9 @@
       <method name="getCurrentEditorElement">
         <body>
         <![CDATA[
-            return this.mTabpanels.selectedPanel;
+            if (this.mTabpanels.selectedPanel)
+              return this.mTabpanels.selectedPanel.lastChild;
+            return null;
         ]]>
         </body>
       </method>
@@ -443,7 +473,7 @@
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
             {
-              var editorElt = editors.item(i);
+              var editorElt = editors.item(i).lastChild;
               var editor = editorElt.getEditor(editorElt.contentWindow);
               if (editor.document.URL == aURL)
                 return editorElt;
@@ -465,7 +495,7 @@
 
            var editors = this.mTabpanels.childNodes;
            for (var i = 0; i < editors.length; i++)
-             editors.item(i).removeAttribute("type");
+             editors.item(i).lastChild.removeAttribute("type");
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
            window.content.focus();
@@ -475,6 +505,21 @@
            window.UpdateWindowTitle();
 
            NotifierUtils.notify("tabSelected");
+           var deck = this.getCurrentEditorElement().parentNode;
+           var mode = deck.getAttribute("previousMode");
+           deck.selectedIndex = (mode == "source") ? 0 : 1;
+           if (mode == "source") {
+             gDialog.sourceModeButton.setAttribute("selected", "true");
+             gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.bespinToolbox.hidden = false;
+             deck.firstChild.focus();
+           }
+           else {
+             gDialog.wysiwygModeButton.setAttribute("selected", "true");
+             gDialog.sourceModeButton.removeAttribute("selected");
+             gDialog.bespinToolbox.hidden = true;
+             deck.lastChild.focus();
+           }
         ]]>
         </body>
       </method>
@@ -504,7 +549,7 @@
           var i, l = editors.length;
           for (i=0; i< l; i++)
           {
-            var e = editors[i];
+            var e = editors[i].lastChild;
             var elt = e.getEditor(e.contentWindow);
             if (elt &&
                 this._trimTrailingSlash(elt.document.URL) == this._trimTrailingSlash(aURL))

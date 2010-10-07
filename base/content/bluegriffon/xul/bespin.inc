@@ -1,6 +1,4 @@
-            <iframe id="bespinIframe" src="resource://gre/res/bespin.html" flex="1"
-                    onclick="onBespinFocus()"/>
-            <hbox id="bespinToolbox" align="center">
+            <hbox id="bespinToolbox" align="center" hidden="true">
               <label value="Line:"/>
               <textbox id="bespinLineTextbox"
                        size="5"

@@ -8,6 +8,7 @@
    table { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 2px; border-collapse: collapse}
    tbody, tr, td, div { height: 100%}
    * { padding: 0px !important: margin: 0px !important; border: 0px none !important}
+   #editor { resize: none }
   </style>
   <script>
     function installBespin(aKeyPressCallback) {
@@ -15,7 +16,6 @@
       var e = bespin.useBespin("editor",
           {
             syntax: "html",
-            stealFocus: true,
             settings: {
                         tabstop: 2,
                         fontface: "Courier New, Courier, monospace"

@@ -581,13 +581,13 @@ function OnKeyPressWhileChangingTag(event)
 /************ VIEW MODE ********/
 function GetCurrentViewMode()
 {
-  return gDialog.modeTabbox.getAttribute("previousMode");
+  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("previousMode");
 }
 
 function ToggleViewMode(aElement)
 {
   var mode =  aElement.getAttribute("value");
-  if (mode == gDialog.modeTabbox.getAttribute("previousMode"))
+  if (mode == GetCurrentViewMode())
     return;
 
   var child = aElement.parentNode.firstChild;
@@ -600,6 +600,7 @@ function ToggleViewMode(aElement)
   }
 
   var editor = EditorUtils.getCurrentEditor();
+  var editorElement = EditorUtils.getCurrentEditorElement();
   if (mode == "source")
   {
     HandlersManager.hideAllHandlers();
@@ -617,34 +618,32 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    if (!BlueGriffonVars.bespinEditor) {
-      var bespinTmp = gDialog.bespinIframe.contentWindow.installBespin(BespinKeyPressCallback);
-      bespinTmp.then(function(env) {
-        var editor = env.editor;
-        BlueGriffonVars.bespinEditor = editor;
-        editor.value = "";
-        editor.value = source;
-      });
-    }
-    else {
-	    BlueGriffonVars.bespinEditor.value = "";
-	    BlueGriffonVars.bespinEditor.value = source;
-    }
-    BlueGriffonVars.oldSource = source;
+    var bespinIframe = editorElement.previousSibling;
+    var bespinEditor = bespinIframe.getUserData("editor");
+    bespinEditor.value = "";
+    bespinEditor.value = source;
+    bespinIframe.setUserData("oldSource", source, null);
     NotifierUtils.notify("afterEnteringSourceMode");
-    gDialog.editorsDeck.selectedIndex = 1;
-    gDialog.bespinIframe.focus();
+    gDialog.bespinToolbox.hidden = false;
+    editorElement.parentNode.selectedIndex = 0;
+    bespinIframe.focus();
+    bespinEditor.focus = true;
+    bespinIframe.contentWindow.getEditableElement().className = "";
   }
   else if (mode == "wysiwyg")
   {
+    gDialog.bespinToolbox.hidden = true;
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
-    if (BlueGriffonVars.bespinEditor)
+    var bespinIframe = editorElement.previousSibling;
+    var bespinEditor = bespinIframe.getUserData("editor");
+    if (bespinEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
-      source = BlueGriffonVars.bespinEditor.value;
-      if (source != BlueGriffonVars.oldSource) {
+      source = bespinEditor.value;
+      var oldSource = bespinIframe.getUserData("oldSource"); 
+      if (source != oldSource) {
         var doctype = EditorUtils.getCurrentDocument().doctype.publicId;
         var isXML = false;
         switch (doctype) {
@@ -675,12 +674,12 @@ function ToggleViewMode(aElement)
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
-        gDialog.editorsDeck.selectedIndex = 0;
+        editorElement.parentNode.selectedIndex = 1;
         window.content.focus();
       }
     }
   }
-  gDialog.modeTabbox.setAttribute("previousMode", mode);
+  editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
 }
 
@@ -715,7 +714,7 @@ function RebuildFromSource(aDoc, aContext)
 {
   if (aContext)
     delete aContext;
-  gDialog.editorsDeck.selectedIndex = 0;
+  EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
   var editor = EditorUtils.getCurrentEditor();
   try {
 
@@ -745,6 +744,7 @@ function doCloseTab(aTab)
   var tabpanels = tabbox.parentNode.mTabpanels;
   var index = tabs.getIndexOfItem(aTab);
   var selectedIndex = tabbox.selectedIndex;
+  var editorBox = tabpanels.childNodes[index];
   tabpanels.removeChild(tabpanels.childNodes[index]);
   tabs.removeChild(aTab);
   if (selectedIndex < tabpanels.childNodes.length)

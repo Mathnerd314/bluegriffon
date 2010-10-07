@@ -106,17 +106,13 @@
   </toolbox>
 
     <vbox flex="1" id="maincontainer">
-      <hbox flex="1">
-        <deck flex="1" id="editorsDeck" selectedIndex="0">
-          <box flex="1" id="tabeditorContainer" >
-            <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
-          </box>
-          <vbox flex="1">
+      <vbox flex="1">
+        <box flex="1" id="tabeditorContainer" >
+          <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
+        </box>
 #include bespin.inc
-          </vbox>
-          <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
-        </deck>
-      </hbox>
+        <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
+      </vbox>
       <hbox align="center" id="helperButtons">
 #ifdef XP_MACOSX
 	      <tabs id="modeTabbox" previousMode="wysiwyg" flex="1">
