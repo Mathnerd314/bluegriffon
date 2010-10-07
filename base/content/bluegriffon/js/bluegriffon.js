@@ -797,6 +797,7 @@ function doSaveTabsBeforeQuit()
 
 function doQuit()
 {
+  ToggleViewMode(gDialog.wysiwygModeButton);
   if (doSaveTabsBeforeQuit())
     goQuitApplication();
 }
