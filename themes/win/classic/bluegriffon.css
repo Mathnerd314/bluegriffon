@@ -155,6 +155,7 @@ grippy[disabled="true"] {
   -moz-border-left-colors:#aaa #dedede #efefef #fafafa;
   -moz-border-bottom-colors:#aaa #dedede #efefef #fafafa;
   background-color: #fafafa;
+  opacity: 1;
 }
 
 .multiButton.left,
@@ -170,12 +171,13 @@ grippy[disabled="true"] {
 }
 
 .multiButton:not([disabled]):active,
-.multiButton[selected="true"]:not([disabled]) {
+.multiButton:not([selected="true"]):not([disabled]) {
   -moz-border-top-colors:#aaa #ddd #ddd #ddd ;
   -moz-border-right-colors:#aaa #ddd #ddd #ddd ;
   -moz-border-left-colors:#aaa #ddd #ddd #ddd ;
   -moz-border-bottom-colors:#aaa #ddd #ddd #ddd ;
   background-color: #ddd;
+  opacity: 0.5;
   color: black;
 }
 
