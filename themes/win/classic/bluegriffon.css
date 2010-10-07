@@ -212,7 +212,6 @@ grippy[disabled="true"] {
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
   -moz-border-radius: 11px 11px 11px 11px;
-  height: 16px;
   font-size: 11px;
   padding: 0px 5px;
   background-color: rgb(208, 208, 208);
