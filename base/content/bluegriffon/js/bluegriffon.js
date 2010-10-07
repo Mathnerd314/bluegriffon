@@ -801,7 +801,8 @@ function doSaveTabsBeforeQuit()
 
 function doQuit()
 {
-  ToggleViewMode(gDialog.wysiwygModeButton);
+  if (EditorUtils.getCurrentEditorElement())
+    ToggleViewMode(gDialog.wysiwygModeButton);
   if (doSaveTabsBeforeQuit())
     goQuitApplication();
 }
