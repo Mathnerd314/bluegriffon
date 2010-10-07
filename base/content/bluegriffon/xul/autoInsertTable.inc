@@ -82,7 +82,7 @@
       <spacer style="width: 1em" onmouseover="AutoInsertTable.increaseSize(true, false)"/>
     </hbox>
     <hbox align="center" onmouseover="AutoInsertTable.increaseSize(false, true)"
-          style="opacity: 1; color: white">
+          style="opacity: 1;">
       <spacer class="spacer" flex="1"/>
       <label id="AutoInsertTableSizeLabel" value="2 x 2"/>
       <spacer class="spacer" flex="1"/>

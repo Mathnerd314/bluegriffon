@@ -581,7 +581,8 @@ function OnKeyPressWhileChangingTag(event)
 /************ VIEW MODE ********/
 function GetCurrentViewMode()
 {
-  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("previousMode");
+  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("previousMode") ||
+         "wysiwyg";
 }
 
 function ToggleViewMode(aElement)
@@ -661,8 +662,11 @@ function ToggleViewMode(aElement)
         }
         if (isXML) {
           var xmlParser = new DOMParser();
-          var doc = xmlParser.parseFromString(source, "text/xml");
-          RebuildFromSource(doc);
+          try {
+            var doc = xmlParser.parseFromString(source, "text/xml");
+            RebuildFromSource(doc);
+          }
+          catch(e) {}
         }
         else {
 	        var hp = new htmlParser(gDialog.parserIframe);

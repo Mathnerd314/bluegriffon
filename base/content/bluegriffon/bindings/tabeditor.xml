@@ -425,6 +425,7 @@
               var editor = env.editor;
               aIframe.setUserData("editor", editor, null);
               editor.value = "";
+              aIframe.parentNode.selectedIndex = 1;
             });
         ]]>
         </body>
@@ -499,8 +500,6 @@
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
            window.content.focus();
-           window.updateCommands("navigation");
-           window.updateCommands("style");
 
            window.UpdateWindowTitle();
 
@@ -520,6 +519,8 @@
              gDialog.bespinToolbox.hidden = true;
              deck.lastChild.focus();
            }
+           window.updateCommands("navigation");
+           window.updateCommands("style");
         ]]>
         </body>
       </method>

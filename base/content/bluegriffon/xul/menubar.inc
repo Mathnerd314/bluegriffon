@@ -110,7 +110,6 @@
                   oncommand="OpenPreferences()"/>
         <menuitem label="Venkman"
                   oncommand="start_venkman()"/>
-        <menuitem label="css" oncommand="start_css()"/>
       </menupopup>
     </menu>
 
