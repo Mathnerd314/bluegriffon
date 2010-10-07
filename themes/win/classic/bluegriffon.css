@@ -42,6 +42,7 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace svg url("http://www.w3.org/2000/svg");
+@namespace html url("http://www.w3.org/1999/xhtml");
 
 tabeditor {
   -moz-binding: url('chrome://bluegriffon/content/bindings/tabeditor.xml#tabeditor');
@@ -217,7 +218,9 @@ grippy[disabled="true"] {
   background-color: rgb(208, 208, 208);
 }
 
+#bespinLineTextbox html|input,
 #bespinFindTextbox html|input {
+  font-size: x-small;
   -moz-appearance: none ! important;
   border: 0px none !important;
   background-color: transparent ! important;
