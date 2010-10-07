@@ -300,6 +300,13 @@ function ValidateData(aTabValue)
   }
 }
 
+function ApplyChanges()
+{
+  ValidateData();
+  gDataChanged = false;
+  document.documentElement.getButton("extra1").disabled = true;
+}
+
 function onAccept()
 {
   ValidateData();

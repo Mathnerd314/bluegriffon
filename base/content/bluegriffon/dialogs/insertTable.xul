@@ -14,7 +14,8 @@
 		    buttons="extra1,accept,cancel"
 		    buttonlabelextra1="&applyButton.label;"
 		    style="height: auto"
-		    ondialogaccept="return onAccept();"
+        ondialogextra1="ApplyChanges()"
+        ondialogaccept="return onAccept();"
 		    persist="screenX screenY">
 
   <!-- Methods common to all editor dialogs -->
