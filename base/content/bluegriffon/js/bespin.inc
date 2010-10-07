@@ -83,9 +83,15 @@ function onBespinFindKeypress(aEvent)
 
 function BespinKeyPressCallback(aEvent)
 {
+#ifdef XP_MACOSX
   if (aEvent.metaKey &&
       !aEvent.ctrlKey &&
       !aEvent.altKey) {
+#else
+  if (!aEvent.metaKey &&
+      aEvent.ctrlKey &&
+      !aEvent.altKey) {
+#endif
     switch (aEvent.which) {
       case 102: // meta-f
         aEvent.preventDefault();
