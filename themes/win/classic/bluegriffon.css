@@ -186,6 +186,94 @@ grippy[disabled="true"] {
   margin-left: 6px;
 }
 
+/* BESPIN TOOLBOX */
+
+#bespinToolbox {
+  margin: 0px;
+  background-color: #28201C;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-top: thin solid rgb(75, 73, 65);
+  color: rgb(208, 208, 208);
+}
+
+#bespinLineTextbox {
+  -moz-border-radius: 11px 11px 11px 11px;
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: right;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinFindTextbox {
+  -moz-appearance: none;
+  border: thin solid rgb(40, 32, 28);
+  -moz-border-radius: 11px 11px 11px 11px;
+  height: 16px;
+  font-size: 11px;
+  padding: 0px 5px;
+  background-color: rgb(208, 208, 208);
+}
+
+#bespinFindTextbox html|input {
+  -moz-appearance: none ! important;
+  border: 0px none !important;
+  background-color: transparent ! important;
+}
+
+#bespinFindTextbox .textbox-search-clear {
+  width: 10px; height: 10px;
+}
+
+#bespinFindTextbox.notfound {
+  background-color: rgb(253, 145, 155);
+  color: black;
+}
+
+#bespinFindPrevious {
+  -moz-appearance: none;
+  font-size: smaller;
+  padding: 0px 8px 0px 12px;
+  -moz-border-radius-topleft: 11px;
+  -moz-border-radius-bottomleft: 11px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  color: black;
+  margin-right: 0px;
+}
+
+#bespinFindNext {
+  -moz-appearance: none;
+  font-size: smaller;
+  padding: 0px 12px 0px 8px;
+  -moz-border-radius-topright: 11px;
+  -moz-border-radius-bottomright: 11px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
+  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
+  background-color: #ddd;
+  color: black;
+  margin-left: 0px;
+}
+
+#bespinFindPrevious:active, #bespinFindNext:active {
+  background-color: silver;
+}
+
 /* autoInsertTable */
 *#AutoInsertTableSizeSelector label {
   width: 2em;
