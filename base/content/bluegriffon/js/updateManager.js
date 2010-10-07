@@ -188,7 +188,7 @@ var BGUpdateManager = {
           var c = (i < currentVersionArray.length)
                     ? parseInt(currentVersionArray[i])
                     : 0;
-          if (c > i) {
+          if (c > a) {
             // aaaaah, we found a more recent version...
             var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
             window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
