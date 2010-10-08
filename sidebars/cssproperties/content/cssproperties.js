@@ -112,7 +112,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
   gCurrentElement = aElt;
   deleteAllChildren(gDialog.classPickerPopup);
-  gDialog.classPickerPopup.value =  "";
+  gDialog.classPicker.value =  "";
 
   var item;
   for (var i = aElt.classList.length -1; i >= 0; i--) {
