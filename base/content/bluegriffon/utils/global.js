@@ -215,10 +215,13 @@ function initClassMenu(menuPopup, aUseSelection)
   
   if (aUseSelection)
   {
-    var classes  = EditorUtils.getClasses(EditorUtils.getSelectionContainer().node).classes;
-    if (classes)
+    var container  = EditorUtils.getBlockContainer(EditorUtils.getSelectionContainer().node);
+    var classList = container.classList;
+    if (classList)
     {
-      classesArray = classes.split(" ");
+      var classesArray = [];
+      for (var index = 0; index < classList.length; index++)
+        classesArray.push(classList[index]);
       classesArray.sort();
       classesArrayLength = classesArray.length;
 

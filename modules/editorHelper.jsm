@@ -464,16 +464,16 @@ var EditorUtils = {
     catch(e) {}
   },
 
-  getClasses: function(aElt)
+  getBlockContainer: function(aElt)
   {
     var e = aElt;
-    var display = CssUtils.getComputedStyle(e).getPropertyValue("display");
+    var display = e.ownerDocument.defaultView.getComputedStyle(e, "").getPropertyValue("display");
     while (e && display == "inline" && e.className == "")
     {
       e = e.parentNode;
-      display = CssUtils.getComputedStyle(e).getPropertyValue("display");
+      display = e.ownerDocument.defaultView.getComputedStyle(e, "").getPropertyValue("display");
     }
-    return {classes: e.className, node: e};
+    return e;
   },
 
   getCurrentTableEditor: function()

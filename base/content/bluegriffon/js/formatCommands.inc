@@ -18,7 +18,7 @@ var cmdClass =
     var selContainer = EditorUtils.getSelectionContainer();
     if (selContainer)
     {
-      var classes = EditorUtils.getClasses(selContainer.node).classes;
+      var classes = EditorUtils.getBlockContainer(selContainer.node).className;
       if (classes)
       {
         aParams.setCStringValue("state_attribute", classes);
@@ -34,28 +34,26 @@ var cmdClass =
     var className = aParams.getCStringValue("state_attribute");
     var node = EditorUtils.getSelectionContainer().node;
 
-    var retValue = EditorUtils.getClasses(node);
-    var classes = retValue.classes;
-    node = retValue.node;
+    var node = EditorUtils.getBlockContainer(node);
+    var classes = node.classList;
 
     var newList = className;
     if (classes)
     {
-      var list = classes.split(" ");
       var found = false;
-      newList = "";
-      for (var i = 0; i < list.length; i++)
+      newList = [];
+      for (var i = 0; i < classes.length; i++)
       {
-        if (list[i] == className)
+        if (classes[i] == className)
           found = true;
         else
-        newList += list[i] + " ";
+        newList.push(classes[i]);;
       }
       if (!found)
-        newList += className;
+        newList.push(className);;
     }
 
-    EditorUtils.getCurrentEditor().setAttribute(node, "class", newList);
+    EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
     // be kind with the rest of the world
     NotifierUtils.notify("selection", node, false);
   }
