@@ -292,6 +292,7 @@
   
                     NotifierUtils.notify("tabCreated");
                     RecentPagesHandler.saveRecentFilesPrefs();
+                    RecentPagesHandler.buildRecentPagesMenu();
                     editor.beginningOfDocument();
                   }
                 }

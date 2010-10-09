@@ -48,6 +48,8 @@ var cmdSave =
                  false,
                  EditorUtils.getCurrentDocumentMimeType());
       window.content.focus();
+      if (result)
+        StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
     }
     return result;
   }
@@ -71,6 +73,8 @@ var cmdSaveAs =
       // FinishHTMLSource();
       var editorMimeType = EditorUtils.getCurrentDocument().contentType;
       var result = FileUtils.saveDocument(true, false, editorMimeType);
+      if (result)
+        StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
       window.content.focus();
       return result;
     }
@@ -118,4 +122,31 @@ var cmdCloseTab =
     doCloseTab(EditorUtils.getCurrentTabEditor().selectedTab);
     return rv;
   }
+}
+
+function StoreUrlInLocationDB(url)
+{
+  RecentPagesHandler.saveRecentFilesPrefs();
+  RecentPagesHandler.buildRecentPagesMenu();
+  var file = Components.classes["@mozilla.org/file/directory_service;1"]
+                       .getService(Components.interfaces.nsIProperties)
+                       .get("ProfD", Components.interfaces.nsIFile);
+  file.append("bgLocations.sqlite");
+  
+  var storageService = Components.classes["@mozilla.org/storage/service;1"]
+                          .getService(Components.interfaces.mozIStorageService);
+  var dbConn = storageService.openDatabase(file);
+  try {
+    var statement = dbConn.createStatement(
+      "INSERT INTO 'bgLocations' ('query','querydate') VALUES(?1,?2)");
+  
+    statement.bindUTF8StringParameter(0, url);
+    statement.bindInt64Parameter(1, Date.parse(new Date()));
+  
+    statement.execute();
+    statement.finalize();
+
+    dbConn.close();
+  }
+  catch (e) {} // already exists in table
 }
