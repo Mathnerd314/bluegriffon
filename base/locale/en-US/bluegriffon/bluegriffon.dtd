@@ -175,7 +175,10 @@
 <!ENTITY linkToolbarCmd.tooltip "Insert or edit a link">
 
 <!ENTITY hrToolbarCmd.label "Horizontal bar">
-<!ENTITY hrToolbarCmd.key "H">
+<!ENTITY hrToolbarCmd.key "b">
+
+<!ENTITY htmlToolbarCmd.label "HTML markup">
+<!ENTITY htmlToolbarCmd.key "H">
 
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">

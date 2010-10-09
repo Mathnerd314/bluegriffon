@@ -43,10 +43,12 @@ VPATH    = @srcdir@
 include $(DEPTH)/config/autoconf.mk
 
 APP_VERSION = $(shell cat $(srcdir)/../config/version.txt)
+CODE_NAME = $(shell cat $(srcdir)/../config/codename.txt)
 
 DEFINES += \
 	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
 	-DAPP_VERSION=$(APP_VERSION) \
+	-DCODE_NAME=$(CODE_NAME) \
 	$(NULL)
 
 ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))

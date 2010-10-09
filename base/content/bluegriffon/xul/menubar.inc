@@ -77,6 +77,10 @@
         <menuitem label="&hrToolbarCmd.label;..."
                   command="cmd_hr"
                   accesskey="&hrToolbarCmd.key;"/>
+        <menuseparator/>
+        <menuitem label="&htmlToolbarCmd.label;..."
+                  command="cmd_html"
+                  accesskey="&htmlToolbarCmd.key;"/>
       </menupopup>
     </menu>
 

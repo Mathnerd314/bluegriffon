@@ -965,7 +965,10 @@ var JSEditor = {
 
 function OnDoubleClick(aEvent)
 {
-  var node = EditorUtils.getSelectionContainer().node;
+  var node = aEvent.target;
+  while (node && node.nodeType != Node.ELEMENT_NODE)
+    node = node.parentNode;
+  EditorUtils.getCurrentEditor().selectElement(node);
   if (!node) // sanity check
     return;
 

@@ -285,6 +285,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);
     commandTable.registerCommand("cmd_link",        cmdInsertLinkCommand);
     commandTable.registerCommand("cmd_hr",          cmdInsertHRCommand);
+    commandTable.registerCommand("cmd_html",        cmdInsertHTMLCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);

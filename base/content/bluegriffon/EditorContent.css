@@ -44,7 +44,7 @@
  *  place in EditorOverride.css, instead of here.
 */
 
-@namespace nvu url("http://disruptive-innovations.com/zoo/nvu");
+@namespace bluegriffon url("http://disruptive-innovations.com/zoo/bluegriffon");
 
 
 a[name], a[id] {
@@ -100,16 +100,25 @@ img {
   -moz-force-broken-image-icon: 1;
 }
 
-nvu|comment, nvu|pi, nvu|php {
-  -moz-user-select: all ! important;
-  display: inline;
+bluegriffon|comment {
+ font-family: monospace;
+ background-color: silver;
+ border-radius: 4px 4px 4px 4px;
+ -moz-user-select: all;
+ -moz-user-focus: normal;
+ -moz-user-input: disabled;
+ -moz-user-modify: read-only;
+ display: inline;
 }
 
-table > nvu|*,
-tbody > nvu|*,
-thead > nvu|*,
-tfoot > nvu|*,
-tr > nvu|* {
+bluegriffon|comment::before { content: "<!--"; }
+bluegriffon|comment::after { content: "-->"; }
+
+table > bluegriffon|*,
+tbody > bluegriffon|*,
+thead > bluegriffon|*,
+tfoot > bluegriffon|*,
+tr > bluegriffon|* {
   display: none ! important}
 
 

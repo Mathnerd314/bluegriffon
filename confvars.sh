@@ -39,6 +39,7 @@
 MOZ_APP_NAME=bluegriffon
 MOZ_APP_DISPLAYNAME=BlueGriffon
 MOZ_APP_VERSION=`cat $topsrcdir/$MOZ_BUILD_APP/config/version.txt`
+MOZ_APP_CODENAME=`cat $topsrcdir/$MOZ_BUILD_APP/config/codename.txt`
 
 #MOZ_ENABLE_LIBXUL=1
 MOZ_NO_XPCOM_OBSOLETE=1

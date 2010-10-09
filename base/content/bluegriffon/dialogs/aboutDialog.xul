@@ -84,7 +84,13 @@
           <label id="version" value="&aboutVersion; @APP_VERSION@"/>
           <spacer flex="1"/>
         </hbox>
-	
+  
+        <hbox>
+          <spacer flex="1"/>
+          <label id="codename" value="&codeName; '@CODE_NAME@'"/>
+          <spacer flex="1"/>
+        </hbox>
+  
         <hbox>
           <spacer flex="1"/>
   	      <description id="copyright">&copyrightText;</description>
