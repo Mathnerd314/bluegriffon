@@ -988,6 +988,9 @@ function OnDoubleClick(aEvent)
     case "audio":
       cmdInsertAudioCommand.doCommand();
       break;
+    case "hr":
+      cmdInsertHRCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

@@ -192,7 +192,9 @@ var cmdInsertHRCommand =
 
   doCommand: function(aCommand)
   {
-    EditorUtils.getCurrentEditor().insertHTML("<hr/>");
+    var element = EditorUtils.getObjectForProperties();
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertHR.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
 
