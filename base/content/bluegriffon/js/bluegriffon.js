@@ -664,9 +664,19 @@ function ToggleViewMode(aElement)
           var xmlParser = new DOMParser();
           try {
             var doc = xmlParser.parseFromString(source, "text/xml");
+            if (doc.documentElement.nodeName == "parsererror") {
+              var message = doc.documentElement.firstChild.data.
+                replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
+              var error = doc.documentElement.lastChild.textContent;
+						  window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
+						                    "chrome,modal,titlebar", message, error);
+              gDialog.wysiwygModeButton.removeAttribute("selected");
+              gDialog.sourceModeButton.setAttribute("selected", "true");
+              return;
+            }
             RebuildFromSource(doc);
           }
-          catch(e) {}
+          catch(e) {alert(e)}
         }
         else {
 	        var hp = new htmlParser(gDialog.parserIframe);
