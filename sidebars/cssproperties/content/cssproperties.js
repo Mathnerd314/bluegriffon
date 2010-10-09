@@ -72,6 +72,12 @@ function Shutdown()
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("tabCreated",
                                                Inspect);
+	  gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
+			                                          RedrawAll,
+			                                          window);
+	  gMain.NotifierUtils.removeNotifierCallback("panelClosed",
+			                                          PanelClosed,
+			                                          window);
   }
 }
 
