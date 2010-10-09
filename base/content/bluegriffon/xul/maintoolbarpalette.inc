@@ -1,7 +1,8 @@
   <toolbarpalette id="ComposerToolbarPalette">
 
       <toolbarbutton id="newButton"
-                     label="&newMenu.label;" type="menu-button"
+                     label="&newMenu.label;"
+                     type="menu-button"
                      oncommand="NewDocument(event);"
                      tooltiptext="&newToolbarCmd.tooltip;">
         <menupopup>
@@ -13,7 +14,8 @@
       </toolbarbutton>
 
       <toolbarbutton id="openButton"
-                     label="&openMenu.label;" type="menu-button"
+                     label="&openMenu.label;"
+                     type="menu-button"
                      oncommand="OpenLocation(event, 'tab');"
                      tooltiptext="&openMenu.tooltip;">
         <menupopup>
@@ -62,6 +64,17 @@
       <toolbarbutton id="browseButton" class="toolbarbutton-1"
                      label="&browseToolbarCmd.label;" observes="cmd_browse"
                      tooltiptext="&browseToolbarCmd.tooltip;"/>
+
+      <toolbarbutton id="formButton" class="toolbarbutton-1"
+                     label="&formToolbarCmd.label;" observes="cmd_form"
+                     tooltiptext="&formToolbarCmd.tooltip;"
+                     type="menu-button">
+        <menupopup>
+          <menuitem label="&formToolbarCmd.label;..."
+                    accesskey="&formToolbarCmd.key;"
+                    command="cmd_form"/>
+        </menupopup>
+      </toolbarbutton>
 
       <toolbaritem id="throbber-box"  align="center" pack="center">
         <image id="composer-throbber" tooltiptext="&throbber.tooltip;" onclick="AboutComposer()"/>

@@ -180,6 +180,10 @@
 <!ENTITY htmlToolbarCmd.label "HTML markup">
 <!ENTITY htmlToolbarCmd.key "H">
 
+<!ENTITY formToolbarCmd.label "Form">
+<!ENTITY formToolbarCmd.key "H">
+<!ENTITY formToolbarCmd.tooltip "Insert or edit a form">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

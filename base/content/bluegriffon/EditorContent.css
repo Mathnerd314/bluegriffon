@@ -84,6 +84,7 @@ table[empty-cells],
 form
 {
   outline: 1px dashed #66cccc;
+  min-height: 1em;
 }
 
 /* give a green dotted border to labels otherwise they are invisible

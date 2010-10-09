@@ -84,6 +84,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertHTML.xul            (content/bluegriffon/dialogs/insertHTML.xul)
   content/bluegriffon/dialogs/insertHR.js               (content/bluegriffon/dialogs/insertHR.js)
   content/bluegriffon/dialogs/insertHR.xul              (content/bluegriffon/dialogs/insertHR.xul)
+  content/bluegriffon/dialogs/insertForm.js             (content/bluegriffon/dialogs/insertForm.js)
+  content/bluegriffon/dialogs/insertForm.xul            (content/bluegriffon/dialogs/insertForm.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -129,4 +131,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertVideo.properties  (locale/en-US/bluegriffon/insertVideo.properties)
   locale/en-US/bluegriffon/insertHTML.dtd  (locale/en-US/bluegriffon/insertHTML.dtd)
   locale/en-US/bluegriffon/insertHR.dtd  (locale/en-US/bluegriffon/insertHR.dtd)
+  locale/en-US/bluegriffon/insertForm.dtd  (locale/en-US/bluegriffon/insertForm.dtd)
   

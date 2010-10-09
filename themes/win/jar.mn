@@ -2,7 +2,7 @@ bluegriffon.jar:
 % skin    bluegriffon    classic/1.0 %skin/classic/bluegriffon/
   skin/classic/bluegriffon/bluegriffon.css  (classic/bluegriffon.css)
   skin/classic/bluegriffon/bluegriffon.ico  (classic/bluegriffon.ico)
-  skin/classic/bluegriffon/bluegriffonDialogs.css  (classic/bluegriffonDialogs.css)
+* skin/classic/bluegriffon/bluegriffonDialogs.css  (classic/bluegriffonDialogs.css)
   skin/classic/bluegriffon/colourPicker.css  (classic/colourPicker.css)
   skin/classic/bluegriffon/cssToggler.css  (classic/cssToggler.css)
   skin/classic/bluegriffon/formatToolbar/align-center-disabled.png  (classic/formatToolbar/align-center-disabled.png)

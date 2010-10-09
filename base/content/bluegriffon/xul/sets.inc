@@ -47,6 +47,7 @@
   <command id="cmd_video"            oncommand="goDoCommand('cmd_video')"/>
   <command id="cmd_audio"            oncommand="goDoCommand('cmd_audio')"/>
   <command id="cmd_html"             oncommand="goDoCommand('cmd_html')"/>
+  <command id="cmd_form"             oncommand="goDoCommand('cmd_form')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

@@ -646,7 +646,8 @@ var EditorUtils = {
 	      if ((nodeName == "a" && node.href) ||
 	          nodeName == "ol" || nodeName == "ul" || nodeName == "dl" ||
 	          nodeName == "td" || nodeName == "th" ||
-	          nodeName == "table")
+	          nodeName == "table" ||
+            nodeName == "form")
 	      {
 	        return node;
 	      }
