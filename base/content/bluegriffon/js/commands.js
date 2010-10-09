@@ -284,6 +284,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_image",       cmdInsertImageCommand);
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);
     commandTable.registerCommand("cmd_link",        cmdInsertLinkCommand);
+    commandTable.registerCommand("cmd_hr",          cmdInsertHRCommand);
+
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);
     commandTable.registerCommand("cmd_audio",       cmdInsertAudioCommand);

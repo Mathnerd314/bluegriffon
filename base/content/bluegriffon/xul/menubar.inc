@@ -61,7 +61,23 @@
     </menu>
 
     <menu id="insertMenu" label="&insertMenu.label;" accesskey="&insertMenu.accesskey;">
-      <menupopup id="insertMenuPopup"/>
+      <menupopup id="insertMenuPopup">
+        <menuitem label="&imageToolbarCmd.label;..."
+                  command="cmd_image"
+                  accesskey="&imageToolbarCmd.key;"/>
+        <menuitem label="&tableToolbarCmd.label;..."
+                  command="cmd_table"
+                  accesskey="&tableToolbarCmd.key;"/>
+        <menuitem label="&linkToolbarCmd.label;..."
+                  command="cmd_link"
+                  accesskey="&linkToolbarCmd.key;"/>
+        <menuitem label="&anchorToolbarCmd.label;..."
+                  command="cmd_anchor"
+                  accesskey="&anchorToolbarCmd.key;"/>
+        <menuitem label="&hrToolbarCmd.label;..."
+                  command="cmd_hr"
+                  accesskey="&hrToolbarCmd.key;"/>
+      </menupopup>
     </menu>
 
     <menu id="formatMenu" label="&formatMenu.label;" accesskey="&formatMenu.accesskey;">

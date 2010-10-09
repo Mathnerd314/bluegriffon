@@ -55,6 +55,7 @@
 <!ENTITY insertMenu.label                 "Insert">
 <!ENTITY insertMenu.accesskey             "i">
 
+
 <!ENTITY formatMenu.label                 "Format">
 <!ENTITY formatMenu.accesskey             "o">
 
@@ -158,16 +159,23 @@
 <!ENTITY noClass.label "(no class)">
 
 <!ENTITY tableToolbarCmd.label "Table">
+<!ENTITY tableToolbarCmd.key "T">
 <!ENTITY tableToolbarCmd.tooltip "Insert new table or edit selected table's properties">
 
 <!ENTITY imageToolbarCmd.label "Image">
+<!ENTITY imageToolbarCmd.key "I">
 <!ENTITY imageToolbarCmd.tooltip "Insert or edit an image">
 
 <!ENTITY anchorToolbarCmd.label "Anchor">
+<!ENTITY anchorToolbarCmd.key "A">
 <!ENTITY anchorToolbarCmd.tooltip "Insert or edit an anchor">
 
 <!ENTITY linkToolbarCmd.label "Link">
+<!ENTITY linkToolbarCmd.key "L">
 <!ENTITY linkToolbarCmd.tooltip "Insert or edit a link">
+
+<!ENTITY hrToolbarCmd.label "Horizontal bar">
+<!ENTITY hrToolbarCmd.key "H">
 
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">

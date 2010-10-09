@@ -177,3 +177,21 @@ var cmdInsertAudioCommand =
   }
 };
 
+var cmdInsertHRCommand = 
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    EditorUtils.getCurrentEditor().insertHTML("<hr/>");
+  }
+};
