@@ -1159,3 +1159,25 @@ function start_css()
     window.open('chrome://cssproperties/content/cssproperties.xul',"_blank",
                "chrome,resizable,scrollbars=yes");
 }
+
+function UpdateTabHTMLDialect(editor)
+{
+  var doctype = editor.document.doctype.systemId;
+  var tab = gDialog.tabeditor.selectedTab;
+  switch (doctype) {
+    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+    case "http://www.w3.org/TR/html4/loose.dtd":
+      tab.setAttribute("tooltiptext", "HTML 4");
+      break;
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+      tab.setAttribute("tooltiptext", "XHTML 1");
+      break;
+    case "":
+      tab.setAttribute("tooltiptext",
+         (editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
+           "XHTML 5" : "HTML 5");
+      break;
+    default: break; // should never happen...
+  }
+}

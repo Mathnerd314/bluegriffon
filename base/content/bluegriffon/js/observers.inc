@@ -65,6 +65,7 @@ var gEditorDocumentObserver =
 
         // Set window title
         UpdateWindowTitle();
+        UpdateTabHTMLDialect(editor)
 
         window.content.focus();
         
