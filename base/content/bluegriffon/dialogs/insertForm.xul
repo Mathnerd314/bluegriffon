@@ -69,6 +69,8 @@
         <label value="&encodingType.label;"/>
         <menulist id="formEnctypeMenulist" sizetopopup="none">
           <menupopup>
+            <menuitem label="&unspecified.label;" value=""/>
+            <menuseparator/>
             <menuitem label="application/x-www-form-urlencoded"
                       value="application/x-www-form-urlencoded"/>
             <menuitem label="multipart/form-data"

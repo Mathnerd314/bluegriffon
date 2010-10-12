@@ -1004,6 +1004,10 @@ function OnDoubleClick(aEvent)
     case "form":
       cmdInsertFormCommand.doCommand();
       break;
+    case "input":
+	    window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
+	                      "chrome,modal,titlebar,resizable=no,dialog=yes", node, node.getAttribute("type"));
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

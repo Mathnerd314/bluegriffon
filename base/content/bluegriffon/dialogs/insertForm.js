@@ -69,6 +69,7 @@ function onAccept()
 
   gEditor.setAttribute(gNode, "name", gDialog.formNameTextbox.value);
   gEditor.setAttribute(gNode, "action", gDialog.formURLTextbox.value);
+
   if (gDialog.methodGETButton.hasAttribute("checked") ||
       gDialog.methodPOSTButton.hasAttribute("checked"))
 	  gEditor.setAttribute(gNode, "method",
@@ -76,6 +77,7 @@ function onAccept()
 	                         (gDialog.methodPOSTButton.hasAttribute("checked") ? "POST" : ""));
     else
     gEditor.removeAttribute(gNode, "method");
+
   if (gDialog.autocompleteOnButton.hasAttribute("checked") ||
       gDialog.autocompleteOffButton.hasAttribute("checked"))
 	  gEditor.setAttribute(gNode, "autocomplete",
@@ -83,13 +85,26 @@ function onAccept()
 	                         (gDialog.autocompleteOffButton.hasAttribute("checked") ? "off" : ""));
   else
     gEditor.removeAttribute(gNode, "autocomplete");
-  gEditor.setAttribute(gNode, "enctype", gDialog.formEnctypeMenulist.value);
+
+  if (gDialog.formEnctypeMenulist.value)
+    gEditor.setAttribute(gNode, "enctype", gDialog.formEnctypeMenulist.value);
+  else
+    gEditor.removeAttribute(gNode, "enctype")
+
   if (gDialog.novalidateButton.checked)
     gEditor.setAttribute(gNode, "novalidate", "novalidate");
   else
     gEditor.removeAttribute(gNode, "novalidate");
-  gEditor.setAttribute(gNode, "target", gDialog.formTargetMenulist.value);
-  gEditor.setAttribute(gNode, "accept-charset", gDialog.formAcceptcharsetTextbox.value);
+
+  if (gDialog.formTargetMenulist.value)
+    gEditor.setAttribute(gNode, "target", gDialog.formTargetMenulist.value);
+  else
+    gEditor.removeAttribute(gNode, "target");
+
+  if (gDialog.formAcceptcharsetTextbox.value)
+    gEditor.setAttribute(gNode, "accept-charset", gDialog.formAcceptcharsetTextbox.value);
+  else
+    gEditor.removeAttribute(gNode, "accept-charset");
 
   gEditor.endTransaction();
 }

@@ -16,3 +16,6 @@
 <!ENTITY target.label "Target:">
 
 <!ENTITY charsets.label "Character encodings:">
+
+<!ENTITY unspecified.label "-- unspecified --">
+ 

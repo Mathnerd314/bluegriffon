@@ -92,11 +92,11 @@
         </row>
         <row align="center" attribute="size">
           <label value="&size.label;"/>
-          <textbox type="number"/>
+          <textbox/>
         </row>
         <row align="center" attribute="maxlength">
           <label value="&maxlength.label;"/>
-          <textbox type="number"/>
+          <textbox/>
         </row>
         <row align="center" attribute="min">
           <label value="&min.label;"/>

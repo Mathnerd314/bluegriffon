@@ -251,6 +251,7 @@
 <!ENTITY copyCmd.key "c">
 <!ENTITY pasteCmd.key "v">
 
+<!ENTITY formInputs.label "Inputs...">
 <!ENTITY hiddenInputForm.label "A hidden string">
 <!ENTITY textInputForm.label "A text input field">
 <!ENTITY searchInputForm.label "A search field">

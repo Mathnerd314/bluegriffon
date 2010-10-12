@@ -657,7 +657,121 @@ var EditorUtils = {
 	  return null;
 	},
 
+  insertElementAroundSelection: function(element)
+  {
+		function nodeIsBreak(editor, node)
+		{
+		  return !node || node.localName == 'BR' || editor.nodeIsBlock(node);
+		}
+
+    var editor = this.getCurrentEditor();
+    editor.beginTransaction();
+  
+    try {
+      // First get the selection as a single range
+      var range, start, end, offset;
+      var count = editor.selection.rangeCount;
+      if (count == 1)
+        range = editor.selection.getRangeAt(0).cloneRange();
+      else
+      {
+        range = editor.document.createRange();
+        start = editor.selection.getRangeAt(0)
+        range.setStart(start.startContainer, start.startOffset);
+        end = editor.selection.getRangeAt(--count);
+        range.setEnd(end.endContainer, end.endOffset);
+      }
+  
+      // Flatten the selection to child nodes of the common ancestor
+      while (range.startContainer != range.commonAncestorContainer)
+        range.setStartBefore(range.startContainer);
+      while (range.endContainer != range.commonAncestorContainer)
+        range.setEndAfter(range.endContainer);
+  
+      if (editor.nodeIsBlock(element))
+        // Block element parent must be a valid block
+        while (!(range.commonAncestorContainer.localName in IsBlockParent))
+          range.selectNode(range.commonAncestorContainer);
+      else
+      {
+        // Fail if we're not inserting a block (use setInlineProperty instead)
+        if (!nodeIsBreak(editor, range.commonAncestorContainer))
+          return false;
+        else if (range.commonAncestorContainer.localName in NotAnInlineParent)
+          // Inline element parent must not be an invalid block
+          do range.selectNode(range.commonAncestorContainer);
+          while (range.commonAncestorContainer.localName in NotAnInlineParent);
+        else
+          // Further insert block check
+          for (var i = range.startOffset; ; i++)
+            if (i == range.endOffset)
+              return false;
+            else if (nodeIsBreak(editor, range.commonAncestorContainer.childNodes[i]))
+              break;
+      }
+  
+      // The range may be contained by body text, which should all be selected.
+      offset = range.startOffset;
+      start = range.startContainer.childNodes[offset];
+      if (!nodeIsBreak(editor, start))
+      {
+        while (!nodeIsBreak(editor, start.previousSibling))
+        {
+          start = start.previousSibling;
+          offset--;
+        }
+      }
+      end = range.endContainer.childNodes[range.endOffset];
+      if (end && !nodeIsBreak(editor, end.previousSibling))
+      {
+        while (!nodeIsBreak(editor, end))
+          end = end.nextSibling;
+      }
+  
+      // Now insert the node
+      editor.insertNode(element, range.commonAncestorContainer, offset, true);
+      offset = element.childNodes.length;
+      if (!editor.nodeIsBlock(element))
+        editor.setShouldTxnSetSelection(false);
+  
+      // Move all the old child nodes to the element
+      var empty = true;
+      while (start != end)
+      {
+        var next = start.nextSibling;
+        editor.deleteNode(start);
+        editor.insertNode(start, element, element.childNodes.length);
+        empty = false;
+        start = next;
+      }
+      if (!editor.nodeIsBlock(element))
+        editor.setShouldTxnSetSelection(true);
+      else
+      {
+        // Also move a trailing <br>
+        if (start && start.localName == 'BR')
+        {
+          editor.deleteNode(start);
+          editor.insertNode(start, element, element.childNodes.length);
+          empty = false;
+        }
+        // Still nothing? Insert a <br> so the node is not empty
+        if (empty)
+          editor.insertNode(editor.createElementWithDefaults("br"), element, element.childNodes.length);
+  
+        // Hack to set the selection just inside the element
+        editor.insertNode(editor.document.createTextNode(""), element, offset);
+      }
+    }
+    finally {
+      editor.endTransaction();
+    }
+  
+    return true;
+  },
+
   get activeViewActive()    { return this.mActiveViewActive; },
   set activeViewActive(val) { this.mActiveViewActive = val; }
+
 
 };
