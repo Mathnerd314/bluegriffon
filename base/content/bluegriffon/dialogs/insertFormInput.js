@@ -2,19 +2,19 @@ var gNode = null;
 var gType = null;
 
 const kPARAMETERS = [
-  ["value"],
-  ["value", "autocomplete", "list", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
-  ["value", "autocomplete", "list", "maxlength", "multiple", "pattern", "placeholder", "readonly", "required", "size"],
-  ["value", "autocomplete", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
-  ["value", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
-  ["value", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
-  ["value", "autocomplete", "list", "max", "min", "step"],
-  ["value", "autocomplete", "list"],
-  ["value", "checked", "required"],
-  ["value", "accept", "multiple", "required"],
-  ["value", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget"],
-  ["value", "alt", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "src", "width"],
-  ["value"]
+  ["name", "value", "disabled"],
+  ["name", "value", "disabled", "autocomplete", "list", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "autocomplete", "list", "maxlength", "multiple", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "autocomplete", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
+  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
+  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "step"],
+  ["name", "value", "disabled", "autocomplete", "list"],
+  ["name", "value", "disabled", "checked", "required"],
+  ["name", "value", "disabled", "accept", "multiple", "required"],
+  ["name", "value", "disabled", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget"],
+  ["name", "value", "disabled", "alt", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "src", "width"],
+  ["name", "value", "disabled"]
 ];
 
 const kTYPES = {
@@ -52,5 +52,33 @@ function Startup()
   gDialog.typeMenulist.value = gType;
   if (gNode)
     gDialog.typeMenulist.disabled = true;
+
+  window.sizeToContent();
+  AdaptDialog();
 }
 
+function ToggleMultibuttons(aElt)
+{
+  if (!aElt.checked)
+    return;
+  var buttons = aElt.parentNode.querySelectorAll(".multibutton");
+  for (var i = 0; i < buttons.length; i++) {
+    var b = buttons[i];
+    if (b != aElt)
+      b.removeAttribute("checked");
+  }
+}
+
+function AdaptDialog()
+{
+  var type = gDialog.typeMenulist.value;
+  var attrType = kTYPES[type];
+  var visibleAttributes = kPARAMETERS[attrType];
+  var rows = gDialog.mainGrid.querySelectorAll("row");
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var attr = row.getAttribute("attribute");
+    row.collapsed = (visibleAttributes.indexOf(attr) == -1);
+  }
+  window.sizeToContent();
+}

@@ -25,3 +25,39 @@
 <!ENTITY button.label "A button">
 
 <!ENTITY parameters.label "Parameters">
+
+<!ENTITY name.label "Name:">
+<!ENTITY value.label "Value:">
+<!ENTITY state.label "State:">
+<!ENTITY disabled.label "Disabled">
+<!ENTITY placeholder.label "Placeholder:">
+<!ENTITY mutability.label "Mutability:">
+<!ENTITY readonly.label "The element is read-only">
+<!ENTITY size.label "Size:">
+<!ENTITY maxlength.label "Max. length:">
+<!ENTITY min.label "Min. value:">
+<!ENTITY max.label "Max. value:">
+<!ENTITY step.label "Step:">
+<!ENTITY checked.label "The element is checked">
+<!ENTITY src.label "Image source:">
+<!ENTITY selectFile.label "Select a file">
+<!ENTITY width.label "Width:">
+<!ENTITY height.label "Height:">
+<!ENTITY list.label "List:">
+<!ENTITY choices.label "Choices:">
+<!ENTITY multiple.label "Accept multiple values">
+<!ENTITY pattern.label "Regexp pattern:">
+<!ENTITY alt.label "Alternate text:">
+<!ENTITY autocomplete.label "Autocompletion:">
+<!ENTITY on.label "On">
+<!ENTITY off.label "Off">
+<!ENTITY accept.label "Accepted MIME types:">
+<!ENTITY formmethod.label "Submission method:">
+<!ENTITY get.label "GET">
+<!ENTITY post.label "POST">
+<!ENTITY formaction.label "Submission action:">
+<!ENTITY formenctype.label "Submission encoding type:">
+<!ENTITY unspecified.label "-- unspecified --">
+<!ENTITY formnovalidate.label "Form validation:">
+<!ENTITY novalidate.label "Don't validate the form">
+<!ENTITY target.label "Target:">
