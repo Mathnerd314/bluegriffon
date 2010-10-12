@@ -239,3 +239,27 @@ var cmdInsertFormCommand =
   }
 };
 
+var cmdInsertFormInputCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {
+    var type = aParams.getCStringValue("type");
+    var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() == "input")
+      type = element.getAttribute("type");
+    else
+      element = null;
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
+                      "chrome,modal,titlebar,resizable=no,dialog=yes", element, type);
+  },
+
+  doCommand: function(aCommand) {}
+};

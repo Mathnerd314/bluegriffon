@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertFormInput.dtd">
+
+<dialog title="&window.title;"
+        id="insertFormInputDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload = "Startup()"
+        buttons="accept,cancel"
+        style="height: auto"
+        ondialogaccept="return onAccept();"
+        persist="screenX screenY width height">
+
+  <!-- Methods common to all editor dialogs -->
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
+  <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/insertFormInput.js"/>
+
+  <hbox align="center">
+    <spacer flex="1"/>
+    <menulist id="typeMenulist">
+      <menupopup>
+        <menuitem label="&hidden.label;" value="hidden"/>
+        <menuitem label="&text.label;" value="text"/>
+        <menuitem label="&search.label;" value="search"/>
+        <menuitem label="&tel.label;" value="tel"/>
+        <menuitem label="&url.label;" value="url"/>
+        <menuitem label="&email.label;" value="email"/>
+        <menuitem label="&password.label;" value="password"/>
+        <menuitem label="&datetime.label;" value="datetime"/>
+        <menuitem label="&date.label;" value="date"/>
+        <menuitem label="&month.label;" value="month"/>
+        <menuitem label="&week.label;" value="week"/>
+        <menuitem label="&time.label;" value="time"/>
+        <menuitem label="&datetimelocal.label;" value="datetime-local"/>
+        <menuitem label="&number.label;" value="number"/>
+        <menuitem label="&range.label;" value="range"/>
+        <menuitem label="&color.label;" value="color"/>
+        <menuitem label="&checkbox.label;" value="checkbox"/>
+        <menuitem label="&radio.label;" value="radio"/>
+        <menuitem label="&file.label;" value="file"/>
+        <menuitem label="&submit.label;" value="submit"/>
+        <menuitem label="&image.label;" value="image"/>
+        <menuitem label="&reset.label;" value="reset"/>
+        <menuitem label="&button.label;" value="button"/>
+      </menupopup>
+    </menulist>
+    <spacer flex="1"/>
+  </hbox>
+  <groupbox>
+    <caption label="&parameters.label;"/>
+  </groupbox>
+</dialog>

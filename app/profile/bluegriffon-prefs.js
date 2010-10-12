@@ -99,3 +99,4 @@ pref("bluegriffon.updates.frequency", "launch");
 pref("html5.enable", true);
 pref("bluegriffon.defaults.doctype", "kXHTML5");
 pref("media.autoplay.enabled", false);
+

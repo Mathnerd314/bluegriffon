@@ -231,6 +231,21 @@ var ComposerCommands = {
     } catch(e) { dump("error thrown in doStatefulCommand: "+e+"\n"); }
   },
 
+  doCommandWithValue: function doCommandWithValueFromAttribute(commandID, aValue)
+  {
+    try
+    {
+      var cmdParams = this.newCommandParams();
+      if (!cmdParams) return;
+
+      cmdParams.setCStringValue("type", aValue);
+      this.goDoCommandParams(commandID, cmdParams);
+
+      this.pokeMultiStateUI(commandID, cmdParams);
+
+    } catch(e) { dump("error thrown in doStatefulCommand: "+e+"\n"); }
+  },
+
   goDoCommandParams: function goDoCommandParams(command, params)
   {
     try
@@ -287,6 +302,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_hr",          cmdInsertHRCommand);
     commandTable.registerCommand("cmd_html",        cmdInsertHTMLCommand);
     commandTable.registerCommand("cmd_form",        cmdInsertFormCommand);
+    commandTable.registerCommand("cmd_formInput",   cmdInsertFormInputCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);

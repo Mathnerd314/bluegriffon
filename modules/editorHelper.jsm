@@ -647,7 +647,7 @@ var EditorUtils = {
 	          nodeName == "ol" || nodeName == "ul" || nodeName == "dl" ||
 	          nodeName == "td" || nodeName == "th" ||
 	          nodeName == "table" ||
-            nodeName == "form")
+            nodeName == "form" || nodeName == "input")
 	      {
 	        return node;
 	      }

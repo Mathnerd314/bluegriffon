@@ -250,3 +250,27 @@
 <!ENTITY cutCmd.key "x">
 <!ENTITY copyCmd.key "c">
 <!ENTITY pasteCmd.key "v">
+
+<!ENTITY hiddenInputForm.label "A hidden string">
+<!ENTITY textInputForm.label "A text input field">
+<!ENTITY searchInputForm.label "A search field">
+<!ENTITY telInputForm.label "A telephone number field">
+<!ENTITY urlInputForm.label "A URL field">
+<!ENTITY emailInputForm.label "An email field">
+<!ENTITY passwordInputForm.label "A password field">
+<!ENTITY datetimeInputForm.label "A date and time picker in UTC time zone">
+<!ENTITY dateInputForm.label "A date picker">
+<!ENTITY monthInputForm.label "A year and month picker">
+<!ENTITY weekInputForm.label "A week-year and week picker">
+<!ENTITY timeInputForm.label "A time picker with no time zone">
+<!ENTITY datetimelocalInputForm.label "A date and time picker with no time zone">
+<!ENTITY numberInputForm.label "A numerical value field">
+<!ENTITY rangeInputForm.label "A numerical range picker">
+<!ENTITY colorInputForm.label "A colorpicker">
+<!ENTITY checkboxInputForm.label "A checkbox">
+<!ENTITY radioInputForm.label "A radiobutton">
+<!ENTITY fileInputForm.label "A filepicker">
+<!ENTITY submitInputForm.label "A form submission button">
+<!ENTITY imageInputForm.label "An image-based form submission button">
+<!ENTITY resetInputForm.label "A button resetting the form">
+<!ENTITY buttonInputForm.label "A button">
