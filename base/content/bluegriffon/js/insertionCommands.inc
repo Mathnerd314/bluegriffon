@@ -25,9 +25,7 @@ var cmdInsertOrEditTableCommand =
           name == "th" ||
           name == "td" ||
           name == "caption") {
-		    /*window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
-		                      "chrome,modal,titlebar,dialog=yes", element);*/
-        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
+       OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
         return;
       }
     }
@@ -234,6 +232,8 @@ var cmdInsertFormCommand =
   doCommand: function(aCommand)
   {
     var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "form")
+      element = null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertForm.xul","_blank",
                       "chrome,modal,titlebar,resizable=no,dialog=yes", element);
   }
@@ -280,6 +280,8 @@ var cmdInsertFieldsetCommand =
   doCommand: function(aCommand)
   {
     var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "fieldset")
+      element = null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertFieldset.xul","_blank",
                       "chrome,modal,titlebar,resizable=no,dialog=yes", element);
   }
@@ -301,6 +303,8 @@ var cmdInsertLabelCommand =
   doCommand: function(aCommand)
   {
     var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "label")
+      element = null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertLabel.xul","_blank",
                       "chrome,modal,titlebar,resizable=no,dialog=yes", element);
   }
