@@ -66,6 +66,10 @@
           <label value="&state.label;"/>
           <checkbox label="&disabled.label;"/>
         </row>
+        <row align="center" attribute="form">
+          <label value="&form.label;"/>
+          <textbox/>
+        </row>
         <row align="center" attribute="checked">
           <spacer/>
           <checkbox label="&checked.label;"/>

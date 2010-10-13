@@ -5,19 +5,19 @@ var gType = null;
 var gEditor = null;
 
 const kPARAMETERS = [
-  ["name", "value", "disabled"],
-  ["name", "value", "disabled", "autocomplete", "list", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
-  ["name", "value", "disabled", "autocomplete", "list", "maxlength", "multiple", "pattern", "placeholder", "readonly", "required", "size"],
-  ["name", "value", "disabled", "autocomplete", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
-  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
-  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
-  ["name", "value", "disabled", "autocomplete", "list", "max", "min", "step"],
-  ["name", "value", "disabled", "autocomplete", "list"],
-  ["name", "value", "disabled", "checked", "required"],
-  ["name", "value", "disabled", "accept", "multiple", "required"],
-  ["name", "value", "disabled", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget"],
-  ["name", "value", "disabled", "alt", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "src", "width"],
-  ["name", "value", "disabled"]
+  ["name", "value", "disabled", "form"],
+  ["name", "value", "disabled", "form", "autocomplete", "list", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "form", "autocomplete", "list", "maxlength", "multiple", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "form", "autocomplete", "maxlength", "pattern", "placeholder", "readonly", "required", "size"],
+  ["name", "value", "disabled", "form", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
+  ["name", "value", "disabled", "form", "autocomplete", "list", "max", "min", "readonly", "required", "step"],
+  ["name", "value", "disabled", "form", "autocomplete", "list", "max", "min", "step"],
+  ["name", "value", "disabled", "form", "autocomplete", "list"],
+  ["name", "value", "disabled", "form", "checked", "required"],
+  ["name", "value", "disabled", "form", "accept", "multiple", "required"],
+  ["name", "value", "disabled", "form", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget"],
+  ["name", "value", "disabled", "form", "alt", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "src", "width"],
+  ["name", "value", "disabled", "form"]
 ];
 
 const kTYPES = {
