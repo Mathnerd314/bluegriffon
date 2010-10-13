@@ -49,9 +49,9 @@
           <menupopup>
             <menuitem label="&unspecified.label;" value=""/>
             <menuseparator/>
-            <menuitem labe="&submit.label;" value="submit"/>
-            <menuitem labe="&reset.label;" value="reset"/>
-            <menuitem labe="&button.label;" value="button"/>
+            <menuitem label="&submit.label;" value="submit"/>
+            <menuitem label="&reset.label;" value="reset"/>
+            <menuitem label="&button.label;" value="button"/>
           </menupopup>
         </menulist>
       </row>
@@ -92,7 +92,7 @@
         <label value="&formnovalidate.label;"/>
         <checkbox label="&novalidate.label;"/>
       </row>
-      <row align="center">
+      <row align="center" attribute="formtarget">
         <label value="&target.label;"/>
         <menulist id="formTargetMenulist"
                   editable="true">
