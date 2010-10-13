@@ -184,6 +184,9 @@
 <!ENTITY formToolbarCmd.key "F">
 <!ENTITY formToolbarCmd.tooltip "Insert or edit a form">
 
+<!ENTITY fieldsetToolbarCmd.label "Fieldset">
+<!ENTITY fieldsetToolbarCmd.key "d">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

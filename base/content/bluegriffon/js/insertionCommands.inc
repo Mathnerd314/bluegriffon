@@ -263,3 +263,24 @@ var cmdInsertFormInputCommand =
 
   doCommand: function(aCommand) {}
 };
+
+var cmdInsertFieldsetCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties();
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertFieldset.xul","_blank",
+                      "chrome,modal,titlebar,resizable=no,dialog=yes", element);
+  }
+};

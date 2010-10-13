@@ -72,6 +72,8 @@
 	<command id="cmd_formInputImage"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'image')"/>
 	<command id="cmd_formInputReset"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'reset')"/>
 	<command id="cmd_formInputButton"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'button')"/>
+
+  <command id="cmd_fieldset"          oncommand="goDoCommand('cmd_fieldset')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

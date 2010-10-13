@@ -126,6 +126,9 @@
 			                    command="cmd_formInputButton"/>
              </menupopup>
           </menu>
+          <menuitem label="&fieldsetToolbarCmd.label;..."
+                    accesskey="&fieldsetToolbarCmd.key;"
+                    command="cmd_fieldset"/>
        </menupopup>
       </toolbarbutton>
 
