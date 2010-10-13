@@ -181,7 +181,7 @@
 <!ENTITY htmlToolbarCmd.key "H">
 
 <!ENTITY formToolbarCmd.label "Form">
-<!ENTITY formToolbarCmd.key "H">
+<!ENTITY formToolbarCmd.key "F">
 <!ENTITY formToolbarCmd.tooltip "Insert or edit a form">
 
 <!ENTITY cssToolbarCmd.label "CSS">
