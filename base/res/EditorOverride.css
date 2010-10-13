@@ -111,7 +111,7 @@ input[type="hidden"] {
 }
 
 label {
-    -moz-user-select: all !important;
+    -moz-user-select: text !important;
 }
 
 ::-moz-display-comboboxcontrol-frame {

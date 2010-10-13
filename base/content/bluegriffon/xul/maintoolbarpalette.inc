@@ -129,6 +129,9 @@
           <menuitem label="&fieldsetToolbarCmd.label;..."
                     accesskey="&fieldsetToolbarCmd.key;"
                     command="cmd_fieldset"/>
+          <menuitem label="&labelToolbarCmd.label;..."
+                    accesskey="&labelToolbarCmd.key;"
+                    command="cmd_label"/>
        </menupopup>
       </toolbarbutton>
 

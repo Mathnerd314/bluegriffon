@@ -1011,6 +1011,9 @@ function OnDoubleClick(aEvent)
     case "fieldset":
       cmdInsertFieldsetCommand.doCommand();
       break;
+    case "label":
+      cmdInsertLabelCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

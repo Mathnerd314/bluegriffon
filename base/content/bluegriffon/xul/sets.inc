@@ -74,6 +74,7 @@
 	<command id="cmd_formInputButton"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'button')"/>
 
   <command id="cmd_fieldset"          oncommand="goDoCommand('cmd_fieldset')"/>
+  <command id="cmd_label"             oncommand="goDoCommand('cmd_label')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

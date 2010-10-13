@@ -647,7 +647,8 @@ var EditorUtils = {
 	          nodeName == "ol" || nodeName == "ul" || nodeName == "dl" ||
 	          nodeName == "td" || nodeName == "th" ||
 	          nodeName == "table" ||
-            nodeName == "form" || nodeName == "input")
+            nodeName == "form" || nodeName == "input" || nodeName == "fieldset" ||
+            nodeName == "label")
 	      {
 	        return node;
 	      }
@@ -661,11 +662,11 @@ var EditorUtils = {
   {
 		function nodeIsBreak(editor, node)
 		{
-		  return !node || node.localName == 'BR' || editor.nodeIsBlock(node);
+      //return !node || node.localName == 'BR' || editor.nodeIsBlock(node);
+      return true;
 		}
 
     var editor = this.getCurrentEditor();
-    editor.beginTransaction();
   
     try {
       // First get the selection as a single range
@@ -764,7 +765,6 @@ var EditorUtils = {
       }
     }
     finally {
-      editor.endTransaction();
     }
   
     return true;

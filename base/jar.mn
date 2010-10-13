@@ -28,8 +28,6 @@ bluegriffon.jar:
 * content/bluegriffon/js/customize.js                   (content/bluegriffon/js/customize.js)
   content/bluegriffon/js/zoomManager.js                 (content/bluegriffon/js/zoomManager.js)
   content/bluegriffon/js/cssRotations.js                (content/bluegriffon/js/cssRotations.js)
-  content/bluegriffon/EditorContent.css                 (content/bluegriffon/EditorContent.css)
-  content/bluegriffon/EditorOverride.css                (content/bluegriffon/EditorOverride.css)
 * content/bluegriffon/dialogs/insertTable.js            (content/bluegriffon/dialogs/insertTable.js)
   content/bluegriffon/dialogs/insertTable.xul           (content/bluegriffon/dialogs/insertTable.xul)
 * content/bluegriffon/dialogs/languages.js              (content/bluegriffon/dialogs/languages.js)
@@ -92,6 +90,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertFormInput.xul       (content/bluegriffon/dialogs/insertFormInput.xul)
   content/bluegriffon/dialogs/insertFieldset.js         (content/bluegriffon/dialogs/insertFieldset.js)
   content/bluegriffon/dialogs/insertFieldset.xul        (content/bluegriffon/dialogs/insertFieldset.xul)
+  content/bluegriffon/dialogs/insertLabel.js            (content/bluegriffon/dialogs/insertLabel.js)
+  content/bluegriffon/dialogs/insertLabel.xul           (content/bluegriffon/dialogs/insertLabel.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -141,4 +141,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/parsingError.dtd  (locale/en-US/bluegriffon/parsingError.dtd)
   locale/en-US/bluegriffon/insertFormInput.dtd  (locale/en-US/bluegriffon/insertFormInput.dtd)
   locale/en-US/bluegriffon/insertFieldset.dtd  (locale/en-US/bluegriffon/insertFieldset.dtd)
+  locale/en-US/bluegriffon/insertLabel.dtd  (locale/en-US/bluegriffon/insertLabel.dtd)
   

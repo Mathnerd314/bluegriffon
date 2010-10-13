@@ -187,6 +187,9 @@
 <!ENTITY fieldsetToolbarCmd.label "Fieldset">
 <!ENTITY fieldsetToolbarCmd.key "d">
 
+<!ENTITY labelToolbarCmd.label "Label">
+<!ENTITY labelToolbarCmd.key "L">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 
