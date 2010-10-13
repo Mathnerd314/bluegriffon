@@ -146,6 +146,9 @@
 		          <menuitem label="&buttonToolbarCmd.label;..."
 		                    accesskey="&buttonToolbarCmd.key;"
 		                    command="cmd_button"/>
+		          <menuitem label="&selectToolbarCmd.label;..."
+		                    accesskey="&selectToolbarCmd.key;"
+		                    command="cmd_select"/>
 		       </menupopup>
         </menu>
       </menupopup>

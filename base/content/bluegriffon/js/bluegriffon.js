@@ -1008,14 +1008,19 @@ function OnDoubleClick(aEvent)
 	    window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
 	                      "chrome,modal,titlebar,resizable=no,dialog=yes", node, node.getAttribute("type"));
       break;
-    case "fieldset":
+   case "fieldset":
       cmdInsertFieldsetCommand.doCommand();
       break;
-    case "label":
+   case "label":
       cmdInsertLabelCommand.doCommand();
       break;
-     case "button":
+    case "button":
       cmdInsertButtonCommand.doCommand();
+      break;
+    case "select":
+    case "option":
+    case "optgroup":
+      cmdInsertSelectCommand.doCommand();
       break;
     case "td":
     case "th":
@@ -1193,4 +1198,9 @@ function UpdateTabHTMLDialect(editor)
       break;
     default: break; // should never happen...
   }
+}
+
+function OpenAddonsSite()
+{
+  loadExternalURL("http://bluegriffon.org/pages/add-ons");
 }

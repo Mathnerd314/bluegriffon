@@ -313,3 +313,18 @@ panel[floating="true"] {
 popup {
   -moz-appearance: menupopup;
 }
+
+/* link to add-ons */
+
+#editorBarLabel {
+  text-decoration: underline;
+  color: darkblue;
+}
+
+#editorBarLabel:hover {
+  color: blue;
+}
+
+#editorBarLabel:hover:active {
+  color: red;
+}

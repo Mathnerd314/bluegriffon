@@ -76,6 +76,7 @@
   <command id="cmd_fieldset"          oncommand="goDoCommand('cmd_fieldset')"/>
   <command id="cmd_label"             oncommand="goDoCommand('cmd_label')"/>
   <command id="cmd_button"            oncommand="goDoCommand('cmd_button')"/>
+  <command id="cmd_select"            oncommand="goDoCommand('cmd_select')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

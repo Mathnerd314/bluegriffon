@@ -193,6 +193,9 @@
 <!ENTITY buttonToolbarCmd.label "Button">
 <!ENTITY buttonToolbarCmd.key "B">
 
+<!ENTITY selectToolbarCmd.label "Selection list">
+<!ENTITY selectToolbarCmd.key "S">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

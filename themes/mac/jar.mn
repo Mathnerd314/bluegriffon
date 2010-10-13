@@ -158,4 +158,8 @@ bluegriffon.jar:
   skin/classic/bluegriffon/tags/tag-anchor.gif (classic/tags/tag-anchor.gif)
   skin/classic/bluegriffon/panels/resizer.png (classic/panels/resizer.png)
   skin/classic/bluegriffon/panels/floatingpanel.css (classic/panels/floatingpanel.css)
+  skin/classic/bluegriffon/icons/down-disabled.png (classic/icons/down-disabled.png)
+  skin/classic/bluegriffon/icons/up-disabled.png (classic/icons/up-disabled.png)
+  skin/classic/bluegriffon/icons/down.png (classic/icons/down.png)
+  skin/classic/bluegriffon/icons/up.png (classic/icons/up.png)
   

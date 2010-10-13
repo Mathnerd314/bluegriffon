@@ -95,6 +95,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertButton.js           (content/bluegriffon/dialogs/insertButton.js)
   content/bluegriffon/dialogs/insertButton.xul          (content/bluegriffon/dialogs/insertButton.xul)
   content/bluegriffon/dialogs/form-common.js            (content/bluegriffon/dialogs/form-common.js)
+  content/bluegriffon/dialogs/insertSelect.js           (content/bluegriffon/dialogs/insertSelect.js)
+  content/bluegriffon/dialogs/insertSelect.xul          (content/bluegriffon/dialogs/insertSelect.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -146,4 +148,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertFieldset.dtd  (locale/en-US/bluegriffon/insertFieldset.dtd)
   locale/en-US/bluegriffon/insertLabel.dtd  (locale/en-US/bluegriffon/insertLabel.dtd)
   locale/en-US/bluegriffon/insertButton.dtd  (locale/en-US/bluegriffon/insertButton.dtd)
+  locale/en-US/bluegriffon/insertSelect.dtd  (locale/en-US/bluegriffon/insertSelect.dtd)
   

@@ -95,6 +95,10 @@
           <label value="&mutability.label;"/>
           <checkbox label="&readonly.label;"/>
         </row>
+        <row align="center" attribute="required">
+          <label value="&required.label;"/>
+          <checkbox label="&isRequired.label;"/>
+        </row>
         <row align="center" attribute="size">
           <label value="&size.label;"/>
           <textbox/>
@@ -193,7 +197,7 @@
           <label value="&formnovalidate.label;"/>
           <checkbox label="&novalidate.label;"/>
         </row>
-        <row align="center">
+        <row align="center" attribute="formtarget">
           <label value="&target.label;"/>
           <menulist id="formTargetMenulist"
                     editable="true">

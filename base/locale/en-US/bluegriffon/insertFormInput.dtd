@@ -61,5 +61,6 @@
 <!ENTITY formnovalidate.label "Form validation:">
 <!ENTITY novalidate.label "Don't validate the form">
 <!ENTITY target.label "Target:">
-
+<!ENTITY required.label "Required:">
+<!ENTITY isRequired.label "The element is required">
 <!ENTITY form.label "Form:">

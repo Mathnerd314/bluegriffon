@@ -170,7 +170,8 @@
   <statusbar id="statusbar">
     <deck flex="1" id="statusbarDeck">
       <hbox id="editorBar" align="center">
-        <label id="editorBarLabel" value="BlueGriffon"/>
+        <label id="editorBarLabel" value="Get add-ons!"
+               onclick="OpenAddonsSite()"/>
         <spacer flex="1"/>
         <statusbarpanel id="zoomPanel">
           <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
