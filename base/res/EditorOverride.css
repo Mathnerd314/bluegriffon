@@ -85,7 +85,7 @@ a:link {
 
 /* Allow double-clicks on these widgets to open properties dialogs
    XXX except when the widget has disabled attribute */
-input, button, textarea {
+input, textarea {
   -moz-user-select: all !important;
   -moz-user-input: auto !important;
   -moz-user-focus: none !important;
@@ -110,7 +110,7 @@ input[type="hidden"] {
   visibility: visible !important;
 }
 
-label {
+label, button {
     -moz-user-select: text !important;
 }
 

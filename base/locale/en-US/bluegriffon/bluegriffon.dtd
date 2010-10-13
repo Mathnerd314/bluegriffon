@@ -190,6 +190,9 @@
 <!ENTITY labelToolbarCmd.label "Label">
 <!ENTITY labelToolbarCmd.key "L">
 
+<!ENTITY buttonToolbarCmd.label "Button">
+<!ENTITY buttonToolbarCmd.key "B">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

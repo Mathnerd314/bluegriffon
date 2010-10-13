@@ -9,15 +9,6 @@ function Startup()
   gEditor = EditorUtils.getCurrentEditor();
   GetUIElements();
 
-  var doc = EditorUtils.getCurrentDocument();
-  var elts = doc.querySelectorAll("button[id], input[id]:not([type='hidden']), keygen[id], meter[id], output[id], progress[id], select[id], textarea[id]");
-  var ids = [];
-  for (var i = 0; i < elts.length; i++)
-    ids.push(elts[i].id);
-  ids.sort;
-  for (var i = 0; i < ids.length; i++)
-    gDialog.forMenulist.appendItem(ids[i], ids[i]);
-
   if (gNode) {
     InitDialog();
   }
@@ -29,8 +20,7 @@ function onAccept()
 
   if (!gNode) {
     var doc = EditorUtils.getCurrentDocument();
-    gNode = doc.createElement("label");
-    //gNode.appendChild(doc.createElement("br"));
+    gNode = doc.createElement("button");
     gEditor.insertElementAtSelection(gNode, true);
   }
 

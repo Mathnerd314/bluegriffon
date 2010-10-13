@@ -305,6 +305,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_formInput",   cmdInsertFormInputCommand);
     commandTable.registerCommand("cmd_fieldset",    cmdInsertFieldsetCommand);
     commandTable.registerCommand("cmd_label",       cmdInsertLabelCommand);
+    commandTable.registerCommand("cmd_button",      cmdInsertButtonCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);

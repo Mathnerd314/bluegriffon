@@ -81,6 +81,73 @@
         <menuitem label="&htmlToolbarCmd.label;..."
                   command="cmd_html"
                   accesskey="&htmlToolbarCmd.key;"/>
+        <menu label="&formToolbarCmd.label;...">
+		        <menupopup>
+		          <menuitem label="&formToolbarCmd.label;"
+		                    accesskey="&formToolbarCmd.key;"
+		                    command="cmd_form"/>
+		          <menuseparator/>
+		          <menu label="&formInputs.label;">
+		            <menupopup>
+		                <menuitem label="&hiddenInputForm.label;"
+		                          command="cmd_formInputHidden"/>
+		                <menuitem label="&textInputForm.label;"
+		                          command="cmd_formInputText"/>
+		                <menuitem label="&searchInputForm.label;"
+		                          command="cmd_formInputSearch"/>
+		                <menuitem label="&telInputForm.label;"
+		                          command="cmd_formInputTel"/>
+		                <menuitem label="&urlInputForm.label;"
+		                          command="cmd_formInputUrl"/>
+		                <menuitem label="&emailInputForm.label;"
+		                          command="cmd_formInputEmail"/>
+		                <menuitem label="&passwordInputForm.label;"
+		                          command="cmd_formInputPassword"/>
+		                <menuitem label="&datetimeInputForm.label;"
+		                          command="cmd_formInputDatetime"/>
+		                <menuitem label="&dateInputForm.label;"
+		                          command="cmd_formInputDate"/>
+		                <menuitem label="&monthInputForm.label;"
+		                          command="cmd_formInputMonth"/>
+		                <menuitem label="&weekInputForm.label;"
+		                          command="cmd_formInputWeek"/>
+		                <menuitem label="&timeInputForm.label;"
+		                          command="cmd_formInputTime"/>
+		                <menuitem label="&datetimelocalInputForm.label;"
+		                          command="cmd_formInputDatetimelocal"/>
+		                <menuitem label="&numberInputForm.label;"
+		                          command="cmd_formInputNumber"/>
+		                <menuitem label="&rangeInputForm.label;"
+		                          command="cmd_formInputRange"/>
+		                <menuitem label="&colorInputForm.label;"
+		                          command="cmd_formInputColor"/>
+		                <menuitem label="&checkboxInputForm.label;"
+		                          command="cmd_formInputCheckbox"/>
+		                <menuitem label="&radioInputForm.label;"
+		                          command="cmd_formInputRadio"/>
+		                <menuitem label="&fileInputForm.label;"
+		                          command="cmd_formInputFile"/>
+		                <menuitem label="&submitInputForm.label;"
+		                          command="cmd_formInputSubmit"/>
+		                <menuitem label="&imageInputForm.label;"
+		                          command="cmd_formInputImage"/>
+		                <menuitem label="&resetInputForm.label;"
+		                          command="cmd_formInputReset"/>
+		                <menuitem label="&buttonInputForm.label;"
+		                          command="cmd_formInputButton"/>
+		             </menupopup>
+		          </menu>
+		          <menuitem label="&fieldsetToolbarCmd.label;..."
+		                    accesskey="&fieldsetToolbarCmd.key;"
+		                    command="cmd_fieldset"/>
+		          <menuitem label="&labelToolbarCmd.label;..."
+		                    accesskey="&labelToolbarCmd.key;"
+		                    command="cmd_label"/>
+		          <menuitem label="&buttonToolbarCmd.label;..."
+		                    accesskey="&buttonToolbarCmd.key;"
+		                    command="cmd_button"/>
+		       </menupopup>
+        </menu>
       </menupopup>
     </menu>
 
