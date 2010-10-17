@@ -5517,7 +5517,6 @@ exports.Promise.prototype._complete = function(list, status, data, name) {
     return this;
 };
 
-
 /**
  * Takes an array of promises and returns a promise that that is fulfilled once
  * all the promises in the array are fulfilled
@@ -5558,6 +5557,26 @@ exports.group = function(promiseList) {
     });
 
     return groupPromise;
+};
+
+/**
+ * Take an asynchronous function (i.e. one that returns a promise) and
+ * return a synchronous version of the same function.
+ * Clearly this is impossible without blocking or busy waiting (both evil).
+ * In this case we make the assumption that the called function is only
+ * theoretically asynchronous (which is actually common with Bespin, because the
+ * most common cause of asynchronaity is the lazy loading module system which
+ * can sometimes be proved to be synchronous in use, even though in theory
+ * there is the potential for asynch behaviour)
+ */
+exports.synchronizer = function(func, scope) {
+    return function() {
+        var promise = func.apply(scope, arguments);
+        if (!promise.isComplete()) {
+            throw new Error('asynchronous function can\'t be synchronized');
+        }
+        return promise._value;
+    };
 };
 
 });
@@ -6860,7 +6879,9 @@ exports.none = function(obj) {
  * (which are not actually cloned because they are immutable).
  * If the passed object implements the clone() method, then this function
  * will simply call that method and return the result.
+ *
  * @param object {Object} the object to clone
+ * @param deep {Boolean} do a deep clone?
  * @returns {Object} the cloned object
  */
 exports.clone = function(object, deep) {
@@ -6885,7 +6906,7 @@ exports.clone = function(object, deep) {
         return reply;
     }
 
-    if (object.clone && typeof(object.clone) === 'function') {
+    if (object && typeof(object.clone) === 'function') {
         return object.clone();
     }
 

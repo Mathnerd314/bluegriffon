@@ -11,16 +11,18 @@
    #editor { resize: none }
   </style>
   <script>
-    function installBespin(aKeyPressCallback) {
+    function installBespin(aKeyPressCallback, aTheme) {
       var elt = getEditableElement();
-      var e = bespin.useBespin("editor",
-          {
+      var settings = {
             syntax: "html",
             settings: {
                         tabstop: 2,
                         fontface: "Courier New, Courier, monospace"
                       }
-          });
+          };
+      if (aTheme)
+        settings.settings.theme = aTheme;
+      var e = bespin.useBespin("editor", settings);
       postMessage("bespin", "*");
 
       getEditableElement().addEventListener("keypress", aKeyPressCallback, true);

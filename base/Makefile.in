@@ -79,6 +79,10 @@ _BESPIN_RESOURCE_FILES = \
 	$(srcdir)/res/resources/screen_theme/theme.less \
 	$(NULL)
 
+_BESPIN_WHITETHEME_FILES = \
+	$(srcdir)/res/resources/whitetheme/theme.less \
+	$(NULL)
+
 _BESPIN_IMAGE_FILES = \
   $(srcdir)/res/resources/screen_theme/images/bespin-s.png \
 	$(srcdir)/res/resources/screen_theme/images/check-selected.png \
@@ -97,12 +101,14 @@ libs::
 	mkdir -p $(DIST)/bin/res/resources/screen_theme/images/
 	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DIST)/bin/res/resources/screen_theme
 	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DIST)/bin/res/resources/screen_theme/images
+	$(INSTALL) $(_BESPIN_WHITETHEME_FILES) $(DIST)/bin/res/resources/whitetheme
 
 install::
 	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
 	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images/
 	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme
 	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images
+	$(INSTALL) $(_BESPIN_WHITETHEME_FILES) $(DESTDIR)$(mozappdir)/res/resources/whitetheme
 
 include $(topsrcdir)/config/rules.mk
 

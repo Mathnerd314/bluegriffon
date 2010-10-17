@@ -416,12 +416,13 @@
 
       <method name="_installBespin">
         <parameter name="aIframe"/>
+        <parameter name="aTheme"/>
         <body>
         <![CDATA[
             var _self = this; 
             aIframe.removeEventListener("load", function() {_self._installBespin(iframe);}, true);
 
-            var bespinTmp = aIframe.contentWindow.installBespin(BespinKeyPressCallback);
+            var bespinTmp = aIframe.contentWindow.installBespin(BespinKeyPressCallback, aTheme);
             bespinTmp.then(function(env) {
               var editor = env.editor;
               aIframe.setUserData("editor", editor, null);
@@ -442,8 +443,13 @@
             var newBox = document.createElement("deck");
 
             var iframe = document.createElement("iframe");
-            var _self = this; 
-            iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
+            var _self = this;
+            var theme = null;
+            try {
+              theme = GetPrefs().getCharPref("bluegriffon.source.theme");
+            }
+            catch(e) {}
+            iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
             iframe.setAttribute("src", "resource://gre/res/bespin.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);

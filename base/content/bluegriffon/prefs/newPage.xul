@@ -11,7 +11,8 @@
 
   <prefpane id="newPagePrefPane">
     <preferences>
-      <preference id="pref-author" name="bluegriffon.author" type="string"/>
+      <preference id="pref-author"       name="bluegriffon.author" type="string"/>
+      <preference id="pref-source-theme" name="bluegriffon.source.theme" type="string"/>
     </preferences>
     <groupbox>
       <caption label="&author.caption;"/>
@@ -34,6 +35,21 @@
                  size="3" maxlength="3"
                  oninput="OnZoomTextInput(this)"/>
         <label value="%"/>
+      </hbox>
+    </groupbox>
+    <groupbox>
+      <caption label="&source.label;"/>
+      <hbox align="center">
+        <label value="&theme.label;"/>
+	      <radiogroup align="center"
+	                  id="sourceThemeRadioGroup"
+	                  preference="pref-source-theme"
+	                  orient="horizontal">
+	        <radio label="&darkTheme.label;" value=""/>
+	        <radio label="&whiteTheme.label;" value="white"/>
+	      </radiogroup>
+	      <label value="&requiresRestart.label;"
+	             style="font-style: italic; font-size: smaller"/>
       </hbox>
     </groupbox>
   </prefpane>

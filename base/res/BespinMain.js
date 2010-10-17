@@ -2215,6 +2215,686 @@ Object.defineProperties(exports.TextStorage.prototype, {
 
 });
 
+bespin.tiki.module("text_editor:tests/controllers/testLayoutmanager",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var LayoutManager = require('controllers/layoutmanager').LayoutManager;
+
+var PANGRAMS =
+    'Cwm fjord bank glyphs vext quiz.\n' +
+    'Squdgy fez, blank jimp crwth vox!\n' +
+    'Jink cwm, zag veldt, fob qursh pyx.\n' +
+    'Veldt jynx grimps waqf zho buck.\n' +
+    'Junky qoph-flags vext crwd zimb.\n' +
+    'Quartz glyph job vex\'d cwm finks.\n' +
+    'Cwm fjord veg balks nth pyx quiz.\n' +
+    'Vext cwm fly, zing, jabs kurd qoph.\n';
+
+exports.testCharacterRectForPosition = function() {
+    var layoutManager = new LayoutManager({
+        margin: { left: 0, bottom: 0, top: 0, right: 0 }
+    });
+    layoutManager.textStorage.setValue(PANGRAMS);
+
+    var characterWidth = layoutManager.characterWidth;
+    var lineHeight = layoutManager.lineHeight;
+
+    t.deepEqual(layoutManager.characterRectForPosition({ row: 3, col: 3 }), {
+            x:      3 * characterWidth,
+            y:      3 * lineHeight,
+            width:  characterWidth,
+            height: lineHeight
+        }, 'the character rect and the expected rect for the character at ' +
+        'position (3,3)');
+};
+
+exports.testDimensionsCalculation = function() {
+    var layoutManager = new LayoutManager({
+        margin: { left: 0, bottom: 0, top: 0, right: 0 }
+    });
+
+    var textStorage = layoutManager.textStorage;
+    textStorage.setValue('Battlefield Earth\n' +
+        'The Star Wars Holiday Special\n' +
+        'Manos: The Hands of Fate\n' +
+        'Santa Claus Conquers the Martians\n');
+
+    var rect = layoutManager.boundingRect();
+    t.equal(rect.height, layoutManager.lineHeight * 5,
+        'the total height and the line height times the number of lines');
+    t.equal(rect.width, layoutManager.characterWidth *
+        'Santa Claus Conquers the Martians'.length, 'the width and the ' +
+        'character width times the length of the longest line');
+
+    textStorage.replaceCharacters({
+        start:  { row: 2, col: 0 },
+        end:    { row: 3, col: 'Santa Claus Conquers the Martians'.length }
+    }, 'SuperBabies: Baby Geniuses 2');
+
+    rect = layoutManager.boundingRect();
+    t.equal(rect.height, layoutManager.lineHeight * 4,
+        'the total and the line height times the new number of lines');
+    t.equal(rect.width, layoutManager.characterWidth *
+        'The Star Wars Holiday Special'.length, 'the width and the ' +
+        'character width times the length of what is now the longest line');
+};
+
+exports.testInvalidRects = function() {
+    var layoutManager = new LayoutManager({
+        margin: { left: 0, bottom: 0, top: 0, right: 0 }
+    });
+
+    var textStorage = layoutManager.textStorage;
+    textStorage.setValue('foo\nbar\nbaz\nboo\n');
+
+    var characterWidth = layoutManager.characterWidth;
+    var lineHeight = layoutManager.lineHeight;
+
+    var returnedRects;
+    layoutManager.addDelegate({
+        layoutManagerInvalidatedRects: function(sender, rects) {
+            returnedRects = rects;
+        }
+    });
+
+    textStorage.insertCharacters({ row: 1, col: 1 }, 'aaa');
+    t.deepEqual(returnedRects[0], {
+            x:      characterWidth,
+            y:      lineHeight,
+            width:  Number.MAX_VALUE,
+            height: lineHeight
+        }, 'the returned rect and the expected rect after no lines changed');
+
+    textStorage.deleteCharacters({
+        start:  { row: 1, col: 0 },
+        end:    { row: 2, col: 0 }
+    });
+    t.deepEqual(returnedRects[0], {
+        x:      0,
+        y:      lineHeight,
+        width:  Number.MAX_VALUE,
+        height: lineHeight
+    }, 'the first returned rect and the expected rect after one line was ' +
+        'deleted');
+    t.deepEqual(returnedRects[1], {
+        x:      0,
+        y:      2 * lineHeight,
+        width:  Number.MAX_VALUE,
+        height: Number.MAX_VALUE
+    }, 'the second returned rect and the expected rect after one line was ' +
+        'deleted');
+
+    textStorage.insertCharacters({ row: 1, col: 1 }, 'bar\n');
+    t.deepEqual(returnedRects[0], {
+        x:      characterWidth,
+        y:      lineHeight,
+        width:  Number.MAX_VALUE,
+        height: lineHeight
+    }, 'the first returned rect and the expected rect after one line was ' +
+        'added');
+    t.deepEqual(returnedRects[1], {
+        x:      0,
+        y:      2 * lineHeight,
+        width:  Number.MAX_VALUE,
+        height: Number.MAX_VALUE
+    }, 'the second returned rect and the expected rect after one line was ' +
+        'added');
+};
+
+exports.testPointToCharacterMapping = function() {
+    var leftMargin = 3, topMargin = 5;
+    var layoutManager = new LayoutManager({
+        margin: { left: leftMargin, bottom: 4, top: topMargin, right: 6 }
+    });
+    var characterWidth = layoutManager.characterWidth;
+    var lineHeight = layoutManager.lineHeight;
+
+    layoutManager.textStorage.setValue(PANGRAMS);
+
+    var pos = layoutManager.characterAtPoint({
+        x: leftMargin + 5 * characterWidth,
+        y: topMargin + 2 * lineHeight
+    });
+    t.deepEqual(pos, { col: 5, row: 2, partialFraction: 0.0 }, 'the ' +
+        'reported character position and the expected character position');
+
+    pos = layoutManager.characterAtPoint({
+        x: 100000,
+        y: topMargin + 4 * lineHeight
+    });
+    t.deepEqual(pos, { col: 32, row: 4, partialFraction: 0.0 }, 'the ' +
+        'reported character position and the expected character ' +
+        'position for a character off the right side of the text area');
+};
+
+exports.testRectsForRange = function() {
+    var layoutManager = new LayoutManager({
+        margin: { left: 0, bottom: 0, top: 0, right: 0 }
+    });
+    layoutManager.textStorage.setValue(PANGRAMS);
+
+    var characterWidth = layoutManager.characterWidth;
+    var lineHeight = layoutManager.lineHeight;
+    var maximumWidth = layoutManager._maximumWidth;
+
+    var rects = layoutManager.rectsForRange({
+        start:  { row: 2, col: 2 },
+        end:    { row: 5, col: 2 }
+    });
+    t.equal(rects.length, 3, 'the length of the rects returned for a ' +
+        'complex range and 3');
+    t.deepEqual(rects[0], {
+            x:      2 * characterWidth,
+            y:      2 * lineHeight,
+            width:  characterWidth * (maximumWidth - 2),
+            height: lineHeight
+        }, 'the first rect returned for a complex range and the expected ' +
+            'rect');
+    t.deepEqual(rects[1], {
+            x:      0,
+            y:      5 * lineHeight,
+            width:  characterWidth * 2,
+            height: lineHeight
+        }, 'the second rect returned for a complex range and the expected ' +
+            'rect');
+    t.deepEqual(rects[2], {
+            x:      0,
+            y:      3 * lineHeight,
+            width:  characterWidth * maximumWidth,
+            height: 2 * lineHeight
+        }, 'the third rect returned for a complex range and the expected ' +
+            'rect');
+
+    rects = layoutManager.rectsForRange({
+        start:  { row: 2, col: 0 },
+        end:    { row: 5, col: 0 }
+    });
+    t.equal(rects.length, 1, 'the length of the rects returned for a ' +
+        'line-spanning range and 1');
+    t.deepEqual(rects[0], {
+            x:      0,
+            y:      2 * lineHeight,
+            width:  characterWidth * maximumWidth,
+            height: 3 * lineHeight
+        }, 'the rect returned for a line-spanning range and the expected ' +
+            'rect');
+
+    rects = layoutManager.rectsForRange({
+        start:  { row: 2, col: 3 },
+        end:    { row: 2, col: 10 }
+    });
+    t.equal(rects.length, 1, 'the length of the rects returned for a ' +
+        'single-line range and 1');
+    t.deepEqual(rects[0], {
+            x:      3 * characterWidth,
+            y:      2 * lineHeight,
+            width:  characterWidth * 7,
+            height: lineHeight
+        }, 'the rect returned for a single-line range and the expected rect');
+};
+
+
+});
+
+bespin.tiki.module("text_editor:tests/models/testTextstorage",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var TextStorage = require('models/textstorage').TextStorage;
+
+exports.testCharacterMutators = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+    t.equal(storage.getValue(), 'foo\nbar\nbaz\n',
+        'characters inserted into an empty text storage object and the ' +
+            'original characters');
+    var lines = storage.lines;
+    t.equal(lines[0].length, 3, 'length of first row and 3');
+    t.equal(lines[1].length, 3, 'length of second row and 3');
+    t.equal(lines[2].length, 3, 'length of third row and 3');
+    t.equal(lines[3].length, 0, 'length of last row and 0');
+
+    storage.deleteCharacters({
+        start: { row: 1, col: 1 },
+        end:   { row: 2, col: 2 }
+    });
+    t.equal(storage.getValue(), 'foo\nbz\n',
+        'the result of deleting characters from a text storage object and ' +
+            'the expected string');
+    t.equal(lines[0].length, 3, 'length of first row and 3');
+    t.equal(lines[1].length, 2, 'length of second row and 2');
+    t.equal(lines[2].length, 0, 'length of last row and 0');
+
+    storage.replaceCharacters({
+        start: { row: 0, col: 2 },
+        end:   { row: 1, col: 1 }
+    }, 'obarba');
+    t.equal(storage.getValue(), 'foobarbaz\n',
+        'the result of replacing characters in a text storage object and ' +
+            'the expected string');
+    t.equal(lines[0].length, 9, 'length of first row and 9');
+};
+
+exports.testClampPosition = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+
+    t.deepEqual(storage.clampPosition({ row: 1, col: 1 }),
+        { row: 1, col: 1 },
+        '(1,1) clamped to the text boundaries and (1,1)');
+
+    t.deepEqual(storage.clampPosition({ row: -1, col: -1 }),
+        { row: 0, col: 0 },
+        '(-1,-1) clamped to the text boundaries and (0,0)');
+    t.deepEqual(storage.clampPosition({ row: -1, col: 1 }),
+        { row: 0, col: 0 },
+        '(-1,1) clamped to the text boundaries and (0,0)');
+    t.deepEqual(storage.clampPosition({ row: -1, col: 4 }),
+        { row: 0, col: 0 },
+        '(-1,4) clamped to the text boundaries and (0,0)');
+
+    t.deepEqual(storage.clampPosition({ row: 1, col: -1 }),
+        { row: 1, col: 0 },
+        '(1,-1) clamped to the text boundaries and (1,0)');
+    t.deepEqual(storage.clampPosition({ row: 1, col: 1 }),
+        { row: 1, col: 1 },
+        '(1,1) clamped to the text boundaries and (1,1)');
+    t.deepEqual(storage.clampPosition({ row: 1, col: 4 }),
+        { row: 1, col: 3 },
+        '(1,4) clamped to the text boundaries and (1,3)');
+
+    t.deepEqual(storage.clampPosition({ row: 4, col: -1 }),
+        { row: 3, col: 0 },
+        '(4,-1) clamped to the text boundaries and (3,0)');
+    t.deepEqual(storage.clampPosition({ row: 4, col: 2 }),
+        { row: 3, col: 0 },
+        '(4,2) clamped to the text boundaries and (3,0)');
+    t.deepEqual(storage.clampPosition({ row: 4, col: 4 }),
+        { row: 3, col: 0 },
+        '(4,4) clamped to the text boundaries and (3,0)');
+};
+
+exports.testClampRange = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+
+    var range = { start: { row: 0, col: 0 }, end: { row: 3, col: 0 } };
+
+    t.deepEqual(storage.clampRange(range), range,
+        '(0,0) (3,0) clamped to the text boundaries and (0,0) (3,0)');
+    t.deepEqual(storage.clampRange({
+            start:  { row: -1, col: -1 },
+            end:    { row: 4, col: 4 }
+        }), range,
+        '(-1,-1) (4,4) clamped to the text boundaries and (0,0) (3,0)');
+};
+
+exports.testDisplacePosition = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+
+    t.deepEqual(storage.displacePosition({ row: 1, col: 1 }, -1),
+        { row: 1, col: 0 }, '(1,1) displaced by -1 and (1,0)');
+    t.deepEqual(storage.displacePosition({ row: 1, col: 0 }, -1),
+        { row: 0, col: 3 }, '(1,0) displaced by -1 and (0,3)');
+    t.deepEqual(storage.displacePosition({ row: 0, col: 0 }, -1),
+        { row: 0, col: 0 }, '(0,0) displaced by -1 and (0,0)');
+
+    t.deepEqual(storage.displacePosition({ row: 1, col: 1 }, 1),
+        { row: 1, col: 2 }, '(1,1) displaced by 1 and (1,2)');
+    t.deepEqual(storage.displacePosition({ row: 1, col: 3 }, 1),
+        { row: 2, col: 0 }, '(1,3) displaced by 1 and (2,0)');
+    t.deepEqual(storage.displacePosition({ row: 3, col: 0 }, 1),
+        { row: 3, col: 0 }, '(3,0) displaced by 1 and (3,0)');
+};
+
+exports.testGetCharacters = function() {
+    var storage = TextStorage.create();
+    storage.setValue('foo\nbar\nbaz\n');
+
+    t.equal(storage.getCharacters({
+            start:  { row: 0, col: 1 },
+            end:    { row: 1, col: 2 }
+        }), 'oo\nba', 'the characters in the range (0,1 1,2) and \"oo\\nba\"');
+    t.equal(storage.getCharacters({
+            start:  { row: 2, col: 0 },
+            end:    { row: 2, col: 3 }
+        }), 'baz', 'the characters in the range (2,0 2,3) and \"baz\"');
+    t.equal(storage.getCharacters({
+            start:  { row: 2, col: 3 },
+            end:    { row: 3, col: 0 }
+        }), '\n', 'the characters in the range (2,3 3,0) and \"\\n\"');
+};
+
+exports.testObserving = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+
+    var called = false;
+    var delegate = {
+        textStorageEdited: function(storage, oldRange, newRange) {
+            called = true;
+            // t.deepEqual(oldRange, deletionRange, 'the old range passed in ' +
+            //     'to textStorageEdited and the actual range deleted');
+            t.deepEqual(newRange, {
+                start:  deletionRange.start,
+                end:    deletionRange.start
+            }, 'the new range passed in to textStorageEdited and a zero-' +
+                'length range located at the start of the deleted range');
+        }
+    };
+    storage.addDelegate(delegate);
+
+    var deletionRange = {
+        start: { row: 0, col: 1 },
+        end:   { row: 2, col: 2 }
+    };
+
+    storage.deleteCharacters(deletionRange);
+    t.ok(called, 'textStorageEdited() was called');
+};
+
+exports.testRange = function() {
+    var storage = TextStorage.create({});
+    storage.insertCharacters({ row: 0, col: 0 }, 'foo\nbar\nbaz\n');
+    t.deepEqual(storage.range, {
+        start:  { row: 0, col: 0 },
+        end:    { row: 3, col: 0 }
+    }, 'the character range and [ 0,0 3,0 ]');
+
+    storage.deleteCharacters({
+        start:  { row: 2, col: 3 },
+        end:    { row: 3, col: 0 }
+    });
+    t.deepEqual(storage.range, {
+        start:  { row: 0, col: 0 },
+        end:    { row: 2, col: 3 }
+    }, 'the character range and [ 0,0 2,3 ]');
+};
+
+});
+
+bespin.tiki.module("text_editor:tests/testScratchcanvas",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var util = require('bespin:util/util');
+var t = require('plugindev');
+var m_scratchcanvas = require('bespin:util/scratchcanvas');
+
+exports.testScratchCanvasBehavesAsASingleton = function() {
+    t.ok(util.none(document.getElementById('bespin-scratch-canvas')),
+        'there is no scratch canvas before the singleton is requested');
+    var scratchCanvasA = m_scratchcanvas.get();
+    var element = document.getElementById('bespin-scratch-canvas');
+    t.ok(!util.none(element),
+        'the element exists after the singleton is requested');
+    var scratchCanvasB = m_scratchcanvas.get();
+    t.equal(scratchCanvasA, scratchCanvasB,
+        'the results of requesting a scratch canvas twice');
+};
+
+exports.testTheScratchCanvasYieldsAUsableCanvasContext = function() {
+    var scratchCanvas = m_scratchcanvas.get();
+    var context = scratchCanvas.getContext();
+    t.ok(!util.none(context.measureText),
+        'the context has a measureText method');
+};
+
+
+});
+
+bespin.tiki.module("text_editor:tests/utils/testRect",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var Rect = require('utils/rect');
+
+exports.testDistanceFromBounds = function() {
+    t.equal(Rect._distanceFromBounds(1, 3, 5), -2,
+        'the distance between 1 and [3,5], and -2');
+    t.equal(Rect._distanceFromBounds(2, 2, 3), 0,
+        'the distance between 2 and [2,3], and 0');
+    t.equal(Rect._distanceFromBounds(5, 4, 6), 0,
+        'the distance between 5 and [4,6], and 0');
+    t.equal(Rect._distanceFromBounds(7, 4, 7), 0,
+        'the distance between 7 and [4,7], and 0');
+    t.equal(Rect._distanceFromBounds(1, -5, -2), 3,
+        'the distance between 1 and [-5,-2], and 3');
+};
+
+exports.testMerge = function() {
+    var resultSet = Rect.merge([
+        { x: 0, y: 0, width: 1, height: 1 },
+        { x: 2, y: 2, width: 1, height: 1 },
+        { x: 0.5, y: 0.5, width: 2, height: 2 }
+    ]);
+    t.equal(resultSet.length, 1,
+        'the number of rects in the union of [ (0,0) (1,1), (2,2) (1,1), ' +
+        '(0,0) (3,3) ] and 1');
+    t.deepEqual(resultSet[0], { x: 0, y: 0, width: 3, height: 3 },
+        'the first rect in the union of [ (0,0) (1,1), (2,2) (1,1), ' +
+        '(0,0) (3,3) ] and (0,0) (3,3)');
+
+    resultSet = Rect.merge([
+        { x: 0, y: 0, width: 1, height: 1 },
+        { x: 1, y: 1, width: 1, height: 1 },
+        { x: 2, y: 0, width: 1, height: 1 }
+    ]);
+    t.equal(resultSet.length, 3,
+        'the number of rects in the result of unifying 3 non-overlapping ' +
+        'rects and 3');
+    t.deepEqual(resultSet[0], { x: 0, y: 0, width: 1, height: 1 },
+        'the first rect in the result of unifying 3 non-overlapping rects ' +
+        'and the original first rect');
+    t.deepEqual(resultSet[1], { x: 1, y: 1, width: 1, height: 1 },
+        'the second rect in the result of unifying 3 non-overlapping rects ' +
+        'and the original second rect');
+    t.deepEqual(resultSet[2], { x: 2, y: 0, width: 1, height: 1 },
+        'the third rect in the result of unifying 3 non-overlapping rects ' +
+        'and the original third rect');
+};
+
+
+exports.testOffsetFromRect = function() {
+    var rect = { x: 0, y: 0, width: 1, height: 1 };
+    t.deepEqual(Rect.offsetFromRect(rect, { x: -1, y: -1 }), { x: -1, y: -1 },
+        'the offset from (-1,-1) to the unit square and (-1,-1)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 0, y: -1 }), { x: 0, y: -1 },
+        'the offset from (0,-1) to the unit square and (0,-1)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 2, y: -1 }), { x: 1, y: -1 },
+        'the offset from (2,-1) to the unit square and (1,-1)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: -1, y: 0.5 }), { x: -1, y: 0 },
+        'the offset from (-1,0.5) to the unit square and (-1,0)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 0.25, y: 1 }), { x: 0, y: 0 },
+        'the offset from (0.25,1) to the unit square and (0,0)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 5, y: 0 }), { x: 4, y: 0 },
+        'the offset from (5,0) to the unit square and (4,0)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: -2, y: 2 }), { x: -2, y: 1 },
+        'the offset from (-2,2) to the unit square and (-2,1)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 0.5, y: 3 }), { x: 0, y: 2 },
+        'the offset from (0.5,3) to the unit square and (0,2)');
+    t.deepEqual(Rect.offsetFromRect(rect, { x: 100, y: 2 }), { x: 99, y: 1 },
+        'the offset from (100,2) to the unit square and (99,1)');
+};
+
+exports.testRectsIntersect = function() {
+    t.ok(Rect.rectsIntersect({ x: 0, y: 0, width: 2, height: 2 },
+        { x: 1, y: 1, width: 2, height: 2 }),
+        '(0,0) (2,2) and (1,1) (3,3) intersect');
+    t.ok(!Rect.rectsIntersect({ x: 0, y: 0, width: 1, height: 1 },
+        { x: 0, y: 1, width: 1, height: 1 }),
+        '(0,0) (1,1) and (0,1) (1,1) don\'t intersect');
+    t.ok(!Rect.rectsIntersect({ x: 0, y: 0, width: 1, height: 1 },
+        { x: 2, y: 2, width: 1, height: 1 }),
+        '(0,0) (1,1) and (2,2) (3,3) don\'t intersect');
+};
+
+exports.testRectsSideBySide = function() {
+    var unit = { x: 0, y: 0, width: 1, height: 1 };
+    t.ok(!Rect.rectsSideBySide(unit, { x: -1, y: -1, width: 1, height: 1 }),
+        '(0,0) (1,1) and (-1,1) and (0,0) are not side-by-side');
+    t.ok( Rect.rectsSideBySide(unit, { x: 0,  y: -1, width: 1, height: 1 }),
+        '(0,0) (1,1) and (0,-1) (1,0) are side-by-side');
+    t.ok(!Rect.rectsSideBySide(unit, { x: 1,  y: -1, width: 1, height: 1 }),
+        '(0,0) (1,1) and (1,-1) (2,0) are not side-by-side');
+    t.ok( Rect.rectsSideBySide(unit, { x: -1, y: 0,  width: 1, height: 1 }),
+        '(0,0) (1,1) and (-1,0) (0,1) are side-by-side');
+    t.ok(!Rect.rectsSideBySide(unit, unit),
+        '(0,0) (1,1) and (0,0) (1,1) are not side-by-side');
+    t.ok( Rect.rectsSideBySide(unit, { x: 1,  y: 0,  width: 1, height: 1 }),
+        '(0,0) (1,1) and (1,0) (2,1) are side-by-side');
+    t.ok(!Rect.rectsSideBySide(unit, { x: -1, y: 1,  width: 1, height: 1 }),
+        '(0,0) (1,1) and (-1,1) (0,2) are not side-by-side');
+    t.ok( Rect.rectsSideBySide(unit, { x: 0,  y: 1,  width: 1, height: 1 }),
+        '(0,0) (1,1) and (0,1) (1,2) are side-by-side');
+    t.ok(!Rect.rectsSideBySide(unit, { x: 1,  y: 1,  width: 1, height: 1 }),
+        '(0,0) (1,1) and (1,1) (2,2) are not side-by-side');
+};
+
+
+});
+
 bespin.tiki.module("text_editor:utils/rect",function(require,exports,module) {
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -2844,7 +3524,8 @@ function computeThemeData(themeManager) {
                 case 'gutter':
                 case 'editor':
                 case 'scroller':
-                case 'highlighter':
+                case 'highlighterFG':
+                case 'highlighterBG':
                     editorThemeData[provides[i].name] = value;
             }
         }
@@ -4570,10 +5251,14 @@ util.mixin(exports.TextView.prototype, {
     },
 
     _drawLines: function(rect, context) {
-        var layoutManager = this.editor.layoutManager;
+        var editor = this.editor;
+        var layoutManager = editor.layoutManager;
         var textLines = layoutManager.textLines;
         var lineAscent = layoutManager.fontDimension.lineAscent;
-        var themeHighlighter = this.editor.themeData.highlighter
+
+        var themeData = editor.themeData;
+        var fgColors = themeData.highlighterFG;
+        var bgColors = themeData.highlighterBG;
 
         context.save();
         context.font = this.editor.font;
@@ -4622,15 +5307,24 @@ util.mixin(exports.TextView.prototype, {
                 var end = colorRange != null ? colorRange.end : endCol;
                 var tag = colorRange != null ? colorRange.tag : 'plain';
 
-                var color = themeHighlighter.hasOwnProperty(tag)
-                            ? themeHighlighter[tag]
-                            : 'red';
-                context.fillStyle = color;
-
                 var pos = { row: row, col: col };
                 var rect = layoutManager.characterRectForPosition(pos);
 
+                if (bgColors.hasOwnProperty(tag)) {
+                    var endPos = { row: row, col: end - 1 };
+                    var endRect = layoutManager.
+                        characterRectForPosition(endPos);
+
+                    var bg = bgColors[tag];
+                    context.fillStyle = bg;
+                    context.fillRect(rect.x, rect.y, endRect.x - rect.x +
+                        endRect.width, endRect.height);
+                }
+
+                var fg = fgColors.hasOwnProperty(tag) ? fgColors[tag] : 'red';
+
                 var snippet = characters.substring(col, end);
+                context.fillStyle = fg;
                 context.fillText(snippet, rect.x, rect.y + lineAscent);
 
                 if (DEBUG_TEXT_RANGES) {
@@ -5523,7 +6217,7 @@ var KeyUtil = require('keyboard:keyutil');
  */
 exports.TextInput = function(container, delegate) {
     var domNode = this.domNode = document.createElement('textarea');
-    domNode.setAttribute('style', 'position: absolute; z-index: -99999; resize: none; ' +
+    domNode.setAttribute('style', 'position: absolute; z-index: -99999; ' +
           'width: 0px; height: 0px; margin: 0px; outline: none; border: 0;');
          // 'z-index: 100; top: 20px; left: 20px; width: 50px; ' +
          // 'height: 50px');
@@ -8287,6 +8981,69 @@ exports.Request.prototype.done = function(content) {
 
 });
 
+bespin.tiki.module("canon:tests/fixture",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var Promise = require('bespin:promise').Promise;
+var Request = require('canon:request').Request;
+var EnvironmentTrait = require('canon:environment').EnvironmentTrait;
+
+exports.MockEnvironmentTrait = EnvironmentTrait;
+
+exports.MockRequest = function() {
+    Request.prototype.apply(this, arguments);
+    this.promise = new Promise();
+};
+
+exports.MockRequest.prototype = new Request();
+
+exports.MockRequest.prototype.doneWithError = function(errorMessage) {
+    this.superclass(errorMessage);
+    this.promise.reject(this);
+};
+
+exports.MockRequest.prototype.done = function(content) {
+    this.superclass(content);
+    this.promise.resolve(this);
+};
+
+});
+
 bespin.tiki.module("canon:index",function(require,exports,module) {
 
 });
@@ -9613,6 +10370,99 @@ exports.addKeyDownListener = function(element, boundFunction) {
 
 });
 
+bespin.tiki.module("keyboard:tests/testKeyboard",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var keyboard = require('keyboard:keyboard');
+var t = require('plugindev');
+
+exports.testKeyMatching = function() {
+    var km = keyboard.keyboardManager;
+    var command = {};
+    t.equal(km._commandMatches(command, 'meta_z', {}), false,
+        'no keymapping means false');
+
+    command = {
+        key: 'meta_z'
+    };
+    t.equal(km._commandMatches(command, 'meta_z', {}), true,
+        'matching keys, simple string');
+    t.equal(km._commandMatches(command, 'meta_a', {}), false,
+        'not matching key, simple string');
+
+    command = {
+        key: {key: 'meta_z', predicates: {isGreen: true}}
+    };
+    t.equal(km._commandMatches(command, 'meta_z', {}), false,
+        'object with not matching predicate');
+    t.equal(km._commandMatches(command, 'meta_z', {isGreen: true}), true,
+        'object with matching key and predicate');
+    t.equal(km._commandMatches(command, 'meta_a', {isGreen: true}), false,
+        'object with not matching key');
+    t.equal(km._commandMatches(command, 'meta_a', {isGreen: false}), false,
+        'object with neither matching');
+    t.equal(km._commandMatches(command, 'meta_z', {isGreen: false}), false,
+        'object with matching key and but different predicate');
+
+    command = {
+        key: ['meta_b', {key: 'meta_z', predicates: {isGreen: true}},
+            {key: 'meta_c'}]
+    };
+    t.equal(km._commandMatches(command, 'meta_z', {}), false,
+        'list: object with not matching predicate');
+    t.equal(km._commandMatches(command, 'meta_z', {isGreen: true}), true,
+        'list: object with matching key and predicate');
+    t.equal(km._commandMatches(command, 'meta_a', {isGreen: true}), false,
+        'list: object with not matching key');
+    t.equal(km._commandMatches(command, 'meta_a', {isGreen: false}), false,
+        'list: object with neither matching');
+    t.equal(km._commandMatches(command, 'meta_z', {isGreen: false}), false,
+        'list: object with matching key and but different predicate');
+    t.equal(km._commandMatches(command, 'meta_b'), true,
+        'list: simple key match');
+    t.equal(km._commandMatches(command, 'meta_c'), true,
+        'list: object without predicate match');
+    t.equal(km._commandMatches(command, 'meta_c', {isGreen: false}), true,
+        'list: flags don\'t matter without predicates');
+};
+
+});
+
 bespin.tiki.module("keyboard:index",function(require,exports,module) {
 
 });
@@ -10099,6 +10949,135 @@ exports.createSession = function(view, user) {
         session.currentUser = user;
     }
     return session;
+};
+
+});
+
+bespin.tiki.module("edit_session:tests/testSession",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var DummyFileSource = require('filesystem:tests/fixture').DummyFileSource;
+var fs = require('filesystem');
+var editsession = require('edit_session');
+var Promise = require('bespin:promise').Promise;
+
+var source = new DummyFileSource([
+    {name: 'atTheTop.js', contents: 'the top file'},
+    {name: 'anotherAtTheTop.js', contents: 'another file'},
+    {name: 'foo/'},
+    {name: 'deeply/nested/directory/andAFile.txt', contents: 'text file'}
+]);
+
+exports.testBufferFileChange = function() {
+    var root = fs.Filesystem.create({
+        source: source
+    });
+    var buffer = editsession.Buffer.create();
+    t.ok(buffer.get('model') != null,
+        'Model should be set to a TextStorage by default');
+    t.ok(buffer.untitled(), 'Buffer should initially be untitled');
+    var f = root.getFile('atTheTop.js');
+    buffer.changeFileOnly(f);
+    t.ok(!buffer.untitled(), 'Buffer should no longer be untitled');
+    t.equal('', buffer.get('model').getValue(), 'Should be empty now');
+    buffer.changeFileOnly(null);
+    t.ok(buffer.untitled(), 'Buffer should be untitled again');
+    buffer.set('file', f);
+    var pr = new Promise();
+    setTimeout(function() {
+        var newtext = buffer.get('model').getValue();
+        t.equal(newtext, 'the top file', 'Expected file contents to be loaded');
+
+        // now we want to reset the buffer.
+        buffer.changeFile(null);
+        t.ok(buffer.untitled(), 'Buffer should be untitled again');
+        newtext = buffer.get('model').getValue();
+        t.equal(newtext, '', 'editor text should be empty');
+        pr.resolve();
+    }, 1);
+    return pr;
+};
+
+exports.testBufferFileChangeWithCallback = function() {
+    var root = fs.Filesystem.create({
+        source: source
+    });
+    var buffer = editsession.Buffer.create();
+    var f = root.getFile('atTheTop.js');
+    var pr = buffer.changeFile(f);
+    var testpr = pr.then(function(b) {
+        t.equal(b, buffer, 'should have gotten the buffer object in');
+        t.equal(b.get('model').getValue(), 'the top file', 'contents should be loaded');
+        if (testpr != undefined) {
+            testpr.resolve();
+        }
+    });
+    return testpr;
+};
+
+exports.testBufferSaving = function() {
+    source.reset();
+    var testpr = new Promise();
+    var root = fs.Filesystem.create({ source: source });
+    var buffer = editsession.Buffer.create();
+    var model = buffer.get('model');
+    model.setValue('foobar');
+    t.equal(model.getValue(), 'foobar', 'the value stored in ' +
+        'the model and the string that was just written to it');
+
+    var file1 = root.getFile('bar.txt');
+    file1.exists().then(function(exists) {
+        t.ok(!exists, 'file should not be there now');
+        buffer.saveAs(file1).then(function() {
+            var request = source.requests.pop();
+            t.equal(request[0], 'saveContents');
+            t.equal(request[1][0], 'bar.txt');
+            t.equal(request[1][1], 'foobar');
+
+            file1.exists().then(function(exists) {
+                t.ok(exists, 'file should now exist');
+                testpr.resolve();
+            });
+        });
+    });
+
+    return testpr;
 };
 
 });
@@ -10912,6 +11891,163 @@ bespin.tiki.module("completion:index",function(require,exports,module) {
     name: "rangeutils",
     dependencies: {  }
 });
+bespin.tiki.module("rangeutils:tests/test",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var Range = require('utils/range');
+
+exports.testAddPositions = function() {
+    t.deepEqual(Range.addPositions({ row: 0, col: 0 },
+        { row: 0, col: 0 }), { row: 0, col: 0 }, '0,0 + 0,0 and 0,0');
+    t.deepEqual(Range.addPositions({ row: 1, col: 0 },
+        { row: 2, col: 0 }), { row: 3, col: 0 }, '1,0 + 2,0 and 3,0');
+    t.deepEqual(Range.addPositions({ row: 0, col: 1 },
+        { row: 0, col: 1 }), { row: 0, col: 2 }, '0,1 + 0,1 and 0,2');
+    t.deepEqual(Range.addPositions({ row: 1, col: 2 },
+        { row: -1, col: -2 }), { row: 0, col: 0 }, '1,2 + -1,-2 and 0,0');
+};
+
+exports.testCloneRange = function() {
+    var oldRange = { start: { row: 1, col: 2 }, end: { row: 3, col: 4 } };
+    var newRange = Range.cloneRange(oldRange);
+    t.deepEqual(oldRange, newRange, "the old range and the new range");
+    t.ok(oldRange.start !== newRange.start, "the old range's start position " +
+        "is distinct from the new range's start position");
+    t.ok(oldRange.end !== newRange.end, "the old range's end position is " +
+        "distinct from the new range's end position");
+    t.ok(oldRange !== newRange, "the old range is distinct from the new " +
+        "range");
+};
+
+exports.testComparePositions = function() {
+    t.equal(Range.comparePositions({ row: 0, col: 0 },
+        { row: 0, col: 0 }), 0, '0,0 = 0,0');
+    t.ok(Range.comparePositions({ row: 0, col: 0 },
+        { row: 1, col: 0 }) < 0, '0,0 < 1,0');
+    t.ok(Range.comparePositions({ row: 0, col: 0 },
+        { row: 0, col: 1 }) < 0, '0,0 < 0,1');
+    t.ok(Range.comparePositions({ row: 1, col: 0 },
+        { row: 0, col: 0 }) > 0, '1,0 > 0,0');
+    t.ok(Range.comparePositions({ row: 0, col: 1 },
+        { row: 0, col: 0 }) > 0, '0,1 > 0,0');
+};
+
+exports.testExtendRange = function() {
+    t.deepEqual(Range.extendRange({
+            start:  { row: 1, col: 2 },
+            end:    { row: 3, col: 4 }
+        }, { row: 5, col: 6 }), {
+            start:  { row: 1, col: 2 },
+            end:    { row: 8, col: 10 }
+        }, '[ 1,2 3,4 ] extended by 5,6 = [ 1,2 8,10 ]');
+    t.deepEqual(Range.extendRange({
+            start:  { row: 7, col: 8 },
+            end:    { row: 9, col: 10 }
+        }, { row: 0, col: 0 }), {
+            start:  { row: 7, col: 8 },
+            end:    { row: 9, col: 10 }
+        }, '[ 7,8 9,10 ] extended by 0,0 remains the same');
+};
+
+exports.testMaxPosition = function() {
+    t.deepEqual(Range.maxPosition({ row: 0, col: 0 },
+        { row: 0, col: 0 }), { row: 0, col: 0 }, 'max(0,0 0,0) = 0,0');
+    t.deepEqual(Range.maxPosition({ row: 0, col: 0 },
+        { row: 1, col: 0 }), { row: 1, col: 0 }, 'max(0,0 1,0) = 1,0');
+    t.deepEqual(Range.maxPosition({ row: 0, col: 0 },
+        { row: 0, col: 1 }), { row: 0, col: 1 }, 'max(0,0 0,1) = 0,1');
+    t.deepEqual(Range.maxPosition({ row: 1, col: 0 },
+        { row: 0, col: 0 }), { row: 1, col: 0 }, 'max(1,0 0,0) = 1,0');
+    t.deepEqual(Range.maxPosition({ row: 0, col: 1 },
+        { row: 0, col: 0 }), { row: 0, col: 1 }, 'max(0,1 0,0) = 0,1');
+};
+
+exports.testNormalizeRange = function() {
+    t.deepEqual(Range.normalizeRange({
+            start:  { row: 0, col: 0 },
+            end:    { row: 0, col: 0 }
+        }), {
+            start:  { row: 0, col: 0 },
+            end:    { row: 0, col: 0 }
+        }, 'normalize(0,0 0,0) and (0,0 0,0)');
+    t.deepEqual(Range.normalizeRange({
+            start:  { row: 1, col: 2 },
+            end:    { row: 3, col: 4 }
+        }), {
+            start:  { row: 1, col: 2 },
+            end:    { row: 3, col: 4 }
+        }, 'normalize(1,2 3,4) and (1,2 3,4)');
+    t.deepEqual(Range.normalizeRange({
+            start:  { row: 4, col: 3 },
+            end:    { row: 2, col: 1 }
+        }), {
+            start:  { row: 2, col: 1 },
+            end:    { row: 4, col: 3 }
+        }, 'normalize(4,3 2,1) and (2,1 4,3)');
+};
+
+exports.testUnionRanges = function() {
+    t.deepEqual(Range.unionRanges({
+            start:  { row: 1, col: 2 },
+            end:    { row: 3, col: 4 }
+        }, {
+            start:  { row: 5, col: 6 },
+            end:    { row: 7, col: 8 }
+        }), {
+            start:  { row: 1, col: 2 },
+            end:    { row: 7, col: 8 }
+        }, '[ 1,2 3,4 ] union [ 5,6 7,8 ] = [ 1,2 7,8 ]');
+    t.deepEqual(Range.unionRanges({
+            start:  { row: 4, col: 4 },
+            end:    { row: 5, col: 5 }
+        }, {
+            start:  { row: 3, col: 3 },
+            end:    { row: 4, col: 5 }
+        }), {
+            start:  { row: 3, col: 3 },
+            end:    { row: 5, col: 5 }
+        }, '[ 4,4 5,5 ] union [ 3,3 4,5 ] = [ 3,3 5,5 ]');
+};
+
+
+});
+
 bespin.tiki.module("rangeutils:utils/range",function(require,exports,module) {
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
@@ -11211,6 +12347,111 @@ exports.global = new exports.UndoManager();
 exports.undoManagerCommand = function(args, request) {
     exports.global[request.commandExt.name]();
 };
+
+});
+
+bespin.tiki.module("undomanager:tests/testUndomanager",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var UndoManager = require('index').UndoManager;
+var t = require('plugindev');
+
+exports.testUndoAndRedo = function() {
+    var undoManager = new UndoManager();
+
+    var redoReceived = null;
+    var undoReceived = null;
+
+    var receiver = {
+        redo: function(context) {
+            redoReceived = context;
+            return true;
+        },
+
+        undo: function(context) {
+            undoReceived = context;
+            return true;
+        }
+    };
+
+    undoManager.registerUndo(receiver, 'foo');
+    t.equal(undoManager._undoStack.length, 1, 'the size of the undo stack ' +
+        'after one action and 1');
+    t.equal(undoManager._redoStack.length, 0, 'the size of the redo stack ' +
+        'after one action and 0');
+
+    undoManager.registerUndo(receiver, 'bar');
+    t.equal(undoManager._undoStack.length, 2, 'the size of the undo stack ' +
+        'after two actions and 2');
+    t.equal(undoManager._redoStack.length, 0, 'the size of the redo stack ' +
+        'after two actions and 0');
+
+    undoManager.undo();
+    t.equal(undoReceived, 'bar', 'the context received after undoing \'bar\' ' +
+        'and \'bar\'');
+    t.equal(undoManager._undoStack.length, 1, 'the size of the undo stack ' +
+        'after two actions and one undo and 1');
+    t.equal(undoManager._redoStack.length, 1, 'the size of the redo stack ' +
+        'after two actions and one undo and 1');
+
+    undoManager.undo();
+    t.equal(undoReceived, 'foo', 'the context received after undoing \'foo\' ' +
+        'and \'foo\'');
+    t.equal(undoManager._undoStack.length, 0, 'the size of the undo stack ' +
+        'after undoing two actions and 0');
+    t.equal(undoManager._redoStack.length, 2, 'the size of the redo stack ' +
+        'after undoing two actions and 2');
+
+    undoManager.redo();
+    t.equal(redoReceived, 'foo', 'the context received after redoing \'foo\' ' +
+        'and \'foo\'');
+    t.equal(undoManager._undoStack.length, 1, 'the size of the undo stack ' +
+        'after redoing \'foo\' and 1');
+    t.equal(undoManager._redoStack.length, 1, 'the size of the redo stack ' +
+        'after redoing \'foo\' and 1');
+
+    undoManager.registerUndo(receiver, 'baz');
+    t.equal(undoManager._undoStack.length, 2, 'the size of the undo stack ' +
+        'after undoing twice, redoing once, and performing an action; and 2');
+    t.equal(undoManager._redoStack.length, 0, 'the size of the redo stack ' +
+        'after undoing twice, redoing once, and performing an action; and 0');
+};
+
 
 });
 ;bespin.tiki.register("::environment", {
@@ -12398,6 +13639,244 @@ exports.unregisterThemeStyles = function(extension) {
 };
 
 });
+;bespin.tiki.register("::whitetheme", {
+    name: "whitetheme",
+    dependencies: { "theme_manager": "0.0.0" }
+});
+bespin.tiki.module("whitetheme:index",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+exports.whiteTheme = function() {
+    return {
+        global: {
+            // Standard font.
+            font:           'arial, lucida, helvetica, sans-serif',
+            // Standard font size.
+            font_size:      '14px',
+            // Standard line_height.
+            line_height:    '1.8em',
+            // Text color.
+            color:          '#2E2E3D',
+            // Text shadow css attribute.
+            text_shadow:    '1px 1px white',
+            // Text error color.
+            error_color:    '#C03A38',
+            // The color for headers (<h1> etc).
+            header_color:   '#222222',
+            // The color for links.
+            link_color:     '#597BAC',
+
+            // Variables for a pane - e.g. the login pane.
+            pane: {
+                h1: {
+                   font:        "'MuseoSans', Helvetica",
+                   font_size:   '2.8em',
+                   color:       "#2C3480"
+                },
+
+                link_color:     '@global_link_color',
+
+                background:     '#DFDFDF',
+                border_radius:  '.5em',
+
+                color:          '#2E2E3D',
+                text_shadow:    '1px 1px #DDD'
+            },
+
+            // Variables for a html form.
+            form: {
+                font: "@global_font",
+                font_size: '@global_font_size',
+                line_height: '@global_line_height',
+
+                color: 'black',
+                text_shadow: '0px 0px transparent'
+            },
+
+            // Variables for a controller: textInput, tree etc.
+            control: {
+                color:          '#222',
+                border:         '1px solid rgba(0, 0, 0, 0.2)',
+                border_radius:  '0.25em',
+                background:     'rgba(0, 0, 0, 0.1)',
+
+                active: {
+                    color:          '#000',
+                    border:         '1px solid #597BAC',
+                    inset_color:    '#597BAC',
+                    background:     'rgba(0, 0, 0, 0.1)'
+                }
+            },
+
+            // Variables for html buttons.
+            button: {
+                color: 'white',
+                background: '#3E6CB9'
+            },
+
+            // Variables for the containers.
+            container: {
+                background:     '#F8F8F8',
+                border:         '1px solid black'
+            },
+
+            // Variables for a menu - e.g. the command line menu.
+            menu: {
+                border_color:   'black',
+                inset_color:    '#999',
+                background:     'transparent'
+            },
+
+            // Variables for elements that can get selected - e.g. the items
+            // in the command line menu.
+            selectable: {
+                color:          'black',
+                border:         '0px solid transparent',
+                background:     'transparent',
+
+                active: {
+                    color:          'white',
+                    border:         '0px solid transparent',
+                    background:     '#6780E4'
+                },
+
+                hover: {
+                    color:          'white',
+                    border:         '0px solid transparent',
+                    background:     '#6780E4'
+                }
+            },
+
+            // Variables for hint text.
+            hint: {
+                color:          '#78788D',
+
+                active: {
+                    color:      'white'
+                },
+
+                hover: {
+                    color:      'white'
+                }
+            },
+
+            // Variables for accelerator (the text that holds the key short cuts
+            // like ALT+2).
+            accelerator: {
+                color:          '#344DB1',
+
+                active: {
+                    color:      'white'
+                },
+
+                hover: {
+                    color:      'white'
+                }
+            }
+        },
+
+        text_editor: {
+            // Variables for the gutter.
+            gutter: {
+                color: '#888888',
+                backgroundColor: '#d2d2d2'
+            },
+
+            // Variables for the editor.
+            editor: {
+                color: '#3D3D3D',
+                backgroundColor: '#ffffff',
+
+                cursorColor: '#000000',
+                selectedTextBackgroundColor: '#BDD9FC',
+
+                unfocusedCursorColor: '#57A1FF',
+                unfocusedCursorBackgroundColor: '#D9E9FC'
+            },
+
+            // Variables for the syntax highlighter.
+            highlighterFG: {
+                plain:     '#030303',
+                comment:   '#919191',
+                directive: '#999999',
+                error:      '#ff0000',
+                identifier: '#A7379F',
+                keyword:    '#1414EF',
+                operator:   '#477ABE',
+                string:     '#017F19',
+                addition:   '#ffffff',
+                deletion:   '#ffffff'
+            },
+
+            highlighterBG: {
+                plain:      'rgba(0, 0, 0, 0)',
+                addition:   '#008000',
+                deletion:   '#800000'
+            },
+
+            // Variables for the scrollers.
+            scroller: {
+                padding: 5,
+                thickness: 17,
+
+                backgroundStyle: "#2A211C",
+
+                fullAlpha: 1.0,
+                particalAlpha: 0.3,
+
+                nibStyle: "rgb(150, 150, 150)",
+                nibArrowStyle: "rgb(255, 255, 255)",
+                nibStrokeStyle: "white",
+
+                trackFillStyle: "rgba(50, 50, 50, 0.2)",
+                trackStrokeStyle: "rgb(150, 150, 150)",
+
+                barFillStyle: "rgb(60, 60, 60)",
+                barFillGradientTopStart: "rgb(150, 150, 150)",
+                barFillGradientTopStop: "rgb(100, 100, 100)",
+                barFillGradientBottomStart: "rgb(82, 82, 82)",
+                barFillGradientBottomStop: "rgb(104, 104, 104)"
+            }
+        }
+    };
+};
+
+});
 ;bespin.tiki.register("::types", {
     name: "types",
     dependencies: {  }
@@ -12623,6 +14102,421 @@ exports.selection = {
 
         return promise;
     }
+};
+
+});
+
+bespin.tiki.module("types:tests/testBasic",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var types = require('types:types');
+var t = require('plugindev');
+
+exports.testTextFromString = function() {
+    types.fromString('Foo', 'text').then(function(converted) {
+        t.equal('Foo', converted);
+    });
+};
+
+exports.testTextToString = function() {
+    types.toString('Foo', 'text').then(function(converted) {
+        t.equal('Foo', converted);
+    });
+    types.toString('4', 'text').then(function(converted) {
+        t.equal('4', converted);
+    });
+};
+
+exports.testTextIsValid = function() {
+    types.isValid('Foo', 'text').then(function(valid) {
+        t.equal(true, valid);
+    });
+    types.isValid('', 'text').then(function(valid) {
+        t.equal(true, valid);
+    });
+    types.isValid('null', 'text').then(function(valid) {
+        t.equal(true, valid);
+    });
+    types.isValid(4, 'text').then(function(valid) {
+        t.equal(false, valid);
+    });
+    types.isValid(null, 'text').then(function(valid) {
+        t.equal(false, valid);
+    });
+};
+
+exports.testNumberFromString = function() {
+    types.fromString('4', 'number').then(function(converted) {
+        t.equal(4, converted);
+    });
+    types.fromString(null, 'number').then(function(converted) {
+        t.equal(null, converted);
+    });
+    // There isn't a spec for stuff like this, but at least we should know
+    // if we're changing stuff
+    types.fromString('010', 'number').then(function(converted) {
+        t.equal(10, converted);
+    });
+    types.fromString('0x10', 'number').then(function(converted) {
+        t.equal(0, converted);
+    });
+};
+
+exports.testNumberToString = function() {
+    types.toString('Foo', 'number').then(function(converted) {
+        t.equal('Foo', converted);
+    });
+    types.toString(4, 'number').then(function(converted) {
+        t.equal('4', converted);
+    });
+};
+
+exports.testNumberIsValid = function() {
+    types.isValid(0, 'number').then(function(valid) {
+        t.equal(true, valid, 'Zero');
+    });
+    types.isValid(-1, 'number').then(function(valid) {
+        t.equal(true, valid, '-1');
+    });
+    types.isValid(Infinity, 'number').then(function(valid) {
+        t.equal(false, valid, 'Infinity');
+    });
+    types.isValid(NaN, 'number').then(function(valid) {
+        t.equal(false, valid, 'NaN');
+    });
+    types.isValid(null, 'number').then(function(valid) {
+        t.equal(false, valid, 'null');
+    });
+    types.isValid('0', 'number').then(function(valid) {
+        t.equal(false, valid, 'string 0');
+    });
+    types.isValid('-1', 'number').then(function(valid) {
+        t.equal(false, valid, 'string -1');
+    });
+    types.isValid('null', 'number').then(function(valid) {
+        t.equal(false, valid, 'string null');
+    });
+    types.isValid({}, 'number').then(function(valid) {
+        t.equal(false, valid, 'object');
+    });
+};
+
+exports.testBooleanFromString = function() {
+    types.fromString('true', 'boolean').then(function(converted) {
+        t.equal(converted, true, '\'true\' should be true');
+    });
+    types.fromString('false', 'boolean').then(function(converted) {
+        t.equal(converted, false, '\'false\' should be false');
+    });
+    types.fromString('TRUE', 'boolean').then(function(converted) {
+        t.equal(converted, true, '\'TRUE\' should be true');
+    });
+    types.fromString('FALSE', 'boolean').then(function(converted) {
+        t.equal(converted, false, '\'FALSE\' should be false');
+    });
+    types.fromString(null, 'boolean').then(function(converted) {
+        t.equal(converted, null, 'null should be null');
+    });
+};
+
+exports.testBooleanToString = function() {
+    types.toString(true, 'boolean').then(function(converted) {
+        t.equal('true', converted);
+    });
+    types.toString(false, 'boolean').then(function(converted) {
+        t.equal('false', converted);
+    });
+};
+
+exports.testBooleanIsValid = function() {
+    types.isValid(0, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'zero');
+    });
+    types.isValid(-1, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'minus 1');
+    });
+    types.isValid(Infinity, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'Infinity');
+    });
+    types.isValid(NaN, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'NaN');
+    });
+    types.isValid(null, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'null');
+    });
+    types.isValid('0', 'boolean').then(function(valid) {
+        t.equal(false, valid, 'string zero');
+    });
+    types.isValid('-1', 'boolean').then(function(valid) {
+        t.equal(false, valid, 'string -1');
+    });
+    types.isValid('null', 'boolean').then(function(valid) {
+        t.equal(false, valid, 'string null');
+    });
+    types.isValid({}, 'boolean').then(function(valid) {
+        t.equal(false, valid, 'object');
+    });
+    types.isValid(true, 'boolean').then(function(valid) {
+        t.equal(true, valid, 'true');
+    });
+    types.isValid(false, 'boolean').then(function(valid) {
+        t.equal(true, valid, 'false');
+    });
+};
+
+});
+
+bespin.tiki.module("types:tests/testTypes",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var Promise = require('bespin:promise').Promise;
+var types = require('types:types');
+var t = require('plugindev');
+
+exports.testGetSimpleName = function() {
+    t.equal(types.getSimpleName('text'), 'text', 'text is simple');
+    t.equal(types.getSimpleName('selection'), 'selection', 'selection simple');
+    t.equal(types.getSimpleName({ name: 'text' }), 'text', 'text complex');
+
+    var selType = { name: 'selection' };
+    t.equal(types.getSimpleName(selType), 'selection', 'selection complex');
+
+    selType = { name: 'selection', data: [ 1, 2, 3, 4 ] };
+    t.equal(types.getSimpleName(selType), 'selection', 'selection complex');
+};
+
+exports.testEquals = function() {
+    var textType = { name: 'text' };
+    t.ok(types.equals('text', 'text'), '2 already simple names are equal');
+    t.ok(types.equals('text', textType), 'simple type = complex type');
+    t.ok(types.equals(textType, 'text'), 'complex type = simple type');
+    t.ok(types.equals(textType, { name: 'text' }), 'complex = complex');
+    t.ok(types.equals('WRONG', 'WRONG'), 'We don\'t test for actual types');
+
+    var sel1 = { name: 'selection' };
+    var sel2 = 'selection';
+    t.ok(types.equals(sel1, sel2), 'complex type = simple type 1');
+
+    sel1 = { name: 'selection', data: [ 1, 2, 3, 4 ] };
+    sel2 = 'selection';
+    t.ok(types.equals(sel1, sel2), 'complex type with data = simple type');
+
+    sel1 = { name: 'selection', data: [ 1, 2, 3, 4 ] };
+    sel2 = { name: 'selection', data: [ 4, 3, 2, 1 ] };
+    t.ok(types.equals(sel1, sel2), 'complex + data = complex + other data');
+
+    //t.ok(!types.equals('text', ''), 'text != ""');
+    t.ok(!types.equals('text', 'selection'), 'text != ""');
+    t.ok(!types.equals('text', 'DOESNOTEXIST'), 'text != ""');
+
+    sel1 = { name: 'selection', data: [ 1, 2, 3, 4 ] };
+    t.ok(!types.equals(sel1, 'text'), 'complex + data != simple');
+};
+
+/**
+ * types.resolveType returns a typeData thing that is { type:... typeExt }
+ * @param name
+ * @returns {Function}
+ */
+function createTypeDataTester(name) {
+    return function(typeData) {
+        t.equal(typeData.ext.ep, 'type', 'TypeExts do give you types?');
+
+        t.equal(typeData.ext.name, name, 'type[text].name == ' + name);
+
+        t.equal(typeof typeData.ext.description, 'string', 'descr = string');
+        t.ok(typeData.ext.description.length > 0, 'type[text].description len');
+
+        t.equal(typeof typeData.ext.pointer, 'string', 'type.pointer = string');
+        t.ok(typeData.ext.pointer.length > 0, 'type[text].pointer exists');
+
+        t.equal(typeof typeData.ext.load, 'function', 'type.load = function');
+    };
+}
+
+exports.testResolveSimpleTypes = function() {
+    var typeSpec = 'text';
+    types.resolveType(typeSpec).then(createTypeDataTester('text'));
+
+    typeSpec = { name: 'text' };
+    types.resolveType(typeSpec).then(createTypeDataTester('text'));
+
+    typeSpec = { name: 'selection' };
+    types.resolveType(typeSpec).then(createTypeDataTester('selection'));
+
+    try {
+        typeSpec = { name: 'wrong' };
+        types.resolveType(typeSpec).then(t.never('should die before here'));
+    } catch (ex) {}
+};
+
+/*
+ * For #testSelection
+ */
+exports.resolver = function() { return [ 4, 3 ]; };
+exports.lateResolver = function() { return new Promise().resolve([ 'a' ]); };
+
+exports.testSelection = function() {
+    var typeSpec = { name: 'selection', data: [ 1, 2 ] };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('selection')(typeData);
+        t.deepEqual(typeData.ext.data, [ 1, 2 ], 'selection data pass thru');
+    });
+
+    typeSpec = {
+        name: 'selection',
+        pointer: 'types:tests/testTypes#resolver'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('selection')(typeData);
+        t.deepEqual(typeData.ext.data, [ 4, 3 ], 'selection data resolved');
+    });
+
+    typeSpec = {
+        name: 'selection',
+        pointer: 'types:tests/testTypes#lateResolver'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('selection')(typeData);
+        t.deepEqual(typeData.ext.data, [ 'a' ], 'selection data resolved');
+    });
+};
+
+exports.deferText = function() { return 'text'; };
+exports.lateDeferText = function() { return new Promise().resolve('text'); };
+exports.deferComplexText = function() { return { name: 'text' }; };
+exports.lateDeferComplexText = function() {
+    return new Promise().resolve({ name: 'text' });
+};
+exports.lateDeferComplexSelection = function() {
+    return new Promise().resolve({ name: 'selection', data: [ 42, 43 ] });
+};
+exports.lateDoubleDeferText = function() {
+    return new Promise().resolve({
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#lateDeferText'
+    });
+};
+
+exports.testDeferred = function() {
+    var typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#deferText'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('text')(typeData);
+    });
+
+    typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#lateDeferText'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('text')(typeData);
+    });
+
+    typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#deferComplexText'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('text')(typeData);
+    });
+
+    typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#lateDoubleDeferText'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('text')(typeData);
+    });
+
+    typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#lateDeferComplexText'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('text')(typeData);
+    });
+
+    typeSpec = {
+        name: 'deferred',
+        pointer: 'types:tests/testTypes#lateDeferComplexSelection'
+    };
+    types.resolveType(typeSpec).then(function(typeData) {
+        createTypeDataTester('selection')(typeData);
+        t.deepEqual(typeData.ext.data, [ 42, 43 ], 'selection data resolved');
+    });
 };
 
 });
@@ -12877,6 +14771,7 @@ bespin.tiki.module("types:index",function(require,exports,module) {
     dependencies: {  }
 });
 bespin.tiki.module("jquery:index",function(require,exports,module) {
+
 "define metadata";
 ({});
 "end";
@@ -12896,6 +14791,7 @@ bespin.tiki.module("jquery:index",function(require,exports,module) {
  *
  * Date: Sat Feb 13 22:33:48 2010 -0500
  */
+(function( window, undefined ) {
 
 // Define a local copy of jQuery
 var jQuery = function( selector, context ) {
@@ -19116,8 +21012,12 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 	};
 
 });
+// Expose jQuery to the global object
+window.jQuery = window.$ = jQuery;
 
-exports.$ = exports.jQuery = jQuery;
+})(window);
+
+exports.$ = $.noConflict(true);
 
 });
 ;bespin.tiki.register("::embedded", {
@@ -20057,6 +21957,9 @@ exports.normalizeConfig = function(catalog, config) {
         config.objects.commandLine = {
         };
     }
+    if (!config.objects.toolbar && catalog.plugins.toolbar) {
+        config.objects.toolbar = {};
+    }
 
     if (config.gui === undefined) {
         config.gui = {};
@@ -20070,6 +21973,10 @@ exports.normalizeConfig = function(catalog, config) {
         }
     }
 
+    if (!config.gui.north && config.objects.toolbar
+        && !alreadyRegistered.toolbar) {
+        config.gui.north = { component: "toolbar" };
+    }
     if (!config.gui.center && config.objects.editor
         && !alreadyRegistered.editor) {
         config.gui.center = { component: "editor" };
@@ -20118,15 +22025,20 @@ var generateGUI = function(catalog, config, pr) {
 
     var centerContainer = document.createElement('div');
     centerContainer.setAttribute('class', 'center-container');
-    container.appendChild(centerContainer);
+    var centerAdded = false;
 
     var element = config.element || document.body;
     // Add the 'bespin' class to the element in case it doesn't have this already.
     util.addClass(element, 'bespin');
     element.appendChild(container);
-
-    for (var place in config.gui) {
+    
+    // this shouldn't be necessary, but it looks like Firefox has an issue
+    // with the box-ordinal-group CSS property
+    ['north', 'west', 'center', 'east', 'south'].forEach(function(place) {
         var descriptor = config.gui[place];
+        if (!descriptor) {
+            return;
+        }
 
         var component = catalog.getObject(descriptor.component);
         if (!component) {
@@ -20149,6 +22061,10 @@ var generateGUI = function(catalog, config, pr) {
         $(element).addClass(place);
 
         if (place == 'west' || place == 'east' || place == 'center') {
+            if (!centerAdded) {
+                container.appendChild(centerContainer);
+                centerAdded = true;
+            }
             centerContainer.appendChild(element);
         } else {
             container.appendChild(element);
@@ -20158,7 +22074,7 @@ var generateGUI = function(catalog, config, pr) {
         if (component.elementAppended) {
             component.elementAppended();
         }
-    }
+    });
 
     pr.resolve();
 };
@@ -20246,6 +22162,503 @@ exports.Event = function() {
 
 
 });
+
+bespin.tiki.module("events:tests/test",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var t = require('plugindev');
+var Event = require('events').Event;
+
+exports.testEventsAreCallable = function() {
+    var evt = new Event();
+    evt();
+    t.ok(true, "events are callable");
+};
+
+exports.testAddingEvents = function() {
+    var evt = new Event();
+    var run1 = false, run2 = false, run3 = false;
+    evt.add(function() { run1 = true; });
+    evt.add(function() { run2 = true; });
+    evt();
+    t.ok(run1, "run1 handler was run");
+    t.ok(run2, "run2 handler was run");
+
+    run1 = false, run2 = false, run3 = false;
+    evt.add(function() { run3 = true; });
+    evt();
+    t.ok(run1, "run1 handler was run");
+    t.ok(run2, "run2 handler was run");
+    t.ok(run3, "run3 handler was run");
+};
+
+exports.testRemovingEvents = function() {
+    var evt = new Event();
+    var ref = { hello: 'world' };
+    var run1 = false, run2 = false, run3 = false;
+    var callback1 = function() { run1 = true; };
+    var callback2 = function() { run2 = true; };
+    var callback3 = function() { run3 = true; };
+
+    evt.add(callback1);
+    evt.add(callback2);
+    evt.remove(callback1);
+    evt();
+    t.equal(run1, false, "run1 handler was not run after removed");
+    t.equal(run2, true, "run2 handler was run after run1 was removed");
+
+    run1 = false, run2 = false, run3 = false;
+    evt.add(callback3);
+    evt.remove(callback2);
+    evt.remove(callback3);
+    evt();
+    t.equal(run1, false, "run1 handler was not run after all callbacks were " +
+        "removed");
+    t.equal(run2, false, "run2 handler was not run after all callbacks were " +
+        "removed");
+    t.equal(run3, false, "run3 handler was not run after all callbacks were " +
+        "removed");
+
+    run1 = false, run2 = false, run3 = false;
+    evt.add(ref, callback3);
+    evt.remove(ref);
+    evt();
+    t.equal(run1, false, "run1 handler was not run after all callbacks were " +
+        "removed");
+    t.equal(run2, false, "run2 handler was not run after all callbacks were " +
+        "removed");
+    t.equal(run3, false, "run3 handler was not run after all callbacks were " +
+        "removed");
+};
+
+
+});
+;bespin.tiki.register("::notifier", {
+    name: "notifier",
+    dependencies: { "settings": "0.0.0" }
+});
+bespin.tiki.module("notifier:handlers",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an 'AS IS' basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var console = require('bespin:console').console;
+
+var getMessageText = function(message) {
+    var text = '';
+    if (message.title) {
+        text = message.title + '\n';
+    }
+    if (message.body) {
+        text += message.body;
+    }
+    return text;
+};
+
+exports.console = function(message) {
+    var text = getMessageText(message);
+    console[message.level](text);
+};
+
+exports.alert = function(message) {
+    var text = getMessageText(message);
+    alert(text);
+};
+
+});
+
+bespin.tiki.module("notifier:index",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var catalog = require('bespin:plugins').catalog;
+var settings = require('settings').settings;
+var console = require('bespin:console').console;
+
+exports.Notifier = function() {};
+
+var levels = {
+    // Level definitions
+    DEBUG: 1,
+    INFO: 2,
+    ERROR: 3
+};
+
+var levelNames = [null, "debug", "info", "error"];
+
+exports._notifications = {};
+
+exports.registerNotification = function(ext) {
+    exports._notifications[ext.pluginName + '_' + ext.name] = ext;
+};
+
+exports.unregisterNotification = function(ext) {
+    delete exports._notifications[ext.pluginName + '_' + ext.name];
+};
+
+
+
+/*
+ * Normalizes and converts a level to an integer value.
+ *
+ * @param level {string|int} level to convert
+ * @return {int} level or null if the level is not properly defined
+ */
+var _convertLevel = function(level) {
+    if (typeof(level) === "number") {
+        if (level == 1 || level == 2 || level == 3) {
+            return level;
+        }
+        return null;
+    }
+    if (level === undefined || level === null) {
+        return null;
+    }
+    if (typeof(level) === "string") {
+        level = level.toUpperCase();
+        level = levels[level];
+        if (level === undefined) {
+            return null;
+        }
+    }
+    return level;
+};
+
+exports.Notifier.prototype = {
+    DEBUG: levels.DEBUG,
+    INFO: levels.INFO,
+    ERROR: levels.ERROR,
+    
+    /*
+     * Decides which handlers should receive the given message.
+     * 
+     * @param message {object} the message for which to decide on handlers
+     * @param notification {object} extension that defines the notification
+     * @param handlers {array} list of available handlers (usually taken from the catalog)
+     * @param config {array} list of handler configurations (usually from the "notifications" setting
+     * @return an array of handler names
+     */
+    _chooseHandlers: function(message, notification, handlers, config) {
+        var level = message.level;
+        level = _convertLevel(level);
+        if (level === null) {
+            level = notification.level;
+            level = _convertLevel(level);
+            if (level === null) {
+                level = this.INFO;
+            }
+        }
+        message.level = level;
+        message.levelName = levelNames[level];
+        
+        var plugin = message.plugin;
+        
+        if (!config) {
+            config = [];
+        }
+        
+        var result = {};
+        var seenHandlers = {};
+        config.forEach(function(item) {
+            var handler = item.handler;
+            if (!handler) {
+                return;
+            }
+            // even if this handler isn't going to be used,
+            // we keep track of its presence
+            seenHandlers[handler] = true;
+            
+            var configLevel = _convertLevel(item.level);
+            if (configLevel && level < configLevel) {
+                return;
+            }
+            
+            if (plugin && item.plugin && item.plugin !== plugin) {
+                return;
+            }
+            result[handler] = true;
+        });
+        
+        // take note of handlers that are installed but not explicitly configured.
+        handlers.forEach(function(handler) {
+            var handlerLevel = _convertLevel(handler.level);
+            if (!handlerLevel || level < handlerLevel || seenHandlers[handler.name]) {
+                return;
+            }
+            result[handler.name] = true;
+        });
+        
+        result = Object.keys(result);
+        if (level === levels.ERROR && result.length == 0 && config.length == 0) {
+            result.push('alert');
+        }
+        
+        return result;
+    },
+    
+    /*
+     * Publishes a notification to the configured handlers. The message object can contain
+     * the following:
+     * - plugin (required): the name of the plugin sending the message
+     * - notification (required): the name of the notification type. This should be defined in the
+     *                                plugin metadata
+     * - level: overrides the default level for this notification type. should be one of
+     *          notifier.ERROR, notifier.INFO, notifier.DEBUG
+     * - body (required): main message text (plain text)
+     * - title
+     * - iconUrl (this will likely have a default for some handlers based on the level)
+     * - onclick: called if the user clicks on the notification in a handler that supports clicking on
+     *            notifications. It is passed the "message" object (you can place anything
+     *            you want in the message to allow proper handling of the click)
+     */
+    notify: function(message) {
+        if (!message.plugin || !message.notification || !message.body) {
+            console.error('Received an invalid notification (plugin, notification and body are required)', message);
+            return;
+        }
+        var notification = exports._notifications[message.plugin + '_' + message.notification];
+        if (!notification) {
+            console.error('Notification message has an unknown notification type:', notification);
+            return;
+        }
+        var handlers = catalog.getExtensions('notificationHandler');
+        var config = settings.get('notifications');
+        
+        try {
+            config = JSON.parse(config);
+        } catch(e) {
+            config = [];
+        }
+        
+        var publishTo = this._chooseHandlers(message, notification, handlers, config);
+        publishTo.forEach(function(handlerName) {
+            var handler = catalog.getExtensionByKey('notificationHandler', handlerName);
+            if (!handler) {
+                return;
+            }
+            handler.load().then(function(handlerFunction) {
+                handlerFunction(message);
+            });
+        });
+    },
+    
+    /*
+     * convenience function that is equivalent to
+     * notify({
+     *  plugin: plugin,
+     *  body: body,
+     *  notification: "debug"
+     * })
+     */
+    debug: function(plugin, body) {
+        this.notify({
+            plugin: plugin,
+            body: body,
+            notification: 'debug'
+        });
+    }
+};
+
+});
+
+bespin.tiki.module("notifier:tests/testNotifications",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an 'AS IS' basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var catalog = require('bespin:plugins').catalog;
+var t = require('plugindev');
+var notifier = require('notifier');
+
+var defaultHandlers = function() {
+    return [
+        {
+            "name": "console",
+            "description": "Logs the output to the browser's console."
+        },
+        {
+            "name": "alert",
+            "description": "Shows a browser alert popup"
+        },
+        {
+            "name": "popup",
+            "description": "Displays a more Growl-like display",
+            "level": "error"
+        }
+    ]
+};
+
+exports.testHandlerSelection = function() {
+    var n = new notifier.Notifier();
+    var config = [];
+    var handlers = [];
+    var notification = {level: 'info'};
+    var result = n._chooseHandlers({plugin: 'bar'}, notification, handlers, config);
+    t.deepEqual(result, [], 'should get empty list for empty handlers/config');
+    
+    // note that if nothing is configured and error level is reached,
+    // the alert handler is going to be presented regardless of whether it
+    // is present in handlers
+    result = n._chooseHandlers({plugin: 'bar', level: 'error'}, notification, handlers, config);
+    t.deepEqual(result, ['alert'], 'error level, alert handler returned by default');
+    
+    handlers = defaultHandlers();
+    notification.level = 'error';
+    result = n._chooseHandlers({plugin: 'bar'}, notification, handlers, config);
+    t.deepEqual(result, ['popup'], 'expected popup from default level set in handler ep');
+    
+    config = [
+        {
+            handler: 'popup',
+            level: 'info'
+        }
+    ];
+    handlers = defaultHandlers();
+    notification.level = 'info';
+    result = n._chooseHandlers({plugin: 'bar'}, notification, handlers, config);
+    t.deepEqual(result, ['popup'], 'expected popup with configured handler');
+    
+    config[0].plugin = 'foo';
+    result = n._chooseHandlers({plugin: 'bar'}, notification, handlers, config);
+    t.deepEqual(result, [], 'expected none when plugin does not match');
+};
+
+});
 ;bespin.tiki.register("::screen_theme", {
     name: "screen_theme",
     dependencies: { "theme_manager": "0.0.0" }
@@ -20257,7 +22670,7 @@ bespin.tiki.module("screen_theme:index",function(require,exports,module) {
 (function() {
 var $ = bespin.tiki.require("jquery").$;
 $(document).ready(function() {
-    bespin.tiki.require("bespin:plugins").catalog.registerMetadata({"text_editor": {"resourceURL": "resources/text_editor/", "description": "Canvas-based text editor component and many common editing commands", "dependencies": {"completion": "0.0.0", "undomanager": "0.0.0", "settings": "0.0.0", "canon": "0.0.0", "rangeutils": "0.0.0", "traits": "0.0.0", "theme_manager": "0.0.0", "keyboard": "0.0.0", "edit_session": "0.0.0", "syntax_manager": "0.0.0"}, "testmodules": ["tests/controllers/testLayoutmanager", "tests/models/testTextstorage", "tests/testScratchcanvas", "tests/utils/testRect"], "provides": [{"action": "new", "pointer": "views/editor#EditorView", "ep": "factory", "name": "text_editor"}, {"pointer": "views/editor#EditorView", "ep": "appcomponent", "name": "editor_view"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#backspace", "ep": "command", "key": "backspace", "name": "backspace"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#deleteCommand", "ep": "command", "key": "delete", "name": "delete"}, {"description": "Delete all lines currently selected", "key": "ctrl_d", "predicates": {"isTextView": true}, "pointer": "commands/editing#deleteLines", "ep": "command", "name": "deletelines"}, {"description": "Create a new, empty line below the current one", "key": "ctrl_return", "predicates": {"isTextView": true}, "pointer": "commands/editing#openLine", "ep": "command", "name": "openline"}, {"description": "Join the current line with the following", "key": "ctrl_shift_j", "predicates": {"isTextView": true}, "pointer": "commands/editing#joinLines", "ep": "command", "name": "joinline"}, {"params": [{"defaultValue": "", "type": "text", "name": "text", "description": "The text to insert"}], "pointer": "commands/editing#insertText", "ep": "command", "name": "insertText"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/editing#newline", "ep": "command", "key": "return", "name": "newline"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/editing#tab", "ep": "command", "key": "tab", "name": "tab"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#untab", "ep": "command", "key": "shift_tab", "name": "untab"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "move"}, {"description": "Repeat the last search (forward)", "pointer": "commands/editor#findNextCommand", "ep": "command", "key": "ctrl_g", "name": "findnext"}, {"description": "Repeat the last search (backward)", "pointer": "commands/editor#findPrevCommand", "ep": "command", "key": "ctrl_shift_g", "name": "findprev"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/movement#moveDown", "ep": "command", "key": "down", "name": "move down"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLeft", "ep": "command", "key": "left", "name": "move left"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveRight", "ep": "command", "key": "right", "name": "move right"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/movement#moveUp", "ep": "command", "key": "up", "name": "move up"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "select"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDown", "ep": "command", "key": "shift_down", "name": "select down"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLeft", "ep": "command", "key": "shift_left", "name": "select left"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectRight", "ep": "command", "key": "shift_right", "name": "select right"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectUp", "ep": "command", "key": "shift_up", "name": "select up"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLineEnd", "ep": "command", "key": ["end", "ctrl_right"], "name": "move lineend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLineEnd", "ep": "command", "key": ["shift_end", "ctrl_shift_right"], "name": "select lineend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveDocEnd", "ep": "command", "key": "ctrl_down", "name": "move docend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDocEnd", "ep": "command", "key": "ctrl_shift_down", "name": "select docend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLineStart", "ep": "command", "key": ["home", "ctrl_left"], "name": "move linestart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLineStart", "ep": "command", "key": ["shift_home", "ctrl_shift_left"], "name": "select linestart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveDocStart", "ep": "command", "key": "ctrl_up", "name": "move docstart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDocStart", "ep": "command", "key": "ctrl_shift_up", "name": "select docstart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveNextWord", "ep": "command", "key": ["alt_right"], "name": "move nextword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectNextWord", "ep": "command", "key": ["alt_shift_right"], "name": "select nextword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#movePreviousWord", "ep": "command", "key": ["alt_left"], "name": "move prevword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectPreviousWord", "ep": "command", "key": ["alt_shift_left"], "name": "select prevword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectAll", "ep": "command", "key": ["ctrl_a", "meta_a"], "name": "select all"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "scroll"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollDocStart", "ep": "command", "key": "ctrl_home", "name": "scroll start"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollDocEnd", "ep": "command", "key": "ctrl_end", "name": "scroll end"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollPageDown", "ep": "command", "key": "pagedown", "name": "scroll down"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollPageUp", "ep": "command", "key": "pageup", "name": "scroll up"}, {"pointer": "commands/editor#lcCommand", "description": "Change all selected text to lowercase", "withKey": "CMD SHIFT L", "ep": "command", "name": "lc"}, {"pointer": "commands/editor#detabCommand", "description": "Convert tabs to spaces.", "params": [{"defaultValue": null, "type": "text", "name": "tabsize", "description": "Optionally, specify a tab size. (Defaults to setting.)"}], "ep": "command", "name": "detab"}, {"pointer": "commands/editor#entabCommand", "description": "Convert spaces to tabs.", "params": [{"defaultValue": null, "type": "text", "name": "tabsize", "description": "Optionally, specify a tab size. (Defaults to setting.)"}], "ep": "command", "name": "entab"}, {"pointer": "commands/editor#trimCommand", "description": "trim trailing or leading whitespace from each line in selection", "params": [{"defaultValue": "both", "type": {"data": [{"name": "left"}, {"name": "right"}, {"name": "both"}], "name": "selection"}, "name": "side", "description": "Do we trim from the left, right or both"}], "ep": "command", "name": "trim"}, {"pointer": "commands/editor#ucCommand", "description": "Change all selected text to uppercase", "withKey": "CMD SHIFT U", "ep": "command", "name": "uc"}, {"predicates": {"isTextView": true}, "pointer": "controllers/undo#undoManagerCommand", "ep": "command", "key": ["ctrl_shift_z"], "name": "redo"}, {"predicates": {"isTextView": true}, "pointer": "controllers/undo#undoManagerCommand", "ep": "command", "key": ["ctrl_z"], "name": "undo"}, {"description": "The distance in characters between each tab", "defaultValue": 8, "type": "number", "ep": "setting", "name": "tabstop"}, {"description": "Customize the keymapping", "defaultValue": "{}", "type": "text", "ep": "setting", "name": "customKeymapping"}, {"description": "The keymapping to use", "defaultValue": "standard", "type": "text", "ep": "setting", "name": "keymapping"}, {"description": "The editor font size in pixels", "defaultValue": 14, "type": "number", "ep": "setting", "name": "fontsize"}, {"description": "The editor font face", "defaultValue": "Monaco, Lucida Console, monospace", "type": "text", "ep": "setting", "name": "fontface"}, {"defaultValue": {"color": "#e5c138", "paddingLeft": 5, "backgroundColor": "#4c4a41", "paddingRight": 10}, "ep": "themevariable", "name": "gutter"}, {"defaultValue": {"color": "#e6e6e6", "selectedTextBackgroundColor": "#526da5", "backgroundColor": "#2a211c", "cursorColor": "#879aff", "unfocusedCursorBackgroundColor": "#73171e", "unfocusedCursorColor": "#ff0033"}, "ep": "themevariable", "name": "editor"}, {"defaultValue": {"comment": "#666666", "directive": "#999999", "keyword": "#42A8ED", "plain": "#e6e6e6", "error": "#ff0000", "operator": "#88BBFF", "identifier": "#D841FF", "string": "#039A0A"}, "ep": "themevariable", "name": "highlighter"}, {"defaultValue": {"nibStrokeStyle": "rgb(150, 150, 150)", "fullAlpha": 1.0, "barFillStyle": "rgb(0, 0, 0)", "particalAlpha": 0.29999999999999999, "barFillGradientBottomStop": "rgb(44, 44, 44)", "backgroundStyle": "#2A211C", "thickness": 17, "padding": 5, "trackStrokeStyle": "rgb(150, 150, 150)", "nibArrowStyle": "rgb(255, 255, 255)", "barFillGradientBottomStart": "rgb(22, 22, 22)", "barFillGradientTopStop": "rgb(40, 40, 40)", "barFillGradientTopStart": "rgb(90, 90, 90)", "nibStyle": "rgb(100, 100, 100)", "trackFillStyle": "rgba(50, 50, 50, 0.8)"}, "ep": "themevariable", "name": "scroller"}, {"description": "Event: Notify when something within the editor changed.", "params": [{"required": true, "name": "pointer", "description": "Function that is called whenever a change happened."}], "ep": "extensionpoint", "name": "editorChange"}], "type": "plugins/supported", "name": "text_editor"}, "less": {"resourceURL": "resources/less/", "description": "Leaner CSS", "contributors": [], "author": "Alexis Sellier <self@cloudhead.net>", "url": "http://lesscss.org", "version": "1.0.11", "dependencies": {}, "testmodules": [], "provides": [], "keywords": ["css", "parser", "lesscss", "browser"], "type": "plugins/thirdparty", "name": "less"}, "theme_manager_base": {"resourceURL": "resources/theme_manager_base/", "name": "theme_manager_base", "share": true, "environments": {"main": true}, "dependencies": {}, "testmodules": [], "provides": [{"description": "(Less)files holding the CSS style information for the UI.", "params": [{"required": true, "name": "url", "description": "Name of the ThemeStylesFile - can also be an array of files."}], "ep": "extensionpoint", "name": "themestyles"}, {"description": "Event: Notify when the theme(styles) changed.", "params": [{"required": true, "name": "pointer", "description": "Function that is called whenever the theme is changed."}], "ep": "extensionpoint", "name": "themeChange"}, {"indexOn": "name", "description": "A theme is a way change the look of the application.", "params": [{"required": false, "name": "url", "description": "Name of a ThemeStylesFile that holds theme specific CSS rules - can also be an array of files."}, {"required": true, "name": "pointer", "description": "Function that returns the ThemeData"}], "ep": "extensionpoint", "name": "theme"}], "type": "plugins/supported", "description": "Defines extension points required for theming"}, "canon": {"resourceURL": "resources/canon/", "name": "canon", "environments": {"main": true, "worker": false}, "dependencies": {"environment": "0.0.0", "events": "0.0.0", "settings": "0.0.0"}, "testmodules": [], "provides": [{"indexOn": "name", "description": "A command is a bit of functionality with optional typed arguments which can do something small like moving the cursor around the screen, or large like cloning a project from VCS.", "ep": "extensionpoint", "name": "command"}, {"description": "An extension point to be called whenever a new command begins output.", "ep": "extensionpoint", "name": "addedRequestOutput"}, {"description": "A dimensionsChanged is a way to be notified of changes to the dimension of Bespin", "ep": "extensionpoint", "name": "dimensionsChanged"}, {"description": "How many typed commands do we recall for reference?", "defaultValue": 50, "type": "number", "ep": "setting", "name": "historyLength"}, {"action": "create", "pointer": "history#InMemoryHistory", "ep": "factory", "name": "history"}], "type": "plugins/supported", "description": "Manages commands"}, "traits": {"resourceURL": "resources/traits/", "description": "Traits library, traitsjs.org", "dependencies": {}, "testmodules": [], "provides": [], "type": "plugins/thirdparty", "name": "traits"}, "keyboard": {"resourceURL": "resources/keyboard/", "description": "Keyboard shortcuts", "dependencies": {"canon": "0.0", "settings": "0.0"}, "testmodules": ["tests/testKeyboard"], "provides": [{"description": "A keymapping defines how keystrokes are interpreted.", "params": [{"required": true, "name": "states", "description": "Holds the states and all the informations about the keymapping. See docs: pluginguide/keymapping"}], "ep": "extensionpoint", "name": "keymapping"}], "type": "plugins/supported", "name": "keyboard"}, "worker_manager": {"resourceURL": "resources/worker_manager/", "description": "Manages a web worker on the browser side", "dependencies": {"canon": "0.0.0", "events": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"description": "Low-level web worker control (for plugin development)", "ep": "command", "name": "worker"}, {"description": "Restarts all web workers (for plugin development)", "pointer": "#workerRestartCommand", "ep": "command", "name": "worker restart"}], "type": "plugins/supported", "name": "worker_manager"}, "edit_session": {"resourceURL": "resources/edit_session/", "description": "Ties together the files being edited with the views on screen", "dependencies": {"events": "0.0.0"}, "testmodules": ["tests/testSession"], "provides": [{"action": "call", "pointer": "#createSession", "ep": "factory", "name": "session"}], "type": "plugins/supported", "name": "edit_session"}, "syntax_manager": {"resourceURL": "resources/syntax_manager/", "name": "syntax_manager", "environments": {"main": true, "worker": false}, "dependencies": {"worker_manager": "0.0.0", "events": "0.0.0", "underscore": "0.0.0", "syntax_directory": "0.0.0"}, "testmodules": [], "provides": [], "type": "plugins/supported", "description": "Provides syntax highlighting services for the editor"}, "completion": {"resourceURL": "resources/completion/", "description": "Code completion support", "dependencies": {"jquery": "0.0.0", "ctags": "0.0.0", "rangeutils": "0.0.0", "canon": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"indexOn": "name", "description": "Code completion support for specific languages", "ep": "extensionpoint", "name": "completion"}, {"description": "Accept the chosen completion", "key": ["return", "tab"], "predicates": {"completing": true}, "pointer": "controller#completeCommand", "ep": "command", "name": "complete"}, {"description": "Abandon the completion", "key": "escape", "predicates": {"completing": true}, "pointer": "controller#completeCancelCommand", "ep": "command", "name": "complete cancel"}, {"description": "Choose the completion below", "key": "down", "predicates": {"completing": true}, "pointer": "controller#completeDownCommand", "ep": "command", "name": "complete down"}, {"description": "Choose the completion above", "key": "up", "predicates": {"completing": true}, "pointer": "controller#completeUpCommand", "ep": "command", "name": "complete up"}], "type": "plugins/supported", "name": "completion"}, "environment": {"testmodules": [], "dependencies": {"settings": "0.0.0"}, "resourceURL": "resources/environment/", "name": "environment", "type": "plugins/supported"}, "undomanager": {"resourceURL": "resources/undomanager/", "description": "Manages undoable events", "testmodules": ["tests/testUndomanager"], "provides": [{"pointer": "#undoManagerCommand", "ep": "command", "key": ["ctrl_shift_z"], "name": "redo"}, {"pointer": "#undoManagerCommand", "ep": "command", "key": ["ctrl_z"], "name": "undo"}], "type": "plugins/supported", "name": "undomanager"}, "rangeutils": {"testmodules": ["tests/test"], "type": "plugins/supported", "resourceURL": "resources/rangeutils/", "description": "Utility functions for dealing with ranges of text", "name": "rangeutils"}, "stylesheet": {"resourceURL": "resources/stylesheet/", "name": "stylesheet", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#CSSSyntax", "ep": "syntax", "fileexts": ["css", "less"], "name": "css"}], "type": "plugins/supported", "description": "CSS syntax highlighter"}, "html": {"resourceURL": "resources/html/", "name": "html", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#HTMLSyntax", "ep": "syntax", "fileexts": ["htm", "html"], "name": "html"}], "type": "plugins/supported", "description": "HTML syntax highlighter"}, "js_syntax": {"resourceURL": "resources/js_syntax/", "name": "js_syntax", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#JSSyntax", "ep": "syntax", "fileexts": ["js", "json"], "name": "js"}], "type": "plugins/supported", "description": "JavaScript syntax highlighter"}, "ctags": {"resourceURL": "resources/ctags/", "description": "Reads and writes tag files", "dependencies": {"traits": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "ctags"}, "events": {"resourceURL": "resources/events/", "description": "Dead simple event implementation", "dependencies": {"traits": "0.0"}, "testmodules": ["tests/test"], "provides": [], "type": "plugins/supported", "name": "events"}, "theme_manager": {"resourceURL": "resources/theme_manager/", "name": "theme_manager", "share": true, "environments": {"main": true, "worker": false}, "dependencies": {"theme_manager_base": "0.0.0", "settings": "0.0.0", "events": "0.0.0", "less": "0.0.0"}, "testmodules": [], "provides": [{"unregister": "themestyles#unregisterThemeStyles", "register": "themestyles#registerThemeStyles", "ep": "extensionhandler", "name": "themestyles"}, {"unregister": "index#unregisterTheme", "register": "index#registerTheme", "ep": "extensionhandler", "name": "theme"}, {"defaultValue": "standard", "description": "The theme plugin's name to use. If set to 'standard' no theme will be used", "type": "text", "ep": "setting", "name": "theme"}, {"pointer": "#appLaunched", "ep": "appLaunched"}], "type": "plugins/supported", "description": "Handles colors in Bespin"}, "standard_syntax": {"resourceURL": "resources/standard_syntax/", "description": "Easy-to-use basis for syntax engines", "environments": {"worker": true}, "dependencies": {"syntax_worker": "0.0.0", "syntax_directory": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "standard_syntax"}, "types": {"resourceURL": "resources/types/", "description": "Defines parameter types for commands", "testmodules": ["tests/testBasic", "tests/testTypes"], "provides": [{"indexOn": "name", "description": "Commands can accept various arguments that the user enters or that are automatically supplied by the environment. Those arguments have types that define how they are supplied or completed. The pointer points to an object with methods convert(str value) and getDefault(). Both functions have `this` set to the command's `takes` parameter. If getDefault is not defined, the default on the command's `takes` is used, if there is one. The object can have a noInput property that is set to true to reflect that this type is provided directly by the system. getDefault must be defined in that case.", "ep": "extensionpoint", "name": "type"}, {"description": "Text that the user needs to enter.", "pointer": "basic#text", "ep": "type", "name": "text"}, {"description": "A JavaScript number", "pointer": "basic#number", "ep": "type", "name": "number"}, {"description": "A true/false value", "pointer": "basic#bool", "ep": "type", "name": "boolean"}, {"description": "An object that converts via JavaScript", "pointer": "basic#object", "ep": "type", "name": "object"}, {"description": "A string that is constrained to be one of a number of pre-defined values", "pointer": "basic#selection", "ep": "type", "name": "selection"}, {"description": "A type which we don't understand from the outset, but which we hope context can help us with", "ep": "type", "name": "deferred"}], "type": "plugins/supported", "name": "types"}, "jquery": {"testmodules": [], "resourceURL": "resources/jquery/", "name": "jquery", "type": "plugins/thirdparty"}, "embedded": {"testmodules": [], "dependencies": {"theme_manager": "0.0.0", "text_editor": "0.0.0", "appconfig": "0.0.0", "edit_session": "0.0.0", "screen_theme": "0.0.0"}, "resourceURL": "resources/embedded/", "name": "embedded", "type": "plugins/supported"}, "settings": {"resourceURL": "resources/settings/", "description": "Infrastructure and commands for managing user preferences", "share": true, "dependencies": {"types": "0.0"}, "testmodules": [], "provides": [{"description": "Storage for the customizable Bespin settings", "pointer": "index#settings", "ep": "appcomponent", "name": "settings"}, {"indexOn": "name", "description": "A setting is something that the application offers as a way to customize how it works", "register": "index#addSetting", "ep": "extensionpoint", "name": "setting"}, {"description": "A settingChange is a way to be notified of changes to a setting", "ep": "extensionpoint", "name": "settingChange"}, {"pointer": "commands#setCommand", "description": "define and show settings", "params": [{"defaultValue": null, "type": {"pointer": "settings:index#getSettings", "name": "selection"}, "name": "setting", "description": "The name of the setting to display or alter"}, {"defaultValue": null, "type": {"pointer": "settings:index#getTypeSpecFromAssignment", "name": "deferred"}, "name": "value", "description": "The new value for the chosen setting"}], "ep": "command", "name": "set"}, {"pointer": "commands#unsetCommand", "description": "unset a setting entirely", "params": [{"type": {"pointer": "settings:index#getSettings", "name": "selection"}, "name": "setting", "description": "The name of the setting to return to defaults"}], "ep": "command", "name": "unset"}], "type": "plugins/supported", "name": "settings"}, "appconfig": {"resourceURL": "resources/appconfig/", "description": "Instantiates components and displays the GUI based on configuration.", "dependencies": {"jquery": "0.0.0", "canon": "0.0.0", "settings": "0.0.0"}, "testmodules": [], "provides": [{"description": "Event: Fired when the app is completely launched.", "ep": "extensionpoint", "name": "appLaunched"}], "type": "plugins/supported", "name": "appconfig"}, "syntax_worker": {"resourceURL": "resources/syntax_worker/", "description": "Coordinates multiple syntax engines", "environments": {"worker": true}, "dependencies": {"syntax_directory": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "syntax_worker"}, "js_completion": {"resourceURL": "resources/js_completion/", "description": "JavaScript code completion", "dependencies": {"completion": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#JSCompletion", "ep": "completion", "name": "js"}], "type": "plugins/supported", "name": "js_completion"}, "screen_theme": {"resourceURL": "resources/screen_theme/", "description": "Bespins standard theme basePlugin", "dependencies": {"theme_manager": "0.0.0"}, "testmodules": [], "provides": [{"url": ["theme.less"], "ep": "themestyles"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "container_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "container_font_size"}, {"defaultValue": "@global_container_background", "ep": "themevariable", "name": "container_bg"}, {"defaultValue": "@global_color", "ep": "themevariable", "name": "container_color"}, {"defaultValue": "@global_line_height", "ep": "themevariable", "name": "container_line_height"}, {"defaultValue": "@global_pane_background", "ep": "themevariable", "name": "pane_bg"}, {"defaultValue": "@global_pane_border_radius", "ep": "themevariable", "name": "pane_border_radius"}, {"defaultValue": "@global_form_font", "ep": "themevariable", "name": "form_font"}, {"defaultValue": "@global_form_font_size", "ep": "themevariable", "name": "form_font_size"}, {"defaultValue": "@global_form_line_height", "ep": "themevariable", "name": "form_line_height"}, {"defaultValue": "@global_form_color", "ep": "themevariable", "name": "form_color"}, {"defaultValue": "@global_form_text_shadow", "ep": "themevariable", "name": "form_text_shadow"}, {"defaultValue": "@global_pane_link_color", "ep": "themevariable", "name": "pane_a_color"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "pane_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "pane_font_size"}, {"defaultValue": "@global_pane_text_shadow", "ep": "themevariable", "name": "pane_text_shadow"}, {"defaultValue": "@global_pane_h1_font", "ep": "themevariable", "name": "pane_h1_font"}, {"defaultValue": "@global_pane_h1_font_size", "ep": "themevariable", "name": "pane_h1_font_size"}, {"defaultValue": "@global_pane_h1_color", "ep": "themevariable", "name": "pane_h1_color"}, {"defaultValue": "@global_font_size * 1.8", "ep": "themevariable", "name": "pane_line_height"}, {"defaultValue": "@global_pane_color", "ep": "themevariable", "name": "pane_color"}, {"defaultValue": "@global_text_shadow", "ep": "themevariable", "name": "pane_text_shadow"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "button_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "button_font_size"}, {"defaultValue": "@global_button_color", "ep": "themevariable", "name": "button_color"}, {"defaultValue": "@global_button_background", "ep": "themevariable", "name": "button_bg"}, {"defaultValue": "@button_bg - #063A27", "ep": "themevariable", "name": "button_bg2"}, {"defaultValue": "@button_bg - #194A5E", "ep": "themevariable", "name": "button_border"}, {"defaultValue": "@global_control_background", "ep": "themevariable", "name": "control_bg"}, {"defaultValue": "@global_control_color", "ep": "themevariable", "name": "control_color"}, {"defaultValue": "@global_control_border", "ep": "themevariable", "name": "control_border"}, {"defaultValue": "@global_control_border_radius", "ep": "themevariable", "name": "control_border_radius"}, {"defaultValue": "@global_control_active_background", "ep": "themevariable", "name": "control_active_bg"}, {"defaultValue": "@global_control_active_border", "ep": "themevariable", "name": "control_active_border"}, {"defaultValue": "@global_control_active_color", "ep": "themevariable", "name": "control_active_color"}, {"defaultValue": "@global_control_active_inset_color", "ep": "themevariable", "name": "control_active_inset_color"}], "type": "plugins/supported", "name": "screen_theme"}});;
+    bespin.tiki.require("bespin:plugins").catalog.registerMetadata({"text_editor": {"resourceURL": "resources/text_editor/", "description": "Canvas-based text editor component and many common editing commands", "dependencies": {"completion": "0.0.0", "undomanager": "0.0.0", "settings": "0.0.0", "canon": "0.0.0", "rangeutils": "0.0.0", "traits": "0.0.0", "theme_manager": "0.0.0", "keyboard": "0.0.0", "edit_session": "0.0.0", "syntax_manager": "0.0.0"}, "testmodules": ["tests/controllers/testLayoutmanager", "tests/models/testTextstorage", "tests/testScratchcanvas", "tests/utils/testRect"], "provides": [{"action": "new", "pointer": "views/editor#EditorView", "ep": "factory", "name": "text_editor"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#backspace", "ep": "command", "key": "backspace", "name": "backspace"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#deleteCommand", "ep": "command", "key": "delete", "name": "delete"}, {"description": "Delete all lines currently selected", "key": "ctrl_d", "predicates": {"isTextView": true}, "pointer": "commands/editing#deleteLines", "ep": "command", "name": "deletelines"}, {"description": "Create a new, empty line below the current one", "key": "ctrl_return", "predicates": {"isTextView": true}, "pointer": "commands/editing#openLine", "ep": "command", "name": "openline"}, {"description": "Join the current line with the following", "key": "ctrl_shift_j", "predicates": {"isTextView": true}, "pointer": "commands/editing#joinLines", "ep": "command", "name": "joinline"}, {"params": [{"defaultValue": "", "type": "text", "name": "text", "description": "The text to insert"}], "pointer": "commands/editing#insertText", "ep": "command", "name": "insertText"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/editing#newline", "ep": "command", "key": "return", "name": "newline"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/editing#tab", "ep": "command", "key": "tab", "name": "tab"}, {"predicates": {"isTextView": true}, "pointer": "commands/editing#untab", "ep": "command", "key": "shift_tab", "name": "untab"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "move"}, {"description": "Repeat the last search (forward)", "pointer": "commands/editor#findNextCommand", "ep": "command", "key": "ctrl_g", "name": "findnext"}, {"description": "Repeat the last search (backward)", "pointer": "commands/editor#findPrevCommand", "ep": "command", "key": "ctrl_shift_g", "name": "findprev"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/movement#moveDown", "ep": "command", "key": "down", "name": "move down"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLeft", "ep": "command", "key": "left", "name": "move left"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveRight", "ep": "command", "key": "right", "name": "move right"}, {"predicates": {"completing": false, "isTextView": true}, "pointer": "commands/movement#moveUp", "ep": "command", "key": "up", "name": "move up"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "select"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDown", "ep": "command", "key": "shift_down", "name": "select down"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLeft", "ep": "command", "key": "shift_left", "name": "select left"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectRight", "ep": "command", "key": "shift_right", "name": "select right"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectUp", "ep": "command", "key": "shift_up", "name": "select up"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLineEnd", "ep": "command", "key": ["end", "ctrl_right"], "name": "move lineend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLineEnd", "ep": "command", "key": ["shift_end", "ctrl_shift_right"], "name": "select lineend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveDocEnd", "ep": "command", "key": "ctrl_down", "name": "move docend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDocEnd", "ep": "command", "key": "ctrl_shift_down", "name": "select docend"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveLineStart", "ep": "command", "key": ["home", "ctrl_left"], "name": "move linestart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectLineStart", "ep": "command", "key": ["shift_home", "ctrl_shift_left"], "name": "select linestart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveDocStart", "ep": "command", "key": "ctrl_up", "name": "move docstart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectDocStart", "ep": "command", "key": "ctrl_shift_up", "name": "select docstart"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#moveNextWord", "ep": "command", "key": ["alt_right"], "name": "move nextword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectNextWord", "ep": "command", "key": ["alt_shift_right"], "name": "select nextword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#movePreviousWord", "ep": "command", "key": ["alt_left"], "name": "move prevword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectPreviousWord", "ep": "command", "key": ["alt_shift_left"], "name": "select prevword"}, {"predicates": {"isTextView": true}, "pointer": "commands/movement#selectAll", "ep": "command", "key": ["ctrl_a", "meta_a"], "name": "select all"}, {"predicates": {"isTextView": true}, "ep": "command", "name": "scroll"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollDocStart", "ep": "command", "key": "ctrl_home", "name": "scroll start"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollDocEnd", "ep": "command", "key": "ctrl_end", "name": "scroll end"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollPageDown", "ep": "command", "key": "pagedown", "name": "scroll down"}, {"predicates": {"isTextView": true}, "pointer": "commands/scrolling#scrollPageUp", "ep": "command", "key": "pageup", "name": "scroll up"}, {"pointer": "commands/editor#lcCommand", "description": "Change all selected text to lowercase", "withKey": "CMD SHIFT L", "ep": "command", "name": "lc"}, {"pointer": "commands/editor#detabCommand", "description": "Convert tabs to spaces.", "params": [{"defaultValue": null, "type": "text", "name": "tabsize", "description": "Optionally, specify a tab size. (Defaults to setting.)"}], "ep": "command", "name": "detab"}, {"pointer": "commands/editor#entabCommand", "description": "Convert spaces to tabs.", "params": [{"defaultValue": null, "type": "text", "name": "tabsize", "description": "Optionally, specify a tab size. (Defaults to setting.)"}], "ep": "command", "name": "entab"}, {"pointer": "commands/editor#trimCommand", "description": "trim trailing or leading whitespace from each line in selection", "params": [{"defaultValue": "both", "type": {"data": [{"name": "left"}, {"name": "right"}, {"name": "both"}], "name": "selection"}, "name": "side", "description": "Do we trim from the left, right or both"}], "ep": "command", "name": "trim"}, {"pointer": "commands/editor#ucCommand", "description": "Change all selected text to uppercase", "withKey": "CMD SHIFT U", "ep": "command", "name": "uc"}, {"predicates": {"isTextView": true}, "pointer": "controllers/undo#undoManagerCommand", "ep": "command", "key": ["ctrl_shift_z"], "name": "redo"}, {"predicates": {"isTextView": true}, "pointer": "controllers/undo#undoManagerCommand", "ep": "command", "key": ["ctrl_z"], "name": "undo"}, {"description": "The distance in characters between each tab", "defaultValue": 8, "type": "number", "ep": "setting", "name": "tabstop"}, {"description": "Customize the keymapping", "defaultValue": "{}", "type": "text", "ep": "setting", "name": "customKeymapping"}, {"description": "The keymapping to use", "defaultValue": "standard", "type": "text", "ep": "setting", "name": "keymapping"}, {"description": "The editor font size in pixels", "defaultValue": 14, "type": "number", "ep": "setting", "name": "fontsize"}, {"description": "The editor font face", "defaultValue": "Monaco, Lucida Console, monospace", "type": "text", "ep": "setting", "name": "fontface"}, {"defaultValue": {"color": "#e5c138", "paddingLeft": 5, "backgroundColor": "#4c4a41", "paddingRight": 10}, "ep": "themevariable", "name": "gutter"}, {"defaultValue": {"color": "#e6e6e6", "selectedTextBackgroundColor": "#526da5", "backgroundColor": "#2a211c", "cursorColor": "#879aff", "unfocusedCursorBackgroundColor": "#73171e", "unfocusedCursorColor": "#ff0033"}, "ep": "themevariable", "name": "editor"}, {"defaultValue": {"comment": "#666666", "directive": "#999999", "keyword": "#42A8ED", "addition": "#FFFFFF", "plain": "#e6e6e6", "deletion": "#FFFFFF", "error": "#ff0000", "operator": "#88BBFF", "identifier": "#D841FF", "string": "#039A0A"}, "ep": "themevariable", "name": "highlighterFG"}, {"defaultValue": {"addition": "#008000", "deletion": "#800000"}, "ep": "themevariable", "name": "highlighterBG"}, {"defaultValue": {"nibStrokeStyle": "rgb(150, 150, 150)", "fullAlpha": 1.0, "barFillStyle": "rgb(0, 0, 0)", "particalAlpha": 0.29999999999999999, "barFillGradientBottomStop": "rgb(44, 44, 44)", "backgroundStyle": "#2A211C", "thickness": 17, "padding": 5, "trackStrokeStyle": "rgb(150, 150, 150)", "nibArrowStyle": "rgb(255, 255, 255)", "barFillGradientBottomStart": "rgb(22, 22, 22)", "barFillGradientTopStop": "rgb(40, 40, 40)", "barFillGradientTopStart": "rgb(90, 90, 90)", "nibStyle": "rgb(100, 100, 100)", "trackFillStyle": "rgba(50, 50, 50, 0.8)"}, "ep": "themevariable", "name": "scroller"}, {"description": "Event: Notify when something within the editor changed.", "params": [{"required": true, "name": "pointer", "description": "Function that is called whenever a change happened."}], "ep": "extensionpoint", "name": "editorChange"}], "type": "plugins/supported", "name": "text_editor"}, "less": {"resourceURL": "resources/less/", "description": "Leaner CSS", "contributors": [], "author": "Alexis Sellier <self@cloudhead.net>", "url": "http://lesscss.org", "version": "1.0.11", "dependencies": {}, "testmodules": [], "provides": [], "keywords": ["css", "parser", "lesscss", "browser"], "type": "plugins/thirdparty", "name": "less"}, "theme_manager_base": {"resourceURL": "resources/theme_manager_base/", "name": "theme_manager_base", "share": true, "environments": {"main": true}, "dependencies": {}, "testmodules": [], "provides": [{"description": "(Less)files holding the CSS style information for the UI.", "params": [{"required": true, "name": "url", "description": "Name of the ThemeStylesFile - can also be an array of files."}], "ep": "extensionpoint", "name": "themestyles"}, {"description": "Event: Notify when the theme(styles) changed.", "params": [{"required": true, "name": "pointer", "description": "Function that is called whenever the theme is changed."}], "ep": "extensionpoint", "name": "themeChange"}, {"indexOn": "name", "description": "A theme is a way change the look of the application.", "params": [{"required": false, "name": "url", "description": "Name of a ThemeStylesFile that holds theme specific CSS rules - can also be an array of files."}, {"required": true, "name": "pointer", "description": "Function that returns the ThemeData"}], "ep": "extensionpoint", "name": "theme"}], "type": "plugins/supported", "description": "Defines extension points required for theming"}, "canon": {"resourceURL": "resources/canon/", "name": "canon", "environments": {"main": true, "worker": false}, "dependencies": {"environment": "0.0.0", "events": "0.0.0", "settings": "0.0.0"}, "testmodules": [], "provides": [{"indexOn": "name", "description": "A command is a bit of functionality with optional typed arguments which can do something small like moving the cursor around the screen, or large like cloning a project from VCS.", "ep": "extensionpoint", "name": "command"}, {"description": "An extension point to be called whenever a new command begins output.", "ep": "extensionpoint", "name": "addedRequestOutput"}, {"description": "A dimensionsChanged is a way to be notified of changes to the dimension of Bespin", "ep": "extensionpoint", "name": "dimensionsChanged"}, {"description": "How many typed commands do we recall for reference?", "defaultValue": 50, "type": "number", "ep": "setting", "name": "historyLength"}, {"action": "create", "pointer": "history#InMemoryHistory", "ep": "factory", "name": "history"}], "type": "plugins/supported", "description": "Manages commands"}, "traits": {"resourceURL": "resources/traits/", "description": "Traits library, traitsjs.org", "dependencies": {}, "testmodules": [], "provides": [], "type": "plugins/thirdparty", "name": "traits"}, "keyboard": {"resourceURL": "resources/keyboard/", "description": "Keyboard shortcuts", "dependencies": {"canon": "0.0", "settings": "0.0"}, "testmodules": ["tests/testKeyboard"], "provides": [{"description": "A keymapping defines how keystrokes are interpreted.", "params": [{"required": true, "name": "states", "description": "Holds the states and all the informations about the keymapping. See docs: pluginguide/keymapping"}], "ep": "extensionpoint", "name": "keymapping"}], "type": "plugins/supported", "name": "keyboard"}, "worker_manager": {"resourceURL": "resources/worker_manager/", "description": "Manages a web worker on the browser side", "dependencies": {"canon": "0.0.0", "events": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"description": "Low-level web worker control (for plugin development)", "ep": "command", "name": "worker"}, {"description": "Restarts all web workers (for plugin development)", "pointer": "#workerRestartCommand", "ep": "command", "name": "worker restart"}], "type": "plugins/supported", "name": "worker_manager"}, "edit_session": {"resourceURL": "resources/edit_session/", "description": "Ties together the files being edited with the views on screen", "dependencies": {"events": "0.0.0"}, "testmodules": ["tests/testSession"], "provides": [{"action": "call", "pointer": "#createSession", "ep": "factory", "name": "session"}], "type": "plugins/supported", "name": "edit_session"}, "syntax_manager": {"resourceURL": "resources/syntax_manager/", "name": "syntax_manager", "environments": {"main": true, "worker": false}, "dependencies": {"worker_manager": "0.0.0", "events": "0.0.0", "underscore": "0.0.0", "syntax_directory": "0.0.0"}, "testmodules": [], "provides": [], "type": "plugins/supported", "description": "Provides syntax highlighting services for the editor"}, "completion": {"resourceURL": "resources/completion/", "description": "Code completion support", "dependencies": {"jquery": "0.0.0", "ctags": "0.0.0", "rangeutils": "0.0.0", "canon": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"indexOn": "name", "description": "Code completion support for specific languages", "ep": "extensionpoint", "name": "completion"}, {"description": "Accept the chosen completion", "key": ["return", "tab"], "predicates": {"completing": true}, "pointer": "controller#completeCommand", "ep": "command", "name": "complete"}, {"description": "Abandon the completion", "key": "escape", "predicates": {"completing": true}, "pointer": "controller#completeCancelCommand", "ep": "command", "name": "complete cancel"}, {"description": "Choose the completion below", "key": "down", "predicates": {"completing": true}, "pointer": "controller#completeDownCommand", "ep": "command", "name": "complete down"}, {"description": "Choose the completion above", "key": "up", "predicates": {"completing": true}, "pointer": "controller#completeUpCommand", "ep": "command", "name": "complete up"}], "type": "plugins/supported", "name": "completion"}, "environment": {"testmodules": [], "dependencies": {"settings": "0.0.0"}, "resourceURL": "resources/environment/", "name": "environment", "type": "plugins/supported"}, "undomanager": {"resourceURL": "resources/undomanager/", "description": "Manages undoable events", "testmodules": ["tests/testUndomanager"], "provides": [{"pointer": "#undoManagerCommand", "ep": "command", "key": ["ctrl_shift_z"], "name": "redo"}, {"pointer": "#undoManagerCommand", "ep": "command", "key": ["ctrl_z"], "name": "undo"}], "type": "plugins/supported", "name": "undomanager"}, "rangeutils": {"testmodules": ["tests/test"], "type": "plugins/supported", "resourceURL": "resources/rangeutils/", "description": "Utility functions for dealing with ranges of text", "name": "rangeutils"}, "stylesheet": {"resourceURL": "resources/stylesheet/", "name": "stylesheet", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#CSSSyntax", "ep": "syntax", "fileexts": ["css", "less"], "name": "css"}], "type": "plugins/supported", "description": "CSS syntax highlighter"}, "html": {"resourceURL": "resources/html/", "name": "html", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#HTMLSyntax", "ep": "syntax", "fileexts": ["htm", "html"], "name": "html"}], "type": "plugins/supported", "description": "HTML syntax highlighter"}, "js_syntax": {"resourceURL": "resources/js_syntax/", "name": "js_syntax", "environments": {"worker": true}, "dependencies": {"standard_syntax": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#JSSyntax", "ep": "syntax", "fileexts": ["js", "json"], "name": "js"}], "type": "plugins/supported", "description": "JavaScript syntax highlighter"}, "ctags": {"resourceURL": "resources/ctags/", "description": "Reads and writes tag files", "dependencies": {"traits": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "ctags"}, "events": {"resourceURL": "resources/events/", "description": "Dead simple event implementation", "dependencies": {"traits": "0.0"}, "testmodules": ["tests/test"], "provides": [], "type": "plugins/supported", "name": "events"}, "theme_manager": {"resourceURL": "resources/theme_manager/", "name": "theme_manager", "share": true, "environments": {"main": true, "worker": false}, "dependencies": {"theme_manager_base": "0.0.0", "settings": "0.0.0", "events": "0.0.0", "less": "0.0.0"}, "testmodules": [], "provides": [{"unregister": "themestyles#unregisterThemeStyles", "register": "themestyles#registerThemeStyles", "ep": "extensionhandler", "name": "themestyles"}, {"unregister": "index#unregisterTheme", "register": "index#registerTheme", "ep": "extensionhandler", "name": "theme"}, {"defaultValue": "standard", "description": "The theme plugin's name to use. If set to 'standard' no theme will be used", "type": "text", "ep": "setting", "name": "theme"}, {"pointer": "#appLaunched", "ep": "appLaunched"}], "type": "plugins/supported", "description": "Handles colors in Bespin"}, "whitetheme": {"resourceURL": "resources/whitetheme/", "description": "Provides a white theme for Bespin", "dependencies": {"theme_manager": "0.0.0"}, "testmodules": [], "provides": [{"url": ["theme.less"], "description": "A basic white theme", "pointer": "index#whiteTheme", "ep": "theme", "name": "white"}], "type": "plugins/supported", "name": "whitetheme"}, "standard_syntax": {"resourceURL": "resources/standard_syntax/", "description": "Easy-to-use basis for syntax engines", "environments": {"worker": true}, "dependencies": {"syntax_worker": "0.0.0", "syntax_directory": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "standard_syntax"}, "types": {"resourceURL": "resources/types/", "description": "Defines parameter types for commands", "testmodules": ["tests/testBasic", "tests/testTypes"], "provides": [{"indexOn": "name", "description": "Commands can accept various arguments that the user enters or that are automatically supplied by the environment. Those arguments have types that define how they are supplied or completed. The pointer points to an object with methods convert(str value) and getDefault(). Both functions have `this` set to the command's `takes` parameter. If getDefault is not defined, the default on the command's `takes` is used, if there is one. The object can have a noInput property that is set to true to reflect that this type is provided directly by the system. getDefault must be defined in that case.", "ep": "extensionpoint", "name": "type"}, {"description": "Text that the user needs to enter.", "pointer": "basic#text", "ep": "type", "name": "text"}, {"description": "A JavaScript number", "pointer": "basic#number", "ep": "type", "name": "number"}, {"description": "A true/false value", "pointer": "basic#bool", "ep": "type", "name": "boolean"}, {"description": "An object that converts via JavaScript", "pointer": "basic#object", "ep": "type", "name": "object"}, {"description": "A string that is constrained to be one of a number of pre-defined values", "pointer": "basic#selection", "ep": "type", "name": "selection"}, {"description": "A type which we don't understand from the outset, but which we hope context can help us with", "ep": "type", "name": "deferred"}], "type": "plugins/supported", "name": "types"}, "jquery": {"testmodules": [], "resourceURL": "resources/jquery/", "name": "jquery", "type": "plugins/thirdparty"}, "embedded": {"testmodules": [], "dependencies": {"theme_manager": "0.0.0", "text_editor": "0.0.0", "appconfig": "0.0.0", "edit_session": "0.0.0", "screen_theme": "0.0.0"}, "resourceURL": "resources/embedded/", "name": "embedded", "type": "plugins/supported"}, "settings": {"resourceURL": "resources/settings/", "description": "Infrastructure and commands for managing user preferences", "share": true, "dependencies": {"types": "0.0"}, "testmodules": [], "provides": [{"indexOn": "name", "description": "A setting is something that the application offers as a way to customize how it works", "register": "index#addSetting", "ep": "extensionpoint", "name": "setting"}, {"description": "A settingChange is a way to be notified of changes to a setting", "ep": "extensionpoint", "name": "settingChange"}, {"pointer": "commands#setCommand", "description": "define and show settings", "params": [{"defaultValue": null, "type": {"pointer": "settings:index#getSettings", "name": "selection"}, "name": "setting", "description": "The name of the setting to display or alter"}, {"defaultValue": null, "type": {"pointer": "settings:index#getTypeSpecFromAssignment", "name": "deferred"}, "name": "value", "description": "The new value for the chosen setting"}], "ep": "command", "name": "set"}, {"pointer": "commands#unsetCommand", "description": "unset a setting entirely", "params": [{"type": {"pointer": "settings:index#getSettings", "name": "selection"}, "name": "setting", "description": "The name of the setting to return to defaults"}], "ep": "command", "name": "unset"}], "type": "plugins/supported", "name": "settings"}, "appconfig": {"resourceURL": "resources/appconfig/", "description": "Instantiates components and displays the GUI based on configuration.", "dependencies": {"jquery": "0.0.0", "canon": "0.0.0", "settings": "0.0.0"}, "testmodules": [], "provides": [{"description": "Event: Fired when the app is completely launched.", "ep": "extensionpoint", "name": "appLaunched"}], "type": "plugins/supported", "name": "appconfig"}, "syntax_worker": {"resourceURL": "resources/syntax_worker/", "description": "Coordinates multiple syntax engines", "environments": {"worker": true}, "dependencies": {"syntax_directory": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "type": "plugins/supported", "name": "syntax_worker"}, "js_completion": {"resourceURL": "resources/js_completion/", "description": "JavaScript code completion", "dependencies": {"completion": "0.0.0", "underscore": "0.0.0"}, "testmodules": [], "provides": [{"pointer": "#JSCompletion", "ep": "completion", "name": "js"}], "type": "plugins/supported", "name": "js_completion"}, "screen_theme": {"resourceURL": "resources/screen_theme/", "description": "Bespins standard theme basePlugin", "dependencies": {"theme_manager": "0.0.0"}, "testmodules": [], "provides": [{"url": ["theme.less"], "ep": "themestyles"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "container_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "container_font_size"}, {"defaultValue": "@global_container_background", "ep": "themevariable", "name": "container_bg"}, {"defaultValue": "@global_color", "ep": "themevariable", "name": "container_color"}, {"defaultValue": "@global_line_height", "ep": "themevariable", "name": "container_line_height"}, {"defaultValue": "@global_pane_background", "ep": "themevariable", "name": "pane_bg"}, {"defaultValue": "@global_pane_border_radius", "ep": "themevariable", "name": "pane_border_radius"}, {"defaultValue": "@global_form_font", "ep": "themevariable", "name": "form_font"}, {"defaultValue": "@global_form_font_size", "ep": "themevariable", "name": "form_font_size"}, {"defaultValue": "@global_form_line_height", "ep": "themevariable", "name": "form_line_height"}, {"defaultValue": "@global_form_color", "ep": "themevariable", "name": "form_color"}, {"defaultValue": "@global_form_text_shadow", "ep": "themevariable", "name": "form_text_shadow"}, {"defaultValue": "@global_pane_link_color", "ep": "themevariable", "name": "pane_a_color"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "pane_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "pane_font_size"}, {"defaultValue": "@global_pane_text_shadow", "ep": "themevariable", "name": "pane_text_shadow"}, {"defaultValue": "@global_pane_h1_font", "ep": "themevariable", "name": "pane_h1_font"}, {"defaultValue": "@global_pane_h1_font_size", "ep": "themevariable", "name": "pane_h1_font_size"}, {"defaultValue": "@global_pane_h1_color", "ep": "themevariable", "name": "pane_h1_color"}, {"defaultValue": "@global_font_size * 1.8", "ep": "themevariable", "name": "pane_line_height"}, {"defaultValue": "@global_pane_color", "ep": "themevariable", "name": "pane_color"}, {"defaultValue": "@global_text_shadow", "ep": "themevariable", "name": "pane_text_shadow"}, {"defaultValue": "@global_font", "ep": "themevariable", "name": "button_font"}, {"defaultValue": "@global_font_size", "ep": "themevariable", "name": "button_font_size"}, {"defaultValue": "@global_button_color", "ep": "themevariable", "name": "button_color"}, {"defaultValue": "@global_button_background", "ep": "themevariable", "name": "button_bg"}, {"defaultValue": "@button_bg - #063A27", "ep": "themevariable", "name": "button_bg2"}, {"defaultValue": "@button_bg - #194A5E", "ep": "themevariable", "name": "button_border"}, {"defaultValue": "@global_control_background", "ep": "themevariable", "name": "control_bg"}, {"defaultValue": "@global_control_color", "ep": "themevariable", "name": "control_color"}, {"defaultValue": "@global_control_border", "ep": "themevariable", "name": "control_border"}, {"defaultValue": "@global_control_border_radius", "ep": "themevariable", "name": "control_border_radius"}, {"defaultValue": "@global_control_active_background", "ep": "themevariable", "name": "control_active_bg"}, {"defaultValue": "@global_control_active_border", "ep": "themevariable", "name": "control_active_border"}, {"defaultValue": "@global_control_active_color", "ep": "themevariable", "name": "control_active_color"}, {"defaultValue": "@global_control_active_inset_color", "ep": "themevariable", "name": "control_active_inset_color"}], "type": "plugins/supported", "name": "screen_theme"}, "notifier": {"resourceURL": "resources/notifier/", "description": "Provides a way to un-obtrusively notify users of asynchronous events", "dependencies": {"settings": "0.0.0"}, "testmodules": ["tests/testNotifications"], "provides": [{"action": "new", "pointer": "#Notifier", "ep": "factory", "name": "notifier"}, {"description": "tells the notifier about a kind of notification that may be presented to the user. This will be used in a notification configuration user interface, for example.", "unregister": "#unregisterNotification", "register": "#registerNotification", "params": [{"required": true, "type": "string", "name": "name", "description": "name of the notification type. Notifications are identified by the combination of pluginName_notificationName, so you don't need to worry about making this unique across Bespin."}, {"type": "string", "name": "description", "description": "The more human-readable form of the notification name that will be presented to the user."}, {"type": "string", "name": "level", "description": "default level for these notifications. Value should be 'error', 'info' or 'debug'."}, {"type": "pointer", "name": "onclick", "description": "function that should be called if one of these notifications is clicked on. Will be passed the message object."}, {"type": "resourceUrl", "name": "iconUrl", "description": "custom icon for this notification. looked up relative to the plugins resources directory."}], "ep": "extensionpoint", "name": "notification"}, {"description": "Debugging Messages", "level": "debug", "ep": "notification", "name": "debug"}, {"indexOn": "name", "description": "A function that is called with message objects whenever appropriate notifications are published.", "params": [{"required": true, "type": "string", "name": "name", "description": "convenient name for the handler (used in configuration)"}, {"type": "string", "name": "description", "description": "Longer, more human-readable description of the handler"}, {"required": true, "name": "pointer", "description": "function that will be called with the message"}], "ep": "extensionpoint", "name": "notificationHandler"}, {"description": "Logs to the browser console", "pointer": "handlers#console", "ep": "notificationHandler", "name": "console"}, {"description": "Displays in browser alerts", "pointer": "handlers#alert", "ep": "notificationHandler", "name": "alert"}, {"description": "JSON array of objects describing how notifications are configured", "defaultValue": "[]", "type": "text", "ep": "setting", "name": "notifications"}], "type": "plugins/supported", "name": "notifier"}});;
 });
 })();
 /* ***** BEGIN LICENSE BLOCK *****
@@ -20304,7 +22717,13 @@ $(document).ready(function() {
 
 (function() {
 
+var Promise = bespin.tiki.require('bespin:promise').Promise;
+var group = bespin.tiki.require("bespin:promise").group;
 var $ = bespin.tiki.require("jquery").$;
+
+bespin.loaded = new Promise();
+bespin.initialized = new Promise();
+
 /**
  * Returns the CSS property of element.
  *   1) If the CSS property is on the style object of the element, use it, OR
@@ -20368,7 +22787,6 @@ bespin.useBespin = function(element, options) {
         }
     }
 
-    var Promise = bespin.tiki.require('bespin:promise').Promise;
     var prEnv = null;
     var pr = new Promise();
 
@@ -20497,6 +22915,9 @@ bespin.useBespin = function(element, options) {
 };
 
 $(document).ready(function() {
+    // Bespin is now ready to use.
+    bespin.loaded.resolve();
+
     // Holds the lauch promises of all launched Bespins.
     var launchBespinPromises = [];
 
@@ -20513,19 +22934,17 @@ $(document).ready(function() {
         launchBespinPromises.push(pr);
     }
 
-    // If users want a custom startup
-    if (window.onBespinLoad) {
-        // group-promise function.
-        var group = bespin.tiki.require("bespin:promise").group;
-
-        // Call the window.onBespinLoad() function after all launched Bespins
-        // are ready or throw an error otherwise.
-        group(launchBespinPromises).then(function() {
-            window.onBespinLoad();
-        }, function() {
-            throw new Error('At least one Bespin failed to launch!');
-        });
-    }
+    // Call the window.onBespinLoad() function after all launched Bespins
+    // are ready or throw an error otherwise.
+    group(launchBespinPromises).then(function() {
+        bespin.initialized.resolve();
+        // If users want a custom startup.
+        if (window.onBespinLoad) {
+          window.onBespinLoad();
+        }
+    }, function(err) {
+        bespin.initialized.reject('At least one Bespin failed to launch!' + err);
+    });
 });
 
 })();
