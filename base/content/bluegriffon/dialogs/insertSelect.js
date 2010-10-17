@@ -2,6 +2,7 @@ Components.utils.import("resource://gre/modules/editorHelper.jsm");
 
 var gNode = null;
 var gEditor = null;
+var gWhere = null;
 
 function Startup()
 {
@@ -19,13 +20,47 @@ function onAccept()
 {
   gEditor.beginTransaction();
 
+  var doc = EditorUtils.getCurrentDocument();
   if (!gNode) {
-    var doc = EditorUtils.getCurrentDocument();
     gNode = doc.createElement("select");
     gEditor.insertElementAtSelection(gNode, true);
   }
 
   ApplyAttributes();
+
+  var child = gNode.lastChild;
+  while (child) {
+    var tmp = child.previousSibling;
+    gEditor.deleteNode(child);
+    child = tmp;
+  }
+
+  var treeitems = gDialog.contentsTree.querySelectorAll("treeitem");
+  var parent = gNode;
+  for (var i = 0; i < treeitems.length; i++)
+  {
+    var treeitem = treeitems[i];
+    if (treeitem.hasAttribute("container")) {
+      var child = doc.createElement("optgroup");
+      child.setAttribute("label", treeitem.firstChild.childNodes[1].getAttribute("label"));
+      if (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔")
+        child.setAttribute("disabled", "disabled");
+      parent = child;
+      gEditor.insertNode(child, gNode, gNode.childNodes.length);
+    }
+    else {
+      if (treeitem.parentNode.parentNode.id == "contentsTree")
+        parent = gNode;
+      var child = doc.createElement("option");
+      child.setAttribute("name", treeitem.firstChild.childNodes[0].getAttribute("label"));
+      child.textContent = treeitem.firstChild.childNodes[1].getAttribute("label");
+      if (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔")
+        child.setAttribute("disabled", "disabled");
+      if (treeitem.firstChild.childNodes[3].getAttribute("label"))
+      child.setAttribute("selected", "selected");
+      gEditor.insertNode(child, parent, parent.childNodes.length);
+    }
+  }
 
   gEditor.endTransaction();
   gEditor.selection.collapse(gNode, 0);
@@ -106,15 +141,17 @@ function UpdateButtons()
     return;
   }
 
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
   gDialog.MinusButton.disabled = false;
   gDialog.ConfigButton.disabled = false;
-  var index = view.selection.currentIndex;
-  gDialog.UpButton.disabled = !index;
-  gDialog.DownButton.disabled = (index == view.rowCount - 1);
+  gDialog.UpButton.disabled = !treeitem.previousElementSibling;
+  gDialog.DownButton.disabled = !treeitem.nextElementSibling;
 }
 
-function AddOptgroup()
+function AddOptgroup(aWhere)
 {
+  gWhere = aWhere;
   gDialog.optGroupLabelTextbox.value = "";
   gDialog.optGroupDisabledCheckbox.checked = false;
   gDialog.optGroupPanel.openPopup(gDialog.PlusButton,
@@ -133,12 +170,35 @@ function DeleteOpt()
   treechildren.removeChild(treeitem);
   if (treechildren.childNode.length == 0)
     treechildren.parentNode.removeChild(treechildren);
+  UpdateButtons();
 }
 
 function doAddOptGroup()
 {
-	item = AddTreeItem(gDialog.contentsTree);
-	var cell1 = document.createElement("treecell");
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection) { // nothing in the tree
+    item = AddTreeItem(tree);
+  }
+  else {
+	  var index = view.selection.currentIndex;
+	  var treeitem = contentView.getItemAtIndex(index);
+	
+    if (gWhere == "before" || gWhere == "after") {
+	    item = document.createElement("treeitem");
+	    var row = document.createElement("treerow");
+	    item.appendChild(row);
+	    if (gWhere == "before")
+		    treeitem.parentNode.insertBefore(item, treeitem);
+	    else
+	      treeitem.parentNode.insertBefore(item, treeitem.nextSibling);
+    }
+    else if (gWhere == "inside")
+      item = AddTreeItem(treeitem);
+  }
+
+  var cell1 = document.createElement("treecell");
 	cell1.setAttribute("label", "");
 	var cell2 = document.createElement("treecell");
 	cell2.setAttribute("label", gDialog.optGroupLabelTextbox.value);
@@ -152,11 +212,13 @@ function doAddOptGroup()
 	item.firstChild.appendChild(cell4);
   item.setAttribute("container", "true");
   gDialog.optGroupPanel.hidePopup();
+  gDialog.contentsTree.view.selection.select(gDialog.contentsTree.contentView.getIndexOfItem(item));
   UpdateButtons();
 }
 
-function AddOption()
+function AddOption(aWhere)
 {
+  gWhere = aWhere;
   gDialog.optionLabelTextbox.value = "";
   gDialog.optionValueTextbox.value = "";
   gDialog.optionSelectedCheckbox.checked = false;
@@ -171,26 +233,112 @@ function doAddOption()
   var tree = gDialog.contentsTree;
   var contentView = tree.contentView;
   var view = tree.view;
-  var index = view.selection.currentIndex;
-  var treeitem = contentView.getItemAtIndex(index);
-
-  if (treeitem.hasAttribute("container")) {
-	  item = AddTreeItem(treeitem);
-	  var cell1 = document.createElement("treecell");
-	  cell1.setAttribute("label", gDialog.optionLabelTextbox.value);
-	  var cell2 = document.createElement("treecell");
-	  cell2.setAttribute("label", gDialog.optionValueTextbox.value);
-	  var cell3 = document.createElement("treecell");
-	  cell3.setAttribute("label", gDialog.optionDisabledCheckbox.checked ? "✔" : "");
-	  var cell4 = document.createElement("treecell");
-	  cell4.setAttribute("label", gDialog.optionSelectedCheckbox.checked ? "✔" : "");
-	  item.firstChild.appendChild(cell1);
-	  item.firstChild.appendChild(cell2);
-	  item.firstChild.appendChild(cell3);
-	  item.firstChild.appendChild(cell4);
+  if (!view || !view.selection) { // nothing in the tree
+    item = AddTreeItem(tree);
   }
   else {
-    
+    var index = view.selection.currentIndex;
+    var treeitem = contentView.getItemAtIndex(index);
+  
+    if (gWhere == "before" || gWhere == "after") {
+      item = document.createElement("treeitem");
+      var row = document.createElement("treerow");
+      item.appendChild(row);
+      if (gWhere == "before")
+        treeitem.parentNode.insertBefore(item, treeitem);
+      else
+        treeitem.parentNode.insertBefore(item, treeitem.nextSibling);
+    }
+    else if (gWhere == "inside")
+      item = AddTreeItem(treeitem);
+  }
+
+  var cell1 = document.createElement("treecell");
+  cell1.setAttribute("label", gDialog.optionLabelTextbox.value);
+  var cell2 = document.createElement("treecell");
+  cell2.setAttribute("label", gDialog.optionValueTextbox.value);
+  var cell3 = document.createElement("treecell");
+  cell3.setAttribute("label", gDialog.optionDisabledCheckbox.checked ? "✔" : "");
+  var cell4 = document.createElement("treecell");
+  cell4.setAttribute("label", gDialog.optionSelectedCheckbox.checked ? "✔" : "");
+  item.firstChild.appendChild(cell1);
+  item.firstChild.appendChild(cell2);
+  item.firstChild.appendChild(cell3);
+  item.firstChild.appendChild(cell4);
+
+
+  gDialog.optionPanel.hidePopup();
+  gDialog.contentsTree.view.selection.select(gDialog.contentsTree.contentView.getIndexOfItem(item));
+  UpdateButtons();
+}
+
+function UpdateOptions()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection) { // no selection...
+    //gDialog.insideMenu.disabled = true;
+    gDialog.insideMenu.disabled = true;
+    gDialog.addOptionInsideMenuitem.disabled = true;
+    gDialog.addOptgroupInsideMenuitem.disabled = true;
+    gDialog.beforeMenu.disabled = true;
+    gDialog.afterMenu.disabled = false;
+    return;
+  }
+
+  gDialog.beforeMenu.disabled = false;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var isTopLevel = (treeitem.parentNode.parentNode.id == "contentsTree");
+  gDialog.addOptgroupBeforeMenuitem.disabled = !isTopLevel;
+  gDialog.addOptgroupAfterMenuitem.disabled = !isTopLevel;
+
+  gDialog.insideMenu.disabled = false;
+  gDialog.addOptionInsideMenuitem.disabled = !treeitem.hasAttribute("container");
+  gDialog.addOptGroupInsideMenuitem.disabled = true;
+}
+
+function Down()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var treechildren = treeitem.parentNode;
+
+  treechildren.insertBefore(treeitem, treeitem.nextSibling.nextSibling);
+  gDialog.contentsTree.view.selection.select(contentView.getIndexOfItem(treeitem));
+  UpdateButtons();
+}
+
+function Up()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var treechildren = treeitem.parentNode;
+
+  treechildren.insertBefore(treeitem, treeitem.previousSibling);
+  gDialog.contentsTree.view.selection.select(contentView.getIndexOfItem(treeitem));
+  UpdateButtons();
+}
+
+function CheckCRInOptGroupPanel(aEvent)
+{
+  if (aEvent.keyCode == 13) { // CR key
+    aEvent.preventDefault();
+    doAddOptGroup();
   }
 }
 
+function CheckCRInOptionPanel(aEvent)
+{
+  if (aEvent.keyCode == 13) { // CR key
+    aEvent.preventDefault();
+    doAddOption();
+  }
+}

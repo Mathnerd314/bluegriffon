@@ -30,6 +30,10 @@
 <!ENTITY disabled.col "Disabled">
 <!ENTITY selected.col "Selected">
 
+<!ENTITY before.label "Before...">
+<!ENTITY inside.label "Inside...">
+<!ENTITY after.label "After...">
+
 <!ENTITY addOption.label "Add an option">
 <!ENTITY addOptgroup.label "Add a group of options">
 

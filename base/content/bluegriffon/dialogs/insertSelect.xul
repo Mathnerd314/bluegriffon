@@ -22,7 +22,8 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/form-common.js"/>
 
   <panelset>
-    <panel id="optGroupPanel" onpopupshown="gDialog.optGroupLabelTextbox.focus()">
+    <panel id="optGroupPanel" onpopupshown="gDialog.optGroupLabelTextbox.focus()"
+           onkeypress="CheckCRInOptGroupPanel(event)">
       <grid>
         <columns><column/><column/></columns>
         <rows>
@@ -44,7 +45,8 @@
                 oncommand="doAddOptGroup()"/>
       </hbox>
     </panel>
-    <panel id="optionPanel" onpopupshown="gDialog.optionLabelTextbox.focus()">
+    <panel id="optionPanel" onpopupshown="gDialog.optionLabelTextbox.focus()"
+           onkeypress="CheckCRInOptionPanel(event)">
       <grid>
         <columns><column/><column/></columns>
         <rows>
@@ -140,13 +142,40 @@
 	                       tooltiptext="&add.tooltip;"
 	                       id="PlusButton"
 	                       type="menu">
-	          <menupopup>
-              <menuitem label="&addOption.label;"
-                        id="addOptionMenuitem"
-                        oncommand="AddOption()"/>
-              <menuitem label="&addOptgroup.label;"
-                        id="addOptgroupMenuitem"
-                        oncommand="AddOptgroup()"/>
+	          <menupopup onpopupshowing="UpdateOptions()">
+              <menu label="&before.label;"
+                    id="beforeMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionBeforeMenuitem"
+                            oncommand="AddOption('before')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupBeforeMenuitem"
+                            oncommand="AddOptgroup('before')"/>
+                </menupopup>
+              </menu>
+              <menu label="&inside.label;"
+                    id="insideMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionInsideMenuitem"
+                            oncommand="AddOption('inside')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupInsideMenuitem"
+                            oncommand="AddOptgroup('inside')"/>
+                </menupopup>
+              </menu>
+              <menu label="&after.label;"
+                    id="afterMenu">
+                <menupopup>
+                  <menuitem label="&addOption.label;"
+                            id="addOptionAfterMenuitem"
+                            oncommand="AddOption('after')"/>
+                  <menuitem label="&addOptgroup.label;"
+                            id="addOptgroupAfterMenuitem"
+                            oncommand="AddOptgroup('after')"/>
+                </menupopup>
+              </menu>
 	          </menupopup>
 	        </toolbarbutton>
 	        <toolbarbutton class="listboxBgMinusButton"
