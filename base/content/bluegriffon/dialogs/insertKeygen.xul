@@ -50,6 +50,10 @@
                          oncommand="ToggleMultibuttons(this)"/>
         </hbox>
       </row>
+      <row align="center" attribute="keyparams">
+        <label value="&keyparams.label;"/>
+        <textbox/>
+      </row>
       <row align="center" attribute="challenge">
         <label value="&challenge.label;"/>
         <textbox/>
