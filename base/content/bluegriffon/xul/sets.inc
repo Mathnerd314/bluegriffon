@@ -81,6 +81,7 @@
   <command id="cmd_keygen"            oncommand="goDoCommand('cmd_keygen')"/>
   <command id="cmd_output"            oncommand="goDoCommand('cmd_output')"/>
   <command id="cmd_progress"          oncommand="goDoCommand('cmd_progress')"/>
+  <command id="cmd_meter"             oncommand="goDoCommand('cmd_meter')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

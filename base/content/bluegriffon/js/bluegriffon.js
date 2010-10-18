@@ -1034,6 +1034,9 @@ function OnDoubleClick(aEvent)
     case "progress":
       cmdInsertProgressCommand.doCommand();
       break;
+    case "meter":
+      cmdInsertMeterCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

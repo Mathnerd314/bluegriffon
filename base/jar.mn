@@ -105,6 +105,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertOutput.xul          (content/bluegriffon/dialogs/insertOutput.xul)
   content/bluegriffon/dialogs/insertProgress.js         (content/bluegriffon/dialogs/insertProgress.js)
   content/bluegriffon/dialogs/insertProgress.xul        (content/bluegriffon/dialogs/insertProgress.xul)
+  content/bluegriffon/dialogs/insertMeter.js            (content/bluegriffon/dialogs/insertMeter.js)
+  content/bluegriffon/dialogs/insertMeter.xul           (content/bluegriffon/dialogs/insertMeter.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -161,4 +163,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertKeygen.dtd  (locale/en-US/bluegriffon/insertKeygen.dtd)
   locale/en-US/bluegriffon/insertOutput.dtd  (locale/en-US/bluegriffon/insertOutput.dtd)
   locale/en-US/bluegriffon/insertProgress.dtd  (locale/en-US/bluegriffon/insertProgress.dtd)
+  locale/en-US/bluegriffon/insertMeter.dtd  (locale/en-US/bluegriffon/insertMeter.dtd)
   

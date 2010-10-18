@@ -161,6 +161,9 @@
 		          <menuitem label="&progressToolbarCmd.label;..."
 		                    accesskey="&progressToolbarCmd.key;"
 		                    command="cmd_progress"/>
+		          <menuitem label="&meterToolbarCmd.label;..."
+		                    accesskey="&meterToolbarCmd.key;"
+		                    command="cmd_meter"/>
 		       </menupopup>
         </menu>
       </menupopup>

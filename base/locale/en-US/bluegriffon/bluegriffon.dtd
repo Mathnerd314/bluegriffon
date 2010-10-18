@@ -208,6 +208,9 @@
 <!ENTITY progressToolbarCmd.label "Progress">
 <!ENTITY progressToolbarCmd.key "p">
 
+<!ENTITY meterToolbarCmd.label "Meter">
+<!ENTITY meterToolbarCmd.key "M">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 
