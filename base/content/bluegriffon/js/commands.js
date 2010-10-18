@@ -312,6 +312,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_output",      cmdInsertOutputCommand);
     commandTable.registerCommand("cmd_progress",    cmdInsertProgressCommand);
     commandTable.registerCommand("cmd_meter",       cmdInsertMeterCommand);
+    commandTable.registerCommand("cmd_datalist",    cmdInsertDatalistCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);

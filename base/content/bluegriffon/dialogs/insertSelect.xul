@@ -40,7 +40,10 @@
       </grid>
       <hbox>
         <spacer flex="1"/>
-        <button label="&ok.label;"
+        <button label="&update.label;" id="doUpdateOptGroupButton"
+                default="true"
+                oncommand="doUpdateOptGroup()"/>
+        <button label="&ok.label;" id="doAddOptGroupButton"
                 default="true"
                 oncommand="doAddOptGroup()"/>
       </hbox>
@@ -72,7 +75,10 @@
       </grid>
       <hbox>
         <spacer flex="1"/>
-        <button label="&ok.label;"
+        <button label="&update.label;" id="doUpdateOptionButton"
+                default="true"
+                oncommand="doUpdateOption()"/>
+        <button label="&ok.label;" id="doAddOptionButton"
                 default="true"
                 oncommand="doAddOption()"/>
       </hbox>

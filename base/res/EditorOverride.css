@@ -96,7 +96,7 @@ textarea {
 }
 
 keygen {
-  min-width: 10em;
+  min-width: 5em;
   min-height: 20px;
   display: inline-block;
   outline: dotted red thin;
@@ -104,6 +104,21 @@ keygen {
   background-image: url("chrome://bluegriffon/skin/icons/lock.png");
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+datalist {
+  min-width: 5em;
+  min-height: 20px;
+  display: inline-block;
+  outline: dotted red thin;
+  background-color: lightgray;
+  background-image: url("chrome://bluegriffon/skin/icons/datalist.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+datalist * {
+  display: none;
 }
 
 /* XXX Still need a better way of blocking other events to these widgets */

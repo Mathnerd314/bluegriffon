@@ -82,6 +82,7 @@
   <command id="cmd_output"            oncommand="goDoCommand('cmd_output')"/>
   <command id="cmd_progress"          oncommand="goDoCommand('cmd_progress')"/>
   <command id="cmd_meter"             oncommand="goDoCommand('cmd_meter')"/>
+  <command id="cmd_datalist"          oncommand="goDoCommand('cmd_datalist')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

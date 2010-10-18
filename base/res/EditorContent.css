@@ -142,7 +142,7 @@ audio:not([controls]) {
 }
 
 output, progress, meter {
-  border: thin red dotted;
+  outline: thin red dotted;
 }
 
 output:empty, progress:empty, meter:empty {

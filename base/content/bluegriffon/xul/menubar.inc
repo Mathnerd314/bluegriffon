@@ -164,6 +164,9 @@
 		          <menuitem label="&meterToolbarCmd.label;..."
 		                    accesskey="&meterToolbarCmd.key;"
 		                    command="cmd_meter"/>
+		          <menuitem label="&datalistToolbarCmd.label;..."
+		                    accesskey="&datalistToolbarCmd.key;"
+		                    command="cmd_datalist"/>
 		       </menupopup>
         </menu>
       </menupopup>

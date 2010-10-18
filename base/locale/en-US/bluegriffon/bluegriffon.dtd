@@ -211,6 +211,9 @@
 <!ENTITY meterToolbarCmd.label "Meter">
 <!ENTITY meterToolbarCmd.key "M">
 
+<!ENTITY datalistToolbarCmd.label "Datalist">
+<!ENTITY datalistToolbarCmd.key "i">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 
