@@ -91,6 +91,10 @@ input, textarea {
   -moz-user-focus: none !important;
 }
 
+textarea {
+  resize: none;
+}
+
 /* XXX Still need a better way of blocking other events to these widgets */
 input[disabled], input[type="checkbox"], input[type="radio"], input[type="file"] {
   -moz-user-select: all !important;

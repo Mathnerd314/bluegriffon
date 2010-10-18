@@ -196,6 +196,9 @@
 <!ENTITY selectToolbarCmd.label "Selection list">
 <!ENTITY selectToolbarCmd.key "S">
 
+<!ENTITY textareaToolbarCmd.label "Text area">
+<!ENTITY textareaToolbarCmd.key "T">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

@@ -1022,6 +1022,9 @@ function OnDoubleClick(aEvent)
     case "optgroup":
       cmdInsertSelectCommand.doCommand();
       break;
+    case "textarea":
+      cmdInsertTextareaCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

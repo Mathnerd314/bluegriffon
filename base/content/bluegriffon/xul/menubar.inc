@@ -149,6 +149,9 @@
 		          <menuitem label="&selectToolbarCmd.label;..."
 		                    accesskey="&selectToolbarCmd.key;"
 		                    command="cmd_select"/>
+		          <menuitem label="&textareaToolbarCmd.label;..."
+		                    accesskey="&textareaToolbarCmd.key;"
+		                    command="cmd_textarea"/>
 		       </menupopup>
         </menu>
       </menupopup>

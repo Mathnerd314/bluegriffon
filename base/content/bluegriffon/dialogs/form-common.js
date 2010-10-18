@@ -79,3 +79,16 @@ function ApplyAttributes()
     }
   }
 }
+
+function ToggleMultibuttons(aElt)
+{
+  if (!aElt.checked)
+    return;
+  var buttons = aElt.parentNode.querySelectorAll(".multibutton");
+  for (var i = 0; i < buttons.length; i++) {
+    var b = buttons[i];
+    if (b != aElt)
+      b.removeAttribute("checked");
+  }
+}
+
