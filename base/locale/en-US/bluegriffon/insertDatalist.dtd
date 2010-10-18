@@ -1,6 +1,6 @@
 <!ENTITY window.title "Insert or edit a data list">
 
-<!ENTITY window.title "Insert or edit a selection list">
+<!ENTITY window.title "Insert or edit a datalist">
 
 <!ENTITY name.label "Name:">
 <!ENTITY value.label "Value:">
