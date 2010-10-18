@@ -155,6 +155,9 @@
 		          <menuitem label="&keygenToolbarCmd.label;..."
 		                    accesskey="&keygenToolbarCmd.key;"
 		                    command="cmd_keygen"/>
+		          <menuitem label="&outputToolbarCmd.label;..."
+		                    accesskey="&outputToolbarCmd.key;"
+		                    command="cmd_output"/>
 		       </menupopup>
         </menu>
       </menupopup>

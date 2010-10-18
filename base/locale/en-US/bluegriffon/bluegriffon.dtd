@@ -202,6 +202,9 @@
 <!ENTITY keygenToolbarCmd.label "Key pair generator">
 <!ENTITY keygenToolbarCmd.key "K">
 
+<!ENTITY outputToolbarCmd.label "Output">
+<!ENTITY outputToolbarCmd.key "O">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

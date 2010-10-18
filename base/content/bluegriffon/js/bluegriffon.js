@@ -1028,6 +1028,9 @@ function OnDoubleClick(aEvent)
     case "keygen":
       cmdInsertKeygenCommand.doCommand();
       break;
+    case "output":
+      cmdInsertOutputCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

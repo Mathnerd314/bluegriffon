@@ -141,3 +141,12 @@ audio:not([controls]) {
   display: inline-block !important;
 }
 
+output {
+  border: thin red dotted;
+}
+
+output:empty {
+  display: inline-block;
+  width: 1em;
+  height: 16px;
+}
