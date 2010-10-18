@@ -308,6 +308,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_button",      cmdInsertButtonCommand);
     commandTable.registerCommand("cmd_select",      cmdInsertSelectCommand);
     commandTable.registerCommand("cmd_textarea",    cmdInsertTextareaCommand);
+    commandTable.registerCommand("cmd_keygen",      cmdInsertKeygenCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);

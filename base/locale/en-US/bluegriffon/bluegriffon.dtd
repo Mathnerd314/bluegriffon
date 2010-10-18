@@ -199,6 +199,9 @@
 <!ENTITY textareaToolbarCmd.label "Text area">
 <!ENTITY textareaToolbarCmd.key "T">
 
+<!ENTITY keygenToolbarCmd.label "Key pair generator">
+<!ENTITY keygenToolbarCmd.key "K">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

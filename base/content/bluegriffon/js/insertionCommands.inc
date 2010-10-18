@@ -378,3 +378,26 @@ var cmdInsertTextareaCommand =
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
+
+var cmdInsertKeygenCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "keygen")
+      element = null;
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertKeygen.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+  }
+};

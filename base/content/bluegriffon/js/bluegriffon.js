@@ -1025,6 +1025,9 @@ function OnDoubleClick(aEvent)
     case "textarea":
       cmdInsertTextareaCommand.doCommand();
       break;
+    case "keygen":
+      cmdInsertKeygenCommand.doCommand();
+      break;
     case "td":
     case "th":
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 

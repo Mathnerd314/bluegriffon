@@ -85,7 +85,7 @@ a:link {
 
 /* Allow double-clicks on these widgets to open properties dialogs
    XXX except when the widget has disabled attribute */
-input, textarea {
+input, textarea, keygen {
   -moz-user-select: all !important;
   -moz-user-input: auto !important;
   -moz-user-focus: none !important;
@@ -93,6 +93,17 @@ input, textarea {
 
 textarea {
   resize: none;
+}
+
+keygen {
+  min-width: 10em;
+  min-height: 20px;
+  display: inline-block;
+  outline: dotted red thin;
+  background-color: lightgray;
+  background-image: url("chrome://bluegriffon/skin/icons/lock.png");
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* XXX Still need a better way of blocking other events to these widgets */

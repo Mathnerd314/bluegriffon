@@ -65,7 +65,7 @@ function ApplyAttributes()
             var c = child.firstElementChild;
             while (c) {
               if (c.hasAttribute("checked")) {
-                gEditor.setAttribute(gNode, attr, child.getAttribute("value"));
+                gEditor.setAttribute(gNode, attr, c.getAttribute("value"));
                 break;
               }
               c = c.nextElementSibling;

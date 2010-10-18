@@ -78,6 +78,7 @@
   <command id="cmd_button"            oncommand="goDoCommand('cmd_button')"/>
   <command id="cmd_select"            oncommand="goDoCommand('cmd_select')"/>
   <command id="cmd_textarea"          oncommand="goDoCommand('cmd_textarea')"/>
+  <command id="cmd_keygen"            oncommand="goDoCommand('cmd_keygen')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

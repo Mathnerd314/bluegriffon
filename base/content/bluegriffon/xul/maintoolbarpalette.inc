@@ -141,6 +141,9 @@
           <menuitem label="&textareaToolbarCmd.label;..."
                     accesskey="&textareaToolbarCmd.key;"
                     command="cmd_textarea"/>
+          <menuitem label="&keygenToolbarCmd.label;..."
+                    accesskey="&keygenToolbarCmd.key;"
+                    command="cmd_keygen"/>
        </menupopup>
       </toolbarbutton>
 
