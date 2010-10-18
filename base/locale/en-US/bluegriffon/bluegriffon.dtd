@@ -205,6 +205,9 @@
 <!ENTITY outputToolbarCmd.label "Output">
 <!ENTITY outputToolbarCmd.key "O">
 
+<!ENTITY progressToolbarCmd.label "Progress">
+<!ENTITY progressToolbarCmd.key "p">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

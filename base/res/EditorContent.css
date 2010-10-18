@@ -141,11 +141,11 @@ audio:not([controls]) {
   display: inline-block !important;
 }
 
-output {
+output, progress {
   border: thin red dotted;
 }
 
-output:empty {
+output:empty, progress:empty {
   display: inline-block;
   width: 1em;
   height: 16px;

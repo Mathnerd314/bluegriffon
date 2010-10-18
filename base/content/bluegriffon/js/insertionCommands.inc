@@ -424,3 +424,26 @@ var cmdInsertOutputCommand =
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
+
+var cmdInsertProgressCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties();
+    if (element && element.nodeName.toLowerCase() != "progress")
+      element = null;
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertProgress.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+  }
+};

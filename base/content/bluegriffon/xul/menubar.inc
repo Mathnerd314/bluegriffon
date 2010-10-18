@@ -158,6 +158,9 @@
 		          <menuitem label="&outputToolbarCmd.label;..."
 		                    accesskey="&outputToolbarCmd.key;"
 		                    command="cmd_output"/>
+		          <menuitem label="&progressToolbarCmd.label;..."
+		                    accesskey="&progressToolbarCmd.key;"
+		                    command="cmd_progress"/>
 		       </menupopup>
         </menu>
       </menupopup>

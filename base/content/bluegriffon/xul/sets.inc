@@ -80,6 +80,7 @@
   <command id="cmd_textarea"          oncommand="goDoCommand('cmd_textarea')"/>
   <command id="cmd_keygen"            oncommand="goDoCommand('cmd_keygen')"/>
   <command id="cmd_output"            oncommand="goDoCommand('cmd_output')"/>
+  <command id="cmd_progress"          oncommand="goDoCommand('cmd_progress')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"
