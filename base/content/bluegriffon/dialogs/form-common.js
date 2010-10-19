@@ -1,7 +1,30 @@
+var gNameAndIds = [];
+
 function InitDialog()
 {
-  if (!gNode)
+  var hasNameAttr = gDialog.mainGrid.querySelector("row[attribute='name']");
+  if (hasNameAttr) {
+    hasNameAttr.lastElementChild.addEventListener("input", CheckNameAttribute, false);
+
+	  var eltsWithId = EditorUtils.getCurrentDocument().querySelectorAll("*[id]");
+	  for (var i = 0; i < eltsWithId.length; i++)
+	    gNameAndIds.push(eltsWithId[i].id);
+
+    var node = EditorUtils.getSelectionContainer().node;
+    while (node && node.nodeName.toLowerCase() != "form")
+      node = node.parentNode;
+  
+    if (node) {
+      var eltsWithName = node.querySelectorAll("button[name],fieldset[name],input[name],keygen[name],output[name],select[name],textarea[name]");
+      for (var i = 0; i < eltsWithName.length; i++)
+        gNameAndIds.push(eltsWithName[i].getAttribute("name"));
+    }
+  }
+
+  if (!gNode) {
+    document.documentElement.getButton("accept").setAttribute("disabled", "true");
     return;
+  }
 
   var rows = gDialog.mainGrid.querySelectorAll("row");
   for (var i = 0; i < rows.length; i++) {
@@ -92,3 +115,13 @@ function ToggleMultibuttons(aElt)
   }
 }
 
+function CheckNameAttribute(aEvent)
+{
+  var target = aEvent.target;
+  if (target.value && gNameAndIds.indexOf(target.value) == -1)
+    document.documentElement.getButton("accept").removeAttribute("disabled");
+  else if (!gNode || target.value != gNode.getAttribute("name"))
+    document.documentElement.getButton("accept").setAttribute("disabled", "true");
+  else
+    document.documentElement.getButton("accept").removeAttribute("disabled");
+}

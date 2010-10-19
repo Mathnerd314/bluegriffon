@@ -54,8 +54,8 @@ function Startup()
   GetUIElements();
 
   gDialog.typeMenulist.value = gType;
+  InitDialog();
   if (gNode) {
-    InitDialog();
     gDialog.typeMenulist.disabled = true;
     document.documentElement.getButton("accept").disabled = false;
   }
@@ -66,6 +66,9 @@ function Startup()
 
 function AdaptDialog()
 {
+  if (!("typeMenulist" in gDialog))
+    return;
+
   var type = gDialog.typeMenulist.value;
   var attrType = kTYPES[type];
   var visibleAttributes = kPARAMETERS[attrType];

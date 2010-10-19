@@ -10,10 +10,8 @@ function Startup()
   gEditor = EditorUtils.getCurrentEditor();
   GetUIElements();
 
-  if (gNode) {
-    InitDialog();
-    InitDialog2(gNode, gDialog.contentsTree);
-  }
+  InitDialog();
+  InitDialog2(gNode, gDialog.contentsTree);
 }
 
 function onAccept()
@@ -86,6 +84,9 @@ function AddTreeItem(aElt)
 
 function InitDialog2(node, refTree)
 {
+  if (!node)
+    return;
+
   var child = node.firstElementChild;
   while (child) {
     var item = null;

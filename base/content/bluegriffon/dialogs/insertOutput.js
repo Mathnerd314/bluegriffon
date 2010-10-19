@@ -18,9 +18,7 @@ function Startup()
   for (var i = 0; i < ids.length; i++)
     gDialog.forMenulist.appendItem(ids[i], ids[i]);
 
-  if (gNode) {
-    InitDialog();
-  }
+  InitDialog();
 }
 
 function onAccept()

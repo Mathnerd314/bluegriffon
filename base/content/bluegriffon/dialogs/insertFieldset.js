@@ -10,9 +10,7 @@ function Startup()
   gEditor = EditorUtils.getCurrentEditor();
   GetUIElements();
 
-  if (gNode) {
-    InitDialog();
-  }
+  InitDialog();
 }
 
 function ToggleLegend(aElt)
