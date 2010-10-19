@@ -111,6 +111,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertDatalist.xul        (content/bluegriffon/dialogs/insertDatalist.xul)
   content/bluegriffon/dialogs/insertStylesheet.js       (content/bluegriffon/dialogs/insertStylesheet.js)
   content/bluegriffon/dialogs/insertStylesheet.xul      (content/bluegriffon/dialogs/insertStylesheet.xul)
+  content/bluegriffon/dialogs/editStylesheet.js         (content/bluegriffon/dialogs/editStylesheet.js)
+  content/bluegriffon/dialogs/editStylesheet.xul        (content/bluegriffon/dialogs/editStylesheet.xul)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -169,4 +171,5 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertProgress.dtd  (locale/en-US/bluegriffon/insertProgress.dtd)
   locale/en-US/bluegriffon/insertMeter.dtd  (locale/en-US/bluegriffon/insertMeter.dtd)
   locale/en-US/bluegriffon/insertStylesheet.dtd  (locale/en-US/bluegriffon/insertStylesheet.dtd)
+  locale/en-US/bluegriffon/editStylesheet.dtd  (locale/en-US/bluegriffon/editStylesheet.dtd)
   

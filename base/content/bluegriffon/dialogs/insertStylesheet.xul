@@ -49,7 +49,7 @@
     <toolbarbutton class="listboxBgPlusButton"
                    tooltiptext="&add.tooltip;"
                    id="PlusButton"
-                   oncommand="AddOption()"/>
+                   oncommand="AddStylesheet()"/>
     <toolbarbutton class="listboxBgMinusButton"
                    disabled="true"
                    id="MinusButton"
