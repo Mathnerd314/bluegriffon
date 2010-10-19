@@ -322,6 +322,7 @@ var ComposerCommands = {
 
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
 
+    commandTable.registerCommand("cmd_stylesheets", cmdStylesheetsCommand);
   },
 
   setupFormatCommands: function setupFormatCommands()

@@ -214,6 +214,9 @@
 <!ENTITY datalistToolbarCmd.label "Datalist">
 <!ENTITY datalistToolbarCmd.key "i">
 
+<!ENTITY stylesheetsToolbarCmd.label "Stylesheets">
+<!ENTITY stylesheetsToolbarCmd.key "S">
+
 <!ENTITY cssToolbarCmd.label "CSS">
 <!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
 

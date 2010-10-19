@@ -493,3 +493,23 @@ var cmdInsertDatalistCommand =
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
 };
+
+var cmdStylesheetsCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertStylesheet.xul","_blank",
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
+  }
+};
