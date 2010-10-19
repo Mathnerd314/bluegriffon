@@ -312,17 +312,23 @@ function FindLastEditableStyleSheet()
         (name == "link" &&
          child.getAttribute("rel").toLowerCase() == "stylesheet" &&
          !child.hasAttribute("title"))) {
+      var media = child.getAttribute("media");
+      var mediaArray = media.split(",");
+      mediaArray.forEach(function(element,index,array) {array[index] = array[index].toLowerCase().trim()});
+      var isForScreen = (!media || media == "all" || mediaArray.indexOf("screen") != -1);
       if (name == "link") {
 	      var uri = Components.classes["@mozilla.org/network/io-service;1"]
 	                              .getService(Components.interfaces.nsIIOService)
 	                              .newURI(child.sheet.href, null, null);
-	      if (uri.scheme == "file")
+	      if (uri.scheme == "file" && isForScreen)
 	        found = true;
 	      else
 	        child = child.previousElementSibling;
       }
-      else
+      else if (isForScreen)
         found = true;
+      else
+        child = child.previousElementSibling;
     }
     else
       child = child.previousElementSibling;
