@@ -13,6 +13,23 @@ function GeneralSectionIniter(aElt, aRuleset)
 	  //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
   }
 
+  var webFonts = CssInspector.getWebFonts(aElt.ownerDocument);
+  var child = gDialog.beforeWebfontsMenuseparator.nextSibling;
+  while (child && child.id != "afterWebfontsMenuseparator") {
+    var tmp = child.nextSibling;
+    gDialog.addFontMenupopup.removeChild(child);
+    child = tmp;
+  }
+  var found = false;
+  for (var i in webFonts) {
+    found = true;
+    var item = document.createElement("menuitem");
+    item.setAttribute("label", i);
+    item.setAttribute("value", i);
+    gDialog.addFontMenupopup.insertBefore(item, gDialog.afterWebfontsMenuseparator)
+  }
+  gDialog.afterWebfontsMenuseparator.hidden = !found;
+
   var fw = CssInspector.getCascadedValue(aRuleset, "font-weight");
   CheckToggle(gDialog.fontWeightBoldButton,    fw == "bold" || fw == "700");
   CheckToggle(gDialog.fontWeightLighterButton, fw == "lighter");

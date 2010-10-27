@@ -46,6 +46,9 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("tabCreated",
                                           Inspect,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("tabSelected",
+                                          Inspect,
+                                          window);
   gMain.NotifierUtils.addNotifierCallback("redrawPanel",
                                           RedrawAll,
                                           window);
@@ -57,7 +60,7 @@ function Startup()
       gMain.EditorUtils.getCurrentEditor()) {
     var c = gMain.EditorUtils.getSelectionContainer();
     if (c)
-      SelectionChanged(null, c.node, c.oneElementSelected)
+      SelectionChanged(null, c.node, c.oneElementSelected);
   }
 }
 
@@ -71,6 +74,8 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("tabClosed",
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("tabCreated",
+                                               Inspect);
+    gMain.NotifierUtils.removeNotifierCallback("tabSelected",
                                                Inspect);
 	  gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
 			                                          RedrawAll,
@@ -87,6 +92,13 @@ function Inspect()
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
     gDialog.mainBox.hidden = !editor;
+    if (editor) {
+      var node = EditorUtils.getSelectionContainer().node;
+      if (node) {
+        gCurrentElement = null;
+        SelectionChanged(null, node, true);
+      }
+    }
   }
 }
 
@@ -312,7 +324,7 @@ function FindLastEditableStyleSheet()
         (name == "link" &&
          child.getAttribute("rel").toLowerCase() == "stylesheet" &&
          !child.hasAttribute("title"))) {
-      var media = child.getAttribute("media");
+      var media = child.getAttribute("media") || "";
       var mediaArray = media.split(",");
       mediaArray.forEach(function(element,index,array) {array[index] = array[index].toLowerCase().trim()});
       var isForScreen = (!media || media == "all" || mediaArray.indexOf("screen") != -1);

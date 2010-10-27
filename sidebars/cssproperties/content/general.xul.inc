@@ -28,7 +28,8 @@
 				                        style="font-family: Time New Roman, Time, serif"/>
 				              <menuitem label="Courier New, Courier, monospace" global="true"
 				                        style="font-family: Courier New, Courier, monospace"/>
-				              <menuseparator/>
+                      <menuseparator id="beforeWebfontsMenuseparator"/>
+                      <menuseparator id="afterWebfontsMenuseparator" hidden="true"/>
 				            </menupopup>
 				          </toolbarbutton>
 				          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"

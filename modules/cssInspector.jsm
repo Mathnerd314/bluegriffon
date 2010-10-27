@@ -756,6 +756,43 @@ var CssInspector = {
       return borderImage;
 
     return null;
+  },
+
+  getWebFonts: function(aDocument)
+  {
+    var ss = aDocument.styleSheets;
+    var webFonts = {};
+    for (var i = 0; i < ss.length; i++) {
+      var s = ss[i];
+      this.findWebFontsInStylesheet(s, webFonts);
+    }
+    return webFonts;
+  },
+
+  findWebFontsInStylesheet: function (aSheet, aFonts)
+  {
+    var rules = aSheet.cssRules;
+    for (var j = 0; j < rules.length; j++)
+    {
+      var rule = rules.item(j);
+      switch (rule.type)
+      {
+        case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE:
+          this.findWebFontsInStylesheet(rule.styleSheet, aFonts);
+          break;
+        case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE:
+	        {
+            var fontFace = rule.style.getPropertyValue("font-family").trim();
+            if ((fontFace[0] == "'" && fontFace[fontFace.length - 1] == "'") ||
+                (fontFace[0] == '"' && fontFace[fontFace.length - 1] == '"'))
+              fontFace = fontFace.substr(1, fontFace.length - 2);
+	          aFonts[fontFace] = true;
+	        }
+          break;
+        default:
+          break;
+      }
+    }
   }
 };
 
