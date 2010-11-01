@@ -978,7 +978,7 @@ function OnDoubleClick(aEvent)
   var node = aEvent.target;
   while (node && node.nodeType != Node.ELEMENT_NODE)
     node = node.parentNode;
-  EditorUtils.getCurrentEditor().selectElement(node);
+  //EditorUtils.getCurrentEditor().selectElement(node);
   if (!node) // sanity check
     return;
 
