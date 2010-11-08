@@ -793,6 +793,145 @@ var CssInspector = {
           break;
       }
     }
+  },
+
+  parseMediaQuery: function(aString)
+  {
+		const kCONSTRAINTS = {
+		  "width": true,
+		  "min-width": true,
+		  "max-width": true,
+		  "height": true,
+		  "min-height": true,
+		  "max-height": true,
+		  "device-width": true,
+		  "min-device-width": true,
+		  "max-device-width": true,
+		  "device-height": true,
+		  "min-device-height": true,
+		  "max-device-height": true,
+		  "orientation": true,
+		  "aspect-ratio": true,
+		  "min-aspect-ratio": true,
+		  "max-aspect-ratio": true,
+		  "device-aspect-ratio": true,
+		  "min-device-aspect-ratio": true,
+		  "max-device-aspect-ratio": true,
+		  "color": true,
+		  "min-color": true,
+		  "max-color": true,
+		  "color-index": true,
+		  "min-color-index": true,
+		  "max-color-index": true,
+		  "monochrome": true,
+		  "min-monochrome": true,
+		  "max-monochrome": true,
+		  "resolution": true,
+		  "min-resolution": true,
+		  "max-resolution": true,
+		  "scan": true,
+		  "grid": true
+		};
+    var parser = new CSSParser();
+    parser._init();
+    parser.mPreserveWS       = false;
+    parser.mPreserveComments = false;
+    parser.mPreservedTokens = [];
+    parser.mScanner.init(aString);
+
+    var m = {amplifier: "", medium: "", constraints: []};
+    var token = parser.getToken(true, true);
+
+    if (token.isIdent("all") ||
+        token.isIdent("aural") ||
+        token.isIdent("braille") ||
+        token.isIdent("handheld") ||
+        token.isIdent("print") ||
+        token.isIdent("projection") ||
+        token.isIdent("screen") ||
+        token.isIdent("tty") ||
+        token.isIdent("tv")) {
+       m.medium = token.value;
+       token = parser.getToken(true, true);
+    }
+    else if (token.isIdent("not") || token.isIdent("only")) {
+      m.amplifier = token.value;
+      token = parser.getToken(true, true);
+	    if (token.isIdent("all") ||
+	        token.isIdent("aural") ||
+	        token.isIdent("braille") ||
+	        token.isIdent("handheld") ||
+	        token.isIdent("print") ||
+	        token.isIdent("projection") ||
+	        token.isIdent("screen") ||
+	        token.isIdent("tty") ||
+	        token.isIdent("tv")) {
+	       m.medium = token.value;
+	       token = parser.getToken(true, true);
+	    }
+      else
+        return null;
+    }
+
+    if (m.medium) {
+      if (!token.isNotNull())
+        return m;
+      if (token.isIdent("and")) {
+        token = parser.getToken(true, true);
+      }
+      else
+        return null;
+    }
+
+    while (token.isSymbol("(")) {
+      token = parser.getToken(true, true);
+      if (token.isIdent() && (token.value in kCONSTRAINTS)) {
+        var constraint = token.value;
+        token = parser.getToken(true, true);
+        if (token.isSymbol(":")) {
+          token = parser.getToken(true, true);
+          var value = "";
+          while (!token.isSymbol(")")) {
+            value += token.value + " ";
+            token = parser.getToken(true, true);
+          }
+          value = value.trim();
+          if (token.isSymbol(")")) {
+            m.constraints.push({constraint: constraint, value: value});
+            token = parser.getToken(true, true);
+            if (token.isNotNull()) {
+              if (token.isIdent("and")) {
+                token = parser.getToken(true, true);
+              }
+              else
+                return null;
+            }
+            else
+              return m;
+          }
+          else
+            return null;
+        }
+        else if (token.isSymbol(")")) {
+          m.constraints.push({constraint: constraint, value: ""});
+          token = parser.getToken(true, true);
+          if (token.isNotNull()) {
+            if (token.isIdent("and")) {
+              token = parser.getToken(true, true);
+            }
+            else
+              return null;
+          }
+          else
+            return m;
+        }
+        else
+          return null;
+      }
+      else
+        return null;
+    }
+    return m;
   }
 };
 
