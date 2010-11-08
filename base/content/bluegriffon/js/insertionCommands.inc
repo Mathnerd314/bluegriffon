@@ -510,6 +510,7 @@ var cmdStylesheetsCommand =
   doCommand: function(aCommand)
   {
     window.openDialog("chrome://bluegriffon/content/dialogs/insertStylesheet.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes");
+                      "chrome,titlebar,resizable=yes");
+    // OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertStylesheet.xul", "", true); 
   }
 };

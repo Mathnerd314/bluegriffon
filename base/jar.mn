@@ -24,6 +24,7 @@ bluegriffon.jar:
   content/bluegriffon/bindings/lengthbox.xml            (content/bluegriffon/bindings/lengthbox.xml)
   content/bluegriffon/bindings/cssClassPicker.xml       (content/bluegriffon/bindings/cssClassPicker.xml)
   content/bluegriffon/bindings/floatingpanel.xml        (content/bluegriffon/bindings/floatingpanel.xml)
+  content/bluegriffon/bindings/media.xml                (content/bluegriffon/bindings/media.xml)
 * content/bluegriffon/js/commands.js                    (content/bluegriffon/js/commands.js)
 * content/bluegriffon/js/customize.js                   (content/bluegriffon/js/customize.js)
   content/bluegriffon/js/zoomManager.js                 (content/bluegriffon/js/zoomManager.js)
@@ -172,4 +173,6 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/insertMeter.dtd  (locale/en-US/bluegriffon/insertMeter.dtd)
   locale/en-US/bluegriffon/insertStylesheet.dtd  (locale/en-US/bluegriffon/insertStylesheet.dtd)
   locale/en-US/bluegriffon/editStylesheet.dtd  (locale/en-US/bluegriffon/editStylesheet.dtd)
+  locale/en-US/bluegriffon/media.dtd  (locale/en-US/bluegriffon/media.dtd)
+  locale/en-US/bluegriffon/media.properties  (locale/en-US/bluegriffon/media.properties)
   

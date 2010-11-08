@@ -8,6 +8,14 @@ function Startup()
   GetUIElements();
   gEditor = EditorUtils.getCurrentEditor();
   gDoc = gEditor.document;
+  ListStylesheets();
+}
+
+function ListStylesheets()
+{
+  var treechildren = gDialog.contentsTree.querySelector("treechildren");
+  if (treechildren)
+    treechildren.parentNode.removeChild(treechildren);
 
   var headElt = gDoc.querySelector("head");
   var styleElts = headElt.querySelectorAll("style,link[rel='stylesheet'],link[rel='alternate stylesheet']");
@@ -39,6 +47,7 @@ function Startup()
     item.firstChild.appendChild(cell2);
     item.firstChild.appendChild(cell3);
     item.firstChild.appendChild(cell4);
+    item.setUserData("element", s, null);
   }
 }
 
@@ -60,17 +69,103 @@ function AddTreeItem(aElt)
   return treeitem;
 }
 
-function doss()
-{
-  var button = document.createElement("button");
-  button.setAttribute("label", "bar");
-  gDialog.stylesheetPanel.appendChild(button);
-}
-
 function AddStylesheet()
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/editStylesheet.xul",
                     "_blank",
-		                "chrome,modal,titlebar,resizable=yes,dialog=yes",
+		                "chrome,titlebar,resizable=yes,dialog=yes",
 		                null);
+  ListStylesheets();
 }
+
+function UpdateButtons()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection || !view.selection.count) { // no selection...
+    gDialog.MinusButton.disabled = true;
+    gDialog.ConfigButton.disabled = true;
+    gDialog.DownButton.disabled = true;
+    gDialog.UpButton.disabled = true;
+    return;
+  }
+
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  gDialog.MinusButton.disabled = false;
+  gDialog.ConfigButton.disabled = false;
+  gDialog.UpButton.disabled = !treeitem.previousElementSibling;
+  gDialog.DownButton.disabled = !treeitem.nextElementSibling;
+}
+
+function DeleteStylesheet()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var elt = treeitem.getUserData("element");
+  gEditor.deleteNode(elt);
+  treeitem.parentNode.removeChild(treeitem);
+}
+
+function Up()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var previous = contentView.getItemAtIndex(index-1);
+
+  var elt = treeitem.getUserData("element");
+  var previousElt = previous.getUserData("element");
+  var child = previousElt.parentNode.firstChild;
+  var index = 0;
+  while (child && child != previousElt) {
+    index++;
+    child = child.nextSibling;
+  }
+  gEditor.insertNode(elt, elt.parentNode, index);
+  treeitem.parentNode.insertBefore(treeitem, previous);
+}
+
+function Down()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var next = contentView.getItemAtIndex(index+1);
+
+  var elt = treeitem.getUserData("element");
+  var nextElt = next.getUserData("element");
+  var child = nextElt.parentNode.firstChild;
+  var index = 0;
+  while (child && child != nextElt) {
+    index++;
+    child = child.nextSibling;
+  }
+  gEditor.insertNode(elt, elt.parentNode, index+1);
+  treeitem.parentNode.insertBefore(treeitem, next.nextSibling);
+}
+
+function UpdateStylesheet()
+{
+  var tree = gDialog.contentsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var elt = treeitem.getUserData("element");
+
+  window.openDialog("chrome://bluegriffon/content/dialogs/editStylesheet.xul",
+                    "_blank",
+                    "chrome,modal,titlebar,resizable=yes,dialog=yes",
+                    elt);
+  ListStylesheets();
+}
+

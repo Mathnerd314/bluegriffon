@@ -54,3 +54,28 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
   display: none;
 }
+
+medium {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#medium');
+}
+
+length {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#length');
+}
+
+.medium-delete-button {
+  visibility: hidden;
+  list-style-image: url("chrome://global/skin/icons/closetab.png");
+}
+
+hbox:hover > .medium-delete-button {
+  visibility: visible;
+}
+
+.medium-delete-button:hover {
+  list-style-image: url("chrome://global/skin/icons/closetab-hover.png") !important;
+}
+
+.medium-delete-button:hover:active {
+  list-style-image: url("chrome://global/skin/icons/closetab-active.png");
+}

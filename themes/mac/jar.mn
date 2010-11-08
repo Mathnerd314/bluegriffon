@@ -50,6 +50,7 @@ bluegriffon.jar:
   skin/classic/bluegriffon/icons/close-button.png  (classic/icons/close-button.png)
   skin/classic/bluegriffon/icons/filePicking.png  (classic/icons/filePicking.png)
   skin/classic/bluegriffon/icons/filePicking-hover.png  (classic/icons/filePicking-hover.png)
+  skin/classic/bluegriffon/icons/filePicking-disabled.png  (classic/icons/filePicking-disabled.png)
   skin/classic/bluegriffon/icons/information-disabled.png  (classic/icons/information-disabled.png)
   skin/classic/bluegriffon/icons/information-hover.png  (classic/icons/information-hover.png)
   skin/classic/bluegriffon/icons/information.png  (classic/icons/information.png)
@@ -164,4 +165,4 @@ bluegriffon.jar:
   skin/classic/bluegriffon/icons/up-disabled.png (classic/icons/up-disabled.png)
   skin/classic/bluegriffon/icons/down.png (classic/icons/down.png)
   skin/classic/bluegriffon/icons/up.png (classic/icons/up.png)
-  
+  skin/classic/bluegriffon/medium.css (classic/medium.css)

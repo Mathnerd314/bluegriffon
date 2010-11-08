@@ -55,3 +55,7 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
   display: none;
 }
+
+medium {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#medium');
+}

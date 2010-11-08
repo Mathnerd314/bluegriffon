@@ -12,4 +12,5 @@
 <!ENTITY href.label "Href:">
 <!ENTITY selectFile.label "Select a stylesheet file">
 <!ENTITY relativeUrl.label "Make URL relative to page location">
- 
+<!ENTITY newFile.button "New file">
+

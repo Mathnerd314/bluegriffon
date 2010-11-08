@@ -6,10 +6,12 @@ filepickerbutton  {
   list-style-image: url('chrome://bluegriffon/skin/icons/filePicking.png');
 }
 
-filepickerbutton:hover  {
-  margin: 0px;
-  padding: 0px;
+filepickerbutton:not([disabled]):hover  {
   list-style-image: url('chrome://bluegriffon/skin/icons/filePicking-hover.png');
+}
+
+filepickerbutton[disabled="true"]  {
+  list-style-image: url('chrome://bluegriffon/skin/icons/filePicking-disabled.png');
 }
 
 .toolbarbutton-icon {

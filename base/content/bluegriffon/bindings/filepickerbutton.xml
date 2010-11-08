@@ -70,9 +70,25 @@
                 onget="return this.getAttribute('value');"
                 onset="this.setAttribute('value', val);"/>
 
-      <property name="disabled"
-                onget="return this.mButton.getAttribute('disabled');"
-                onset="this.mButton.setAttribute('disabled', val);"/>
+      <property name="disabled">
+        <getter>
+        <![CDATA[
+          return this.mButton.getAttribute('disabled');
+        ]]>
+        </getter>
+        <setter>
+        <![CDATA[
+          if (val) {
+            this.mButton.setAttribute('disabled', val);
+            this.setAttribute('disabled', val);
+          }
+          else {
+            this.mButton.removeAttribute('disabled');
+            this.removeAttribute('disabled');
+          } 
+        ]]>
+        </setter>
+      </property>
 
       <field name="fp">null</field>
       <field name="nsIFP">Components.interfaces.nsIFilePicker</field>
