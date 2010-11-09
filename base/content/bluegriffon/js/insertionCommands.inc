@@ -509,8 +509,8 @@ var cmdStylesheetsCommand =
 
   doCommand: function(aCommand)
   {
-    window.openDialog("chrome://bluegriffon/content/dialogs/insertStylesheet.xul","_blank",
-                      "chrome,titlebar,resizable=yes");
-    // OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertStylesheet.xul", "", true); 
+    /*window.openDialog("chrome://bluegriffon/content/dialogs/insertStylesheet.xul","_blank",
+                      "chrome,titlebar,resizable=yes");*/
+    OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertStylesheet.xul", "", true); 
   }
 };

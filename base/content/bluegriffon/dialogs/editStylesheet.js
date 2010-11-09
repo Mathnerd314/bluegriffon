@@ -141,16 +141,7 @@ function onAccept()
   // let's dance, baby...
   var isStyleElt = (gDialog.typeRadiogroup.value == "embedded");
   var doc = EditorUtils.getCurrentDocument();
-  var elt = doc.createElement(isStyleElt ? "style" : "link");
-  elt.setAttribute("type", "text/css");
-  if (!isStyleElt) {
-    elt.setAttribute("rel", gDialog.alternateCheckbox.checked ?
-                              "alternate stylesheet" :
-                              "stylesheet");
-    elt.setAttribute("href", gDialog.urlTextbox.value);
-  }
-  if (gDialog.titleTextbox.value)
-    elt.setAttribute("title", gDialog.titleTextbox.value);
+  var editor = EditorUtils.getCurrentEditor();
 
   var mediaString = "";
   var mediumElts = gDialog.mediaGroupbox.querySelectorAll("medium");
@@ -172,19 +163,64 @@ function onAccept()
         case "integer":
         case "length":
         case "resolution":
-          str += (str ? " and " : "") +
-                 "(" + type + ": " + c.querySelector(".value").value + ")";
+          if (c.querySelector(".value").value)
+	          str += (str ? " and " : "") +
+	                 "(" + type + ": " + c.querySelector(".value").value + ")";
+          break;
+        case "boolean":
+          str += ((c.querySelector(".value").checked && str) ? " and " : "") +
+                 (c.querySelector(".value").checked ? "(" + type + ")" : "");
+          break;
+        case "ratio":
+          if (c.querySelector(".value1").value && c.querySelector(".value2").value)
+	          str += (str ? " and " : "") +
+	                 "(" + type + ": " + c.querySelector(".value1").value + "/" +
+	                                     c.querySelector(".value2").value + ")";
           break;
       }
     }
 
     mediaString += (mediaString ? ", " : "") + str;
   }
-  if (mediaString)
-    elt.setAttribute("media", mediaString);
 
-  var head = doc.documentElement.querySelector("head");
-  EditorUtils.getCurrentEditor().insertNode(elt, head, head.childNodes.length + 1);
+  if (gElt) {
+    editor.beginTransaction();
+    if (!isStyleElt) {
+      editor.setAttribute(gElt, "rel", gDialog.alternateCheckbox.checked ?
+                                "alternate stylesheet" :
+                                "stylesheet");
+      editor.setAttribute(gElt, "href", gDialog.urlTextbox.value);
+    }
+    if (gDialog.titleTextbox.value)
+      editor.setAttribute(gElt, "title", gDialog.titleTextbox.value);
+    else
+      editor.removeAttribute(gElt, "title");
+
+    if (mediaString)
+      editor.setAttribute(gElt, "media", mediaString);
+    else
+      editor.removeAttribute(gElt, "media");
+
+    editor.endTransaction();
+  }
+  else {
+	  var elt = doc.createElement(isStyleElt ? "style" : "link");
+	  elt.setAttribute("type", "text/css");
+	  if (!isStyleElt) {
+	    elt.setAttribute("rel", gDialog.alternateCheckbox.checked ?
+	                              "alternate stylesheet" :
+	                              "stylesheet");
+	    elt.setAttribute("href", gDialog.urlTextbox.value);
+	  }
+	  if (gDialog.titleTextbox.value)
+	    elt.setAttribute("title", gDialog.titleTextbox.value);
+	
+	  if (mediaString)
+	    elt.setAttribute("media", mediaString);
+	
+	  var head = doc.documentElement.querySelector("head");
+	  EditorUtils.getCurrentEditor().insertNode(elt, head, head.childNodes.length + 1);
+  }
 }
 
 function UpdateDialog()
@@ -195,7 +231,7 @@ function UpdateDialog()
 
   UpdateType();
 
-  if (isStyleElt) {
+  if (!isStyleElt) {
     gDialog.alternateCheckbox.checked = (gElt.getAttribute("rel") &&
                 gElt.getAttribute("rel").toLowerCase() == "alternate stylesheet");
     gDialog.urlTextbox.value = gElt.getAttribute("href");
@@ -212,6 +248,25 @@ function UpdateDialog()
     gDialog.mediaGroupbox.insertBefore(medium, gDialog.mediaButtonHbox);
     medium.amplifier = parsed.amplifier;
     medium.media = parsed.medium;
+
+    for (var j = 0; j < parsed.constraints.length; j++) {
+      var constraint = parsed.constraints[j].constraint;
+      var values = parsed.constraints[j].value;
+      var menuitem = medium.getChild("constraintButton").querySelector("[value='" + constraint + "']");
+      var type = menuitem.getAttribute("value");
+      var querytype = menuitem.getAttribute("querytype");
+      if (!values && (querytype == "integer" || querytype == "boolean")) {
+        // monster kung-fu grippy hack to deal with painful value-less
+        // Media Queries...
+        if (constraint == "color" ||
+            constraint == "color-index" ||
+            constraint == "monochrome")
+          constraint = "min-" + constraint;
+        values = ["1"];
+      }
+      var label = menuitem.getAttribute("label");
+      medium._AddConstraint(type, querytype, label, values);
+    }
   }
   window.sizeToContent();
 }

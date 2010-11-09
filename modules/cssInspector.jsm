@@ -890,14 +890,13 @@ var CssInspector = {
         token = parser.getToken(true, true);
         if (token.isSymbol(":")) {
           token = parser.getToken(true, true);
-          var value = "";
+          var values = [];
           while (!token.isSymbol(")")) {
-            value += token.value + " ";
+            values.push(token.value);
             token = parser.getToken(true, true);
           }
-          value = value.trim();
           if (token.isSymbol(")")) {
-            m.constraints.push({constraint: constraint, value: value});
+            m.constraints.push({constraint: constraint, value: values});
             token = parser.getToken(true, true);
             if (token.isNotNull()) {
               if (token.isIdent("and")) {
@@ -913,7 +912,7 @@ var CssInspector = {
             return null;
         }
         else if (token.isSymbol(")")) {
-          m.constraints.push({constraint: constraint, value: ""});
+          m.constraints.push({constraint: constraint, value: null});
           token = parser.getToken(true, true);
           if (token.isNotNull()) {
             if (token.isIdent("and")) {

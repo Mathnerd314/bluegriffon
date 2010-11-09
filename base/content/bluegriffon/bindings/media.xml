@@ -132,7 +132,18 @@
           var type = target.getAttribute("value");
           var querytype = target.getAttribute("querytype");
           var label = target.getAttribute("label");
+          this._AddConstraint(type, querytype, label, null);
+        ]]>
+        </body>
+      </method>
 
+      <method name="_AddConstraint">
+        <parameter name="type"/>
+        <parameter name="querytype"/>
+        <parameter name="label"/>
+        <parameter name="values"/>
+        <body>
+        <![CDATA[
           var hbox = document.createElement("hbox");
           hbox.setAttribute("type", type);
           hbox.setAttribute("querytype", querytype);
@@ -141,6 +152,8 @@
           var spacer = document.createElement("spacer");
           spacer.setAttribute("style", "width: 3em");
           hbox.appendChild(spacer);
+
+          this.appendChild(hbox);
 
           switch(querytype) {
             case "integer":
@@ -154,6 +167,9 @@
                 textbox.setAttribute("style", "width: 6em");
                 textbox.className = "value";
                 hbox.appendChild(textbox);
+
+                if (values)
+                  textbox.value = values[0];
               }
               break;
             case "boolean":
@@ -162,6 +178,9 @@
                 checkbox.setAttribute("label", label);
                 checkbox.className = "value";
                 hbox.appendChild(checkbox);
+
+                if (values)
+                  checkbox.checked = (values[0] == "1");
               }
               break;
             case "length":
@@ -174,6 +193,9 @@
                 lengthbox.setAttribute("units", '% px pt cm in mm pc em ex');
                 lengthbox.className = "value";
                 hbox.appendChild(lengthbox);
+
+                if (values)
+                  lengthbox.value = values[0];
               }
               break;
             case "resolution":
@@ -186,6 +208,9 @@
                 lengthbox.setAttribute("units", 'dpi dpcm');
                 lengthbox.className = "value";
                 hbox.appendChild(lengthbox);
+
+                if (values)
+                  lengthbox.value = values[0];
               }
               break;
             case "ratio":
@@ -209,6 +234,11 @@
                 t2.setAttribute("style", "width: 6em");
                 t2.className = "value2";
                 hbox.appendChild(t2);
+
+                if (values) {
+                  t1.value = values[0];
+                  t2.value = values[2];
+                }
 	            }
 	            break;
             default:
@@ -234,6 +264,9 @@
                   r.setAttribute("value", e);
                   radiogroup.appendChild(r);
                 }
+
+                if (values)
+                  radiogroup.value = values[0];
               }
               break;
           }
@@ -246,8 +279,6 @@
           toolbarbutton.className = "medium-delete-button";
           toolbarbutton.setAttribute("oncommand", "this.parentNode.parentNode.removeChild(this.parentNode)");
           hbox.appendChild(toolbarbutton);
-
-          this.appendChild(hbox);
 
           window.sizeToContent();
         ]]>
@@ -277,7 +308,6 @@
         <parameter name="aAllowNegative"/>
         <body>
         <![CDATA[
-          var idents = aIdentsString.split(" ");
           var value;
           if (aElt.selectedItem)
             value = aElt.selectedItem.value;

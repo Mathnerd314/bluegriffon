@@ -73,7 +73,7 @@ function AddStylesheet()
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/editStylesheet.xul",
                     "_blank",
-		                "chrome,titlebar,resizable=yes,dialog=yes",
+		                "chrome,modal,titlebar,resizable=yes,dialog=yes",
 		                null);
   ListStylesheets();
 }
