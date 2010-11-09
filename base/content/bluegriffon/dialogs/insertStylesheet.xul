@@ -24,7 +24,8 @@
 
   <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px; height: 200px"
         treelines="true"
-        onselect="UpdateButtons()">
+        onselect="UpdateButtons()"
+        ondblclick="UpdateStylesheet()">
     <treecols>
       <treecol id="urlCol"
                flex="1"
