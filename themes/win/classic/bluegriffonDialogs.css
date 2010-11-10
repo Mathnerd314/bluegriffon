@@ -66,7 +66,7 @@ length {
 
 .medium-delete-button {
   visibility: hidden;
-  list-style-image: url("chrome://global/skin/icons/closetab.png");
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab.png");
 }
 
 hbox:hover > .medium-delete-button {
@@ -74,9 +74,9 @@ hbox:hover > .medium-delete-button {
 }
 
 .medium-delete-button:hover {
-  list-style-image: url("chrome://global/skin/icons/closetab-hover.png") !important;
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-hover.png") !important;
 }
 
 .medium-delete-button:hover:active {
-  list-style-image: url("chrome://global/skin/icons/closetab-active.png");
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-active.png");
 }
