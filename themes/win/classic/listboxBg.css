@@ -102,3 +102,19 @@ hbox.listboxBg .listboxBgConfigButton[disabled] {
 hbox.listboxBg .listboxBgThrobberButton {
   list-style-image: url("chrome://global/skin/icons/loading_16.png");
 }
+
+hbox.listboxBg .listboxBgDownButton {
+	list-style-image: url("chrome://bluegriffon/skin/icons/down.png")
+}
+
+hbox.listboxBg .listboxBgDownButton[disabled] {
+	list-style-image: url("chrome://bluegriffon/skin/icons/down-disabled.png")
+}
+
+hbox.listboxBg .listboxBgUpButton {
+	list-style-image: url("chrome://bluegriffon/skin/icons/up.png")
+}
+
+hbox.listboxBg .listboxBgUpButton[disabled] {
+	list-style-image: url("chrome://bluegriffon/skin/icons/up-disabled.png")
+}
