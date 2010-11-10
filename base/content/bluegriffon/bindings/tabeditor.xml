@@ -273,8 +273,8 @@
                       editor instanceof Components.interfaces.nsIHTMLEditor;
                       editor instanceof Components.interfaces.nsIEditorStyleSheets;
 
-                      editor.addOverrideStyleSheet("resource://gre/res/EditorContent.css");
-                      editor.addOverrideStyleSheet("resource://gre/res/EditorOverride.css");
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorContent.css");
+                      editor.addOverrideStyleSheet("chrome://bluegriffon/content/EditorOverride.css");
 
                       editor.selection.QueryInterface(Components.interfaces.nsISelectionPrivate)
                         .addSelectionListener(ComposerCommands.selectionListener);

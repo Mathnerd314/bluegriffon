@@ -6,7 +6,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += 
+DIRS += svg-edit
 
 include $(topsrcdir)/config/rules.mk
 

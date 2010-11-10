@@ -71,8 +71,6 @@ _FILES = \
 	$(srcdir)/res/rotate_icon.png \
 	$(srcdir)/res/reset-fonts-grids.css \
 	$(srcdir)/res/base-min.css \
-	$(srcdir)/res/EditorContent.css \
-	$(srcdir)/res/EditorOverride.css \
 	$(NULL)
 
 _BESPIN_RESOURCE_FILES = \
