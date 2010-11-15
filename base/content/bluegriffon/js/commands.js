@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
 
 const kBASE_COMMAND_CONTROLLER_CID = "@mozilla.org/embedcomp/base-command-controller;1";
 

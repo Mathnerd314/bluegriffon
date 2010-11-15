@@ -35,15 +35,15 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-Components.utils.import("resource://gre/modules/urlHelper.jsm");
-Components.utils.import("resource://gre/modules/prompterHelper.jsm");
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
-Components.utils.import("resource://gre/modules/cssHelper.jsm");
-Components.utils.import("resource://gre/modules/fileHelper.jsm");
-Components.utils.import("resource://gre/modules/l10nHelper.jsm");
-Components.utils.import("resource://gre/modules/handlersManager.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://app/modules/prompterHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/cssHelper.jsm");
+Components.utils.import("resource://app/modules/fileHelper.jsm");
+Components.utils.import("resource://app/modules/l10nHelper.jsm");
+Components.utils.import("resource://app/modules/handlersManager.jsm");
 try {
-  Components.utils.import("resource://gre/modules/projectManager.jsm");
+  Components.utils.import("resource://app/modules/projectManager.jsm");
 }
 catch(e) {}
 

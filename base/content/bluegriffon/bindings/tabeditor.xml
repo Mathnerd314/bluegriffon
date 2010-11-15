@@ -450,7 +450,7 @@
             }
             catch(e) {}
             iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
-            iframe.setAttribute("src", "resource://gre/res/bespin.html");
+            iframe.setAttribute("src", "resource://app/res/bespin.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);
 

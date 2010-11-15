@@ -37,7 +37,7 @@
 
 var EXPORTED_SYMBOLS = ["UrlUtils"];
 
-Components.utils.import("resource://gre/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
 
 var UrlUtils = {
 
@@ -138,7 +138,7 @@ var UrlUtils = {
 
   isUrlOfBlankDocument: function isUrlOfBlankDocument(urlString)
   {
-    const kDATA_URL_PREFIX = "resource://gre/res";
+    const kDATA_URL_PREFIX = "resource://app/res";
     return (urlString.substr(0, kDATA_URL_PREFIX.length) == kDATA_URL_PREFIX);
   },
 
@@ -334,7 +334,7 @@ var UrlUtils = {
 
   getDocumentBaseUrl: function getDocumentBaseUrl()
   {
-    Components.utils.import("resource://gre/modules/editorHelper.jsm");
+    Components.utils.import("resource://app/modules/editorHelper.jsm");
     try {
       var docUrl;
 
