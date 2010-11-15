@@ -1220,5 +1220,5 @@ function UpdateTabHTMLDialect(editor)
 
 function OpenAddonsSite()
 {
-  loadExternalURL("http://bluegriffon.org/pages/add-ons");
+  loadExternalURL("http://bluegriffon.com/");
 }
