@@ -91,7 +91,7 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    gDialog.mainBox.hidden = !editor;
+    gDialog.mainBox.style.visibility = editor ? "" : "hidden";
     if (editor) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
