@@ -15,6 +15,7 @@ var gIsPanelActive = true;
 var gIsPanelActive = false;
 #endif
 #endif
+var gPrefs = null;
 
 function Startup()
 {
@@ -23,6 +24,8 @@ function Startup()
   Bezier.init();
 
   InitLocalFontFaceMenu(gDialog.addFontMenupopup);
+
+  gPrefs = GetPrefs();
 
   gInUtils = Components.classes["@mozilla.org/inspector/dom-utils;1"]
               .getService(Components.interfaces.inIDOMUtils);
@@ -242,10 +245,20 @@ function ApplyStyles(aStyles)
   var editor = EditorUtils.getCurrentEditor();
   if (gDialog.hoverStateCheckbox.checked)
     gDialog.cssPolicyMenulist.value = "id";
+  var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
 	    // if the element has no ID, ask for one...
-	    if (!gCurrentElement.id) {
+      if (gCurrentElement.id)
+        editor.beginTransaction();
+      else if (cssPolicy == "automatic") {
+        var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
+        var id = prefix + new Date().valueOf() +
+                          "_" + Math.round(Math.random() * 100000);
+        editor.beginTransaction();
+        editor.setAttribute(gCurrentElement, "id", id);
+      }
+      else {
 	      var result = {};
 	      if (!PromptUtils.prompt(window,
 	                              gDialog.csspropertiesBundle.getString("EnterAnId"),
@@ -255,23 +268,34 @@ function ApplyStyles(aStyles)
         editor.beginTransaction();
 	      editor.setAttribute(gCurrentElement, "id", result.value);
 	    }
-      else
-        editor.beginTransaction();
       break;
 
     case "class":
       if (!gDialog.classPicker.value) {
-        PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
-                                   gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
-                                   window);
-        return;
+        if (cssPolicy == "automatic") {
+	        var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
+	        className = prefix + new Date().valueOf() +
+	                          "_" + Math.round(Math.random() * 100000);
+	        editor.beginTransaction();
+	        editor.setAttribute(gCurrentElement, "class", className);
+          gDialog.classPicker.value = className;
+        }
+        else {
+	        PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
+	                                   gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
+	                                   window);
+	        return;
+        }
       }
-
-      editor.beginTransaction();
-      // make sure the element carries the user-selected class
-      if (!gCurrentElement.classList.contains(gDialog.classPicker.value))
-        gCurrentElement.classList.add(gDialog.classPicker.value); // XXX
-      className = gDialog.classPicker.value;
+      else {
+        editor.beginTransaction();
+	      // make sure the element carries the user-selected class
+	      if (!gCurrentElement.classList.contains(gDialog.classPicker.value)) {
+          var c = (gCurrentElement.classList ? gCurrentElement.classList + " " : "") + className;
+	        editor.setAttribute(gCurrentElement, "class", className);
+        }
+	      className = gDialog.classPicker.value;
+      }
       break;
 
     default:
