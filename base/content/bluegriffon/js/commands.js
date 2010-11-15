@@ -125,6 +125,17 @@ var ComposerCommands = {
         case "cmd_strong":
         case "cmd_em":
         case "cmd_code":
+        case "cmd_strikethrough":
+	      case "cmd_superscript":
+	      case "cmd_subscript":
+	      case "cmd_nobreak":
+	      case "cmd_var":
+	      case "cmd_samp":
+	      case "cmd_code":
+	      case "cmd_acronym":
+	      case "cmd_abbr":
+	      case "cmd_cite":
+        case "cmd_tt":
 
         case "cmd_ul":
         case "cmd_ol":

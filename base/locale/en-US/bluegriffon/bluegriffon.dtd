@@ -58,6 +58,44 @@
 
 <!ENTITY formatMenu.label                 "Format">
 <!ENTITY formatMenu.accesskey             "o">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "Text Style">
+<!ENTITY formatstylemenu.accesskey "s">
+<!ENTITY styleBoldCmd.label "Bold">
+<!ENTITY stylebold.accesskey "b">
+<!ENTITY stylebold.keybinding "b">
+<!ENTITY styleItalicCmd.label "Italic">
+<!ENTITY styleitalic.accesskey "I">
+<!ENTITY styleitalic.keybinding "i">
+<!ENTITY styleUnderlineCmd.label "Underline">
+<!ENTITY styleunderline.accesskey "u">
+<!ENTITY styleunderline.keybinding "u">
+<!ENTITY styleStrikeThruCmd.label "Strikethrough">
+<!ENTITY stylestrikethru.accesskey "k">
+<!ENTITY styleSuperscriptCmd.label "Superscript">
+<!ENTITY stylesuperscript.accesskey "p">
+<!ENTITY styleSubscriptCmd.label "Subscript">
+<!ENTITY stylesubscript.accesskey "S">
+<!ENTITY styleNonbreakingCmd.label "Nonbreaking">
+<!ENTITY stylenonbreaking.accesskey "N">
+<!ENTITY styleEm.label "Emphasis">
+<!ENTITY styleEm.accesskey "e">
+<!ENTITY styleStrong.label "Stronger Emphasis">
+<!ENTITY styleStrong.accesskey "t">
+<!ENTITY styleCite.label "Citation">
+<!ENTITY styleCite.accesskey "c">
+<!ENTITY styleAbbr.label "Abbreviation">
+<!ENTITY styleAbbr.accesskey "A">
+<!ENTITY styleAcronym.label "Acronym">
+<!ENTITY styleAcronym.accesskey "r">
+<!ENTITY styleCode.label "Code">
+<!ENTITY styleCode.accesskey "o">
+<!ENTITY styleSamp.label "Sample Output">
+<!ENTITY styleSamp.accesskey "m">
+<!ENTITY styleVar.label "Variable">
+<!ENTITY styleVar.accesskey "v">
+<!ENTITY fontFixedWidth.label "Fixed Width">
+<!ENTITY fontfixedwidth.accesskey "x">
 
 <!ENTITY tableMenu.label                  "Table">
 <!ENTITY tableMenu.accesskey              "b">

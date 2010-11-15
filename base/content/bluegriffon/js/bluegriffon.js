@@ -1222,3 +1222,16 @@ function OpenAddonsSite()
 {
   loadExternalURL("http://bluegriffon.com/");
 }
+
+function initFontStyleMenu(menuPopup)
+{
+  for (var i = 0; i < menuPopup.childNodes.length; i++)
+  {
+    var menuItem = menuPopup.childNodes[i];
+    var theStyle = menuItem.getAttribute("state");
+    if (theStyle)
+    {
+      menuItem.setAttribute("checked", theStyle);
+    }
+  }
+}

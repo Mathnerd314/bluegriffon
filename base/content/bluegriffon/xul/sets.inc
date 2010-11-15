@@ -97,6 +97,19 @@
   <command id="cmd_strong"       state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_strong')"/>
   <command id="cmd_em"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_em')"/>
   <command id="cmd_code"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_code')"/>
+  <command id="cmd_strikethrough" state="false"    oncommand="ComposerCommands.doStyleUICommand('cmd_strikethrough');"/>
+  <command id="cmd_superscript"  state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_superscript');"/>
+  <command id="cmd_subscript"    state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_subscript');"/>
+  <command id="cmd_nobreak"      state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_nobreak');"/>
+
+  <command id="cmd_cite"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_cite')"/>
+  <command id="cmd_abbr"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_abbr')"/>
+  <command id="cmd_acronym"      state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_acronym')"/>
+  <command id="cmd_code"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_code')"/>
+  <command id="cmd_samp"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_samp')"/>
+  <command id="cmd_var"          state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_var')"/>
+  <command id="cmd_tt"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_tt')"/>
+
 
   <command id="cmd_paragraphState" state=""        oncommand="ComposerCommands.doStatefulCommand('cmd_paragraphState', event.target.value)"/>
   <command id="cmd_fontFace"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"/>
