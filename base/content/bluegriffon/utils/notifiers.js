@@ -46,7 +46,7 @@ var NotifierUtils = {
   {
     var caller = this._error.caller;
     var s = "";
-    for (i in this)
+    for (var i in this)
       if (this[i].toString() == caller)
       {
         s = i + "()";
