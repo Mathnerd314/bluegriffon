@@ -20,7 +20,7 @@ hruler, vruler      { display: -moz-box;
 hruler {
   stroke-width: 4px;
   font-family: -moz-fixed;
-  font-style: bold;
+  font-weight: bold;
   font-variant: normal;
   line-height: normal;
   font-size: x-small;
@@ -32,7 +32,7 @@ hruler {
 vruler {
   stroke-width: 4px;
   font-family: -moz-fixed;
-  font-style: bold;
+  font-weight: bold;
   font-variant: normal;
   line-height: normal;
   font-size: x-small;
