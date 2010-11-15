@@ -45,4 +45,10 @@ bluegriffon/installer/Makefile
 bluegriffon/sidebars/Makefile
 bluegriffon/src/Makefile
 bluegriffon/themes/Makefile
+bluegriffon/modules/Makefile
+bluegriffon/themes/win/Makefile
+bluegriffon/themes/mac/Makefile
+bluegriffon/extensions/svg-edit/Makefile
+bluegriffon/sidebars/cssproperties/Makefile
+bluegriffon/components/Makefile
 "
