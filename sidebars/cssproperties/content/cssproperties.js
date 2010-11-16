@@ -263,8 +263,10 @@ function ApplyStyles(aStyles)
 	      if (!PromptUtils.prompt(window,
 	                              gDialog.csspropertiesBundle.getString("EnterAnId"),
 	                              gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-	                              result))
+	                              result)) {
+          Inspect();
 	        return;
+        }
         editor.beginTransaction();
 	      editor.setAttribute(gCurrentElement, "id", result.value);
 	    }
@@ -284,6 +286,7 @@ function ApplyStyles(aStyles)
 	        PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
 	                                   gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
 	                                   window);
+          Inspect();
 	        return;
         }
       }
