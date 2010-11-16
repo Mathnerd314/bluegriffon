@@ -282,6 +282,7 @@ ifneq (,$(filter gtk gtk2,$(MOZ_WIDGET_TOOLKIT)))
 ICON_FILES	= \
 		$(srcdir)/icons/bluegriffon50.xpm \
 		$(srcdir)/icons/bluegriffon50.png \
+		$(srcdir)/icons/bluegriffon32.png \
 		$(srcdir)/icons/bluegriffon16.xpm \
 		$(srcdir)/icons/bluegriffon16.png \
 		$(NULL)
