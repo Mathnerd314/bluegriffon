@@ -131,8 +131,26 @@
 <commandset id="selectionBasedCommands"
             commandupdater="true"
             events="style,create"
-            oncommandupdate="/*ComposerCommands.updateSelectionBased(this, event)*/">
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);/*ComposerCommands.updateSelectionBased(this, event)*/">
   <command id="cmd_selectionChanged"/>
+  <command id="cmd_undo" 
+           oncommand="goDoCommand('cmd_undo')"
+           disabled="true"/>
+  <command id="cmd_redo" 
+           oncommand="goDoCommand('cmd_redo')"
+           disabled="true"/>
+  <command id="cmd_cut" 
+           oncommand="goDoCommand('cmd_cut')"
+           disabled="true"/>
+  <command id="cmd_copy" 
+           oncommand="goDoCommand('cmd_copy')"
+           disabled="true"/>
+  <command id="cmd_paste" 
+           oncommand="goDoCommand('cmd_paste')"
+           disabled="true"/>
+  <command id="cmd_delete"
+           oncommand="goDoCommand('cmd_delete')"
+           disabled="true"/>
 </commandset>
 
 <commandset id="composerSaveMenuItems"

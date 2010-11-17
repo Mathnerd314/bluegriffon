@@ -97,7 +97,7 @@ var ComposerCommands = {
         else
           commandNode.setAttribute("disabled", "true");
 
-        //goUpdateCommand(commandID);  // enable or disable
+        goUpdateCommand(commandID);  // enable or disable
         if (commandNode.hasAttribute("state"))
           this.goUpdateCommandState(commandID);
       }
