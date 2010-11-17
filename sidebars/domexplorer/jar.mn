@@ -7,6 +7,7 @@ domexplorer.jar:
   content/domexplorer/domexplorerOverlay.js       (content/domexplorerOverlay.js)
 * content/domexplorer/domexplorer.xul             (content/domexplorer.xul)
 * content/domexplorer/domexplorer.js              (content/domexplorer.js)
+* skin/classic/domexplorer/domexplorer.css        (skin/domexplorer.css)
 
 domexplorer-locale.jar:
 % locale    domexplorer    en-US    %locale/en-US/domexplorer/

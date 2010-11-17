@@ -62,5 +62,50 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diChangeFileStylesheetTxn.js"/>
   <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorer.js"/>
 
-  <label value="foo"/>
+  <vbox id="mainBox" flex="1" style="visibility: hidden">
+	  <tree id="elementsTree" flex="1" hidecolumnpicker="true" seltype="single"
+          persist="height">
+		  <treecols>
+		    <treecol id="elementsTreecol" label="&elements.label;" flex="1"
+                 primary="true"/>
+		  </treecols>
+	  </tree>
+    <splitter id="mainBoxSplitter"/>
+    <tabbox flex="1" persist="height" id="tabbox">
+      <tabs>
+        <tab label="&attributesTab.label;"/>
+        <tab label="&stylesTab.label;"/>
+      </tabs>
+      <tabpanels flex="1">
+        <vbox flex="1">
+	        <tree id="attributesTree" flex="1" hidecolumnpicker="true" seltype="single"
+	              editable="true">
+			      <treecols>
+	            <treecol id="attrNameTreecol"  label="&attrName.label;" flex="1" persist="width"/>
+	            <splitter class="tree-splitter"/>
+	            <treecol id="attrValueTreecol" label="&attrValue.label;" flex="1" persist="width"/>
+			      </treecols>
+	          <treechildren id="attributesTreechildren"/>
+	        </tree>
+				  <hbox id="attributesTreeToolbox" class="listboxBg">
+				    <toolbarbutton class="listboxBgPlusButton"
+				                   tooltiptext="&addAttribute.tooltip;"
+				                   id="PlusButton"
+				                   oncommand="AddStylesheet()"/>
+				    <toolbarbutton class="listboxBgMinusButton"
+				                   disabled="true"
+				                   id="MinusButton"
+				                   tooltiptext="&removeAttribute.tooltip;"
+				                   oncommand="DeleteStylesheet()"/>
+				    <toolbarbutton class="listboxBgConfigButton"
+				                   tooltiptext="&modifyAttribute.tooltip;"
+				                   disabled="true"
+				                   id="ConfigButton"
+				                   oncommand="UpdateStylesheet()"/>
+				    <spacer flex="1"/>
+				  </hbox>
+        </vbox>
+      </tabpanels>
+    </tabbox>
+  </vbox>
 </page>
