@@ -146,6 +146,17 @@
 <!ENTITY emToolbarCmd.label               "Emphasis">
 <!ENTITY codeToolbarCmd.label             "Code">
 <!ENTITY codeToolbarCmd.tooltip           "Code">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "Writing Direction">
+<!ENTITY writingdirectionmenu.accesskey      "w">
+<!ENTITY defaultDirectionMenu.label          "Unspecified">
+<!ENTITY defaultdirectionmenu.accesskey      "u">
+<!ENTITY ltrDirectionMenu.label              "Left to right">
+<!ENTITY ltrdirectionmenu.accesskey          "l">
+<!ENTITY rtlDirectionMenu.label              "Right to left">
+<!ENTITY rtldirectionmenu.accesskey          "r">
+<!ENTITY dirLtr.tooltip                      "Left to right">
+<!ENTITY dirRtl.tooltip                      "Right to left">
 
 <!ENTITY ParagraphSelect.tooltip "Choose a paragraph format">
 <!-- Shared in Paragraph, and Toolbar menulist -->

@@ -151,6 +151,9 @@
   <command id="cmd_delete"
            oncommand="goDoCommand('cmd_delete')"
            disabled="true"/>
+  <command id="cmd_selectAll"
+           oncommand="goDoCommand('cmd_selectAll')"
+           disabled="true"/>
 </commandset>
 
 <commandset id="composerSaveMenuItems"

@@ -44,6 +44,9 @@
         <menuitem id="menu_paste"/>
         <menuitem id="menu_delete"/>
         <menuseparator/>
+        <menuitem id="menu_selectAll"
+                  command="cmd_selectAll"/>
+        <menuseparator/>
         <menuitem id="menu_find" command="cmd_bgfind"
                   key="findkb"/>
       </menupopup>
