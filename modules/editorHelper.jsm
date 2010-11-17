@@ -602,18 +602,18 @@ var EditorUtils = {
     //var ps = EditorUtils.
   },
 
-  getObjectForProperties: function()
+  getObjectForProperties: function(aNodeNames, aRequiredAttribute)
 	{
 	  var editor = this.getCurrentEditor();
 	  if (!editor)
 	    return null;
 	
-	  var element;
+	  /*var element;
 	  try {
 	    element = editor.getSelectedElement("");
 	  } catch (e) {}
 	  if (element)
-	    return element;
+	    return element;*/
 	
 	  // Find nearest parent of selection anchor node
 	  //   that is a link, list, table cell, or table
@@ -643,15 +643,9 @@ var EditorUtils = {
 	      // Done when we hit the body
 	      if (nodeName == "body") break;
 	
-	      if ((nodeName == "a" && node.href) ||
-	          nodeName == "ol" || nodeName == "ul" || nodeName == "dl" ||
-	          nodeName == "td" || nodeName == "th" ||
-	          nodeName == "table" ||
-            nodeName == "form" || nodeName == "input" || nodeName == "fieldset" ||
-            nodeName == "label")
-	      {
+	      if (aNodeNames.indexOf(nodeName) != -1 &&
+            (!aRequiredAttribute || node.getAttribute(aRequiredAttribute)))
 	        return node;
-	      }
 	    }
 	    node = node.parentNode;
 	  }
