@@ -155,7 +155,7 @@
 </commandset>
 
 <keyset id="editorKeys">
-  <key id="key_newNavigator" key="n" modifiers="control" />
+  <key id="key_newNavigator" key="n" modifiers="accel" observes="cmd_new"/>
 </keyset>
 
 <popupset id="editorPopupSet">

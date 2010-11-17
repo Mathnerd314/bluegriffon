@@ -195,6 +195,19 @@
 	      <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox"/>
 	      <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
 	      <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
+        <!--menu id="directionMenu" label="&writingDirectionMenu.label;" position="5"
+              accesskey="&writingdirectionmenu.accesskey;"
+              onpopupshowing="InitWritingDirectionMenu()">
+          <menupopup oncommand="ComposerCommands.doStatefulCommand('cmd_direction', event.target.getAttribute('value'))">
+            <menuitem id="menu_noDir" label="&defaultDirectionMenu.label;" accesskey="&defaultdirectionmenu.accesskey;"
+                      type="radio" name="1" value="none"   observes="cmd_renderedHTMLEnabler" />
+            <menuseparator/>
+            <menuitem id="menu_ltr" label="&ltrDirectionMenu.label;" accesskey="&ltrdirectionmenu.accesskey;"
+                      type="radio" name="1" value="ltr"    observes="cmd_renderedHTMLEnabler" />
+            <menuitem id="menu_rtl" label="&rtlDirectionMenu.label;" accesskey="&rtldirectionmenu.accesskey;"
+                      type="radio" name="1" value="rtl"    observes="cmd_renderedHTMLEnabler" />
+          </menupopup>
+        </menu-->
       </menupopup>
     </menu>
 
