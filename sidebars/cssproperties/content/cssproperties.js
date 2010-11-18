@@ -98,7 +98,6 @@ function Inspect()
     if (editor) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
-        gCurrentElement = null;
         SelectionChanged(null, node, true);
       }
     }
@@ -111,9 +110,7 @@ function RedrawAll(aNotification, aPanelId)
     gIsPanelActive = true;
     if (gCurrentElement) {
       // force query of all properties on the current element
-      var elt = gCurrentElement;
-      gCurrentElement = null;
-      SelectionChanged(null, elt, true);
+      SelectionChanged(null, gCurrentElement, true);
     }
   }
 }
@@ -126,7 +123,7 @@ function PanelClosed(aNotification, aPanelId)
 
 function SelectionChanged(aArgs, aElt, aOneElementSelected)
 {
-  if (!gIsPanelActive || (gCurrentElement == aElt)) {
+  if (!gIsPanelActive) {
     gCurrentElement = aElt;
     return;
   }
@@ -843,6 +840,5 @@ function ToggleHover(aElt)
   if (aElt.checked)
     gDialog.cssPolicyMenulist.value = "id";
   var node = gCurrentElement;
-  gCurrentElement = null;
   SelectionChanged(null, node, null);
 }

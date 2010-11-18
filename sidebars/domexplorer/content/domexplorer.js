@@ -96,7 +96,6 @@ function Inspect()
     if (editor) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
-        gCurrentElement = null;
         SelectionChanged(null, node, true);
       }
     }
@@ -115,7 +114,6 @@ function RedrawAll(aNotification, aPanelId)
     if (gCurrentElement) {
       // force query of all properties on the current element
       var elt = gCurrentElement;
-      gCurrentElement = null;
       SelectionChanged(null, elt, true);
     }
   }
@@ -134,33 +132,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     return;
   }
 
-  var path = "";
-  var node = aElt;
-  if (gPath)
-	  while (node && node.nodeType == Node.ELEMENT_NODE) {
-	    path += node.nodeName.toLowerCase() + ":";
-	    var child = node;
-	    var i = 0;
-	    while (child.previousElementSibling) {
-	      i++;
-	      child = child.previousElementSibling;
-	    }
-	    path += i;
-	    for (var i = 0; i < node.attributes.length; i++) {
-	      path += "[" + node.attributes[i].nodeName + "=" +
-	                    node.attributes[i].nodeValue + "]";
-	    }
-	
-	    if (gPath.substr(0, path.length) != path)
-	      break;
-	
-	    node = node.parentNode;
-	  }
-  
-  if (gCurrentElement == aElt && gPath == path)
-    return;
-
-  gPath = path;
   gCurrentElement = aElt;
 
   var node = gCurrentElement;

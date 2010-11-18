@@ -48,6 +48,9 @@ var ComposerCommands = {
   mComposerJSCommandControllerID: null,
   mSelectionTimeOutId: null,
 
+  mLastSelectedElement: null,
+  mLastSelectedElementPath: null,
+
   getComposerCommandTable: function getComposerCommandTable()
   {
     var controller;
@@ -371,6 +374,38 @@ var ComposerCommands = {
 
   _updateSelectionBased: function _updateSelectionBased(aElement, aOneElementSelected)
   {
+    if (ComposerCommands.mLastSelectedElement && aElement &&
+        ComposerCommands.mLastSelectedElement.ownerDocument == aElement.ownerDocument &&
+        aElement == ComposerCommands.mLastSelectedElement) {
+		  var path = "";
+		  var node = aElement;
+		  if (ComposerCommands.mLastSelectedElementPath) // sanity check
+		    while (node && node.nodeType == Node.ELEMENT_NODE) {
+		      path += node.nodeName.toLowerCase() + ":";
+		      var child = node;
+		      var i = 0;
+		      while (child.previousElementSibling) {
+		        i++;
+		        child = child.previousElementSibling;
+		      }
+		      path += i;
+		      for (var i = 0; i < node.attributes.length; i++) {
+		        path += "[" + node.attributes[i].nodeName + "=" +
+		                      node.attributes[i].nodeValue + "]";
+		      }
+		  
+		      if (ComposerCommands.mLastSelectedElementPath.substr(0, path.length) != path)
+		        break;
+		  
+		      node = node.parentNode;
+		    }
+		  
+		  if (ComposerCommands.mLastSelectedElementPath == path)
+		    return;
+      ComposerCommands.mLastSelectedElementPath = path;
+    }
+    // now we're sure something changed in the selection, element or attribute
+    // on the selected element
     NotifierUtils.notify("selection", aElement, aOneElementSelected);
   },
 
