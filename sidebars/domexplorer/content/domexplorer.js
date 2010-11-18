@@ -15,7 +15,7 @@ var gIsPanelActive = false;
 #endif
 #endif
 var gPrefs = null;
-var gPath = "";
+var gPath = null;
 
 function Startup()
 {
@@ -82,6 +82,8 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("panelClosed",
                                                 PanelClosed,
                                                 window);
+	  gDialog.elementsTree.removeEventListener("keypress", onKeypressInElementsTree, true);
+	  gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
   }
 }
 
@@ -134,18 +136,26 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
   var path = "";
   var node = aElt;
-  while (node && node.nodeType == Node.ELEMENT_NODE) {
-    path += node.nodeName.toLowerCase() + ":";
-    var child = node;
-    var i = 0;
-    while (child.previousElementSibling) {
-      i++;
-      child = child.previousElementSibling;
-    }
-    path += i;
-
-    node = node.parentNode;
-  }
+  if (gPath)
+	  while (node && node.nodeType == Node.ELEMENT_NODE) {
+	    path += node.nodeName.toLowerCase() + ":";
+	    var child = node;
+	    var i = 0;
+	    while (child.previousElementSibling) {
+	      i++;
+	      child = child.previousElementSibling;
+	    }
+	    path += i;
+	    for (var i = 0; i < node.attributes.length; i++) {
+	      path += "[" + node.attributes[i].nodeName + "=" +
+	                    node.attributes[i].nodeValue + "]";
+	    }
+	
+	    if (gPath.substr(0, path.length) != path)
+	      break;
+	
+	    node = node.parentNode;
+	  }
   
   if (gCurrentElement == aElt && gPath == path)
     return;
@@ -216,15 +226,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 }
 
 function onKeypressInElementsTree(aEvent) {
-  /*
-  // early way out if we're not in htmlTree
-  if (event.target != gDialog.elementsTree)
-    return;
-
-  // Alt+Arrow shortcuts are handled by the main editor window
-  if (event.altKey)
-    return;
-*/
   switch(aEvent.keyCode) {
     case KeyEvent.DOM_VK_DOWN:
     case KeyEvent.DOM_VK_RIGHT:

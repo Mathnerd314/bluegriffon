@@ -49,10 +49,6 @@
                      label="&linkToolbarCmd.label;" observes="cmd_link"
                      tooltiptext="&linkToolbarCmd.tooltip;"/>
 
-      <toolbarbutton id="cssButton" class="toolbarbutton-1"
-                     label="&cssToolbarCmd.label;" observes="cmd_css"
-                     tooltiptext="&cssToolbarCmd.tooltip;"/>
-
       <toolbarbutton id="videoButton" class="toolbarbutton-1"
                      label="&videoToolbarCmd.label;" observes="cmd_video"
                      tooltiptext="&videoToolbarCmd.tooltip;"/>

@@ -3496,8 +3496,10 @@ Object.defineProperties(exports.EditorView.prototype, {
 
             // Use the replace function and not this.model.value = newValue
             // directly as this wouldn't create a new undoable action.
-            return this.replace(this.layoutManager.textStorage.range,
+            var rv = this.replace(this.layoutManager.textStorage.range,
                                         newValue, false);
+            //this.buffer.undoManager.clearStacks();
+            return rv;
         }
     },
 
@@ -11169,6 +11171,11 @@ exports.UndoManager = function() {};
 util.mixin(exports.UndoManager.prototype, {
     _redoStack: [],
     _undoStack: [],
+
+    clearStacks: function() {
+	      this._redoStack = [];
+	      this._undoStack = [];
+    },
 
     _undoOrRedo: function(method, stack, otherStack) {
         if (stack.length === 0) {

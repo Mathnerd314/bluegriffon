@@ -266,9 +266,6 @@
 <!ENTITY stylesheetsToolbarCmd.label "Stylesheets">
 <!ENTITY stylesheetsToolbarCmd.key "S">
 
-<!ENTITY cssToolbarCmd.label "CSS">
-<!ENTITY cssToolbarCmd.tooltip "Set CSS styles">
-
 <!ENTITY videoToolbarCmd.label "Video">
 <!ENTITY videoToolbarCmd.tooltip "Insert or edit a video">
 
