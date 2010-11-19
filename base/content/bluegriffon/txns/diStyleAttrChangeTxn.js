@@ -30,8 +30,11 @@ diStyleAttrChangeTxn.prototype = {
 	    this.mNode.style.setProperty(this.mProperty,
 	                                 this.mValue,
 	                                 this.mPriority);
-    else
+    else {
       this.mNode.style.removeProperty(this.mProperty);
+      if (this.mNode.getAttribute("style") == "")
+        this.mNode.removeAttribute("style");
+    }
   },
 
   undoTransaction: function()
@@ -48,6 +51,6 @@ diStyleAttrChangeTxn.prototype = {
 
   merge: function(aTransaction)
   {
-    return true;
+    return false;
   }
 };

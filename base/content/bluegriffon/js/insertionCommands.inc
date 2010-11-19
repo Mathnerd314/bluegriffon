@@ -122,6 +122,37 @@ var cmdCssPanelCommand =
   }
 };
 
+var cmdDomExplorerPanelCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+#ifdef XP_UNIX
+#ifdef XP_MACOSX
+    var panel = gDialog["panel-domexplorer"];
+    panel.openPanel(null, false);
+    NotifierUtils.notify("redrawPanel", panel.id);
+#else
+    start_domexplorer();
+#endif
+#else
+    var panel = gDialog["panel-domexplorer"];
+    panel.openPanel(null, false);
+    NotifierUtils.notify("redrawPanel", panel.id);
+#endif
+  }
+};
+
 var cmdInsertVideoCommand =
 {
   isCommandEnabled: function(aCommand, dummy)

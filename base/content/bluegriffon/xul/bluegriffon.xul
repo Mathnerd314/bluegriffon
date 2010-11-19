@@ -63,19 +63,19 @@
 
 #include menubar.inc
 
-  <toolbox class="toolbox-top" id="MainToolbox" mode="full" context="main-toolbar-context-menu">
+  <toolbox class="toolbox-top" id="MainToolbox" context="main-toolbar-context-menu">
 #include maintoolbarpalette.inc
     <toolbar id="MainToolbar" class="toolbar-primary chromeclass-toolbar" align="center"
              toolbarname="Main"
              fullscreentoolbar="true"
              persist="iconsize,mode"
              iconsize="small"
-             mode="full"
+             mode="icons"
              customizable="true"
 #ifdef XP_MACOSX
-             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,linkButton,cssButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,spacer,browseButton,spring,throbber-box"/>
+             defaultset="newButton,openButton,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,linkButton,domexplorerButton,cssButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,spacer,browseButton,spring,throbber-box"/>
 #else
-             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,linkButton,cssButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,spacer,browseButton,spring,throbber-box,spacer"/>
+             defaultset="newButton,spacer,openButton,spacer,saveButton,stopButton,spacer,tableButton,imageButton,anchorButton,linkButton,domexplorerButton,cssButton,svgEditMainToolbarButton,videoButton,audioButton,formButton,spacer,browseButton,spring,throbber-box,spacer"/>
 #endif
     <toolbarset id="customMainToolbars" context="main-toolbar-context-menu"/>
   </toolbox>

@@ -329,6 +329,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_datalist",    cmdInsertDatalistCommand);
 
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
+    commandTable.registerCommand("cmd_domexplorer", cmdDomExplorerPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);
     commandTable.registerCommand("cmd_audio",       cmdInsertAudioCommand);
 
@@ -354,7 +355,7 @@ var ComposerCommands = {
     } catch (e) { alert(e); }
   },
 
-  updateSelectionBased: function updateSelectionBased(aElt, aEvent)
+  updateSelectionBased: function updateSelectionBased(aDontNotify)
   {
     try {
       var mixed = EditorUtils.getSelectionContainer();
@@ -367,46 +368,48 @@ var ComposerCommands = {
       if (this.mSelectionTimeOutId)
         clearTimeout(this.mSelectionTimeOutId);
 
-      this.mSelectionTimeOutId = setTimeout(this._updateSelectionBased, 100, element, oneElementSelected);
+      this.mSelectionTimeOutId = setTimeout(this._updateSelectionBased, 100, element, oneElementSelected, aDontNotify);
     }
     catch(e) {}
   },
 
-  _updateSelectionBased: function _updateSelectionBased(aElement, aOneElementSelected)
+  _updateSelectionBased: function _updateSelectionBased(aElement, aOneElementSelected, aDontNotify)
   {
-    if (ComposerCommands.mLastSelectedElement && aElement &&
-        ComposerCommands.mLastSelectedElement.ownerDocument == aElement.ownerDocument &&
-        aElement == ComposerCommands.mLastSelectedElement) {
-		  var path = "";
-		  var node = aElement;
-		  if (ComposerCommands.mLastSelectedElementPath) // sanity check
-		    while (node && node.nodeType == Node.ELEMENT_NODE) {
-		      path += node.nodeName.toLowerCase() + ":";
-		      var child = node;
-		      var i = 0;
-		      while (child.previousElementSibling) {
-		        i++;
-		        child = child.previousElementSibling;
-		      }
-		      path += i;
-		      for (var i = 0; i < node.attributes.length; i++) {
-		        path += "[" + node.attributes[i].nodeName + "=" +
-		                      node.attributes[i].nodeValue + "]";
-		      }
-		  
-		      if (ComposerCommands.mLastSelectedElementPath.substr(0, path.length) != path)
-		        break;
-		  
-		      node = node.parentNode;
-		    }
-		  
-		  if (ComposerCommands.mLastSelectedElementPath == path)
-		    return;
+    var path = "";
+    var node = aElement;
+    while (node && node.nodeType == Node.ELEMENT_NODE) {
+      path += node.nodeName.toLowerCase() + ":";
+      var child = node;
+      var j = 0;
+      while (child.previousElementSibling) {
+        j++;
+        child = child.previousElementSibling;
+      }
+      path += j;
+      for (var i = 0; i < node.attributes.length; i++) {
+        path += "[" + node.attributes[i].nodeName + "=" +
+                      node.attributes[i].nodeValue + "]";
+      }
+  
+      node = node.parentNode;
+      path += " ";
+    }
+
+    // trivial case
+    if (ComposerCommands.mLastSelectedElement != aElement) {
+      ComposerCommands.mLastSelectedElement = aElement;
+      ComposerCommands.mLastSelectedElementPath = path;
+      if (!aDontNotify)
+        NotifierUtils.notify("selection", aElement, aOneElementSelected);
+    }
+
+    if (ComposerCommands.mLastSelectedElementPath != path) {
+	    // now we're sure something changed in the selection, element or attribute
+	    // on the selected element
+      if (!aDontNotify)
+  	    NotifierUtils.notify("selection", aElement, aOneElementSelected);
       ComposerCommands.mLastSelectedElementPath = path;
     }
-    // now we're sure something changed in the selection, element or attribute
-    // on the selected element
-    NotifierUtils.notify("selection", aElement, aOneElementSelected);
   },
 
   onStateButtonUpdate: function onStateButtonUpdate(button, commmandID, onState)
@@ -420,9 +423,13 @@ var ComposerCommands = {
   selectionListener: {
     notifySelectionChanged: function(doc, sel, reason)
     {
-      ComposerCommands.updateSelectionBased();
-    }
+      ComposerCommands.updateSelectionBased(false);
+    },
 
+    EditAction: function()
+    {
+      ComposerCommands.updateSelectionBased(false);
+    }
   }
 };
 

@@ -44,6 +44,7 @@
   <command id="cmd_link"             oncommand="goDoCommand('cmd_link')"/>
   <command id="cmd_hr"               oncommand="goDoCommand('cmd_hr')"/>
   <command id="cmd_css"              oncommand="goDoCommand('cmd_css')"/>
+  <command id="cmd_domexplorer"      oncommand="goDoCommand('cmd_domexplorer')"/>
   <command id="cmd_video"            oncommand="goDoCommand('cmd_video')"/>
   <command id="cmd_audio"            oncommand="goDoCommand('cmd_audio')"/>
   <command id="cmd_html"             oncommand="goDoCommand('cmd_html')"/>
@@ -131,7 +132,7 @@
 <commandset id="selectionBasedCommands"
             commandupdater="true"
             events="style,create"
-            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);/*ComposerCommands.updateSelectionBased(this, event)*/">
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);">
   <command id="cmd_selectionChanged"/>
   <command id="cmd_undo" 
            oncommand="goDoCommand('cmd_undo')"

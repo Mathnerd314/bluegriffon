@@ -16,6 +16,7 @@ var gIsPanelActive = false;
 #endif
 var gPrefs = null;
 var gPath = null;
+var gNewAttribute = -1;
 
 function Startup()
 {
@@ -59,8 +60,8 @@ function Startup()
       SelectionChanged(null, c.node, c.oneElementSelected);
   }
 
-  gDialog.elementsTree.addEventListener("keypress", onKeypressInElementsTree, true);
   gDialog.attributesTree.addEventListener("DOMAttrModified", onAttributesTreeModified, true);
+  gDialog.cssTree.addEventListener("DOMAttrModified", onCssTreeModified, true);
 }
 
 function Shutdown()
@@ -82,8 +83,8 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("panelClosed",
                                                 PanelClosed,
                                                 window);
-	  gDialog.elementsTree.removeEventListener("keypress", onKeypressInElementsTree, true);
 	  gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
+    gDialog.cssTree.removeEventListener("DOMAttrModified", onCssTreeModified, true);
   }
 }
 
@@ -94,7 +95,7 @@ function Inspect()
     var editor = gMain.EditorUtils.getCurrentEditor();
     gDialog.mainBox.style.visibility = editor ? "" : "hidden";
     if (editor) {
-      var node = EditorUtils.getSelectionContainer().node;
+      var node = gMain.EditorUtils.getSelectionContainer().node;
       if (node) {
         SelectionChanged(null, node, true);
       }
@@ -193,50 +194,25 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     gDialog.elementsTree.view.selection.select(gDialog.elementsTree.contentView.getIndexOfItem(selected));
 
   UpdateAttributes();
-  //UpdateStyles();
+  UpdateStyles();
 }
 
-function onKeypressInElementsTree(aEvent) {
-  switch(aEvent.keyCode) {
-    case KeyEvent.DOM_VK_DOWN:
-    case KeyEvent.DOM_VK_RIGHT:
-      SelectNextOrPreviousInTree(1)
-      break;
-    case KeyEvent.DOM_VK_LEFT:
-    case KeyEvent.DOM_VK_UP:
-      SelectNextOrPreviousInTree(-1)
-      break;
-    default:
-      return;
-  }
-
-  aEvent.stopPropagation();
-}
-
-function SelectNextOrPreviousInTree(aIncrement)
+function ElementSelectedInTree()
 {
   var tree = gDialog.elementsTree;
   var contentView = tree.contentView;
   var view = tree.view;
-  var index = 0;
-  if (view.selection.count) // No selection yet in the tree
+  if (!view || !view.selection || !view.selection.count) // No selection yet in the tree
   {
-    index = view.selection.currentIndex;
+    return;
   }
-  index += aIncrement;
-  if (index < 0)
-    index = 0;
-  if (index >= gDialog.elementsTree.view.rowCount)
-    index = gDialog.elementsTree.view.rowCount - 1;
+  var index = view.selection.currentIndex;
   var treeitem = contentView.getItemAtIndex(index);
   var node = treeitem.getUserData("node");
-  try {
-	  EditorUtils.getCurrentEditor().selectElement(node);
-  }
-  catch(e) {
-    gDialog.elementsTree.view.selection.select(index);
-    SelectionChanged(null, node, true);
-  }
+
+  gDialog.elementsTree.view.selection.select(index);
+  gMain.ComposerCommands.mLastSelectedElement = null;
+  SelectionChanged(null, node, true);
 }
 
 function UpdateAttributes()
@@ -263,6 +239,7 @@ function UpdateAttributes()
 }
 
 var gEditing = -1;
+var gEditingColumn = null;
 
 function onAttributesTreeModified(aEvent)
 {
@@ -280,13 +257,208 @@ function onAttributesTreeModified(aEvent)
 		  var contentView = tree.contentView;
 		  var view = tree.view;
 		  gEditing = view.selection.currentIndex;
+      gEditingColumn = tree._editingColumn;
     }
     else if (attrChange == 3 && gEditing >= 0) { // end editing
-      EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
-                               gDialog.attributesTree.view.getCellText(gEditing, gDialog.attributesTree.columns[0]),
-                               gDialog.attributesTree.view.getCellText(gEditing, gDialog.attributesTree.columns[1]));
-      gEditing = -1;
+      var aName  = gDialog.attributesTree.view.getCellText(gEditing, gDialog.attributesTree.columns[0]);
+      var aValue = gDialog.attributesTree.view.getCellText(gEditing, gDialog.attributesTree.columns[1]);
+      if (gEditingColumn == gDialog.attributesTree.columns[1]) {
+        gMain.EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
+										                                aName,
+										                                aValue);
+        gMain.ComposerCommands.updateSelectionBased(true);
+        UpdateStyles();
+        gEditing = -1;
+        gEditingColumn = null;
+      }
+      else {
+        gEditingColumn = gDialog.attributesTree.columns[1];
+        gDialog.attributesTree.contentView.getItemAtIndex(gEditing).querySelector("treecell").setAttribute("editable", "false");
+        setTimeout(function(){gDialog.attributesTree.startEditing(gEditing, gDialog.attributesTree.columns[1])}, 100);
+      }
     }
   }
 }
 
+function AddAttribute()
+{
+  var treeitem = document.createElement("treeitem");
+  var treerow  = document.createElement("treerow");
+  treecellName = document.createElement("treecell");
+  treecellValue = document.createElement("treecell");
+  treecellName.setAttribute("label",  "");
+  treecellValue.setAttribute("label", "");
+  treerow.appendChild(treecellName);
+  treerow.appendChild(treecellValue);
+  treeitem.appendChild(treerow);
+  gDialog.attributesTreechildren.appendChild(treeitem);
+  var index = gDialog.attributesTree.contentView.getIndexOfItem(treeitem);
+  gDialog.attributesTree.view.selection.select(index);
+  gDialog.attributesTree.startEditing(index, gDialog.attributesTree.columns[0]);
+}
+
+function UpdateAttributeButtons()
+{
+  var tree = gDialog.attributesTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection || !view.selection.count) { // no selection...
+    gDialog.MinusButton.disabled = true;
+    gDialog.ConfigButton.disabled = true;
+    return;
+  }
+
+  var index = view.selection.currentIndex;
+  gDialog.MinusButton.disabled = false;
+  gDialog.ConfigButton.disabled = false;
+}
+
+function DeleteAttribute()
+{
+  var tree = gDialog.attributesTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var item = gDialog.attributesTree.contentView.getItemAtIndex(index);
+  var aName  = gDialog.attributesTree.view.getCellText(index, gDialog.attributesTree.columns[0]);
+  item.parentNode.removeChild(item);
+  gMain.EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
+                                                 aName);
+  gMain.ComposerCommands.updateSelectionBased(true);
+}
+
+function ModifyAttribute()
+{
+  var tree = gDialog.attributesTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  gDialog.attributesTree.startEditing(index, gDialog.attributesTree.columns[1]);
+}
+
+
+function UpdateStyles()
+{
+  deleteAllChildren(gDialog.cssTreechildren);
+  var styles = gCurrentElement.style;
+  for (var i = 0; i < styles.length; i++) {
+    var treeitem = document.createElement("treeitem");
+    var treerow  = document.createElement("treerow");
+    treecellName = document.createElement("treecell");
+    treecellValue = document.createElement("treecell");
+    treecellPriority = document.createElement("treecell");
+    var property = styles.item(i);
+    treecellName.setAttribute("label",  property);
+    treecellValue.setAttribute("label", styles.getPropertyValue(property));
+    treecellPriority.setAttribute("label", styles.getPropertyPriority(property));
+    treecellName.setAttribute("editable", "false");
+    treerow.appendChild(treecellName);
+    treerow.appendChild(treecellValue);
+    treerow.appendChild(treecellPriority);
+    treeitem.appendChild(treerow);
+    gDialog.cssTreechildren.appendChild(treeitem);
+  }
+}
+
+function UpdateCSSButtons()
+{
+  var tree = gDialog.cssTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection || !view.selection.count) { // no selection...
+    gDialog.MinusCSSButton.disabled = true;
+    gDialog.ConfigCSSButton.disabled = true;
+    return;
+  }
+
+  var index = view.selection.currentIndex;
+  gDialog.MinusCSSButton.disabled = false;
+  gDialog.ConfigCSSButton.disabled = false;
+}
+
+function DeleteCSS()
+{
+  var tree = gDialog.cssTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  var item = gDialog.cssTree.contentView.getItemAtIndex(index);
+  var property = gDialog.cssTree.view.getCellText(index, gDialog.attributesTree.columns[0]);
+  item.parentNode.removeChild(item);
+  var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
+  gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+  gMain.ComposerCommands.updateSelectionBased(true);
+  UpdateAttributes();
+}
+
+function AddCSS()
+{
+  var treeitem = document.createElement("treeitem");
+  var treerow  = document.createElement("treerow");
+  treecellName = document.createElement("treecell");
+  treecellValue = document.createElement("treecell");
+  treecellPriority = document.createElement("treecell");
+  treecellName.setAttribute("label",  "");
+  treecellValue.setAttribute("label", "");
+  treecellPriority.setAttribute("label", "");
+  treerow.appendChild(treecellName);
+  treerow.appendChild(treecellValue);
+  treerow.appendChild(treecellPriority);
+  treeitem.appendChild(treerow);
+  gDialog.cssTreechildren.appendChild(treeitem);
+  var index = gDialog.cssTree.contentView.getIndexOfItem(treeitem);
+  gDialog.cssTree.view.selection.select(index);
+  gDialog.cssTree.startEditing(index, gDialog.cssTree.columns[0]);
+}
+
+function onCssTreeModified(aEvent)
+{
+  var target = aEvent.target;
+  if (target != gDialog.cssTree)
+    return;
+
+  var attrChange = aEvent.attrChange;
+  var attrName = aEvent.attrName;
+  var newValue = aEvent.newValue;
+
+  if (attrName == "editing") {
+    if (attrChange == 2) { // start editing
+      var tree = gDialog.cssTree;
+      var contentView = tree.contentView;
+      var view = tree.view;
+      gEditing = view.selection.currentIndex;
+      gEditingColumn = tree._editingColumn;
+    }
+    else if (attrChange == 3 && gEditing >= 0) { // end editing
+      var aName     = gDialog.cssTree.view.getCellText(gEditing, gDialog.cssTree.columns[0]);
+      var aValue    = gDialog.cssTree.view.getCellText(gEditing, gDialog.cssTree.columns[1]);
+      var aPriority = gDialog.cssTree.view.getCellText(gEditing, gDialog.cssTree.columns[2]);
+      if (gEditingColumn == gDialog.cssTree.columns[2]) {
+			  var txn = new diStyleAttrChangeTxn(gCurrentElement, aName, aValue, aPriority);
+			  gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+        gMain.ComposerCommands.updateSelectionBased(true);
+        UpdateAttributes();
+        gEditing = -1;
+        gEditingColumn = null;
+      }
+      else if (gEditingColumn == gDialog.cssTree.columns[1]) {
+        gEditingColumn = gDialog.cssTree.columns[2];
+        setTimeout(function(){gDialog.cssTree.startEditing(gEditing, gDialog.cssTree.columns[2])}, 100);
+      }
+      else if (gEditingColumn == gDialog.cssTree.columns[0]) {
+        gEditingColumn = gDialog.cssTree.columns[1];
+        gDialog.cssTree.contentView.getItemAtIndex(gEditing).querySelector("treecell").setAttribute("editable", "false");
+        setTimeout(function(){gDialog.cssTree.startEditing(gEditing, gDialog.cssTree.columns[1])}, 100);
+      }
+    }
+  }
+}
+
+function ModifyCSS()
+{
+  var tree = gDialog.cssTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  var index = view.selection.currentIndex;
+  gDialog.cssTree.startEditing(index, gDialog.cssTree.columns[1]);
+}

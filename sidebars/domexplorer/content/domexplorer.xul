@@ -57,14 +57,13 @@
 
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
-  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
-  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diChangeFileStylesheetTxn.js"/>
   <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorer.js"/>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
 	  <tree id="elementsTree" flex="1" hidecolumnpicker="true" seltype="single"
-          persist="height">
+          persist="height"
+          onselect="ElementSelectedInTree()">
 		  <treecols>
 		    <treecol id="elementsTreecol" label="&elements.label;" flex="1"
                  primary="true"/>
@@ -79,31 +78,64 @@
       <tabpanels flex="1">
         <vbox flex="1">
 	        <tree id="attributesTree" flex="1" hidecolumnpicker="true" seltype="single"
-	              editable="true">
+	              editable="true"
+                onselect="UpdateAttributeButtons()">
 			      <treecols>
 	            <treecol id="attrNameTreecol"  label="&attrName.label;" flex="1" persist="width"/>
-	            <splitter class="tree-splitter"/>
-	            <treecol id="attrValueTreecol" label="&attrValue.label;" flex="1" persist="width"/>
-			      </treecols>
+              <splitter class="tree-splitter"/>
+              <treecol id="attrValueTreecol" label="&attrValue.label;" flex="1" persist="width"/>
+  		      </treecols>
 	          <treechildren id="attributesTreechildren"/>
 	        </tree>
 				  <hbox id="attributesTreeToolbox" class="listboxBg">
 				    <toolbarbutton class="listboxBgPlusButton"
 				                   tooltiptext="&addAttribute.tooltip;"
 				                   id="PlusButton"
-				                   oncommand="AddStylesheet()"/>
+				                   oncommand="AddAttribute()"/>
 				    <toolbarbutton class="listboxBgMinusButton"
 				                   disabled="true"
 				                   id="MinusButton"
 				                   tooltiptext="&removeAttribute.tooltip;"
-				                   oncommand="DeleteStylesheet()"/>
+				                   oncommand="DeleteAttribute()"/>
 				    <toolbarbutton class="listboxBgConfigButton"
 				                   tooltiptext="&modifyAttribute.tooltip;"
 				                   disabled="true"
 				                   id="ConfigButton"
-				                   oncommand="UpdateStylesheet()"/>
+				                   oncommand="ModifyAttribute()"/>
 				    <spacer flex="1"/>
 				  </hbox>
+        </vbox>
+
+        <vbox flex="1">
+          <tree id="cssTree" flex="1" hidecolumnpicker="true" seltype="single"
+                editable="true"
+                onselect="UpdateCSSButtons()">
+            <treecols>
+              <treecol id="propertyTreecol"  label="&property.label;" flex="1" persist="width"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="valueTreecol" label="&value.label;" flex="1" persist="width"/>
+              <splitter class="tree-splitter"/>
+              <treecol id="priorityTreecol" label="&priority.label;" flex="1" persist="width"/>
+            </treecols>
+            <treechildren id="cssTreechildren"/>
+          </tree>
+          <hbox id="cssTreeToolbox" class="listboxBg">
+            <toolbarbutton class="listboxBgPlusButton"
+                           tooltiptext="&addCSS.tooltip;"
+                           id="PlusCSSButton"
+                           oncommand="AddCSS()"/>
+            <toolbarbutton class="listboxBgMinusButton"
+                           disabled="true"
+                           id="MinusCSSButton"
+                           tooltiptext="&removeCSS.tooltip;"
+                           oncommand="DeleteCSS()"/>
+            <toolbarbutton class="listboxBgConfigButton"
+                           tooltiptext="&modifyCSS.tooltip;"
+                           disabled="true"
+                           id="ConfigCSSButton"
+                           oncommand="ModifyCSS()"/>
+            <spacer flex="1"/>
+          </hbox>
         </vbox>
       </tabpanels>
     </tabbox>
