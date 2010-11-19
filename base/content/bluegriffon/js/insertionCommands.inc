@@ -271,8 +271,10 @@ var cmdInsertFormInputCommand =
   doCommandParams: function(aCommand, aParams, aRefCon) {
     var type = aParams.getCStringValue("type");
     var element = EditorUtils.getObjectForProperties(["input"]);
-    if (element)
-      type = element.getAttribute("type");
+    if (element) {
+      if (!type || type != element.getAttribute("type"))
+        element = null;
+    }
     window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
                       "chrome,modal,titlebar,resizable=no,dialog=yes", element, type);
   },

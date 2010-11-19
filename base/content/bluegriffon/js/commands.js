@@ -328,6 +328,31 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_meter",       cmdInsertMeterCommand);
     commandTable.registerCommand("cmd_datalist",    cmdInsertDatalistCommand);
 
+    commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputHidden",  cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputText",    cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputSearch",  cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputTel",     cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputUrl",     cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputEmail",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputPassword",cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputDatetime",cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputDate",    cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputMonth",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputWeek",    cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputTime",    cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputDatetimelocal",cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputNumber",  cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputRange",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputColor",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputCheckbox",cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputRadio",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputFile",    cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputSubmit",  cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputImage",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputReset",   cmdInsertFormInputCommand);
+    commandTable.registerCommand("cmd_formInputButton",  cmdInsertFormInputCommand);
+
     commandTable.registerCommand("cmd_css",         cmdCssPanelCommand);
     commandTable.registerCommand("cmd_domexplorer", cmdDomExplorerPanelCommand);
     commandTable.registerCommand("cmd_video",       cmdInsertVideoCommand);
