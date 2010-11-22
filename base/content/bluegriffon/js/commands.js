@@ -400,6 +400,8 @@ var ComposerCommands = {
 
   _updateSelectionBased: function _updateSelectionBased(aElement, aOneElementSelected, aDontNotify)
   {
+    NotifierUtils.notify("selection_strict", aElement, aOneElementSelected);
+
     var path = "";
     var node = aElement;
     while (node && node.nodeType == Node.ELEMENT_NODE) {
