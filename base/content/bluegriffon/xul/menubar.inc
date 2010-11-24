@@ -181,6 +181,10 @@
 
     <menu id="formatMenu" label="&formatMenu.label;" accesskey="&formatMenu.accesskey;">
       <menupopup id="formatMenuPopup" onpopupshowing="initFontStyleMenu(this)">
+	      <menuitem label="&spanCmd.label;"
+	                command="cmd_span"
+                  accesskey="&spanCmd.accesskey;"/>
+        <menuseparator/>
 	      <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox" key="boldkb"/>
 	      <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox" key="italickb" />
 	      <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>

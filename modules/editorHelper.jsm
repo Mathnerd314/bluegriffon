@@ -46,6 +46,7 @@ var EditorUtils = {
   nsIDOMNode: Components.interfaces.nsIDOMNode,
 
   mActiveViewActive: false,
+  mAtomService: null,
 
   /********** PUBLIC **********/
 
@@ -452,11 +453,28 @@ var EditorUtils = {
     }
   },
 
+	getAtomService: function()
+	{
+    if (!this.mAtomService)
+	    this.mAtomService = Components.classes["@mozilla.org/atom-service;1"]
+                                    .getService(Components.interfaces.nsIAtomService);
+    return this.mAtomService;
+	},
+
+  setTextProperty: function(property, attribute, value)
+  {
+    try {
+      var propAtom = this.getAtomService().getAtom(property);
+  
+      this.getCurrentEditor().setInlineProperty(propAtom, attribute, value);
+    }
+    catch(e) {}
+  },
+
   getTextProperty: function(property, attribute, value, firstHas, anyHas, allHas)
   {
     try {
-      if (!gAtomService) GetAtomService();
-      var propAtom = gAtomService.getAtom(property);
+      var propAtom = this.getAtomService().getAtom(property);
   
       this.getCurrentEditor().getInlineProperty(propAtom, attribute, value,
                                                 firstHas, anyHas, allHas);
@@ -763,6 +781,7 @@ var EditorUtils = {
   
     return true;
   },
+
 
   get activeViewActive()    { return this.mActiveViewActive; },
   set activeViewActive(val) { this.mActiveViewActive = val; }

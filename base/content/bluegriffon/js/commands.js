@@ -363,6 +363,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
 
     commandTable.registerCommand("cmd_stylesheets", cmdStylesheetsCommand);
+
+    commandTable.registerCommand("cmd_span",        cmdSpanCommand);
   },
 
   setupFormatCommands: function setupFormatCommands()

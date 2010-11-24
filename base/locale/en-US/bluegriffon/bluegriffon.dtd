@@ -55,9 +55,10 @@
 <!ENTITY insertMenu.label                 "Insert">
 <!ENTITY insertMenu.accesskey             "i">
 
-
 <!ENTITY formatMenu.label                 "Format">
 <!ENTITY formatMenu.accesskey             "o">
+<!ENTITY spanCmd.label "Span">
+<!ENTITY spanCmd.accesskey "n">
 <!-- Font Style SubMenu -->
 <!ENTITY fontStyleMenu.label "Text Style">
 <!ENTITY formatstylemenu.accesskey "s">
