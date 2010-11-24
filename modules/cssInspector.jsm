@@ -44,12 +44,267 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var EXPORTED_SYMBOLS = ["CssInspector"];
+var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
+
+/* FROM http://peter.sh/data/vendor-prefixed-css.php?js=1 */
+
+const kCSS_VENDOR_PREFIXES = {"lastUpdate":1290441007,"properties":[{"gecko":"","webkit":"","presto":"","trident":"-ms-accelerator","status":"P"},
+{"gecko":"","webkit":"-webkit-animation","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-delay","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-direction","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-duration","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-fill-mode","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-animation-iteration-count","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-name","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-play-state","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-animation-timing-function","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-appearance","webkit":"-webkit-appearance","presto":"","trident":"","status":"CR"},
+{"gecko":"","webkit":"-webkit-backface-visibility","presto":"","trident":"","status":"WD"},
+{"gecko":"background-clip","webkit":"-webkit-background-clip","presto":"background-clip","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-background-composite","presto":"","trident":"","status":""},
+{"gecko":"-moz-background-inline-policy","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"background-origin","webkit":"-webkit-background-origin","presto":"background-origin","trident":"","status":"WD"},
+{"gecko":"","webkit":"background-position-x","presto":"","trident":"-ms-background-position-x","status":""},
+{"gecko":"","webkit":"background-position-y","presto":"","trident":"-ms-background-position-y","status":""},
+{"gecko":"background-size","webkit":"-webkit-background-size","presto":"background-size","trident":"","status":"WD"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-behavior","status":""},
+{"gecko":"-moz-binding","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-block-progression","status":""},
+{"gecko":"","webkit":"-webkit-border-after","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-after-color","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-after-style","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-after-width","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-before","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-before-color","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-before-style","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-before-width","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-bottom-colors","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"border-bottom-left-radius","webkit":"-webkit-border-bottom-left-radius","presto":"border-bottom-left-radius","trident":"border-bottom-left-radius","status":"WD"},
+{"gecko":"border-bottom-right-radius","webkit":"-webkit-border-bottom-right-radius","presto":"border-bottom-right-radius","trident":"border-bottom-right-radius","status":"WD"},
+{"gecko":"-moz-border-end","webkit":"-webkit-border-end","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-end-color","webkit":"-webkit-border-end-color","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-end-style","webkit":"-webkit-border-end-style","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-end-width","webkit":"-webkit-border-end-width","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-border-fit","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-border-horizontal-spacing","presto":"","trident":"","status":""},
+{"gecko":"-moz-border-image","webkit":"-webkit-border-image","presto":"border-image","trident":"","status":"WD"},
+{"gecko":"-moz-border-left-colors","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"border-radius","webkit":"-webkit-border-radius","presto":"border-radius","trident":"border-radius","status":"WD"},
+{"gecko":"-moz-border-right-colors","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-border-start","webkit":"-webkit-border-start","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-start-color","webkit":"-webkit-border-start-color","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-start-style","webkit":"-webkit-border-start-style","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-start-width","webkit":"-webkit-border-start-width","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-border-top-colors","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"border-top-left-radius","webkit":"-webkit-border-top-left-radius","presto":"border-top-left-radius","trident":"border-top-left-radius","status":"WD"},
+{"gecko":"border-top-right-radius","webkit":"-webkit-border-top-right-radius","presto":"border-top-right-radius","trident":"border-top-right-radius","status":"WD"},
+{"gecko":"","webkit":"-webkit-border-vertical-spacing","presto":"","trident":"","status":""},
+{"gecko":"-moz-box-align","webkit":"-webkit-box-align","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-box-direction","webkit":"-webkit-box-direction","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-box-flex","webkit":"-webkit-box-flex","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-box-flex-group","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-box-lines","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-box-ordinal-group","webkit":"-webkit-box-ordinal-group","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-box-orient","webkit":"-webkit-box-orient","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-box-pack","webkit":"-webkit-box-pack","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-box-reflect","presto":"","trident":"","status":""},
+{"gecko":"box-shadow","webkit":"-webkit-box-shadow","presto":"box-shadow","trident":"box-shadow","status":"WD"},
+{"gecko":"-moz-box-sizing","webkit":"box-sizing","presto":"box-sizing","trident":"","status":"CR"},
+{"gecko":"","webkit":"-webkit-color-correction","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-column-break-after","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-column-break-before","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-column-break-inside","presto":"","trident":"","status":""},
+{"gecko":"-moz-column-count","webkit":"-webkit-column-count","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-gap","webkit":"-webkit-column-gap","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-rule","webkit":"-webkit-column-rule","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-rule-color","webkit":"-webkit-column-rule-color","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-rule-style","webkit":"-webkit-column-rule-style","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-rule-width","webkit":"-webkit-column-rule-width","presto":"","trident":"","status":"CR"},
+{"gecko":"","webkit":"-webkit-column-span","presto":"","trident":"","status":"CR"},
+{"gecko":"-moz-column-width","webkit":"-webkit-column-width","presto":"","trident":"","status":"CR"},
+{"gecko":"","webkit":"-webkit-columns","presto":"","trident":"","status":"CR"},
+{"gecko":"","webkit":"-webkit-dashboard-region","presto":"","trident":"","status":""},
+{"gecko":"filter","webkit":"","presto":"","trident":"-ms-filter","status":""},
+{"gecko":"-moz-float-edge","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-font-feature-settings","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"-moz-font-language-override","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-font-size-delta","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-font-smoothing","presto":"","trident":"","status":""},
+{"gecko":"-moz-force-broken-image-icon","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-highlight","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-hyphenate-character","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-hyphenate-locale","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-hyphens","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-image-region","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"ime-mode","webkit":"","presto":"","trident":"-ms-ime-mode","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-interpolation-mode","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-flow","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-grid","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-grid-char","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-grid-line","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-grid-mode","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-layout-grid-type","status":""},
+{"gecko":"","webkit":"-webkit-line-break","presto":"","trident":"-ms-line-break","status":""},
+{"gecko":"","webkit":"-webkit-line-clamp","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-line-grid-mode","status":""},
+{"gecko":"","webkit":"-webkit-logical-height","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-logical-width","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-margin-after","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-margin-after-collapse","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-margin-before","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-margin-before-collapse","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-margin-bottom-collapse","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-margin-collapse","presto":"","trident":"","status":""},
+{"gecko":"-moz-margin-end","webkit":"-webkit-margin-end","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-margin-start","webkit":"-webkit-margin-start","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-margin-top-collapse","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-marquee","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-marquee-direction","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-marquee-increment","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-marquee-repetition","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-marquee-speed","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-marquee-style","presto":"","trident":"","status":"WD"},
+{"gecko":"mask","webkit":"-webkit-mask","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-attachment","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-box-image","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-clip","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-composite","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-image","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-origin","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-position","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-position-x","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-position-y","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-repeat","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-repeat-x","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-repeat-y","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-mask-size","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-match-nearest-mail-blockquote-color","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-max-logical-height","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-max-logical-width","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-min-logical-height","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-min-logical-width","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-nbsp-mode","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"","presto":"-o-object-fit","trident":"","status":"ED"},
+{"gecko":"","webkit":"","presto":"-o-object-position","trident":"","status":"ED"},
+{"gecko":"opacity","webkit":"-webkit-opacity","presto":"opacity","trident":"opacity","status":"WD"},
+{"gecko":"-moz-outline-radius","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-outline-radius-bottomleft","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-outline-radius-bottomright","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-outline-radius-topleft","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-outline-radius-topright","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"overflow-x","webkit":"overflow-x","presto":"overflow-x","trident":"-ms-overflow-x","status":"WD"},
+{"gecko":"overflow-y","webkit":"overflow-y","presto":"overflow-y","trident":"-ms-overflow-y","status":"WD"},
+{"gecko":"","webkit":"-webkit-padding-after","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-padding-before","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-padding-end","webkit":"-webkit-padding-end","presto":"","trident":"","status":"ED"},
+{"gecko":"-moz-padding-start","webkit":"-webkit-padding-start","presto":"","trident":"","status":"ED"},
+{"gecko":"","webkit":"-webkit-perspective","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-perspective-origin","presto":"","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-perspective-origin-x","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-perspective-origin-y","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-rtl-ordering","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-script-level","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"-moz-script-min-size","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"-moz-script-size-multiplier","webkit":"","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-3dlight-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-arrow-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-base-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-darkshadow-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-face-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-highlight-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-shadow-color","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-scrollbar-track-color","status":"P"},
+{"gecko":"-moz-stack-sizing","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-svg-shadow","presto":"","trident":"","status":""},
+{"gecko":"-moz-tab-size","webkit":"","presto":"-o-tab-size","trident":"","status":""},
+{"gecko":"","webkit":"","presto":"-o-table-baseline","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-tap-highlight-color","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-text-align-last","status":"WD"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-text-autospace","status":"WD"},
+{"gecko":"","webkit":"-webkit-text-combine","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-text-decorations-in-effect","presto":"","trident":"","status":""},
+{"gecko":"","webkit":"-webkit-text-fill-color","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-text-justify","status":"WD"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-text-kashida-space","status":"P"},
+{"gecko":"","webkit":"text-overflow","presto":"-o-text-overflow","trident":"-ms-text-overflow","status":"WD"},
+{"gecko":"","webkit":"-webkit-text-security","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-text-size-adjust","presto":"","trident":"-ms-text-size-adjust","status":""},
+{"gecko":"","webkit":"-webkit-text-stroke","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-text-stroke-color","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-text-stroke-width","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"","presto":"","trident":"-ms-text-underline-position","status":"P"},
+{"gecko":"","webkit":"-webkit-touch-callout","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-transform","webkit":"-webkit-transform","presto":"-o-transform","trident":"","status":"WD"},
+{"gecko":"-moz-transform-origin","webkit":"-webkit-transform-origin","presto":"-o-transform-origin","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-transform-origin-x","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-transform-origin-y","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-transform-origin-z","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"-webkit-transform-style","presto":"","trident":"","status":"WD"},
+{"gecko":"-moz-transition","webkit":"-webkit-transition","presto":"-o-transition","trident":"","status":"WD"},
+{"gecko":"-moz-transition-delay","webkit":"-webkit-transition-delay","presto":"-o-transition-delay","trident":"","status":"WD"},
+{"gecko":"-moz-transition-duration","webkit":"-webkit-transition-duration","presto":"-o-transition-duration","trident":"","status":"WD"},
+{"gecko":"-moz-transition-property","webkit":"-webkit-transition-property","presto":"-o-transition-property","trident":"","status":"WD"},
+{"gecko":"-moz-transition-timing-function","webkit":"-webkit-transition-timing-function","presto":"-o-transition-timing-function","trident":"","status":"WD"},
+{"gecko":"","webkit":"-webkit-user-drag","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-user-focus","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-user-input","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-user-modify","webkit":"-webkit-user-modify","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-user-select","webkit":"-webkit-user-select","presto":"","trident":"","status":"P"},
+{"gecko":"-moz-window-shadow","webkit":"","presto":"","trident":"","status":"P"},
+{"gecko":"","webkit":"word-break","presto":"","trident":"-ms-word-break","status":"WD"},
+{"gecko":"word-wrap","webkit":"word-wrap","presto":"word-wrap","trident":"-ms-word-wrap","status":"WD"},
+{"gecko":"","webkit":"-webkit-writing-mode","presto":"","trident":"-ms-writing-mode","status":"ED"},
+{"gecko":"","webkit":"zoom","presto":"","trident":"-ms-zoom","status":""}]};
 
 var CssInspector = {
 
   kINIDOMUTILS: Components.interfaces.inIDOMUtils,
   kINIDOMUTILS_CID: "@mozilla.org/inspector/dom-utils;1",
+
+  mVENDOR_PREFIXES: null,
+
+  cleanPrefixes: function()
+  {
+    this.mVENDOR_PREFIXES = null;
+  },
+
+  prefixesForProperty: function(aProperty)
+  {
+    if (!this.mVENDOR_PREFIXES) {
+      var useGecko = true;
+      var useWebkit = true;
+      var usePresto = true;
+      var useTrident = true;
+      try {
+        var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                       .getService(Components.interfaces.nsIPrefBranch);
+      
+        useGecko   = prefs.getBoolPref("bluegriffon.css.support.gecko");
+        useWebkit  = prefs.getBoolPref("bluegriffon.css.support.webkit");
+        usePresto  = prefs.getBoolPref("bluegriffon.css.support.presto");
+        useTrident = prefs.getBoolPref("bluegriffon.css.support.trident");
+      }
+      catch(e) {}
+
+      this.mVENDOR_PREFIXES = {};
+      for (var i = 0; i < kCSS_VENDOR_PREFIXES.properties.length; i++) {
+        var p = kCSS_VENDOR_PREFIXES.properties[i];
+        if (p.gecko && (p.webkit || p.presto || p.trident)) {
+          var o = {};
+          if (useGecko) o[p.gecko] = true;
+          if (useWebkit && p.webkit)  o[p.webkit] = true;
+          if (usePresto && p.presto)  o[p.presto] = true;
+          if (useTrident && p.trident) o[p.trident] = true;
+          this.mVENDOR_PREFIXES[p.gecko] = [];
+          for (var j in o)
+            this.mVENDOR_PREFIXES[p.gecko].push(j)
+        }
+      }
+    }
+    if (aProperty in this.mVENDOR_PREFIXES)
+      return this.mVENDOR_PREFIXES[aProperty].sort();
+    return null;
+  },
 
   serializeFileStyleSheet: function(aSheet, aHref)
   {
@@ -72,6 +327,10 @@ var CssInspector = {
           break;
       }
     }
+
+    var cssParser = new CSSParser(str);
+    var parsedSheet = cssParser.parse(str, false, false);
+    str = parsedSheet.cssText();
 
     const classes             = Components.classes;
     const interfaces          = Components.interfaces;
@@ -4255,6 +4514,24 @@ jscsspDeclaration.prototype = {
   },
 
   cssText: function() {
+    var prefixes = CssInspector.prefixesForProperty(this.property);
+    if (prefixes) {
+      var rv = "";
+      for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
+        var property = prefixes[propertyIndex];
+		    rv += (propertyIndex ? gTABS : "") + property + ": ";
+		    var separator = (property in this.kCOMMA_SEPARATED) ? ", " : " ";
+		    for (var i = 0; i < this.values.length; i++)
+		      if (this.values[i].cssText() != null)
+		        rv += (i ? separator : "") + this.values[i].cssText();
+		      else
+		        return null;
+		    rv += (this.priority ? " !important" : "") + ";" +
+              ((prefixes.length > 1 && propertyIndex != prefixes.length -1) ? "\n" : "");
+      }
+      return rv;
+    }
+
     var rv = this.property + ": ";
     var separator = (this.property in this.kCOMMA_SEPARATED) ? ", " : " ";
     for (var i = 0; i < this.values.length; i++)

@@ -3,3 +3,10 @@
 <!ENTITY prefixPrompt.label "Enter a prefix for IDs and classes:">
 <!ENTITY iDecide.radio "Manual">
 <!ENTITY iDecide.desc "Let me decide">
+<!ENTITY cssPolicy.caption "CSS Policy">
+
+<!ENTITY browserSupport.caption "Browser support">
+<!ENTITY gecko.label "Gecko-based browsers (Firefox, Camino, ...)">
+<!ENTITY webkit.label "WebKit-based browsers (Safari, Chrome, ...)">
+<!ENTITY presto.label "Opera">
+<!ENTITY trident.label "Internet Explorer">

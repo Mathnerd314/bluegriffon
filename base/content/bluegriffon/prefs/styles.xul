@@ -13,9 +13,14 @@
     <preferences>
       <preference id="pref-csspolicy"       name="bluegriffon.css.policy" type="string"/>
       <preference id="pref-cssprefix"       name="bluegriffon.css.prefix" type="string"/>
+
+      <preference id="pref-support-gecko"   name="bluegriffon.css.support.gecko" type="bool"/>
+      <preference id="pref-support-webkit"  name="bluegriffon.css.support.webkit" type="bool"/>
+      <preference id="pref-support-presto"  name="bluegriffon.css.support.presto" type="bool"/>
+      <preference id="pref-support-trident" name="bluegriffon.css.support.trident" type="bool"/>
     </preferences>
-    <groupbox flex="1">
-      <caption label="CSS policy"/>
+    <groupbox>
+      <caption label="&cssPolicy.caption;"/>
       <radiogroup orient="vertical" preference="pref-csspolicy"
                   id="cssPolicyRadiogroup"
                   onselect="TogglePolicyRadiogroup(this)">
@@ -35,6 +40,13 @@
                value="manual"
                tooltiptext="&iDecide.desc;"/>
       </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&browserSupport.caption;"/>
+      <checkbox label="&gecko.label;" id="geckoBrowsers" disabled="true" preference="pref-support-gecko" oncommand="CleanPrefixes()"/>
+      <checkbox label="&webkit.label;" id="webkitBrowsers" preference="pref-support-webkit" oncommand="CleanPrefixes()"/>
+      <checkbox label="&presto.label;" id="prestoBrowsers" preference="pref-support-presto" oncommand="CleanPrefixes()"/>
+      <checkbox label="&trident.label;" id="tridentBrowsers" preference="pref-support-trident" oncommand="CleanPrefixes()"/>
     </groupbox>
   </prefpane>
 

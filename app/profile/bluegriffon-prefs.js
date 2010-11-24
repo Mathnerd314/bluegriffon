@@ -59,6 +59,10 @@ pref("bluegriffon.defaults.table.cell_padding", "2");
 // CSS policy
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
+pref("bluegriffon.css.support.gecko", true);
+pref("bluegriffon.css.support.webkit", true);
+pref("bluegriffon.css.support.presto", true);
+pref("bluegriffon.css.support.trident", true);
 
 pref("bluegriffon.prettyprint", true);
 pref("bluegriffon.encode_entity", "html");

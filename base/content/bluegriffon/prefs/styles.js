@@ -1,3 +1,5 @@
+Components.utils.import("resource://app/modules/cssInspector.jsm");
+
 function OnStylesPaneLoad()
 {
   GetUIElements();
@@ -14,4 +16,9 @@ function TogglePolicyRadiogroup(aElt)
       SetEnabledElementAndControl(gDialog.cssPrefixLabel, false);
       break;
   }
+}
+
+function CleanPrefixes()
+{
+  CssInspector.cleanPrefixes();
 }

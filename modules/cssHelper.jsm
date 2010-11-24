@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/cssInspector.jsm");
 
 var EXPORTED_SYMBOLS = ["CssUtils"];
 
@@ -295,7 +296,9 @@ var CssUtils = {
       editor.deleteNode(child);
       child = tmp;
     }
-    var textNode = styleElt.ownerDocument.createTextNode(str);
+    var cssParser = new CSSParser(str);
+    var parsedSheet = cssParser.parse(str, false, false);
+    var textNode = styleElt.ownerDocument.createTextNode(parsedSheet.cssText());
     editor.insertNode(textNode, styleElt, 0);
   },
 
