@@ -53,6 +53,93 @@
         </menulist>
       </toolbaritem>
 
+    <toolbaritem id="ARIARoleSelectBox">
+      <menulist class="toolbar-focustarget"
+                id="ARIARoleSelect"
+                observes="cmd_renderedHTMLEnabler"
+                tooltiptext="&ARIARoleSelect.tooltip;" crop="right">
+        <observes element="cmd_ariaRole" attribute="state" onbroadcast="onARIARoleChange(this.parentNode, 'cmd_ariaRole')"/>
+        <menupopup id="ARIARolePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)">
+          <menuitem label="&noARIArole.label;" value=""/>
+          <menuseparator/>
+					<menuitem label="alert" value="alert" tooltiptext="&alertRole.label;"/>
+					<menuitem label="alertdialog" value="alertdialog" tooltiptext="&alertdialogRole.label;"/>
+					<menuitem label="application" value="application" tooltiptext="&applicationRole.label;"/>
+					<menuitem label="article" value="article" tooltiptext="&articleRole.label;"/>
+					<menuitem label="banner" value="banner" tooltiptext="&bannerRole.label;"/>
+					<menuitem label="button" value="button" tooltiptext="&buttonRole.label;"/>
+					<menuitem label="checkbox" value="checkbox" tooltiptext="&checkboxRole.label;"/>
+					<menuitem label="columnheader" value="columnheader" tooltiptext="&columnheaderRole.label;"/>
+					<menuitem label="combobox" value="combobox" tooltiptext="&comboboxRole.label;"/>
+					<menuitem label="command" value="command" tooltiptext="&commandRole.label;"/>
+					<menuitem label="complementary" value="complementary" tooltiptext="&complementaryRole.label;"/>
+					<menuitem label="composite" value="composite" tooltiptext="&compositeRole.label;"/>
+					<menuitem label="contentinfo" value="contentinfo" tooltiptext="&contentinfoRole.label;"/>
+					<menuitem label="definition" value="definition" tooltiptext="&definitionRole.label;"/>
+					<menuitem label="dialog" value="dialog" tooltiptext="&dialogRole.label;"/>
+					<menuitem label="directory" value="directory" tooltiptext="&directoryRole.label;"/>
+					<menuitem label="document" value="document" tooltiptext="&documentRole.label;"/>
+					<menuitem label="form" value="form" tooltiptext="&formRole.label;"/>
+					<menuitem label="grid" value="grid" tooltiptext="&gridRole.label;"/>
+					<menuitem label="gridcell" value="gridcell" tooltiptext="&gridcellRole.label;"/>
+					<menuitem label="group" value="group" tooltiptext="&groupRole.label;"/>
+					<menuitem label="heading" value="heading" tooltiptext="&headingRole.label;"/>
+					<menuitem label="img" value="img" tooltiptext="&imgRole.label;"/>
+					<menuitem label="input" value="input" tooltiptext="&inputRole.label;"/>
+					<menuitem label="landmark" value="landmark" tooltiptext="&landmarkRole.label;"/>
+					<menuitem label="link" value="link" tooltiptext="&linkRole.label;"/>
+					<menuitem label="list" value="list" tooltiptext="&listRole.label;"/>
+					<menuitem label="listbox" value="listbox" tooltiptext="&listboxRole.label;"/>
+					<menuitem label="listitem" value="listitem" tooltiptext="&listitemRole.label;"/>
+					<menuitem label="log" value="log" tooltiptext="&logRole.label;"/>
+					<menuitem label="main" value="main" tooltiptext="&mainRole.label;"/>
+					<menuitem label="marquee" value="marquee" tooltiptext="&marqueeRole.label;"/>
+					<menuitem label="math" value="math" tooltiptext="&mathRole.label;"/>
+					<menuitem label="menu" value="menu" tooltiptext="&menuRole.label;"/>
+					<menuitem label="menubar" value="menubar" tooltiptext="&menubarRole.label;"/>
+					<menuitem label="menuitem" value="menuitem" tooltiptext="&menuitemRole.label;"/>
+					<menuitem label="menuitemcheckbox" value="menuitemcheckbox" tooltiptext="&menuitemcheckboxRole.label;"/>
+					<menuitem label="menuitemradio" value="menuitemradio" tooltiptext="&menuitemradioRole.label;"/>
+					<menuitem label="navigation" value="navigation" tooltiptext="&navigationRole.label;"/>
+					<menuitem label="note" value="note" tooltiptext="&noteRole.label;"/>
+					<menuitem label="option" value="option" tooltiptext="&optionRole.label;"/>
+					<menuitem label="presentation" value="presentation" tooltiptext="&presentationRole.label;"/>
+					<menuitem label="progressbar" value="progressbar" tooltiptext="&progressbarRole.label;"/>
+					<menuitem label="radio" value="radio" tooltiptext="&radioRole.label;"/>
+					<menuitem label="radiogroup" value="radiogroup" tooltiptext="&radiogroupRole.label;"/>
+					<menuitem label="range" value="range" tooltiptext="&rangeRole.label;"/>
+					<menuitem label="region" value="region" tooltiptext="&regionRole.label;"/>
+					<menuitem label="roletype" value="roletype" tooltiptext="&roletypeRole.label;"/>
+					<menuitem label="row" value="row" tooltiptext="&rowRole.label;"/>
+					<menuitem label="rowgroup" value="rowgroup" tooltiptext="&rowgroupRole.label;"/>
+					<menuitem label="rowheader" value="rowheader" tooltiptext="&rowheaderRole.label;"/>
+					<menuitem label="scrollbar" value="scrollbar" tooltiptext="&scrollbarRole.label;"/>
+					<menuitem label="search" value="search" tooltiptext="&searchRole.label;"/>
+					<menuitem label="section" value="section" tooltiptext="&sectionRole.label;"/>
+					<menuitem label="sectionhead" value="sectionhead" tooltiptext="&sectionheadRole.label;"/>
+					<menuitem label="select" value="select" tooltiptext="&selectRole.label;"/>
+					<menuitem label="separator" value="separator" tooltiptext="&separatorRole.label;"/>
+					<menuitem label="slider" value="slider" tooltiptext="&sliderRole.label;"/>
+					<menuitem label="spinbutton" value="spinbutton" tooltiptext="&spinbuttonRole.label;"/>
+					<menuitem label="status" value="status" tooltiptext="&statusRole.label;"/>
+					<menuitem label="structure" value="structure" tooltiptext="&structureRole.label;"/>
+					<menuitem label="tab" value="tab" tooltiptext="&tabRole.label;"/>
+					<menuitem label="tablist" value="tablist" tooltiptext="&tablistRole.label;"/>
+					<menuitem label="tabpanel" value="tabpanel" tooltiptext="&tabpanelRole.label;"/>
+					<menuitem label="textbox" value="textbox" tooltiptext="&textboxRole.label;"/>
+					<menuitem label="timer" value="timer" tooltiptext="&timerRole.label;"/>
+					<menuitem label="toolbar" value="toolbar" tooltiptext="&toolbarRole.label;"/>
+					<menuitem label="tooltip" value="tooltip" tooltiptext="&tooltipRole.label;"/>
+					<menuitem label="tree" value="tree" tooltiptext="&treeRole.label;"/>
+					<menuitem label="treegrid" value="treegrid" tooltiptext="&treegridRole.label;"/>
+					<menuitem label="treeitem" value="treeitem" tooltiptext="&treeitemRole.label;"/>
+					<menuitem label="widget" value="widget" tooltiptext="&widgetRole.label;"/>
+					<menuitem label="window" value="window" tooltiptext="&windowRole.label;"/>
+        </menupopup>
+                   
+      </menulist>
+    </toolbaritem>
+
     <toolbarbutton id="ulButton" type="radio" group="lists" autoCheck="false" observes="cmd_ul"
                    tooltiptext="&unorderedList.tooltip;" label="&unorderedList.label;">
         <observes element="cmd_ul" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_ul')"/>

@@ -258,6 +258,28 @@ function onParagraphFormatChange(paraMenuList, commandID)
   }
 }
 
+function onARIARoleChange(menuList, commandID)
+{
+  var commandNode = document.getElementById(commandID);
+  var state = commandNode.getAttribute("state");
+  menuList.value = state;
+}
+
+function onARIARoleChangeStructureBar(commandID)
+{
+  var commandNode = document.getElementById(commandID);
+  var state = commandNode.getAttribute("state");
+  var popup = gDialog.ARIARoleStructureBarPopup;
+  var child = popup.firstElementChild;
+  while (child) {
+    if (child.getAttribute("value") == state)
+      child.setAttribute("checked", "true");
+    else
+      child.removeAttribute("checked");
+    child = child.nextElementSibling;
+  }
+}
+
 /************* GLOBAL VARS *************/
 
 
@@ -406,6 +428,8 @@ function UpdateStructureBarContextMenu()
   var target    = null;
   if (popupNode)
     target = popupNode.getUserData("node");
+  if (target) // sanity check
+    EditorUtils.getCurrentEditor().selectElement(target);
 
   if (target && target.hasAttribute("lang"))
     gDialog.resetElementLanguageMenuitem.removeAttribute("disabled");

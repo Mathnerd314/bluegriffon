@@ -59,3 +59,48 @@ var cmdClass =
   }
 };
 
+//-----------------------------------------------------------------------------------
+
+var cmdAriaRole =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function (aCommandName, aParams, aRefcon)
+  {
+    var enabled = this.isCommandEnabled(aCommandName, aRefcon);
+    aParams.setBooleanValue("state_enabled", enabled);
+    aParams.setBooleanValue("state_mixed", false);
+    var selContainer = EditorUtils.getSelectionContainer();
+    if (selContainer)
+    {
+      var role = EditorUtils.getBlockContainer(selContainer.node).getAttribute("role");
+      if (role)
+      {
+        aParams.setCStringValue("state_attribute", role);
+        return;
+      }
+    }
+
+    aParams.setCStringValue("state_attribute", "");
+  },
+
+  doCommandParams: function(aCommandName, aParams, aRefCon)
+  {
+    var role = aParams.getCStringValue("state_attribute");
+    var node = EditorUtils.getSelectionContainer().node;
+
+    if (role)
+      EditorUtils.getCurrentEditor().setAttribute(node, "role", role);
+    else
+      EditorUtils.getCurrentEditor().removeAttribute(node, "role");
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection", node, false);
+  }
+};
+
