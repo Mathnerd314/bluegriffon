@@ -110,6 +110,7 @@
           var showIDs = true;
           var showClasses = true;
           var showLang = false;
+          var showRole = true;
           try {
             showIDs = prefs.getBoolPref("bluegriffon.structurebar.id.show");
           } catch(e) {}
@@ -118,6 +119,9 @@
           } catch(e) {}
           try {
             showLang = prefs.getBoolPref("bluegriffon.structurebar.lang.show");
+          } catch(e) {}
+          try {
+            showRole = prefs.getBoolPref("bluegriffon.structurebar.role.show");
           } catch(e) {}
           while (node.nodeName.toLowerCase() != "html")
           {
@@ -130,6 +134,8 @@
               text += "." + node.getAttribute("class").replace( / /g, ".");
             if (showLang && node.hasAttribute("lang"))
               text += ":lang(" + node.getAttribute("lang") + ")";
+            if (showRole && node.hasAttribute("role"))
+              text += ":role(" + node.getAttribute("role") + ")";
             text += ">"
 
             newLabel.setAttribute("label",     text);

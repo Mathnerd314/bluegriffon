@@ -6,3 +6,8 @@
 
 <!ENTITY returnKey.caption "Behavior of the return key">
 <!ENTITY returnKey.label "Return key in a paragraph always creates a new paragraph">
+
+<!ENTITY showIDs.label "Show ID">
+<!ENTITY showClasses.label "Show classes">
+<!ENTITY showLanguage.label "show language">
+<!ENTITY showRoles.label "Show ARIA role">

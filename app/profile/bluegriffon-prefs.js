@@ -95,6 +95,7 @@ pref("dom.storage.enabled", true);
 pref("bluegriffon.structurebar.id.show", true);
 pref("bluegriffon.structurebar.class.show", true);
 pref("bluegriffon.structurebar.lang.show", false);
+pref("bluegriffon.structurebar.role.show", true);
 
 // updates
 pref("bluegriffon.updates.check.enabled", true);

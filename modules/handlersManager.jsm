@@ -15,8 +15,10 @@ var HandlersManager = {
     for (var handler in this.mHandlers) {
       var handler = this.mHandlers[handler];
       var elt = handler.xulElt;
-      elt.checked = false;
-      handler.handler.toggle(elt);
+      if (elt) {
+	      elt.checked = false;
+	      handler.handler.toggle(elt);
+      }
     }
   }
 

@@ -15,6 +15,7 @@
       <preference id="pref-showIDs"      name="bluegriffon.structurebar.id.show" type="bool"/>
       <preference id="pref-showClasses"  name="bluegriffon.structurebar.class.show" type="bool"/>
       <preference id="pref-showLangs"    name="bluegriffon.structurebar.lang.show" type="bool"/>
+      <preference id="pref-showAriaRole" name="bluegriffon.structurebar.role.show" type="bool"/>
       <preference id="pref-returnKey"    name="bluegriffon.returnKey.createsParagraph" type="bool"/>
     </preferences>
     <groupbox>
@@ -30,17 +31,28 @@
 
     <groupbox>
       <caption label="&structureBar.caption;"/>
-      <hbox>
-        <checkbox id="showIDsCheckbox" flex="1"
-                  preference="pref-showIDs"
-                  label="Show IDs"/>
-        <checkbox id="showClassesCheckbox" flex="1"
-                  preference="pref-showClasses"
-                  label="Show classes"/>
-        <checkbox id="showIDsCheckbox" flex="1"
-                  preference="pref-showLangs"
-                  label="Show language"/>
-      </hbox>
+      <grid>
+        <columns><column flex="1"/><column flex="1"/></columns>
+        <rows>
+          <row align="center">
+		        <checkbox id="showIDsCheckbox" flex="1"
+		                  preference="pref-showIDs"
+		                  label="&showIDs.label;"/>
+		        <checkbox id="showClassesCheckbox" flex="1"
+		                  preference="pref-showClasses"
+		                  label="&showClasses.label;"/>
+          </row>
+          <row align="center">
+		        <checkbox id="showAriaRoleCheckbox" flex="1"
+		                  preference="pref-showAriaRole"
+		                  label="&showRoles.label;"/>
+		        <checkbox id="showLanguageCheckbox" flex="1"
+		                  preference="pref-showLangs"
+		                  label="&showLanguage.label;"/>
+
+          </row>
+        </rows>
+      </grid>
     </groupbox>
 
     <groupbox>
