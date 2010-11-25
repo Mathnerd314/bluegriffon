@@ -1,5 +1,7 @@
 function UpdateFrequencyRadiogroup()
 {
+  if (!gDialog || !("checkUpdatesCheckbox" in gDialog))
+    return; // sanity check
   var disabled = !gDialog.checkUpdatesCheckbox.checked;
   gDialog.atLaunchRadio.disabled = disabled;
   gDialog.oncePerDayRadio.disabled = disabled;

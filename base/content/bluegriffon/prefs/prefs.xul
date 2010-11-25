@@ -17,6 +17,11 @@
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   
+  <stringbundleset id="languageSet">
+    <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
+    <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
+  </stringbundleset>
+
   <prefpane id="generalPrefPane"
             label="&general.title;"
             image="chrome://bluegriffon/skin/prefs/general.png"
@@ -36,12 +41,18 @@
             onpaneload="OnUpdatePaneLoad()"
             image="chrome://bluegriffon/skin/prefs/update.png"
             src="chrome://bluegriffon/content/prefs/update.xul"/>
+  <prefpane id="advancedPrefPane"
+            label="&advanced.title;"
+            onpaneload="OnAdvancedPaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/advanced.png"
+            src="chrome://bluegriffon/content/prefs/advanced.xul"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/prefs.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/newPage.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/styles.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
 
