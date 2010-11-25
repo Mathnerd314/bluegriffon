@@ -96,6 +96,7 @@ REQUIRES = \
 CPPSRCS = nsEditorApp.cpp
 
 LOCAL_INCLUDES += -I$(topsrcdir)/toolkit/xre
+LOCAL_INCLUDES += -I$(topsrcdir)/xpcom/base
 
 ifdef BUILD_STATIC_LIBS
 ifdef _MSC_VER

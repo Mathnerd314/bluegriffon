@@ -51,6 +51,7 @@
 
 #ifdef XP_WIN
 // we want a wmain entry point
+#define XRE_WANT_DLL_BLOCKLIST
 #include "nsWindowsWMain.cpp"
 #endif
 
