@@ -1,0 +1,430 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY window.title           "BlueGriffon">
+
+<!ENTITY fileMenu.label         "Fichier">
+<!ENTITY fileMenu.accesskey     "f">
+<!ENTITY newMenu.label                    "Nouveau">
+<!ENTITY newMenu.accesskey                "n">
+
+<!ENTITY newWizardMenu.label              "Assistant de création de nouveau document">
+
+<!ENTITY editMenu.label                   "Édition">
+<!ENTITY editMenu.accesskey               "d">
+
+<!ENTITY viewMenu.label                   "Affichage">
+<!ENTITY viewMenu.accesskey               "a">
+<!ENTITY customizeToolbar.label           "Personnaliser la barre d'outils">
+<!ENTITY customizeToolbar.accesskey       "c">
+
+<!ENTITY insertMenu.label                 "Insertion">
+<!ENTITY insertMenu.accesskey             "i">
+
+<!ENTITY formatMenu.label                 "Format">
+<!ENTITY formatMenu.accesskey             "o">
+<!ENTITY spanCmd.label "Span">
+<!ENTITY spanCmd.accesskey "n">
+<!-- Font Style SubMenu -->
+<!ENTITY fontStyleMenu.label "Style de texte">
+<!ENTITY formatstylemenu.accesskey "s">
+<!ENTITY styleBoldCmd.label "Gras">
+<!ENTITY stylebold.accesskey "g">
+<!ENTITY stylebold.keybinding "g">
+<!ENTITY styleItalicCmd.label "Italique">
+<!ENTITY styleitalic.accesskey "I">
+<!ENTITY styleitalic.keybinding "i">
+<!ENTITY styleUnderlineCmd.label "Souligné">
+<!ENTITY styleunderline.accesskey "u">
+<!ENTITY styleunderline.keybinding "u">
+<!ENTITY styleStrikeThruCmd.label "Barré">
+<!ENTITY stylestrikethru.accesskey "b">
+<!ENTITY styleSuperscriptCmd.label "Exposant">
+<!ENTITY stylesuperscript.accesskey "p">
+<!ENTITY styleSubscriptCmd.label "Indice">
+<!ENTITY stylesubscript.accesskey "d">
+<!ENTITY styleNonbreakingCmd.label "Insécable">
+<!ENTITY stylenonbreaking.accesskey "s">
+<!ENTITY styleEm.label "Emphase simple">
+<!ENTITY styleEm.accesskey "e">
+<!ENTITY styleStrong.label "Emphase forte">
+<!ENTITY styleStrong.accesskey "t">
+<!ENTITY styleCite.label "Citation">
+<!ENTITY styleCite.accesskey "c">
+<!ENTITY styleAbbr.label "Abréviation">
+<!ENTITY styleAbbr.accesskey "A">
+<!ENTITY styleAcronym.label "Acronyme">
+<!ENTITY styleAcronym.accesskey "r">
+<!ENTITY styleCode.label "Code">
+<!ENTITY styleCode.accesskey "o">
+<!ENTITY styleSamp.label "Exemple de sortie d'un programme">
+<!ENTITY styleSamp.accesskey "m">
+<!ENTITY styleVar.label "Variable">
+<!ENTITY styleVar.accesskey "v">
+<!ENTITY fontFixedWidth.label "Largeur fixe">
+<!ENTITY fontfixedwidth.accesskey "x">
+
+<!ENTITY tableMenu.label                  "Tableau">
+<!ENTITY tableMenu.accesskey              "b">
+
+<!ENTITY toolsMenu.label                  "Outils">
+<!ENTITY toolsMenu.accesskey              "t">
+<!ENTITY consoleMenu.label                "Console JavaScript">
+
+<!ENTITY panelsMenu.label                 "Panneaux">
+<!ENTITY panelsMenu.accesskey             "p">
+
+<!ENTITY alignPanels.label                "Aligner tous les panneaux">
+
+<!ENTITY helpMenu.label                   "Aide">
+<!ENTITY helpMenu.accesskey               "d">
+<!ENTITY aboutComposer.label              "À propos de BlueGriffon">
+
+<!ENTITY throbber.tooltip                 "BlueGriffon">
+
+<!ENTITY newMenu.label                    "Nouveau document">
+<!ENTITY newToolbarCmd.tooltip            "Créer un nouveau document">
+<!ENTITY newTab.label                     "Nouveau document dans un nouvel onglet">
+<!ENTITY newWindow.label                  "Nouveau document dans une nouvelle fenêtre">
+<!ENTITY newOtherCmd.label                "Plus d'options...">
+
+<!ENTITY openMenu.label                   "Ouvrir">
+<!ENTITY openMenu.tooltip                 "Ouvrir un document existant">
+<!ENTITY openTab.label                    "Ouvrir dans un nouvel onglet">
+<!ENTITY openWindow.label                 "Ouvrir dans une nouvelle fenêtre">
+<!ENTITY openPage.label                   "Ouvrir">
+<!ENTITY openPage.accesskey               "o">
+
+<!ENTITY quit.label                       "Quitter">
+<!ENTITY quit.accesskey                   "q">
+
+<!ENTITY stopButton.label                 "Arrêter">
+<!ENTITY stopButton.tooltip               "Arrêter le chargement du document">
+
+<!ENTITY boldToolbarCmd.tooltip           "Gras">
+<!ENTITY boldToolbarCmd.label             "Gras">
+<!ENTITY italicToolbarCmd.tooltip         "Italique">
+<!ENTITY italicToolbarCmd.label           "Italique">
+<!ENTITY underlineToolbarCmd.tooltip      "Souligné">
+<!ENTITY underlineToolbarCmd.label        "Souligné">
+<!ENTITY strongToolbarCmd.tooltip         "Emphase forte">
+<!ENTITY strongToolbarCmd.label           "Emphase forte">
+<!ENTITY emToolbarCmd.tooltip             "Emphase">
+<!ENTITY emToolbarCmd.label               "Emphase">
+<!ENTITY codeToolbarCmd.label             "Code">
+<!ENTITY codeToolbarCmd.tooltip           "Code">
+<!-- RTL -->                           
+<!ENTITY writingDirectionMenu.label          "Direction d'écriture">
+<!ENTITY writingdirectionmenu.accesskey      "e">
+<!ENTITY defaultDirectionMenu.label          "Non spécifié">
+<!ENTITY defaultdirectionmenu.accesskey      "c">
+<!ENTITY ltrDirectionMenu.label              "De gauche à droite">
+<!ENTITY ltrdirectionmenu.accesskey          "g">
+<!ENTITY rtlDirectionMenu.label              "De droite à gauche">
+<!ENTITY rtldirectionmenu.accesskey          "d">
+<!ENTITY dirLtr.tooltip                      "De gauche à droite">
+<!ENTITY dirRtl.tooltip                      "De droite à gauche">
+
+<!ENTITY ParagraphSelect.tooltip "Choisir un format de paragraphe">
+<!-- Shared in Paragraph, and Toolbar menulist -->
+<!ENTITY bodyTextCmd.label "Corps de texte">
+<!ENTITY paragraphParagraphCmd.label "Paragraphe">  
+<!ENTITY heading1Cmd.label "Titre de niveau 1">
+<!ENTITY heading2Cmd.label "Titre de niveau 2">
+<!ENTITY heading3Cmd.label "Titre de niveau 3">
+<!ENTITY heading4Cmd.label "Titre de niveau 4">
+<!ENTITY heading5Cmd.label "Titre de niveau 5">
+<!ENTITY heading6Cmd.label "Titre de niveau 6">
+<!ENTITY paragraphAddressCmd.label "Addresse">
+<!ENTITY paragraphPreformatCmd.label "Préformaté">
+<!ENTITY genericContainerCmd.label "Conteneur générique (div)">
+
+<!ENTITY unorderedList.tooltip "Liste à puces">
+<!ENTITY orderedList.tooltip "Liste ordonnée">
+<!ENTITY unorderedList.label "Liste à puces">
+<!ENTITY orderedList.label "Liste ordonnée">
+
+<!ENTITY alignLeft.tooltip "Aligner à gauche">
+<!ENTITY alignCenter.tooltip "Centrer">
+<!ENTITY alignRight.tooltip "Aligner à droite">
+<!ENTITY alignJustify.tooltip "Justifier">
+<!ENTITY alignLeft.label "Aligner à gauche">
+<!ENTITY alignCenter.label "Centrer">
+<!ENTITY alignRight.label "Aligner à droite">
+<!ENTITY alignJustify.label "Justifier">
+
+<!ENTITY indentToolbarCmd.tooltip "Augmenter l'indentation">
+<!ENTITY indentToolbarCmd.label "Indenter">
+
+<!ENTITY outdentToolbarCmd.tooltip "Diminuer l'indentation">
+<!ENTITY outdentToolbarCmd.label "Diminuer l'indentation">
+
+<!ENTITY definitionDescription.tooltip "Description de définition">
+<!ENTITY definitionDescription.label "Description de définition">
+<!ENTITY definitionTitle.tooltip "Titre de définition">
+<!ENTITY definitionTitle.label "Titre de définition">
+
+<!ENTITY FontFaceSelect.tooltip "Choix d'une fonte">
+<!ENTITY fontVarWidth.label "Largeur variable">
+<!ENTITY fontFixedWidth.label "Largeur fixe">
+<!ENTITY fontHelveticaFont.label "Helvetica, Arial">
+<!ENTITY fontTimes.label "Times">
+<!ENTITY fontCourier.label "Courier">
+
+<!ENTITY applyClassToSelectionCmd.tooltip "Appliquer une classe à la sélection">
+<!ENTITY noClass.label "(pas de classe)">
+
+<!ENTITY tableToolbarCmd.label "Tableau">
+<!ENTITY tableToolbarCmd.key "T">
+<!ENTITY tableToolbarCmd.tooltip "Insérer un nouveau tableau ou éditer les propriétés d'un tableau existant">
+
+
+<!ENTITY imageToolbarCmd.label "Image">
+<!ENTITY imageToolbarCmd.key "I">
+<!ENTITY imageToolbarCmd.tooltip "Insérer ou éditer une image existante">
+
+<!ENTITY anchorToolbarCmd.label "Ancre">
+<!ENTITY anchorToolbarCmd.key "A">
+<!ENTITY anchorToolbarCmd.tooltip "Insérer ou éditer une ancre existante">
+
+<!ENTITY linkToolbarCmd.label "Lien">
+<!ENTITY linkToolbarCmd.key "L">
+<!ENTITY linkToolbarCmd.tooltip "Insérer ou éditer un lien existant">
+
+<!ENTITY hrToolbarCmd.label "Barre horizontale">
+<!ENTITY hrToolbarCmd.key "b">
+
+<!ENTITY htmlToolbarCmd.label "Code HTML">
+<!ENTITY htmlToolbarCmd.key "H">
+
+<!ENTITY formToolbarCmd.label "Formulaire">
+<!ENTITY formToolbarCmd.key "F">
+<!ENTITY formToolbarCmd.tooltip "Insérer ou éditer un formulaire existant">
+
+<!ENTITY fieldsetToolbarCmd.label "Groupe de champs de formulaire">
+<!ENTITY fieldsetToolbarCmd.key "g">
+
+<!ENTITY labelToolbarCmd.label "Label">
+<!ENTITY labelToolbarCmd.key "L">
+
+<!ENTITY buttonToolbarCmd.label "Bouton">
+<!ENTITY buttonToolbarCmd.key "B">
+
+<!ENTITY selectToolbarCmd.label "Liste de choix">
+<!ENTITY selectToolbarCmd.key "x">
+
+<!ENTITY textareaToolbarCmd.label "Zone de texte">
+<!ENTITY textareaToolbarCmd.key "T">
+
+<!ENTITY keygenToolbarCmd.label "Générateur de paire de clefs">
+<!ENTITY keygenToolbarCmd.key "p">
+
+<!ENTITY outputToolbarCmd.label "Sortie de données">
+<!ENTITY outputToolbarCmd.key "S">
+
+<!ENTITY progressToolbarCmd.label "Barre de progression">
+<!ENTITY progressToolbarCmd.key "p">
+
+<!ENTITY meterToolbarCmd.label "Jauge">
+<!ENTITY meterToolbarCmd.key "J">
+
+<!ENTITY datalistToolbarCmd.label "Liste de données">
+<!ENTITY datalistToolbarCmd.key "i">
+
+<!ENTITY stylesheetsToolbarCmd.label "Feuilles de styles CSS">
+<!ENTITY stylesheetsToolbarCmd.key "S">
+
+<!ENTITY videoToolbarCmd.label "Vidéo">
+<!ENTITY videoToolbarCmd.tooltip "Insérer ou éditer une vidéo existante">
+
+<!ENTITY audioToolbarCmd.label "Audio">
+<!ENTITY audioToolbarCmd.tooltip "Insérer ou éditer une audio existante">
+
+<!ENTITY browseToolbarCmd.label "Prévisualiser">
+<!ENTITY browseToolbarCmd.tooltip "Prévisualiser dans un navigateur">
+
+<!ENTITY saveCmd.label "Sauver">
+<!ENTITY saveToolbarCmd.tooltip "Sauver le document dans un fichier local">
+<!ENTITY filesave.key "s">
+<!ENTITY saveAsCmd.label "Sauver comme...">
+<!ENTITY filesaveas.key "s">
+
+<!ENTITY undoCmd.label "Annuler">
+<!ENTITY undoCmd.accesskey "U">
+<!ENTITY redoCmd.label "Refaire">
+<!ENTITY redoCmd.accesskey "R">
+
+<!ENTITY setZoomFactor.label "Préciser le facteur de zoom">
+
+<!ENTITY fileRecentMenu.label "Fichiers récents">
+<!ENTITY filerecentmenu.accesskey "r">
+
+<!ENTITY markupCleanerCmd.label "Nettoyeur de code">
+<!ENTITY markupcleaner.accesskey "t">
+
+<!ENTITY viewToolbars.label "Barres d'outils">
+<!ENTITY viewStatusbar.label "Barre de status">
+
+<!ENTITY formatToolbar.name "Formatage (primaire)">
+<!ENTITY formatToolbar2.name "Formatage (secondaire)">
+
+<!ENTITY setElementLanguage.label "Spécifier la langue utilisée">
+<!ENTITY setElementLanguage.accesskey "L">
+<!ENTITY resetElementLanguage.label "Reset language">
+<!ENTITY resetElementLanguage.accesskey "s">
+<!ENTITY deleteElement.label "Détruire l'élément">
+<!ENTITY deleteElement.accesskey "D">
+<!ENTITY removeTag.label "Supprimer le tag">
+<!ENTITY removeTag.accesskey "R">
+<!ENTITY changeTag.label "Changer le tag">
+<!ENTITY changeTag.accesskey "C">
+
+<!ENTITY wysiwygMode.label "Wysiwyg">
+<!ENTITY sourceMode.label "Source">
+
+<!ENTITY closeTabCmd.label "Fermer le document">
+
+<!ENTITY filesave.key "s">
+<!ENTITY quit.key "q">
+<!ENTITY closeWindow.key "w">
+<!ENTITY openPage.key "o">
+<!ENTITY undoCmd.key "z">
+<!ENTITY redoCmd.key "y">
+<!ENTITY cutCmd.key "x">
+<!ENTITY copyCmd.key "c">
+<!ENTITY pasteCmd.key "v">
+
+<!ENTITY formInputs.label "Champs de formulaire...">
+<!ENTITY hiddenInputForm.label "Une chaîne de caractères cachée">
+<!ENTITY textInputForm.label "Une zone d'entrée de texte">
+<!ENTITY searchInputForm.label "Une zone de recherche">
+<!ENTITY telInputForm.label "Une zone d'entrée de numéro de téléphone">
+<!ENTITY urlInputForm.label "Une zone d'entrée d'URL">
+<!ENTITY emailInputForm.label "Une zone d'entrée d'adresse email">
+<!ENTITY passwordInputForm.label "Une zone d'entrée de mot de passe">
+<!ENTITY datetimeInputForm.label "Un choix de date et heure en temps universel">
+<!ENTITY dateInputForm.label "Un choix de date">
+<!ENTITY monthInputForm.label "Un choix d'année et mois">
+<!ENTITY weekInputForm.label "Un choix de semaine">
+<!ENTITY timeInputForm.label "Un choix d'heure sans fuseau horaire">
+<!ENTITY datetimelocalInputForm.label "Un choix de date et heure sans fuseau horaire">
+<!ENTITY numberInputForm.label "Une zone d'entrée numérique">
+<!ENTITY rangeInputForm.label "Une fourchette d'entrée numérique">
+<!ENTITY colorInputForm.label "Un choix de couleur">
+<!ENTITY checkboxInputForm.label "Une case à cocher">
+<!ENTITY radioInputForm.label "Un bouton radio">
+<!ENTITY fileInputForm.label "Un sélecteur de fichier">
+<!ENTITY submitInputForm.label "Un bouton d'envoi du formulaire">
+<!ENTITY imageInputForm.label "Un bouton d'envoi du formulaire contenant une image">
+<!ENTITY resetInputForm.label "Un bouton de remise à zéro du formulaire">
+<!ENTITY buttonInputForm.label "Un bouton">
+
+<!ENTITY noARIArole.label "(pas de rôle ARIA)">
+<!ENTITY ARIARoleSelect.tooltip "Préciser l'attribut de rôle ARIA">
+<!ENTITY alertRole.label "Un message avec une information informante, généralement dépendante du moment. Voir aussi alertdialog.">
+<!ENTITY alertdialogRole.label "Un dialogue avec un message d'alerte, un élémen du dialogue prenant le focus. Voir aussi alert et dialog">
+<!ENTITY applicationRole.label "Une région déclarée comme application Web, par opposition à un document Web">
+<!ENTITY articleRole.label "Une section formant une partie indépendante du document, de la page ou du site">
+<!ENTITY bannerRole.label "Une région contenant du contenu plus liée au site qu'à la page">
+<!ENTITY buttonRole.label "Un élément d'entrée déclenchant une action lorsqu'il est pressé ou activé. Voir aussi link">
+<!ENTITY checkboxRole.label "Un élément à cocher qui a trois valeurs possibles: vrai, faux, ou mélangé">
+<!ENTITY columnheaderRole.label "Une cellule contenant des informations d'en-tête pour une colonne">
+<!ENTITY comboboxRole.label "La présentation d'un choix; généralement similaire à une zone d'entrée de texte où l'usager peut taper pour faire son choix ou entrer une valeur arbitraire. Voir aussi listbox">
+<!ENTITY commandRole.label "Un élement qui génère une action mais ne reçoit aucune entrée de données">
+<!ENTITY complementaryRole.label "Une section du document complémentaire du contenu principal au même niveau dans le document, mais qui reste compréhensible lorsqu'elle est séparée de ce contenu principal">
+<!ENTITY compositeRole.label "Un élément qui peut contenir des descendants visitables ou des enfants directs">
+<!ENTITY contentinfoRole.label "Une large région intégrée contenant des informations sur le document parent">
+<!ENTITY definitionRole.label "La définition d'un terme ou d'un concept">
+<!ENTITY dialogRole.label "Un dialogue est une fenêtre de l'applicationA dialog is an application window that is designed to interrupt the current processing of an application in order to prompt the user to enter information or require a response. Also see alertdialog">
+<!ENTITY directoryRole.label "Une liste de références aux données d'un groupe, comme par exemple une table des matières statique">
+<!ENTITY documentRole.label "Une région déclarée comme étant du contenu documentaire, par opposition à une application Web">
+<!ENTITY formRole.label "Une région contenant une collection d'objets et éléments constituant un formulaire. Voir aussi search">
+<!ENTITY gridRole.label "Une grille est un contrôle interactif contenant des données tabulaires présentées en lignes et colonnes, par exemple un tableau">
+<!ENTITY gridcellRole.label "Une cellule dans une grille ou une grille extensible">
+<!ENTITY groupRole.label "Un groupe d'objets d'interfaces non susceptibles d'être intégrés à un résumé de la page ou une table des matières">
+<!ENTITY headingRole.label "Une en-tête pour une section de la page">
+<!ENTITY imgRole.label "Un conteneur pour une collection d'éléments constituant une image">
+<!ENTITY inputRole.label "Un type générique d'élement constituant une zone d'entrée">
+<!ENTITY landmarkRole.label "Une région de la page représentant une zone navigable">
+<!ENTITY linkRole.label "Une référence interactive à une ressource interner ou externe qui, lorsqu'elle est activée, envoie le navigateur vers cette ressource. Voir aussi button">
+<!ENTITY listRole.label "Un groupe d'items de liste non interactifs. Voir aussi listbox">
+<!ENTITY listboxRole.label "Un élément qui permet à l'usager de sélectionner un ou plusieurs choix dans une liste. Voir aussi combobox et list">
+<!ENTITY listitemRole.label "Un choix unique dans une liste ou un catalogue">
+<!ENTITY logRole.label "Une région dynamique dans laquelle des informations nouvelles sont ajoutées en ordre logique et dont les informations les plus anciennes peuvent disparaître. Voir aussi marquee">
+<!ENTITY mainRole.label "Le contenu principal d'un document">
+<!ENTITY marqueeRole.label "Une région dynamique dans laquelle les informations non-essentielles changent fréquemment. Voir aussi log">
+<!ENTITY mathRole.label "Un contenu représentant une expression mathématique">
+<!ENTITY menuRole.label "Un type d'élément présentant une liste de choix à l'usager">
+<!ENTITY menubarRole.label "Un type de menu qui reste en général visible et est en général présenté horizontalement">
+<!ENTITY menuitemRole.label "Une option dans un groupe de choix contenu dans un menu ou une barre de menus">
+<!ENTITY menuitemcheckboxRole.label "Un item de menu cochable qui peut avoir trois valeurs : vrai, faux, ou mélangé">
+<!ENTITY menuitemradioRole.label "Un item de menu cochable dans un group d'items de menu radio, un seul pouvant être coché à la fois">
+<!ENTITY navigationRole.label "Une collection d'éléments de navigation (en général des liens) pour la navigation dans le document et entre les documents">
+<!ENTITY noteRole.label "Une section dont le contenu est une parenthèse ou complémentaire au contenu principal">
+<!ENTITY optionRole.label "Un item sélectionnable dans une liste de choix">
+<!ENTITY presentationRole.label "Un élément dont la sémantique implicite ne sera pas transmise à l'interface programmatique (API) d'accessibilité">
+<!ENTITY progressbarRole.label "Un élément affichant l'état de progression de tâches prenant longtemps à effectuer">
+<!ENTITY radioRole.label "Un élément cochable dans un groupe d'éléments radio, un seul pouvant être coché à la fois">
+<!ENTITY radiogroupRole.label "Un groupe de radio-boutons">
+<!ENTITY rangeRole.label "Une zone d'entrée représentant une fourchette de valeurs sélectionnables par l'usager">
+<!ENTITY regionRole.label "Une large section du document que l'auteur voit suffisemment importante pour être incluse dans un résumé de la page ou une table des matières">
+<!ENTITY roletypeRole.label "Le rôle de base dont tous les autres rôles de cette taxonomie héritent">
+<!ENTITY rowRole.label "Une ligne de cellules dans une grille">
+<!ENTITY rowgroupRole.label "Une groupe d'une ou plusieurs lignes de cellule dans une grille">
+<!ENTITY rowheaderRole.label "Une cellule contenant des informations d'en-tête pour une ligne de cellules dans une grille">
+<!ENTITY scrollbarRole.label "Un objet graphique contrôlant le A graphical object that controls the scrolling of content within a viewing area, regardless of whether the content is fully displayed within the viewing area">
+<!ENTITY searchRole.label "Une région contenant une collection d'objets constituant un moyen de recherche. Voir aussi form">
+<!ENTITY sectionRole.label "Une unité restituable de structure du document ou de l'application">
+<!ENTITY sectionheadRole.label "Une structure qui labellise ou résume le sujet de sa section associée">
+<!ENTITY selectRole.label "Un objet de formulaire qui permet à l'usager d'effectuer des sélections dans un choix">
+<!ENTITY separatorRole.label "Un séparateur entre des sections de contenu ou des groups d'items de menu">
+<!ENTITY sliderRole.label "Un élément d'entrée permettant à l'usager de sélectionner une valeur dans une fourchette donnée de valeurs">
+<!ENTITY spinbuttonRole.label "Un type de fourchette de choix proposant à l'usager le choix dans un ensemble discret de valeurs">
+<!ENTITY statusRole.label "Un conteneur pour des conseils à l'usager qui ne sont pas assez important pour justifier une alerte. Voir aussi alert">
+<!ENTITY structureRole.label "Un élément de structure du document">
+<!ENTITY tabRole.label "Un onglet labellisé permettant la sélection de son contenu à restituer à l'usager">
+<!ENTITY tablistRole.label "Une liste d'onglets, référençant des contenus d'onglet">
+<!ENTITY tabpanelRole.label "Un contenu d'onglet pour des ressources associées un onglet, chaque onglet étant contenu dans une liste d'onglets">
+<!ENTITY textboxRole.label "Un zone d'entrée textuelle libre">
+<!ENTITY timerRole.label "Un type de région dynamique contenant un compteur numérique indiquant le temps écoulé depuis un point initial, ou le temps restant jusqu'à un point final">
+<!ENTITY toolbarRole.label "Une collection de boutons exécutant des fonctions usuelles réprésentée dans une forme visuelle compacte">
+<!ENTITY tooltipRole.label "Une infobulle affichant la description d'un élément">
+<!ENTITY treeRole.label "Un arbre, type de liste pouvant contenir des sous-groupes à plusieurs niveaux et pouvant être ouverts ou refermés">
+<!ENTITY treegridRole.label "Une grille dont les lignes peuvent être ouvertes ou refermées comme pour un tree">
+<!ENTITY treeitemRole.label "Une option dans un arbre. C'est un élément d'arbre qui peut être ouvert ou refermé s'il contient un sous-groupe d'éléments d'arbre">
+<!ENTITY widgetRole.label "Un composant interactif d'une interface homme-machine (IHM)">
+<!ENTITY windowRole.label "Un navigateur ou une fenêtre applicative">

@@ -1,0 +1,8 @@
+<!ENTITY window.title "Links">
+
+<!ENTITY linkText.label "Text">
+<!ENTITY linkTarget.label "Target">
+<!ENTITY selectFile.label "Select a file">
+
+<!ENTITY isMail.label "This is an email address">
+<!ENTITY relativeUrl.label "Make URL relative to page location">

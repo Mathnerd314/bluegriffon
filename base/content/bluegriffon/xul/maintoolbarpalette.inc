@@ -67,7 +67,7 @@
                      tooltiptext="&formToolbarCmd.tooltip;"
                      type="menu-button">
         <menupopup>
-          <menuitem label="&formToolbarCmd.label;..."
+          <menuitem label="&formToolbarCmd.label;"
                     accesskey="&formToolbarCmd.key;"
                     command="cmd_form"
                     default="true"/>
@@ -122,34 +122,34 @@
 			                    command="cmd_formInputButton"/>
              </menupopup>
           </menu>
-          <menuitem label="&fieldsetToolbarCmd.label;..."
+          <menuitem label="&fieldsetToolbarCmd.label;"
                     accesskey="&fieldsetToolbarCmd.key;"
                     command="cmd_fieldset"/>
-          <menuitem label="&labelToolbarCmd.label;..."
+          <menuitem label="&labelToolbarCmd.label;"
                     accesskey="&labelToolbarCmd.key;"
                     command="cmd_label"/>
-          <menuitem label="&buttonToolbarCmd.label;..."
+          <menuitem label="&buttonToolbarCmd.label;"
                     accesskey="&buttonToolbarCmd.key;"
                     command="cmd_button"/>
-          <menuitem label="&selectToolbarCmd.label;..."
+          <menuitem label="&selectToolbarCmd.label;"
                     accesskey="&selectToolbarCmd.key;"
                     command="cmd_select"/>
-          <menuitem label="&textareaToolbarCmd.label;..."
+          <menuitem label="&textareaToolbarCmd.label;"
                     accesskey="&textareaToolbarCmd.key;"
                     command="cmd_textarea"/>
-          <menuitem label="&keygenToolbarCmd.label;..."
+          <menuitem label="&keygenToolbarCmd.label;"
                     accesskey="&keygenToolbarCmd.key;"
                     command="cmd_keygen"/>
-          <menuitem label="&outputToolbarCmd.label;..."
+          <menuitem label="&outputToolbarCmd.label;"
                     accesskey="&outputToolbarCmd.key;"
                     command="cmd_output"/>
-          <menuitem label="&progressToolbarCmd.label;..."
+          <menuitem label="&progressToolbarCmd.label;"
                     accesskey="&progressToolbarCmd.key;"
                     command="cmd_progress"/>
-          <menuitem label="&meterToolbarCmd.label;..."
+          <menuitem label="&meterToolbarCmd.label;"
                     accesskey="&meterToolbarCmd.key;"
                     command="cmd_meter"/>
-          <menuitem label="&datalistToolbarCmd.label;..."
+          <menuitem label="&datalistToolbarCmd.label;"
                     accesskey="&datalistToolbarCmd.key;"
                     command="cmd_datalist"/>
        </menupopup>
