@@ -1,14 +1,14 @@
-<!ENTITY window.title "Insert or edit stylesheets">
+<!ENTITY window.title "Insérer ou éditer des Feuilles de Styles">
 
 <!ENTITY url.col "URL">
-<!ENTITY alternate.col "Alternate">
-<!ENTITY title.col "Title">
+<!ENTITY alternate.col "Alternative">
+<!ENTITY title.col "Titre">
 <!ENTITY media.col "Media">
 
-<!ENTITY add.tooltip "Add stylesheet">
-<!ENTITY remove.tooltip "Delete selected stylesheet">
-<!ENTITY modify.tooltip "Modify selected stylesheet">
-<!ENTITY down.tooltip "Move selected stylesheet down">
-<!ENTITY up.tooltip "Move selected stylesheet up">
+<!ENTITY add.tooltip "Ajouter une Feuille de Styles">
+<!ENTITY remove.tooltip "Supprimer la Feuille de Styles">
+<!ENTITY modify.tooltip "Modifier la Feuille de Styles">
+<!ENTITY down.tooltip "Déplacer vers le bas">
+<!ENTITY up.tooltip "Déplacer vers le haut">
 
-<!ENTITY close.label "Close">
+<!ENTITY close.label "Fermer">

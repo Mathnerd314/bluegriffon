@@ -34,6 +34,7 @@ cssproperties.jar:
 
 cssproperties-locale.jar:
 % locale    cssproperties    en-US    %locale/en-US/cssproperties/
+% locale    cssproperties    fr-FR    %locale/fr-FR/cssproperties/
   locale/en-US/cssproperties/csspropertiesOverlay.dtd    (locale/en-US/csspropertiesOverlay.dtd)
   locale/en-US/cssproperties/cssproperties.dtd           (locale/en-US/cssproperties.dtd)
   locale/en-US/cssproperties/backgrounditem.dtd          (locale/en-US/backgrounditem.dtd)
@@ -43,3 +44,13 @@ cssproperties-locale.jar:
   locale/en-US/cssproperties/colorstopitem.dtd           (locale/en-US/colorstopitem.dtd)
   locale/en-US/cssproperties/backgrounditem.properties   (locale/en-US/backgrounditem.properties)
   locale/en-US/cssproperties/cssproperties.properties    (locale/en-US/cssproperties.properties)
+  locale/fr-FR/cssproperties/csspropertiesOverlay.dtd    (locale/fr-FR/csspropertiesOverlay.dtd)
+  locale/fr-FR/cssproperties/cssproperties.dtd           (locale/fr-FR/cssproperties.dtd)
+  locale/fr-FR/cssproperties/backgrounditem.dtd          (locale/fr-FR/backgrounditem.dtd)
+  locale/fr-FR/cssproperties/transformationitem.dtd      (locale/fr-FR/transformationitem.dtd)
+  locale/fr-FR/cssproperties/transitionitem.dtd          (locale/fr-FR/transitionitem.dtd)
+  locale/fr-FR/cssproperties/textshadowitem.dtd          (locale/fr-FR/textshadowitem.dtd)
+  locale/fr-FR/cssproperties/colorstopitem.dtd           (locale/fr-FR/colorstopitem.dtd)
+  locale/fr-FR/cssproperties/backgrounditem.properties   (locale/fr-FR/backgrounditem.properties)
+  locale/fr-FR/cssproperties/cssproperties.properties    (locale/fr-FR/cssproperties.properties)
+  

@@ -35,14 +35,14 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY window.title "Markup cleaner">
+<!ENTITY window.title "Nettoyeur de code">
 
-<!ENTITY trailingBR.label "Remove trailing &lt;br&gt;">
-<!ENTITY emptyBlocks.label "Remove empty blocks">
-<!ENTITY emptyCells.label "Remove alignment on empty table cells">
-<!ENTITY nestedLists.label "Fix nested lists">
+<!ENTITY trailingBR.label "Supprimer les &lt;br&gt; finaux">
+<!ENTITY emptyBlocks.label "Supprimer les blocs vides">
+<!ENTITY emptyCells.label "Supprimer l'alignement sur les cellules de tableau vides">
+<!ENTITY nestedLists.label "Corriger les listes et sous-listes">
 
-<!ENTITY cleanUp.label "Clean up">
+<!ENTITY cleanUp.label "Nettoyer">
 
 <!ENTITY actionColumnHeader.label "Action">
-<!ENTITY reportColumnHeader.label "Report">
+<!ENTITY reportColumnHeader.label "Rapport">

@@ -5,7 +5,6 @@
 <!ENTITY disabled.label "Disabled">
 <!ENTITY placeholder.label "Placeholder:">
 <!ENTITY form.label "Form:">
-<!ENTITY placeholder.label "Placeholder:">
 <!ENTITY mutability.label "Mutability:">
 <!ENTITY readonly.label "The element is read-only">
 <!ENTITY required.label "Required:">

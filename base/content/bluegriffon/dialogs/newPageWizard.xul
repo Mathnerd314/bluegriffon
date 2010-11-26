@@ -53,7 +53,7 @@
         onload="Startup()"
         onunload="Shutdown()"
         onwizardfinish="return CreateNewDocument();"
-        height="350" width="450"
+        height="350" width="550"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY">
 

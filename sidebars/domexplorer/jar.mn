@@ -14,6 +14,9 @@ domexplorer.jar:
 
 domexplorer-locale.jar:
 % locale    domexplorer    en-US    %locale/en-US/domexplorer/
+% locale    domexplorer    fr-FR    %locale/fr-FR/domexplorer/
   locale/en-US/domexplorer/domexplorerOverlay.dtd (locale/en-US/domexplorerOverlay.dtd)
   locale/en-US/domexplorer/domexplorer.dtd        (locale/en-US/domexplorer.dtd)
+  locale/fr-FR/domexplorer/domexplorerOverlay.dtd (locale/fr-FR/domexplorerOverlay.dtd)
+  locale/fr-FR/domexplorer/domexplorer.dtd        (locale/fr-FR/domexplorer.dtd)
   

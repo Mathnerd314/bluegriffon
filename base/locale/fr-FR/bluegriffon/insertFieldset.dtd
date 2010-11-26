@@ -1,7 +1,7 @@
-<!ENTITY window.title "Insert or edit a fieldset">
+<!ENTITY window.title "Insérer ou éditer un groupe de champs de formulaure">
 
-<!ENTITY name.label "Name:">
-<!ENTITY state.label "State:">
-<!ENTITY disabled.label "Disabled">
-<!ENTITY form.label "Form:">
-<!ENTITY insertLegend.label "Add a legend to the fieldset">
+<!ENTITY name.label "Nom:">
+<!ENTITY state.label "État:">
+<!ENTITY disabled.label "Inactif">
+<!ENTITY form.label "Formulaire:">
+<!ENTITY insertLegend.label "Ajouter une légende au groupe">

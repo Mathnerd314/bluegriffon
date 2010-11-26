@@ -1,9 +1,9 @@
-<!ENTITY window.title "Insert or edit a progress element">
+<!ENTITY window.title "Insérer ou éditer une jauge">
 
-<!ENTITY value.label "Value:">
-<!ENTITY min.label "Min. value:">
-<!ENTITY max.label "Max. value:">
-<!ENTITY form.label "Form:">
-<!ENTITY optimum.label "Optimal value:">
-<!ENTITY low.label "Low limit:">
-<!ENTITY high.label "High limit:">
+<!ENTITY value.label "Valeur:">
+<!ENTITY min.label "Valeur min.:">
+<!ENTITY max.label "Valeur max.:">
+<!ENTITY form.label "Formulaire:">
+<!ENTITY optimum.label "Valeur optimale:">
+<!ENTITY low.label "Limite basse:">
+<!ENTITY high.label "Limite haute:">

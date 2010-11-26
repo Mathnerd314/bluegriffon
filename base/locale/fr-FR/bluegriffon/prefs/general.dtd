@@ -1,13 +1,13 @@
-<!ENTITY fileHistory.caption "Recent files">
-<!ENTITY fileHistoryDepth.label "Maximum number of files in recent history:">
-<!ENTITY files.label "files">
+<!ENTITY fileHistory.caption "Fichiers récents">
+<!ENTITY fileHistoryDepth.label "Nombre maximum de fichiers récents mémorisés:">
+<!ENTITY files.label "fichiers">
 
-<!ENTITY structureBar.caption "Structure bar">
+<!ENTITY structureBar.caption "Barre de structure du document">
 
-<!ENTITY returnKey.caption "Behavior of the return key">
-<!ENTITY returnKey.label "Return key in a paragraph always creates a new paragraph">
+<!ENTITY returnKey.caption "Comportement de la touche Return">
+<!ENTITY returnKey.label "Return dans un paragraphe crée un nouveau paragraphe">
 
-<!ENTITY showIDs.label "Show ID">
-<!ENTITY showClasses.label "Show classes">
-<!ENTITY showLanguage.label "show language">
-<!ENTITY showRoles.label "Show ARIA role">
+<!ENTITY showIDs.label "Montrer l'ID">
+<!ENTITY showClasses.label "Montrer les classes">
+<!ENTITY showLanguage.label "Montrer la langue">
+<!ENTITY showRoles.label "Montrer le rôle ARIA">

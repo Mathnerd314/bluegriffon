@@ -1,10 +1,10 @@
-<!ENTITY window.title "Select a language">
+<!ENTITY window.title "Choisir un langage">
 
-<!ENTITY languagesList.label  "Languages:">
-<!ENTITY examples.label "e.g.: en-bz, ar-jo">
-<!ENTITY others.label "Others:">
+<!ENTITY languagesList.label  "Langages:">
+<!ENTITY examples.label "par exemple: en-bz, ar-jo">
+<!ENTITY others.label "Autres:">
 <!ENTITY others.accesskey "O">
 
-<!ENTITY clearSubtree.label "Clear language information for children">
+<!ENTITY clearSubtree.label "Effacer les informations de langage pour tous les éléments enfants">
 
-<!ENTITY currentLanguage.label "Current language is:">
+<!ENTITY currentLanguage.label "Le langage actuel est:">

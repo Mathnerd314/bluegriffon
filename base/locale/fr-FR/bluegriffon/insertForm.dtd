@@ -1,21 +1,21 @@
-<!ENTITY window.title "Insert or edit a form">
+<!ENTITY window.title "Insérer ou éditer un formulaire">
 
-<!ENTITY formName.label "Name of the form:">
+<!ENTITY formName.label "Nom du formulaire:">
 <!ENTITY url.label "URL:">
-<!ENTITY autocomplete.label "Autocompleted:">
-<!ENTITY autocompleteOn.label "on">
-<!ENTITY autocompleteOff.label "off">
+<!ENTITY autocomplete.label "Autocomplétion:">
+<!ENTITY autocompleteOn.label "marche">
+<!ENTITY autocompleteOff.label "arrêt">
 
-<!ENTITY encodingType.label "Encoding:">
+<!ENTITY encodingType.label "Encodage:">
 
-<!ENTITY method.label "Method:">
+<!ENTITY method.label "Méthode:">
 
 <!ENTITY validation.label "Validation:">
-<!ENTITY novalidate.label "No validation during form submission">
+<!ENTITY novalidate.label "Pas de validation durant la soumission du formulaire">
 
-<!ENTITY target.label "Target:">
+<!ENTITY target.label "Cible:">
 
-<!ENTITY charsets.label "Character encodings:">
+<!ENTITY charsets.label "Encodage de caractères:">
 
-<!ENTITY unspecified.label "-- unspecified --">
+<!ENTITY unspecified.label "-- non spécifié --">
  

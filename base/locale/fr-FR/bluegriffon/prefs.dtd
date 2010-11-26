@@ -1,7 +1,7 @@
-<!ENTITY window.title "Bluegriffon - Preferences">
+<!ENTITY window.title "Bluegriffon - Préférences">
 
-<!ENTITY general.title "General">
-<!ENTITY newPage.title "New Page">
-<!ENTITY update.title "Updates">
-<!ENTITY advanced.title "Advanced">
+<!ENTITY general.title "Général">
+<!ENTITY newPage.title "Nouveaux documents">
+<!ENTITY update.title "Mises à jour">
+<!ENTITY advanced.title "Avancé">
 <!ENTITY styles.title "Styles">

@@ -1,12 +1,12 @@
-<!ENTITY bgDecidesAll.radio "Automatic">
-<!ENTITY bgDecidesAll.desc "Let BlueGriffon decide by itself how it adds styles and let it pick IDs and classes for me when needed">
-<!ENTITY prefixPrompt.label "Enter a prefix for IDs and classes:">
-<!ENTITY iDecide.radio "Manual">
-<!ENTITY iDecide.desc "Let me decide">
-<!ENTITY cssPolicy.caption "CSS Policy">
+<!ENTITY bgDecidesAll.radio "Automatique">
+<!ENTITY bgDecidesAll.desc "Laisser BlueGriffon décider et choisir un ID ou une classe par lui-même">
+<!ENTITY prefixPrompt.label "Entrez un préfixe pour les IDs et classes:">
+<!ENTITY iDecide.radio "Manuel">
+<!ENTITY iDecide.desc "Laissez-moi choisir...">
+<!ENTITY cssPolicy.caption "Politique CSS">
 
-<!ENTITY browserSupport.caption "Browser support">
-<!ENTITY gecko.label "Gecko-based browsers (Firefox, Camino, ...)">
-<!ENTITY webkit.label "WebKit-based browsers (Safari, Chrome, ...)">
+<!ENTITY browserSupport.caption "Support CSS des navigateurs">
+<!ENTITY gecko.label "Navigateurs basés sur Gecko (Firefox, Camino, ...)">
+<!ENTITY webkit.label "Navigateurs basés sur WebKit (Safari, Chrome, ...)">
 <!ENTITY presto.label "Opera">
 <!ENTITY trident.label "Internet Explorer">

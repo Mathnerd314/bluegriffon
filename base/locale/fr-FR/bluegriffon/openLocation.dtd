@@ -35,16 +35,16 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY window.title "Open a file or template">
+<!ENTITY window.title "Ouvrir un document">
 
-<!ENTITY enterLocation.label "Enter the web location (URL) of the file/template, or choose a local one:">
+<!ENTITY enterLocation.label "Entrez l'URL du document, ou sélectionnez un fichier local :">
 <!ENTITY enterLocation.accesskey "E">
 
-<!ENTITY chooseFile.label "Choose File...">
-<!ENTITY chooseFile.accesskey "C">
+<!ENTITY chooseFile.label "Sélectionner un fichier...">
+<!ENTITY chooseFile.accesskey "S">
 
-<!ENTITY createIn.label "Create in a">
-<!ENTITY inATab.label "Tab">
-<!ENTITY inATab.accesskey "T">
-<!ENTITY inAWindow.label "Window">
-<!ENTITY inAWindow.accesskey "W">
+<!ENTITY createIn.label "Ouvrir le document dans">
+<!ENTITY inATab.label "un onglet">
+<!ENTITY inATab.accesskey "o">
+<!ENTITY inAWindow.label "une fenêtre">
+<!ENTITY inAWindow.accesskey "f">

@@ -31,6 +31,6 @@
 <!ENTITY backgroundPositionLeftBottom.label "Left bottom">
 <!ENTITY backgroundPositionCenterBottom.label "Center bottom">
 <!ENTITY backgroundPositionRightBottom.label "Right bottom">
-<!ENTITY backgroundPositionUserDefined.label "Define precision more precisely">
+<!ENTITY backgroundPositionUserDefined.label "Define position more precisely">
 
 <!ENTITY backgroundOrigin.label "Origin:">

@@ -1,5 +1,5 @@
-<!ENTITY window.title "Insert or edit a key pair generator">
+<!ENTITY window.title "Insérer ou éditer un indicateur de progression">
 
-<!ENTITY value.label "Value:">
-<!ENTITY max.label "Max. value:">
-<!ENTITY form.label "Form:">
+<!ENTITY value.label "Valeur:">
+<!ENTITY max.label "Valeur max.:">
+<!ENTITY form.label "Formulaire:">

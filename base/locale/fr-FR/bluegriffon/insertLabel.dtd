@@ -1,4 +1,4 @@
-<!ENTITY window.title "Insert or edit a label">
+<!ENTITY window.title "Insérer ou éditer un label">
 
-<!ENTITY form.label "Form:">
-<!ENTITY for.label "Control's ID:">
+<!ENTITY form.label "Formulaire:">
+<!ENTITY for.label "ID de l'élément de contrôle:">

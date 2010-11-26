@@ -1,51 +1,51 @@
 
-<!ENTITY windowTitle.label "Table Properties">
+<!ENTITY windowTitle.label "Propriétés de tableau">
 
-<!ENTITY table.tab "Table">
-<!ENTITY cell.tab "Cells">
+<!ENTITY table.tab "Tableau">
+<!ENTITY cell.tab "Cellules">
 
-<!ENTITY size.label "Size">
-<!ENTITY rows.label "Rows:">
-<!ENTITY width.label "Width:">
-<!ENTITY columns.label "Columns:">
-<!ENTITY height.label "Height:">
-<!ENTITY rowsInHeader.label "Rows in header:">
-<!ENTITY onlyHeaderCells.label "Only header cells">
-<!ENTITY rowsInFooter.label "Rows in footer:">
+<!ENTITY size.label "Taille">
+<!ENTITY rows.label "Lignes:">
+<!ENTITY width.label "Largeur:">
+<!ENTITY columns.label "Colonnes:">
+<!ENTITY height.label "Hauteur:">
+<!ENTITY rowsInHeader.label "Lignes d'en-tête:">
+<!ENTITY onlyHeaderCells.label "Que des cellules d'en-tête">
+<!ENTITY rowsInFooter.label "Lignes dans le pied de tableau:">
 
-<!ENTITY layout.label "Layout">
-<!ENTITY border.label "Border:">
+<!ENTITY layout.label "Formatage">
+<!ENTITY border.label "Cadre:">
 <!ENTITY pixels.label "pixels">
-<!ENTITY cellSpacing.label "Cell spacing:">
-<!ENTITY percent.label "percents">
-<!ENTITY cellPadding.label "Cell padding:">
+<!ENTITY cellSpacing.label "Espace inter-cellules:">
+<!ENTITY percent.label "pourcents">
+<!ENTITY cellPadding.label "Espace intra-cellulaire:">
 
 <!ENTITY selection.caption "Selection">
-<!ENTITY cells.label "Cell(s)">
-<!ENTITY rowsSelection.label "Row(s)">
-<!ENTITY columnsSelection.label "Column(s)">
+<!ENTITY cells.label "Cellule(s)">
+<!ENTITY rowsSelection.label "Ligne(s)">
+<!ENTITY columnsSelection.label "Colonne(s)">
 
-<!ENTITY previous.label "Previous">
-<!ENTITY next.label "Next">
+<!ENTITY previous.label "Précédent">
+<!ENTITY next.label "Suivant">
 
-<!ENTITY applyButton.label "Apply">
+<!ENTITY applyButton.label "Appliquer">
 
-<!ENTITY warning.description "Changes will be applied before selection is changed.">
+<!ENTITY warning.description "Les changement seront appliqués avant tout changement de la sélection.">
 
-<!ENTITY size.caption "Size">
-<!ENTITY alignment.caption "Content Alignment">
-<!ENTITY hAlign.label "Horizontally:">
-<!ENTITY vAlign.label "Vertically:">
-<!ENTITY left.label "Left">
-<!ENTITY unspecified.label "- unspecified -">
-<!ENTITY center.label "Center">
-<!ENTITY right.label "Right">
-<!ENTITY justify.label "Justified">
-<!ENTITY top.label "Top">
-<!ENTITY bottom.label "Bottom">
+<!ENTITY size.caption "Taille">
+<!ENTITY alignment.caption "Alignement du contenu">
+<!ENTITY hAlign.label "Horizontalement:">
+<!ENTITY vAlign.label "Verticalement:">
+<!ENTITY left.label "Gauche">
+<!ENTITY unspecified.label "- non spécifié -">
+<!ENTITY center.label "Centre">
+<!ENTITY right.label "Droite">
+<!ENTITY justify.label "Justifié">
+<!ENTITY top.label "Haut">
+<!ENTITY bottom.label "Bas">
 
 <!ENTITY style.caption "Style">
-<!ENTITY bgColor.label "Background color:">
-<!ENTITY bgColor.windowTitle "Background color">
-<!ENTITY headers.checkbox "Header(s)">
-<!ENTITY nowrap.checkbox "Text is not wrapping">
+<!ENTITY bgColor.label "Couleur de fond:">
+<!ENTITY bgColor.windowTitle "Couleur de fond">
+<!ENTITY headers.checkbox "En-tête(s)">
+<!ENTITY nowrap.checkbox "Le texte ne passe pas à la ligne">

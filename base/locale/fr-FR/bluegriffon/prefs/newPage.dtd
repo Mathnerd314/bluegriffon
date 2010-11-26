@@ -1,8 +1,8 @@
-<!ENTITY author.caption "Author">
-<!ENTITY authorName.label "Author's name:">
+<!ENTITY author.caption "Auteur">
+<!ENTITY authorName.label "Nom de l'auteur:">
 
-<!ENTITY source.label "Source view">
-<!ENTITY theme.label "Theme:">
-<!ENTITY darkTheme.label "Dark">
-<!ENTITY whiteTheme.label "White">
-<!ENTITY requiresRestart.label "(Restart needed to apply changes)">
+<!ENTITY source.label "Vue Source">
+<!ENTITY theme.label "Thème:">
+<!ENTITY darkTheme.label "Sombre">
+<!ENTITY whiteTheme.label "Blanc">
+<!ENTITY requiresRestart.label "(Veuillez relancer l'application après changement)">

@@ -1,7 +1,7 @@
-<!ENTITY window.title "Insert or edit a result of calculation">
+<!ENTITY window.title "Insérer ou éditer le résultat d'un calcul">
 
-<!ENTITY name.label "Name:">
-<!ENTITY form.label "Form:">
-<!ENTITY for.label "Control's IDs:">
+<!ENTITY name.label "Nom:">
+<!ENTITY form.label "Formulaire:">
+<!ENTITY for.label "ID de l'élément de contrôle:">
 <!ENTITY autofocus.label "Autofocus:">
-<!ENTITY focusOnPageLoad.label "As soon as the page is loaded">
+<!ENTITY focusOnPageLoad.label "Dès que la page est chargée">

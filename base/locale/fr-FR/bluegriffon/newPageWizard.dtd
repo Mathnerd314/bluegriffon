@@ -35,120 +35,120 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY window.title "New Document Wizard">
+<!ENTITY window.title "Assistant de création de document">
 
-<!ENTITY pageTitle.label "Title:">
-<!ENTITY pageAuthor.label "Author:">
+<!ENTITY pageTitle.label "Titre:">
+<!ENTITY pageAuthor.label "Auteur:">
 <!ENTITY pageDescription.label "Description:">
 <!ENTITY pageTitle.accesskey "T">
 <!ENTITY pageAuthor.accesskey "A">
 <!ENTITY pageDescription.accesskey "D">
-<!ENTITY pageKeywords.label "Keywords:">
-<!ENTITY pageKeywords.accesskey "K">
-<!ENTITY language.label "Language:">
+<!ENTITY pageKeywords.label "Mots-clés:">
+<!ENTITY pageKeywords.accesskey "M">
+<!ENTITY language.label "Langage:">
 <!ENTITY language.accesskey "L">
-<!ENTITY charset.label "Character set:">
-<!ENTITY charset.accesskey "C">
-<!ENTITY direction.label "Text direction:">
+<!ENTITY charset.label "Jeu de caractères:">
+<!ENTITY charset.accesskey "c">
+<!ENTITY direction.label "Direction du texte:">
 <!ENTITY direction.accesskey "x">
-<!ENTITY ltr.label "Left to right">
-<!ENTITY rtl.label "Right to left">
-<!ENTITY unspecified.label "Unspecified">
+<!ENTITY ltr.label "De gauche à droite">
+<!ENTITY rtl.label "De droite à gauche">
+<!ENTITY unspecified.label "Non spécifié">
 
-<!ENTITY selectLanguage.label "Select a language">
+<!ENTITY selectLanguage.label "Langage du texte">
 
-<!ENTITY backgroundImage.label "Background Image:">
-<!ENTITY backgroundImage.accesskey "B">
+<!ENTITY backgroundImage.label "Image de fond:">
+<!ENTITY backgroundImage.accesskey "I">
 
-<!ENTITY filepickerForBgImage.title "Select a background image">
-<!ENTITY pagePreview.label "Preview:">
+<!ENTITY filepickerForBgImage.title "Sélectionner une image de fond:">
+<!ENTITY pagePreview.label "Prévisualisation:">
 
-<!ENTITY useSystemColors.label "Reader's defaults colors (Don't set colors in page)">
-<!ENTITY userDefinedColors.label "Use custom colors:">
+<!ENTITY useSystemColors.label "Couleurs par défaut (Ne pas spécifier de couleurs pour la page)">
+<!ENTITY userDefinedColors.label "Couleurs spécifiques:">
 
-<!ENTITY backgroundColor.label "Background:">
-<!ENTITY backgroundColor.accesskey "B">
-<!ENTITY textColor.label "Text:">
+<!ENTITY backgroundColor.label "Fond:">
+<!ENTITY backgroundColor.accesskey "F">
+<!ENTITY textColor.label "Texte:">
 <!ENTITY textColor.accesskey "T">
-<!ENTITY linksColor.label "Links:">
+<!ENTITY linksColor.label "Liens:">
 <!ENTITY linksColor.accesskey "L">
-<!ENTITY activeLinksColor.label "Active Links:">
+<!ENTITY activeLinksColor.label "Liens activés:">
 <!ENTITY activeLinksColor.accesskey "A">
-<!ENTITY visitedLinksColor.label "Visited Links:">
+<!ENTITY visitedLinksColor.label "Liens visités:">
 <!ENTITY visitedLinksColor.accesskey "V">
-<!ENTITY underlineLinks.label "Underline links">
+<!ENTITY underlineLinks.label "Souligner les liens">
 
-<!ENTITY relativeURLForBgImage.label "URL is relative to page location">
+<!ENTITY relativeURLForBgImage.label "Rendre l'URL relatif au document">
 
-<!ENTITY generalTab.label "General document properties">
-<!ENTITY colorsTab.label "Colors and backgrounds">
+<!ENTITY generalTab.label "Propriétés générales du document">
+<!ENTITY colorsTab.label "Couleurs et fond">
 <!ENTITY styleTab.label "Style">
-<!ENTITY advancedTab.label "Advanced">
+<!ENTITY advancedTab.label "Avancé">
 
-<!ENTITY unsavedPage.label "[New page, not saved yet]">
-<!ENTITY noPageLastModified.label "[No information]">
+<!ENTITY unsavedPage.label "[Nouveau document, pas encore sauvé]">
+<!ENTITY noPageLastModified.label "[Pas d'information]">
 
-<!ENTITY normalText.preview "Normal text">
-<!ENTITY links.preview "Links">
-<!ENTITY activeLinks.preview "Active links">
-<!ENTITY visitedLinks.preview "Visited links">
+<!ENTITY normalText.preview "Texte normal">
+<!ENTITY links.preview "Liens">
+<!ENTITY activeLinks.preview "Liens activés">
+<!ENTITY visitedLinks.preview "Liens visités">
 
-<!ENTITY makeColorsDefault.label "Make the above my default settings">
+<!ENTITY makeColorsDefault.label "Les choix ci-dessus sont mes choix par défaut">
 
-<!ENTITY bgTab.label "Document background">
+<!ENTITY bgTab.label "Fond du document">
 
-<!ENTITY layoutsTab.label "Page layouts">
-<!ENTITY usePageLayout.checkbox "Apply a predefined CSS layout">
-<!ENTITY oneColumn100.label "1 column, 100&#37;">
-<!ENTITY twoColumns5050.label "2 columns, 50&#37;/50&#37;">
-<!ENTITY twoColumns6633.label "2 columns, 66&#37;/33&#37;">
-<!ENTITY twoColumns3366.label "2 columns, 33&#37;/66&#37;">
-<!ENTITY twoColumns7525.label "2 columns, 75&#37;/25&#37;">
-<!ENTITY twoColumns2575.label "2 columns, 25&#37;/75&#37;">
-<!ENTITY threeColumns333333.label "3 columns, 33&#37;/33&#37;/33&#37;">
-<!ENTITY threeColumns502525.label "3 columns, 50&#37;/25&#37;/25&#37;">
-<!ENTITY threeColumns252550.label "3 columns, 25&#37;/25&#37;/50&#37;">
-<!ENTITY fourColumns25252525.label "4 columns, 25&#37;/25&#37;/25&#37;/25&#37;">
+<!ENTITY layoutsTab.label "Modèle de page">
+<!ENTITY usePageLayout.checkbox "Appliquer un modèle CSS de page">
+<!ENTITY oneColumn100.label "1 colonne, 100&#37;">
+<!ENTITY twoColumns5050.label "2 colonnes, 50&#37;/50&#37;">
+<!ENTITY twoColumns6633.label "2 colonnes, 66&#37;/33&#37;">
+<!ENTITY twoColumns3366.label "2 colonnes, 33&#37;/66&#37;">
+<!ENTITY twoColumns7525.label "2 colonnes, 75&#37;/25&#37;">
+<!ENTITY twoColumns2575.label "2 colonnes, 25&#37;/75&#37;">
+<!ENTITY threeColumns333333.label "3 colonnes, 33&#37;/33&#37;/33&#37;">
+<!ENTITY threeColumns502525.label "3 colonnes, 50&#37;/25&#37;/25&#37;">
+<!ENTITY threeColumns252550.label "3 colonnes, 25&#37;/25&#37;/50&#37;">
+<!ENTITY fourColumns25252525.label "4 colonnes, 25&#37;/25&#37;/25&#37;/25&#37;">
 
-<!ENTITY layoutType.label "Width:">
-<!ENTITY layoutType.accesskey "W">
-<!ENTITY layout100percent.label "Full width">
+<!ENTITY layoutType.label "Largeur:">
+<!ENTITY layoutType.accesskey "L">
+<!ENTITY layout100percent.label "Largeur de la page">
 <!ENTITY layout750px.label "750px">
 <!ENTITY layout950px.label "950px">
 <!ENTITY layout974px.label "974px">
-<!ENTITY layoutSubtype.label "Sidebar:">
-<!ENTITY layoutSubtype.accesskey "S">
-<!ENTITY noSidebar.label "None">
-<!ENTITY left160Sidebar.label "Left 160px">
-<!ENTITY left180Sidebar.label "Left 180px">
-<!ENTITY left300Sidebar.label "Left 300px">
-<!ENTITY right180Sidebar.label "Right 180px">
-<!ENTITY right240Sidebar.label "Right 240px">
-<!ENTITY right300Sidebar.label "Right 300px">
-<!ENTITY loremIpsum.label "Include 'lorem ipsum' dummy content">
+<!ENTITY layoutSubtype.label "Barre latérale:">
+<!ENTITY layoutSubtype.accesskey "B">
+<!ENTITY noSidebar.label "Aucune">
+<!ENTITY left160Sidebar.label "À gauche 160px">
+<!ENTITY left180Sidebar.label "À gauche 180px">
+<!ENTITY left300Sidebar.label "À gauche 300px">
+<!ENTITY right180Sidebar.label "À droite 180px">
+<!ENTITY right240Sidebar.label "À droite 240px">
+<!ENTITY right300Sidebar.label "À droite 300px">
+<!ENTITY loremIpsum.label "Inclure du contenu 'lorem ipsum'">
 <!ENTITY loremIpsum.accesskey "I">
-<!ENTITY newRow.label "New row">
-<!ENTITY removeRow.label "Remove">
+<!ENTITY newRow.label "Nouvelle ligne">
+<!ENTITY removeRow.label "Supprimer">
 
-<!ENTITY tile.label "Tile:">
-<!ENTITY tile.accesskey "T">
-<!ENTITY scrolling.label "Scrolling:">
-<!ENTITY scrolling.accesskey "S">
-<!ENTITY scrollWithPage.label "With the page">
-<!ENTITY noScrolling.label "No scrolling">
+<!ENTITY tile.label "Répéter:">
+<!ENTITY tile.accesskey "t">
+<!ENTITY scrolling.label "Défilement:">
+<!ENTITY scrolling.accesskey "D">
+<!ENTITY scrollWithPage.label "Avec la page">
+<!ENTITY noScrolling.label "Pas de défilement">
 <!ENTITY horizPosition.label "Horiz:">
 <!ENTITY vertPosition.label "Vert:">
 
-<!ENTITY documentType.label "Document type">
-<!ENTITY documentType.description "What kind of document do you want to create?">
+<!ENTITY documentType.label "Type de document">
+<!ENTITY documentType.description "Quel type de document voulez-vous créer ?">
 
-<!ENTITY language.label "Document language">
+<!ENTITY language.label "Langage du document">
 <!ENTITY html.label "HTML 4">
 <!ENTITY xhtml.label "XHTML 1">
 <!ENTITY html5.label "HTML 5">
 <!ENTITY xhtml5.label "XHTML 5">
 
-<!ENTITY doctype.label "Document type">
-<!ENTITY transitional.label "Transitional">
-<!ENTITY strict.label "strict">
+<!ENTITY doctype.label "Type du document">
+<!ENTITY transitional.label "Transitionel">
+<!ENTITY strict.label "Strict">
 

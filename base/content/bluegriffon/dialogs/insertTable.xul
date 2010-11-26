@@ -237,7 +237,7 @@
                   oninput="DataChanged()">
           <caption label="Style"/>
           <hbox align="center">
-            <hbox flex="1">
+            <hbox flex="1" align="center">
 	            <label value="&bgColor.label;"/>
 	            <ecolorpicker id="bgColorColorpicker"
 	                          color="transparent"

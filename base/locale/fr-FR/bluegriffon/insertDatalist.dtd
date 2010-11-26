@@ -1,46 +1,44 @@
-<!ENTITY window.title "Insert or edit a data list">
+<!ENTITY window.title "Insérer ou éditer une liste de données">
 
-<!ENTITY window.title "Insert or edit a datalist">
+<!ENTITY name.label "Nom:">
+<!ENTITY value.label "Valeur:">
+<!ENTITY state.label "État:">
+<!ENTITY disabled.label "Inactif">
+<!ENTITY size.label "Taille:">
+<!ENTITY choices.label "Choix:">
+<!ENTITY multiple.label "Accepter plusieurs valeurs">
+<!ENTITY list.label "Liste:">
 
-<!ENTITY name.label "Name:">
-<!ENTITY value.label "Value:">
-<!ENTITY state.label "State:">
-<!ENTITY disabled.label "Disabled">
-<!ENTITY size.label "Size:">
-<!ENTITY choices.label "Choices:">
-<!ENTITY multiple.label "Accept multiple values">
-<!ENTITY list.label "List:">
-
-<!ENTITY form.label "Form:">
+<!ENTITY form.label "Formulaire:">
 <!ENTITY autofocus.label "Autofocus:">
-<!ENTITY focusOnPageLoad.label "As soon as the page is loaded">
-<!ENTITY required.label "Required:">
-<!ENTITY isRequired.label "The element is required">
+<!ENTITY focusOnPageLoad.label "Dès que la page est chargée">
+<!ENTITY required.label "Requis:">
+<!ENTITY isRequired.label "Cet élément est requis">
 
-<!ENTITY parameters.label "Parameters">
+<!ENTITY parameters.label "Paramètres">
 
-<!ENTITY add.tooltip "Add options">
-<!ENTITY remove.tooltip "Remove selected option or optgroup">
-<!ENTITY modify.tooltip "Modify selected option or optgroup">
+<!ENTITY add.tooltip "Ajouter des options">
+<!ENTITY remove.tooltip "Supprimer l'option ou le groupe d'options">
+<!ENTITY modify.tooltip "Modifier l'option ou le groupe d'options">
 
 <!ENTITY options.label "Options">
-<!ENTITY up.tooltip "Up">
-<!ENTITY down.tooltip "Down">
+<!ENTITY up.tooltip "Déplacer vers le haut">
+<!ENTITY down.tooltip "Déplacer vers le bas">
 
-<!ENTITY value.col "Value">
+<!ENTITY value.col "Valeur">
 <!ENTITY label.col "Label">
-<!ENTITY disabled.col "Disabled">
-<!ENTITY selected.col "Selected">
+<!ENTITY disabled.col "Inactif">
+<!ENTITY selected.col "Sélectionné">
 
-<!ENTITY before.label "Before...">
-<!ENTITY inside.label "Inside...">
-<!ENTITY after.label "After...">
+<!ENTITY before.label "Avant...">
+<!ENTITY inside.label "Dans...">
+<!ENTITY after.label "Après...">
 
-<!ENTITY addOption.label "Add an option">
-<!ENTITY addOptgroup.label "Add a group of options">
+<!ENTITY addOption.label "Ajouter une option">
+<!ENTITY addOptgroup.label "Ajouter un groupe d'options">
 
 <!ENTITY label.label "Label:">
 <!ENTITY ok.label "OK">
-<!ENTITY selected.label "Selected">
+<!ENTITY selected.label "Sélectionné">
 
-<!ENTITY update.label "Update">
+<!ENTITY update.label "Mise à jour">
