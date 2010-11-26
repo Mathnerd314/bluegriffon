@@ -1,7 +1,5 @@
 function Shutdown()
 {
-  window.removeEventListener("deactivate", DeactivateMainWindow, true);
-
   try {
     var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.removeObserver("bluegriffon.", BlueGriffonPrefsObserver, false);

@@ -36,6 +36,6 @@ function Startup()
   if ("ProjectManager" in window)
     ProjectManager.init();
 
-  window.addEventListener("deactivate", DeactivateMainWindow, true);
+  window.tryToClose = doSaveTabsBeforeQuit;
 }
 

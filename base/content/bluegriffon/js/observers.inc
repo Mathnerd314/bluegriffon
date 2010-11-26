@@ -168,13 +168,3 @@ var BlueGriffonPrefsObserver = {
     }
   }
 };
-
-function DeactivateMainWindow()
-{
-  setTimeout(_DeactivateMainWindow, 500);
-}
-
-function _DeactivateMainWindow()
-{
-}
-
