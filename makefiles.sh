@@ -50,5 +50,6 @@ bluegriffon/themes/win/Makefile
 bluegriffon/themes/mac/Makefile
 bluegriffon/extensions/svg-edit/Makefile
 bluegriffon/sidebars/cssproperties/Makefile
+bluegriffon/sidebars/domexplorer/Makefile
 bluegriffon/components/Makefile
 "
