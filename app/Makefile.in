@@ -1,3 +1,4 @@
+
 # ***** BEGIN LICENSE BLOCK *****
 # Version: MPL 1.1/GPL 2.0/LGPL 2.1
 #
@@ -23,7 +24,6 @@
 #  Jonathan Wilson <jonwil@tpgi.com.au>
 #  Dan Mosedale <dmose@mozilla.org>
 #  Benjamin Smedberg <benjamin@smedbergs.us>
-#  Laurent Jouanneau <laurent.jouanneau@disruptive-innovations.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -41,7 +41,7 @@
 
 DEPTH		= ../..
 topsrcdir	= @top_srcdir@
-srcdir	= @srcdir@
+srcdir		= @srcdir@
 VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
@@ -49,21 +49,23 @@ include $(DEPTH)/config/autoconf.mk
 PREF_JS_EXPORTS = $(srcdir)/profile/bluegriffon-prefs.js \
 		  $(NULL)
 
-# hardcoded en-US for the moment
-AB_CD = en-US
-#AB_CD = $(MOZ_UI_LOCALE)
 
-APP_UA_NAME = $(shell echo $(MOZ_APP_DISPLAYNAME) | sed -e's/[^A-Za-z]//g')
-APP_BINARY = $(MOZ_APP_NAME)$(BIN_SUFFIX)
+# hardcode en-US for the moment
+AB_CD = en-US
+
+DEFINES += -DAB_CD=$(AB_CD)
+
 APP_VERSION = $(shell cat $(srcdir)/../config/version.txt)
+DEFINES += -DAPP_VERSION="$(APP_VERSION)"
 
 DIST_FILES = application.ini
 
 GRE_MILESTONE = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build Milestone)
 GRE_BUILDID = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build BuildID)
 
-
 DEFINES += \
+	-DMOZ_APP_NAME=$(MOZ_APP_DISPLAYNAME) \
+	-DMOZ_APP_VERSION=$(APP_VERSION) \
 	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
 	-DAPP_VERSION=$(APP_VERSION) \
 	-DAPP_UA_NAME="$(APP_UA_NAME)" \
@@ -73,25 +75,30 @@ DEFINES += \
 	-DAB_CD=$(AB_CD) \
    $(NULL)
 
+DEFINES += -DGRE_MILESTONE=$(GRE_MILESTONE) -DGRE_BUILDID=$(GRE_BUILDID)
+
+MOZ_SOURCE_STAMP ?= $(shell hg -R $(topsrcdir) parent --template="{node|short}\n" 2>/dev/null)
+ifdef MOZ_SOURCE_STAMP
+DEFINES += -DMOZ_SOURCE_STAMP="$(MOZ_SOURCE_STAMP)"
+endif
+
+SOURCE_REPO := $(shell hg -R $(topsrcdir) showconfig paths.default 2>/dev/null | sed -e "s/^ssh:/http:/")
+ifdef SOURCE_REPO
+DEFINES += -DMOZ_SOURCE_REPO="$(SOURCE_REPO)"
+endif
+
 LIBS += $(JEMALLOC_LIBS)
 
 ifdef LIBXUL_SDK
 include $(topsrcdir)/config/rules.mk
 else
-
 # Build a binary bootstrapping with XRE_main
 
-ifeq ($(USE_SHORT_LIBNAME), 1)
+ifneq (,$(filter OS2 WINCE WINNT,$(OS_ARCH)))
 PROGRAM = $(MOZ_APP_NAME)$(BIN_SUFFIX)
 else
 PROGRAM = $(MOZ_APP_NAME)-bin$(BIN_SUFFIX)
 endif
-
-REQUIRES = \
-	xpcom \
-	string \
-	xulapp \
-	$(NULL)
 
 CPPSRCS = nsEditorApp.cpp
 
@@ -104,17 +111,17 @@ STATIC_COMPONENTS_LINKER_PATH = -LIBPATH:$(DEPTH)/staticlib
 else
 STATIC_COMPONENTS_LINKER_PATH = -L$(DEPTH)/staticlib
 endif
-LIBS += $(MOZDEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
+LIBS += $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
 else
-ifneq (,$(filter mac cocoa,$(MOZ_WIDGET_TOOLKIT)))
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 LIBS += $(DIST)/bin/XUL
 else
 EXTRA_DSO_LIBS += xul
 endif
 endif
 
-ifneq (,$(filter mac cocoa,$(MOZ_WIDGET_TOOLKIT)))
-TK_LIBS :=  -framework Cocoa  $(TK_LIBS)
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+TK_LIBS := $(TK_LIBS)
 endif
 
 ifdef MOZ_ENABLE_LIBXUL
@@ -126,15 +133,15 @@ endif
 
 LIBS += \
 	$(STATIC_COMPONENTS_LINKER_PATH) \
-	$(MOZ_JS_LIBS) \
 	$(EXTRA_DSO_LIBS) \
+	$(MOZ_JS_LIBS) \
 	$(APP_XPCOM_LIBS) \
 	$(NSPR_LIBS) \
 	$(TK_LIBS) \
 	$(NULL)
 
 # Add explicit X11 dependency when building against X11 toolkits
-ifneq (,$(filter gtk gtk2 xlib,$(MOZ_WIDGET_TOOLKIT)))
+ifneq (,$(filter gtk2,$(MOZ_WIDGET_TOOLKIT)))
 LIBS += $(XLDFLAGS) $(XLIBS) $(ZLIB_LIBS)
 endif
 
@@ -150,6 +157,8 @@ MOZ_WINCONSOLE = 0
 endif
 endif
 
+# This switches $(INSTALL) to copy mode, like $(SYSINSTALL), so things that
+# shouldn't get 755 perms need $(IFLAGS1) for either way of calling nsinstall.
 NSDISTMODE = copy
 
 include $(topsrcdir)/config/config.mk
@@ -157,16 +166,18 @@ include $(topsrcdir)/config/config.mk
 ifdef _MSC_VER
 # Always enter a Windows program through wmain, whether or not we're
 # a console application.
+ifdef WINCE
+WIN32_EXE_LDFLAGS += -ENTRY:mainWCRTStartup
+else
 WIN32_EXE_LDFLAGS += -ENTRY:wmainCRTStartup
 endif
-
-ifndef BUILD_STATIC_LIBS
-
-ifdef NS_TRACE_MALLOC
-EXTRA_DSO_LIBS += tracemalloc
 endif
 
-else
+ifdef WINCE
+EXTRA_DSO_LDOPTS += $(call EXPAND_LIBNAME,corelibc)
+endif
+
+ifdef BUILD_STATIC_LIBS
 include $(topsrcdir)/config/static-config.mk
 
 EXTRA_DEPS	+= \
@@ -175,19 +186,20 @@ EXTRA_DEPS	+= \
 DEFINES		+= $(STATIC_DEFINES)
 CPPSRCS		+= $(STATIC_CPPSRCS)
 EXTRA_DSO_LIBS	+= $(STATIC_EXTRA_DSO_LIBS)
-REQUIRES	+= $(STATIC_REQUIRES)
 EXTRA_LIBS	+= $(STATIC_EXTRA_LIBS)
 endif
-
 
 ifeq ($(OS_ARCH),WINNT)
 OS_LIBS += $(call EXPAND_LIBNAME,comctl32 comdlg32 uuid shell32 ole32 oleaut32 version winspool)
 OS_LIBS += $(call EXPAND_LIBNAME,usp10 msimg32)
+endif
+
+ifneq (,$(filter WINNT WINCE,$(OS_ARCH)))
 RCINCLUDE = splash.rc
 ifndef GNU_CC
-RCFLAGS += -I$(srcdir)
+RCFLAGS += -DMOZ_PHOENIX -I$(srcdir)
 else
-RCFLAGS += --include-dir $(srcdir)
+RCFLAGS += -DMOZ_PHOENIX --include-dir $(srcdir)
 endif
 ifdef BUILD_STATIC_LIBS
 RCFLAGS += -DMOZ_STATIC_BUILD
@@ -198,28 +210,25 @@ endif
 endif
 
 ifeq ($(OS_ARCH),BeOS)
-#BEOS_PROGRAM_RESOURCE = $(srcdir)/apprunner-beos.rsrc
+BEOS_PROGRAM_RESOURCE = $(srcdir)/apprunner-beos.rsrc
 ifdef BUILD_STATIC_LIBS
 OS_LIBS += -ltracker -lgame
 endif
 endif
 
-#ifeq ($(OS_ARCH),OS2)
-#RESFILE=splashos2.res
-#ifdef BUILD_STATIC_LIBS
-#EXE_DEF_FILE = bluegriffon.def
-#RCFLAGS += -DMOZ_STATIC_BUILD -i $(DIST)/include/widget
-#endif
-#ifdef DEBUG
-#RCFLAGS += -DDEBUG
-#endif
-#RCFLAGS += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
-#endif
+ifeq ($(OS_ARCH),OS2)
+RESFILE=splashos2.res
+RCFLAGS += -DMOZ_PHOENIX
+ifdef BUILD_STATIC_LIBS
+RCFLAGS += -DMOZ_STATIC_BUILD -i $(DIST)/include
+endif
+ifdef DEBUG
+RCFLAGS += -DDEBUG
+endif
+RCFLAGS += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
+endif
 
 include $(topsrcdir)/config/rules.mk
-
-
-DEFINES += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
 
 ifdef BUILD_STATIC_LIBS
 include $(topsrcdir)/config/static-rules.mk
@@ -244,17 +253,19 @@ ifeq ($(OS_ARCH),WINNT)
 #
 ifndef GNU_CC
 LDFLAGS += /HEAP:0x40000
+ifeq ($(OS_TEST),x86_64)
+# set stack to 2MB on x64 build.  See bug 582910
+LDFLAGS += -STACK:2097152
+endif
 endif
 endif
 
 $(PROGRAM): $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
 
-ifneq (,$(filter-out OS2 WINNT,$(OS_ARCH)))
+ifneq (,$(filter-out OS2 WINNT WINCE,$(OS_ARCH)))
 
-$(MOZ_APP_NAME):: mozilla.in Makefile.in Makefile $(DEPTH)/config/autoconf.mk
+$(MOZ_APP_NAME):: $(topsrcdir)/build/unix/mozilla.in $(GLOBAL_DEPS)
 	cat $< | sed -e "s|%MOZAPPDIR%|$(installdir)|" \
-		-e "s|%MREDIR%|$(mredir)|" \
-		-e "s|%MOZILLA-BIN%|$(PROGRAM)|g" \
 		-e "s|%MOZ_APP_DISPLAYNAME%|$(MOZ_APP_DISPLAYNAME)|" > $@
 	chmod +x $@
 
@@ -269,47 +280,49 @@ GARBAGE += $(addprefix $(DIST)/bin/defaults/pref/, bluegriffon-prefs.js)
 
 endif
 
-ifneq (,$(filter mac cocoa,$(MOZ_WIDGET_TOOLKIT)))
-ifdef BUILD_STATIC_LIBS
-LIBS	+= -lcups -framework AddressBook
-endif
-endif
-
 endif # LIBXUL_SDK
 
+DEFINES += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
 
-
-ifneq (,$(filter gtk gtk2,$(MOZ_WIDGET_TOOLKIT)))
-ICON_FILES	= \
-		$(srcdir)/icons/bluegriffon50.xpm \
-		$(srcdir)/icons/bluegriffon50.png \
-		$(srcdir)/icons/bluegriffon32.png \
-		$(srcdir)/icons/bluegriffon16.xpm \
-		$(srcdir)/icons/bluegriffon16.png \
-		$(NULL)
-libs::
-	$(INSTALL) $(ICON_FILES) $(DIST)/bin/icons/
-
-install::
-	$(SYSINSTALL) $(IFLAGS1) $(ICON_FILES) $(DESTDIR)$(mozappdir)/icons
+ifdef MOZILLA_OFFICIAL
+DEFINES += -DMOZILLA_OFFICIAL
 endif
 
-ifneq (,$(filter windows os2,$(MOZ_WIDGET_TOOLKIT)))
-#libs:: $(DESKTOP_ICONS)
-#	$(INSTALL) $^ $(DIST)/bin/chrome/icons/default
+ifeq ($(MOZ_WIDGET_TOOLKIT),gtk2)
+libs::
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default16.png  $(DIST)/bin/chrome/icons/default
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default32.png  $(DIST)/bin/chrome/icons/default
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default48.png  $(DIST)/bin/chrome/icons/default
 endif
 
+ifdef MOZ_SPLASHSCREEN
+ifeq ($(MOZ_WIDGET_TOOLKIT),windows)
 libs::
-	touch $(DIST)/bin/.autoreg
+	$(INSTALL) $(IFLAGS1) $(DIST)/branding/splash.bmp $(DIST)/bin
+endif
+endif
 
+ifdef WINCE
+ifdef MOZ_FASTSTART
+libs::
+	cp -f $(DIST)/bin/faststartstub.exe $(DIST)/bin/$(MOZ_APP_NAME)faststart.exe
+endif
+endif
 
-ifneq (,$(filter mac cocoa,$(MOZ_WIDGET_TOOLKIT)))
+libs:: $(srcdir)/profile/bluegriffon-prefs.js
+	$(INSTALL) $(IFLAGS1) $^ $(DIST)/bin/defaults/profile
+
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 
 APP_NAME = $(MOZ_APP_DISPLAYNAME)
 
 ifdef MOZ_DEBUG
 APP_NAME := $(APP_NAME)Debug
 endif
+
+LOWER_APP_NAME = $(shell echo $(APP_NAME) | tr '[A-Z]' '[a-z]')
+
+AB_CD = $(MOZ_UI_LOCALE)
 
 AB := $(firstword $(subst -, ,$(AB_CD)))
 
@@ -327,36 +340,27 @@ libs repackage:: $(PROGRAM) application.ini
 	rsync -a --exclude CVS --exclude "*.in" $(srcdir)/macbuild/Contents $(DIST)/$(APP_NAME).app --exclude English.lproj
 	mkdir -p $(DIST)/$(APP_NAME).app/Contents/Resources/$(AB).lproj
 	rsync -a --exclude CVS --exclude "*.in" $(srcdir)/macbuild/Contents/Resources/English.lproj/ $(DIST)/$(APP_NAME).app/Contents/Resources/$(AB).lproj
-	sed -e "s/%APP_VERSION%/$(APP_VERSION)/" -e "s/%APP_NAME%/$(APP_NAME)/" $(srcdir)/macbuild/Contents/Info.plist.in > $(DIST)/$(APP_NAME).app/Contents/Info.plist
-	sed -e "s/%APP_VERSION%/$(APP_VERSION)/" -e "s/%APP_NAME%/$(APP_NAME)/" $(srcdir)/macbuild/Contents/Resources/English.lproj/InfoPlist.strings.in | iconv -f UTF-8 -t UTF-16 > $(DIST)/$(APP_NAME).app/Contents/Resources/$(AB).lproj/InfoPlist.strings
+	sed -e "s/%APP_VERSION%/$(APP_VERSION)/" -e "s/%APP_NAME%/$(APP_NAME)/" -e "s/%LOWER_APP_NAME%/$(LOWER_APP_NAME)/" $(srcdir)/macbuild/Contents/Info.plist.in > $(DIST)/$(APP_NAME).app/Contents/Info.plist
+	sed -e "s/%APP_NAME%/$(APP_NAME)/" $(srcdir)/macbuild/Contents/Resources/English.lproj/InfoPlist.strings.in | iconv -f UTF-8 -t UTF-16 > $(DIST)/$(APP_NAME).app/Contents/Resources/$(AB).lproj/InfoPlist.strings
 	rsync -a $(DIST)/bin/ $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)
 	$(RM) $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)/mangle $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)/shlibsign
 ifdef LIBXUL_SDK
-	cp $(LIBXUL_DIST)/bin/$(XR_STUB_NAME) $(DIST)/$(APP_NAME).app/Contents/MacOS/firefox-bin
+	cp $(LIBXUL_DIST)/bin/$(XR_STUB_NAME) $(DIST)/$(APP_NAME).app/Contents/MacOS/bluegriffon-bin
 else
 	rm -f $(DIST)/$(APP_NAME).app/Contents/MacOS/$(PROGRAM)
 	rsync -aL $(PROGRAM) $(DIST)/$(APP_NAME).app/Contents/MacOS
 endif
-	mkdir -p $(DIST)/$(APP_NAME).app/Contents/Plug-Ins
-#	rsync -a --copy-unsafe-links $(LIBXUL_DIST)/package/PrintPDE.plugin $(DIST)/$(APP_NAME).app/Contents/Plug-Ins
-#	-cp -L $(DIST)/bin/mangle $(DIST)/bin/shlibsign $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)
+	-cp -L $(DIST)/bin/mangle $(DIST)/bin/shlibsign $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)
 	cp -RL $(srcdir)/macbuild/Contents/Resources/bluegriffon.icns $(DIST)/$(APP_NAME).app/Contents/Resources/bluegriffon.icns
-	echo -n APPLMOZB > $(DIST)/$(APP_NAME).app/Contents/PkgInfo
+	printf APPLMOZB > $(DIST)/$(APP_NAME).app/Contents/PkgInfo
 #       remove CVS dirs from packaged app
 	find $(DIST)/$(APP_NAME).app -type d -name "CVS" -prune -exec rm -rf {} \;
-	find $(DIST)/$(APP_NAME).app -type d -name ".svn" -prune -exec rm -rf {} \;
+
 else
 ifdef LIBXUL_SDK
 libs::
-	cp $(LIBXUL_DIST)/bin/xulrunner-stub$(BIN_SUFFIX) $(DIST)/bin/firefox$(BIN_SUFFIX)
+	cp $(LIBXUL_DIST)/bin/$(XULRUNNER_STUB_NAME)$(BIN_SUFFIX) $(DIST)/bin/bluegriffon$(BIN_SUFFIX)
 endif
-endif
-
-libs::
-ifeq ($(OS_ARCH),WINNT)
-	$(PERL) -pe 's/(?<!\r)\n/\r\n/g;' < $(topsrcdir)/LICENSE > $(DIST)/bin/LICENSE
-else
-	$(INSTALL) $(topsrcdir)/LICENSE	$(DIST)/bin
 endif
 
 ifdef LIBXUL_SDK
