@@ -101,7 +101,7 @@
              align="center"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,ClassButtonsBox,FontFaceSelectBox,separator,dtButton,ddButton,rotateButton"/>
+             defaultset="spacer,ClassButtonsBox,FontFaceSelectBox,separator,dtButton,ddButton,rotateButton,ARIARoleSelectBox"/>
     <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 
