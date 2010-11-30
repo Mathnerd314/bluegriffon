@@ -267,6 +267,8 @@
 <!ENTITY stylesheetsToolbarCmd.label "Stylesheets">
 <!ENTITY stylesheetsToolbarCmd.key "S">
 
+<!ENTITY webfonts.label "Web Fonts">
+
 <!ENTITY videoToolbarCmd.label "Video">
 <!ENTITY videoToolbarCmd.tooltip "Insert or edit a video">
 

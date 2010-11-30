@@ -176,6 +176,10 @@
         <menuitem label="&stylesheetsToolbarCmd.label;"
                   accesskey="&stylesheetsToolbarCmd.key;"
                   command="cmd_stylesheets"/>
+        <menuseparator/>
+        <menu label="&webfonts.label;">
+          <menupopup id="webfontsMenupopup"/>
+        </menu>
       </menupopup>
     </menu>
 

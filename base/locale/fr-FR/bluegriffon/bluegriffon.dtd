@@ -268,6 +268,8 @@
 <!ENTITY stylesheetsToolbarCmd.label "Feuilles de styles CSS">
 <!ENTITY stylesheetsToolbarCmd.key "S">
 
+<!ENTITY webfonts.label "Web Fonts">
+
 <!ENTITY videoToolbarCmd.label "Vidéo">
 <!ENTITY videoToolbarCmd.tooltip "Insérer ou éditer une vidéo existante">
 
