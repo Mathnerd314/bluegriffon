@@ -303,7 +303,11 @@ function onAttributesTreeModified(aEvent)
         gMain.EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
 										                                aName,
 										                                aValue);
-        gMain.ComposerCommands.updateSelectionBased(true);
+        var notify = (aName.toLowerCase() == "id"
+                      || aName.toLowerCase() == "class"
+                      || aName.toLowerCase() == "role"
+                      || aName.toLowerCase() == "lang");
+        gMain.ComposerCommands.updateSelectionBased(!notify);
         UpdateStyles();
         gEditing = -1;
         gEditingColumn = null;
@@ -361,7 +365,11 @@ function DeleteAttribute()
   item.parentNode.removeChild(item);
   gMain.EditorUtils.getCurrentEditor().removeAttribute(gCurrentElement,
                                                  aName);
-  gMain.ComposerCommands.updateSelectionBased(true);
+  var notify = (aName.toLowerCase() == "id"
+                || aName.toLowerCase() == "class"
+                || aName.toLowerCase() == "role"
+                || aName.toLowerCase() == "lang");
+  gMain.ComposerCommands.updateSelectionBased(!notify);
 }
 
 function ModifyAttribute()
