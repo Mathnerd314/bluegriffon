@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>bluegriffon-bin</string>
 	<key>CFBundleGetInfoString</key>
-	<string>%APP_NAME% %APP_VERSION%, © 2007-2008 Disruptive Innovations</string>
+	<string>%APP_NAME% %APP_VERSION%, © 2007-2010 Disruptive Innovations</string>
 	<key>CFBundleIconFile</key>
 	<string>bluegriffon</string>
 	<key>CFBundleIdentifier</key>

@@ -24,8 +24,6 @@ ac_add_options  --enable-application=bluegriffon
 #ac_add_options --enable-debug
 #ac_add_options --enable-tests
 
-mk_add_options MOZ_MAKE_FLAGS=-j2
-
 # If you have Vista, comment the following line
 ac_add_options --disable-vista-sdk-requirements
 

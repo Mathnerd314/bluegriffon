@@ -11,15 +11,15 @@
 # for the specific language governing rights and limitations under the
 # License.
 #
-# The Original Code is McCoy.
+# The Original Code is Mozilla.org
 #
 # The Initial Developer of the Original Code is
-# the Mozilla Foundation <http://www.mozilla.org/>.
-# Portions created by the Initial Developer are Copyright (C) 2007
+# Netscape Communications Corporation.
+# Portions created by the Initial Developer are Copyright (C) 2003
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s):
-#   Dave Townsend <dtownsend@oxymoronical.com>
+#   Daniel Glazman (daniel@glazman.org), on behalf of Lindows.com
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -35,32 +35,21 @@
 #
 # ***** END LICENSE BLOCK *****
 
-DEPTH		= ../..
+DEPTH		= ../../..
 topsrcdir	= @top_srcdir@
-srcdir		= @srcdir@
+srcdir	= @srcdir@
 VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-NO_PKG_FILES = \
-	$(MOZ_APP_NAME)-config \
-	$(MOZ_APP_NAME)-bin.elf \
-	regchrome* \
-	regxpcom* \
-	xpcshell* \
-	xpidl* \
-	xpt_dump* \
-	xpt_link* \
-	crashreporter.* \
-	bloaturls.txt \
-	nsinstall \
-	nspr-config \
-	$(NULL)
+MODULE = gfd
+USE_EXTENSION_MANIFEST = 1
+
+XPI_NAME    = gfd
+INSTALL_EXTENSION_ID  = gfd@bluegriffon.com
+XPI_PKGNAME   = gfd
+  
+DIST_FILES = install.rdf
 
 include $(topsrcdir)/config/rules.mk
 
-ifneq (,$(filter mac cocoa,$(MOZ_WIDGET_TOOLKIT)))
-_BINPATH = /$(_APPNAME)/Contents/MacOS
-endif
-
-include $(topsrcdir)/toolkit/mozapps/installer/packager.mk
