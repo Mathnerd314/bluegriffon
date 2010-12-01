@@ -15,18 +15,8 @@ var cmdGfdCommand =
 
   doCommand: function(aCommand)
   {
-    var w = null;
-    try {
-      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
-      w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:Gfd");
-    }
-    catch(e){}
-    if (w)
-      w.focus();
-    else {
-      window.openDialog('chrome://gfd/content/gfd.xul',"_blank",
-                        "chrome,resizable,modal,scrollbars=yes");
-    }
+    window.openDialog('chrome://gfd/content/gfd.xul',"_blank",
+                      "chrome,resizable,modal,scrollbars=yes");
   }
 };
 

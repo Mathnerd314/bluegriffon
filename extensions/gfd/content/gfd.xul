@@ -5,16 +5,16 @@
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 <?xml-stylesheet href="chrome://gfd/skin/gfd.css" type="text/css"?>
 
-<!DOCTYPE window SYSTEM "chrome://gfd/locale/gfd.dtd">
+<!DOCTYPE dialog SYSTEM "chrome://gfd/locale/gfd.dtd">
 
-<window title="&window.title;"
+<dialog title="&window.title;"
         id="bluegriffonGfd"
         windowtype="BlueGriffon:Gfd"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         onload="Startup()"
         style="height: auto"
-        ondialogaccept="return onAccept();"
+        ondialogaccept="return onAccept()"
         persist="screenX screenY width height"
         screenX="24" screenY="24">
 
@@ -32,7 +32,8 @@
   <vbox flex="1" id="mainBox">
 	  <tree id="installedFontsTree"
 	        hidecolumnpicker="true"
-	        flex="1">
+          onselect="UpdateButtons()"
+          flex="1">
 	    <treecols>
 	      <treecol id="familyCol"
 	               flex="1"
@@ -56,12 +57,12 @@
 	    <toolbarbutton class="listboxBgPlusButton"
 	                   tooltiptext="&add.tooltip;"
 	                   id="PlusButton"
-	                   oncommand="AddStylesheet()"/>
+	                   oncommand="AddFontFamily()"/>
 	    <toolbarbutton class="listboxBgMinusButton"
 	                   disabled="true"
 	                   id="MinusButton"
                      tooltiptext="&remove.tooltip;"
-	                   oncommand="DeleteStylesheet()"/>
+	                   oncommand="DeleteFontFamily()"/>
 	  </hbox>
   </vbox>
-</window>
+</dialog>
