@@ -130,7 +130,11 @@ function ApplyFontFamily()
   var child = gDialog.fontFamilyListbox.firstChild;
   var ff = "";
   while (child) {
-    ff += (ff ? ", " : "") + child.value;
+    ff += (ff ? ", " : "");
+    if (child.value.indexOf(" ") != -1)
+      ff += '"' + child.value + '"';
+    else
+      ff += child.value;
     child = child.nextSibling;
   }
   ApplyStyles([
