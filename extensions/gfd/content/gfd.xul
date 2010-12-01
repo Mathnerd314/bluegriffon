@@ -16,6 +16,8 @@
         style="height: auto"
         ondialogaccept="return onAccept()"
         persist="screenX screenY width height"
+        width="300"
+        height="300"
         screenX="24" screenY="24">
 
   <!-- Methods common to all editor dialogs -->

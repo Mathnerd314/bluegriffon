@@ -6,5 +6,3 @@
 
 <!ENTITY add.tooltip "Add a font family">
 <!ENTITY remove.tooltip "Uninstall font family">
-<!ENTITY modify.tooltip "Modify font family">
-<!ENTITY viewfont.tooltip "Preview a font in Google Font Previewer">
