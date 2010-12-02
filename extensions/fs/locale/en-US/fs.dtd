@@ -1,0 +1,8 @@
+<!ENTITY window.title "FontSquirrel Fonts">
+
+<!ENTITY superFamilies.label "Families">
+<!ENTITY families.label "Fonts">
+ 
+<!ENTITY networkActivity.tooltip "Network activity">
+
+<!ENTITY addToDocument.label "Add to document">
