@@ -1,7 +1,4 @@
-
-const KFONT_FACE_URL = "http://www.fontsquirrel.com/fontface";
-const KFONTLIST_TABLE_CLASSNAME = "fontface";
-const FONT_CLASSNAME = "fontinfo";
-const KFONT_NAME_QUERY = "strong";
-const kFONTFACE_KIT_URL = "http://www.fontsquirrel.com/fontfacekit/";
-const kFONT_PREVIEW_IMAGE_QUERY = "img";
+const kCLASSIFICATIONS_QUERY_URL = "http://www.fontsquirrel.com/api/classifications";
+const kFONTLIST_QUERY_URL = "http://www.fontsquirrel.com/api/fontlist/";
+const kPREVIEW_URL = "http://www.fontsquirrel.com/utils/makeFont.php?font=%id/%ttf&text=%text&width=%w&size=26&cache=false";
+const kFONTDETAILS_QUERY_URL = "http://www.fontsquirrel.com/api/familyinfo/";

@@ -1,8 +1,11 @@
 <!ENTITY window.title "FontSquirrel Fonts">
 
-<!ENTITY superFamilies.label "Families">
-<!ENTITY families.label "Fonts">
+<!ENTITY classifications.label "Classifications">
+<!ENTITY fontList.label "Font list">
  
 <!ENTITY networkActivity.tooltip "Network activity">
 
 <!ENTITY addToDocument.label "Add to document">
+
+<!ENTITY previewText.label "Preview text:">
+<!ENTITY prose.label "BlueGriffon">

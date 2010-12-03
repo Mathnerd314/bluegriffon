@@ -1,86 +1,90 @@
-var gFonts = {};
-var gCounts = {};
+var gClassifications = null;
+var gFontLists = {};
 
-function GetFontFamiliesList()
+function SendRequest(aURL, aCallback, aContext)
 {
-	var req = new XMLHttpRequest();
-	req.open('GET', KFONT_FACE_URL, true);
-	req.onreadystatechange = function (aEvt) {
-	  if (req.readyState == 4) {
+  var req = new XMLHttpRequest();
+  req.open('GET', aURL, aCallback, true);
+  req.onreadystatechange = function (aEvt) {
+    if (req.readyState == 4) {
       gDialog.ThrobberButton.hidden = true;
-	     if(req.status == 200) {
-        var hp = new htmlParser(gDialog.parserIframe);
-        hp.parseHTML(req.responseText,
-                     KFONT_FACE_URL,
-                     function(aDoc, ctx) { ParseFontFamiliesList(aDoc); },
-                     hp);
+       if(req.status == 200) {
+        aCallback(req.responseText, aContext);
        }
-	     else
-	      alert(req.status);
-	  }
-	};
+       else
+        alert(req.status);
+    }
+  };
   gDialog.ThrobberButton.hidden = false;
-	req.send(null);
+  req.send(null);
 }
 
-function ParseFontFamiliesList(aDoc)
+function GetClassifications()
 {
-  var fontInfoTable = aDoc.querySelector("." + KFONTLIST_TABLE_CLASSNAME);
-  var rows = fontInfoTable.querySelectorAll("tr");
-  var superFamily = "";
-  for (var i = 0; i < rows.length ; i ++) {
-    var row = rows[i];
-    if (row.firstElementChild.nodeName.toLowerCase() == "th") {
-      superFamily = row.textContent;
-      gFonts[superFamily] = {};
-      gCounts[superFamily] = 0;
-    }
-    else {
-      var fontInfos = row.querySelectorAll("." + FONT_CLASSNAME);
-      for (var j = 0; j < fontInfos.length; j++) {
-        var f = fontInfos[j];
-        var name = f.querySelector(KFONT_NAME_QUERY).textContent;
-        var previewURL = f.nextElementSibling.querySelector(kFONT_PREVIEW_IMAGE_QUERY).src;
-        gFonts[superFamily][name] = previewURL;
-        gCounts[superFamily]++;
-      }
-    }
-  }
-
-  for (var i in gFonts) {
-    var item = document.createElement("listitem");
-    item.setAttribute("label", i + " (" + gCounts[i] + ")");
-    item.setAttribute("value", i);
-    gDialog.superFamiliesBox.appendChild(item);
-  }
+  SendRequest(kCLASSIFICATIONS_QUERY_URL, UpdateClassifications);
 }
+
 
 function Startup()
 {
   GetUIElements();
+  try {
+    var prose = GetPrefs().getCharPref("extension.fs.preview.prose");
+    gDialog.previewTextbox.value = prose;
+  }
+  catch(e) {}
 
-  GetFontFamiliesList();
+  GetClassifications();
 }
 
-function onSuperFamilySelected(aElt)
+function UpdateClassifications(aJSON)
+{
+  gClassifications = JSON.parse(aJSON);
+  for (var i = 0; i < gClassifications.length; i++) {
+    var c = gClassifications[i];
+    var item = document.createElement("listitem");
+    item.setAttribute("label", c.name.replace( /%20/g, " ") + " (" + c.count + ")");
+    item.setAttribute("value", c.name);
+    gDialog.classificationsBox.appendChild(item);
+  }
+}
+
+function onClassificationSelected(aElt)
 {
   if (!aElt.selectedItem)
     return;
 
   gDialog.preview.setAttribute("src", "");
-  var child = gDialog.familiesBox.lastElementChild;
+
+  var classification = aElt.selectedItem.getAttribute("value");
+  if (classification in gFontLists)
+    ShowFontList(classification);
+  else
+    SendRequest(kFONTLIST_QUERY_URL + classification, UpdateFontList, classification);
+}
+
+function UpdateFontList(aJSON, aClassification)
+{
+  gFontLists[aClassification] = JSON.parse(aJSON);
+  ShowFontList(aClassification);
+}
+
+function ShowFontList(aClassification)
+{
+  // clean the font list
+  var child = gDialog.fontListBox.lastElementChild;
   while (child && child.nodeName.toLowerCase() != "listcols") {
     var tmp = child.previousElementSibling;
-    gDialog.familiesBox.removeChild(child);
+    gDialog.fontListBox.removeChild(child);
     child = tmp;
   }
-
-  var superFamily = aElt.selectedItem.getAttribute("value");
-  for (var i in gFonts[superFamily]) {
+  for (var i = 0; i < gFontLists[aClassification].length; i++) {
+    var f = gFontLists[aClassification][i];
     var item = document.createElement("listitem");
-    item.setAttribute("label", i);
+    item.setAttribute("label", f.family_name);
     item.setAttribute("value", i);
-    gDialog.familiesBox.appendChild(item);
+    item.setAttribute("classification", aClassification);
+    gDialog.fontListBox.appendChild(item);
   }
 }
 
@@ -89,8 +93,31 @@ function onFontSelected(aElt)
   if (!aElt.selectedItem)
     return;
 
+  var fontIndex      = aElt.selectedItem.getAttribute("value");
+  var classification = aElt.selectedItem.getAttribute("classification");
+  var font = gFontLists[classification][fontIndex];
+  var url = kPREVIEW_URL.replace( /%id/g, font.id)
+                        .replace( /%ttf/g, font.font_filename)
+                        .replace( /%w/g, gDialog.previewBox.boxObject.width)
+                        .replace( /%text/g, escape(gDialog.previewTextbox.value));
   gDialog.ThrobberButton.hidden = false;
-  var url = gFonts[gDialog.superFamiliesBox.selectedItem.getAttribute("value")][aElt.selectedItem.getAttribute("value")];
-  gDialog.preview.setAttribute("src", url.replace( /size=18/g, "size=26"));
-  gDialog.preview.style.height = "";
+  gDialog.preview.setAttribute("src", url);
+}
+
+function UpdatePreview()
+{
+  gTimeout = null;
+  gDialog.preview.setAttribute("src", "");
+  GetPrefs().setCharPref("extension.fs.preview.prose", gDialog.previewTextbox.value);
+  onFontSelected(gDialog.fontListBox);
+}
+
+var gTimeout = null;
+
+function UpdatePreviewOnResize()
+{
+  if (gTimeout)
+    clearTimeout(gTimeout);
+
+  gTimeout = setTimeout(UpdatePreview, 500);
 }

@@ -17,15 +17,15 @@
         ondialogaccept="return onAccept()"
         buttonlabelaccept="&addToDocument.label;"
         persist="screenX screenY width height"
-        width="300"
+        width="660"
         height="300"
-        screenX="24" screenY="24">
+        screenX="24" screenY="24"
+        onresize="UpdatePreviewOnResize()">
 
   <!-- Methods common to all editor dialogs -->
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
 
-  <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/htmlParser.js"/>
   <script type="application/x-javascript"  src="chrome://fs/content/fontsquirrel.js"/>
   <script type="application/x-javascript"  src="chrome://fs/content/fs.js"/>
 
@@ -33,22 +33,21 @@
     <key keycode="VK_ESCAPE" oncommand="window.close()"/>
   </keyset>
 
-  <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
   <hbox flex="1">
-    <listbox id="superFamiliesBox"
-             onselect="onSuperFamilySelected(this)">
+    <listbox id="classificationsBox"
+             onselect="onClassificationSelected(this)">
       <listhead>
-         <listheader label="&superFamilies.label;" />
+         <listheader label="&classifications.label;" />
       </listhead>
       <listcols>
         <listcol flex="1"/>
       </listcols>
     </listbox>
-    <listbox id="familiesBox"
+    <listbox id="fontListBox"
                  flex="1"
                  onselect="onFontSelected(this)">
       <listhead>
-         <listheader label="&families.label;"/>
+         <listheader label="&fontList.label;"/>
       </listhead>
       <listcols>
         <listcol flex="1"/>
@@ -63,11 +62,23 @@
            id="ThrobberButton"
            hidden="true"/>
   </hbox>
-  <groupbox style="min-height: 80px;">
+  <groupbox style="min-height: 120px;">
     <caption label="Preview"/>
-    <hbox align="center" style=" background-color: white" flex="1">
+    <hbox align="center">
+      <label value="&previewText.label;"/>
+      <textbox value="&prose.label;"
+               flex="1"
+               type="timed"
+               timeout="500"
+               id="previewTextbox"
+               oncommand="UpdatePreview()"/>
+    </hbox>
+    <hbox align="center"
+          style=" background-color: white; border-radius: 5px; margin-bottom: 4px"
+          flex="1"
+          id="previewBox">
       <spacer flex="1"/>
-      <image id="preview" onload="gDialog.ThrobberButton.hidden = true"/>
+      <image id="preview" onload="gDialog.ThrobberButton.hidden = true" />
       <spacer flex="1"/>
     </hbox>
   </groupbox>
