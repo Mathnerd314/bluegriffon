@@ -1,10 +1,13 @@
+Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+
 var gClassifications = null;
 var gFontLists = {};
 
 function SendRequest(aURL, aCallback, aContext)
 {
   var req = new XMLHttpRequest();
-  req.open('GET', aURL, aCallback, true);
+  req.open('GET', aURL, true);
   req.onreadystatechange = function (aEvt) {
     if (req.readyState == 4) {
       gDialog.ThrobberButton.hidden = true;
@@ -27,6 +30,8 @@ function GetClassifications()
 
 function Startup()
 {
+  document.documentElement.getButton("accept").setAttribute("disabled", "true");
+
   GetUIElements();
   try {
     var prose = GetPrefs().getCharPref("extension.fs.preview.prose");
@@ -55,6 +60,7 @@ function onClassificationSelected(aElt)
     return;
 
   gDialog.preview.setAttribute("src", "");
+  document.documentElement.getButton("accept").setAttribute("disabled", "true");
 
   var classification = aElt.selectedItem.getAttribute("value");
   if (classification in gFontLists)
@@ -93,6 +99,8 @@ function onFontSelected(aElt)
   if (!aElt.selectedItem)
     return;
 
+  document.documentElement.getButton("accept").removeAttribute("disabled");
+
   var fontIndex      = aElt.selectedItem.getAttribute("value");
   var classification = aElt.selectedItem.getAttribute("classification");
   var font = gFontLists[classification][fontIndex];
@@ -120,4 +128,156 @@ function UpdatePreviewOnResize()
     clearTimeout(gTimeout);
 
   gTimeout = setTimeout(UpdatePreview, 500);
+}
+
+function onAccept()
+{
+  var classification = gDialog.classificationsBox.selectedItem.getAttribute("value");
+  var fontIndex      = gDialog.fontListBox.selectedItem.getAttribute("value");
+  var font = gFontLists[classification][fontIndex];
+
+  document.documentElement.getButton("accept").setAttribute("disabled", "true");
+  var rv = {cancelled: true, value: "no" };
+  window.openDialog('chrome://fs/content/addFont.xul',"_blank",
+                    "chrome,modal,scrollbars=yes", rv);
+
+  if (rv.cancelled) {
+    document.documentElement.getButton("accept").removeAttribute("disabled");
+    return false;
+  }
+
+  if (rv.value == "no") {
+	  var url = kFONTFACEKIT_URL + font.family_urlname;
+	  var req = new XMLHttpRequest();
+	  req.open('GET', url, true);
+	  req.overrideMimeType('text/plain; charset=x-user-defined');  
+	  req.onreadystatechange = function (aEvt) {
+	    if (req.readyState == 4) {
+	      gDialog.loadingLabel.hidden = true;
+	      gDialog.ThrobberButton.hidden = true;
+	       if(req.status == 200) {
+	        WriteFile(font.family_urlname, req.responseText);
+	       }
+	       else
+	        alert(req.status);
+	    }
+	  };
+	  gDialog.ThrobberButton.hidden = false;
+	  gDialog.loadingLabel.hidden = false;
+	  req.send(null);
+	
+	  return false;
+  }
+
+
+  var fp = Components.classes["@mozilla.org/filepicker;1"]
+             .createInstance(Components.interfaces.nsIFilePicker);
+  fp.init(window, gDialog.stringBundle.getString("SelectFile"),
+          Components.interfaces.nsIFilePicker.modeOpen);
+  fp.appendFilter(gDialog.stringBundle.getString("Stylesheet"), "*.css");
+  if (fp.show() == Components.interfaces.nsIFilePicker.returnOK) {
+    AddLinkToDocument(fp.file);
+    window.close();
+    return true;
+  }
+  document.documentElement.getButton("accept").removeAttribute("disabled");
+  return false;
+}
+
+function WriteFile(aFilename, aData)
+{
+  var fp = Components.classes["@mozilla.org/filepicker;1"]
+             .createInstance(Components.interfaces.nsIFilePicker);
+  fp.init(window, gDialog.stringBundle.getString("SelectDir"),
+          Components.interfaces.nsIFilePicker.modeGetFolder);
+  if (fp.show() == Components.interfaces.nsIFilePicker.returnOK) {
+		var file = Components.classes["@mozilla.org/file/directory_service;1"].
+		           getService(Components.interfaces.nsIProperties).
+		           get("ProfD", Components.interfaces.nsIFile);
+		file.createUnique(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+		            
+		var stream = Components.classes["@mozilla.org/network/safe-file-output-stream;1"].
+		             createInstance(Components.interfaces.nsIFileOutputStream);
+		stream.init(file, 0x04 | 0x08 | 0x20, 0600, 0); // readwrite, create, truncate
+		            
+		stream.write(aData, aData.length);
+		if (stream instanceof Components.interfaces.nsISafeOutputStream) {
+		    stream.finish();
+		} else {
+		    stream.close();
+	  }
+
+	  var dir = fp.file.clone();
+	  dir.append(aFilename);
+	  if (!dir.exists())
+	    dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+	
+	  UnzipPackage(file, dir);
+	  file.remove(false);
+    dir.append("stylesheet.css");
+    AddLinkToDocument(dir);
+	  window.close();
+    return;
+  }
+  file.remove(false);
+  document.documentElement.getButton("accept").removeAttribute("disabled");
+}
+
+function UnzipPackage(aFile, aDir)
+{
+  var zipReader = Components.classes["@mozilla.org/libjar/zip-reader;1"]
+                    .createInstance(Components.interfaces.nsIZipReader);
+  zipReader.open(aFile);
+  try {
+    zipReader.test(null);
+  }
+  catch(e)
+  {
+    alert(e);
+    return false;
+  }
+
+  var entries = zipReader.findEntries(null);
+  while (entries.hasMore())
+  {
+    var entryName = entries.getNext();
+    _installZipEntry(zipReader, entryName, aDir);
+  }
+  zipReader.close();
+}
+
+function _installZipEntry(aZipReader, aZipEntry, aDestination)
+{
+  var file = aDestination.clone();
+  var dirs = aZipEntry.split(/\//);
+  var isDirectory = /\/$/.test(aZipEntry);
+
+  var end = dirs.length;
+  if (!isDirectory)
+    --end;
+
+  for (var i = 0; i < end; ++i)
+  {
+    file.append(dirs[i]);
+    if (!file.exists())
+      file.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+  }
+
+  if (!isDirectory)
+  {
+    file.append(dirs[end]);
+    aZipReader.extract(aZipEntry, file);
+  }
+}
+
+function AddLinkToDocument(aFile)
+{
+  var uri = UrlUtils.getIOService().newFileURI(aFile);
+  var spec = uri.spec;
+  var doc = EditorUtils.getCurrentDocument();
+  var link = doc.createElement("link");
+  link.setAttribute("rel", "stylesheet");
+  link.setAttribute("type", "text/css");
+  link.setAttribute("href", UrlUtils.makeRelativeUrl(spec));
+  EditorUtils.getCurrentEditor().insertNode(link, doc.querySelector("head"), 0);
 }

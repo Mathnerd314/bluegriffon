@@ -33,6 +33,8 @@
     <key keycode="VK_ESCAPE" oncommand="window.close()"/>
   </keyset>
 
+  <stringbundle id="stringBundle"   src="chrome://fs/locale/fs.properties"/>
+
   <hbox flex="1">
     <listbox id="classificationsBox"
              onselect="onClassificationSelected(this)">
@@ -55,7 +57,7 @@
     </listbox>
   </hbox>
   <hbox id="Toolbox" class="listboxBg">
-    <label value=" " />
+    <label value="&loading.label;" hidden="true" id="loadingLabel"/>
     <spacer flex="1"/>
     <image class="listboxBgThrobberButton"
            tooltiptext="&networkActivity.tooltip;"

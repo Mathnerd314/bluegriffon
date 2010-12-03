@@ -9,3 +9,5 @@
 
 <!ENTITY previewText.label "Preview text:">
 <!ENTITY prose.label "BlueGriffon">
+
+<!ENTITY loading.label "Loading font package...">
