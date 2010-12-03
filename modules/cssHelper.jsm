@@ -297,8 +297,11 @@ var CssUtils = {
       child = tmp;
     }
     var cssParser = new CSSParser(str);
-    var parsedSheet = cssParser.parse(str, false, false);
-    var textNode = styleElt.ownerDocument.createTextNode(parsedSheet.cssText());
+    if (str) {
+	    var parsedSheet = cssParser.parse(str, false, false);
+	    str = parsedSheet.cssText();
+    }
+    var textNode = styleElt.ownerDocument.createTextNode(str);
     editor.insertNode(textNode, styleElt, 0);
   },
 

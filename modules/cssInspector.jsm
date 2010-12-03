@@ -329,8 +329,10 @@ var CssInspector = {
     }
 
     var cssParser = new CSSParser(str);
-    var parsedSheet = cssParser.parse(str, false, false);
-    str = parsedSheet.cssText();
+    if (str) {
+	    var parsedSheet = cssParser.parse(str, false, false);
+	    str = parsedSheet.cssText();
+    }
 
     const classes             = Components.classes;
     const interfaces          = Components.interfaces;
