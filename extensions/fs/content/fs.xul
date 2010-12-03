@@ -57,6 +57,7 @@
     </listbox>
   </hbox>
   <hbox id="Toolbox" class="listboxBg">
+    <label value=" " />
     <label value="&loading.label;" hidden="true" id="loadingLabel"/>
     <spacer flex="1"/>
     <image class="listboxBgThrobberButton"
