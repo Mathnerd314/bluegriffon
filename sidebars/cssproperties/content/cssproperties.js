@@ -36,6 +36,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/cssInspector.jsm");
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
@@ -393,8 +394,14 @@ function FindLastEditableStyleSheet()
 	      var uri = Components.classes["@mozilla.org/network/io-service;1"]
 	                              .getService(Components.interfaces.nsIIOService)
 	                              .newURI(child.sheet.href, null, null);
-	      if (uri.scheme == "file" && isForScreen)
-	        found = true;
+	      if (uri.scheme == "file" && isForScreen) {
+          // is the file writable ?
+          var file = UrlUtils.newLocalFile(UrlUtils.makeAbsoluteUrl(child.sheet.href));
+	        if (file.isWritable())
+            found = true;
+          else
+            child = child.previousElementSibling;
+        }
 	      else
 	        child = child.previousElementSibling;
       }

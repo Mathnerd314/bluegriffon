@@ -19,4 +19,8 @@ fs-locale.jar:
   locale/en-US/fs/fs.dtd           (locale/en-US/fs.dtd)
   locale/en-US/fs/fs.properties    (locale/en-US/fs.properties)
   locale/en-US/fs/addFont.dtd      (locale/en-US/addFont.dtd)
+  locale/fr-FR/fs/fsOverlay.dtd    (locale/fr-FR/fsOverlay.dtd)
+  locale/fr-FR/fs/fs.dtd           (locale/fr-FR/fs.dtd)
+  locale/fr-FR/fs/fs.properties    (locale/fr-FR/fs.properties)
+  locale/fr-FR/fs/addFont.dtd      (locale/fr-FR/addFont.dtd)
   

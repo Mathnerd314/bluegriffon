@@ -1,5 +1,6 @@
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/prompterHelper.jsm");
 
 var gClassifications = null;
 var gFontLists = {};
@@ -30,9 +31,20 @@ function GetClassifications()
 
 function Startup()
 {
+  GetUIElements();
+
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (!docUrlScheme || docUrlScheme == "resource") {
+    PromptUtils.alertWithTitle(gDialog.stringBundle.getString("MustBeSavedTitle"),
+                               gDialog.stringBundle.getString("MustBeSavedMessage"),
+                               null);
+    window.close();
+    return;
+  }
+
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
 
-  GetUIElements();
   try {
     var prose = GetPrefs().getCharPref("extension.fs.preview.prose");
     gDialog.previewTextbox.value = prose;
