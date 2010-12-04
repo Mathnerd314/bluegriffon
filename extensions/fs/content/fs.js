@@ -227,6 +227,7 @@ function WriteFile(aFilename, aData)
 	  UnzipPackage(file, dir);
 	  file.remove(false);
     dir.append("stylesheet.css");
+    // guess who's messing around... Windows...
     dir.permissions = 0444;
     AddLinkToDocument(dir);
 	  window.close();
