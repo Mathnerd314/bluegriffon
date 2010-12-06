@@ -259,8 +259,7 @@
                         var l = links[i];
                         var rel = l.getAttribute("rel").toLowerCase();
                         if (rel == "shortcut icon"
-                            || rel == "icon"
-                            || rel == "apple-touch-icon") {
+                            || rel == "icon") {
                           this.mTab.setAttribute("image", l.getAttribute("href"));
                         }
                       }
