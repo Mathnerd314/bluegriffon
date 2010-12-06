@@ -213,7 +213,7 @@
 	                    var url = _self.getAttribute("image");
 	                    gDialog.imageURLTextbox.value = url;
 	                    gDialog.previewBackgroundImage.style.backgroundImage =
-	                      'url("' + url + '")';
+	                      'url("' + UrlUtils.makeAbsoluteUrl(url) + '")';
 	                  }
 	                  else {
                       gDialog.imageURLTextbox.value = "";
@@ -321,8 +321,8 @@
         <parameter name="aImageURL"/>
         <body>
           <![CDATA[
+            this.getChild("backgrounditemButton").style.backgroundImage = 'url("' + UrlUtils.makeAbsoluteUrl(aImageURL) + '")';
             aImageURL = 'url("' + aImageURL + '")';
-            this.getChild("backgrounditemButton").style.backgroundImage = aImageURL;
             if (this.parsedValue != aImageURL) {
               this.parsedValue = aImageURL;
               ReapplyBackgrounds();

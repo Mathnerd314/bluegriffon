@@ -29,7 +29,14 @@ function ColorsSectionIniter(aElt, aRuleset)
     item.parsedValue = parsedImages[i].value;
     switch (type) {
       case "image":
-        button.style.backgroundImage = item.parsedValue;
+        // pfff, find the real URL...
+        var match = item.parsedValue.match ( /^url\(\s*"([^"]*)"\s*\)|^url\(\s*'([^']*)'\s*\)|^url\(\s*([^\)]*)\s*\)/ );
+        if (match) {
+          if (match[1]) item.setAttribute("image", match[1]);
+          else if (match[2]) item.setAttribute("image", match[2]);
+          else if (match[3]) item.setAttribute("image", match[3]);
+        }
+        button.style.backgroundImage = "url('" + UrlUtils.makeAbsoluteUrl(item.getAttribute("image")) + "')";
         break;
       default:
         button.style.backgroundImage =
@@ -81,7 +88,7 @@ function DeleteBackground()
 function LoadImage()
 {
   gDialog.previewBackgroundImage.style.backgroundImage =
-    'url("' + gDialog.imageURLTextbox.inputField.value + '")';
+    'url("' + UrlUtils.makeAbsoluteUrl(gDialog.imageURLTextbox.inputField.value) + '")';
 }
 
 function BackgroundImageSelected()
@@ -105,6 +112,7 @@ function ReapplyBackgrounds()
                   value: bgImages.join(", ")
                 }
               ]);
+  SelectionChanged(null, gCurrentElement, true);
 }
 
 function RepaintGradient()
