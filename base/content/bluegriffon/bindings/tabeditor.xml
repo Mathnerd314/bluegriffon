@@ -241,7 +241,11 @@
                       var thisURI = Components.classes["@mozilla.org/network/io-service;1"]
                                               .getService(Components.interfaces.nsIIOService)
                                               .newURI(this.mURL, null, null);
-                      this.mTab.setAttribute("image", "http://www.google.com/s2/favicons?domain=" + thisURI.host);
+                      var scheme = thisURI.scheme;
+                      if (scheme == "resource")
+                        this.mTab.setAttribute("image", "chrome://mozapps/skin/places/defaultFavicon.png");
+                      else
+                        this.mTab.setAttribute("image", thisURI.prePath + "/favicon.ico");
                     }
                     catch(e) {}
 
@@ -250,6 +254,16 @@
 
                     var editor = this.mEditor.getEditor(this.mEditor.contentWindow);
                     if (editor) {
+                      var links = editor.document.querySelectorAll("link");
+                      for (var i = 0; i < links.length; i++) {
+                        var l = links[i];
+                        var rel = l.getAttribute("rel").toLowerCase();
+                        if (rel == "shortcut icon"
+                            || rel == "icon"
+                            || rel == "apple-touch-icon") {
+                          this.mTab.setAttribute("image", l.getAttribute("href"));
+                        }
+                      }
                       if (UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl())) {
                         try {
                           // add author's meta
