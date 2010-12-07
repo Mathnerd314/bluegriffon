@@ -446,3 +446,5 @@
 <!ENTITY rightTransformOrigin.label "Droite">
 <!ENTITY topTransformOrigin.label "Haut">
 <!ENTITY bottomTransformOrigin.label "Bas">
+
+<!ENTITY makeRelative.label "Rendre l'URL relatif au document">

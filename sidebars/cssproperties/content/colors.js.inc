@@ -211,3 +211,37 @@ function FlushBackgroundProperties(aEvent)
                 }
               ]);
 }
+
+function ToggleRelativeOrAbsoluteBackgroundImage()
+{
+  if (gDialog.relativeBackgroundImageCheckbox.checked) {
+    MakeRelativeUrlBackgroundImage();
+  }
+  else {
+    MakeAbsoluteUrlBackgroundImage();
+  }
+}
+
+function MakeRelativeUrlBackgroundImage()
+{
+  var spec = gDialog.imageURLTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeRelativeUrl(spec);
+    gDialog.imageURLTextbox.value = spec;
+    gDialog.relativeBackgroundImageCheckbox.checked = true;
+  }
+}
+
+function MakeAbsoluteUrlBackgroundImage()
+{
+  var spec = gDialog.imageURLTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeAbsoluteUrl(spec);
+    gDialog.imageURLTextbox.value = spec;
+    gDialog.relativeBackgroundImageCheckbox.checked = false;
+  }
+}

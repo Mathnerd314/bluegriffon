@@ -209,6 +209,10 @@
                   // WARNING, the following is a workaround because it takes a short
                   // while before XBLs are instantiated when you open a floating panel...
                   setTimeout(function() {
+									  var docUrl = EditorUtils.getDocumentUrl();
+									  var docUrlScheme = UrlUtils.getScheme(docUrl);
+									  gDialog.relativeBackgroundImageCheckbox.disabled = !(docUrlScheme && docUrlScheme != "resource");
+
 	                  if (_self.hasAttribute("image")) {
 	                    var url = _self.getAttribute("image");
 	                    gDialog.imageURLTextbox.value = url;

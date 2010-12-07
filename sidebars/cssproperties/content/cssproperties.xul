@@ -195,9 +195,16 @@
 		                        control="imageURLTextbox"
 		                        mode="0"
 		                        filters="filterImages"
-		                        oncommand="LoadImage();"
+		                        oncommand="LoadImage(); MakeRelativeUrlBackgroundImage()"
 		                        title="&selectImageButton.label;"/>
 	      </hbox>
+        <!-- TODO: make relative URL button -->
+        <hbox align="center">
+          <checkbox label="&makeRelative.label;"
+                    id="relativeBackgroundImageCheckbox"
+                    disabled="true"
+                    oncommand="ToggleRelativeOrAbsoluteBackgroundImage()"/>
+        </hbox>
       </groupbox>
       <groupbox>
         <caption label="&preview.caption;"/>

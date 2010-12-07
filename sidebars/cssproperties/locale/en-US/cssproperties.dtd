@@ -446,3 +446,5 @@
 <!ENTITY rightTransformOrigin.label "Right">
 <!ENTITY topTransformOrigin.label "Top">
 <!ENTITY bottomTransformOrigin.label "Bottom">
+
+<!ENTITY makeRelative.label "Make URL relative to the document">
