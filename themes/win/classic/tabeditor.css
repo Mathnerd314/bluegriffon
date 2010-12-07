@@ -72,3 +72,11 @@
 .tabeditor-tab[selected="true"] {
   background-color: transparent;
 }
+
+tabeditor-tab  .tab-text {
+  margin-left: 1em;
+}
+
+.tabeditor-tab[modified="true"]  .tab-text {
+  text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);
+}
