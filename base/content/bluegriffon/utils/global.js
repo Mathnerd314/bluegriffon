@@ -212,13 +212,15 @@ function initClassMenu(menuPopup, aUseSelection)
 
   var mixedObj = new Object();
   var classesArray, classesArrayLength = 0;
-  
+
+  var doneForSelection = false;
   if (aUseSelection)
   {
-    var container  = EditorUtils.getBlockContainer(EditorUtils.getSelectionContainer().node);
+    var container  = EditorUtils.getSelectionContainer().node;
     var classList = container.classList;
-    if (classList)
+    if (classList && classList.length)
     {
+      doneForSelection = true;
       var classesArray = [];
       for (var index = 0; index < classList.length; index++)
         classesArray.push(classList[index]);
@@ -228,42 +230,32 @@ function initClassMenu(menuPopup, aUseSelection)
       for (var index = 0; index < classesArrayLength; index++)
       {
         var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-        menuEntry.setAttribute("type",    "checkbox");
-        menuEntry.setAttribute("checked", "true");
-        menuEntry.setAttribute("class",   "menuitem-iconic");
         menuEntry.setAttribute("label",   classesArray[index]);
         menuEntry.setAttribute("value",   classesArray[index]);
   
         menuPopup.appendChild(menuEntry);
       }
+	    var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
+	    menuPopup.appendChild(menuSep);
     }
   }
-  else
+
+  if (aUseSelection && !doneForSelection)
   {
     var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-    menuEntry.setAttribute("type",    "checkbox");
-    menuEntry.setAttribute("class",   "menuitem-iconic");
+    menuEntry.setAttribute("disabled","true");
     menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
     menuEntry.setAttribute("value",   "");
     menuPopup.appendChild(menuEntry);
 
     var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
     menuPopup.appendChild(menuSep);
-
-    menuPopup.parentNode.selectedIndex = 0;
   }
 
   var classList =  CssUtils.getAllClassesForDocument(EditorUtils.getCurrentEditor().document);
 
   if (classList && classList.length)
   {
-    if (classesArrayLength)
-    {
-      var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
-      menuPopup.appendChild(menuSep);
-    }
-
-
     var classListLength = classList.length;
 
     classList.sort();
@@ -290,20 +282,24 @@ function initClassMenu(menuPopup, aUseSelection)
         if (!found)
         {
           menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-          menuEntry.setAttribute("type",    "checkbox");
-          menuEntry.setAttribute("class",   "menuitem-iconic");
           menuEntry.setAttribute("label",   classEntry);
           menuEntry.setAttribute("value",   classEntry);
           menuPopup.appendChild(menuEntry);
         }
       }
     }
+    if (menuPopup.lastElementChild.nodeName == "menuseparator") {
+	    menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+	    menuEntry.setAttribute("disabled","true");
+	    menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
+	    menuPopup.appendChild(menuEntry);
+    }
   }
-  else if (aUseSelection)
+  else
   {
     // no class defined in the document
     menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-    menuEntry.setAttribute("type",    "checkbox");
+    menuEntry.setAttribute("disabled","true");
     menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
     menuPopup.appendChild(menuEntry);
   }
@@ -313,17 +309,26 @@ function initIdMenu(menuPopup)
 {
   deleteAllChildren(menuPopup);
 
-  var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-  menuEntry.setAttribute("type",    "checkbox");
-  menuEntry.setAttribute("class",   "menuitem-iconic");
-  menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
-  menuEntry.setAttribute("value",   "");
-  menuPopup.appendChild(menuEntry);
+  var node  = EditorUtils.getSelectionContainer().node;
+
+  var currentId = "";
+  if (node && node.hasAttribute("id")) {
+    currentId = node.id;
+    var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+    menuEntry.setAttribute("label",   currentId);
+    menuEntry.setAttribute("value",   currentId);
+    menuPopup.appendChild(menuEntry);
+  }
+  else {
+	  var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+	  menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
+    menuEntry.setAttribute("value",   "");
+    menuEntry.setAttribute("disabled","true");
+	  menuPopup.appendChild(menuEntry);
+  }
 
   var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
   menuPopup.appendChild(menuSep);
-
-  menuPopup.parentNode.selectedIndex = 0;
 
   var idList =  CssUtils.getAllIdsForDocument(EditorUtils.getCurrentEditor().document);
 
@@ -337,18 +342,23 @@ function initIdMenu(menuPopup)
     for (var index = 0; index < idListLength; index++)
     {
       var idEntry = idList[index];
-      if (idEntry != previousId)
+      if (idEntry != previousId && idEntry != currentId)
       {
         previousId = idEntry;
 
         menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-        menuEntry.setAttribute("type",    "checkbox");
-        menuEntry.setAttribute("class",   "menuitem-iconic");
         menuEntry.setAttribute("label",   idEntry);
         menuEntry.setAttribute("value",   idEntry);
         menuPopup.appendChild(menuEntry);
       }
     }
+  }
+  else {
+    var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+    menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
+    menuEntry.setAttribute("value",   "");
+    menuEntry.setAttribute("disabled","true");
+    menuPopup.appendChild(menuEntry);
   }
 }
 

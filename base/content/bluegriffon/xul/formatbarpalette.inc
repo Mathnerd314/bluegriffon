@@ -215,13 +215,38 @@
     </toolbaritem>
 
     <toolbaritem id="ClassButtonsBox">
-      <menulist class="toolbar-focustarget" id="ClassSelect"
+      <menulist class="toolbar-focustarget"
+                id="ClassSelect"
+                style="min-width: 10em"
+                sizetopopup="none"
+                editable="true"
+                placeholder="&noClass.label;"
+                onkeypress="OnKeyPressInClassMenulist(event)"
+                onblur="OnBlurFromClassMenulist(event)"
                 observes="cmd_renderedHTMLEnabler"
                 tooltiptext="&applyClassToSelectionCmd.tooltip;">
         <observes element="cmd_class" attribute="state" onbroadcast="onClassChange(this.parentNode, 'cmd_class')"/>
-        <menupopup id="ClassPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)" onpopupshowing="initClassMenu(this, true);">
-          <menuitem label="&noClass.label;" id="NoClassMenuItem"/>
-        </menupopup>
+        <menupopup id="ClassPopup"
+                   oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"
+                   onpopupshowing="initClassMenu(this, true);"/>
+      </menulist>
+    </toolbaritem>
+
+    <toolbaritem id="IdButtonsBox">
+      <menulist class="toolbar-focustarget"
+                id="IdSelect"
+                style="min-width: 10em"
+                sizetopopup="none"
+                editable="true"
+                placeholder="&noId.label;"
+                onkeypress="OnKeyPressInIdMenulist(event)"
+                onblur="OnBlurFromIdMenulist(event)"
+                observes="cmd_renderedHTMLEnabler"
+                tooltiptext="&applyIdToSelectionCmd.tooltip;">
+        <observes element="cmd_id" attribute="state" onbroadcast="onIdChange(this.parentNode, 'cmd_id')"/>
+        <menupopup id="IdPopup"
+                   oncommand="ComposerCommands.doStatefulCommand('cmd_id', event.target.value)"
+                   onpopupshowing="initIdMenu(this);"/>
       </menulist>
     </toolbaritem>
 

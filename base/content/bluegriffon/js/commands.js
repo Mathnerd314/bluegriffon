@@ -152,6 +152,7 @@ var ComposerCommands = {
         case "cmd_align":
         case "cmd_fontFace":
         case "cmd_class":
+        case "cmd_id":
         case "cmd_ariaRole":
           this.pokeMultiStateUI(command, params);
           break;
@@ -360,6 +361,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_audio",       cmdInsertAudioCommand);
 
     commandTable.registerCommand("cmd_class",       cmdClass);
+    commandTable.registerCommand("cmd_id",          cmdId);
     commandTable.registerCommand("cmd_ariaRole",    cmdAriaRole);
 
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);

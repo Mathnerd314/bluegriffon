@@ -16,9 +16,9 @@ var cmdClass =
     aParams.setBooleanValue("state_enabled", enabled);
     aParams.setBooleanValue("state_mixed", false);
     var selContainer = EditorUtils.getSelectionContainer();
-    if (selContainer)
+    if (selContainer && selContainer.node)
     {
-      var classes = EditorUtils.getBlockContainer(selContainer.node).className;
+      var classes = selContainer.node.className;
       if (classes)
       {
         aParams.setCStringValue("state_attribute", classes);
@@ -26,7 +26,7 @@ var cmdClass =
       }
     }
 
-    aParams.setCStringValue("state_attribute", L10NUtils.getString("NoClassAvailable"));
+    aParams.setCStringValue("state_attribute", "");
   },
 
   doCommandParams: function(aCommandName, aParams, aRefCon)
@@ -34,26 +34,92 @@ var cmdClass =
     var className = aParams.getCStringValue("state_attribute");
     var node = EditorUtils.getSelectionContainer().node;
 
-    var node = EditorUtils.getBlockContainer(node);
-    var classes = node.classList;
-
-    var newList = className;
-    if (classes)
-    {
-      var found = false;
-      newList = [];
-      for (var i = 0; i < classes.length; i++)
+    if (className) {
+      var classes = node.classList;
+  
+      var newList = className;
+      if (classes)
       {
-        if (classes[i] == className)
-          found = true;
-        else
-        newList.push(classes[i]);;
+        var found = false;
+        newList = [];
+        for (var i = 0; i < classes.length; i++)
+        {
+          if (classes[i] == className)
+            found = true;
+          else
+          newList.push(classes[i]);;
+        }
+        if (!found)
+          newList.push(className);
       }
-      if (!found)
-        newList.push(className);;
+  
+      EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
+    }
+    else
+      EditorUtils.getCurrentEditor().removeAttribute(node, "class");
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection", node, false);
+  }
+};
+
+
+var cmdId =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function (aCommandName, aParams, aRefcon)
+  {
+    var enabled = this.isCommandEnabled(aCommandName, aRefcon);
+    aParams.setBooleanValue("state_enabled", enabled);
+    aParams.setBooleanValue("state_mixed", false);
+    var selContainer = EditorUtils.getSelectionContainer();
+    if (selContainer && selContainer.node)
+    {
+      var id = selContainer.node.id;
+      if (id)
+      {
+        aParams.setCStringValue("state_attribute", id);
+        return;
+      }
     }
 
-    EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
+    aParams.setCStringValue("state_attribute", "");
+  },
+
+  doCommandParams: function(aCommandName, aParams, aRefCon)
+  {
+    var id = aParams.getCStringValue("state_attribute");
+    var node = EditorUtils.getSelectionContainer().node;
+    var editor = EditorUtils.getCurrentEditor();
+    var elt = id ? EditorUtils.getCurrentDocument().getElementById(id) : null;
+    var rv = 0;
+    if (elt && elt != node)
+      rv = PromptUtils.confirmWithTitle(
+                             L10NUtils.getString("IdAlreadyTaken"),
+                             L10NUtils.getString("RemoveIdFromElement"),
+                             L10NUtils.getString("YesRemoveId"),
+                             L10NUtils.getString("NoCancel"),
+                             null);
+
+    if (id && node.id != id) {
+      // first, let's check another element does not already carry that id...
+      if (rv == 1)
+        return;
+      editor.beginTransaction();
+      if (elt)
+        editor.removeAttribute(elt, "id");
+      editor.setAttribute(node, "id", id);
+      editor.endTransaction();
+    }
+    else
+      editor.removeAttribute(node, "id");
+
     // be kind with the rest of the world
     NotifierUtils.notify("selection", node, false);
   }

@@ -205,8 +205,11 @@
 <!ENTITY fontTimes.label "Times">
 <!ENTITY fontCourier.label "Courier">
 
-<!ENTITY applyClassToSelectionCmd.tooltip "Apply a class to the selection">
+<!ENTITY applyClassToSelectionCmd.tooltip "Apply a class to the selection's container">
 <!ENTITY noClass.label "(no class)">
+
+<!ENTITY applyIdToSelectionCmd.tooltip "Give an ID to the selection's container">
+<!ENTITY noId.label "(no ID)">
 
 <!ENTITY tableToolbarCmd.label "Table">
 <!ENTITY tableToolbarCmd.key "T">

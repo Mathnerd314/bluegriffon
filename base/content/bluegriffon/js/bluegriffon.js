@@ -419,8 +419,69 @@ function onClassChange(classMenuList, commandID)
 {
   var commandNode = document.getElementById(commandID);
   var state = commandNode.getAttribute("state");
-  classMenuList.setAttribute("label", state);
+  classMenuList.value = state;
 }
+
+var gChangingClass = false;
+function OnKeyPressInClassMenulist(aEvent)
+{
+  gChangingClass = true;
+  var keyCode = aEvent.keyCode;
+  if (keyCode == 13) {
+    gDialog.ClassSelect.blur();
+  }  
+}
+
+function OnBlurFromClassMenulist(aEvent)
+{
+  if (gChangingClass) {
+    gChangingClass = false;
+    var node = EditorUtils.getSelectionContainer().node;
+    var className = gDialog.ClassSelect.value;
+    if (className)
+      EditorUtils.getCurrentEditor().setAttribute(node, "class", className);
+    else
+      EditorUtils.getCurrentEditor().removeAttribute(node, "class");
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection", node, false);
+  }  
+}
+
+/************** ID MANAGEMENT **************/
+
+function onIdChange(idMenuList, commandID)
+{
+  var commandNode = document.getElementById(commandID);
+  var state = commandNode.getAttribute("state");
+  idMenuList.value = state;
+}
+
+var gChangingId = false;
+function OnKeyPressInIdMenulist(aEvent)
+{
+  gChangingId = true;
+  var keyCode = aEvent.keyCode;
+  if (keyCode == 13) {
+    gDialog.IdSelect.blur();
+  }  
+}
+
+function OnBlurFromIdMenulist(aEvent)
+{
+  if (gChangingId) {
+    gChangingId = false;
+    var node = EditorUtils.getSelectionContainer().node;
+    var id = gDialog.IdSelect.value;
+    if (id)
+      EditorUtils.getCurrentEditor().setAttribute(node, "id", id);
+    else
+      EditorUtils.getCurrentEditor().removeAttribute(node, "id");
+    // be kind with the rest of the world
+    NotifierUtils.notify("selection", node, false);
+  }  
+}
+
+/************** STRUCTUREBAR *************/
 
 function UpdateStructureBarContextMenu()
 {
