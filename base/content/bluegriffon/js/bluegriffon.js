@@ -499,21 +499,18 @@ function ExplodeElement(aEvent)
     if (target)
     {
       var editor = EditorUtils.getCurrentEditor();
-      var offset = 0;
-      var parent = target.parentNode.wrappedJSObject;
-      var childNodes = parent.childNodes;
+      var parent = target.parentNode;
       editor.beginTransaction();
 
-      while (childNodes[offset] != target)
-        ++offset;
+      var child = target.lastChild;
+      while (child) {
+        var tmp = child.previousSibling;
+        editor.deleteNode(child);
+        var txn = new diNodeInsertionTxn(child, parent, target);
+        editor.transactionManager.doTransaction(txn);
 
-      childNodes = target.childNodes;
-      var childNodesLength = childNodes.length;
-      for (var i = childNodesLength - 1; i >= 0; i--) {
-        var clone = childNodes.item(i).cloneNode(true);
-        editor.insertNode(clone, parent, offset + 1);
+        child = tmp;
       }
-
       editor.deleteNode(target);
 
       editor.endTransaction();
