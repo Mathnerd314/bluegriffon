@@ -49,7 +49,7 @@ const nsIHTMLEditor = interfaces.nsIHTMLEditor;
 const nsIEditingSession = interfaces.nsIEditingSession;
 
 var BlueGriffonVars = {
-  kXUL_NS: "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
+  kXUL_NS: "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 };
 
 var gPrefs = null;

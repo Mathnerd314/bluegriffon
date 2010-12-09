@@ -188,7 +188,7 @@ var CssUtils = {
         else
           parentStyleSheet.deleteRule(ruleList[i].index);
       }
-      this.reserializeEmbeddedStylesheet(parentStyleSheet, aEditor);
+      this.reserializeEmbeddedStylesheet(parentStyleSheet, aEditor, aDocument);
     }
   },
 
@@ -219,8 +219,11 @@ var CssUtils = {
       styleElement.setAttribute("type", "text/css");
       var textNode = aDocument.createTextNode("/* created by BlueGriffon */");
       styleElement.appendChild(textNode);
-      var head = aDocument.getElementsByTagName("head")[0]; 
-      aEditor.insertNode(styleElement, head, head.childNodes.length);
+      var head = aDocument.getElementsByTagName("head")[0];
+      if (aEditor)
+        aEditor.insertNode(styleElement, head, head.childNodes.length);
+      else
+        head.appendChild(styleElement);
       stylesheet = styleElement.sheet;
     }
     return stylesheet;
@@ -266,10 +269,10 @@ var CssUtils = {
         }
     }
 
-    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet, aEditor);
+    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet, aEditor, aDocument);
   },
 
-  reserializeEmbeddedStylesheet: function(aSheet, editor)
+  reserializeEmbeddedStylesheet: function(aSheet, editor, aDocument)
   {
     var cssRules = aSheet.cssRules;
     var str = "";
@@ -293,7 +296,10 @@ var CssUtils = {
     while (child)
     {
       var tmp = child.nextSibling;
-      editor.deleteNode(child);
+      if (editor)
+        editor.deleteNode(child);
+      else
+        styleElt.removeChild(child);
       child = tmp;
     }
     var cssParser = new CSSParser(str);
@@ -302,7 +308,10 @@ var CssUtils = {
 	    str = parsedSheet.cssText();
     }
     var textNode = styleElt.ownerDocument.createTextNode(str);
-    editor.insertNode(textNode, styleElt, 0);
+    if (editor)
+      editor.insertNode(textNode, styleElt, 0);
+    else
+      styleElt.appendChild(textNode);
   },
 
   getUseCSSPref: function()
