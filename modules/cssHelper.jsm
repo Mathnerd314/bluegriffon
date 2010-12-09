@@ -217,7 +217,7 @@ var CssUtils = {
     {
       var styleElement = aDocument.createElement("style");
       styleElement.setAttribute("type", "text/css");
-      var textNode = aDocument.createTextNode("/* created by BlueGriffon */");
+      var textNode = aDocument.createTextNode("<!--\n/* created by BlueGriffon */\n-->\n");
       styleElement.appendChild(textNode);
       var head = aDocument.getElementsByTagName("head")[0];
       if (aEditor)
@@ -234,10 +234,26 @@ var CssUtils = {
     this.deleteAllLocalRulesForSelector(aEditor, aDocument, aSelector, aDeclarations);
     var ruleList = this.getAllLocalRulesForSelector(aDocument, aSelector);
 
+    var stylesheet;
     if (!ruleList || !ruleList.length)
     {
-      var stylesheet = this.getStyleSheetForScreen(aDocument, aEditor);
-      var str = stylesheet.ownerNode.textContent;
+      stylesheet = this.getStyleSheetForScreen(aDocument, aEditor);
+      var str = aSelector + " {";
+      for (var j = 0; j < aDeclarations.length; j++)
+      {
+        var property = aDeclarations[j].property;
+        var value = aDeclarations[j].value;
+        if (value) {
+          var priority = aDeclarations[j].priority;
+          str += "\n  " + property + ": " +
+                 value +
+                 (priority ? " !important;" : ";");
+        }
+      }
+      str += "\n}\n";
+      stylesheet.insertRule(str, stylesheet.cssRules.length)
+
+      /*var str = stylesheet.ownerNode.textContent;
       str += "\n" + aSelector + " {";
       for (var j = 0; j < aDeclarations.length; j++)
       {
@@ -252,24 +268,26 @@ var CssUtils = {
       }
       str += "\n}\n";
       stylesheet.ownerNode.firstChild.data = str;
-      return;
+      return;*/
+    }
+    else {
+	    var rule = ruleList[ruleList.length -1].rule;
+      stylesheet = rule.parentStyleSheet;
+	    for (var j = 0; j < aDeclarations.length; j++)
+	    {
+	        var property = aDeclarations[j].property;
+	        var value = aDeclarations[j].value;
+	        if (value) {
+		        var priority = aDeclarations[j].priority ? " !important" : "";
+		
+		        rule.style.setProperty(property,
+		                               value,
+		                               priority);
+	        }
+	    }
     }
 
-    var rule = ruleList[ruleList.length -1].rule;
-    for (var j = 0; j < aDeclarations.length; j++)
-    {
-        var property = aDeclarations[j].property;
-        var value = aDeclarations[j].value;
-        if (value) {
-	        var priority = aDeclarations[j].priority ? " !important" : "";
-	
-	        rule.style.setProperty(property,
-	                               value,
-	                               priority);
-        }
-    }
-
-    this.reserializeEmbeddedStylesheet(rule.parentStyleSheet, aEditor, aDocument);
+    this.reserializeEmbeddedStylesheet(stylesheet, aEditor, aDocument);
   },
 
   reserializeEmbeddedStylesheet: function(aSheet, editor, aDocument)
@@ -307,6 +325,7 @@ var CssUtils = {
 	    var parsedSheet = cssParser.parse(str, false, false);
 	    str = parsedSheet.cssText();
     }
+    str = "<!--\n" + str + "\n-->\n";
     var textNode = styleElt.ownerDocument.createTextNode(str);
     if (editor)
       editor.insertNode(textNode, styleElt, 0);
