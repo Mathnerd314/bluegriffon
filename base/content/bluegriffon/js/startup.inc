@@ -33,9 +33,6 @@ function Startup()
     dump("Failed to observe prefs: " + ex + "\n");
   }
 
-  if ("ProjectManager" in window)
-    ProjectManager.init();
-
   window.tryToClose = doSaveTabsBeforeQuit;
 }
 
