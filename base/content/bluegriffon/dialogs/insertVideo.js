@@ -10,12 +10,18 @@ var gEditor = null;
 function Startup()
 {
   gNode = window.arguments[0];
+  var url = window.arguments[1];
   gEditor = EditorUtils.getCurrentEditor();
 
   var docUrl = EditorUtils.getDocumentUrl();
   gDocUrlScheme = UrlUtils.getScheme(docUrl);
 
   GetUIElements();
+  if (url) {
+    gDialog.urlTextbox.value = url;
+    LoadVideoFile();
+    CheckURL('urlTextbox', 'relativeURLCheckbox')
+  }
 
   if (!gNode)
     document.documentElement.getButton("accept").disabled = true;

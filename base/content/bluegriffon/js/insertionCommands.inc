@@ -45,7 +45,7 @@ var cmdInsertImageCommand =
   {
     var element = EditorUtils.getObjectForProperties(["img"]);
     window.openDialog("chrome://bluegriffon/content/dialogs/insertImage.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element, null);
   }
 };
 
@@ -170,7 +170,7 @@ var cmdInsertVideoCommand =
   {
     var element = EditorUtils.getObjectForProperties(["video"]);
     window.openDialog("chrome://bluegriffon/content/dialogs/insertVideo.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element, null);
   }
 };
 

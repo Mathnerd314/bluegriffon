@@ -34,13 +34,6 @@
                           oncommand="LoadImage();MakeRelativeUrl();SetFocusToAlt()"
                           title="&selectImageButton.label;"/>
       </hbox>
-      <hbox>
-        <spacer flex="1"/>
-        <button label="Select from projects"
-                id="selectfromProjectButton"
-                oncommand="OpenInProjectPicker()"
-                hidden="true"/>
-      </hbox>
       <hbox align="center">
         <checkbox id="relativeURLCheckbox"
                   disabled="true"

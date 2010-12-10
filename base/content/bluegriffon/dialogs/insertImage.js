@@ -1,16 +1,13 @@
 Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
-try {
-Components.utils.import("resource://app/modules/projectManager.jsm");
-}
-catch(e) {}
 
 var gNode = null;
 
 function Startup()
 {
   gNode = window.arguments[0];
+  var url = window.arguments[1];
 
   GetUIElements();
 
@@ -23,13 +20,14 @@ function Startup()
     gDialog.relativeURLCheckboxWarning.hidden = true;
   }
 
+  if (url) {
+    gDialog.imageURLTextbox.value = url;
+    LoadImage();
+    MakeRelativeUrl();
+    SetFocusToAlt();
+  }
 
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
-  var nproj = 0;
-  if ("ProjectManager" in window)
-    for (var i in ProjectManager.projects)
-      nproj++
-  gDialog.selectfromProjectButton.hidden = (nproj == 0);
   window.sizeToContent();
 #ifndef XP_MACOSX
   CenterDialogOnOpener();
@@ -119,17 +117,6 @@ function ToggleRelativeOrAbsolute()
   else {
     MakeAbsoluteUrl();
   }
-}
-
-function OpenInProjectPicker()
-{
-  var rv = { value: "" };
-  window.openDialog("chrome://projectmanager/content/dialogs/inprojectPicker.xul","_blank",
-                    "chrome,modal,titlebar,resizable=yes", rv, "images");  
-  gDialog.imageURLTextbox.value = rv.value;
-  gDialog.relativeURLCheckbox.checked = false;
-  LoadImage();
-  gDialog.alternateTextTextbox.focus();
 }
 
 function InitDialog()
