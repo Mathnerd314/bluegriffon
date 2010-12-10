@@ -252,23 +252,6 @@ var CssUtils = {
       }
       str += "\n}\n";
       stylesheet.insertRule(str, stylesheet.cssRules.length)
-
-      /*var str = stylesheet.ownerNode.textContent;
-      str += "\n" + aSelector + " {";
-      for (var j = 0; j < aDeclarations.length; j++)
-      {
-        var property = aDeclarations[j].property;
-        var value = aDeclarations[j].value;
-        if (value) {
-	        var priority = aDeclarations[j].priority;
-	        str += "\n  " + property + ": " +
-	               value +
-	               (priority ? " !important;" : ";");
-        }
-      }
-      str += "\n}\n";
-      stylesheet.ownerNode.firstChild.data = str;
-      return;*/
     }
     else {
 	    var rule = ruleList[ruleList.length -1].rule;
