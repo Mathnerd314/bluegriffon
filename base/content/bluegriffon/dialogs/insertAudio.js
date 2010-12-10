@@ -10,6 +10,7 @@ var gEditor = null;
 function Startup()
 {
   gNode = window.arguments[0];
+  var url = window.arguments[1];
   gEditor = EditorUtils.getCurrentEditor();
 
   var docUrl = EditorUtils.getDocumentUrl();
@@ -20,6 +21,10 @@ function Startup()
   if (!gNode)
     document.documentElement.getButton("accept").disabled = true;
 
+  if (url) {
+    gDialog.urlTextbox.value = url;
+    LoadAudioFile();
+  }
   InitDialog();
   CheckURL('urlTextbox', 'relativeURLCheckbox');
 }

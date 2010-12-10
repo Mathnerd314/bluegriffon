@@ -191,7 +191,7 @@ var cmdInsertAudioCommand =
   {
     var element = EditorUtils.getObjectForProperties(["audio"]);
     window.openDialog("chrome://bluegriffon/content/dialogs/insertAudio.xul","_blank",
-                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
+                      "chrome,modal,titlebar,resizable=yes,dialog=yes", element, null);
   }
 };
 
