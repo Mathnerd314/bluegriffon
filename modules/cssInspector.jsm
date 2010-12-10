@@ -256,6 +256,10 @@ const kCSS_VENDOR_PREFIXES = {"lastUpdate":1290441007,"properties":[{"gecko":"",
 {"gecko":"","webkit":"-webkit-writing-mode","presto":"","trident":"-ms-writing-mode","status":"ED"},
 {"gecko":"","webkit":"zoom","presto":"","trident":"-ms-zoom","status":""}]};
 
+const kCSS_PREFIXED_VALUE = [
+  {"gecko": "-moz-box", "webkit": "-moz-box", "presto": "", "trident": "", "generic": "box"}
+];
+
 var CssInspector = {
 
   kINIDOMUTILS: Components.interfaces.inIDOMUtils,
