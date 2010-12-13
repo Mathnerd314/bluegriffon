@@ -62,8 +62,11 @@ function onAccept()
 {
   gEditor.beginTransaction();
 
+  var br = null;
   if (!gNode) {
     gNode = EditorUtils.getCurrentDocument().createElement("form");
+    br = EditorUtils.getCurrentDocument().createElement("br");
+    gNode.appendChild(br);
     gEditor.insertElementAtSelection(gNode, true);
   }
 
@@ -107,4 +110,6 @@ function onAccept()
     gEditor.removeAttribute(gNode, "accept-charset");
 
   gEditor.endTransaction();
+  if (br)
+    gEditor.selectElement(br);
 }
