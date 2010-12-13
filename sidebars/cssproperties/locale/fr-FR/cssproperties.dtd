@@ -162,7 +162,7 @@
 <!ENTITY table.label "Tableau">
 <!ENTITY inlineTable.label "Tableau dans un flot de texte">
 <!ENTITY tableHeaderGroup.label "Groupe d'en-têtes de tableau">
-<!ENTITY tableRowGroup.label "Groupe de ligne de tableay">
+<!ENTITY tableRowGroup.label "Groupe de ligne de tableau">
 <!ENTITY tableFooterGroup.label "Groupe de pieds de tableau">
 <!ENTITY tableColumnGroup.label "Groupe de colonnes de tableau">
 <!ENTITY tableCaption.label "Légende de tableau">
@@ -429,7 +429,7 @@
 <!ENTITY topCaptionSide.label "haut">
 <!ENTITY bottomCaptionSide.label "bas">
 
-<!ENTITY borderCollapse.label "Cadre du tableay:">
+<!ENTITY borderCollapse.label "Cadre du tableau:">
 <!ENTITY collapseBorderCollapse.label "Replié">
 <!ENTITY separateBorderCollapse.label "Séparé">
 
