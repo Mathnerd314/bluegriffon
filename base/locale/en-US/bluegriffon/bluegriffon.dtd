@@ -432,3 +432,5 @@
 <!ENTITY treeitemRole.label "An option item of a tree. This is an element within a tree that may be expanded or collapsed if it contains a sub-level group of treeitems">
 <!ENTITY widgetRole.label "An interactive component of a graphical user interface (GUI)">
 <!ENTITY windowRole.label "A browser or application window">
+
+<!ENTITY allTagsMode.label "All Tags Mode">

@@ -1317,3 +1317,32 @@ function initFontStyleMenu(menuPopup)
     }
   }
 }
+
+function ToggleAllTagsMode()
+{
+  var tab = gDialog.tabeditor.selectedTab;
+  if (tab) {
+    var editor = EditorUtils.getCurrentEditor();
+    editor instanceof Components.interfaces.nsIEditorStyleSheets;
+    if (tab.hasAttribute("alltags")) {
+      tab.removeAttribute("alltags");
+      editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", false);
+    }
+    else {
+      tab.setAttribute("alltags", "true");
+      editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", true);
+    }
+  }
+}
+
+function UpdateViewMenu()
+{
+  var tab = gDialog.tabeditor.selectedTab;
+  if (tab) {
+    if (tab.hasAttribute("alltags")) {
+      gDialog.allTagsModeMenuitem.setAttribute("checked", "true");
+      return;
+    }
+  }
+  gDialog.allTagsModeMenuitem.removeAttribute("checked");
+}

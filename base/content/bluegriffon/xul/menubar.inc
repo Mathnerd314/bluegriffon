@@ -53,7 +53,14 @@
     </menu>
 
     <menu id="viewMenu"   label="&viewMenu.label;"   accesskey="&viewMenu.accesskey;">
-      <menupopup id="viewMenuPopup">
+      <menupopup id="viewMenuPopup"
+                 onpopupshowing="UpdateViewMenu()">
+        <menuitem label="&allTagsMode.label;"
+                  type="checkbox"
+                  id="allTagsModeMenuitem"
+                  observes="cmd_renderedHTMLEnabler"
+                  oncommand="ToggleAllTagsMode()"/>
+        <menuseparator/>
         <menu label="&viewToolbars.label;">
           <menupopup id="viewToolbarsPopup"
                      onpopupshowing="BGToolbarManager.listToolbars(this)"/>
@@ -264,6 +271,7 @@
                   oncommand="OpenPreferences()"/>
         <menuitem label="Venkman"
                   oncommand="start_venkman()"/>
+        <menuitem label="foo" oncommand="foo()"/>
       </menupopup>
     </menu>
 

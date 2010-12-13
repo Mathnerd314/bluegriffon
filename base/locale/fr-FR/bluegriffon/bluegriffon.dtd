@@ -433,3 +433,5 @@
 <!ENTITY treeitemRole.label "Une option dans un arbre. C'est un élément d'arbre qui peut être ouvert ou refermé s'il contient un sous-groupe d'éléments d'arbre">
 <!ENTITY widgetRole.label "Un composant interactif d'une interface homme-machine (IHM)">
 <!ENTITY windowRole.label "Un navigateur ou une fenêtre applicative">
+
+<!ENTITY allTagsMode.label "Mode All Tags">
