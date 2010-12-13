@@ -1,2 +1,6 @@
 <!ENTITY ui.caption "BlueGriffon's User Interface">
 <!ENTITY switchLocale.button "Use language">
+
+<!ENTITY network.caption "Network">
+<!ENTITY configureNetwork.label "Configure BlueGriffon's network settings">
+<!ENTITY parameters.label "Parameters...">

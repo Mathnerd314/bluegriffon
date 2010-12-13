@@ -10,6 +10,15 @@
   xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="advancedPrefPane">
+    <groupbox>
+      <caption label="&network.caption;"/>
+      <hbox align="center">
+        <label value="&configureNetwork.label;"/>
+        <spacer flex="1"/>
+        <button label="&parameters.label;"
+                oncommand="OpenNetworkParams()"/>
+      </hbox>
+    </groupbox>
     <groupbox flex="1">
       <caption label="&ui.caption;"/>
 	    <listbox id="locale-listbox" flex="1"/>

@@ -70,3 +70,9 @@ function changeLocale() {
     alert("Couldn't change locale: " + err);
   }
 }
+
+function OpenNetworkParams()
+{
+  document.documentElement.openSubDialog("chrome://bluegriffon/content/prefs/connection.xul",
+                                         "", null);
+}
