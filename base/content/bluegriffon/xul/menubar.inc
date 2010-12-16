@@ -87,10 +87,6 @@
         <menuitem label="&hrToolbarCmd.label;"
                   command="cmd_hr"
                   accesskey="&hrToolbarCmd.key;"/>
-        <menuseparator/>
-        <menuitem label="&htmlToolbarCmd.label;"
-                  command="cmd_html"
-                  accesskey="&htmlToolbarCmd.key;"/>
         <menu label="&formToolbarCmd.label;">
 		        <menupopup>
 		          <menuitem label="&formToolbarCmd.label;"
@@ -179,6 +175,10 @@
 		                    command="cmd_datalist"/>
 		       </menupopup>
         </menu>
+        <menuseparator/>
+        <menuitem label="&htmlToolbarCmd.label;"
+                  command="cmd_html"
+                  accesskey="&htmlToolbarCmd.key;"/>
         <menuseparator/>
         <menuitem label="&stylesheetsToolbarCmd.label;"
                   accesskey="&stylesheetsToolbarCmd.key;"
@@ -271,7 +271,6 @@
                   oncommand="OpenPreferences()"/>
         <menuitem label="Venkman"
                   oncommand="start_venkman()"/>
-        <menuitem label="foo" oncommand="foo()"/>
       </menupopup>
     </menu>
 
