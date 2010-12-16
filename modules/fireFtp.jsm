@@ -2046,11 +2046,13 @@ ftpMozilla.prototype.ftp = {
             this.observer.onAppendLog(buffer, 'error', "error");
           }
         } else {
-          buffer = buffer.indexOf("\r\n") != -1 ? buffer.split("\r\n") : buffer.split("\n");
+          // XXX glazou: following line is wrong because some servers use both \r\n and \n
+          //buffer = buffer.indexOf("\r\n") != -1 ? buffer.split("\r\n") : buffer.split("\n");
+          buffer = buffer.replace(/\\r\\n/g, "\n").split("\n");
 
           for (var x = 0; x < buffer.length; ++x) {
             if (buffer[x] && buffer[x][0] == ' ') {
-              var feat = buffer[x].replace(/^\s*/, "").replace(/\s*$/, "").toUpperCase();
+              var feat = buffer[x].trim().toUpperCase();
               if (feat == "MDTM") {
                 this.featMDTM   = true;
               } else if (feat == "MLSD") {
@@ -2160,6 +2162,7 @@ ftpMozilla.prototype.ftp = {
     if (isDirectory) {
       this.unshiftEventQueue("RMD",    path.substring(path.lastIndexOf('/') + 1), callback);
       this.unshiftEventQueue("CWD",    path.substring(0, path.lastIndexOf('/') ? path.lastIndexOf('/') : 1), true);
+      this.unshiftEventQueue("CWD",    path.replace(/[^\/]+/g , ".."), true);
 
       var self         = this;
       var listCallback = function() { self.removeRecursive(path); };
@@ -3388,14 +3391,14 @@ ftpMozilla.prototype.sftp = {
 
   remove : function(isDirectory, path, callback) {
     if (isDirectory) {
-      this.unshiftEventQueue("rmdir", path.substring(path.lastIndexOf('/') + 1).replace(/\[/g, "\\[").replace(/\]/g, "\\]"), callback);
+      this.unshiftEventQueue("rmdir", path.substring(path.lastIndexOf('/') + 1), callback);
       this.unshiftEventQueue("cd",    path.substring(0, path.lastIndexOf('/') ? path.lastIndexOf('/') : 1), true);
 
       var self         = this;
       var listCallback = function() { self.removeRecursive(path); };
       this.list(path, listCallback, true, true);
     } else {
-      this.unshiftEventQueue("rm",    path.substring(path.lastIndexOf('/') + 1).replace(/\[/g, "\\[").replace(/\]/g, "\\]"), callback);
+      this.unshiftEventQueue("rm",    path.substring(path.lastIndexOf('/') + 1), callback);
       this.unshiftEventQueue("cd",    path.substring(0, path.lastIndexOf('/') ? path.lastIndexOf('/') : 1), true);
     }
 
@@ -3409,11 +3412,11 @@ ftpMozilla.prototype.sftp = {
       var remotePath = this.constructPath(parent, files[x].leafName);
 
       if (files[x].isDirectory()) {                                              // delete a subdirectory recursively
-        this.unshiftEventQueue("rmdir",  remotePath.substring(remotePath.lastIndexOf('/') + 1).replace(/\[/g, "\\[").replace(/\]/g, "\\]"), "");
+        this.unshiftEventQueue("rmdir",  remotePath.substring(remotePath.lastIndexOf('/') + 1), "");
         this.unshiftEventQueue("cd",     parent, true);
         this.removeRecursiveHelper(remotePath);
       } else {                                                                   // delete a file
-        this.unshiftEventQueue("rm",     remotePath.substring(remotePath.lastIndexOf('/') + 1).replace(/\[/g, "\\[").replace(/\]/g, "\\]"), "");
+        this.unshiftEventQueue("rm",     remotePath.substring(remotePath.lastIndexOf('/') + 1), "");
         this.unshiftEventQueue("cd",     parent, true);
       }
     }
