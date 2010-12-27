@@ -42,10 +42,6 @@ Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
-try {
-  Components.utils.import("resource://app/modules/projectManager.jsm");
-}
-catch(e) {}
 
 #include blanks.inc
 
