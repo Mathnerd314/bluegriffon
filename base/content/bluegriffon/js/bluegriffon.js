@@ -659,7 +659,7 @@ function OnKeyPressWhileChangingTag(event)
 /************ VIEW MODE ********/
 function GetCurrentViewMode()
 {
-  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("previousMode") ||
+  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
          "wysiwyg";
 }
 
@@ -680,6 +680,8 @@ function ToggleViewMode(aElement)
 
   var editor = EditorUtils.getCurrentEditor();
   var editorElement = EditorUtils.getCurrentEditorElement();
+  editorElement.parentNode.setAttribute("currentmode", mode);
+
   if (mode == "source")
   {
     HandlersManager.hideAllHandlers();

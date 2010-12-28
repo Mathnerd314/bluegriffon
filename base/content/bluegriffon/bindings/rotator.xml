@@ -114,7 +114,7 @@
           var angle = aEvent.originalTarget.value;
           if (this.getChild("textbox").value != angle)
             this.getChild("textbox").value = angle;
-          this.getChild("innerRotator").style.MozTransform = "rotate(" + angle + "deg)";
+          this.getChild("innerRotator").style.MozTransform = "rotate(" + -parseFloat(angle) + "deg)";
           this.callCallback(angle, aForceCallback);
           this.getChild("textbox").focus();
         ]]></body>

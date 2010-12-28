@@ -90,6 +90,13 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("tabSelected",
                                           Inspect,
                                           window);
+  gMain.NotifierUtils.addNotifierCallback("afterEnteringSourceMode",
+                                          Inspect,
+                                          window);
+  gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
+                                          Inspect,
+                                          window);
+
   gMain.NotifierUtils.addNotifierCallback("redrawPanel",
                                           RedrawAll,
                                           window);
@@ -118,6 +125,10 @@ function Shutdown()
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("tabSelected",
                                                Inspect);
+    gMain.NotifierUtils.removeNotifierCallback("afterEnteringSourceMode",
+                                               Inspect);
+    gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
+                                               Inspect);
 	  gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
 			                                          RedrawAll,
 			                                          window);
@@ -132,8 +143,9 @@ function Inspect()
   if (gMain && gMain.EditorUtils)
   {
     var editor = gMain.EditorUtils.getCurrentEditor();
-    gDialog.mainBox.style.visibility = editor ? "" : "hidden";
-    if (editor) {
+    var visible = editor && (gMain.GetCurrentViewMode() == "wysiwyg");
+    gDialog.mainBox.style.visibility = visible ? "" : "hidden";
+    if (visible) {
       var node = EditorUtils.getSelectionContainer().node;
       if (node) {
         SelectionChanged(null, node, true);

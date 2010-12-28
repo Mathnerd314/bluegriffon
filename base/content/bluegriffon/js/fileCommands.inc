@@ -25,9 +25,11 @@ var cmdSave =
     //  when you first open a remote file.
     try {
       var docUrl = EditorUtils.getDocumentUrl();
-      return EditorUtils.isDocumentEditable() &&
-        (EditorUtils.isDocumentModified() ||
-         UrlUtils.isUrlOfBlankDocument(docUrl) || UrlUtils.getScheme(docUrl) != "file");
+      return EditorUtils.isDocumentEditable()
+        && GetCurrentViewMode() == "wysiwyg"
+        && (EditorUtils.isDocumentModified()
+            || UrlUtils.isUrlOfBlankDocument(docUrl)
+            || UrlUtils.getScheme(docUrl) != "file");
     } catch (e) {return false;}
   },
   
@@ -39,8 +41,8 @@ var cmdSave =
     var result = false;
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
-    {
-      // FinishHTMLSource();
+    try {
+      ToggleViewMode(gDialog.wysiwygModeButton);
       // for the time being, we use the HTML serializer
 
       result = FileUtils.saveDocument(
@@ -51,6 +53,7 @@ var cmdSave =
       if (result)
         StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
     }
+    catch (e) {}
     return result;
   }
 }
@@ -59,7 +62,7 @@ var cmdSaveAs =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    return (EditorUtils.isDocumentEditable());
+    return (EditorUtils.isDocumentEditable() && GetCurrentViewMode() == "wysiwyg");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -69,8 +72,8 @@ var cmdSaveAs =
   {
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
-    {
-      // FinishHTMLSource();
+    try {
+      ToggleViewMode(gDialog.wysiwygModeButton);
       var editorMimeType = EditorUtils.getCurrentDocument().contentType;
       var result = FileUtils.saveDocument(true, false, editorMimeType);
       if (result)
@@ -78,6 +81,7 @@ var cmdSaveAs =
       window.content.focus();
       return result;
     }
+    catch (e) {}
     return false;
   }
 }
