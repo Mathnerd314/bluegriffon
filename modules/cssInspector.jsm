@@ -5165,5 +5165,14 @@ function FilterLinearGradientForOutput(aValue, aEngine)
   return str + ")";
 }
 
-function FilterRadialGradientForOutput(aValue) {}
+function FilterRadialGradientForOutput(aValue, aEngine)
+{
+  if (aEngine == "generic")
+    return aValue.substr(5);
+
+  if (aEngine != "webkit")
+    return "";
+
+  return "";
+}
 

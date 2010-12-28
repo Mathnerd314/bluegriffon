@@ -266,12 +266,12 @@
                   <menulist id="radioGradientSize" sizetopopup="none"
                             oncommand="RepaintGradient()">
                     <menupopup>
-                      <menuitem label="closest-side" value="closest-side"/>
+                      <menuitem label="---" value=""/>
+                      <menuseparator/>
+                      <menuitem label="closest-side (contain)" value="closest-side"/>
                       <menuitem label="closest-corner" value="closest-corner"/>
                       <menuitem label="farthest-side" value="farthest-side"/>
-                      <menuitem label="farthest-corner" value="farthest-corner"/>
-                      <menuitem label="contain" value="contain"/>
-                      <menuitem label="cover" value="cover"/>
+                      <menuitem label="farthest-corner (cover)" value="farthest-corner"/>
                     </menupopup>
                   </menulist>
                 </row>
