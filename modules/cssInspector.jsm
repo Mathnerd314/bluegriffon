@@ -48,6 +48,27 @@ var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
 /* FROM http://peter.sh/data/vendor-prefixed-css.php?js=1 */
 
+const kENGINES = [
+  "webkit",
+  "presto",
+  "trident",
+  "generic"
+];
+
+const kCSS_VENDOR_VALUES = {
+  "-moz-box":             {"webkit": "-webkit-box",        "presto": "", "trident": "", "generic": "box" },
+  "-moz-inline-box":      {"webkit": "-webkit-inline-box", "presto": "", "trident": "", "generic": "inline-box" },
+  "-moz-initial":         {"webkit": "",                   "presto": "", "trident": "", "generic": "initial" },
+  "-moz-linear-gradient": {"webkit": FilterLinearGradientForOutput,
+                           "presto": "",
+                           "trident": "",
+                           "generic": FilterLinearGradientForOutput },
+  "-moz-radial-gradient": {"webkit": FilterRadialGradientForOutput,
+                           "presto": "",
+                           "trident": "",
+                           "generic": FilterRadialGradientForOutput }
+};
+
 const kCSS_VENDOR_PREFIXES = {"lastUpdate":1290441007,"properties":[{"gecko":"","webkit":"","presto":"","trident":"-ms-accelerator","status":"P"},
 {"gecko":"","webkit":"-webkit-animation","presto":"","trident":"","status":"WD"},
 {"gecko":"","webkit":"-webkit-animation-delay","presto":"","trident":"","status":"WD"},
@@ -334,8 +355,8 @@ var CssInspector = {
 
     var cssParser = new CSSParser(str);
     if (str) {
-	    var parsedSheet = cssParser.parse(str, false, false);
-	    str = parsedSheet.cssText();
+      var parsedSheet = cssParser.parse(str, false, false);
+      str = parsedSheet.cssText();
     }
 
     const classes             = Components.classes;
@@ -399,9 +420,9 @@ var CssInspector = {
       }
     }
     if (!aNoInlineStyles) // don't forget the style attribute
-	    ruleset.push( { rule: aElement,
-	                    specificity: {a:1, b:0, c:0, d:0},
-	                    order: order });
+      ruleset.push( { rule: aElement,
+                      specificity: {a:1, b:0, c:0, d:0},
+                      order: order });
     return ruleset;
   },
 
@@ -538,32 +559,32 @@ var CssInspector = {
             // we already know it's a percentage, a length, a number or a position kw
             gradient.position = token.value;
             token = parser.getToken(true, true);
-		        if (token.isPercentage() ||
-		            token.isDimensionOfUnit("deg") ||
-		            token.isDimensionOfUnit("rad") ||
-		            token.isDimensionOfUnit("grad") ||
-		            token.isDimensionOfUnit("cm") ||
-		            token.isDimensionOfUnit("mm") ||
-		            token.isDimensionOfUnit("in") ||
-		            token.isDimensionOfUnit("pc") ||
+            if (token.isPercentage() ||
+                token.isDimensionOfUnit("deg") ||
+                token.isDimensionOfUnit("rad") ||
+                token.isDimensionOfUnit("grad") ||
+                token.isDimensionOfUnit("cm") ||
+                token.isDimensionOfUnit("mm") ||
+                token.isDimensionOfUnit("in") ||
+                token.isDimensionOfUnit("pc") ||
                 token.isDimensionOfUnit("px") ||
-		            token.isDimensionOfUnit("em") ||
-		            token.isDimensionOfUnit("ex") ||
-		            token.isDimensionOfUnit("pt") ||
-		            token.isNumber() ||
-		            token.isIdent("top") ||
+                token.isDimensionOfUnit("em") ||
+                token.isDimensionOfUnit("ex") ||
+                token.isDimensionOfUnit("pt") ||
+                token.isNumber() ||
+                token.isIdent("top") ||
                 token.isIdent("center") ||
                 token.isIdent("bottom")) { // second position
               gradient.position += " " + token.value;
               // we can still have an angle :-(
               var token = parser.getToken(true, true);
-		          if (token.isDimensionOfUnit("deg") ||
-		              token.isDimensionOfUnit("rad") ||
-		              token.isDimensionOfUnit("grad")) { // we have an angle here
-		            gradient.angle = token.value;
-		            haveAngle = true;
-		            token = parser.getToken(true, true);
-		          }
+              if (token.isDimensionOfUnit("deg") ||
+                  token.isDimensionOfUnit("rad") ||
+                  token.isDimensionOfUnit("grad")) { // we have an angle here
+                gradient.angle = token.value;
+                haveAngle = true;
+                token = parser.getToken(true, true);
+              }
             }
           }
           // we must find a comma here
@@ -792,15 +813,15 @@ var CssInspector = {
         token = parser.getToken(true, true);
       }
       else {
-	      if (token.isFunction("rgb(") ||
-	          token.isFunction("rgba(") ||
-	          token.isFunction("hsl(") ||
-	          token.isFunction("hsla(") ||
-	          token.isSymbol("#") ||
-	          token.isIdent()) {
-	        var color = parser.parseColor(token);
-	        token = parser.getToken(true, true);
-	      }
+        if (token.isFunction("rgb(") ||
+            token.isFunction("rgba(") ||
+            token.isFunction("hsl(") ||
+            token.isFunction("hsla(") ||
+            token.isSymbol("#") ||
+            token.isIdent()) {
+          var color = parser.parseColor(token);
+          token = parser.getToken(true, true);
+        }
         if (token.isPercentage() ||
             token.isDimensionOfUnit("cm") ||
             token.isDimensionOfUnit("mm") ||
@@ -885,20 +906,20 @@ var CssInspector = {
     var backgrounds = [];
     var token = parser.getToken(true, true);
     while (token.isNotNull()) {
-	    /*if (token.isFunction("rgb(") ||
-	        token.isFunction("rgba(") ||
-	        token.isFunction("hsl(") ||
-	        token.isFunction("hsla(") ||
+      /*if (token.isFunction("rgb(") ||
+          token.isFunction("rgba(") ||
+          token.isFunction("hsl(") ||
+          token.isFunction("hsla(") ||
           token.isSymbol("#") ||
-	        token.isIdent()) {
-	      var color = parser.parseColor(token);
+          token.isIdent()) {
+        var color = parser.parseColor(token);
         backgrounds.push( { type: "color", value: color });
-	      token = parser.getToken(true, true);
-	    }
+        token = parser.getToken(true, true);
+      }
       else */
       if (token.isFunction("url(")) {
-	      token = parser.getToken(true, true);
-	      var urlContent = parser.parseURL(token);
+        token = parser.getToken(true, true);
+        var urlContent = parser.parseURL(token);
         backgrounds.push( { type: "image", value: "url(" + urlContent });
         token = parser.getToken(true, true);
       }
@@ -985,25 +1006,25 @@ var CssInspector = {
       token = parser.getToken(true, true);
 
     if (token.isSymbol("/")) {
-	    token = parser.getToken(true, true);
-	    if (token.isDimension()
+      token = parser.getToken(true, true);
+      if (token.isDimension()
           || token.isNumber("0")
           || (token.isIdent() && token.value in parser.kBORDER_WIDTH_NAMES))
-	      borderImage.widths.push(token.value);
-	    else
-	      return null;
+        borderImage.widths.push(token.value);
+      else
+        return null;
 
       for (var i = 0; i < 3; i++) {
-	      token = parser.getToken(true, true);
-	      if (token.isDimension()
-	          || token.isNumber("0")
-	          || (token.isIdent() && token.value in parser.kBORDER_WIDTH_NAMES))
-	        borderImage.widths.push(token.value);
-	      else
-	        break;
+        token = parser.getToken(true, true);
+        if (token.isDimension()
+            || token.isNumber("0")
+            || (token.isIdent() && token.value in parser.kBORDER_WIDTH_NAMES))
+          borderImage.widths.push(token.value);
+        else
+          break;
       }
-	    if (i == 3)
-	      token = parser.getToken(true, true);
+      if (i == 3)
+        token = parser.getToken(true, true);
     }
 
     for (var i = 0; i < 2; i++) {
@@ -1046,13 +1067,13 @@ var CssInspector = {
           this.findWebFontsInStylesheet(rule.styleSheet, aFonts);
           break;
         case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE:
-	        {
+          {
             var fontFace = rule.style.getPropertyValue("font-family").trim();
             if ((fontFace[0] == "'" && fontFace[fontFace.length - 1] == "'") ||
                 (fontFace[0] == '"' && fontFace[fontFace.length - 1] == '"'))
               fontFace = fontFace.substr(1, fontFace.length - 2);
-	          aFonts[fontFace] = true;
-	        }
+            aFonts[fontFace] = true;
+          }
           break;
         default:
           break;
@@ -1062,41 +1083,41 @@ var CssInspector = {
 
   parseMediaQuery: function(aString)
   {
-		const kCONSTRAINTS = {
-		  "width": true,
-		  "min-width": true,
-		  "max-width": true,
-		  "height": true,
-		  "min-height": true,
-		  "max-height": true,
-		  "device-width": true,
-		  "min-device-width": true,
-		  "max-device-width": true,
-		  "device-height": true,
-		  "min-device-height": true,
-		  "max-device-height": true,
-		  "orientation": true,
-		  "aspect-ratio": true,
-		  "min-aspect-ratio": true,
-		  "max-aspect-ratio": true,
-		  "device-aspect-ratio": true,
-		  "min-device-aspect-ratio": true,
-		  "max-device-aspect-ratio": true,
-		  "color": true,
-		  "min-color": true,
-		  "max-color": true,
-		  "color-index": true,
-		  "min-color-index": true,
-		  "max-color-index": true,
-		  "monochrome": true,
-		  "min-monochrome": true,
-		  "max-monochrome": true,
-		  "resolution": true,
-		  "min-resolution": true,
-		  "max-resolution": true,
-		  "scan": true,
-		  "grid": true
-		};
+    const kCONSTRAINTS = {
+      "width": true,
+      "min-width": true,
+      "max-width": true,
+      "height": true,
+      "min-height": true,
+      "max-height": true,
+      "device-width": true,
+      "min-device-width": true,
+      "max-device-width": true,
+      "device-height": true,
+      "min-device-height": true,
+      "max-device-height": true,
+      "orientation": true,
+      "aspect-ratio": true,
+      "min-aspect-ratio": true,
+      "max-aspect-ratio": true,
+      "device-aspect-ratio": true,
+      "min-device-aspect-ratio": true,
+      "max-device-aspect-ratio": true,
+      "color": true,
+      "min-color": true,
+      "max-color": true,
+      "color-index": true,
+      "min-color-index": true,
+      "max-color-index": true,
+      "monochrome": true,
+      "min-monochrome": true,
+      "max-monochrome": true,
+      "resolution": true,
+      "min-resolution": true,
+      "max-resolution": true,
+      "scan": true,
+      "grid": true
+    };
     var parser = new CSSParser();
     parser._init();
     parser.mPreserveWS       = false;
@@ -1122,18 +1143,18 @@ var CssInspector = {
     else if (token.isIdent("not") || token.isIdent("only")) {
       m.amplifier = token.value;
       token = parser.getToken(true, true);
-	    if (token.isIdent("all") ||
-	        token.isIdent("aural") ||
-	        token.isIdent("braille") ||
-	        token.isIdent("handheld") ||
-	        token.isIdent("print") ||
-	        token.isIdent("projection") ||
-	        token.isIdent("screen") ||
-	        token.isIdent("tty") ||
-	        token.isIdent("tv")) {
-	       m.medium = token.value;
-	       token = parser.getToken(true, true);
-	    }
+      if (token.isIdent("all") ||
+          token.isIdent("aural") ||
+          token.isIdent("braille") ||
+          token.isIdent("handheld") ||
+          token.isIdent("print") ||
+          token.isIdent("projection") ||
+          token.isIdent("screen") ||
+          token.isIdent("tty") ||
+          token.isIdent("tv")) {
+         m.medium = token.value;
+         token = parser.getToken(true, true);
+      }
       else
         return null;
     }
@@ -1197,6 +1218,7 @@ var CssInspector = {
     }
     return m;
   }
+
 };
 
 
@@ -4522,7 +4544,8 @@ jscsspDeclaration.prototype = {
   kCOMMA_SEPARATED: {
     "cursor": true,
     "font-family": true,
-    "voice-family": true
+    "voice-family": true,
+    "background-image": true
   },
 
   cssText: function() {
@@ -4531,14 +4554,14 @@ jscsspDeclaration.prototype = {
       var rv = "";
       for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
         var property = prefixes[propertyIndex];
-		    rv += (propertyIndex ? gTABS : "") + property + ": ";
-		    var separator = (property in this.kCOMMA_SEPARATED) ? ", " : " ";
-		    for (var i = 0; i < this.values.length; i++)
-		      if (this.values[i].cssText() != null)
-		        rv += (i ? separator : "") + this.values[i].cssText();
-		      else
-		        return null;
-		    rv += (this.priority ? " !important" : "") + ";" +
+        rv += (propertyIndex ? gTABS : "") + property + ": ";
+        var separator = (property in this.kCOMMA_SEPARATED) ? ", " : " ";
+        for (var i = 0; i < this.values.length; i++)
+          if (this.values[i].cssText() != null)
+            rv += (i ? separator : "") + this.values[i].cssText();
+          else
+            return null;
+        rv += (this.priority ? " !important" : "") + ";" +
               ((prefixes.length > 1 && propertyIndex != prefixes.length -1) ? "\n" : "");
       }
       return rv;
@@ -4546,12 +4569,58 @@ jscsspDeclaration.prototype = {
 
     var rv = this.property + ": ";
     var separator = (this.property in this.kCOMMA_SEPARATED) ? ", " : " ";
-    for (var i = 0; i < this.values.length; i++)
-      if (this.values[i].cssText() != null)
-        rv += (i ? separator : "") + this.values[i].cssText();
+    var extras = {"webkit": false, "presto": false, "trident": false, "generic": false }
+    for (var i = 0; i < this.values.length; i++) {
+      var v = this.values[i].cssText();
+      if (v != null) {
+        var paren = v.indexOf("(");
+        var kwd = v;
+        if (paren != -1)
+          kwd = v.substr(0, paren);
+        if (kwd in kCSS_VENDOR_VALUES) {
+          for (var j in kCSS_VENDOR_VALUES[kwd]) {
+            extras[j] = extras[j] || (kCSS_VENDOR_VALUES[kwd][j] != "");
+          }
+        }
+        rv += (i ? separator : "") + v;
+      }
       else
         return null;
-    return rv + (this.priority ? " !important" : "") + ";";
+    }
+    rv += (this.priority ? " !important" : "") + ";";
+
+    for (var j in extras) {
+      if (extras[j]) {
+        var str = "\n" + gTABS +  this.property + ": ";
+        for (var i = 0; i < this.values.length; i++) {
+          var v = this.values[i].cssText();
+          if (v != null) {
+            var paren = v.indexOf("(");
+            var kwd = v;
+            if (paren != -1)
+              kwd = v.substr(0, paren);
+            if (kwd in kCSS_VENDOR_VALUES) {
+              functor = kCSS_VENDOR_VALUES[kwd][j];
+              if (functor) {
+                v = (typeof functor == "string") ? functor : functor(v, j);
+                if (!v) {
+                  str = null;
+                  break;
+                }
+              }
+            }
+            str += (i ? separator : "") + v;
+          }
+          else
+            return null;
+        }
+        if (str)
+          rv += str + ";"
+        else
+          rv += "\n" + gTABS + "/* Impossible to translate property " + this.property + " for " + j + " */";
+      }
+    }
+    return rv;
   },
 
   setCssText: function(val) {
@@ -4965,4 +5034,136 @@ function CountLF(s)
   return nCR ? nCR.length + 1 : 1;
 }
 
+
+function FilterLinearGradientForOutput(aValue, aEngine)
+{
+  if (aEngine == "generic")
+    return aValue.substr(5);
+
+  if (aEngine != "webkit")
+    return "";
+
+  var g = CssInspector.parseBackgroundImages(aValue)[0];
+
+  var cancelled = false;
+  var str = "-webkit-gradient(linear, ";
+  var position = ("position" in g.value) ? g.value.position.toLowerCase() : "";
+  var angle    = ("angle" in g.value) ? g.value.angle.toLowerCase() : "";
+  // normalize angle
+  if (angle) {
+    var match = angle.match(/^([0-9\-\.\\+]+)([a-z]*)/);
+    var angle = parseFloat(match[1]);
+    var unit  = match[2];
+    switch (unit) {
+      case "grad": angle = angle * 90 / 100; break;
+      case "rad":  angle = angle * 180 / Math.PI; break;
+      default: break;
+    }
+    while (angle < 0)
+      angle += 360;
+    while (angle >= 360)
+      angle -= 360;
+  }
+  // get startpoint w/o keywords
+  var startpoint = [];
+  var endpoint = [];
+  if (position != "") {
+    if (position == "center")
+      position = "center center";
+    startpoint = position.split(" ");
+    if (angle == "" && angle != 0) {
+      // no angle, then we just turn the point 180 degrees around center
+      switch (startpoint[0]) {
+        case "left":   endpoint.push("right"); break;
+        case "center": endpoint.push("center"); break;
+        case "right":  endpoint.push("left"); break;
+        default: {
+            var match = startpoint[0].match(/^([0-9\-\.\\+]+)([a-z]*)/);
+            var v     = parseFloat(match[0]);
+            var unit  = match[1];
+            if (unit == "%") {
+              endpoint.push((100-v) + "%");
+            }
+            else
+              cancelled = true;
+          }
+          break;
+      }
+      if (!cancelled)
+        switch (startpoint[1]) {
+          case "top":    endpoint.push("bottom"); break;
+          case "center": endpoint.push("center"); break;
+          case "bottom": endpoint.push("top"); break;
+          default: {
+              var match = startpoint[1].match(/^([0-9\-\.\\+]+)([a-z]*)/);
+              var v     = parseFloat(match[0]);
+              var unit  = match[1];
+              if (unit == "%") {
+                endpoint.push((100-v) + "%");
+              }
+              else
+                cancelled = true;
+            }
+            break;
+        }
+    }
+    else {
+      switch (angle) {
+        case 0:    endpoint.push("right"); endpoint.push(startpoint[1]); break;
+        case 90:   endpoint.push(startpoint[0]); endpoint.push("top"); break;
+        case 180:  endpoint.push("left"); endpoint.push(startpoint[1]); break;
+        case 270:  endpoint.push(startpoint[0]); endpoint.push("bottom"); break;
+        default:     cancelled = true; break;
+      }
+    }
+  }
+  else {
+    // no position defined, we accept only vertical and horizontal
+    if (angle == "")
+      angle = 270;
+    switch (angle) {
+      case 0:    startpoint= ["left", "center"];   endpoint = ["right", "center"]; break;
+      case 90:   startpoint= ["center", "bottom"]; endpoint = ["center", "top"]; break;
+      case 180:  startpoint= ["right", "center"];  endpoint = ["left", "center"]; break;
+      case 270:  startpoint= ["center", "top"];    endpoint = ["center", "bottom"]; break;
+      default:     cancelled = true; break;
+    }
+  }
+
+  if (cancelled)
+    return "";
+
+  str += startpoint.join(" ") + ", " + endpoint.join(" ");
+  if (!g.value.stops[0].position)
+    g.value.stops[0].position = "0%";
+  if (!g.value.stops[g.value.stops.length-1].position)
+    g.value.stops[g.value.stops.length-1].position = "100%";
+  var current = 0;
+  for (var i = 0; i < g.value.stops.length && !cancelled; i++) {
+    var s = g.value.stops[i];
+    if (s.position) {
+      if (s.position.indexOf("%") == -1) {
+        cancelled = true;
+        break;
+      }
+    }
+    else {
+      var j = i + 1;
+      while (j < g.value.stops.length && !g.value.stops[j].position)
+        j++;
+      var inc = parseFloat(g.value.stops[j].position) - current;
+      for (var k = i; k < j; k++) {
+        g.value.stops[k].position = (current + inc * (k - i + 1) / (j - i + 1)) + "%";
+      }
+    }
+    current = parseFloat(s.position);
+    str += ", color-stop(" + (parseFloat(current) / 100) + ", " + s.color + ")";
+  }
+
+  if (cancelled)
+    return "";
+  return str + ")";
+}
+
+function FilterRadialGradientForOutput(aValue) {}
 
