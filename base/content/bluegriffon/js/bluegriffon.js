@@ -562,8 +562,8 @@ function ExplodeElement(aEvent)
       var child = target.lastChild;
       while (child) {
         var tmp = child.previousSibling;
-        editor.deleteNode(child);
-        var txn = new diNodeInsertionTxn(child, parent, target);
+        var clone = child.cloneNode(true)
+        var txn = new diNodeInsertionTxn(clone, parent, target);
         editor.transactionManager.doTransaction(txn);
 
         child = tmp;
