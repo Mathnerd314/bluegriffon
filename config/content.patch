@@ -1,0 +1,50 @@
+diff -r 0aa98eae87ed content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Fri Nov 05 02:21:30 2010 -0500
++++ b/content/base/src/nsCopySupport.cpp	Wed Dec 29 19:35:56 2010 +0100
+@@ -436,7 +436,7 @@
+   // copy it properly (all the copy code for non-plaintext assumes using HTML
+   // serializers and parsers is OK, and those mess up XHTML).
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
+-  if (!(htmlDoc && aDoc->IsHTML()))
++  if (!(htmlDoc /*&& aDoc->IsHTML()*/))
+     *aIsPlainTextContext = PR_TRUE;
+ 
+   return NS_OK;
+diff -r 0aa98eae87ed content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Fri Nov 05 02:21:30 2010 -0500
++++ b/content/base/src/nsDocumentEncoder.cpp	Wed Dec 29 19:35:56 2010 +0100
+@@ -1333,7 +1333,7 @@
+   
+   // also consider ourselves in a text widget if we can't find an html document
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
+-  if (!(htmlDoc && mDocument->IsHTML()))
++  if (!(htmlDoc /*&& mDocument->IsHTML()*/))
+     mIsTextWidget = PR_TRUE;
+   
+   // normalize selection if we are not in a widget
+diff -r 0aa98eae87ed content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Fri Nov 05 02:21:30 2010 -0500
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Wed Dec 29 19:35:56 2010 +0100
+@@ -897,6 +897,8 @@
+       name == nsGkAtoms::noframes
+       ) {
+     mPreLevel++;
++    if (name != nsGkAtoms::pre)
++      ++mDisableEntityEncoding;
+   }
+ }
+ 
+@@ -915,6 +917,8 @@
+       name == nsGkAtoms::noframes
+     ) {
+     --mPreLevel;
++    if (name != nsGkAtoms::pre)
++      --mDisableEntityEncoding;
+   }
+ }
+ 
+@@ -1034,3 +1038,4 @@
+ 
+   return PR_TRUE;
+ }
++
