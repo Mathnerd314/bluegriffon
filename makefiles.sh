@@ -49,6 +49,8 @@ bluegriffon/modules/Makefile
 bluegriffon/themes/win/Makefile
 bluegriffon/themes/mac/Makefile
 bluegriffon/extensions/svg-edit/Makefile
+bluegriffon/extensions/gfd/Makefile
+bluegriffon/extensions/fs/Makefile
 bluegriffon/sidebars/cssproperties/Makefile
 bluegriffon/sidebars/domexplorer/Makefile
 bluegriffon/components/Makefile

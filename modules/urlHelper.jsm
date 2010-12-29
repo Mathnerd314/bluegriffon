@@ -164,9 +164,7 @@ var UrlUtils = {
 
   isTextURI: function isTextURI(aText)
   {
-    return aText && /^http:\/\/|^https:\/\/|^file:\/\/|\
-      ^ftp:\/\/|^about:|^mailto:|^news:|^snews:|^telnet:|^ldap:|\
-      ^ldaps:|^gopher:|^finger:|^javascript:/i.test(aText);
+    return aText && /^http:\/\/|^https:\/\/|^file:\/\/|^ftp:\/\/|^about:|^mailto:|^news:|^snews:|^telnet:|^ldap:|^ldaps:|^gopher:|^finger:|^javascript:/i.test(aText);
   },
 
   makeRelativeUrl: function makeRelativeUrl(aURLString)
