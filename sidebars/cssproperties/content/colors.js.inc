@@ -126,7 +126,7 @@ function RepaintGradient()
   var type = gDialog.shapeAndSizeTab.hidden ? "-moz-linear-gradient(" : "-moz-radial-gradient(";
   var str = type + ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
   if (!gDialog.shapeAndSizeTab.hidden) {
-    var shape = gDialog.radialGradientShape.value;
+    var shape = gDialog.radialGradientShape.selectedItem.value;
     var size  = gDialog.radioGradientSize.value;
     str += ((shape || size) ? shape + " " + size + "," : "");
   }

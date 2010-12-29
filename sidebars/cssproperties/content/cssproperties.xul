@@ -257,7 +257,7 @@
 	                <label value="&shape.label;"/>
 	                <radiogroup id="radialGradientShape" orient="horizontal"
                               oncommand="RepaintGradient()">
-	                  <radio label="&circularShape.label;" value="circle"/>
+	                  <radio label="&circularShape.label;" value="circle" selected="true"/>
 	                  <radio label="&ellipticShape.label;" value="ellipse"/>
 	                </radiogroup>
                 </row>
