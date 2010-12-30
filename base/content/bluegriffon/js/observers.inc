@@ -28,7 +28,14 @@ var gEditorDocumentObserver =
         if (!params)
           return;
 
-        // TBD : RealTimeSpell.Init(editor, true);
+        try {
+          var spellChecker = new InlineSpellChecker(editor);
+          var prefs = GetPrefs();
+          var enabled = prefs.getBoolPref("bluegriffon.spellCheck.enabled");
+          spellChecker.enabled = enabled;
+          EditorUtils.getCurrentEditorElement().setUserData("spellchecker", spellChecker, null);
+        }
+        catch(e) { dump(e); }
 
         try {
           commandManager.getCommandState(aTopic, gContentWindow, params);
@@ -158,9 +165,28 @@ var BlueGriffonPrefsObserver = {
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
         for (var i = 0; i < editors.length; i++) {
           try {
-            var e = editors[i];
+            var e = editors[i].lastChild;
             var innerEditor = e.getEditor(e.contentWindow);
             innerEditor.returnInParagraphCreatesNewParagraph = value;
+          }
+          catch(e) {}
+        }
+      }
+    }
+    else if (prefName == "bluegriffon.spellCheck.enabled") {
+      var value = GetPrefs().getBoolPref("bluegriffon.spellCheck.enabled");
+      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                            .getService();
+      var windowEnumerator = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
+                                          .getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
+        for (var i = 0; i < editors.length; i++) {
+          try {
+            var e = editors[i].lastChild;
+            var innerEditor = e.getEditor(e.contentWindow);
+            innerEditor.setSpellcheckUserOverride(value);
           }
           catch(e) {}
         }

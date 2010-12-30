@@ -146,7 +146,7 @@
   <command id="cmd_cut" 
            oncommand="goDoCommand('cmd_cut')"
            disabled="true"/>
-  <command id="cmd_copy" 
+  <command id="cmd_copy"
            oncommand="goDoCommand('cmd_copy')"
            disabled="true"/>
   <command id="cmd_paste" 
@@ -184,12 +184,15 @@
 </keyset>
 
 <popupset id="editorPopupSet">
+
   <popup id="main-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('MainToolbox');" id="CustomizeMainToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
   </popup>
+
   <popup id="format-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
   </popup>
+
   <popup id="structureBarContextMenu"
          onpopupshowing="UpdateStructureBarContextMenu()">
     <menuitem label="&resetElementLanguage.label;"
@@ -295,6 +298,38 @@
      </menu>
   </popup>
 
+  <popup id="editorContextMenu"
+         onpopupshowing="UpdateEditorContextMenu(event, this)">
+    <menu label="&spellCheck.label;"
+          id="spellCheckMenu">
+      <menupopup onpopupshowing="UpdateSpellCheckMenu(this)"
+                 onpopuphiding="CleanSpellCheckMenu()">
+        <menuitem label="&addToDictionary;"
+                  oncommand="AddWordToDictionary()"
+                  id="addToDictionarySpellCheckMenuitem"/>
+        <menuseparator/>
+        <menuseparator id="suggestionsSpellCheckSeparator"/>
+        <menuitem label="&ignoreWord.label;"
+                  command="IgnoreWord()"/>
+      </menupopup>
+    </menu>
+    <menu label="&dictionary.label;">
+      <menupopup id="dictionaryMenupopup"
+                 onpopupshowing="UpdateSpellCheckDictionaries(this)"
+                 onpopuphiding="CleanSpellCheckDictionaries()"/>
+    </menu>
+    <menuseparator/>
+    <menuitem id="cMenu_undo" key="key_undo"/>
+    <menuitem id="cMenu_redo" key="key_redo"/>
+    <menuseparator/>
+    <menuitem id="cMenu_cut" key="key_cut"/>
+    <menuitem id="cMenu_copy" key="key_copy"/>
+    <menuitem id="cMenu_paste" key="key_paste"/>
+    <menuitem id="cMenu_delete" key="key_delete"/>
+    <menuseparator/>
+    <menuitem id="cMenu_selectAll" key="key_selectAll"/>
+    <menuseparator/>
+  </popup>
 </popupset>
 
 <stringbundleset id="languageSet">

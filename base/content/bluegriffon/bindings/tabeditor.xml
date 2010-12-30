@@ -471,7 +471,7 @@
             newBox.appendChild(iframe);
 
             var newEditorElement = document.createElement("editor");
-            //newEditorElement.setAttribute("editortype", "html");
+            newEditorElement.setAttribute("context", "editorContextMenu");
             newEditorElement.setAttribute("type", "content-primary");
             newBox.appendChild(newEditorElement);
 

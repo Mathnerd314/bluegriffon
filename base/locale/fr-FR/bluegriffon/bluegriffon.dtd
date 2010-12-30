@@ -435,3 +435,8 @@
 <!ENTITY windowRole.label "Un navigateur ou une fenêtre applicative">
 
 <!ENTITY allTagsMode.label "Mode All Tags">
+
+<!ENTITY spellCheck.label "Correction orthographique">
+<!ENTITY dictionary.label "Dictionnaire">
+<!ENTITY addToDictionary "Ajouter au dictionnaire">
+<!ENTITY ignoreWord.label "Ne pas tenir compte de ce mot">

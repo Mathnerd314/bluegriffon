@@ -42,6 +42,7 @@ Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
+Components.utils.import("resource://app/modules/InlineSpellChecker.jsm");
 
 #include blanks.inc
 
@@ -1343,4 +1344,60 @@ function UpdateViewMenu()
     }
   }
   gDialog.allTagsModeMenuitem.removeAttribute("checked");
+}
+
+/*********** CONTEXT MENU ***********/
+
+function UpdateEditorContextMenu(event, aMenupopup)
+{
+  if (event.explicitOriginalTarget.id == "editorContextMenu") {
+    var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+    sc.initFromEvent(document.popupRangeParent, document.popupRangeOffset);
+
+    gDialog.spellCheckMenu.disabled = !sc.overMisspelling;
+  }
+}
+
+function UpdateSpellCheckMenu(aMenupopup)
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+
+  var suggestions = 10;
+  try {
+    var prefs = GetPrefs();
+    suggestions = prefs.getIntPref("bluegriffon.spellCheck.suggestions");
+  }
+  catch(e) {}
+
+  sc.addSuggestionsToMenu(aMenupopup, gDialog.suggestionsSpellCheckSeparator, suggestions);
+}
+
+function CleanSpellCheckMenu()
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+  sc.clearSuggestionsFromMenu();
+}
+
+function AddWordToDictionary()
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+  sc.addToDictionary();
+}
+
+function UpdateSpellCheckDictionaries(aMenupopup)
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+  sc.addDictionaryListToMenu(aMenupopup, null);
+}
+
+function CleanSpellCheckDictionaries()
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+  sc.clearDictionaryListFromMenu();
+}
+
+function IgnoreWord()
+{
+  var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
+  sc.ignoreWord();
 }

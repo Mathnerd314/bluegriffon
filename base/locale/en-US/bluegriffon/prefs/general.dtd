@@ -13,5 +13,5 @@
 <!ENTITY showRoles.label "Show ARIA role">
 
 <!ENTITY spellCheck.caption "Spellchecking">
-<!ENTITY enableSpellCheck.label "Enable real-time spellchecking by default">
+<!ENTITY enableSpellCheck.label "Enable real-time spellchecking">
 <!ENTITY numberSuggestions.label "Number of suggestions:">

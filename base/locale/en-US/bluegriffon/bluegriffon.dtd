@@ -434,3 +434,9 @@
 <!ENTITY windowRole.label "A browser or application window">
 
 <!ENTITY allTagsMode.label "All Tags Mode">
+
+<!ENTITY spellCheck.label "Spellcheck">
+<!ENTITY dictionary.label "Dictionary">
+<!ENTITY addToDictionary "Add to dictionary">
+<!ENTITY ignoreWord.label "Ignore word">
+
