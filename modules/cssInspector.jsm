@@ -5181,6 +5181,13 @@ function FilterRadialGradientForOutput(aValue, aEngine)
       || (size != "farthest-corner" && size != "cover"))
     return "";
 
+  if (g.value.stops.length < 2
+      || !("position" in g.value.stops[0])
+      || !g.value.stops[g.value.stops.length - 1].position
+      || !("position" in g.value.stops[0])
+      || !g.value.stops[g.value.stops.length - 1].position)
+    return "";
+
   for (var i = 0; i < g.value.stops.length; i++) {
     var s = g.value.stops[i];
     if (("position" in s) && s.position && s.position.indexOf("px") == -1)
