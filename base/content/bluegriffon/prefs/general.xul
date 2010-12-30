@@ -17,6 +17,8 @@
       <preference id="pref-showLangs"    name="bluegriffon.structurebar.lang.show" type="bool"/>
       <preference id="pref-showAriaRole" name="bluegriffon.structurebar.role.show" type="bool"/>
       <preference id="pref-returnKey"    name="bluegriffon.returnKey.createsParagraph" type="bool"/>
+      <preference id="pref-spellCheck"   name="bluegriffon.spellCheck.enabled" type="bool"/>
+      <preference id="pref-suggestions"  name="bluegriffon.spellCheck.suggestions" type="int"/>
     </preferences>
     <groupbox>
       <caption label="&fileHistory.caption;"/>
@@ -62,6 +64,23 @@
                   id="crInPCreatesNewP"
                   preference="pref-returnKey"
                   />
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&spellCheck.caption;"/>
+      <hbox align="center">
+        <checkbox label="&enableSpellCheck.label;"
+                  id="enableSpellCheckCheckbox"
+                  preference="pref-spellCheck"
+                  />
+      </hbox>
+      <hbox align="center">
+        <label value="&numberSuggestions.label;"/>
+        <textbox id="numberSuggestionsTextbox"
+                 type="number"
+                 size="2"
+                 preference="pref-suggestions"/>
       </hbox>
     </groupbox>
   </prefpane>

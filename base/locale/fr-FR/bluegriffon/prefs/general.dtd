@@ -11,3 +11,7 @@
 <!ENTITY showClasses.label "Montrer les classes">
 <!ENTITY showLanguage.label "Montrer la langue">
 <!ENTITY showRoles.label "Montrer le rôle ARIA">
+
+<!ENTITY spellCheck.caption "Correction orthographique">
+<!ENTITY enableSpellCheck.label "Activer la correction orthographique à la volée">
+<!ENTITY numberSuggestions.label "Nombre de suggestions:">

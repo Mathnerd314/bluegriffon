@@ -40,6 +40,8 @@ pref("bluegriffon.display.anchor_color", "#0000ee");
 pref("bluegriffon.display.visited_color", "#551a8b");
 pref("bluegriffon.display.underline_links", true);
 pref("bluegriffon.returnKey.createsParagraph", true);
+pref("bluegriffon.spellCheck.enabled", true);
+pref("bluegriffon.spellCheck.suggestions", 10);
 
 // document preferences
 pref("bluegriffon.author", "");
