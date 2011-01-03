@@ -52,8 +52,11 @@ EXTRA_JS_MODULES = colourPickerHelper.jsm \
 	fireFtp.jsm \
 	handlersManager.jsm \
 	cssInspector.jsm \
-	unicodeHelper.jsm \
 	$(NULL)
+
+ifneq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+EXTRA_JS_MODULES += unicodeHelper.jsm
+endif
 
 include $(topsrcdir)/config/rules.mk
 

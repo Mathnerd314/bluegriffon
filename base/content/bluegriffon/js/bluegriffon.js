@@ -1402,6 +1402,7 @@ function IgnoreWord()
   sc.ignoreWord();
 }
 
+#ifndef XP_MACOSX
 function OpenCharInsertionDialog()
 {
   try {
@@ -1416,3 +1417,4 @@ function OpenCharInsertionDialog()
    window.openDialog("chrome://bluegriffon/content/dialogs/insertChars.xul","_blank",
                      "chrome,modal=no,titlebar");
 }
+#endif
