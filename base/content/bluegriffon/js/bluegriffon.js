@@ -1404,6 +1404,15 @@ function IgnoreWord()
 
 function OpenCharInsertionDialog()
 {
-  window.openDialog("chrome://bluegriffon/content/dialogs/insertChars.xul","_blank",
-              "chrome,modal=no,titlebar");
+  try {
+    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
+                     .getMostRecentWindow("BlueGriffon:insertCharsDlg");
+  }
+  catch(e){}
+  if (w)
+    w.focus();
+  else
+   window.openDialog("chrome://bluegriffon/content/dialogs/insertChars.xul","_blank",
+                     "chrome,modal=no,titlebar");
 }

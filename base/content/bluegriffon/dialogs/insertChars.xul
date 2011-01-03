@@ -43,13 +43,14 @@
 <!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/insertChars.dtd">
 
 <dialog id="insertCharsDlg"
+        windowtype="BlueGriffon:insertCharsDlg"
         title="&windowTitle.label;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload = "Startup()"
+        onfocus="OnFocus()"
+        buttons="accept"
         buttonlabelaccept="&insertButton.label;"
-        buttonlabelcancel="&closeButton.label;"
         ondialogaccept = "return onAccept();"
-        ondialogcancel = "return onClose();"
         persist="screenX screenY">
 
   <!-- Methods common to all editor dialogs -->
@@ -60,8 +61,8 @@
   <listbox id="blocksListbox"
            onselect="BlockSelected()">
     <listhead>
-      <listheader label="Unicode"/>
-      <listheader label="Block name"/>
+      <listheader label="&unicode.label;"/>
+      <listheader label="&blockName.label;"/>
     </listhead>
   
     <listcols>
@@ -96,19 +97,27 @@
   </hbox>
 
   <hbox>
-    <label id="charPreview" value="A"/>
-    <grid>
-      <columns><column/><column/></columns>
-      <rows>
-        <row align="center">
-          <label value="Name:"/>
-          <label id="charName"/>
-        </row>
-        <row align="center">
-          <label value="Unicode:"/>
-          <label id="charCode"/>
-        </row>
-      </rows>
-    </grid>
+    <label id="charPreview" value=""/>
+    <vbox flex="1">
+      <grid>
+        <columns><column/><column/></columns>
+        <rows>
+          <row align="center">
+            <label value="&charName.label;"/>
+            <label id="charName"/>
+          </row>
+          <row align="center">
+            <label value="&charCode.label;"/>
+            <label id="charCode"/>
+          </row>
+        </rows>
+      </grid>
+      <spacer flex="1"/>
+    <textbox id="searchTextbox"
+             placeholder="&search.placeholder;"
+             onpopuphiding="UpdatePopup(this)"
+             timeout="1000"
+             type="autocomplete" autocompletesearch="bluegriffoncharunicode-autocomplete"/>
+    </vbox>
   </hbox>
 </dialog>

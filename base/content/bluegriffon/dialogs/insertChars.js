@@ -1,5 +1,8 @@
 
+Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/unicodeHelper.jsm");
+
+var currentChar = -1;
 
 function Startup()
 {
@@ -29,6 +32,7 @@ function Startup()
     for (var j = 0; j < 16; j++) {
       var toolbarbutton = document.createElement("label");
       toolbarbutton.setAttribute("onclick", "ActivateChar(this)");
+      toolbarbutton.setAttribute("ondblclick", "ActivateChar(this); onAccept()");
       toolbarbutton.setAttribute("value", " ");
       toolbarbutton.className = "gridCell";
       row.appendChild(toolbarbutton);
@@ -36,7 +40,7 @@ function Startup()
     gDialog.charGridRows.appendChild(row);
   }
 
-  UpdateChars(0x10470);
+  UpdateChars(0);
   document.addEventListener("DOMAttrModified", OnMutationEventOnScrollbar, false);
 }
 
@@ -99,13 +103,54 @@ function ActivateChar(aElt)
 {
   var char = aElt.getAttribute("value");
   gDialog.charPreview.setAttribute("value", char);
-  var code = parseInt(aElt.getAttribute("char"));
-  var name = UnicodeUtils.getCharName(code);
+  currentChar = parseInt(aElt.getAttribute("char"));
+  var name = UnicodeUtils.getCharName(currentChar);
   gDialog.charName.setAttribute("value", name);
-  gDialog.charCode.setAttribute("value", ToHex4(code));
+  gDialog.charCode.setAttribute("value", ToHex4(currentChar));
 
   var gridCells = document.querySelectorAll(".gridCell");
   for (var i = 0; i < gridCells.length; i++)
     gridCells[i].className = "gridCell";
   aElt.className = "gridCell selected";
+  OnFocus();
+}
+
+function OnFocus()
+{
+  var editor = EditorUtils.getCurrentEditor();
+  var enabled = (editor != null && currentChar != -1);
+  document.documentElement.getButton("accept").disabled = !enabled;
+}
+
+function onAccept()
+{
+  var char = gDialog.charPreview.getAttribute("value");
+  try {
+    var w = EditorUtils.getCurrentEditorWindow();
+    if (w.GetCurrentViewMode() == "wysiwyg")
+      EditorUtils.getCurrentEditor().insertText(char);
+    else {
+      var editorElement = EditorUtils.getCurrentEditorElement();
+      var bespinIframe = editorElement.previousSibling;
+      var bespinEditor = bespinIframe.getUserData("editor");
+      var selection = bespinEditor.selection;
+      bespinEditor.replace(selection, char, false);
+    }
+  }
+  catch(e) {}
+  return false;
+}
+
+function UpdatePopup(aBox)
+{
+  var char = aBox.value;
+  if (!char)
+    return;
+  var match = char.match( /^([a-f0-9])+\ /g);
+  if (match) {
+    var code = parseInt(match, 16);
+    var codebase = Math.floor(code / 16) * 16;
+    UpdateChars(codebase);
+    ActivateChar(document.querySelector(".gridCell[char='" + code + "']"));
+  }
 }

@@ -47,6 +47,8 @@ EXTRA_COMPONENTS = \
 	bgLocationAutocomplete.manifest \
 	bgCommandHandler.js \
 	bgCommandHandler.manifest \
+  bgCharUnicodeAutocomplete.js \
+  bgCharUnicodeAutocomplete.manifest \
 	$(NULL)
 
 include $(topsrcdir)/config/rules.mk

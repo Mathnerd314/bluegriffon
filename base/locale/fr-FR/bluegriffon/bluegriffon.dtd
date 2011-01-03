@@ -440,3 +440,5 @@
 <!ENTITY dictionary.label "Dictionnaire">
 <!ENTITY addToDictionary "Ajouter au dictionnaire">
 <!ENTITY ignoreWord.label "Ne pas tenir compte de ce mot">
+
+<!ENTITY specialChars.label "Caractères spéciaux">

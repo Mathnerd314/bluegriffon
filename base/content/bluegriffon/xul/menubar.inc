@@ -186,8 +186,11 @@
         <menu label="&webfonts.label;">
           <menupopup id="webfontsMenupopup"/>
         </menu>
-        <menuitem label="Characters and symbols"
+#ifndef XP_MACOSX
+        <menuseparator/>
+        <menuitem label="&specialChars.label;"
                   oncommand="OpenCharInsertionDialog()"/>
+#endif
       </menupopup>
     </menu>
 

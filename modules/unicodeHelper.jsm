@@ -1,3 +1,5 @@
+Components.utils.import("resource://app/modules/Services.jsm");
+
 var EXPORTED_SYMBOLS = ["UnicodeUtils"];
 
 var UnicodeUtils = {
@@ -20024,5 +20026,32 @@ var UnicodeUtils = {
     if (aCode in this.mNamesList)
       return this.mNamesList[aCode];
     return "<unknown name>";
+  },
+
+  findCharFromName: function(aName)
+  {
+    function ToHex4(n)
+    {
+      var str = Number(n).toString(16);
+      while (str.length < 4)
+        str = "0" + str;
+      return str;
+    }
+
+    aName = aName.toLowerCase();
+    var res = [];
+    var p = Components.classes["@mozilla.org/xmlextras/domparser;1"].createInstance();
+    for (var i in this.mNamesList) {
+      var name = this.mNamesList[i].toLowerCase();
+      if (name.indexOf(aName) != -1) {
+        var hex = ToHex4(i);
+        var a = p.parseFromString("<a>&#x" + hex + ";</a>", "text/xml");
+        if (a.documentElement.nodeName != "parsererror")
+          res.push(hex + " " + a.documentElement.textContent + " " + this.mNamesList[i]);
+        else
+          res.push(hex + "   " + this.mNamesList[i]);
+      }
+    }
+    return res;
   }
 };
