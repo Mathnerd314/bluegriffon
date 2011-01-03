@@ -124,6 +124,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/editStylesheet.js         (content/bluegriffon/dialogs/editStylesheet.js)
   content/bluegriffon/dialogs/editStylesheet.xul        (content/bluegriffon/dialogs/editStylesheet.xul)
   content/bluegriffon/bindings/menulist.xml             (content/bluegriffon/bindings/menulist.xml)
+  content/bluegriffon/dialogs/insertChars.xul           (content/bluegriffon/dialogs/insertChars.xul)
+  content/bluegriffon/dialogs/insertChars.js            (content/bluegriffon/dialogs/insertChars.js)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -188,6 +190,7 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/editStylesheet.dtd  (locale/en-US/bluegriffon/editStylesheet.dtd)
   locale/en-US/bluegriffon/media.dtd  (locale/en-US/bluegriffon/media.dtd)
   locale/en-US/bluegriffon/media.properties  (locale/en-US/bluegriffon/media.properties)
+  locale/en-US/bluegriffon/insertChars.dtd  (locale/en-US/bluegriffon/insertChars.dtd)
   locale/fr-FR/bluegriffon/aboutDialog.dtd  (locale/fr-FR/bluegriffon/aboutDialog.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.dtd  (locale/fr-FR/bluegriffon/bluegriffon.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.properties  (locale/fr-FR/bluegriffon/bluegriffon.properties)
@@ -247,3 +250,5 @@ bluegriffon-locale.jar:
   locale/fr-FR/bluegriffon/editStylesheet.dtd  (locale/fr-FR/bluegriffon/editStylesheet.dtd)
   locale/fr-FR/bluegriffon/media.dtd  (locale/fr-FR/bluegriffon/media.dtd)
   locale/fr-FR/bluegriffon/media.properties  (locale/fr-FR/bluegriffon/media.properties)
+  locale/fr-FR/bluegriffon/insertChars.dtd  (locale/fr-FR/bluegriffon/insertChars.dtd)
+  

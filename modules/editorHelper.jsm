@@ -176,6 +176,7 @@ var EditorUtils = {
 
   isAlreadyEdited: function isAlreadyEdited(aURL)
   {
+    Components.utils.import("resource://app/modules/urlHelper.jsm");
     // blank documents are never "already edited"...
     if (UrlUtils.isUrlOfBlankDocument(aURL))
       return null;

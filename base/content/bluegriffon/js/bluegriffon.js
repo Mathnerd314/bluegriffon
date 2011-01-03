@@ -1401,3 +1401,9 @@ function IgnoreWord()
   var sc = EditorUtils.getCurrentEditorElement().getUserData("spellchecker");
   sc.ignoreWord();
 }
+
+function OpenCharInsertionDialog()
+{
+  window.openDialog("chrome://bluegriffon/content/dialogs/insertChars.xul","_blank",
+              "chrome,modal=no,titlebar");
+}

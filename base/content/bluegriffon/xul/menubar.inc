@@ -186,6 +186,8 @@
         <menu label="&webfonts.label;">
           <menupopup id="webfontsMenupopup"/>
         </menu>
+        <menuitem label="Characters and symbols"
+                  oncommand="OpenCharInsertionDialog()"/>
       </menupopup>
     </menu>
 
