@@ -4,6 +4,29 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>html</string>
+        <string>htm</string>
+        <string>shtml</string>
+        <string>xml</string>
+        <string>xhtml</string>
+        <string>shtm</string>
+        <string>xhtm</string>
+      </array>
+      <key>CFBundleTypeName</key>
+      <string>HTML Document</string>
+      <key>CFBundleTypeOSTypes</key>
+      <array>
+        <string>HTML</string>
+      </array>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+    </dict>
+  </array>
 	<key>CFBundleExecutable</key>
 	<string>bluegriffon-bin</string>
 	<key>CFBundleGetInfoString</key>
@@ -26,5 +49,44 @@
 	<string>%APP_VERSION%</string>
 	<key>NSAppleScriptEnabled</key>
 	<true/>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLIconFile</key>
+      <string>document.icns</string>
+      <key>CFBundleURLName</key>
+      <string>http URL</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>http</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLIconFile</key>
+      <string>document.icns</string>
+      <key>CFBundleURLName</key>
+      <string>https URL</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>https</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>ftp URL</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>ftp</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>file URL</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>file</string>
+      </array>
+    </dict>
+  </array>
 </dict>
 </plist>
