@@ -444,6 +444,7 @@
               aIframe.setUserData("editor", editor, null);
               editor.value = "";
               aIframe.parentNode.selectedIndex = 1;
+              gDialog.sourceModeButton.disabled = false;
             });
         ]]>
         </body>
@@ -465,6 +466,7 @@
               theme = GetPrefs().getCharPref("bluegriffon.source.theme");
             }
             catch(e) {}
+            gDialog.sourceModeButton.disabled = true;
             iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
             iframe.setAttribute("src", "resource://app/res/bespin.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
