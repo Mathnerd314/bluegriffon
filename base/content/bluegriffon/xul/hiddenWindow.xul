@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        id="mac_cmdline_forward" windowtype="BlueGriffon:MacCmdLineFwd"
+        title="Hidden" width="0" height="0" >
+
+  <script><![CDATA[ 
+    Components.utils.import("resource://app/modules/Services.jsm");
+    const PREFS_SERVICE_CONTRACTID = "@mozilla.org/preferences-service;1";
+    const WNDMEDIATOR_SERVICE_CONTRACTID = "@mozilla.org/appshell/window-mediator;1";
+    const CMDLINEHANDLER_SERVICE_CONTRACTID = "@disruptive-innovations.com/commandlinehandler/general-startup;1?type=bluegriffon";
+    const Ci = Components.interfaces;
+
+    function getPref(aFunc, aPreference, aDefaultValue) {
+      var prefs = 
+        Components.classes[PREFS_SERVICE_CONTRACTID].getService(Ci.nsIPrefBranch2);
+      try {
+        return prefs[aFunc](aPreference);
+      }
+      catch (e) { }
+      return aDefaultValue;
+    }
+
+    function selectMainWindowAndClose() {
+      window.removeEventListener("load", selectMainWindowAndClose, false);
+      var singletonWindowType = getPref("getCharPref", "toolkit.singletonWindowType", "");
+      var windowMediator = Components.classes[WNDMEDIATOR_SERVICE_CONTRACTID].getService(Ci.nsIWindowMediator);
+      var win = windowMediator.getMostRecentWindow(singletonWindowType);
+      if (win)
+        win.focus();
+      else
+        window.openDialog(getPref("getCharPref", "bluegriffon.chromeURL", ""), "_blank",
+                       "chrome,all,dialog=no");
+        
+      window.close();
+    }
+
+    //Services.prompt.alert(null, "hiddenWindow", window.arguments[0].length)
+    /*if (window.arguments && window.arguments[0]) {
+      var handler = Components.classes[CMDLINEHANDLER_SERVICE_CONTRACTID].getService(Ci.nsICommandLineHandler);
+      handler.QueryInterface(Ci.sbICommandLineManager).handleURL(window.arguments[0]);
+    } */
+    window.addEventListener("load", selectMainWindowAndClose, false);
+
+  ]]></script>
+
+</window>
+
