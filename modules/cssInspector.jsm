@@ -59,11 +59,13 @@ const kCSS_VENDOR_VALUES = {
   "-moz-box":             {"webkit": "-webkit-box",        "presto": "", "trident": "", "generic": "box" },
   "-moz-inline-box":      {"webkit": "-webkit-inline-box", "presto": "", "trident": "", "generic": "inline-box" },
   "-moz-initial":         {"webkit": "",                   "presto": "", "trident": "", "generic": "initial" },
-  "-moz-linear-gradient": {"webkit": FilterLinearGradientForOutput,
+  "-moz-linear-gradient": {"webkit20110101": FilterLinearGradientForOutput,
+                           "webkit": FilterLinearGradientForOutput,
                            "presto": "",
                            "trident": "",
                            "generic": FilterLinearGradientForOutput },
-  "-moz-radial-gradient": {"webkit": FilterRadialGradientForOutput,
+  "-moz-radial-gradient": {"webkit20110101": FilterRadialGradientForOutput,
+                           "webkit": FilterRadialGradientForOutput,
                            "presto": "",
                            "trident": "",
                            "generic": FilterRadialGradientForOutput }
@@ -5040,7 +5042,10 @@ function FilterLinearGradientForOutput(aValue, aEngine)
   if (aEngine == "generic")
     return aValue.substr(5);
 
-  if (aEngine != "webkit")
+  if (aEngine == "webkit")
+    return aValue.replace( /\-moz\-/g , "-webkit-")
+
+  if (aEngine != "webkit20110101")
     return "";
 
   var g = CssInspector.parseBackgroundImages(aValue)[0];
@@ -5170,7 +5175,10 @@ function FilterRadialGradientForOutput(aValue, aEngine)
   if (aEngine == "generic")
     return aValue.substr(5);
 
-  if (aEngine != "webkit")
+  if (aEngine == "webkit")
+    return aValue.replace( /\-moz\-/g , "-webkit-")
+
+  if (aEngine != "webkit20110101")
     return "";
 
   var g = CssInspector.parseBackgroundImages(aValue)[0];
