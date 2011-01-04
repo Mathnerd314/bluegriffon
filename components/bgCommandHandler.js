@@ -30,6 +30,7 @@ const nsIWebNavigationInfo   = Components.interfaces.nsIWebNavigationInfo;
 const nsIBrowserSearchService = Components.interfaces.nsIBrowserSearchService;
 const nsICommandLineValidator = Components.interfaces.nsICommandLineValidator;
 const nsIXULAppInfo          = Components.interfaces.nsIXULAppInfo;
+const nsIObserver            = Components.interfaces.nsIObserver;
 
 const NS_BINDING_ABORTED = Components.results.NS_BINDING_ABORTED;
 const NS_ERROR_WONT_HANDLE_CONTENT = 0x805d0001;
@@ -122,6 +123,22 @@ nsBlueGriffonContentHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function bch_handle(cmdLine) {
+    if (!cmdLine.length)
+      return;
+    var ar = cmdLine.handleFlagWithParam("file", false);
+    if (ar) {
+      var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                         .getService(nsIWindowMediator);
+      var e = Services.wm.getEnumerator("bluegriffon");
+      var mostRecent = null;
+      if (e && e.hasMoreElements()) {
+        mostRecent = e.getNext();
+      }
+      if (mostRecent)
+        Services.prompt.alert(null, "mostRecent", mostRecent)
+      else
+        openWindow(null, gBlueGriffonContentHandler.chromeURL, "_blank", "chrome,dialog=no,all", ar);
+    }
   },
 
   helpInfo : "",
@@ -141,7 +158,8 @@ nsDefaultCommandLineHandler.prototype = {
   /* nsISupports */
   QueryInterface : function dch_QI(iid) {
     if (!iid.equals(nsISupports) &&
-        !iid.equals(nsICommandLineHandler))
+        !iid.equals(nsICommandLineHandler) &&
+        !iid.equals(nsIObserver))
       throw Components.results.NS_ERROR_NO_INTERFACE;
 
     return this;
@@ -154,45 +172,70 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
-  var ar = cmdLine.handleFlagWithParam("file", false);
-  if (ar) {
+
+    var url = null;
+#ifndef XP_MACOSX
+    if (cmdLine.length == 1) {
+      var arg = cmdLine.getArgument(0);
+      if (arg[0] != "-")
+        url = arg;
+    }
+#endif
+
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                        .getService(nsIWindowMediator);
     var e = Services.wm.getEnumerator("bluegriffon");
     var mostRecent = null;
-    if (e.hasMoreElements()) {
+    if (e && e.hasMoreElements()) {
       mostRecent = e.getNext();
     }
-    if (mostRecent) {
-      var localFile = UrlUtils.newLocalFile(ar);
-      var ioService =
-        Components.classes["@mozilla.org/network/io-service;1"]
-                  .getService(Components.interfaces.nsIIOService);
-      var fileHandler =
-        ioService.getProtocolHandler("file")
-                 .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-      url = fileHandler.getURLSpecFromFile(localFile);
-      var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
-                         .getInterface(nsIWebNavigation);
-      var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
-      var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
-                            .getInterface(nsIDOMWindow);
-      rootWin.OpenFile(url, true);
-      return;
-    }
-    OpenWindow(null, gBlueGriffonContentHandler.chromeURL,
-                           "_blank",
-                           "chrome,dialog=no,all",
-                           ar, NO_EXTERNAL_URIS);
-    return;
-  }
-  var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
-                         .getService(nsIWindowWatcher);
 
-  return wwatch.openWindow(null, gBlueGriffonContentHandler.chromeURL,
-                           "_blank",
-                           "chrome,dialog=no,all",
-                           cmdLine);
+    var ar = cmdLine.handleFlagWithParam("file", false);
+    if (ar || url) {
+      if (mostRecent) {
+        var localFile = UrlUtils.newLocalFile(ar || url);
+        var ioService =
+          Components.classes["@mozilla.org/network/io-service;1"]
+                    .getService(Components.interfaces.nsIIOService);
+        var fileHandler =
+          ioService.getProtocolHandler("file")
+                   .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+        url = fileHandler.getURLSpecFromFile(localFile);
+        var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
+                           .getInterface(nsIWebNavigation);
+        var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
+        var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
+                              .getInterface(nsIDOMWindow);
+        rootWin.OpenFile(url, true);
+        return;
+      }
+
+#ifdef XP_MACOSX
+      return;
+#else
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               ar || url);
+#endif
+    }
+    if (mostRecent) {
+      mostRecent.focus();
+      return mostRecent;
+    }
+#ifdef XP_MACOSX
+    var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
+                           .getService(nsIWindowWatcher);
+    return wwatch.openWindow(null, "chrome://bluegriffon/content/xul/hiddenWindow.xul",
+                             "_blank",
+                             "chrome,dialog=no,all",
+                             cmdLine);
+#else
+    return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                             "_blank",
+                             "chrome,dialog=no,all",
+                             "");
+#endif
   },
 
   helpInfo : ""

@@ -45,10 +45,11 @@ include $(DEPTH)/config/autoconf.mk
 EXTRA_COMPONENTS = \
 	bgLocationAutocomplete.js \
 	bgLocationAutocomplete.manifest \
-	bgCommandHandler.js \
 	bgCommandHandler.manifest \
   bgCharUnicodeAutocomplete.js \
   bgCharUnicodeAutocomplete.manifest \
-	$(NULL)
+  $(NULL)
+
+EXTRA_PP_COMPONENTS = bgCommandHandler.js
 
 include $(topsrcdir)/config/rules.mk
