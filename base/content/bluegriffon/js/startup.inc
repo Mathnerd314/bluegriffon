@@ -9,11 +9,11 @@ function Startup()
   SetLocationDB();
   var url = null;
   // do we have a URL to open ?
-  /*try {
+  try {
     if (window.arguments && window.arguments[0]) {
       var cl = window.arguments[0];
-      if (cl.length == 2 && cl.getArgument(0) == "-file")
-        url = cl.getArgument(1);
+      if (cl && cl instanceof Components.interfaces.nsISupportsArray) {
+        url = cl.GetElementAt(0).QueryInterface(Components.interfaces.nsISupportsString).data;
         var localFile = UrlUtils.newLocalFile(url);
         var ioService =
           Components.classes["@mozilla.org/network/io-service;1"]
@@ -22,15 +22,12 @@ function Startup()
           ioService.getProtocolHandler("file")
                    .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
         url = fileHandler.getURLSpecFromFile(localFile);
+      }
     }
   }
-  catch(e) { url = null; }*/
+  catch(e) { url = null; }
 
   GetUIElements();
-
-  // let's finish with the url
-  if (url)
-    OpenFile(url, true);
 
   ComposerCommands.setupMainCommands();
   window.updateCommands("style");
@@ -50,6 +47,10 @@ function Startup()
   } catch(ex) {
     dump("Failed to observe prefs: " + ex + "\n");
   }
+
+  // let's finish with the url
+  if (url)
+    setTimeout(OpenFile, 100, url, true);
 
   window.tryToClose = doSaveTabsBeforeQuit;
 }

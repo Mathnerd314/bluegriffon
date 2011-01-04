@@ -134,8 +134,23 @@ nsBlueGriffonContentHandler.prototype = {
       if (e && e.hasMoreElements()) {
         mostRecent = e.getNext();
       }
-      if (mostRecent)
-        Services.prompt.alert(null, "mostRecent", mostRecent)
+      if (mostRecent) {
+        var localFile = UrlUtils.newLocalFile(ar);
+        var ioService =
+          Components.classes["@mozilla.org/network/io-service;1"]
+                    .getService(Components.interfaces.nsIIOService);
+        var fileHandler =
+          ioService.getProtocolHandler("file")
+                   .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+        var url = fileHandler.getURLSpecFromFile(localFile);
+        var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
+                           .getInterface(nsIWebNavigation);
+        var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
+        var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
+                              .getInterface(nsIDOMWindow);
+        rootWin.OpenFile(url, true);
+        return;
+      }
       else
         openWindow(null, gBlueGriffonContentHandler.chromeURL, "_blank", "chrome,dialog=no,all", ar);
     }
@@ -226,7 +241,7 @@ nsDefaultCommandLineHandler.prototype = {
 #ifdef XP_MACOSX
     var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
                            .getService(nsIWindowWatcher);
-    return wwatch.openWindow(null, "chrome://bluegriffon/content/xul/hiddenWindow.xul",
+    return wwatch.openWindow(null, this.hiddenChromeURL,
                              "_blank",
                              "chrome,dialog=no,all",
                              cmdLine);
@@ -237,6 +252,22 @@ nsDefaultCommandLineHandler.prototype = {
                              "");
 #endif
   },
+
+#ifdef XP_MACOSX
+  mHiddenChromeURL : null,
+
+  get hiddenChromeURL() {
+    if (this.mHiddenChromeURL) {
+      return this.mHiddenChromeURL;
+    }
+
+    var prefb = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(nsIPrefBranch);
+    this.mHiddenChromeURL = prefb.getCharPref("bluegriffon.hiddenWindowChromeURL");
+
+    return this.mHiddenChromeURL;
+  },
+#endif
 
   helpInfo : ""
 };

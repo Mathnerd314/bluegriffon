@@ -1,7 +1,8 @@
 #filter substitution
 
-//pref("toolkit.defaultChromeURI", "chrome://bluegriffon/content/xul/bluegriffon.xul");
 pref("bluegriffon.chromeURL", "chrome://bluegriffon/content/xul/bluegriffon.xul");
+pref("bluegriffon.hiddenWindowChromeURL", "chrome://bluegriffon/content/xul/hiddenWindow.xul");
+pref("toolkit.singletonWindowType", "bluegriffon");
 
 // mandatory for XULrunner apps
 // see https://developer.mozilla.org/en/XUL/prefwindow
