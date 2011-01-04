@@ -444,7 +444,8 @@
               aIframe.setUserData("editor", editor, null);
               editor.value = "";
               aIframe.parentNode.selectedIndex = 1;
-              gDialog.sourceModeButton.disabled = false;
+              gDialog.sourceModeButton.removeAttribute("busy");
+              window.updateCommands("mode_switch");
             });
         ]]>
         </body>
@@ -466,7 +467,7 @@
               theme = GetPrefs().getCharPref("bluegriffon.source.theme");
             }
             catch(e) {}
-            gDialog.sourceModeButton.disabled = true;
+            gDialog.sourceModeButton.setAttribute("busy", "true");
             iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
             iframe.setAttribute("src", "resource://app/res/bespin.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");

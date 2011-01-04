@@ -21,14 +21,15 @@ var cmdDummyHTML =
 
 };
 
-var cmdDummy2HTML =
+var cmdViewModeEnabler =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
-            !EditorUtils.activeViewActive);
+            !EditorUtils.activeViewActive &&
+            gDialog.sourceModeButton.getAttribute("busy") != "true");
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},

@@ -306,7 +306,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_new",         cmdNew);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
     commandTable.registerCommand("cmd_renderedHTMLEnabler",  cmdDummyHTML);
-    commandTable.registerCommand("cmd_viewModeEnabler", cmdDummy2HTML);
+    commandTable.registerCommand("cmd_viewModeEnabler", cmdViewModeEnabler);
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
     commandTable.registerCommand("cmd_browse",      cmdBrowseCommand);
 
