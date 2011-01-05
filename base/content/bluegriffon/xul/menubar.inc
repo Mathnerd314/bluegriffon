@@ -324,6 +324,16 @@
         <menuitem label="&aboutComposer.label;"
                   id="aboutName"
                   oncommand="AboutComposer()"/>
+        <menuitem label="&homePage.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.org')"/>
+        <menuseparator/>
+        <menuitem label="&forumsHelpMenu.label;"
+                  oncommand="loadExternalURL('&forums.url;')"/>
+        <menuitem label="&qa.label;"
+                  oncommand="loadExternalURL('http://bugzilla.bluegriffon.org')"/>
+        <menuseparator/>
+        <menuitem label="&addons.label;"
+                  oncommand="loadExternalURL('http://bluegriffon.com')"/>
       </menupopup>
     </menu>
 

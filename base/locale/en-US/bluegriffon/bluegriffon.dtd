@@ -502,3 +502,9 @@
 <!ENTITY converttotable.accesskey            "r">
 <!ENTITY tableProperties.label               "Table Properties…">
 <!ENTITY tableProperties.accesskey           "o">
+
+<!ENTITY forumsHelpMenu.label "User's Community">
+<!ENTITY forums.url "http://groups.google.com/group/bluegriffon/">
+<!ENTITY qa.label "Bugs and Suggestions">
+<!ENTITY homePage.label "Web Site">
+<!ENTITY addons.label "Get Add-ons">
