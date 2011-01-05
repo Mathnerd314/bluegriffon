@@ -1348,6 +1348,19 @@ function UpdateViewMenu()
 
 /*********** CONTEXT MENU ***********/
 
+function GetParentTable(element)
+{
+  var node = element;
+  while (node)
+  {
+    if (node.nodeName.toLowerCase() == "table")
+      return node;
+
+    node = node.parentNode;
+  }
+  return node;
+}
+
 function UpdateEditorContextMenu(event, aMenupopup)
 {
   if (event.explicitOriginalTarget.id == "editorContextMenu") {
@@ -1355,6 +1368,20 @@ function UpdateEditorContextMenu(event, aMenupopup)
     sc.initFromEvent(document.popupRangeParent, document.popupRangeOffset);
 
     gDialog.spellCheckMenu.disabled = !sc.overMisspelling;
+
+    var element = GetParentTable(document.popupNode);
+    var idstart = "separator_before_ctableInsertMenu";
+    var idend   = "cmenu_tableProperties";
+    var elt = gDialog[idstart];
+    var currentId;
+    do {
+      if (element)
+        elt.removeAttribute("hidden");
+      else
+        elt.setAttribute("hidden", "true");
+      currentId = elt.id;
+      elt = elt.nextElementSibling;
+    } while (currentId != idend);
   }
 }
 

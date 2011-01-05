@@ -450,9 +450,9 @@
 <!ENTITY tableSelectMenu.label               "Selectionner">
 <!ENTITY tableselectmenu.accesskey           "s">
 
-<!ENTITY tableSelectMenu2.label              "Table Select">
-<!ENTITY tableInsertMenu2.label              "Table Insert">
-<!ENTITY tableDeleteMenu2.label              "Table Delete">
+<!ENTITY tableSelectMenu2.label              "Sélectionner dans le tableau">
+<!ENTITY tableInsertMenu2.label              "Insérer dans le tableau">
+<!ENTITY tableDeleteMenu2.label              "Supprimer dans le tableau">
 
 <!-- Insert SubMenu -->
 <!ENTITY tableInsertMenu.label               "Insérer">

@@ -502,6 +502,3 @@
 <!ENTITY converttotable.accesskey            "r">
 <!ENTITY tableProperties.label               "Table Properties…">
 <!ENTITY tableProperties.accesskey           "o">
-
-<!ENTITY tableOrCellColor.label              "Table or Cell Background Color…">
-<!ENTITY tableOrCellColor.accesskey          "B">
