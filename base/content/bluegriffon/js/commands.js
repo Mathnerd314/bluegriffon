@@ -310,7 +310,29 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
     commandTable.registerCommand("cmd_browse",      cmdBrowseCommand);
 
-    commandTable.registerCommand("cmd_table",       cmdInsertOrEditTableCommand);
+    commandTable.registerCommand("cmd_table",                cmdInsertOrEditTableCommand);
+    commandTable.registerCommand("cmd_editTable",            bgEditTableCommand);
+    commandTable.registerCommand("cmd_SelectTable",          bgSelectTableCommand);
+    commandTable.registerCommand("cmd_SelectRow",            bgSelectTableRowCommand);
+    commandTable.registerCommand("cmd_SelectColumn",         bgSelectTableColumnCommand);
+    commandTable.registerCommand("cmd_SelectCell",           bgSelectTableCellCommand);
+    commandTable.registerCommand("cmd_SelectAllCells",       bgSelectAllTableCellsCommand);
+    commandTable.registerCommand("cmd_InsertTable",          bgInsertTableCommand);
+    commandTable.registerCommand("cmd_InsertRowAbove",       bgInsertTableRowAboveCommand);
+    commandTable.registerCommand("cmd_InsertRowBelow",       bgInsertTableRowBelowCommand);
+    commandTable.registerCommand("cmd_InsertColumnBefore",   bgInsertTableColumnBeforeCommand);
+    commandTable.registerCommand("cmd_InsertColumnAfter",    bgInsertTableColumnAfterCommand);
+    commandTable.registerCommand("cmd_InsertCellBefore",     bgInsertTableCellBeforeCommand);
+    commandTable.registerCommand("cmd_InsertCellAfter",      bgInsertTableCellAfterCommand);
+    commandTable.registerCommand("cmd_DeleteTable",          bgDeleteTableCommand);
+    commandTable.registerCommand("cmd_DeleteRow",            bgDeleteTableRowCommand);
+    commandTable.registerCommand("cmd_DeleteColumn",         bgDeleteTableColumnCommand);
+    commandTable.registerCommand("cmd_DeleteCell",           bgDeleteTableCellCommand);
+    commandTable.registerCommand("cmd_DeleteCellContents",   bgDeleteTableCellContentsCommand);
+    commandTable.registerCommand("cmd_JoinTableCells",       bgJoinTableCellsCommand);
+    commandTable.registerCommand("cmd_SplitTableCell",       bgSplitTableCellCommand);
+    commandTable.registerCommand("cmd_NormalizeTable",       bgNormalizeTableCommand);
+    commandTable.registerCommand("cmd_ConvertToTable",       bgConvertToTable);
 
     commandTable.registerCommand("cmd_image",       cmdInsertImageCommand);
     commandTable.registerCommand("cmd_anchor",      cmdInsertAnchorCommand);
@@ -473,4 +495,5 @@ var ComposerCommands = {
 #include formatCommands.inc
 #include insertionCommands.inc
 #include editCommands.inc
+#include tableCommands.inc
 

@@ -442,3 +442,64 @@
 <!ENTITY ignoreWord.label "Ne pas tenir compte de ce mot">
 
 <!ENTITY specialChars.label "Caractères spéciaux">
+
+<!-- Table Menu -->
+<!ENTITY tableMenu.label                     "Tableau">
+<!ENTITY tablemenu.accesskey                 "b">
+<!-- Select Submenu -->
+<!ENTITY tableSelectMenu.label               "Selectionner">
+<!ENTITY tableselectmenu.accesskey           "s">
+
+<!ENTITY tableSelectMenu2.label              "Table Select">
+<!ENTITY tableInsertMenu2.label              "Table Insert">
+<!ENTITY tableDeleteMenu2.label              "Table Delete">
+
+<!-- Insert SubMenu -->
+<!ENTITY tableInsertMenu.label               "Insérer">
+<!ENTITY tableinsertmenu.accesskey           "i">
+<!ENTITY tableTable.label                    "Tableau">
+<!ENTITY tabletable.accesskey                "t">
+<!ENTITY tableRow.label                      "Ligne">
+<!ENTITY tableRows.label                     "Ligne(s)">
+<!ENTITY tablerow.accesskey                  "l">
+<!ENTITY tableRowAbove.label                 "Ligne au-dessus">
+<!-- uses tablerow.accesskey -->
+<!ENTITY tableRowBelow.label                 "Ligne au-dessous">
+<!ENTITY tablerowbelow.accesskey             "u">
+<!ENTITY tableColumn.label                   "Colonne">
+<!ENTITY tableColumns.label                  "Colonne(s)">
+<!ENTITY tablecolumn.accesskey               "o">
+<!ENTITY tableColumnBefore.label             "Colonne avant">
+<!-- uses tablecolumn.accesskey -->
+<!ENTITY tableColumnAfter.label              "Colonne après">
+<!ENTITY tablecolumnafter.accesskey          "a">
+<!ENTITY tableCell.label                     "Cellule">
+<!ENTITY tableCells.label                    "Cellule(s)">
+<!ENTITY tablecell.accesskey                 "c">
+<!ENTITY tableCellContents.label             "Contenu des cellules">
+<!ENTITY tablecellcontents.accesskey         "n">
+<!ENTITY tableAllCells.label                 "Toutes les cellules">
+<!ENTITY tableCellBefore.label               "Cellule avant">
+<!ENTITY tableallcells.accesskey             "a">
+<!-- uses tablecell.accesskey -->
+<!ENTITY tableCellAfter.label                "Cellule après">
+<!ENTITY tablecellafter.accesskey            "s">
+<!-- Delete SubMenu -->
+<!ENTITY tableDeleteMenu.label               "Supprimer">
+<!ENTITY tabledeletemenu.accesskey           "S">
+
+<!ENTITY tableFix.label                      "Fix Table Layout">
+<!ENTITY tablefix.accesskey                  "f">
+<!-- text for "Join Cells" is in editor.properties 
+     ("JoinSelectedCells" and "JoinCellToRight")
+     the access key must exist in both of those strings
+     But value must be set here for accesskey to draw properly
+-->
+<!ENTITY tableJoinCells.label                "Joindre les cellules">
+<!ENTITY tablejoincells.accesskey            "j">
+<!ENTITY tableSplitCell.label                "Exploser la cellule jointe">
+<!ENTITY tablesplitcell.accesskey            "c">
+<!ENTITY convertToTable.label                "Créer un tableau d'après la sélection">
+<!ENTITY converttotable.accesskey            "r">
+<!ENTITY tableProperties.label               "Propriétés du tableau…">
+<!ENTITY tableProperties.accesskey           "o">

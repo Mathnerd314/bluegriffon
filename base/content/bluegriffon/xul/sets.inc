@@ -179,6 +179,36 @@
   <command id="cmd_cleanup"         oncommand="goDoCommand('cmd_cleanup')"      label="&markupCleanerCmd.label;" accesskey="&markupcleaner.accesskey;"/>
 </commandset>
 
+<commandset id="composerTableMenuItems"
+            commandupdater="true"
+            events="create,style,mode_switch"
+            oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+  <!-- Table menu -->
+  <command id="cmd_SelectTable"         oncommand="goDoCommand('cmd_SelectTable')"/>
+  <command id="cmd_SelectRow"           oncommand="goDoCommand('cmd_SelectRow')"/>
+  <command id="cmd_SelectColumn"        oncommand="goDoCommand('cmd_SelectColumn')"/>
+  <command id="cmd_SelectCell"          oncommand="goDoCommand('cmd_SelectCell')"/>
+  <command id="cmd_SelectAllCells"      oncommand="goDoCommand('cmd_SelectAllCells')"/>
+  <command id="cmd_InsertTable"         oncommand="goDoCommand('cmd_InsertTable')"/>
+  <command id="cmd_InsertRowAbove"      oncommand="goDoCommand('cmd_InsertRowAbove')"/>
+  <command id="cmd_InsertRowBelow"      oncommand="goDoCommand('cmd_InsertRowBelow')"/>
+  <command id="cmd_InsertColumnBefore"  oncommand="goDoCommand('cmd_InsertColumnBefore')"/>
+  <command id="cmd_InsertColumnAfter"   oncommand="goDoCommand('cmd_InsertColumnAfter')"/>
+  <command id="cmd_InsertCellBefore"    oncommand="goDoCommand('cmd_InsertCellBefore')"/>
+  <command id="cmd_InsertCellAfter"     oncommand="goDoCommand('cmd_InsertCellAfter')"/>
+  <command id="cmd_DeleteTable"         oncommand="goDoCommand('cmd_DeleteTable')"/>
+  <command id="cmd_DeleteRow"           oncommand="goDoCommand('cmd_DeleteRow')"/>
+  <command id="cmd_DeleteColumn"        oncommand="goDoCommand('cmd_DeleteColumn')"/>
+  <command id="cmd_DeleteCell"          oncommand="goDoCommand('cmd_DeleteCell')"/>
+  <command id="cmd_DeleteCellContents"  oncommand="goDoCommand('cmd_DeleteCellContents')"/>
+  <command id="cmd_NormalizeTable"      oncommand="goDoCommand('cmd_NormalizeTable')"/>
+  <command id="cmd_JoinTableCells"      oncommand="goDoCommand('cmd_JoinTableCells')"/>
+  <command id="cmd_SplitTableCell"      oncommand="goDoCommand('cmd_SplitTableCell')"/>
+  <command id="cmd_ConvertToTable"      oncommand="goDoCommand('cmd_ConvertToTable')"/>
+  <command id="cmd_TableOrCellColor"    oncommand="goDoCommand('cmd_TableOrCellColor')"/>
+  <command id="cmd_editTable"           oncommand="goDoCommand('cmd_editTable')"/>
+</commandset>
+
 <keyset id="editorKeys">
   <key id="key_newNavigator" key="n" modifiers="accel" observes="cmd_new"/>
 </keyset>

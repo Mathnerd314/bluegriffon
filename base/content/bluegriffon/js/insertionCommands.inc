@@ -15,7 +15,7 @@ var cmdInsertOrEditTableCommand =
   doCommand: function(aCommand)
   {
     var element = EditorUtils.getObjectForProperties(
-          ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "cpation"]);
+          ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "caption"]);
     if (element) {
       OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
       return;
