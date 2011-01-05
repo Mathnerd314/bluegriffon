@@ -46,8 +46,6 @@
 
         display: -moz-box;
         -moz-box-orient: vertical;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
         width: 100%;
         height: 100%;
         margin: 0;
@@ -55,7 +53,6 @@
 
     .container .north {
         -moz-box-ordinal-group: 1;
-        -webkit-box-ordinal-group: 1;
     }
 
     .container .center-container {
@@ -63,32 +60,23 @@
         -moz-box-orient: horizontal;
         -moz-box-ordinal-group: 2;
         -moz-box-flex: 1;
-        display: -webkit-box;
-        -webkit-box-orient: horizontal;
-        -webkit-box-ordinal-group: 2;
-        -webkit-box-flex: 1;
     }
 
     .container .south {
         -moz-box-ordinal-group: 3;
-        -webkit-box-ordinal-group: 3;
     }
 
     .container .center-container .west {
         -moz-box-ordinal-group: 1;
-        -webkit-box-ordinal-group: 1;
     }
 
     .container .center-container .center {
         -moz-box-flex: 1;
         -moz-box-ordinal-group: 2;
-        -webkit-box-flex: 1;
-        -webkit-box-ordinal-group: 2;
     }
 
     .container .center-container .east {
         -moz-box-ordinal-group: 3;
-        -webkit-box-ordinal-group: 3;
     }
 
     input, textarea {
@@ -101,14 +89,10 @@
         border: @control_border;
         font-size: 8pt;
         -moz-border-radius: @control_border_radius;
-        -webkit-border-radius: @control_border_radius;
         box-shadow:
             rgba(255,255,255,0.3) 0px 0px 2px,
             inset rgba(0,0,0,0.3) 0px 0px 4px;
         -moz-box-shadow:
-            rgba(255,255,255,0.3) 0px 0px 2px,
-            inset rgba(0,0,0,0.3) 0px 0px 4px;
-        -webkit-box-shadow:
             rgba(255,255,255,0.3) 0px 0px 2px,
             inset rgba(0,0,0,0.3) 0px 0px 4px;
     }
@@ -122,8 +106,6 @@
             inset opacity(@control_active_inset_color, 0.3) 0px 0px 6px;
         -moz-box-shadow: opacity(@control_active_inset_color, 0.6) 0px 0px 2px,
             inset opacity(@control_active_inset_color, 0.3) 0px 0px 6px;
-        -webkit-box-shadow: opacity(@control_active_inset_color, 0.6) 0px 0px 2px,
-            inset opacity(@control_active_inset_color, 0.3) 0px 0px 6px;
     }
 
     input[type=submit], input[type=button] {
@@ -135,16 +117,10 @@
         margin-left: 8px;
         color: @button_color;
         background: transparent -moz-linear-gradient(top, @button_bg, @button_bg2);
-        background: transparent -webkit-gradient(linear, 50% 0%, 50% 100%, from(@button_bg), to(@button_bg2));
 
         border: 1px solid @button_border;
         -moz-border-radius: @control_border_radius;
-        -webkit-border-radius: @control_border_radius;
         -moz-box-shadow:
-            inset rgba(255, 255, 255, 0.2) 0 1px 0px,
-            inset rgba(0, 0, 0, 0.2) 0 -1px 0px,
-            rgba(0, 0, 0, 0.1) 0px 1px 2px;
-        -webkit-box-shadow:
             inset rgba(255, 255, 255, 0.2) 0 1px 0px,
             inset rgba(0, 0, 0, 0.2) 0 -1px 0px,
             rgba(0, 0, 0, 0.1) 0px 1px 2px;
@@ -173,9 +149,7 @@
         text-shadow: @pane_text_shadow;
 
         -moz-border-radius: @pane_border_radius;
-        -webkit-border-radius: @pane_border_radius;
         -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px;
-        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px;
 
         a {
             color: @pane_a_color;
