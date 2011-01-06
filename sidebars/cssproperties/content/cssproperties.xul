@@ -222,12 +222,17 @@
 
     <panel level="floating" id="linearGradientPanel" noautohide="true">
       <hbox align="top">
-        <groupbox>
-          <caption label="&preview.caption;"/>
-          <spacer flex="1"/>
-          <vbox id="linearGradientPreview"/>
-          <spacer flex="1"/>
-        </groupbox>
+        <vbox align="center">
+          <groupbox>
+            <caption label="&preview.caption;"/>
+            <spacer flex="1"/>
+            <vbox id="linearGradientPreview"/>
+            <spacer flex="1"/>
+          </groupbox>
+          <checkbox id="repeatingGradientCheckbox"
+                    label="&repeating.label;"
+                    oncommand="RepaintGradient()"/>
+        </vbox>
         <tabbox id="linearGradientPropertiesTabbox">
           <tabs>
             <tab label="&colorStops.tab;"/>

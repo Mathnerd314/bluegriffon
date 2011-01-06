@@ -123,7 +123,9 @@ function RepaintGradient()
                                                           : "";
   var hOffset = gDialog.linearGradientHorizOffsetCheckbox.checked ? gDialog.linearGradientHorizOffset.value
                                                           : "";
-  var type = gDialog.shapeAndSizeTab.hidden ? "-moz-linear-gradient(" : "-moz-radial-gradient(";
+  var type = gDialog.shapeAndSizeTab.hidden
+             ? (gDialog.repeatingGradientCheckbox.checked ? "-moz-repeating-linear-gradient(" : "-moz-linear-gradient(")
+             : (gDialog.repeatingGradientCheckbox.checked ? "-moz-repeating--radial-gradient(" : "-moz-radial-gradient(");
   var str = type + ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
   if (!gDialog.shapeAndSizeTab.hidden) {
     var shape = gDialog.radialGradientShape.selectedItem.value;

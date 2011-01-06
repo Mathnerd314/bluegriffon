@@ -81,6 +81,8 @@
 <!ENTITY angle.tab "Angle">
 <!ENTITY startingPoint.tab "Starting point">
 
+<!ENTITY repeating.label "Repeating">
+
 <!ENTITY angle.checkbox "Angle:">
 <!ENTITY startingPoint.checkbox "Starting point:">
 <!ENTITY horizOffset.checkbox "Horiz. offset:">

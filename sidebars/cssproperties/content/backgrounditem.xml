@@ -257,6 +257,8 @@
 	
 	                  if (_self.parsedValue) {
 	                    var gradient = _self.parsedValue;
+                      if ("isRepeating" in gradient)
+                        gDialog.repeatingGradientCheckbox.checked = gradient.isRepeating;
 	                    if ("angle" in gradient) {
 	                      gDialog.linearGradientAngleCheckbox.checked = true;
 	                      gDialog.linearGradientAngleRotator.value = parseFloat(gradient.angle);

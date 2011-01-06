@@ -43,6 +43,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
+Components.utils.import("resource://app/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
@@ -68,7 +69,17 @@ const kCSS_VENDOR_VALUES = {
                            "webkit": FilterRadialGradientForOutput,
                            "presto": "",
                            "trident": "",
-                           "generic": FilterRadialGradientForOutput }
+                           "generic": FilterRadialGradientForOutput },
+  "-moz-repeating-linear-gradient": {"webkit20110101": "",
+                           "webkit": FilterRepeatingGradientForOutput,
+                           "presto": "",
+                           "trident": "",
+                           "generic": FilterRepeatingGradientForOutput },
+  "-moz-repeating-radial-gradient": {"webkit20110101": "",
+                           "webkit": FilterRepeatingGradientForOutput,
+                           "presto": "",
+                           "trident": "",
+                           "generic": FilterRepeatingGradientForOutput }
 };
 
 const kCSS_VENDOR_PREFIXES = {"lastUpdate":1290441007,"properties":[{"gecko":"","webkit":"","presto":"","trident":"-ms-accelerator","status":"P"},
@@ -517,13 +528,21 @@ var CssInspector = {
   parseGradient: function (parser, token)
   {
     var isRadial = false;
-    var gradient = {};
+    var gradient = { isRepeating: false };
     if (token.isNotNull()) {
       if (token.isFunction("-moz-linear-gradient(") ||
-          token.isFunction("-moz-radial-gradient(")) {
-        if (token.isFunction("-moz-radial-gradient(")) {
+          token.isFunction("-moz-radial-gradient(") ||
+          token.isFunction("-moz-repeating-linear-gradient(") ||
+          token.isFunction("-moz-repeating-radial-gradient(")) {
+        if (token.isFunction("-moz-radial-gradient(") ||
+            token.isFunction("-moz-repeating-radial-gradient(")) {
           gradient.isRadial = true;
         }
+        if (token.isFunction("-moz-repeating-linear-gradient(") ||
+            token.isFunction("-moz-repeating-radial-gradient(")) {
+          gradient.isRepeating = true;
+        }
+        
 
         token = parser.getToken(true, true);
         var haveGradientLine = false;
@@ -926,7 +945,9 @@ var CssInspector = {
         token = parser.getToken(true, true);
       }
       else if (token.isFunction("-moz-linear-gradient(") ||
-               token.isFunction("-moz-radial-gradient(")) {
+               token.isFunction("-moz-radial-gradient(") ||
+               token.isFunction("-moz-repeating-linear-gradient(") ||
+               token.isFunction("-moz-repeating-radial-gradient(")) {
         var gradient = this.parseGradient(parser, token);
         backgrounds.push( { type: gradient.isRadial ? "radial-gradient" : "linear-gradient", value: gradient });
         token = parser.getToken(true, true);
@@ -944,7 +965,9 @@ var CssInspector = {
 
   serializeGradient: function(gradient)
   {
-    var s = gradient.isRadial ? "-moz-radial-gradient(" : "-moz-linear-gradient(";
+    var s = gradient.isRadial
+              ? (gradient.isRepeating ? "-moz-repeating-radial-gradient(" : "-moz-radial-gradient(" )
+              : (gradient.isRepeating ? "-moz-repeating-linear-gradient(" : "-moz-linear-gradient(" );
     if (gradient.angle || gradient.position)
       s += (gradient.angle ? gradient.angle : "") +
            " " +
@@ -3042,6 +3065,18 @@ CSSParser.prototype = {
             else
               return "";
           }
+        }
+
+        else if (!bgImage &&
+                 (token.isFunction("-moz-linear-gradient(")
+                  || token.isFunction("-moz-radial-gradient(")
+                  || token.isFunction("-moz-repeating-linear-gradient(")
+                  || token.isFunction("-moz-repeating-radial-gradient("))) {
+          var gradient = CssInspector.parseGradient(this, token);
+          if (gradient)
+            bgImage = CssInspector.serializeGradient(gradient);
+          else
+            return "";
         }
 
         else {
@@ -5175,10 +5210,10 @@ function FilterRadialGradientForOutput(aValue, aEngine)
   if (aEngine == "generic")
     return aValue.substr(5);
 
-  if (aEngine == "webkit")
+  else if (aEngine == "webkit")
     return aValue.replace( /\-moz\-/g , "-webkit-")
 
-  if (aEngine != "webkit20110101")
+  else if (aEngine != "webkit20110101")
     return "";
 
   var g = CssInspector.parseBackgroundImages(aValue)[0];
@@ -5229,3 +5264,13 @@ function FilterRadialGradientForOutput(aValue, aEngine)
   return str;
 }
 
+function FilterRepeatingGradientForOutput(aValue, aEngine)
+{
+  if (aEngine == "generic")
+    return aValue.substr(5);
+
+  else if (aEngine == "webkit")
+    return aValue.replace( /\-moz\-/g , "-webkit-")
+
+  return "";
+}
