@@ -6,11 +6,11 @@ function GeneralSectionIniter(aElt, aRuleset)
 
   var fontFamily = CssInspector.getCascadedValue(aRuleset, "font-family");
   if (fontFamily) {
-	  var fonts = fontFamily.split(",");
-	  fonts.forEach(function(aElt, aIndex, aArray) {
-	      gDialog.fontFamilyListbox.appendItem(aElt, aElt);
-	    });
-	  //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
+    var fonts = fontFamily.split(",");
+    fonts.forEach(function(aElt, aIndex, aArray) {
+        gDialog.fontFamilyListbox.appendItem(aElt, aElt);
+      });
+    //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
   }
 
   var webFonts = CssInspector.getWebFonts(aElt.ownerDocument);

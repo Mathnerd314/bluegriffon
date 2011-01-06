@@ -463,10 +463,10 @@ function ApplyBorderImage(aZeroWidths)
       gDialog[id].value = "0px";
   }
   if (aZeroWidths) {
-	  ZeroTextboxIfNeededed("borderSliceLeftWidthMenulist");
-	  ZeroTextboxIfNeededed("borderSliceRightWidthMenulist");
-	  ZeroTextboxIfNeededed("borderSliceTopWidthMenulist");
-	  ZeroTextboxIfNeededed("borderSliceBottomWidthMenulist");
+    ZeroTextboxIfNeededed("borderSliceLeftWidthMenulist");
+    ZeroTextboxIfNeededed("borderSliceRightWidthMenulist");
+    ZeroTextboxIfNeededed("borderSliceTopWidthMenulist");
+    ZeroTextboxIfNeededed("borderSliceBottomWidthMenulist");
   }
   var leftWidth   = gDialog.borderSliceLeftWidthMenulist.value;
   var rightWidth  = gDialog.borderSliceRightWidthMenulist.value;

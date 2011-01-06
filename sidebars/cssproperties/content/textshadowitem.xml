@@ -28,23 +28,23 @@
           <xul:row align="center">
             <xul:label value="&colorTextShadow.label;"/>
             <xul:hbox>
-	            <xul:ecolorpicker anonid="color"
-			                          color="black"
-			                          colorObjectId="TextShadowColor"
-			                          windowTitle="&colorTextShadow.title;"
-			                          showTransparency="true"
+              <xul:ecolorpicker anonid="color"
+                                color="black"
+                                colorObjectId="TextShadowColor"
+                                windowTitle="&colorTextShadow.title;"
+                                showTransparency="true"
                                 oncommand="ReapplyTextShadows()"/>
             </xul:hbox>
             <xul:label value="&blurRadiusTextShadow.label;"/>
             <xul:hbox>
-	            <xul:menulist editable="true" anonid="blurRadius"
-			                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-			                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
-	              <xul:menupopup
-	                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
-	            </xul:menulist>
-	            <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-	                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+              <xul:menulist editable="true" anonid="blurRadius"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                <xul:menupopup
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+              </xul:menulist>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
             </xul:hbox>
           </xul:row>
           <xul:row align="center">

@@ -130,12 +130,12 @@ function Shutdown()
                                                Inspect);
     gMain.NotifierUtils.removeNotifierCallback("afterLeavingSourceMode",
                                                Inspect);
-	  gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
-			                                          RedrawAll,
-			                                          window);
-	  gMain.NotifierUtils.removeNotifierCallback("panelClosed",
-			                                          PanelClosed,
-			                                          window);
+    gMain.NotifierUtils.removeNotifierCallback("redrawPanel",
+                                                RedrawAll,
+                                                window);
+    gMain.NotifierUtils.removeNotifierCallback("panelClosed",
+                                                PanelClosed,
+                                                window);
   }
 }
 
@@ -296,7 +296,7 @@ function ApplyStyles(aStyles)
   var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
-	    // if the element has no ID, ask for one...
+      // if the element has no ID, ask for one...
       if (gCurrentElement.id)
         editor.beginTransaction();
       else if (cssPolicy == "automatic") {
@@ -307,45 +307,45 @@ function ApplyStyles(aStyles)
         editor.setAttribute(gCurrentElement, "id", id);
       }
       else {
-	      var result = {};
-	      if (!PromptUtils.prompt(window,
-	                              gDialog.csspropertiesBundle.getString("EnterAnId"),
-	                              gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-	                              result)) {
+        var result = {};
+        if (!PromptUtils.prompt(window,
+                                gDialog.csspropertiesBundle.getString("EnterAnId"),
+                                gDialog.csspropertiesBundle.getString("EnterUniqueId"),
+                                result)) {
           Inspect();
-	        return;
+          return;
         }
         editor.beginTransaction();
-	      editor.setAttribute(gCurrentElement, "id", result.value);
-	    }
+        editor.setAttribute(gCurrentElement, "id", result.value);
+      }
       break;
 
     case "class":
       if (!gDialog.classPicker.value) {
         if (cssPolicy == "automatic") {
-	        var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
-	        className = prefix + new Date().valueOf() +
-	                          "_" + Math.round(Math.random() * 100000);
-	        editor.beginTransaction();
-	        editor.setAttribute(gCurrentElement, "class", className);
+          var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
+          className = prefix + new Date().valueOf() +
+                            "_" + Math.round(Math.random() * 100000);
+          editor.beginTransaction();
+          editor.setAttribute(gCurrentElement, "class", className);
           gDialog.classPicker.value = className;
         }
         else {
-	        PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
-	                                   gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
-	                                   window);
+          PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
+                                     gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
+                                     window);
           Inspect();
-	        return;
+          return;
         }
       }
       else {
         editor.beginTransaction();
-	      // make sure the element carries the user-selected class
-	      if (!gCurrentElement.classList.contains(gDialog.classPicker.value)) {
+        // make sure the element carries the user-selected class
+        if (!gCurrentElement.classList.contains(gDialog.classPicker.value)) {
           var c = (gCurrentElement.classList ? gCurrentElement.classList + " " : "") + className;
-	        editor.setAttribute(gCurrentElement, "class", className);
+          editor.setAttribute(gCurrentElement, "class", className);
         }
-	      className = gDialog.classPicker.value;
+        className = gDialog.classPicker.value;
       }
       break;
 
@@ -404,19 +404,19 @@ function FindLastEditableStyleSheet()
       mediaArray.forEach(function(element,index,array) {array[index] = array[index].toLowerCase().trim()});
       var isForScreen = (!media || media == "all" || mediaArray.indexOf("screen") != -1);
       if (name == "link") {
-	      var uri = Components.classes["@mozilla.org/network/io-service;1"]
-	                              .getService(Components.interfaces.nsIIOService)
-	                              .newURI(child.sheet.href, null, null);
-	      if (uri.scheme == "file" && isForScreen) {
+        var uri = Components.classes["@mozilla.org/network/io-service;1"]
+                                .getService(Components.interfaces.nsIIOService)
+                                .newURI(child.sheet.href, null, null);
+        if (uri.scheme == "file" && isForScreen) {
           // is the file writable ?
           var file = UrlUtils.newLocalFile(UrlUtils.makeAbsoluteUrl(child.sheet.href));
-	        if (file.isWritable())
+          if (file.isWritable())
             found = true;
           else
             child = child.previousElementSibling;
         }
-	      else
-	        child = child.previousElementSibling;
+        else
+          child = child.previousElementSibling;
       }
       else if (isForScreen)
         found = true;
@@ -615,49 +615,49 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
   var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + units + ")*", "");
   var match = value.match( r );
   if (aElt.getAttribute("property")) {
-	  if (!value ||
-	      (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
-	       (match[2] || units[0] == "|")) ||
-	      idents.indexOf(value) != -1) {
-	    var toApply = [ {
-		                    property: aElt.getAttribute("property"),
-		                    value: value
-	                    } ];
-	    if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
-	      if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
-		      var edgesArray = aElt.getAttribute("fouredges").split(",");
-		      for (var i = 0; i < edgesArray.length; i++)
-			      toApply.push({
-			                     property: edgesArray[i],
-			                     value: value
-			                   } );
-	      }
-	    }
-	    if (aElt.hasAttribute("checkimageratio") &&
-	        gCurrentElement.nodeName.toLowerCase() == "img" &&
-	        gDialog.preserveImageRatioCheckbox.checked) {
-	      var id = aElt.id;
-	      var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
-	      var otherValue = null;
-	      if (value == "auto" ||
-	          (value && value.indexOf("%") != -1))
-	        otherValue = value;
-	      else if (match) {
-	        var ratio = (id == "widthMenulist") ? gCurrentElement.naturalHeight / gCurrentElement.naturalWidth :
-	                                              gCurrentElement.naturalWidth / gCurrentElement.naturalHeight;
-	        otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
-	      }
-	
-	      if (value) {
-          gDialog[otherId].value = otherValue;
-	        toApply.push({
-	                       property: gDialog[otherId].getAttribute("property"),
-	                       value: otherValue
-	                     } );
+    if (!value ||
+        (match && !(!aAllowNegative && parseFloat(match[1]) < 0) &&
+         (match[2] || units[0] == "|")) ||
+        idents.indexOf(value) != -1) {
+      var toApply = [ {
+                        property: aElt.getAttribute("property"),
+                        value: value
+                      } ];
+      if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
+        if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {
+          var edgesArray = aElt.getAttribute("fouredges").split(",");
+          for (var i = 0; i < edgesArray.length; i++)
+            toApply.push({
+                           property: edgesArray[i],
+                           value: value
+                         } );
         }
-	    }
-	    ApplyStyles(toApply);
-	  }
+      }
+      if (aElt.hasAttribute("checkimageratio") &&
+          gCurrentElement.nodeName.toLowerCase() == "img" &&
+          gDialog.preserveImageRatioCheckbox.checked) {
+        var id = aElt.id;
+        var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
+        var otherValue = null;
+        if (value == "auto" ||
+            (value && value.indexOf("%") != -1))
+          otherValue = value;
+        else if (match) {
+          var ratio = (id == "widthMenulist") ? gCurrentElement.naturalHeight / gCurrentElement.naturalWidth :
+                                                gCurrentElement.naturalWidth / gCurrentElement.naturalHeight;
+          otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
+        }
+  
+        if (value) {
+          gDialog[otherId].value = otherValue;
+          toApply.push({
+                         property: gDialog[otherId].getAttribute("property"),
+                         value: otherValue
+                       } );
+        }
+      }
+      ApplyStyles(toApply);
+    }
   }
   if (aCallback)
     aCallback(aElt);
@@ -846,10 +846,10 @@ function SetColor(aElt)
 {
   var color = aElt.color;
   var toApply = [
-	                {
-	                  property: aElt.getAttribute("property"),
-	                  value: color
-	                }
+                  {
+                    property: aElt.getAttribute("property"),
+                    value: color
+                  }
                 ];
   if (aElt.hasAttribute("fouredges") && aElt.hasAttribute("fouredgescontrol")) {
     if (document.getElementById(aElt.getAttribute("fouredgescontrol")).checked) {

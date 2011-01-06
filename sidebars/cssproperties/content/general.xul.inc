@@ -12,31 +12,31 @@
             <row align="top">
               <label value="Font family:"/>
               <vbox>
-				        <listbox id="fontFamilyListbox"
-				                 onselect="OnFontFamilySelect(this)"
-				                 rows="6"/>
-				
-				        <hbox class="listboxBg">
-				          <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
-				                         oncommand="AddFont(event)">
-				            <menupopup id="addFontMenupopup">
-				              <checkbox id="viewFontsCheckbox" label="View fonts"/>
-				              <menuseparator/>
-				              <menuitem label="Arial, Helvetica, sans-serif" global="true"
-				                        style="font-family: Arial, Helvetica, sans-serif" />
-				              <menuitem label="Time New Roman, Time, serif" global="true"
-				                        style="font-family: Time New Roman, Time, serif"/>
-				              <menuitem label="Courier New, Courier, monospace" global="true"
-				                        style="font-family: Courier New, Courier, monospace"/>
+                <listbox id="fontFamilyListbox"
+                         onselect="OnFontFamilySelect(this)"
+                         rows="6"/>
+        
+                <hbox class="listboxBg">
+                  <toolbarbutton id="addFontButton" class="listboxBgPlusButton" type="menu"
+                                 oncommand="AddFont(event)">
+                    <menupopup id="addFontMenupopup">
+                      <checkbox id="viewFontsCheckbox" label="View fonts"/>
+                      <menuseparator/>
+                      <menuitem label="Arial, Helvetica, sans-serif" global="true"
+                                style="font-family: Arial, Helvetica, sans-serif" />
+                      <menuitem label="Time New Roman, Time, serif" global="true"
+                                style="font-family: Time New Roman, Time, serif"/>
+                      <menuitem label="Courier New, Courier, monospace" global="true"
+                                style="font-family: Courier New, Courier, monospace"/>
                       <menuseparator id="beforeWebfontsMenuseparator"/>
                       <menuseparator id="afterWebfontsMenuseparator" hidden="true"/>
-				            </menupopup>
-				          </toolbarbutton>
-				          <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
-				                         disabled="true"
-				                         oncommand="DeleteFont()"/>
-				          
-				        </hbox>
+                    </menupopup>
+                  </toolbarbutton>
+                  <toolbarbutton id="removeFontButton" class="listboxBgMinusButton"
+                                 disabled="true"
+                                 oncommand="DeleteFont()"/>
+                  
+                </hbox>
               </vbox>
             </row>
 
@@ -85,17 +85,17 @@
 
             <row align="center">
               <label value="&fontWeight.label;"/>
-		          <hbox align="center">
-		            <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
-		                           style="font-weight:bold" id="fontWeightBoldButton" group="font-weight"
-		                           oncommand="ToggleProperty(this)"/>
-		            <toolbarbutton class="multibutton" label="&fontWeightLighter.label;" value="lighter" property="font-weight" type="checkbox"
-		                           style="font-weight: lighter" id="fontWeightLighterButton" group="font-weight"
-		                           oncommand="ToggleProperty(this)"/>
-		            <toolbarbutton class="multibutton" label="&fontWeightBolder.label;" value="bolder" property="font-weight" type="checkbox"
-		                           style="font-weight: bolder" id="fontWeightBolderButton" group="font-weight"
-		                           oncommand="ToggleProperty(this)"/>
-		          </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
+                               style="font-weight:bold" id="fontWeightBoldButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&fontWeightLighter.label;" value="lighter" property="font-weight" type="checkbox"
+                               style="font-weight: lighter" id="fontWeightLighterButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&fontWeightBolder.label;" value="bolder" property="font-weight" type="checkbox"
+                               style="font-weight: bolder" id="fontWeightBolderButton" group="font-weight"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
             </row>
 
             <row align="center">
@@ -112,35 +112,35 @@
 
             <row align="center">
               <label value="&textDecoration.label;"/>
-			        <hbox align="center">
-			          <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
-			                         style="text-decoration: underline" agregator="text-decoration"
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
+                               style="text-decoration: underline" agregator="text-decoration"
                                id="textDecorationUnderlineButton"
                                oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
-			                         style="text-decoration: overline" agregator="text-decoration"
+                <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
+                               style="text-decoration: overline" agregator="text-decoration"
                                id="textDecorationOverlineButton"
                                oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
-			                         style="text-decoration: line-through" agregator="text-decoration"
+                <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
+                               style="text-decoration: line-through" agregator="text-decoration"
                                id="textDecorationLinethroughButton"
                                oncommand="ToggleProperty(this)"/>
-			        </hbox>
+              </hbox>
             </row>
 
             <row align="center">
               <label value="&textTransform.label;"/>
-			        <hbox align="center">
-			          <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
-			                         group="text-transform" id="textTransformLowercaseButton"
-			                         oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="&textTransformUppercase.label;" value="uppercase" property="text-transform" type="checkbox"
-			                         group="text-transform" id="textTransformUppercaseButton"
-			                         oncommand="ToggleProperty(this)"/>
-			          <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
-			                         group="text-transform" id="textTransformLinethroughButton"
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformLowercaseButton"
                                oncommand="ToggleProperty(this)"/>
-			        </hbox>
+                <toolbarbutton class="multibutton" label="&textTransformUppercase.label;" value="uppercase" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformUppercaseButton"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&textTransformCapitalize.label;" value="capitalize" property="text-transform" type="checkbox"
+                               group="text-transform" id="textTransformLinethroughButton"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
             </row>
 
             <row align="center">

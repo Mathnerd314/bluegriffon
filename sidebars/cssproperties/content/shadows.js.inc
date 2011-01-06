@@ -127,9 +127,9 @@ function ReapplyBoxShadows()
     var item = items[i];
     var s;
     if (!item.none) {
-	    s = (item.inset ? "inset " : "");
-	    s += item.offsetX + " " + item.offsetY + " " + item.blurRadius + " " +
-	         item.spreadRadius + " " + item.color;
+      s = (item.inset ? "inset " : "");
+      s += item.offsetX + " " + item.offsetY + " " + item.blurRadius + " " +
+           item.spreadRadius + " " + item.color;
     }
     else
      s = "none";

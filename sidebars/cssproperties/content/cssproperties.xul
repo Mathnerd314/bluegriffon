@@ -72,64 +72,64 @@
     <panel level="top" noautohide="true" id="bezierPanel"
            alwaysontop="true">
       <hbox align="center">
-	      <stack>
-			    <svg xmlns:svg="http://www.w3.org/2000/svg"
-	             xmlns="http://www.w3.org/2000/svg"
-	             xmlns:xlink="http://www.w3.org/1999/xlink"
-	             version="1.1" width="156" height="156" id="svg2">
-			      <style type="text/css"> #p1_path {stroke:#fa0000;marker-end:url(#DotL)} #p2_path {stroke:#fa0000;marker-start:url(#DotL)} path {fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1} #grid_path {stroke-width:0.1px} #axis_unit_dec #grid_path {stroke-width:0.5px} #axis_unit path {} text{font-size:9.33333px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Grande} #curve{fill:none;stroke:#000000;stroke-width:1px} </style>
-			      <defs>
-			
-			        <path d="M 0,-100 V 0" class="grid_path" id="grid_path" />
-			        <marker orient="auto" refY="0.0" refX="0.0" id="DotL" style="overflow:visible">
-			          <circle cx="0" cy="0" r="3" style="stroke:#000;stroke-width:1px;fill:#F00"/>
-			        </marker>
-			      </defs>
-			      <g>
-			        <g transform="translate(50,10)">
-			          <g transform="translate(50,50)" id="grid">
-			            <use transform="matrix(0,1,-1,0,0,0)" xlink:href="#axis" />
-			
-			            <g id="axis">
-			              <g transform="translate(-50,50)" id="axis_unit_dec">
-			                <path d="M 0,0 V 10" />
-			                <use xlink:href="#grid_path" />
-			              </g>
-			              <g transform="translate(-50,50)" id="axis_unit">
-			                <use transform="translate(10,0)" xlink:href="#grid_path" />
-			                <path d="M 10,0 V 5" />
-			              </g>
-			
-			              <use transform="translate(50,0)" xlink:href="#axis_unit_dec" />
-			              <use transform="translate(100,0)" xlink:href="#axis_unit_dec" />
-			              <use transform="translate(10,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(20,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(30,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(50,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(60,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(70,0)" xlink:href="#axis_unit" />
-			              <use transform="translate(80,0)" xlink:href="#axis_unit" />
-			
-			            </g>
-			            <text x="-85" y="5">0.5</text>
-			            <text x="-75" y="-45">1</text>
-			            <text x="-10" y="75">0.5</text>
-			            <text x="45" y="75">1</text>
-			            <text x="-75" y="75">0</text>
-			
-			            <text x="-45" y="90">Input Percentage</text>
-			            <text x="-50" y="-90" transform="rotate(-90)">Output Percentage</text>
-			          </g>
-			          <path d="M 0,100 C 100,100 0,0 100,0" id="curve" />
-			          <path d="M 0,100 100,100" id="p1_path" />
-			          <path d="M 0,0 100,0" id="p2_path" />
-			        </g>
-			      </g>
-			
-			    </svg>
-	        <box id="p1_point" style="width: 8px; height: 8px;" top="6" left="46"/> 
-	        <box id="p2_point" style="width: 8px; height: 8px;" top="106" left="146"/> 
-		    </stack>
+        <stack>
+          <svg xmlns:svg="http://www.w3.org/2000/svg"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               version="1.1" width="156" height="156" id="svg2">
+            <style type="text/css"> #p1_path {stroke:#fa0000;marker-end:url(#DotL)} #p2_path {stroke:#fa0000;marker-start:url(#DotL)} path {fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1} #grid_path {stroke-width:0.1px} #axis_unit_dec #grid_path {stroke-width:0.5px} #axis_unit path {} text{font-size:9.33333px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Lucida Grande} #curve{fill:none;stroke:#000000;stroke-width:1px} </style>
+            <defs>
+      
+              <path d="M 0,-100 V 0" class="grid_path" id="grid_path" />
+              <marker orient="auto" refY="0.0" refX="0.0" id="DotL" style="overflow:visible">
+                <circle cx="0" cy="0" r="3" style="stroke:#000;stroke-width:1px;fill:#F00"/>
+              </marker>
+            </defs>
+            <g>
+              <g transform="translate(50,10)">
+                <g transform="translate(50,50)" id="grid">
+                  <use transform="matrix(0,1,-1,0,0,0)" xlink:href="#axis" />
+      
+                  <g id="axis">
+                    <g transform="translate(-50,50)" id="axis_unit_dec">
+                      <path d="M 0,0 V 10" />
+                      <use xlink:href="#grid_path" />
+                    </g>
+                    <g transform="translate(-50,50)" id="axis_unit">
+                      <use transform="translate(10,0)" xlink:href="#grid_path" />
+                      <path d="M 10,0 V 5" />
+                    </g>
+      
+                    <use transform="translate(50,0)" xlink:href="#axis_unit_dec" />
+                    <use transform="translate(100,0)" xlink:href="#axis_unit_dec" />
+                    <use transform="translate(10,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(20,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(30,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(50,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(60,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(70,0)" xlink:href="#axis_unit" />
+                    <use transform="translate(80,0)" xlink:href="#axis_unit" />
+      
+                  </g>
+                  <text x="-85" y="5">0.5</text>
+                  <text x="-75" y="-45">1</text>
+                  <text x="-10" y="75">0.5</text>
+                  <text x="45" y="75">1</text>
+                  <text x="-75" y="75">0</text>
+      
+                  <text x="-45" y="90">Input Percentage</text>
+                  <text x="-50" y="-90" transform="rotate(-90)">Output Percentage</text>
+                </g>
+                <path d="M 0,100 C 100,100 0,0 100,0" id="curve" />
+                <path d="M 0,100 100,100" id="p1_path" />
+                <path d="M 0,0 100,0" id="p2_path" />
+              </g>
+            </g>
+      
+          </svg>
+          <box id="p1_point" style="width: 8px; height: 8px;" top="6" left="46"/> 
+          <box id="p2_point" style="width: 8px; height: 8px;" top="106" left="146"/> 
+        </stack>
         <vbox>
           <label value="Point 1:"/>
           <hbox align="center" class="indent">
@@ -187,17 +187,17 @@
 
     <panel level="floating" id="backgroundImagePanel" noautohide="true">
       <groupbox style="width: 400px">
-		    <caption label="&imageURL.caption;"/>
-		    <hbox align="center">
-		      <textbox flex="1" id="imageURLTextbox"
-		               oninput="LoadImage()"/>
-		      <filepickerbutton id="filepickerbutton"
-		                        control="imageURLTextbox"
-		                        mode="0"
-		                        filters="filterImages"
-		                        oncommand="LoadImage(); MakeRelativeUrlBackgroundImage()"
-		                        title="&selectImageButton.label;"/>
-	      </hbox>
+        <caption label="&imageURL.caption;"/>
+        <hbox align="center">
+          <textbox flex="1" id="imageURLTextbox"
+                   oninput="LoadImage()"/>
+          <filepickerbutton id="filepickerbutton"
+                            control="imageURLTextbox"
+                            mode="0"
+                            filters="filterImages"
+                            oncommand="LoadImage(); MakeRelativeUrlBackgroundImage()"
+                            title="&selectImageButton.label;"/>
+        </hbox>
         <!-- TODO: make relative URL button -->
         <hbox align="center">
           <checkbox label="&makeRelative.label;"
@@ -259,12 +259,12 @@
               <columns><column/><column/></columns>
               <rows>
                 <row align="center">
-	                <label value="&shape.label;"/>
-	                <radiogroup id="radialGradientShape" orient="horizontal"
+                  <label value="&shape.label;"/>
+                  <radiogroup id="radialGradientShape" orient="horizontal"
                               oncommand="RepaintGradient()">
-	                  <radio label="&circularShape.label;" value="circle" selected="true"/>
-	                  <radio label="&ellipticShape.label;" value="ellipse"/>
-	                </radiogroup>
+                    <radio label="&circularShape.label;" value="circle" selected="true"/>
+                    <radio label="&ellipticShape.label;" value="ellipse"/>
+                  </radiogroup>
                 </row>
                 <row align="center">
                   <label value="&size.label;"/>
@@ -283,75 +283,75 @@
               </rows>
             </grid>
             <hbox align="center" flex="1">
-	            <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
-	                      oncommand="RepaintGradient()"/>
+              <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
+                        oncommand="RepaintGradient()"/>
               <rotator id="linearGradientAngleRotator"
                        onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintGradient()"
                        negated="true"/>
             </hbox>
-		        <grid>
-		          <columns><column/><column/></columns>
-		          <rows>
-		            <row align="center">
-		              <checkbox label="&startingPoint.checkbox;" id="linearGradientStartingPointCheckbox"
+            <grid>
+              <columns><column/><column/></columns>
+              <rows>
+                <row align="center">
+                  <checkbox label="&startingPoint.checkbox;" id="linearGradientStartingPointCheckbox"
                             oncommand="RepaintGradient()"/>
-		              <hbox>
-		                <menulist sizetopopup="none" editable="true" id="linearGradientStartingPointMenulist"
+                  <hbox>
+                    <menulist sizetopopup="none" editable="true" id="linearGradientStartingPointMenulist"
                               oncommand="RepaintGradient()">
-		                  <menupopup>
-		                    <grid class="multipane-menu"
-		                              oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
-		                      <columns><column/><column/><column/></columns>
-		                      <rows>
-		                        <row align="center">
-		                          <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
-		                          <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
-		                          <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
-		                        </row>
-		                        <row align="center">
-		                          <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
-		                          <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
-		                          <menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
-		                        </row>
-		                        <row align="center">
-		                          <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
-		                          <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
-		                          <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
-		                        </row>
-		                      </rows>
-		                    </grid>
-		                  </menupopup>
-		                </menulist>
-		              </hbox>
-		            </row>
-		            <row align="center">
-		              <checkbox label="&horizOffset.checkbox;" id="linearGradientHorizOffsetCheckbox"
+                      <menupopup>
+                        <grid class="multipane-menu"
+                                  oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+                          <columns><column/><column/><column/></columns>
+                          <rows>
+                            <row align="center">
+                              <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                              <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+                              <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                            </row>
+                            <row align="center">
+                              <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+                              <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+                              <menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
+                            </row>
+                            <row align="center">
+                              <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                              <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+                              <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                            </row>
+                          </rows>
+                        </grid>
+                      </menupopup>
+                    </menulist>
+                  </hbox>
+                </row>
+                <row align="center">
+                  <checkbox label="&horizOffset.checkbox;" id="linearGradientHorizOffsetCheckbox"
                             oncommand="RepaintGradient()"/>
-		              <hbox>
-		                <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
+                  <hbox>
+                    <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
                               oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
-		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
-		                  <menupopup id="linearGradientHorizOffsetMenupopup"
-		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                  </menupopup>
-		                </menulist>
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
+                      <menupopup id="linearGradientHorizOffsetMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                      </menupopup>
+                    </menulist>
                     <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
                                  ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
-		                <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
+                    <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
                               oncommand="RepaintGradient()"/>
-		                <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
-		                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
-		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
-		                  <menupopup id="linearGradientVertOffsetMenupopup"
-		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                  </menupopup>
-		                </menulist>
+                    <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
+                      <menupopup id="linearGradientVertOffsetMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                      </menupopup>
+                    </menulist>
                     <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
                                  ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
-		              </hbox>
-		             </row>
-		          </rows>
-		        </grid>
+                  </hbox>
+                 </row>
+              </rows>
+            </grid>
           </tabpanels>
         </tabbox>
       </hbox>
@@ -364,30 +364,30 @@
   </panelset>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-  	<vbox id="mainBoxHeader">
-	    <label id="currentElementBox"
-	           crop="end"/>
-	    <label value="&applyStyles.label;"/>
-	    <hbox id="cssPolicyBox" align="center">
-	      <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
-	        <menupopup>
-	          <menuitem label="&modifyID.label;" value="id"/>
-	          <menuitem label="&modifyClass.label;" value="class"/>
-	          <menuseparator/>
-			      <menuitem label="&useInlineStyles.label;" value="inline"/>
-	        </menupopup>
-	      </menulist>
-	      <menulist id="classPicker" editable="true" hidden="true">
-	        <menupopup id="classPickerPopup"/>
-	      </menulist>
-	      <textbox id="IDPicker" hidden="true"/>
-	    </hbox>
+    <vbox id="mainBoxHeader">
+      <label id="currentElementBox"
+             crop="end"/>
+      <label value="&applyStyles.label;"/>
+      <hbox id="cssPolicyBox" align="center">
+        <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
+          <menupopup>
+            <menuitem label="&modifyID.label;" value="id"/>
+            <menuitem label="&modifyClass.label;" value="class"/>
+            <menuseparator/>
+            <menuitem label="&useInlineStyles.label;" value="inline"/>
+          </menupopup>
+        </menulist>
+        <menulist id="classPicker" editable="true" hidden="true">
+          <menupopup id="classPickerPopup"/>
+        </menulist>
+        <textbox id="IDPicker" hidden="true"/>
+      </hbox>
       <hbox class="indent">
         <checkbox label="when the pointer hovers over the element"
                   id="hoverStateCheckbox"
                   oncommand="ToggleHover(this)"/>
       </hbox>
-  	</vbox>
+    </vbox>
 
     <vbox flex="1" id="propertiesBox">
 #include general.xul.inc

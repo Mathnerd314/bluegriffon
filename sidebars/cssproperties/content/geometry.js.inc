@@ -68,9 +68,9 @@ function ToggleFourEdges(aCheckbox, aPrefix)
   gDialog[aPrefix + "TopMenulist"].nextElementSibling.style.visibility = (checked ? "hidden": "");
   if (checked) {
     var value = gDialog[aPrefix + "BottomMenulist"].value;
-	  gDialog[aPrefix + "RightMenulist"].value= value;
-	  gDialog[aPrefix + "LeftMenulist"].value= value;
-	  gDialog[aPrefix + "TopMenulist"].value= value;
+    gDialog[aPrefix + "RightMenulist"].value= value;
+    gDialog[aPrefix + "LeftMenulist"].value= value;
+    gDialog[aPrefix + "TopMenulist"].value= value;
     onLengthMenulistCommand(gDialog[aPrefix + "BottomMenulist"], '% px pt cm in mm pc em ex', '', false);
   }
 }
@@ -81,9 +81,9 @@ function GetNaturalSize()
   gDialog.heightMenulist.value = gCurrentElement.naturalHeight + "px";
   gDialog.preserveImageRatioCheckbox.checked = true;
   ApplyStyles( [ {
-							    property: "width",
+                  property: "width",
                   value: gDialog.widthMenulist.value
-							  },
+                },
                 {
                   property: "height",
                   value: gDialog.heightMenulist.value

@@ -59,19 +59,19 @@
               </menulist>
               <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
                            ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
-	              <label value="&maxWidth.label;"/>
+                <label value="&maxWidth.label;"/>
                 <hbox align="center">
-		              <menulist sizetopopup="none" editable="true" id="maxWidthMenulist" property="max-width"
-		                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
-		                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
-		                <menupopup id="maxWidthMenupopup"
-		                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                  <menuseparator/>
-		                  <menuitem label="&noneMaxWidth.label;" value="none"/>
-		                </menupopup>
-		              </menulist>
-		              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                  <menulist sizetopopup="none" editable="true" id="maxWidthMenulist" property="max-width"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
+                    <menupopup id="maxWidthMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                      <menuseparator/>
+                      <menuitem label="&noneMaxWidth.label;" value="none"/>
+                    </menupopup>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
                 </hbox>
             </row>
 
@@ -86,19 +86,19 @@
               </menulist>
               <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
                            ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
-	              <label value="&maxHeight.label;"/>
+                <label value="&maxHeight.label;"/>
                 <hbox align="center">
-		              <menulist sizetopopup="none" editable="true" id="maxHeightMenulist" property="max-height"
-		                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
-		                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
-		                <menupopup id="maxHeightMenupopup"
-		                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                  <menuseparator/>
-		                  <menuitem label="&noneMaxHeight.label;" value="none"/>
-		                </menupopup>
-		              </menulist>
-		              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                  <menulist sizetopopup="none" editable="true" id="maxHeightMenulist" property="max-height"
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'none', false)">
+                    <menupopup id="maxHeightMenupopup"
+                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                      <menuseparator/>
+                      <menuitem label="&noneMaxHeight.label;" value="none"/>
+                    </menupopup>
+                  </menulist>
+                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
                 </hbox>
             </row>
 
@@ -141,15 +141,15 @@
               <hbox align="center">
                 <label value="&paddings.label;"/>
                 <spacer flex="1"/>
-		            <menulist sizetopopup="none" editable="true" id="paddingTopMenulist" property="padding-top"
-		                      oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-		                      oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
-		              <menupopup id="paddingTopMenupopup"
-		                         onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		              </menupopup>
-		            </menulist>
-		            <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                         ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                <menulist sizetopopup="none" editable="true" id="paddingTopMenulist" property="padding-top"
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                  <menupopup id="paddingTopMenupopup"
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                  </menupopup>
+                </menulist>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
                 <spacer flex="1"/>
                 <label value="&paddings.label;" style="visibility: hidden"/>
               </hbox>
@@ -178,21 +178,21 @@
                 <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
                              ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
               </hbox>
-		          <hbox align="center">
-		            <spacer flex="1"/>
-		                <menulist sizetopopup="none" editable="true" id="paddingBottomMenulist" property="padding-bottom"
+              <hbox align="center">
+                <spacer flex="1"/>
+                    <menulist sizetopopup="none" editable="true" id="paddingBottomMenulist" property="padding-bottom"
                               fouredges="padding-top,padding-left,padding-right"
                               fouredgescontrol="useSameFourPaddingsCheckbox"
                               oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-		                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
-		                  <menupopup id="paddingBottomMenupopup"
-		                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                  </menupopup>
-		                </menulist>
-		                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
-		            <spacer flex="1"/>
-		          </hbox>
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                      <menupopup id="paddingBottomMenupopup"
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                      </menupopup>
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+                <spacer flex="1"/>
+              </hbox>
               <hbox align="center">
                 <spacer flex="1"/>
                 <checkbox label="&useSameFourPaddings.label;" id="useSameFourPaddingsCheckbox"

@@ -34,10 +34,10 @@ function ColumnCountChanged()
     count = "";
 
   ApplyStyles([
-	              {
-	                property: "-moz-column-count",
-	                value: count
-	              }
+                {
+                  property: "-moz-column-count",
+                  value: count
+                }
               ]);
 }
 

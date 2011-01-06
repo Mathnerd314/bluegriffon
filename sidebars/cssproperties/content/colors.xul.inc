@@ -33,23 +33,23 @@
             <row align="top">
               <label value="&backgrounds.label;"/>
               <vbox flex="1">
-	              <richlistbox id="backgroundsRichlistbox" rows="6"
+                <richlistbox id="backgroundsRichlistbox" rows="6"
                              onselect="OnBackgroundSelect(this)"/>
-	              <hbox class="listboxBg">
-	                <toolbarbutton id="addBackgroundButton" class="listboxBgPlusButton" type="menu"
-	                               oncommand="AddBackground(event)">
-	                  <menupopup id="addBackgroundMenupopup">
+                <hbox class="listboxBg">
+                  <toolbarbutton id="addBackgroundButton" class="listboxBgPlusButton" type="menu"
+                                 oncommand="AddBackground(event)">
+                    <menupopup id="addBackgroundMenupopup">
                       <menuitem label="&addBackgroundLinearGradientMenuitem.label;" value="linear-gradient"/>
                       <menuitem label="&addBackgroundRadialGradientMenuitem.label;" value="radial-gradient"/>
                       <menuseparator/>
                       <menuitem label="&addBackgroundImageMenuitem.label;" value="image"/>
-	                  </menupopup>
-	                </toolbarbutton>
-	                <toolbarbutton id="removeBackgroundButton" class="listboxBgMinusButton"
-	                               disabled="true"
-	                               oncommand="DeleteBackground()"/>
-	                
-	              </hbox>
+                    </menupopup>
+                  </toolbarbutton>
+                  <toolbarbutton id="removeBackgroundButton" class="listboxBgMinusButton"
+                                 disabled="true"
+                                 oncommand="DeleteBackground()"/>
+                  
+                </hbox>
               </vbox>
             </row>
           </rows>

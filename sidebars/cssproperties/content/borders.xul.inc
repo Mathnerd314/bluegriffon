@@ -303,74 +303,74 @@
                   oncommand="ToggleImageAsBorder(this)"/>
         <vbox class="indent" id="useImageAsBorderVbox">
           <label value="&enterImageUrl.label;"/>
-		      <hbox align="center">
-		        <textbox flex="1" id="borderImageURLTextbox"
-		                 oninput="LoadBorderImage();ApplyBorderImage(false)"/>
-		        <filepickerbutton id="borderImageURLFilepicker"
-		                          control="borderImageURLTextbox"
-		                          mode="0"
-		                          filters="filterImages"
-		                          oncommand="LoadBorderImage();MakeRelativeUrl();ApplyBorderImage(false)"
-		                          title="&borderImageURLButton.label;"/>
+          <hbox align="center">
+            <textbox flex="1" id="borderImageURLTextbox"
+                     oninput="LoadBorderImage();ApplyBorderImage(false)"/>
+            <filepickerbutton id="borderImageURLFilepicker"
+                              control="borderImageURLTextbox"
+                              mode="0"
+                              filters="filterImages"
+                              oncommand="LoadBorderImage();MakeRelativeUrl();ApplyBorderImage(false)"
+                              title="&borderImageURLButton.label;"/>
           </hbox>
           <vbox align="center" id="borderImagePreviewBox" >
             <hbox align="center">
               <spacer flex="1"/>
-	            <stack>
-	              <image id="borderImagePreview" top="0" left="0" style="margin: 15px"
-	                     onload="SizeBorderImageRulers(this)"
-	                     onerror="ErrorLoadingBorderImage()"/>
+              <stack>
+                <image id="borderImagePreview" top="0" left="0" style="margin: 15px"
+                       onload="SizeBorderImageRulers(this)"
+                       onerror="ErrorLoadingBorderImage()"/>
 
-	              <box id="borderImageFromTop" top="15" left="0"
+                <box id="borderImageFromTop" top="15" left="0"
                      onmousedown="StartMovingBorderImageSliceEdge(event, this, 'top')"
                      onmousemove="MoveBorderImageSliceEdge(event, this, 'top')"
                      onmouseup="StopMovingBorderImageSliceEdge(event, this, 'top')"/>
-	              <box id="borderImageFromRight" right="15" top="0"
+                <box id="borderImageFromRight" right="15" top="0"
                      onmousedown="StartMovingBorderImageSliceEdge(event, this, 'right')"
                      onmousemove="MoveBorderImageSliceEdge(event, this, 'right')"
                      onmouseup="StopMovingBorderImageSliceEdge(event, this, 'right')"/>
-	              <box id="borderImageFromLeft" left="15" top="0"
+                <box id="borderImageFromLeft" left="15" top="0"
                      onmousedown="StartMovingBorderImageSliceEdge(event, this, 'left')"
                      onmousemove="MoveBorderImageSliceEdge(event, this, 'left')"
                      onmouseup="StopMovingBorderImageSliceEdge(event, this, 'left')"/>
-	              <box id="borderImageFromBottom" bottom="15" left="0"
+                <box id="borderImageFromBottom" bottom="15" left="0"
                      onmousedown="StartMovingBorderImageSliceEdge(event, this, 'bottom')"
                      onmousemove="MoveBorderImageSliceEdge(event, this, 'bottom')"
                      onmouseup="StopMovingBorderImageSliceEdge(event, this, 'bottom')"/>
-	            </stack>
+              </stack>
               <spacer flex="1"/>
             </hbox>
-	          <grid id="borderImageSubpropertiesGrid">
-	            <columns>
-	              <column style="border-right: thin solid gray"/>
-	              <column style="border-right: thin solid gray"/>
-	              <column style="border-right: thin solid gray"/>
-	              <column style="border-right: thin solid gray"/>
-	              <column/>
-	            </columns>
-	            <rows>
-	              <row align="center">
-	                <spacer/>
-	                <label value="&topBorderImageProps.label;"/>
-	                <label value="&rightBBorderImageProps.label;"/>
-	                <label value="&bottomBorderImageProps.label;"/>
-	                <label value="&leftBorderImageProps.label;"/>
-	              </row>
-	              <row align="center" style="border-top: thin solid gray">
-	                <label value="&slicingBorderImageProps.label;"/>
-	                <textbox type="number" size="5" id="topEdgeSlicingTextbox"
-	                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
-	                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
-		              <textbox type="number" size="5" id="rightEdgeSlicingTextbox"
-		                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
-		                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+            <grid id="borderImageSubpropertiesGrid">
+              <columns>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column style="border-right: thin solid gray"/>
+                <column/>
+              </columns>
+              <rows>
+                <row align="center">
+                  <spacer/>
+                  <label value="&topBorderImageProps.label;"/>
+                  <label value="&rightBBorderImageProps.label;"/>
+                  <label value="&bottomBorderImageProps.label;"/>
+                  <label value="&leftBorderImageProps.label;"/>
+                </row>
+                <row align="center" style="border-top: thin solid gray">
+                  <label value="&slicingBorderImageProps.label;"/>
+                  <textbox type="number" size="5" id="topEdgeSlicingTextbox"
+                         oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                         oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                  <textbox type="number" size="5" id="rightEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
                   <textbox type="number" size="5" id="bottomEdgeSlicingTextbox"
                            oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
                            oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
-		              <textbox type="number" size="5" id="leftEdgeSlicingTextbox"
-		                       oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
-		                       oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
-	              </row>
+                  <textbox type="number" size="5" id="leftEdgeSlicingTextbox"
+                           oncommand="ApplyBorderImageSliceChangeFromTextbox(this)"
+                           oninput="ApplyBorderImageSliceChangeFromTextbox(this)"/>
+                </row>
                 <row align="center" style="border-top: thin solid gray">
                   <label value="&widthBorderImageProps.label;"/>
                   <hbox align="center">
@@ -453,8 +453,8 @@
                     </menupopup>
                   </menulist>
                 </row>
-	            </rows>
-	          </grid>
+              </rows>
+            </grid>
           </vbox>
         </vbox>
       </vbox>

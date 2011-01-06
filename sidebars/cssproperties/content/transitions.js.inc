@@ -7,22 +7,22 @@ function TransitionsSectionIniter(aElt, aRuleset)
   var mtpArray = [];
   if (mtp) {
     mtpArray = mtp.split(",");
-	  for (var i = 0; i < mtpArray.length; i++) {
-	    var item = document.createElement("richlistitem");
-	    var v = mtpArray[i].trim();
-	    switch (v) {
-	      case "all":
-	      case "none":
-	        item.className = v + "Transition";
-	        gDialog.transitionsRichlistbox.appendChild(item)
-	        break;
-	      default:
-	        item.className = "propertyTransition";
-	        gDialog.transitionsRichlistbox.appendChild(item);
-	        item.propertyValue = v;
-	        break;
-	    }
-	  }
+    for (var i = 0; i < mtpArray.length; i++) {
+      var item = document.createElement("richlistitem");
+      var v = mtpArray[i].trim();
+      switch (v) {
+        case "all":
+        case "none":
+          item.className = v + "Transition";
+          gDialog.transitionsRichlistbox.appendChild(item)
+          break;
+        default:
+          item.className = "propertyTransition";
+          gDialog.transitionsRichlistbox.appendChild(item);
+          item.propertyValue = v;
+          break;
+      }
+    }
   }
 
   var mtde = CssInspector.getCascadedValue(aRuleset, "-moz-transition-delay") || "0s";
@@ -90,10 +90,10 @@ function ReapplyTransitions()
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     if (item.propertyValue) {
-	    properties.push( item.propertyValue );
-	    durations.push( item.durationValue + "s" );
-	    functions.push( item.functionValue );
-	    delays.push( item.delayValue + "s");
+      properties.push( item.propertyValue );
+      durations.push( item.durationValue + "s" );
+      functions.push( item.functionValue );
+      delays.push( item.delayValue + "s");
     }
   }
   ApplyStyles( [

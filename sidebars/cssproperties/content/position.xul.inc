@@ -10,34 +10,34 @@
           <row align="center">
             <label value="&display.label;"/>
             <hbox>
-	            <menulist id="displayMenulist" sizetopopup="none"
+              <menulist id="displayMenulist" sizetopopup="none"
                         property="display"
                         oncommand="ToggleProperty(this)">
-	              <menupopup>
-		              <menuitem label="&noneDisplay.label;"         value="none"/>
-		              <menuseparator/>
-		              <menuitem label="&inlineDisplay.label;"       value="inline"/>
-		              <menuitem label="&runInDisplay.label;"        value="run-in"/>
-		              <menuseparator/>
-		              <menuitem label="&blockDisplay.label;"        value="block"/>
-		              <menuitem label="&inlineBlockDisplay.label;"  value="inline-block"/>
-		              <menuseparator/>
-		              <menuitem label="&listItem.label;"            value="list-item"/>
-		              <menuseparator/>
-		              <menuitem label="&table.label;"               value="table"/>
-		              <menuitem label="&inlineTable.label;"         value="inline-table"/>
-		              <menuseparator/>
-		              <menuitem label="&tableHeaderGroup.label;"    value="table-header-group"/>
-		              <menuitem label="&tableRowGroup.label;"       value="table-row-group"/>
-		              <menuitem label="&tableFooterGroup.label;"    value="table-footer-group"/>
-		              <menuitem label="&tableColumnGroup.label;"    value="table-column-group"/>
-		              <menuseparator/>
-		              <menuitem label="&tableCaption.label;"        value="table-caption"/>
-		              <menuitem label="&tableRow.label;"            value="table-row"/>
-		              <menuitem label="&tableColumn.label;"         value="table-column"/>
-		              <menuitem label="&tableCell.label;"           value="table-cell"/>
-	              </menupopup>
-	            </menulist>
+                <menupopup>
+                  <menuitem label="&noneDisplay.label;"         value="none"/>
+                  <menuseparator/>
+                  <menuitem label="&inlineDisplay.label;"       value="inline"/>
+                  <menuitem label="&runInDisplay.label;"        value="run-in"/>
+                  <menuseparator/>
+                  <menuitem label="&blockDisplay.label;"        value="block"/>
+                  <menuitem label="&inlineBlockDisplay.label;"  value="inline-block"/>
+                  <menuseparator/>
+                  <menuitem label="&listItem.label;"            value="list-item"/>
+                  <menuseparator/>
+                  <menuitem label="&table.label;"               value="table"/>
+                  <menuitem label="&inlineTable.label;"         value="inline-table"/>
+                  <menuseparator/>
+                  <menuitem label="&tableHeaderGroup.label;"    value="table-header-group"/>
+                  <menuitem label="&tableRowGroup.label;"       value="table-row-group"/>
+                  <menuitem label="&tableFooterGroup.label;"    value="table-footer-group"/>
+                  <menuitem label="&tableColumnGroup.label;"    value="table-column-group"/>
+                  <menuseparator/>
+                  <menuitem label="&tableCaption.label;"        value="table-caption"/>
+                  <menuitem label="&tableRow.label;"            value="table-row"/>
+                  <menuitem label="&tableColumn.label;"         value="table-column"/>
+                  <menuitem label="&tableCell.label;"           value="table-cell"/>
+                </menupopup>
+              </menulist>
             </hbox>
           </row>
 
@@ -77,24 +77,24 @@
           <row align="center">
             <label value="&clear.label;"/>
             <hbox>
-	            <hbox align="center">
-	              <toolbarbutton class="multibutton" label="&leftClear.label;" value="left" property="clear" type="checkbox"
-	                             id="clearLeftButton" group="clear"
-	                             oncommand="ToggleProperty(this)"/>
-	              <toolbarbutton class="multibutton" label="&rightClear.label;" value="right" property="clear" type="checkbox"
-	                             id="clearRightButton" group="clear"
-	                             oncommand="ToggleProperty(this)"/>
-	            </hbox>
-	            <hbox align="center">
-	              <toolbarbutton class="multibutton" label="&bothClear.label;" value="both" property="clear" type="checkbox"
-	                             id="clearBothButton" group="clear"
-	                             oncommand="ToggleProperty(this)"/>
-	            </hbox>
-	            <hbox align="center">
-	              <toolbarbutton class="multibutton" label="&noneClear.label;" value="none" property="clear" type="checkbox"
-	                             id="clearNoneButton" group="clear"
-	                             oncommand="ToggleProperty(this)"/>
-	            </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&leftClear.label;" value="left" property="clear" type="checkbox"
+                               id="clearLeftButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&rightClear.label;" value="right" property="clear" type="checkbox"
+                               id="clearRightButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&bothClear.label;" value="both" property="clear" type="checkbox"
+                               id="clearBothButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&noneClear.label;" value="none" property="clear" type="checkbox"
+                               id="clearNoneButton" group="clear"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
             </hbox>
           </row>
 
@@ -154,74 +154,74 @@
           <row align="top">
             <label value="&offsets.label;"/>
             <hbox>
-	            <grid style="background-color: #e0e0e0" id="positionOffsetsGrid">
-	              <columns><column/><column/><column/></columns>
-	              <rows>
-	                <row>
-	                  <spacer/>
-	                  <hbox align="center">
-		                  <menulist editable="true" id="topMenulist" property="top" sizetopopup="none"
-		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-		                    <menupopup id="topMenupopup"
-		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                      <menuseparator/>
-		                      <menuitem label="&offsetAuto.label;" value="auto"/>
-		                    </menupopup>
-		                  </menulist>
-		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-	                 </hbox>
-	               </row>
-	
-	                <row align="center">
-	                  <hbox align="center">
-		                  <menulist editable="true" id="leftMenulist" property="left" sizetopopup="none"
-		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-		                    <menupopup id="leftMenupopup"
-		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                      <menuseparator/>
-		                      <menuitem label="&offsetAuto.label;" value="auto"/>
-		                    </menupopup>
-		                  </menulist>
-		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-	                  </hbox>
-	                  <spacer/>
-	                  <hbox align="center">
-	                    <menulist editable="true" id="rightMenulist" property="right" sizetopopup="none"
-	                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-	                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-	                      <menupopup id="rightMenupopup"
-	                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-	                        <menuseparator/>
-	                        <menuitem label="&offsetAuto.label;" value="auto"/>
-	                      </menupopup>
-	                    </menulist>
-	                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-	                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-	                  </hbox>
-	                </row>
-	
-	                <row>
-	                  <spacer/>
-	                  <hbox align="center">
-		                  <menulist editable="true" id="bottomMenulist" property="bottom" sizetopopup="none"
-		                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-		                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
-		                    <menupopup id="bottomMenupopup"
-		                               onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
-		                      <menuseparator/>
-		                      <menuitem label="&offsetAuto.label;" value="auto"/>
-		                    </menupopup>
-		                  </menulist>
-		                  <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-		                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
-	                  </hbox>
-	                 </row>
-	              </rows>
-	            </grid>
+              <grid style="background-color: #e0e0e0" id="positionOffsetsGrid">
+                <columns><column/><column/><column/></columns>
+                <rows>
+                  <row>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="topMenulist" property="top" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                        <menupopup id="topMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                   </hbox>
+                 </row>
+  
+                  <row align="center">
+                    <hbox align="center">
+                      <menulist editable="true" id="leftMenulist" property="left" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                        <menupopup id="leftMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                    </hbox>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="rightMenulist" property="right" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                        <menupopup id="rightMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                    </hbox>
+                  </row>
+  
+                  <row>
+                    <spacer/>
+                    <hbox align="center">
+                      <menulist editable="true" id="bottomMenulist" property="bottom" sizetopopup="none"
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                        <menupopup id="bottomMenupopup"
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                          <menuseparator/>
+                          <menuitem label="&offsetAuto.label;" value="auto"/>
+                        </menupopup>
+                      </menulist>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                    </hbox>
+                   </row>
+                </rows>
+              </grid>
             </hbox>
           </row>
         </rows>

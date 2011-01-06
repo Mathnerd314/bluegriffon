@@ -39,11 +39,11 @@ function ToggleFlexBox()
 {
   gDialog.inlineBoxCheckbox.disabled = !gDialog.flexBoxEnabledCheckbox.checked;
   ApplyStyles( [
-							   {
-							     property: "display",
+                 {
+                   property: "display",
                    value: gDialog.flexBoxEnabledCheckbox.checked ?
                           (gDialog.inlineBoxCheckbox.checked ? "-moz-inline-box" : "-moz-box") :
                           ""
-							   }
+                 }
                ]);
 }

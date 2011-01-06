@@ -139,10 +139,10 @@ var Bezier = {
       p2_y = 0;
     }
     else {
-	    p1_x = parseFloat(r[1]);
-	    p1_y = 1 - parseFloat(r[2]);
-	    p2_x = parseFloat(r[3]);
-	    p2_y = 1 - parseFloat(r[4]);
+      p1_x = parseFloat(r[1]);
+      p1_y = 1 - parseFloat(r[2]);
+      p2_x = parseFloat(r[3]);
+      p2_y = 1 - parseFloat(r[4]);
     }
 
     this.updateAll(p1_x, p1_y, p2_x, p2_y, true);
@@ -151,10 +151,10 @@ var Bezier = {
   updateAll: function (p1_x, p1_y, p2_x, p2_y, aUpdateTextboxes)
   {
     if (aUpdateTextboxes) {
-	    gDialog.p1_x.value = p1_x;
-	    gDialog.p1_y.value = 1 - p1_y;
-	    gDialog.p2_x.value = p2_x;
-	    gDialog.p2_y.value = 1 - p2_y;
+      gDialog.p1_x.value = p1_x;
+      gDialog.p1_y.value = 1 - p1_y;
+      gDialog.p2_x.value = p2_x;
+      gDialog.p2_y.value = 1 - p2_y;
     }
     var p1 = Math.floor(p1_x * 100) + "," + Math.floor(p1_y * 100);
     var p2 = Math.floor(p2_x * 100) + "," + Math.floor(p2_y * 100);

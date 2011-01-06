@@ -16,9 +16,9 @@ function ListsSectionIniter(aElt, aRuleset)
 function LoadListStyleImage()
 {
   ApplyStyles( [
-							   {
-							     property: "list-style-image",
+                 {
+                   property: "list-style-image",
                    value: 'url("' + gDialog.listStyleImageURLTextbox.value + '")'
-							   }
+                 }
                ]);
 }

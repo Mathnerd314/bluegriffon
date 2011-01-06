@@ -28,11 +28,11 @@
           <xul:row align="center">
             <xul:label value="&colorTextShadow.label;"/>
             <xul:hbox>
-	            <xul:ecolorpicker anonid="color"
-			                          color="black"
-			                          colorObjectId="BoxShadowColor"
-			                          windowTitle="&colorTextShadow.title;"
-			                          showTransparency="true"
+              <xul:ecolorpicker anonid="color"
+                                color="black"
+                                colorObjectId="BoxShadowColor"
+                                windowTitle="&colorTextShadow.title;"
+                                showTransparency="true"
                                 oncommand="ReapplyBoxShadows()"/>
             </xul:hbox>
             <xul:checkbox label="&inset.label;" anonid="inset"/>
