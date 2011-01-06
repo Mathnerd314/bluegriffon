@@ -648,11 +648,13 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
 	        otherValue = (parseFloat(match[1]) * ratio) + match[2]; 
 	      }
 	
-	      if (value)
+	      if (value) {
+          gDialog[otherId].value = otherValue;
 	        toApply.push({
 	                       property: gDialog[otherId].getAttribute("property"),
 	                       value: otherValue
 	                     } );
+        }
 	    }
 	    ApplyStyles(toApply);
 	  }
