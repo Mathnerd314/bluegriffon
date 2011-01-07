@@ -85,7 +85,6 @@ function StartUp()
 
   if (!window.arguments[0])
   {
-    dump("colourPicker: Missing color object param\n");
     return;
   }
 

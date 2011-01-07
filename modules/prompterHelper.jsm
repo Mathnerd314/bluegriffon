@@ -56,7 +56,7 @@ var PromptUtils = {
           Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
                     .getService(Components.interfaces.nsIPromptService);
       }
-      catch(e) { dump("### cannot get a PromptService\n"); }
+      catch(e) { }
     }
     return this.mPromptService;
   },

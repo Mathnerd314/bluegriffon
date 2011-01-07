@@ -527,7 +527,7 @@ var FileUtils = {
                               aMimeType, outputFlags, wrapColumn);
       gPersistObj = persistObj;
     }
-    catch(e) { dump("caught an error, bail\n"); return false; }
+    catch(e) { }
   
     return true;
   },

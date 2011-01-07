@@ -84,7 +84,6 @@ var ComposerCommands = {
 
   goUpdateComposerMenuItems: function goUpdateComposerMenuItems(commandset)
   {
-    dump("Updating commands for " + commandset.id + "\n");
     for (var i = 0; i < commandset.childNodes.length; i++)
     {
       var commandNode = commandset.childNodes[i];
@@ -161,10 +160,10 @@ var ComposerCommands = {
         case "cmd_outdent":
           break;
 
-        default: dump("no update for command: " +command+"\n");
+        default: break;
       }
     }
-    catch (e) { dump("An error occurred updating the "+command+" command: \n"+e+"\n"); }
+    catch (e) {  }
   },
 
   pokeStyleUI: function pokeStyleUI(uiID, aDesiredState)
@@ -184,7 +183,7 @@ var ComposerCommands = {
         newState = "false";
       commandNode.setAttribute("state", newState);
     }
-   } catch(e) { dump("poking UI for "+uiID+" failed: "+e+"\n"); }
+   } catch(e) {  }
   },
 
   newCommandParams: function newCommandParams()
@@ -192,7 +191,7 @@ var ComposerCommands = {
     try {
       return Components.classes["@mozilla.org/embedcomp/command-params;1"].createInstance(Components.interfaces.nsICommandParams);
     }
-    catch(e) { dump("error thrown in newCommandParams: "+e+"\n"); }
+    catch(e) {  }
     return null;
   },
 
@@ -244,7 +243,7 @@ var ComposerCommands = {
 
       this.pokeMultiStateUI(commandID, cmdParams);
 
-    } catch(e) { dump("error thrown in doStatefulCommand: "+e+"\n"); }
+    } catch(e) {  }
   },
 
   doCommandWithValue: function doCommandWithValueFromAttribute(commandID, aValue)
@@ -259,7 +258,7 @@ var ComposerCommands = {
 
       this.pokeMultiStateUI(commandID, cmdParams);
 
-    } catch(e) { dump("error thrown in doStatefulCommand: "+e+"\n"); }
+    } catch(e) { }
   },
 
   goDoCommandParams: function goDoCommandParams(command, params)
@@ -283,10 +282,7 @@ var ComposerCommands = {
         }
       }
     }
-    catch (e)
-    {
-      dump("An error occurred executing the "+command+" command\n");
-    }
+    catch (e) { }
   },
 
   setupMainCommands: function setupMainCommands()
@@ -295,7 +291,6 @@ var ComposerCommands = {
     if (!commandTable)
       return;
     
-    //dump("Registering plain text editor commands\n");
     commandTable.registerCommand("cmd_stopLoading", cmdStopLoading);
     //commandTable.registerCommand("cmd_copy",        cmdCopy);
     commandTable.registerCommand("cmd_open",        cmdOpen);

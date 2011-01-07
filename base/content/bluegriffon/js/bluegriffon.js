@@ -148,7 +148,7 @@ function EditorLoadUrl(aElt, aURL)
              null,                                         // post-data stream
              null);
     }
-  } catch (e) { dump(" EditorLoadUrl failed: "+e+"\n"); }
+  } catch (e) { }
 }
 
 function AboutComposer()
@@ -217,7 +217,7 @@ function UpdateWindowTitle()
                                  .formatStringFromName("titleFormat",
                                                        [windowTitle, titleModifier],
                                                        2);
-  } catch (e) { dump(e); }
+  } catch (e) { }
 }
 
 function onParagraphFormatChange(paraMenuList, commandID)
@@ -826,7 +826,6 @@ function RebuildFromSource(aDoc, aContext)
     // update the window title
     UpdateWindowTitle();
   } catch(ex) {
-    dump(ex);
   }
   NotifierUtils.notify("afterLeavingSourceMode");
   window.content.focus();

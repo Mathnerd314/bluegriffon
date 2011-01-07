@@ -329,7 +329,7 @@ var CssUtils = {
                      .getIntPref("bluegriffon.css.policy");
       return useCSS;
     }
-    catch(e) { dump("Cannot get preference bluegriffon.css.policy; defaulting to HTML attributes") }
+    catch(e) { }
 
     return 0;
   }

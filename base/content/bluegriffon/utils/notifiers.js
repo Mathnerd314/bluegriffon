@@ -54,7 +54,6 @@ var NotifierUtils = {
       }
     var errorString = aErrorString +
                       (aHelperString ? " '" + aHelperString + "'" : "");
-    dump("### NotifierUtils: " + s + " " + errorString + "\n");
   },
 
   _addNotifier: function NotifierUtils__addNotifier(aKeyword)

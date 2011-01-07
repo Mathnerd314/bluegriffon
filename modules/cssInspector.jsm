@@ -4350,7 +4350,6 @@ jscsspStylesheet.prototype = {
      this.cssRules.splice(aIndex, 1, aRule);
     }
     catch(e) {
-      dump("DOMException: jscsspStylesheet.insertRule\n")
     }
   },
 
@@ -4359,7 +4358,6 @@ jscsspStylesheet.prototype = {
       this.cssRules.splice(aIndex);
     }
     catch(e) {
-      dump("DOMException: jscsspStylesheet.insertRule\n")
     }
   },
 

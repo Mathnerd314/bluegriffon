@@ -14,7 +14,6 @@ var gEditorDocumentObserver =
     {
       case "obs_documentCreated":
         // placeholder; TBD
-        dump("obs_documentCreated\n");
 
         // TBD : 1. DONE
         //       2. add override stylesheets if needed
@@ -35,7 +34,7 @@ var gEditorDocumentObserver =
           spellChecker.enabled = enabled;
           EditorUtils.getCurrentEditorElement().setUserData("spellchecker", spellChecker, null);
         }
-        catch(e) { dump(e); }
+        catch(e) { }
 
         try {
           commandManager.getCommandState(aTopic, gContentWindow, params);
@@ -43,7 +42,6 @@ var gEditorDocumentObserver =
           var editorStatus = params.getLongValue("state_data");
           if (!editor && editorStatus == nsIEditingSession.eEditorOK)
           {
-            dump("\n ****** NO EDITOR BUT NO EDITOR ERROR REPORTED ******* \n\n");
             editorStatus = nsIEditingSession.eEditorErrorUnknown;
           }
 
@@ -63,7 +61,7 @@ var gEditorDocumentObserver =
           }
           if (errorStringId)
             PromptUtils.alertWithTitle("", L10NUtils.getString(errorStringId));
-        } catch(e) { dump("EXCEPTION GETTING obs_documentCreated state "+e+"\n"); }
+        } catch(e) {  }
 
         // We have a bad editor -- nsIEditingSession will rebuild an editor
         //   with a blank page, so simply abort here
@@ -80,7 +78,6 @@ var gEditorDocumentObserver =
         break;
 
       case "cmd_setDocumentModified":
-        dump("cmd_setDocumentModified " + EditorUtils.isDocumentModified() + "\n");
         gDialog.tabeditor.showCurrentTabAsModified(EditorUtils.isDocumentModified());    // || IsHTMLSourceChanged());
 
         // TBD : 1. update web navigation commands
@@ -89,12 +86,10 @@ var gEditorDocumentObserver =
         break;
 
       case "obs_documentWillBeDestroyed":
-        dump("obs_documentWillBeDestroyed\n");
         // placeholder; TBD
         break;
 
       case "obs_documentLocationChanged":
-        dump("obs_documentLocationChanged\n");
         // TBD : 1. update base URL
         break;
 

@@ -49,7 +49,7 @@ var LoginUtils = {
 		    this.mLoginManager = Components.classes["@mozilla.org/login-manager;1"]
 	                             .getService(Components.interfaces.nsILoginManager);
 	    }
-	    catch(e) { dump(e + "\n");}
+	    catch(e) { }
 
     return this.mLoginManager;
   },
@@ -71,7 +71,7 @@ var LoginUtils = {
     try {
       this._getLoginManager().addLogin(loginInfo);
     }
-    catch(e) { dump(e + "\n");}
+    catch(e) { }
   },
 
   modifyLogin: function(aOldLoginInfo, aURL, aUser, aPassword)
@@ -80,7 +80,7 @@ var LoginUtils = {
     try {
       this._getLoginManager().modifyLogin(aOldLoginInfo, loginInfo);
     }
-    catch(e) { dump(e + "\n");}
+    catch(e) { }
   },
 
   removeLogin: function(aOldLoginInfo)
@@ -88,7 +88,7 @@ var LoginUtils = {
     try {
       this._getLoginManager().removeLogin(aOldLoginInfo);
     }
-    catch(e) { dump(e + "\n");}
+    catch(e) { }
   },
 
   checkForMasterPasswordSetting: function()

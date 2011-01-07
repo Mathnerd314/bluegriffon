@@ -94,7 +94,6 @@ function baseConverter (number,ob,nb) {
 // used by openLocation. see openLocation.js for additional notes.
 function delayedOpenWindow(chrome, flags, param1, param2)
 {
-  dump("delayOpenWindow: setting timeout\n");
   setTimeout("window.openDialog('"+chrome+"','_blank','"+flags+"','"+param1+"','"+param2+"')", 10);
 }
 
@@ -120,7 +119,6 @@ function GetPrefsService()
     gPrefsService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
   }
   catch(ex) {
-    dump("failed to get prefs service!\n");
   }
 
   return gPrefsService;

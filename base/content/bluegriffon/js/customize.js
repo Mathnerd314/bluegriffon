@@ -130,7 +130,6 @@ function onViewToolbarCommand(aToolbarId, aMenuItemId)
 
 function UpdateMainToolbar(caller)
 {
-    dump("===> UPDATING TOOLBAR\n");
 }
 
 function UpdateCustomizeMenuPopup(aPopup)

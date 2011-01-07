@@ -121,7 +121,7 @@ var EditorUtils = {
         editor instanceof Components.interfaces.nsIPlaintextEditor;
         editor instanceof Components.interfaces.nsIHTMLEditor;
       }
-    } catch (e) { dump("Error in GetCurrentEditor: " + e + "\n"); }
+    } catch (e) { }
   
     return editor;
   },
@@ -139,7 +139,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditorElement().commandManager;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return null;
   },
@@ -152,7 +152,7 @@ var EditorUtils = {
 
       return Components.classes[contractId].createInstance(Components.interfaces.nsICommandParams);
     }
-    catch(e) { dump("error thrown in newCommandParams: "+e+"\n"); }
+    catch(e) { }
     return null;
   },
 
@@ -160,7 +160,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditorElement().editingSession;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return null;
   },
@@ -169,7 +169,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditorElement().editortype;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return "";
   },
@@ -203,7 +203,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditor().isDocumentEditable;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
     return false;
   },
 
@@ -211,7 +211,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditor().documentModified;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
     return false;
   },
 
@@ -219,7 +219,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentEditor().documentIsEmpty;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
     return false;
   },
 
@@ -227,7 +227,7 @@ var EditorUtils = {
   {
     try {
       return this.getCurrentDocument().title;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return "";
   },
@@ -250,7 +250,6 @@ var EditorUtils = {
           return false
 
         default:
-          dump("INVALID EDITOR TYPE: " + editortype + "\n");
           break;
     }
     return false;
@@ -271,7 +270,7 @@ var EditorUtils = {
         window.UpdateWindowTitle();
       else if ("UpdateWindowTitle" in window.opener)
         window.opener.UpdateWindowTitle();
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
   },
 
   getSelectionContainer: function getSelectionContainer()
@@ -567,7 +566,7 @@ var EditorUtils = {
     try {
       // XXX WE'LL NEED TO GET "CURRENT" CONTENT FRAME ONCE MULTIPLE EDITORS ARE ALLOWED
       this.getCurrentEditorElement().docShell.setCurrentURI(uri);
-    } catch (e) { dump("SetDocumentURI:\n"+e +"\n"); }
+    } catch (e) { }
   },
 
   documentReloadListener:

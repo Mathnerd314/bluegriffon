@@ -16,7 +16,6 @@ var cmdDummyHTML =
   doCommand: function(aCommand)
   {
     // do nothing
-    dump("Hey, who's calling the dummy command?\n");
   }
 
 };
@@ -38,7 +37,6 @@ var cmdViewModeEnabler =
   doCommand: function(aCommand)
   {
     // do nothing
-    dump("Hey, who's calling the dummy command?\n");
   }
 };
 

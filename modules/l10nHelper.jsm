@@ -58,7 +58,7 @@ var L10NUtils = {
         this.mStringBundleService =
             Components.classes["@mozilla.org/intl/stringbundle;1"]
                       .getService(Components.interfaces.nsIStringBundleService); 
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
     }
     return this.mStringBundleService;
   },
@@ -69,7 +69,7 @@ var L10NUtils = {
     if (this._getStringBundleService())
       try {
         stringBundle = this.mStringBundleService.createBundle(aProperties);
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
     return stringBundle;
   },
 
@@ -81,7 +81,7 @@ var L10NUtils = {
     {
       try {
         return aBundle.GetStringFromName(aName);
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
     }
     return null;
   },
@@ -96,7 +96,7 @@ var L10NUtils = {
     var stringBundle;
     try {
       stringBundle = this._getBundleFromURL(aProperties); 
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return this.getStringFromBundle(stringBundle, aName);
   },
@@ -106,7 +106,7 @@ var L10NUtils = {
     if (!this.mStringBundle)
       try {
         this.mStringBundle = this._getBundleFromURL(this.kBLUEGRIFFON_PROPERTIES); 
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
 
     return this.mStringBundle;
   },

@@ -71,7 +71,6 @@ var UrlUtils = {
       } catch (e) {}
       path = decodeURI(file.path);
     } catch(e) {
-      dump(e);
     }
     
     return path;
@@ -86,7 +85,6 @@ var UrlUtils = {
                              .createInstance(Components.interfaces.nsILocalFile);
       nsFile.initWithPath(filePath);
     } catch(e) {
-      dump("could not create LocalFile interface on " + FilePath);
     }
     return nsFile;
   },
@@ -121,7 +119,6 @@ var UrlUtils = {
           k.appendRelativePath(url);
         }
         catch (e) {
-          dump("### Can't understand the filepath\n");
           return kHTML_TRANSITIONAL;
         }
         var ioService =
@@ -157,7 +154,7 @@ var UrlUtils = {
   {
     try {
       return this.getIOService().newURI(aURLString, null, null);
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return null;
   },
@@ -325,7 +322,7 @@ var UrlUtils = {
       // This is deprecated and buggy! 
       // If used, we must make it a path for the parent directory (remove filename)
       //absoluteUrl = IOService.resolveRelativePath(resultUrl, docUrl);
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return absoluteUrl;
   },
@@ -349,7 +346,7 @@ var UrlUtils = {
 
       if (!this.isUrlOfBlankDocument(docUrl))
         return docUrl;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
     return "";
   },
 
@@ -359,7 +356,7 @@ var UrlUtils = {
       var aDOMHTMLDoc = EditorUtils.getCurrentEditor().document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument);
       return aDOMHTMLDoc.URL;
     }
-    catch (e) { dump (e)+"\n"; }
+    catch (e) { }
     return "";
   },
 
@@ -378,7 +375,7 @@ var UrlUtils = {
     try {
       // This fails if there's no scheme
       scheme = IOService.extractScheme(resultUrl);
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return scheme ? scheme.toLowerCase() : "";
   },
@@ -395,7 +392,7 @@ var UrlUtils = {
     var uri = null;
     try {
       uri = IOService.newURI(aURLSpec, null, null);
-     } catch (e) { dump (e)+"\n"; }
+     } catch (e) { }
 
     return uri;
   },
@@ -466,7 +463,7 @@ var UrlUtils = {
           if (usernameStart != -1)
             return urlspec.slice(0, usernameStart) + urlspec.slice(atIndex+1);
         }
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
     }
     return urlspec;
   },
@@ -503,7 +500,7 @@ var UrlUtils = {
             return urlspec.slice(0, colon) + urlspec.slice(atIndex);
           }
         }
-      } catch (e) { dump (e)+"\n"; }
+      } catch (e) { }
     }
     return urlspec;
   },
@@ -522,7 +519,7 @@ var UrlUtils = {
           start = urlspec.indexOf(userPass);
           urlspec = urlspec.slice(0, start) + urlspec.slice(start+userPass.length+1);
         }
-      } catch (e) { dump (e)+"\n"; }    
+      } catch (e) { }    
     }
     return urlspec;
   },
@@ -537,7 +534,7 @@ var UrlUtils = {
       var URI = ioService.newURI(aURLSpec, this.getCurrentEditor().documentCharacterSet, null);
       URI.username = aUserName;
       return URI.spec;
-    } catch (e) { dump (e)+"\n"; }
+    } catch (e) { }
 
     return aURLSpec;
   },
@@ -571,7 +568,7 @@ var UrlUtils = {
       var handler = ios.getProtocolHandler("file");
       return handler.QueryInterface(Components.interfaces.nsIFileProtocolHandler);
     }
-    catch (e) { dump (e)+"\n"; }
+    catch (e) { }
     return null;
   }
 

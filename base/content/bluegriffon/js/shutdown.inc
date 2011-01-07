@@ -4,7 +4,6 @@ function Shutdown()
     var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.removeObserver("bluegriffon.", BlueGriffonPrefsObserver, false);
   } catch(ex) {
-    dump("Failed to stop observing prefs: " + ex + "\n");
   }
 
   gDialog.structurebar.shutdown();

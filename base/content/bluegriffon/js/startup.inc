@@ -44,7 +44,6 @@ function Startup()
     var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.addObserver("bluegriffon.", BlueGriffonPrefsObserver, false);
   } catch(ex) {
-    dump("Failed to observe prefs: " + ex + "\n");
   }
 
   // let's finish with the url
