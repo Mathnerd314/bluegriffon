@@ -43,7 +43,6 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-Components.utils.import("resource://app/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 

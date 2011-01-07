@@ -5,7 +5,6 @@
         title="Hidden" width="0" height="0" >
 
   <script><![CDATA[ 
-    Components.utils.import("resource://app/modules/Services.jsm");
     const PREFS_SERVICE_CONTRACTID = "@mozilla.org/preferences-service;1";
     const WNDMEDIATOR_SERVICE_CONTRACTID = "@mozilla.org/appshell/window-mediator;1";
     const CMDLINEHANDLER_SERVICE_CONTRACTID = "@disruptive-innovations.com/commandlinehandler/general-startup;1?type=bluegriffon";
@@ -35,7 +34,6 @@
       window.close();
     }
 
-    //Services.prompt.alert(null, "hiddenWindow", window.arguments[0].length)
     /*if (window.arguments && window.arguments[0]) {
       var handler = Components.classes[CMDLINEHANDLER_SERVICE_CONTRACTID].getService(Ci.nsICommandLineHandler);
       handler.QueryInterface(Ci.sbICommandLineManager).handleURL(window.arguments[0]);

@@ -42,7 +42,7 @@ Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
-Components.utils.import("resource://app/modules/InlineSpellChecker.jsm");
+Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
 
 #include blanks.inc
 

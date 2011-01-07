@@ -37,7 +37,6 @@
 
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/cssInspector.jsm");
-Components.utils.import("resource://app/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["CssUtils"];
 

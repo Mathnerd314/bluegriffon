@@ -1,5 +1,5 @@
-Components.utils.import("resource://app/modules/XPCOMUtils.jsm");
-Components.utils.import("resource://app/modules/Services.jsm");
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 
 const nsISupports            = Components.interfaces.nsISupports;

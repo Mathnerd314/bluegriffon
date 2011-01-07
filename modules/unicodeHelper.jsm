@@ -1,4 +1,3 @@
-Components.utils.import("resource://app/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["UnicodeUtils"];
 

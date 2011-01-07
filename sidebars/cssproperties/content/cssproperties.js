@@ -40,7 +40,6 @@ Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/cssInspector.jsm");
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/Services.jsm");
 
 var gMain = null;
 var gCurrentElement = null;
