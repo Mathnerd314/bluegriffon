@@ -11,6 +11,7 @@
 
   <prefpane id="generalPrefPane">
     <preferences>
+      <preference id="pref-tabmode"      name="bluegriffon.tabs.position" type="string"/>
       <preference id="pref-historyCount" name="bluegriffon.history.url_maximum" type="int"/>
       <preference id="pref-showIDs"      name="bluegriffon.structurebar.id.show" type="bool"/>
       <preference id="pref-showClasses"  name="bluegriffon.structurebar.class.show" type="bool"/>
@@ -20,6 +21,18 @@
       <preference id="pref-spellCheck"   name="bluegriffon.spellCheck.enabled" type="bool"/>
       <preference id="pref-suggestions"  name="bluegriffon.spellCheck.suggestions" type="int"/>
     </preferences>
+
+    <groupbox>
+      <caption label="&tabPosition.label;"/>
+      <radiogroup id="tabPositionRadio"
+                  orient="horizontal"
+                  preference="pref-tabmode">
+        <radio label="&leftTabPosition.label;" value="left"/>
+        <radio label="&centerTabPosition.label;" value="center"/>
+        <radio label="&rightTabPosition.label;" value="right"/>
+      </radiogroup>
+    </groupbox>
+
     <groupbox>
       <caption label="&fileHistory.caption;"/>
       <hbox align="center">

@@ -108,7 +108,7 @@
     <vbox flex="1" id="maincontainer">
       <vbox flex="1">
         <box flex="1" id="tabeditorContainer" >
-          <tabeditor flex="1" id="tabeditor" visibility="hidden"/>
+          <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode"/>
         </box>
 #include bespin.inc
         <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>

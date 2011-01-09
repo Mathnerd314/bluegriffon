@@ -110,3 +110,4 @@ pref("bluegriffon.defaults.doctype", "kXHTML5");
 pref("media.autoplay.enabled", false);
 
 pref("bluegriffon.source.theme", "white");
+pref("bluegriffon.tabs.position", "center");

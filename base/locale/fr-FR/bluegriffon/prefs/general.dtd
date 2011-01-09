@@ -15,3 +15,8 @@
 <!ENTITY spellCheck.caption "Correction orthographique">
 <!ENTITY enableSpellCheck.label "Activer la correction orthographique à la volée">
 <!ENTITY numberSuggestions.label "Nombre de suggestions:">
+
+<!ENTITY tabPosition.label "Position of Tabs">
+<!ENTITY leftTabPosition.label "Left">
+<!ENTITY centerTabPosition.label "Center">
+<!ENTITY rightTabPosition.label "Right">

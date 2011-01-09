@@ -168,6 +168,7 @@ var BlueGriffonPrefsObserver = {
         }
       }
     }
+
     else if (prefName == "bluegriffon.spellCheck.enabled") {
       var value = GetPrefs().getBoolPref("bluegriffon.spellCheck.enabled");
       var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
@@ -185,6 +186,19 @@ var BlueGriffonPrefsObserver = {
           }
           catch(e) {}
         }
+      }
+    }
+
+    else if (prefName == "bluegriffon.tabs.position") {
+      var value = GetPrefs().getCharPref("bluegriffon.tabs.position");
+      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                            .getService();
+      var windowEnumerator = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
+                                          .getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var tabeditor = w.gDialog.tabeditor;
+        tabeditor.setAttribute("tabmode", value);
       }
     }
   }
