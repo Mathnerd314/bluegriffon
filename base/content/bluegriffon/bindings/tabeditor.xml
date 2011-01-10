@@ -412,6 +412,7 @@
             {
               var tab = tabs.item(i);
               tab.label = title;
+              UpdateWindowTitle();
               return;
             }
           }          

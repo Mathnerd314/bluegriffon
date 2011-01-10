@@ -42,9 +42,7 @@
 
 <!DOCTYPE dialog [
   <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/pageProperties.dtd" >
-  <!ENTITY % filePickingDTD SYSTEM "chrome://bluegriffon/locale/filePicking.dtd" >
   %pagePropertiesDTD;
-  %filePickingDTD;
 ]>            
  
 <dialog id="pageProperties"
@@ -58,137 +56,70 @@
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
-  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/colors.js"/>
-  <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/l10n.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/pageProperties.js"/>
 
-  <tabbox id="pagePropertiesTab" flex="1">
-    <tabs>
-      <tab label="&generalTab.label;"/>
-      <tab label="&styleTab.label;"/>
-      <tab label="&advancedTab.label;"/>
-    </tabs>
-    <tabpanels>
-      <tabpanel>
-        <grid flex="1">
-          <columns><column/><column flex="1"/></columns>
-          <rows>
-            <row align="center">
-              <label value="&pageLocation.label;"/>
-              <label id="pageLocation" value="[New page, not saved yet]"/>
-            </row>
-            <row align="center">
-              <label value="&pageLastModified.label;"/>
-              <label id="pageLastModified" value="foo"/>
-            </row>
-            <row align="center">
-              <label value="&pageTitle.label;"
-                     control="pageTitle"
-                     accesskey="&pageTitle.accesskey;"/>
-              <textbox id="pageTitle" spellcheck="true"
-                       oninput="TextboxChanged(this.id);"/>
-            </row>
-            <row align="center">
-              <label value="&pageAuthor.label;"
-                     control="pageAuthor"
-                     accesskey="&pageAuthor.accesskey;"/>
-              <textbox id="pageAuthor"
-                       oninput="TextboxChanged(this.id);"/>
-            </row>
-            <row align="center">
-              <label value="&pageDescription.label;"
-                     control="pageDescription"
-                     accesskey="&pageDescription.accesskey;"/>
-              <textbox id="pageDescription" spellcheck="true"
-                       oninput="TextboxChanged(this.id);"/>
-            </row>
-            <row align="center">
-              <label value="&pageKeywords.label;"
-                     control="pageKeywords"
-                     accesskey="&pageKeywords.accesskey;"/>
-              <textbox id="pageKeywords" spellcheck="true"
-                       oninput="TextboxChanged(this.id);"/>
-            </row>
-          </rows>
-        </grid>
-      </tabpanel>
-      
-
-      <tabpanel orient="vertical">
-        <radiogroup id="colorRadiogroup">
-          <radio id="useSystemColors"
-                 label="&useSystemColors.label;"
-                 oncommand="UseDefaultColors()"/>
-          <radio id="userDefinedColors"
-                 label="&userDefinedColors.label;"
-                 oncommand="UseCustomColors()"/>
+  <grid flex="1">
+    <columns><column/><column flex="1"/></columns>
+    <rows>
+      <row align="center">
+        <label value="&pageLocation.label;"/>
+        <label id="pageLocation" value="[New page, not saved yet]"/>
+      </row>
+      <row align="center">
+        <label value="&pageLastModified.label;"/>
+        <label id="pageLastModified" value="foo"/>
+      </row>
+      <row align="center">
+        <label value="&pageTitle.label;"
+               control="pageTitle"
+               accesskey="&pageTitle.accesskey;"/>
+        <textbox id="pageTitle" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageAuthor.label;"
+               control="pageAuthor"
+               accesskey="&pageAuthor.accesskey;"/>
+        <textbox id="pageAuthor"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageDescription.label;"
+               control="pageDescription"
+               accesskey="&pageDescription.accesskey;"/>
+        <textbox id="pageDescription" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&pageKeywords.label;"
+               control="pageKeywords"
+               accesskey="&pageKeywords.accesskey;"/>
+        <textbox id="pageKeywords" spellcheck="true"
+                 oninput="TextboxChanged(this.id);"/>
+      </row>
+      <row align="center">
+        <label value="&language.label;"
+               control="pageLanguage"
+               accesskey="&language.accesskey;"/>
+        <hbox align="center">
+          <textbox id="pageLanguage" flex="1"
+                   oninput="TextboxChanged(this.id);"/>
+          <button label="&selectLanguage.label;"
+                  oncommand="SelectLanguage(this)"/>
+       </hbox>
+      </row>
+      <row align="center">
+        <label value="&direction.label;"
+               control="directionRadio"
+               accesskey="&direction.accesskey;"/>
+        <radiogroup id="directionRadio" orient="horizontal">
+          <radio label="&unspecified.label;" value=""/>
+          <radio label="&ltr.label;" value="ltr"/>
+          <radio label="&rtl.label;" value="rtl"/>
         </radiogroup>
-        <hbox class="indent">
-          <grid>
-            <columns><column/><column/></columns>
-            <rows>
-              <row align="center">
-                <label value="&backgroundColor.label;"
-                       id="backgroundColorColorpickerLabel"
-                       control="backgroundColorColorpicker"/>
-                <colorpicker type="button" id="backgroundColorColorpicker"/>
-              </row>
-              <row align="center">
-                <label value="&textColor.label;"
-                       id="textColorColorpickerLabel"
-                       control="textColorColorpicker"/>
-                <colorpicker type="button" id="textColorColorpicker"/>
-              </row>
-              <row align="center">
-                <label value="&linksColor.label;"
-                       id="linksColorColorpickerLabel"
-                        control="linksColorColorpicker"/>
-                <colorpicker type="button" id="linksColorColorpicker"/>
-              </row>
-              <row align="center">
-                <label value="&activeLinksColor.label;"
-                       id="activeLinksColorColorpickerLabel"
-                        control="activeLinksColorColorpicker"/>
-                <colorpicker type="button" id="activeLinksColorColorpicker"/>
-              </row>
-              <row align="center">
-                <label value="&visitedLinksColor.label;"
-                       id="visitedLinksColorColorpickerLabel"
-                        control="visitedLinksColorColorpicker"/>
-                <colorpicker type="button" id="visitedLinksColorColorpicker"/>
-              </row>
-            </rows>
-          </grid>
-          <vbox id="pagePreview" flex="1">
-             <spacer flex="1"/>
-             <label class="larger" id="textPreview" value="Normal text"/>
-             <spacer flex="1"/>
-             <label class="larger" id="linksPreview" value="Links"/>
-             <spacer flex="1"/>
-             <label class="larger" id="activeLinksPreview" value="Active links"/>
-             <spacer flex="1"/>
-             <label class="larger" id="visitedLinksPreview" value="Visited links"/>
-             <spacer flex="1"/>
-          </vbox>
-        </hbox>
-        <hbox align="center">
-          <label value="&backgroundImage.label;"
-                 control="backgroundImage"
-                 accesskey="&backgroundImage.accesskey;"/>
-          <textbox id="backgroundImage" flex="1"/>
-          <filepickerbutton id="filepickerbutton"
-                            mode="0"
-                            control="backgroundImage"
-                            title="&filepickerForBgImage.title;"/>
-          <toolbarbutton id="removeBackground" />
-        </hbox>
-        <hbox align="center">
-          <checkbox label="&relativeURLForBgImage.label;"
-                    disabled="true"/>
-        </hbox>
-      </tabpanel>
-    </tabpanels>
-  </tabbox>
+      </row>
+    </rows>
+  </grid>
 
 </dialog>
 

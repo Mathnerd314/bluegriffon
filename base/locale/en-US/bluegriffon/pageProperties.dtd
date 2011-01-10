@@ -11,23 +11,14 @@
 <!ENTITY pageKeywords.label "Keywords:">
 <!ENTITY pageKeywords.accesskey "K">
 
-<!ENTITY backgroundImage.label "Background Image:">
-<!ENTITY backgroundImage.accesskey "B">
+<!ENTITY language.label "Language:">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "Character Set:">
+<!ENTITY charset.accesskey "c">
+<!ENTITY direction.label "Text Direction:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "From Left to Right">
+<!ENTITY rtl.label "From Right to Left">
+<!ENTITY unspecified.label "Unspecified">
 
-<!ENTITY filepickerForBgImage.title "Select a background image">
-<!ENTITY pagePreview.label "Preview:">
-
-<!ENTITY useSystemColors.label "Reader's defaults colors (Don't set colors in page)">
-<!ENTITY userDefinedColors.label "Use custom colors:">
-
-<!ENTITY backgroundColor.label "Background:">
-<!ENTITY textColor.label "Text:">
-<!ENTITY linksColor.label "Links:">
-<!ENTITY activeLinksColor.label "Active Links:">
-<!ENTITY visitedLinksColor.label "Visited Links:">
-
-<!ENTITY relativeURLForBgImage.label "URL is relative to page location">
-
-<!ENTITY generalTab.label "General">
-<!ENTITY styleTab.label "Style">
-<!ENTITY advancedTab.label "Advanced">
+<!ENTITY selectLanguage.label "Text Language">

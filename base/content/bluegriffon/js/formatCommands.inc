@@ -170,3 +170,26 @@ var cmdAriaRole =
   }
 };
 
+var cmdPagePropertiesCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    try {
+      window.openDialog("chrome://bluegriffon/content/dialogs/pageProperties.xul", "_blank",
+              "chrome,close,titlebar,modal");
+    }
+    catch(ex) {}
+    window.content.focus();
+  }
+};

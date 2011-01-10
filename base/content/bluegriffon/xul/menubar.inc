@@ -230,6 +230,8 @@
                       type="radio" name="1" value="rtl"    observes="cmd_renderedHTMLEnabler" />
           </menupopup>
         </menu-->
+        <menuseparator/>
+        <menuitem label="&pageProperties.label;" observes="cmd_pageProperties"/>
       </menupopup>
     </menu>
 

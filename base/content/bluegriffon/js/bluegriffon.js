@@ -823,8 +823,7 @@ function RebuildFromSource(aDoc, aContext)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     editor.endTransaction();
 
-    // update the window title
-    UpdateWindowTitle();
+    // the window title is updated by DOMTitleChanged event
   } catch(ex) {
   }
   NotifierUtils.notify("afterLeavingSourceMode");

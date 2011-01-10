@@ -508,3 +508,5 @@
 <!ENTITY qa.label "Bugs and Suggestions">
 <!ENTITY homePage.label "Web Site">
 <!ENTITY addons.label "Get Add-ons">
+
+<!ENTITY pageProperties.label "Page Properties">

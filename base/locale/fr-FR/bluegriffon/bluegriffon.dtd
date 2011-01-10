@@ -509,3 +509,5 @@
 <!ENTITY qa.label "Bugs et Suggestions">
 <!ENTITY homePage.label "Site Web de BlueGriffon">
 <!ENTITY addons.label "Obtenir des extensions">
+
+<!ENTITY pageProperties.label "Propriétés du document">

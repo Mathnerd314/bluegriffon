@@ -11,23 +11,14 @@
 <!ENTITY pageKeywords.label "Mots-clés:">
 <!ENTITY pageKeywords.accesskey "c">
 
-<!ENTITY backgroundImage.label "Image de fond:">
-<!ENTITY backgroundImage.accesskey "f">
+<!ENTITY language.label "Langage:">
+<!ENTITY language.accesskey "L">
+<!ENTITY charset.label "Jeu de caractères:">
+<!ENTITY charset.accesskey "c">
+<!ENTITY direction.label "Direction du texte:">
+<!ENTITY direction.accesskey "x">
+<!ENTITY ltr.label "De gauche à droite">
+<!ENTITY rtl.label "De droite à gauche">
+<!ENTITY unspecified.label "Non spécifié">
 
-<!ENTITY filepickerForBgImage.title "Sélectionner une image de fond">
-<!ENTITY pagePreview.label "Prévisualisation:">
-
-<!ENTITY useSystemColors.label "Couleurs par défaut (pas de couleur spécifique au document)">
-<!ENTITY userDefinedColors.label "Couleurs spécifiques:">
-
-<!ENTITY backgroundColor.label "Fond:">
-<!ENTITY textColor.label "Texte:">
-<!ENTITY linksColor.label "Liens:">
-<!ENTITY activeLinksColor.label "Liens activés:">
-<!ENTITY visitedLinksColor.label "Liens visités:">
-
-<!ENTITY relativeURLForBgImage.label "Rendre l'URL relatif au document">
-
-<!ENTITY generalTab.label "Général">
-<!ENTITY styleTab.label "Style">
-<!ENTITY advancedTab.label "Avancé">
+<!ENTITY selectLanguage.label "Langage du texte">

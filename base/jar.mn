@@ -129,6 +129,8 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/convertToTable.js         (content/bluegriffon/dialogs/convertToTable.js)
   content/bluegriffon/dialogs/insertChars.xul           (content/bluegriffon/dialogs/insertChars.xul)
   content/bluegriffon/dialogs/insertChars.js            (content/bluegriffon/dialogs/insertChars.js)
+  content/bluegriffon/dialogs/pageProperties.xul        (content/bluegriffon/dialogs/pageProperties.xul)
+  content/bluegriffon/dialogs/pageProperties.js         (content/bluegriffon/dialogs/pageProperties.js)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -195,6 +197,7 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/media.properties  (locale/en-US/bluegriffon/media.properties)
   locale/en-US/bluegriffon/insertChars.dtd  (locale/en-US/bluegriffon/insertChars.dtd)
   locale/en-US/bluegriffon/convertToTable.dtd (locale/en-US/bluegriffon/convertToTable.dtd)
+  locale/en-US/bluegriffon/pageProperties.dtd (locale/en-US/bluegriffon/pageProperties.dtd)
   locale/fr-FR/bluegriffon/aboutDialog.dtd  (locale/fr-FR/bluegriffon/aboutDialog.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.dtd  (locale/fr-FR/bluegriffon/bluegriffon.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.properties  (locale/fr-FR/bluegriffon/bluegriffon.properties)
@@ -256,3 +259,4 @@ bluegriffon-locale.jar:
   locale/fr-FR/bluegriffon/media.properties  (locale/fr-FR/bluegriffon/media.properties)
   locale/fr-FR/bluegriffon/insertChars.dtd  (locale/fr-FR/bluegriffon/insertChars.dtd)
   locale/fr-FR/bluegriffon/convertToTable.dtd (locale/fr-FR/bluegriffon/convertToTable.dtd)
+  locale/fr-FR/bluegriffon/pageProperties.dtd (locale/fr-FR/bluegriffon/pageProperties.dtd)

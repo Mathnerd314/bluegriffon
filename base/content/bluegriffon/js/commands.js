@@ -386,6 +386,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_stylesheets", cmdStylesheetsCommand);
 
     commandTable.registerCommand("cmd_span",        cmdSpanCommand);
+
+    commandTable.registerCommand("cmd_pageProperties", cmdPagePropertiesCommand);
   },
 
   setupFormatCommands: function setupFormatCommands()
