@@ -545,68 +545,60 @@ var CssInspector = {
 
         token = parser.getToken(true, true);
         var haveGradientLine = false;
-        if (token.isPercentage() ||
-            token.isDimensionOfUnit("deg") ||
-            token.isDimensionOfUnit("rad") ||
-            token.isDimensionOfUnit("grad") ||
-            token.isDimensionOfUnit("cm") ||
-            token.isDimensionOfUnit("mm") ||
-            token.isDimensionOfUnit("in") ||
-            token.isDimensionOfUnit("pc") ||
-            token.isDimensionOfUnit("px") ||
-            token.isDimensionOfUnit("em") ||
-            token.isDimensionOfUnit("ex") ||
-            token.isDimensionOfUnit("pt") ||
-            token.isNumber())
-          haveGradientLine = true;
-        else if (token.isIdent("top") ||
-                 token.isIdent("center") ||
-                 token.isIdent("bottom") ||
-                 token.isIdent("left") ||
-                 token.isIdent("right"))
-          haveGradientLine = true;
+        var foundHorizPosition = false;
+        var haveAngle = false;
 
-        haveAngle = false;
+        if (token.isAngle()) {
+          gradient.angle = token.value;
+          haveGradientLine = true;
+          haveAngle = true;
+          token = parser.getToken(true, true);
+        }
+
+        if (token.isLength()
+            || token.isIdent("top")
+            || token.isIdent("center")
+            || token.isIdent("bottom")
+            || token.isIdent("left")
+            || token.isIdent("right")) {
+          haveGradientLine = true;
+          if (token.isLength()
+            || token.isIdent("left")
+            || token.isIdent("right")) {
+            foundHorizPosition = true;
+          }
+          gradient.position = token.value;
+          token = parser.getToken(true, true);
+        }
+
         if (haveGradientLine) {
-          if (token.isDimensionOfUnit("deg") ||
-              token.isDimensionOfUnit("rad") ||
-              token.isDimensionOfUnit("grad")) { // we have an angle here
+          if (!haveAngle && token.isAngle()) { // we have an angle here
             gradient.angle = token.value;
             haveAngle = true;
             token = parser.getToken(true, true);
           }
-          if (!haveAngle || !token.isSymbol(",")) {
-            // we already know it's a percentage, a length, a number or a position kw
-            gradient.position = token.value;
+
+          else if (token.isLength()
+                  || (foundHorizPosition && (token.isIdent("top")
+                                             || token.isIdent("center")
+                                             || token.isIdent("bottom")))
+                  || (!foundHorizPosition && (token.isLength()
+                                              || token.isIdent("top")
+                                              || token.isIdent("center")
+                                              || token.isIdent("bottom")
+                                              || token.isIdent("left")
+                                              || token.isIdent("right")))) {
+            gradient.position = ("position" in gradient) ? gradient.position + " ": "";
+            gradient.position += token.value;
             token = parser.getToken(true, true);
-            if (token.isPercentage() ||
-                token.isDimensionOfUnit("deg") ||
-                token.isDimensionOfUnit("rad") ||
-                token.isDimensionOfUnit("grad") ||
-                token.isDimensionOfUnit("cm") ||
-                token.isDimensionOfUnit("mm") ||
-                token.isDimensionOfUnit("in") ||
-                token.isDimensionOfUnit("pc") ||
-                token.isDimensionOfUnit("px") ||
-                token.isDimensionOfUnit("em") ||
-                token.isDimensionOfUnit("ex") ||
-                token.isDimensionOfUnit("pt") ||
-                token.isNumber() ||
-                token.isIdent("top") ||
-                token.isIdent("center") ||
-                token.isIdent("bottom")) { // second position
-              gradient.position += " " + token.value;
-              // we can still have an angle :-(
-              var token = parser.getToken(true, true);
-              if (token.isDimensionOfUnit("deg") ||
-                  token.isDimensionOfUnit("rad") ||
-                  token.isDimensionOfUnit("grad")) { // we have an angle here
-                gradient.angle = token.value;
-                haveAngle = true;
-                token = parser.getToken(true, true);
-              }
-            }
           }
+
+          if (!haveAngle && token.isAngle()) { // we have an angle here
+            gradient.angle = token.value;
+            haveAngle = true;
+            token = parser.getToken(true, true);
+          }
+
           // we must find a comma here
           if (!token.isSymbol(","))
             return null;
@@ -968,8 +960,7 @@ var CssInspector = {
               ? (gradient.isRepeating ? "-moz-repeating-radial-gradient(" : "-moz-radial-gradient(" )
               : (gradient.isRepeating ? "-moz-repeating-linear-gradient(" : "-moz-linear-gradient(" );
     if (gradient.angle || gradient.position)
-      s += (gradient.angle ? gradient.angle : "") +
-           " " +
+      s += (gradient.angle ? gradient.angle + " ": "") +
            (gradient.position ? gradient.position : "") +
            ", ";
     if (gradient.isRadial && (gradient.shape || gradient.size))
@@ -4318,6 +4309,26 @@ jscsspToken.prototype = {
   isDimensionOfUnit: function(aUnit)
   {
     return (this.isDimension() && this.unit == aUnit);
+  },
+
+  isLength: function()
+  {
+    return (this.isPercentage() ||
+            this.isDimensionOfUnit("cm") ||
+            this.isDimensionOfUnit("mm") ||
+            this.isDimensionOfUnit("in") ||
+            this.isDimensionOfUnit("pc") ||
+            this.isDimensionOfUnit("px") ||
+            this.isDimensionOfUnit("em") ||
+            this.isDimensionOfUnit("ex") ||
+            this.isDimensionOfUnit("pt"));
+  },
+
+  isAngle: function()
+  {
+    return (this.isDimensionOfUnit("deg") ||
+            this.isDimensionOfUnit("rad") ||
+            this.isDimensionOfUnit("grad"));
   }
 }
 
