@@ -34,8 +34,12 @@ var bgSpellingCommand =
   {
     window.cancelSendMessage = false;
     try {
-      window.openDialog("chrome://editor/content/EdSpellCheck.xul", "_blank",
-              "chrome,close,titlebar,modal", false, false, true);
+      /*window.openDialog("chrome://bluegriffon/content/dialogs/spellCheck.xul", "_blank",
+              "chrome,close,titlebar,modal=no", false, true);*/
+      OpenAppModalWindow(window,
+                         "chrome://bluegriffon/content/dialogs/spellCheck.xul",
+                         "Spell Check",
+                         false); 
     }
     catch(ex) {}
     window.content.focus();

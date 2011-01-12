@@ -46,6 +46,9 @@
         <menuseparator/>
         <menuitem id="menu_selectAll" />
         <menuseparator/>
+        <menuitem label="&spellCheck.label;"
+                  observes="cmd_spellCheck"/>
+        <menuseparator/>
         <menuitem id="menu_find" command="cmd_bgfind"
                   key="findkb"/>
       </menupopup>

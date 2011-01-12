@@ -88,6 +88,8 @@
   <command id="cmd_stylesheets"       oncommand="goDoCommand('cmd_stylesheets')"/>
 
   <command id="cmd_pageProperties"    oncommand="goDoCommand('cmd_pageProperties')"/>
+
+  <command id="cmd_spellCheck"        oncommand="goDoCommand('cmd_spellCheck')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

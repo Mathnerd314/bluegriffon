@@ -388,7 +388,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_span",        cmdSpanCommand);
 
     commandTable.registerCommand("cmd_pageProperties", cmdPagePropertiesCommand);
-  },
+
+    commandTable.registerCommand("cmd_spellCheck",  bgSpellingCommand);
+},
 
   setupFormatCommands: function setupFormatCommands()
   {
