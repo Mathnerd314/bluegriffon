@@ -4,3 +4,6 @@
 <!ENTITY network.caption "Network">
 <!ENTITY configureNetwork.label "Configure BlueGriffon's network settings">
 <!ENTITY parameters.label "Parameters...">
+
+<!ENTITY advancedConfig.caption "Advanced Configuration">
+<!ENTITY configEditor.label "Configuration Editor">

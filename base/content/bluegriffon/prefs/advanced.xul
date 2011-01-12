@@ -19,12 +19,21 @@
                 oncommand="OpenNetworkParams()"/>
       </hbox>
     </groupbox>
-    <groupbox flex="1">
+    <groupbox>
       <caption label="&ui.caption;"/>
-	    <listbox id="locale-listbox" flex="1"/>
+	    <listbox id="locale-listbox" rows="4"/>
 	    <hbox>
         <spacer flex="1"/>
         <button label="&switchLocale.button;" oncommand="changeLocale()"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&advancedConfig.caption;"/>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&configEditor.label;"
+                oncommand="OpenAppModalWindow(window, 'about:config', 'Config', true)"/>
       </hbox>
     </groupbox>
   </prefpane>

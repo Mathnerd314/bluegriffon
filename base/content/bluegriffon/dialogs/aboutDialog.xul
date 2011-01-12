@@ -68,8 +68,9 @@
 
   <tabbox flex="1">
     <tabs>
-      <tab label="About"/>
-      <tab label="Credits"/>
+      <tab label="&aboutTab.label;"/>
+      <tab label="&creditsTab.label;"/>
+      <tab label="&buildConfigTab.label;"/>
     </tabs>
     <tabpanels flex="1">
 	    <vbox flex="1">
@@ -102,6 +103,7 @@
 	      </vbox>
 	    </vbox>
       <iframe flex="1" id="iframe"/>
+      <iframe flex="1" src="about:buildconfig"/>
     </tabpanels>
   </tabbox>
 </dialog>

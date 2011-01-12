@@ -5,3 +5,7 @@
 <!ENTITY copyrightText          "&#169;1998-2010 Disruptive Innovations et ses Contributeurs. Tous droits réservés.">
 <!ENTITY cmdClose.macKey        "W">
 <!ENTITY codeName               "Nom de code">
+
+<!ENTITY aboutTab.label         "À propos">
+<!ENTITY creditsTab.label       "Licence et contributeurs">
+<!ENTITY buildConfigTab.label   "Configuration">
