@@ -753,6 +753,7 @@ function ToggleViewMode(aElement)
 						                    "chrome,modal,titlebar", message, error);
               gDialog.wysiwygModeButton.removeAttribute("selected");
               gDialog.sourceModeButton.setAttribute("selected", "true");
+              editorElement.parentNode.setAttribute("currentmode", "source");
               return;
             }
             RebuildFromSource(doc);
