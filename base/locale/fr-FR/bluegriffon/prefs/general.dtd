@@ -16,7 +16,7 @@
 <!ENTITY enableSpellCheck.label "Activer la correction orthographique à la volée">
 <!ENTITY numberSuggestions.label "Nombre de suggestions:">
 
-<!ENTITY tabPosition.label "Position of Tabs">
-<!ENTITY leftTabPosition.label "Left">
-<!ENTITY centerTabPosition.label "Center">
-<!ENTITY rightTabPosition.label "Right">
+<!ENTITY tabPosition.label "Position des Onglets">
+<!ENTITY leftTabPosition.label "À gauche">
+<!ENTITY centerTabPosition.label "Au centre">
+<!ENTITY rightTabPosition.label "À droite">
