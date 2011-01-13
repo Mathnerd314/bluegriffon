@@ -6,7 +6,7 @@ diff -r 0aa98eae87ed content/base/src/nsCopySupport.cpp
    // serializers and parsers is OK, and those mess up XHTML).
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
 -  if (!(htmlDoc && aDoc->IsHTML()))
-+  if (!(htmlDoc /*&& aDoc->IsHTML()*/))
++  if (!htmlDoc)
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
@@ -18,7 +18,7 @@ diff -r 0aa98eae87ed content/base/src/nsDocumentEncoder.cpp
    // also consider ourselves in a text widget if we can't find an html document
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
 -  if (!(htmlDoc && mDocument->IsHTML()))
-+  if (!(htmlDoc /*&& mDocument->IsHTML()*/))
++  if (!htmlDoc)
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget

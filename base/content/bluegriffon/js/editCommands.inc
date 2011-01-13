@@ -34,8 +34,6 @@ var bgSpellingCommand =
   {
     window.cancelSendMessage = false;
     try {
-      /*window.openDialog("chrome://bluegriffon/content/dialogs/spellCheck.xul", "_blank",
-              "chrome,close,titlebar,modal=no", false, true);*/
       OpenAppModalWindow(window,
                          "chrome://bluegriffon/content/dialogs/spellCheck.xul",
                          "Spell Check",

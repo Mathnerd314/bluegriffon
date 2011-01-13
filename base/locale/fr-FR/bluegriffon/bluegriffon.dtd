@@ -293,6 +293,12 @@
 <!ENTITY redoCmd.label "Refaire">
 <!ENTITY redoCmd.accesskey "R">
 
+<!ENTITY cutCmd.label "Couper">
+<!ENTITY copyCmd.label "Copier">
+<!ENTITY pasteCmd.label "Coller">
+<!ENTITY deleteCmd.label "Supprimer">
+<!ENTITY selectAllCmd.label "Tout Sélectionner">
+
 <!ENTITY setZoomFactor.label "Préciser le facteur de zoom">
 
 <!ENTITY fileRecentMenu.label "Fichiers récents">

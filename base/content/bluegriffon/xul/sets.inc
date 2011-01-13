@@ -141,25 +141,25 @@
             events="style,create"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);">
   <command id="cmd_selectionChanged"/>
-  <command id="cmd_undo" 
+  <command id="cmd_undo" label="&undoCmd.label;" 
            oncommand="goDoCommand('cmd_undo')"
            disabled="true"/>
-  <command id="cmd_redo" 
+  <command id="cmd_redo" label="&redoCmd.label;"
            oncommand="goDoCommand('cmd_redo')"
            disabled="true"/>
-  <command id="cmd_cut" 
+  <command id="cmd_cut" label="&cutCmd.label;"
            oncommand="goDoCommand('cmd_cut')"
            disabled="true"/>
-  <command id="cmd_copy"
+  <command id="cmd_copy" label="&copyCmd.label;"
            oncommand="goDoCommand('cmd_copy')"
            disabled="true"/>
-  <command id="cmd_paste" 
+  <command id="cmd_paste" label="&pasteCmd.label;"
            oncommand="goDoCommand('cmd_paste')"
            disabled="true"/>
-  <command id="cmd_delete"
+  <command id="cmd_delete" label="&deleteCmd.label;"
            oncommand="goDoCommand('cmd_delete')"
            disabled="true"/>
-  <command id="cmd_selectAll"
+  <command id="cmd_selectAll" label="&selectAllCmd.label;"
            oncommand="goDoCommand('cmd_selectAll')"
            disabled="true"/>
 </commandset>

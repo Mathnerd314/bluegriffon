@@ -292,6 +292,12 @@
 <!ENTITY redoCmd.label "Redo">
 <!ENTITY redoCmd.accesskey "R">
 
+<!ENTITY cutCmd.label "Cut">
+<!ENTITY copyCmd.label "Copy">
+<!ENTITY pasteCmd.label "Paste">
+<!ENTITY deleteCmd.label "Delete">
+<!ENTITY selectAllCmd.label "Select All">
+
 <!ENTITY setZoomFactor.label "Set zoom factor">
 
 <!ENTITY fileRecentMenu.label "Recent files">
