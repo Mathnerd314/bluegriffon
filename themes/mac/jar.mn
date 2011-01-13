@@ -168,3 +168,6 @@ bluegriffon.jar:
   skin/classic/bluegriffon/icons/up.png (classic/icons/up.png)
   skin/classic/bluegriffon/medium.css (classic/medium.css)
   skin/classic/bluegriffon/insertChars.css (classic/insertChars.css)
+  skin/classic/bluegriffon/icons/close-findbar.png (classic/icons/close-findbar.png)
+  skin/classic/bluegriffon/icons/close-findbar-hover.png (classic/icons/close-findbar-hover.png)
+  skin/classic/bluegriffon/icons/close-findbar-active.png (classic/icons/close-findbar-active.png)

@@ -190,7 +190,7 @@ grippy[disabled="true"] {
   margin-left: 6px;
 }
 
-#bespinToolbox {
+#bespinToolbox1, #bespinToolbox2 {
   margin: 0px;
   background-color: #28201C;
   margin-left: 1px;
@@ -209,7 +209,8 @@ grippy[disabled="true"] {
   background-color: rgb(208, 208, 208);
 }
 
-#bespinFindTextbox {
+#bespinFindTextbox,
+#bespinReplaceTextbox {
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
   -moz-border-radius: 11px 11px 11px 11px;
@@ -219,13 +220,15 @@ grippy[disabled="true"] {
   background-color: rgb(208, 208, 208);
 }
 
-#bespinFindTextbox html|input {
+#bespinFindTextbox html|input,
+#bespinReplaceTextbox html|input {
   -moz-appearance: none ! important;
   border: 0px none !important;
   background-color: transparent ! important;
 }
 
-#bespinFindTextbox .textbox-search-clear {
+#bespinFindTextbox .textbox-search-clear,
+#bespinReplaceTextbox .textbox-search-clear {
   width: 10px; height: 10px;
 }
 
@@ -234,12 +237,11 @@ grippy[disabled="true"] {
   color: black;
 }
 
-#bespinFindPrevious {
+.findBarButton {
+  padding: 0px 12px 0px 12px;
   -moz-appearance: none;
   font-size: smaller;
-  padding: 0px 8px 0px 12px;
-  -moz-border-radius-topleft: 11px;
-  -moz-border-radius-bottomleft: 11px;
+  -moz-border-radius: 11px;
   border-top: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -250,30 +252,36 @@ grippy[disabled="true"] {
   -moz-border-right-colors:#aaa #bbb #ccc #ddd;
   background-color: #ddd;
   color: black;
+}
+
+#bespinFindPrevious {
+  padding: 0px 8px 0px 12px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
   margin-right: 0px;
 }
 
 #bespinFindNext {
-  -moz-appearance: none;
-  font-size: smaller;
   padding: 0px 12px 0px 8px;
-  -moz-border-radius-topright: 11px;
-  -moz-border-radius-bottomright: 11px;
-  border-top: 1px solid #aaa;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  -moz-border-top-colors:#aaa #bbb #ccc #ddd;
-  -moz-border-left-colors:#aaa #bbb #ccc #ddd;
-  -moz-border-bottom-colors:#aaa #bbb #ccc #ddd;
-  -moz-border-right-colors:#aaa #bbb #ccc #ddd;
-  background-color: #ddd;
-  color: black;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-bottomleft: 0px;
   margin-left: 0px;
 }
 
-#bespinFindPrevious:active, #bespinFindNext:active {
+.findBarButton:active {
   background-color: silver;
+}
+
+#closeFindbarButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar.png");
+}
+
+#closeFindbarButton:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-hover.png");
+}
+
+#closeFindbarButton:active:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-active.png");
 }
 
 /* autoInsertTable */

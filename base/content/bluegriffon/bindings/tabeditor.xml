@@ -537,13 +537,15 @@
            if (mode == "source") {
              gDialog.sourceModeButton.setAttribute("selected", "true");
              gDialog.wysiwygModeButton.removeAttribute("selected");
-             gDialog.bespinToolbox.hidden = false;
+             gDialog.bespinToolbox1.hidden = false;
+             gDialog.bespinToolbox2.hidden = false;
              deck.firstChild.focus();
            }
            else {
              gDialog.wysiwygModeButton.setAttribute("selected", "true");
              gDialog.sourceModeButton.removeAttribute("selected");
-             gDialog.bespinToolbox.hidden = true;
+             gDialog.bespinToolbox1.hidden = true;
+             gDialog.bespinToolbox2.hidden = true;
              deck.lastChild.focus();
            }
            window.updateCommands("navigation");

@@ -49,8 +49,10 @@
         <menuitem label="&spellCheck.label;"
                   observes="cmd_spellCheck"/>
         <menuseparator/>
-        <menuitem id="menu_find" command="cmd_bgfind"
+        <menuitem id="bgmenu_find" command="cmd_bgfind"
                   key="findkb"/>
+        <menuitem id="bgmenu_replace" command="cmd_replace"
+                  key="replacekb"/>
       </menupopup>
     </menu>
 

@@ -517,3 +517,16 @@
 <!ENTITY addons.label "Obtenir des extensions">
 
 <!ENTITY pageProperties.label "Propriétés du document">
+
+<!-- FIND AND REPLACE BARS -->
+<!ENTITY replaceAll.button "Tout remplacer">
+<!ENTITY replace.button "Remplacer">
+<!ENTITY replaceAndFind.button "Remplacer et passer au suivant">
+<!ENTITY replace.label "Remplacer par:">
+<!ENTITY line.label "Ligne:">
+<!ENTITY previous.label "Précédent">
+<!ENTITY next.label "Suivant">
+<!ENTITY caseSensitive.checkbox "Sensibilité à la casse">
+<!ENTITY find.label "Rechercher:">
+<!ENTITY findCmd.label "Rechercher">
+<!ENTITY replaceCmd.label "Remplacer">

@@ -110,7 +110,7 @@
         <box flex="1" id="tabeditorContainer" >
           <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode"/>
         </box>
-#include bespin.inc
+#include findbar.inc
         <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>
       </vbox>
       <hbox align="center" id="helperButtons">

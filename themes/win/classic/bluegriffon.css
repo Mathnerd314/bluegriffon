@@ -192,7 +192,7 @@ grippy[disabled="true"] {
 
 /* BESPIN TOOLBOX */
 
-#bespinToolbox {
+#bespinToolbox1, #bespinToolbox2 {
   margin: 0px;
   background-color: #28201C;
   margin-left: 1px;
@@ -277,6 +277,18 @@ grippy[disabled="true"] {
 
 #bespinFindPrevious:active, #bespinFindNext:active {
   background-color: silver;
+}
+
+#closeFindbarButton {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar.png");
+}
+
+#closeFindbarButton:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-hover.png");
+}
+
+#closeFindbarButton:active:hover {
+  list-style-image: url("chrome://bluegriffon/skin/icons/close-findbar-active.png");
 }
 
 /* autoInsertTable */

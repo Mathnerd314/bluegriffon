@@ -12,8 +12,10 @@ var cmdBgFindCommand =
 
   doCommand: function(aCommand)
   {
-    if (GetCurrentViewMode() == "source")
-      gDialog.bespinFindTextbox.focus();
+    var isSource = (GetCurrentViewMode() == "source");
+    WysiwygShowFindBar();
+    gDialog.bespinLineLabel.hidden = !isSource;
+    gDialog.bespinLineTextbox.hidden = !isSource;
   }
 };
 

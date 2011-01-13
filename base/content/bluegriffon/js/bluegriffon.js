@@ -43,6 +43,7 @@ Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
 Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 #include blanks.inc
 
@@ -683,6 +684,8 @@ function ToggleViewMode(aElement)
   var editorElement = EditorUtils.getCurrentEditorElement();
   editorElement.parentNode.setAttribute("currentmode", mode);
 
+  gDialog.bespinToolbox1.hidden = true;
+  gDialog.bespinToolbox2.hidden = true;
   if (mode == "source")
   {
     HandlersManager.hideAllHandlers();
@@ -706,7 +709,6 @@ function ToggleViewMode(aElement)
     bespinEditor.value = source;
     bespinIframe.setUserData("oldSource", source, null);
     NotifierUtils.notify("afterEnteringSourceMode");
-    gDialog.bespinToolbox.hidden = false;
     editorElement.parentNode.selectedIndex = 0;
     bespinIframe.focus();
     bespinEditor.focus = true;
@@ -714,7 +716,6 @@ function ToggleViewMode(aElement)
   }
   else if (mode == "wysiwyg")
   {
-    gDialog.bespinToolbox.hidden = true;
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
@@ -1142,7 +1143,7 @@ function OnDoubleClick(aEvent)
   }
 }
 
-#include bespin.inc
+#include findbar.inc
 
 #include autoInsertTable.inc
 
