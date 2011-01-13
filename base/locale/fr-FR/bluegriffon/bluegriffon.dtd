@@ -530,3 +530,5 @@
 <!ENTITY find.label "Rechercher:">
 <!ENTITY findCmd.label "Rechercher">
 <!ENTITY replaceCmd.label "Remplacer">
+
+<!ENTITY preferences.label "Préférences...">

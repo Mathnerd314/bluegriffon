@@ -319,7 +319,7 @@
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
         <menuseparator id="menu_PrefsSeparator"/>
-        <menuitem id="menu_preferences" label="Preferences"
+        <menuitem id="menu_preferences" label="&preferences.label;"
                   oncommand="OpenPreferences()"/>
         <menuitem label="Venkman"
                   oncommand="start_venkman()"/>
