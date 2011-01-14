@@ -46,6 +46,10 @@
         <menuseparator/>
         <menuitem id="menu_selectAll" />
         <menuseparator/>
+        <menuitem id="menu_copyHTMLCode"
+                  label="&copyHTMLCodeCmd.label;"
+                  observes="cmd_copyHTMLCode"/>
+        <menuseparator/>
         <menuitem label="&spellCheck.label;"
                   observes="cmd_spellCheck"/>
         <menuseparator/>

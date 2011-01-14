@@ -297,6 +297,8 @@
 <!ENTITY pasteCmd.label "Paste">
 <!ENTITY deleteCmd.label "Delete">
 <!ENTITY selectAllCmd.label "Select All">
+<!ENTITY copyHTMLCodeCmd.label "Copy Selected HTML Markup">
+<!ENTITY copyHTMLCode.label "Copy HTML Markup of this element">
 
 <!ENTITY setZoomFactor.label "Set zoom factor">
 

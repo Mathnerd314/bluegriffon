@@ -163,6 +163,10 @@
   <command id="cmd_selectAll" label="&selectAllCmd.label;"
            oncommand="goDoCommand('cmd_selectAll')"
            disabled="true"/>
+  <command id="cmd_copyHTMLCode"
+           oncommand="goDoCommand('cmd_copyHTMLCode')"
+           disabled="true"/>
+           
 </commandset>
 
 <commandset id="composerSaveMenuItems"
@@ -251,6 +255,10 @@
               id="changeTagMenuitem"
               accesskey="&changeTag.accesskey;"
               oncommand="ChangeTag(event)"/>
+     <menuseparator/>
+     <menuitem label="&copyHTMLCode.label;"
+               id="copyHTMLCodeOfElementMenuitem"
+               oncommand="goDoCommand('cmd_copyHTMLCode')"/>
      <menuseparator/>
      <menu label="ARIA Role">
         <menupopup id="ARIARoleStructureBarPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"
@@ -364,6 +372,10 @@
     <menuitem id="cMenu_delete" key="key_delete"/>
     <menuseparator/>
     <menuitem id="cMenu_selectAll" key="key_selectAll"/>
+    <menuseparator/>
+    <menuitem id="cMenu_copyHTMLCode"
+              label="&copyHTMLCodeCmd.label;"
+              observes="cmd_copyHTMLCode"/>
     <menuseparator id="separator_before_ctableInsertMenu"/>
     <menu id="ctableInsertMenu" label="&tableInsertMenu2.label;" accesskey="&tableinsertmenu.accesskey;">
       <menupopup>

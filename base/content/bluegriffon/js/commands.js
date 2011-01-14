@@ -391,6 +391,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_pageProperties", cmdPagePropertiesCommand);
 
     commandTable.registerCommand("cmd_spellCheck",  bgSpellingCommand);
+
+    commandTable.registerCommand("cmd_copyHTMLCode", cmdCopyHTMLCodeCommand);
 },
 
   setupFormatCommands: function setupFormatCommands()

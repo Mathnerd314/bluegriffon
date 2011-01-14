@@ -690,7 +690,7 @@ function ToggleViewMode(aElement)
   {
     HandlersManager.hideAllHandlers();
 
-    flags = 1 << 1; // OutputFormatted
+    var flags = 1 << 1; // OutputFormatted
     flags |= 1 << 5; // OutputWrap
     //flags |= 1 << 2; // OutputRaw
     flags |= 1 << 10; // OutputLF

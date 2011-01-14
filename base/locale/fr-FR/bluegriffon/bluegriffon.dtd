@@ -298,6 +298,8 @@
 <!ENTITY pasteCmd.label "Coller">
 <!ENTITY deleteCmd.label "Supprimer">
 <!ENTITY selectAllCmd.label "Tout Sélectionner">
+<!ENTITY copyHTMLCodeCmd.label "Copier le code HTML de la sélection">
+<!ENTITY copyHTMLCode.label "Copier le code HTML de cet élément">
 
 <!ENTITY setZoomFactor.label "Préciser le facteur de zoom">
 
