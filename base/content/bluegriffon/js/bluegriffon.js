@@ -688,6 +688,7 @@ function ToggleViewMode(aElement)
   gDialog.bespinToolbox2.hidden = true;
   if (mode == "source")
   {
+    gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
 
     var flags = 1 << 1; // OutputFormatted
@@ -757,6 +758,7 @@ function ToggleViewMode(aElement)
               editorElement.parentNode.setAttribute("currentmode", "source");
               return;
             }
+            gDialog.structurebar.style.visibility = "";
             RebuildFromSource(doc);
           }
           catch(e) {alert(e)}
@@ -765,13 +767,14 @@ function ToggleViewMode(aElement)
 	        var hp = new htmlParser(gDialog.parserIframe);
 	        hp.parseHTML(source,
 	                     EditorUtils.getDocumentUrl(),
-	                     function(aDoc, ctx) { RebuildFromSource(aDoc, ctx); },
+	                     function(aDoc, ctx) { gDialog.structurebar.style.visibility = "";; RebuildFromSource(aDoc, ctx); },
 	                     hp);
         }
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
         editorElement.parentNode.selectedIndex = 1;
+        gDialog.structurebar.style.visibility = "";
         window.content.focus();
       }
     }

@@ -534,18 +534,18 @@
            var deck = this.getCurrentEditorElement().parentNode;
            var mode = deck.getAttribute("previousMode");
            deck.selectedIndex = (mode == "source") ? 0 : 1;
+           gDialog.bespinToolbox1.hidden = true;
+           gDialog.bespinToolbox2.hidden = true;
            if (mode == "source") {
              gDialog.sourceModeButton.setAttribute("selected", "true");
              gDialog.wysiwygModeButton.removeAttribute("selected");
-             gDialog.bespinToolbox1.hidden = false;
-             gDialog.bespinToolbox2.hidden = false;
+             gDialog.structurebar.style.visibility = "hidden";
              deck.firstChild.focus();
            }
            else {
              gDialog.wysiwygModeButton.setAttribute("selected", "true");
              gDialog.sourceModeButton.removeAttribute("selected");
-             gDialog.bespinToolbox1.hidden = true;
-             gDialog.bespinToolbox2.hidden = true;
+             gDialog.structurebar.style.visibility = "";
              deck.lastChild.focus();
            }
            window.updateCommands("navigation");
