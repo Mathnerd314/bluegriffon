@@ -329,25 +329,25 @@
                             oncommand="RepaintGradient()"/>
                   <hbox>
                     <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
-                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()">
                       <menupopup id="linearGradientHorizOffsetMenupopup"
-                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                       </menupopup>
                     </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); RepaintGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true); RepaintGradient()"/>
                     <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
                               oncommand="RepaintGradient()"/>
                     <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()"
-                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true); RepaintGradient()">
+                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()"
+                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()">
                       <menupopup id="linearGradientVertOffsetMenupopup"
-                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                       </menupopup>
                     </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex'); RepaintGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true); RepaintGradient()"/>
+                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); RepaintGradient()"
+                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true); RepaintGradient()"/>
                   </hbox>
                  </row>
               </rows>

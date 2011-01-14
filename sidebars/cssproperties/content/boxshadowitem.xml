@@ -41,48 +41,48 @@
             <xul:label value="&offsetXTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetX"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)">
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
                 <xul:menupopup
-                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
             <xul:label value="&offsetYTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="offsetY"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', true)">
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true)">
                 <xul:menupopup
-                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </xul:hbox>
           </xul:row>
           <xul:row align="center">
             <xul:label value="&blurRadiusTextShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="blurRadius"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
                 <xul:menupopup
-                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </xul:hbox>
             <xul:label value="&spreadRadiusBoxShadow.label;"/>
             <xul:hbox>
               <xul:menulist editable="true" anonid="spreadRadius"
-                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)"
-                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', '', false)">
+                            oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)"
+                            oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', false)">
                 <xul:menupopup
-                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')"/>
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')"/>
               </xul:menulist>
-              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', false)"/>
+              <xul:spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                               ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', false)"/>
             </xul:hbox>
           </xul:row>
         </xul:rows>

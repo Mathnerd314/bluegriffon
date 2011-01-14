@@ -8,32 +8,32 @@
         <hbox align="center">
           <label value="&hTransformOrigin.label;"/>
           <menulist id="transformOriginXMenulist" editable="true"
-                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'left center right', true, ReapplyTransforms)"
-                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'left center right', true, ReapplyTransforms)">
+                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
             <menupopup anonid="transformOriginXMenupopup"
-                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
               <menuseparator/>
               <menuitem label="&leftTransformOrigin.label;" value="left"/>
               <menuitem label="&centerTransformOrigin.label;" value="center"/>
               <menuitem label="&rightTransformOrigin.label;" value="right"/>
             </menupopup>
           </menulist>
-          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ReapplyTransforms)"
-                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true, ReapplyTransforms)"/>
+          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
           <label value="&vTransformOrigin.label;"/>
           <menulist id="transformOriginYMenulist" editable="true"
-                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'left center right', true, ReapplyTransforms)"
-                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'left center right', true, ReapplyTransforms)">
+                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
             <menupopup anonid="transformOriginYMenupopup"
-                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
               <menuseparator/>
               <menuitem label="&topTransformOrigin.label;" value="top"/>
               <menuitem label="&centerTransformOrigin.label;" value="center"/>
               <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
             </menupopup>
           </menulist>
-          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex', ReapplyTransforms)"
-                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true, ReapplyTransforms)"/>
+          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
         </hbox>    
         <richlistbox id="transformsRichlistbox" rows="6"
                      onselect="OnTransformSelect(this)"/>

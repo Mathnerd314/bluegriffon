@@ -49,7 +49,7 @@ function BordersSectionIniter(aElt, aRuleset)
   var blCorner = CssInspector.getCascadedValue(aRuleset, "border-bottom-left-radius");
   var brCorner = CssInspector.getCascadedValue(aRuleset, "border-bottom-right-radius");
   var sameFourCorners = (tlCorner == trCorner && tlCorner == blCorner && tlCorner == brCorner);
-  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(%|px|pt|cm|in|mm|pc|em|ex)*", "g");
+  var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(%|px|pt|cm|in|mm|pc|em|ex|ch|rem)*", "g");
   tlCorner = tlCorner.match(r);
   trCorner = trCorner.match(r);
   blCorner = blCorner.match(r);

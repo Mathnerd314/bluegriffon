@@ -552,6 +552,8 @@ function IncreaseLength(aElt, aUnitsString, aCallback)
         v = Math.round( v * 10) / 10;
         break;
       case "em":
+      case "rem":
+      case "ch":
       case "ex":
         v += 0.5;
         v = Math.round( v * 10) / 10;

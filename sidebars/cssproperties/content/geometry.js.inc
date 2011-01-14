@@ -71,7 +71,7 @@ function ToggleFourEdges(aCheckbox, aPrefix)
     gDialog[aPrefix + "RightMenulist"].value= value;
     gDialog[aPrefix + "LeftMenulist"].value= value;
     gDialog[aPrefix + "TopMenulist"].value= value;
-    onLengthMenulistCommand(gDialog[aPrefix + "BottomMenulist"], '% px pt cm in mm pc em ex', '', false);
+    onLengthMenulistCommand(gDialog[aPrefix + "BottomMenulist"], '% px pt cm in mm pc em ex rem ch', '', false);
   }
 }
 

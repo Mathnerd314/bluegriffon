@@ -138,16 +138,16 @@
             <label value="&zIndex.label;"/>
             <hbox align="center">
                 <menulist editable="true" id="zIndexMenulist" property="z-index"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
                   <menupopup id="lineHeightMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                     <menuseparator/>
                     <menuitem label="&zIndexAuto.label;" value="auto"/>
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
             </hbox>
           </row>
 
@@ -161,46 +161,46 @@
                     <spacer/>
                     <hbox align="center">
                       <menulist editable="true" id="topMenulist" property="top" sizetopopup="none"
-                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
                         <menupopup id="topMenupopup"
-                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                           <menuseparator/>
                           <menuitem label="&offsetAuto.label;" value="auto"/>
                         </menupopup>
                       </menulist>
-                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
                    </hbox>
                  </row>
   
                   <row align="center">
                     <hbox align="center">
                       <menulist editable="true" id="leftMenulist" property="left" sizetopopup="none"
-                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
                         <menupopup id="leftMenupopup"
-                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                           <menuseparator/>
                           <menuitem label="&offsetAuto.label;" value="auto"/>
                         </menupopup>
                       </menulist>
-                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
                     </hbox>
                     <spacer/>
                     <hbox align="center">
                       <menulist editable="true" id="rightMenulist" property="right" sizetopopup="none"
-                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
                         <menupopup id="rightMenupopup"
-                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                           <menuseparator/>
                           <menuitem label="&offsetAuto.label;" value="auto"/>
                         </menupopup>
                       </menulist>
-                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
                     </hbox>
                   </row>
   
@@ -208,16 +208,16 @@
                     <spacer/>
                     <hbox align="center">
                       <menulist editable="true" id="bottomMenulist" property="bottom" sizetopopup="none"
-                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)"
-                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex', 'auto', true)">
+                                oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
+                                oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
                         <menupopup id="bottomMenupopup"
-                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex')">
+                                   onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
                           <menuseparator/>
                           <menuitem label="&offsetAuto.label;" value="auto"/>
                         </menupopup>
                       </menulist>
-                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex')"
-                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex', true)"/>
+                      <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
+                                   ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
                     </hbox>
                    </row>
                 </rows>
