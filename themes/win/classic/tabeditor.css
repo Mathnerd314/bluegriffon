@@ -80,3 +80,19 @@ tabeditor-tab  .tab-text {
 .tabeditor-tab[modified="true"]  .tab-text {
   text-shadow: 0 1px 0 rgba(255, 0, 0, 0.4);
 }
+
+.tabs-left, .tabs-right {
+  -moz-box-flex: 1;
+  display: -moz-box;
+  width: 3px;
+}
+
+tabeditor[tabmode="left"] .tabs-left {
+  width: 8px;
+  -moz-box-flex: 0;
+}
+
+tabeditor[tabmode="right"] .tabs-right {
+  max-width: 8px !important;
+  -moz-box-flex: 0 ! important;
+}

@@ -156,7 +156,8 @@ tabeditor > tabbox {
   margin-bottom: 0;
 }
 
-.tabs-left {
+.tabs-left, .tabs-right {
+  -moz-box-flex: 1;
   display: -moz-box;
   width: 3px;
 }
@@ -203,8 +204,8 @@ tabeditor > tabbox > tabpanels {
 }
 
 tabeditor[tabmode="left"] .tabs-left {
-  width: 8px;
-  -moz-box-flex: 0;
+  width: 8px !important;
+  -moz-box-flex: 0 !important;
 }
 
 tabeditor[tabmode="right"] .tabs-right {
