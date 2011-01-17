@@ -1126,6 +1126,8 @@ function OnDoubleClick(aEvent)
       break;
     case "td":
     case "th":
+      // fire the table properties dialog only if the selection is collapsed
+      if (EditorUtils.getCurrentEditor().selection.isCollapsed)
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 
       break;
     default:

@@ -248,7 +248,7 @@
       <menupopup id="tableMenuPopup">
         <menu id="tableInsertMenu" label="&tableInsertMenu.label;" accesskey="&tableinsertmenu.accesskey;">
           <menupopup>
-            <menuitem label="&tableTable.label;"    accesskey="&tabletable.accesskey;"        observes="cmd_InsertTable"/>
+            <menuitem label="&tableTable.label;"    accesskey="&tabletable.accesskey;"            observes="cmd_InsertTable"/>
             <menuseparator />
             <menuitem label="&tableRowAbove.label;"     accesskey="&tablerow.accesskey;"          observes="cmd_InsertRowAbove"/>
             <menuitem label="&tableRowBelow.label;"     accesskey="&tablerowbelow.accesskey;"     observes="cmd_InsertRowBelow"/>
