@@ -1,6 +1,6 @@
-diff -r 0aa98eae87ed content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Fri Nov 05 02:21:30 2010 -0500
-+++ b/content/base/src/nsCopySupport.cpp	Wed Dec 29 19:35:56 2010 +0100
+diff -r df3c1150dd7a content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Sat Jan 08 00:48:44 2011 -0800
++++ b/content/base/src/nsCopySupport.cpp	Tue Jan 18 15:31:17 2011 +0100
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -10,9 +10,9 @@ diff -r 0aa98eae87ed content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r 0aa98eae87ed content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Fri Nov 05 02:21:30 2010 -0500
-+++ b/content/base/src/nsDocumentEncoder.cpp	Wed Dec 29 19:35:56 2010 +0100
+diff -r df3c1150dd7a content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Sat Jan 08 00:48:44 2011 -0800
++++ b/content/base/src/nsDocumentEncoder.cpp	Tue Jan 18 15:31:17 2011 +0100
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -22,9 +22,9 @@ diff -r 0aa98eae87ed content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r 0aa98eae87ed content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Fri Nov 05 02:21:30 2010 -0500
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Wed Dec 29 19:35:56 2010 +0100
+diff -r df3c1150dd7a content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Sat Jan 08 00:48:44 2011 -0800
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Tue Jan 18 15:31:17 2011 +0100
 @@ -897,6 +897,8 @@
        name == nsGkAtoms::noframes
        ) {
@@ -48,3 +48,16 @@ diff -r 0aa98eae87ed content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
+diff -r df3c1150dd7a editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Sat Jan 08 00:48:44 2011 -0800
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue Jan 18 15:31:17 2011 +0100
+@@ -1386,7 +1386,8 @@
+                                      aSourceDoc,
+                                      aDestinationNode, aDestOffset,
+                                      aDoDeleteSelection,
+-                                     isSafe);
++                                     //isSafe);
++                                     true);
+       }
+     }
+     else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||

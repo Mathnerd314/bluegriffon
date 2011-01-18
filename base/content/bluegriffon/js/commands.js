@@ -292,7 +292,6 @@ var ComposerCommands = {
       return;
     
     commandTable.registerCommand("cmd_stopLoading", cmdStopLoading);
-    //commandTable.registerCommand("cmd_copy",        cmdCopy);
     commandTable.registerCommand("cmd_open",        cmdOpen);
     commandTable.registerCommand("cmd_save",        cmdSave);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
