@@ -353,7 +353,7 @@ var FileUtils = {
         // grab the file name
         var url = docURI.fileBaseName;
         if (url)
-          return url+extension;
+          return unescape(url+extension);
       } catch(e) {}
     } 
   
