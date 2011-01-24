@@ -135,6 +135,7 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/spellCheck.js             (content/bluegriffon/dialogs/spellCheck.js)
   content/bluegriffon/dialogs/dictionary.xul            (content/bluegriffon/dialogs/dictionary.xul)
   content/bluegriffon/dialogs/dictionary.js             (content/bluegriffon/dialogs/dictionary.js)
+  content/bluegriffon/js/html5.js                       (content/bluegriffon/js/html5.js)
 
 bluegriffon-locale.jar:
 % locale    bluegriffon    en-US    %locale/en-US/bluegriffon/
@@ -206,6 +207,7 @@ bluegriffon-locale.jar:
   locale/en-US/bluegriffon/spellCheck.dtd (locale/en-US/bluegriffon/spellCheck.dtd)
   locale/en-US/bluegriffon/spellCheck.properties (locale/en-US/bluegriffon/spellCheck.properties)
   locale/en-US/bluegriffon/dictionary.dtd (locale/en-US/bluegriffon/dictionary.dtd)
+  locale/en-US/bluegriffon/html5.properties (locale/en-US/bluegriffon/html5.properties)
   locale/fr-FR/bluegriffon/aboutDialog.dtd  (locale/fr-FR/bluegriffon/aboutDialog.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.dtd  (locale/fr-FR/bluegriffon/bluegriffon.dtd)
   locale/fr-FR/bluegriffon/bluegriffon.properties  (locale/fr-FR/bluegriffon/bluegriffon.properties)
@@ -272,4 +274,4 @@ bluegriffon-locale.jar:
   locale/fr-FR/bluegriffon/spellCheck.dtd (locale/fr-FR/bluegriffon/spellCheck.dtd)
   locale/fr-FR/bluegriffon/spellCheck.properties (locale/fr-FR/bluegriffon/spellCheck.properties)
   locale/fr-FR/bluegriffon/dictionary.dtd (locale/fr-FR/bluegriffon/dictionary.dtd)
-  
+  locale/fr-FR/bluegriffon/html5.properties (locale/fr-FR/bluegriffon/html5.properties)

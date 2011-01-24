@@ -11,7 +11,7 @@
 
   <key id="strongkb"            key="&styleStrong.key;"      observes="cmd_strong"    modifiers="accel"/>
   <key id="emkb"                key="&styleEm.key;"          observes="cmd_em"        modifiers="accel"/>
-  <key id="codekb"              key="&styleCode.key;"        observes="cmd_code"      modifiers="accel"/>
+  <key id="codekb"              key="&styleCode.key;"        observes="cmd_code"      modifiers="accel,shift"/>
   <key id="underlinekb"         key="&styleUnderline.key;"   observes="cmd_underline" modifiers="accel"/>
 </keyset>
 
@@ -424,6 +424,7 @@
   <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
   <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
   <stringbundle id="bundlePreferences"  src="chrome://bluegriffon/locale/language.properties"/>
+  <stringbundle id="bundleHTML5"        src="chrome://bluegriffon/locale/html5.properties"/>
   <stringbundle id="bundleAccepted"     src="resource://gre/res/language.properties"/>
 </stringbundleset>
 

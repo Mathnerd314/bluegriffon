@@ -184,6 +184,11 @@
 		       </menupopup>
         </menu>
         <menuseparator/>
+        <menu label="HTML 5 Element">
+          <menupopup id="html5InsertionMenupopup"
+                     onpopupshowing="HTML5Helper.initInsertMenu(this)"/>
+        </menu>
+        <menuseparator/>
         <menuitem label="&htmlToolbarCmd.label;"
                   command="cmd_html"
                   accesskey="&htmlToolbarCmd.key;"/>
