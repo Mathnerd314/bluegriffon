@@ -19,6 +19,7 @@ function onAccept()
   if (!gNode) {
     var doc = EditorUtils.getCurrentDocument();
     gNode = doc.createElement("button");
+    gNode.appendChild(doc.createTextNode(gEditor.selection.toString()));
     gEditor.insertElementAtSelection(gNode, true);
   }
 
