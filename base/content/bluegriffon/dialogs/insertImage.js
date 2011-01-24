@@ -40,6 +40,7 @@ function onAccept()
   var url = gDialog.imageURLTextbox.value;
   var title = gDialog.titleTextbox.value;
   var altText = gDialog.alternateTextTextbox.value;
+  var longdesc = gDialog.longDescTextbox.value;
 
   var editor = EditorUtils.getCurrentEditor(); 
   if (gNode) {
@@ -53,6 +54,11 @@ function onAccept()
       editor.setAttribute(gNode, "title", title);
     else
       editor.removeAttribute(gNode, "title");
+    if (longdesc)
+      editor.setAttribute(gNode, "longdesc", longdesc);
+    else
+      editor.removeAttribute(gNode, "longdesc");
+    
     editor.endTransaction();
   }
   else {
@@ -89,6 +95,17 @@ function MakeRelativeUrl()
     spec = UrlUtils.makeRelativeUrl(spec);
     gDialog.imageURLTextbox.value = spec;
     gDialog.relativeURLCheckbox.checked = true;
+  }
+}
+
+function MakeRelativeLongDescUrl()
+{
+  var spec = gDialog.longDescTextbox.value;
+  var docUrl = EditorUtils.getDocumentUrl();
+  var docUrlScheme = UrlUtils.getScheme(docUrl);
+  if (docUrlScheme && docUrlScheme != "resource") {
+    spec = UrlUtils.makeRelativeUrl(spec);
+    gDialog.longDescTextbox.value = spec;
   }
 }
 

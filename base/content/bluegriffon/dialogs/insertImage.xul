@@ -61,6 +61,16 @@
                     id="emptyAltOkCheckbox"
                     oncommand="UpdateButtons()"/>
         </row>
+        <row align="center">
+          <label value="&longdesc.label;"/>
+          <textbox flex="1" id="longDescTextbox"/>
+          <filepickerbutton id="filepickerLongDescbutton"
+                            control="longDescTextbox"
+                            mode="0"
+                            filters="filterAll"
+                            oncommand="MakeRelativeLongDescUrl();"
+                            title="&selectLongDescButton.label;"/>
+        </row>
       </rows>
     </grid>
   </vbox>

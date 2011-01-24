@@ -10,3 +10,6 @@
 <!ENTITY preview.label "Preview">
 
 <!ENTITY emptyAltOk.checkbox "Allow an empty alternate text">
+
+<!ENTITY longdesc.label "Long description URI:">
+<!ENTITY selectLongDescButton.label "Select a file">

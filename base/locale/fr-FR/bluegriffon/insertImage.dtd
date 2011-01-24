@@ -10,3 +10,6 @@
 <!ENTITY preview.label "Prévisualisation">
 
 <!ENTITY emptyAltOk.checkbox "Autoriser un texte alternatif vide">
+
+<!ENTITY longdesc.label "URI de longue description:">
+<!ENTITY selectLongDescButton.label "Sélectionner un fichier">
