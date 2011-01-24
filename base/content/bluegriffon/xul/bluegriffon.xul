@@ -42,7 +42,14 @@
 
 #include overlays.inc
 
-<!DOCTYPE window SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd">
+<!DOCTYPE window [
+  <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
+  <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
+  <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
+  %bluegriffonDTD;
+  %structurebarDTD;
+  %ariaDTD;
+]>            
 
 <window
   id     = "Bluegriffon"

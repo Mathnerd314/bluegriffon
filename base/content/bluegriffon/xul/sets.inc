@@ -6,8 +6,13 @@
   <key id="key_quitApplication" key="&quit.key;"                                      modifiers="accel"/>
   <key id="closetabkb"          key="&closeWindow.key;"      observes="cmd_closeTab"  modifiers="accel"/>
   <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel"/>
-  <key id="findkb"              key="f"                      observes="cmd_bgfind"    modifiers="accel"/>
-  <key id="replacekb"           key="r"                      observes="cmd_replace"   modifiers="accel"/>
+  <key id="findkb"              key="&findCmd.key;"          observes="cmd_bgfind"    modifiers="accel"/>
+  <key id="replacekb"           key="&replaceCmd.key;"       observes="cmd_replace"   modifiers="accel"/>
+
+  <key id="strongkb"            key="&styleStrong.key;"      observes="cmd_strong"    modifiers="accel"/>
+  <key id="emkb"                key="&styleEm.key;"          observes="cmd_em"        modifiers="accel"/>
+  <key id="codekb"              key="&styleCode.key;"        observes="cmd_code"      modifiers="accel"/>
+  <key id="underlinekb"         key="&styleUnderline.key;"   observes="cmd_underline" modifiers="accel"/>
 </keyset>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->
@@ -51,29 +56,29 @@
   <command id="cmd_html"             oncommand="goDoCommand('cmd_html')"/>
   <command id="cmd_form"             oncommand="goDoCommand('cmd_form')"/>
 
-	<command id="cmd_formInputHidden"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'hidden')"/>
-	<command id="cmd_formInputText"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'text')"/>
-	<command id="cmd_formInputSearch"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'search')"/>
-	<command id="cmd_formInputTel"      oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'tel')"/>
-	<command id="cmd_formInputUrl"      oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'url')"/>
-	<command id="cmd_formInputEmail"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'email')"/>
-	<command id="cmd_formInputPassword" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'password')"/>
-	<command id="cmd_formInputDatetime" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'datetime')"/>
-	<command id="cmd_formInputDate"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'date')"/>
-	<command id="cmd_formInputMonth"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'month')"/>
-	<command id="cmd_formInputWeek"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'week')"/>
-	<command id="cmd_formInputTime"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'time')"/>
-	<command id="cmd_formInputDatetimelocal" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'datetime-local')"/>
-	<command id="cmd_formInputNumber"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'number')"/>
-	<command id="cmd_formInputRange"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'range')"/>
-	<command id="cmd_formInputColor"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'color')"/>
-	<command id="cmd_formInputCheckbox" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'checkbox')"/>
-	<command id="cmd_formInputRadio"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'radio')"/>
-	<command id="cmd_formInputFile"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'file')"/>
-	<command id="cmd_formInputSubmit"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'submit')"/>
-	<command id="cmd_formInputImage"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'image')"/>
-	<command id="cmd_formInputReset"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'reset')"/>
-	<command id="cmd_formInputButton"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'button')"/>
+  <command id="cmd_formInputHidden"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'hidden')"/>
+  <command id="cmd_formInputText"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'text')"/>
+  <command id="cmd_formInputSearch"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'search')"/>
+  <command id="cmd_formInputTel"      oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'tel')"/>
+  <command id="cmd_formInputUrl"      oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'url')"/>
+  <command id="cmd_formInputEmail"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'email')"/>
+  <command id="cmd_formInputPassword" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'password')"/>
+  <command id="cmd_formInputDatetime" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'datetime')"/>
+  <command id="cmd_formInputDate"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'date')"/>
+  <command id="cmd_formInputMonth"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'month')"/>
+  <command id="cmd_formInputWeek"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'week')"/>
+  <command id="cmd_formInputTime"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'time')"/>
+  <command id="cmd_formInputDatetimelocal" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'datetime-local')"/>
+  <command id="cmd_formInputNumber"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'number')"/>
+  <command id="cmd_formInputRange"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'range')"/>
+  <command id="cmd_formInputColor"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'color')"/>
+  <command id="cmd_formInputCheckbox" oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'checkbox')"/>
+  <command id="cmd_formInputRadio"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'radio')"/>
+  <command id="cmd_formInputFile"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'file')"/>
+  <command id="cmd_formInputSubmit"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'submit')"/>
+  <command id="cmd_formInputImage"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'image')"/>
+  <command id="cmd_formInputReset"    oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'reset')"/>
+  <command id="cmd_formInputButton"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'button')"/>
 
   <command id="cmd_fieldset"          oncommand="goDoCommand('cmd_fieldset')"/>
   <command id="cmd_label"             oncommand="goDoCommand('cmd_label')"/>
@@ -102,7 +107,6 @@
   <command id="cmd_underline"    state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_underline')"/>
   <command id="cmd_strong"       state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_strong')"/>
   <command id="cmd_em"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_em')"/>
-  <command id="cmd_code"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_code')"/>
   <command id="cmd_strikethrough" state="false"    oncommand="ComposerCommands.doStyleUICommand('cmd_strikethrough');"/>
   <command id="cmd_superscript"  state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_superscript');"/>
   <command id="cmd_subscript"    state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_subscript');"/>
@@ -256,11 +260,11 @@
               accesskey="&changeTag.accesskey;"
               oncommand="ChangeTag(event)"/>
      <menuseparator/>
-     <menuitem label="&copyHTMLCode.label;"
+     <menuitem label="&copyHTMLCodeInStructurebarContext.label;"
                id="copyHTMLCodeOfElementMenuitem"
                oncommand="goDoCommand('cmd_copyHTMLCode')"/>
      <menuseparator/>
-     <menu label="ARIA Role">
+     <menu label="&ariaRole.label;">
         <menupopup id="ARIARoleStructureBarPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"
                    onpopupshowing="onARIARoleChangeStructureBar('cmd_ariaRole')">
           <menuitem label="&noARIArole.label;" type="checkbox" value=""/>

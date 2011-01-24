@@ -234,6 +234,21 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   UpdateStyles();
 }
 
+function GetSelectedElementInTree()
+{
+  var tree = gDialog.elementsTree;
+  var contentView = tree.contentView;
+  var view = tree.view;
+  if (!view || !view.selection || !view.selection.count) // No selection yet in the tree
+  {
+    return;
+  }
+  var index = view.selection.currentIndex;
+  var treeitem = contentView.getItemAtIndex(index);
+  var node = treeitem.getUserData("node");
+  return node;
+}
+
 function ElementSelectedInTree()
 {
   var tree = gDialog.elementsTree;

@@ -46,3 +46,7 @@
 #attributesTree, #cssTree {
   margin: 0px;
 }
+
+#structureBarContextMenu {
+  -moz-appearance: menupopup;
+}
