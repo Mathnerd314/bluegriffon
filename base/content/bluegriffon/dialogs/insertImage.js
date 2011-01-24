@@ -67,6 +67,8 @@ function onAccept()
 	  imgElement.setAttribute("alt", altText);
 	  if (title)
 	    imgElement.setAttribute("title", title);
+    if (longdesc)
+      imgElement.setAttribute("longdesc", longdesc);
 	  editor.insertElementAtSelection(imgElement, true);
   }
 }
