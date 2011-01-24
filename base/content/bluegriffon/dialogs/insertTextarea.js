@@ -19,6 +19,7 @@ function onAccept()
   var doc = EditorUtils.getCurrentDocument();
   if (!gNode) {
     gNode = doc.createElement("textarea");
+    gNode.appendChild(doc.createTextNode(gEditor.selection.toString()));
     gEditor.insertElementAtSelection(gNode, true);
   }
 
