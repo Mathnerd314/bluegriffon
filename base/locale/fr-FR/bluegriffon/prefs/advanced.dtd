@@ -1,9 +1,0 @@
-<!ENTITY switchLocale.button "Changer la langue des menus de BlueGriffon">
-<!ENTITY ui.caption "Interface de BlueGriffon">
-
-<!ENTITY network.caption "Réseau">
-<!ENTITY configureNetwork.label "Configurer les accès réseau de BlueGriffon">
-<!ENTITY parameters.label "Paramètres...">
-
-<!ENTITY advancedConfig.caption "Configuration avancée">
-<!ENTITY configEditor.label "Éditeur de configuration">

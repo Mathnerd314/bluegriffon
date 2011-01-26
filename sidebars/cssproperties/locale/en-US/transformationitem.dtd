@@ -1,8 +1,0 @@
-<!ENTITY rotation.label "Rotation">
-<!ENTITY translation.label "Translation">
-<!ENTITY skew.label "Skew">
-<!ENTITY aroundXAxis.label "X axis:">
-<!ENTITY aroundYAxis.label "Y axis:">
-<!ENTITY horizontally.label "Horizontally:">
-<!ENTITY vertically.label "Vertically:">
-<!ENTITY scale.label "Scale">

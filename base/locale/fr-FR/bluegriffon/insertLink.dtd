@@ -1,8 +1,0 @@
-<!ENTITY window.title "Insérer ou éditer un lien">
-
-<!ENTITY linkText.label "Texte">
-<!ENTITY linkTarget.label "Cible">
-<!ENTITY selectFile.label "Sélectionner un fichier">
-
-<!ENTITY isMail.label "C'est une adresse email">
-<!ENTITY relativeUrl.label "Rendre l'URL relatif au document">

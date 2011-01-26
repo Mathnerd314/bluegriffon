@@ -1,8 +1,0 @@
-<!ENTITY rotation.label "Rotation">
-<!ENTITY translation.label "Translation">
-<!ENTITY skew.label "Inclinaison">
-<!ENTITY aroundXAxis.label "Axe des X:">
-<!ENTITY aroundYAxis.label "Axe des Y:">
-<!ENTITY horizontally.label "Horizontalement:">
-<!ENTITY vertically.label "Verticalement:">
-<!ENTITY scale.label "Retaillage">
