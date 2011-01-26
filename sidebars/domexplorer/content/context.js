@@ -171,3 +171,18 @@ function onElementsTreeModified(aEvent)
     }
   }
 }
+
+function onARIARoleChangeStructureBar()
+{
+  var node = GetSelectedElementInTree();
+  var state = node.getAttribute("role");
+  var popup = gDialog.ARIARoleStructureBarPopup;
+  var child = popup.firstElementChild;
+  while (child) {
+    if (child.getAttribute("value") == state)
+      child.setAttribute("checked", "true");
+    else
+      child.removeAttribute("checked");
+    child = child.nextElementSibling;
+  }
+}

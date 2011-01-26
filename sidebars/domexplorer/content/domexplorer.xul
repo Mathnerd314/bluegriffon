@@ -91,11 +91,11 @@
      <menuseparator/>
      <menuitem label="&copyHTMLCodeInStructurebarContext.label;"
                id="copyHTMLCodeOfElementMenuitem"
-               oncommand="goDoCommand('cmd_copyHTMLCode')"/>
+               oncommand="gMain.goDoCommand('cmd_copyHTMLCode')"/>
      <menuseparator/>
      <menu label="ARIA Role">
-        <menupopup id="ARIARoleStructureBarPopup" oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"
-                   onpopupshowing="onARIARoleChangeStructureBar('cmd_ariaRole')">
+        <menupopup id="ARIARoleStructureBarPopup" oncommand="gMain.ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"
+                   onpopupshowing="onARIARoleChangeStructureBar()">
           <menuitem label="&noARIArole.label;" type="checkbox" value=""/>
           <menuseparator/>
           <menuitem label="alert" value="alert" tooltiptext="&alertRole.label;" type="checkbox"/>
