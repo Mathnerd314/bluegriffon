@@ -1,4 +1,3 @@
-
 fs.jar:
 % content   fs          %content/fs/
 % skin    fs    classic/1.0 %skin/classic/fs/
@@ -13,14 +12,3 @@ fs.jar:
   content/fs/addFont.js            (content/addFont.js)
 
 fs-locale.jar:
-% locale    fs    en-US    %locale/en-US/fs/
-% locale    fs    fr-FR    %locale/fr-FR/fs/
-  locale/en-US/fs/fsOverlay.dtd    (locale/en-US/fsOverlay.dtd)
-  locale/en-US/fs/fs.dtd           (locale/en-US/fs.dtd)
-  locale/en-US/fs/fs.properties    (locale/en-US/fs.properties)
-  locale/en-US/fs/addFont.dtd      (locale/en-US/addFont.dtd)
-  locale/fr-FR/fs/fsOverlay.dtd    (locale/fr-FR/fsOverlay.dtd)
-  locale/fr-FR/fs/fs.dtd           (locale/fr-FR/fs.dtd)
-  locale/fr-FR/fs/fs.properties    (locale/fr-FR/fs.properties)
-  locale/fr-FR/fs/addFont.dtd      (locale/fr-FR/addFont.dtd)
-  

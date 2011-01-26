@@ -1,4 +1,3 @@
-
 gfd.jar:
 % content   gfd          %content/gfd/
 % skin    gfd    classic/1.0 %skin/classic/gfd/
@@ -17,12 +16,3 @@ gfd.jar:
   content/gfd/directory.js           (content/directory.js)
 
 gfd-locale.jar:
-% locale    gfd    en-US    %locale/en-US/gfd/
-% locale    gfd    fr-FR    %locale/fr-FR/gfd/
-  locale/en-US/gfd/gfdOverlay.dtd    (locale/en-US/gfdOverlay.dtd)
-  locale/en-US/gfd/gfd.dtd           (locale/en-US/gfd.dtd)
-  locale/en-US/gfd/addFont.dtd       (locale/en-US/addFont.dtd)
-  locale/fr-FR/gfd/gfdOverlay.dtd    (locale/fr-FR/gfdOverlay.dtd)
-  locale/fr-FR/gfd/gfd.dtd           (locale/fr-FR/gfd.dtd)
-  locale/fr-FR/gfd/addFont.dtd       (locale/fr-FR/addFont.dtd)
-  
