@@ -62,6 +62,7 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
   <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorer.js"/>
   <script type="application/x-javascript"  src="chrome://domexplorer/content/context.js"/>
 
@@ -175,7 +176,11 @@
   </popup>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-	  <tree id="elementsTree" flex="1" hidecolumnpicker="true" seltype="single"
+	  <tree id="elementsTree"
+          flex="1"
+          hidecolumnpicker="true"
+          seltype="single"
+          editable="true"
           persist="height"
           context="structureBarContextMenu"
           onselect="ElementSelectedInTree()">

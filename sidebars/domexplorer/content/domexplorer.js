@@ -97,6 +97,7 @@ function Startup()
       SelectionChanged(null, c.node, c.oneElementSelected);
   }
 
+  gDialog.elementsTree.addEventListener("DOMAttrModified", onElementsTreeModified, true);
   gDialog.attributesTree.addEventListener("DOMAttrModified", onAttributesTreeModified, true);
   gDialog.cssTree.addEventListener("DOMAttrModified", onCssTreeModified, true);
 }
@@ -120,6 +121,7 @@ function Shutdown()
     gMain.NotifierUtils.removeNotifierCallback("panelClosed",
                                                 PanelClosed,
                                                 window);
+    gDialog.elementsTree.removeEventListener("DOMAttrModified", onElementsTreeModified, true);
 	  gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
     gDialog.cssTree.removeEventListener("DOMAttrModified", onCssTreeModified, true);
   }
