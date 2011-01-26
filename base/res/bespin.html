@@ -2,7 +2,6 @@
 <html><head>
   <link rel="stylesheet" type="text/css" href="resource://app/res/BespinEmbedded.css/">
   <link id="bespin_base" href="resource://app/res/"/>
-  <script type="text/javascript" src="resource://app/res/BespinEmbedded.js"></script>
   <style>
    body {
      overflow: hidden;
@@ -28,26 +27,47 @@
    }
   </style>
   <script>
-    function installBespin(aKeyPressCallback, aTheme) {
-      var elt = getEditableElement();
+    var gBespinEditor = null;
+    var gSetupCallback = null;
+    var gTheme = null;
+    var gIframe = null;
+
+    window.onBespinLoad = function() {
+      var edit = getEditableElement();
+      // Get the environment variable.
+      var env = edit.bespin;
+      // Get the editor.
+      var editor = env.editor;
       var settings = {
-            syntax: "html",
-            settings: {
-                        tabstop: 2,
-                        fontface: "Courier New, Courier, monospace"
-                      }
-          };
-      if (aTheme)
-        settings.settings.theme = aTheme;
-      var e = bespin.useBespin("editor", settings);
-      postMessage("bespin", "*");
-
-      getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
-
-      return e;
+          syntax: "html",
+          settings: {
+                      tabstop: 2,
+                      fontface: "Courier New, Courier, monospace"
+                    }
+        };
+      env.editor.syntax = "html"
+      env.settings.set("tabstop", 2);
+      env.settings.set("fontface", "Courier New, Courier, monospace");
+      if (gTheme)
+        env.settings.set("theme", gTheme);
+      if (gSetupCallback)
+        gSetupCallback(gIframe, editor);
     }
+
+    function installBespin(aSetupCallback, aKeyPressCallback, aIframe, aTheme) {
+      getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
+      gSetupCallback = aSetupCallback;
+      gIframe = aIframe;
+      gTheme = aTheme;
+
+      var s = document.createElement("script");
+      s.setAttribute("type", "text/javascript");
+      s.setAttribute("src", "resource://app/res/BespinEmbedded.js");
+      document.querySelector("head").appendChild(s);
+    }
+
     function getEditableElement() {
-      return document.getElementById("editor");
+      return document.getElementById("edit");
     }
   </script>
 </head>
@@ -56,7 +76,7 @@
   <tbody>
     <tr>
       <td>
-        <div id="editor"></div>
+        <div id="edit" class="bespin"></div>
       </td>
     </tr>
   </tbody>

@@ -431,24 +431,33 @@
         </body>
       </method>
 
+      <method name="__installBespin">
+        <parameter name="aIframe"/>
+        <parameter name="aBespinEditor"/>
+        <body>
+        <![CDATA[
+            aIframe.setUserData("editor", aBespinEditor, null);
+            aBespinEditor.value = "";
+            aIframe.parentNode.selectedIndex = 1;
+            gDialog.sourceModeButton.removeAttribute("busy");
+            window.updateCommands("mode_switch");
+        ]]>
+        </body>
+      </method>
+
       <method name="_installBespin">
         <parameter name="aIframe"/>
         <parameter name="aTheme"/>
         <body>
         <![CDATA[
             var _self = this; 
-            aIframe.removeEventListener("load", function() {_self._installBespin(iframe);}, true);
+            aIframe.removeEventListener("pageshow", function() {_self._installBespin(aIframe);}, true);
 
-            var bespinTmp = aIframe.contentWindow.installBespin(BespinKeyPressCallback, aTheme);
-            bespinTmp.then(function(env) {
-              var editor = env.editor;
-              aIframe.setUserData("editor", editor, null);
-              editor.value = "";
-              aIframe.parentNode.selectedIndex = 1;
-              gDialog.sourceModeButton.removeAttribute("busy");
-              window.updateCommands("mode_switch");
-            });
-        ]]>
+            aIframe.contentWindow.installBespin(_self.__installBespin,
+                                                BespinKeyPressCallback,
+                                                aIframe,
+                                                aTheme);
+       ]]>
         </body>
       </method>
 
