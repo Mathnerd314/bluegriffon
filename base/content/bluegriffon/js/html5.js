@@ -258,6 +258,20 @@ var HTML5Helper = {
       editor.selection.collapse(finalNode, 0);
       return;
     }
+
+    editor.beginTransaction();
+    var node = doc.createElement("img");
+    editor.insertElementAtSelection(node, true);
+    var finalNode = doc.createElement(element.tag);
+    var finalTextNode = doc.createTextNode("");
+    finalNode.appendChild(finalTextNode);
+    txn = new diNodeInsertionTxn(finalNode,
+                                 node.parentNode,
+                                 node.nextSibling);
+    editor.transactionManager.doTransaction(txn);
+    editor.deleteNode(node);
+    editor.endTransaction();
+    editor.selection.collapse(finalNode, 0);
   }
 };
 
