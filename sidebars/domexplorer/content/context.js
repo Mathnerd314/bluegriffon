@@ -114,59 +114,59 @@ function onElementsTreeModified(aEvent)
 
   if (attrName == "editing") {
     if (attrChange == 2) { // start editing
-		  var target = GetSelectedElementInTree();
-		  var name = target.nodeName.toLowerCase();
-		  if (name == "html" || name == "body" || name == "head")
-		    gDialog.elementsTree.stopEditing(false);
+      var target = GetSelectedElementInTree();
+      var name = target.nodeName.toLowerCase();
+      if (name == "html" || name == "body" || name == "head")
+        gDialog.elementsTree.stopEditing(false);
     }
     else if (attrChange == 3) { // end editing
-		  var tree = gDialog.elementsTree;
-		  var contentView = tree.contentView;
-		  var view = tree.view;
-		  var index = view.selection.currentIndex;
+      var tree = gDialog.elementsTree;
+      var contentView = tree.contentView;
+      var view = tree.view;
+      var index = view.selection.currentIndex;
       var newName  = gDialog.elementsTree.view.getCellText(index, gDialog.elementsTree.columns[0]);
       if (newName == "html" || newName == "body" || newName == "head")
         return;
-		  var target = GetSelectedElementInTree();
-		  var name = target.nodeName.toLowerCase();
+      var target = GetSelectedElementInTree();
+      var name = target.nodeName.toLowerCase();
       if (newName == name)
         return;
 
       var editor = EditorUtils.getCurrentEditor();
-	    var offset = 0;
-	    var childNodes = target.parentNode.childNodes;
-	    while (childNodes.item(offset) != target) {
-	      offset++;
-	    }
-	
-	    editor.beginTransaction();
-	
-	    try {
-	      var newElt = editor.document.createElement(newName);
+      var offset = 0;
+      var childNodes = target.parentNode.childNodes;
+      while (childNodes.item(offset) != target) {
+        offset++;
+      }
+  
+      editor.beginTransaction();
+  
+      try {
+        var newElt = editor.document.createElement(newName);
         for (var i = 0; i < target.attributes.length; i++) {
           var attr = target.attributes[i];
           newElt.setAttributeNS(attr.namespaceURI,
                                 attr.localName,
                                 attr.nodeValue);
         }
-	      if (newElt) {
-	        childNodes = target.childNodes;
-	        var childNodesLength = childNodes.length;
-	        var i;
-	        for (i = 0; i < childNodesLength; i++) {
-	          var clone = childNodes.item(i).cloneNode(true);
-	          newElt.appendChild(clone);
-	        }
-	        editor.insertNode(newElt, target.parentNode, offset+1);
-	        editor.deleteNode(target);
-	        editor.selectElement(newElt);
-	
-	        window.content.focus();
-	      }
-	    }
-	    catch (e) {}
-	
-	    editor.endTransaction();
+        if (newElt) {
+          childNodes = target.childNodes;
+          var childNodesLength = childNodes.length;
+          var i;
+          for (i = 0; i < childNodesLength; i++) {
+            var clone = childNodes.item(i).cloneNode(true);
+            newElt.appendChild(clone);
+          }
+          editor.insertNode(newElt, target.parentNode, offset+1);
+          editor.deleteNode(target);
+          editor.selectElement(newElt);
+  
+          window.content.focus();
+        }
+      }
+      catch (e) {}
+  
+      editor.endTransaction();
       gMain.ComposerCommands.updateSelectionBased(false);
     }
   }
