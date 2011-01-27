@@ -96,6 +96,8 @@
   <command id="cmd_pageProperties"    oncommand="goDoCommand('cmd_pageProperties')"/>
 
   <command id="cmd_spellCheck"        oncommand="goDoCommand('cmd_spellCheck')"/>
+
+  <command id="cmd_gotoLink"          oncommand="goDoCommand('cmd_gotoLink')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"
@@ -380,6 +382,8 @@
     <menuitem id="cMenu_copyHTMLCode"
               label="&copyHTMLCodeCmd.label;"
               observes="cmd_copyHTMLCode"/>
+    <menuseparator id="separator_before_cMenu_gotoLink" />
+    <menuitem id="cMenu_gotoLink" label="&gotoLink.label;" observes="cmd_gotoLink"/>
     <menuseparator id="separator_before_ctableInsertMenu"/>
     <menu id="ctableInsertMenu" label="&tableInsertMenu2.label;" accesskey="&tableinsertmenu.accesskey;">
       <menupopup>

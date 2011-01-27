@@ -209,7 +209,7 @@ var UrlUtils = {
       docPath = docPath.toLowerCase();
 
     // Get document filename before we start chopping up the docPath
-    var docFilename = this.getFilename(docPath);
+    var docFilename = this.getFilename(docUrl);
 
     // Both url and doc paths now begin with "/"
     // Look for shared dirs starting after that

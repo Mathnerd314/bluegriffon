@@ -1374,6 +1374,8 @@ function UpdateEditorContextMenu(event, aMenupopup)
 
     gDialog.spellCheckMenu.disabled = !sc.overMisspelling;
 
+    EditorUtils.getCurrentEditor().selectElement(document.popupNode);
+
     var element = GetParentTable(document.popupNode);
     var idstart = "separator_before_ctableInsertMenu";
     var idend   = "cmenu_tableProperties";

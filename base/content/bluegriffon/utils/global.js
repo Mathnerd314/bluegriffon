@@ -433,3 +433,18 @@ function loadExternalURL( url )
     extProtocolSvc.loadURI(uri);
   }
 }
+
+function ScrollToElement(aElement)
+{
+  if (!aElement)
+    return;
+
+  var x = 0;
+  var y = 0;
+  while (aElement) {
+    x += aElement.offsetLeft;
+    y += aElement.offsetTop;
+    aElement = aElement.offsetParent;
+  }
+  EditorUtils.getCurrentEditorElement().contentWindow.scrollTo(x, y);
+}
