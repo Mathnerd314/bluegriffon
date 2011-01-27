@@ -3494,12 +3494,12 @@ Object.defineProperties(exports.EditorView.prototype, {
                                         newValue + '"');
             }
 
-            // Use the replace function and not this.model.value = newValue
-            // directly as this wouldn't create a new undoable action.
-            var rv = this.replace(this.layoutManager.textStorage.range,
-                                        newValue, false);
+            /*var rv = this.replace(this.layoutManager.textStorage.range,
+                                        newValue, false);*/
+            /* in BlueGriffon this must be undoable */
+            this._buffer.model.value = newValue;
             //this.buffer.undoManager.clearStacks();
-            return rv;
+            return true;
         }
     },
 
