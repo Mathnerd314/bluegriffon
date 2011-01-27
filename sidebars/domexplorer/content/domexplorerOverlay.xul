@@ -74,6 +74,8 @@
   <panelset id="panels">
     <panel id="panel-domexplorer"
            floating="true"
+           width="300"
+           height="600"
            label="&domexplorer.label;">
       <iframe type="chrome"
               flex="1"
@@ -84,6 +86,8 @@
 #ifndef XP_UNIX
   <panelset id="panels">
     <panel id="panel-domexplorer"
+           width="300"
+           height="600"
            floating="true"
            label="&domexplorer.label;">
       <iframe type="chrome"

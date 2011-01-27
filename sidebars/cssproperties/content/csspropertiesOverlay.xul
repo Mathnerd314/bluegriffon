@@ -72,6 +72,8 @@
   <panelset id="panels">
     <panel id="panel-cssproperties"
            floating="true"
+           width="300"
+           height="600"
            label="&cssproperties.label;">
       <iframe type="chrome"
               flex="1"
@@ -82,6 +84,8 @@
 #ifndef XP_UNIX
   <panelset id="panels">
     <panel id="panel-cssproperties"
+           width="300"
+           height="600"
            floating="true"
            label="&cssproperties.label;">
       <iframe type="chrome"
