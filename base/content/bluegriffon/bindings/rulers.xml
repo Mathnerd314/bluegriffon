@@ -416,21 +416,39 @@
           else
             styleAttrValue = "";
           var zoom = BGZoomManager.getCurrentZoom();
+          var editor = EditorUtils.getCurrentEditor();
+          editor.beginTransaction();
           switch (this.mRulerSeparatorPosition)
           {
             case "left":
-              styleAttrValue += "margin-left: " + (marginLeft - (this.mOriginalX - x)/zoom) + "px";
-              if(source.style.getPropertyValue("width"))
-                styleAttrValue += "; width: " + (width  + (this.mOriginalX - x)/zoom) + "px";
-              break;
+              {
+                var txn = new diStyleAttrChangeTxn(source,
+                                                   "margin-left",
+                                                   (marginLeft - (this.mOriginalX - x)/zoom) + "px",
+                                                   "");
+                EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                if(source.style.getPropertyValue("width")) {
+                  txn = new diStyleAttrChangeTxn(source,
+                                                 "width",
+                                                 (width  + (this.mOriginalX - x)/zoom) + "px",
+                                                 "");
+                  EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                }
+              }
+               break;
             case "right":
-              styleAttrValue += "width: " + (width  - (this.mOriginalX - x)/zoom) + "px";
+              {
+                var txn = new diStyleAttrChangeTxn(source,
+                                                   "width",
+                                                   (width  - (this.mOriginalX - x)/zoom) + "px",
+                                                   "");
+                EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+              }
               break;
             default: break;
           }
-          EditorUtils.getCurrentEditor()
-            .setAttribute(source, "style", styleAttrValue);
-          this.selectionChanged(null, source, null);
+          editor.endTransaction();
+          NotifierUtils.notify("selection", source, false);
         ]]>
       </handler>
 
@@ -730,33 +748,52 @@
             else
               styleAttrValue = "";
             var zoom = BGZoomManager.getCurrentZoom();
-            var marginTop = parseFloat(aSelf.getComputedStyle(aElt).getPropertyValue("margin-left"));
+            var marginTop = parseFloat(aSelf.getComputedStyle(aElt).getPropertyValue("margin-top"));
             if (!marginTop) marginTop = 0;
+            var editor = EditorUtils.getCurrentEditor();
             switch (aSelf.mRulerSeparatorPosition)
             {
               case "top":
-                if (aIsCell)
-                  styleAttrValue += "height: " + (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px";
+                if (aIsCell) {
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "height",
+                                                     (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);  
+                }
                 else {
-                  styleAttrValue += "margin-top: " + (marginTop - (aSelf.mOriginalY - aY)/zoom) + "px";
-                  if(aElt.style.getPropertyValue("height"))
-                    styleAttrValue += "; height: " + (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px";
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "margin-top",
+                                                     (marginTop - (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);  
+                  if(aElt.style.getPropertyValue("height")) {
+                    txn = new diStyleAttrChangeTxn(aElt,
+                                                   "height",
+                                                   (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                   "");
+                    editor.transactionManager.doTransaction(txn);  
+                  }
                 }
                 break;
               case "bottom":
-                styleAttrValue += "height: " + (aHeight  - (aSelf.mOriginalY - aY)/zoom) + "px";
+                {
+                  var txn = new diStyleAttrChangeTxn(aElt,
+                                                     "height",
+                                                     (aHeight  - (aSelf.mOriginalY - aY)/zoom) + "px",
+                                                     "");
+                  editor.transactionManager.doTransaction(txn);  
+                }
                 break;
               default: break;
             }
-  
-            EditorUtils.getCurrentEditor().setAttribute(aElt, "style", styleAttrValue);
           }
 
           var height = source.clientHeight;
+          var editor = EditorUtils.getCurrentEditor();
           if (source instanceof Components.interfaces.nsIDOMHTMLTableCellElement)
           {
             var elt = source.parentNode.firstChild;
-            var editor = EditorUtils.getCurrentEditor();
             editor.beginTransaction();
             while (elt)
             {
@@ -766,15 +803,18 @@
               elt = elt.nextSibling;
             }
             editor.endTransaction();
-            this.selectionChanged(null, source, null);
+            NotifierUtils.notify("selection", source, false);
             this.notifyEditor(true);
           }
           else
           {
+            editor.beginTransaction();
             changeHeight(source, y, height, this, false);
-            this.selectionChanged(null, source, null);
+            editor.endTransaction();
+            NotifierUtils.notify("selection", source, false);
             this.notifyEditor(false);
           }
+          
         ]]>
       </handler>
 
