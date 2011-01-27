@@ -66,7 +66,7 @@
   <script type="application/x-javascript"  src="chrome://domexplorer/content/domexplorer.js"/>
   <script type="application/x-javascript"  src="chrome://domexplorer/content/context.js"/>
 
-  <popup id="structureBarContextMenu"
+  <menupopup id="structureBarContextMenu"
          onpopupshowing="UpdateStructureBarContextMenu()">
     <menuitem label="&resetElementLanguage.label;"
               id="resetElementLanguageMenuitem"
@@ -173,7 +173,7 @@
           <menuitem label="window" value="window" tooltiptext="&windowRole.label;" type="checkbox"/>
         </menupopup>
      </menu>
-  </popup>
+  </menupopup>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
 	  <tree id="elementsTree"

@@ -231,15 +231,15 @@
 
 <popupset id="editorPopupSet">
 
-  <popup id="main-toolbar-context-menu">
+  <menupopup id="main-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('MainToolbox');" id="CustomizeMainToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </popup>
+  </menupopup>
 
-  <popup id="format-toolbar-context-menu">
+  <menupopup id="format-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('FormatToolbox');" id="CustomizeFormatToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
-  </popup>
+  </menupopup>
 
-  <popup id="structureBarContextMenu"
+  <menupopup id="structureBarContextMenu"
          onpopupshowing="UpdateStructureBarContextMenu()">
     <menuitem label="&resetElementLanguage.label;"
               id="resetElementLanguageMenuitem"
@@ -346,9 +346,9 @@
           <menuitem label="window" value="window" tooltiptext="&windowRole.label;" type="checkbox"/>
         </menupopup>
      </menu>
-  </popup>
+  </menupopup>
 
-  <popup id="editorContextMenu"
+  <menupopup id="editorContextMenu"
          onpopupshowing="UpdateEditorContextMenu(event, this)">
     <menu label="&spellCheck.label;"
           id="spellCheckMenu">
@@ -421,7 +421,7 @@
     <menuitem id="cmenu_SplitTableCell"   label="&tableSplitCell.label;"   accesskey="&tablesplitcell.accesskey;"   observes="cmd_SplitTableCell"/>
     <menuseparator />
     <menuitem id="cmenu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  observes="cmd_editTable"/>
-  </popup>
+  </menupopup>
 </popupset>
 
 <stringbundleset id="languageSet">

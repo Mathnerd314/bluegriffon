@@ -180,10 +180,10 @@
       </hbox>
     </panel>
 
-    <popup id="sectionHeaderContext">
+    <menupopup id="sectionHeaderContext">
       <menuitem label="&closeOtherSections.label;" oncommand="CloseAllSection(false)"/>
       <menuitem label="&closeAllSections.label;" oncommand="CloseAllSection(true)"/>
-    </popup>
+    </menupopup>
 
     <panel level="floating" id="backgroundImagePanel" noautohide="true">
       <groupbox style="width: 400px">
