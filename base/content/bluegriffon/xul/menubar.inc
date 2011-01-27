@@ -50,6 +50,10 @@
                   label="&copyHTMLCodeCmd.label;"
                   observes="cmd_copyHTMLCode"/>
         <menuseparator/>
+        <menuitem id="menu_gotoLink"
+                  label="&gotoLink.label;"
+                  observes="cmd_gotoLink"/>
+        <menuseparator/>
         <menuitem label="&spellCheck.label;"
                   observes="cmd_spellCheck"/>
         <menuseparator/>
