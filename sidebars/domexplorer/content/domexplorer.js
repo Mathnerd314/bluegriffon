@@ -267,7 +267,10 @@ function ElementSelectedInTree()
   gDialog.elementsTree.view.selection.select(index);
   gMain.ComposerCommands.mLastSelectedElement = null;
   gMain.ScrollToElement(node);
-  EditorUtils.getCurrentEditor().selectElement(node);
+  try {
+    EditorUtils.getCurrentEditor().selectElement(node);
+  }
+  catch(e) {}
 }
 
 function UpdateAttributes()

@@ -6,7 +6,10 @@ function UpdateStructureBarContextMenu()
   if (target) // sanity check
     try {
       gMain.ScrollToElement(target);
-      EditorUtils.getCurrentEditor().selectElement(target);
+      try {
+        EditorUtils.getCurrentEditor().selectElement(target);
+      }
+      catch(e) {}
     }
     catch(e) {}
 

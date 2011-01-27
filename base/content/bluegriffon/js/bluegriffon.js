@@ -488,7 +488,10 @@ function UpdateStructureBarContextMenu()
   if (popupNode)
     target = popupNode.getUserData("node");
   if (target) // sanity check
-    EditorUtils.getCurrentEditor().selectElement(target);
+    try {
+      EditorUtils.getCurrentEditor().selectElement(target);
+    }
+    catch(e) {}
 
   if (target && target.hasAttribute("lang"))
     gDialog.resetElementLanguageMenuitem.removeAttribute("disabled");
@@ -1374,7 +1377,10 @@ function UpdateEditorContextMenu(event, aMenupopup)
 
     gDialog.spellCheckMenu.disabled = !sc.overMisspelling;
 
-    EditorUtils.getCurrentEditor().selectElement(document.popupNode);
+    try {
+      EditorUtils.getCurrentEditor().selectElement(document.popupNode);
+    }
+    catch(e) {}
 
     var element = GetParentTable(document.popupNode);
     var idstart = "separator_before_ctableInsertMenu";
