@@ -220,12 +220,19 @@ var BGUpdateManager = {
         var currentVersionArray = currentVersion.split(".");
         for (var i = 0; i < Math.max(appVersionArray.length, currentVersionArray.length); i++) {
           var a = (i < appVersionArray.length)
-                    ? parseInt(appVersionArray[i])
-                    : 0;
+                    ? appVersionArray[i]
+                    : "0";
           var c = (i < currentVersionArray.length)
-                    ? parseInt(currentVersionArray[i])
-                    : 0;
-          if (c > a) {
+                    ? currentVersionArray[i]
+                    : "0";
+          if (parseInt(a) == parseInt(c)) {
+            while (a.length < c.length)
+              a += "z";
+            while (a.length > c.length)
+              c += "z";
+          }
+          if (parseInt(c) > parseInt(a)
+              || (parseInt(a) == parseInt(c) && c > a)) {
             // aaaaah, we found a more recent version...
             var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
             window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
