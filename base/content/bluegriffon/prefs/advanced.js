@@ -57,13 +57,17 @@ function changeLocale() {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                     getService(Components.interfaces.nsIPrefBranch);
     prefs.setCharPref("general.useragent.locale", newLocale);
-    
+    var main = window.opener;
+    if (EditorUtils.getCurrentEditorElement())
+      main.ToggleViewMode(main.gDialog.wysiwygModeButton);
+    if (main.doSaveTabsBeforeQuit()) {
     // Restart application
-    var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
-                     .getService(Components.interfaces.nsIAppStartup);
-
-    appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
-                    Components.interfaces.nsIAppStartup.eAttemptQuit);
+      var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]
+                       .getService(Components.interfaces.nsIAppStartup);
+  
+      appStartup.quit(Components.interfaces.nsIAppStartup.eRestart |
+                      Components.interfaces.nsIAppStartup.eAttemptQuit);
+    }
     
   } catch(err) {
   
