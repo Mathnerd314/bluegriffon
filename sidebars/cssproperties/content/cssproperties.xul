@@ -383,7 +383,7 @@
         <textbox id="IDPicker" hidden="true"/>
       </hbox>
       <hbox class="indent">
-        <checkbox label="when the pointer hovers over the element"
+        <checkbox label="&hoverState.label;"
                   id="hoverStateCheckbox"
                   oncommand="ToggleHover(this)"/>
       </hbox>
