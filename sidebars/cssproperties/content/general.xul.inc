@@ -272,7 +272,7 @@
                                id="normalWordWrapButton"
                                oncommand="ToggleProperty(this)"/>
                 <toolbarbutton class="multibutton" label="&breakWordWordWrap.label;"
-                               value="end" property="word-wrap" type="checkbox" group="word-wrap"
+                               value="break-word" property="word-wrap" type="checkbox" group="word-wrap"
                                id="breakWrapWordWrapButton"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
