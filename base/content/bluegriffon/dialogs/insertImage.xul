@@ -22,7 +22,7 @@
 
   <vbox>
     <groupbox>
-      <caption label="Select image"/>
+      <caption label="&selectImageButton.label;"/>
       <label value="&imageLocation.label;"/>
       <hbox align="center">
         <textbox flex="1" id="imageURLTextbox"
