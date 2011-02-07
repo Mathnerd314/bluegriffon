@@ -28,12 +28,13 @@ function InitDialog()
   if (gNode) {
     gDialog.linkTextbox.hidden = true;
     gDialog.linkLabel.setAttribute("value", gNode.textContent.trim());
-    var url = gNode.getAttribute("href")
+    var url = gNode.getAttribute("href");
     gDialog.urlMenulist.value = url;
     gDialog.relativeURLCheckbox.checked =
        !(url.substr(0,7) == "http://" ||
          url.substr(0,8) == "https://" ||
-         url.substr(0,6) == "ftp://");
+         url.substr(0,6) == "ftp://" ||
+         url.substr(0,7) == "file://");
   }
   else {
     gCollapsedSelection = gEditor.selection.isCollapsed;
