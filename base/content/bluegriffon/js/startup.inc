@@ -1,5 +1,6 @@
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/bgQuit.jsm");
 
 var gContentWindow = null;
 
@@ -23,6 +24,9 @@ function Startup()
         url = fileHandler.getURLSpecFromFile(localFile);
       }
     }
+    else if (window.arguments.length >= 2 &&
+             window.arguments[1])
+      url = window.arguments[1];
   }
   catch(e) { url = null; }
 
@@ -50,5 +54,5 @@ function Startup()
   if (url)
     setTimeout(OpenFile, 100, url, true);
 
-  window.tryToClose = doSaveTabsBeforeQuit;
+  BlueGriffonQuitHelper.init();
 }

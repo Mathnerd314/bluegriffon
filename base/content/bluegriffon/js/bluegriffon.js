@@ -127,7 +127,9 @@ function OpenFile(aURL, aInTab)
     return;
   }
 
-  if (aInTab)
+  // force new window if we don't have one already
+  var tabeditor = document.getElementById("tabeditor");
+  if (tabeditor && aInTab)
     document.getElementById("tabeditor").addEditor(
          UrlUtils.stripUsernamePassword(aURL, null, null),
          aURL);
@@ -884,6 +886,8 @@ function GetDBConn()
 function doSaveTabsBeforeQuit()
 {
   var tabeditor = EditorUtils.getCurrentTabEditor();
+  if (!tabeditor)
+    return true;
   var tabs      = tabeditor.mTabs.childNodes;
   var l = tabs.length;
   for (var i = l-1; i >= 0; i--) {
@@ -900,8 +904,7 @@ function doQuit()
 {
   if (EditorUtils.getCurrentEditorElement())
     ToggleViewMode(gDialog.wysiwygModeButton);
-  if (doSaveTabsBeforeQuit())
-    goQuitApplication();
+  return doSaveTabsBeforeQuit();
 }
 
 function OpenPreferences()

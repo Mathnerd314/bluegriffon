@@ -16,15 +16,15 @@ pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
 /* debugging prefs */
-pref("browser.dom.window.dump.enabled", true);
-pref("javascript.options.showInConsole", true);
-pref("javascript.options.strict", true);
+pref("browser.dom.window.dump.enabled", false);
+pref("javascript.options.showInConsole", false);
+pref("javascript.options.strict", false);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
 pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
 
-pref("extensions.update.enabled", true);
+pref("extensions.update.enabled", false);
 pref("extensions.update.url", "chrome://mozapps/locale/extensions/extensions.properties");
 pref("extensions.update.interval", 86400);  // Check for updates to Extensions and 
                                             // Themes every week

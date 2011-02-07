@@ -5,7 +5,7 @@ bluegriffon.jar:
 % style  chrome://global/content/customizeToolbar.xul    chrome://bluegriffon/skin/editorFormat.css
 % override chrome://global/content/bindings/menulist.xml chrome://bluegriffon/content/bindings/menulist.xml
 * content/bluegriffon/xul/bluegriffon.xul               (content/bluegriffon/xul/bluegriffon.xul)
-  content/bluegriffon/xul/hiddenWindow.xul              (content/bluegriffon/xul/hiddenWindow.xul)
+* content/bluegriffon/xul/hiddenWindow.xul              (content/bluegriffon/xul/hiddenWindow.xul)
 * content/bluegriffon/js/bluegriffon.js                 (content/bluegriffon/js/bluegriffon.js)
   content/bluegriffon/utils/dgid.js                     (content/bluegriffon/utils/dgid.js)
 * content/bluegriffon/utils/global.js                   (content/bluegriffon/utils/global.js)

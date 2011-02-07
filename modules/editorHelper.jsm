@@ -54,7 +54,8 @@ var EditorUtils = {
   {
     try {
       var windowManager = Components.classes[this.kWINDOWMEDIATOR_CID].getService();
-      return windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("bluegriffon");
+      return windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("bluegriffon") ||
+             windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:MacCmdLineFwd");
     }
     catch(e){}
     return null;

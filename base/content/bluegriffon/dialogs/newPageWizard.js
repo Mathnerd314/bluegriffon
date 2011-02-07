@@ -687,7 +687,6 @@ function CreateNewDocument()
 
   var docType = "k" + value +
                 (isHtml5 ? "" : "_" + gDialog.doctypeRadiogroup.value);
-
   w.OpenFile(w[docType], true);
   return false;
 }

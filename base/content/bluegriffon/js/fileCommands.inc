@@ -42,7 +42,8 @@ var cmdSave =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
     try {
-      ToggleViewMode(gDialog.wysiwygModeButton);
+      if (gDialog.wysiwygModeButton)
+        ToggleViewMode(gDialog.wysiwygModeButton);
       // for the time being, we use the HTML serializer
 
       result = FileUtils.saveDocument(
@@ -73,7 +74,8 @@ var cmdSaveAs =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
     try {
-      ToggleViewMode(gDialog.wysiwygModeButton);
+      if (gDialog.wysiwygModeButton)
+        ToggleViewMode(gDialog.wysiwygModeButton);
       var editorMimeType = EditorUtils.getCurrentDocument().contentType;
       var result = FileUtils.saveDocument(true, false, editorMimeType);
       if (result)

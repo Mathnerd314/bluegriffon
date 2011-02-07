@@ -94,7 +94,7 @@ function baseConverter (number,ob,nb) {
 // used by openLocation. see openLocation.js for additional notes.
 function delayedOpenWindow(chrome, flags, param1, param2)
 {
-  setTimeout("window.openDialog('"+chrome+"','_blank','"+flags+"','"+param1+"','"+param2+"')", 10);
+  setTimeout(window.openDialog, 10, chrome, '_blank', flags, param1, param2);
 }
 
 function GetPrefs()

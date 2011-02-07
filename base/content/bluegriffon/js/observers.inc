@@ -203,3 +203,4 @@ var BlueGriffonPrefsObserver = {
     }
   }
 };
+
