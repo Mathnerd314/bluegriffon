@@ -10,7 +10,7 @@
           <columns><column/><column/></columns>
           <rows>
             <row align="top">
-              <label value="Font family:"/>
+              <label value="&fontFamily.label;"/>
               <vbox>
                 <listbox id="fontFamilyListbox"
                          onselect="OnFontFamilySelect(this)"
