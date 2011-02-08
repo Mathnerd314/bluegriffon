@@ -67,6 +67,7 @@
 #include scripts.inc
 
 #include sets.inc
+#include popups.inc
 
 #include menubar.inc
 

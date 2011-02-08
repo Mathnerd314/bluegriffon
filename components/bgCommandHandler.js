@@ -112,7 +112,7 @@ nsBlueGriffonContentHandler.prototype = {
 
     var prefb = Components.classes["@mozilla.org/preferences-service;1"]
                           .getService(nsIPrefBranch);
-    this.mChromeURL = prefb.getCharPref("bluegriffon.chromeURL");
+    this.mChromeURL = prefb.getCharPref("browser.chromeURL");
 
     return this.mChromeURL;
   },
@@ -187,7 +187,6 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
-
     var url = null;
 #ifndef XP_MACOSX
     if (cmdLine.length == 1) {
@@ -238,7 +237,7 @@ nsDefaultCommandLineHandler.prototype = {
       mostRecent.focus();
       return mostRecent;
     }
-#ifdef XP_MACOSX
+#ifdef TAGADA
     var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
                            .getService(nsIWindowWatcher);
     return wwatch.openWindow(null, this.hiddenChromeURL,
@@ -263,7 +262,7 @@ nsDefaultCommandLineHandler.prototype = {
 
     var prefb = Components.classes["@mozilla.org/preferences-service;1"]
                           .getService(nsIPrefBranch);
-    this.mHiddenChromeURL = prefb.getCharPref("bluegriffon.hiddenWindowChromeURL");
+    this.mHiddenChromeURL = prefb.getCharPref("browser.hiddenWindowChromeURL");
 
     return this.mHiddenChromeURL;
   },

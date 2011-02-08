@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
 #include overlays.inc
 
 <!DOCTYPE window [
@@ -12,7 +14,7 @@
 ]>            
 
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        id="mac_cmdline_forward" windowtype="BlueGriffon:MacCmdLineFwd"
+        id="hidden-window" windowtype="hidden-main"
         width="0" height="0" >
 
   <script><![CDATA[ 
@@ -34,7 +36,6 @@
 
     function selectMainWindowAndClose() {
       window.removeEventListener("load", selectMainWindowAndClose, false);
-
       GetUIElements();
     
       ComposerCommands.setupMainCommands();
@@ -56,20 +57,19 @@
         }
       }
 
-      var singletonWindowType = getPref("getCharPref", "toolkit.singletonWindowType", "");
+      var singletonWindowType = getPref("getCharPref", "bluegriffon.singletonWindowType", "");
       var windowMediator = Cc[WNDMEDIATOR_SERVICE_CONTRACTID].getService(Ci.nsIWindowMediator);
       var win = windowMediator.getMostRecentWindow(singletonWindowType);
       if (win)
         win.focus();
       else
         OpenBlueGriffonWindow();
-        
-      //window.close();
+
     }
 
     function OpenBlueGriffonWindow()
     {
-      window.openDialog(getPref("getCharPref", "bluegriffon.chromeURL", ""), "_blank",
+      window.openDialog(getPref("getCharPref", "browser.chromeURL", ""), "_blank",
                         "chrome,all,dialog=no");
     }
 
