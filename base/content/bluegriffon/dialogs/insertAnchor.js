@@ -70,11 +70,7 @@ function onAccept()
       gNode.id = id;
   }
   else {
-    var anchor = gDoc.createElement("a");
-    anchor.id = id;
-    anchor.appendChild(gDoc.createTextNode(""));
-    EditorUtils.getCurrentEditor().insertElementAtSelection(anchor, true);
-    var a = 1;
+    EditorUtils.getCurrentEditor().setInlineProperty("a", "name", id)
   }
 }
 
