@@ -19,6 +19,8 @@
         <xul:titlebar flex="1">
           <xul:label xbl:inherits="value=label"/>
         </xul:titlebar>
+        <xul:image class="floatinpanel-align"
+                   onclick="AlignAllPanels()"/>
       </xul:hbox>
       <children/>
       <xul:hbox style="width: 25px;" align="center">
