@@ -35,6 +35,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
@@ -42,8 +45,7 @@ Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
-Components.utils.import("resource://gre/modules/InlineSpellChecker.jsm");
-Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://app/modules/screens.jsm");
 
 #include blanks.inc
 
@@ -1163,62 +1165,8 @@ function OnDoubleClick(aEvent)
 
 function AlignAllPanels()
 {
-  var x = window.screenX;
-  var y = window.screenY;
-  var w = window.outerWidth;
-  var availableWidth = screen.availWidth - x - w;
-  var h = window.outerHeight;
-  var panelsData = [];
-  var panels = document.querySelectorAll('panel[floating="true"]');
-  for (var i = 0; i < panels.length; i++) {
-    if (panels[i].popupBoxObject.popupState == "open") {
-      panelsData.push( {
-                         panel: panels[i],
-                         x: panels[i].boxObject.screenX,
-                         w: panels[i].boxObject.width
-                       });
-    }
-  }
-
-  function comparePanelsData(a, b) {
-    if (a.x < b.x)
-      return -1;
-    if (a.x > b.x)
-      return +1;
-    return 0;
-  }
-  panelsData.sort(comparePanelsData);
-
-  for (var i = 0; i < panelsData.length; i++) {
-    if (i+1 >= panelsData.length)
-      break;
-    if (panelsData[i+1].x >= panelsData[i].x &&
-        panelsData[i+1].x <= panelsData[i].x + panelsData[i].w)
-      panelsData[i+1].x = panelsData[i].x;
-  }
-
-  var weightData = {};
-  var flex = 0;
-  for (var i = 0; i < panelsData.length; i++) {
-    if (panelsData[i].x in weightData)
-      weightData[panelsData[i].x]++;
-    else {
-      weightData[panelsData[i].x] = 1;
-      flex++;
-    }
-    panelsData[i].vPos = weightData[panelsData[i].x] - 1;
-  }
-
-  var currentX = x + w + 1;
-  var lastX = panelsData[0].x;
-  for (var i = 0; i < panelsData.length; i++) {
-    if (panelsData[i].x != lastX) {
-      currentX += availableWidth / flex;
-      lastX = panelsData[i].x;
-    }
-    panelsData[i].panel.moveTo(currentX + 10 , y + (h / weightData[panelsData[i].x]) * panelsData[i].vPos);
-    panelsData[i].panel.sizeTo((availableWidth / flex) - 14 , h / weightData[panelsData[i].x] - 4);
-  }
+  ScreenUtils.alignPanelsForWindow(window);
+  return;
 }
 
 function UpdatePanelsStatusInMenu()
