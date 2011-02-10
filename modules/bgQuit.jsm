@@ -20,8 +20,7 @@ var BlueGriffonQuitHelper = {
     switch (topic) {
       case "quit-application-requested":
       {
-        var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1'].
-                             getService(Components.interfaces.nsIWindowMediator);
+        var windowMediator = Services.wm;
         var e = windowMediator.getEnumerator("bluegriffon");
         var windows = [];
         while (e.hasMoreElements()) {

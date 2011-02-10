@@ -37,12 +37,12 @@
 
 var EXPORTED_SYMBOLS = ["EditorUtils"];
 
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 //Components.utils.import("resource://app/modules/cssHelper.jsm");
 
 var EditorUtils = {
 
-  kWINDOWMEDIATOR_CID: "@mozilla.org/appshell/window-mediator;1",
   nsIDOMNode: Components.interfaces.nsIDOMNode,
 
   mActiveViewActive: false,
@@ -53,9 +53,9 @@ var EditorUtils = {
   getCurrentEditorWindow: function getCurrentEditorWindow()
   {
     try {
-      var windowManager = Components.classes[this.kWINDOWMEDIATOR_CID].getService();
-      return windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("bluegriffon") ||
-             windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:MacCmdLineFwd");
+      var windowManager = Services.wm;
+      return windowManager.getMostRecentWindow("bluegriffon") ||
+             windowManager.getMostRecentWindow("BlueGriffon:MacCmdLineFwd");
     }
     catch(e){}
     return null;
@@ -184,9 +184,7 @@ var EditorUtils = {
   
     var url = UrlUtils.newURI(aURL).spec;
   
-    var windowManager = Components.classes[this.kWINDOWMEDIATOR_CID].getService();
-    var windowManagerInterface = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator);
-    var enumerator = windowManagerInterface.getEnumerator( "bluegriffon" );
+    var enumerator = Services.wm.getEnumerator( "bluegriffon" );
     while ( enumerator.hasMoreElements() )
     {
       var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindowInternal);

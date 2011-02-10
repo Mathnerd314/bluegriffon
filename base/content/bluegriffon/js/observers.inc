@@ -151,10 +151,7 @@ var BlueGriffonPrefsObserver = {
 
     if (prefName == "bluegriffon.returnKey.createsParagraph") {
       var value = GetPrefs().getBoolPref("bluegriffon.returnKey.createsParagraph");
-      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                            .getService();
-      var windowEnumerator = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
-                                          .getEnumerator("bluegriffon");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
@@ -171,10 +168,7 @@ var BlueGriffonPrefsObserver = {
 
     else if (prefName == "bluegriffon.spellCheck.enabled") {
       var value = GetPrefs().getBoolPref("bluegriffon.spellCheck.enabled");
-      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                            .getService();
-      var windowEnumerator = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
-                                          .getEnumerator("bluegriffon");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
         var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
@@ -191,10 +185,7 @@ var BlueGriffonPrefsObserver = {
 
     else if (prefName == "bluegriffon.tabs.position") {
       var value = GetPrefs().getCharPref("bluegriffon.tabs.position");
-      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                            .getService();
-      var windowEnumerator = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
-                                          .getEnumerator("bluegriffon");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
         var tabeditor = w.gDialog.tabeditor;

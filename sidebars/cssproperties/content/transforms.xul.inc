@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="transformsSectionHeader">
-        <image src="chrome://cssproperties/skin/filter.png" onclick="ToggleSection(this.parentNode)"/>
+            id="transformsSectionHeader" onclick="ToggleSection(event, this)">
+        <image src="chrome://cssproperties/skin/filter.png"/>
         <label value="&transformsSectionHeader.label;"/>
       </hbox>
 

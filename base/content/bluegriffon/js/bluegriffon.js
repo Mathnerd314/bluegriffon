@@ -158,9 +158,8 @@ function EditorLoadUrl(aElt, aURL)
 
 function AboutComposer()
 {
-  var windowManager = Components.classes[this.kWINDOWMEDIATOR_CID].getService();
-  var windowManagerInterface = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator);
-  var enumerator = windowManagerInterface.getEnumerator( "BlueGriffon:About" );
+  var wm = Services.wm;
+  var enumerator = wm.getEnumerator( "BlueGriffon:About" );
   while ( enumerator.hasMoreElements() )
   {
     var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindowInternal);
@@ -1227,8 +1226,7 @@ function start_css()
 {
   var w = null;
   try {
-    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
-    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow("BlueGriffon:CSSProperties");
+    w = Services.wm.getMostRecentWindow("BlueGriffon:CSSProperties");
   }
   catch(e){}
   if (w)
@@ -1398,10 +1396,9 @@ function IgnoreWord()
 #ifndef XP_MACOSX
 function OpenCharInsertionDialog()
 {
+  var w = null;
   try {
-    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
-    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator)
-                     .getMostRecentWindow("BlueGriffon:insertCharsDlg");
+    w = Services.wm.getMostRecentWindow("BlueGriffon:insertCharsDlg");
   }
   catch(e){}
   if (w)

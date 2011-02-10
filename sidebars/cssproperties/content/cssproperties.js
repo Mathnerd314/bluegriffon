@@ -223,8 +223,11 @@ function onCssPolicyChange(aElt)
     gDialog.classPicker.focus();
 }
 
-function ToggleSection(header)
+function ToggleSection(aEvent, header)
 {
+  if (aEvent.button) // only first button...
+    return;
+
   var section = header.nextElementSibling;
   if (header.hasAttribute("open")) {
     section.style.height = "0px";
