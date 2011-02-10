@@ -229,8 +229,12 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
       treeitem = tmp;
     }
   }
-  if (selected)
+  if (selected) {
+    var tmp = gDialog.elementsTree.getAttribute("onselect");
+    gDialog.elementsTree.removeAttribute("onselect")
     gDialog.elementsTree.view.selection.select(gDialog.elementsTree.contentView.getIndexOfItem(selected));
+    gDialog.elementsTree.setAttribute("onselect", tmp)
+  }
 
   UpdateAttributes();
   UpdateStyles();
@@ -268,7 +272,7 @@ function ElementSelectedInTree()
   gMain.ComposerCommands.mLastSelectedElement = null;
   gMain.ScrollToElement(node);
   try {
-    EditorUtils.getCurrentEditor().selectElement(node);
+    SelectionChanged(null, node, true);
   }
   catch(e) {}
 }
