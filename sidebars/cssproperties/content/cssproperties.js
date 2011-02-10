@@ -225,7 +225,7 @@ function onCssPolicyChange(aElt)
 
 function ToggleSection(aEvent, header)
 {
-  if (aEvent.button) // only first button...
+  if (aEvent && aEvent.button) // only first button...
     return;
 
   var section = header.nextElementSibling;
@@ -880,7 +880,7 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
     var header = headers[i];
     if ((aAlsoCloseOriginalTarget || header != h) &&
         header.hasAttribute("open"))
-      ToggleSection(header);
+      ToggleSection(null, header);
   }
 }
 
