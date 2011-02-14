@@ -13,7 +13,7 @@ function GeneralSectionIniter(aElt, aRuleset)
     //SetEnabledElement(gDialog.removeFontButton, gDialog.fontFamilyListbox.itemCount);
   }
 
-  var webFonts = CssInspector.getWebFonts(aElt.ownerDocument);
+  var webFonts = CssInspector.getWebFonts(EditorUtils.getCurrentDocument());
   var child = gDialog.beforeWebfontsMenuseparator.nextSibling;
   while (child && child.id != "afterWebfontsMenuseparator") {
     var tmp = child.nextSibling;

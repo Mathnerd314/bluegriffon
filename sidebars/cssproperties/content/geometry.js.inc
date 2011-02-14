@@ -49,7 +49,8 @@ function GeometrySectionIniter(aElt, aRuleset)
   var Mh = CssInspector.getCascadedValue(aRuleset, "max-height");
   gDialog.maxHeightMenulist.value = Mh;
 
-  var isImg = (aElt.nodeName.toLowerCase() == "img");
+  var isImg = ("nodeName" in aElt
+               && aElt.nodeName.toLowerCase() == "img");
   gDialog.preserveImageRatioCheckbox.hidden = !isImg;
   if (isImg)
     gDialog.getNaturalSizeButton.removeAttribute("hidden");
