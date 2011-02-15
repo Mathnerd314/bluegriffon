@@ -4514,7 +4514,7 @@ jscsspImportRule.prototype = {
   cssText: function() {
     var mediaString = this.media.join(", ");
     return "@import " + this.href
-                      + (mediaString ? mediaString + " " : "")
+                      + ((mediaString && mediaString != "all") ? mediaString + " " : "")
                       + ";";
   },
 
