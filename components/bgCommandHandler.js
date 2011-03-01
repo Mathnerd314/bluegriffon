@@ -161,6 +161,7 @@ nsBlueGriffonContentHandler.prototype = {
   /* nsIContentHandler */
 
   handleContent : function bch_handleContent(contentType, context, request) {
+    Services.prompt(null, "a", "b")
   }
 };
 
@@ -187,6 +188,7 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
+
     var url = null;
 #ifndef XP_MACOSX
     if (cmdLine.length == 1) {
@@ -232,6 +234,22 @@ nsDefaultCommandLineHandler.prototype = {
                                "chrome,dialog=no,all",
                                ar || url);
 #endif
+    }
+    url = cmdLine.handleFlagWithParam("url", false);
+    if (url) {
+      if (mostRecent) {
+        var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
+                           .getInterface(nsIWebNavigation);
+        var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
+        var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
+                              .getInterface(nsIDOMWindow);
+        rootWin.OpenFile(url, true);
+        return;
+      }
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               url);
     }
     if (mostRecent) {
       mostRecent.focus();
