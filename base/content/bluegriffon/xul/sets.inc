@@ -149,24 +149,31 @@
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);">
   <command id="cmd_selectionChanged"/>
   <command id="cmd_undo" label="&undoCmd.label;" 
+           accesskey="&undoCmd.accesskey;"
            oncommand="goDoCommand('cmd_undo')"
            disabled="true"/>
   <command id="cmd_redo" label="&redoCmd.label;"
+           accesskey="&redoCmd.accesskey;"
            oncommand="goDoCommand('cmd_redo')"
            disabled="true"/>
   <command id="cmd_cut" label="&cutCmd.label;"
+           accesskey="&cutCmd.accesskey;"
            oncommand="goDoCommand('cmd_cut')"
            disabled="true"/>
   <command id="cmd_copy" label="&copyCmd.label;"
+           accesskey="&copyCmd.accesskey;"
            oncommand="goDoCommand('cmd_copy')"
            disabled="true"/>
   <command id="cmd_paste" label="&pasteCmd.label;"
+           accesskey="&pasteCmd.accesskey;"
            oncommand="goDoCommand('cmd_paste')"
            disabled="true"/>
   <command id="cmd_delete" label="&deleteCmd.label;"
+           accesskey="&deleteCmd.accesskey;"
            oncommand="goDoCommand('cmd_delete')"
            disabled="true"/>
   <command id="cmd_selectAll" label="&selectAllCmd.label;"
+           accesskey="&selectAllCmd.accesskey;"
            oncommand="goDoCommand('cmd_selectAll')"
            disabled="true"/>
   <command id="cmd_copyHTMLCode"
@@ -183,8 +190,8 @@
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
 
-  <command id="cmd_bgfind"         label="&findCmd.label;"           oncommand="goDoCommand('cmd_bgfind')"/>
-  <command id="cmd_replace"        label="&replaceCmd.label;"        oncommand="goDoCommand('cmd_replace')"/>
+  <command id="cmd_bgfind"         label="&findCmd.label;"           accesskey="&findCmd.accesskey;"    oncommand="goDoCommand('cmd_bgfind')"/>
+  <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;" oncommand="goDoCommand('cmd_replace')"/>
   <command id="cmd_browse"                                           oncommand="goDoCommand('cmd_browse')"/>
 </commandset>
 

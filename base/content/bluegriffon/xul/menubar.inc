@@ -48,13 +48,16 @@
         <menuseparator/>
         <menuitem id="menu_copyHTMLCode"
                   label="&copyHTMLCodeCmd.label;"
+                  accesskey="&copyHTMLCodeCmd.accesskey;"
                   observes="cmd_copyHTMLCode"/>
         <menuseparator/>
         <menuitem id="menu_gotoLink"
                   label="&gotoLink.label;"
+                  accesskey="&gotoLink.accesskey;"
                   observes="cmd_gotoLink"/>
         <menuseparator/>
         <menuitem label="&spellCheck.label;"
+                  accesskey="&spellCheck.accesskey;"
                   observes="cmd_spellCheck"/>
         <menuseparator/>
         <menuitem id="bgmenu_find" command="cmd_bgfind"
