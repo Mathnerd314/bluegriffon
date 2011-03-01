@@ -63,7 +63,7 @@
             this.setAttribute("open", "true");
             document.persist(this.id, "open");
             if (aDoResize && this.hasAttribute("width") && this.hasAttribute("height"))
-              this(this.getAttribute("width"), this.getAttribute("height"));
+              this.sizeTo(this.getAttribute("width"), this.getAttribute("height"));
             BlueGriffonVars.lastPanelRaised = this;
           } catch(e) {}
         ]]>
