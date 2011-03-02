@@ -12,8 +12,7 @@
               <label value="&replace.label;"/>
               <textbox id="bespinReplaceTextbox"
                        size="10"
-                       type="search"
-                       oncommand="onBespinReplaceClear(event, this)"/>
+                       type="search"/>
             </hbox>
             <hbox id="bespinToolbox1" align="center" hidden="true">
               <spacer style="width: 5px"/>

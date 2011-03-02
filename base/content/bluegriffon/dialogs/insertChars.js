@@ -132,9 +132,10 @@ function onAccept()
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();
       var bespinIframe = editorElement.previousSibling;
-      var bespinEditor = bespinIframe.getUserData("editor");
-      var selection = bespinEditor.selection;
-      bespinEditor.replace(selection, char, false);
+      var bespinEditor = bespinIframe.contentWindow.gEditor;
+      var selection = bespinEditor.getSession().getSelection();
+      var r = selection.getRange();
+      bespinEditor.$tryReplace(r, char)
     }
   }
   catch(e) {}

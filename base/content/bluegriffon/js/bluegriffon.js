@@ -711,15 +711,14 @@ function ToggleViewMode(aElement)
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
     var bespinIframe = editorElement.previousSibling;
-    var bespinEditor = bespinIframe.getUserData("editor");
-    bespinEditor.value = "";
-    bespinEditor.value = source;
+    var bespinEditor = bespinIframe.contentWindow.gEditor;
+    //bespinEditor.value = "";
+    bespinEditor.getSession().setValue(source);
     bespinIframe.setUserData("oldSource", source, null);
     NotifierUtils.notify("afterEnteringSourceMode");
     editorElement.parentNode.selectedIndex = 0;
     bespinIframe.focus();
-    bespinEditor.focus = true;
-    bespinIframe.contentWindow.getEditableElement().className = "";
+    bespinEditor.focus();
   }
   else if (mode == "wysiwyg")
   {
@@ -727,11 +726,11 @@ function ToggleViewMode(aElement)
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
     var bespinIframe = editorElement.previousSibling;
-    var bespinEditor = bespinIframe.getUserData("editor");
+    var bespinEditor = bespinIframe.contentWindow.gEditor;
     if (bespinEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
-      source = bespinEditor.value;
+      source = bespinEditor.getSession().getValue();
       var oldSource = bespinIframe.getUserData("oldSource"); 
       if (source != oldSource) {
         var doctype = EditorUtils.getCurrentDocument().doctype.publicId;

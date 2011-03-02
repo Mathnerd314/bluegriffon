@@ -56,10 +56,6 @@ DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET
 endif
 
 _FILES = \
-	$(srcdir)/res/BespinEmbedded.css \
-	$(srcdir)/res/BespinEmbedded.js \
-	$(srcdir)/res/BespinMain.js \
-	$(srcdir)/res/BespinWorker.js \
 	$(srcdir)/res/bespin.html \
 	$(srcdir)/res/html_transitional.html \
 	$(srcdir)/res/html_strict.html \
@@ -73,40 +69,48 @@ _FILES = \
 	$(srcdir)/res/base-min.css \
 	$(NULL)
 
-_BESPIN_RESOURCE_FILES = \
-	$(srcdir)/res/resources/screen_theme/theme.less \
-	$(NULL)
-
-_BESPIN_WHITETHEME_FILES = \
-	$(srcdir)/res/resources/whitetheme/theme.less \
-	$(NULL)
-
-_BESPIN_IMAGE_FILES = \
-  $(srcdir)/res/resources/screen_theme/images/bespin-s.png \
-	$(srcdir)/res/resources/screen_theme/images/check-selected.png \
-	$(srcdir)/res/resources/screen_theme/images/check-unselected.png \
-	$(srcdir)/res/resources/screen_theme/images/lines.png \
-	$(srcdir)/res/resources/screen_theme/images/radio-selected.png \
-	$(srcdir)/res/resources/screen_theme/images/radio-unselected.png \
-	$(srcdir)/res/resources/screen_theme/images/scroll-down.png \
-	$(srcdir)/res/resources/screen_theme/images/scroll-left.png \
-	$(srcdir)/res/resources/screen_theme/images/scroll-right.png \
-	$(srcdir)/res/resources/screen_theme/images/scroll-up.png \
+_ACE_RESOURCE_FILES = \
+	$(srcdir)/res/ace/ace-uncompressed.js \
+	$(srcdir)/res/ace/ace.js \
+	$(srcdir)/res/ace/cockpit-uncompressed.js \
+	$(srcdir)/res/ace/cockpit.js \
+	$(srcdir)/res/ace/keybinding-emacs.js \
+	$(srcdir)/res/ace/keybinding-vim.js \
+	$(srcdir)/res/ace/mode-c_cpp.js \
+	$(srcdir)/res/ace/mode-coffee.js \
+	$(srcdir)/res/ace/mode-csharp.js \
+	$(srcdir)/res/ace/mode-css.js \
+	$(srcdir)/res/ace/mode-html.js \
+	$(srcdir)/res/ace/mode-java.js \
+	$(srcdir)/res/ace/mode-javascript.js \
+	$(srcdir)/res/ace/mode-perl.js \
+	$(srcdir)/res/ace/mode-php.js \
+	$(srcdir)/res/ace/mode-python.js \
+	$(srcdir)/res/ace/mode-ruby.js \
+	$(srcdir)/res/ace/mode-xml.js \
+	$(srcdir)/res/ace/theme-clouds.js \
+	$(srcdir)/res/ace/theme-clouds_midnight.js \
+	$(srcdir)/res/ace/theme-cobalt.js \
+	$(srcdir)/res/ace/theme-dawn.js \
+	$(srcdir)/res/ace/theme-eclipse.js \
+	$(srcdir)/res/ace/theme-idle_fingers.js \
+	$(srcdir)/res/ace/theme-kr_theme.js \
+	$(srcdir)/res/ace/theme-mono_industrial.js \
+	$(srcdir)/res/ace/theme-monokai.js \
+	$(srcdir)/res/ace/theme-pastel_on_dark.js \
+	$(srcdir)/res/ace/theme-twilight.js \
+	$(srcdir)/res/ace/worker-javascript.js \
 	$(NULL)
 
 libs::
 	$(INSTALL) $(_FILES) $(DIST)/bin/res
-	mkdir -p $(DIST)/bin/res/resources/screen_theme/images/
-	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DIST)/bin/res/resources/screen_theme
-	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DIST)/bin/res/resources/screen_theme/images
-	$(INSTALL) $(_BESPIN_WHITETHEME_FILES) $(DIST)/bin/res/resources/whitetheme
+	mkdir -p $(DIST)/bin/res/ace
+	$(INSTALL) $(_ACE_RESOURCE_FILES) $(DIST)/bin/res/ace
 
 install::
 	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
-	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images/
-	$(INSTALL) $(_BESPIN_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme
-	$(INSTALL) $(_BESPIN_IMAGE_FILES) $(DESTDIR)$(mozappdir)/res/resources/screen_theme/images
-	$(INSTALL) $(_BESPIN_WHITETHEME_FILES) $(DESTDIR)$(mozappdir)/res/resources/whitetheme
+	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/ace
+	$(INSTALL) $(_ACE_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/ace
 
 include $(topsrcdir)/config/rules.mk
 
