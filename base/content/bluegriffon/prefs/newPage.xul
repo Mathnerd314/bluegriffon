@@ -45,8 +45,8 @@
 	                  id="sourceThemeRadioGroup"
 	                  preference="pref-source-theme"
 	                  orient="horizontal">
-	        <radio label="&darkTheme.label;" value=""/>
-	        <radio label="&whiteTheme.label;" value="white"/>
+	        <radio label="&darkTheme.label;" value="twilight"/>
+	        <radio label="&whiteTheme.label;" value="clouds"/>
 	      </radiogroup>
 	      <label value="&requiresRestart.label;"
 	             style="font-style: italic; font-size: smaller"/>

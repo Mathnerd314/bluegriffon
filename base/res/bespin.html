@@ -23,6 +23,7 @@
     
 <script src="resource://app/res/ace/ace-uncompressed.js" type="text/javascript" charset="utf-8"></script>
 <script src="resource://app/res/ace/theme-clouds.js" type="text/javascript" charset="utf-8"></script>
+<script src="resource://app/res/ace/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
 <script src="resource://app/res/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
 <script>
   var gEditor = null;
@@ -38,7 +39,7 @@
 
   window.onload = function() {
       gEditor = ace.edit("editor");
-      gEditor.setTheme("ace/theme/clouds");
+      gEditor.setTheme("ace/theme/" + gTheme);
       
       var HTMLMode = require("ace/mode/html").Mode;
       gEditor.getSession().setMode(new HTMLMode());
