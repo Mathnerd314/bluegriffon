@@ -712,11 +712,20 @@ function ToggleViewMode(aElement)
     var source = encoder.encodeToString();
     var bespinIframe = editorElement.previousSibling;
     var bespinEditor = bespinIframe.contentWindow.gEditor;
+    bespinIframe.setUserData("oldSource", source, null);
+
+    MarkSelection();
+    source = encoder.encodeToString();
+
+    UnmarkSelection();
+
     //bespinEditor.value = "";
     bespinEditor.getSession().setValue(source);
-    bespinIframe.setUserData("oldSource", source, null);
     NotifierUtils.notify("afterEnteringSourceMode");
     editorElement.parentNode.selectedIndex = 0;
+
+    MarkSelectionInAce(bespinEditor);
+
     bespinIframe.focus();
     bespinEditor.focus();
   }
@@ -1407,3 +1416,137 @@ function OpenCharInsertionDialog()
                      "chrome,modal=no,titlebar");
 }
 #endif
+
+
+var gDummySelectionStartNode = null;
+var gDummySelectionEndNode = null;
+var gDummySelectionStartData = "";
+var gDummySelectionEndData = "";
+
+function MarkSelection()
+{
+  gDummySelectionStartNode = null;
+  gDummySelectionEndNode = null;
+  gDummySelectionStartData = "";
+  gDummySelectionEndData = "";
+  
+  const kBGBGBG = "--BG--";
+
+  var selection = EditorUtils.getCurrentEditor().selection;
+  for (var count = 0; count < 1; count++) {
+    var range = selection.getRangeAt(count);
+    var startContainer = range.startContainer;
+    var endContainer   = range.endContainer;
+    var startOffset    = range.startOffset;
+    var endOffset      = range.endOffset;
+
+    if (startContainer.nodeType == Node.TEXT_NODE) {
+      var data = startContainer.data;
+      gDummySelectionStartNode = startContainer;
+      gDummySelectionStartData = data;
+      data = data.substr(0, startOffset) + kBGBGBG + data.substr(startOffset);
+      startContainer.data = data;
+    }
+    else if (startContainer.nodeType == Node.ELEMENT_NODE) {
+      var node = startContainer.childNodes.item(startOffset);
+      if (node.nodeType == Node.TEXT_NODE) {
+        var data = node.data;
+        gDummySelectionStartNode = node;
+        gDummySelectionStartData = data;
+        data = kBGBGBG + data;
+        node.data = data;
+      }
+      else {
+        var t = EditorUtils.getCurrentDocument().createTextNode(kBGBGBG);
+        gDummySelectionStartNode = t;
+        startContainer.insertBefore(t, node);
+      }
+    }
+
+    if (endContainer.nodeType == Node.TEXT_NODE) {
+      // same node as start node???
+      if (endContainer == startContainer) {
+        var data = endContainer.data;
+        gDummySelectionEndNode = endContainer;
+        gDummySelectionEndData = data;
+        data = data.substr(0, endOffset + kBGBGBG.length) + kBGBGBG + data.substr(endOffset + kBGBGBG.length);
+        endContainer.data = data;
+      }
+      else {
+        var data = endContainer.data;
+        gDummySelectionEndNode = endContainer;
+        gDummySelectionEndData = data;
+        data = data.substr(0, endOffset) + kBGBGBG + data.substr(endOffset);
+        endContainer.data = data;
+      }
+    }
+    else if (endContainer.nodeType == Node.ELEMENT_NODE) {
+      var node = endContainer.childNodes.item(Math.max(0, endOffset - 1));
+      if (node.nodeType == Node.TEXT_NODE) {
+        var data = node.data;
+        gDummySelectionEndNode = node;
+        gDummySelectionEndData = data;
+        data += kBGBGBG;
+        node.data = data;
+      }
+      else {
+        var t = EditorUtils.getCurrentDocument().createTextNode(kBGBGBG);
+        gDummySelectionEndNode = t;
+        endContainer.insertBefore(t, node.nextSibling);
+      }
+    }
+  }
+}
+
+function UnmarkSelection()
+{
+  if (gDummySelectionEndNode) {
+    if (gDummySelectionEndData)
+      gDummySelectionEndNode.data = gDummySelectionEndData;
+    else
+      gDummySelectionEndNode.parentNode.removeChild(gDummySelectionEndNode);
+  }
+
+  if (gDummySelectionStartNode) {
+    if (gDummySelectionStartData)
+      gDummySelectionStartNode.data = gDummySelectionStartData;
+    else if (gDummySelectionStartNode.parentNode) // if not already removed....
+      gDummySelectionStartNode.parentNode.removeChild(gDummySelectionStartNode);
+  }
+}
+
+function MarkSelectionInAce(aAceEditor)
+{
+  const kBGBGBG = "--BG--";
+
+  var selection = aAceEditor.getSession().getSelection();
+  selection.setSelectionRange({ start: { row: 0, column: 0 },
+                                end:   { row: 0, column: 0 } });
+
+  var range = aAceEditor.find(kBGBGBG, { backwards: false,
+                                         wrap: true,
+                                         caseSensitive: true,
+                                         wholeWord: false,
+                                         regExp: false
+                              });
+  var startRow    = range.start.row;
+  var startColumn = range.start.column;
+  selection.setSelectionRange({ start: { row: 0, column: 0 },
+                                end:   { row: 0, column: 0 } });
+  aAceEditor.replace("");
+
+  var range = aAceEditor.find(kBGBGBG, { backwards: false,
+                                         wrap: true,
+                                         caseSensitive: true,
+                                         wholeWord: false,
+                                         regExp: false
+                              });
+  var endRow      = range.start.row;
+  var endColumn   = range.start.column;
+  aAceEditor.replace("");
+
+  aAceEditor.gotoLine(startRow);
+  selection.setSelectionRange({ start: { row: startRow, column: startColumn },
+                                end:   { row: endRow,   column: endColumn } });
+                                
+}
