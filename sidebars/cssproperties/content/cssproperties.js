@@ -343,11 +343,11 @@ function ApplyStyles(aStyles)
       else {
         editor.beginTransaction();
         // make sure the element carries the user-selected class
+        className = gDialog.classPicker.value;
         if (!gCurrentElement.classList.contains(gDialog.classPicker.value)) {
           var c = (gCurrentElement.classList ? gCurrentElement.classList + " " : "") + className;
           editor.setAttribute(gCurrentElement, "class", className);
         }
-        className = gDialog.classPicker.value;
       }
       break;
 
