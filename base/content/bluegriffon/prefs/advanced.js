@@ -22,6 +22,7 @@ function OnAdvancedPaneLoad()
 	  while(availableLocales.hasMore()) {
   
 	    var locale = availableLocales.getNext();
+      var localeId = locale;
   
 	    var listitem = document.createElementNS(XUL_NS, "listitem");
 	    listitem.setAttribute("value", locale);
@@ -31,19 +32,19 @@ function OnAdvancedPaneLoad()
                          gDialog.bundleRegions.getString(match[3].toLowerCase()) + ")";
       }
 	    listitem.setAttribute("label", locale);
-  
-	    if (locale == selectedLocale) {
-	      // Is this the current locale?
-	      selectedItem = listitem;
-	    }
-  
+
 	    localeListbox.appendChild(listitem);
+      if (localeId == selectedLocale) {
+        // Is this the current locale?
+         setTimeout(function(a, b) {a.selectedItem = b}, 100, localeListbox, listitem);
+      }
+  
 	  }
 
-	  // Highlight current locale
-	  localeListbox.selectedItem = selectedItem;
 
 	} catch (err) {	}
+
+  setTimeout(SwitchToSystemLocale, 100, document.getElementById("matchOSRadiogroup"));
 }
 
 function changeLocale() {
@@ -51,12 +52,14 @@ function changeLocale() {
   try {
     // Which locale did the user select?
     var localeListbox = gDialog["locale-listbox"];
-    var newLocale = localeListbox.selectedItem.value;
-    
-    // Write preferred locale to local user config
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
-                    getService(Components.interfaces.nsIPrefBranch);
-    prefs.setCharPref("general.useragent.locale", newLocale);
+    if (localeListbox.selectedItem) {
+      var newLocale = localeListbox.selectedItem.value;
+      
+      // Write preferred locale to local user config
+      var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefBranch);
+      prefs.setCharPref("general.useragent.locale", newLocale);
+    }
     var main = window.opener;
     if (EditorUtils.getCurrentEditorElement())
       main.ToggleViewMode(main.gDialog.wysiwygModeButton);
@@ -79,4 +82,13 @@ function OpenNetworkParams()
 {
   document.documentElement.openSubDialog("chrome://bluegriffon/content/prefs/connection.xul",
                                          "", null);
+}
+
+function SwitchToSystemLocale(aElt)
+{
+  var listbox = document.getElementById("locale-listbox");
+  if (aElt.value == "true")
+    listbox.setAttribute("disabled", "true");
+  else
+    listbox.removeAttribute("disabled");
 }

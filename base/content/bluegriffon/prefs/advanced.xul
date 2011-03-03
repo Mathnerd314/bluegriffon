@@ -10,6 +10,10 @@
   xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="advancedPrefPane">
+    <preferences>
+      <preference id="pref-matchOS" name="intl.locale.matchOS" type="bool"/>
+    </preferences>
+
     <groupbox>
       <caption label="&network.caption;"/>
       <hbox align="center">
@@ -21,7 +25,13 @@
     </groupbox>
     <groupbox>
       <caption label="&ui.caption;"/>
-	    <listbox id="locale-listbox" rows="4"/>
+      <radiogroup id="matchOSRadiogroup"
+                  preference="pref-matchOS"
+                  oncommand="SwitchToSystemLocale(this)">
+        <radio label="&useSystemLocale.radio;" value="true"/>
+        <radio label="&useInstalledLocale.radio;" value="false"/>
+      </radiogroup>
+	    <listbox id="locale-listbox" rows="4" class="indent"/>
 	    <hbox>
         <spacer flex="1"/>
         <button label="&switchLocale.button;" oncommand="changeLocale()"/>
