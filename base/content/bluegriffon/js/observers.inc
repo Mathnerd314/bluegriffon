@@ -192,6 +192,20 @@ var BlueGriffonPrefsObserver = {
         tabeditor.setAttribute("tabmode", value);
       }
     }
+
+    else if (prefName == "bluegriffon.source.theme") {
+      var value = GetPrefs().getCharPref("bluegriffon.source.theme");
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var tabeditor = w.gDialog.tabeditor;
+        var panels = tabeditor.mTabpanels;
+        var decks = panels.childNodes;
+        for (var i = 0; i < decks.length; i++) {
+          decks[i].firstChild.contentWindow.useTheme(value);
+        }
+      }
+    }
   }
 };
 

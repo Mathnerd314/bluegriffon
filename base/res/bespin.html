@@ -37,12 +37,18 @@
     gTheme = aTheme;
   }
 
+  function useTheme(aTheme) {
+    if (gEditor)
+      gEditor.setTheme("ace/theme/" + aTheme);
+  }
+
   window.onload = function() {
       gEditor = ace.edit("editor");
-      gEditor.setTheme("ace/theme/" + gTheme);
+      useTheme(gTheme);
       
       var HTMLMode = require("ace/mode/html").Mode;
       gEditor.getSession().setMode(new HTMLMode());
+      gEditor.setShowInvisibles(true)
 
       var canon = require("pilot/canon");
       canon.removeCommand("findnext");

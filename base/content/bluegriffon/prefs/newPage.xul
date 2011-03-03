@@ -48,8 +48,6 @@
 	        <radio label="&darkTheme.label;" value="twilight"/>
 	        <radio label="&whiteTheme.label;" value="clouds"/>
 	      </radiogroup>
-	      <label value="&requiresRestart.label;"
-	             style="font-style: italic; font-size: smaller"/>
       </hbox>
     </groupbox>
   </prefpane>
