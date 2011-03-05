@@ -20,10 +20,8 @@
 <body>
 
 <pre id="editor"></pre>
-    
+<script src="resource://app/res/ace/themes-list.js" type="text/javascript" charset="utf-8"></script>
 <script src="resource://app/res/ace/ace-uncompressed.js" type="text/javascript" charset="utf-8"></script>
-<script src="resource://app/res/ace/theme-clouds.js" type="text/javascript" charset="utf-8"></script>
-<script src="resource://app/res/ace/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
 <script src="resource://app/res/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
 <script>
   var gEditor = null;
@@ -42,7 +40,18 @@
       gEditor.setTheme("ace/theme/" + aTheme);
   }
 
+  var head = document.querySelector("head");
+  for (var i = 0; i < kTHEMES.length; i++) {
+    var s = document.createElement("script");
+    s.setAttribute("type", "text/javascript");
+    s.setAttribute("charset", "utf-8");
+    s.setAttribute("src", "resource://app/res/ace/theme-" + kTHEMES[i] + ".js");
+    head.appendChild(s);
+  }
+
   window.onload = function() {
+
+
       gEditor = ace.edit("editor");
       useTheme(gTheme);
       
@@ -58,6 +67,5 @@
       canon.removeCommand("gotoline");
   };
 </script>
-
 </body>
 </html>

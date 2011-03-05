@@ -99,7 +99,8 @@ _ACE_RESOURCE_FILES = \
 	$(srcdir)/res/ace/theme-monokai.js \
 	$(srcdir)/res/ace/theme-pastel_on_dark.js \
 	$(srcdir)/res/ace/theme-twilight.js \
-	$(srcdir)/res/ace/worker-javascript.js \
+  $(srcdir)/res/ace/worker-javascript.js \
+  $(srcdir)/res/ace/themes-list.js \
 	$(NULL)
 
 libs::

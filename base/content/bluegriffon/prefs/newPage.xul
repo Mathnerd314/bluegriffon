@@ -41,15 +41,14 @@
       <caption label="&source.label;"/>
       <hbox align="center">
         <label value="&theme.label;"/>
-	      <radiogroup align="center"
-	                  id="sourceThemeRadioGroup"
-	                  preference="pref-source-theme"
-	                  orient="horizontal">
-	        <radio label="&darkTheme.label;" value="twilight"/>
-	        <radio label="&whiteTheme.label;" value="clouds"/>
-	      </radiogroup>
+        <menulist id="sourceThemeMenulist"
+                  preference="pref-source-theme">
+          <menupopup id="sourceThemeMenupopup"/>
+        </menulist>
       </hbox>
     </groupbox>
   </prefpane>
+
+  <script type="application/javascript" src="resource://app/res/ace/themes-list.js"/>
 
 </overlay>

@@ -4,6 +4,16 @@ function OnNewPagePaneLoad()
   var zoom = Math.floor(parseFloat(GetPrefs().getCharPref("bluegriffon.zoom.default")) * 100);
   gDialog.zoomScale.value = zoom;
   OnScaleChange(false);
+
+  var elt = document.getElementById("sourceThemeMenupopup");
+  for (var i = 0; i < kTHEMES.length; i++) {
+    var s = document.createElement("menuitem");
+    s.setAttribute("label", kTHEMES[i]);
+    s.setAttribute("value", kTHEMES[i]);
+    elt.appendChild(s);
+  }
+  var currentTheme = GetPrefs().getCharPref("bluegriffon.source.theme");
+  document.getElementById("sourceThemeMenulist").value = currentTheme;
 }
 
 function OnScaleChange(aChangePref)
