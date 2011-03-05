@@ -25,6 +25,7 @@
 <script src="resource://app/res/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
 <script>
   var gEditor = null;
+  var gTheme  = "clouds";
 
   function getEditableElement() {
     return document.getElementById("editor");
@@ -36,8 +37,16 @@
   }
 
   function useTheme(aTheme) {
-    if (gEditor)
+    if (gEditor) {
       gEditor.setTheme("ace/theme/" + aTheme);
+      if (aTheme != gTheme)
+        gTheme = aTheme;
+    }
+  }
+
+  function getCurrentTheme()
+  {
+    return gTheme;
   }
 
   var head = document.querySelector("head");
@@ -50,21 +59,19 @@
   }
 
   window.onload = function() {
+    gEditor = ace.edit("editor");
+    useTheme(gTheme);
+    
+    var HTMLMode = require("ace/mode/html").Mode;
+    gEditor.getSession().setMode(new HTMLMode());
+    gEditor.setShowInvisibles(true)
 
-
-      gEditor = ace.edit("editor");
-      useTheme(gTheme);
-      
-      var HTMLMode = require("ace/mode/html").Mode;
-      gEditor.getSession().setMode(new HTMLMode());
-      gEditor.setShowInvisibles(true)
-
-      var canon = require("pilot/canon");
-      canon.removeCommand("findnext");
-      canon.removeCommand("findprevious");
-      canon.removeCommand("find");
-      canon.removeCommand("replace");
-      canon.removeCommand("gotoline");
+    var canon = require("pilot/canon");
+    canon.removeCommand("findnext");
+    canon.removeCommand("findprevious");
+    canon.removeCommand("find");
+    canon.removeCommand("replace");
+    canon.removeCommand("gotoline");
   };
 </script>
 </body>

@@ -82,6 +82,15 @@
         </menu>
         <menuitem label="&viewStatusbar.label;"
                   oncommand="BGToolbarManager.goToggleToolbar('statusbar')" />
+        <menu label="&source.label;" observes="cmd_renderedSourceEnabler">
+          <menupopup>
+            <menu label="&theme.label;">
+              <menupopup id="themesMenupopup"
+                         onpopupshowing="FillAceThemesMenupopup()"
+                         oncommand="UseAceTheme(event)"/>
+            </menu>
+          </menupopup>
+        </menu>
       </menupopup>
     </menu>
 

@@ -20,6 +20,26 @@ var cmdDummyHTML =
 
 };
 
+var cmdDummySource =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            !EditorUtils.activeViewActive);
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    // do nothing
+  }
+
+};
+
 var cmdViewModeEnabler =
 {
   isCommandEnabled: function(aCommand, dummy)

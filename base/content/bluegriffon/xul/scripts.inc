@@ -23,5 +23,6 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/rotate.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/cssRotations.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/html5.js"/>
+  <script type="application/javascript" src="resource://app/res/ace/themes-list.js"/>
 
   <script type="application/javascript" src="chrome://venkman/content/venkman-overlay.js"/>

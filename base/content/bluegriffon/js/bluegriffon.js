@@ -1553,3 +1553,26 @@ function MarkSelectionInAce(aAceEditor)
                                 end:   { row: endRow,   column: endColumn } });
                                 
 }
+
+function FillAceThemesMenupopup()
+{
+  deleteAllChildren(gDialog.themesMenupopup);
+  var aceIframe = EditorUtils.getCurrentSourceEditorElement();
+  var currentTheme = aceIframe.contentWindow.getCurrentTheme();
+  for (var i = 0; i < kTHEMES.length; i++) {
+    var s = document.createElement("menuitem");
+    s.setAttribute("label", kTHEMES[i]);
+    s.setAttribute("value", kTHEMES[i]);
+    s.setAttribute("type", "checkbox");
+    if (kTHEMES[i] == currentTheme)
+      s.setAttribute("checked", "true");
+    gDialog.themesMenupopup.appendChild(s);
+  }
+}
+
+function UseAceTheme(aEvent)
+{
+  var theme = aEvent.originalTarget.getAttribute("value");
+  var aceIframe = EditorUtils.getCurrentSourceEditorElement();
+  aceIframe.contentWindow.useTheme(theme);
+}
