@@ -673,6 +673,9 @@ function GetCurrentViewMode()
 
 function ToggleViewMode(aElement)
 {
+  if (!aElement) // sanity case
+    return;
+
   var mode =  aElement.getAttribute("value");
   if (mode == GetCurrentViewMode())
     return;
@@ -897,7 +900,7 @@ function doSaveTabsBeforeQuit()
   var tabeditor = EditorUtils.getCurrentTabEditor();
   if (!tabeditor)
     return true;
-  var tabs      = tabeditor.mTabs.childNodes;
+  var tabs = tabeditor.mTabs.childNodes;
   var l = tabs.length;
   for (var i = l-1; i >= 0; i--) {
     var tab = tabs.item(i);
