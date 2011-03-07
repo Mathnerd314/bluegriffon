@@ -76,12 +76,12 @@
                   observes="cmd_renderedHTMLEnabler"
                   oncommand="ToggleAllTagsMode()"/>
         <menuseparator/>
-        <menu label="&viewToolbars.label;">
+        <!--menu label="&viewToolbars.label;">
           <menupopup id="viewToolbarsPopup"
                      onpopupshowing="BGToolbarManager.listToolbars(this)"/>
         </menu>
         <menuitem label="&viewStatusbar.label;"
-                  oncommand="BGToolbarManager.goToggleToolbar('statusbar')" />
+                  oncommand="BGToolbarManager.goToggleToolbar('statusbar')" /-->
         <menu label="&source.label;" observes="cmd_renderedSourceEnabler">
           <menupopup>
             <menu label="&theme.label;">
@@ -100,7 +100,7 @@
                   command="cmd_image"
                   accesskey="&imageToolbarCmd.key;"/>
         <menuitem label="&tableToolbarCmd.label;"
-                  command="cmd_table"
+                  command="cmd_InsertTable"
                   accesskey="&tableToolbarCmd.key;"/>
         <menuitem label="&linkToolbarCmd.label;"
                   command="cmd_link"
