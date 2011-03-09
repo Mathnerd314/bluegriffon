@@ -1148,3 +1148,24 @@ diInsertNodeBeforeTxn.prototype = {
   }
 };
 
+function collectDescendants(aNode)
+{
+  var rv = [];
+  _collectDescendants(rv, aNode, 0, arguments);
+  return rv;
+}
+
+function _collectDescendants(aRv, aNode, aIndex, aArgs)
+{
+  if (aNode) {
+    for (var i = 0; i < aNode.childNodes.length; i++) {
+      var c = aNode.childNodes[i];
+      if (c.nodeName == aArgs[aIndex]) {
+        if (aIndex == aArgs.length - 1)
+          aRv.push(c);
+        else
+          _collectDescendants(aRv, c, aIndex + 1, aArgs);
+      }
+    }
+  }
+}

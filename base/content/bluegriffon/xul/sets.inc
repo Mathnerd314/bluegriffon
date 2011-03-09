@@ -130,6 +130,8 @@
   <command id="cmd_id"           state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_id', event.target.value)"/>
   <command id="cmd_ariaRole"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"/>
   <command id="cmd_renderedHTMLEnabler"/>
+  <command id="cmd_renderedSourceEnabler"/>
+  <command id="cmd_renderedAllEnabler"/>
   <command id="cmd_viewModeEnabler"/>
   <command id="cmd_ul"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ul')"/>
   <command id="cmd_ol"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ol')"/>

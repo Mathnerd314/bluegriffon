@@ -27,6 +27,27 @@ var cmdDummySource =
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
             EditorUtils.isEditingRenderedHTML() &&
+            !EditorUtils.activeViewActive  &&
+            GetCurrentViewMode() == "source");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    // do nothing
+  }
+
+};
+
+var cmdDummyAll =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
             !EditorUtils.activeViewActive);
   },
 

@@ -178,7 +178,7 @@
   <statusbar id="statusbar">
     <deck flex="1" id="statusbarDeck">
       <hbox id="editorBar" align="center">
-        <label id="editorBarLabel" value="Get add-ons!"
+        <label id="editorBarLabel" value="&getAddOns.label;"
                onclick="OpenAddonsSite()"/>
         <spacer flex="1"/>
         <statusbarpanel id="zoomPanel">

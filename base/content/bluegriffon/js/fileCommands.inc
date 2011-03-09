@@ -41,20 +41,20 @@ var cmdSave =
     var result = false;
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
-    try {
-      if (gDialog.wysiwygModeButton)
-        ToggleViewMode(gDialog.wysiwygModeButton);
-      // for the time being, we use the HTML serializer
-
-      result = FileUtils.saveDocument(
-                 UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
-                 false,
-                 EditorUtils.getCurrentDocumentMimeType());
-      window.content.focus();
-      if (result)
-        StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
-    }
-    catch (e) {}
+      try {
+        if (gDialog.wysiwygModeButton)
+          ToggleViewMode(gDialog.wysiwygModeButton);
+        // for the time being, we use the HTML serializer
+  
+        result = FileUtils.saveDocument(
+                   UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
+                   false,
+                   EditorUtils.getCurrentDocumentMimeType());
+        window.content.focus();
+        if (result)
+          StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
+      }
+      catch (e) {}
     return result;
   }
 }

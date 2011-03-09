@@ -131,10 +131,12 @@ function OpenFile(aURL, aInTab)
 
   // force new window if we don't have one already
   var tabeditor = document.getElementById("tabeditor");
-  if (tabeditor && aInTab)
+  if (tabeditor && aInTab) {
     document.getElementById("tabeditor").addEditor(
          UrlUtils.stripUsernamePassword(aURL, null, null),
          aURL);
+    gDialog.structurebar.removeAttribute("class");
+  }
   else
     OpenNewWindow(aURL);
 }
@@ -870,6 +872,8 @@ function doCloseTab(aTab)
     tabbox.parentNode.mHruler.setAttribute("disabled", "true");
     tabbox.parentNode.mVruler.setAttribute("disabled", "true");
     tabbox.parentNode.setAttribute("visibility", "hidden");
+    if (gDialog.structurebar)
+      gDialog.structurebar.className = "hidden";
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");

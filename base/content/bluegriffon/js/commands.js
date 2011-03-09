@@ -300,8 +300,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
     commandTable.registerCommand("cmd_newWizard",   cmdNewWizard);
-    commandTable.registerCommand("cmd_renderedHTMLEnabler",  cmdDummyHTML);
+    commandTable.registerCommand("cmd_renderedHTMLEnabler",    cmdDummyHTML);
     commandTable.registerCommand("cmd_renderedSourceEnabler",  cmdDummySource);
+    commandTable.registerCommand("cmd_renderedAllEnabler",     cmdDummyAll);
     commandTable.registerCommand("cmd_viewModeEnabler", cmdViewModeEnabler);
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
     commandTable.registerCommand("cmd_browse",      cmdBrowseCommand);
