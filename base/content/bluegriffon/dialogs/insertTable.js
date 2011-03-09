@@ -186,25 +186,31 @@ function InitTableData(aNode)
   }
   gDialog.heightMenulist.value = h;
 
-  var rows = gTable.querySelectorAll("tbody > tr");
+  //var rows = gTable.querySelectorAll("tbody > tr");
+  var rows = collectDescendants(gTable, "tbody", "tr");
   gDialog.tableRowsTextbox.value = rows.length;
   gRows = rows.length;
   var columns = 0;
   for (var i = 0; i < rows.length; i++) {
-    columns = Math.max(columns, rows[i].querySelectorAll("td,th").length);
+    //columns = Math.max(columns, rows[i].querySelectorAll("td,th").length);
+    columns = Math.max(columns, collectDescendants(rows[i], "td").length + collectDescendants(rows[i], "th").length);
   }
   gDialog.tableColumnsTextbox.value = columns;
   gColumns = columns;
 
-  var headerRows = gTable.querySelectorAll("thead > tr");
+  //var headerRows = gTable.querySelectorAll("thead > tr");
+  var headerRows = collectDescendants(gTable, "thead", "tr");
   gRowsInHeader = headerRows ? headerRows.length : 0;
   gDialog.rowsInHeaderTextbox.value = gRowsInHeader;
-  gDialog.onlyHeaderCellsInHeaderCheckbox.checked = gRowsInHeader && !gTable.querySelector("thead > tr > td");
+  //gDialog.onlyHeaderCellsInHeaderCheckbox.checked = gRowsInHeader && !gTable.querySelector("thead > tr > td");
+  gDialog.onlyHeaderCellsInHeaderCheckbox.checked = gRowsInHeader && !collectFirstDescendant(gTable, "thead", "tr", "td");
 
-  var footerRows = gTable.querySelectorAll("tfoot > tr");
+  //var footerRows = gTable.querySelectorAll("tfoot > tr");
+  var footerRows = collectDescendants(gTable, "tfoot", "tr");
   gRowsInFooter = footerRows ? footerRows.length : 0;
   gDialog.rowsInFooterTextbox.value = gRowsInFooter;
-  gDialog.onlyHeaderCellsInFooterCheckbox.checked = gRowsInFooter && !gTable.querySelector("tfoot > tr > td");
+  gDialog.onlyHeaderCellsInFooterCheckbox.checked = gRowsInFooter && !collectFirstDescendant(gTable, "tfoot", "tr", "td");
+  //gDialog.onlyHeaderCellsInFooterCheckbox.checked = gRowsInFooter && !gTable.querySelector("tfoot > tr > td");
 
   var border = gTable.getAttribute("border");
   border = border ? border : 0;
@@ -244,7 +250,8 @@ function ValidateData(aTabValue)
 	      editor.doTransaction(txn);
 	      txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
 	      editor.doTransaction(txn);
-	      var header = gTable.querySelector("thead");
+	      //var header = gTable.querySelector("thead");
+        var header = collectFirstDescendant(gTable, "thead");
 	      if (!parseInt(gDialog.rowsInHeaderTextbox.value)) {
 	        // delete the header if it exists...
 	        if (header)
@@ -255,14 +262,16 @@ function ValidateData(aTabValue)
 	        if (!header) {
 	          // ah, we need to create the header first...
 	          header = editor.document.createElement("thead");
-	          var where = gTable.querySelector("tfoot") || gTable.querySelector("tbody");
+            //var where = gTable.querySelector("tfoot") || gTable.querySelector("tbody");
+            var where = collectFirstDescendant(gTable, "tfoot") || collectFirstDescendant(gTable, "tbody");
 			      txn = new diInsertNodeBeforeTxn(header, gTable, where);
 			      editor.doTransaction(txn);
 	        }
 	        UpdateListOfRows(header, gRowsInHeader, gDialog.rowsInHeaderTextbox.value,
 	                         gDialog.onlyHeaderCellsInHeaderCheckbox.checked ? "th" : "td");
 	      }
-	      var footer = gTable.querySelector("tfoot");
+        //var footer = gTable.querySelector("tfoot");
+        var footer = collectFirstDescendant(gTable, "tfoot");
 	      if (!parseInt(gDialog.rowsInFooterTextbox.value)) {
 	        // delete the header if it exists...
 	        if (footer)
@@ -273,7 +282,8 @@ function ValidateData(aTabValue)
 	        if (!footer) {
 	          // ah, we need to create the header first...
 	          footer = editor.document.createElement("tfoot");
-	          var where = gTable.querySelector("tbody");
+            //var where = gTable.querySelector("tbody");
+            var where = collectFirstDescendant(gTable, "tbody");
 	          txn = new diInsertNodeBeforeTxn(footer, gTable, where);
 	          editor.doTransaction(txn);
 	        }
@@ -281,7 +291,7 @@ function ValidateData(aTabValue)
 	                         gDialog.onlyHeaderCellsInFooterCheckbox.checked ? "th" : "td");
 	      }
 	
-	      UpdateListOfRows(gTable.querySelector("tbody"), gRows, gDialog.tableRowsTextbox.value,
+	      UpdateListOfRows(collectFirstDescendant(gTable, "tbody"), gRows, gDialog.tableRowsTextbox.value,
 	                       "td");
 	      break;
 	
@@ -349,7 +359,8 @@ function UpdateListOfRows(aElement, aOldRows, aNewRows, aCellTag)
   }
 
   // browse the existing rows
-  var rows = aElement.querySelectorAll("tr");
+  //var rows = aElement.querySelectorAll("tr");
+  var rows = collectDescendants(aElement, "tr");
   for (var i = 0; i < aOldRows; i++) {
     var row = rows[i];
     var cellCount = 0;
@@ -573,7 +584,8 @@ function UpdateColumns(editor)
         return; // uuuh well should never happen
 
       // find all the rows in the enclosing element
-      var rows = enclosing.querySelectorAll("tr");
+      //var rows = enclosing.querySelectorAll("tr");
+      var rows = collectDescendants(enclosing, "tr");
       for (var j = 0; j < rows.length; j++) {
         // we have to count to find the nth cell
         child = rows[j].firstElementChild;
@@ -725,7 +737,8 @@ function GetCurrentCellFromSelection()
 
 function GetNumberOfColumnsInSection(section)
 {
-  var rows = section.querySelectorAll("tr");
+  //var rows = section.querySelectorAll("tr");
+  var rows = collectDescendants(section, "tr");
   var n = 0;
   for (var i = 0; i < rows.length; i++) {
     var m = 0;
@@ -770,16 +783,16 @@ function NextColumn()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("tbody")
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "tbody")
         break;
       case "tbody":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tfoot") ||
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tfoot") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("tbody"); // always exists
+        newSection = collectFirstDescendant(tableElement, "tbody"); // always exists
         break;
     }
     if (newSection) { // sanity check
@@ -788,7 +801,8 @@ function NextColumn()
     }
     else return;
   }
-  var rows = section.querySelectorAll("tr");
+  //var rows = section.querySelectorAll("tr");
+  var rows = collectDescendants(section, "tr");
   var columnsCells = [];
   for (var j = 0; j < rows.length; j++) {
     // we have to count to find the nth cell
@@ -840,16 +854,16 @@ function NextRow()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tbody"); // must exist...
+        newSection = collectFirstDescendant(tableElement, "tbody"); // must exist...
         break;
       case "tbody":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("thead") ||
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "thead") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tbody");
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tbody");
         break;
     }
     if (newSection) { // sanity check
@@ -857,7 +871,8 @@ function NextRow()
     }
   }
   var editor = EditorUtils.getCurrentEditor();
-  var cells = row.querySelectorAll("td,th");
+  //var cells = row.querySelectorAll("td,th");
+  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {
@@ -888,16 +903,16 @@ function NextCell()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tbody"); // must exist...
+        newSection = collectFirstDescendant(tableElement, "tbody"); // must exist...
         break;
       case "tbody":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("thead") ||
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "thead") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tbody");
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tbody");
         break;
     }
     if (newSection) { // sanity check
@@ -954,16 +969,16 @@ function PreviousCell()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("tbody")
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "tbody")
         break;
       case "tbody":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tfoot") ||
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tfoot") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("tbody"); // always exists
+        newSection = collectFirstDescendant(tableElement, "tbody"); // always exists
         break;
     }
     if (newSection) { // sanity check
@@ -994,16 +1009,16 @@ function PreviousRow()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("tbody")
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "tbody")
         break;
       case "tbody":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tfoot") ||
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tfoot") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("tbody"); // always exists
+        newSection = collectFirstDescendant(tableElement, "tbody"); // always exists
         break;
     }
     if (newSection) { // sanity check
@@ -1011,7 +1026,8 @@ function PreviousRow()
     }
   }
   var editor = EditorUtils.getCurrentEditor();
-  var cells = row.querySelectorAll("td,th");
+  //var cells = row.querySelectorAll("td,th");
+  var cells = collectDescendants(row, "td").join(collectDescendants(row, "th"));
   var selection = editor.selection;
   selection.removeAllRanges();
   for (var i = 0; i < cells.length; i++) {
@@ -1050,16 +1066,16 @@ function PreviousColumn()
     var newSection;
     switch (sectionName) {
       case "thead":
-        newSection = tableElement.querySelector("tfoot") ||
-                     tableElement.querySelector("tbody")
+        newSection = collectFirstDescendant(tableElement, "tfoot") ||
+                     collectFirstDescendant(tableElement, "tbody")
         break;
       case "tbody":
-        newSection = tableElement.querySelector("thead") ||
-                     tableElement.querySelector("tfoot") ||
+        newSection = collectFirstDescendant(tableElement, "thead") ||
+                     collectFirstDescendant(tableElement, "tfoot") ||
                      section;
         break;
       case "tfoot":
-        newSection = tableElement.querySelector("tbody"); // always exists
+        newSection = collectFirstDescendant(tableElement, "tbody"); // always exists
         break;
     }
     if (newSection) { // sanity check
@@ -1068,7 +1084,8 @@ function PreviousColumn()
     }
     else return;
   }
-  var rows = section.querySelectorAll("tr");
+  //var rows = section.querySelectorAll("tr");
+  var rows = collectDescendants(section, "tr");
   var columnsCells = [];
   for (var j = 0; j < rows.length; j++) {
     // we have to count to find the nth cell
@@ -1151,8 +1168,17 @@ diInsertNodeBeforeTxn.prototype = {
 function collectDescendants(aNode)
 {
   var rv = [];
-  _collectDescendants(rv, aNode, 0, arguments);
+  _collectDescendants(rv, aNode, 1, arguments);
   return rv;
+}
+
+function collectFirstDescendant(aNode)
+{
+  var rv = [];
+  _collectDescendants(rv, aNode, 1, arguments);
+  if (rv.length)
+    return rv[0];
+  return null;
 }
 
 function _collectDescendants(aRv, aNode, aIndex, aArgs)
@@ -1167,5 +1193,6 @@ function _collectDescendants(aRv, aNode, aIndex, aArgs)
           _collectDescendants(aRv, c, aIndex + 1, aArgs);
       }
     }
+    return null;
   }
 }
