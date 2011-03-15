@@ -35,17 +35,20 @@ function InitDialog()
          url.substr(0,8) == "https://" ||
          url.substr(0,6) == "ftp://" ||
          url.substr(0,7) == "file://");
+    gDialog.urlMenulist.focus();
   }
   else {
     gCollapsedSelection = gEditor.selection.isCollapsed;
     if (gCollapsedSelection) {
-	    gDialog.linkTextbox.hidden = false;
-	    gDialog.linkLabel.hidden = true;
+      gDialog.linkTextbox.hidden = false;
+      gDialog.linkLabel.hidden = true;
+      gDialog.linkTextbox.focus();
     }
     else {
-	    gDialog.linkTextbox.hidden = true;
-	    gDialog.linkLabel.hidden = false;
+      gDialog.linkTextbox.hidden = true;
+      gDialog.linkLabel.hidden = false;
       gDialog.linkLabel.setAttribute("value", GetSelectionAsText().trim());
+      gDialog.urlMenulist.focus();
     }
   }
 

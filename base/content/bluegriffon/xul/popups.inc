@@ -152,6 +152,10 @@
               label="&copyHTMLCodeCmd.label;"
               observes="cmd_copyHTMLCode"/>
     <menuseparator id="separator_before_cMenu_gotoLink" />
+    <menuitem id="cMenu_insertLink"
+              label="&cMenu_insertLink.label;"
+              accesskey="&cMenu_insertLink.accesskey;"
+              observes="cmd_link"/>
     <menuitem id="cMenu_gotoLink" label="&gotoLink.label;" observes="cmd_gotoLink"/>
     <menuseparator id="separator_before_ctableInsertMenu"/>
     <menu id="ctableInsertMenu" label="&tableInsertMenu2.label;" accesskey="&tableinsertmenu.accesskey;">
