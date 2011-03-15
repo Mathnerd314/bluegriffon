@@ -238,6 +238,11 @@ var BGUpdateManager = {
             window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
             return;
           }
+          else if (parseInt(a) > parseInt(c)) {
+            if ("BlueGriffonIsUpToDate" in window)
+              BlueGriffonIsUpToDate();
+            return;
+          }
         }
         if ("BlueGriffonIsUpToDate" in window)
           BlueGriffonIsUpToDate();
