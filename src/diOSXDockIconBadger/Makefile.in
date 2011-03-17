@@ -1,0 +1,42 @@
+
+DEPTH		= ../../..
+topsrcdir	= @top_srcdir@
+srcdir		= @srcdir@
+VPATH		= @srcdir@
+
+include $(DEPTH)/config/autoconf.mk
+
+MODULE		= diOSXDockIconBadger
+LIBRARY_NAME	= macinteg
+#LIBXUL_LIBRARY  = 1
+EXPORT_LIBRARY	= 1
+IS_COMPONENT	= 1
+MODULE_NAME	= diOSXDockIconBadger
+
+XPIDLSRCS	= \
+		diIOSXDockIconBadger.idl \
+		$(NULL)
+
+EXPORTS		= \
+		diOSXDockIconBadgerCIID.h \
+		$(NULL)
+
+CMMSRCS         = diOSXDockIconBadger.mm
+
+CPPSRCS   = \
+    diOSXDockIconBadgerFactory.cpp \
+    $(NULL)
+
+EXTRA_DSO_LDOPTS = \
+    -framework Carbon \
+    $(XPCOM_GLUE_LDOPTS) \
+    $(NSPR_LIBS) \
+		$(LIBS_DIRS) \
+		$(MOZ_UNICHARUTIL_LIBS) \
+		$(MOZ_COMPONENT_LIBS) \
+		$(NULL)
+
+EXTRA_COMPONENTS = dibadge.manifest
+
+include $(topsrcdir)/config/rules.mk
+
