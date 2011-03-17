@@ -82,6 +82,7 @@ var gEditorDocumentObserver =
 
 #ifdef XP_MACOSX
         gDialog.tabeditor.updateOSXCloseButton();
+        UpdateBadge();
 #endif
         // TBD : 1. update web navigation commands
         //       2. DONE
@@ -208,6 +209,13 @@ var BlueGriffonPrefsObserver = {
           decks[i].firstChild.contentWindow.useTheme(value);
         }
       }
+    }
+    else if (prefName == "bluegriffon.osx.dock-integration") {
+      var value = GetPrefs().getBoolPref("bluegriffon.osx.dock-integration");
+      if (value)
+        UpdateBadge();
+      else
+        ResetBadge();
     }
   }
 };

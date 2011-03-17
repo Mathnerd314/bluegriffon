@@ -597,6 +597,23 @@
         </body>
       </method>
 
+      <method name="getNumberOfModifiedDocuments">
+        <parameter name="val" />
+        <body>
+        <![CDATA[
+          var tabs = this.mTabs.childNodes;
+          var n = 0;
+          for (var i = 0; i < tabs.length; i++) {
+            var tab = tabs.item(i)
+            if (tab.hasAttribute("modified"))
+              n++;
+          }
+
+          return n;
+        ]]>
+        </body>
+      </method>
+
       <method name="updateOSXCloseButton">
         <body>
         <![CDATA[
@@ -606,14 +623,8 @@
           var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
                                  .createInstance(Components.interfaces.diIOSXDockIconBadger);
           var tabs      = this.mTabs.childNodes;
-          for (var i = 0; i < tabs.length; i++) {
-            var tab = tabs.item(i)
-            if (tab.hasAttribute("modified")) {
-              badger.setDocumentEdited(baseWindow, true);
-              return;
-            }
-          }
-          badger.setDocumentEdited(baseWindow, false);
+          var modifiedDocuments = this.getNumberOfModifiedDocuments(); 
+          badger.setDocumentEdited(baseWindow, (0 != modifiedDocuments));
         ]]>
         </body>
       </method>

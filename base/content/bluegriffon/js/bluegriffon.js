@@ -878,6 +878,7 @@ function doCloseTab(aTab)
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
   gDialog.tabeditor.updateOSXCloseButton();
+  UpdateBadge();
 }
 
 function SetLocationDB()
@@ -1582,3 +1583,34 @@ function UseAceTheme(aEvent)
   var aceIframe = EditorUtils.getCurrentSourceEditorElement();
   aceIframe.contentWindow.useTheme(theme);
 }
+
+#ifdef XP_MACOSX
+function UpdateBadge()
+{
+  var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+  var n = 0;
+  while (windowEnumerator.hasMoreElements()) {
+    var w = windowEnumerator.getNext();
+    n += w.gDialog.tabeditor.getNumberOfModifiedDocuments();
+  }
+  var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                         .getInterface(Components.interfaces.nsIWebNavigation)
+                         .QueryInterface(Components.interfaces.nsIBaseWindow);
+  var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
+                         .createInstance(Components.interfaces.diIOSXDockIconBadger);
+  if (n)
+    badger.setIconValue(n);
+  else
+    badger.restoreIcon();
+}
+
+function ResetBadge()
+{
+  var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                         .getInterface(Components.interfaces.nsIWebNavigation)
+                         .QueryInterface(Components.interfaces.nsIBaseWindow);
+  var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
+                         .createInstance(Components.interfaces.diIOSXDockIconBadger);
+  badger.restoreIcon();
+}
+#endif

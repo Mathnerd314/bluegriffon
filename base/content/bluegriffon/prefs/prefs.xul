@@ -47,12 +47,23 @@
             image="chrome://bluegriffon/skin/prefs/advanced.png"
             src="chrome://bluegriffon/content/prefs/advanced.xul"/>
 
+#ifdef XP_MACOSX
+  <prefpane id="osxPrefPane"
+            label="&osx.title;"
+            onpaneload="OnOSXPaneLoad()"
+            image="chrome://bluegriffon/skin/prefs/macosx.png"
+            src="chrome://bluegriffon/content/prefs/osx.xul"/>
+#endif
+
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/prefs.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/newPage.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/styles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
+#ifdef XP_MACOSX
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/osx.js"/>
+#endif
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
 
