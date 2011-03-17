@@ -80,6 +80,9 @@ var gEditorDocumentObserver =
       case "cmd_setDocumentModified":
         gDialog.tabeditor.showCurrentTabAsModified(EditorUtils.isDocumentModified());    // || IsHTMLSourceChanged());
 
+#ifdef XP_MACOSX
+        gDialog.tabeditor.updateOSXCloseButton();
+#endif
         // TBD : 1. update web navigation commands
         //       2. DONE
 

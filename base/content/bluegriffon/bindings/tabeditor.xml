@@ -597,6 +597,27 @@
         </body>
       </method>
 
+      <method name="updateOSXCloseButton">
+        <body>
+        <![CDATA[
+          var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                                 .getInterface(Components.interfaces.nsIWebNavigation)
+                                 .QueryInterface(Components.interfaces.nsIBaseWindow);
+          var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
+                                 .createInstance(Components.interfaces.diIOSXDockIconBadger);
+          var tabs      = this.mTabs.childNodes;
+          for (var i = 0; i < tabs.length; i++) {
+            var tab = tabs.item(i)
+            if (tab.hasAttribute("modified")) {
+              badger.setDocumentEdited(baseWindow, true);
+              return;
+            }
+          }
+          badger.setDocumentEdited(baseWindow, false);
+        ]]>
+        </body>
+      </method>
+
     </implementation>
 
   </binding>

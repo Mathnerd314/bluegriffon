@@ -877,6 +877,7 @@ function doCloseTab(aTab)
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
+  gDialog.tabeditor.updateOSXCloseButton();
 }
 
 function SetLocationDB()
