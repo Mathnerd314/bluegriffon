@@ -622,7 +622,6 @@
                                  .QueryInterface(Components.interfaces.nsIBaseWindow);
           var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
                                  .createInstance(Components.interfaces.diIOSXDockIconBadger);
-          var tabs      = this.mTabs.childNodes;
           var modifiedDocuments = this.getNumberOfModifiedDocuments(); 
           badger.setDocumentEdited(baseWindow, (0 != modifiedDocuments));
         ]]>

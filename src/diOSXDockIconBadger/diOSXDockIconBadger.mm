@@ -85,8 +85,6 @@ diOSXDockIconBadger::SetDocumentEdited(nsIBaseWindow *aWindow, PRBool aIsEdited)
     NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
     [cocoaWindow setDocumentEdited:aIsEdited];
   }
-  else
-    SetIconValue(127);
   return NS_OK;
 }
 
