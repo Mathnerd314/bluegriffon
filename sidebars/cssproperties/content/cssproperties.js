@@ -190,6 +190,8 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   if (item)
     gDialog.classPicker.selectedItem = item;
 
+  gDialog.typePicker.setAttribute("value", gCurrentElement.nodeName);
+
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
   var state;
@@ -218,9 +220,21 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 function onCssPolicyChange(aElt)
 {
   var cssPolicy = aElt.value;
-  gDialog.classPicker.hidden = (cssPolicy !="class");
-  if (cssPolicy == "class")
-    gDialog.classPicker.focus();
+  switch (cssPolicy) {
+    case "class":
+      gDialog.classPicker.hidden = false;
+      gDialog.typePicker.hidden  = true;
+      gDialog.classPicker.focus();
+      break;
+    case "id":
+      gDialog.classPicker.hidden = true;
+      gDialog.typePicker.hidden  = true;
+      break;
+    case "type":
+      gDialog.classPicker.hidden = true;
+      gDialog.typePicker.hidden  = false;
+      break;
+  }
 }
 
 function ToggleSection(aEvent, header)
@@ -293,8 +307,8 @@ function ApplyStyles(aStyles)
 {
   var className;
   var editor = EditorUtils.getCurrentEditor();
-  if (gDialog.hoverStateCheckbox.checked)
-    gDialog.cssPolicyMenulist.value = "id";
+  /*if (gDialog.hoverStateCheckbox.checked)
+    gDialog.cssPolicyMenulist.value = "id";*/
   var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
@@ -380,6 +394,11 @@ function ApplyStyles(aStyles)
       case "class":
           ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
                                          ".", "\\.", className);
+        break;
+
+      case "type":
+          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
+                                         "", "", gCurrentElement.nodeName);
         break;
       default:
         break;
@@ -900,8 +919,8 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 
 function ToggleHover(aElt)
 {
-  if (aElt.checked)
+  /*if (aElt.checked)
     gDialog.cssPolicyMenulist.value = "id";
   var node = gCurrentElement;
-  SelectionChanged(null, node, null);
+  SelectionChanged(null, node, null);*/
 }

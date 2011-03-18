@@ -371,8 +371,9 @@
       <hbox id="cssPolicyBox" align="center">
         <menulist id="cssPolicyMenulist" oncommand="onCssPolicyChange(this)">
           <menupopup>
-            <menuitem label="&modifyID.label;" value="id"/>
-            <menuitem label="&modifyClass.label;" value="class"/>
+            <menuitem label="&modifyID.label;"        value="id"/>
+            <menuitem label="&modifyClass.label;"     value="class"/>
+            <menuitem label="&allOfType.label;"       value="type"/>
             <menuseparator/>
             <menuitem label="&useInlineStyles.label;" value="inline"/>
           </menupopup>
@@ -381,6 +382,7 @@
           <menupopup id="classPickerPopup"/>
         </menulist>
         <textbox id="IDPicker" hidden="true"/>
+        <textbox id="typePicker" disabled="true" hidden="true"/>
       </hbox>
       <hbox class="indent">
         <checkbox label="&hoverState.label;"
