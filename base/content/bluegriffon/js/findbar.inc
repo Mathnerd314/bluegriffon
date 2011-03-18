@@ -208,9 +208,23 @@ function BespinReplaceAndFind()
 
 function BespinReplaceAll()
 {
-  var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
-  var bespinEditor = bespinIframe.contentWindow.gEditor;
-  var occurences = bespinEditor.replaceAll(gDialog.bespinReplaceTextbox.value);
+  var occurences = 0;
+  if (GetCurrentViewMode() == "source") {
+    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
+    var bespinEditor = bespinIframe.contentWindow.gEditor;
+    occurences = bespinEditor.replaceAll(gDialog.bespinReplaceTextbox.value);
+  }
+  else {
+    var found = true;
+    var editor = EditorUtils.getCurrentEditor();
+    editor.beginTransaction();
+    while (found) {
+      occurences++;
+      ReplaceInWysiwyg();
+      found = BespinFind(true, false);
+    }
+    editor.endTransaction();
+  }
   var title = L10NUtils.getString("ReplaceAll");
   var msg = L10NUtils.getString("ReplacedPart1") +
             " " +
