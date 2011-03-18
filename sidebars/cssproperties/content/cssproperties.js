@@ -307,8 +307,8 @@ function ApplyStyles(aStyles)
 {
   var className;
   var editor = EditorUtils.getCurrentEditor();
-  /*if (gDialog.hoverStateCheckbox.checked)
-    gDialog.cssPolicyMenulist.value = "id";*/
+  if (gDialog.hoverStateCheckbox.checked && gDialog.cssPolicyMenulist.value == "inline")
+    gDialog.cssPolicyMenulist.value = "id";
   var cssPolicy = gPrefs.getCharPref("bluegriffon.css.policy"); 
   switch (gDialog.cssPolicyMenulist.value) {
     case "id":
@@ -919,8 +919,8 @@ function CloseAllSection(aAlsoCloseOriginalTarget)
 
 function ToggleHover(aElt)
 {
-  /*if (aElt.checked)
+  if (aElt.checked && gDialog.cssPolicyMenulist.value == "inline")
     gDialog.cssPolicyMenulist.value = "id";
   var node = gCurrentElement;
-  SelectionChanged(null, node, null);*/
+  SelectionChanged(null, node, null);
 }
