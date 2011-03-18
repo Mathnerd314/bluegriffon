@@ -39,7 +39,10 @@ diStyleAttrChangeTxn.prototype = {
 
   undoTransaction: function()
   {
-    this.mNode.setAttribute("style", this.mOldData);
+    if (this.mOldData)
+      this.mNode.setAttribute("style", this.mOldData);
+    else
+      this.mNode.removeAttribute("style");
   },
 
   redoTransaction: function()
