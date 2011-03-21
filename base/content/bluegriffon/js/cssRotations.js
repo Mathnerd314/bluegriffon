@@ -25,9 +25,9 @@ var CSSRotationsHandler = {
   {
     window.removeEventListener("load", CSSRotationsHandler.addToHandlersManager, false);
 
-		HandlersManager.addHandler("cssRotations",
-		                           CSSRotationsHandler,
-		                           "rotateButton",
+    HandlersManager.addHandler("cssRotations",
+                               CSSRotationsHandler,
+                               "rotateButton",
                                document);
   },
 
@@ -198,10 +198,10 @@ var CSSRotationsHandler = {
       return
     var centerX = csr.mRotatedLeft + parseFloat(csr.mCenterX);
     var centerY = csr.mRotatedTop + parseFloat(csr.mCenterY);
-	  var x = event.clientX;
-	  var y = event.clientY;
-	  var angle;
-	  with (Math) {
+    var x = event.clientX;
+    var y = event.clientY;
+    var angle;
+    with (Math) {
       var t1 = {x: x - centerX, y: y - centerY };
       var t2 = {x: csr.mStartRotationX - centerX, y: csr.mStartRotationY - centerY };
       angle = (atan2(t1.y, t1.x) - atan2(t2.y, t2.x)) * 180 / PI;
@@ -212,8 +212,8 @@ var CSSRotationsHandler = {
               .getComputedStyle(csr.mLayer, "")
               .getPropertyValue("-moz-transform")
               .replace( /none/g ,  "");
-	  }
-	 
+    }
+   
   },
 
   endRotating: function(event)

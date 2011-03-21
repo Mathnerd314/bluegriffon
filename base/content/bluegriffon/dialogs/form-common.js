@@ -6,9 +6,9 @@ function InitDialog()
   if (hasNameAttr) {
     hasNameAttr.lastElementChild.addEventListener("input", CheckNameAttribute, false);
 
-	  var eltsWithId = EditorUtils.getCurrentDocument().querySelectorAll("*[id]");
-	  for (var i = 0; i < eltsWithId.length; i++)
-	    gNameAndIds.push(eltsWithId[i].id);
+    var eltsWithId = EditorUtils.getCurrentDocument().querySelectorAll("*[id]");
+    for (var i = 0; i < eltsWithId.length; i++)
+      gNameAndIds.push(eltsWithId[i].id);
 
     var node = EditorUtils.getSelectionContainer().node;
     while (node && node.nodeName.toLowerCase() != "form")

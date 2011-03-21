@@ -62,14 +62,14 @@ function onAccept()
     editor.endTransaction();
   }
   else {
-	  var imgElement = EditorUtils.getCurrentDocument().createElement("img");
-	  imgElement.setAttribute("src", url);
-	  imgElement.setAttribute("alt", altText);
-	  if (title)
-	    imgElement.setAttribute("title", title);
+    var imgElement = EditorUtils.getCurrentDocument().createElement("img");
+    imgElement.setAttribute("src", url);
+    imgElement.setAttribute("alt", altText);
+    if (title)
+      imgElement.setAttribute("title", title);
     if (longdesc)
       imgElement.setAttribute("longdesc", longdesc);
-	  editor.insertElementAtSelection(imgElement, true);
+    editor.insertElementAtSelection(imgElement, true);
   }
 }
 

@@ -185,34 +185,34 @@ function doAddOptGroup()
     item = AddTreeItem(tree);
   }
   else {
-	  var index = view.selection.currentIndex;
-	  var treeitem = contentView.getItemAtIndex(index);
-	
+    var index = view.selection.currentIndex;
+    var treeitem = contentView.getItemAtIndex(index);
+  
     if (gWhere == "before" || gWhere == "after") {
-	    item = document.createElement("treeitem");
-	    var row = document.createElement("treerow");
-	    item.appendChild(row);
-	    if (gWhere == "before")
-		    treeitem.parentNode.insertBefore(item, treeitem);
-	    else
-	      treeitem.parentNode.insertBefore(item, treeitem.nextSibling);
+      item = document.createElement("treeitem");
+      var row = document.createElement("treerow");
+      item.appendChild(row);
+      if (gWhere == "before")
+        treeitem.parentNode.insertBefore(item, treeitem);
+      else
+        treeitem.parentNode.insertBefore(item, treeitem.nextSibling);
     }
     else if (gWhere == "inside")
       item = AddTreeItem(treeitem);
   }
 
   var cell1 = document.createElement("treecell");
-	cell1.setAttribute("label", "");
-	var cell2 = document.createElement("treecell");
-	cell2.setAttribute("label", gDialog.optGroupLabelTextbox.value);
-	var cell3 = document.createElement("treecell");
-	cell3.setAttribute("label", gDialog.optGroupDisabledCheckbox.checked ? "✔" : "");
-	var cell4 = document.createElement("treecell");
-	cell4.setAttribute("label", "");
-	item.firstChild.appendChild(cell1);
-	item.firstChild.appendChild(cell2);
-	item.firstChild.appendChild(cell3);
-	item.firstChild.appendChild(cell4);
+  cell1.setAttribute("label", "");
+  var cell2 = document.createElement("treecell");
+  cell2.setAttribute("label", gDialog.optGroupLabelTextbox.value);
+  var cell3 = document.createElement("treecell");
+  cell3.setAttribute("label", gDialog.optGroupDisabledCheckbox.checked ? "✔" : "");
+  var cell4 = document.createElement("treecell");
+  cell4.setAttribute("label", "");
+  item.firstChild.appendChild(cell1);
+  item.firstChild.appendChild(cell2);
+  item.firstChild.appendChild(cell3);
+  item.firstChild.appendChild(cell4);
   item.setAttribute("container", "true");
   gDialog.optGroupPanel.hidePopup();
   gDialog.contentsTree.view.selection.select(gDialog.contentsTree.contentView.getIndexOfItem(item));
@@ -359,22 +359,22 @@ function UpdateUrl()
   if (isContainer) {
     gDialog.doUpdateOptGroupButton.hidden = false;
     gDialog.doAddOptGroupButton.hidden = true;
-	  gDialog.optGroupLabelTextbox.value = treeitem.firstChild.childNodes[1].getAttribute("label");
-	  gDialog.optGroupDisabledCheckbox.checked = (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔");
-	  gDialog.optGroupPanel.openPopup(gDialog.ConfigButton,
-	                                  "after_start", 0, 0,
-	                                  false, true);
+    gDialog.optGroupLabelTextbox.value = treeitem.firstChild.childNodes[1].getAttribute("label");
+    gDialog.optGroupDisabledCheckbox.checked = (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔");
+    gDialog.optGroupPanel.openPopup(gDialog.ConfigButton,
+                                    "after_start", 0, 0,
+                                    false, true);
   }
   else {
-	  gDialog.doUpdateOptionButton.hidden = false;
-	  gDialog.doAddOptionButton.hidden = true;
-	  gDialog.optionLabelTextbox.value = treeitem.firstChild.childNodes[0].getAttribute("label");
-	  gDialog.optionValueTextbox.value = treeitem.firstChild.childNodes[1].getAttribute("label");
-	  gDialog.optionSelectedCheckbox.checked = (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔");;
-	  gDialog.optionDisabledCheckbox.checked = (treeitem.firstChild.childNodes[3].getAttribute("label") == "✔");;
-	  gDialog.optionPanel.openPopup(gDialog.ConfigButton,
-	                                 "after_start", 0, 0,
-	                                 false, true);
+    gDialog.doUpdateOptionButton.hidden = false;
+    gDialog.doAddOptionButton.hidden = true;
+    gDialog.optionLabelTextbox.value = treeitem.firstChild.childNodes[0].getAttribute("label");
+    gDialog.optionValueTextbox.value = treeitem.firstChild.childNodes[1].getAttribute("label");
+    gDialog.optionSelectedCheckbox.checked = (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔");;
+    gDialog.optionDisabledCheckbox.checked = (treeitem.firstChild.childNodes[3].getAttribute("label") == "✔");;
+    gDialog.optionPanel.openPopup(gDialog.ConfigButton,
+                                   "after_start", 0, 0,
+                                   false, true);
   }
 }
 

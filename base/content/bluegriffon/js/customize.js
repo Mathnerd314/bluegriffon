@@ -76,10 +76,10 @@ function CustomizeToolbar(id)
     panel.openPopup(gDialog[id], "after_start", 0, 0);
     return sheetFrame.contentWindow;
   } else {
-	  window.openDialog(customizeURL,
-	                    "CustomizeToolbar",
-	                    "chrome,titlebar,toolbar,location,resizable,dependent",
-	                    document.getElementById(id));
+    window.openDialog(customizeURL,
+                      "CustomizeToolbar",
+                      "chrome,titlebar,toolbar,location,resizable,dependent",
+                      document.getElementById(id));
   }
 }
 

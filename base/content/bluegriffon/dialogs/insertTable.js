@@ -230,83 +230,83 @@ function InitTableData(aNode)
 function ValidateData(aTabValue)
 {
   if (gDataChanged) {
-	  var tab = aTabValue || gDialog.tabbox.selectedTab.value;
-	  var editor = EditorUtils.getCurrentEditor();
-	  editor.beginTransaction();
-	  switch (tab) {
-	    case "table":
-	      editor.setAttribute(gTable, "border", gDialog.tableBorderTextbox.value);
-	      if (gDialog.tableCellPaddingTextbox.value)
-	        editor.setAttribute(gTable, "cellpadding", gDialog.tableCellPaddingTextbox.value + gDialog.tableCellPaddingUnitMenulist.value);
-	      else
-	        editor.removeAttribute(gTable, "cellpadding");
-	      if (gDialog.tableCellSpacingTextbox.value)
-	        editor.setAttribute(gTable, "cellspacing", gDialog.tableCellSpacingTextbox.value + gDialog.tableCellSpacingUnitMenulist.value);
-	      else
-	        editor.removeAttribute(gTable, "cellspacing");
-	      editor.removeAttribute(gTable, "width");
-	      editor.removeAttribute(gTable, "height");
-	      var txn = new diStyleAttrChangeTxn(gTable, "width", gDialog.widthMenulist.value, "");
-	      editor.doTransaction(txn);
-	      txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
-	      editor.doTransaction(txn);
-	      //var header = gTable.querySelector("thead");
+    var tab = aTabValue || gDialog.tabbox.selectedTab.value;
+    var editor = EditorUtils.getCurrentEditor();
+    editor.beginTransaction();
+    switch (tab) {
+      case "table":
+        editor.setAttribute(gTable, "border", gDialog.tableBorderTextbox.value);
+        if (gDialog.tableCellPaddingTextbox.value)
+          editor.setAttribute(gTable, "cellpadding", gDialog.tableCellPaddingTextbox.value + gDialog.tableCellPaddingUnitMenulist.value);
+        else
+          editor.removeAttribute(gTable, "cellpadding");
+        if (gDialog.tableCellSpacingTextbox.value)
+          editor.setAttribute(gTable, "cellspacing", gDialog.tableCellSpacingTextbox.value + gDialog.tableCellSpacingUnitMenulist.value);
+        else
+          editor.removeAttribute(gTable, "cellspacing");
+        editor.removeAttribute(gTable, "width");
+        editor.removeAttribute(gTable, "height");
+        var txn = new diStyleAttrChangeTxn(gTable, "width", gDialog.widthMenulist.value, "");
+        editor.doTransaction(txn);
+        txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
+        editor.doTransaction(txn);
+        //var header = gTable.querySelector("thead");
         var header = collectFirstDescendant(gTable, "thead");
-	      if (!parseInt(gDialog.rowsInHeaderTextbox.value)) {
-	        // delete the header if it exists...
-	        if (header)
-	          editor.deleteNode(header);
-	      }
-	      else {
-	        // add or remove rows as needed
-	        if (!header) {
-	          // ah, we need to create the header first...
-	          header = editor.document.createElement("thead");
+        if (!parseInt(gDialog.rowsInHeaderTextbox.value)) {
+          // delete the header if it exists...
+          if (header)
+            editor.deleteNode(header);
+        }
+        else {
+          // add or remove rows as needed
+          if (!header) {
+            // ah, we need to create the header first...
+            header = editor.document.createElement("thead");
             //var where = gTable.querySelector("tfoot") || gTable.querySelector("tbody");
             var where = collectFirstDescendant(gTable, "tfoot") || collectFirstDescendant(gTable, "tbody");
-			      txn = new diInsertNodeBeforeTxn(header, gTable, where);
-			      editor.doTransaction(txn);
-	        }
-	        UpdateListOfRows(header, gRowsInHeader, gDialog.rowsInHeaderTextbox.value,
-	                         gDialog.onlyHeaderCellsInHeaderCheckbox.checked ? "th" : "td");
-	      }
+            txn = new diInsertNodeBeforeTxn(header, gTable, where);
+            editor.doTransaction(txn);
+          }
+          UpdateListOfRows(header, gRowsInHeader, gDialog.rowsInHeaderTextbox.value,
+                           gDialog.onlyHeaderCellsInHeaderCheckbox.checked ? "th" : "td");
+        }
         //var footer = gTable.querySelector("tfoot");
         var footer = collectFirstDescendant(gTable, "tfoot");
-	      if (!parseInt(gDialog.rowsInFooterTextbox.value)) {
-	        // delete the header if it exists...
-	        if (footer)
-	          editor.deleteNode(footer);
-	      }
-	      else {
-	        // add or remove rows as needed
-	        if (!footer) {
-	          // ah, we need to create the header first...
-	          footer = editor.document.createElement("tfoot");
+        if (!parseInt(gDialog.rowsInFooterTextbox.value)) {
+          // delete the header if it exists...
+          if (footer)
+            editor.deleteNode(footer);
+        }
+        else {
+          // add or remove rows as needed
+          if (!footer) {
+            // ah, we need to create the header first...
+            footer = editor.document.createElement("tfoot");
             //var where = gTable.querySelector("tbody");
             var where = collectFirstDescendant(gTable, "tbody");
-	          txn = new diInsertNodeBeforeTxn(footer, gTable, where);
-	          editor.doTransaction(txn);
-	        }
-	        UpdateListOfRows(footer, gRowsInFooter, gDialog.rowsInFooterTextbox.value,
-	                         gDialog.onlyHeaderCellsInFooterCheckbox.checked ? "th" : "td");
-	      }
-	
-	      UpdateListOfRows(collectFirstDescendant(gTable, "tbody"), gRows, gDialog.tableRowsTextbox.value,
-	                       "td");
-	      break;
-	
-	    case "cell":
-	      switch (gDialog.selectionType.value) {
-	        case "cells":   UpdateCells(editor); break;
+            txn = new diInsertNodeBeforeTxn(footer, gTable, where);
+            editor.doTransaction(txn);
+          }
+          UpdateListOfRows(footer, gRowsInFooter, gDialog.rowsInFooterTextbox.value,
+                           gDialog.onlyHeaderCellsInFooterCheckbox.checked ? "th" : "td");
+        }
+  
+        UpdateListOfRows(collectFirstDescendant(gTable, "tbody"), gRows, gDialog.tableRowsTextbox.value,
+                         "td");
+        break;
+  
+      case "cell":
+        switch (gDialog.selectionType.value) {
+          case "cells":   UpdateCells(editor); break;
           case "rows":    UpdateRows(editor);  break;
           case "columns": UpdateColumns(editor); break;
-	        default: break;
-	      }
-	      break;
-	
-	    default: break;
-	  }
-	  editor.endTransaction();
+          default: break;
+        }
+        break;
+  
+      default: break;
+    }
+    editor.endTransaction();
   }
 }
 
@@ -399,10 +399,10 @@ function onTabSelect()
         if (PromptUtils.confirm(gDialog.bundleString.getString("TableTabModified"),
                                 gDialog.bundleString.getString("ApplyAndCloseWindow"),
                                 window)) {
-	        ValidateData("table");
+          ValidateData("table");
           gDataChanged = false;
           document.documentElement.getButton("extra1").disabled = false;
-	      }
+        }
       }
       break;
     case "table":
@@ -526,10 +526,10 @@ function GetSelectedCells(selection)
 
 function UpdateCells(editor)
 {
-	var selection = editor.selection;
-	var cells = GetSelectedCells(selection);
-	// at this points cells array contains all the cells to impact
-	for (var i = 0; i < cells.length; i++) {
+  var selection = editor.selection;
+  var cells = GetSelectedCells(selection);
+  // at this points cells array contains all the cells to impact
+  for (var i = 0; i < cells.length; i++) {
     var c = cells[i];
 
     var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
@@ -591,17 +591,17 @@ function UpdateColumns(editor)
         child = rows[j].firstElementChild;
         var cellIndex = 0;
         while (child && cellIndex < index) {
-	        if (child.hasAttribute("colspan")) {
-	          cellIndex += parseInt(child.getAttribute("colspan"))
-	        }
-	        else
-	          cellIndex++;
-	        child = child.nextElementSibling;
+          if (child.hasAttribute("colspan")) {
+            cellIndex += parseInt(child.getAttribute("colspan"))
+          }
+          else
+            cellIndex++;
+          child = child.nextElementSibling;
         }
         // cell is ok only if cellIndex == index strictly
         if (child && cellIndex == index) {
-	        if (columnsCells.indexOf(child) == -1)
-	          columnsCells.push(child);
+          if (columnsCells.indexOf(child) == -1)
+            columnsCells.push(child);
           if (child.hasAttribute("rowspan"))
             j += parseInt(child.getsAttribute("rowspan")) - 1;
         }
@@ -667,26 +667,26 @@ function UpdateRows(editor)
 
     var c = r.firstElementChild;
     while (c) {
-	    var txn = new diStyleAttrChangeTxn(c, "width", "", "");
-	    editor.doTransaction(txn);
-	
-	    txn = new diStyleAttrChangeTxn(c, "height", "", "");
-	    editor.doTransaction(txn);
-	
-	    txn = new diStyleAttrChangeTxn(c, "text-align", "", "");
-	    editor.doTransaction(txn);
-	
-	    txn = new diStyleAttrChangeTxn(c, "vertical-align", "", "");
-	    editor.doTransaction(txn);
-	
-	    txn = new diStyleAttrChangeTxn(c, "white-space", "", "");
-	    editor.doTransaction(txn);
-	
-	    txn = new diStyleAttrChangeTxn(c, "background-color", "", "");
-	    editor.doTransaction(txn);
+      var txn = new diStyleAttrChangeTxn(c, "width", "", "");
+      editor.doTransaction(txn);
+  
+      txn = new diStyleAttrChangeTxn(c, "height", "", "");
+      editor.doTransaction(txn);
+  
+      txn = new diStyleAttrChangeTxn(c, "text-align", "", "");
+      editor.doTransaction(txn);
+  
+      txn = new diStyleAttrChangeTxn(c, "vertical-align", "", "");
+      editor.doTransaction(txn);
+  
+      txn = new diStyleAttrChangeTxn(c, "white-space", "", "");
+      editor.doTransaction(txn);
+  
+      txn = new diStyleAttrChangeTxn(c, "background-color", "", "");
+      editor.doTransaction(txn);
 
       if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
-	      editor.switchTableCellHeaderType(c);
+        editor.switchTableCellHeaderType(c);
 
       c = c.nextElementSibling;
     }

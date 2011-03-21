@@ -45,23 +45,23 @@ var LoginUtils = {
   _getLoginManager: function()
   {
     if (!this.mLoginManager)
-	    try {
-		    this.mLoginManager = Components.classes["@mozilla.org/login-manager;1"]
-	                             .getService(Components.interfaces.nsILoginManager);
-	    }
-	    catch(e) { }
+      try {
+        this.mLoginManager = Components.classes["@mozilla.org/login-manager;1"]
+                               .getService(Components.interfaces.nsILoginManager);
+      }
+      catch(e) { }
 
     return this.mLoginManager;
   },
 
   newLoginInfo: function(aURL, aUser, aPassword)
   {
-		var nsLoginInfo = new Components.Constructor("@mozilla.org/login-manager/loginInfo;1",
-		                                             Components.interfaces.nsILoginInfo,
-		                                             "init");
-		    
-		var loginInfo = new nsLoginInfo(aURL, null, "bluegriffon", aUser, aPassword,
-		                                "", "");
+    var nsLoginInfo = new Components.Constructor("@mozilla.org/login-manager/loginInfo;1",
+                                                 Components.interfaces.nsILoginInfo,
+                                                 "init");
+        
+    var loginInfo = new nsLoginInfo(aURL, null, "bluegriffon", aUser, aPassword,
+                                    "", "");
     return loginInfo;
   },
 
@@ -139,26 +139,26 @@ var LoginUtils = {
 
   findPassword: function(hostname, formSubmitURL, httprealm, username)
   {
-		var password = null;
-		
-		try {
-		   // Get Login Manager 
-		   var myLoginManager = this._getLoginManager();
-		    
-		   // Find users for the given parameters
-		   var logins = myLoginManager.findLogins({}, hostname, formSubmitURL, httprealm);
-		      
-		   // Find user from returned array of nsILoginInfo objects
-		   for (var i = 0; i < logins.length; i++) {
-		      if (logins[i].username == username) {
-		         password = logins[i].password;
-		         break;
-		      }
-		   }
-		}
-		catch(ex) {
-		   // This will only happen if there is no nsILoginManager component class
-		}
+    var password = null;
+    
+    try {
+       // Get Login Manager 
+       var myLoginManager = this._getLoginManager();
+        
+       // Find users for the given parameters
+       var logins = myLoginManager.findLogins({}, hostname, formSubmitURL, httprealm);
+          
+       // Find user from returned array of nsILoginInfo objects
+       for (var i = 0; i < logins.length; i++) {
+          if (logins[i].username == username) {
+             password = logins[i].password;
+             break;
+          }
+       }
+    }
+    catch(ex) {
+       // This will only happen if there is no nsILoginManager component class
+    }
 
     return password;
   },

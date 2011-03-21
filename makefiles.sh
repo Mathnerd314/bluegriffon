@@ -44,6 +44,8 @@ bluegriffon/extensions/Makefile
 bluegriffon/installer/Makefile
 bluegriffon/sidebars/Makefile
 bluegriffon/src/Makefile
+bluegriffon/src/dibgutils/Makefile
+bluegriffon/src/diOSXDockIconBadger/Makefile
 bluegriffon/themes/Makefile
 bluegriffon/modules/Makefile
 bluegriffon/themes/win/Makefile

@@ -2,47 +2,47 @@ function OnAdvancedPaneLoad()
 {
   GetUIElements();
 
-	try {
-	  // Query available and selected locales
-	  
-	  var chromeRegService = Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService();
-	  var xulChromeReg = chromeRegService.QueryInterface(Components.interfaces.nsIXULChromeRegistry);
-	  var toolkitChromeReg = chromeRegService.QueryInterface(Components.interfaces.nsIToolkitChromeRegistry);
+  try {
+    // Query available and selected locales
+    
+    var chromeRegService = Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService();
+    var xulChromeReg = chromeRegService.QueryInterface(Components.interfaces.nsIXULChromeRegistry);
+    var toolkitChromeReg = chromeRegService.QueryInterface(Components.interfaces.nsIToolkitChromeRegistry);
 
-	  var selectedLocale = xulChromeReg.getSelectedLocale("bluegriffon");
-	  var availableLocales = toolkitChromeReg.getLocalesForPackage("bluegriffon");
+    var selectedLocale = xulChromeReg.getSelectedLocale("bluegriffon");
+    var availableLocales = toolkitChromeReg.getLocalesForPackage("bluegriffon");
 
-	  // Render locale menulist by iterating through the query result from getLocalesForPackage()
-	  const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+    // Render locale menulist by iterating through the query result from getLocalesForPackage()
+    const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
-	  var localeListbox = gDialog["locale-listbox"];
+    var localeListbox = gDialog["locale-listbox"];
 
-	  var selectedItem = null;
-	  
-	  while(availableLocales.hasMore()) {
+    var selectedItem = null;
+    
+    while(availableLocales.hasMore()) {
   
-	    var locale = availableLocales.getNext();
+      var locale = availableLocales.getNext();
       var localeId = locale;
   
-	    var listitem = document.createElementNS(XUL_NS, "listitem");
-	    listitem.setAttribute("value", locale);
+      var listitem = document.createElementNS(XUL_NS, "listitem");
+      listitem.setAttribute("value", locale);
       var match = locale.match( /^([a-zA-Z]*)(\-([a-zA-Z]*))?$/ );
       if (match) {
         locale += " (" + gDialog.bundleLanguages.getString(match[1].toLowerCase()) + ", " +
                          gDialog.bundleRegions.getString(match[3].toLowerCase()) + ")";
       }
-	    listitem.setAttribute("label", locale);
+      listitem.setAttribute("label", locale);
 
-	    localeListbox.appendChild(listitem);
+      localeListbox.appendChild(listitem);
       if (localeId == selectedLocale) {
         // Is this the current locale?
          setTimeout(function(a, b) {a.selectedItem = b}, 100, localeListbox, listitem);
       }
   
-	  }
+    }
 
 
-	} catch (err) {	}
+  } catch (err) {  }
 
   setTimeout(SwitchToSystemLocale, 100, document.getElementById("matchOSRadiogroup"));
 }

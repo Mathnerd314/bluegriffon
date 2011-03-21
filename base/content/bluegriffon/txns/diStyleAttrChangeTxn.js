@@ -27,9 +27,9 @@ diStyleAttrChangeTxn.prototype = {
   {
     this.mOldData = this.mNode.getAttribute("style");
     if (this.mValue)
-	    this.mNode.style.setProperty(this.mProperty,
-	                                 this.mValue,
-	                                 this.mPriority);
+      this.mNode.style.setProperty(this.mProperty,
+                                   this.mValue,
+                                   this.mPriority);
     else {
       this.mNode.style.removeProperty(this.mProperty);
       if (this.mNode.getAttribute("style") == "")

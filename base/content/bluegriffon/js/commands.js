@@ -129,15 +129,15 @@ var ComposerCommands = {
         case "cmd_em":
         case "cmd_code":
         case "cmd_strikethrough":
-	      case "cmd_superscript":
-	      case "cmd_subscript":
-	      case "cmd_nobreak":
-	      case "cmd_var":
-	      case "cmd_samp":
-	      case "cmd_code":
-	      case "cmd_acronym":
-	      case "cmd_abbr":
-	      case "cmd_cite":
+        case "cmd_superscript":
+        case "cmd_subscript":
+        case "cmd_nobreak":
+        case "cmd_var":
+        case "cmd_samp":
+        case "cmd_code":
+        case "cmd_acronym":
+        case "cmd_abbr":
+        case "cmd_cite":
         case "cmd_tt":
 
         case "cmd_ul":
@@ -464,10 +464,10 @@ var ComposerCommands = {
     }
 
     if (ComposerCommands.mLastSelectedElementPath != path) {
-	    // now we're sure something changed in the selection, element or attribute
-	    // on the selected element
+      // now we're sure something changed in the selection, element or attribute
+      // on the selected element
       if (!aDontNotify)
-  	    NotifierUtils.notify("selection", aElement, aOneElementSelected);
+        NotifierUtils.notify("selection", aElement, aOneElementSelected);
       ComposerCommands.mLastSelectedElementPath = path;
     }
   },

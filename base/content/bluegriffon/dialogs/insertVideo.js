@@ -154,9 +154,9 @@ function UseCurrentFrameAsPoster()
     canvas.setAttribute("height", gDialog.preview.videoHeight);
     canvas.style.display = "none";
     var ctx = canvas.getContext("2d");
-	  ctx.drawImage(gDialog.preview, 0, 0);
-	  gDialog.urlPosterTextbox.value = canvas.toDataURL();
-	  gDialog.tabbox.selectedTab = gDialog.posterTab;
+    ctx.drawImage(gDialog.preview, 0, 0);
+    gDialog.urlPosterTextbox.value = canvas.toDataURL();
+    gDialog.tabbox.selectedTab = gDialog.posterTab;
     LoadPosterFile();
   }
   catch(e) {alert(e)}
@@ -179,12 +179,12 @@ function onAccept()
   }
 
   if (gDialog.urlTextbox.value) {
-	  function setAttribute(aName, aValue) {
-	    if (aValue)
-	      gEditor.setAttribute(gNode, aName, aValue);
-	    else
-	      gEditor.removeAttribute(gNode, aName);
-	  }
+    function setAttribute(aName, aValue) {
+      if (aValue)
+        gEditor.setAttribute(gNode, aName, aValue);
+      else
+        gEditor.removeAttribute(gNode, aName);
+    }
     gEditor.setAttribute(gNode, "src", gDialog.urlTextbox.value);
 
     setAttribute("poster",   gDialog.urlPosterTextbox.value);
@@ -196,17 +196,17 @@ function onAccept()
     setAttribute("loop",     gDialog.loopCheckbox.checked ? "loop" : "");
 
     if (nodeCreated) {
-	      try {
+        try {
           // monster hack because insertElementAtSelection() fails on <video>
           var p = gEditor.document.createElement("span");
           p.appendChild(gEditor.document.createElement("br"));
           
           p.appendChild(gNode);
-		      gEditor.insertElementAtSelection(p, true);
-		      txn = new diNodeInsertionTxn(gNode,
-		                                   p.parentNode,
-		                                   p.nextSibling);
-		      gEditor.transactionManager.doTransaction(txn);
+          gEditor.insertElementAtSelection(p, true);
+          txn = new diNodeInsertionTxn(gNode,
+                                       p.parentNode,
+                                       p.nextSibling);
+          gEditor.transactionManager.doTransaction(txn);
           gEditor.deleteNode(p);
         }
         catch(e) {alert(e)}
@@ -240,22 +240,22 @@ function SavePosterAsFile()
       return;
 
     var file = fp.file;
-	
-	  // create a data url from the canvas and then create URIs of the source and targets  
-	  var io = Components.classes["@mozilla.org/network/io-service;1"]
-	                     .getService(Components.interfaces.nsIIOService);
-	  var source = io.newURI(canvas.toDataURL("image/png", ""), "UTF8", null);
-	  var target = io.newFileURI(file)
-	    
-	  // prepare to save the canvas data
-	  var persist = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
-	                          .createInstance(Components.interfaces.nsIWebBrowserPersist);
-	  
-	  persist.persistFlags = Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
-	  persist.persistFlags |= Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-	  
-	  // save the canvas data to the file
-	  persist.saveURI(source, null, null, null, null, file);
+  
+    // create a data url from the canvas and then create URIs of the source and targets  
+    var io = Components.classes["@mozilla.org/network/io-service;1"]
+                       .getService(Components.interfaces.nsIIOService);
+    var source = io.newURI(canvas.toDataURL("image/png", ""), "UTF8", null);
+    var target = io.newFileURI(file)
+      
+    // prepare to save the canvas data
+    var persist = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
+                            .createInstance(Components.interfaces.nsIWebBrowserPersist);
+    
+    persist.persistFlags = Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_REPLACE_EXISTING_FILES;
+    persist.persistFlags |= Components.interfaces.nsIWebBrowserPersist.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
+    
+    // save the canvas data to the file
+    persist.saveURI(source, null, null, null, null, file);
     gDialog.urlPosterTextbox.value = fp.fileURL.spec;
     LoadPosterFile();
     CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox');

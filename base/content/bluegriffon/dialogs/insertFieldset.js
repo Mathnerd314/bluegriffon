@@ -37,8 +37,8 @@ function onAccept()
     if (gDialog.insertLegendCheckbox.checked) {
       if (gLegend.textContent != gDialog.legendContent.value) {
         // update legend
-	      var legend =  doc.createElement("legend");
-	      legend.textContent = gDialog.legendContent.value;
+        var legend =  doc.createElement("legend");
+        legend.textContent = gDialog.legendContent.value;
         gEditor.insertNode(legend, gNode, 0);
         gEditor.deleteNode(gLegend);
         gLegend = legend;

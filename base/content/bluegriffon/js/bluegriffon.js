@@ -684,11 +684,11 @@ function ToggleViewMode(aElement)
 
   var child = aElement.parentNode.firstChild;
   while (child) {
-  	if (child == aElement)
-  	  child.setAttribute("selected", "true");
-  	else
-  	  child.removeAttribute("selected");
-  	child = child.nextSibling;
+    if (child == aElement)
+      child.setAttribute("selected", "true");
+    else
+      child.removeAttribute("selected");
+    child = child.nextSibling;
   }
 
   var editor = EditorUtils.getCurrentEditor();
@@ -770,8 +770,8 @@ function ToggleViewMode(aElement)
               var message = doc.documentElement.firstChild.data.
                 replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
               var error = doc.documentElement.lastChild.textContent;
-						  window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
-						                    "chrome,modal,titlebar", message, error);
+              window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
+                                "chrome,modal,titlebar", message, error);
               gDialog.wysiwygModeButton.removeAttribute("selected");
               gDialog.sourceModeButton.setAttribute("selected", "true");
               editorElement.parentNode.setAttribute("currentmode", "source");
@@ -783,11 +783,11 @@ function ToggleViewMode(aElement)
           catch(e) {alert(e)}
         }
         else {
-	        var hp = new htmlParser(gDialog.parserIframe);
-	        hp.parseHTML(source,
-	                     EditorUtils.getDocumentUrl(),
-	                     function(aDoc, ctx) { gDialog.structurebar.style.visibility = "";; RebuildFromSource(aDoc, ctx); },
-	                     hp);
+          var hp = new htmlParser(gDialog.parserIframe);
+          hp.parseHTML(source,
+                       EditorUtils.getDocumentUrl(),
+                       function(aDoc, ctx) { gDialog.structurebar.style.visibility = "";; RebuildFromSource(aDoc, ctx); },
+                       hp);
         }
       }
       else {
@@ -1058,12 +1058,12 @@ var JSEditor = {
 
         var parent = node.parentNode;
         if (parent) {
-	        parent.removeChild(node);
-	        while (!parent.firstChild) {
-	          var tmp = parent.parentNode;
-	          tmp.removeChild(parent);
-	          parent = tmp;
-	        }
+          parent.removeChild(node);
+          while (!parent.firstChild) {
+            var tmp = parent.parentNode;
+            tmp.removeChild(parent);
+            parent = tmp;
+          }
         }
       }
     }
@@ -1115,8 +1115,8 @@ function OnDoubleClick(aEvent)
       cmdInsertFormCommand.doCommand();
       break;
     case "input":
-	    window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
-	                      "chrome,modal,titlebar,resizable=no,dialog=yes", node, node.getAttribute("type"));
+      window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
+                        "chrome,modal,titlebar,resizable=no,dialog=yes", node, node.getAttribute("type"));
       break;
    case "fieldset":
       cmdInsertFieldsetCommand.doCommand();
@@ -1158,7 +1158,7 @@ function OnDoubleClick(aEvent)
       break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")
-	    {
+      {
         while (node.parentNode && node.parentNode.namespaceURI == "http://www.w3.org/2000/svg")
           node = node.parentNode;
         EditorUtils.getCurrentEditor().selectElement(node);
@@ -1169,7 +1169,7 @@ function OnDoubleClick(aEvent)
           start_svg_edit(source);
         }
         catch(e) {}
-	    }
+      }
     
   }
 }
@@ -1232,7 +1232,7 @@ function OnClick(aEvent)
 {
   // this is necessary to be able to select for instance video elements
   var target = aEvent.explicitOriginalTarget;
-	if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement ||
+  if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement ||
                  target instanceof Components.interfaces.nsIDOMHTMLAudioElement)) {
     EditorUtils.getCurrentEditor().selectElement(target);
   }

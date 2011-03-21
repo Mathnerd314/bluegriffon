@@ -372,292 +372,292 @@ function Apply()
   var doc = EditorUtils.getCurrentDocument();
 
   try {
-	  // UI CSS GRID LAYOUT
-	  if (gDialog.usePageLayout.checked)
-	  {
-	    var loremIpusm = gDialog.LoremIpsumCheckbox.checked;
-	
-	
-		  var file = Components.classes["@mozilla.org/file/directory_service;1"].  
-		                       getService(Components.interfaces.nsIProperties).  
-		                       get("CurProcD", Components.interfaces.nsIFile);    
-		  file.append("res");
-		  var resetFontsGridsFile = file.clone();
-		  resetFontsGridsFile.append("reset-fonts-grids.css");
-	    var baseMinFile = file.clone();
-	    baseMinFile.append("base-min.css");
-	    
-	    var styleElt = doc.createElement("style");
-	    styleElt.setAttribute("type", "text/css");
-	    styleElt.textContent = ReadFileContents(resetFontsGridsFile); 
-	    EditorUtils.getHeadElement().appendChild(styleElt);
-	    styleElt = doc.createElement("style");
-	    styleElt.setAttribute("type", "text/css");
-	    styleElt.textContent = ReadFileContents(baseMinFile);
-	    EditorUtils.getHeadElement().appendChild(styleElt);
-	
-	    var docId    = gDialog.LayoutTypeMenulist.value;
-	    var docClass = gDialog.LayoutSubtypeMenulist.value;
-	    var outerDiv = doc.createElement("div");
-	    outerDiv.setAttribute("id", docId);
-	    outerDiv.setAttribute("class", docClass);
-	    doc.body.innerHTML = "";
-	    doc.body.appendChild(outerDiv);
-	
-	    var headerDiv = doc.createElement("div");
-	    headerDiv.setAttribute("id", "hd");
-	    var bodyDiv = doc.createElement("div");
-	    bodyDiv.setAttribute("id", "bd");
-	    var footerDiv = doc.createElement("div");
-	    footerDiv.setAttribute("id", "ft");
-	    outerDiv.appendChild(headerDiv);
-	    outerDiv.appendChild(bodyDiv);
-	    outerDiv.appendChild(footerDiv);
-	
-	    var loremIpsumStr = "<br>";
-	    var navProse = "";
-	    if (loremIpusm)
-	    {
-	      var loremIpsumProse = L10NUtils.getStringFromURL("loremIpsum",
-	                                             "chrome://bluegriffon/locale/newPageWizard.properties");
-	      var headerProse = L10NUtils.getStringFromURL("header",
-	                                             "chrome://bluegriffon/locale/newPageWizard.properties");
-	      var footerProse = L10NUtils.getStringFromURL("footer",
-	                                             "chrome://bluegriffon/locale/newPageWizard.properties");
-	      navProse =    L10NUtils.getStringFromURL("nav",
-	                                             "chrome://bluegriffon/locale/newPageWizard.properties");
-	
-	      var h1 = doc.createElement("h1");
-	      var headerTextNode = doc.createTextNode(headerProse);
-	      h1.appendChild(headerTextNode);
-	      headerDiv.appendChild(h1);
-	      var p = doc.createElement("p");
-	      var footerTextNode = doc.createTextNode(footerProse);
-	      p.appendChild(footerTextNode);
-	      footerDiv.appendChild(p);
-	
-	      loremIpsumStr = "<p>" + loremIpsumProse + "</p>";
-	    }
-	    else
-	    {
-	      var headerBr = doc.createElement("br");
-	      headerDiv.appendChild(headerBr);
-	      var footerBr = doc.createElement("br");
-	      footerDiv.appendChild(footerBr);
-	    }
-	
-	    var mainContainer = bodyDiv;
-	    if (docClass != "yui-t7")
-	    {
-	      mainContainer = doc.createElement("div");
-	      mainContainer.setAttribute("class", "yui-b");
-	      mainContainerContainer = doc.createElement("div");
-	      mainContainerContainer.setAttribute("id", "yui-main");
-	
-	      mainContainerContainer.appendChild(mainContainer);
-	      bodyDiv.appendChild(mainContainerContainer);
-	    }
-	
-	    var listbox = gDialog.ContentRowsListbox;
-	    for (var i = 0 ; i < listbox.itemCount; i++)
-	    {
-	      var item = listbox.getItemAtIndex(i);
-	      var value = item.value;
-	      var ihtml = "";
-	      switch (value)
-	      {
-	        case "1": // .yui-g
-	          ihtml = "<div class='yui-g'>" + loremIpsumStr + "</div>";
-	          break;  // oneColumn100
-	
-	        case "2": // .yui-g > .yui-u.first + .yui-u 
-	          ihtml = "<div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // twoColumns5050
-	
-	        case "3": // .yui-gc > .yui-u.first + .yui-u 
-	          ihtml = "<div class='yui-gc'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // twoColumns6633
-	
-	        case "4": // .yui-gd > .yui-u.first + .yui-u 
-	          ihtml = "<div class='yui-gd'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // twoColumns3366
-	
-	        case "5": // .yui-ge > .yui-u.first + .yui-u 
-	          ihtml = "<div class='yui-ge'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // twoColumns7525
-	
-	        case "6": // .yui-gf > .yui-u.first + .yui-u 
-	          ihtml = "<div class='yui-gf'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // twoColumns2575
-	
-	        case "7": // .yui-gb > .yui-u.first + .yui-u + .yui-u 
-	          ihtml = "<div class='yui-gb'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // threeColumns333333
-	
-	        case "8": // .yui-g > .yui-u first + .yui-g > .yui-u.first + .yui-u
-	          ihtml = "<div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
-	                               "</div><div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
-	                                                   "</div><div class='yui-u'>" + loremIpsumStr +
-	                                       "</div></div></div>";
-	          break;  // threeColumns502525
-	
-	        case "9": // .yui-g > .yui-g.first ( > .yui-u.first + .yui-u ) + .yui-u
-	          ihtml = "<div class='yui-g'><div class='yui-g first'><div class='yui-u first'>" + loremIpsumStr +
-	                                                   "</div><div class='yui-u'>" + loremIpsumStr +
-	                                       "</div></div><div class='yui-u'>" + loremIpsumStr +
-	                               "</div></div>";
-	          break;  // threeColumns252550
-	
-	        case "10": // .yui-g > .yui-g.first ( > .yui-u.first + .yui-u ) + .yui-g ( > .yui-u.first + .yui-u )
-	          ihtml = "<div class='yui-g'><div class='yui-g first'><div class='yui-u first'>" + loremIpsumStr +
-	                                                   "</div><div class='yui-u'>" + loremIpsumStr +
-	                                       "</div></div><div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
-	                                                   "</div><div class='yui-u'>" + loremIpsumStr +
-	                                       "</div></div></div>";
-	          break;  // fourColumns25252525
-	
-	        default: break // should not happen
-	      }
-	      mainContainer.innerHTML += ihtml;
-	    }
-	
-	    // the sidebar now...
-	    if (docClass != "yui-t7")
-	    {
-	      bodyDiv.innerHTML += "<div class='yui-b'>" + navProse + "</div>";
-	    }
-	  }
-	
-	  // DOCUMENT METADATA
-	  if (gDialog.pageTitle.value)
-	  {
-	    EditorUtils.setDocumentTitle(gDialog.pageTitle.value);
-	  }
-	
-	  if (gDialog.pageAuthor.value)
-	  {
-	    var meta = EditorUtils.createMetaElement("author");
-	    EditorUtils.insertMetaElement(meta, gDialog.pageAuthor.value, true, false);
-	  }
-	
-	  if (gDialog.pageDescription.value)
-	  {
-	    meta = EditorUtils.createMetaElement("description");
-	    EditorUtils.insertMetaElement(meta, gDialog.pageDescription.value, true, false);
-	  }
-	
-	  if (gDialog.pageKeywords.value)
-	  {
-	    meta = EditorUtils.createMetaElement("keywords");
-	    EditorUtils.insertMetaElement(meta, gDialog.pageKeywords.value, true, false);
-	  }
-	
-	  meta = EditorUtils.createMetaElement("generator");
-	  EditorUtils.insertMetaElement(meta, "BlueGriffon wysiwyg editor", true, false);
-	
-	  if (gDialog.pageLanguage.value)
-	    EditorUtils.getCurrentDocument().documentElement.
-	      setAttribute("lang", gDialog.pageLanguage.value);
-	
-	  if (gDialog.directionRadio.value)
-	    EditorUtils.getCurrentDocument().documentElement.
-	      setAttribute("dir", gDialog.directionRadio.value);
-	
-	  // COLORS
-	  var prefs = GetPrefs();
-	  if (gDialog.makeColorsDefault.checked)
-	    prefs.setBoolPref("bluegriffon.display.use_system_colors", !gDialog.userDefinedColors.checked)
-	  if (gDialog.userDefinedColors.checked)
-	  {
-	    var bgColor      = gDialog.backgroundColorColorpicker.color;
-	    var fgColor      = gDialog.textColorColorpicker.color;
-	    var linksColor   = gDialog.linksColorColorpicker.color;
-	    var activeColor  = gDialog.activeLinksColorColorpicker.color;
-	    var visitedColor = gDialog.visitedLinksColorColorpicker.color;
-	
-	    CssUtils.getStyleSheetForScreen(doc, editor);
-	    CssUtils.addRuleForSelector(editor, doc, "html",
-	                                [ { property: "background-color",
-	                                    value: bgColor,
-	                                    priority: false } ] );
-	    CssUtils.addRuleForSelector(editor, doc, "body",
-	                                [ { property: "background-color",
-	                                    value: bgColor,
-	                                    priority: false }]);
-	    CssUtils.addRuleForSelector(editor, doc, "body",
-	                                [ {
-	                                    property: "color",
-	                                    value: fgColor,
-	                                    priority: false } ] );
-	    CssUtils.addRuleForSelector(editor, doc, ":link",
-	                                [ { property: "color",
-	                                    value: linksColor,
-	                                    priority: false } ] );
-	    if (!gDialog.underlineLinks.checked)
-	      CssUtils.addRuleForSelector(editor, doc, ":link",
-	                                  [ { property: "text-decoration",
-	                                      value: "none",
-	                                      priority: false } ] );
-	    CssUtils.addRuleForSelector(editor, doc, ":link:active",
-	                                [ { property: "color",
-	                                    value: activeColor,
-	                                    priority: false } ] );
-	    CssUtils.addRuleForSelector(editor, doc, ":link:visited",
-	                                [ { property: "color",
-	                                    value: visitedColor,
-	                                    priority: false } ] );
-	
-	    if (gDialog.makeColorsDefault.checked)
-	    {
-	      prefs.setCharPref("bluegriffon.display.foreground_color", fgColor);
-	      prefs.setCharPref("bluegriffon.display.background_color", bgColor);
-	      prefs.setCharPref("bluegriffon.display.active_color", activeColor);
-	      prefs.setCharPref("bluegriffon.display.anchor_color", linksColor);
-	      prefs.setCharPref("bluegriffon.display.visited_color", visitedColor);
-	      prefs.setBoolPref("bluegriffon.display.underline_links", gDialog.underlineLinks.checked);
-	    }
-	  }
-	
-	  // BACKGROUND IMAGE
-	  var bgImage = gDialog.backgroundImage.value; 
-	  if (bgImage)
-	  {
-	    var bgRepeat     = gDialog.backgroundTile.value;
-	    var bgAttachment = gDialog.backgroundScroll.value;
-	    var bgPosition   = gDialog.horizPosition.value + " " + gDialog.vertPosition.value;
-	    CssUtils.addRuleForSelector(editor, doc, "html",
-	                                [ { property: "background-image",
-	                                    value: 'url("' + bgImage + '")',
-	                                    priority: false },
-	                                  {
-	                                    property: "background-repeat",
-	                                    value: bgRepeat,
-	                                    priority: false },
-	                                  {
-	                                    property: "background-attachment",
-	                                    value: bgAttachment,
-	                                    priority: false },
-	                                  {
-	                                    property: "background-position",
-	                                    value: bgPosition,
-	                                    priority: false } ] );
-	  }
-	
-	  /* character set */
-	  EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
+    // UI CSS GRID LAYOUT
+    if (gDialog.usePageLayout.checked)
+    {
+      var loremIpusm = gDialog.LoremIpsumCheckbox.checked;
+  
+  
+      var file = Components.classes["@mozilla.org/file/directory_service;1"].  
+                           getService(Components.interfaces.nsIProperties).  
+                           get("CurProcD", Components.interfaces.nsIFile);    
+      file.append("res");
+      var resetFontsGridsFile = file.clone();
+      resetFontsGridsFile.append("reset-fonts-grids.css");
+      var baseMinFile = file.clone();
+      baseMinFile.append("base-min.css");
+      
+      var styleElt = doc.createElement("style");
+      styleElt.setAttribute("type", "text/css");
+      styleElt.textContent = ReadFileContents(resetFontsGridsFile); 
+      EditorUtils.getHeadElement().appendChild(styleElt);
+      styleElt = doc.createElement("style");
+      styleElt.setAttribute("type", "text/css");
+      styleElt.textContent = ReadFileContents(baseMinFile);
+      EditorUtils.getHeadElement().appendChild(styleElt);
+  
+      var docId    = gDialog.LayoutTypeMenulist.value;
+      var docClass = gDialog.LayoutSubtypeMenulist.value;
+      var outerDiv = doc.createElement("div");
+      outerDiv.setAttribute("id", docId);
+      outerDiv.setAttribute("class", docClass);
+      doc.body.innerHTML = "";
+      doc.body.appendChild(outerDiv);
+  
+      var headerDiv = doc.createElement("div");
+      headerDiv.setAttribute("id", "hd");
+      var bodyDiv = doc.createElement("div");
+      bodyDiv.setAttribute("id", "bd");
+      var footerDiv = doc.createElement("div");
+      footerDiv.setAttribute("id", "ft");
+      outerDiv.appendChild(headerDiv);
+      outerDiv.appendChild(bodyDiv);
+      outerDiv.appendChild(footerDiv);
+  
+      var loremIpsumStr = "<br>";
+      var navProse = "";
+      if (loremIpusm)
+      {
+        var loremIpsumProse = L10NUtils.getStringFromURL("loremIpsum",
+                                               "chrome://bluegriffon/locale/newPageWizard.properties");
+        var headerProse = L10NUtils.getStringFromURL("header",
+                                               "chrome://bluegriffon/locale/newPageWizard.properties");
+        var footerProse = L10NUtils.getStringFromURL("footer",
+                                               "chrome://bluegriffon/locale/newPageWizard.properties");
+        navProse =    L10NUtils.getStringFromURL("nav",
+                                               "chrome://bluegriffon/locale/newPageWizard.properties");
+  
+        var h1 = doc.createElement("h1");
+        var headerTextNode = doc.createTextNode(headerProse);
+        h1.appendChild(headerTextNode);
+        headerDiv.appendChild(h1);
+        var p = doc.createElement("p");
+        var footerTextNode = doc.createTextNode(footerProse);
+        p.appendChild(footerTextNode);
+        footerDiv.appendChild(p);
+  
+        loremIpsumStr = "<p>" + loremIpsumProse + "</p>";
+      }
+      else
+      {
+        var headerBr = doc.createElement("br");
+        headerDiv.appendChild(headerBr);
+        var footerBr = doc.createElement("br");
+        footerDiv.appendChild(footerBr);
+      }
+  
+      var mainContainer = bodyDiv;
+      if (docClass != "yui-t7")
+      {
+        mainContainer = doc.createElement("div");
+        mainContainer.setAttribute("class", "yui-b");
+        mainContainerContainer = doc.createElement("div");
+        mainContainerContainer.setAttribute("id", "yui-main");
+  
+        mainContainerContainer.appendChild(mainContainer);
+        bodyDiv.appendChild(mainContainerContainer);
+      }
+  
+      var listbox = gDialog.ContentRowsListbox;
+      for (var i = 0 ; i < listbox.itemCount; i++)
+      {
+        var item = listbox.getItemAtIndex(i);
+        var value = item.value;
+        var ihtml = "";
+        switch (value)
+        {
+          case "1": // .yui-g
+            ihtml = "<div class='yui-g'>" + loremIpsumStr + "</div>";
+            break;  // oneColumn100
+  
+          case "2": // .yui-g > .yui-u.first + .yui-u 
+            ihtml = "<div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // twoColumns5050
+  
+          case "3": // .yui-gc > .yui-u.first + .yui-u 
+            ihtml = "<div class='yui-gc'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // twoColumns6633
+  
+          case "4": // .yui-gd > .yui-u.first + .yui-u 
+            ihtml = "<div class='yui-gd'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // twoColumns3366
+  
+          case "5": // .yui-ge > .yui-u.first + .yui-u 
+            ihtml = "<div class='yui-ge'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // twoColumns7525
+  
+          case "6": // .yui-gf > .yui-u.first + .yui-u 
+            ihtml = "<div class='yui-gf'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // twoColumns2575
+  
+          case "7": // .yui-gb > .yui-u.first + .yui-u + .yui-u 
+            ihtml = "<div class='yui-gb'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // threeColumns333333
+  
+          case "8": // .yui-g > .yui-u first + .yui-g > .yui-u.first + .yui-u
+            ihtml = "<div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
+                                 "</div><div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
+                                                     "</div><div class='yui-u'>" + loremIpsumStr +
+                                         "</div></div></div>";
+            break;  // threeColumns502525
+  
+          case "9": // .yui-g > .yui-g.first ( > .yui-u.first + .yui-u ) + .yui-u
+            ihtml = "<div class='yui-g'><div class='yui-g first'><div class='yui-u first'>" + loremIpsumStr +
+                                                     "</div><div class='yui-u'>" + loremIpsumStr +
+                                         "</div></div><div class='yui-u'>" + loremIpsumStr +
+                                 "</div></div>";
+            break;  // threeColumns252550
+  
+          case "10": // .yui-g > .yui-g.first ( > .yui-u.first + .yui-u ) + .yui-g ( > .yui-u.first + .yui-u )
+            ihtml = "<div class='yui-g'><div class='yui-g first'><div class='yui-u first'>" + loremIpsumStr +
+                                                     "</div><div class='yui-u'>" + loremIpsumStr +
+                                         "</div></div><div class='yui-g'><div class='yui-u first'>" + loremIpsumStr +
+                                                     "</div><div class='yui-u'>" + loremIpsumStr +
+                                         "</div></div></div>";
+            break;  // fourColumns25252525
+  
+          default: break // should not happen
+        }
+        mainContainer.innerHTML += ihtml;
+      }
+  
+      // the sidebar now...
+      if (docClass != "yui-t7")
+      {
+        bodyDiv.innerHTML += "<div class='yui-b'>" + navProse + "</div>";
+      }
+    }
+  
+    // DOCUMENT METADATA
+    if (gDialog.pageTitle.value)
+    {
+      EditorUtils.setDocumentTitle(gDialog.pageTitle.value);
+    }
+  
+    if (gDialog.pageAuthor.value)
+    {
+      var meta = EditorUtils.createMetaElement("author");
+      EditorUtils.insertMetaElement(meta, gDialog.pageAuthor.value, true, false);
+    }
+  
+    if (gDialog.pageDescription.value)
+    {
+      meta = EditorUtils.createMetaElement("description");
+      EditorUtils.insertMetaElement(meta, gDialog.pageDescription.value, true, false);
+    }
+  
+    if (gDialog.pageKeywords.value)
+    {
+      meta = EditorUtils.createMetaElement("keywords");
+      EditorUtils.insertMetaElement(meta, gDialog.pageKeywords.value, true, false);
+    }
+  
+    meta = EditorUtils.createMetaElement("generator");
+    EditorUtils.insertMetaElement(meta, "BlueGriffon wysiwyg editor", true, false);
+  
+    if (gDialog.pageLanguage.value)
+      EditorUtils.getCurrentDocument().documentElement.
+        setAttribute("lang", gDialog.pageLanguage.value);
+  
+    if (gDialog.directionRadio.value)
+      EditorUtils.getCurrentDocument().documentElement.
+        setAttribute("dir", gDialog.directionRadio.value);
+  
+    // COLORS
+    var prefs = GetPrefs();
+    if (gDialog.makeColorsDefault.checked)
+      prefs.setBoolPref("bluegriffon.display.use_system_colors", !gDialog.userDefinedColors.checked)
+    if (gDialog.userDefinedColors.checked)
+    {
+      var bgColor      = gDialog.backgroundColorColorpicker.color;
+      var fgColor      = gDialog.textColorColorpicker.color;
+      var linksColor   = gDialog.linksColorColorpicker.color;
+      var activeColor  = gDialog.activeLinksColorColorpicker.color;
+      var visitedColor = gDialog.visitedLinksColorColorpicker.color;
+  
+      CssUtils.getStyleSheetForScreen(doc, editor);
+      CssUtils.addRuleForSelector(editor, doc, "html",
+                                  [ { property: "background-color",
+                                      value: bgColor,
+                                      priority: false } ] );
+      CssUtils.addRuleForSelector(editor, doc, "body",
+                                  [ { property: "background-color",
+                                      value: bgColor,
+                                      priority: false }]);
+      CssUtils.addRuleForSelector(editor, doc, "body",
+                                  [ {
+                                      property: "color",
+                                      value: fgColor,
+                                      priority: false } ] );
+      CssUtils.addRuleForSelector(editor, doc, ":link",
+                                  [ { property: "color",
+                                      value: linksColor,
+                                      priority: false } ] );
+      if (!gDialog.underlineLinks.checked)
+        CssUtils.addRuleForSelector(editor, doc, ":link",
+                                    [ { property: "text-decoration",
+                                        value: "none",
+                                        priority: false } ] );
+      CssUtils.addRuleForSelector(editor, doc, ":link:active",
+                                  [ { property: "color",
+                                      value: activeColor,
+                                      priority: false } ] );
+      CssUtils.addRuleForSelector(editor, doc, ":link:visited",
+                                  [ { property: "color",
+                                      value: visitedColor,
+                                      priority: false } ] );
+  
+      if (gDialog.makeColorsDefault.checked)
+      {
+        prefs.setCharPref("bluegriffon.display.foreground_color", fgColor);
+        prefs.setCharPref("bluegriffon.display.background_color", bgColor);
+        prefs.setCharPref("bluegriffon.display.active_color", activeColor);
+        prefs.setCharPref("bluegriffon.display.anchor_color", linksColor);
+        prefs.setCharPref("bluegriffon.display.visited_color", visitedColor);
+        prefs.setBoolPref("bluegriffon.display.underline_links", gDialog.underlineLinks.checked);
+      }
+    }
+  
+    // BACKGROUND IMAGE
+    var bgImage = gDialog.backgroundImage.value; 
+    if (bgImage)
+    {
+      var bgRepeat     = gDialog.backgroundTile.value;
+      var bgAttachment = gDialog.backgroundScroll.value;
+      var bgPosition   = gDialog.horizPosition.value + " " + gDialog.vertPosition.value;
+      CssUtils.addRuleForSelector(editor, doc, "html",
+                                  [ { property: "background-image",
+                                      value: 'url("' + bgImage + '")',
+                                      priority: false },
+                                    {
+                                      property: "background-repeat",
+                                      value: bgRepeat,
+                                      priority: false },
+                                    {
+                                      property: "background-attachment",
+                                      value: bgAttachment,
+                                      priority: false },
+                                    {
+                                      property: "background-position",
+                                      value: bgPosition,
+                                      priority: false } ] );
+    }
+  
+    /* character set */
+    EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
   }
   catch(e) {}
 

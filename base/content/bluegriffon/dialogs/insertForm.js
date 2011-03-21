@@ -75,17 +75,17 @@ function onAccept()
 
   if (gDialog.methodGETButton.hasAttribute("checked") ||
       gDialog.methodPOSTButton.hasAttribute("checked"))
-	  gEditor.setAttribute(gNode, "method",
-	                       gDialog.methodGETButton.hasAttribute("checked") ? "GET" :
-	                         (gDialog.methodPOSTButton.hasAttribute("checked") ? "POST" : ""));
+    gEditor.setAttribute(gNode, "method",
+                         gDialog.methodGETButton.hasAttribute("checked") ? "GET" :
+                           (gDialog.methodPOSTButton.hasAttribute("checked") ? "POST" : ""));
     else
     gEditor.removeAttribute(gNode, "method");
 
   if (gDialog.autocompleteOnButton.hasAttribute("checked") ||
       gDialog.autocompleteOffButton.hasAttribute("checked"))
-	  gEditor.setAttribute(gNode, "autocomplete",
-	                       gDialog.autocompleteOnButton.hasAttribute("checked") ? "on" :
-	                         (gDialog.autocompleteOffButton.hasAttribute("checked") ? "off" : ""));
+    gEditor.setAttribute(gNode, "autocomplete",
+                         gDialog.autocompleteOnButton.hasAttribute("checked") ? "on" :
+                           (gDialog.autocompleteOffButton.hasAttribute("checked") ? "off" : ""));
   else
     gEditor.removeAttribute(gNode, "autocomplete");
 

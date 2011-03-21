@@ -2002,7 +2002,7 @@ NameGuesser.prototype = {
     },
 
     createXMLHTTPObject: function() {
-	    // Try XHR methods in order and store XHR factory
+      // Try XHR methods in order and store XHR factory
         var xmlhttp, XMLHttpFactories = [
             function() {
                 return new XMLHttpRequest();
@@ -8091,19 +8091,19 @@ var EditSession = function(text, mode) {
         var tabSize = this.getTabSize();
 
         for (var i = 0; i < str.length; i++) {
-			var c = str.charCodeAt(i);
-			// Tab
-			if (c == 9) {
-			    arr.push(TAB);
-			    for (var n = 1; n < tabSize; n++) {
-			        arr.push(TAB_SPACE);
-			    }
-			}
-			// Space
-			else if(c == 32) {
-			    arr.push(SPACE);
-			}
-    		// CJK characters
+      var c = str.charCodeAt(i);
+      // Tab
+      if (c == 9) {
+          arr.push(TAB);
+          for (var n = 1; n < tabSize; n++) {
+              arr.push(TAB_SPACE);
+          }
+      }
+      // Space
+      else if(c == 32) {
+          arr.push(SPACE);
+      }
+        // CJK characters
             else if (
                 c >= 0x3040 && c <= 0x309F || // Hiragana
                 c >= 0x30A0 && c <= 0x30FF || // Katakana
@@ -8129,14 +8129,14 @@ var EditSession = function(text, mode) {
     this.$getStringScreenWidth = function(str) {
         var screenColumn = 0;
         var tabSize = this.getTabSize();
-		
-		for (var i=0; i<str.length; i++) {
-			var c = str.charCodeAt(i);
-			// tab
-			if (c == 9) {
-				screenColumn += tabSize;
-			}
-    		// CJK characters
+    
+    for (var i=0; i<str.length; i++) {
+      var c = str.charCodeAt(i);
+      // tab
+      if (c == 9) {
+        screenColumn += tabSize;
+      }
+        // CJK characters
             else if (
                 c >= 0x3040 && c <= 0x309F || // Hiragana
                 c >= 0x30A0 && c <= 0x30FF || // Katakana
@@ -8144,13 +8144,13 @@ var EditSession = function(text, mode) {
                 c >= 0xF900 && c <= 0xFAFF ||
                 c >= 0x3400 && c <= 0x4DBF
             ) {
-            	screenColumn += 2;
-			} else {
-				screenColumn += 1;
-			}
-		}
-		
-		return screenColumn;
+              screenColumn += 2;
+      } else {
+        screenColumn += 1;
+      }
+    }
+    
+    return screenColumn;
     }
 
     this.getRowHeight = function(config, row) {
@@ -8261,15 +8261,15 @@ var EditSession = function(text, mode) {
         } else {
             var wrapData = this.$wrapData;
 
-			var docRow = 0;
-			while (docRow < linesCount && row >= wrapData[docRow].length + 1) {
-				row -= wrapData[docRow].length + 1;
-				docRow ++;
-			}
+      var docRow = 0;
+      while (docRow < linesCount && row >= wrapData[docRow].length + 1) {
+        row -= wrapData[docRow].length + 1;
+        docRow ++;
+      }
 
             if (docRow >= linesCount) {
                 docRow = linesCount-1
-				row = wrapData[docRow].length;
+        row = wrapData[docRow].length;
             }
             docColumn = wrapData[docRow][row - 1] || 0;
             line = this.getLine(docRow).substring(docColumn);
@@ -8315,7 +8315,7 @@ var EditSession = function(text, mode) {
         // Clamp docColumn.
         if (this.$useWrapMode) {
             column = wrapData[docRow][row]
-			if (docColumn >= column) {
+      if (docColumn >= column) {
                 // We remove one character at the end such that the docColumn
                 // position returned is not associated to the next row on the
                 // screen.
@@ -9452,7 +9452,7 @@ var Document = function(text) {
         this.remove(new Range(0, 0, len, this.getLine(len-1).length));
         this.insert({row: 0, column:0}, text);
     };
-  	
+    
     this.getValue = function() {
         return this.getAllLines().join(this.getNewLineCharacter());
     };
@@ -11737,7 +11737,7 @@ var Gutter = function(parentEl) {
                 "' title='", annotation.text.join("\n"),
                 "' style='height:", this.session.getRowHeight(config, i), "px;'>", (i+1), "</div>");
         }
-		this.element = dom.setInnerHtml(this.element, html.join(""));
+    this.element = dom.setInnerHtml(this.element, html.join(""));
         this.element.style.height = config.minHeight + "px";
     };
 

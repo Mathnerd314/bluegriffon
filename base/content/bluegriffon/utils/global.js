@@ -233,8 +233,8 @@ function initClassMenu(menuPopup, aUseSelection)
   
         menuPopup.appendChild(menuEntry);
       }
-	    var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
-	    menuPopup.appendChild(menuSep);
+      var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");
+      menuPopup.appendChild(menuSep);
     }
   }
 
@@ -287,10 +287,10 @@ function initClassMenu(menuPopup, aUseSelection)
       }
     }
     if (menuPopup.lastElementChild.nodeName == "menuseparator") {
-	    menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-	    menuEntry.setAttribute("disabled","true");
-	    menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
-	    menuPopup.appendChild(menuEntry);
+      menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+      menuEntry.setAttribute("disabled","true");
+      menuEntry.setAttribute("label",   L10NUtils.getString("NoClassAvailable"));
+      menuPopup.appendChild(menuEntry);
     }
   }
   else
@@ -318,11 +318,11 @@ function initIdMenu(menuPopup)
     menuPopup.appendChild(menuEntry);
   }
   else {
-	  var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
-	  menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
+    var menuEntry = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+    menuEntry.setAttribute("label",   L10NUtils.getString("NoIdAvailable"));
     menuEntry.setAttribute("value",   "");
     menuEntry.setAttribute("disabled","true");
-	  menuPopup.appendChild(menuEntry);
+    menuPopup.appendChild(menuEntry);
   }
 
   var menuSep = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuseparator");

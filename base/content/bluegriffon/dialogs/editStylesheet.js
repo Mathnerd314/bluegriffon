@@ -114,22 +114,22 @@ function NewFile()
     var file = fp.file;
 
     // file is nsIFile, data is a string
-		var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
-		                         createInstance(Components.interfaces.nsIFileOutputStream);
-		
-		// use 0x02 | 0x10 to open file for appending.
-		foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
-		// write, create, truncate
-		// In a c file operation, we have no need to set file mode with or operation,
-		// directly using "r" or "w" usually.
-		
-		// if you are sure there will never ever be any non-ascii text in data you can 
-		// also call foStream.writeData directly
-		var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
-		                          createInstance(Components.interfaces.nsIConverterOutputStream);
-		converter.init(foStream, "UTF-8", 0, 0);
-		converter.writeString("");
-		converter.close(); // this closes foStream
+    var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+                             createInstance(Components.interfaces.nsIFileOutputStream);
+    
+    // use 0x02 | 0x10 to open file for appending.
+    foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+    // write, create, truncate
+    // In a c file operation, we have no need to set file mode with or operation,
+    // directly using "r" or "w" usually.
+    
+    // if you are sure there will never ever be any non-ascii text in data you can 
+    // also call foStream.writeData directly
+    var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+                              createInstance(Components.interfaces.nsIConverterOutputStream);
+    converter.init(foStream, "UTF-8", 0, 0);
+    converter.writeString("");
+    converter.close(); // this closes foStream
 
     gDialog.urlTextbox.value = spec;
     CheckURL('urlTextbox', 'relativeURLCheckbox');
@@ -164,8 +164,8 @@ function onAccept()
         case "length":
         case "resolution":
           if (c.querySelector(".value").value)
-	          str += (str ? " and " : "") +
-	                 "(" + type + ": " + c.querySelector(".value").value + ")";
+            str += (str ? " and " : "") +
+                   "(" + type + ": " + c.querySelector(".value").value + ")";
           break;
         case "boolean":
           str += ((c.querySelector(".value").checked && str) ? " and " : "") +
@@ -173,9 +173,9 @@ function onAccept()
           break;
         case "ratio":
           if (c.querySelector(".value1").value && c.querySelector(".value2").value)
-	          str += (str ? " and " : "") +
-	                 "(" + type + ": " + c.querySelector(".value1").value + "/" +
-	                                     c.querySelector(".value2").value + ")";
+            str += (str ? " and " : "") +
+                   "(" + type + ": " + c.querySelector(".value1").value + "/" +
+                                       c.querySelector(".value2").value + ")";
           break;
       }
     }
@@ -204,22 +204,22 @@ function onAccept()
     editor.endTransaction();
   }
   else {
-	  var elt = doc.createElement(isStyleElt ? "style" : "link");
-	  elt.setAttribute("type", "text/css");
-	  if (!isStyleElt) {
-	    elt.setAttribute("rel", gDialog.alternateCheckbox.checked ?
-	                              "alternate stylesheet" :
-	                              "stylesheet");
-	    elt.setAttribute("href", gDialog.urlTextbox.value);
-	  }
-	  if (gDialog.titleTextbox.value)
-	    elt.setAttribute("title", gDialog.titleTextbox.value);
-	
-	  if (mediaString)
-	    elt.setAttribute("media", mediaString);
-	
-	  var head = doc.documentElement.querySelector("head");
-	  EditorUtils.getCurrentEditor().insertNode(elt, head, head.childNodes.length + 1);
+    var elt = doc.createElement(isStyleElt ? "style" : "link");
+    elt.setAttribute("type", "text/css");
+    if (!isStyleElt) {
+      elt.setAttribute("rel", gDialog.alternateCheckbox.checked ?
+                                "alternate stylesheet" :
+                                "stylesheet");
+      elt.setAttribute("href", gDialog.urlTextbox.value);
+    }
+    if (gDialog.titleTextbox.value)
+      elt.setAttribute("title", gDialog.titleTextbox.value);
+  
+    if (mediaString)
+      elt.setAttribute("media", mediaString);
+  
+    var head = doc.documentElement.querySelector("head");
+    EditorUtils.getCurrentEditor().insertNode(elt, head, head.childNodes.length + 1);
   }
 }
 
