@@ -19,6 +19,7 @@ function Startup()
 
   InitDialog();
   CheckURL();
+  window.sizeToContent();
 }
 
 function InitDialog()
