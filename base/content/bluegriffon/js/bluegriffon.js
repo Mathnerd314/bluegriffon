@@ -729,7 +729,7 @@ function ToggleViewMode(aElement)
     NotifierUtils.notify("afterEnteringSourceMode");
     editorElement.parentNode.selectedIndex = 0;
 
-    MarkSelectionInAce(bespinEditor);
+    MarkSelectionInAce(bespinEditor, source);
 
     bespinIframe.focus();
     bespinEditor.focus();
@@ -1556,9 +1556,10 @@ function MarkSelectionInAce(aAceEditor)
   aAceEditor.replace("");
 
   aAceEditor.gotoLine(startRow);
+  //bespinEditor.getSession().setValue(source.replace(/\-\-BG\-\-/g, ""));
   selection.setSelectionRange({ start: { row: startRow, column: startColumn },
                                 end:   { row: endRow,   column: endColumn } });
-                                
+  aAceEditor.reset();
 }
 
 function FillAceThemesMenupopup()

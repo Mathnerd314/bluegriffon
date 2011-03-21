@@ -5165,6 +5165,11 @@ var Editor =function(renderer, session) {
         this.session.getUndoManager().redo();
     };
 
+    this.reset = function() {
+        this.session.$deltas = [];
+        this.session.getUndoManager().reset();
+    };
+
 }).call(Editor.prototype);
 
 
