@@ -59,6 +59,7 @@ function UpdateButtons()
 function onAccept()
 {
   var id = gDialog.anchorNameMenulist.value;
+  var editor = EditorUtils.getCurrentEditor();
   if (gNode) {
     if (gOriginalAnchor) {
       if (gNode.id == gOriginalAnchor)
@@ -70,7 +71,24 @@ function onAccept()
       gNode.id = id;
   }
   else {
-    EditorUtils.getCurrentEditor().setInlineProperty("a", "name", id)
+    var isCollapsed = editor.selection.isCollapsed;
+    if (isCollapsed) {
+      editor.beginTransaction();
+      var anchor = editor.document.createElement("a")
+      anchor.setAttribute("name", id);
+      try {
+        editor.insertElementAtSelection(anchor, false);
+        editor.endTransaction();
+        if (gIsHTML5) {
+          editor.setAttribute(anchor, "id", id);
+          //editor.removeAttribute(anchor, "name");
+          //editor.setCaretAfterElement(anchor);
+        }
+      }
+      catch (e) {}
+    }
+    else
+      editor.setInlineProperty("a", gIsHTML5 ? "id" : "name", id)
   }
 }
 
