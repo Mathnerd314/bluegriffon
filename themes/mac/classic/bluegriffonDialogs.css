@@ -60,7 +60,8 @@ length {
 
 .medium-delete-button {
   visibility: hidden;
-  list-style-image: url("chrome://global/skin/icons/closetab.png");
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
 }
 
 hbox:hover > .medium-delete-button {
@@ -68,9 +69,9 @@ hbox:hover > .medium-delete-button {
 }
 
 .medium-delete-button:hover {
-  list-style-image: url("chrome://global/skin/icons/closetab-hover.png") !important;
+  -moz-image-region: rect(0, 32px, 16px, 16px);
 }
 
 .medium-delete-button:hover:active {
-  list-style-image: url("chrome://global/skin/icons/closetab-active.png");
+  -moz-image-region: rect(0, 48px, 16px, 32px);
 }

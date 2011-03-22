@@ -11,8 +11,9 @@
 
   <prefpane id="newPagePrefPane">
     <preferences>
-      <preference id="pref-author"       name="bluegriffon.author" type="string"/>
-      <preference id="pref-source-theme" name="bluegriffon.source.theme" type="string"/>
+      <preference id="pref-author"          name="bluegriffon.author" type="string"/>
+      <preference id="pref-source-theme"    name="bluegriffon.source.theme" type="string"/>
+      <preference id="pref-source-entities" name="bluegriffon.source.entities" type="string"/>
     </preferences>
     <groupbox>
       <caption label="&author.caption;"/>
@@ -46,6 +47,20 @@
           <menupopup id="sourceThemeMenupopup"/>
         </menulist>
       </hbox>
+
+      <vbox>
+        <label value="&specialChars.description;"/>
+        <menulist id="entitiesOutputMenulist"
+                  class="indent"
+                  preference="pref-source-entities">
+          <menupopup>
+            <menuitem label="&basicEncoding.label;"          value="basic"/>
+            <menuitem label="&latin1EntitiesEncoding.label;" value="latin1"/>
+            <menuitem label="&htmlEntitiesEncoding.label;"   value="html"/>
+            <menuitem label="&allEntitiesEncoding.label;"    value="unicode"/>
+          </menupopup>
+        </menulist>
+      </vbox>
     </groupbox>
   </prefpane>
 

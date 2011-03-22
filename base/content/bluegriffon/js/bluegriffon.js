@@ -702,10 +702,20 @@ function ToggleViewMode(aElement)
     gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
 
-    var flags = 1 << 1; // OutputFormatted
-    flags |= 1 << 5; // OutputWrap
-    //flags |= 1 << 2; // OutputRaw
-    flags |= 1 << 10; // OutputLF
+    const nsIDE = Components.interfaces.nsIDocumentEncoder;
+    var flags = nsIDE.OutputFormatted ;
+    flags |= nsIDE.OutputWrap;
+    flags |= nsIDE.OutputLFLineBreak;
+    flags |= nsIDE.OutputPersistNBSP;
+
+    var encodeEntity = GetPrefs().getCharPref("bluegriffon.source.entities");
+    switch (encodeEntity) {
+      case "basic"  : flags |= nsIDE.OutputEncodeBasicEntities;     break;
+      case "latin1" : flags |= nsIDE.OutputEncodeLatin1Entities;    break;
+      case "html"   : flags |= nsIDE.OutputEncodeHTMLEntities;      break;
+      case "unicode": flags |= nsIDE.OutputEncodeCharacterEntities; break;
+      default: break;
+    }
 
     var mimeType = EditorUtils.getCurrentDocument().contentType;
     var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + mimeType]
@@ -745,6 +755,7 @@ function ToggleViewMode(aElement)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
       source = bespinEditor.getSession().getValue();
+      bespinEditor.blur();
       var oldSource = bespinIframe.getUserData("oldSource"); 
       if (source != oldSource) {
         var doctype = EditorUtils.getCurrentDocument().doctype.publicId;
@@ -852,6 +863,7 @@ function RebuildFromSource(aDoc, aContext)
   }
   NotifierUtils.notify("afterLeavingSourceMode");
   window.content.focus();
+  EditorUtils.getCurrentEditorElement().focus();
 }
 
 function doCloseTab(aTab)
@@ -877,7 +889,8 @@ function doCloseTab(aTab)
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
-  gDialog.tabeditor.updateOSXCloseButton();
+  if (gDialog.tabeditor)
+    gDialog.tabeditor.updateOSXCloseButton();
   UpdateBadge();
 }
 

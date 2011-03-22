@@ -14,6 +14,10 @@
   list-style-image: url("chrome://bluegriffon/skin/icons/closetab-hover.png");
 }
 
+.floatingpanel-close:hover:active {
+  list-style-image: url("chrome://bluegriffon/skin/icons/closetab-active.png");
+}
+
 box[anonid="resizer"] {
   width: 25px;
   height: 25px;

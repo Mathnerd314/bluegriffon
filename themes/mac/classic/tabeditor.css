@@ -176,15 +176,16 @@ tabeditor > tabbox > tabpanels {
 
 .tabeditor-tab:hover .tab-close-button {
   visibility: visible;
-  list-style-image: url("chrome://global/skin/icons/closetab.png");
+  list-style-image: url("chrome://global/skin/icons/close.png");
+  -moz-image-region: rect(0, 16px, 16px, 0);
 }
 
 .tabeditor-tab .tab-close-button:hover {
-  list-style-image: url("chrome://global/skin/icons/closetab-hover.png") !important;
+  -moz-image-region: rect(0, 32px, 16px, 16px);
 }
 
 .tabeditor-tab .tab-close-button:hover:active {
-  list-style-image: url("chrome://global/skin/icons/closetab-active.png");
+  -moz-image-region: rect(0, 48px, 16px, 32px);
 }
 
 .tabeditor-tab {
