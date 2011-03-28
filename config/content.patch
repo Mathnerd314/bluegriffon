@@ -1,6 +1,21 @@
-diff -r df3c1150dd7a content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Sat Jan 08 00:48:44 2011 -0800
-+++ b/content/base/src/nsCopySupport.cpp	Tue Jan 18 15:31:17 2011 +0100
+diff -r b1f60621c95b content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Mon Mar 07 13:34:54 2011 -0800
++++ b/content/base/public/nsIDocumentEncoder.idl	Mon Mar 28 18:23:53 2011 +0200
+@@ -237,6 +237,11 @@
+   const unsigned long OutputFormatDelSp  = (1 << 20);
+  
+   /**
++   * Output all non-ascii characters as numeric entities
++   */
++  const unsigned long OutputEncodeCharacterEntities = (1 << 21);
++
++  /**
+    * Initialize with a pointer to the document and the mime type.
+    * @param aDocument Document to encode.
+    * @param aMimeType MimeType to use. May also be set by SetMimeType.
+diff -r b1f60621c95b content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Mon Mar 07 13:34:54 2011 -0800
++++ b/content/base/src/nsCopySupport.cpp	Mon Mar 28 18:23:53 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -10,9 +25,9 @@ diff -r df3c1150dd7a content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r df3c1150dd7a content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Sat Jan 08 00:48:44 2011 -0800
-+++ b/content/base/src/nsDocumentEncoder.cpp	Tue Jan 18 15:31:17 2011 +0100
+diff -r b1f60621c95b content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Mon Mar 07 13:34:54 2011 -0800
++++ b/content/base/src/nsDocumentEncoder.cpp	Mon Mar 28 18:23:53 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -22,9 +37,37 @@ diff -r df3c1150dd7a content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r df3c1150dd7a content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Sat Jan 08 00:48:44 2011 -0800
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Tue Jan 18 15:31:17 2011 +0100
+diff -r b1f60621c95b content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Mon Mar 07 13:34:54 2011 -0800
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Mar 28 18:23:53 2011 +0200
+@@ -513,7 +513,8 @@
+   PRBool nonBasicEntities =
+     !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
+                  nsIDocumentEncoder::OutputEncodeHTMLEntities   |
+-                 nsIDocumentEncoder::OutputEncodeW3CEntities));
++                 nsIDocumentEncoder::OutputEncodeW3CEntities    |
++                 nsIDocumentEncoder::OutputEncodeCharacterEntities));
+ 
+   if (!nonBasicEntities &&
+       (mFlags & (nsIDocumentEncoder::OutputEncodeBasicEntities))) {
+@@ -569,7 +570,13 @@
+       // needs to be replaced
+       for (; c < fragmentEnd; c++, advanceLength++) {
+         PRUnichar val = *c;
+-        if (val <= kValNBSP && entityTable[val]) {
++        if ((val == kValNBSP || val > 127) &&
++            (mFlags & nsIDocumentEncoder::OutputEncodeCharacterEntities)) {
++          nsAutoString entityValue(PRUnichar('#'));
++          entityValue.AppendInt(val);
++          entityText = ToNewCString(entityValue);
++		break;
++        } else if (val <= kValNBSP && entityTable[val]) {
+           fullConstEntityText = entityTable[val];
+           break;
+         } else if (val > 127 &&
+diff -r b1f60621c95b content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Mon Mar 07 13:34:54 2011 -0800
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Mar 28 18:23:53 2011 +0200
 @@ -897,6 +897,8 @@
        name == nsGkAtoms::noframes
        ) {
@@ -48,9 +91,9 @@ diff -r df3c1150dd7a content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
-diff -r df3c1150dd7a editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Sat Jan 08 00:48:44 2011 -0800
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue Jan 18 15:31:17 2011 +0100
+diff -r b1f60621c95b editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Mar 07 13:34:54 2011 -0800
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Mar 28 18:23:53 2011 +0200
 @@ -1386,7 +1386,8 @@
                                       aSourceDoc,
                                       aDestinationNode, aDestOffset,
