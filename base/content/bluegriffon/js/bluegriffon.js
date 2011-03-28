@@ -816,11 +816,13 @@ function ToggleViewMode(aElement)
 function CloneElementContents(editor, sourceElt, destElt)
 {
   editor.cloneAttributes(destElt, sourceElt);
-  var destChild = destElt.lastChild;
-  while (destChild) {
-    editor.deleteNode(destChild);
-    destChild = destElt.lastChild;
+  var lastChild = destElt.lastChild;
+  if (!lastChild || lastChild.nodeName.toLowerCase() != "br") {
+    lastChild = editor.document.createElement("br");
+    lastChild.setAttribute("type", "_moz");
+    editor.insertNode(lastChild, destElt, destElt.childNodes.length);
   }
+
   var sourceChild = sourceElt.firstChild;
   while (sourceChild) {
     if (sourceChild.nodeType == Node.ELEMENT_NODE) {
@@ -838,6 +840,13 @@ function CloneElementContents(editor, sourceElt, destElt)
 
     sourceChild = sourceChild.nextSibling;
   }
+
+  var child = destElt.firstChild;
+  do {
+    var stopIt = (child == lastChild);
+    editor.deleteNode(child);
+    child = destElt.firstChild;
+  } while (!stopIt);
 }
 
 function RebuildFromSource(aDoc, aContext)
@@ -852,10 +861,17 @@ function RebuildFromSource(aDoc, aContext)
     editor.beginTransaction();
     // clone html attributes
     editor.cloneAttributes(editor.document.documentElement, aDoc.documentElement);
-    // clone body
-    CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
     // clone head
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
+    // clone body
+    CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
+    /*var child = editor.document.body.lastChild;
+    if (!child || child.nodeName.toLowerCase() != "br") { // CreateTrailingBRIfNeeded
+      var mozbr = editor.document.createElement("br");
+      mozbr.setAttribute("type", "_moz");
+      editor.insertNode(mozbr, editor.document.body, editor.document.body.childNodes.length);
+    }
+    editor.endOfDocument();*/
     editor.endTransaction();
 
     // the window title is updated by DOMTitleChanged event
