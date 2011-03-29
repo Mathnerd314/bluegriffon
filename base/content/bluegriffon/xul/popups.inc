@@ -148,6 +148,15 @@
     <menuseparator/>
     <menuitem id="cMenu_selectAll" key="key_selectAll"/>
     <menuseparator/>
+    <menuitem id="cMenu_removeAllStyles"
+              label="&removeAllStyles.label;"
+              accesskey="&removeAllStyles.accesskey;"
+              observes="cmd_removeStyles"/>
+    <menuitem id="cMenu_removeAllLinks"
+              label="&removeAllLinks.label;"
+              accesskey="&removeAllLinks.accesskey;"
+              observes="cmd_removeLinks"/>
+    <menuseparator />
     <menuitem id="cMenu_copyHTMLCode"
               label="&copyHTMLCodeCmd.label;"
               observes="cmd_copyHTMLCode"/>
