@@ -11,4 +11,3 @@ fs.jar:
   content/fs/addFont.xul           (content/addFont.xul)
   content/fs/addFont.js            (content/addFont.js)
 
-fs-locale.jar:
