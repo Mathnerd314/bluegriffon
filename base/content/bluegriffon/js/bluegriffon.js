@@ -1487,18 +1487,25 @@ function MarkSelection()
       startContainer.data = data;
     }
     else if (startContainer.nodeType == Node.ELEMENT_NODE) {
-      var node = startContainer.childNodes.item(startOffset);
-      if (node.nodeType == Node.TEXT_NODE) {
-        var data = node.data;
-        gDummySelectionStartNode = node;
-        gDummySelectionStartData = data;
-        data = kBGBGBG + data;
-        node.data = data;
+      if (startOffset < startContainer.childNodes.length) {
+        var node = startContainer.childNodes.item(startOffset);
+        if (node.nodeType == Node.TEXT_NODE) {
+          var data = node.data;
+          gDummySelectionStartNode = node;
+          gDummySelectionStartData = data;
+          data = kBGBGBG + data;
+          node.data = data;
+        }
+        else {
+          var t = EditorUtils.getCurrentDocument().createTextNode(kBGBGBG);
+          gDummySelectionStartNode = t;
+          startContainer.insertBefore(t, node);
+        }
       }
       else {
         var t = EditorUtils.getCurrentDocument().createTextNode(kBGBGBG);
         gDummySelectionStartNode = t;
-        startContainer.insertBefore(t, node);
+        startContainer.appendChild(t);
       }
     }
 
