@@ -371,9 +371,11 @@
             var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
             progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 
-            newEditorElement.addEventListener("load", function(evt) { if (evt.originalTarget == content.document){ } }, true);
+            newEditorElement.addEventListener("load", function(evt) { 
+                var _self = this;
+                if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
-            // newEditorElement.addEventListener("keypress", function(evt) { JSEditor.deleteSelection(evt) }, true);
+
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
             newEditorElement.addEventListener("click", function(evt) { OnClick(evt) }, true);
 
@@ -387,6 +389,17 @@
 
             return {tab: newTab, panel: newEditorElement};
           ]]>
+        </body>
+      </method>
+
+      <method name="this.finishInstall">
+        <parameter name="aPL" />
+        <body>
+        <![CDATA[
+          aPL.onStateChange(null, null, Components.interfaces.nsIWebProgressListener.STATE_STOP |
+                                        Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK,
+                            null);
+        ]]>
         </body>
       </method>
 
