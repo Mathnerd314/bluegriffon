@@ -371,8 +371,8 @@
             var progressListener = new EditorContentListener(this, newEditorElement, aURL, newTab);
             progress.addProgressListener(progressListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 
+            var _self = this;
             newEditorElement.addEventListener("load", function(evt) { 
-                var _self = this;
                 if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
             newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
 
