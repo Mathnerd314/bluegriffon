@@ -865,13 +865,6 @@ function RebuildFromSource(aDoc, aContext)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     // clone body
     CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
-    /*var child = editor.document.body.lastChild;
-    if (!child || child.nodeName.toLowerCase() != "br") { // CreateTrailingBRIfNeeded
-      var mozbr = editor.document.createElement("br");
-      mozbr.setAttribute("type", "_moz");
-      editor.insertNode(mozbr, editor.document.body, editor.document.body.childNodes.length);
-    }
-    editor.endOfDocument();*/
     editor.endTransaction();
 
     // the window title is updated by DOMTitleChanged event

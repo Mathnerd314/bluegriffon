@@ -345,12 +345,12 @@
         <menuitem label="Extensions"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
-        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/>
+        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences" label="&preferences.label;"
                   oncommand="OpenPreferences()"/>
-        <menuitem label="Venkman"
-                  oncommand="start_venkman()"/>
+        <!--menuitem label="Venkman"
+                  oncommand="start_venkman()"/-->
       </menupopup>
     </menu>
 
