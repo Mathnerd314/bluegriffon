@@ -20,7 +20,7 @@ function InitDialog()
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
 
   gDoc = EditorUtils.getCurrentDocument()
-  gIsHTML5 = (gDoc.doctype.publicId == "");
+  gIsHTML5 = (gDoc.doctype && gDoc.doctype.publicId == "");
 
   var ids = CssUtils.getAllIdsForDocument(gDoc);
   for (var i = 0; i < ids.length; i++) {

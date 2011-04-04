@@ -758,11 +758,13 @@ function ToggleViewMode(aElement)
       bespinEditor.blur();
       var oldSource = bespinIframe.getUserData("oldSource"); 
       if (source != oldSource) {
-        var doctype = EditorUtils.getCurrentDocument().doctype.publicId;
+        var doctype = EditorUtils.getCurrentDocument().doctype;
+        var publicId = doctype ? doctype.publicId : null;
         var isXML = false;
-        switch (doctype) {
+        switch (publicId) {
           case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
           case "http://www.w3.org/TR/html4/loose.dtd":
+          case null:
             isXML = false;
             break;
           case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
@@ -1277,11 +1279,13 @@ function start_css()
 
 function UpdateTabHTMLDialect(editor)
 {
-  var doctype = editor.document.doctype.systemId;
+  var doctype = editor.document.doctype;
+  var systemId = doctype ? doctype.systemId : null;
   var tab = gDialog.tabeditor.selectedTab;
-  switch (doctype) {
+  switch (systemId) {
     case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
     case "http://www.w3.org/TR/html4/loose.dtd":
+    case null:
       tab.setAttribute("tooltiptext", "HTML 4");
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1

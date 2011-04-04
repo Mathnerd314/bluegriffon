@@ -503,7 +503,7 @@ var EditorUtils = {
   isStrictDTD: function()
   {
     var doctype = this.getCurrentEditor().document.doctype;
-    return (doctype.publicId.lastIndexOf("Strict") != -1);
+    return (doctype && doctype.publicId.lastIndexOf("Strict") != -1);
   },
   
   isCSSDisabledAndStrictDTD: function()
@@ -533,11 +533,13 @@ var EditorUtils = {
   {
     var doc = this.getCurrentDocument();
     var editorMimeType = doc.contentType;
-    var doctype = doc.doctype.systemId;
+    var doctype = doc.doctype;
+    var systemId = doctype ? doc.doctype.systemId : null;
     var isXML = false;
-    switch (doctype) {
+    switch (systemId) {
       case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
       case "http://www.w3.org/TR/html4/loose.dtd":
+      case null:
         isXML = false;
         break;
       case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
