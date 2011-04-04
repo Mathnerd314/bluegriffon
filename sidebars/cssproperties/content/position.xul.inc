@@ -136,18 +136,19 @@
 
           <row align="center">
             <label value="&zIndex.label;"/>
-            <hbox align="center">
+           <hbox align="center">
                 <menulist editable="true" id="zIndexMenulist" property="z-index"
-                          oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)"
-                          oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'auto', true)">
+                          oncommand="onLengthMenulistCommand(this, ' ', 'auto', true)"
+                          oninput="onLengthMenulistCommand(this, ' ', 'auto', true)"
+                          sizetopopup="none">
                   <menupopup id="lineHeightMenupopup"
-                             onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                             onpopupshowing="PopulateLengths(this, ' ')">
                     <menuseparator/>
                     <menuitem label="&zIndexAuto.label;" value="auto"/>
                   </menupopup>
                 </menulist>
-                <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch')"
-                             ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true)"/>
+                <spinbuttons onup="IncreaseLength(this, ' ')"
+                             ondown="DecreaseLength(this, ' ', true)"/>
             </hbox>
           </row>
 
