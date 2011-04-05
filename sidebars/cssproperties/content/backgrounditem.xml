@@ -100,7 +100,7 @@
                       <xul:row align="center">
                         <xul:menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
                         <xul:menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
-                        <xul:menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
+                        <xul:menuitem label="&backgroundPositionRightCenter.label;" value="right center"/>
                       </xul:row>
                       <xul:row align="center">
                         <xul:menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
