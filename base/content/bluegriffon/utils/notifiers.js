@@ -54,6 +54,9 @@ var NotifierUtils = {
       }
     var errorString = aErrorString +
                       (aHelperString ? " '" + aHelperString + "'" : "");
+    /*Components.classes['@mozilla.org/consoleservice;1']
+              .getService(Components.interfaces.nsIConsoleService)
+              .logStringMessage(errorString);*/
   },
 
   _addNotifier: function NotifierUtils__addNotifier(aKeyword)
@@ -136,11 +139,9 @@ var NotifierUtils = {
           processes[i].apply(contexts[i], arguments);
         }
         catch (e) {
-          this._error("callback raised an exception for notifier id", aKeyword);
+          this._error(e + "\ncallback raised an exception for notifier id", aKeyword);
         }
     }
-    else
-      this._error("called with unrecognized notifier id", aKeyword);
   }
 
 };

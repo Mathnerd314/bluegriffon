@@ -54,5 +54,37 @@ function Startup()
   if (url)
     setTimeout(OpenFile, 100, url, true);
 
+  setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
 }
+
+var gLastTabsArray;
+function LoadLastTabs()
+{
+  var lastTabs = "";
+  gLastTabsArray = [];
+  try {
+    lastTabs = GetPrefs().getCharPref("bluegriffon.defaults.lastTabs");
+    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", "");
+  }
+  catch(e) {}
+  if (lastTabs) {
+    gLastTabsArray = lastTabs.split("|");
+    //gLastTabsArray.reverse();
+    NotifierUtils.addNotifierCallback("tabCreated", OpenTabFromPreviousSession);
+    var url = gLastTabsArray.pop();
+    OpenFile(url, true);
+  }
+}
+
+function OpenTabFromPreviousSession(aReason, aContext)
+{
+  if (gLastTabsArray.length) {
+    var url = gLastTabsArray.pop();
+    OpenFile(url, true);
+  }
+  else {
+    NotifierUtils.removeNotifierCallback("tabCreated", OpenTabFromPreviousSession);
+  }
+}
+

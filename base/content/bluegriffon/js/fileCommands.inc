@@ -120,11 +120,18 @@ var cmdCloseTab =
                              L10NUtils.getString("DontCloseTab"),
                              L10NUtils.getString("NoDiscardChanges"));
        switch(rv) {
-         case 1: return rv;
-         case 0: if (!cmdSave.doCommand()) return rv;
+         case 1:
+           SaveCurrentTabLocation();
+           return rv;
+         case 0:
+           if (!cmdSave.doCommand()) {
+             SaveCurrentTabLocation();
+             return rv;
+           }
          default: break;
        }
     }
+    SaveCurrentTabLocation();
     doCloseTab(EditorUtils.getCurrentTabEditor().selectedTab);
     return rv;
   }

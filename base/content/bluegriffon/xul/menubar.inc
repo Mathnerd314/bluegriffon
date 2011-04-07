@@ -29,7 +29,7 @@
                   label="&quit.label;"
                   accesskey="&quit.accesskey;"
                   key="key_quitApplication"
-                  oncommand="goQuitApplication()"/>
+                  oncommand="SaveTabs(); goQuitApplication()"/>
       </menupopup>
     </menu>
 

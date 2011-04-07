@@ -1648,3 +1648,32 @@ function ResetBadge()
   badger.restoreIcon();
 }
 #endif
+
+function SaveCurrentTabLocation()
+{
+  try {
+    if (!GetPrefs().getBoolPref("bluegriffon.defaults.restorePreviousSession"))
+      return;
+  }
+  catch(e) {}
+
+  var URL = EditorUtils.getDocumentUrl();
+  var lastTabs = "";
+  try {
+    lastTabs = GetPrefs().getCharPref("bluegriffon.defaults.lastTabs");
+  }
+  catch(e) {}
+  lastTabs += (lastTabs ? "|" : "") + URL;
+  try {
+    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", lastTabs);
+  }
+  catch(e) {}
+}
+
+function SaveTabs()
+{
+  try {
+    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", "");
+  }
+  catch(e) {}
+}
