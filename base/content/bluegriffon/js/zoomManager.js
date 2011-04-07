@@ -106,8 +106,26 @@ var BGZoomManager = {
       aMenulist.value = this.getCurrentZoom() * 100 + "%";
   },
 
+  addToSourceViewFontSize: function(aIncrement) {
+    var editorElement = EditorUtils.getCurrentEditorElement();
+    var bespinIframe = editorElement.previousSibling;
+    var bespinEditor = bespinIframe.contentWindow.getEditableElement();
+
+    var fontSize = bespinEditor.ownerDocument
+                               .defaultView
+                               .getComputedStyle(bespinEditor, "")
+                               .getPropertyCSSValue("font-size")
+                               .getFloatValue(CSSPrimitiveValue.CSS_PX)
+    fontSize = Math.max(fontSize + aIncrement, 6);
+    bespinEditor.style.fontSize = fontSize + "px";
+  },
+
   enlarge: function BGZoomManager_enlarge(aMenulist)
   {
+    if (GetCurrentViewMode() == "source") {
+      this.addToSourceViewFontSize(+1);
+      return;
+    }
     var zoomValues = this.zoomValues();
     var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
@@ -130,6 +148,10 @@ var BGZoomManager = {
 
   reduce: function BGZoomManager_reduce(aMenulist)
   {
+    if (GetCurrentViewMode() == "source") {
+      this.addToSourceViewFontSize(-1);
+      return;
+    }
     var zoomValues = this.zoomValues();
     var currentZoom = Math.round(this.getCurrentZoom() * 100) / 100;
     var i = zoomValues.indexOf(currentZoom);
