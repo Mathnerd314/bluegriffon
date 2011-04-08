@@ -7,7 +7,7 @@ filepickerbutton {
 }
 
 toolbarbutton.multibutton[checked],
-toolbarbutton.multibutton:hover:active {
+toolbarbutton.multibutton:hover:active:not([disabled]) {
 	text-shadow: rgba(129, 211, 255, 1) 0 0 3px;
 	-moz-box-shadow: 
 		inset rgba(0, 0, 0, 1) 0 2px 8px, 

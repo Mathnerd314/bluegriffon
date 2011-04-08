@@ -52,7 +52,11 @@ function TransitionsSectionIniter(aElt, aRuleset)
     item.functionValue = mttfArray[i];
   }
 
-  UpdateTransitionUI();
+  if (!(aElt instanceof Components.interfaces.nsIDOMCSSStyleSheet) ||
+      (aElt.parentStyleSheet &&
+       (!aElt.parentStyleSheet.href ||
+        aElt.parentStyleSheet.href.substr(0, 7) == "file://")))
+    UpdateTransitionUI();
 }
 
 function OnTransitionSelect(aElt)
