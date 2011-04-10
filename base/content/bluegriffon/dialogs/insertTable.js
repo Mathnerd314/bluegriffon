@@ -1186,7 +1186,7 @@ function _collectDescendants(aRv, aNode, aIndex, aArgs)
   if (aNode) {
     for (var i = 0; i < aNode.childNodes.length; i++) {
       var c = aNode.childNodes[i];
-      if (c.nodeName == aArgs[aIndex]) {
+      if (c.nodeName.toLowerCase() == aArgs[aIndex]) {
         if (aIndex == aArgs.length - 1)
           aRv.push(c);
         else
