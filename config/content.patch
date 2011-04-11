@@ -1,6 +1,6 @@
-diff -r b1f60621c95b content/base/public/nsIDocumentEncoder.idl
---- a/content/base/public/nsIDocumentEncoder.idl	Mon Mar 07 13:34:54 2011 -0800
-+++ b/content/base/public/nsIDocumentEncoder.idl	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Tue Mar 29 02:07:57 2011 +1100
++++ b/content/base/public/nsIDocumentEncoder.idl	Mon Apr 11 10:32:22 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -13,9 +13,9 @@ diff -r b1f60621c95b content/base/public/nsIDocumentEncoder.idl
     * Initialize with a pointer to the document and the mime type.
     * @param aDocument Document to encode.
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
-diff -r b1f60621c95b content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Mon Mar 07 13:34:54 2011 -0800
-+++ b/content/base/src/nsCopySupport.cpp	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/content/base/src/nsCopySupport.cpp	Mon Apr 11 10:32:22 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -25,9 +25,9 @@ diff -r b1f60621c95b content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r b1f60621c95b content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Mon Mar 07 13:34:54 2011 -0800
-+++ b/content/base/src/nsDocumentEncoder.cpp	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/content/base/src/nsDocumentEncoder.cpp	Mon Apr 11 10:32:22 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -37,9 +37,9 @@ diff -r b1f60621c95b content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r b1f60621c95b content/base/src/nsHTMLContentSerializer.cpp
---- a/content/base/src/nsHTMLContentSerializer.cpp	Mon Mar 07 13:34:54 2011 -0800
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Apr 11 10:32:22 2011 +0200
 @@ -513,7 +513,8 @@
    PRBool nonBasicEntities =
      !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
@@ -65,9 +65,9 @@ diff -r b1f60621c95b content/base/src/nsHTMLContentSerializer.cpp
            fullConstEntityText = entityTable[val];
            break;
          } else if (val > 127 &&
-diff -r b1f60621c95b content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Mon Mar 07 13:34:54 2011 -0800
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Apr 11 10:32:22 2011 +0200
 @@ -897,6 +897,8 @@
        name == nsGkAtoms::noframes
        ) {
@@ -91,9 +91,9 @@ diff -r b1f60621c95b content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
-diff -r b1f60621c95b editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Mar 07 13:34:54 2011 -0800
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Mar 28 18:23:53 2011 +0200
+diff -r f74d318349d8 editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Apr 11 10:32:22 2011 +0200
 @@ -1386,7 +1386,8 @@
                                       aSourceDoc,
                                       aDestinationNode, aDestOffset,
@@ -104,3 +104,48 @@ diff -r b1f60621c95b editor/libeditor/html/nsHTMLDataTransfer.cpp
        }
      }
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
+diff -r f74d318349d8 editor/libeditor/html/nsHTMLEditRules.cpp
+--- a/editor/libeditor/html/nsHTMLEditRules.cpp	Tue Mar 29 02:07:57 2011 +1100
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Apr 11 10:32:22 2011 +0200
+@@ -1450,39 +1450,8 @@
+     // it is to search for both tabs and newlines.
+     if (isPRE || IsPlaintextEditor())
+     {
+-      while (unicodeBuf && (pos != -1) && (pos < (PRInt32)(*inString).Length()))
+-      {
+-        PRInt32 oldPos = pos;
+-        PRInt32 subStrLen;
+-        pos = tString.FindChar(nsCRT::LF, oldPos);
+-
+-        if (pos != -1) 
+-        {
+-          subStrLen = pos - oldPos;
+-          // if first char is newline, then use just it
+-          if (subStrLen == 0)
+-            subStrLen = 1;
+-        }
+-        else
+-        {
+-          subStrLen = tString.Length() - oldPos;
+-          pos = tString.Length();
+-        }
+-
+-        nsDependentSubstring subStr(tString, oldPos, subStrLen);
+-        
+-        // is it a return?
+-        if (subStr.Equals(newlineStr))
+-        {
+-          res = mHTMLEditor->CreateBRImpl(address_of(curNode), &curOffset, address_of(unused), nsIEditor::eNone);
+-          pos++;
+-        }
+-        else
+-        {
+-          res = mHTMLEditor->InsertTextImpl(subStr, address_of(curNode), &curOffset, doc);
+-        }
+-        NS_ENSURE_SUCCESS(res, res);
+-      }
++      res = mHTMLEditor->InsertTextImpl(tString, address_of(curNode), &curOffset, doc);
++      NS_ENSURE_SUCCESS(res, res);
+     }
+     else
+     {
