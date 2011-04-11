@@ -95,13 +95,11 @@
 hbox.csspropertiesHeader {
   border-top: thin solid silver;
   padding-left: 3px;
-%ifdef XP_MACOSX
-  background-image: -moz-linear-gradient( silver, silver 10%, gray );
-%else
-  background-color: #cac7b6;
-  background-image: -moz-linear-gradient( #cac7b6, #dad8b7 50%, #cac7b6 );
+  background-color: #dee4ea;
+%ifndef XP_MACOSX
+  font-weight: bold;
 %endif
-  font-size: larger; 
+
 }
 
 hbox.csspropertiesHeader > image {
@@ -119,7 +117,7 @@ hbox.csspropertiesHeader[open="true"] > image {
   opacity: 0;
   overflow: hidden;
   padding: 1em;
-  background-color: transparent;
+  background-color: white;
 }
 
 hbox.csspropertiesHeader[open="true"] + .section {
