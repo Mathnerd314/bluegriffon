@@ -98,6 +98,9 @@ function LoadAudioFile()
 
 function AudioLoaded()
 {
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx - 1);
+
   gDialog.audioPreviewBox.hidden = false;
   document.documentElement.getButton("accept").disabled = false;
   window.sizeToContent();
@@ -106,6 +109,9 @@ function AudioLoaded()
 
 function CantLoadAudio()
 {
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx - 1);
+
   gDialog.audioPreviewBox.hidden = true;
   document.documentElement.getButton("accept").disabled = gDialog.urlTextbox.value || !gNode;
   window.sizeToContent();
@@ -158,4 +164,10 @@ function onAccept()
 
   gEditor.endTransaction();
   return true;
+}
+
+function LoadStarts()
+{
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx + 1);
 }

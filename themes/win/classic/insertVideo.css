@@ -2,3 +2,7 @@
 #heightTextbox {
   max-width: 8em;
 }
+
+#throbber[cx="0"] {
+  visibility: hidden;
+}

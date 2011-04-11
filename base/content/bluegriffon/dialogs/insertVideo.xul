@@ -34,7 +34,9 @@
         <vbox>
           <label value="&videoFileLocation.label;"/>
 			    <hbox align="center">
-			      <textbox id="urlTextbox" flex="1" oninput="LoadVideoFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
+			      <textbox id="urlTextbox"
+                     flex="1"
+                     oninput="LoadVideoFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
 			      <filepickerbutton id="urlFilepickerbutton"
 			                        control="urlTextbox"
 			                        mode="0"
@@ -42,9 +44,14 @@
 			                        oncommand="LoadVideoFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"
 			                        title="&selectFile.label;"/>
 			    </hbox>
-			    <checkbox class="indent" id="relativeURLCheckbox"
-			              label="&relativeUrl.label;"
-			              oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+          <hbox align="center">
+            <image src="chrome://bluegriffon/skin/throbber16.png"
+                   id="throbber"
+                   cx="0"/>
+  			    <checkbox class="indent" id="relativeURLCheckbox"
+  			              label="&relativeUrl.label;"
+  			              oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+          </hbox>
           <vbox id="videoPreviewBox" hidden="true">
 				    <grid>
 				      <columns><column/><column/><column/><column/></columns>
@@ -78,6 +85,7 @@
 				      <spacer flex="1"/>
 				      <html:video id="preview" controls="controls"
                           onloadeddata="VideoLoaded()"
+                          onloadstart="LoadStarts()"
                           onerror="CantLoadVideo()"/>
 				      <spacer flex="1"/>
 				    </hbox>

@@ -33,9 +33,14 @@
 	                    oncommand="LoadAudioFile(); CheckURL('urlTextbox', 'relativeURLCheckbox')"
 	                    title="&selectFile.label;"/>
 	</hbox>
-	<checkbox class="indent" id="relativeURLCheckbox"
-	          label="&relativeUrl.label;"
-	          oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+  <hbox align="center">
+    <image src="chrome://bluegriffon/skin/throbber16.png"
+           id="throbber"
+           cx="0"/>
+  	<checkbox class="indent" id="relativeURLCheckbox"
+  	          label="&relativeUrl.label;"
+  	          oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+  </hbox>
 	<vbox id="audioPreviewBox" hidden="true">
 	  <grid>
 	    <columns><column/><column/><column/><column/></columns>
@@ -62,7 +67,8 @@
 	  <hbox align="center" style="margin-top: 2em">
 	    <spacer flex="1"/>
 	    <html:audio id="preview" controls="controls"
-	                onloadeddata="AudioLoaded()"
+	                onloadstart="LoadStarts()"
+                  onloadeddata="AudioLoaded()"
 	                onerror="CantLoadAudio()"/>
 	    <spacer flex="1"/>
 	  </hbox>

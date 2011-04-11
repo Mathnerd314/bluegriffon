@@ -78,6 +78,7 @@ bluegriffon.jar:
   skin/classic/bluegriffon/icons/closetab-active.png (classic/icons/closetab-active.png)
   skin/classic/bluegriffon/icons/datalist.png  (classic/icons/datalist.png)
   skin/classic/bluegriffon/insertTable.css  (classic/insertTable.css)
+  skin/classic/bluegriffon/insertAudio.css  (classic/insertAudio.css)
   skin/classic/bluegriffon/insertVideo.css  (classic/insertVideo.css)
   skin/classic/bluegriffon/languages.css  (classic/languages.css)
   skin/classic/bluegriffon/backgroundImage.png  (classic/backgroundImage.png)

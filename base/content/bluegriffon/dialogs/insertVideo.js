@@ -113,6 +113,9 @@ function LoadPosterFile()
 
 function VideoLoaded()
 {
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx - 1);
+
   gDialog.videoPreviewBox.hidden = false;
   document.documentElement.getButton("accept").disabled = false;
   if (gDialog.widthTextbox)
@@ -125,6 +128,9 @@ function VideoLoaded()
 
 function CantLoadVideo()
 {
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx - 1);
+
   gDialog.videoPreviewBox.hidden = true;
   document.documentElement.getButton("accept").disabled = gDialog.urlTextbox.value || !gNode;
   window.sizeToContent();
@@ -261,4 +267,10 @@ function SavePosterAsFile()
     CheckURL('urlPosterTextbox', 'relativeURLPosterCheckbox');
   }
   catch(e) {alert(e)}
+}
+
+function LoadStarts()
+{
+  var cx = parseInt(gDialog.throbber.getAttribute("cx"));
+  gDialog.throbber.setAttribute("cx", cx + 1);
 }
