@@ -72,7 +72,8 @@ function AddTransition(aEvent)
   item.className = type + "Transition";
   gDialog.transitionsRichlistbox.appendChild(item);
   UpdateTransitionUI();
-  ReapplyTransitions();
+  if (value != property)
+    ReapplyTransitions();
 }
 
 function DeleteTransition()
