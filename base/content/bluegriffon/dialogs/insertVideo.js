@@ -274,3 +274,10 @@ function LoadStarts()
   var cx = parseInt(gDialog.throbber.getAttribute("cx"));
   gDialog.throbber.setAttribute("cx", cx + 1);
 }
+
+function OnProgress(e)
+{
+  var s = "";
+  for (var i in e) s+= i + " ";
+  alert(s)
+}

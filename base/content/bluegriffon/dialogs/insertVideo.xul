@@ -86,6 +86,7 @@
 				      <html:video id="preview" controls="controls"
                           onloadeddata="VideoLoaded()"
                           onloadstart="LoadStarts()"
+                          onprogress="OnProgress(event)"
                           onerror="CantLoadVideo()"/>
 				      <spacer flex="1"/>
 				    </hbox>

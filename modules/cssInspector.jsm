@@ -3829,10 +3829,10 @@ CSSParser.prototype = {
       }
       // now combinators and grouping...
       else if (!combinatorFound
-          && (token.isWhiteSpace()
-              || token.isSymbol(">")
-              || token.isSymbol("+")
-              || token.isSymbol("~"))) {
+                && (token.isWhiteSpace()
+                    || token.isSymbol(">")
+                    || token.isSymbol("+")
+                    || token.isSymbol("~"))) {
         if (token.isWhiteSpace())
           s += " ";
         else
@@ -3854,7 +3854,7 @@ CSSParser.prototype = {
         specificity.d += simpleSelector.specificity.d;
       }
 
-      isFirstInChain == false;
+      isFirstInChain = false;
       combinatorFound = false;
       token = this.getToken(false, true);
     }
