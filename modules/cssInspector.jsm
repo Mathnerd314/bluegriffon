@@ -1487,7 +1487,7 @@ CSSScanner.prototype = {
       else
         break;
     }
-    if (this.startsWithIdent(c, this.peek())) { // DIMENSION
+    if (c > 0 && this.startsWithIdent(c, this.peek())) { // DIMENSION
       var unit = this.gatherIdent(c);
       s += unit;
       return new jscsspToken(jscsspToken.DIMENSION_TYPE, s, unit);
@@ -1613,7 +1613,7 @@ CSSScanner.prototype = {
           case "|" :
             return new jscsspToken(jscsspToken.DASHMATCH_TYPE, "|=");
           case "^" :
-            return new jscsspToken(jscsspToken.BEGINSMATCH_TYPE, "=");
+            return new jscsspToken(jscsspToken.BEGINSMATCH_TYPE, "^=");
           case "$" :
             return new jscsspToken(jscsspToken.ENDSMATCH_TYPE, "$=");
           case "*" :
