@@ -899,9 +899,11 @@ function doCloseTab(aTab)
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
+#ifdef XP_MACOSX
   if (gDialog.tabeditor)
     gDialog.tabeditor.updateOSXCloseButton();
   UpdateBadge();
+#endif
 }
 
 function SetLocationDB()
