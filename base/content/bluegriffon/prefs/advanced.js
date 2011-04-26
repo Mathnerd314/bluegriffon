@@ -27,9 +27,11 @@ function OnAdvancedPaneLoad()
       var listitem = document.createElementNS(XUL_NS, "listitem");
       listitem.setAttribute("value", locale);
       var match = locale.match( /^([a-zA-Z]*)(\-([a-zA-Z]*))?$/ );
-      if (match) {
-        locale += " (" + gDialog.bundleLanguages.getString(match[1].toLowerCase()) + ", " +
-                         gDialog.bundleRegions.getString(match[3].toLowerCase()) + ")";
+      if (match && match[1]) {
+        locale += " (" + gDialog.bundleLanguages.getString(match[1].toLowerCase());
+        if (match[3])
+          locale += ", " + gDialog.bundleRegions.getString(match[3].toLowerCase());
+        locale += ")";
       }
       listitem.setAttribute("label", locale);
 
