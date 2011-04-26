@@ -703,8 +703,7 @@ function ToggleViewMode(aElement)
     HandlersManager.hideAllHandlers();
 
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
-    var flags = nsIDE.OutputFormatted ;
-    flags |= nsIDE.OutputWrap;
+    var flags = nsIDE.OutputRaw;
     flags |= nsIDE.OutputLFLineBreak;
     flags |= nsIDE.OutputPersistNBSP;
 
@@ -944,10 +943,6 @@ function doSaveTabsBeforeQuit()
 
 function doQuit()
 {
-/*  alert(gDialog.MainToolbox)
-  if (EditorUtils.getCurrentEditorElement() &&
-      gDialog.wysiwygModeButton)
-    ToggleViewMode(gDialog.wysiwygModeButton);*/
   return doSaveTabsBeforeQuit();
 }
 
