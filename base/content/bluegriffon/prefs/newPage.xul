@@ -26,7 +26,7 @@
     <groupbox>
       <caption label="Zoom"/>
       <hbox align="center">
-        <label value="Default zoom factor:"/>
+        <label value="&defaultZoomFactor.label;"/>
         <scale id="zoomScale"
                flex="1"
                min="1" max="300" increment="1"
