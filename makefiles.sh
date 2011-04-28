@@ -55,6 +55,7 @@ bluegriffon/extensions/gfd/Makefile
 bluegriffon/extensions/fs/Makefile
 bluegriffon/sidebars/cssproperties/Makefile
 bluegriffon/sidebars/domexplorer/Makefile
+bluegriffon/langpacks/Makefile
 bluegriffon/locales/Makefile
 bluegriffon/components/Makefile
 "

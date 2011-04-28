@@ -1,0 +1,24 @@
+DEPTH           = ../..
+topsrcdir       = @top_srcdir@
+srcdir          = @srcdir@
+VPATH           = @srcdir@
+
+include $(DEPTH)/config/autoconf.mk
+
+_AVAILABLE_LOCALES =\
+    fr-FR \
+    zh-CN \
+    es-ES \
+    cs \
+    de-DE \
+    he-IL \
+    it-IT \
+    $(NULL)
+    
+libs:: $(_AVAILABLE_LOCALES)
+	mkdir -p $(FINAL_TARGET)/distribution/extensions
+#	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -r ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/distribution/extensions
+
+include $(topsrcdir)/config/rules.mk
+
