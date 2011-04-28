@@ -1,0 +1,36 @@
+<!ENTITY backgroundAttachment.label "Připojení:">
+<!ENTITY backgroundAttachmentScroll.label "Rolování s textem">
+<!ENTITY backgroundAttachmentLocal.label "Připojené k elementu">
+<!ENTITY backgroundAttachmentFixed.label "Nerolovat">
+
+<!ENTITY backgroundSize.label "Velikost:">
+<!ENTITY backgroundSizeAuto.label "Automatická">
+<!ENTITY backgroundSizeContain.label "Obsažené v elementu">
+<!ENTITY backgroundSizeCover.label "Překrýt element">
+<!ENTITY backgroundSizeUserDefined.label "Select lengths">
+
+<!ENTITY backgroundRepeat.label "Opakování:">
+<!ENTITY backgroundRepeatRepeat.label "Opakovat v obou směrech">
+<!ENTITY backgroundRepeatSpace.label "Opakovat s ořezem">
+<!ENTITY backgroundRepeatRound.label "Změnit velikost a opakovat">
+<!ENTITY backgroundRepeatNorepeat.label "Vůbec neopakovat">
+<!ENTITY backgroundRepeatUserDefined.label "Vybrat opakování pro každou osu">
+
+<!ENTITY backgroundClip.label "Painting area:">
+<!ENTITY backgroundBorderbox.label "Border box">
+<!ENTITY backgroundPaddingbox.label "Padding box">
+<!ENTITY backgroundContentbox.label "Content box">
+
+<!ENTITY backgroundPosition.label "Umístění:">
+<!ENTITY backgroundPositionLeftTop.label "Vlevo nahoře">
+<!ENTITY backgroundPositionCenterTop.label "Nahoře uprostřed">
+<!ENTITY backgroundPositionRightTop.label "Vpravo nahoře">
+<!ENTITY backgroundPositionLeftCenter.label "Vlevo uprostřed">
+<!ENTITY backgroundPositionCenterCenter.label "Uprostřed">
+<!ENTITY backgroundPositionRightCenter.label "Vpravo uprostřed">
+<!ENTITY backgroundPositionLeftBottom.label "Vlevo dole">
+<!ENTITY backgroundPositionCenterBottom.label "Dole uprostřed">
+<!ENTITY backgroundPositionRightBottom.label "Vpravo dole">
+<!ENTITY backgroundPositionUserDefined.label "Definovat umístění přesněji">
+
+<!ENTITY backgroundOrigin.label "Počátek:">

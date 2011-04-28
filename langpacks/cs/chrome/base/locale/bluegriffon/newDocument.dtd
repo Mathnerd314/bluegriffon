@@ -1,0 +1,17 @@
+<!ENTITY window.title "BlueGriffon - Nový dokument">
+
+<!ENTITY documentType.description "Jaký typ dokumentu chcete vytvořit?">
+
+<!ENTITY language.label "Jazyk dokumentu">
+<!ENTITY html.label "HTML 4">
+<!ENTITY xhtml.label "XHTML 1">
+<!ENTITY html5.label "HTML 5">
+<!ENTITY xhtml5.label "XHTML 5">
+
+<!ENTITY doctype.label "Typ dokumentu">
+<!ENTITY transitional.label "Transitional">
+<!ENTITY strict.label "strict">
+
+<!ENTITY where.label "Kde?">
+<!ENTITY tab.label "V novém panelu">
+<!ENTITY window.label "V novém okně>

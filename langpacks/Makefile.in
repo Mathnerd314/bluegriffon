@@ -15,9 +15,10 @@ _AVAILABLE_LOCALES =\
     it-IT \
     $(NULL)
     
-libs::
+libs::$(_AVAILABLE_LOCALES)
 	mkdir -p $(FINAL_TARGET)/distribution/extensions
-#	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -r ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -r ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -r $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi . ;)
 	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/distribution/extensions
 
 include $(topsrcdir)/config/rules.mk

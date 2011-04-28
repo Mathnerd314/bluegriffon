@@ -1,0 +1,8 @@
+<!ENTITY rotation.label "Rotace">
+<!ENTITY translation.label "Překlopení">
+<!ENTITY skew.label "Zkosení">
+<!ENTITY aroundXAxis.label "Osa X:">
+<!ENTITY aroundYAxis.label "Osa Y:">
+<!ENTITY horizontally.label "Horizontálně:">
+<!ENTITY vertically.label "Vertikálně:">
+<!ENTITY scale.label "Měřítko">

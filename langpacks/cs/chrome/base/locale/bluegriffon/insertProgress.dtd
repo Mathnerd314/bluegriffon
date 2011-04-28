@@ -1,0 +1,5 @@
+<!ENTITY window.title "Vložit nebo upravit progress">
+
+<!ENTITY value.label "Hodnota:">
+<!ENTITY max.label "Max. hodnota:">
+<!ENTITY form.label "Forma:">

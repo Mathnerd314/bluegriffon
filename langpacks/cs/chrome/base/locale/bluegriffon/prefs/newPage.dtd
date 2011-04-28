@@ -1,0 +1,17 @@
+<!ENTITY author.caption "Autor">
+<!ENTITY authorName.label "Jméno autora:">
+
+<!ENTITY source.label "Zobrazení zdroje">
+<!ENTITY theme.label "Styl:">
+<!ENTITY darkTheme.label "Temný">
+<!ENTITY whiteTheme.label "Bílý">
+<!ENTITY requiresRestart.label "(Pro použití změn je nutný restart aplikace)">
+
+<!ENTITY specialChars.description      "Výstup následujících znaků jako entit:">
+<!-- ENTITY basicEncoding.label           "Only &amp; &lt; &gt; ' and non-breakable whitespace" -->
+<!ENTITY basicEncoding.label           "Pouze &amp; &lt; &gt; a pevné mezery">
+<!ENTITY latin1EntitiesEncoding.label  "Výše uvedené znaky a znaky Latin-1">
+<!ENTITY htmlEntitiesEncoding.label    "Všechny speciální znaky HTML 4">
+<!ENTITY allEntitiesEncoding.label     "Použít zápis &amp;#..; pro všechny ne-ASCII znaky">
+
+<!ENTITY defaultZoomFactor.label "Výchozí velikost zobrazení:">

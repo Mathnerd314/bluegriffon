@@ -1,0 +1,11 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - ***** END LICENSE BLOCK ***** -->
+<!ENTITY advancedJSDialog.title "Parámetros avanzados de JavaScript">
+<!ENTITY window.width "37em">
+<!ENTITY allowScripts.label "Permitir a los scripts:">
+<!ENTITY moveResizeWindows.label "Mover o redimensionar las ventanas existentes">
+<!ENTITY moveResizeWindows.accesskey "M">
+<!ENTITY raiseLowerWindows.label "Resaltar u ocultar ventanas">
+<!ENTITY raiseLowerWindows.accesskey "R">
+<!ENTITY disableContextMenus.label "Desactivar o reemplazar menús contextuales">
+<!ENTITY disableContextMenus.accesskey "D">

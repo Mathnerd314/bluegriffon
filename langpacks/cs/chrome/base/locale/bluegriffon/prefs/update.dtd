@@ -1,0 +1,8 @@
+<!ENTITY checkForUpdates.label "Kontrolovat aktualizace aplikace">
+
+<!ENTITY atLaunch.checkbox "Pokaždé při spuštění aplikace">
+<!ENTITY oncePerDay.checkbox "Nejvýše jednou denně">
+<!ENTITY manually.checkbox "Ručně">
+
+<!ENTITY checkNow.button "Zkontrolovat nyní">
+<!ENTITY privacyPolicy.label "Privacy policy">
