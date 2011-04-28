@@ -145,7 +145,8 @@ function InitDialog()
     // Fill in with value from editor prefs
     gPrefs = GetPrefs();
     if (gPrefs) 
-      gAuthor = gPrefs.getCharPref("bluegriffon.author");
+      gAuthor = gPrefs.getComplexValue("bluegriffon.author",
+                                       Components.interfaces.nsISupportsString).data;
   }
   catch(e) {}
   // if we still have no author name, use the system username if any

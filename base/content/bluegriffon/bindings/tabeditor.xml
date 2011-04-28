@@ -264,13 +264,16 @@
                         }
                       }
                       if (UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl())) {
-                        try {
-                          // add author's meta
-                          var author = GetPrefs().getCharPref("bluegriffon.author");
-                          var meta = EditorUtils.createMetaElement("author");
-                          EditorUtils.insertMetaElement(meta, author, true, false);
-                        }
-                        catch(e) {}
+                        var authorMeta = editor.document.querySelector("meta[name='author']");
+                        if (!authorMeta)
+                          try {
+                            // add author's meta
+                            var author = GetPrefs().getComplexValue("bluegriffon.author",
+                                                                    Components.interfaces.nsISupportsString).data;
+                            var meta = EditorUtils.createMetaElement("author");
+                            EditorUtils.insertMetaElement(meta, author, true, false);
+                          }
+                          catch(e) {}
                       }
 
                       try {
