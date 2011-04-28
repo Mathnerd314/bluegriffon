@@ -19,9 +19,9 @@ locale testpilot zh-CN chrome/zh-CN/locale/feedback/
 locale pippki zh-CN chrome/zh-CN/locale/zh-CN/pippki/
 locale global zh-CN chrome/zh-CN/locale/zh-CN/global/
 locale autoconfig zh-CN chrome/zh-CN/locale/zh-CN/autoconfig/
-locale bluegriffon zh-CN chrome/base/locale/bluegriffon/
-locale branding zh-CN chrome/base/locale/branding/
-locale fs zh-CN chrome/extensions/fs/
-locale gfd zh-CN chrome/extensions/gfd/
-locale cssproperties zh-CN chrome/sidebars/cssproperties/
-locale domexplorer zh-CN chrome/sidebars/domexplorer/
+locale bluegriffon zh-CN base/locale/bluegriffon/
+locale branding zh-CN base/locale/branding/
+locale fs zh-CN extensions/fs/
+locale gfd zh-CN extensions/gfd/
+locale cssproperties zh-CN sidebars/cssproperties/
+locale domexplorer zh-CN sidebars/domexplorer/

@@ -19,9 +19,9 @@ locale passwordmgr es-ES chrome/es-ES/locale/es-ES/passwordmgr/
 locale pippki es-ES chrome/es-ES/locale/es-ES/pippki/
 locale pipnss es-ES chrome/es-ES/locale/es-ES/pipnss/
 locale global-region es-ES chrome/es-ES/locale/es-ES/global-region/
-locale bluegriffon es-ES chrome/base/locale/bluegriffon/
-locale branding es-ES chrome/base/locale/branding/
-locale fs es-ES chrome/extensions/fs/
-locale gfd es-ES chrome/extensions/gfd/
-locale cssproperties es-ES chrome/sidebars/cssproperties/
-locale domexplorer es-ES chrome/sidebars/domexplorer/
+locale bluegriffon es-ES base/locale/bluegriffon/
+locale branding es-ES base/locale/branding/
+locale fs es-ES extensions/fs/
+locale gfd es-ES extensions/gfd/
+locale cssproperties es-ES sidebars/cssproperties/
+locale domexplorer es-ES sidebars/domexplorer/

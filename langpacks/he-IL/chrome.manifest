@@ -19,9 +19,9 @@ locale places he chrome/he/locale/he/places/
 locale cookie he chrome/he/locale/he/cookie/
 locale mozapps he chrome/he/locale/he/mozapps/
 locale pippki he chrome/he/locale/he/pippki/
-locale bluegriffon he chrome/base/locale/bluegriffon/
-locale branding he chrome/base/locale/branding/
-locale fs he chrome/extensions/fs/
-locale gfd he chrome/extensions/gfd/
-locale cssproperties he chrome/sidebars/cssproperties/
-locale domexplorer he chrome/sidebars/domexplorer/
+locale bluegriffon he base/locale/bluegriffon/
+locale branding he base/locale/branding/
+locale fs he extensions/fs/
+locale gfd he extensions/gfd/
+locale cssproperties he sidebars/cssproperties/
+locale domexplorer he sidebars/domexplorer/

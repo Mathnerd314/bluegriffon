@@ -19,9 +19,9 @@ locale global-region de chrome/de/locale/de/global-region/
 locale cookie de chrome/de/locale/de/cookie/
 locale alerts de chrome/de/locale/de/alerts/
 locale pipnss de chrome/de/locale/de/pipnss/
-locale bluegriffon de chrome/base/locale/bluegriffon/
-locale branding de chrome/base/locale/branding/
-locale fs de chrome/extensions/fs/
-locale gfd de chrome/extensions/gfd/
-locale cssproperties de chrome/sidebars/cssproperties/
-locale domexplorer de chrome/sidebars/domexplorer/
+locale bluegriffon de base/locale/bluegriffon/
+locale branding de base/locale/branding/
+locale fs de extensions/fs/
+locale gfd de extensions/gfd/
+locale cssproperties de sidebars/cssproperties/
+locale domexplorer de sidebars/domexplorer/

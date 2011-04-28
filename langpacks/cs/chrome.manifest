@@ -19,9 +19,9 @@ locale pippki cs chrome/cs/locale/cs/pippki/
 locale weave cs chrome/cs/locale/cs/
 locale autoconfig cs chrome/cs/locale/cs/autoconfig/
 locale cookie cs chrome/cs/locale/cs/cookie/
-locale bluegriffon cs chrome/base/locale/bluegriffon/
-locale branding cs chrome/base/locale/branding/
-locale fs cs chrome/extensions/fs/
-locale gfd cs chrome/extensions/gfd/
-locale cssproperties cs chrome/sidebars/cssproperties/
-locale domexplorer cs chrome/sidebars/domexplorer/
+locale bluegriffon cs base/locale/bluegriffon/
+locale branding cs base/locale/branding/
+locale fs cs extensions/fs/
+locale gfd cs extensions/gfd/
+locale cssproperties cs sidebars/cssproperties/
+locale domexplorer cs sidebars/domexplorer/
