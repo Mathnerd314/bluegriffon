@@ -13,7 +13,7 @@
 		               label="SVG Edit"
 	                 class="toolbarbutton-1"
 	                 observes="cmd_renderedHTMLEnabler"
-	                 tooltiptext="SVG Editor"
+	                 tooltiptext="SVG Edit"
 		               oncommand="start_svg_edit(null);"/>
 	</toolbarpalette>
 
