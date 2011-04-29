@@ -76,7 +76,21 @@ var MarkupCleaner = {
       aClearReport(gDialog.emptyCellsReport,  gDialog.emptyCellsCheckbox);
     }
 
-    function acceptNode(node, nestedLists, trailingBR, emptyBLocks, emptyCells)
+    function acceptNodeBR(node, nestedLists, trailingBR, emptyBLocks, emptyCells)
+    {
+      if (node.nodeType == Node.ELEMENT_NODE)
+      {
+        var tagName = node.nodeName.toLowerCase();
+        if (tagName== "br") {
+          if ((!gDialog.trailinBRCheckbox || gDialog.trailinBRCheckbox.checked) &&
+               MarkupCleaner.onlyWhiteTextNodesStartingAtNode(node.nextSibling, false))
+            return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+      return NodeFilter.FILTER_SKIP;
+    }
+
+    function acceptNodeBlocks(node, nestedLists, trailingBR, emptyBLocks, emptyCells)
     {
       // TBD : useless test below
       if (node.nodeType == Node.ELEMENT_NODE)
@@ -84,12 +98,6 @@ var MarkupCleaner = {
         var tagName = node.nodeName.toLowerCase();
         switch (tagName)
         {
-          case "br":
-            if ((!gDialog.trailinBRCheckbox || gDialog.trailinBRCheckbox.checked) &&
-                 MarkupCleaner.onlyWhiteTextNodesStartingAtNode(node.nextSibling, false))
-              return NodeFilter.FILTER_ACCEPT;
-            break;
-  
           case "ul":
           case "ol":
             if (!gDialog.nestedListsCheckbox || gDialog.nestedListsCheckbox.checked)
@@ -126,14 +134,38 @@ var MarkupCleaner = {
     }
   
     var editor = EditorUtils.getCurrentEditor();
+    editor.beginTransaction();
     var theDocument = editor.document;
     var treeWalker = theDocument.createTreeWalker(theDocument.documentElement,
                                                   NodeFilter.SHOW_ELEMENT,
-                                                  acceptNode,
+                                                  acceptNodeBR,
                                                   true);
     if (treeWalker) {
       var theNode = treeWalker.nextNode(), tmpNode;
-      editor.beginTransaction();
+      while (theNode) {
+        var tagName = theNode.nodeName.toLowerCase();
+        if (tagName == "br") // sanity check
+        {
+          tmpNode = treeWalker.nextNode();
+          var parentTagName = theNode.parentNode.nodeName.toLowerCase();
+          if (parentTagName != "td" && parentTagName != "th")
+          {
+            editor.deleteNode(theNode);
+            if (aIncreaseReport)
+              aIncreaseReport(gDialog.trailinBRReport);
+          }
+  
+          theNode = tmpNode;
+        }
+      }
+    }
+
+    treeWalker = theDocument.createTreeWalker(theDocument.documentElement,
+                                              NodeFilter.SHOW_ELEMENT,
+                                              acceptNodeBlocks,
+                                              true);
+    if (treeWalker) {
+      var theNode = treeWalker.nextNode(), tmpNode;
   
       while (theNode) {
         var tagName = theNode.nodeName.toLowerCase();
@@ -154,21 +186,7 @@ var MarkupCleaner = {
           }
           theNode = tmpNode;
         }
-  
-        else if (tagName == "br")
-        {
-          tmpNode = treeWalker.nextNode();
-          var parentTagName = theNode.parentNode.nodeName.toLowerCase();
-          if (parentTagName != "td" && parentTagName != "th")
-          {
-            editor.deleteNode(theNode)
-            if (aIncreaseReport)
-              aIncreaseReport(gDialog.trailinBRReport);
-          }
-  
-          theNode = tmpNode;
-        }
-        
+          
         else if (tagName == "td" || tagName == "th")
         {
           if (theNode.hasAttribute("align") ||
@@ -186,7 +204,7 @@ var MarkupCleaner = {
         else
         {
           tmpNode = treeWalker.nextNode();
-          editor.deleteNode(theNode)
+          editor.deleteNode(theNode);
           if (aIncreaseReport)
             aIncreaseReport(gDialog.emptyBlocksReport);
   
