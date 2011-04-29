@@ -19,8 +19,8 @@ libs::$(_AVAILABLE_LOCALES)
 	mkdir -p $(FINAL_TARGET)/distribution/extensions
 	rm -f $(FINAL_TARGET)/distribution/extensions/*.xpi
 	rm -f $(srcdir)/*.xpi
-	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -r ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
-	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -r $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -qr ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -qr $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi . ;)
 	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/distribution/extensions
 
 include $(topsrcdir)/config/rules.mk
