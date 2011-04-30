@@ -60,7 +60,12 @@ function changeLocale() {
       // Write preferred locale to local user config
       var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                       getService(Components.interfaces.nsIPrefBranch);
-      prefs.setCharPref("general.useragent.locale", newLocale);
+      var supportsString = Components.classes["@mozilla.org/supports-string;1"]
+                                     .createInstance(Components.interfaces.nsISupportsString);
+      supportsString.data = newLocale;
+      prefs.setComplexValue("general.useragent.locale",
+                            Components.interfaces.nsISupportsString,
+                            supportsString);
     }
     var main = window.opener;
     if (EditorUtils.getCurrentEditorElement())
