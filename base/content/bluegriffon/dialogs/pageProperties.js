@@ -177,5 +177,8 @@ function SelectLanguage(aElt)
   var retValue = { lang: "" };
   window.openDialog("chrome://bluegriffon/content/dialogs/languages.xul","_blank",
                     "chrome,modal,dialog=yes,titlebar", null, retValue);
-  gDialog.pageLanguage.value = retValue.lang;
+  if (gDialog.pageLanguage.value != retValue.lang) {
+    gDialog.pageLanguage.value = retValue.lang;
+    gLanguageWasEdited = true;
+  }
 }
