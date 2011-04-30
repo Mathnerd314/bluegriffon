@@ -1487,7 +1487,8 @@ CSSScanner.prototype = {
       else
         break;
     }
-    if (c > 0 && this.startsWithIdent(c, this.peek())) { // DIMENSION
+
+    if (c != -1 && this.startsWithIdent(c, this.peek())) { // DIMENSION
       var unit = this.gatherIdent(c);
       s += unit;
       return new jscsspToken(jscsspToken.DIMENSION_TYPE, s, unit);

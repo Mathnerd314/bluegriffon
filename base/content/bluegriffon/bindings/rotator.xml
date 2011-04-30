@@ -80,7 +80,7 @@
         <setter>
         <![CDATA[
           this.getChild("textbox").value = val;
-          this.getChild("innerRotator").style.MozTransform = "rotate(" + val + "deg)";
+          this.getChild("innerRotator").style.MozTransform = "rotate(" + -val + "deg)";
         ]]>
         </setter>
       </property>
