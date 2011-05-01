@@ -35,6 +35,8 @@ function ShadowsSectionIniter(aElt, aRuleset)
       item.spreadRadius = s.spreadRadius;
     }
   }
+  UpdateBoxShadowUI();
+  UpdateTextShadowUI();
 }
 
 function OnTextShadowSelect(aElt)
@@ -50,7 +52,8 @@ function AddTextShadow(aEvent)
   item.className = type + "TextShadow";
   gDialog.textShadowRichlistbox.appendChild(item);
   UpdateTextShadowUI();
-  ReapplyTextShadows();
+  if (type == "none")
+    ReapplyTextShadows();
 }
 
 function DeleteTextShadow()
@@ -69,7 +72,16 @@ function ReapplyTextShadows()
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     var s;
-    if (!item.none) {
+    if (item.className == "shadowTextShadow") {
+      if (item.offsetX != "" && item.offsetY != "") {
+        var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
+        var mX = item.offsetX.match(r);
+        var mY = item.offsetY.match(r);
+        if (!mX || !mY || !mX[2] || !mY[2])
+          return;
+      }
+      else
+        return;
       s = item.color + " " + item.offsetX + " " + item.offsetY + " " + item.blurRadius;
     }
     else
@@ -107,7 +119,8 @@ function AddBoxShadow(aEvent)
   item.className = type + "BoxShadow";
   gDialog.boxShadowRichlistbox.appendChild(item);
   UpdateBoxShadowUI();
-  ReapplyBoxShadows();
+  if (type == "none")
+    ReapplyBoxShadows();
 }
 
 function DeleteBoxShadow()
@@ -126,7 +139,16 @@ function ReapplyBoxShadows()
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     var s;
-    if (!item.none) {
+    if (item.className == "shadowBoxShadow") {
+      if (item.offsetX != "" && item.offsetY != "") {
+        var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
+        var mX = item.offsetX.match(r);
+        var mY = item.offsetY.match(r);
+        if (!mX || !mY || !mX[2] || !mY[2])
+          return;
+      }
+      else
+        return;
       s = (item.inset ? "inset " : "");
       s += item.offsetX + " " + item.offsetY + " " + item.blurRadius + " " +
            item.spreadRadius + " " + item.color;

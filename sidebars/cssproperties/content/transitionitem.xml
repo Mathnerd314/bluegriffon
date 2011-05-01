@@ -95,16 +95,8 @@
           </xul:row>
           <xul:row align="center">
             <xul:label value="&function.label;"/>
-            <xul:menulist anonid="function" editable="true"
-                          oncommand="this.value = event.originalTarget.value">
-              <xul:menupopup>
-                <xul:menuitem label="&ease.label;" value="ease"/>
-                <xul:menuitem label="&linear.label;" value="linear"/>
-                <xul:menuitem label="&easeIn.label;" value="ease-in"/>
-                <xul:menuitem label="&easeOut.label;" value="ease-out"/>
-                <xul:menuitem label="&easeInOut.label;" value="ease-in-out"/>
-                <xul:menuitem label="&cubicBezier.label;" value="cubic-bezier(0, 0, 1, 1)"/>
-              </xul:menupopup>
+            <xul:menulist anonid="function" editable="true">
+              <xul:menupopup onpopupshowing="OpenPanelIfBezier(this.parentNode)"/>
             </xul:menulist>
             <xul:label value="&delay.label;"/>
             <xul:textbox anonid="delay" type="number" decimalplaces="3"/>
@@ -142,16 +134,8 @@
           </xul:row>
           <xul:row align="center">
             <xul:label value="&function.label;"/>
-            <xul:menulist anonid="function" editable="true"
-                          oncommand="this.value = event.originalTarget.value">
-              <xul:menupopup>
-                <xul:menuitem label="&ease.label;" value="ease"/>
-                <xul:menuitem label="&linear.label;" value="linear"/>
-                <xul:menuitem label="&easeIn.label;" value="ease-in"/>
-                <xul:menuitem label="&easeOut.label;" value="ease-out"/>
-                <xul:menuitem label="&easeInOut.label;" value="ease-in-out"/>
-                <xul:menuitem label="&cubicBezier.label;" value="cubic-bezier(0, 0, 1, 1)"/>
-              </xul:menupopup>
+            <xul:menulist anonid="function" editable="true">
+              <xul:menupopup onpopupshowing="OpenPanelIfBezier(this.parentNode)"/>
             </xul:menulist>
             <xul:label value="&delay.label;"/>
             <xul:textbox anonid="delay" type="number" decimalplaces="3"/>
@@ -165,7 +149,7 @@
       <property name="propertyValue">
         <getter>
         <![CDATA[
-          return "all";
+          return "none";
         ]]>
         </getter>
       </property>

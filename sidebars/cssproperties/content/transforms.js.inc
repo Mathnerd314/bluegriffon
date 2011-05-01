@@ -145,6 +145,7 @@ function ReapplyTransforms()
   var transforms = [];
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
+    var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
     switch (item.className) {
       case "rotateTransform":
         transforms.push( "rotate(" + item.value + "deg)");
@@ -153,6 +154,18 @@ function ReapplyTransforms()
         {
           var h = item.horizontally;
           var v = item.vertically;
+          if (!h && !v)
+            return;
+          if (h) {
+            var mH = h.match(r);
+            if (!mH || !mH[2])
+              return;
+          }
+          if (v) {
+            var mV = v.match(r);
+            if (!mV || !mV[2])
+              return;
+          }
           if (h && v && parseFloat(h) && parseFloat(v))
             transforms.push("translate(" + h + ", " + v + ")");
           else if (h && parseFloat(h))
@@ -165,6 +178,18 @@ function ReapplyTransforms()
         {
           var x = item.valueX;
           var y = item.valueY;
+          if (!x && !y)
+            return;
+          if (x) {
+            var mX = x.match(r);
+            if (!mX || !mX[2])
+              return;
+          }
+          if (y) {
+            var mY = y.match(r);
+            if (!mY || !mY[2])
+              return;
+          }
           if (x && y && parseFloat(x) && parseFloat(y))
             transforms.push("skew(" + x + "deg, " + y + "deg)");
           else if (x && parseFloat(x))
@@ -177,6 +202,18 @@ function ReapplyTransforms()
         {
           var h = item.horizontally;
           var v = item.vertically;
+          if (!h && !v)
+            return;
+          if (h) {
+            var mH = h.match(r);
+            if (!mH || !mH[2])
+              return;
+          }
+          if (v) {
+            var mV = v.match(r);
+            if (!mV || !mV[2])
+              return;
+          }
           if (h && v && parseFloat(h) && parseFloat(v))
             transforms.push("scale(" + h + ", " + v + ")");
           else if (h && parseFloat(h))

@@ -24,7 +24,6 @@ function TransitionsSectionIniter(aElt, aRuleset)
       }
     }
   }
-
   var mtde = CssInspector.getCascadedValue(aRuleset, "-moz-transition-delay") || "0s";
   var mtdeArray = mtde.split(",");
   while (mtdeArray.length < mtpArray.length)
@@ -44,7 +43,7 @@ function TransitionsSectionIniter(aElt, aRuleset)
   }
 
   var mttf = CssInspector.getCascadedValue(aRuleset, "-moz-transition-timing-function") || "ease";
-  var mttfArray = mttf.match( /ease-in-out|ease-in|ease-out|ease|cubic-bezier\([^\)]*\)/g ) || [];
+  var mttfArray = mttf.match( /linear|ease-in-out|ease-in|ease-out|ease|cubic-bezier\([^\)]*\)/g ) || [];
   while (mttfArray.length < mtpArray.length)
     mttfArray = mttfArray.concat(mttfArray);
   for (var i = 0 ; i < mtpArray.length; i++) {
@@ -100,6 +99,8 @@ function ReapplyTransitions()
       functions.push( item.functionValue );
       delays.push( item.delayValue + "s");
     }
+    else
+      return;
   }
   ApplyStyles( [
                  {
