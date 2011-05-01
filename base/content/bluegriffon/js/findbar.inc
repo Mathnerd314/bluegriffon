@@ -237,6 +237,24 @@ function BespinReplaceAll()
 function WysiwygShowFindBar()
 {
   gDialog.bespinToolbox1.hidden = false;
+  var editor = EditorUtils.getCurrentEditor();
+  if (GetCurrentViewMode() == "wysiwyg") {
+    var text = editor.outputToString("text/plain", 1).trim();
+    if (text) {
+      gDialog.bespinFindTextbox.value = text;
+      BespinFind(true, true);
+    }
+  }
+  else {
+    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
+    var bespinEditor = bespinIframe.contentWindow.gEditor;
+    var selectionRange = bespinEditor.getSelectionRange();
+    var text = bespinEditor.getSession().getTextRange(selectionRange)
+    if (text) {
+      gDialog.bespinFindTextbox.value = text;
+      BespinFind(true, true);
+    }
+  }
   gDialog.bespinFindTextbox.focus();
 }
 
