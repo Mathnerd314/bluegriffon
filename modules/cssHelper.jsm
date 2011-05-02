@@ -311,7 +311,7 @@ var CssUtils = {
     var doctype = EditorUtils.getCurrentDocumentMimeType();
     // pfff, xhtml parsed strictly as xml is a pain...
     var textNode;
-    if (doctype == "application/xhtml+xml")
+    if (editor && doctype == "application/xhtml+xml")
       textNode = styleElt.ownerDocument.createCDATASection("\n" + str);
     else
       textNode = styleElt.ownerDocument.createTextNode(str);
