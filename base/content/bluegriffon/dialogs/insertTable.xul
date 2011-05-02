@@ -235,7 +235,7 @@
         </hbox>
         <groupbox oncommand="DataChanged()"
                   oninput="DataChanged()">
-          <caption label="Style"/>
+          <caption label="&style.caption;"/>
           <hbox align="center">
             <hbox flex="1" align="center">
 	            <label value="&bgColor.label;"/>
