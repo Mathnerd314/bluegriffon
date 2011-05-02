@@ -83,11 +83,18 @@
             </hbox>
 				    <hbox align="center">
 				      <spacer flex="1"/>
-				      <html:video id="preview" controls="controls"
-                          onloadeddata="VideoLoaded()"
-                          onloadstart="LoadStarts()"
-                          onprogress="OnProgress(event)"
-                          onerror="CantLoadVideo()"/>
+              <html:table>
+                <html:tbody>
+                  <html:tr>
+                    <html:td>
+                      <html:video id="preview" controls="controls"
+                                  onloadeddata="VideoLoaded()"
+                                  onloadstart="LoadStarts()"
+                                  onerror="CantLoadVideo()"/>
+                    </html:td>
+                  </html:tr>
+                </html:tbody>
+              </html:table>
 				      <spacer flex="1"/>
 				    </hbox>
 	          <hbox align="center">

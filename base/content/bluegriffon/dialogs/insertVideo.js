@@ -118,10 +118,10 @@ function VideoLoaded()
 
   gDialog.videoPreviewBox.hidden = false;
   document.documentElement.getButton("accept").disabled = false;
-  if (gDialog.widthTextbox)
-    gDialog.preview.setAttribute("width", gDialog.widthTextbox);
-  if (gDialog.heightTextbox)
-    gDialog.preview.setAttribute("height", gDialog.heightTextbox);
+  if (gDialog.widthTextbox.value)
+    gDialog.preview.setAttribute("width", gDialog.widthTextbox.value);
+  if (gDialog.heightTextbox.value)
+    gDialog.preview.setAttribute("height", gDialog.heightTextbox.value);
   window.sizeToContent();
 }
 
@@ -153,11 +153,23 @@ function CantLoadPoster()
 function UseCurrentFrameAsPoster()
 {
   try {
+    // XXX
     var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
-    canvas.style.width = gDialog.preview.videoWidth + "px";
-    canvas.setAttribute("width", gDialog.preview.videoWidth);
-    canvas.style.height = gDialog.preview.videoHeight + "px";
-    canvas.setAttribute("height", gDialog.preview.videoHeight);
+    var userDefinedSize = (gDialog.widthTextbox.value || gDialog.heightTextbox.value);
+    var w = gDialog.widthTextbox.value   ? gDialog.widthTextbox.value  : gDialog.preview.videoWidth;
+    var h = gDialog.heightTextbox.value  ? gDialog.heightTextbox.value : gDialog.preview.videoHeight;
+    if (userDefinedSize) {
+      canvas.style.width = gDialog.preview.clientWidth + "px";
+      canvas.setAttribute("width", gDialog.preview.clientWidth);
+      canvas.style.height = gDialog.preview.clientHeight + "px";
+      canvas.setAttribute("height", gDialog.preview.clientHeight);
+    }
+    else {
+      canvas.style.width = gDialog.preview.videoWidthw + "px";
+      canvas.setAttribute("width", gDialog.preview.videoWidth);
+      canvas.style.height = gDialog.preview.videoHeight + "px";
+      canvas.setAttribute("height", gDialog.preview.videoHeight);
+     }
     canvas.style.display = "none";
     var ctx = canvas.getContext("2d");
     ctx.drawImage(gDialog.preview, 0, 0);
@@ -171,6 +183,16 @@ function UseCurrentFrameAsPoster()
 function CheckPixels(aElt)
 {
   aElt.value = aElt.value.replace( /[^0-9]/g , "");
+  if (gDialog.widthTextbox.value)
+    gDialog.preview.setAttribute("width", gDialog.widthTextbox.value);
+  else
+    gDialog.preview.removeAttribute("width");
+  if (gDialog.heightTextbox.value)
+    gDialog.preview.setAttribute("height", gDialog.heightTextbox.value);
+  else
+    gDialog.preview.removeAttribute("height");
+
+  window.sizeToContent();
 }
 
 function onAccept()
@@ -273,11 +295,4 @@ function LoadStarts()
 {
   var cx = parseInt(gDialog.throbber.getAttribute("cx"));
   gDialog.throbber.setAttribute("cx", cx + 1);
-}
-
-function OnProgress(e)
-{
-  var s = "";
-  for (var i in e) s+= i + " ";
-  alert(s)
 }
