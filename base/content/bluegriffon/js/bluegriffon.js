@@ -703,7 +703,8 @@ function ToggleViewMode(aElement)
     HandlersManager.hideAllHandlers();
 
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
-    var flags = nsIDE.OutputRaw;
+    var flags = nsIDE.OutputFormatted ;
+    flags |= nsIDE.OutputWrap;
     flags |= nsIDE.OutputLFLineBreak;
     flags |= nsIDE.OutputPersistNBSP;
 
