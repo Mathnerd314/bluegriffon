@@ -1,6 +1,6 @@
 diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
 --- a/content/base/public/nsIDocumentEncoder.idl	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/public/nsIDocumentEncoder.idl	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/public/nsIDocumentEncoder.idl	Wed May 04 12:24:24 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -15,7 +15,7 @@ diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
 diff -r 55f344578932 content/base/src/nsCopySupport.cpp
 --- a/content/base/src/nsCopySupport.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsCopySupport.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/src/nsCopySupport.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -27,7 +27,7 @@ diff -r 55f344578932 content/base/src/nsCopySupport.cpp
    return NS_OK;
 diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
 --- a/content/base/src/nsDocumentEncoder.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsDocumentEncoder.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/src/nsDocumentEncoder.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -39,7 +39,7 @@ diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
    // normalize selection if we are not in a widget
 diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
 --- a/content/base/src/nsHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -250,14 +250,15 @@
  
    PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
@@ -85,7 +85,7 @@ diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
          } else if (val > 127 &&
 diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
 --- a/content/base/src/nsXHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
@@ -170,7 +170,7 @@ diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
 +
 diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
 --- a/content/base/src/nsXMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/content/base/src/nsXMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -64,6 +64,7 @@
  #include "nsContentUtils.h"
  #include "nsAttrName.h"
@@ -214,7 +214,7 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  void
  nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
  {
-+  if (mMayIgnoreLineBreakSequence) {
++  if (!mPreLevel && mMayIgnoreLineBreakSequence) {
 +    mMayIgnoreLineBreakSequence = PR_FALSE;
 +    return;
 +  }
@@ -272,7 +272,7 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  }
 diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -1380,13 +1380,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
@@ -321,7 +321,7 @@ diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
 diff -r 55f344578932 editor/libeditor/html/nsHTMLEditRules.cpp
 --- a/editor/libeditor/html/nsHTMLEditRules.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Wed May 04 10:04:23 2011 +0200
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Wed May 04 12:24:24 2011 +0200
 @@ -1450,39 +1450,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
