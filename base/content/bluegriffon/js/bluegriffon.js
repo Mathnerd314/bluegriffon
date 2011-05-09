@@ -569,9 +569,9 @@ function ExplodeElement(aEvent)
       var parent = target.parentNode;
       editor.beginTransaction();
 
-      var child = target.lastChild;
+      var child = target.firstChild;
       while (child) {
-        var tmp = child.previousSibling;
+        var tmp = child.nextSibling;
         var clone = child.cloneNode(true)
         var txn = new diNodeInsertionTxn(clone, parent, target);
         editor.transactionManager.doTransaction(txn);
@@ -703,7 +703,8 @@ function ToggleViewMode(aElement)
     HandlersManager.hideAllHandlers();
 
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
-    var flags = nsIDE.OutputRaw;
+    var flags = nsIDE.OutputFormatted ;
+    flags |= nsIDE.OutputWrap;
     flags |= nsIDE.OutputLFLineBreak;
     flags |= nsIDE.OutputPersistNBSP;
 
