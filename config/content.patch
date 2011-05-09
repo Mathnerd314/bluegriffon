@@ -179,48 +179,6 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  
  static const char kMozStr[] = "moz";
  
-@@ -939,7 +940,7 @@
-   nsIAtom *name = content->Tag();
-   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
- 
--  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
-+  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
-     if (mColPos && lineBreakBeforeOpen) {
-       AppendNewLineToString(aStr);
-     }
-@@ -1186,6 +1187,21 @@
-     return;
-   }
-   mColPos += aStr.Length();
-+  nsASingleFragmentString::const_char_iterator pos, end, sequenceStart;
-+
-+  aStr.BeginReading(pos);
-+  aStr.EndReading(end);
-+  PRBool foundOtherThanCR = PR_FALSE;
-+  while (!foundOtherThanCR && pos < end) {
-+    if (*pos != '\n' && *pos != '\r') {
-+      foundOtherThanCR = PR_TRUE;
-+    }
-+    pos++;
-+  }
-+
-+  if (!foundOtherThanCR) {
-+    mMayIgnoreLineBreakSequence = PR_TRUE;
-+  }
-   aOutputStr.Append(aStr);
- }
- 
-@@ -1296,6 +1312,10 @@
- void
- nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
- {
-+  if (!mPreLevel && mMayIgnoreLineBreakSequence) {
-+    mMayIgnoreLineBreakSequence = PR_FALSE;
-+    return;
-+  }
-   AppendToString(mLineBreak, aStr);
-   mMayIgnoreLineBreakSequence = PR_TRUE;
-   mColPos = 0;
 @@ -1336,7 +1356,39 @@
  PRBool
  nsXMLContentSerializer::LineBreakBeforeOpen(PRInt32 aNamespaceID, nsIAtom* aName)
@@ -262,14 +220,6 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRBool 
-@@ -1464,6 +1516,7 @@
-       // Since we only saw linebreaks, but no spaces or tabs,
-       // let's write a linebreak now.
-       AppendNewLineToString(aOutputStr);
-+      mMayIgnoreLineBreakSequence = PR_TRUE;
-     }
-   }
- }
 diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Fri Mar 18 11:43:21 2011 +0000
 +++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Wed May 04 12:24:24 2011 +0200
