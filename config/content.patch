@@ -1,6 +1,6 @@
 diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
 --- a/content/base/public/nsIDocumentEncoder.idl	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/public/nsIDocumentEncoder.idl	Wed May 04 12:24:24 2011 +0200
++++ b/content/base/public/nsIDocumentEncoder.idl	Mon May 09 19:02:06 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -15,7 +15,7 @@ diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
 diff -r 55f344578932 content/base/src/nsCopySupport.cpp
 --- a/content/base/src/nsCopySupport.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsCopySupport.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/content/base/src/nsCopySupport.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -27,7 +27,7 @@ diff -r 55f344578932 content/base/src/nsCopySupport.cpp
    return NS_OK;
 diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
 --- a/content/base/src/nsDocumentEncoder.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsDocumentEncoder.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/content/base/src/nsDocumentEncoder.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -39,26 +39,8 @@ diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
    // normalize selection if we are not in a widget
 diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
 --- a/content/base/src/nsHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
-@@ -250,14 +250,15 @@
- 
-   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
- 
--  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
-+  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
-     if (mColPos && lineBreakBeforeOpen) {
-       AppendNewLineToString(aStr);
-+      mMayIgnoreLineBreakSequence = PR_FALSE;
-     }
-     else {
-       MaybeAddNewlineForRootNode(aStr);
-     }
--    if (!mColPos) {
-+    if (!mColPos && !mDoRaw) {
-       AppendIndentation(aStr);
-     }
-     else if (mAddSpace) {
-@@ -513,7 +514,8 @@
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
+@@ -513,7 +513,8 @@
    PRBool nonBasicEntities =
      !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
                   nsIDocumentEncoder::OutputEncodeHTMLEntities   |
@@ -68,7 +50,7 @@ diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
  
    if (!nonBasicEntities &&
        (mFlags & (nsIDocumentEncoder::OutputEncodeBasicEntities))) {
-@@ -569,7 +571,13 @@
+@@ -569,7 +570,13 @@
        // needs to be replaced
        for (; c < fragmentEnd; c++, advanceLength++) {
          PRUnichar val = *c;
@@ -85,7 +67,7 @@ diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
          } else if (val > 127 &&
 diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
 --- a/content/base/src/nsXHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
@@ -170,7 +152,7 @@ diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
 +
 diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
 --- a/content/base/src/nsXMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/content/base/src/nsXMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -64,6 +64,7 @@
  #include "nsContentUtils.h"
  #include "nsAttrName.h"
@@ -179,49 +161,7 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  
  static const char kMozStr[] = "moz";
  
-@@ -939,7 +940,7 @@
-   nsIAtom *name = content->Tag();
-   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
- 
--  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
-+  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
-     if (mColPos && lineBreakBeforeOpen) {
-       AppendNewLineToString(aStr);
-     }
-@@ -1186,6 +1187,21 @@
-     return;
-   }
-   mColPos += aStr.Length();
-+  nsASingleFragmentString::const_char_iterator pos, end, sequenceStart;
-+
-+  aStr.BeginReading(pos);
-+  aStr.EndReading(end);
-+  PRBool foundOtherThanCR = PR_FALSE;
-+  while (!foundOtherThanCR && pos < end) {
-+    if (*pos != '\n' && *pos != '\r') {
-+      foundOtherThanCR = PR_TRUE;
-+    }
-+    pos++;
-+  }
-+
-+  if (!foundOtherThanCR) {
-+    mMayIgnoreLineBreakSequence = PR_TRUE;
-+  }
-   aOutputStr.Append(aStr);
- }
- 
-@@ -1296,6 +1312,10 @@
- void
- nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
- {
-+  if (!mPreLevel && mMayIgnoreLineBreakSequence) {
-+    mMayIgnoreLineBreakSequence = PR_FALSE;
-+    return;
-+  }
-   AppendToString(mLineBreak, aStr);
-   mMayIgnoreLineBreakSequence = PR_TRUE;
-   mColPos = 0;
-@@ -1336,7 +1356,39 @@
+@@ -1336,7 +1337,39 @@
  PRBool
  nsXMLContentSerializer::LineBreakBeforeOpen(PRInt32 aNamespaceID, nsIAtom* aName)
  {
@@ -262,17 +202,9 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRBool 
-@@ -1464,6 +1516,7 @@
-       // Since we only saw linebreaks, but no spaces or tabs,
-       // let's write a linebreak now.
-       AppendNewLineToString(aOutputStr);
-+      mMayIgnoreLineBreakSequence = PR_TRUE;
-     }
-   }
- }
 diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -1380,13 +1380,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
@@ -321,7 +253,7 @@ diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
 diff -r 55f344578932 editor/libeditor/html/nsHTMLEditRules.cpp
 --- a/editor/libeditor/html/nsHTMLEditRules.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Wed May 04 12:24:24 2011 +0200
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon May 09 19:02:06 2011 +0200
 @@ -1450,39 +1450,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
