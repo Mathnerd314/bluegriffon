@@ -1,6 +1,17 @@
-diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
---- a/content/base/public/nsIDocumentEncoder.idl	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/public/nsIDocumentEncoder.idl	Mon May 09 19:02:06 2011 +0200
+diff -r 1f5db39fbb1a browser/app/profile/firefox.js
+--- a/browser/app/profile/firefox.js	Wed May 11 10:16:10 2011 +0300
++++ b/browser/app/profile/firefox.js	Thu May 12 12:51:32 2011 +0200
+@@ -203,6 +203,7 @@
+ pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
+ pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
+                                                 // restart.
++pref("extensions.closeOnEscape", false); // allow the escape key to close the add-ons manager if it is standalone
+ 
+ pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
+ pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
+diff -r 1f5db39fbb1a content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/public/nsIDocumentEncoder.idl	Thu May 12 12:51:32 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -13,9 +24,9 @@ diff -r 55f344578932 content/base/public/nsIDocumentEncoder.idl
     * Initialize with a pointer to the document and the mime type.
     * @param aDocument Document to encode.
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
-diff -r 55f344578932 content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsCopySupport.cpp	Mon May 09 19:02:06 2011 +0200
+diff -r 1f5db39fbb1a content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/src/nsCopySupport.cpp	Thu May 12 12:51:32 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -25,9 +36,9 @@ diff -r 55f344578932 content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsDocumentEncoder.cpp	Mon May 09 19:02:06 2011 +0200
+diff -r 1f5db39fbb1a content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/src/nsDocumentEncoder.cpp	Thu May 12 12:51:32 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -37,10 +48,28 @@ diff -r 55f344578932 content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
---- a/content/base/src/nsHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
-@@ -513,7 +513,8 @@
+diff -r 1f5db39fbb1a content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Thu May 12 12:51:32 2011 +0200
+@@ -270,14 +270,15 @@
+ 
+   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
+ 
+-  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
++  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
+     if (mColPos && lineBreakBeforeOpen) {
+       AppendNewLineToString(aStr);
++      mMayIgnoreLineBreakSequence = PR_FALSE;
+     }
+     else {
+       MaybeAddNewlineForRootNode(aStr);
+     }
+-    if (!mColPos) {
++    if (!mColPos && !mDoRaw) {
+       AppendIndentation(aStr);
+     }
+     else if (mAddSpace) {
+@@ -545,7 +546,8 @@
    PRBool nonBasicEntities =
      !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
                   nsIDocumentEncoder::OutputEncodeHTMLEntities   |
@@ -50,7 +79,7 @@ diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
  
    if (!nonBasicEntities &&
        (mFlags & (nsIDocumentEncoder::OutputEncodeBasicEntities))) {
-@@ -569,7 +570,13 @@
+@@ -601,7 +603,13 @@
        // needs to be replaced
        for (; c < fragmentEnd; c++, advanceLength++) {
          PRUnichar val = *c;
@@ -65,19 +94,18 @@ diff -r 55f344578932 content/base/src/nsHTMLContentSerializer.cpp
            fullConstEntityText = entityTable[val];
            break;
          } else if (val > 127 &&
-diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
+diff -r 1f5db39fbb1a content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Thu May 12 12:51:32 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
  
 -  if (aName == nsGkAtoms::title ||
--      aName == nsGkAtoms::meta  ||
++  if (// aName == nsGkAtoms::title ||
+       aName == nsGkAtoms::meta  ||
 -      aName == nsGkAtoms::link  ||
 -      aName == nsGkAtoms::style ||
-+  if (// aName == nsGkAtoms::title ||
-+      // aName == nsGkAtoms::meta  ||
 +      //aName == nsGkAtoms::link  ||
 +      //aName == nsGkAtoms::style ||
        aName == nsGkAtoms::select ||
@@ -106,15 +134,6 @@ diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
        (aName == nsGkAtoms::ul) ||
        (aName == nsGkAtoms::ol) ||
        (aName == nsGkAtoms::dl) ||
-@@ -803,7 +812,7 @@
-       (aName == nsGkAtoms::tbody) ||
-       (aName == nsGkAtoms::tr) ||
-       (aName == nsGkAtoms::br) ||
--      (aName == nsGkAtoms::meta) ||
-+      //(aName == nsGkAtoms::meta) ||
-       (aName == nsGkAtoms::link) ||
-       (aName == nsGkAtoms::script) ||
-       (aName == nsGkAtoms::select) ||
 @@ -832,7 +841,10 @@
        (aName == nsGkAtoms::dl) ||
        (aName == nsGkAtoms::select) ||
@@ -150,18 +169,60 @@ diff -r 55f344578932 content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
-diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
---- a/content/base/src/nsXMLContentSerializer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Mon May 09 19:02:06 2011 +0200
-@@ -64,6 +64,7 @@
+diff -r 1f5db39fbb1a content/base/src/nsXMLContentSerializer.cpp
+--- a/content/base/src/nsXMLContentSerializer.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/content/base/src/nsXMLContentSerializer.cpp	Thu May 12 12:51:32 2011 +0200
+@@ -61,6 +61,7 @@
+ #include "prprf.h"
+ #include "nsUnicharUtils.h"
+ #include "nsCRT.h"
++#include "nsIParserService.h"
  #include "nsContentUtils.h"
  #include "nsAttrName.h"
  #include "nsILineBreaker.h"
-+#include "nsIParserService.h"
+@@ -942,7 +943,7 @@
+   nsIAtom *name = content->Tag();
+   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
  
- static const char kMozStr[] = "moz";
+-  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
++  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
+     if (mColPos && lineBreakBeforeOpen) {
+       AppendNewLineToString(aStr);
+     }
+@@ -1189,6 +1190,21 @@
+     return;
+   }
+   mColPos += aStr.Length();
++  nsASingleFragmentString::const_char_iterator pos, end, sequenceStart;
++
++  aStr.BeginReading(pos);
++  aStr.EndReading(end);
++  PRBool foundOtherThanCR = PR_FALSE;
++  while (!foundOtherThanCR && pos < end) {
++    if (*pos != '\n' && *pos != '\r') {
++      foundOtherThanCR = PR_TRUE;
++    }
++    pos++;
++  }
++
++  if (!foundOtherThanCR) {
++    mMayIgnoreLineBreakSequence = PR_TRUE;
++  }
+   aOutputStr.Append(aStr);
+ }
  
-@@ -1336,7 +1337,39 @@
+@@ -1299,6 +1315,10 @@
+ void
+ nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
+ {
++  if (!mPreLevel && mMayIgnoreLineBreakSequence) {
++    mMayIgnoreLineBreakSequence = PR_FALSE;
++    return;
++  }
+   AppendToString(mLineBreak, aStr);
+   mMayIgnoreLineBreakSequence = PR_TRUE;
+   mColPos = 0;
+@@ -1340,7 +1360,39 @@
  PRBool
  nsXMLContentSerializer::LineBreakBeforeOpen(PRInt32 aNamespaceID, nsIAtom* aName)
  {
@@ -202,10 +263,59 @@ diff -r 55f344578932 content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRBool 
-diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon May 09 19:02:06 2011 +0200
-@@ -1380,13 +1380,43 @@
+@@ -1352,7 +1404,39 @@
+ PRBool 
+ nsXMLContentSerializer::LineBreakBeforeClose(PRInt32 aNamespaceID, nsIAtom* aName)
+ {
+-  return mAddSpace;
++    if (aNamespaceID != kNameSpaceID_XHTML) {
++      return mAddSpace;
++    }
++
++    if (aName == nsGkAtoms::title ||
++        aName == nsGkAtoms::meta  ||
++        aName == nsGkAtoms::link  ||
++        aName == nsGkAtoms::style ||
++        aName == nsGkAtoms::select ||
++        aName == nsGkAtoms::option ||
++        aName == nsGkAtoms::script ||
++        aName == nsGkAtoms::html ||
++        aName == nsGkAtoms::table ||
++        aName == nsGkAtoms::caption ||
++        aName == nsGkAtoms::tbody ||
++        aName == nsGkAtoms::thead ||
++        aName == nsGkAtoms::tfoot ||
++        aName == nsGkAtoms::tr ||
++        aName == nsGkAtoms::td) {
++      return PR_TRUE;
++    }
++    else {
++      nsIParserService* parserService = nsContentUtils::GetParserService();
++
++      if (parserService) {
++        PRBool res;
++        parserService->
++          IsBlock(parserService->HTMLCaseSensitiveAtomTagToId(aName), res);
++        return res;
++      }
++    }
++
++    return mAddSpace;
+ }
+ 
+ PRBool 
+@@ -1468,6 +1552,7 @@
+       // Since we only saw linebreaks, but no spaces or tabs,
+       // let's write a linebreak now.
+       AppendNewLineToString(aOutputStr);
++      mMayIgnoreLineBreakSequence = PR_TRUE;
+     }
+   }
+ }
+diff -r 1f5db39fbb1a editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu May 12 12:51:32 2011 +0200
+@@ -1391,13 +1391,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
          stuffToPaste.Assign(text.get(), len / 2);
@@ -251,10 +361,10 @@ diff -r 55f344578932 editor/libeditor/html/nsHTMLDataTransfer.cpp
        }
      }
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
-diff -r 55f344578932 editor/libeditor/html/nsHTMLEditRules.cpp
---- a/editor/libeditor/html/nsHTMLEditRules.cpp	Fri Mar 18 11:43:21 2011 +0000
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon May 09 19:02:06 2011 +0200
-@@ -1450,39 +1450,8 @@
+diff -r 1f5db39fbb1a editor/libeditor/html/nsHTMLEditRules.cpp
+--- a/editor/libeditor/html/nsHTMLEditRules.cpp	Wed May 11 10:16:10 2011 +0300
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Thu May 12 12:51:32 2011 +0200
+@@ -1441,39 +1441,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
      {
@@ -296,3 +406,67 @@ diff -r 55f344578932 editor/libeditor/html/nsHTMLEditRules.cpp
      }
      else
      {
+diff -r 1f5db39fbb1a mobile/app/mobile.js
+--- a/mobile/app/mobile.js	Wed May 11 10:16:10 2011 +0300
++++ b/mobile/app/mobile.js	Thu May 12 12:51:32 2011 +0200
+@@ -200,6 +200,7 @@
+ pref("extensions.hideInstallButton", true);
+ pref("extensions.showMismatchUI", false);
+ pref("extensions.hideUpdateButton", false);
++pref("extensions.closeOnEscape", false);
+ 
+ pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%");
+ 
+diff -r 1f5db39fbb1a toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js	Wed May 11 10:16:10 2011 +0300
++++ b/toolkit/mozapps/extensions/content/extensions.js	Thu May 12 12:51:32 2011 +0200
+@@ -56,6 +56,7 @@
+ const PREF_GETADDONS_CACHE_ENABLED = "extensions.getAddons.cache.enabled";
+ const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
+ const PREF_UI_LASTCATEGORY = "extensions.ui.lastCategory";
++const PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE = "extensions.closeOnEscape";
+ 
+ const BRANCH_REGEXP = /^([^\.]+\.[0-9]+[a-z]*).*/gi;
+ 
+@@ -106,6 +107,18 @@
+ 
+ function initialize() {
+   document.removeEventListener("load", initialize, true);
++
++  // should we allow the window to close when the user hits the ESC key?
++  let closeOnEscape = false; // default for Firefox 4+
++  try {
++    closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
++  } catch(e) { }
++  if (!closeOnEscape) {
++    let escapeKeyElt = document.getElementById("escapeKey");
++    if (escapeKeyElt)
++      escapeKeyElt.setAttribute("disabled", "true");
++  }
++
+   gCategories.initialize();
+   gHeader.initialize();
+   gViewController.initialize();
+@@ -2323,7 +2336,7 @@
+ 
+     for (let i = 0; i < this._listBox.itemCount; i++) {
+       let item = this._listBox.childNodes[i];
+-      if (item[prop] == aObj) {
++      if (prop in item && item[prop] == aObj) {
+         this._listBox.removeChild(item);
+         this.showEmptyNotice(this._listBox.itemCount == 0);
+         return;
+diff -r 1f5db39fbb1a toolkit/mozapps/extensions/content/extensions.xul
+--- a/toolkit/mozapps/extensions/content/extensions.xul	Wed May 11 10:16:10 2011 +0300
++++ b/toolkit/mozapps/extensions/content/extensions.xul	Thu May 12 12:51:32 2011 +0200
+@@ -65,6 +65,10 @@
+   <script type="application/javascript"
+           src="chrome://global/content/contentAreaUtils.js"/>
+ 
++  <keyset>
++    <key id="escapeKey" keycode="VK_ESCAPE" oncommand="window.close()"/>
++  </keyset>
++
+   <popupset>
+     <!-- menu for an addon item -->
+     <menupopup id="addonitem-popup">
