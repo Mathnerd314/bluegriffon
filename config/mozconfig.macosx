@@ -5,7 +5,7 @@
 #
 
 ##############################
-# Assuming you're using 1.06 and want a universal build
+# Assuming you're using >= Mac OS 10.6 and want a universal build
 ##############################
 . $topsrcdir/build/macosx/universal/mozconfig
 
