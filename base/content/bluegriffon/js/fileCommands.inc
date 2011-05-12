@@ -76,7 +76,7 @@ var cmdSaveAs =
     try {
       if (gDialog.wysiwygModeButton)
         ToggleViewMode(gDialog.wysiwygModeButton);
-      var editorMimeType = EditorUtils.getCurrentDocument().contentType;
+      var editorMimeType = EditorUtils.getCurrentDocumentMimeType();
       var result = FileUtils.saveDocument(true, false, editorMimeType);
       if (result)
         StoreUrlInLocationDB(EditorUtils.getDocumentUrl());

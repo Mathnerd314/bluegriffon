@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-cs@bluegriffon.org"
                em:name="Czech (CZ) Language Pack"
-               em:version="4.0"
+               em:version="4.1"
                em:type="8"
                em:creator="Mozilla.cz">
     <em:contributor>Pavel Franc</em:contributor>
@@ -18,7 +18,7 @@
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
         <em:minVersion>0.1pre</em:minVersion>
-        <em:maxVersion>1.0</em:maxVersion>
+        <em:maxVersion>1.1</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

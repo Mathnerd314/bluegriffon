@@ -35,6 +35,8 @@ pref("extensions.getMoreThemesURL", "chrome://mozapps/locale/extensions/extensio
 pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
 pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
                                                 // restart.
+pref("extensions.closeOnEscape", true);
+
 // browser preferences
 pref("bluegriffon.display.use_system_colors", true);
 pref("bluegriffon.display.foreground_color", "#000000");
@@ -117,3 +119,4 @@ pref("bluegriffon.source.entities", "basic");
 pref("bluegriffon.tabs.position", "center");
 
 pref("bluegriffon.osx.dock-integration", true);
+pref("extensions.getAddons.cache.enabled", false);

@@ -260,7 +260,7 @@ endif
 endif
 endif
 
-$(PROGRAM): $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
+#$(PROGRAM): $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
 
 ifneq (,$(filter-out OS2 WINNT WINCE,$(OS_ARCH)))
 
@@ -374,3 +374,14 @@ else
 endif # cocoa
 endif # SKIP_COPY_XULRUNNER
 endif # LIBXUL_SDK
+
+libs::
+ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
+	$(INSTALL) $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/* $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions 
+	rm -fr $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/*
+else
+  $(INSTALL) $(DIST)/bin/extensions/* $(DIST)/bin/distribution/extensions 
+	rm -fr  $(DIST)/bin/extensions/*
+endif
+	rm -rf $(DIST)/xpi-stage/*
+
