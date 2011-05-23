@@ -24,8 +24,8 @@
                       <menuseparator/>
                       <menuitem label="Arial, Helvetica, sans-serif" global="true"
                                 style="font-family: Arial, Helvetica, sans-serif" />
-                      <menuitem label="Time New Roman, Time, serif" global="true"
-                                style="font-family: Time New Roman, Time, serif"/>
+                      <menuitem label="Times New Roman, Times, serif" global="true"
+                                style="font-family: Times New Roman, Times, serif"/>
                       <menuitem label="Courier New, Courier, monospace" global="true"
                                 style="font-family: Courier New, Courier, monospace"/>
                       <menuseparator id="beforeWebfontsMenuseparator"/>
