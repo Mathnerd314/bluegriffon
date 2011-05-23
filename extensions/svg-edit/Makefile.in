@@ -45,9 +45,9 @@ include $(DEPTH)/config/autoconf.mk
 MODULE = svg-edit
 USE_EXTENSION_MANIFEST = 1
 
-XPI_NAME    = svg-edit
+XPI_NAME    = svg-edit@googlegroups.com
 INSTALL_EXTENSION_ID  = svg-edit@googlegroups.com
-XPI_PKGNAME   = svg-edit
+XPI_PKGNAME   = svg-edit@googlegroups.com
   
 DIST_FILES = install.rdf
 
