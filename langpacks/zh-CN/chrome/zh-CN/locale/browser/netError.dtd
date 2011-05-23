@@ -43,7 +43,7 @@
 <!ENTITY netOffline.title "脱机模式">
 <!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
      indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the Firefox button
+     since it could be in either the normal menu (Mac/Linux) or the BlueGriffon button
      menu (Windows).
 -->
 <!ENTITY netOffline.overrideLongDesc "<ul><li>请将菜单中的 &quot;脱机工作&quot; 取消选中，然后再试。</li></ul>">
@@ -127,7 +127,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "<p>如果您使用的是一个您不完全信任的因特网连接，或者您不习惯看到此服务器的警告，您不应该添加一个例外。</p>
 

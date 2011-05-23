@@ -7,7 +7,7 @@
 
 <!ENTITY importFromIE.label             "Microsoft Internet Explorer">
 <!ENTITY importFromIE.accesskey         "M">
-<!ENTITY importFromPhoenix.label        "Firefox 0.8, Firebird oder Phoenix">
+<!ENTITY importFromPhoenix.label        "BlueGriffon 0.8, Firebird oder Phoenix">
 <!ENTITY importFromPhoenix.accesskey    "F">
 <!ENTITY importFromNothing.label        "Nichts importieren">
 <!ENTITY importFromNothing.accesskey    "h">

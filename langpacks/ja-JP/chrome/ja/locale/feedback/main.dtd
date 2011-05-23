@@ -26,10 +26,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "閉じる">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Turn On User Studies">
 <!ENTITY testpilot.feedbackbutton.label                "Feedback">
-<!ENTITY testpilot.happy.label        "Firefox Made Me Happy Because...">
-<!ENTITY testpilot.sad.label          "Firefox Made Me Sad Because...">
+<!ENTITY testpilot.happy.label        "BlueGriffon Made Me Happy Because...">
+<!ENTITY testpilot.sad.label          "BlueGriffon Made Me Sad Because...">
 <!ENTITY testpilot.broken.label       "Report this website as broken...">
 <!ENTITY testpilot.idea.label         "Give us a suggestion...">

@@ -7,7 +7,7 @@
 
 <!ENTITY importFromIE.label             "微软 Internet Explorer">
 <!ENTITY importFromIE.accesskey         "M">
-<!ENTITY importFromPhoenix.label        "Firefox 0.8, Firebird 或者 Phoenix">
+<!ENTITY importFromPhoenix.label        "BlueGriffon 0.8, Firebird 或者 Phoenix">
 <!ENTITY importFromPhoenix.accesskey    "P">
 <!ENTITY importFromNothing.label        "不导入任何数据">
 <!ENTITY importFromNothing.accesskey    "D">

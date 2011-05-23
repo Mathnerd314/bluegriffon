@@ -1,0 +1,21 @@
+override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
+locale autoconfig en-US chrome/en-US/locale/en-US/autoconfig/
+manifest chrome/en-US.manifest
+locale browser-region en-US chrome/en-US/locale/browser-region/
+override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
+locale branding en-US chrome/en-US/locale/branding/
+locale places en-US chrome/en-US/locale/en-US/places/
+locale mozapps en-US chrome/en-US/locale/en-US/mozapps/
+locale testpilot en-US chrome/en-US/locale/feedback/
+locale cookie en-US chrome/en-US/locale/en-US/cookie/
+locale global-region en-US chrome/en-US/locale/en-US/global-region/
+locale necko en-US chrome/en-US/locale/en-US/necko/
+locale global-platform en-US chrome/en-US/locale/en-US/global-platform/
+locale global en-US chrome/en-US/locale/en-US/global/
+locale pippki en-US chrome/en-US/locale/en-US/pippki/
+locale browser en-US chrome/en-US/locale/browser/
+locale passwordmgr en-US chrome/en-US/locale/en-US/passwordmgr/
+locale alerts en-US chrome/en-US/locale/en-US/alerts/
+locale pipnss en-US chrome/en-US/locale/en-US/pipnss/
+locale weave en-US chrome/en-US/locale/en-US/
