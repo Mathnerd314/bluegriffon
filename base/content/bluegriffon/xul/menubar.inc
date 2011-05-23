@@ -200,7 +200,7 @@
 		       </menupopup>
         </menu>
         <menuseparator/>
-        <menu label="HTML 5 Element">
+        <menu label="&html5Element.label;">
           <menupopup id="html5InsertionMenupopup"
                      onpopupshowing="HTML5Helper.initInsertMenu(this)"/>
         </menu>
@@ -342,7 +342,7 @@
       <menupopup id="toolsPopup">
         <menuitem id="menu_cleanup" observes="cmd_cleanup"/>
         <menuseparator/>
-        <menuitem label="Extensions"  oncommand="OpenExtensionsManager()"/>
+        <menuitem label="&addons.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
