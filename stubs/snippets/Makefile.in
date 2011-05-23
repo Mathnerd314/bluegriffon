@@ -45,9 +45,9 @@ include $(DEPTH)/config/autoconf.mk
 MODULE = snippets
 USE_EXTENSION_MANIFEST = 1
 
-XPI_NAME    = snippets
+XPI_NAME    = snippets@bluegriffon.com
 INSTALL_EXTENSION_ID  = snippets@bluegriffon.com
-XPI_PKGNAME   = snippets
+XPI_PKGNAME   = snippets@bluegriffon.com
   
 DIST_FILES = install.rdf
 

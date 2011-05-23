@@ -45,9 +45,9 @@ include $(DEPTH)/config/autoconf.mk
 MODULE = thumbnailer
 USE_EXTENSION_MANIFEST = 1
 
-XPI_NAME    = thumbnailer
+XPI_NAME    = thumbnailer@bluegriffon.com
 INSTALL_EXTENSION_ID  = thumbnailer@bluegriffon.com
-XPI_PKGNAME   = thumbnailer
+XPI_PKGNAME   = thumbnailer@bluegriffon.com
   
 DIST_FILES = install.rdf
 
