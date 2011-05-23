@@ -26,10 +26,10 @@ var cmdSave =
     try {
       var docUrl = EditorUtils.getDocumentUrl();
       return EditorUtils.isDocumentEditable()
-        && GetCurrentViewMode() == "wysiwyg"
-        && (EditorUtils.isDocumentModified()
-            || UrlUtils.isUrlOfBlankDocument(docUrl)
-            || UrlUtils.getScheme(docUrl) != "file");
+			        && (GetCurrentViewMode() == "source"
+					        || (EditorUtils.isDocumentModified()
+					            || UrlUtils.isUrlOfBlankDocument(docUrl)
+					            || UrlUtils.getScheme(docUrl) != "file"));
     } catch (e) {return false;}
   },
   
@@ -42,14 +42,24 @@ var cmdSave =
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
       try {
-        if (gDialog.wysiwygModeButton)
-          ToggleViewMode(gDialog.wysiwygModeButton);
-        // for the time being, we use the HTML serializer
-  
-        result = FileUtils.saveDocument(
-                   UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
-                   false,
-                   EditorUtils.getCurrentDocumentMimeType());
+        var mode = GetCurrentViewMode();
+        if (mode == "source") {
+          var editorElement = EditorUtils.getCurrentEditorElement();
+			    var bespinIframe = editorElement.previousSibling;
+			    var bespinEditor = bespinIframe.contentWindow.gEditor;
+          var source = bespinEditor.getSession().getValue();
+
+          result = FileUtils.saveSourceDocument(source,
+                     UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
+                     false,
+                     EditorUtils.getCurrentDocumentMimeType());
+        }
+        else {
+	        result = FileUtils.saveDocument(
+	                   UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
+	                   false,
+	                   EditorUtils.getCurrentDocumentMimeType());
+        }
         window.content.focus();
         if (result)
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
@@ -63,7 +73,7 @@ var cmdSaveAs =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    return (EditorUtils.isDocumentEditable() && GetCurrentViewMode() == "wysiwyg");
+    return EditorUtils.isDocumentEditable();
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -71,20 +81,34 @@ var cmdSaveAs =
 
   doCommand: function(aCommand)
   {
+    var result = false;
     var editor = EditorUtils.getCurrentEditor();
     if (editor)
-    try {
-      if (gDialog.wysiwygModeButton)
-        ToggleViewMode(gDialog.wysiwygModeButton);
-      var editorMimeType = EditorUtils.getCurrentDocumentMimeType();
-      var result = FileUtils.saveDocument(true, false, editorMimeType);
-      if (result)
-        StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
-      window.content.focus();
-      return result;
-    }
-    catch (e) {}
-    return false;
+      try {
+        var mode = GetCurrentViewMode();
+        if (mode == "source") {
+          var editorElement = EditorUtils.getCurrentEditorElement();
+          var bespinIframe = editorElement.previousSibling;
+          var bespinEditor = bespinIframe.contentWindow.gEditor;
+          var source = bespinEditor.getSession().getValue();
+
+          result = FileUtils.saveSourceDocument(source,
+                     true,
+                     false,
+                     EditorUtils.getCurrentDocumentMimeType());
+        }
+        else {
+          result = FileUtils.saveDocument(
+                     true,
+                     false,
+                     EditorUtils.getCurrentDocumentMimeType());
+        }
+        window.content.focus();
+        if (result)
+          StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
+      }
+      catch (e) {}
+    return result;
   }
 }
 

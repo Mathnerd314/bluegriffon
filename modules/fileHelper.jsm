@@ -62,6 +62,181 @@ var FileUtils = {
   mPublishData: null,
   mProgressDialog: null,
 
+  saveSourceDocument: function(aSource, aSaveAs, aSaveCopy, aMimeType)
+  {
+    var editor = EditorUtils.getCurrentEditor();
+    if (!aMimeType || aMimeType == "" || !editor)
+      throw NS_ERROR_NOT_INITIALIZED;
+  
+    var editorDoc = editor.document;
+    if (!editorDoc)
+      throw NS_ERROR_NOT_INITIALIZED;
+  
+    // if we don't have the right editor type bail (we handle text and html)
+    var editorType = EditorUtils.getCurrentEditorType();
+    if (editorType != "html")
+      throw NS_ERROR_NOT_IMPLEMENTED;
+  
+    var urlstring = EditorUtils.getDocumentUrl();
+    var mustShowFileDialog = (aSaveAs ||
+                              UrlUtils.isUrlOfBlankDocument(urlstring) ||
+                              (urlstring == ""));
+  
+    // If editing a remote URL, force SaveAs dialog
+    if (!mustShowFileDialog && UrlUtils.getScheme(urlstring) != "file")
+      mustShowFileDialog = true;
+  
+    var replacing = !aSaveAs;
+    var titleChanged = false;
+    var doUpdateURI = false;
+    var tempLocalFile = null;
+  
+    if (mustShowFileDialog)
+    {
+      try {
+        var dialogResult = this.promptForSaveLocation(false, editorType, aMimeType, urlstring);
+        if (dialogResult.filepickerClick == this.nsIFilePicker.returnCancel)
+          return false;
+  
+        replacing = (dialogResult.filepickerClick == this.nsIFilePicker.returnReplace);
+        urlstring = dialogResult.resultingURIString;
+        tempLocalFile = dialogResult.resultingLocalFile;
+   
+        // update the new URL for the webshell unless we are saving a copy
+        if (!aSaveCopy)
+          doUpdateURI = true;
+     } catch (e) {  return false; }
+    } // mustShowFileDialog
+  
+    var success = true;
+    var ioService;
+    try {
+      // if somehow we didn't get a local file but we did get a uri, 
+      // attempt to create the localfile if it's a "file" url
+      var docURI;
+      if (!tempLocalFile)
+      {
+        ioService = UrlUtils.getIOService();
+        docURI = ioService.newURI(urlstring, editor.documentCharacterSet, null);
+        
+        if (docURI.schemeIs("file"))
+        {
+          var fileHandler = UrlUtils.getFileProtocolHandler();
+          tempLocalFile = fileHandler.getFileFromURLSpec(urlstring).QueryInterface(Components.interfaces.nsILocalFile);
+        }
+      }
+  
+      // this is the location where the related files will go
+      var relatedFilesDir = null;
+      
+      // First check pref for saving associated files
+      var saveAssociatedFiles = false;
+      try {
+        var prefs = GetPrefs();
+        saveAssociatedFiles = prefs.getBoolPref("editor.save_associated_files");
+      } catch (e) {}
+  
+      // Only change links or move files if pref is set 
+      //  and we are saving to a new location
+      if (saveAssociatedFiles && aSaveAs)
+      {
+        try {
+          if (tempLocalFile)
+          {
+            // if we are saving to the same parent directory, don't set relatedFilesDir
+            // grab old location, chop off file
+            // grab new location, chop off file, compare
+            var oldLocation = EditorUtils.getDocumentUrl();
+            var oldLocationLastSlash = oldLocation.lastIndexOf("\/");
+            if (oldLocationLastSlash != -1)
+              oldLocation = oldLocation.slice(0, oldLocationLastSlash);
+  
+            var relatedFilesDirStr = urlstring;
+            var newLocationLastSlash = relatedFilesDirStr.lastIndexOf("\/");
+            if (newLocationLastSlash != -1)
+              relatedFilesDirStr = relatedFilesDirStr.slice(0, newLocationLastSlash);
+            if (oldLocation == relatedFilesDirStr || UrlUtils.isUrlOfBlankDocument(oldLocation))
+              relatedFilesDir = null;
+            else
+              relatedFilesDir = tempLocalFile.parent;
+          }
+          else
+          {
+            var lastSlash = urlstring.lastIndexOf("\/");
+            if (lastSlash != -1)
+            {
+              var relatedFilesDirString = urlstring.slice(0, lastSlash + 1);  // include last slash
+              ioService = UrlUtils.getIOService();
+              relatedFilesDir = ioService.newURI(relatedFilesDirString, editor.documentCharacterSet, null);
+            }
+          }
+        } catch(e) { relatedFilesDir = null; }
+      }
+  
+      var destinationLocation;
+      if (tempLocalFile)
+        destinationLocation = tempLocalFile;
+      else
+        destinationLocation = docURI;
+  
+      // file is nsIFile, data is a string
+      var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+                     createInstance(Components.interfaces.nsIFileOutputStream);
+      
+      // use 0x02 | 0x10 to open file for appending.
+      foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
+      // write, create, truncate
+      // In a c file operation, we have no need to set file mode with or operation,
+      // directly using "r" or "w" usually.
+      
+      // if you are sure there will never ever be any non-ascii text in data you can 
+      // also call foStream.writeData directly
+      var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+                      createInstance(Components.interfaces.nsIConverterOutputStream);
+      converter.init(foStream, "UTF-8", 0, 0);
+      converter.writeString(aSource);
+      converter.close(); // this closes foStream
+    }
+    catch (e)
+    {
+      success = false;
+    }
+  
+    if (success)
+    {
+      try {
+        if (doUpdateURI)
+        {
+           // If a local file, we must create a new uri from nsILocalFile
+          if (tempLocalFile)
+            docURI = UrlUtils.getFileProtocolHandler().newFileURI(tempLocalFile);
+  
+          // We need to set new document uri before notifying listeners
+          EditorUtils.setDocumentURI(docURI);
+        }
+  
+        // Update window title to show possibly different filename
+        // This also covers problem that after undoing a title change,
+        //   window title loses the extra [filename] part that this adds
+        EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
+  
+        if (!aSaveCopy)
+          editor.resetModificationCount();
+        // this should cause notification to listeners that document has changed
+  
+        // Set UI based on whether we're editing a remote or local url
+        this.setSaveAndPublishUI(urlstring);
+      } catch (e) {}
+    }
+    else
+    {
+      var saveDocStr = L10NUtils.getString("SaveDocument");
+      var failedStr = L10NUtils.getString("SaveFileFailed");
+      PromptUtils.alertWithTitle(saveDocStr, failedStr, EditorUtils.getCurrentEditorWindow());
+    }
+    return success;
+  },
+
   // throws an error or returns true if user attempted save; false if user canceled save
   saveDocument: function(aSaveAs, aSaveCopy, aMimeType)
   {
