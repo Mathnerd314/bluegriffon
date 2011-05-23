@@ -342,7 +342,7 @@
       <menupopup id="toolsPopup">
         <menuitem id="menu_cleanup" observes="cmd_cleanup"/>
         <menuseparator/>
-        <menuitem label="&addons.label;"  oncommand="OpenExtensionsManager()"/>
+        <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
