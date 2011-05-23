@@ -13,6 +13,12 @@
   <key id="emkb"                key="&styleEm.key;"          observes="cmd_em"        modifiers="accel"/>
   <key id="codekb"              key="&styleCode.key;"        observes="cmd_code"      modifiers="accel,shift"/>
   <key id="underlinekb"         key="&styleUnderline.key;"   observes="cmd_underline" modifiers="accel"/>
+
+#ifdef XP_MACOSX
+  <key id="key_preferencesCmdMac" key="&preferencesCmdMac.commandkey;" modifiers="accel"/>
+  <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac.commandkey;" modifiers="accel"/>
+  <key id="key_hideOtherAppsCmdMac" key="&hideOtherAppsCmdMac.commandkey;" modifiers="accel,alt"/>
+#endif
 </keyset>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->

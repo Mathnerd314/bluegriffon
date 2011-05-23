@@ -347,8 +347,18 @@
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
         <menuseparator id="menu_PrefsSeparator"/>
-        <menuitem id="menu_preferences" label="&preferences.label;"
+        <menuitem id="menu_preferences"
+                  label="&preferences.label;"
+#ifdef XP_MACOSX
+                  key="key_preferencesCmdMac"
+#endif
                   oncommand="OpenPreferences()"/>
+#ifdef XP_MACOSX
+        <menuitem id="menu_mac_services" label="&servicesMenuMac.label;"/>
+        <menuitem id="menu_mac_hide_app" label="&hideThisAppCmdMac.label;" key="key_hideThisAppCmdMac"/>
+        <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
+        <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
+#endif
         <!--menuitem label="Venkman"
                   oncommand="start_venkman()"/-->
       </menupopup>

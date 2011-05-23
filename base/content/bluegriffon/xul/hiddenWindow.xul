@@ -8,9 +8,13 @@
   <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
   <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
   <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
+  <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
+  <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
   %bluegriffonDTD;
   %structurebarDTD;
   %ariaDTD;
+  %brandDTD;
+  %baseMenuOverlayDTD;
 ]>            
 
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
