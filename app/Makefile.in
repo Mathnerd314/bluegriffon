@@ -1,4 +1,3 @@
-
 # ***** BEGIN LICENSE BLOCK *****
 # Version: MPL 1.1/GPL 2.0/LGPL 2.1
 #
@@ -63,18 +62,6 @@ DIST_FILES = application.ini
 GRE_MILESTONE = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build Milestone)
 GRE_BUILDID = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build BuildID)
 
-DEFINES += \
-	-DMOZ_APP_NAME=$(MOZ_APP_DISPLAYNAME) \
-	-DMOZ_APP_VERSION=$(APP_VERSION) \
-	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
-	-DAPP_VERSION=$(APP_VERSION) \
-	-DAPP_UA_NAME="$(APP_UA_NAME)" \
-	-DGRE_BUILDID=$(GRE_BUILDID) \
-	-DGRE_MILESTONE=$(GRE_MILESTONE) \
-	-DMOZ_APP_NAME=$(MOZ_APP_NAME) \
-	-DAB_CD=$(AB_CD) \
-   $(NULL)
-
 DEFINES += -DGRE_MILESTONE=$(GRE_MILESTONE) -DGRE_BUILDID=$(GRE_BUILDID)
 
 MOZ_SOURCE_STAMP ?= $(shell hg -R $(topsrcdir) parent --template="{node|short}\n" 2>/dev/null)
@@ -87,6 +74,25 @@ ifdef SOURCE_REPO
 DEFINES += -DMOZ_SOURCE_REPO="$(SOURCE_REPO)"
 endif
 
+DEFINES += \
+	-DMOZ_APP_NAME=$(MOZ_APP_DISPLAYNAME) \
+	-DMOZ_APP_VERSION=$(APP_VERSION) \
+	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
+	-DAPP_VERSION=$(APP_VERSION) \
+	-DAPP_UA_NAME="$(APP_UA_NAME)" \
+	-DGRE_BUILDID=$(GRE_BUILDID) \
+	-DGRE_MILESTONE=$(GRE_MILESTONE) \
+	-DMOZ_APP_NAME=$(MOZ_APP_NAME) \
+	-DAB_CD=$(AB_CD) \
+	 $(NULL)
+
+DEFINES += -DMOZ_APP_BASENAME="$(MOZ_APP_BASENAME)" \
+	         -DMOZ_APP_VENDOR="$(MOZ_APP_VENDOR)"
+
+ifdef MOZ_APP_PROFILE
+DEFINES += -DMOZ_APP_PROFILE="$(MOZ_APP_PROFILE)"
+endif
+
 LIBS += $(JEMALLOC_LIBS)
 
 ifdef LIBXUL_SDK
@@ -94,7 +100,7 @@ include $(topsrcdir)/config/rules.mk
 else
 # Build a binary bootstrapping with XRE_main
 
-ifneq (,$(filter OS2 WINCE WINNT,$(OS_ARCH)))
+ifneq (,$(filter OS2 WINNT,$(OS_ARCH)))
 PROGRAM = $(MOZ_APP_NAME)$(BIN_SUFFIX)
 else
 PROGRAM = $(MOZ_APP_NAME)-bin$(BIN_SUFFIX)
@@ -105,45 +111,19 @@ CPPSRCS = nsEditorApp.cpp
 LOCAL_INCLUDES += -I$(topsrcdir)/toolkit/xre
 LOCAL_INCLUDES += -I$(topsrcdir)/xpcom/base
 
-ifdef BUILD_STATIC_LIBS
-ifdef _MSC_VER
-STATIC_COMPONENTS_LINKER_PATH = -LIBPATH:$(DEPTH)/staticlib
-else
-STATIC_COMPONENTS_LINKER_PATH = -L$(DEPTH)/staticlib
-endif
-LIBS += $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
-else
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 LIBS += $(DIST)/bin/XUL
+TK_LIBS := $(TK_LIBS)
 else
 EXTRA_DSO_LIBS += xul
-endif
-endif
-
-ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-TK_LIBS := $(TK_LIBS)
-endif
-
-ifdef MOZ_ENABLE_LIBXUL
-APP_XPCOM_LIBS = $(XPCOM_GLUE_LDOPTS)
-else
-MOZILLA_INTERNAL_API = 1
-APP_XPCOM_LIBS = $(XPCOM_LIBS)
 endif
 
 LIBS += \
 	$(STATIC_COMPONENTS_LINKER_PATH) \
 	$(EXTRA_DSO_LIBS) \
-	$(MOZ_JS_LIBS) \
-	$(APP_XPCOM_LIBS) \
+	$(XPCOM_GLUE_LDOPTS) \
 	$(NSPR_LIBS) \
-	$(TK_LIBS) \
 	$(NULL)
-
-# Add explicit X11 dependency when building against X11 toolkits
-ifneq (,$(filter gtk2,$(MOZ_WIDGET_TOOLKIT)))
-LIBS += $(XLDFLAGS) $(XLIBS) $(ZLIB_LIBS)
-endif
 
 ifdef MOZ_JPROF
 LIBS += -ljprof
@@ -166,27 +146,7 @@ include $(topsrcdir)/config/config.mk
 ifdef _MSC_VER
 # Always enter a Windows program through wmain, whether or not we're
 # a console application.
-ifdef WINCE
-WIN32_EXE_LDFLAGS += -ENTRY:mainWCRTStartup
-else
 WIN32_EXE_LDFLAGS += -ENTRY:wmainCRTStartup
-endif
-endif
-
-ifdef WINCE
-EXTRA_DSO_LDOPTS += $(call EXPAND_LIBNAME,corelibc)
-endif
-
-ifdef BUILD_STATIC_LIBS
-include $(topsrcdir)/config/static-config.mk
-
-EXTRA_DEPS	+= \
-	$(STATIC_EXTRA_DEPS) \
-	$(NULL)
-DEFINES		+= $(STATIC_DEFINES)
-CPPSRCS		+= $(STATIC_CPPSRCS)
-EXTRA_DSO_LIBS	+= $(STATIC_EXTRA_DSO_LIBS)
-EXTRA_LIBS	+= $(STATIC_EXTRA_LIBS)
 endif
 
 ifeq ($(OS_ARCH),WINNT)
@@ -194,34 +154,21 @@ OS_LIBS += $(call EXPAND_LIBNAME,comctl32 comdlg32 uuid shell32 ole32 oleaut32 v
 OS_LIBS += $(call EXPAND_LIBNAME,usp10 msimg32)
 endif
 
-ifneq (,$(filter WINNT WINCE,$(OS_ARCH)))
+ifeq ($(OS_ARCH),WINNT)
 RCINCLUDE = splash.rc
 ifndef GNU_CC
 RCFLAGS += -DMOZ_PHOENIX -I$(srcdir)
 else
 RCFLAGS += -DMOZ_PHOENIX --include-dir $(srcdir)
 endif
-ifdef BUILD_STATIC_LIBS
-RCFLAGS += -DMOZ_STATIC_BUILD
-endif
 ifdef DEBUG
 RCFLAGS += -DDEBUG
-endif
-endif
-
-ifeq ($(OS_ARCH),BeOS)
-BEOS_PROGRAM_RESOURCE = $(srcdir)/apprunner-beos.rsrc
-ifdef BUILD_STATIC_LIBS
-OS_LIBS += -ltracker -lgame
 endif
 endif
 
 ifeq ($(OS_ARCH),OS2)
 RESFILE=splashos2.res
 RCFLAGS += -DMOZ_PHOENIX
-ifdef BUILD_STATIC_LIBS
-RCFLAGS += -DMOZ_STATIC_BUILD -i $(DIST)/include
-endif
 ifdef DEBUG
 RCFLAGS += -DDEBUG
 endif
@@ -229,12 +176,6 @@ RCFLAGS += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$
 endif
 
 include $(topsrcdir)/config/rules.mk
-
-ifdef BUILD_STATIC_LIBS
-include $(topsrcdir)/config/static-rules.mk
-
-DEFINES += -DIMPL_XREAPI
-endif
 
 ifeq ($(MOZ_WIDGET_TOOLKIT),photon)
 LIBS += -lphexlib
@@ -260,9 +201,7 @@ endif
 endif
 endif
 
-#$(PROGRAM): $(DEPTH)/toolkit/xre/$(LIB_PREFIX)xulapp_s.$(LIB_SUFFIX)
-
-ifneq (,$(filter-out OS2 WINNT WINCE,$(OS_ARCH)))
+ifneq (,$(filter-out OS2 WINNT,$(OS_ARCH)))
 
 $(MOZ_APP_NAME):: $(topsrcdir)/build/unix/mozilla.in $(GLOBAL_DEPS)
 	cat $< | sed -e "s|%MOZAPPDIR%|$(installdir)|" \
@@ -290,22 +229,15 @@ endif
 
 ifeq ($(MOZ_WIDGET_TOOLKIT),gtk2)
 libs::
-	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default16.png  $(DIST)/bin/chrome/icons/default
-	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default32.png  $(DIST)/bin/chrome/icons/default
-	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default48.png  $(DIST)/bin/chrome/icons/default
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default16.png	$(DIST)/bin/chrome/icons/default
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default32.png	$(DIST)/bin/chrome/icons/default
+	$(INSTALL) $(IFLAGS1) $(srcdir)/icons/default48.png	$(DIST)/bin/chrome/icons/default
 endif
 
 ifdef MOZ_SPLASHSCREEN
 ifeq ($(MOZ_WIDGET_TOOLKIT),windows)
 libs::
 	$(INSTALL) $(IFLAGS1) $(DIST)/branding/splash.bmp $(DIST)/bin
-endif
-endif
-
-ifdef WINCE
-ifdef MOZ_FASTSTART
-libs::
-	cp -f $(DIST)/bin/faststartstub.exe $(DIST)/bin/$(MOZ_APP_NAME)faststart.exe
 endif
 endif
 
@@ -327,7 +259,7 @@ AB_CD = $(MOZ_UI_LOCALE)
 AB := $(firstword $(subst -, ,$(AB_CD)))
 
 clean clobber repackage::
-	rm -rf $(DIST)/$(APP_NAME).app
+	$(RM) -r $(DIST)/$(APP_NAME).app
 
 ifdef LIBXUL_SDK
 APPFILES = Resources
