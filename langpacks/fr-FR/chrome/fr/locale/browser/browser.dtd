@@ -104,7 +104,7 @@ can reach it easily. -->
 <!ENTITY subscribeToPageMenuitem.label "S'abonner à cette page…">
 <!ENTITY addCurPagesCmd.label "Marquer tous les onglets…">
 <!ENTITY showAllBookmarks2.label "Afficher tous les marque-pages">
-<!ENTITY bookmarkAllCmd.label "Marquer tous les onglets…">
+<!ENTITY unsortedBookmarksCmd.label "Marque-pages non classés">
 <!ENTITY bookmarksToolbarChevron.tooltip "Afficher plus de marque-pages">
 
 <!ENTITY backCmd.label                "Page précédente">
@@ -178,6 +178,9 @@ can reach it easily. -->
 <!ENTITY addons.accesskey             "e">
 <!ENTITY addons.commandkey            "A">
 
+<!ENTITY webDeveloperMenu.label       "Développeur Web">
+<!ENTITY webDeveloperMenu.accesskey   "W">
+
 <!ENTITY errorConsoleCmd.label        "Console d'erreurs">
 <!ENTITY errorConsoleCmd.accesskey    "s">
 <!ENTITY errorConsoleCmd.commandkey   "j">
@@ -190,6 +193,21 @@ can reach it easily. -->
 <!ENTITY inspectMenu.label            "Examiner">
 <!ENTITY inspectMenu.accesskey        "E">
 <!ENTITY inspectMenu.commandkey       "I">
+
+<!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
+  -  in the Tools menu. See bug 653093.
+  -  The Scratchpad is intended to provide a simple text editor for creating
+  -  and evaluating bits of JavaScript code for the purposes of function
+  -  prototyping, experimentation and convenient scripting.
+  -
+  -  It's quite possible that you won't have a good analogue for the word
+  -  "Scratchpad" in your locale. You should feel free to find a close
+  -  approximation to it or choose a word (or words) that means
+  -  "simple discardable text editor". -->
+<!ENTITY scratchpad.label             "Bloc-notes">
+<!ENTITY scratchpad.accesskey         "B">
+<!ENTITY scratchpad.keycode           "VK_F4">
+<!ENTITY scratchpad.keytext           "F4">
 
 <!ENTITY inspectButton.label          "Examiner">
 <!ENTITY inspectButton.accesskey      "E">
@@ -459,8 +477,8 @@ you can use these alternative items. Otherwise, their values should be empty.
 
 <!ENTITY fullScreenButton.tooltip       "Afficher la fenêtre en plein écran">
 
-<!ENTITY zoomOutButton.tooltip          "Zoom avant">
-<!ENTITY zoomInButton.tooltip           "Zoom arrière">
+<!ENTITY zoomOutButton.tooltip          "Zoom arrière">
+<!ENTITY zoomInButton.tooltip           "Zoom avant">
 <!ENTITY zoomControls.label             "Niveau de zoom">
 
 <!ENTITY quitApplicationCmdWin.label       "Quitter">
@@ -550,5 +568,5 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY syncSyncNowItem.accesskey    "S">
 <!ENTITY syncToolbarButton.label      "Synchroniser">
 
-<!ENTITY addonBarCloseButton.tooltip  "Fermer la Barre des modules">
+<!ENTITY addonBarCloseButton.tooltip  "Fermer la barre des modules">
 <!ENTITY toggleAddonBarCmd.key        "/">

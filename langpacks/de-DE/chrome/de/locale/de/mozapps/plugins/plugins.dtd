@@ -35,4 +35,9 @@
 <!ENTITY report.submitted                                    "Absturzmeldung gesendet.">
 <!ENTITY report.disabled                                     "Melden von Abstürzen deaktiviert.">
 <!ENTITY report.failed                                       "Senden fehlgeschlagen.">
-<!ENTITY report.unavailable                                  "Keine Meldungen verfügbar.">
+<!ENTITY report.unavailable                                  "Keine Meldungen verfügbar."><!ENTITY disabledPlugin                                      "This plugin is disabled.">
+
+<!ENTITY installPlugin                                       "Install plugin…">
+<!ENTITY managePlugins                                       "Manage plugins…">
+
+<!ENTITY missingPlugin                                       "A plugin is needed to display this content.">

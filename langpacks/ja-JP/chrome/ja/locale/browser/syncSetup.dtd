@@ -106,3 +106,4 @@
 <!ENTITY setup.successPage.title      "セットアップが完了しました">
 <!ENTITY changeOptions.label    "この設定は、下の同期オプションを選択することで変更できます。">
 <!ENTITY continueUsing.label    "今から &brandShortName; を使い続けることができます。">
+<!ENTITY syncGenerateNewKey.label  "Generate a new key">

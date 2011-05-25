@@ -31,7 +31,7 @@
 <!ENTITY setup.newSyncKeyPage.description.label "Para asegurar una privacidad total, todos los datos son cifrados antes de ser enviados. La clave de Sync, que es necesaria para descifrar sus datos, no es enviada.">
 <!ENTITY syncKeyEntry.label "Su clave de Sync">
 <!ENTITY syncKeyEntry.accesskey "c">
-<!ENTITY syncKeyGenerate.label "Generar">
+<!ENTITY syncGenerateNewKey.label "Generar una nueva clave">
 <!ENTITY syncKeyBackup.description "Su clave de Sync es necesaria para acceder a &syncBrand.fullName.label; en otros equipos. Por favor, cree una copia ahora. No podemos ayudarle a recuperar su clave de Sync.">
 <!ENTITY button.syncKeyBackup.print.label "Imprimir…">
 <!ENTITY button.syncKeyBackup.print.accesskey "p">
@@ -46,7 +46,7 @@
 <!ENTITY addDevice.dialog.description.label 'Para activar este nuevo dispositivo, vaya a las opciones de &syncBrand.shortName.label; en este equipo y seleccione "Conectar".'>
 <!ENTITY addDevice.dialog.enterCode.label "Escriba el código que el dispositivo proporciona:">
 <!ENTITY addDevice.dialog.tryAgain.label "Por favor, pruebe de nuevo.">
-<!ENTITY addDevice.dialog.successful.label "Este dispositivo se ha añadido correctamente. Esta sincronización inicial puede tardar varios minutos y terminará de fondo.">
+<!ENTITY addDevice.dialog.successful.label "Este dispositivo se ha añadido correctamente. Esta sincronización inicial puede tardar varios minutos y terminará en segundo plano.">
 <!ENTITY addDevice.dialog.syncKey.label "Para activar este dispositivo necesita introducir la clave de Sync. Por favor, imprima o guarde esta clave y llévela consigo.">
 <!ENTITY addDevice.dialog.connected.label "Dispositivo conectado">
 <!ENTITY setup.signInPage.title.label "Conectarse">

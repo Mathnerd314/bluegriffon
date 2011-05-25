@@ -80,7 +80,7 @@
 <!ENTITY subscribeToPageMenuitem.label "Abbonati a questa pagina…">
 <!ENTITY addCurPagesCmd.label "Tutte le schede nei segnalibri…">
 <!ENTITY showAllBookmarks2.label "Visualizza tutti i segnalibri">
-<!ENTITY bookmarkAllCmd.label "Tutte le schede nei segnalibri…">
+<!ENTITY unsortedBookmarksCmd.label "Segnalibri non catalogati">
 <!ENTITY bookmarksToolbarChevron.tooltip "Visualizza altri segnalibri">
 <!ENTITY backCmd.label "Indietro">
 <!ENTITY backCmd.accesskey "I">
@@ -139,6 +139,8 @@
 <!ENTITY addons.label "Componenti aggiuntivi">
 <!ENTITY addons.accesskey "a">
 <!ENTITY addons.commandkey "A">
+<!ENTITY webDeveloperMenu.label "Sviluppo web">
+<!ENTITY webDeveloperMenu.accesskey "u">
 <!ENTITY errorConsoleCmd.label "Console degli errori">
 <!ENTITY errorConsoleCmd.accesskey "C">
 <!ENTITY errorConsoleCmd.commandkey "j">
@@ -148,6 +150,10 @@
 <!ENTITY inspectMenu.label "Analisi pagina">
 <!ENTITY inspectMenu.accesskey "s">
 <!ENTITY inspectMenu.commandkey "I">
+<!ENTITY scratchpad.label "Blocco per gli appunti">
+<!ENTITY scratchpad.accesskey "B">
+<!ENTITY scratchpad.keycode "VK_F4">
+<!ENTITY scratchpad.keytext "F4">
 <!ENTITY inspectPanelTitle.label "HTML">
 <!ENTITY inspectButton.label "Analisi">
 <!ENTITY inspectButton.accesskey "A">
@@ -160,6 +166,8 @@
 <!ENTITY inspectStylePanelTitle.label "Stile">
 <!ENTITY inspectObjectButton.label "Oggetto">
 <!ENTITY inspectObjectButton.accesskey "O">
+<!ENTITY getMoreDevtoolsCmd.label "Altri strumenti di sviluppo">
+<!ENTITY getMoreDevtoolsCmd.accesskey "A">
 <!ENTITY fileMenu.label "File">
 <!ENTITY fileMenu.accesskey "F">
 <!ENTITY newNavigatorCmd.label "Nuova finestra">
@@ -267,7 +275,7 @@
 <!ENTITY viewImageCmd.label "Visualizza immagine">
 <!ENTITY viewImageCmd.accesskey "V">
 <!ENTITY viewImageInfoCmd.label "Visualizza informazioni immagine">
-<!ENTITY viewImageInfoCmd.accesskey "z">
+<!ENTITY viewImageInfoCmd.accesskey "u">
 <!ENTITY viewVideoCmd.label "Visualizza video">
 <!ENTITY viewVideoCmd.accesskey "V">
 <!ENTITY viewBGImageCmd.label "Visualizza immagine di sfondo">

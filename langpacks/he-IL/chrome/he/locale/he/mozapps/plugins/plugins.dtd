@@ -36,3 +36,9 @@
 <!ENTITY report.disabled                                     "דיווח קריסות מנוטרל.">
 <!ENTITY report.failed                                       "השליחה נכשלה.">
 <!ENTITY report.unavailable                                  "אין דיווח זמין.">
+<!ENTITY disabledPlugin                                      "This plugin is disabled.">
+
+<!ENTITY installPlugin                                       "Install plugin…">
+<!ENTITY managePlugins                                       "Manage plugins…">
+
+<!ENTITY missingPlugin                                       "A plugin is needed to display this content.">

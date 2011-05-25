@@ -106,3 +106,4 @@
 <!ENTITY setup.successPage.title "安装完成">
 <!ENTITY changeOptions.label "您可以选择下面的同步选项更改此首选项。">
 <!ENTITY continueUsing.label "您现在可以继续使用 &brandShortName;。">
+<!ENTITY syncGenerateNewKey.label  "Generate a new key">

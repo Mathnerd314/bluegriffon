@@ -106,3 +106,4 @@
 <!ENTITY setup.successPage.title "ההתקנה הושלמה">
 <!ENTITY changeOptions.label "ניתן לשנות העדפה זו על ידי בחירה באפשרויות הסנכרון להלן.">
 <!ENTITY continueUsing.label "כעת תוכל להמשיך להשתמש ב־&brandShortName;.">
+<!ENTITY syncGenerateNewKey.label  "Generate a new key">

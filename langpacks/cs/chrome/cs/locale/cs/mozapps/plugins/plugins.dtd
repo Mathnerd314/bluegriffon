@@ -36,3 +36,9 @@
 <!ENTITY report.disabled "Hlášení o pádu je zakázáno.">
 <!ENTITY report.failed "Hlášení skončilo chybou.">
 <!ENTITY report.unavailable "Hlášení není dostupné.">
+<!ENTITY disabledPlugin                                      "This plugin is disabled.">
+
+<!ENTITY installPlugin                                       "Install plugin…">
+<!ENTITY managePlugins                                       "Manage plugins…">
+
+<!ENTITY missingPlugin                                       "A plugin is needed to display this content.">

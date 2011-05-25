@@ -74,3 +74,7 @@
 
 <!ENTITY  clearOnCloseSettings.label     "Einstellungen…">
 <!ENTITY  clearOnCloseSettings.accesskey "E">
+<!ENTITY doNotTrack.accesskey           "d">
+
+<!ENTITY doNotTrack.label               "Tell web sites I do not want to be tracked">
+<!ENTITY tracking.label                 "Tracking">

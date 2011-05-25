@@ -23,24 +23,23 @@
 <!ENTITY warning.updatesecurity.enable.label       "Activer">
 <!ENTITY warning.updatesecurity.enable.tooltip     "Activer la vérification de mises à jour de sécurité pour les modules complémentaires">
 
+<!-- global informations -->
+<!ENTITY info.plugincheck.label "Vérifier si les plugins sont à jour">
+<!ENTITY info.plugincheck.tooltip "Vérifier si les plugins sont à jour">
+
 <!-- categories / views -->
 <!ENTITY view.search.label                    "Rechercher">
 <!ENTITY view.discover.label                  "Catalogue">
-<!ENTITY view.locales.label                   "Langues">
-<!ENTITY view.searchengines.label             "Moteurs de recherche">
-<!ENTITY view.features.label                  "Extensions">
-<!ENTITY view.appearance2.label               "Apparence">
-<!ENTITY view.plugins.label                   "Plugins">
 <!ENTITY view.recentUpdates.label             "Mis à jour">
 <!ENTITY view.availableUpdates.label          "À mettre à jour">
 
 <!-- addon updates -->
 <!ENTITY updates.checkForUpdates.label        "Rechercher des mises à jour">
-<!ENTITY updates.checkForUpdates.accesskey    "m">
+<!ENTITY updates.checkForUpdates.accesskey    "R">
 <!ENTITY updates.viewUpdates.label            "Afficher les mises à jour récentes">
 <!ENTITY updates.viewUpdates.accesskey        "A">
 <!ENTITY updates.updateAddonsAutomatically.label     "Mettre à jour les modules automatiquement">
-<!ENTITY updates.updateAddonsAutomatically.accesskey "a">
+<!ENTITY updates.updateAddonsAutomatically.accesskey "M">
 <!ENTITY updates.resetUpdatesToAutomatic.label       "Activer la mise à jour automatique pour tous les modules">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey   "c">
 <!ENTITY updates.resetUpdatesToManual.label          "Désactiver la mise à jour automatique pour tous les modules">
