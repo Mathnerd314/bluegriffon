@@ -102,10 +102,10 @@
               <label value="&fontStyle.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&fontStyleItalic.label;" value="italic" property="font-style" type="checkbox"
-                               style="font-style: italic" id="fontStyleItalicButton"
+                               style="font-style: italic" id="fontStyleItalicButton" group="font-style"
                                oncommand="ToggleProperty(this)"/>
                 <toolbarbutton class="multibutton" label="&fontStyleOblique.label;" value="oblique" property="font-style" type="checkbox"
-                               style="font-style: oblique" id="fontStyleObliqueButton"
+                               style="font-style: oblique" id="fontStyleObliqueButton" group="font-style"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
             </row>
