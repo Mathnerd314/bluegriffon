@@ -308,13 +308,25 @@ var CssUtils = {
 	    var parsedSheet = cssParser.parse(str, false, false);
 	    str = parsedSheet.cssText();
     }
+
+    var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+                    createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+    var charset = "UTF-8";
+    if (aSheet
+        && aSheet.cssRules
+        && aSheet.cssRules.length
+        && aSheet.cssRules.item(0).type == Components.interfaces.nsIDOMCSSRule.CHARSET_RULE)
+      charset = aSheet.cssRules.item(0).encoding;
+    converter.charset = charset;
+    var outText = converter.ConvertFromUnicode(str) + converter.Finish();
+
     var doctype = EditorUtils.getCurrentDocumentMimeType();
     // pfff, xhtml parsed strictly as xml is a pain...
     var textNode;
     if (editor && doctype == "application/xhtml+xml")
-      textNode = styleElt.ownerDocument.createCDATASection("\n" + str);
+      textNode = styleElt.ownerDocument.createCDATASection("\n" + outText);
     else
-      textNode = styleElt.ownerDocument.createTextNode(str);
+      textNode = styleElt.ownerDocument.createTextNode(outText);
     if (editor)
       editor.insertNode(textNode, styleElt, 0);
     else
