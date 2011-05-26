@@ -1,6 +1,6 @@
 diff -r 84e2e54efcc7 browser/app/profile/firefox.js
 --- a/browser/app/profile/firefox.js	Tue May 24 02:32:26 2011 -0700
-+++ b/browser/app/profile/firefox.js	Tue May 24 15:30:48 2011 +0200
++++ b/browser/app/profile/firefox.js	Thu May 26 19:22:26 2011 +0200
 @@ -203,6 +203,7 @@
  pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
  pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
@@ -9,9 +9,24 @@ diff -r 84e2e54efcc7 browser/app/profile/firefox.js
  
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
+diff -r 84e2e54efcc7 caps/src/nsScriptSecurityManager.cpp
+--- a/caps/src/nsScriptSecurityManager.cpp	Tue May 24 02:32:26 2011 -0700
++++ b/caps/src/nsScriptSecurityManager.cpp	Thu May 26 19:22:26 2011 +0200
+@@ -1545,6 +1545,11 @@
+                              &hasFlags);
+     NS_ENSURE_SUCCESS(rv, rv);
+     if (hasFlags) {
++        // In the editor, we need to be able to link local resources
++        // JavaScript being disabled anyway in the edited document,
++        // this is safe.
++        return NS_OK;
++
+         // resource: and chrome: are equivalent, securitywise
+         // That's bogus!!  Fix this.  But watch out for
+         // the view-source stylesheet?
 diff -r 84e2e54efcc7 content/base/public/nsIDocumentEncoder.idl
 --- a/content/base/public/nsIDocumentEncoder.idl	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/public/nsIDocumentEncoder.idl	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/public/nsIDocumentEncoder.idl	Thu May 26 19:22:26 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -26,7 +41,7 @@ diff -r 84e2e54efcc7 content/base/public/nsIDocumentEncoder.idl
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
 diff -r 84e2e54efcc7 content/base/src/nsCopySupport.cpp
 --- a/content/base/src/nsCopySupport.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/src/nsCopySupport.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/src/nsCopySupport.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -38,7 +53,7 @@ diff -r 84e2e54efcc7 content/base/src/nsCopySupport.cpp
    return NS_OK;
 diff -r 84e2e54efcc7 content/base/src/nsDocumentEncoder.cpp
 --- a/content/base/src/nsDocumentEncoder.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/src/nsDocumentEncoder.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/src/nsDocumentEncoder.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -50,7 +65,7 @@ diff -r 84e2e54efcc7 content/base/src/nsDocumentEncoder.cpp
    // normalize selection if we are not in a widget
 diff -r 84e2e54efcc7 content/base/src/nsHTMLContentSerializer.cpp
 --- a/content/base/src/nsHTMLContentSerializer.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -270,14 +270,15 @@
  
    PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
@@ -96,7 +111,7 @@ diff -r 84e2e54efcc7 content/base/src/nsHTMLContentSerializer.cpp
          } else if (val > 127 &&
 diff -r 84e2e54efcc7 content/base/src/nsXHTMLContentSerializer.cpp
 --- a/content/base/src/nsXHTMLContentSerializer.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
@@ -171,7 +186,7 @@ diff -r 84e2e54efcc7 content/base/src/nsXHTMLContentSerializer.cpp
 +
 diff -r 84e2e54efcc7 content/base/src/nsXMLContentSerializer.cpp
 --- a/content/base/src/nsXMLContentSerializer.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/content/base/src/nsXMLContentSerializer.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -61,6 +61,7 @@
  #include "prprf.h"
  #include "nsUnicharUtils.h"
@@ -314,7 +329,7 @@ diff -r 84e2e54efcc7 content/base/src/nsXMLContentSerializer.cpp
  }
 diff -r 84e2e54efcc7 editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -1390,13 +1390,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
@@ -363,7 +378,7 @@ diff -r 84e2e54efcc7 editor/libeditor/html/nsHTMLDataTransfer.cpp
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
 diff -r 84e2e54efcc7 editor/libeditor/html/nsHTMLEditRules.cpp
 --- a/editor/libeditor/html/nsHTMLEditRules.cpp	Tue May 24 02:32:26 2011 -0700
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Tue May 24 15:30:48 2011 +0200
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Thu May 26 19:22:26 2011 +0200
 @@ -1428,39 +1428,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
@@ -408,7 +423,7 @@ diff -r 84e2e54efcc7 editor/libeditor/html/nsHTMLEditRules.cpp
      {
 diff -r 84e2e54efcc7 mobile/app/mobile.js
 --- a/mobile/app/mobile.js	Tue May 24 02:32:26 2011 -0700
-+++ b/mobile/app/mobile.js	Tue May 24 15:30:48 2011 +0200
++++ b/mobile/app/mobile.js	Thu May 26 19:22:26 2011 +0200
 @@ -201,6 +201,7 @@
  pref("extensions.hideInstallButton", true);
  pref("extensions.showMismatchUI", false);
@@ -419,7 +434,7 @@ diff -r 84e2e54efcc7 mobile/app/mobile.js
  
 diff -r 84e2e54efcc7 toolkit/mozapps/extensions/content/extensions.js
 --- a/toolkit/mozapps/extensions/content/extensions.js	Tue May 24 02:32:26 2011 -0700
-+++ b/toolkit/mozapps/extensions/content/extensions.js	Tue May 24 15:30:48 2011 +0200
++++ b/toolkit/mozapps/extensions/content/extensions.js	Thu May 26 19:22:26 2011 +0200
 @@ -57,6 +57,7 @@
  const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
  const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
@@ -433,17 +448,17 @@ diff -r 84e2e54efcc7 toolkit/mozapps/extensions/content/extensions.js
  function initialize() {
    document.removeEventListener("load", initialize, true);
 +
-+   // should we allow the window to close when the user hits the ESC key?
-+   let closeOnEscape = false; // default for Firefox 4+
-+   try {
-+     closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
-+   } catch(e) { }
-+  if (!closeOnEscape) {
-+     let escapeKeyElt = document.getElementById("escapeKey");
-+     if (escapeKeyElt)
-+       escapeKeyElt.setAttribute("disabled", "true");
-+   }
-+ 
++ // should we allow the window to close when the user hits the ESC key?
++ let closeOnEscape = false; // default for Firefox 4+
++ try {
++   closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
++ } catch(e) { }
++ if (!closeOnEscape) {
++   let escapeKeyElt = document.getElementById("escapeKey");
++   if (escapeKeyElt)
++     escapeKeyElt.setAttribute("disabled", "true");
++ }
++
    gViewController.initialize();
    gCategories.initialize();
    gHeader.initialize();
@@ -458,7 +473,7 @@ diff -r 84e2e54efcc7 toolkit/mozapps/extensions/content/extensions.js
          return;
 diff -r 84e2e54efcc7 toolkit/mozapps/extensions/content/extensions.xul
 --- a/toolkit/mozapps/extensions/content/extensions.xul	Tue May 24 02:32:26 2011 -0700
-+++ b/toolkit/mozapps/extensions/content/extensions.xul	Tue May 24 15:30:48 2011 +0200
++++ b/toolkit/mozapps/extensions/content/extensions.xul	Thu May 26 19:22:26 2011 +0200
 @@ -65,6 +65,10 @@
    <script type="application/javascript"
            src="chrome://global/content/contentAreaUtils.js"/>
