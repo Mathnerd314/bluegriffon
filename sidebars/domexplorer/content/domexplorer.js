@@ -453,7 +453,7 @@ function DeleteCSS()
   var view = tree.view;
   var index = view.selection.currentIndex;
   var item = gDialog.cssTree.contentView.getItemAtIndex(index);
-  var property = gDialog.cssTree.view.getCellText(index, gDialog.attributesTree.columns[0]);
+  var property = gDialog.cssTree.view.getCellText(index, gDialog.cssTree.columns[0]);
   item.parentNode.removeChild(item);
   var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
   gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
