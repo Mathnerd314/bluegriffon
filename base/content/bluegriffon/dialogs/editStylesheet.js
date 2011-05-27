@@ -107,7 +107,8 @@ function NewFile()
               .createInstance(nsIFP);
   fp.init(window, gDialog.bundleString.getString("NewCSSFile"), nsIFP.modeSave);
   fp.appendFilter("*.css", "*.css");
-  if (fp.show() == nsIFP.returnOK &&
+  var fpr = fp.show();
+  if ((fpr == nsIFP.returnOK || fpr == nsIFP.returnReplace) &&
       fp.fileURL.spec && fp.fileURL.spec.length > 0)
   {
     var spec = fp.fileURL.spec;
