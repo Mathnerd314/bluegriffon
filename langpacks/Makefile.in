@@ -19,6 +19,7 @@ _AVAILABLE_LOCALES =\
     ja-JP \
     zh-TW \
     nl \
+    ko \
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)
