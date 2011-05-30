@@ -5,7 +5,7 @@ VPATH           = @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += mathml2 fullscreen snippets tableLayout thumbnailer
+DIRS += mathml2 fullscreen snippets tableLayout thumbnailer csseditor
 
 include $(topsrcdir)/config/rules.mk
 
