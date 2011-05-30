@@ -7,10 +7,21 @@ include $(DEPTH)/config/autoconf.mk
 
 APP_NAME = $(MOZ_APP_DISPLAYNAME)
 
-_AVAILABLE_LOCALES = en-US
-
-#_AVAILABLE_LOCALES += fr-FR zh-CN es-ES cs de-DE he-IL it-IT ja-JP zh-TW nl ko
-
+_AVAILABLE_LOCALES =\
+    en-US \
+    fr-FR \
+    zh-CN \
+    es-ES \
+    cs \
+    de-DE \
+    he-IL \
+    it-IT \
+    ja-JP \
+    zh-TW \
+    nl \
+    ko \
+    $(NULL)
+    
 libs::$(_AVAILABLE_LOCALES)
 	mkdir -p $(FINAL_TARGET)/distribution/extensions
 	rm -f $(FINAL_TARGET)/distribution/extensions/*.xpi
