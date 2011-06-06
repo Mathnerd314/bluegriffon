@@ -88,7 +88,11 @@
               node = node.parentNode;
               toolbarbutton = toolbarbutton.previousSibling;
             }
-            // so we rebuild from toolbarbutton up to the root
+            // so we rebuild only from toolbarbutton up to the root
+            if (aOneElementSelected)
+              this.mLastNode.setAttribute("checked", "true");
+            else
+              this.mLastNode.removeAttribute("checked");
           }
           else
           {
@@ -164,7 +168,7 @@
       <method name="init">
         <body>
         <![CDATA[
-          NotifierUtils.addNotifierCallback("selection", this.selectionChanged, this);
+          NotifierUtils.addNotifierCallback("selection_strict", this.selectionChanged, this);
         ]]>
         </body>
       </method>
@@ -172,7 +176,7 @@
       <method name="shutdown">
         <body>
         <![CDATA[
-          NotifierUtils.removeNotifierCallback("selection", this.selectionChanged, this);
+          NotifierUtils.removeNotifierCallback("selection_strict", this.selectionChanged, this);
         ]]>
         </body>
       </method>
