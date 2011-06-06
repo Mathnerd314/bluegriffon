@@ -141,3 +141,35 @@ var cmdGotoLinkCommand =
     }
   }
 };
+
+var cmdStructureClimbCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            !EditorUtils.activeViewActive  &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var mixed = EditorUtils.getSelectionContainer();
+    if (!mixed) return;
+    var element = mixed.node;
+    var oneElementSelected = mixed.oneElementSelected;
+    var editor = EditorUtils.getCurrentEditor();
+    if (oneElementSelected) {
+      if (element.parentNode && element.parentNode != element.ownerDocument.documentElement)
+        editor.selectElement(element.parentNode)
+    }
+    else
+      editor.selectElement(element);
+  }
+
+};
+

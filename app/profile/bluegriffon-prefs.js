@@ -24,6 +24,7 @@ pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
 pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
+pref("intl.locale.matchOS", true);
 
 pref("extensions.update.enabled", false);
 pref("extensions.update.url", "chrome://mozapps/locale/extensions/extensions.properties");

@@ -396,6 +396,8 @@ var ComposerCommands = {
 
     commandTable.registerCommand("cmd_copyHTMLCode", cmdCopyHTMLCodeCommand);
     commandTable.registerCommand("cmd_gotoLink",    cmdGotoLinkCommand);
+
+    commandTable.registerCommand("cmd_structureClimb", cmdStructureClimbCommand);
 },
 
   setupFormatCommands: function setupFormatCommands()
