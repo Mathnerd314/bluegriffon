@@ -1,6 +1,6 @@
-diff -r 9a6c139a4e58 browser/app/profile/firefox.js
---- a/browser/app/profile/firefox.js	Thu Jun 02 10:27:51 2011 +0800
-+++ b/browser/app/profile/firefox.js	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff browser/app/profile/firefox.js
+--- a/browser/app/profile/firefox.js	Mon Jun 06 11:22:45 2011 +1000
++++ b/browser/app/profile/firefox.js	Thu Jun 09 11:08:33 2011 +0200
 @@ -204,6 +204,7 @@
  pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
  pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
@@ -9,9 +9,9 @@ diff -r 9a6c139a4e58 browser/app/profile/firefox.js
  
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
-diff -r 9a6c139a4e58 caps/src/nsScriptSecurityManager.cpp
---- a/caps/src/nsScriptSecurityManager.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/caps/src/nsScriptSecurityManager.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff caps/src/nsScriptSecurityManager.cpp
+--- a/caps/src/nsScriptSecurityManager.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/caps/src/nsScriptSecurityManager.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -1545,6 +1545,7 @@
                               &hasFlags);
      NS_ENSURE_SUCCESS(rv, rv);
@@ -20,9 +20,9 @@ diff -r 9a6c139a4e58 caps/src/nsScriptSecurityManager.cpp
          // resource: and chrome: are equivalent, securitywise
          // That's bogus!!  Fix this.  But watch out for
          // the view-source stylesheet?
-diff -r 9a6c139a4e58 content/base/public/nsIDocumentEncoder.idl
---- a/content/base/public/nsIDocumentEncoder.idl	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/public/nsIDocumentEncoder.idl	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/public/nsIDocumentEncoder.idl	Thu Jun 09 11:08:33 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -35,9 +35,9 @@ diff -r 9a6c139a4e58 content/base/public/nsIDocumentEncoder.idl
     * Initialize with a pointer to the document and the mime type.
     * @param aDocument Document to encode.
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
-diff -r 9a6c139a4e58 content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/src/nsCopySupport.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/src/nsCopySupport.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -436,7 +436,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
@@ -47,9 +47,9 @@ diff -r 9a6c139a4e58 content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r 9a6c139a4e58 content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/src/nsDocumentEncoder.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/src/nsDocumentEncoder.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -1333,7 +1333,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
@@ -59,9 +59,9 @@ diff -r 9a6c139a4e58 content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r 9a6c139a4e58 content/base/src/nsHTMLContentSerializer.cpp
---- a/content/base/src/nsHTMLContentSerializer.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -270,14 +270,15 @@
  
    PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
@@ -105,9 +105,9 @@ diff -r 9a6c139a4e58 content/base/src/nsHTMLContentSerializer.cpp
            fullConstEntityText = entityTable[val];
            break;
          } else if (val > 127 &&
-diff -r 9a6c139a4e58 content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
@@ -180,9 +180,9 @@ diff -r 9a6c139a4e58 content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
-diff -r 9a6c139a4e58 content/base/src/nsXMLContentSerializer.cpp
---- a/content/base/src/nsXMLContentSerializer.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff content/base/src/nsXMLContentSerializer.cpp
+--- a/content/base/src/nsXMLContentSerializer.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/content/base/src/nsXMLContentSerializer.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -61,6 +61,7 @@
  #include "prprf.h"
  #include "nsUnicharUtils.h"
@@ -367,9 +367,9 @@ diff -r 9a6c139a4e58 content/base/src/nsXMLContentSerializer.cpp
      }
    }
  }
-diff -r 9a6c139a4e58 editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -1390,13 +1390,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
@@ -416,9 +416,9 @@ diff -r 9a6c139a4e58 editor/libeditor/html/nsHTMLDataTransfer.cpp
        }
      }
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
-diff -r 9a6c139a4e58 editor/libeditor/html/nsHTMLEditRules.cpp
---- a/editor/libeditor/html/nsHTMLEditRules.cpp	Thu Jun 02 10:27:51 2011 +0800
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff editor/libeditor/html/nsHTMLEditRules.cpp
+--- a/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Thu Jun 09 11:08:33 2011 +0200
 @@ -1428,39 +1428,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
@@ -461,9 +461,9 @@ diff -r 9a6c139a4e58 editor/libeditor/html/nsHTMLEditRules.cpp
      }
      else
      {
-diff -r 9a6c139a4e58 toolkit/mozapps/extensions/content/extensions.js
---- a/toolkit/mozapps/extensions/content/extensions.js	Thu Jun 02 10:27:51 2011 +0800
-+++ b/toolkit/mozapps/extensions/content/extensions.js	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js	Mon Jun 06 11:22:45 2011 +1000
++++ b/toolkit/mozapps/extensions/content/extensions.js	Thu Jun 09 11:08:33 2011 +0200
 @@ -57,6 +57,7 @@
  const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
  const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
@@ -491,7 +491,7 @@ diff -r 9a6c139a4e58 toolkit/mozapps/extensions/content/extensions.js
    gViewController.initialize();
    gCategories.initialize();
    gHeader.initialize();
-@@ -2442,7 +2455,7 @@
+@@ -2451,7 +2464,7 @@
  
      for (let i = 0; i < this._listBox.itemCount; i++) {
        let item = this._listBox.childNodes[i];
@@ -500,9 +500,9 @@ diff -r 9a6c139a4e58 toolkit/mozapps/extensions/content/extensions.js
          this._listBox.removeChild(item);
          this.showEmptyNotice(this._listBox.itemCount == 0);
          return;
-diff -r 9a6c139a4e58 toolkit/mozapps/extensions/content/extensions.xul
---- a/toolkit/mozapps/extensions/content/extensions.xul	Thu Jun 02 10:27:51 2011 +0800
-+++ b/toolkit/mozapps/extensions/content/extensions.xul	Mon Jun 06 09:27:13 2011 +0200
+diff -r caf81a228fff toolkit/mozapps/extensions/content/extensions.xul
+--- a/toolkit/mozapps/extensions/content/extensions.xul	Mon Jun 06 11:22:45 2011 +1000
++++ b/toolkit/mozapps/extensions/content/extensions.xul	Thu Jun 09 11:08:33 2011 +0200
 @@ -65,6 +65,10 @@
    <script type="application/javascript"
            src="chrome://global/content/contentAreaUtils.js"/>
@@ -514,3 +514,15 @@ diff -r 9a6c139a4e58 toolkit/mozapps/extensions/content/extensions.xul
    <popupset>
      <!-- menu for an addon item -->
      <menupopup id="addonitem-popup">
+diff -r caf81a228fff widget/src/gtk2/nsWindow.cpp
+--- a/widget/src/gtk2/nsWindow.cpp	Mon Jun 06 11:22:45 2011 +1000
++++ b/widget/src/gtk2/nsWindow.cpp	Thu Jun 09 11:08:33 2011 +0200
+@@ -3986,6 +3986,8 @@
+                 gdk_window_add_filter(mShell->window,
+                                       popup_take_focus_filter, NULL); 
+ #endif
++                // XXX BlueGriffon ugly hack to work around bug 662770
++                gtk_window_set_modal(GTK_WINDOW(mShell), TRUE);
+             }
+ 
+             GdkWindowTypeHint gtkTypeHint;
