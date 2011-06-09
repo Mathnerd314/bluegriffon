@@ -54,6 +54,7 @@ EXTRA_JS_MODULES = colourPickerHelper.jsm \
 	cssInspector.jsm \
 	bgQuit.jsm \
 	screens.jsm \
+	projectManager.jsm \
 	$(NULL)
 
 ifneq (cocoa,$(MOZ_WIDGET_TOOLKIT))
