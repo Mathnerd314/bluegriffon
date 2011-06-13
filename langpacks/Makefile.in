@@ -20,14 +20,15 @@ _AVAILABLE_LOCALES =\
     zh-TW \
     nl \
     ko \
+    sl \
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)
 	mkdir -p $(FINAL_TARGET)/distribution/extensions
 	rm -f $(FINAL_TARGET)/distribution/extensions/*.xpi
 	rm -f $(srcdir)/*.xpi
-	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -qr ../langpack-`basename $f`@bluegriffon.org.xpi . ;)
-	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -qr $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi . ;)
+	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -qr ../langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
+	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -qr $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 	$(INSTALL) $(srcdir)/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
 else
