@@ -37,6 +37,7 @@
 
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/cssInspector.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["CssUtils"];
 
@@ -323,10 +324,7 @@ var CssUtils = {
     var doctype = EditorUtils.getCurrentDocumentMimeType();
     // pfff, xhtml parsed strictly as xml is a pain...
     var textNode;
-    if (editor && doctype == "application/xhtml+xml")
-      textNode = styleElt.ownerDocument.createCDATASection("\n" + outText);
-    else
-      textNode = styleElt.ownerDocument.createTextNode(outText);
+    textNode = styleElt.ownerDocument.createTextNode("\n" + outText);
     if (editor)
       editor.insertNode(textNode, styleElt, 0);
     else
