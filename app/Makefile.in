@@ -172,7 +172,7 @@ RCFLAGS += -DMOZ_PHOENIX
 ifdef DEBUG
 RCFLAGS += -DDEBUG
 endif
-RCFLAGS += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
+RCFLAGS += -DCOMPOSER_ICO=\"$(srcdir)/icons/bluegriffon-os2.ico\" -DDOCUMENT_ICO=\"$(srcdir)/icons/bluegriffon.ico\"
 endif
 
 include $(topsrcdir)/config/rules.mk
