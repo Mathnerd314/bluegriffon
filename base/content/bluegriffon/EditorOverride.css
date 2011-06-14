@@ -78,10 +78,11 @@ a:link img, a:visited img {
 /* We suppress user/author's prefs for link underline, 
    so we must set explicitly. This isn't good!
 */
-a:link {
+/* BlueGriffon should allow to see document styles for links */
+/*a:link {
   text-decoration: underline -moz-anchor-decoration;
   color: -moz-hyperlinktext;
-}
+}*/
 
 /* Allow double-clicks on these widgets to open properties dialogs
    XXX except when the widget has disabled attribute */
