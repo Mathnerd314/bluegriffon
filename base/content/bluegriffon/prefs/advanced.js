@@ -99,3 +99,19 @@ function SwitchToSystemLocale(aElt)
   else
     listbox.removeAttribute("disabled");
 }
+
+function ResetPreviewers()
+{
+  const handlerSvc = Components.classes["@mozilla.org/uriloader/handler-service;1"].
+                     getService(Components.interfaces.nsIHandlerService);
+  var e = handlerSvc.enumerate();
+  var handlers = [];
+  while (e.hasMoreElements()) {
+    var handler = e.getNext().QueryInterface(Components.interfaces.nsIHandlerInfo);
+    handlers.push(handler);
+  }
+
+  for (var i = 0; i < handlers.length; i++)
+    handlerSvc.remove(handlers[i]);
+}
+

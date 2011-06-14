@@ -39,6 +39,15 @@
     </groupbox>
 
     <groupbox>
+      <caption label="&preview.caption;"/>
+      <hbox align="center">
+        <spacer flex="1"/>
+        <button label="&resetPreviewers.label;"
+                oncommand="ResetPreviewers()"/>
+      </hbox>
+    </groupbox>
+
+    <groupbox>
       <caption label="&advancedConfig.caption;"/>
       <hbox align="center">
         <spacer flex="1"/>
