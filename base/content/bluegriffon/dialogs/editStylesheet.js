@@ -103,7 +103,7 @@ function AddMedium()
 function NewFile()
 {
   const nsIFP = Components.interfaces.nsIFilePicker;
-  fp = Components.classes["@mozilla.org/filepicker;1"]
+  var fp = Components.classes["@mozilla.org/filepicker;1"]
               .createInstance(nsIFP);
   fp.init(window, gDialog.bundleString.getString("NewCSSFile"), nsIFP.modeSave);
   fp.appendFilter("*.css", "*.css");
@@ -113,6 +113,17 @@ function NewFile()
   {
     var spec = fp.fileURL.spec;
     var file = fp.file;
+    if (spec.length < 5 ||
+        spec.substring(spec.length - 4) != ".css") {
+      spec += ".css";
+      var ioService =
+        Components.classes["@mozilla.org/network/io-service;1"]
+                  .getService(Components.interfaces.nsIIOService);
+      var fileHandler =
+        ioService.getProtocolHandler("file")
+                 .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+      file = fileHandler.getFileFromURLSpec(spec);
+    }
 
     // file is nsIFile, data is a string
     var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
