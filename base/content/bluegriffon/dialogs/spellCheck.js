@@ -485,10 +485,8 @@ function SelectLanguage()
       gLastSelectedLang = item;
     }
     else {
-      opener.open(GetPrefs().getComplexValue("editor.spellcheckers.url",
-                  Ci.nsIPrefLocalizedString).data);
-      if (gLastSelectedLang)
-        gDialog.LanguageMenulist.selectedItem = gLastSelectedLang;
+      loadExternalURL("http://www.bluegriffon.com/index.php?pages/Dictionaries");
+      window.close();
     }
   } catch (ex) {
     dump(ex);
