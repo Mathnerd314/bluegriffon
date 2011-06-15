@@ -90,9 +90,9 @@
             }
             // so we rebuild only from toolbarbutton up to the root
             if (aOneElementSelected)
-              this.mLastNode.setAttribute("checked", "true");
+              toolbarbutton.setAttribute("checked", "true");
             else
-              this.mLastNode.removeAttribute("checked");
+              toolbarbutton.removeAttribute("checked");
           }
           else
           {
