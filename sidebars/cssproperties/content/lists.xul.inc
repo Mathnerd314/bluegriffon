@@ -21,6 +21,7 @@
                   <menuitem label="&disc.label;" value="disc"/>
                   <menuitem label="&circle.label;" value="circle"/>
                   <menuitem label="&square.label;" value="square"/>
+                  <menuseparator/>
                   <menuitem label="&decimal.label;" value="decimal"/>
                   <menuitem label="&decimalLeadingZero.label;" value="decimal-leading-zero"/>
                   <menuitem label="&lowerRoman.label;" value="lower-roman"/>
