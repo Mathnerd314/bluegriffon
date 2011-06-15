@@ -587,7 +587,7 @@ function ExplodeElement(aEvent)
 
 function ChangeTag(aEvent)
 {
-  var popupNode = document.popupNode;
+  var popupNode = gDialog.structurebar.querySelector("[checked='true']");
   var textbox = document.createElement("textbox");
   textbox.setAttribute("value", popupNode.getAttribute("value"));
   textbox.setAttribute("width", popupNode.boxObject.width);
