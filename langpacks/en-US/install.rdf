@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-en-US@bluegriffon.org"
                em:name="English (US) Language Pack"
-               em:version="6.0.1.1.1"
+               em:version="6.0.1.2"
                em:type="8"
                em:creator="mozilla.org">
 
@@ -16,8 +16,8 @@
       <!-- BlueGriffon -->
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
-        <em:minVersion>1.1.1</em:minVersion>
-        <em:maxVersion>1.1.1</em:maxVersion>
+        <em:minVersion>1.2</em:minVersion>
+        <em:maxVersion>1.2</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-zh-CN@bluegriffon.org"
                em:name="Chinese Simplified (zh-CN) Language Pack"
-               em:version="6.0.1.1.1"
+               em:version="6.0.1.2"
                em:type="8"
                em:creator="mozilla.org">
     <em:contributor>Wen Shaohua</em:contributor> <em:contributor>Jin Jian</em:contributor> <em:contributor>Rongjun Mu</em:contributor> <em:contributor>Xie Yanbo</em:contributor> <em:contributor>Cathayan</em:contributor>
@@ -17,8 +17,8 @@
       <!-- BlueGriffon -->
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
-        <em:minVersion>1.1.1</em:minVersion>
-        <em:maxVersion>1.1.1</em:maxVersion>
+        <em:minVersion>1.2</em:minVersion>
+        <em:maxVersion>1.2</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
