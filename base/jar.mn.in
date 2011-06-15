@@ -139,4 +139,5 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/dictionary.xul            (content/bluegriffon/dialogs/dictionary.xul)
   content/bluegriffon/dialogs/dictionary.js             (content/bluegriffon/dialogs/dictionary.js)
   content/bluegriffon/js/html5.js                       (content/bluegriffon/js/html5.js)
-
+  content/bluegriffon/dialogs/listProperties.js         (content/bluegriffon/dialogs/listProperties.js)
+  content/bluegriffon/dialogs/listProperties.xul        (content/bluegriffon/dialogs/listProperties.xul)

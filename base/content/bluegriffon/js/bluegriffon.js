@@ -1178,6 +1178,12 @@ function OnDoubleClick(aEvent)
       if (EditorUtils.getCurrentEditor().selection.isCollapsed)
         OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 
       break;
+    case "li":
+    case "ul":
+    case "ol":
+      window.openDialog("chrome://bluegriffon/content/dialogs/listProperties.xul","_blank",
+                        "chrome,modal,titlebar,resizable=no,dialog=yes", node);
+      break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")
       {

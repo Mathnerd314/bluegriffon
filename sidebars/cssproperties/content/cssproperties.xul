@@ -43,8 +43,8 @@
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
 <!DOCTYPE page [
-  <!ENTITY % composerOverlayDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
-  %composerOverlayDTD;
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
   <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
   %backgrounditemDTD;
 ]>
