@@ -52,6 +52,7 @@
             commandupdater="true"
             events="create,style,mode_switch"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+  <command id="cmd_list"             oncommand="goDoCommand('cmd_list')"/>
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
   <command id="cmd_anchor"           oncommand="goDoCommand('cmd_anchor')"/>

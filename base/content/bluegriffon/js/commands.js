@@ -307,6 +307,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_cleanup",     cmdMarkupCleaner);
     commandTable.registerCommand("cmd_browse",      cmdBrowseCommand);
 
+    commandTable.registerCommand("cmd_list",                 cmdEditListCommand);
+
     commandTable.registerCommand("cmd_table",                cmdInsertOrEditTableCommand);
     commandTable.registerCommand("cmd_editTable",            bgEditTableCommand);
     commandTable.registerCommand("cmd_SelectTable",          bgSelectTableCommand);

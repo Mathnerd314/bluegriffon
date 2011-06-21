@@ -193,3 +193,25 @@ var cmdPagePropertiesCommand =
     window.content.focus();
   }
 };
+
+var cmdEditListCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    var element = EditorUtils.getObjectForProperties(["ul","ol"]);
+    return (element &&
+            EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/listProperties.xul","_blank",
+                      "chrome,modal,titlebar,resizable=no,dialog=yes");
+   }
+};

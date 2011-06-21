@@ -1181,8 +1181,7 @@ function OnDoubleClick(aEvent)
     case "li":
     case "ul":
     case "ol":
-      window.openDialog("chrome://bluegriffon/content/dialogs/listProperties.xul","_blank",
-                        "chrome,modal,titlebar,resizable=no,dialog=yes", node);
+      cmdEditListCommand.doCommand();
       break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")

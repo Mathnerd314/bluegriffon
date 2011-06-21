@@ -264,6 +264,8 @@
         <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  observes="cmd_removeStyles"/>
         <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   observes="cmd_removeLinks"/>
         <menuseparator />
+        <menuitem label="&listProperties.label;" observes="cmd_list"/>
+        <menuseparator/>
         <menuitem label="&pageProperties.label;" observes="cmd_pageProperties"/>
       </menupopup>
     </menu>
