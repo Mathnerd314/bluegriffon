@@ -627,13 +627,6 @@ var EditorUtils = {
 	  if (!editor)
 	    return null;
 	
-	  /*var element;
-	  try {
-	    element = editor.getSelectedElement("");
-	  } catch (e) {}
-	  if (element)
-	    return element;*/
-	
 	  // Find nearest parent of selection anchor node
 	  //   that is a link, list, table cell, or table
 	
