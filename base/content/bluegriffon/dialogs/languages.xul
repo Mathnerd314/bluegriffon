@@ -51,7 +51,6 @@
   </stringbundleset>
 
   <groupbox id="currentLanguageBox">
-    <caption label="Current language"/>
     <hbox align="center">
       <label value="&currentLanguage.label;"/>
       <label id="currentLanguage"/>
