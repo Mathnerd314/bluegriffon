@@ -15,6 +15,10 @@
   <key id="underlinekb"         key="&styleUnderline.key;"   observes="cmd_underline" modifiers="accel"/>
 
   <key keycode="VK_ESCAPE"      observes="cmd_structureClimb" />
+  <key id="structureclimbkb"      keycode="VK_F2"              observes="cmd_structureClimb"/>
+  <key id="structurefirstchildkb" keycode="VK_F2"              observes="cmd_structureFirstChild" modifiers="shift"/>
+  <key id="structurenextkb"       keycode="VK_F4"              observes="cmd_structureNext"/>
+  <key id="structurepreviousbkb"  keycode="VK_F4"              observes="cmd_structurePrevious" modifiers="shift"/>
   
 #ifdef XP_MACOSX
   <key id="key_preferencesCmdMac" key="&preferencesCmdMac.commandkey;" modifiers="accel"/>
@@ -143,6 +147,9 @@
   <command id="cmd_renderedAllEnabler"/>
   <command id="cmd_viewModeEnabler"/>
   <command id="cmd_structureClimb"                 oncommand="goDoCommand('cmd_structureClimb')"/>
+  <command id="cmd_structureFirstChild"            oncommand="goDoCommand('cmd_structureFirstChild')"/>
+  <command id="cmd_structureNext"                  oncommand="goDoCommand('cmd_structureNext')"/>
+  <command id="cmd_structurePrevious"              oncommand="goDoCommand('cmd_structurePrevious')"/>
   <command id="cmd_ul"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ul')"/>
   <command id="cmd_ol"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_ol')"/>
   <command id="cmd_align"        state="left"      oncommand="ComposerCommands.doStatefulCommand('cmd_align', event.target.value)"/>

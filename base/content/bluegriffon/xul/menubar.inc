@@ -44,6 +44,23 @@
         <menuitem id="menu_paste"/>
         <menuitem id="menu_delete"/>
         <menuseparator/>
+        <menu label="&select.label;">
+          <menupopup>
+            <menuitem label="&parentElement.label;"
+                      key="structureclimbkb"
+                      observes="cmd_structureClimb"/>
+            <menuitem label="&firstChild.label;"
+                      key="structurefirstchildkb"
+                      observes="cmd_structureFirstChild"/>
+            <menuseparator/>
+            <menuitem label="&nextSibling.label;"
+                      key="structurenextkb"
+                      observes="cmd_structureNext"/>
+            <menuitem label="&previousSibling.label;"
+                      key="structurepreviousbkb"
+                      observes="cmd_structurePrevious"/>
+          </menupopup>
+        </menu>
         <menuitem id="menu_selectAll" />
         <menuseparator/>
         <menuitem id="menu_copyHTMLCode"

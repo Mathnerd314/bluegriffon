@@ -400,6 +400,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_gotoLink",    cmdGotoLinkCommand);
 
     commandTable.registerCommand("cmd_structureClimb", cmdStructureClimbCommand);
+    commandTable.registerCommand("cmd_structureFirstChild", cmdStructureFirstChildCommand);
+    commandTable.registerCommand("cmd_structureNext", cmdStructureNextCommand);
+    commandTable.registerCommand("cmd_structurePrevious", cmdStructurePreviousCommand);
 },
 
   setupFormatCommands: function setupFormatCommands()
