@@ -20,6 +20,7 @@
   <stringbundleset id="languageSet">
     <stringbundle id="bundleRegions"      src="chrome://global/locale/regionNames.properties"/>
     <stringbundle id="bundleLanguages"    src="chrome://global/locale/languageNames.properties"/>
+    <stringbundle id="updaterBundle"      src="chrome://bluegriffon/locale/prefs/update.properties"/>
   </stringbundleset>
 
   <prefpane id="generalPrefPane"

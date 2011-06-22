@@ -40,10 +40,14 @@ function CheckNow()
 
 function ErrorOnUpdate()
 {
-  PromptUtils.alertWithTitle("Software updates", "Unable to check availability", window);
+  PromptUtils.alertWithTitle(gDialog.updaterBundle.getString("SoftwareUpdates"),
+                             gDialog.updaterBundle.getString("UnableToCheck"),
+                             window);
 }
 
 function BlueGriffonIsUpToDate()
 {
-  PromptUtils.alertWithTitle("Software updates", "BlueGriffon is up to date", window);
+  PromptUtils.alertWithTitle(gDialog.updaterBundle.getString("SoftwareUpdates"),
+                             gDialog.updaterBundle.getString("UpToDate"),
+                             window);
 }
