@@ -116,6 +116,18 @@
             </hbox>
           </row>
 
+           <row align="center">
+            <label value="&textOverflow.label;"/>
+            <hbox align="center">
+              <toolbarbutton class="multibutton" label="&clipTextOverflow.label;" value="clip" property="text-overflow" type="checkbox"
+                             id="clipTextOverflowButton" group="text-overflow"
+                             oncommand="ToggleProperty(this)"/>
+              <toolbarbutton class="multibutton" label="&ellipsisTextOverflow.label;" value="ellipsis" property="text-overflow" type="checkbox"
+                             id="ellipsisTextOverflowButton" group="text-overflow"
+                             oncommand="ToggleProperty(this)"/>
+            </hbox>
+          </row>
+
           <row align="center">
             <label value="&position.label;"/>
             <hbox align="center">

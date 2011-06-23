@@ -44,4 +44,8 @@ function PositionSectionIniter(aElt, aRuleset)
   CheckToggle(gDialog.hiddenOverflowButton,   o == "hidden");
   CheckToggle(gDialog.scrollOverflowButton,   o == "scroll");
   CheckToggle(gDialog.autoOverflowButton,     o == "auto");
+
+  var to = CssInspector.getCascadedValue(aRuleset, "text-overflow");
+  CheckToggle(gDialog.clipTextOverflowButton,       to == "clip");
+  CheckToggle(gDialog.ellipsisTextOverflowButton,   to == "ellipsis");
 }
