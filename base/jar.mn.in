@@ -141,3 +141,6 @@ bluegriffon.jar:
   content/bluegriffon/js/html5.js                       (content/bluegriffon/js/html5.js)
   content/bluegriffon/dialogs/listProperties.js         (content/bluegriffon/dialogs/listProperties.js)
   content/bluegriffon/dialogs/listProperties.xul        (content/bluegriffon/dialogs/listProperties.xul)
+  content/bluegriffon/dialogs/insertTOC.js              (content/bluegriffon/dialogs/insertTOC.js)
+  content/bluegriffon/dialogs/insertTOC.xul             (content/bluegriffon/dialogs/insertTOC.xul)
+
