@@ -965,6 +965,7 @@ var resetUndoStack, addCommandToHistory;
 	};
 	
 	c.undoMgr = {
+	  reset: function() { undoStack = []; undoStackPointer = 0; },
 		// Function: undoMgr.getUndoStackSize
 		// Returns: 
 		// Integer with the current size of the undo history stack

@@ -30,7 +30,7 @@
 			// changed in the UI and are stored in the browser, config can not
 			
 			curConfig = {
-				canvas_expansion: 3,
+				canvas_expansion: 1,
 				dimensions: [640,480],
 				initFill: {
 					color: 'FF0000',  // solid red
@@ -175,12 +175,12 @@
 		Editor.init = function() {
 			(function() {
 				// let the opener know SVG Edit is ready
-	  			var w = window.opener;
+        var w = window.top.opener;
 				if (w) {
 				    try {
-					var svgEditorReadyEvent = w.document.createEvent("Event");
-					svgEditorReadyEvent.initEvent("svgEditorReady", true, true);
-					w.document.documentElement.dispatchEvent(svgEditorReadyEvent);
+              var svgEditorReadyEvent = w.document.createEvent("Event");
+              svgEditorReadyEvent.initEvent("svgEditorReady", true, true);
+              w.document.documentElement.dispatchEvent(svgEditorReadyEvent);
 				    }
 				    catch(e) {}
 				}
@@ -455,6 +455,7 @@
 				modKey = (isMac ? "meta+" : "ctrl+"); // ⌘
 				path = svgCanvas.pathActions,
 				undoMgr = svgCanvas.undoMgr,
+        window.undoMgr = undoMgr;
 				Utils = svgCanvas.Utils,
 				default_img_url = curConfig.imgPath + "logo.png",
 				workarea = $("#workarea"),
@@ -561,7 +562,7 @@
 	    	if (svgEditor.externalSaveHandler) {
 					svgEditor.externalSaveHandler(svg);
 					show_save_warning = false;
-					window.close();
+					window.top.close();
 					return;
 				}
 			
@@ -4126,6 +4127,13 @@
 		Editor.loadFromString = function(str) {
 			Editor.ready(function() {
 				svgCanvas.setSvgString(str);
+				svgCanvas.undoMgr.reset();
+			});
+		};
+		
+		Editor.resetTransactionManager = function() {
+			Editor.ready(function() {
+				svgCanvas.undoMgr.reset();
 			});
 		};
 		

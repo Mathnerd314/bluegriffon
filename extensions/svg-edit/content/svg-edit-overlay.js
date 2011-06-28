@@ -5,18 +5,23 @@ var SVGWindow;
 function start_svg_edit(aString) {
   function svgEditorReady(event)
   {
-    SVGWindow.svgEditor.externalSaveHandler = InsertSVGAtSelection;
+    var svgWindow = SVGWindow.document.getElementById("mainIframe")
+                      .contentWindow;
+    var svgEditor = svgWindow.svgEditor;
+    svgEditor.externalSaveHandler = InsertSVGAtSelection;
     if (aString)
-      SVGWindow.svgEditor.loadFromString(aString)
-	  window.document.documentElement
+      svgEditor.loadFromString(aString)
+    else
+      svgEditor.resetTransactionManager();
+	  svgWindow.document.documentElement
 	    .removeEventListener("svgEditorReady", svgEditorReady, false);
   }
 
   window.document.documentElement
     .addEventListener("svgEditorReady", svgEditorReady, false);
-  var url = "chrome://svg-edit/content/editor/svg-editor.html";
+  var url = "chrome://svg-edit/content/svg-edit.xul";
   SVGWindow = window.openDialog(url, "_blank",
-          "width=1024,height=700,centerscreen,menubar=yes,toolbar=no,resizable=yes,sizemode=normal");
+          "menubar=yes,toolbar=no,resizable=yes,sizemode=normal");
 }
 
 function InsertSVGAtSelection(aString)
