@@ -46,6 +46,7 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     onload="Startup();"
     ondialogaccept="return BuildTOC(true);"
+    persist="screenX screenY"
     oncancel="window.close(); return true;">
 
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>

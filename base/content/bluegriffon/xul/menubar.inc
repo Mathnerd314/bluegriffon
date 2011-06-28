@@ -217,6 +217,10 @@
 		       </menupopup>
         </menu>
         <menuseparator/>
+	        <menuitem label="&tableOfContents.label;"
+	                  observes="cmd_renderedHTMLEnabler"
+                    oncommand="CreateOrUpdateTableOfContents()"/>
+        <menuseparator/>
         <menu label="&html5Element.label;">
           <menupopup id="html5InsertionMenupopup"
                      onpopupshowing="HTML5Helper.initInsertMenu(this)"/>

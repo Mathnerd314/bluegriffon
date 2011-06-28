@@ -1681,8 +1681,8 @@ function SaveTabs()
   catch(e) {}
 }
 
-function TOC()
+function CreateOrUpdateTableOfContents()
 {
   window.openDialog("chrome://bluegriffon/content/dialogs/insertTOC.xul","_blank",
-              "chrome,modal,titlebar");
+                    "chrome,modal,titlebar");
 }

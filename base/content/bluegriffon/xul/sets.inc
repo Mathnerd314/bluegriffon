@@ -68,6 +68,7 @@
   <command id="cmd_audio"            oncommand="goDoCommand('cmd_audio')"/>
   <command id="cmd_html"             oncommand="goDoCommand('cmd_html')"/>
   <command id="cmd_form"             oncommand="goDoCommand('cmd_form')"/>
+  <command id="cmd_toc"              oncommand="goDoCommand('cmd_toc')"/>
 
   <command id="cmd_formInputHidden"   oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'hidden')"/>
   <command id="cmd_formInputText"     oncommand="ComposerCommands.doCommandWithValue('cmd_formInput', 'text')"/>
