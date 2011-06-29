@@ -368,7 +368,6 @@
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
-        <!--menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();"/-->
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences"
                   label="&preferences.label;"
@@ -382,8 +381,10 @@
         <menuitem id="menu_mac_hide_others" label="&hideOtherAppsCmdMac.label;" key="key_hideOtherAppsCmdMac"/>
         <menuitem id="menu_mac_show_all" label="&showAllAppsCmdMac.label;"/>
 #endif
-        <!--menuitem label="Venkman"
-                  oncommand="start_venkman()"/-->
+        <menuitem label="Venkman" id="venkmanMenuitem"
+                  hidden="true"
+                  oncommand="start_venkman()"/>
+        <menuitem id="menu_inspector" label="DOMI" oncommand="inspectDOMDocument();" hidden="true"/>
       </menupopup>
     </menu>
 

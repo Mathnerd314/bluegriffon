@@ -1,6 +1,7 @@
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/bgQuit.jsm");
+Components.utils.import("resource://gre/modules/AddonManager.jsm");
 
 var gContentWindow = null;
 
@@ -56,6 +57,12 @@ function Startup()
 
   setTimeout(LoadLastTabs, 1000);
   BlueGriffonQuitHelper.init();
+
+  AddonManager.getAddonByID("{f13b157f-b174-47e7-a34d-4815ddfdfeb8}",
+    function(addon) { if(addon) document.getElementById("venkmanMenuitem").hidden = false; } );
+
+  AddonManager.getAddonByID("inspector@mozilla.org",
+    function(addon) { if(addon) document.getElementById("menu_inspector").hidden = false; } );
 }
 
 var gLastTabsArray;
