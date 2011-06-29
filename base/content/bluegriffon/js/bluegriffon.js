@@ -1181,7 +1181,11 @@ function OnDoubleClick(aEvent)
     case "li":
     case "ul":
     case "ol":
-      cmdEditListCommand.doCommand();
+      {
+        var selContainer = EditorUtils.getSelectionContainer();
+        if (selContainer.oneElementSelected)
+          cmdEditListCommand.doCommand();
+      }
       break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")
