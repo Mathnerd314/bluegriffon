@@ -164,7 +164,7 @@ function AboutComposer()
   var enumerator = wm.getEnumerator( "BlueGriffon:About" );
   while ( enumerator.hasMoreElements() )
   {
-    var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindowInternal);
+    var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
     win.focus();
     return;
   }

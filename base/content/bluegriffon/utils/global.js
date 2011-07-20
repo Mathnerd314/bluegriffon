@@ -43,7 +43,6 @@ const kWINDOWMEDIATOR_CID = "@mozilla.org/appshell/window-mediator;1";
 
 const interfaces = Components.interfaces;
 const nsIWindowMediator = interfaces.nsIWindowMediator;
-const nsIDOMWindowInternal = interfaces.nsIDOMWindowInternal;
 const nsIPlaintextEditor = interfaces.nsIPlaintextEditor;
 const nsIHTMLEditor = interfaces.nsIHTMLEditor;
 const nsIEditingSession = interfaces.nsIEditingSession;
