@@ -187,7 +187,7 @@ var EditorUtils = {
     var enumerator = Services.wm.getEnumerator( "bluegriffon" );
     while ( enumerator.hasMoreElements() )
     {
-      var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindowInternal);
+      var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
       try {
         var mixed = win.gDialog.tabeditor.isAlreadyEdited(url);
         if (mixed)

@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://app/modules/urlHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var EXPORTED_SYMBOLS = ["ftpMozilla", "ftpDataSocketMozilla"];
 
@@ -1929,10 +1930,9 @@ ftpMozilla.prototype.ftp = {
         if (returnCode == 2) {
           var zeDate = buffer.split(" ").filter(this.removeBlanks);
           zeDate     = zeDate[1];
-
           try {
-            var file = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-            file.initWithPath(callback);
+            var fileHandler = UrlUtils.getFileProtocolHandler();
+            var file = fileHandler.getFileFromURLSpec(callback).QueryInterface(Components.interfaces.nsILocalFile);
             file.lastModifiedTime = Date.parse(zeDate.substr(0, 4) + " " + zeDate.substr(4,  2) + " " + zeDate.substr(6,  2) + " "
                                              + zeDate.substr(8, 2) + ":" + zeDate.substr(10, 2) + ":" + zeDate.substr(12, 2) + " GMT");
           } catch (ex) {
@@ -2255,7 +2255,7 @@ ftpMozilla.prototype.ftp = {
     this.writeControlWrapper();
   },
 
-  download : function(remotePath, localPath, remoteSize, resume, localSize, isSymlink, callback) {
+  download : function(remotePath, localPath, remoteSize, resume, localSize, isSymlink, callback, disableMDTM) {
     ++this.queueID;
     var id = this.connNo + "-" + this.queueID;
 
@@ -2291,7 +2291,7 @@ ftpMozilla.prototype.ftp = {
       this.addEventQueue(this.featXCheck, '"' + leafName + '"', localPath);
     }
 
-    if (this.timestampsMode && this.featMDTM) {
+    if (this.timestampsMode && this.featMDTM && !disableMDTM) {
       this.addEventQueue("MDTM", leafName, localPath);
     }
 

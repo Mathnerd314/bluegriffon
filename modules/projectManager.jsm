@@ -60,7 +60,6 @@ var ProjectManager = {
     var mDBConn = this.getDBConn();    
     mDBConn.executeSimpleSQL("CREATE TABLE IF NOT EXISTS 'projects' ( \
 'name' VARCHAR PRIMARY KEY NOT NULL, \
-'url' VARCHAR NOT NULL, \
 'storageChoice' VARCHAR NOT NULL, \
 'hostname' VARCHAR NOT NULL, \
 'rootpath' VARCHAR NOT NULL, \
@@ -86,20 +85,18 @@ var ProjectManager = {
 
     while (statement.executeStep()) {
       var name           = statement.getString(0);
-      var url            = statement.getString(1);
-      var storageChoice  = statement.getString(2);
-      var hostname       = statement.getString(3);
-      var rootpath       = statement.getString(4);
-      var user           = statement.getString(5);
-      var passiveMode    = statement.getString(6);
-      var ipv6Mode       = statement.getString(7);
-      var port           = statement.getString(8);
-      var localStoreHome = statement.getString(9)
-      var exclusions     = statement.getString(10);
-      var timeShift      = statement.getString(11);
+      var storageChoice  = statement.getString(1);
+      var hostname       = statement.getString(2);
+      var rootpath       = statement.getString(3);
+      var user           = statement.getString(4);
+      var passiveMode    = statement.getString(5);
+      var ipv6Mode       = statement.getString(6);
+      var port           = statement.getString(7);
+      var localStoreHome = statement.getString(8)
+      var exclusions     = statement.getString(9);
+      var timeShift      = statement.getString(10);
   
       this.projects[name] = {
-        url: url,
         storageChoice: storageChoice,
         hostname: hostname,
         rootpath: rootpath,
@@ -135,7 +132,6 @@ var ProjectManager = {
 
 
   addProject: function(name,
-                       url,
                        storageChoice,
                        hostname,
                        rootpath,
@@ -149,26 +145,24 @@ var ProjectManager = {
   {
     if (!(name in this.projects)) { // sanity check
       var dbConn = this.getDBConn();
-      var statement = dbConn.createStatement("INSERT INTO 'projects' ('name', 'url', 'storageChoice', 'hostname', 'rootpath', 'user', 'passiveMode', 'ipv6Mode', 'port', 'localStoreHome', 'exclusions', 'timeShift') VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)");
+      var statement = dbConn.createStatement("INSERT INTO 'projects' ('name', 'storageChoice', 'hostname', 'rootpath', 'user', 'passiveMode', 'ipv6Mode', 'port', 'localStoreHome', 'exclusions', 'timeShift') VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)");
       statement.bindUTF8StringParameter(0, name);
-      statement.bindUTF8StringParameter(1, url);
-      statement.bindUTF8StringParameter(2, storageChoice);
-      statement.bindUTF8StringParameter(3, hostname);
-      statement.bindUTF8StringParameter(4, rootpath);
-      statement.bindUTF8StringParameter(5, user);
-      statement.bindUTF8StringParameter(6, passiveMode);
-      statement.bindUTF8StringParameter(7, ipv6Mode);
-      statement.bindUTF8StringParameter(8, port);
-      statement.bindUTF8StringParameter(9, localStoreHome);
-      statement.bindUTF8StringParameter(10, exclusions);
-      statement.bindUTF8StringParameter(11, timeShift);
+      statement.bindUTF8StringParameter(1, storageChoice);
+      statement.bindUTF8StringParameter(2, hostname);
+      statement.bindUTF8StringParameter(3, rootpath);
+      statement.bindUTF8StringParameter(4, user);
+      statement.bindUTF8StringParameter(5, passiveMode);
+      statement.bindUTF8StringParameter(6, ipv6Mode);
+      statement.bindUTF8StringParameter(7, port);
+      statement.bindUTF8StringParameter(8, localStoreHome);
+      statement.bindUTF8StringParameter(9, exclusions);
+      statement.bindUTF8StringParameter(10, timeShift);
 
       statement.execute();
       statement.finalize();
     
       dbConn.close();
       this.projects[name] = {
-        url: url,
         storageChoice: storageChoice,
         hostname: hostname,
         rootpath: rootpath,
@@ -184,7 +178,6 @@ var ProjectManager = {
   },
 
   modifyProject: function(name,
-                          url,
                           storageChoice,
                           hostname,
                           rootpath,
@@ -199,36 +192,33 @@ var ProjectManager = {
     if ((name in this.projects)) { // sanity check
       var dbConn = this.getDBConn();
       var statement = dbConn.createStatement("UPDATE 'projects' SET \
-url=?2,\
-storageChoice=?3,\
-hostname=?4,\
-rootpath=?5,\
-user=?6,\
-passiveMode=?7,\
-ipv6Mode=?8,\
-port=?9,\
-localStoreHome=?10,\
-exclusions=?11,\
-timeShift=?12 WHERE name=?1");
+storageChoice=?2,\
+hostname=?3,\
+rootpath=?4,\
+user=?5,\
+passiveMode=?6,\
+ipv6Mode=?7,\
+port=?8,\
+localStoreHome=?9,\
+exclusions=?10,\
+timeShift=?11 WHERE name=?1");
       statement.bindUTF8StringParameter(0, name);
-      statement.bindUTF8StringParameter(1, url);
-      statement.bindUTF8StringParameter(2, storageChoice);
-      statement.bindUTF8StringParameter(3, hostname);
-      statement.bindUTF8StringParameter(4, rootpath);
-      statement.bindUTF8StringParameter(5, user);
-      statement.bindUTF8StringParameter(6, passiveMode);
-      statement.bindUTF8StringParameter(7, ipv6Mode);
-      statement.bindUTF8StringParameter(8, port);
-      statement.bindUTF8StringParameter(9, localStoreHome);
-      statement.bindUTF8StringParameter(10, exclusions);
-      statement.bindUTF8StringParameter(11, timeShift);
+      statement.bindUTF8StringParameter(1, storageChoice);
+      statement.bindUTF8StringParameter(2, hostname);
+      statement.bindUTF8StringParameter(3, rootpath);
+      statement.bindUTF8StringParameter(4, user);
+      statement.bindUTF8StringParameter(5, passiveMode);
+      statement.bindUTF8StringParameter(6, ipv6Mode);
+      statement.bindUTF8StringParameter(7, port);
+      statement.bindUTF8StringParameter(8, localStoreHome);
+      statement.bindUTF8StringParameter(9, exclusions);
+      statement.bindUTF8StringParameter(10, timeShift);
     
       statement.execute();
       statement.finalize();
     
       dbConn.close();
       this.projects[name] = {
-        url: url,
         storageChoice: storageChoice,
         hostname: hostname,
         rootpath: rootpath,
@@ -246,15 +236,5 @@ timeShift=?12 WHERE name=?1");
   isExistingProject: function(aName)
   {
     return (aName in this.projects);
-  },
-
-  getProjectForUrlSpec: function(aUrlSpec)
-  {
-    for (var name in this.projects) {
-      var localStoreHome = this.projects[name].localStoreHome;
-      if (aUrlSpec.substr(0, localStoreHome.length) == localStoreHome)
-        return {name: name, project: this.projects };
-    }
-    return null;
   }
 };
