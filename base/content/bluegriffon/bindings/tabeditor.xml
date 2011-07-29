@@ -456,7 +456,9 @@
             aIframe.removeEventListener("pageshow", function() {_self._installBespin(aIframe);}, true);
 
             aIframe.contentWindow.installBespin(BespinKeyPressCallback,
-                                                aTheme);
+                                                aTheme,
+                                                HTML5Helper.mHTML5_ELEMENTS,
+                                                EditorUtils);
             gDialog.sourceModeButton.removeAttribute("busy");
             window.updateCommands("mode_switch");
        ]]>

@@ -73,34 +73,43 @@ _ACE_RESOURCE_FILES = \
 	$(srcdir)/res/ace/ace-uncompressed.js \
 	$(srcdir)/res/ace/ace.js \
 	$(srcdir)/res/ace/cockpit-uncompressed.js \
-	$(srcdir)/res/ace/cockpit.js \
 	$(srcdir)/res/ace/keybinding-emacs.js \
 	$(srcdir)/res/ace/keybinding-vim.js \
 	$(srcdir)/res/ace/mode-c_cpp.js \
+	$(srcdir)/res/ace/mode-clojure.js \
 	$(srcdir)/res/ace/mode-coffee.js \
 	$(srcdir)/res/ace/mode-csharp.js \
 	$(srcdir)/res/ace/mode-css.js \
 	$(srcdir)/res/ace/mode-html.js \
 	$(srcdir)/res/ace/mode-java.js \
 	$(srcdir)/res/ace/mode-javascript.js \
+	$(srcdir)/res/ace/mode-json.js \
 	$(srcdir)/res/ace/mode-perl.js \
 	$(srcdir)/res/ace/mode-php.js \
 	$(srcdir)/res/ace/mode-python.js \
 	$(srcdir)/res/ace/mode-ruby.js \
+	$(srcdir)/res/ace/mode-scss.js \
+	$(srcdir)/res/ace/mode-svg.js \
 	$(srcdir)/res/ace/mode-xml.js \
 	$(srcdir)/res/ace/theme-clouds.js \
 	$(srcdir)/res/ace/theme-clouds_midnight.js \
 	$(srcdir)/res/ace/theme-cobalt.js \
+	$(srcdir)/res/ace/theme-crimson_editor.js \
 	$(srcdir)/res/ace/theme-dawn.js \
 	$(srcdir)/res/ace/theme-eclipse.js \
 	$(srcdir)/res/ace/theme-idle_fingers.js \
 	$(srcdir)/res/ace/theme-kr_theme.js \
+	$(srcdir)/res/ace/theme-merbivore.js \
+	$(srcdir)/res/ace/theme-merbivore_soft.js \
 	$(srcdir)/res/ace/theme-mono_industrial.js \
 	$(srcdir)/res/ace/theme-monokai.js \
 	$(srcdir)/res/ace/theme-pastel_on_dark.js \
 	$(srcdir)/res/ace/theme-twilight.js \
-  $(srcdir)/res/ace/worker-javascript.js \
-  $(srcdir)/res/ace/themes-list.js \
+	$(srcdir)/res/ace/theme-vibrant_ink.js \
+	$(srcdir)/res/ace/themes-list.js \
+	$(srcdir)/res/ace/worker-coffee.js \
+	$(srcdir)/res/ace/worker-css.js \
+	$(srcdir)/res/ace/worker-javascript.js \
 	$(NULL)
 
 libs::

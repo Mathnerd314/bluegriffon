@@ -16,6 +16,12 @@ function onBespinLineKeypress(aEvent, aElt)
     onBespinLineBlur(aElt);
     onBespinFocus(EditorUtils.getCurrentSourceEditorElement());
   }
+  if (aEvent.keyCode == 13 ||
+      (aEvent.keyCode == 27 && !aEvent.which)) { // ESC key
+    gDialog.bespinToolbox1.hidden = true;
+    gDialog.bespinToolbox2.hidden = true;
+    EditorUtils.getCurrentSourceEditorElement().focus();
+  }
 }
 
 function ToggleBespinFindCaseSensitivity()
