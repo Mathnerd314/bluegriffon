@@ -71,7 +71,6 @@ _FILES = \
 
 _ACE_RESOURCE_FILES = \
 	$(srcdir)/res/ace/ace-uncompressed.js \
-	$(srcdir)/res/ace/ace.js \
 	$(srcdir)/res/ace/cockpit-uncompressed.js \
 	$(srcdir)/res/ace/keybinding-emacs.js \
 	$(srcdir)/res/ace/keybinding-vim.js \
