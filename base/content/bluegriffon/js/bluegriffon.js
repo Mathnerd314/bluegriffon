@@ -1596,10 +1596,9 @@ function MarkSelectionInAce(aAceEditor)
   aAceEditor.replace("");
 
   aAceEditor.gotoLine(startRow);
-  // ugly hack to reset entirely the unomanager of Ace
-  aAceEditor.getSession().setValue(aAceEditor.getSession().getValue());
   selection.setSelectionRange({ start: { row: startRow, column: startColumn },
                                 end:   { row: endRow,   column: endColumn } });
+  aAceEditor.reset();
 }
 
 function FillAceThemesMenupopup()

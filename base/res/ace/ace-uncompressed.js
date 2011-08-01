@@ -6688,6 +6688,8 @@ var Editor =function(renderer, session) {
 
     this.reset = function() {
         this.session.$deltas = [];
+        this.session.$deltasDoc = [];
+        this.session.$deltasFold = [];
         this.session.getUndoManager().reset();
     };
 
