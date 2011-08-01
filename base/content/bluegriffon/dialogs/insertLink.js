@@ -36,6 +36,24 @@ function InitDialog()
          url.substr(0,8) == "https://" ||
          url.substr(0,6) == "ftp://" ||
          url.substr(0,7) == "file://");
+    if (gNode.hasAttribute("target")) {
+	    gDialog.applyTargetAttributeCheckbox.checked = true;
+      var target = gNode.getAttribute("target");
+	    switch (target) {
+	      case "_top":
+	      case "_parent":
+	      case "_blank":
+	      case "_self":
+	        gDialog.targetAttributeMenulist.value = target;
+          gDialog.userDefinedValueTextbox.value = "";
+          break;
+        default:
+          gDialog.targetAttributeMenulist.value = "x";
+          gDialog.userDefinedValueTextbox.value = target;
+          break;
+	    }
+      ToggleTargetAttribute();
+    }
     gDialog.urlMenulist.focus();
   }
   else {
@@ -136,10 +154,20 @@ function onAccept()
   var url = gDialog.urlMenulist.value;
   if (url && gDialog.emailCheckbox.checked)
     url = "mailto:" + url;
+  var target = gDialog.applyTargetAttributeCheckbox.checked
+               ? ((gDialog.targetAttributeMenulist.value == "x")
+                   ? gDialog.userDefinedValueTextbox.value
+                   : gDialog.targetAttributeMenulist.value)
+               : "";
 
   if (gNode) {
-    if (url)
+    if (url) {
       gEditor.setAttribute(gNode, "href", url);
+      if (target)
+        gEditor.setAttribute(gNode, "target", target);
+      else
+        gEditor.removeAttribute(gNode, "target");
+    }
     else {
       var offset = 0;
       var parent = gNode.parentNode;
@@ -168,6 +196,8 @@ function onAccept()
     var anchor = gEditor.document.createElement("a");
     anchor.appendChild(textNode);
     anchor.setAttribute("href", url);
+    if (target)
+      anchor.setAttribute("target", target);
     try {
       gEditor.insertElementAtSelection(anchor, false);
     }
@@ -176,9 +206,23 @@ function onAccept()
   else {
     var anchor = gEditor.document.createElement("a");
     anchor.setAttribute("href", url);
+    if (target)
+      anchor.setAttribute("target", target);
     try {
       gEditor.insertLinkAroundSelection(anchor);
     }
     catch (e) {}
   }
+}
+
+function ToggleTargetAttribute()
+{
+  var enabled = gDialog.applyTargetAttributeCheckbox.checked;
+  SetEnabledElement(gDialog.targetAttributeMenulist, enabled);
+  SetEnabledElement(gDialog.userDefinedValueTextbox, enabled && (gDialog.targetAttributeMenulist.value == "x"));
+}
+
+function TargetAttributeSelected(aMenulist)
+{
+  SetEnabledElement(gDialog.userDefinedValueTextbox, aMenulist.value == "x");
 }
