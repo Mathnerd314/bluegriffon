@@ -705,8 +705,23 @@ function ToggleViewMode(aElement)
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
     var flags = nsIDE.OutputFormatted ;
     flags |= nsIDE.OutputWrap;
-    flags |= nsIDE.OutputLFLineBreak;
     flags |= nsIDE.OutputPersistNBSP;
+
+    var osString = Components.classes["@mozilla.org/xre/app-info;1"]
+                     .getService(Components.interfaces.nsIXULRuntime).OS;
+    switch (osString) {
+      case "WINNT":
+        flags |= nsIDE.OutputLFLineBreak;
+        flags |= nsIDE.OutputCRLineBreak;
+        break;
+      case "Darwin":
+        flags |= nsIDE.OutputCRLineBreak;
+        break;
+      case "Linux":
+      default:
+        flags |= nsIDE.OutputLFLineBreak;
+        break;
+    }
 
     var encodeEntity = GetPrefs().getCharPref("bluegriffon.source.entities");
     switch (encodeEntity) {

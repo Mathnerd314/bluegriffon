@@ -364,9 +364,24 @@ var FileUtils = {
       const nsIDE = Components.interfaces.nsIDocumentEncoder;
       var flags = nsIDE.OutputFormatted ;
       flags |= nsIDE.OutputWrap;
-      flags |= nsIDE.OutputLFLineBreak;
       flags |= nsIDE.OutputPersistNBSP;
   
+      var osString = Components.classes["@mozilla.org/xre/app-info;1"]
+                     .getService(Components.interfaces.nsIXULRuntime).OS;
+      switch (osString) {
+        case "WINNT":
+          flags |= nsIDE.OutputLFLineBreak;
+          flags |= nsIDE.OutputCRLineBreak;
+          break;
+        case "Darwin":
+          flags |= nsIDE.OutputCRLineBreak;
+          break;
+        case "Linux":
+        default:
+          flags |= nsIDE.OutputLFLineBreak;
+          break;
+      }
+
       var encodeEntity = Services.prefs.getCharPref("bluegriffon.source.entities");
       switch (encodeEntity) {
         case "basic"  : flags |= nsIDE.OutputEncodeBasicEntities;     break;
@@ -683,110 +698,6 @@ var FileUtils = {
       re = /[\:\/]+/g;
     
     return aFileName.replace(re, "_");
-  },
-
-  outputFileWithPersistAPI: function(editorDoc, aDestinationLocation, aRelatedFilesParentDir, aMimeType)
-  {
-    gPersistObj = null;
-    var editor = EditorUtils.getCurrentEditor();
-    try {
-      var imeEditor = editor.QueryInterface(Components.interfaces.nsIEditorIMESupport);
-      imeEditor.ForceCompositionEnd();
-      } catch (e) {}
-  
-    var isLocalFile = false;
-    try {
-      var tmp1 = aDestinationLocation.QueryInterface(Components.interfaces.nsIFile);
-      isLocalFile = true;
-    } 
-    catch (e) {
-      try {
-        var tmp = aDestinationLocation.QueryInterface(Components.interfaces.nsIURI);
-        isLocalFile = tmp.schemeIs("file");
-      }
-      catch (e) {}
-    }
-  
-    try {
-      // we should supply a parent directory if/when we turn on functionality to save related documents
-      var persistObj = Components.classes["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"]
-                         .createInstance(this.nsIWebBrowserPersist);
-      //persistObj.progressListener = gEditorOutputProgressListener;
-      
-      var wrapColumn = EditorUtils.getWrapColumn();
-      var outputFlags = this.getOutputFlags(aMimeType, wrapColumn);
-  
-      // for 4.x parity as well as improving readability of file locally on server
-      // this will always send crlf for upload (http/ftp)
-      if (!isLocalFile) // if we aren't saving locally then send both cr and lf
-      {
-        outputFlags |= this.nsIWebBrowserPersist.ENCODE_FLAGS_CR_LINEBREAKS |
-                       this.nsIWebBrowserPersist.ENCODE_FLAGS_LF_LINEBREAKS;
-  
-        // we want to serialize the output for all remote publishing
-        // some servers can handle only one connection at a time
-        // some day perhaps we can make this user-configurable per site?
-        persistObj.persistFlags = persistObj.persistFlags |
-                                  this.nsIWebBrowserPersist.PERSIST_FLAGS_SERIALIZE_OUTPUT;
-      }
-  
-      // note: we always want to set the replace existing files flag since we have
-      // already given user the chance to not replace an existing file (file picker)
-      // or the user picked an option where the file is implicitly being replaced (save)
-      persistObj.persistFlags = persistObj.persistFlags 
-                              | this.nsIWebBrowserPersist.PERSIST_FLAGS_NO_BASE_TAG_MODIFICATIONS
-                              | this.nsIWebBrowserPersist.PERSIST_FLAGS_REPLACE_EXISTING_FILES
-                              | this.nsIWebBrowserPersist.PERSIST_FLAGS_DONT_FIXUP_LINKS
-                              | this.nsIWebBrowserPersist.PERSIST_FLAGS_DONT_CHANGE_FILENAMES
-                              | this.nsIWebBrowserPersist.PERSIST_FLAGS_FIXUP_ORIGINAL_DOM;
-  
-      // HACK: in Nvu, always save as text/html...
-      persistObj.saveDocument(editorDoc, aDestinationLocation, aRelatedFilesParentDir, 
-                              aMimeType, outputFlags, wrapColumn);
-      gPersistObj = persistObj;
-    }
-    catch(e) { }
-  
-    return true;
-  },
-
-  getOutputFlags: function(aMimeType, aWrapColumn)
-  {
-    var outputFlags = 0;
-    var editor = EditorUtils.getCurrentEditor();
-    var outputEntity = (editor && editor.documentCharacterSet == "ISO-8859-1")
-      ? this.nsIWebBrowserPersist.ENCODE_FLAGS_ENCODE_LATIN1_ENTITIES
-      : this.nsIWebBrowserPersist.ENCODE_FLAGS_ENCODE_BASIC_ENTITIES;
-    if (aMimeType == "text/plain")
-    {
-      // When saving in "text/plain" format, always do formatting
-      outputFlags |= this.nsIWebBrowserPersist.ENCODE_FLAGS_FORMATTED;
-    }
-    else
-    {
-      try {
-        // Should we prettyprint? Check the pref
-        var prefs = GetPrefs();
-        if (prefs.getBoolPref("bluegriffon.prettyprint"))
-          outputFlags |= this.nsIWebBrowserPersist.ENCODE_FLAGS_FORMATTED;
-  
-        // How much entity names should we output? Check the pref
-        var encodeEntity = prefs.getCharPref("bluegriffon.encode_entity");
-        switch (encodeEntity) {
-          case "basic"  : outputEntity = this.nsIWebBrowserPersist.ENCODE_FLAGS_ENCODE_BASIC_ENTITIES; break;
-          case "latin1" : outputEntity = this.nsIWebBrowserPersist.ENCODE_FLAGS_ENCODE_LATIN1_ENTITIES; break;
-          case "html"   : outputEntity = this.nsIWebBrowserPersist.ENCODE_FLAGS_ENCODE_HTML_ENTITIES; break;
-          case "none"   : outputEntity = 0; break;
-        }
-      }
-      catch (e) {}
-    }
-    outputFlags |= outputEntity;
-  
-    if (aWrapColumn > 0)
-      outputFlags |= this.nsIWebBrowserPersist.ENCODE_FLAGS_WRAP;
-  
-    return outputFlags;
   },
 
   setSaveAndPublishUI: function(urlstring)
