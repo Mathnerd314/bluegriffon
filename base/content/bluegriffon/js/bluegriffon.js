@@ -543,6 +543,49 @@ function ShowLanguageDialog(aEvent)
   }
 }
 
+function UpdateDirectionMenu(aEvent)
+{
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target) {
+      var direction = target.style.direction;
+      switch (direction) {
+        case "ltr":
+          gDialog.noDirectionContextMenuitem.removeAttribute("checked");
+          gDialog.ltrDirectionContextMenuitem.setAttribute("checked", "true");
+          gDialog.rtlDirectionContextMenuitem.removeAttribute("checked");
+          break;
+        case "rtl":
+          gDialog.noDirectionContextMenuitem.removeAttribute("checked");
+          gDialog.ltrDirectionContextMenuitem.removeAttribute("checked");
+          gDialog.rtlDirectionContextMenuitem.setAttribute("checked", "true");
+          break;
+        default:
+          gDialog.noDirectionContextMenuitem.setAttribute("checked", "true");
+          gDialog.ltrDirectionContextMenuitem.removeAttribute("checked");
+          gDialog.rtlDirectionContextMenuitem.removeAttribute("checked");
+          break;
+      }
+    }
+  }
+}
+
+function SetDirection(aEvent)
+{
+  var value = aEvent.originalTarget.getAttribute("value");
+  var popupNode = document.popupNode;
+  if (popupNode)
+  {
+    var target = popupNode.getUserData("node");
+    if (target) {
+      var txn = new diStyleAttrChangeTxn(target, "direction", value, "");
+      EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+    }
+  }
+}
+
 function DeleteElement(aEvent)
 {
   var popupNode = document.popupNode;

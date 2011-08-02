@@ -59,7 +59,7 @@
   id     = "Bluegriffon"
   windowtype = "bluegriffon"
   title  = "&window.title;"
-  width  = "800"
+  width  = "900"
   height = "600"
   persist="screenX screenY width height"
   onload = "Startup()"
@@ -103,7 +103,7 @@
              align="center"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,ParagraphSelectBox,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton"/>
+             defaultset="spacer,ParagraphSelectBox,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,dirLtrButton,dirRtlButton"/>
     <toolbar id="FormatToolbar2" class="chromeclass-toolbar"
              toolbarname="&formatToolbar2.name;"
              fullscreentoolbar="true"

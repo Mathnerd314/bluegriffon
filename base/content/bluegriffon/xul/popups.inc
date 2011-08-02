@@ -17,6 +17,27 @@
     <menuitem label="&setElementLanguage.label;"
               accesskey="&setElementLanguage.accesskey;"
               oncommand="ShowLanguageDialog(event)" />
+    <menu label="&writingDirectionMenu.label;"
+          oncommand="SetDirection(event)">
+      <menupopup onpopupshowing="UpdateDirectionMenu()">
+        <menuitem id="noDirectionContextMenuitem"
+                  label="&defaultDirectionMenu.label;"
+                  value=""
+                  type="radio"
+                  name="direction"/>
+        <menuseparator/>
+        <menuitem id="ltrDirectionContextMenuitem"
+                  label="&ltrDirectionMenu.label;"
+                  value="ltr"
+                  type="radio"
+                  name="direction"/>
+        <menuitem id="rtlDirectionContextMenuitem"
+                  label="&rtlDirectionMenu.label;"
+                  value="rtl"
+                  type="radio"
+                  name="direction"/>
+      </menupopup>
+    </menu>
     <menuseparator/>
     <menuitem label="&deleteElement.label;"
               id="deleteElementMenuitem"
