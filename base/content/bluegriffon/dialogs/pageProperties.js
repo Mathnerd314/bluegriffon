@@ -142,8 +142,9 @@ function onAccept()
                                   gInsertNewKeywords, false);
 
   if (gLanguageWasEdited)
-    EditorUtils.getCurrentDocument().documentElement.
-      setAttribute("lang", gDialog.pageLanguage.value);
+    EditorUtils.getCurrentEditor().
+      setAttribute(EditorUtils.getCurrentDocument().documentElement,
+                   "lang", gDialog.pageLanguage.value);
 
   if (gDialog.directionRadio.value)
     EditorUtils.getCurrentDocument().documentElement.
