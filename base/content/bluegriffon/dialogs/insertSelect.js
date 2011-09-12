@@ -50,7 +50,7 @@ function onAccept()
       if (treeitem.parentNode.parentNode.id == "contentsTree")
         parent = gNode;
       var child = doc.createElement("option");
-      child.setAttribute("name", treeitem.firstChild.childNodes[0].getAttribute("label"));
+      child.setAttribute("value", treeitem.firstChild.childNodes[0].getAttribute("label"));
       child.textContent = treeitem.firstChild.childNodes[1].getAttribute("label");
       if (treeitem.firstChild.childNodes[2].getAttribute("label") == "✔")
         child.setAttribute("disabled", "disabled");
@@ -259,9 +259,9 @@ function doAddOption()
   }
 
   var cell1 = document.createElement("treecell");
-  cell1.setAttribute("label", gDialog.optionLabelTextbox.value);
+  cell1.setAttribute("label", gDialog.optionValueTextbox.value);
   var cell2 = document.createElement("treecell");
-  cell2.setAttribute("label", gDialog.optionValueTextbox.value);
+  cell2.setAttribute("label", gDialog.optionLabelTextbox.value);
   var cell3 = document.createElement("treecell");
   cell3.setAttribute("label", gDialog.optionDisabledCheckbox.checked ? "✔" : "");
   var cell4 = document.createElement("treecell");
