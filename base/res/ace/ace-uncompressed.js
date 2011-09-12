@@ -6621,6 +6621,7 @@ var Editor =function(renderer, session) {
 
         this.selection.setSelectionRange(selection);
         this.$blockScrolling -= 1;
+        return ranges.length;
     },
 
     this.$tryReplace = function(range, replacement) {
