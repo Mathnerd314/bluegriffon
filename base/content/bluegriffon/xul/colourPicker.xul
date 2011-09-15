@@ -42,6 +42,7 @@
 
 <!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/colourPicker.dtd" >
 <dialog
+    id="colourPickerDialog"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml"
     onload="StartUp();"
@@ -155,7 +156,7 @@
                     persist="LastTextColor LastBackgroundColor"/>
         <label value="&lastPickedColor.label;" accesskey="&lastPickedColor.accessKey;" flex="1" style="text-align: center;"/>
       </button>
-      <hbox>
+      <hbox id="previewHbox">
 	      <grid>
 	        <columns><column/><column/></columns>
 	        <rows>
@@ -175,7 +176,7 @@
 	          </row>
 	        </rows>
 	      </grid>
-        <html:p flex="1" id="swatch">   </html:p>
+        <box flex="1" id="swatch"/>
       </hbox>
       <!--checkbox label="&transparency.label;"
                 id="transparencyCheckbox"

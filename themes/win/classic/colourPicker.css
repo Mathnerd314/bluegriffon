@@ -48,7 +48,7 @@
   background-color: transparent;
 }
 
-html|*#swatch {
+#swatch {
   width: 30px;
   height: 67px;
   min-width: 34px;

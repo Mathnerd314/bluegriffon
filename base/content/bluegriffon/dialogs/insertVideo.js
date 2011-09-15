@@ -165,7 +165,7 @@ function UseCurrentFrameAsPoster()
       canvas.setAttribute("height", gDialog.preview.clientHeight);
     }
     else {
-      canvas.style.width = gDialog.preview.videoWidthw + "px";
+      canvas.style.width = gDialog.preview.videoWidth + "px";
       canvas.setAttribute("width", gDialog.preview.videoWidth);
       canvas.style.height = gDialog.preview.videoHeight + "px";
       canvas.setAttribute("height", gDialog.preview.videoHeight);

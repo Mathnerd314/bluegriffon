@@ -1,3 +1,5 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 var EXPORTED_SYMBOLS = ["ColorPickerHelper"];
 
 
@@ -70,7 +72,7 @@ var ColorPickerHelper = {
 
     aWindow.openDialog(this.kCOLOUR_PICKER_URL,
                       "_blank",
-                      "chrome,close,titlebar,modal",
+                      "chrome,close,titlebar,modal,dialog=no",
                       colorObject, aWindowTitle, aShowTransparency);
     return colorObject;
   },
