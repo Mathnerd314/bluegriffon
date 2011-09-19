@@ -1,7 +1,7 @@
-diff -r a0372b031aac browser/app/profile/firefox.js
---- a/browser/app/profile/firefox.js	Sun Jul 17 13:01:05 2011 -0700
-+++ b/browser/app/profile/firefox.js	Mon Sep 12 12:41:36 2011 +0200
-@@ -200,6 +200,7 @@
+diff -r 5faaa652594f browser/app/profile/firefox.js
+--- a/browser/app/profile/firefox.js	Thu Sep 15 09:36:07 2011 +0100
++++ b/browser/app/profile/firefox.js	Mon Sep 19 14:06:17 2011 +0200
+@@ -205,6 +205,7 @@
  pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
  pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
                                                  // restart.
@@ -9,10 +9,10 @@ diff -r a0372b031aac browser/app/profile/firefox.js
  
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
-diff -r a0372b031aac caps/src/nsScriptSecurityManager.cpp
---- a/caps/src/nsScriptSecurityManager.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/caps/src/nsScriptSecurityManager.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -1547,6 +1547,7 @@
+diff -r 5faaa652594f caps/src/nsScriptSecurityManager.cpp
+--- a/caps/src/nsScriptSecurityManager.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/caps/src/nsScriptSecurityManager.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -1546,6 +1546,7 @@
                               &hasFlags);
      NS_ENSURE_SUCCESS(rv, rv);
      if (hasFlags) {
@@ -20,9 +20,9 @@ diff -r a0372b031aac caps/src/nsScriptSecurityManager.cpp
          // resource: and chrome: are equivalent, securitywise
          // That's bogus!!  Fix this.  But watch out for
          // the view-source stylesheet?
-diff -r a0372b031aac content/base/public/nsIDocumentEncoder.idl
---- a/content/base/public/nsIDocumentEncoder.idl	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/public/nsIDocumentEncoder.idl	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/public/nsIDocumentEncoder.idl	Mon Sep 19 14:06:17 2011 +0200
 @@ -237,6 +237,11 @@
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
@@ -35,10 +35,10 @@ diff -r a0372b031aac content/base/public/nsIDocumentEncoder.idl
     * Initialize with a pointer to the document and the mime type.
     * @param aDocument Document to encode.
     * @param aMimeType MimeType to use. May also be set by SetMimeType.
-diff -r a0372b031aac content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/src/nsCopySupport.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -436,7 +436,7 @@
+diff -r 5faaa652594f content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/src/nsCopySupport.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -438,7 +438,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
@@ -47,10 +47,10 @@ diff -r a0372b031aac content/base/src/nsCopySupport.cpp
      *aIsPlainTextContext = PR_TRUE;
  
    return NS_OK;
-diff -r a0372b031aac content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/src/nsDocumentEncoder.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -1331,7 +1331,7 @@
+diff -r 5faaa652594f content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/src/nsDocumentEncoder.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -1332,7 +1332,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
@@ -59,9 +59,9 @@ diff -r a0372b031aac content/base/src/nsDocumentEncoder.cpp
      mIsTextWidget = PR_TRUE;
    
    // normalize selection if we are not in a widget
-diff -r a0372b031aac content/base/src/nsHTMLContentSerializer.cpp
---- a/content/base/src/nsHTMLContentSerializer.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Sep 19 14:06:17 2011 +0200
 @@ -270,14 +270,15 @@
  
    PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
@@ -105,9 +105,9 @@ diff -r a0372b031aac content/base/src/nsHTMLContentSerializer.cpp
            fullConstEntityText = entityTable[val];
            break;
          } else if (val > 127 &&
-diff -r a0372b031aac content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Sep 19 14:06:17 2011 +0200
 @@ -761,14 +761,23 @@
      return mAddSpace;
    }
@@ -180,10 +180,10 @@ diff -r a0372b031aac content/base/src/nsXHTMLContentSerializer.cpp
    return PR_TRUE;
  }
 +
-diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
---- a/content/base/src/nsXMLContentSerializer.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -61,6 +61,7 @@
+diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
+--- a/content/base/src/nsXMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/content/base/src/nsXMLContentSerializer.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -57,6 +57,7 @@
  #include "prprf.h"
  #include "nsUnicharUtils.h"
  #include "nsCRT.h"
@@ -191,7 +191,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
  #include "nsContentUtils.h"
  #include "nsAttrName.h"
  #include "nsILineBreaker.h"
-@@ -652,7 +653,25 @@
+@@ -649,7 +650,25 @@
    PRBool rawAppend = mDoRaw && aDoEscapeEntities;
    nsAString& attrString = (rawAppend) ? aStr : attrString_;
  
@@ -218,7 +218,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
    if (!aPrefix.IsEmpty()) {
      attrString.Append(aPrefix);
      attrString.Append(PRUnichar(':'));
-@@ -726,6 +745,8 @@
+@@ -723,6 +742,8 @@
      attrString.Append(sValue);
      attrString.Append(cDelimiter);
    }
@@ -227,7 +227,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
    if (mPreLevel > 0 || mDoRaw) {
      AppendToStringConvertLF(attrString, aStr);
    }
-@@ -738,6 +759,7 @@
+@@ -735,6 +756,7 @@
    else {
      AppendToStringConvertLF(attrString, aStr);
    }
@@ -235,7 +235,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRUint32 
-@@ -942,7 +964,7 @@
+@@ -939,7 +961,7 @@
    nsIAtom *name = content->Tag();
    PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
  
@@ -244,7 +244,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
      if (mColPos && lineBreakBeforeOpen) {
        AppendNewLineToString(aStr);
      }
-@@ -1189,6 +1211,21 @@
+@@ -1186,6 +1208,21 @@
      return;
    }
    mColPos += aStr.Length();
@@ -266,7 +266,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
    aOutputStr.Append(aStr);
  }
  
-@@ -1299,6 +1336,10 @@
+@@ -1296,6 +1333,10 @@
  void
  nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
  {
@@ -277,7 +277,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
    AppendToString(mLineBreak, aStr);
    mMayIgnoreLineBreakSequence = PR_TRUE;
    mColPos = 0;
-@@ -1340,7 +1381,39 @@
+@@ -1337,7 +1378,39 @@
  PRBool
  nsXMLContentSerializer::LineBreakBeforeOpen(PRInt32 aNamespaceID, nsIAtom* aName)
  {
@@ -318,7 +318,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRBool 
-@@ -1352,7 +1425,39 @@
+@@ -1349,7 +1422,39 @@
  PRBool 
  nsXMLContentSerializer::LineBreakBeforeClose(PRInt32 aNamespaceID, nsIAtom* aName)
  {
@@ -359,7 +359,7 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
  }
  
  PRBool 
-@@ -1468,6 +1573,7 @@
+@@ -1465,6 +1570,7 @@
        // Since we only saw linebreaks, but no spaces or tabs,
        // let's write a linebreak now.
        AppendNewLineToString(aOutputStr);
@@ -367,10 +367,10 @@ diff -r a0372b031aac content/base/src/nsXMLContentSerializer.cpp
      }
    }
  }
-diff -r a0372b031aac editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -1384,13 +1384,43 @@
+diff -r 5faaa652594f editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -1378,13 +1378,43 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
          stuffToPaste.Assign(text.get(), len / 2);
@@ -416,10 +416,10 @@ diff -r a0372b031aac editor/libeditor/html/nsHTMLDataTransfer.cpp
        }
      }
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
-diff -r a0372b031aac editor/libeditor/html/nsHTMLEditRules.cpp
---- a/editor/libeditor/html/nsHTMLEditRules.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -464,8 +464,9 @@
+diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditRules.cpp
+--- a/editor/libeditor/html/nsHTMLEditRules.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -463,8 +463,9 @@
      }
  
      // clean up any empty nodes in the selection
@@ -431,7 +431,7 @@ diff -r a0372b031aac editor/libeditor/html/nsHTMLEditRules.cpp
  
      // attempt to transform any unneeded nbsp's into spaces after doing various operations
      if ((action == nsEditor::kOpInsertText) || 
-@@ -1398,39 +1399,8 @@
+@@ -1400,39 +1401,8 @@
      // it is to search for both tabs and newlines.
      if (isPRE || IsPlaintextEditor())
      {
@@ -473,10 +473,10 @@ diff -r a0372b031aac editor/libeditor/html/nsHTMLEditRules.cpp
      }
      else
      {
-diff -r a0372b031aac editor/libeditor/html/nsHTMLEditor.cpp
---- a/editor/libeditor/html/nsHTMLEditor.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/editor/libeditor/html/nsHTMLEditor.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -317,7 +317,8 @@
+diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditor.cpp
+--- a/editor/libeditor/html/nsHTMLEditor.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/editor/libeditor/html/nsHTMLEditor.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -318,7 +318,8 @@
  
      if (!IsInteractionAllowed()) {
        // ignore any errors from this in case the file is missing
@@ -486,10 +486,10 @@ diff -r a0372b031aac editor/libeditor/html/nsHTMLEditor.cpp
      }
  
      nsCOMPtr<nsISelection>selection;
-diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.js
---- a/toolkit/mozapps/extensions/content/extensions.js	Sun Jul 17 13:01:05 2011 -0700
-+++ b/toolkit/mozapps/extensions/content/extensions.js	Mon Sep 12 12:41:36 2011 +0200
-@@ -57,6 +57,7 @@
+diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js	Thu Sep 15 09:36:07 2011 +0100
++++ b/toolkit/mozapps/extensions/content/extensions.js	Mon Sep 19 14:06:17 2011 +0200
+@@ -59,6 +59,7 @@
  const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
  const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
  const PREF_UI_LASTCATEGORY = "extensions.ui.lastCategory";
@@ -497,7 +497,7 @@ diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.js
  
  const BRANCH_REGEXP = /^([^\.]+\.[0-9]+[a-z]*).*/gi;
  
-@@ -115,6 +116,18 @@
+@@ -117,6 +118,18 @@
  
  function initialize() {
    document.removeEventListener("load", initialize, true);
@@ -516,7 +516,7 @@ diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.js
    gViewController.initialize();
    gCategories.initialize();
    gHeader.initialize();
-@@ -2467,7 +2480,7 @@
+@@ -2458,7 +2471,7 @@
  
      for (let i = 0; i < this._listBox.itemCount; i++) {
        let item = this._listBox.childNodes[i];
@@ -525,9 +525,9 @@ diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.js
          this._listBox.removeChild(item);
          this.showEmptyNotice(this._listBox.itemCount == 0);
          return;
-diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.xul
---- a/toolkit/mozapps/extensions/content/extensions.xul	Sun Jul 17 13:01:05 2011 -0700
-+++ b/toolkit/mozapps/extensions/content/extensions.xul	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.xul
+--- a/toolkit/mozapps/extensions/content/extensions.xul	Thu Sep 15 09:36:07 2011 +0100
++++ b/toolkit/mozapps/extensions/content/extensions.xul	Mon Sep 19 14:06:17 2011 +0200
 @@ -65,6 +65,10 @@
    <script type="application/javascript"
            src="chrome://global/content/contentAreaUtils.js"/>
@@ -539,9 +539,58 @@ diff -r a0372b031aac toolkit/mozapps/extensions/content/extensions.xul
    <popupset>
      <!-- menu for an addon item -->
      <menupopup id="addonitem-popup">
-diff -r a0372b031aac widget/src/cocoa/nsMenuItemX.mm
---- a/widget/src/cocoa/nsMenuItemX.mm	Sun Jul 17 13:01:05 2011 -0700
-+++ b/widget/src/cocoa/nsMenuItemX.mm	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f toolkit/mozapps/handling/nsContentDispatchChooser.js
+--- a/toolkit/mozapps/handling/nsContentDispatchChooser.js	Thu Sep 15 09:36:07 2011 +0100
++++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js	Mon Sep 19 14:06:17 2011 +0200
+@@ -101,12 +101,44 @@
+     params.appendElement(aURI, false);
+     params.appendElement(aWindowContext, false);
+     
++    // if a modal window is already shown, we need to open the app chooser
++    // as a modal window otherwise it will be unresponsive; bug 687423
++    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
++               getService(Ci.nsIWindowMediator);
++    var enumerator = wm.getXULWindowEnumerator(null);
++    var inModalState = false;
++    while (!inModalState && enumerator.hasMoreElements()) {
++      var win = enumerator.getNext();
++      var windowDocShell = win.QueryInterface(Ci.nsIXULWindow).docShell;
++  
++      var containedDocShells = windowDocShell.getDocShellEnumerator(
++                                        Ci.nsIDocShellTreeItem.typeChrome,
++                                        Ci.nsIDocShell.ENUMERATE_FORWARDS);
++
++      while (!inModalState && containedDocShells.hasMoreElements()) {
++        // Get the corresponding document for this docshell
++        var childDocShell = containedDocShells.getNext();
++
++        // We don't want it if it's not done loading.
++        if (childDocShell.busyFlags != Ci.nsIDocShell.BUSY_FLAGS_NONE)
++          continue;
++
++        // Ensure that we are only returning true if it is indeed modal
++        var chrome = win.QueryInterface(Ci.nsIInterfaceRequestor).
++                         getInterface(Ci.nsIWebBrowserChrome);
++        if (chrome.isWindowModal()) {
++          inModalState = true;
++        }
++      }
++    }
++
+     var ww = Cc["@mozilla.org/embedcomp/window-watcher;1"].
+              getService(Ci.nsIWindowWatcher);
+     ww.openWindow(window,
+                   CONTENT_HANDLING_URL,
+                   null,
+-                  "chrome,dialog=yes,resizable,centerscreen",
++                  "chrome,dialog=yes,resizable,centerscreen"
++                    + (inModalState ? ",modal" : ""),
+                   params);
+   },
+ 
+diff -r 5faaa652594f widget/src/cocoa/nsMenuItemX.mm
+--- a/widget/src/cocoa/nsMenuItemX.mm	Thu Sep 15 09:36:07 2011 +0100
++++ b/widget/src/cocoa/nsMenuItemX.mm	Mon Sep 19 14:06:17 2011 +0200
 @@ -284,8 +284,31 @@
        nsAutoString modifiersStr;
        keyContent->GetAttr(kNameSpaceID_None, nsWidgetAtoms::modifiers, modifiersStr);
@@ -575,10 +624,10 @@ diff -r a0372b031aac widget/src/cocoa/nsMenuItemX.mm
        [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
  
        NSString *keyEquivalent = [[NSString stringWithCharacters:(unichar*)keyChar.get()
-diff -r a0372b031aac widget/src/gtk2/nsWindow.cpp
---- a/widget/src/gtk2/nsWindow.cpp	Sun Jul 17 13:01:05 2011 -0700
-+++ b/widget/src/gtk2/nsWindow.cpp	Mon Sep 12 12:41:36 2011 +0200
-@@ -4051,6 +4051,8 @@
+diff -r 5faaa652594f widget/src/gtk2/nsWindow.cpp
+--- a/widget/src/gtk2/nsWindow.cpp	Thu Sep 15 09:36:07 2011 +0100
++++ b/widget/src/gtk2/nsWindow.cpp	Mon Sep 19 14:06:17 2011 +0200
+@@ -4059,6 +4059,8 @@
                  gdk_window_add_filter(mShell->window,
                                        popup_take_focus_filter, NULL); 
  #endif
@@ -587,9 +636,9 @@ diff -r a0372b031aac widget/src/gtk2/nsWindow.cpp
              }
  
              GdkWindowTypeHint gtkTypeHint;
-diff -r a0372b031aac widget/src/xpwidgets/nsWidgetAtomList.h
---- a/widget/src/xpwidgets/nsWidgetAtomList.h	Sun Jul 17 13:01:05 2011 -0700
-+++ b/widget/src/xpwidgets/nsWidgetAtomList.h	Mon Sep 12 12:41:36 2011 +0200
+diff -r 5faaa652594f widget/src/xpwidgets/nsWidgetAtomList.h
+--- a/widget/src/xpwidgets/nsWidgetAtomList.h	Thu Sep 15 09:36:07 2011 +0100
++++ b/widget/src/xpwidgets/nsWidgetAtomList.h	Mon Sep 19 14:06:17 2011 +0200
 @@ -85,6 +85,7 @@
  WIDGET_ATOM(input, "input")
  WIDGET_ATOM(indeterminate, "indeterminate")
