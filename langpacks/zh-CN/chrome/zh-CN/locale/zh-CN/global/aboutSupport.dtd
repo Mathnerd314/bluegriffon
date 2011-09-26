@@ -34,3 +34,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "更新历史">
 
 <!ENTITY aboutSupport.copyToClipboard.label "全部复制到剪贴板">
+<!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">

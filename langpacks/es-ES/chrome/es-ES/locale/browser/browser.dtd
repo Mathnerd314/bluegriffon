@@ -39,8 +39,6 @@
 <!ENTITY printCmd.label "Imprimir…">
 <!ENTITY printCmd.accesskey "m">
 <!ENTITY printCmd.commandkey "p">
-<!ENTITY import.label "Importar…">
-<!ENTITY import.accesskey "I">
 <!ENTITY goOfflineCmd.label "Trabajar sin conexión">
 <!ENTITY goOfflineCmd.accesskey "x">
 <!ENTITY menubarCmd.label "Barra de menús">
@@ -88,6 +86,8 @@
 <!ENTITY forwardCmd.label "Siguiente">
 <!ENTITY forwardCmd.accesskey "g">
 <!ENTITY forwardButton.tooltip "Ir a la página siguiente">
+<!ENTITY backForwardButtonMenu.tooltip "Pinche con el botón derecho o arrastre hacia abajo para ver el historial">
+<!ENTITY backForwardButtonMenuMac.tooltip "Arrastre hacia abajo para ver el historial">
 <!ENTITY reloadCmd.label "Recargar">
 <!ENTITY reloadCmd.accesskey "a">
 <!ENTITY reloadButton.tooltip "Recargar esta página">
@@ -150,22 +150,15 @@
 <!ENTITY inspectMenu.label "Inspeccionar">
 <!ENTITY inspectMenu.accesskey "r">
 <!ENTITY inspectMenu.commandkey "I">
-<!ENTITY scratchpad.label "Scratchpad">
-<!ENTITY scratchpad.accesskey "s">
+<!ENTITY scratchpad.label "Borrador">
+<!ENTITY scratchpad.accesskey "b">
 <!ENTITY scratchpad.keycode "VK_F4">
 <!ENTITY scratchpad.keytext "F4">
 <!ENTITY inspectPanelTitle.label "HTML">
 <!ENTITY inspectButton.label "Inspeccionar">
 <!ENTITY inspectButton.accesskey "I">
-<!ENTITY inspectNextButton.label "Siguiente">
-<!ENTITY inspectNextButton.accesskey "n">
-<!ENTITY inspectPreviousButton.label "Anterior">
-<!ENTITY inspectPreviousButton.accesskey "t">
-<!ENTITY inspectStyleButton.label "Estilo">
-<!ENTITY inspectStyleButton.accesskey "s">
-<!ENTITY inspectStylePanelTitle.label "Estilo">
-<!ENTITY inspectObjectButton.label "Objeto">
-<!ENTITY inspectObjectButton.accesskey "O">
+<!ENTITY getMoreDevtoolsCmd.label "Conseguir más herramientas">
+<!ENTITY getMoreDevtoolsCmd.accesskey "M">
 <!ENTITY fileMenu.label "Archivo">
 <!ENTITY fileMenu.accesskey "A">
 <!ENTITY newNavigatorCmd.label "Nueva ventana">
@@ -240,9 +233,10 @@
 <!ENTITY urlbar.accesskey "d">
 <!ENTITY urlbar.switchToTab.label "Cambiar a la pestaña:">
 <!ENTITY searchFocus.commandkey "k">
+<!ENTITY searchFocus.commandkey2 "e">
 <!ENTITY searchFocusUnix.commandkey "j">
 <!ENTITY tabView.commandkey "e">
-<!ENTITY openLinkCmdInTab.label "Abrir en pestaña nueva">
+<!ENTITY openLinkCmdInTab.label "Abrir enlace en una pestaña nueva">
 <!ENTITY openLinkCmdInTab.accesskey "T">
 <!ENTITY openLinkCmd.label "Abrir enlace en una ventana nueva">
 <!ENTITY openLinkCmd.accesskey "v">
@@ -423,3 +417,6 @@
 <!ENTITY syncToolbarButton.label "Sync">
 <!ENTITY addonBarCloseButton.tooltip "Cerrar la barra de complementos">
 <!ENTITY toggleAddonBarCmd.key "/">
+<!ENTITY inspectContextMenu.accesskey "Q">
+
+<!ENTITY inspectContextMenu.label     "Inspect Element">

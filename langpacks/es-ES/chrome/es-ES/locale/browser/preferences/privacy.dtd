@@ -1,6 +1,6 @@
 <!ENTITY tracking.label "Rastreo">
 <!ENTITY doNotTrack.label "Decir a los sitios web que no quiero ser rastreado">
-<!ENTITY doNotTrack.accesskey "d">
+<!ENTITY doNotTrack.accesskey "D">
 <!ENTITY history.label "Historial">
 <!ENTITY locationBar.label "Barra de direcciones">
 <!ENTITY locbar.pre.label "Cuando se use la barra de direcciones, sugerir:">
@@ -39,8 +39,8 @@
 <!ENTITY dontrememberActions.pre.label "También le podría interesar ">
 <!ENTITY dontrememberActions.clearHistory.label "limpiar todo el historial">
 <!ENTITY dontrememberActions.post.label ".">
-<!ENTITY privateBrowsingPermanent.label "Modo permanente de navegación privada">
-<!ENTITY privateBrowsingPermanent.accesskey "d">
+<!ENTITY privateBrowsingPermanent2.label "Modo permanente de navegación privada">
+<!ENTITY privateBrowsingPermanent2.accesskey "d">
 <!ENTITY rememberHistory.label "Recordar mi historial de navegación">
 <!ENTITY rememberHistory.accesskey "v">
 <!ENTITY rememberDownload.label "Recordar el historial de descargas">

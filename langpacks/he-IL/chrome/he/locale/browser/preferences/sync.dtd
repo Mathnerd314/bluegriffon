@@ -12,7 +12,7 @@
 <!-- Manage Account -->
 <!ENTITY manageAccount.label          "ניהול חשבון">
 <!ENTITY manageAccount.accesskey      "נ">
-<!ENTITY viewQuota.label              "הצג מיכסה">
+<!ENTITY viewQuota.label              "הצג מכסה">
 <!ENTITY changePassword.label         "שינוי ססמה">
 <!ENTITY mySyncKey.label              "מפתח הסנכרון שלי">
 <!ENTITY resetSync.label              "איפוס Sync">
@@ -38,3 +38,7 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "לתנאי השירות">
 <!ENTITY prefs.ppLink.label         "מדיניות פרטיות">
+<!ENTITY changePassword2.label        "Change Password…">
+<!ENTITY myRecoveryKey.label          "My Recovery Key">
+<!ENTITY resetSync2.label             "Reset Sync…">
+<!ENTITY unlinkDevice.label           "Unlink This Device">

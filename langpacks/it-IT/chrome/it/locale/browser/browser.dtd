@@ -39,8 +39,6 @@
 <!ENTITY printCmd.label "Stampa…">
 <!ENTITY printCmd.accesskey "m">
 <!ENTITY printCmd.commandkey "p">
-<!ENTITY import.label "Importa…">
-<!ENTITY import.accesskey "I">
 <!ENTITY goOfflineCmd.label "Lavora non in linea">
 <!ENTITY goOfflineCmd.accesskey "L">
 <!ENTITY menubarCmd.label "Barra dei menu">
@@ -88,6 +86,8 @@
 <!ENTITY forwardCmd.label "Avanti">
 <!ENTITY forwardCmd.accesskey "A">
 <!ENTITY forwardButton.tooltip "Vai avanti di una pagina">
+<!ENTITY backForwardButtonMenu.tooltip "Per visualizzare la cronologia fare clic con il tasto destro o trascinare verso il basso il puntatore del mouse">
+<!ENTITY backForwardButtonMenuMac.tooltip "Per visualizzare la cronologia trascinare verso il basso il puntatore del mouse">
 <!ENTITY reloadCmd.label "Ricarica">
 <!ENTITY reloadCmd.accesskey "R">
 <!ENTITY reloadButton.tooltip "Ricarica la pagina corrente">
@@ -150,6 +150,8 @@
 <!ENTITY inspectMenu.label "Analisi pagina">
 <!ENTITY inspectMenu.accesskey "s">
 <!ENTITY inspectMenu.commandkey "I">
+<!ENTITY inspectContextMenu.label "Ispeziona elemento">
+<!ENTITY inspectContextMenu.accesskey "t">
 <!ENTITY scratchpad.label "Blocco per gli appunti">
 <!ENTITY scratchpad.accesskey "B">
 <!ENTITY scratchpad.keycode "VK_F4">
@@ -157,15 +159,6 @@
 <!ENTITY inspectPanelTitle.label "HTML">
 <!ENTITY inspectButton.label "Analisi">
 <!ENTITY inspectButton.accesskey "A">
-<!ENTITY inspectNextButton.label "Successivo">
-<!ENTITY inspectNextButton.accesskey "S">
-<!ENTITY inspectPreviousButton.label "Precedente">
-<!ENTITY inspectPreviousButton.accesskey "P">
-<!ENTITY inspectStyleButton.label "Stile">
-<!ENTITY inspectStyleButton.accesskey "t">
-<!ENTITY inspectStylePanelTitle.label "Stile">
-<!ENTITY inspectObjectButton.label "Oggetto">
-<!ENTITY inspectObjectButton.accesskey "O">
 <!ENTITY getMoreDevtoolsCmd.label "Altri strumenti di sviluppo">
 <!ENTITY getMoreDevtoolsCmd.accesskey "A">
 <!ENTITY fileMenu.label "File">
@@ -242,13 +235,14 @@
 <!ENTITY urlbar.accesskey "d">
 <!ENTITY urlbar.switchToTab.label "Passa alla scheda:">
 <!ENTITY searchFocus.commandkey "k">
+<!ENTITY searchFocus.commandkey2 "e">
 <!ENTITY searchFocusUnix.commandkey "j">
 <!ENTITY tabView.commandkey "e">
 <!ENTITY openLinkCmdInTab.label "Apri in nuova scheda">
 <!ENTITY openLinkCmdInTab.accesskey "s">
 <!ENTITY openLinkCmd.label "Apri in nuova finestra">
 <!ENTITY openLinkCmd.accesskey "f">
-<!ENTITY openLinkCmdInCurrent.label "Apri collegamento">
+<!ENTITY openLinkCmdInCurrent.label "Apri link">
 <!ENTITY openLinkCmdInCurrent.accesskey "A">
 <!ENTITY openFrameCmdInTab.label "Apri riquadro in nuova scheda">
 <!ENTITY openFrameCmdInTab.accesskey "c">

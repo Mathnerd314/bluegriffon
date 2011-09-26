@@ -25,7 +25,8 @@
 <!ENTITY netInterrupt.longDesc "<p>Selain muodosti yhteyden onnistuneesti, mutta yhteys katkesi siirrettäessä tietoa. Yritä myöhemmin uudestaan.</p><ul><li>Jos muutkaan sivustot eivät toimi, tarkista tietokoneen verkkoasetukset.</li><li>Jos ongelmat jatkuvat, ota yhteyttä verkon ylläpitoon tai verkkoyhteyden palveluntarjoajaan.</li></ul>">
 
 <!ENTITY netOffline.title  "Yhteydettömässä tilassa">
-<!ENTITY netOffline.longDesc2 "<p>Selain on verkkoyhteydettömässä tilassa eikä voi muodostaa yhteyttä pyydettyyn kohteeseen.</p><ul><li>Onko tietokoneen verkkoyhteys toiminnassa?</li><li>Aseta selain yhteystilaan ja yritä uudelleen.</li></ul>">
+<!ENTITY netOffline.longDesc "<p>Selain on verkkoyhteydettömässä tilassa eikä voi muodostaa yhteyttä pyydettyyn kohteeseen.</p><ul><li>Onko tietokoneen verkkoyhteys toiminnassa?</li><li>Aseta selain yhteystilaan ja yritä uudelleen.</li></ul>">
+<!ENTITY netOffline.overrideLongDesc "<p>Selain on verkkoyhteydettömässä tilassa eikä voi muodostaa yhteyttä pyydettyyn kohteeseen.</p><ul><li>Onko tietokoneen verkkoyhteys toiminnassa?</li><li>Aseta selain yhteystilaan ja yritä uudelleen.</li></ul>">
 
 <!ENTITY contentEncodingError.title "Sisällön koodausvirhe">
 <!ENTITY contentEncodingError.longDesc "<p>Avattavaa sivua ei voida näyttää, koska se on pakattu virheellisesti tai muodossa, joka ei ole tuettu.</p><ul><li>Ilmoitathan sivuston omistajalle tästä ongelmasta.</li></ul>">
@@ -83,15 +84,15 @@
 <!ENTITY cspFrameAncestorBlocked.title "Sisällön tietosuojakäytännön estämä">
 <!ENTITY cspFrameAncestorBlocked.longDesc "<p>Selain esti tämän sivun latautumisen tässä yhteydessä, koska sivun sisällön tietosuojakäytäntö kieltää sen.</p>">
 
-<!ENTITY corruptedContentError.title "Sisältö vioittunut virhe">
-<!ENTITY corruptedContentError.longDesc "<p>Avattavaa sivua ei voida näyttää, koska tiedonsiirrossa tapahtui virhe.</p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul>">
-
-<!ENTITY remoteXUL.title "XUL-koodia etänä">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Ilmoitathan ongelmasta sivuston omistajalle.</li></ul></p>">
-
 <!-- Include app-specific error messages - do not change this in localization!
      Some applications might override netErrorApp.dtd with their specific version,
-     this inclusion needs to be intact for that approach to work correctly.
-     Please, try to keep this at the end of the file. -->
+     this inclusion needs to be intact for that approach to work correctly. -->
 <!ENTITY % netErrorAppDTD SYSTEM "chrome://global/locale/netErrorApp.dtd">
 %netErrorAppDTD;
+<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+
+<!ENTITY corruptedContentError.title "Corrupted Content Error">
+<!ENTITY netOffline.longDesc2 "<p>The browser is operating in its offline mode and cannot connect to the requested item.</p><ul><li>Is the computer connected to an active network?</li><li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li></ul>">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
+
+<!ENTITY remoteXUL.title "Remote XUL">

@@ -142,3 +142,10 @@
 <!ENTITY byLastVisited.accesskey  "z">
 <!ENTITY byDayAndSite.label       "Nach Datum und Website">
 <!ENTITY byDayAndSite.accesskey   "h">
+<!ENTITY exportBookmarksToHTML.accesskey   "E">
+<!ENTITY exportBookmarksToHTML.label       "Export Bookmarks to HTML…">
+<!ENTITY importBookmarksFromHTML.accesskey "I">
+
+<!ENTITY importBookmarksFromHTML.label     "Import Bookmarks from HTML…">
+<!ENTITY importOtherBrowser.accesskey      "A">
+<!ENTITY importOtherBrowser.label          "Import Data from Another Browser…">

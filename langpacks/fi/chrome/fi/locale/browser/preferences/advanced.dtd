@@ -21,6 +21,8 @@
 <!ENTITY allowHWAccel.accesskey          "K">
 <!ENTITY checkSpelling.label             "Oikolue käyttäjän kirjoitukset">
 <!ENTITY checkSpelling.accesskey         "l">
+<!ENTITY doNotTrack.label                "Ilmoita sivustoille, etten halua niiden seuraavan minua">
+<!ENTITY doNotTrack.accesskey            "I">
 
 <!ENTITY systemDefaults.label            "Järjestelmän oletukset">
 <!ENTITY alwaysCheckDefault.label        "&brandShortName; tarkistaa käynnistyessään, onko se oletusselain"><!--XXX-->
@@ -29,8 +31,6 @@
 <!ENTITY checkNow.accesskey              "T">
 <!ENTITY submitCrashes.label             "Lähetä kaatumisilmoitus">
 <!ENTITY submitCrashes.accesskey         "ä">
-<!ENTITY submitTelemetry.label           "Lähetä suorityskykytietoja">
-<!ENTITY submitTelemetry.accesskey       "h">
 
 <!ENTITY networkTab.label                "Verkko">
 
@@ -107,3 +107,5 @@
 <!ENTITY verify2.accesskey               "m">
 <!ENTITY viewSecurityDevices.label       "Turvallisuuslaitteet">
 <!ENTITY viewSecurityDevices.accesskey   "T">
+<!ENTITY submitTelemetry.accesskey       "P">
+<!ENTITY submitTelemetry.label           "Submit performance data">

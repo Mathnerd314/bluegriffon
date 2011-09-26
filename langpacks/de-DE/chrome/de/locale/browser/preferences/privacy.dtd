@@ -76,5 +76,8 @@
 <!ENTITY  clearOnCloseSettings.accesskey "E">
 <!ENTITY doNotTrack.accesskey           "d">
 
-<!ENTITY doNotTrack.label               "Tell web sites I do not want to be tracked">
+<!ENTITY doNotTrack.label               "Tell websites I do not want to be tracked">
+<!ENTITY  privateBrowsingPermanent2.accesskey "p">
+
+<!ENTITY  privateBrowsingPermanent2.label "Always use private browsing mode">
 <!ENTITY tracking.label                 "Tracking">

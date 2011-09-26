@@ -23,6 +23,7 @@
 <!ENTITY aboutSupport.appBasicsBuildConfig "Konfiguracja kompilacji">
 
 <!ENTITY aboutSupport.appBasicsUserAgent "Identyfikator programu">
+<!ENTITY aboutSupport.appBasicsCrashIDs "Zgłoszenia awarii">
 
 <!ENTITY aboutSupport.show.label "Pokaż zawartość folderu">
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
@@ -40,3 +41,4 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Historia aktualizacji">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Skopiuj wszystko do schowka">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">

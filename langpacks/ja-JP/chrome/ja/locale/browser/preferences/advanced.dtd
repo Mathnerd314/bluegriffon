@@ -105,3 +105,5 @@
 <!ENTITY verify2.accesskey			"V">
 <!ENTITY viewSecurityDevices.label		"セキュリティデバイス...">
 <!ENTITY viewSecurityDevices.accesskey		"y">
+<!ENTITY submitTelemetry.accesskey       "P">
+<!ENTITY submitTelemetry.label           "Submit performance data">

@@ -1,9 +1,9 @@
 <!ENTITY aboutDialog.title          "Tietoja &brandFullName;ista">
 
-<!ENTITY community.start2           "&brandShortName;in on kehittänyt ">
+<!ENTITY community.start2           "&brandShortName;in on kehittänyt">
 <!-- LOCALIZATION NOTE (community.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
 <!ENTITY community.mozillaLink      "&vendorShortName;">
-<!ENTITY community.middle2          ", ">
+<!ENTITY community.middle2          "; ">
 <!-- LOCALIZATION NOTE (community.creditsLink): This is a link title that links to about:credits. -->
 <!ENTITY community.creditsLink      "kansainvälinen yhteisö">
 <!ENTITY community.end2             ", joka pyrkii kehittämään Internetiä. Uskomme, että Internetin tulisi olla avoin, julkinen ja kaikkien käytettävissä rajoituksitta.">
@@ -54,9 +54,9 @@
      example: Downloading update — 111 KB of 13 MB -->
 <!ENTITY update.downloading.start   "Ladataan päivitystä — ">
 <!ENTITY update.downloading.end     "">
+<!ENTITY channel.description.end    " update channel. ">
 
 <!-- LOCALIZATION NOTE (channel.description.start,channel.description.end): channel.description.start and
      channel.description.end create one sentence, with the current channel label inserted in between.
      example: You are currently on the _Stable_ update channel. -->
-<!ENTITY channel.description.start  "Ohjelmasi päivitykset ovat tällä hetkellä tyyppiä ">
-<!ENTITY channel.description.end    ".">
+<!ENTITY channel.description.start  "You are currently on the ">

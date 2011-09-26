@@ -35,3 +35,7 @@
 <!ENTITY manageAddonsDescUnix2.label   "修改附加组件的首选项">
 <!ENTITY manageAddons.label            "管理附加组件…">
 <!ENTITY manageAddons.accesskey        "M">
+<!ENTITY chooseBookmark.accesskey  "B">
+<!ENTITY chooseBookmark.label      "Use Bookmark…">
+<!ENTITY restoreOnDemand.accesskey "l">
+<!ENTITY restoreOnDemand.label     "Don’t load tabs until selected">

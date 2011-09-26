@@ -174,3 +174,11 @@ netError.xhtml) because it exposes functionality specific to BlueGriffon. -->
 
 <!ENTITY remoteXUL.title	"リモート XUL">
 <!ENTITY remoteXUL.longDesc	"<p><ul><li>この問題を Web サイトの管理者に報告してください。</li></ul></p>">
+<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
+
+<!ENTITY corruptedContentError.title "Corrupted Content Error">
+<!ENTITY netOffline.longDesc2 "
+<ul>
+  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
+</ul>
+">

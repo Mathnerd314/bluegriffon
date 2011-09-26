@@ -28,10 +28,12 @@
 <!ENTITY cmd.findCurrent.label          "Zoeken in huidige collectie…">
 <!ENTITY cmd.findCurrent.accesskey      "i">
 
-<!ENTITY cmd.exportHTML.label           "HTML exporteren…">
-<!ENTITY cmd.exportHTML.accesskey       "e">
-<!ENTITY cmd.importHTML.label           "HTML importeren…">
-<!ENTITY cmd.importHTML.accesskey       "i">
+<!ENTITY importBookmarksFromHTML.label     "Bladwijzers importeren vanuit HTML…">
+<!ENTITY importBookmarksFromHTML.accesskey "m">
+<!ENTITY exportBookmarksToHTML.label       "Bladwijzers exporteren naar HTML…">
+<!ENTITY exportBookmarksToHTML.accesskey   "x">
+<!ENTITY importOtherBrowser.label          "Gegevens van een andere browser importeren…">
+<!ENTITY importOtherBrowser.accesskey      "d">
 
 <!ENTITY cmd.backup.label               "Reservekopie maken…">
 <!ENTITY cmd.backup.accesskey           "R">
@@ -106,7 +108,7 @@
 
 <!ENTITY maintenance.label      "Importeren en reservekopie maken">
 <!ENTITY maintenance.accesskey  "I">
-<!ENTITY maintenance.tooltip    "Uw bladwijzers importeren en reservekopie maken">
+<!ENTITY maintenance.tooltip    "Uw bladwijzers importeren en een reservekopie maken">
 
 <!ENTITY backButton.tooltip  "Terug gaan">
 

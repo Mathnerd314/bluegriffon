@@ -22,7 +22,7 @@
 <!ENTITY helpTroubleshootingInfo.accesskey  "T">
 
 <!ENTITY helpFeedbackPage.label "Odeslat zpětnou vazbu…">
-<!ENTITY helpFeedbackPage.accesskey "s">
+<!ENTITY helpFeedbackPage.accesskey "d">
 
 <!ENTITY preferencesCmdMac.label "Předvolby…">
 <!ENTITY preferencesCmdMac.commandkey ",">

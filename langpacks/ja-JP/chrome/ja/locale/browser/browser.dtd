@@ -553,6 +553,14 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip	"アドオンバーを閉じます">
 <!ENTITY toggleAddonBarCmd.key			"/">
+<!ENTITY backForwardButtonMenu.tooltip "Right-click or pull down to show history">
+<!ENTITY backForwardButtonMenuMac.tooltip "Pull down to show history">
+<!ENTITY getMoreDevtoolsCmd.accesskey    "M">
+
+<!ENTITY getMoreDevtoolsCmd.label        "Get More Tools">
+<!ENTITY inspectContextMenu.accesskey "Q">
+
+<!ENTITY inspectContextMenu.label     "Inspect Element">
 <!ENTITY scratchpad.accesskey         "s">
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
@@ -568,6 +576,7 @@ just addresses the organization to follow, e.g. "This site is run by " -->
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
 <!ENTITY scratchpad.label             "Scratchpad">
+<!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY unsortedBookmarksCmd.label "Unsorted Bookmarks">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 

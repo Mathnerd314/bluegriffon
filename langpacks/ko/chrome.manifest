@@ -1,24 +1,24 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-locale mozapps ko chrome/ko/locale/ko/mozapps/
-override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
-locale global ko chrome/ko/locale/ko/global/
-locale pipnss ko chrome/ko/locale/ko/pipnss/
-override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale branding ko chrome/ko/locale/branding/
-locale testpilot ko chrome/ko/locale/feedback/
-locale necko ko chrome/ko/locale/ko/necko/
-manifest chrome/ja.manifest
-locale passwordmgr ko chrome/ko/locale/ko/passwordmgr/
-locale autoconfig ko chrome/ko/locale/ko/autoconfig/
 locale cookie ko chrome/ko/locale/ko/cookie/
+manifest chrome/ko.manifest
+override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+locale autoconfig ko chrome/ko/locale/ko/autoconfig/
+override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
+locale mozapps ko chrome/ko/locale/ko/mozapps/
 locale alerts ko chrome/ko/locale/ko/alerts/
-locale browser-region ko chrome/ko/locale/browser-region/
-locale pippki ko chrome/ko/locale/ko/pippki/
-locale global-region ko chrome/ko/locale/ko/global-region/
-locale places ko chrome/ko/locale/ko/places/
+locale testpilot ko chrome/ko/locale/feedback/
+locale pipnss ko chrome/ko/locale/ko/pipnss/
 locale global-platform ko chrome/ko/locale/ko/global-platform/
+locale browser-region ko chrome/ko/locale/browser-region/
+locale places ko chrome/ko/locale/ko/places/
+locale pippki ko chrome/ko/locale/ko/pippki/
 locale weave ko chrome/ko/locale/ko/
+locale passwordmgr ko chrome/ko/locale/ko/passwordmgr/
+locale necko ko chrome/ko/locale/ko/necko/
 locale browser ko chrome/ko/locale/browser/
+locale global-region ko chrome/ko/locale/ko/global-region/
+locale global ko chrome/ko/locale/ko/global/
 locale bluegriffon ko base/locale/bluegriffon/
 locale branding ko base/locale/branding/
 locale fs ko extensions/fs/

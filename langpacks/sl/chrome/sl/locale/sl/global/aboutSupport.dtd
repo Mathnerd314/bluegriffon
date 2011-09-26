@@ -38,3 +38,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Zgodovina posodobitev">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Kopiraj v odložišče">
+<!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">

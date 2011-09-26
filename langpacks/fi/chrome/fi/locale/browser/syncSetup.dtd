@@ -24,12 +24,10 @@
 
 <!-- New Account Page 1: Basic Account Info -->
 <!ENTITY setup.newAccountDetailsPage.title.label "Tilin tiedot">
+<!ENTITY setup.confirmPassword.label  "Vahvista salasana">
+<!ENTITY setup.confirmPassword.accesskey  "V">
 <!ENTITY setup.emailAddress.label     "Sähköpostiosoite">
 <!ENTITY setup.emailAddress.accesskey "S">
-<!ENTITY setup.choosePassword.label      "Anna salasana">
-<!ENTITY setup.choosePassword.accesskey  "A">
-<!ENTITY setup.confirmPassword.label     "Vahvista salasana">
-<!ENTITY setup.confirmPassword.accesskey "V">
 <!-- LOCALIZATION NOTE: tosAgree1, tosLink, tosAgree2, ppLink, tosAgree3 are
      joined with implicit white space, so spaces in the strings aren't necessary -->
 <!ENTITY setup.tosAgree1.label      "Hyväksyn palvelun">
@@ -45,7 +43,7 @@
 <!ENTITY setup.newSyncKeyPage.description.label "Varmistaaksemme täydellisen yksityisyydensuojan, kaikki tiedot salataan ennen kuin ne lähetetään eteenpäin. Synkronointiavaimesi on välttämätön tietojen purkamiseen, mutta sitä ei lähetetä eteenpäin.">
 <!ENTITY syncKeyEntry.label        "Synkronointiavaimesi">
 <!ENTITY syncKeyEntry.accesskey    "S">
-<!ENTITY syncGenerateNewKey.label  "Luo uusi avain">
+<!ENTITY syncKeyGenerate.label     "Luo">
 <!ENTITY syncKeyBackup.description "Tarvitset synkronointiavaintasi kun haluat liittää toisia laitteita &syncBrand.fullName.label; -tiliisi. Otathan siis avaimesta varmuuskopion. Emme voi auttaa sinua palauttamaan hävinnyttä synkronointiavainta.">
 
 <!ENTITY button.syncKeyBackup.print.label     "Tulosta…">
@@ -108,3 +106,17 @@
 <!ENTITY setup.successPage.title "Asennus on valmis">
 <!ENTITY changeOptions.label "Voit muuttaa tätä asetusta valitsemalla alta synkronointiasetukset.">
 <!ENTITY continueUsing.label "Voit nyt jatkaa &brandShortName;in käyttämistä.">
+<!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
+<!ENTITY existingRecoveryKey.description "You can get a copy of your Recovery Key by going to &syncBrand.shortName.label; Options on your other device, and selecting  &#x0022;My Recovery Key&#x0022; under &#x0022;Manage Account&#x0022;.">
+<!ENTITY recoveryKeyBackup.description "Your Recovery Key is required to access &syncBrand.fullName.label; on other machines. Please create a backup copy. We cannot help you recover your Recovery Key.">
+<!ENTITY recoveryKeyEntry.accesskey    "K">
+<!ENTITY recoveryKeyEntry.label        "Your Recovery Key">
+<!ENTITY setup.choosePassword.accesskey  "P">
+<!ENTITY setup.choosePassword.label      "Choose a Password">
+<!ENTITY setup.newRecoveryKeyPage.description.label "To ensure your total privacy, all of your data is encrypted prior to being uploaded. The Recovery Key which is necessary to decrypt your data is not uploaded.">
+
+<!-- New Account Page 2: Sync Key -->
+<!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; Cares About Your Privacy">
+<!ENTITY signIn.recoveryKey.accesskey   "K">
+<!ENTITY signIn.recoveryKey.label       "Recovery Key">
+<!ENTITY syncGenerateNewKey.label  "Generate a new key">

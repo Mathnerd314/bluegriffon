@@ -19,6 +19,7 @@
 <!ENTITY aboutSupport.appBasicsEnabledPlugins "사용 중인 플러그인">
 <!ENTITY aboutSupport.appBasicsBuildConfig "빌드 설정">
 <!ENTITY aboutSupport.appBasicsUserAgent "사용자 에이전트">
+<!ENTITY aboutSupport.appBasicsCrashIDs "문제점 보고서">
 
 <!ENTITY aboutSupport.show.label "폴더 열기">
 
@@ -37,3 +38,4 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "업데이트 기록">
 
 <!ENTITY aboutSupport.copyToClipboard.label "클립보드에 복사하기">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">

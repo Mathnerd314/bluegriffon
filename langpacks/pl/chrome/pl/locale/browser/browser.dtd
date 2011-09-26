@@ -121,6 +121,8 @@ can reach it easily. -->
 <!ENTITY forwardCmd.label "Do przodu" >
 <!ENTITY forwardCmd.accesskey "P" >
 <!ENTITY forwardButton.tooltip "Przejdź do następnej strony" >
+<!ENTITY backForwardButtonMenu.tooltip "Kliknij prawym przyciskiem lub rozwiń, by wyświetlić historię">
+<!ENTITY backForwardButtonMenuMac.tooltip "Rozwiń, by wyświetlić historię">
 <!ENTITY reloadCmd.label "Odśwież" >
 <!ENTITY reloadCmd.accesskey "O" >
 <!ENTITY reloadButton.tooltip "Odśwież bieżącą stronę" >
@@ -187,7 +189,7 @@ can reach it easily. -->
 <!ENTITY addons.accesskey		"D">
 <!ENTITY addons.commandkey            "A">
 
-<!ENTITY webDeveloperMenu.label       "Dla programistów WWW">
+<!ENTITY webDeveloperMenu.label       "Dla twórców witryn">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
 <!ENTITY errorConsoleCmd.label "Konsola błędów" >
@@ -329,6 +331,7 @@ can reach it easily. -->
    
 -->
 <!ENTITY searchFocus.commandkey       "k">
+<!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY searchFocusUnix.commandkey   "j">
 <!ENTITY tabView.commandkey           "e">
 
@@ -555,3 +558,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "Zamknij pasek dodatków">
 <!ENTITY toggleAddonBarCmd.key        "/">
+<!ENTITY inspectContextMenu.accesskey "Q">
+
+<!ENTITY inspectContextMenu.label     "Inspect Element">

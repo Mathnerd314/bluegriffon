@@ -8,9 +8,9 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-zh-TW@bluegriffon.org"
                em:name="Traditional Chinese (zh-TW) Language Pack"
-               em:version="6.0.1.2"
+               em:version="9.0.1.2"
                em:type="8"
-               em:creator="Wei-Lun Sun(josesun)">
+               em:creator="Mozilla Taiwan Community (MozTW)">
     <em:contributor>Hung-Te Lin(piaip)</em:contributor> <em:contributor>Wei-Lun Sun(josesun)</em:contributor> <em:contributor>Tim Guan-Tin Chien(timdream)</em:contributor> <em:contributor>Peter Pin-Guang Chen(petercpg)</em:contributor>
 
     <em:targetApplication>

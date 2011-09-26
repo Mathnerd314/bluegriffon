@@ -29,7 +29,7 @@
 <!ENTITY alwaysCheckDefault.accesskey    "B">
 <!ENTITY checkNow.label                  "Jetzt überprüfen">
 <!ENTITY checkNow.accesskey              "J">
-<!ENTITY submitCrashes.label             "Absturzmeldungen senden">
+<!ENTITY submitCrashes.label             "Absturzberichte senden">
 <!ENTITY submitCrashes.accesskey         "A">
 
 <!ENTITY networkTab.label                "Netzwerk">
@@ -107,3 +107,5 @@
 <!ENTITY verify2.accesskey                "V">
 <!ENTITY viewSecurityDevices.label       "Kryptographie-Module">
 <!ENTITY viewSecurityDevices.accesskey   "K">
+<!ENTITY submitTelemetry.accesskey       "P">
+<!ENTITY submitTelemetry.label           "Submit performance data">

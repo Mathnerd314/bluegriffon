@@ -36,3 +36,7 @@
 <!ENTITY manageAddonsDescUnix2.label  "Add-on-Optionen ändern">
 <!ENTITY manageAddons.label           "Add-ons verwalten…">
 <!ENTITY manageAddons.accesskey       "v">
+<!ENTITY chooseBookmark.accesskey  "B">
+<!ENTITY chooseBookmark.label      "Use Bookmark…">
+<!ENTITY restoreOnDemand.accesskey "l">
+<!ENTITY restoreOnDemand.label     "Don’t load tabs until selected">

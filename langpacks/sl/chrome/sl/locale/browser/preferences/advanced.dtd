@@ -108,3 +108,5 @@
 <!ENTITY verify2.accesskey "V">
 <!ENTITY viewSecurityDevices.label "Varnostne naprave">
 <!ENTITY viewSecurityDevices.accesskey "v">
+<!ENTITY submitTelemetry.accesskey       "P">
+<!ENTITY submitTelemetry.label           "Submit performance data">

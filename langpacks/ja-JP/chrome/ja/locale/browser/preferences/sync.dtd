@@ -38,3 +38,7 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "利用規約">
 <!ENTITY prefs.ppLink.label         "プライバシーポリシー">
+<!ENTITY changePassword2.label        "Change Password…">
+<!ENTITY myRecoveryKey.label          "My Recovery Key">
+<!ENTITY resetSync2.label             "Reset Sync…">
+<!ENTITY unlinkDevice.label           "Unlink This Device">

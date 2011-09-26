@@ -43,7 +43,6 @@
 <!ENTITY setup.newSyncKeyPage.description.label "Za zagotovitev najvišje stopnje zasebnosti se vsi vaši podatki pred prenosom šifrirajo. Sinhronizacijski ključ, ki je potreben za dešifriranje, pa se ne prenaša.">
 <!ENTITY syncKeyEntry.label        "Vaš sinhronizacijski ključ">
 <!ENTITY syncKeyEntry.accesskey    "K">
-<!ENTITY syncKeyGenerate.label     "Ustvari">
 <!ENTITY syncKeyBackup.description "Sinhronizacijski ključ je potreben za dostop do storitve &syncBrand.fullName.label; na drugih napravah. Ustvarite varnostno kopijo, saj vam ga ne moremo obnoviti.">
 
 <!ENTITY button.syncKeyBackup.print.label     "Natisni …">
@@ -106,4 +105,17 @@
 <!ENTITY setup.successPage.title  "Namestitev končana!">
 <!ENTITY changeOptions.label "To nastavitev lahko spremenite z izbiro Možnosti sinhronizacije.">
 <!ENTITY continueUsing.label "Zdaj lahko nadaljujete z uporabo &brandShortName;a.">
+<!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
+<!ENTITY existingRecoveryKey.description "You can get a copy of your Recovery Key by going to &syncBrand.shortName.label; Options on your other device, and selecting  &#x0022;My Recovery Key&#x0022; under &#x0022;Manage Account&#x0022;.">
+<!ENTITY recoveryKeyBackup.description "Your Recovery Key is required to access &syncBrand.fullName.label; on other machines. Please create a backup copy. We cannot help you recover your Recovery Key.">
+<!ENTITY recoveryKeyEntry.accesskey    "K">
+<!ENTITY recoveryKeyEntry.label        "Your Recovery Key">
+<!ENTITY setup.choosePassword.accesskey  "P">
+<!ENTITY setup.choosePassword.label      "Choose a Password">
+<!ENTITY setup.newRecoveryKeyPage.description.label "To ensure your total privacy, all of your data is encrypted prior to being uploaded. The Recovery Key which is necessary to decrypt your data is not uploaded.">
+
+<!-- New Account Page 2: Sync Key -->
+<!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; Cares About Your Privacy">
+<!ENTITY signIn.recoveryKey.accesskey   "K">
+<!ENTITY signIn.recoveryKey.label       "Recovery Key">
 <!ENTITY syncGenerateNewKey.label  "Generate a new key">
