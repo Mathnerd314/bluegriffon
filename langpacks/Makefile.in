@@ -23,6 +23,7 @@ _AVAILABLE_LOCALES =\
     sl \
     pl \
     fi \
+    sv-SE \
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)
