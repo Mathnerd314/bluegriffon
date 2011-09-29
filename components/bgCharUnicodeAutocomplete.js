@@ -9,8 +9,8 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 
 function bgCharUnicodeAutocompleteResult(searchString, searchResult,
-		                                  defaultIndex, errorDescription,
-		                                  results, comments) {
+                                      defaultIndex, errorDescription,
+                                      results, comments) {
   this._searchString = searchString;
   this._searchResult = searchResult;
   this._defaultIndex = defaultIndex;

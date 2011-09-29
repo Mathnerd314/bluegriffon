@@ -159,26 +159,26 @@ function onAccept()
   }
 
   if (rv.value == "no") {
-	  var url = kFONTFACEKIT_URL + font.family_urlname;
-	  var req = new XMLHttpRequest();
-	  req.open('GET', url, true);
-	  req.overrideMimeType('text/plain; charset=x-user-defined');  
-	  req.onreadystatechange = function (aEvt) {
-	    if (req.readyState == 4) {
-	      gDialog.loadingLabel.hidden = true;
-	      gDialog.ThrobberButton.hidden = true;
-	       if(req.status == 200) {
-	        WriteFile(font.family_urlname, req.responseText);
-	       }
-	       else
-	        alert(req.status);
-	    }
-	  };
-	  gDialog.ThrobberButton.hidden = false;
-	  gDialog.loadingLabel.hidden = false;
-	  req.send(null);
-	
-	  return false;
+    var url = kFONTFACEKIT_URL + font.family_urlname;
+    var req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.overrideMimeType('text/plain; charset=x-user-defined');  
+    req.onreadystatechange = function (aEvt) {
+      if (req.readyState == 4) {
+        gDialog.loadingLabel.hidden = true;
+        gDialog.ThrobberButton.hidden = true;
+         if(req.status == 200) {
+          WriteFile(font.family_urlname, req.responseText);
+         }
+         else
+          alert(req.status);
+      }
+    };
+    gDialog.ThrobberButton.hidden = false;
+    gDialog.loadingLabel.hidden = false;
+    req.send(null);
+  
+    return false;
   }
 
 
@@ -203,34 +203,34 @@ function WriteFile(aFilename, aData)
   fp.init(window, gDialog.stringBundle.getString("SelectDir"),
           Components.interfaces.nsIFilePicker.modeGetFolder);
   if (fp.show() == Components.interfaces.nsIFilePicker.returnOK) {
-		var file = Components.classes["@mozilla.org/file/directory_service;1"].
-		           getService(Components.interfaces.nsIProperties).
-		           get("ProfD", Components.interfaces.nsIFile);
-		file.createUnique(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
-		            
-		var stream = Components.classes["@mozilla.org/network/safe-file-output-stream;1"].
-		             createInstance(Components.interfaces.nsIFileOutputStream);
-		stream.init(file, 0x04 | 0x08 | 0x20, 0600, 0); // readwrite, create, truncate
-		            
-		stream.write(aData, aData.length);
-		if (stream instanceof Components.interfaces.nsISafeOutputStream) {
-		    stream.finish();
-		} else {
-		    stream.close();
-	  }
+    var file = Components.classes["@mozilla.org/file/directory_service;1"].
+               getService(Components.interfaces.nsIProperties).
+               get("ProfD", Components.interfaces.nsIFile);
+    file.createUnique(Components.interfaces.nsIFile.NORMAL_FILE_TYPE, 0600);
+                
+    var stream = Components.classes["@mozilla.org/network/safe-file-output-stream;1"].
+                 createInstance(Components.interfaces.nsIFileOutputStream);
+    stream.init(file, 0x04 | 0x08 | 0x20, 0600, 0); // readwrite, create, truncate
+                
+    stream.write(aData, aData.length);
+    if (stream instanceof Components.interfaces.nsISafeOutputStream) {
+        stream.finish();
+    } else {
+        stream.close();
+    }
 
-	  var dir = fp.file.clone();
-	  dir.append(aFilename);
-	  if (!dir.exists())
-	    dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
-	
-	  UnzipPackage(file, dir);
-	  file.remove(false);
+    var dir = fp.file.clone();
+    dir.append(aFilename);
+    if (!dir.exists())
+      dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0755);
+  
+    UnzipPackage(file, dir);
+    file.remove(false);
     dir.append("stylesheet.css");
     // guess who's messing around... Windows...
     dir.permissions = 0444;
     AddLinkToDocument(dir);
-	  window.close();
+    window.close();
     return;
   }
   file.remove(false);

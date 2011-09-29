@@ -125,10 +125,10 @@
         </rows>
       </grid>
       <vbox>
-	      <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px"
+        <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px"
               treelines="true"
               onselect="UpdateButtons()">
-	        <treecols>
+          <treecols>
             <treecol id="valueCol"    flex="1" label="&value.col;"
                      primary="true"
                      persist="width ordinal hidden"/>
@@ -142,13 +142,13 @@
             <treecol id="selectedCol"          label="&selected.col;"
                      persist="width ordinal hidden"/>
           </treecols>
-	      </tree>
-	      <hbox id="UrlsToolbox" class="listboxBg">
-	        <toolbarbutton class="listboxBgPlusButton"
-	                       tooltiptext="&add.tooltip;"
-	                       id="PlusButton"
-	                       type="menu">
-	          <menupopup onpopupshowing="UpdateOptions()">
+        </tree>
+        <hbox id="UrlsToolbox" class="listboxBg">
+          <toolbarbutton class="listboxBgPlusButton"
+                         tooltiptext="&add.tooltip;"
+                         id="PlusButton"
+                         type="menu">
+            <menupopup onpopupshowing="UpdateOptions()">
               <menu label="&before.label;"
                     id="beforeMenu">
                 <menupopup>
@@ -182,19 +182,19 @@
                             oncommand="AddOptgroup('after')"/>
                 </menupopup>
               </menu>
-	          </menupopup>
-	        </toolbarbutton>
-	        <toolbarbutton class="listboxBgMinusButton"
-	                       disabled="true"
-	                       id="MinusButton"
-	                       tooltiptext="&remove.tooltip;"
-	                       oncommand="DeleteOpt()"/>
-	        <toolbarbutton class="listboxBgConfigButton"
-	                       tooltiptext="&modify.tooltip;"
-	                       disabled="true"
-	                       id="ConfigButton"
-	                       oncommand="UpdateUrl()"/>
-	        <spacer flex="1"/>
+            </menupopup>
+          </toolbarbutton>
+          <toolbarbutton class="listboxBgMinusButton"
+                         disabled="true"
+                         id="MinusButton"
+                         tooltiptext="&remove.tooltip;"
+                         oncommand="DeleteOpt()"/>
+          <toolbarbutton class="listboxBgConfigButton"
+                         tooltiptext="&modify.tooltip;"
+                         disabled="true"
+                         id="ConfigButton"
+                         oncommand="UpdateUrl()"/>
+          <spacer flex="1"/>
           <toolbarbutton class="listboxBgDownButton"
                          tooltiptext="&down.tooltip;"
                          disabled="true"
@@ -205,9 +205,9 @@
                          disabled="true"
                          id="UpButton"
                          oncommand="Up()"/>
-	      </hbox>
-	
-	    </vbox>
+        </hbox>
+  
+      </vbox>
     </tabpanels>
   </tabbox>
 </dialog>

@@ -52,7 +52,7 @@ parsererror {
 
 #password1Textbox, #password2Textbox, #loginTextbox
 {
-	direction: ltr !important;
+  direction: ltr !important;
 }
 
 /********************

@@ -127,39 +127,39 @@
       </vbox>
       <hbox align="center" id="helperButtons">
 #ifdef XP_MACOSX
-	      <tabs id="modeTabbox" previousMode="wysiwyg" flex="1">
-	        <tab
-	                 selected="true"
-	                 id="wysiwygModeButton"
-	                 label="&wysiwygMode.label;"
-	                 oncommand="ToggleViewMode(this)"
-	                 value="wysiwyg"
-	                 observes="cmd_viewModeEnabler"/>
-	        <tab
-	                 id="sourceModeButton"
-	                 label="&sourceMode.label;"
-	                 oncommand="ToggleViewMode(this)"
-	                 value="source"
-	                 observes="cmd_viewModeEnabler"/>
-	      </tabs>
+        <tabs id="modeTabbox" previousMode="wysiwyg" flex="1">
+          <tab
+                   selected="true"
+                   id="wysiwygModeButton"
+                   label="&wysiwygMode.label;"
+                   oncommand="ToggleViewMode(this)"
+                   value="wysiwyg"
+                   observes="cmd_viewModeEnabler"/>
+          <tab
+                   id="sourceModeButton"
+                   label="&sourceMode.label;"
+                   oncommand="ToggleViewMode(this)"
+                   value="source"
+                   observes="cmd_viewModeEnabler"/>
+        </tabs>
 #else
-	      <hbox id="modeTabbox" previousMode="wysiwyg" flex="1">
-	      	<spacer flex="1"/>
-	      	<label class="multiButton left"
-	      				   selected="true"
-	      				   id="wysiwygModeButton"
-	      				   label="&wysiwygMode.label;"
-	      				   onclick="ToggleViewMode(this)"
-	      				   value="wysiwyg"
-	      				   observes="cmd_viewModeEnabler"/>
-	      	<label class="multiButton right"
-	      				   id="sourceModeButton"
-	      				   label="&sourceMode.label;"
-	      				   onclick="ToggleViewMode(this)"
-	      				   value="source"
-	      				   observes="cmd_viewModeEnabler"/>
-	      	<spacer flex="1"/>
-	      </hbox>
+        <hbox id="modeTabbox" previousMode="wysiwyg" flex="1">
+          <spacer flex="1"/>
+          <label class="multiButton left"
+                   selected="true"
+                   id="wysiwygModeButton"
+                   label="&wysiwygMode.label;"
+                   onclick="ToggleViewMode(this)"
+                   value="wysiwyg"
+                   observes="cmd_viewModeEnabler"/>
+          <label class="multiButton right"
+                   id="sourceModeButton"
+                   label="&sourceMode.label;"
+                   onclick="ToggleViewMode(this)"
+                   value="source"
+                   observes="cmd_viewModeEnabler"/>
+          <spacer flex="1"/>
+        </hbox>
 #endif
       </hbox>
       <structurebar id="structurebar" orient="horizontal">

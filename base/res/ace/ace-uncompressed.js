@@ -2726,7 +2726,7 @@ NameGuesser.prototype = {
     },
 
     createXMLHTTPObject: function() {
-	    // Try XHR methods in order and store XHR factory
+      // Try XHR methods in order and store XHR factory
         var xmlhttp, XMLHttpFactories = [
             function() {
                 return new XMLHttpRequest();

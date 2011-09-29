@@ -210,18 +210,22 @@ function onAccept()
   gEditor.removeAttribute(gNode, "width");
   var txn = new diStyleAttrChangeTxn(gNode, "width", gDialog.widthMenulist.value, "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
 
   txn = new diStyleAttrChangeTxn(gNode, "height", gDialog.heightMenulist.value, "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
 
   gEditor.removeAttribute(gNode, "color");
    txn = new diStyleAttrChangeTxn(gNode, "color", gDialog.colorColorpicker.color, "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
 
   gEditor.removeAttribute(gNode, "noshade");
   txn = new diStyleAttrChangeTxn(gNode, "border-style",
                                      gDialog.shadedCheckbox.checked ? "" : "solid", "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
 
   gEditor.removeAttribute(gNode, "align");
   var ml = "", mr = "";
@@ -239,8 +243,10 @@ function onAccept()
   }
   txn = new diStyleAttrChangeTxn(gNode, "margin-left", ml, "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
   txn = new diStyleAttrChangeTxn(gNode, "margin-right", mr, "");
   gEditor.transactionManager.doTransaction(txn);
+  gEditor.incrementModificationCount(1);  
 
   gEditor.endTransaction();
 }

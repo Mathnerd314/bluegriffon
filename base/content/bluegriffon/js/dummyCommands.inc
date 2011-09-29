@@ -208,14 +208,14 @@ var cmdStructureFirstChildCommand =
         while (e) {
           if (e.nodeType != Node.TEXT_NODE
               || e.data.match( /[^\s\r\n]/g )) {
-		        if (e.nodeType == Node.ELEMENT_NODE)
-		          editor.selectElement(e);
-		        else {
-		          s.removeAllRanges();
-		          var range = EditorUtils.getCurrentDocument().createRange();
-		          range.selectNode(e);
-		          s.addRange(range);
-		        }
+            if (e.nodeType == Node.ELEMENT_NODE)
+              editor.selectElement(e);
+            else {
+              s.removeAllRanges();
+              var range = EditorUtils.getCurrentDocument().createRange();
+              range.selectNode(e);
+              s.addRange(range);
+            }
             return;
           }
           e = e.nextSibling;
@@ -281,10 +281,10 @@ var cmdStructureNextCommand =
         if (result.nodeType == Node.ELEMENT_NODE)
           editor.selectElement(result);
         else {
-	        s.removeAllRanges();
-	        var range = EditorUtils.getCurrentDocument().createRange();
-	        range.selectNode(result);
-	        s.addRange(range);
+          s.removeAllRanges();
+          var range = EditorUtils.getCurrentDocument().createRange();
+          range.selectNode(result);
+          s.addRange(range);
         }
       }
     }

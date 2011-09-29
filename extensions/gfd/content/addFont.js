@@ -30,13 +30,13 @@ function Startup()
   {
     var f = kDIRECTORY[i];
     gFontsList[f.name] = {
-											     subsets: f.subsets,
+                           subsets: f.subsets,
                            regular: f.regular,
                            bold: f.bold,
                            italic: f.italic,
                            bolditalic: f.bolditalic,
                            extra: f.extra
-											   };
+                         };
   }
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
   window.sizeToContent();

@@ -19,9 +19,9 @@ svgEditor.addExtension("view_grid", function(s) {
     };
 
     var svgdoc = document.getElementById("svgcanvas").ownerDocument,
-			svgns = "http://www.w3.org/2000/svg",
-			dims = svgEditor.curConfig.dimensions,
-			svgroot = s.svgroot;
+      svgns = "http://www.w3.org/2000/svg",
+      dims = svgEditor.curConfig.dimensions,
+      svgroot = s.svgroot;
 
     /*
     * copied from svgcanvas.js line 1138-1157 (version: 2.5 rc1)
@@ -34,7 +34,7 @@ svgEditor.addExtension("view_grid", function(s) {
 
         for (var i in attrs) {
             var ns = (i.substr(0, 4) == "xml:" ? xmlns :
-							i.substr(0, 6) == "xlink:" ? xlinkns : null);
+              i.substr(0, 6) == "xlink:" ? xlinkns : null);
 
             if (ns || !unitCheck) {
                 node.setAttributeNS(ns, i, attrs[i]);

@@ -582,6 +582,7 @@ function SetDirection(aEvent)
     if (target) {
       var txn = new diStyleAttrChangeTxn(target, "direction", value, "");
       EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+      EditorUtils.getCurrentEditor().incrementModificationCount(1);  
     }
   }
 }

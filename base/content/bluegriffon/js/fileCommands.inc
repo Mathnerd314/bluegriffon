@@ -26,10 +26,10 @@ var cmdSave =
     try {
       var docUrl = EditorUtils.getDocumentUrl();
       return EditorUtils.isDocumentEditable()
-			        && (GetCurrentViewMode() == "source"
-					        || (EditorUtils.isDocumentModified()
-					            || UrlUtils.isUrlOfBlankDocument(docUrl)
-					            || UrlUtils.getScheme(docUrl) != "file"));
+              && (GetCurrentViewMode() == "source"
+                  || (EditorUtils.isDocumentModified()
+                      || UrlUtils.isUrlOfBlankDocument(docUrl)
+                      || UrlUtils.getScheme(docUrl) != "file"));
     } catch (e) {return false;}
   },
   
@@ -45,8 +45,8 @@ var cmdSave =
         var mode = GetCurrentViewMode();
         if (mode == "source") {
           var editorElement = EditorUtils.getCurrentEditorElement();
-			    var bespinIframe = editorElement.previousSibling;
-			    var bespinEditor = bespinIframe.contentWindow.gEditor;
+          var bespinIframe = editorElement.previousSibling;
+          var bespinEditor = bespinIframe.contentWindow.gEditor;
           var source = bespinEditor.getSession().getValue();
 
           result = FileUtils.saveSourceDocument(source,
@@ -55,10 +55,10 @@ var cmdSave =
                      EditorUtils.getCurrentDocumentMimeType());
         }
         else {
-	        result = FileUtils.saveDocument(
-	                   UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
-	                   false,
-	                   EditorUtils.getCurrentDocumentMimeType());
+          result = FileUtils.saveDocument(
+                     UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
+                     false,
+                     EditorUtils.getCurrentDocumentMimeType());
         }
         window.content.focus();
         if (result)
@@ -129,13 +129,13 @@ var cmdCloseTab =
 
   doCommand: function(aCommand)
   {
-	  var editorElement = EditorUtils.getCurrentEditorElement();
+    var editorElement = EditorUtils.getCurrentEditorElement();
     if (!editorElement) // sanity check
       return;
     var mode = editorElement.parentNode.getAttribute("previousMode");
-	  if (mode == "source") {
-	    ToggleViewMode(gDialog.wysiwygModeButton);
-	  }
+    if (mode == "source") {
+      ToggleViewMode(gDialog.wysiwygModeButton);
+    }
     if (EditorUtils.isDocumentModified()) {
       var rv = PromptUtils.confirmWithTitle(
                              L10NUtils.getString("FileNotSaved"),

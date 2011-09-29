@@ -159,33 +159,33 @@
         <label value="&lastPickedColor.label;" accesskey="&lastPickedColor.accessKey;" flex="1" style="text-align: center;"/>
       </button>
       <hbox id="previewHbox">
-	      <grid>
-	        <columns><column/><column/></columns>
-	        <rows>
-	          <row align="center">
-	            <label value="&hexColor.label;"
-	                   control="hexColour"
-	                   id="hexColourLabel" />
-	            <textbox size="7" id="hexColour"/>
-	          </row>
-	          <row align="center">
-	            <label value="&nameColor.label;"
-	                   control="nameColour" 
-	                   id="nameColourLabel" />
-	            <textbox size="7"
-	                     id="nameColour"
-	                     oninput="onNamedColourChanged(this)"/>
-	          </row>
-	        </rows>
-	      </grid>
+        <grid>
+          <columns><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <label value="&hexColor.label;"
+                     control="hexColour"
+                     id="hexColourLabel" />
+              <textbox size="7" id="hexColour"/>
+            </row>
+            <row align="center">
+              <label value="&nameColor.label;"
+                     control="nameColour" 
+                     id="nameColourLabel" />
+              <textbox size="7"
+                       id="nameColour"
+                       oninput="onNamedColourChanged(this)"/>
+            </row>
+          </rows>
+        </grid>
         <box flex="1" id="swatch"/>
       </hbox>
       <!--checkbox label="&transparency.label;"
                 id="transparencyCheckbox"
                 oncommand="ToggleTransparency(this)"/-->
       <hbox align="center">
-	      <label value="&opacity.label;"/>
-	      <scale min="0" max="100" id="opacityScale" value="100"
+        <label value="&opacity.label;"/>
+        <scale min="0" max="100" id="opacityScale" value="100"
                onchange="gDialog.opacityTextbox.value = this.value; ToggleTransparency(this)"/>
         <textbox type="number" min="0" max="100" id="opacityTextbox"
                  size="3" value="100"

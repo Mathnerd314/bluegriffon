@@ -31,8 +31,8 @@
         <radio label="&useSystemLocale.radio;" value="true"/>
         <radio label="&useInstalledLocale.radio;" value="false"/>
       </radiogroup>
-	    <listbox id="locale-listbox" rows="4" class="indent"/>
-	    <hbox>
+      <listbox id="locale-listbox" rows="4" class="indent"/>
+      <hbox>
         <spacer flex="1"/>
         <button label="&switchLocale.button;" oncommand="changeLocale()"/>
       </hbox>

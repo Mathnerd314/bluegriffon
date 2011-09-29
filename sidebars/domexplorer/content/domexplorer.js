@@ -122,7 +122,7 @@ function Shutdown()
                                                 PanelClosed,
                                                 window);
     gDialog.elementsTree.removeEventListener("DOMAttrModified", onElementsTreeModified, true);
-	  gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
+    gDialog.attributesTree.removeEventListener("DOMAttrModified", onAttributesTreeModified, true);
     gDialog.cssTree.removeEventListener("DOMAttrModified", onCssTreeModified, true);
   }
 }
@@ -140,9 +140,9 @@ function Inspect()
       }
     }
     else {
-		  var treechildren = gDialog.elementsTree.querySelector("treechildren");
-		  if (treechildren)
-		    gDialog.elementsTree.removeChild(treechildren);
+      var treechildren = gDialog.elementsTree.querySelector("treechildren");
+      if (treechildren)
+        gDialog.elementsTree.removeChild(treechildren);
     }
   }
 }
@@ -192,8 +192,8 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   var treerow  = document.createElement("treerow");
   var treecell = document.createElement("treecell");
   treecell.setAttribute("label", elements[elements.length - 1].nodeName.toLowerCase());
-	treeitem.setUserData("node", elements[elements.length - 1], null);
-	treerow.appendChild(treecell);
+  treeitem.setUserData("node", elements[elements.length - 1], null);
+  treerow.appendChild(treecell);
   treeitem.appendChild(treerow);
   treechildren.appendChild(treeitem);
 
@@ -210,19 +210,19 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
       var parent = document.createElement("treechildren");
       treeitem.appendChild(parent);
       while (child) {
-		    treeitem = document.createElement("treeitem");
+        treeitem = document.createElement("treeitem");
         treeitem.setUserData("node", child, null);
-		    treerow  = document.createElement("treerow");
-		    treecell = document.createElement("treecell");
-		    treecell.setAttribute("label", child.nodeName.toLowerCase());
-		    treerow.appendChild(treecell);
-		    treeitem.appendChild(treerow);
-		    parent.appendChild(treeitem);
+        treerow  = document.createElement("treerow");
+        treecell = document.createElement("treecell");
+        treecell.setAttribute("label", child.nodeName.toLowerCase());
+        treerow.appendChild(treecell);
+        treeitem.appendChild(treerow);
+        parent.appendChild(treeitem);
 
         if (i > 0 && child == elements[i-1]) {
           tmp = treeitem;
-	      if (child == gCurrentElement)
-	        selected = treeitem;
+        if (child == gCurrentElement)
+          selected = treeitem;
         }
         child = child.nextElementSibling;
       }
@@ -315,10 +315,10 @@ function onAttributesTreeModified(aEvent)
 
   if (attrName == "editing") {
     if (attrChange == 2) { // start editing
-		  var tree = gDialog.attributesTree;
-		  var contentView = tree.contentView;
-		  var view = tree.view;
-		  gEditing = view.selection.currentIndex;
+      var tree = gDialog.attributesTree;
+      var contentView = tree.contentView;
+      var view = tree.view;
+      gEditing = view.selection.currentIndex;
       gEditingColumn = tree._editingColumn;
     }
     else if (attrChange == 3 && gEditing >= 0) { // end editing
@@ -326,8 +326,8 @@ function onAttributesTreeModified(aEvent)
       var aValue = gDialog.attributesTree.view.getCellText(gEditing, gDialog.attributesTree.columns[1]);
       if (gEditingColumn == gDialog.attributesTree.columns[1]) {
         gMain.EditorUtils.getCurrentEditor().setAttribute(gCurrentElement,
-										                                aName,
-										                                aValue);
+                                                    aName,
+                                                    aValue);
         var notify = (aName.toLowerCase() == "id"
                       || aName.toLowerCase() == "class"
                       || aName.toLowerCase() == "role"
@@ -457,6 +457,7 @@ function DeleteCSS()
   item.parentNode.removeChild(item);
   var txn = new diStyleAttrChangeTxn(gCurrentElement, property, "", "");
   gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+  gMain.EditorUtils.getCurrentEditor().incrementModificationCount(1);  
   gMain.ComposerCommands.updateSelectionBased(true);
   UpdateAttributes();
 }
@@ -504,8 +505,9 @@ function onCssTreeModified(aEvent)
       var aValue    = gDialog.cssTree.view.getCellText(gEditing, gDialog.cssTree.columns[1]);
       var aPriority = gDialog.cssTree.view.getCellText(gEditing, gDialog.cssTree.columns[2]);
       if (gEditingColumn == gDialog.cssTree.columns[2]) {
-			  var txn = new diStyleAttrChangeTxn(gCurrentElement, aName, aValue, aPriority);
-			  gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+        var txn = new diStyleAttrChangeTxn(gCurrentElement, aName, aValue, aPriority);
+        gMain.EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+        gMain.EditorUtils.getCurrentEditor().incrementModificationCount(1);  
         gMain.ComposerCommands.updateSelectionBased(true);
         UpdateAttributes();
         gEditing = -1;

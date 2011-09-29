@@ -2624,7 +2624,7 @@ ftpDataSocketMozilla.prototype = {
         this.dataInstream                 = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
         if (this.useCompression) {
           streamConverter = Components.classes["@mozilla.org/streamconv;1?from=deflate&to=uncompressed"].createInstance(Components.interfaces.nsIStreamConverter);
-	        streamConverter.asyncConvertData("deflate", "uncompressed", this.dataListener, null);
+          streamConverter.asyncConvertData("deflate", "uncompressed", this.dataListener, null);
         } else {
           this.dataInstream.setInputStream(dataStream);
         }

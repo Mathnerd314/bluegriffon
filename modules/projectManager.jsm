@@ -71,7 +71,7 @@ var ProjectManager = {
 'exclusions' VARCHAR NOT NULL, \
 'timeShift' VARCHAR NOT NULL)");
 
-  	mDBConn.close();
+    mDBConn.close();
 
     this.loadProjects();
   },

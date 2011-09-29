@@ -427,12 +427,14 @@
                                                    (marginLeft - (this.mOriginalX - x)/zoom) + "px",
                                                    "");
                 EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                EditorUtils.getCurrentEditor().incrementModificationCount(1);  
                 if(source.style.getPropertyValue("width")) {
                   txn = new diStyleAttrChangeTxn(source,
                                                  "width",
                                                  (width  + (this.mOriginalX - x)/zoom) + "px",
                                                  "");
                   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+                  EditorUtils.getCurrentEditor().incrementModificationCount(1);  
                 }
               }
                break;
@@ -443,6 +445,7 @@
                                                    (width  - (this.mOriginalX - x)/zoom) + "px",
                                                    "");
                 EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+                EditorUtils.getCurrentEditor().incrementModificationCount(1);  
               }
               break;
             default: break;
@@ -759,20 +762,23 @@
                                                      "height",
                                                      (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
                                                      "");
-                  editor.transactionManager.doTransaction(txn);  
+                  editor.transactionManager.doTransaction(txn);
+                  editor.incrementModificationCount(1);  
                 }
                 else {
                   var txn = new diStyleAttrChangeTxn(aElt,
                                                      "margin-top",
                                                      (marginTop - (aSelf.mOriginalY - aY)/zoom) + "px",
                                                      "");
-                  editor.transactionManager.doTransaction(txn);  
+                  editor.transactionManager.doTransaction(txn);
+                  editor.incrementModificationCount(1);  
                   if(aElt.style.getPropertyValue("height")) {
                     txn = new diStyleAttrChangeTxn(aElt,
                                                    "height",
                                                    (aHeight  + (aSelf.mOriginalY - aY)/zoom) + "px",
                                                    "");
                     editor.transactionManager.doTransaction(txn);  
+                    editor.incrementModificationCount(1);  
                   }
                 }
                 break;
@@ -783,6 +789,7 @@
                                                      (aHeight  - (aSelf.mOriginalY - aY)/zoom) + "px",
                                                      "");
                   editor.transactionManager.doTransaction(txn);  
+                  editor.incrementModificationCount(1);  
                 }
                 break;
               default: break;

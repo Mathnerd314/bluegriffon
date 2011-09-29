@@ -18,45 +18,45 @@ function ColorsSectionIniter(aElt, aRuleset)
   var bgClip       = CssInspector.getCascadedValue(aRuleset, "background-clip").split(",");
   var bgOrigin     = CssInspector.getCascadedValue(aRuleset, "background-origin").split(",");
   if (bgImages != "none") {
-	  for (var i = 0; i < parsedImages.length; i++) {
-	    var item = document.createElement("richlistitem");
-	    item.className = "backgrounditem";
-	    var type = parsedImages[i].type;
-	    item.setAttribute("type", type);
-	    gDialog.backgroundsRichlistbox.appendChild(item);
-	
-	    item.reset();
-	    var button = item.getChild("backgrounditemButton");
-	    item.parsedValue = parsedImages[i].value;
-	    switch (type) {
-	      case "image":
-	        // pfff, find the real URL...
-	        var match = item.parsedValue.match ( /^url\(\s*"([^"]*)"\s*\)|^url\(\s*'([^']*)'\s*\)|^url\(\s*([^\)]*)\s*\)/ );
-	        if (match) {
-	          if (match[1]) item.setAttribute("image", match[1]);
-	          else if (match[2]) item.setAttribute("image", match[2]);
-	          else if (match[3]) item.setAttribute("image", match[3]);
-	        }
-	        button.style.backgroundImage = "url('" + UrlUtils.makeAbsoluteUrl(item.getAttribute("image")) + "')";
-	        break;
-	      default:
-	        button.style.backgroundImage =
-	          CssInspector.serializeGradient(item.parsedValue);
-	        break;
-	    }
-	    item.getChild("backgrounditem-attachment").value =
-	      (i < bgAttachment.length ? bgAttachment[i].trim() : "");
-	    item.getChild("backgrounditem-repeat").value =
-	      (i < bgRepeat.length ? bgRepeat[i].trim() : "");
-	    item.getChild("backgrounditem-position").value =
-	      (i < bgPosition.length ? bgPosition[i].trim() : "");
-	    item.getChild("backgrounditem-size").value =
-	      (i < bgSize.length ? bgSize[i].trim() : "");
-	    item.getChild("backgrounditem-clip").value =
-	      (i < bgClip.length ? bgClip[i].trim() : "");
-	    item.getChild("backgrounditem-origin").value =
-	      (i < bgOrigin.length ? bgOrigin[i].trim() : "");
-	  }
+    for (var i = 0; i < parsedImages.length; i++) {
+      var item = document.createElement("richlistitem");
+      item.className = "backgrounditem";
+      var type = parsedImages[i].type;
+      item.setAttribute("type", type);
+      gDialog.backgroundsRichlistbox.appendChild(item);
+  
+      item.reset();
+      var button = item.getChild("backgrounditemButton");
+      item.parsedValue = parsedImages[i].value;
+      switch (type) {
+        case "image":
+          // pfff, find the real URL...
+          var match = item.parsedValue.match ( /^url\(\s*"([^"]*)"\s*\)|^url\(\s*'([^']*)'\s*\)|^url\(\s*([^\)]*)\s*\)/ );
+          if (match) {
+            if (match[1]) item.setAttribute("image", match[1]);
+            else if (match[2]) item.setAttribute("image", match[2]);
+            else if (match[3]) item.setAttribute("image", match[3]);
+          }
+          button.style.backgroundImage = "url('" + UrlUtils.makeAbsoluteUrl(item.getAttribute("image")) + "')";
+          break;
+        default:
+          button.style.backgroundImage =
+            CssInspector.serializeGradient(item.parsedValue);
+          break;
+      }
+      item.getChild("backgrounditem-attachment").value =
+        (i < bgAttachment.length ? bgAttachment[i].trim() : "");
+      item.getChild("backgrounditem-repeat").value =
+        (i < bgRepeat.length ? bgRepeat[i].trim() : "");
+      item.getChild("backgrounditem-position").value =
+        (i < bgPosition.length ? bgPosition[i].trim() : "");
+      item.getChild("backgrounditem-size").value =
+        (i < bgSize.length ? bgSize[i].trim() : "");
+      item.getChild("backgrounditem-clip").value =
+        (i < bgClip.length ? bgClip[i].trim() : "");
+      item.getChild("backgrounditem-origin").value =
+        (i < bgOrigin.length ? bgOrigin[i].trim() : "");
+    }
   }
 }
 

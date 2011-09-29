@@ -56,7 +56,7 @@ ecolorpicker {
 }
 
 ecolorpicker:hover:active {
-	background-color: ThreeDLightShadow;
+  background-color: ThreeDLightShadow;
 }
 
 .colorpicker-button-colorbox {

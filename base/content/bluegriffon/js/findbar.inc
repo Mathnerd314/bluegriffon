@@ -169,21 +169,21 @@ function BespinKeyPressCallback(aEvent)
         break;
       /*case 99: // meta-c XXX Workaround for Copy horked in Bespin0.9+Gecko2
       case 120: // meta-x XXX
-	      {
-	        aEvent.preventDefault();
+        {
+          aEvent.preventDefault();
           var bespinEditor = EditorUtils.getCurrentSourceEditor();
           var selection = bespinEditor.selectedText;
-	        var clipboardSvc = Components.classes["@mozilla.org/widget/clipboard;1"].
-	                           getService(Components.interfaces.nsIClipboard);
-	        var xferable = Components.classes["@mozilla.org/widget/transferable;1"].
-	                       createInstance(Components.interfaces.nsITransferable);
+          var clipboardSvc = Components.classes["@mozilla.org/widget/clipboard;1"].
+                             getService(Components.interfaces.nsIClipboard);
+          var xferable = Components.classes["@mozilla.org/widget/transferable;1"].
+                         createInstance(Components.interfaces.nsITransferable);
           xferable.addDataFlavor("text/unicode");
-			    var s = Components.classes["@mozilla.org/supports-string;1"].
-			            createInstance(Components.interfaces.nsISupportsString);
-			    s.data = selection;
+          var s = Components.classes["@mozilla.org/supports-string;1"].
+                  createInstance(Components.interfaces.nsISupportsString);
+          s.data = selection;
           xferable.setTransferData("text/unicode", s, selection.length * 2);
           clipboardSvc.setData(xferable, null, Components.interfaces.nsIClipboard.kGlobalClipboard);
-	      }
+        }
         if (aEvent.which == 120)
           bespinEditor.selectedText = "";
         break;*/

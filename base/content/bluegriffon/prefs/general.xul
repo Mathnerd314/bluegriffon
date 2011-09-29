@@ -54,20 +54,20 @@
         <columns><column flex="1"/><column flex="1"/></columns>
         <rows>
           <row align="center">
-		        <checkbox id="showIDsCheckbox" flex="1"
-		                  preference="pref-showIDs"
-		                  label="&showIDs.label;"/>
-		        <checkbox id="showClassesCheckbox" flex="1"
-		                  preference="pref-showClasses"
-		                  label="&showClasses.label;"/>
+            <checkbox id="showIDsCheckbox" flex="1"
+                      preference="pref-showIDs"
+                      label="&showIDs.label;"/>
+            <checkbox id="showClassesCheckbox" flex="1"
+                      preference="pref-showClasses"
+                      label="&showClasses.label;"/>
           </row>
           <row align="center">
-		        <checkbox id="showAriaRoleCheckbox" flex="1"
-		                  preference="pref-showAriaRole"
-		                  label="&showRoles.label;"/>
-		        <checkbox id="showLanguageCheckbox" flex="1"
-		                  preference="pref-showLangs"
-		                  label="&showLanguage.label;"/>
+            <checkbox id="showAriaRoleCheckbox" flex="1"
+                      preference="pref-showAriaRole"
+                      label="&showRoles.label;"/>
+            <checkbox id="showLanguageCheckbox" flex="1"
+                      preference="pref-showLangs"
+                      label="&showLanguage.label;"/>
 
           </row>
         </rows>

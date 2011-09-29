@@ -113,6 +113,7 @@ function onAccept()
       if (li.style.listStyleType) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-type", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -120,6 +121,7 @@ function onAccept()
       if (li.style.listStylePosition) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-position", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -127,6 +129,7 @@ function onAccept()
       if (li.style.listStyleImage) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-image", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -148,6 +151,7 @@ function onAccept()
       if (li.style.listStyleType) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-type", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -155,6 +159,7 @@ function onAccept()
       if (li.style.listStylePosition) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-position", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -162,6 +167,7 @@ function onAccept()
       if (li.style.listStyleImage) {
         var txn = new diStyleAttrChangeTxn(li, "list-style-image", "", "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
       }
     }
 
@@ -180,16 +186,19 @@ function onAccept()
     if (gInfo.lst != gDialog.listStyleTypeMenulist.value && gDialog.listStyleTypeMenulist.value) {
       var txn = new diStyleAttrChangeTxn(li, "list-style-type", gDialog.listStyleTypeMenulist.value, "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
     }
 
     if (gInfo.lsp != lsp && lsp) {
       var txn = new diStyleAttrChangeTxn(li, "list-style-position", lsp, "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
     }
 
     if (gInfo.lsi != gDialog.listStyleImageURLTextbox.value && gDialog.listStyleImageURLTextbox.value) {
       var txn = new diStyleAttrChangeTxn(li, "list-style-image", "url(" + gDialog.listStyleImageURLTextbox.value + ")", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
     }
 
     if (gInfo.startDisabled != gDialog.dontSetStartValueCheckbox.checked
@@ -265,13 +274,13 @@ function ListStyleImageSet()
 function GetAllListItems(aSelection)
 {
   for (var k = 0; k < aSelection.rangeCount; k++) {
-		var range = aSelection.getRangeAt(k);
+    var range = aSelection.getRangeAt(k);
     var nodes = [];
 
     if (range.commonAncestorContainer.nodeType == Node.ELEMENT_NODE) {
-	    var allWithinRangeParent = range.commonAncestorContainer.querySelectorAll("ul,ol,li");
-			for (var i = 0; i < allWithinRangeParent.length; i++) {
-	      var el = allWithinRangeParent[i];
+      var allWithinRangeParent = range.commonAncestorContainer.querySelectorAll("ul,ol,li");
+      for (var i = 0; i < allWithinRangeParent.length; i++) {
+        var el = allWithinRangeParent[i];
         var name = el.nodeName.toLowerCase();
         if (name == "li")
           gLis.push(el);
@@ -279,12 +288,12 @@ function GetAllListItems(aSelection)
         if ((name == "ol" || name == "ul")
             && aSelection.containsNode(el, false))
           nodes.push(el)
-			  else if (name =="li"
+        else if (name =="li"
                  && aSelection.containsNode(el, true)
                  && !aSelection.containsNode(el.parentNode, false)) {
-			    nodes.push(el);
-			  }
-			}
+          nodes.push(el);
+        }
+      }
     }
     if (!nodes.length) {
       var node = range.commonAncestorContainer;

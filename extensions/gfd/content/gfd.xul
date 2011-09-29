@@ -32,39 +32,39 @@
   </keyset>
 
   <vbox flex="1" id="mainBox">
-	  <tree id="installedFontsTree"
-	        hidecolumnpicker="true"
+    <tree id="installedFontsTree"
+          hidecolumnpicker="true"
           onselect="UpdateButtons()"
           flex="1">
-	    <treecols>
-	      <treecol id="familyCol"
-	               flex="1"
-	               label="&family.col;"
-	               primary="true"
-	               persist="width ordinal hidden"/>
-	      <splitter class="tree-splitter"/>
-	      <treecol id="variantsCol"
-	               flex="1"
-	               label="&variants.col;"
-	               persist="width ordinal hidden"/>
-	      <splitter class="tree-splitter"/>
-	      <treecol id="subsetsCol"
-	               flex="1"
-	               label="&subsets.col;"
-	               persist="width ordinal hidden"/>
-	    </treecols>
-	    <treechildren id="installedFontsTreechildren"/>
-	  </tree>
-	  <hbox id="UrlsToolbox" class="listboxBg">
-	    <toolbarbutton class="listboxBgPlusButton"
-	                   tooltiptext="&add.tooltip;"
-	                   id="PlusButton"
-	                   oncommand="AddFontFamily()"/>
-	    <toolbarbutton class="listboxBgMinusButton"
-	                   disabled="true"
-	                   id="MinusButton"
+      <treecols>
+        <treecol id="familyCol"
+                 flex="1"
+                 label="&family.col;"
+                 primary="true"
+                 persist="width ordinal hidden"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="variantsCol"
+                 flex="1"
+                 label="&variants.col;"
+                 persist="width ordinal hidden"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="subsetsCol"
+                 flex="1"
+                 label="&subsets.col;"
+                 persist="width ordinal hidden"/>
+      </treecols>
+      <treechildren id="installedFontsTreechildren"/>
+    </tree>
+    <hbox id="UrlsToolbox" class="listboxBg">
+      <toolbarbutton class="listboxBgPlusButton"
+                     tooltiptext="&add.tooltip;"
+                     id="PlusButton"
+                     oncommand="AddFontFamily()"/>
+      <toolbarbutton class="listboxBgMinusButton"
+                     disabled="true"
+                     id="MinusButton"
                      tooltiptext="&remove.tooltip;"
-	                   oncommand="DeleteFontFamily()"/>
-	  </hbox>
+                     oncommand="DeleteFontFamily()"/>
+    </hbox>
   </vbox>
 </dialog>

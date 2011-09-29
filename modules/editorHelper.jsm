@@ -452,13 +452,13 @@ var EditorUtils = {
     }
   },
 
-	getAtomService: function()
-	{
+  getAtomService: function()
+  {
     if (!this.mAtomService)
-	    this.mAtomService = Components.classes["@mozilla.org/atom-service;1"]
+      this.mAtomService = Components.classes["@mozilla.org/atom-service;1"]
                                     .getService(Components.interfaces.nsIAtomService);
     return this.mAtomService;
-	},
+  },
 
   setTextProperty: function(property, attribute, value)
   {
@@ -611,8 +611,8 @@ var EditorUtils = {
   createAnonymousElement: function(tag, parentNode, anonClass, isCreatedHidden)
   {
     var a = EditorUtils.getCurrentEditor().createAnonymousElement(tag,
-								     parentNode ? parentNode : EditorUtils.getCurrentDocument().body,
-								     anonClass, isCreatedHidden);
+                     parentNode ? parentNode : EditorUtils.getCurrentDocument().body,
+                     anonClass, isCreatedHidden);
     return a;
   },
 
@@ -622,55 +622,55 @@ var EditorUtils = {
   },
 
   getObjectForProperties: function(aNodeNames, aRequiredAttribute)
-	{
-	  var editor = this.getCurrentEditor();
-	  if (!editor)
-	    return null;
-	
-	  // Find nearest parent of selection anchor node
-	  //   that is a link, list, table cell, or table
-	
-	  var anchorNode
-	  var node;
-	  try {
-	    anchorNode = editor.selection.anchorNode;
-	    if (anchorNode.firstChild)
-	    {
-	      // Start at actual selected node
-	      var offset = editor.selection.anchorOffset;
-	      // Note: If collapsed, offset points to element AFTER caret,
-	      //  thus node may be null
-	      node = anchorNode.childNodes.item(offset);
-	    }
-	    if (!node)
-	      node = anchorNode;
-	  } catch (e) {}
-	
-	  while (node)
-	  {
-	    if (node.nodeName)
-	    {
-	      var nodeName = node.nodeName.toLowerCase();
-	
-	      // Done when we hit the body
-	      if (nodeName == "body") break;
-	
-	      if (aNodeNames.indexOf(nodeName) != -1 &&
+  {
+    var editor = this.getCurrentEditor();
+    if (!editor)
+      return null;
+  
+    // Find nearest parent of selection anchor node
+    //   that is a link, list, table cell, or table
+  
+    var anchorNode
+    var node;
+    try {
+      anchorNode = editor.selection.anchorNode;
+      if (anchorNode.firstChild)
+      {
+        // Start at actual selected node
+        var offset = editor.selection.anchorOffset;
+        // Note: If collapsed, offset points to element AFTER caret,
+        //  thus node may be null
+        node = anchorNode.childNodes.item(offset);
+      }
+      if (!node)
+        node = anchorNode;
+    } catch (e) {}
+  
+    while (node)
+    {
+      if (node.nodeName)
+      {
+        var nodeName = node.nodeName.toLowerCase();
+  
+        // Done when we hit the body
+        if (nodeName == "body") break;
+  
+        if (aNodeNames.indexOf(nodeName) != -1 &&
             (!aRequiredAttribute || node.getAttribute(aRequiredAttribute)))
-	        return node;
-	    }
-	    node = node.parentNode;
-	  }
-	  return null;
-	},
+          return node;
+      }
+      node = node.parentNode;
+    }
+    return null;
+  },
 
   insertElementAroundSelection: function(element)
   {
-		function nodeIsBreak(editor, node)
-		{
+    function nodeIsBreak(editor, node)
+    {
       //return !node || node.localName == 'BR' || editor.nodeIsBlock(node);
       return true;
-		}
+    }
 
     var editor = this.getCurrentEditor();
   

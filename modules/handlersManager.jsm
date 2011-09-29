@@ -16,8 +16,8 @@ var HandlersManager = {
       var handler = this.mHandlers[handler];
       var elt = handler.xulElt;
       if (elt) {
-	      elt.checked = false;
-	      handler.handler.toggle(elt);
+        elt.checked = false;
+        handler.handler.toggle(elt);
       }
     }
   }

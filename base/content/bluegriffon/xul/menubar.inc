@@ -129,96 +129,96 @@
                   command="cmd_hr"
                   accesskey="&hrToolbarCmd.key;"/>
         <menu label="&formToolbarCmd.label;">
-		        <menupopup>
-		          <menuitem label="&formToolbarCmd.label;"
-		                    accesskey="&formToolbarCmd.key;"
-		                    command="cmd_form"/>
-		          <menuseparator/>
-		          <menu label="&formInputs.label;">
-		            <menupopup>
-		                <menuitem label="&hiddenInputForm.label;"
-		                          command="cmd_formInputHidden"/>
-		                <menuitem label="&textInputForm.label;"
-		                          command="cmd_formInputText"/>
-		                <menuitem label="&searchInputForm.label;"
-		                          command="cmd_formInputSearch"/>
-		                <menuitem label="&telInputForm.label;"
-		                          command="cmd_formInputTel"/>
-		                <menuitem label="&urlInputForm.label;"
-		                          command="cmd_formInputUrl"/>
-		                <menuitem label="&emailInputForm.label;"
-		                          command="cmd_formInputEmail"/>
-		                <menuitem label="&passwordInputForm.label;"
-		                          command="cmd_formInputPassword"/>
-		                <menuitem label="&datetimeInputForm.label;"
-		                          command="cmd_formInputDatetime"/>
-		                <menuitem label="&dateInputForm.label;"
-		                          command="cmd_formInputDate"/>
-		                <menuitem label="&monthInputForm.label;"
-		                          command="cmd_formInputMonth"/>
-		                <menuitem label="&weekInputForm.label;"
-		                          command="cmd_formInputWeek"/>
-		                <menuitem label="&timeInputForm.label;"
-		                          command="cmd_formInputTime"/>
-		                <menuitem label="&datetimelocalInputForm.label;"
-		                          command="cmd_formInputDatetimelocal"/>
-		                <menuitem label="&numberInputForm.label;"
-		                          command="cmd_formInputNumber"/>
-		                <menuitem label="&rangeInputForm.label;"
-		                          command="cmd_formInputRange"/>
-		                <menuitem label="&colorInputForm.label;"
-		                          command="cmd_formInputColor"/>
-		                <menuitem label="&checkboxInputForm.label;"
-		                          command="cmd_formInputCheckbox"/>
-		                <menuitem label="&radioInputForm.label;"
-		                          command="cmd_formInputRadio"/>
-		                <menuitem label="&fileInputForm.label;"
-		                          command="cmd_formInputFile"/>
-		                <menuitem label="&submitInputForm.label;"
-		                          command="cmd_formInputSubmit"/>
-		                <menuitem label="&imageInputForm.label;"
-		                          command="cmd_formInputImage"/>
-		                <menuitem label="&resetInputForm.label;"
-		                          command="cmd_formInputReset"/>
-		                <menuitem label="&buttonInputForm.label;"
-		                          command="cmd_formInputButton"/>
-		             </menupopup>
-		          </menu>
-		          <menuitem label="&fieldsetToolbarCmd.label;"
-		                    accesskey="&fieldsetToolbarCmd.key;"
-		                    command="cmd_fieldset"/>
-		          <menuitem label="&labelToolbarCmd.label;"
-		                    accesskey="&labelToolbarCmd.key;"
-		                    command="cmd_label"/>
-		          <menuitem label="&buttonToolbarCmd.label;"
-		                    accesskey="&buttonToolbarCmd.key;"
-		                    command="cmd_button"/>
-		          <menuitem label="&selectToolbarCmd.label;"
-		                    accesskey="&selectToolbarCmd.key;"
-		                    command="cmd_select"/>
-		          <menuitem label="&textareaToolbarCmd.label;"
-		                    accesskey="&textareaToolbarCmd.key;"
-		                    command="cmd_textarea"/>
-		          <menuitem label="&keygenToolbarCmd.label;"
-		                    accesskey="&keygenToolbarCmd.key;"
-		                    command="cmd_keygen"/>
-		          <menuitem label="&outputToolbarCmd.label;"
-		                    accesskey="&outputToolbarCmd.key;"
-		                    command="cmd_output"/>
-		          <menuitem label="&progressToolbarCmd.label;"
-		                    accesskey="&progressToolbarCmd.key;"
-		                    command="cmd_progress"/>
-		          <menuitem label="&meterToolbarCmd.label;"
-		                    accesskey="&meterToolbarCmd.key;"
-		                    command="cmd_meter"/>
-		          <menuitem label="&datalistToolbarCmd.label;"
-		                    accesskey="&datalistToolbarCmd.key;"
-		                    command="cmd_datalist"/>
-		       </menupopup>
+            <menupopup>
+              <menuitem label="&formToolbarCmd.label;"
+                        accesskey="&formToolbarCmd.key;"
+                        command="cmd_form"/>
+              <menuseparator/>
+              <menu label="&formInputs.label;">
+                <menupopup>
+                    <menuitem label="&hiddenInputForm.label;"
+                              command="cmd_formInputHidden"/>
+                    <menuitem label="&textInputForm.label;"
+                              command="cmd_formInputText"/>
+                    <menuitem label="&searchInputForm.label;"
+                              command="cmd_formInputSearch"/>
+                    <menuitem label="&telInputForm.label;"
+                              command="cmd_formInputTel"/>
+                    <menuitem label="&urlInputForm.label;"
+                              command="cmd_formInputUrl"/>
+                    <menuitem label="&emailInputForm.label;"
+                              command="cmd_formInputEmail"/>
+                    <menuitem label="&passwordInputForm.label;"
+                              command="cmd_formInputPassword"/>
+                    <menuitem label="&datetimeInputForm.label;"
+                              command="cmd_formInputDatetime"/>
+                    <menuitem label="&dateInputForm.label;"
+                              command="cmd_formInputDate"/>
+                    <menuitem label="&monthInputForm.label;"
+                              command="cmd_formInputMonth"/>
+                    <menuitem label="&weekInputForm.label;"
+                              command="cmd_formInputWeek"/>
+                    <menuitem label="&timeInputForm.label;"
+                              command="cmd_formInputTime"/>
+                    <menuitem label="&datetimelocalInputForm.label;"
+                              command="cmd_formInputDatetimelocal"/>
+                    <menuitem label="&numberInputForm.label;"
+                              command="cmd_formInputNumber"/>
+                    <menuitem label="&rangeInputForm.label;"
+                              command="cmd_formInputRange"/>
+                    <menuitem label="&colorInputForm.label;"
+                              command="cmd_formInputColor"/>
+                    <menuitem label="&checkboxInputForm.label;"
+                              command="cmd_formInputCheckbox"/>
+                    <menuitem label="&radioInputForm.label;"
+                              command="cmd_formInputRadio"/>
+                    <menuitem label="&fileInputForm.label;"
+                              command="cmd_formInputFile"/>
+                    <menuitem label="&submitInputForm.label;"
+                              command="cmd_formInputSubmit"/>
+                    <menuitem label="&imageInputForm.label;"
+                              command="cmd_formInputImage"/>
+                    <menuitem label="&resetInputForm.label;"
+                              command="cmd_formInputReset"/>
+                    <menuitem label="&buttonInputForm.label;"
+                              command="cmd_formInputButton"/>
+                 </menupopup>
+              </menu>
+              <menuitem label="&fieldsetToolbarCmd.label;"
+                        accesskey="&fieldsetToolbarCmd.key;"
+                        command="cmd_fieldset"/>
+              <menuitem label="&labelToolbarCmd.label;"
+                        accesskey="&labelToolbarCmd.key;"
+                        command="cmd_label"/>
+              <menuitem label="&buttonToolbarCmd.label;"
+                        accesskey="&buttonToolbarCmd.key;"
+                        command="cmd_button"/>
+              <menuitem label="&selectToolbarCmd.label;"
+                        accesskey="&selectToolbarCmd.key;"
+                        command="cmd_select"/>
+              <menuitem label="&textareaToolbarCmd.label;"
+                        accesskey="&textareaToolbarCmd.key;"
+                        command="cmd_textarea"/>
+              <menuitem label="&keygenToolbarCmd.label;"
+                        accesskey="&keygenToolbarCmd.key;"
+                        command="cmd_keygen"/>
+              <menuitem label="&outputToolbarCmd.label;"
+                        accesskey="&outputToolbarCmd.key;"
+                        command="cmd_output"/>
+              <menuitem label="&progressToolbarCmd.label;"
+                        accesskey="&progressToolbarCmd.key;"
+                        command="cmd_progress"/>
+              <menuitem label="&meterToolbarCmd.label;"
+                        accesskey="&meterToolbarCmd.key;"
+                        command="cmd_meter"/>
+              <menuitem label="&datalistToolbarCmd.label;"
+                        accesskey="&datalistToolbarCmd.key;"
+                        command="cmd_datalist"/>
+           </menupopup>
         </menu>
         <menuseparator/>
-	        <menuitem label="&tableOfContents.label;"
-	                  observes="cmd_renderedHTMLEnabler"
+          <menuitem label="&tableOfContents.label;"
+                    observes="cmd_renderedHTMLEnabler"
                     oncommand="CreateOrUpdateTableOfContents()"/>
         <menuseparator/>
         <menu label="&html5Element.label;">
@@ -247,27 +247,27 @@
 
     <menu id="formatMenu" label="&formatMenu.label;" accesskey="&formatMenu.accesskey;">
       <menupopup id="formatMenuPopup" onpopupshowing="initFontStyleMenu(this)">
-	      <menuitem label="&spanCmd.label;"
-	                command="cmd_span"
+        <menuitem label="&spanCmd.label;"
+                  command="cmd_span"
                   accesskey="&spanCmd.accesskey;"/>
         <menuseparator/>
-	      <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
-	      <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
-	      <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
-	      <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
-	      <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
-	      <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
-	      <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
-	      <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
-	      <menuseparator/>
-	      <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
-	      <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
-	      <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
-	      <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
-	      <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
-	      <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
-	      <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
-	      <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
+        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
+        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
+        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
+        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
+        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
+        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
+        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
+        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
+        <menuseparator/>
+        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
+        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
+        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
+        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
+        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
+        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
+        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
+        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
         <menuseparator/>
         <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  observes="cmd_removeStyles"/>
         <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   observes="cmd_removeLinks"/>

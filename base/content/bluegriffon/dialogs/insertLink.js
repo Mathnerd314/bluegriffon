@@ -37,21 +37,21 @@ function InitDialog()
          url.substr(0,6) == "ftp://" ||
          url.substr(0,7) == "file://");
     if (gNode.hasAttribute("target")) {
-	    gDialog.applyTargetAttributeCheckbox.checked = true;
+      gDialog.applyTargetAttributeCheckbox.checked = true;
       var target = gNode.getAttribute("target");
-	    switch (target) {
-	      case "_top":
-	      case "_parent":
-	      case "_blank":
-	      case "_self":
-	        gDialog.targetAttributeMenulist.value = target;
+      switch (target) {
+        case "_top":
+        case "_parent":
+        case "_blank":
+        case "_self":
+          gDialog.targetAttributeMenulist.value = target;
           gDialog.userDefinedValueTextbox.value = "";
           break;
         default:
           gDialog.targetAttributeMenulist.value = "x";
           gDialog.userDefinedValueTextbox.value = target;
           break;
-	    }
+      }
       ToggleTargetAttribute();
     }
     gDialog.urlMenulist.focus();

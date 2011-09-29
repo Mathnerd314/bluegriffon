@@ -64,8 +64,8 @@ function DeleteFontFamily()
  function AddFontFamily()
  {
     var rv = {value: false};
-	  window.openDialog('chrome://gfd/content/addFont.xul',"_blank",
-	                    "chrome,resizable=no,modal,scrollbars=yes", rv);
+    window.openDialog('chrome://gfd/content/addFont.xul',"_blank",
+                      "chrome,resizable=no,modal,scrollbars=yes", rv);
     if (rv.value) {
       var treeitem  = document.createElement("treeitem");
       var treerow   = document.createElement("treerow");
@@ -115,9 +115,9 @@ function DeleteFontFamily()
       url += "&subsets=" + subsets;
 
     var link = doc.createElement("link");
-	  link.setAttribute("rel", "stylesheet");
-	  link.setAttribute("type", "text/css");
-	  link.setAttribute("href", url);
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("type", "text/css");
+    link.setAttribute("href", url);
     editor.insertNode(link, head, 0);
   }
 

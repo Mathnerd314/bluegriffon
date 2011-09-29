@@ -73,13 +73,13 @@
       <tab label="&buildConfigTab.label;"/>
     </tabs>
     <tabpanels flex="1">
-	    <vbox flex="1">
-	      <hbox>
+      <vbox flex="1">
+        <hbox>
           <spacer flex="1"/>
-	        <image src="chrome://bluegriffon/skin/about-logo.png"/>
+          <image src="chrome://bluegriffon/skin/about-logo.png"/>
           <spacer flex="1"/>
-	      </hbox>
-	
+        </hbox>
+  
         <hbox>
           <spacer flex="1"/>
           <label id="version" value="&aboutVersion; @APP_VERSION@"/>
@@ -94,14 +94,14 @@
   
         <hbox>
           <spacer flex="1"/>
-  	      <description id="copyright">&copyrightText;</description>
+          <description id="copyright">&copyrightText;</description>
           <spacer flex="1"/>
         </hbox>
 
-	      <vbox id="detailsBox" align="center" flex="1">
-	        <description id="userAgent"/>
-	      </vbox>
-	    </vbox>
+        <vbox id="detailsBox" align="center" flex="1">
+          <description id="userAgent"/>
+        </vbox>
+      </vbox>
       <iframe flex="1" id="iframe"/>
       <iframe flex="1" src="about:buildconfig"/>
     </tabpanels>

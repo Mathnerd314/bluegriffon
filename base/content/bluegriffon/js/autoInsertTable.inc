@@ -32,66 +32,66 @@ var AutoInsertTable = {
   },
 
   selectArea: function(cell)
-	{
-	  var cellID    = cell.id;
+  {
+    var cellID    = cell.id;
     var r = cellID.match ( /AutoInsertTable_r([0-9]*)c([0-9]*)/ );
 
-	  var row = r[1];
+    var row = r[1];
     var column = r[2];
-	
-	  // early way out if we can...
-	  if (this.mRow == row && this.mColumn == column)
-	    return;
-	
-	  this.mRow = row;
+  
+    // early way out if we can...
+    if (this.mRow == row && this.mColumn == column)
+      return;
+  
+    this.mRow = row;
     this.mColumn = column;
-	
-	  var cells = gDialog.AutoInsertTableSizeSelector.querySelectorAll("label");
+  
+    var cells = gDialog.AutoInsertTableSizeSelector.querySelectorAll("label");
     for (var i = 0; i < cells.length; i++)
       cells[i].className = "";
-	
-	  for (i = row; i > 0; i--)
-	  {
-	    anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
-	    while (anyCell)
-	    {
-	      anyCell.setAttribute("class", "selected");
-	      anyCell = anyCell.previousSibling;
-	    }
-	  }
+  
+    for (i = row; i > 0; i--)
+    {
+      anyCell = document.getElementById("AutoInsertTable_r"+i+"c"+this.mColumn);
+      while (anyCell)
+      {
+        anyCell.setAttribute("class", "selected");
+        anyCell = anyCell.previousSibling;
+      }
+    }
     gDialog.AutoInsertTableSizeLabel.value = this.mRow + " x " + this.mColumn;
-	},
+  },
 
   selectSize: function(cell)
-	{
-	  gDialog.AutoInsertTableSheetPopup.hidePopup();
-	
-	  var editor = EditorUtils.getCurrentEditor();
-	  var doc = EditorUtils.getCurrentDocument();
-	  editor.beginTransaction();
-	  var tableElement = doc.createElement("table");
-	  var tableBody = doc.createElement("tbody");
-	  tableElement.appendChild(tableBody);
-	  tableElement.setAttribute("border", "1");
-	  tableElement.setAttribute("width", "100%");
-	  var firstCell = null;
-	  for (var i = 0; i < this.mRow; i++)
-	  {
-	    var newRow = doc.createElement("tr");
-	    tableBody.appendChild(newRow);
-	    for (var j = 0; j < this.mColumn; j++)
-	    {
-	      var newCell = doc.createElement("td");
-	      if (!firstCell)
-	        firstCell = newCell;
-	      newRow.appendChild(newCell);
-	    }
-	  }
-	  editor.insertElementAtSelection(tableElement, true);
-	  editor.endTransaction();
-	  editor.selection.collapse(firstCell, 0);
-	  window.content.focus();
-	},
+  {
+    gDialog.AutoInsertTableSheetPopup.hidePopup();
+  
+    var editor = EditorUtils.getCurrentEditor();
+    var doc = EditorUtils.getCurrentDocument();
+    editor.beginTransaction();
+    var tableElement = doc.createElement("table");
+    var tableBody = doc.createElement("tbody");
+    tableElement.appendChild(tableBody);
+    tableElement.setAttribute("border", "1");
+    tableElement.setAttribute("width", "100%");
+    var firstCell = null;
+    for (var i = 0; i < this.mRow; i++)
+    {
+      var newRow = doc.createElement("tr");
+      tableBody.appendChild(newRow);
+      for (var j = 0; j < this.mColumn; j++)
+      {
+        var newCell = doc.createElement("td");
+        if (!firstCell)
+          firstCell = newCell;
+        newRow.appendChild(newCell);
+      }
+    }
+    editor.insertElementAtSelection(tableElement, true);
+    editor.endTransaction();
+    editor.selection.collapse(firstCell, 0);
+    window.content.focus();
+  },
 
   increaseSize: function(aX, aY)
   {

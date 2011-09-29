@@ -248,8 +248,10 @@ function ValidateData(aTabValue)
         editor.removeAttribute(gTable, "height");
         var txn = new diStyleAttrChangeTxn(gTable, "width", gDialog.widthMenulist.value, "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
         txn = new diStyleAttrChangeTxn(gTable, "height", gDialog.heightMenulist.value, "");
         editor.doTransaction(txn);
+        editor.incrementModificationCount(1);  
         //var header = gTable.querySelector("thead");
         var header = collectFirstDescendant(gTable, "thead");
         if (!parseInt(gDialog.rowsInHeaderTextbox.value)) {
@@ -534,21 +536,27 @@ function UpdateCells(editor)
 
     var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "height", gDialog.cellsHeightMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "text-align", gDialog.cellsHAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "background-color", gDialog.bgColorColorpicker.color, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
       editor.switchTableCellHeaderType(c);
@@ -614,21 +622,27 @@ function UpdateColumns(editor)
 
     var txn = new diStyleAttrChangeTxn(c, "width", gDialog.cellsWidthMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "height", gDialog.cellsHeightMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "text-align", gDialog.cellsHAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(c, "background-color", gDialog.bgColorColorpicker.color, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
       editor.switchTableCellHeaderType(c);
@@ -652,38 +666,49 @@ function UpdateRows(editor)
 
     txn = new diStyleAttrChangeTxn(r, "height", gDialog.cellsHeightMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(r, "text-align", gDialog.cellsHAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(r, "vertical-align", gDialog.cellsVAlignMenulist.value, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(r, "white-space", gDialog.cellsNoWrapCheckbox.checked ? "now-wrap" : "", "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     txn = new diStyleAttrChangeTxn(r, "background-color", gDialog.bgColorColorpicker.color, "");
     editor.doTransaction(txn);
+    editor.incrementModificationCount(1);  
 
     var c = r.firstElementChild;
     while (c) {
       var txn = new diStyleAttrChangeTxn(c, "width", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
   
       txn = new diStyleAttrChangeTxn(c, "height", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
   
       txn = new diStyleAttrChangeTxn(c, "text-align", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
   
       txn = new diStyleAttrChangeTxn(c, "vertical-align", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
   
       txn = new diStyleAttrChangeTxn(c, "white-space", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
   
       txn = new diStyleAttrChangeTxn(c, "background-color", "", "");
       editor.doTransaction(txn);
+      editor.incrementModificationCount(1);  
 
       if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
         editor.switchTableCellHeaderType(c);

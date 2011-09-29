@@ -214,26 +214,26 @@ function BuildTOC(update)
   }
 
   try {
-	  var editor = EditorUtils.getCurrentEditor();
-	  editor.beginTransaction();
-	  var theDocument = editor.document;
-	  // let's create a TreeWalker to look for our nodes
-	  var treeWalker = theDocument.createTreeWalker(theDocument.documentElement,
-	                                                NodeFilter.SHOW_ELEMENT,
-	                                                acceptNode,
-	                                                true);
-	  // we need an array to store all TOC entries we find in the document
-	  var tocArray = new Array();
-	  if (treeWalker) {
-	    var tocSourceNode = treeWalker.nextNode();
-	    while (tocSourceNode) {
-	      var headerIndex = currentHeaderLevel;
-	
-	      var headerText = tocSourceNode.textContent.trim();
-	
-	      var anchor = tocSourceNode.firstChild, id;
+    var editor = EditorUtils.getCurrentEditor();
+    editor.beginTransaction();
+    var theDocument = editor.document;
+    // let's create a TreeWalker to look for our nodes
+    var treeWalker = theDocument.createTreeWalker(theDocument.documentElement,
+                                                  NodeFilter.SHOW_ELEMENT,
+                                                  acceptNode,
+                                                  true);
+    // we need an array to store all TOC entries we find in the document
+    var tocArray = new Array();
+    if (treeWalker) {
+      var tocSourceNode = treeWalker.nextNode();
+      while (tocSourceNode) {
+        var headerIndex = currentHeaderLevel;
+  
+        var headerText = tocSourceNode.textContent.trim();
+  
+        var anchor = tocSourceNode.firstChild, id;
         var mozTocClass = kMozTocClassPrefix + tocSourceNode.nodeName.toUpperCase();
-	      // do we have a named anchor as 1st child of our node ?
+        // do we have a named anchor as 1st child of our node ?
         if (anchor &&
             anchor.nodeName.toLowerCase() == "a" &&
             anchor.hasAttribute("id") &&
@@ -242,9 +242,9 @@ function BuildTOC(update)
           id = anchor.getAttribute("id");
           if (!anchor.classList.contains(mozTocClass))
             editor.setAttribute(anchor, "class",
-	                                anchor.getAttribute("class")
-	                                ? anchor.getAttribute("class") + " " + mozTocClass
-	                                : mozTocClass);
+                                  anchor.getAttribute("class")
+                                  ? anchor.getAttribute("class") + " " + mozTocClass
+                                  : mozTocClass);
         }
         else if (anchor &&
             anchor.nodeName.toLowerCase() == "a" &&
@@ -254,132 +254,132 @@ function BuildTOC(update)
           id = anchor.getAttribute("name");
           if (!anchor.classList.contains(mozTocClass))
             editor.setAttribute(anchor, "class",
-	                                anchor.getAttribute("class")
-	                                ? anchor.getAttribute("class") + " " + mozTocClass
-	                                : mozTocClass);
+                                  anchor.getAttribute("class")
+                                  ? anchor.getAttribute("class") + " " + mozTocClass
+                                  : mozTocClass);
         }
-	      else {
-	        // no we don't and we need to create one
-	        anchor = theDocument.createElement("a");
-	        txn = new diNodeInsertionTxn(anchor,
-	                                     tocSourceNode,
-	                                     tocSourceNode.firstChild);
-	        editor.transactionManager.doTransaction(txn);
-	        // let's give it a random ID
-	        var c = 1000000 * Math.random();
-	        id = kMozTocIdPrefix + Math.round(c);
-	        editor.setAttribute(anchor, "id",  id);
-	        editor.setAttribute(anchor, "class", mozTocClass);
-	      }
-	      // and store that new entry in our array
-	      tocArray.push({index: headerIndex, text: headerText, id: id});
-	      tocSourceNode = treeWalker.nextNode();
-	    }
-	  }
+        else {
+          // no we don't and we need to create one
+          anchor = theDocument.createElement("a");
+          txn = new diNodeInsertionTxn(anchor,
+                                       tocSourceNode,
+                                       tocSourceNode.firstChild);
+          editor.transactionManager.doTransaction(txn);
+          // let's give it a random ID
+          var c = 1000000 * Math.random();
+          id = kMozTocIdPrefix + Math.round(c);
+          editor.setAttribute(anchor, "id",  id);
+          editor.setAttribute(anchor, "class", mozTocClass);
+        }
+        // and store that new entry in our array
+        tocArray.push({index: headerIndex, text: headerText, id: id});
+        tocSourceNode = treeWalker.nextNode();
+      }
+    }
 
-	  // do we already have a TOC?
-	  var toc = theDocument.getElementById(kMozToc);
-	  var oldToc = toc;
-	  var newToc = theDocument.createElement(orderedList ? "ol" : "ul");
-	  newToc.setAttribute("id", kMozToc);
-	
-	  /* generate the TOC itself */
-	  headerIndex = 0;
-	  var item, toc;
-	  for (var i = 0; i < tocArray.length; i++) {
-	    if (!headerIndex) {
-	      // do we need to create an ol/ul container for the first entry ?
-	      ++headerIndex;
-	      toc = newToc;
-	      var commentText = "mozToc ";
-	      for (var j = 0; j < 6; j++) {
-	        if (tocHeadersArray[j][0] != "") {
-	          commentText += tocHeadersArray[j][0];
-	          if (tocHeadersArray[j][1] != "") {
-	            commentText += "." + tocHeadersArray[j][1];
-	          }
-	          commentText += " " + (j + 1) + " ";
-	        }
-	      }
-	      // important, we have to remove trailing spaces
-	      commentText = TrimStringRight(commentText);
-	
-	      // forge a comment we'll insert in the TOC ; that comment will hold
-	      // the TOC definition for us
-	      var ct = theDocument.createComment(commentText);
-	      toc.appendChild(ct);
-	
-	      // assign a special class to the TOC top element if the TOC is readonly
-	      // the definition of this class is in EditorOverride.css
-	      if (readonly) {
-	        toc.setAttribute("class", "readonly");
-	      }
-	      else {
-	        toc.removeAttribute("class");
-	      }
-	
-	      // We need a new variable to hold the local ul/ol container
-	      // The toplevel TOC element is not the parent element of a
-	      // TOC entry if its depth is > 1...
-	      var tocList = toc;
-	      // create a list item
-	      var tocItem = theDocument.createElement("li");
-	      // and an anchor in this list item
-	      var tocAnchor = theDocument.createElement("a");
-	      // make it target the source of the TOC entry
-	      tocAnchor.setAttribute("href", "#" + tocArray[i].id);
-	      // and put the textual contents of the TOC entry in that anchor
-	      var tocEntry = theDocument.createTextNode(tocArray[i].text);
-	      // now, insert everything where it has to be inserted
-	      tocAnchor.appendChild(tocEntry);
-	      tocItem.appendChild(tocAnchor);
-	      tocList.appendChild(tocItem);
-	      item = tocList;
-	    }
-	    else {
-	      if (tocArray[i].index < headerIndex) {
-	        // if the depth of the new TOC entry is less than the depth of the
-	        // last entry we created, find the good ul/ol ancestor
-	        for (j = headerIndex - tocArray[i].index; j > 0; --j) {
-	          if (item != toc) {
-	            item = item.parentNode.parentNode;
-	          }
-	        }
-	        tocItem = theDocument.createElement("li");
-	      }
-	      else if (tocArray[i].index > headerIndex) {
-	        // to the contrary, it's deeper than the last one
-	        // we need to create sub ul/ol's and li's
-	        for (j = tocArray[i].index - headerIndex; j > 0; --j) {
-	          tocList = theDocument.createElement(orderedList ? "ol" : "ul");
-	          item.lastChild.appendChild(tocList);
-	          tocItem = theDocument.createElement("li");
-	          tocList.appendChild(tocItem);
-	          item = tocList;
-	        }
-	      }
-	      else {
-	        tocItem = theDocument.createElement("li");
-	      }
-	      tocAnchor = theDocument.createElement("a");
-	      tocAnchor.setAttribute("href", "#" + tocArray[i].id);
-	      tocEntry = theDocument.createTextNode(tocArray[i].text);
-	      tocAnchor.appendChild(tocEntry);
-	      tocItem.appendChild(tocAnchor);
-	      item.appendChild(tocItem);
-	      headerIndex = tocArray[i].index;
-	    }
-	  }
-	
-	  if (oldToc) {
-	    txn = new diNodeInsertionTxn(newToc,
-	                                 oldToc.parentNode,
-	                                 oldToc);
-	    editor.transactionManager.doTransaction(txn);
-	    editor.deleteNode(oldToc);
-	  }
-	  else
-	    editor.insertElementAtSelection(newToc, true);
+    // do we already have a TOC?
+    var toc = theDocument.getElementById(kMozToc);
+    var oldToc = toc;
+    var newToc = theDocument.createElement(orderedList ? "ol" : "ul");
+    newToc.setAttribute("id", kMozToc);
+  
+    /* generate the TOC itself */
+    headerIndex = 0;
+    var item, toc;
+    for (var i = 0; i < tocArray.length; i++) {
+      if (!headerIndex) {
+        // do we need to create an ol/ul container for the first entry ?
+        ++headerIndex;
+        toc = newToc;
+        var commentText = "mozToc ";
+        for (var j = 0; j < 6; j++) {
+          if (tocHeadersArray[j][0] != "") {
+            commentText += tocHeadersArray[j][0];
+            if (tocHeadersArray[j][1] != "") {
+              commentText += "." + tocHeadersArray[j][1];
+            }
+            commentText += " " + (j + 1) + " ";
+          }
+        }
+        // important, we have to remove trailing spaces
+        commentText = TrimStringRight(commentText);
+  
+        // forge a comment we'll insert in the TOC ; that comment will hold
+        // the TOC definition for us
+        var ct = theDocument.createComment(commentText);
+        toc.appendChild(ct);
+  
+        // assign a special class to the TOC top element if the TOC is readonly
+        // the definition of this class is in EditorOverride.css
+        if (readonly) {
+          toc.setAttribute("class", "readonly");
+        }
+        else {
+          toc.removeAttribute("class");
+        }
+  
+        // We need a new variable to hold the local ul/ol container
+        // The toplevel TOC element is not the parent element of a
+        // TOC entry if its depth is > 1...
+        var tocList = toc;
+        // create a list item
+        var tocItem = theDocument.createElement("li");
+        // and an anchor in this list item
+        var tocAnchor = theDocument.createElement("a");
+        // make it target the source of the TOC entry
+        tocAnchor.setAttribute("href", "#" + tocArray[i].id);
+        // and put the textual contents of the TOC entry in that anchor
+        var tocEntry = theDocument.createTextNode(tocArray[i].text);
+        // now, insert everything where it has to be inserted
+        tocAnchor.appendChild(tocEntry);
+        tocItem.appendChild(tocAnchor);
+        tocList.appendChild(tocItem);
+        item = tocList;
+      }
+      else {
+        if (tocArray[i].index < headerIndex) {
+          // if the depth of the new TOC entry is less than the depth of the
+          // last entry we created, find the good ul/ol ancestor
+          for (j = headerIndex - tocArray[i].index; j > 0; --j) {
+            if (item != toc) {
+              item = item.parentNode.parentNode;
+            }
+          }
+          tocItem = theDocument.createElement("li");
+        }
+        else if (tocArray[i].index > headerIndex) {
+          // to the contrary, it's deeper than the last one
+          // we need to create sub ul/ol's and li's
+          for (j = tocArray[i].index - headerIndex; j > 0; --j) {
+            tocList = theDocument.createElement(orderedList ? "ol" : "ul");
+            item.lastChild.appendChild(tocList);
+            tocItem = theDocument.createElement("li");
+            tocList.appendChild(tocItem);
+            item = tocList;
+          }
+        }
+        else {
+          tocItem = theDocument.createElement("li");
+        }
+        tocAnchor = theDocument.createElement("a");
+        tocAnchor.setAttribute("href", "#" + tocArray[i].id);
+        tocEntry = theDocument.createTextNode(tocArray[i].text);
+        tocAnchor.appendChild(tocEntry);
+        tocItem.appendChild(tocAnchor);
+        item.appendChild(tocItem);
+        headerIndex = tocArray[i].index;
+      }
+    }
+  
+    if (oldToc) {
+      txn = new diNodeInsertionTxn(newToc,
+                                   oldToc.parentNode,
+                                   oldToc);
+      editor.transactionManager.doTransaction(txn);
+      editor.deleteNode(oldToc);
+    }
+    else
+      editor.insertElementAtSelection(newToc, true);
   }
   catch(e) {alert(e)}
   editor.endTransaction();

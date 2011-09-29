@@ -33,18 +33,18 @@
               label="&alternate.label;"/>
     <hbox align="center">
       <label value="&href.label;" id="hrefLabel"/>
-	    <textbox id="urlTextbox" flex="1" oninput="CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
-	    <filepickerbutton id="urlFilepickerbutton"
-	                      control="urlTextbox"
-	                      mode="0"
-	                      filters="*.css"
-	                      oncommand="CheckURL('urlTextbox', 'relativeURLCheckbox')"
-	                      title="&selectFile.label;"/>
+      <textbox id="urlTextbox" flex="1" oninput="CheckURL('urlTextbox', 'relativeURLCheckbox')"/>
+      <filepickerbutton id="urlFilepickerbutton"
+                        control="urlTextbox"
+                        mode="0"
+                        filters="*.css"
+                        oncommand="CheckURL('urlTextbox', 'relativeURLCheckbox')"
+                        title="&selectFile.label;"/>
     </hbox>
     <hbox align="center">
-		  <checkbox class="indent" id="relativeURLCheckbox"
-		            label="&relativeUrl.label;"
-		            oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
+      <checkbox class="indent" id="relativeURLCheckbox"
+                label="&relativeUrl.label;"
+                oncommand="ToggleRelativeOrAbsolute('urlTextbox', 'relativeURLCheckbox')"/>
       <spacer flex="1"/>
       <button label="&newFile.button;"
               id="newFileButton"

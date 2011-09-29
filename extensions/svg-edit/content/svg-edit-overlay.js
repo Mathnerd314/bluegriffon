@@ -13,8 +13,8 @@ function start_svg_edit(aString) {
       svgEditor.loadFromString(aString)
     else
       svgEditor.resetTransactionManager();
-	  svgWindow.document.documentElement
-	    .removeEventListener("svgEditorReady", svgEditorReady, false);
+    svgWindow.document.documentElement
+      .removeEventListener("svgEditorReady", svgEditorReady, false);
   }
 
   window.document.documentElement
@@ -61,13 +61,13 @@ var _ForceSVGInHTML= function()
   function ForceSVGInHTML()
   {
     window.removeEventListener("load", ForceSVGInHTML, true);
-	  var svgs = document.getElementsByTagName("svg");
-	  for (var i = 0; i < svgs.length; i++) {
-	    var svg = svgs[i];
-			var div = document.createElement("div");
-			div.appendChild(svg.cloneNode(true));
-			var dom = (new DOMParser()).parseFromString(div.innerHTML, "application/xml");
-			svg.parentNode.replaceChild(document.importNode(dom.documentElement, true), svg);
+    var svgs = document.getElementsByTagName("svg");
+    for (var i = 0; i < svgs.length; i++) {
+      var svg = svgs[i];
+      var div = document.createElement("div");
+      div.appendChild(svg.cloneNode(true));
+      var dom = (new DOMParser()).parseFromString(div.innerHTML, "application/xml");
+      svg.parentNode.replaceChild(document.importNode(dom.documentElement, true), svg);
     }
   }
   window.addEventListener("load", ForceSVGInHTML, true);

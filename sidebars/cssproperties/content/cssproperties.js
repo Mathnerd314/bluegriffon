@@ -387,6 +387,7 @@ function ApplyStyles(aStyles)
         try {
           var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "");
           EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
+          EditorUtils.getCurrentEditor().incrementModificationCount(1);  
         }
         catch(e) {}
         break;
@@ -729,6 +730,7 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   // first, clean the style attribute for the style to apply
   var txn = new diStyleAttrChangeTxn(aElement, property, "", "");
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+  EditorUtils.getCurrentEditor().incrementModificationCount(1);  
 
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
@@ -840,6 +842,7 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     // is that one goes away.
     var txn = new diStyleAttrChangeTxn(aElement, property, value, "important");
     EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+    EditorUtils.getCurrentEditor().incrementModificationCount(1);  
   }
   else {
     // oh, the property is not applied yet, let's just create a rule

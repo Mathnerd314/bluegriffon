@@ -35,24 +35,24 @@ rotator {
 
 #backgroundPositionBox {
   width: 99px;
-	height: 99px;
-	background-image: url('chrome://bluegriffon/skin/backgroundPosition.png');
-	background-position: 50% 50%;
-	background-color: transparent;
-	-moz-appearance: none;
+  height: 99px;
+  background-image: url('chrome://bluegriffon/skin/backgroundPosition.png');
+  background-position: 50% 50%;
+  background-color: transparent;
+  -moz-appearance: none;
 }
 
 #backgroundImageBox {
   width: 99px;
-	height: 99px;
-	/*background-image: url('chrome://bluegriffon/skin/backgroundImage.png');*/
-	background-repeat: no-repeat;
+  height: 99px;
+  /*background-image: url('chrome://bluegriffon/skin/backgroundImage.png');*/
+  background-repeat: no-repeat;
   /*background-color: white;*/
-	background-position: 50% 50%;
+  background-position: 50% 50%;
 }
 
 stack {
-	border: 1px ridge #888;
+  border: 1px ridge #888;
 }
 
 

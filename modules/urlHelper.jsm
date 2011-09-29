@@ -545,8 +545,8 @@ var UrlUtils = {
       return this.mOS;
 
     var xrt = Components.classes["@mozilla.org/xre/app-info;1"]
-		                    .getService(Components.interfaces.nsIXULAppInfo)
-		                    .QueryInterface(Components.interfaces.nsIXULRuntime);
+                        .getService(Components.interfaces.nsIXULAppInfo)
+                        .QueryInterface(Components.interfaces.nsIXULRuntime);
     var platform = xrt.OS.toLowerCase();
     if (platform == "windows")
       this.mOS = this.gWin;

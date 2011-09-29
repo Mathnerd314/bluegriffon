@@ -255,20 +255,20 @@ var CssUtils = {
       stylesheet.insertRule(str, stylesheet.cssRules.length)
     }
     else {
-	    var rule = ruleList[ruleList.length -1].rule;
+      var rule = ruleList[ruleList.length -1].rule;
       stylesheet = rule.parentStyleSheet;
-	    for (var j = 0; j < aDeclarations.length; j++)
-	    {
-	        var property = aDeclarations[j].property;
-	        var value = aDeclarations[j].value;
-	        if (value) {
-		        var priority = aDeclarations[j].priority ? " !important" : "";
-		
-		        rule.style.setProperty(property,
-		                               value,
-		                               priority);
-	        }
-	    }
+      for (var j = 0; j < aDeclarations.length; j++)
+      {
+          var property = aDeclarations[j].property;
+          var value = aDeclarations[j].value;
+          if (value) {
+            var priority = aDeclarations[j].priority ? " !important" : "";
+    
+            rule.style.setProperty(property,
+                                   value,
+                                   priority);
+          }
+      }
     }
 
     this.reserializeEmbeddedStylesheet(stylesheet, aEditor, aDocument);
@@ -306,8 +306,8 @@ var CssUtils = {
     }
     var cssParser = new CSSParser(str);
     if (str) {
-	    var parsedSheet = cssParser.parse(str, false, false);
-	    str = parsedSheet.cssText();
+      var parsedSheet = cssParser.parse(str, false, false);
+      str = parsedSheet.cssText();
     }
 
     var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
