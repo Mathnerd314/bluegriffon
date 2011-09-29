@@ -60,7 +60,7 @@
               label="&domexplorer.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_domexplorer"
+              oncommand="start_domexplorer()"
 #else
               type="checkbox"
 #endif

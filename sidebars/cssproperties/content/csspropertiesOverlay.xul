@@ -58,7 +58,7 @@
               label="&cssproperties.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_css"
+              oncommand="start_css()"
 #else
               type="checkbox"
 #endif
