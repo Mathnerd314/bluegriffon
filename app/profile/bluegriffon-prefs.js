@@ -26,6 +26,7 @@ pref("nglayout.debug.disable_xul_fastload", true);
 pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
 pref("intl.locale.matchOS", true);
 
+pref("extensions.update.autoUpdateDefault", true);
 pref("extensions.update.enabled", false);
 pref("extensions.update.url", "chrome://mozapps/locale/extensions/extensions.properties");
 pref("extensions.update.interval", 86400);  // Check for updates to Extensions and 
