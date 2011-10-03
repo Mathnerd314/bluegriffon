@@ -103,7 +103,7 @@
              align="center"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,ParagraphSelectBox,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,dirLtrButton,dirRtlButton"/>
+             defaultset="spacer,ParagraphSelectBox,separator,emButton,strongButton,codeButton,separator,boldButton,italicButton,underlineButton,separator,ulButton,olButton,dtButton,ddButton,separator,align-left-button,align-center-button,align-right-button,align-justify-button,separator,indentButton,outdentButton,separator,dirLtrButton,dirRtlButton"/>
     <toolbar id="FormatToolbar2" class="chromeclass-toolbar"
              toolbarname="&formatToolbar2.name;"
              fullscreentoolbar="true"
@@ -113,7 +113,7 @@
              align="center"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,IdButtonsBox,ClassButtonsBox,FontFaceSelectBox,separator,dtButton,ddButton,rotateButton,ARIARoleSelectBox"/>
+             defaultset="spacer,IdButtonsBox,ClassButtonsBox,FontFaceSelectBox,separator,ARIARoleSelectBox"/>
     <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 

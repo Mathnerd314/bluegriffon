@@ -1685,11 +1685,14 @@ function UseAceTheme(aEvent)
 #ifdef XP_MACOSX
 function UpdateBadge()
 {
-  var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
   var n = 0;
-  while (windowEnumerator.hasMoreElements()) {
-    var w = windowEnumerator.getNext();
-    n += w.gDialog.tabeditor.getNumberOfModifiedDocuments();
+  var dockIntegration = Services.prefs.getBoolPref("bluegriffon.osx.dock-integration");
+  if (dockIntegration) {
+    var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+    while (windowEnumerator.hasMoreElements()) {
+      var w = windowEnumerator.getNext();
+      n += w.gDialog.tabeditor.getNumberOfModifiedDocuments();
+    }
   }
   var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                          .getInterface(Components.interfaces.nsIWebNavigation)
