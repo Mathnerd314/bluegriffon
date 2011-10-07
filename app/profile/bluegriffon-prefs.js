@@ -118,12 +118,6 @@ pref("media.autoplay.enabled", false);
 
 pref("bluegriffon.source.theme", "clouds");
 pref("bluegriffon.source.entities", "basic");
-pref("bluegriffon.source.auto-indent", true);
-pref("bluegriffon.source.wrap", true);
-pref("bluegriffon.source.wrap.maxColumn", 80);
-pref("bluegriffon.source.wrap.exclude-languages", true);
-pref("bluegriffon.source.wrap.language-exclusions", "");
-
 pref("bluegriffon.tabs.position", "center");
 
 pref("bluegriffon.osx.dock-integration", true);

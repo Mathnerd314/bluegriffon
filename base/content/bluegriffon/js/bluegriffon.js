@@ -746,27 +746,47 @@ function ToggleViewMode(aElement)
     gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
 
-    var mimeType = EditorUtils.getCurrentDocument().contentType;
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
+    var flags = nsIDE.OutputFormatted ;
+    flags |= nsIDE.OutputWrap;
+    flags |= nsIDE.OutputPersistNBSP;
+
+    var osString = Components.classes["@mozilla.org/xre/app-info;1"]
+                     .getService(Components.interfaces.nsIXULRuntime).OS;
+    switch (osString) {
+      case "WINNT":
+        flags |= nsIDE.OutputLFLineBreak;
+        flags |= nsIDE.OutputCRLineBreak;
+        break;
+      case "Darwin":
+        flags |= nsIDE.OutputCRLineBreak;
+        break;
+      case "Linux":
+      default:
+        flags |= nsIDE.OutputLFLineBreak;
+        break;
+    }
+
+    var encodeEntity = GetPrefs().getCharPref("bluegriffon.source.entities");
+    switch (encodeEntity) {
+      case "basic"  : flags |= nsIDE.OutputEncodeBasicEntities;     break;
+      case "latin1" : flags |= nsIDE.OutputEncodeLatin1Entities;    break;
+      case "html"   : flags |= nsIDE.OutputEncodeHTMLEntities;      break;
+      case "unicode": flags |= nsIDE.OutputEncodeCharacterEntities; break;
+      default: break;
+    }
+
+    var mimeType = EditorUtils.getCurrentDocument().contentType;
     var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + mimeType]
-                   .createInstance(nsIDE);
-
-    var flags = EditorUtils.getSerializationFlags(EditorUtils.getCurrentDocument());
-
+                   .createInstance(Components.interfaces.nsIDocumentEncoder);
     encoder.setCharset("UTF-8");
-    encoder.init(EditorUtils.getCurrentDocument(), mimeType, flags.value);
-    if (flags.value & nsIDE.OutputWrap)
-      encoder.setWrapColumn(flags.maxColumnPref);
+    encoder.init(EditorUtils.getCurrentDocument(), mimeType, flags);
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
     var bespinIframe = editorElement.previousSibling;
     var bespinEditor = bespinIframe.contentWindow.gEditor;
     bespinIframe.setUserData("oldSource", source, null);
-
-    var lastEditableChild = editor.document.body.lastChild;
-    if (lastEditableChild.nodeType == Node.TEXT_NODE)
-      lastEditableChild.data = lastEditableChild.data.replace( /\s*$/, "\n");
 
     MarkSelection();
     source = encoder.encodeToString();
@@ -775,14 +795,6 @@ function ToggleViewMode(aElement)
 
     //bespinEditor.value = "";
     bespinEditor.getSession().setValue(source);
-    bespinEditor.getSession().setUseWrapMode(false);
-    if (flags.value & nsIDE.OutputWrap) {
-      bespinEditor.setShowPrintMargin(true);
-      bespinEditor.setPrintMarginColumn(flags.maxColumnPref);
-    }
-    else {
-      bespinEditor.setShowPrintMargin(false);
-    }
     NotifierUtils.notify("afterEnteringSourceMode");
     editorElement.parentNode.selectedIndex = 0;
 

@@ -14,20 +14,6 @@ function OnNewPagePaneLoad()
   }
   var currentTheme = GetPrefs().getCharPref("bluegriffon.source.theme");
   document.getElementById("sourceThemeMenulist").value = currentTheme;
-
-  toggleWrapping();
-}
-
-function toggleWrapping()
-{
-  var wrapArray = ["maxColumnLabel", "maxColumnCheckbox", "noWrapForLanguagesCheckbox",
-                   "langExclusionsTextbox", "langExclusionExampleLabel"];
-  var wrapping = gDialog.wrapCheckbox.checked;
-  for (var i = 0; i < wrapArray.length; i++)
-    if (wrapping)
-      gDialog[wrapArray[i]].removeAttribute("disabled");
-    else
-      gDialog[wrapArray[i]].setAttribute("disabled", "true");
 }
 
 function OnScaleChange(aChangePref)
