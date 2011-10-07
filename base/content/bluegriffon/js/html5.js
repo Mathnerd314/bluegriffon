@@ -93,6 +93,17 @@ var HTML5Helper = {
     {tag: 'wbr',        label: "wbr",         block: false, empty: true,  command: null }
   ],
 
+  mOTHER_HTML5_ELEMENTS: [
+    {tag: 'html',       label: "html",        block: true, empty: false, command: null },
+    {tag: 'body',       label: "body",        block: true, empty: false, command: null },
+    {tag: 'head',       label: "head",        block: true, empty: false, command: null },
+    {tag: 'title',      label: "title",       block: true, empty: false, command: null },
+    {tag: 'meta',       label: "meta",        block: true, empty: true,  command: null },
+    {tag: 'link',       label: "link",        block: true, empty: true,  command: null },
+    {tag: 'style',      label: "style",       block: true, empty: false, command: null },
+    {tag: 'script',     label: "script",      block: true, empty: false, command: null }
+  ],
+
   insertVideo: function()
   {
     window.openDialog("chrome://bluegriffon/content/dialogs/insertVideo.xul","_blank",

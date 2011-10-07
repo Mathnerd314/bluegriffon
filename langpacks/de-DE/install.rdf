@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-de-DE@bluegriffon.org"
                em:name="Deutsch (DE) Language Pack"
-               em:version="9.0.1.2.1"
+               em:version="9.0.1.3"
                em:type="8"
                em:creator="Abdulkadir Topal">
     <em:contributor></em:contributor>
@@ -17,8 +17,8 @@
       <!-- BlueGriffon -->
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
-        <em:minVersion>1.2.1</em:minVersion>
-        <em:maxVersion>1.2.1</em:maxVersion>
+        <em:minVersion>1.3</em:minVersion>
+        <em:maxVersion>1.3</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

@@ -361,42 +361,15 @@ var FileUtils = {
       else
         destinationLocation = docURI;
   
-      const nsIDE = Components.interfaces.nsIDocumentEncoder;
-      var flags = nsIDE.OutputFormatted ;
-      flags |= nsIDE.OutputWrap;
-      flags |= nsIDE.OutputPersistNBSP;
-  
-      var osString = Components.classes["@mozilla.org/xre/app-info;1"]
-                     .getService(Components.interfaces.nsIXULRuntime).OS;
-      switch (osString) {
-        case "WINNT":
-          flags |= nsIDE.OutputLFLineBreak;
-          flags |= nsIDE.OutputCRLineBreak;
-          break;
-        case "Darwin":
-          flags |= nsIDE.OutputCRLineBreak;
-          break;
-        case "Linux":
-        default:
-          flags |= nsIDE.OutputLFLineBreak;
-          break;
-      }
-
-      var encodeEntity = Services.prefs.getCharPref("bluegriffon.source.entities");
-      switch (encodeEntity) {
-        case "basic"  : flags |= nsIDE.OutputEncodeBasicEntities;     break;
-        case "latin1" : flags |= nsIDE.OutputEncodeLatin1Entities;    break;
-        case "html"   : flags |= nsIDE.OutputEncodeHTMLEntities;      break;
-        case "unicode": flags |= nsIDE.OutputEncodeCharacterEntities; break;
-        default: break;
-      }
-
+      var flags = EditorUtils.getSerializationFlags(EditorUtils.getCurrentDocument());
       var doctype = editorDoc.doctype;
       var systemId = doctype ? doctype.systemId : null;
       var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + aMimeType]
                      .createInstance(Components.interfaces.nsIDocumentEncoder);
       encoder.setCharset("UTF-8");
-      encoder.init(editorDoc, aMimeType, flags);
+      encoder.init(editorDoc, aMimeType, flags.value);
+      if (flags.value & Components.interfaces.nsIDocumentEncoder.OutputWrap)
+        encoder.setWrapColumn(flags.maxColumnPref);
   
       var source = encoder.encodeToString();
       // file is nsIFile, data is a string
