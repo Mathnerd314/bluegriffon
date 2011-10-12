@@ -231,6 +231,10 @@ var HTML5Helper = {
   {
     var index = parseInt(aMenuitem.getAttribute("html5index"))
     var element = HTML5Helper.mHTML5_ELEMENTS[index];
+    this._insertElement(element);
+  },
+
+  _insertElement: function(element) {
     if (element.command) {
       HTML5Helper[element.command]();
       return;
@@ -260,9 +264,16 @@ var HTML5Helper = {
       var finalNode = doc.createElement(element.tag);
       var finalBr = doc.createElement("br");
       finalNode.appendChild(finalBr);
+      var refNode = node;
+      while (refNode.parentNode
+             && refNode.parentNode.nodeName.toLowerCase() != "div"
+             && refNode.parentNode.nodeName.toLowerCase() != "body"
+             && refNode.parentNode.nodeName.toLowerCase() != "td"
+             && refNode.parentNode.nodeName.toLowerCase() != "th")
+        refNode = refNode.parentNode;
       txn = new diNodeInsertionTxn(finalNode,
-                                   node.parentNode,
-                                   node.nextSibling);
+                                   refNode.parentNode,
+                                   refNode.nextSibling);
       editor.transactionManager.doTransaction(txn);
       editor.deleteNode(node);
       editor.endTransaction();
