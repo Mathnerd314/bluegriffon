@@ -24,7 +24,7 @@
         </menupopup>
       </toolbarbutton>
 
-      <toolbarbutton id="saveButton" class="toolbarbutton-1" observes="cmd_save"
+      <toolbarbutton id="saveButton" class="toolbarbutton-1" command="cmd_save"
                      tooltiptext="&saveToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="stopButton"
@@ -34,36 +34,36 @@
                      command="cmd_stopLoading"/>
 
       <toolbarbutton id="tableButton" class="toolbarbutton-1"
-                     label="&tableToolbarCmd.label;" observes="cmd_table"
+                     label="&tableToolbarCmd.label;" command="cmd_table"
                      tooltiptext="&tableToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="imageButton" class="toolbarbutton-1"
-                     label="&imageToolbarCmd.label;" observes="cmd_image"
+                     label="&imageToolbarCmd.label;" command="cmd_image"
                      tooltiptext="&imageToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="anchorButton" class="toolbarbutton-1"
-                     label="&anchorToolbarCmd.label;" observes="cmd_anchor"
+                     label="&anchorToolbarCmd.label;" command="cmd_anchor"
                      tooltiptext="&anchorToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="linkButton" class="toolbarbutton-1"
-                     label="&linkToolbarCmd.label;" observes="cmd_link"
+                     label="&linkToolbarCmd.label;" command="cmd_link"
                      tooltiptext="&linkToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="videoButton" class="toolbarbutton-1"
-                     label="&videoToolbarCmd.label;" observes="cmd_video"
+                     label="&videoToolbarCmd.label;" command="cmd_video"
                      tooltiptext="&videoToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="audioButton" class="toolbarbutton-1"
-                     label="&audioToolbarCmd.label;" observes="cmd_audio"
+                     label="&audioToolbarCmd.label;" command="cmd_audio"
                      tooltiptext="&audioToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="browseButton" class="toolbarbutton-1"
-                     label="&browseToolbarCmd.label;" observes="cmd_browse"
+                     label="&browseToolbarCmd.label;" command="cmd_browse"
                      tooltiptext="&browseToolbarCmd.tooltip;"/>
 
       <toolbarbutton id="formButton" class="toolbarbutton-1"
                      label="&formToolbarCmd.label;"
-                     observes="cmd_form"
+                     command="cmd_form"
                      tooltiptext="&formToolbarCmd.tooltip;"
                      type="menu-button">
         <menupopup>

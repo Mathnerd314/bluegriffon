@@ -376,6 +376,7 @@ function initLocalFontFaceMenu(menuPopup)
       if (BlueGriffonVars.localFonts[i] != "")
       {
         var itemNode = document.createElementNS(BlueGriffonVars.kXUL_NS, "menuitem");
+        itemNode.setAttribute("class", "menuitem-non-iconic-accel");
         itemNode.setAttribute("label", BlueGriffonVars.localFonts[i]);
         itemNode.setAttribute("value", BlueGriffonVars.localFonts[i]);
         if (useRadioMenuitems) {

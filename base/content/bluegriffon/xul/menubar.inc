@@ -15,14 +15,14 @@
         </menu>
 
         <menuseparator/>
-        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" observes="cmd_open"/>
+        <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
 
         <menuseparator/>
-        <menuitem id="saveMenuitem"   key="savekb" observes="cmd_save"/>
-        <menuitem id="saveAsMenuitem" key="saveaskb" observes="cmd_saveAs"/>
+        <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>
+        <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
 
         <menuseparator/>
-        <menuitem id="closeTabMenuitem" key="closetabkb" observes="cmd_closeTab"/>
+        <menuitem id="closeTabMenuitem" key="closetabkb" command="cmd_closeTab"/>
 
         <menuseparator id="menu_FileQuitSeparator"/>
         <menuitem id="menu_FileQuitItem"
@@ -48,17 +48,17 @@
           <menupopup>
             <menuitem label="&parentElement.label;"
                       key="structureclimbkb"
-                      observes="cmd_structureClimb"/>
+                      command="cmd_structureClimb"/>
             <menuitem label="&firstChild.label;"
                       key="structurefirstchildkb"
-                      observes="cmd_structureFirstChild"/>
+                      command="cmd_structureFirstChild"/>
             <menuseparator/>
             <menuitem label="&nextSibling.label;"
                       key="structurenextkb"
-                      observes="cmd_structureNext"/>
+                      command="cmd_structureNext"/>
             <menuitem label="&previousSibling.label;"
                       key="structurepreviousbkb"
-                      observes="cmd_structurePrevious"/>
+                      command="cmd_structurePrevious"/>
           </menupopup>
         </menu>
         <menuitem id="menu_selectAll" />
@@ -66,16 +66,16 @@
         <menuitem id="menu_copyHTMLCode"
                   label="&copyHTMLCodeCmd.label;"
                   accesskey="&copyHTMLCodeCmd.accesskey;"
-                  observes="cmd_copyHTMLCode"/>
+                  command="cmd_copyHTMLCode"/>
         <menuseparator/>
         <menuitem id="menu_gotoLink"
                   label="&gotoLink.label;"
                   accesskey="&gotoLink.accesskey;"
-                  observes="cmd_gotoLink"/>
+                  command="cmd_gotoLink"/>
         <menuseparator/>
         <menuitem label="&spellCheck.label;"
                   accesskey="&spellCheck.accesskey;"
-                  observes="cmd_spellCheck"/>
+                  command="cmd_spellCheck"/>
         <menuseparator/>
         <menuitem id="bgmenu_find" command="cmd_bgfind"
                   key="findkb"/>
@@ -251,30 +251,30 @@
                   command="cmd_span"
                   accesskey="&spanCmd.accesskey;"/>
         <menuseparator/>
-        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
-        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
-        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
-        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
-        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
-        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
-        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
-        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
+        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         command="cmd_bold"          type="checkbox"/>
+        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       command="cmd_italic"        type="checkbox"/>
+        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    command="cmd_underline"     type="checkbox" key="underlinekb"/>
+        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   command="cmd_strikethrough" type="checkbox"/>
+        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  command="cmd_superscript"   type="checkbox"/>
+        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    command="cmd_subscript"     type="checkbox"/>
+        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    command="cmd_tt"            type="checkbox"/>
+        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  command="cmd_nobreak"       type="checkbox"/>
         <menuseparator/>
-        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
-        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
-        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
-        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
-        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
-        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
-        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
-        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
+        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           command="cmd_em"            type="checkbox" key="emkb"/>
+        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       command="cmd_strong"        type="checkbox" key="strongkb"/>
+        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         command="cmd_cite"          type="checkbox"/>
+        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         command="cmd_abbr"          type="checkbox"/>
+        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      command="cmd_acronym"       type="checkbox"/>
+        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         command="cmd_code"          type="checkbox" key="codekb"/>
+        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         command="cmd_samp"          type="checkbox"/>
+        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          command="cmd_var"           type="checkbox"/>
         <menuseparator/>
-        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  observes="cmd_removeStyles"/>
-        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   observes="cmd_removeLinks"/>
+        <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  command="cmd_removeStyles"/>
+        <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   command="cmd_removeLinks"/>
         <menuseparator />
-        <menuitem label="&listProperties.label;" observes="cmd_list"/>
+        <menuitem label="&listProperties.label;" command="cmd_list"/>
         <menuseparator/>
-        <menuitem label="&pageProperties.label;" observes="cmd_pageProperties"/>
+        <menuitem label="&pageProperties.label;" command="cmd_pageProperties"/>
       </menupopup>
     </menu>
 
@@ -282,43 +282,43 @@
       <menupopup id="tableMenuPopup">
         <menu id="tableInsertMenu" label="&tableInsertMenu.label;" accesskey="&tableinsertmenu.accesskey;">
           <menupopup>
-            <menuitem label="&tableTable.label;"    accesskey="&tabletable.accesskey;"            observes="cmd_InsertTable"/>
+            <menuitem label="&tableTable.label;"    accesskey="&tabletable.accesskey;"            command="cmd_InsertTable"/>
             <menuseparator />
-            <menuitem label="&tableRowAbove.label;"     accesskey="&tablerow.accesskey;"          observes="cmd_InsertRowAbove"/>
-            <menuitem label="&tableRowBelow.label;"     accesskey="&tablerowbelow.accesskey;"     observes="cmd_InsertRowBelow"/>
+            <menuitem label="&tableRowAbove.label;"     accesskey="&tablerow.accesskey;"          command="cmd_InsertRowAbove"/>
+            <menuitem label="&tableRowBelow.label;"     accesskey="&tablerowbelow.accesskey;"     command="cmd_InsertRowBelow"/>
             <menuseparator />
-            <menuitem label="&tableColumnBefore.label;" accesskey="&tablecolumn.accesskey;"       observes="cmd_InsertColumnBefore"/>
-            <menuitem label="&tableColumnAfter.label;"  accesskey="&tablecolumnafter.accesskey;"  observes="cmd_InsertColumnAfter"/>
+            <menuitem label="&tableColumnBefore.label;" accesskey="&tablecolumn.accesskey;"       command="cmd_InsertColumnBefore"/>
+            <menuitem label="&tableColumnAfter.label;"  accesskey="&tablecolumnafter.accesskey;"  command="cmd_InsertColumnAfter"/>
             <menuseparator />
-            <menuitem label="&tableCellBefore.label;"   accesskey="&tablecell.accesskey;"         observes="cmd_InsertCellBefore"/>
-            <menuitem label="&tableCellAfter.label;"    accesskey="&tablecellafter.accesskey;"    observes="cmd_InsertCellAfter"/>
+            <menuitem label="&tableCellBefore.label;"   accesskey="&tablecell.accesskey;"         command="cmd_InsertCellBefore"/>
+            <menuitem label="&tableCellAfter.label;"    accesskey="&tablecellafter.accesskey;"    command="cmd_InsertCellAfter"/>
           </menupopup>
         </menu>
         <menu id="tableSelectMenu" label="&tableSelectMenu.label;" accesskey="&tableselectmenu.accesskey;">
           <menupopup id="tableSelectPopup">
-            <menuitem id="menu_SelectTable"    label="&tableTable.label;"    accesskey="&tabletable.accesskey;"    observes="cmd_SelectTable"    />
-            <menuitem id="menu_SelectRow"      label="&tableRow.label;"      accesskey="&tablerow.accesskey;"      observes="cmd_SelectRow"      />
-            <menuitem id="menu_SelectColumn"   label="&tableColumn.label;"   accesskey="&tablecolumn.accesskey;"   observes="cmd_SelectColumn"   />
-            <menuitem id="menu_SelectCell"     label="&tableCell.label;"     accesskey="&tablecell.accesskey;"     observes="cmd_SelectCell"     />
-            <menuitem id="menu_SelectAllCells" label="&tableAllCells.label;" accesskey="&tableallcells.accesskey;" observes="cmd_SelectAllCells" />
+            <menuitem id="menu_SelectTable"    label="&tableTable.label;"    accesskey="&tabletable.accesskey;"    command="cmd_SelectTable"    />
+            <menuitem id="menu_SelectRow"      label="&tableRow.label;"      accesskey="&tablerow.accesskey;"      command="cmd_SelectRow"      />
+            <menuitem id="menu_SelectColumn"   label="&tableColumn.label;"   accesskey="&tablecolumn.accesskey;"   command="cmd_SelectColumn"   />
+            <menuitem id="menu_SelectCell"     label="&tableCell.label;"     accesskey="&tablecell.accesskey;"     command="cmd_SelectCell"     />
+            <menuitem id="menu_SelectAllCells" label="&tableAllCells.label;" accesskey="&tableallcells.accesskey;" command="cmd_SelectAllCells" />
           </menupopup>
         </menu>
         <menu id="tableDeleteMenu" label="&tableDeleteMenu.label;" accesskey="&tabledeletemenu.accesskey;">
           <menupopup id="tableDeletePopup">
-            <menuitem id="menu_DeleteTable"         label="&tableTable.label;"        accesskey="&tabletable.accesskey;"          observes="cmd_DeleteTable"/>
-            <menuitem id="menu_DeleteRow"           label="&tableRows.label;"         accesskey="&tablerow.accesskey;"            observes="cmd_DeleteRow"/>
-            <menuitem id="menu_DeleteColumn"        label="&tableColumns.label;"      accesskey="&tablecolumn.accesskey;"         observes="cmd_DeleteColumn"/>
-            <menuitem id="menu_DeleteCell"          label="&tableCells.label;"        accesskey="&tablecell.accesskey;"           observes="cmd_DeleteCell"/>
-            <menuitem id="menu_DeleteCellContents"  label="&tableCellContents.label;" accesskey="&tablecellcontents.accesskey;"   observes="cmd_DeleteCellContents"/>
+            <menuitem id="menu_DeleteTable"         label="&tableTable.label;"        accesskey="&tabletable.accesskey;"          command="cmd_DeleteTable"/>
+            <menuitem id="menu_DeleteRow"           label="&tableRows.label;"         accesskey="&tablerow.accesskey;"            command="cmd_DeleteRow"/>
+            <menuitem id="menu_DeleteColumn"        label="&tableColumns.label;"      accesskey="&tablecolumn.accesskey;"         command="cmd_DeleteColumn"/>
+            <menuitem id="menu_DeleteCell"          label="&tableCells.label;"        accesskey="&tablecell.accesskey;"           command="cmd_DeleteCell"/>
+            <menuitem id="menu_DeleteCellContents"  label="&tableCellContents.label;" accesskey="&tablecellcontents.accesskey;"   command="cmd_DeleteCellContents"/>
           </menupopup>
         </menu>
         <menuseparator />
         <!-- menu label is set in InitTableMenu -->
-        <menuitem id="menu_JoinTableCells"   label="&tableJoinCells.label;"   accesskey="&tablejoincells.accesskey;"   observes="cmd_JoinTableCells"/>
-        <menuitem id="menu_SplitTableCell"   label="&tableSplitCell.label;"   accesskey="&tablesplitcell.accesskey;"   observes="cmd_SplitTableCell"/>
-        <menuitem id="menu_ConvertToTable"   label="&convertToTable.label;"   accesskey="&converttotable.accesskey;"   observes="cmd_ConvertToTable"/>
+        <menuitem id="menu_JoinTableCells"   label="&tableJoinCells.label;"   accesskey="&tablejoincells.accesskey;"   command="cmd_JoinTableCells"/>
+        <menuitem id="menu_SplitTableCell"   label="&tableSplitCell.label;"   accesskey="&tablesplitcell.accesskey;"   command="cmd_SplitTableCell"/>
+        <menuitem id="menu_ConvertToTable"   label="&convertToTable.label;"   accesskey="&converttotable.accesskey;"   command="cmd_ConvertToTable"/>
         <menuseparator />
-        <menuitem id="menu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  observes="cmd_editTable"/>
+        <menuitem id="menu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
 
       </menupopup>
     </menu>
@@ -350,7 +350,7 @@
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
       <menupopup id="toolsPopup">
-        <menuitem id="menu_cleanup" observes="cmd_cleanup"/>
+        <menuitem id="menu_cleanup" command="cmd_cleanup"/>
         <menuseparator/>
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
