@@ -999,8 +999,17 @@ function doQuit()
 
 function OpenPreferences()
 {
-  var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
-  window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
+  var w = null;
+  try {
+    w = Services.wm.getMostRecentWindow("bluegriffon-prefs");
+  }
+  catch(e){}
+  if (w)
+    w.focus();
+  else {
+    var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
+    window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
+  }
 }
 
 function UpdateSidebarsMenuStatus()
