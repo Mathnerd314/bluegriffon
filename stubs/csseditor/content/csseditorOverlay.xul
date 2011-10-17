@@ -20,7 +20,7 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
     <toolbarbutton id="csseditorButton" class="toolbarbutton-1"
-                   label="&csseditorToolbarCmd.label;" observes="cmd_csseditor"
+                   label="&csseditorToolbarCmd.label;" command="cmd_csseditor"
                    tooltiptext="&csseditorToolbarCmd.tooltip;"/>
   
   </toolbarpalette>
@@ -28,7 +28,7 @@
   <menupopup id="toolsPopup">
     <menuitem id="csseditor-menuitem"
               label="&csseditor.label;"
-              observes="cmd_csseditor"
+              command="cmd_csseditor"
               />
   </menupopup>
 

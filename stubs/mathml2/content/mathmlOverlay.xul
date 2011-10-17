@@ -53,14 +53,14 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
     <toolbarbutton id="mathmlButton" class="toolbarbutton-1"
-                   label="&mathmlToolbarCmd.label;" observes="cmd_mathml"
+                   label="&mathmlToolbarCmd.label;" command="cmd_mathml"
                    tooltiptext="&mathmlToolbarCmd.tooltip;"/>
   
   </toolbarpalette>
 
   <toolbarpalette id="ComposerToolbarPalette">
       <toolbarbutton id="mathmlButton" class="toolbarbutton-1"
-                     label="&mathmlToolbarCmd.label;" observes="cmd_mathml"
+                     label="&mathmlToolbarCmd.label;" command="cmd_mathml"
                      tooltiptext="&mathmlToolbarCmd.tooltip;"/>
   </toolbarpalette>
 

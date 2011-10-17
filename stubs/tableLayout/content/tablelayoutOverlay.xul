@@ -30,7 +30,7 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
       <toolbarbutton id="tableLayoutButton" class="toolbarbutton-1"
-                     label="&tableLayout.label;"  observes="cmd_tableLayout"
+                     label="&tableLayout.label;"  command="cmd_tableLayout"
                      tooltiptext="&tableLayout.tooltip;"/>
   </toolbarpalette>
 

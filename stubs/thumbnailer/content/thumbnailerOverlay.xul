@@ -28,7 +28,7 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
       <toolbarbutton id="thumbnailButton" class="toolbarbutton-1"
-                     label="&thumbnail.label;"  observes="cmd_thumbnail"
+                     label="&thumbnail.label;"  command="cmd_thumbnail"
                      tooltiptext="&thumbnail.tooltip;"/>
   </toolbarpalette>
 
