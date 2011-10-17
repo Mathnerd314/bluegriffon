@@ -14,7 +14,7 @@
 
   <menupopup id="webfontsMenupopup">
     <menuitem label="&gfdWindow.label;"
-              observes="cmd_gfdManager"/>
+              command="cmd_gfdManager"/>
   </menupopup>
 
   <commandset id="composerMenuItems">

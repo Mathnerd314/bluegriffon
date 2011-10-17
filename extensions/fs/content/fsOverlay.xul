@@ -14,7 +14,7 @@
 
   <menupopup id="webfontsMenupopup">
     <menuitem label="&fsWindow.label;"
-              observes="cmd_fsManager"/>
+              command="cmd_fsManager"/>
   </menupopup>
 
   <commandset id="composerMenuItems">
