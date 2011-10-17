@@ -291,7 +291,7 @@ function onARIARoleChangeStructureBar(commandID)
 
 function initFontFaceMenu(menuPopup)
 {
-  initLocalFontFaceMenu(menuPopup);
+  //initLocalFontFaceMenu(menuPopup);
 
   if (menuPopup)
   {

@@ -35,6 +35,7 @@ function Startup()
 
   ComposerCommands.setupMainCommands();
   window.updateCommands("style");
+  RestoreShortcuts();
 
   InstallCustomizationDoneCallbacks();
 
@@ -44,6 +45,8 @@ function Startup()
   EditorScrolledNotifier.startup();
   BGZoomManager.startup();
   BGUpdateManager.check();
+  
+  initLocalFontFaceMenu(gDialog.FontFacePopup);
 
   try {
     var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
@@ -95,3 +98,75 @@ function OpenTabFromPreviousSession(aReason, aContext)
   }
 }
 
+function RestoreShortcuts()
+{
+  try {
+    var file = Components.classes["@mozilla.org/file/directory_service;1"]
+                         .getService(Components.interfaces.nsIProperties)
+                         .get("ProfD", Components.interfaces.nsIFile);
+    file.append("shortcuts.sqlite");
+    
+    var storageService = Components.classes["@mozilla.org/storage/service;1"]
+                            .getService(Components.interfaces.mozIStorageService);
+    var dbConn = storageService.openDatabase(file);
+
+    var statement = dbConn.createStatement("SELECT * from shortcuts");
+
+    // remove all existing shortcuts...
+    var elts = document.querySelectorAll("#composer-main-menubar *[key], toolbar *[key]");
+    for (var i = 0; i < elts.length; i++) {
+      var elt = elts[i];
+      var keyId = elt.getAttribute("key");
+      elt.removeAttribute("key");
+      var keyElt = document.getElementById(keyId);
+      if (keyElt) { //sanity check
+        var keyset = keyElt.parentNode;
+        keyset.removeChild(keyElt);
+        var parent = keyset.parentNode;
+        var nextSibling = parent.nextSibling;
+        parent.removeChild(keyset);
+        parent.insertBefore(keyset, nextSibling);
+       }
+    }
+
+    while (statement.executeStep()) {
+      var selector = statement.getUTF8String(1);
+      var modifiers = statement.getUTF8String(2);
+      var key = statement.getUTF8String(3);
+
+      var elt = document.querySelector(selector);
+      // recreate a key
+      var keyset = document.getElementById("mainKeySet");
+      keyElt = document.createElement("key");
+      keyElt.setAttribute("modifiers", modifiers);
+      if (key.length == 1)
+        keyElt.setAttribute("key", key);
+      else
+        keyElt.setAttribute("keycode", key);
+      if (elt.hasAttribute("command"))
+        keyElt.setAttribute("command", elt.getAttribute("command"));
+      if (elt.hasAttribute("oncommand"))
+        keyElt.setAttribute("oncommand", elt.getAttribute("oncommand"));
+      if (!elt.hasAttribute("command") && !elt.hasAttribute("oncommand")) {
+        var cmdStr = 'var e = document.createEvent("Events"); e.initEvent("command", true, true); document.querySelector("'
+                     + selector
+                     +'").dispatchEvent(e);';
+        keyElt.setAttribute("oncommand", cmdStr);
+      }
+
+      var keyId =  "key-" + modifiers.replace( /,/g , "-") + key;
+      keyElt.setAttribute("id", keyId);
+      keyset.appendChild(keyElt);
+      elt.setAttribute("key", keyId);
+
+      var parent = keyset.parentNode;
+      var nextSibling = parent.nextSibling;
+      parent.removeChild(keyset);
+      parent.insertBefore(keyset, nextSibling);
+    }
+    dbConn.close();
+  }
+  catch(e) {
+    // no shortcut DB yet, do nothing
+  }
+}

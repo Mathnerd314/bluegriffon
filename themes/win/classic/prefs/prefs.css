@@ -14,3 +14,7 @@ radio[pane="newPagePrefPane"] {
 #locale-listbox[disabled="true"] * {
   color: silver;
 }
+
+#commandsShortcutsTree[disabled="true"] {
+  color: silver;
+}
