@@ -49,7 +49,7 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
     <toolbarbutton id="domexplorerButton" class="toolbarbutton-1"
-                   label="&domexplorer.label;" observes="cmd_domexplorer"
+                   label="&domexplorer.label;" command="cmd_domexplorer"
                    tooltiptext="&domexplorer.tooltip;"/>
   
   </toolbarpalette>

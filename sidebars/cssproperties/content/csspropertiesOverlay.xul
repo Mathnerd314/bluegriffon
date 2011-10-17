@@ -47,7 +47,7 @@
 
   <toolbarpalette id="ComposerToolbarPalette">
     <toolbarbutton id="cssButton" class="toolbarbutton-1"
-                   label="&cssToolbarCmd.label;" observes="cmd_css"
+                   label="&cssToolbarCmd.label;" command="cmd_css"
                    tooltiptext="&cssToolbarCmd.tooltip;"/>
   
   </toolbarpalette>
