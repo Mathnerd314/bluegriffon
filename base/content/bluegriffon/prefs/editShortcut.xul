@@ -4,7 +4,8 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
 <window id     = "advancedPrefsOverlay"
-	      xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist = "screenX screenY"
+	xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload = "Startup()">
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>

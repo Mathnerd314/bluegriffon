@@ -133,13 +133,13 @@
                    id="wysiwygModeButton"
                    label="&wysiwygMode.label;"
                    oncommand="ToggleViewMode(this)"
-                   value="wysiwyg"
+                   mode="wysiwyg"
                    observes="cmd_viewModeEnabler"/>
           <tab
                    id="sourceModeButton"
                    label="&sourceMode.label;"
                    oncommand="ToggleViewMode(this)"
-                   value="source"
+                   mode="source"
                    observes="cmd_viewModeEnabler"/>
         </tabs>
 #else
@@ -148,15 +148,15 @@
           <label class="multiButton left"
                    selected="true"
                    id="wysiwygModeButton"
-                   label="&wysiwygMode.label;"
+                   value="&wysiwygMode.label;"
                    onclick="ToggleViewMode(this)"
-                   value="wysiwyg"
+                   mode="wysiwyg"
                    observes="cmd_viewModeEnabler"/>
           <label class="multiButton right"
                    id="sourceModeButton"
-                   label="&sourceMode.label;"
+                   value="&sourceMode.label;"
                    onclick="ToggleViewMode(this)"
-                   value="source"
+                   mode="source"
                    observes="cmd_viewModeEnabler"/>
           <spacer flex="1"/>
         </hbox>

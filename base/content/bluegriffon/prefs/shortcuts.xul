@@ -20,7 +20,9 @@
         <treecol id="commandTreecol" label="&commandShortcutCol.label;" flex="1"
                primary="true"
                persist="width ordinal hidden"/>
-        <treecol id="shortcutTreecol" label="&shortcutShortcutCol.label;"/>
+        <splitter class="tree-splitter"/>
+        <treecol id="shortcutTreecol" label="&shortcutShortcutCol.label;"
+		 persist="width ordinal hidden"/>
       </treecols>
       <treechildren id="commandsShortcutsTreechildren">
         <treeitem id="menubarShortcutsTreeitem" container="true">

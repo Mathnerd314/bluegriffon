@@ -723,7 +723,7 @@ function ToggleViewMode(aElement)
   if (!aElement) // sanity case
     return;
 
-  var mode =  aElement.getAttribute("value");
+  var mode =  aElement.getAttribute("mode");
   if (mode == GetCurrentViewMode())
     return;
 
