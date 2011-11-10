@@ -90,7 +90,7 @@ pref("signon.SignonFileName", "signons.txt");
 pref("network.protocol-handler.warn-external.http", true);
 pref("network.protocol-handler.warn-external.https", true);
 pref("network.protocol-handler.warn-external.ftp", true);
-pref("network.protocol-handler.expose-all", false);
+pref("network.protocol-handler.expose-all", true);
 
 // XPI
 pref("xpinstall.dialog.confirm", "chrome://mozapps/content/xpinstall/xpinstallConfirm.xul");
