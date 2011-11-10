@@ -118,16 +118,16 @@ function bindKey(win, mac) {
     });
 
     window.Insert = function(aTag) {
-			autocompleting = false;
-			var sel = gEditor.selection.getRange();
+      autocompleting = false;
+      var sel = gEditor.selection.getRange();
 
-			var line = gEditor.getSession().getLine(sel.start.row);						
-			line = line.substr(0,sel.start.column);						
-			var pos = line.lastIndexOf('<');
-			var text = line.substr(pos+1);
-			sel.start.column = sel.start.column - text.length
-			gEditor.selection.setSelectionRange(sel);
-			gEditor.insert(aTag);
+      var line = gEditor.getSession().getLine(sel.start.row);            
+      line = line.substr(0,sel.start.column);            
+      var pos = line.lastIndexOf('<');
+      var text = line.substr(pos+1);
+      sel.start.column = sel.start.column - text.length
+      gEditor.selection.setSelectionRange(sel);
+      gEditor.insert(aTag);
 
       var tagObject = null;
       for (var i = 0; !tagObject && i < html_tags.length; i++) {
@@ -180,208 +180,204 @@ function bindKey(win, mac) {
       Insert(aOption.value);
     };
 
-		canon.addCommand({
-			name: "autocomplete",
-			exec: function(env, args, request) {
-				var sel = env.editor.getSelection();
-				var session = env.editor.getSession();
+    canon.addCommand({
+      name: "autocomplete",
+      exec: function(env, args, request) {
+        var sel = env.editor.getSelection();
+        var session = env.editor.getSession();
 
-				var lead = sel.getSelectionLead();
-				var pos = env.editor.renderer.textToScreenCoordinates(lead.row, lead.column);
+        var lead = sel.getSelectionLead();
+        var pos = env.editor.renderer.textToScreenCoordinates(lead.row, lead.column);
 
-				var ac = document.getElementById('ac');
+        var ac = document.getElementById('ac');
 
-				if (!ac) {
-					ac = document.createElement('select');
-					ac.id = 'ac';
-					ac.namme = 'ac';
-					ac.style.position = 'absolute';
-					ac.style.zIndex = 100;;
-					ac.style.width = '140px';
-					ac.size = 10;
-				}
-				
-				//compute the container offset
-				var obj = env.editor.container;
+        if (!ac) {
+          ac = document.createElement('select');
+          ac.id = 'ac';
+          ac.namme = 'ac';
+          ac.style.position = 'absolute';
+          ac.style.zIndex = 100;;
+          ac.style.width = '140px';
+          ac.size = 10;
+        }
+        
+        //compute the container offset
+        var obj = env.editor.container;
 
-				var curleft = 0;
-				var curtop = 0;
-				if (obj.offsetParent) {
-					do {
-						curleft += obj.offsetLeft;
-						curtop += obj.offsetTop;
-					} while (obj = obj.offsetParent);
-				}						
+        var curleft = 0;
+        var curtop = 0;
+        if (obj.offsetParent) {
+          do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+          } while (obj = obj.offsetParent);
+        }            
 
-				//position autocomplete
-				ac.style.top = pos.pageY - curtop + 20 + "px";
-				ac.style.left = pos.pageX - curleft + "px";
-				ac.style.display = 'block';
-				ac.style.background = 'white';
+        //position autocomplete
+        ac.style.top = pos.pageY - curtop + 20 + "px";
+        ac.style.left = pos.pageX - curleft + "px";
+        ac.style.display = 'block';
+        ac.style.background = 'white';
 
-				var sel = env.editor.selection.getRange();
+        var sel = env.editor.selection.getRange();
 
-				var line = env.editor.getSession().getLine(sel.start.row);						
+        var line = env.editor.getSession().getLine(sel.start.row);            
 
-				line = line.substr(0,sel.start.column);						
-				var pos = line.lastIndexOf('<');
-				var text = line.substr(pos+1);
+        line = line.substr(0,sel.start.column);            
+        var pos = line.lastIndexOf('<');
+        var text = line.substr(pos+1);
 
-				var tag;
-				for(i in html_tags) {
-					if (!html_tags.hasOwnProperty(i)
+        var tag;
+        for(i in html_tags) {
+          if (!html_tags.hasOwnProperty(i)
               || html_tags[i].tag != html_tags[i].label) {
-						continue;
-					}
+            continue;
+          }
 
-					tag = html_tags[i].tag;					
+          tag = html_tags[i].tag;          
 
-					if ( text ) {
-						if ( text != tag.substr(0,text.length) ) {
-							continue;
-						}
-					}
+          if ( text ) {
+            if ( text != tag.substr(0,text.length) ) {
+              continue;
+            }
+          }
 
-					var option = document.createElement('option');
-					option.text = tag;
-					option.value = tag;
-					
-					try {
-						ac.add(option, null); // standards compliant; doesn't work in IE
-					}
-					catch(ex) {
-						ac.add(option); // IE only
-					}
-				};
-				
-				if ( !ac.length) {
-					autocompleting = false;
-					
-					return false;
-				}
-				
-				ac.selectedIndex = 0;						
-		
+          var option = document.createElement('option');
+          option.text = tag;
+          option.value = tag;
+          
+          try {
+            ac.add(option, null); // standards compliant; doesn't work in IE
+          }
+          catch(ex) {
+            ac.add(option); // IE only
+          }
+        };
+        
+        if ( !ac.length) {
+          autocompleting = false;
+          
+          return false;
+        }
+        
+        ac.selectedIndex = 0;            
+    
         ac.addEventListener("dblclick", DblClickOnOption, false);
-				env.editor.container.appendChild(ac);
-				
-				autocompleting = true;
-			}
-		});
-		
-		canon.addCommand({
-			name: "langle",
-			bindKey: {
-				win: "<", // <
-				mac: "<", // <
-				sender: "editor"
-			},
-			exec: function(env, args, request) {
-				env.editor.insert('<');
+        env.editor.container.appendChild(ac);
+        
+        autocompleting = true;
+      }
+    });
+    
+    canon.addCommand({
+      name: "langle",
+      bindKey: {
+        win: "<", // <
+        mac: "<", // <
+        sender: "editor"
+      },
+      exec: function(env, args, request) {
+        env.editor.insert('<');
         startSel = gEditor.selection.getRange();
-				
-				var canon = require("pilot/canon");
-					
-				var command = canon.getCommand('autocomplete');
-					
-				command.exec(env);					
-			}
-		});
-		
-		canon.addCommand({
-			name: "up",
-			bindKey: {
-				win: "Up",
-				mac: "Up",
-				sender: "editor"
-			},
-			exec: function(env, args, request) {
-				if ( document.getElementById('ac') ) {
-					var select = document.getElementById('ac');
-					
-					if ( select.selectedIndex==0 ) {
-						select.selectedIndex = select.options.length-1;
-					}else{
-						select.selectedIndex = select.selectedIndex-1;
-					}
-				}else{
-					env.editor.navigateUp(args.times);
-				}
-			}
-		});
-		
-		canon.addCommand({
-			name: "down",
-			bindKey: {
-				win: "Down",
-				mac: "Down",
-				sender: "editor"
-			},
-			exec: function(env, args, request) {
-				if ( document.getElementById('ac') ) {
-					var select = document.getElementById('ac');
-					
-					if ( select.selectedIndex==select.options.length-1 ) {
-						select.selectedIndex = 0;
-					}else{
-						select.selectedIndex = select.selectedIndex+1;
-					}
-				}else{
-					env.editor.navigateDown(args.times);
-				}
-			}
-		});
-		
-		canon.addCommand({
-			name: "escape",
-			bindKey: {
-				win: "Esc",
-				mac: "Esc",
-				sender: "editor"
-			},
-			exec: function(env, args, request) {
-				var ac = document.getElementById('ac');
- 				if (ac) {							
-					ac.parentNode.removeChild(ac);
-					autocompleting = false;
-				}
-			}
-		});
-		
-		canon.addCommand({
-			name: "enter",
-			bindKey: {
-				win: "Return",
-				mac: "Return",
-				sender: "editor"
-			},
-			exec: function(env, args, request) {
-				if ( document.getElementById('ac') ) {
-					var select = document.getElementById('ac');
-					var tag = select.options[select.selectedIndex].value;
+        
+        var canon = require("pilot/canon");
+          
+        var command = canon.getCommand('autocomplete');
+          
+        command.exec(env);          
+      }
+    });
+
+    canon.addCommand({
+      name: "up",
+      bindKey: {
+        win: "Up",
+        mac: "Up",
+        sender: "editor"
+      },
+      exec: function(env, args, request) {
+        if ( document.getElementById('ac') ) {
+          var select = document.getElementById('ac');
+          
+          if ( select.selectedIndex==0 ) {
+            select.selectedIndex = select.options.length-1;
+          }else{
+            select.selectedIndex = select.selectedIndex-1;
+          }
+        }else{
+          env.editor.navigateUp(args.times);
+        }
+      }
+    });
+    
+    canon.addCommand({
+      name: "down",
+      bindKey: {
+        win: "Down",
+        mac: "Down",
+        sender: "editor"
+      },
+      exec: function(env, args, request) {
+        if ( document.getElementById('ac') ) {
+          var select = document.getElementById('ac');
+          
+          if ( select.selectedIndex==select.options.length-1 ) {
+            select.selectedIndex = 0;
+          }else{
+            select.selectedIndex = select.selectedIndex+1;
+          }
+        }else{
+          env.editor.navigateDown(args.times);
+        }
+      }
+    });
+    
+    canon.addCommand({
+      name: "escape",
+      bindKey: {
+        win: "Esc",
+        mac: "Esc",
+        sender: "editor"
+      },
+      exec: function(env, args, request) {
+        var ac = document.getElementById('ac');
+         if (ac) {              
+          ac.parentNode.removeChild(ac);
+          autocompleting = false;
+        }
+      }
+    });
+    
+    canon.addCommand({
+      name: "enter",
+      bindKey: {
+        win: "Return",
+        mac: "Return",
+        sender: "editor"
+      },
+      exec: function(env, args, request) {
+        if ( document.getElementById('ac') ) {
+          var select = document.getElementById('ac');
+          var tag = select.options[select.selectedIndex].value;
           Insert(tag);
-				}else{
-					env.editor.insert('\n');
-				}
-			}
-		});
-		
-		canon.addCommand({
-			name: "inserttext",
-			exec: function(env, args, request) {						
-				var lang = require("pilot/lang");
-				
-				env.editor.insert(lang.stringRepeat(args.text  || "", args.times || 1));
-				
-				if ( autocompleting ) {
-					var canon = require("pilot/canon");
-					
-					var command = canon.getCommand('autocomplete');
-					
-					command.exec(editor.env);
-				}
-			}
-		});
+        }else{
+          env.editor.insert('\n');
+        }
+      }
+    });
+    
+    canon.addCommand({
+      name: "inserttext",
+      exec: function(env, args, request) {
+        var ac = document.getElementById('ac');
+         if (ac) {              
+          ac.parentNode.removeChild(ac);
+          autocompleting = false;
+        }
+        env.editor.insert(args.text  || "");
+
+      }
+    });
 
     window.OnEditorChange = function() {
       var ac = document.getElementById('ac');
@@ -417,7 +413,7 @@ function bindKey(win, mac) {
       else if (ac)
        ac.parentNode.removeChild(ac);
     }
-		gEditor.getSession().selection.on('changeCursor',OnEditorChange);
+    gEditor.getSession().selection.on('changeCursor',OnEditorChange);
     canon.addCommand({
         name: "backspaceinAutocomplete",
         bindKey: { win: "Ctrl-Backspace|Command-Backspace|Option-Backspace|Shift-Backspace|Backspace",
