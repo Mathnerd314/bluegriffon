@@ -35,6 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 var BGZoomManager = {
 
   kZOOM_VALUES:  "toolkit.zoomManager.zoomValues",
@@ -44,7 +46,7 @@ var BGZoomManager = {
   {
     var values;
     try {
-      values = GetPrefs().getCharPref(this.kZOOM_VALUES);
+      values = Services.prefs.getCharPref(this.kZOOM_VALUES);
     }
     catch(e) {
       values = ".5,.75,1,1.25,1.5,2,3";
@@ -218,7 +220,7 @@ var BGZoomManager = {
   {
     var defaultZoom;
     try {
-      defaultZoom = parseFloat(GetPrefs().getCharPref(this.kDEFAULT_ZOOM));
+      defaultZoom = parseFloat(Services.prefs.getCharPref(this.kDEFAULT_ZOOM));
     }
     catch(e)
     {

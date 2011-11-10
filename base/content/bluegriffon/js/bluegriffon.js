@@ -74,7 +74,7 @@ function GetPreferredNewDocumentURL()
 {
   var url = window["kHTML_TRANSITIONAL"];
   try {
-    urlId = GetPrefs().getCharPref("bluegriffon.defaults.doctype");
+    urlId = Services.prefs.getCharPref("bluegriffon.defaults.doctype");
     url = window[urlId]; 
   }
   catch(e) {}
@@ -1462,8 +1462,7 @@ function UpdateSpellCheckMenu(aMenupopup)
 
   var suggestions = 10;
   try {
-    var prefs = GetPrefs();
-    suggestions = prefs.getIntPref("bluegriffon.spellCheck.suggestions");
+    suggestions = Services.prefs.getIntPref("bluegriffon.spellCheck.suggestions");
   }
   catch(e) {}
 
@@ -1717,7 +1716,7 @@ function ResetBadge()
 function SaveCurrentTabLocation()
 {
   try {
-    if (!GetPrefs().getBoolPref("bluegriffon.defaults.restorePreviousSession"))
+    if (!Services.prefs.getBoolPref("bluegriffon.defaults.restorePreviousSession"))
       return;
   }
   catch(e) {}
@@ -1725,12 +1724,12 @@ function SaveCurrentTabLocation()
   var URL = EditorUtils.getDocumentUrl();
   var lastTabs = "";
   try {
-    lastTabs = GetPrefs().getCharPref("bluegriffon.defaults.lastTabs");
+    lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");
   }
   catch(e) {}
   lastTabs += (lastTabs ? "|" : "") + URL;
   try {
-    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", lastTabs);
+    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", lastTabs);
   }
   catch(e) {}
 }
@@ -1738,7 +1737,7 @@ function SaveCurrentTabLocation()
 function SaveTabs()
 {
   try {
-    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", "");
+    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", "");
   }
   catch(e) {}
 }

@@ -1,7 +1,7 @@
 function Shutdown()
 {
   try {
-    var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+    var pbi = Services.prefs.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.removeObserver("bluegriffon.", BlueGriffonPrefsObserver, false);
   } catch(ex) {
   }

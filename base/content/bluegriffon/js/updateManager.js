@@ -35,6 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 var BGUpdateManager = {
 
   kPREF_APPID:            "bluegriffon.updates.id",
@@ -66,7 +68,7 @@ var BGUpdateManager = {
     if (gDialog.updateThrobber)
       gDialog.updateThrobber.hidden = false;
 
-    var prefs = GetPrefs();
+    var prefs = Services.prefs;
     var currentDate = Date.parse(new Date());
 
     // we need an appId for the xmlhttprequest
@@ -108,9 +110,6 @@ var BGUpdateManager = {
         (updateFrequency == "launch" ||
          (updateFrequency == "onceperday" && currentDate - lastCheck > 24*60*60*1000))) {
 
-      var gApp = Components.classes["@mozilla.org/xre/app-info;1"]
-                   .getService(Components.interfaces.nsIXULAppInfo)
-                   .QueryInterface(Components.interfaces.nsIXULRuntime);
       // ok we have to look for an app update...
       var rq = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
                  .createInstance();
@@ -177,7 +176,7 @@ var BGUpdateManager = {
       rq.addEventListener("error", errorHandler, false);
   
       rq = rq.QueryInterface(Components.interfaces.nsIXMLHttpRequest);
-      rq.open("GET", this.kURL_UPDATE + "v=" + gApp.version
+      rq.open("GET", this.kURL_UPDATE + "v=" + Services.appinfo.version
                                       + "&id=" + appId, true);
       rq.setRequestHeader("Pragma", "no-cache");
       rq.channel.loadFlags |= Components.interfaces.nsIRequest.LOAD_BYPASS_CACHE;
@@ -195,7 +194,7 @@ var BGUpdateManager = {
     if (gDialog.updateThrobber)
       gDialog.updateThrobber.hidden = true;
     // update the last update's time
-    GetPrefs().setIntPref(this.kPREF_LAST_UPDATE, Date.parse(new Date()));
+    Services.prefs.setIntPref(this.kPREF_LAST_UPDATE, Date.parse(new Date()));
 
     var rq = aEvent.target;
     var doc = rq.responseXML; 
@@ -213,43 +212,19 @@ var BGUpdateManager = {
         child = child.nextElementSibling;
       }
       if (currentVersion && homeURL) {
-        var gApp = Components.classes["@mozilla.org/xre/app-info;1"]
-                     .getService(Components.interfaces.nsIXULAppInfo)
-                     .QueryInterface(Components.interfaces.nsIXULRuntime);
-        var appVersionArray     = gApp.version.split(".");
-        var currentVersionArray = currentVersion.split(".");
-        for (var i = 0; i < Math.max(appVersionArray.length, currentVersionArray.length); i++) {
-          var a = (i < appVersionArray.length)
-                    ? appVersionArray[i]
-                    : "0";
-          var c = (i < currentVersionArray.length)
-                    ? currentVersionArray[i]
-                    : "0";
-          if (parseInt(a) == parseInt(c)) {
-            while (a.length < c.length)
-              a += "z";
-            while (a.length > c.length)
-              c += "z";
-          }
-          if (parseInt(c) > parseInt(a)
-              || (parseInt(a) == parseInt(c) && c > a)) {
-            // aaaaah, we found a more recent version...
-            var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
-            window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
-            return;
-          }
-          else if (parseInt(a) > parseInt(c)) {
-            if ("BlueGriffonIsUpToDate" in window)
-              BlueGriffonIsUpToDate();
-            return;
-          }
+        var gApp = Services.appinfo;
+        if (Services.vc.compare(gApp.version, currentVersion) < 0) {
+          // aaaaah, we found a more recent version...
+          var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
+          window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
+          return;
         }
-        if ("BlueGriffonIsUpToDate" in window)
-          BlueGriffonIsUpToDate();
-        return;
+        else {
+          if ("BlueGriffonIsUpToDate" in window)
+            BlueGriffonIsUpToDate();
+          return;
+        }
       }
     }
-    if ("ErrorOnUpdate" in window)
-      ErrorOnUpdate();
   }
 };

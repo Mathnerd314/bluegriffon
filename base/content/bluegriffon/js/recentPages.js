@@ -35,6 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 
@@ -80,9 +81,7 @@ var RecentPagesHandler = {
   buildRecentPagesMenu: function()
   {
     var editor = EditorUtils.getCurrentEditor();
-    if (!GetPrefs())
-      return;
-  
+
     var popup = gDialog["menupopup_RecentFiles"];
     if (!popup)
       return;
@@ -98,7 +97,7 @@ var RecentPagesHandler = {
       curUrl = UrlUtils.stripPassword(EditorUtils.getDocumentUrl());
     var historyCount = 10;
     try {
-      historyCount = GetPrefs().getIntPref("bluegriffon.history.url_maximum");
+      historyCount = Services.prefs.getIntPref("bluegriffon.history.url_maximum");
     } catch(e) {}
     var menuIndex = 1;
   
@@ -119,16 +118,12 @@ var RecentPagesHandler = {
   
   saveRecentFilesPrefs: function()
   {
-    // Can't do anything if no prefs
-    if (!GetPrefs())
-      return;
-  
     var curUrl = UrlUtils.stripPassword(EditorUtils.getDocumentUrl());
     if (!curUrl)
       return;
     var historyCount = 10;
     try {
-      historyCount = GetPrefs().getIntPref("bluegriffon.history.url_maximum"); 
+      historyCount = Services.prefs.getIntPref("bluegriffon.history.url_maximum"); 
     } catch(e) {}
   
     var titleArray = [];

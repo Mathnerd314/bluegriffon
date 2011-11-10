@@ -1,7 +1,9 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 function OnNewPagePaneLoad()
 {
   GetUIElements();
-  var zoom = Math.floor(parseFloat(GetPrefs().getCharPref("bluegriffon.zoom.default")) * 100);
+  var zoom = Math.floor(parseFloat(Services.prefs.getCharPref("bluegriffon.zoom.default")) * 100);
   gDialog.zoomScale.value = zoom;
   OnScaleChange(false);
 
@@ -12,7 +14,7 @@ function OnNewPagePaneLoad()
     s.setAttribute("value", kTHEMES[i]);
     elt.appendChild(s);
   }
-  var currentTheme = GetPrefs().getCharPref("bluegriffon.source.theme");
+  var currentTheme = Services.prefs.getCharPref("bluegriffon.source.theme");
   document.getElementById("sourceThemeMenulist").value = currentTheme;
 
   toggleWrapping();
@@ -35,7 +37,7 @@ function OnScaleChange(aChangePref)
   if (gDialog.zoomText) {
     gDialog.zoomText.value = gDialog.zoomScale.value;
     if (aChangePref)
-      GetPrefs().setCharPref("bluegriffon.zoom.default", gDialog.zoomScale.value/100);
+      Services.prefs.setCharPref("bluegriffon.zoom.default", gDialog.zoomScale.value/100);
   }
 }
 

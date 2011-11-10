@@ -29,7 +29,7 @@ var gEditorDocumentObserver =
 
         try {
           var spellChecker = new InlineSpellChecker(editor);
-          var prefs = GetPrefs();
+          var prefs = Services.prefs;
           var enabled = prefs.getBoolPref("bluegriffon.spellCheck.enabled");
           spellChecker.enabled = enabled;
           EditorUtils.getCurrentEditorElement().setUserData("spellchecker", spellChecker, null);
@@ -154,7 +154,7 @@ var BlueGriffonPrefsObserver = {
       return;
 
     if (prefName == "bluegriffon.returnKey.createsParagraph") {
-      var value = GetPrefs().getBoolPref("bluegriffon.returnKey.createsParagraph");
+      var value = Services.prefs.getBoolPref("bluegriffon.returnKey.createsParagraph");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
@@ -171,7 +171,7 @@ var BlueGriffonPrefsObserver = {
     }
 
     else if (prefName == "bluegriffon.spellCheck.enabled") {
-      var value = GetPrefs().getBoolPref("bluegriffon.spellCheck.enabled");
+      var value = Services.prefs.getBoolPref("bluegriffon.spellCheck.enabled");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
@@ -188,7 +188,7 @@ var BlueGriffonPrefsObserver = {
     }
 
     else if (prefName == "bluegriffon.tabs.position") {
-      var value = GetPrefs().getCharPref("bluegriffon.tabs.position");
+      var value = Services.prefs.getCharPref("bluegriffon.tabs.position");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
@@ -198,7 +198,7 @@ var BlueGriffonPrefsObserver = {
     }
 
     else if (prefName == "bluegriffon.source.theme") {
-      var value = GetPrefs().getCharPref("bluegriffon.source.theme");
+      var value = Services.prefs.getCharPref("bluegriffon.source.theme");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
       while (windowEnumerator.hasMoreElements()) {
         var w = windowEnumerator.getNext();
@@ -211,7 +211,7 @@ var BlueGriffonPrefsObserver = {
       }
     }
     else if (prefName == "bluegriffon.osx.dock-integration") {
-      var value = GetPrefs().getBoolPref("bluegriffon.osx.dock-integration");
+      var value = Services.prefs.getBoolPref("bluegriffon.osx.dock-integration");
       if (value)
         UpdateBadge();
       else

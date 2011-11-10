@@ -1,3 +1,4 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/bgQuit.jsm");
@@ -49,7 +50,7 @@ function Startup()
   initLocalFontFaceMenu(gDialog.FontFacePopup);
 
   try {
-    var pbi = GetPrefs().QueryInterface(Components.interfaces.nsIPrefBranchInternal);
+    var pbi = Services.prefs.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.addObserver("bluegriffon.", BlueGriffonPrefsObserver, false);
   } catch(ex) {
   }
@@ -74,8 +75,8 @@ function LoadLastTabs()
   var lastTabs = "";
   gLastTabsArray = [];
   try {
-    lastTabs = GetPrefs().getCharPref("bluegriffon.defaults.lastTabs");
-    GetPrefs().setCharPref("bluegriffon.defaults.lastTabs", "");
+    lastTabs = Services.prefs.getCharPref("bluegriffon.defaults.lastTabs");
+    Services.prefs.setCharPref("bluegriffon.defaults.lastTabs", "");
   }
   catch(e) {}
   if (lastTabs) {

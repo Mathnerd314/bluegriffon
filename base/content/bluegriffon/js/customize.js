@@ -36,6 +36,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 function CustomizeToolbar(id)
 {
@@ -54,7 +55,7 @@ function CustomizeToolbar(id)
   var customizeURL = "chrome://global/content/customizeToolbar.xul";
 
   try {
-    gCustomizeSheet = GetPrefs().getBoolPref("toolbar.customization.usesheet");
+    gCustomizeSheet = Services.prefs.getBoolPref("toolbar.customization.usesheet");
   }
   catch(e) { gCustomizeSheet = false; }
 
