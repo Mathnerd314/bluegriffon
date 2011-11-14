@@ -3891,8 +3891,10 @@ CSSParser.prototype = {
 
       if (!aParseSelectorOnly && token.isSymbol("{")) {
         // end of selector
-        this.ungetToken();
-        valid = true;
+        valid = !combinatorFound;
+        // don't unget if invalid since addUnknownRule is going to restore state anyway
+        if (valid)
+          this.ungetToken();
         break;
       }
 
@@ -3905,18 +3907,31 @@ CSSParser.prototype = {
       }
       // now combinators and grouping...
       else if (!combinatorFound
-                && (token.isWhiteSpace()
-                    || token.isSymbol(">")
+         && (token.isWhiteSpace()
+        || token.isSymbol(">")
                     || token.isSymbol("+")
                     || token.isSymbol("~"))) {
-        if (token.isWhiteSpace())
-          s += " ";
-        else
+        if (token.isWhiteSpace()) {
+                s += " ";
+          var nextToken = this.lookAhead(true, true);
+          if (!nextToken.isNotNull()) {
+                  if (aParseSelectorOnly)
+                    return {selector: s, specificity: specificity };
+            return "";
+          }
+          if (nextToken.isSymbol(">")
+              || nextToken.isSymbol("+")
+              || nextToken.isSymbol("~")) {
+                  token = this.getToken(true, true);
+            s += token.value + " ";
+            combinatorFound = true;
+          }
+        }
+        else {
           s += token.value;
-        if (token.isSymbol(">")
-            || token.isSymbol("+")
-            || token.isSymbol("~"))
           combinatorFound = true;
+        }
+        isFirstInChain = true;
         token = this.getToken(true, true);
         continue;
       }
@@ -3928,10 +3943,10 @@ CSSParser.prototype = {
         specificity.b += simpleSelector.specificity.b;
         specificity.c += simpleSelector.specificity.c;
         specificity.d += simpleSelector.specificity.d;
+        isFirstInChain = false;
+        combinatorFound = false;
       }
 
-      isFirstInChain = false;
-      combinatorFound = false;
       token = this.getToken(false, true);
     }
 
