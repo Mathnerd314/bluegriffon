@@ -43,6 +43,7 @@ var BGUpdateManager = {
   kPREF_LAST_UPDATE:      "blugriffon.updates.last",
   kPREF_UPDATES_ENABLED:  "bluegriffon.updates.check.enabled",
   kPREF_UPDATE_FREQUENCY: "bluegriffon.updates.frequency",
+  kPREF_UPDATE_MESSAGE:   "bluegriffon.updates.message",
   kURL_UPDATE:            "http://bluegriffon.org/pings/bluegriffon_ping.php?",
 
   //Interfaces this component implements.
@@ -202,26 +203,40 @@ var BGUpdateManager = {
         doc.documentElement.nodeName == "update") {
       var child = doc.documentElement.firstElementChild;
       var currentVersion, homeURL;
+      var message = "", messageURL = "";
       while (child) {
         switch (child.nodeName)
         {
           case "currentVersion": currentVersion = child.textContent; break;
           case "homeURL":        homeURL = child.textContent; break;
+          case "message":        message = child.textContent; break;
+          case "messageURL":     messageURL = child.textContent; break;
           default:               break;
         }
         child = child.nextElementSibling;
       }
       if (currentVersion && homeURL) {
         var gApp = Services.appinfo;
+        var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
         if (Services.vc.compare(gApp.version, currentVersion) < 0) {
           // aaaaah, we found a more recent version...
-          var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
-          window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features);
+          window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
+                            null, null);
           return;
         }
         else {
           if ("BlueGriffonIsUpToDate" in window)
             BlueGriffonIsUpToDate();
+          var lastMessage = "";
+          try {
+            lastMessage = Services.prefs.getCharPref(this.kPREF_UPDATE_MESSAGE);
+          }
+          catch(e){}
+          if (message && lastMessage != message) {
+            Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
+            window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
+                              message, messageURL);
+          }
           return;
         }
       }
