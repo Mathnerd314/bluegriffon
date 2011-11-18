@@ -50,13 +50,11 @@
 
   <binding id="structurebar" extends="chrome://global/content/bindings/scrollbox.xml#arrowscrollbox">
 
-    <resources>
-      <stylesheet src="chrome://bluegriffon/skin/structurebar.css"/>
-    </resources>
 
     <implementation>
 
       <field name="mLastNode">null</field>
+      <field name="mOneElementSelected">false</field>
 
       <method name="selectionChanged">
         <parameter name="aArguments"/>
@@ -64,6 +62,8 @@
         <parameter name="aOneElementSelected"/>
         <body>
         <![CDATA[
+          this.mOneElementSelected = aOneElementSelected;
+
           var node = aNode;
           while (node && node.namespaceURI == "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul") // XUL
             node = node.parentNode;
@@ -133,13 +133,13 @@
 
             var text = "<" + node.nodeName.toLowerCase();
             if (showIDs && node.id)
-              text += "#" + node.id;
+              text += " #" + node.id;
             if (showClasses && node.hasAttribute("class"))
-              text += "." + node.getAttribute("class").replace( / /g, ".");
+              text += " ." + node.getAttribute("class").replace( / /g, ".");
             if (showLang && node.hasAttribute("lang"))
-              text += ":lang(" + node.getAttribute("lang") + ")";
+              text += " :lang(" + node.getAttribute("lang") + ")";
             if (showRole && node.hasAttribute("role"))
-              text += ":role(" + node.getAttribute("role") + ")";
+              text += " :role(" + node.getAttribute("role") + ")";
             text += ">"
 
             newLabel.setAttribute("label",     text);
@@ -168,6 +168,8 @@
       <method name="init">
         <body>
         <![CDATA[
+          var isRTL = Components.classes["@mozilla.org/chrome/chrome-registry;1"].getService(Components.interfaces.nsIXULChromeRegistry).isLocaleRTL("global");
+          this.setAttribute("rtl", isRTL);
           NotifierUtils.addNotifierCallback("selection_strict", this.selectionChanged, this);
         ]]>
         </body>

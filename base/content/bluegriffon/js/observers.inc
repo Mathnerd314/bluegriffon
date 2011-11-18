@@ -153,6 +153,8 @@ var BlueGriffonPrefsObserver = {
     if (topic != "nsPref:changed")
       return;
 
+    const kSTRUCTUREBAR_PREFS = "bluegriffon.structurebar";
+
     if (prefName == "bluegriffon.returnKey.createsParagraph") {
       var value = Services.prefs.getBoolPref("bluegriffon.returnKey.createsParagraph");
       var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
@@ -217,6 +219,12 @@ var BlueGriffonPrefsObserver = {
       else
         ResetBadge();
     }
+    else if (prefName.substr(0, kSTRUCTUREBAR_PREFS.length) == kSTRUCTUREBAR_PREFS
+             && gDialog.structurebar.mLastNode)
+      gDialog.structurebar.selectionChanged(
+                null,
+                gDialog.structurebar.mLastNode,
+                gDialog.structurebar.mOneElementSelected);
   }
 };
 

@@ -49,12 +49,6 @@ structurebar toolbarbutton {
   padding: 0px;
 }
 
-structurebar toolbarbutton[checked="true"] {
-  font-weight: bold;
-  border: none 0px;
-  -moz-border-radius: 3px;
-}
-
 structurebar autorepeatbutton {
   -moz-border-radius: 3px;
   width: 1.5em;
