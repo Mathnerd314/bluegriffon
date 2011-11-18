@@ -78,38 +78,38 @@ function TransformsSectionIniter(aElt, aRuleset)
       case "skew":
         item.className = "skewTransform";
         gDialog.transformsRichlistbox.appendChild(item);
-        item.valueX = t.values[0];
-        item.valueY = t.values[1];
+        item.valueX = parseFloat(t.values[0]);
+        item.valueY = parseFloat(t.values[1]);
         break;
       case "skewx":
         item.className = "skewTransform";
         gDialog.transformsRichlistbox.appendChild(item);
-        item.valueX = t.values[0];
+        item.valueX = parseFloat(t.values[0]);
         item.valueY = "";
         break;
       case "skewy":
         item.className = "skewTransform";
         gDialog.transformsRichlistbox.appendChild(item);
         item.valueX = "";
-        item.valueY = t.values[0];
+        item.valueY = parseFloat(t.values[0]);
         break;
       case "scale":
         item.className = "scaleTransform";
         gDialog.transformsRichlistbox.appendChild(item);
-        item.horizontally = t.values[0];
-        item.vertically = t.values[1];
+        item.horizontally = parseFloat(t.values[0]);
+        item.vertically = parseFloat(t.values[1]);
         break;
       case "scalex":
         item.className = "scaleTransform";
         gDialog.transformsRichlistbox.appendChild(item);
-        item.horizontally = t.values[0];
+        item.horizontally = parseFloat(t.values[0]);
         item.vertically = "";
         break;
       case "scaley":
         item.className = "scaleTransform";
         gDialog.transformsRichlistbox.appendChild(item);
         item.horizontally = "";
-        item.vertically = t.values[0];
+        item.vertically = parseFloat(t.values[0]);
         break;
       default: break;
     }
@@ -180,16 +180,6 @@ function ReapplyTransforms()
           var y = item.valueY;
           if (!x && !y)
             return;
-          if (x) {
-            var mX = x.match(r);
-            if (!mX || !mX[2])
-              return;
-          }
-          if (y) {
-            var mY = y.match(r);
-            if (!mY || !mY[2])
-              return;
-          }
           if (x && y && parseFloat(x) && parseFloat(y))
             transforms.push("skew(" + x + "deg, " + y + "deg)");
           else if (x && parseFloat(x))
@@ -204,16 +194,6 @@ function ReapplyTransforms()
           var v = item.vertically;
           if (!h && !v)
             return;
-          if (h) {
-            var mH = h.match(r);
-            if (!mH || !mH[2])
-              return;
-          }
-          if (v) {
-            var mV = v.match(r);
-            if (!mV || !mV[2])
-              return;
-          }
           if (h && v && parseFloat(h) && parseFloat(v))
             transforms.push("scale(" + h + ", " + v + ")");
           else if (h && parseFloat(h))
