@@ -77,7 +77,7 @@ diOSXDockIconBadger::SetIconValue(int aCount)
 }
 
 NS_IMETHODIMP
-diOSXDockIconBadger::SetDocumentEdited(nsIBaseWindow *aWindow, PRBool aIsEdited) 
+diOSXDockIconBadger::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 
 {
   nsCOMPtr<nsIWidget> widget = nsnull;
   aWindow->GetMainWidget(getter_AddRefs(widget));

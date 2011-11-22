@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-sv-SE@bluegriffon.org"
                em:name="Svenska (SE) Language Pack"
-               em:version="9.0.1.3"
+               em:version="9.0.1.4"
                em:type="8"
                em:creator="Mozilla-sv">
 
@@ -16,8 +16,8 @@
       <!-- BlueGriffon -->
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
-        <em:minVersion>1.3</em:minVersion>
-        <em:maxVersion>1.3</em:maxVersion>
+        <em:minVersion>1.4</em:minVersion>
+        <em:maxVersion>1.4</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

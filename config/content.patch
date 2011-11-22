@@ -1,7 +1,7 @@
-diff -r 5faaa652594f browser/app/profile/firefox.js
---- a/browser/app/profile/firefox.js	Thu Sep 15 09:36:07 2011 +0100
-+++ b/browser/app/profile/firefox.js	Mon Nov 21 14:40:20 2011 +0100
-@@ -205,6 +205,7 @@
+diff -r 8ceaedf06a57 browser/app/profile/firefox.js
+--- a/browser/app/profile/firefox.js	Mon Nov 21 11:40:20 2011 -0800
++++ b/browser/app/profile/firefox.js	Tue Nov 22 14:14:16 2011 +0100
+@@ -211,6 +211,7 @@
  pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
  pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
                                                  // restart.
@@ -9,71 +9,71 @@ diff -r 5faaa652594f browser/app/profile/firefox.js
  
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
  pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
-diff -r 5faaa652594f caps/src/nsScriptSecurityManager.cpp
---- a/caps/src/nsScriptSecurityManager.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/caps/src/nsScriptSecurityManager.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -1546,6 +1546,7 @@
+diff -r 8ceaedf06a57 caps/src/nsScriptSecurityManager.cpp
+--- a/caps/src/nsScriptSecurityManager.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/caps/src/nsScriptSecurityManager.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -1507,6 +1507,7 @@
                               &hasFlags);
      NS_ENSURE_SUCCESS(rv, rv);
      if (hasFlags) {
 +        return NS_OK;
-         // resource: and chrome: are equivalent, securitywise
-         // That's bogus!!  Fix this.  But watch out for
-         // the view-source stylesheet?
-diff -r 5faaa652594f content/base/public/nsIDocumentEncoder.idl
---- a/content/base/public/nsIDocumentEncoder.idl	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/public/nsIDocumentEncoder.idl	Mon Nov 21 14:40:20 2011 +0100
-@@ -51,7 +51,7 @@
- [ptr] native nsINodePtr(nsINode);
- [ptr] native nsIDocumentPtr(nsIDocument);
+         if (aFlags & nsIScriptSecurityManager::ALLOW_CHROME) {
+             if (!targetScheme.EqualsLiteral("chrome")) {
+                 // for now don't change behavior for resource: or moz-icon:
+diff -r 8ceaedf06a57 content/base/public/nsIDocumentEncoder.idl
+--- a/content/base/public/nsIDocumentEncoder.idl	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/public/nsIDocumentEncoder.idl	Tue Nov 22 14:14:16 2011 +0100
+@@ -68,7 +68,7 @@
+   nsIDOMNode fixupNode(in nsIDOMNode aNode, out boolean aSerializeCloneKids);
+ };
  
--[scriptable, uuid(c0da5b87-0ba7-4d7c-8cb3-fcb02af4253d)]
+-[scriptable, uuid(7222bdf1-c2b9-41f1-a40a-a3d65283a95b)]
 +[scriptable, uuid(30a3161c-09e0-425e-84e6-ff952c0fd859)]
- interface nsIDocumentEncoderNodeFixup : nsISupports
+ interface nsIDocumentEncoder : nsISupports
  {
-   /**
-@@ -237,6 +237,11 @@
+   // Output methods flag bits. There are a frightening number of these,
+@@ -236,6 +236,11 @@
+    */
    const unsigned long OutputFormatDelSp  = (1 << 20);
   
-   /**
++ /**
 +   * Output all non-ascii characters as numeric entities
 +   */
 +  const unsigned long OutputEncodeCharacterEntities = (1 << 21);
 +
-+  /**
+   /**
     * Initialize with a pointer to the document and the mime type.
     * @param aDocument Document to encode.
-    * @param aMimeType MimeType to use. May also be set by SetMimeType.
-diff -r 5faaa652594f content/base/src/nsCopySupport.cpp
---- a/content/base/src/nsCopySupport.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/src/nsCopySupport.cpp	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 content/base/src/nsCopySupport.cpp
+--- a/content/base/src/nsCopySupport.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/src/nsCopySupport.cpp	Tue Nov 22 14:14:16 2011 +0100
 @@ -438,7 +438,7 @@
    // copy it properly (all the copy code for non-plaintext assumes using HTML
    // serializers and parsers is OK, and those mess up XHTML).
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
 -  if (!(htmlDoc && aDoc->IsHTML()))
 +  if (!htmlDoc)
-     *aIsPlainTextContext = PR_TRUE;
+     *aIsPlainTextContext = true;
  
    return NS_OK;
-diff -r 5faaa652594f content/base/src/nsDocumentEncoder.cpp
---- a/content/base/src/nsDocumentEncoder.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/src/nsDocumentEncoder.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -1332,7 +1332,7 @@
+diff -r 8ceaedf06a57 content/base/src/nsDocumentEncoder.cpp
+--- a/content/base/src/nsDocumentEncoder.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/src/nsDocumentEncoder.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -1340,7 +1340,7 @@
    
    // also consider ourselves in a text widget if we can't find an html document
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
 -  if (!(htmlDoc && mDocument->IsHTML()))
 +  if (!htmlDoc)
-     mIsTextWidget = PR_TRUE;
+     mIsTextWidget = true;
    
    // normalize selection if we are not in a widget
-diff -r 5faaa652594f content/base/src/nsHTMLContentSerializer.cpp
---- a/content/base/src/nsHTMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/src/nsHTMLContentSerializer.cpp	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 content/base/src/nsHTMLContentSerializer.cpp
+--- a/content/base/src/nsHTMLContentSerializer.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/src/nsHTMLContentSerializer.cpp	Tue Nov 22 14:14:16 2011 +0100
 @@ -270,14 +270,15 @@
  
-   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
+   bool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
  
 -  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
 +  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
@@ -90,7 +90,7 @@ diff -r 5faaa652594f content/base/src/nsHTMLContentSerializer.cpp
      }
      else if (mAddSpace) {
 @@ -545,7 +546,8 @@
-   PRBool nonBasicEntities =
+   bool nonBasicEntities =
      !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
                   nsIDocumentEncoder::OutputEncodeHTMLEntities   |
 -                 nsIDocumentEncoder::OutputEncodeW3CEntities));
@@ -114,32 +114,25 @@ diff -r 5faaa652594f content/base/src/nsHTMLContentSerializer.cpp
            fullConstEntityText = entityTable[val];
            break;
          } else if (val > 127 &&
-diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
---- a/content/base/src/nsXHTMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/src/nsXHTMLContentSerializer.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -104,9 +104,9 @@
-   // when there is no flags, so we keep wrapping in order to keep
-   // compatibility with the existing calling code
-   // XXXLJ perhaps should we remove this default settings later ?
+diff -r 8ceaedf06a57 content/base/src/nsXHTMLContentSerializer.cpp
+--- a/content/base/src/nsXHTMLContentSerializer.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/src/nsXHTMLContentSerializer.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -100,14 +100,6 @@
+                               const char* aCharSet, bool aIsCopying,
+                               bool aRewriteEncodingDeclaration)
+ {
+-  // The previous version of the HTML serializer did implicit wrapping
+-  // when there is no flags, so we keep wrapping in order to keep
+-  // compatibility with the existing calling code
+-  // XXXLJ perhaps should we remove this default settings later ?
 -  if (aFlags & nsIDocumentEncoder::OutputFormatted ) {
-+  /*if (aFlags & nsIDocumentEncoder::OutputFormatted ) {
-       aFlags = aFlags | nsIDocumentEncoder::OutputWrap;
+-      aFlags = aFlags | nsIDocumentEncoder::OutputWrap;
 -  }
-+  }*/
- 
+-
    nsresult rv;
    rv = nsXMLContentSerializer::Init(aFlags, aWrapColumn, aCharSet, aIsCopying, aRewriteEncodingDeclaration);
-@@ -761,14 +761,23 @@
-     return mAddSpace;
-   }
- 
--  if (aName == nsGkAtoms::title ||
-+  if (// aName == nsGkAtoms::title ||
-       aName == nsGkAtoms::meta  ||
--      aName == nsGkAtoms::link  ||
--      aName == nsGkAtoms::style ||
-+      //aName == nsGkAtoms::link  ||
-+      //aName == nsGkAtoms::style ||
+   NS_ENSURE_SUCCESS(rv, rv);
+@@ -767,7 +759,16 @@
        aName == nsGkAtoms::select ||
        aName == nsGkAtoms::option ||
        aName == nsGkAtoms::script ||
@@ -154,19 +147,19 @@ diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
 +      aName == nsGkAtoms::tfoot ||
 +      aName == nsGkAtoms::tr ||
 +      aName == nsGkAtoms::td) {
-     return PR_TRUE;
+     return true;
    }
    else {
-@@ -795,7 +804,7 @@
+@@ -794,7 +795,7 @@
  
    if ((aName == nsGkAtoms::html) ||
        (aName == nsGkAtoms::head) ||
 -      (aName == nsGkAtoms::body) ||
-+      //(aName == nsGkAtoms::body) ||
++      // (aName == nsGkAtoms::body) ||
        (aName == nsGkAtoms::ul) ||
        (aName == nsGkAtoms::ol) ||
        (aName == nsGkAtoms::dl) ||
-@@ -832,7 +841,10 @@
+@@ -831,7 +832,10 @@
        (aName == nsGkAtoms::dl) ||
        (aName == nsGkAtoms::select) ||
        (aName == nsGkAtoms::table) ||
@@ -175,10 +168,10 @@ diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
 +      (aName == nsGkAtoms::thead) ||
 +      (aName == nsGkAtoms::tfoot) ||
 +      (aName == nsGkAtoms::tr)) {
-     return PR_TRUE;
+     return true;
    }
-   return PR_FALSE;
-@@ -897,6 +909,8 @@
+   return false;
+@@ -896,6 +900,8 @@
        name == nsGkAtoms::noframes
        ) {
      mPreLevel++;
@@ -187,7 +180,7 @@ diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
    }
  }
  
-@@ -915,6 +929,8 @@
+@@ -914,6 +920,8 @@
        name == nsGkAtoms::noframes
      ) {
      --mPreLevel;
@@ -196,16 +189,11 @@ diff -r 5faaa652594f content/base/src/nsXHTMLContentSerializer.cpp
    }
  }
  
-@@ -1034,3 +1050,4 @@
- 
-   return PR_TRUE;
- }
-+
-diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
---- a/content/base/src/nsXMLContentSerializer.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/content/base/src/nsXMLContentSerializer.cpp	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 content/base/src/nsXMLContentSerializer.cpp
+--- a/content/base/src/nsXMLContentSerializer.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/content/base/src/nsXMLContentSerializer.cpp	Tue Nov 22 14:14:16 2011 +0100
 @@ -649,7 +649,25 @@
-   PRBool rawAppend = mDoRaw && aDoEscapeEntities;
+   bool rawAppend = mDoRaw && aDoEscapeEntities;
    nsAString& attrString = (rawAppend) ? aStr : attrString_;
  
 -  attrString.Append(PRUnichar(' '));
@@ -250,25 +238,26 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
  PRUint32 
 @@ -939,7 +960,7 @@
    nsIAtom *name = content->Tag();
-   PRBool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
+   bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
  
 -  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
 +  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
      if (mColPos && lineBreakBeforeOpen) {
        AppendNewLineToString(aStr);
      }
-@@ -969,6 +990,10 @@
-   PRBool addNSAttr;
+@@ -970,6 +991,11 @@
    addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
-                             PR_FALSE);
+                             false);
+ 
 +  if (!mNameSpaceStack.Length()
 +      && tagNamespaceURI.EqualsLiteral("http://www.w3.org/1999/xhtml")
 +      && !tagLocalName.EqualsLiteral("html"))
 +    addNSAttr = PR_FALSE;
- 
++
    // Serialize the qualified name of the element
    AppendToString(kLessThan, aStr);
-@@ -1186,6 +1211,23 @@
+   if (!tagPrefix.IsEmpty()) {
+@@ -1186,6 +1212,23 @@
      return;
    }
    mColPos += aStr.Length();
@@ -276,8 +265,8 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
 +
 +  aStr.BeginReading(pos);
 +  aStr.EndReading(end);
-+  PRBool foundCR = PR_FALSE;
-+  PRBool foundOtherThanCROrBlank = PR_FALSE;
++  bool foundCR = PR_FALSE;
++  bool foundOtherThanCROrBlank = PR_FALSE;
 +  while (pos < end) {
 +    if (*pos == '\n' || *pos == '\r')
 +      foundCR = PR_TRUE;
@@ -292,7 +281,7 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
    aOutputStr.Append(aStr);
  }
  
-@@ -1296,6 +1338,10 @@
+@@ -1296,6 +1339,10 @@
  void
  nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
  {
@@ -301,9 +290,9 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
 +    return;
 +  }
    AppendToString(mLineBreak, aStr);
-   mMayIgnoreLineBreakSequence = PR_TRUE;
+   mMayIgnoreLineBreakSequence = true;
    mColPos = 0;
-@@ -1465,6 +1511,7 @@
+@@ -1465,6 +1512,7 @@
        // Since we only saw linebreaks, but no spaces or tabs,
        // let's write a linebreak now.
        AppendNewLineToString(aOutputStr);
@@ -311,11 +300,11 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
      }
    }
  }
-@@ -1591,9 +1638,29 @@
+@@ -1591,9 +1639,29 @@
              aOutputStr.Append(PRUnichar(' '));
-             mAddSpace = PR_FALSE;
+             mAddSpace = false;
            }
-+          PRBool CRDone = PR_FALSE;
++          bool CRDone = PR_FALSE;
 +          if (wrapPosition) {
 +            CRDone = (*(aSequenceStart + wrapPosition - 1) == '\n');
 +          }
@@ -340,12 +329,12 @@ diff -r 5faaa652594f content/base/src/nsXMLContentSerializer.cpp
 +
 +          mMayIgnoreLineBreakSequence = PR_TRUE;
            aPos = aSequenceStart + wrapPosition;
-           aMayIgnoreStartOfLineWhitespaceSequence = PR_TRUE;
+           aMayIgnoreStartOfLineWhitespaceSequence = true;
          }
-diff -r 5faaa652594f editor/libeditor/html/nsHTMLDataTransfer.cpp
---- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -1378,13 +1378,43 @@
+diff -r 8ceaedf06a57 editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- a/editor/libeditor/html/nsHTMLDataTransfer.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -1404,13 +1404,42 @@
          textDataObj->GetData(text);
          NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
          stuffToPaste.Assign(text.get(), len / 2);
@@ -355,13 +344,13 @@ diff -r 5faaa652594f editor/libeditor/html/nsHTMLDataTransfer.cpp
 +        nsReadingIterator<PRUnichar> endbody;
 +        stuffToPaste.BeginReading(beginbody);
 +        stuffToPaste.EndReading(endbody);
-+        PRBool foundbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING("<body"),
++        bool foundbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING("<body"),
 +                                                         beginbody, endbody);
 +        nsAutoString realStuffToPaste;
 +        if (foundbody) {
 +          nsReadingIterator<PRUnichar> endstartbody;
 +          stuffToPaste.EndReading(endstartbody);
-+          PRBool foundstartbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING(">"),
++          bool foundstartbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING(">"),
 +                                                                endbody, endstartbody);
 +          if (!foundstartbody)
 +            return NS_ERROR_FAILURE;
@@ -372,7 +361,7 @@ diff -r 5faaa652594f editor/libeditor/html/nsHTMLDataTransfer.cpp
 +          stuffToPaste.EndReading(endclosebody);
 +
 +          // Find the index before "</body>"
-+          PRBool foundclosehead = CaseInsensitiveFindInReadable(
++          bool foundclosehead = CaseInsensitiveFindInReadable(
 +                   NS_LITERAL_STRING("</body>"), beginclosebody, endclosebody);
 +          realStuffToPaste.Assign(Substring(endstartbody, beginclosebody));
 +        }
@@ -386,14 +375,13 @@ diff -r 5faaa652594f editor/libeditor/html/nsHTMLDataTransfer.cpp
                                       aDestinationNode, aDestOffset,
                                       aDoDeleteSelection,
 -                                     isSafe);
-+                                     //isSafe);
 +                                     true);
        }
      }
      else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
-diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditRules.cpp
---- a/editor/libeditor/html/nsHTMLEditRules.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 editor/libeditor/html/nsHTMLEditRules.cpp
+--- a/editor/libeditor/html/nsHTMLEditRules.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/editor/libeditor/html/nsHTMLEditRules.cpp	Tue Nov 22 14:14:16 2011 +0100
 @@ -463,8 +463,9 @@
      }
  
@@ -448,10 +436,10 @@ diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditRules.cpp
      }
      else
      {
-diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditor.cpp
---- a/editor/libeditor/html/nsHTMLEditor.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/editor/libeditor/html/nsHTMLEditor.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -318,7 +318,8 @@
+diff -r 8ceaedf06a57 editor/libeditor/html/nsHTMLEditor.cpp
+--- a/editor/libeditor/html/nsHTMLEditor.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/editor/libeditor/html/nsHTMLEditor.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -320,7 +320,8 @@
  
      if (!IsInteractionAllowed()) {
        // ignore any errors from this in case the file is missing
@@ -461,9 +449,9 @@ diff -r 5faaa652594f editor/libeditor/html/nsHTMLEditor.cpp
      }
  
      nsCOMPtr<nsISelection>selection;
-diff -r 5faaa652594f toolkit/content/widgets/menu.xml
---- a/toolkit/content/widgets/menu.xml	Thu Sep 15 09:36:07 2011 +0100
-+++ b/toolkit/content/widgets/menu.xml	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 toolkit/content/widgets/menu.xml
+--- a/toolkit/content/widgets/menu.xml	Mon Nov 21 11:40:20 2011 -0800
++++ b/toolkit/content/widgets/menu.xml	Tue Nov 22 14:14:16 2011 +0100
 @@ -224,6 +224,15 @@
      </content>
    </binding>
@@ -480,10 +468,10 @@ diff -r 5faaa652594f toolkit/content/widgets/menu.xml
    <binding id="menuitem-iconic-noaccel" extends="chrome://global/content/bindings/menu.xml#menuitem">
      <content>
        <xul:hbox class="menu-iconic-left" align="center" pack="center"
-diff -r 5faaa652594f toolkit/content/xul.css
---- a/toolkit/content/xul.css	Thu Sep 15 09:36:07 2011 +0100
-+++ b/toolkit/content/xul.css	Mon Nov 21 14:40:20 2011 +0100
-@@ -347,6 +347,10 @@
+diff -r 8ceaedf06a57 toolkit/content/xul.css
+--- a/toolkit/content/xul.css	Mon Nov 21 11:40:20 2011 -0800
++++ b/toolkit/content/xul.css	Tue Nov 22 14:14:16 2011 +0100
+@@ -351,6 +351,10 @@
    -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic");
  }
  
@@ -494,9 +482,9 @@ diff -r 5faaa652594f toolkit/content/xul.css
  menuitem[description] {
    -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic-desc-noaccel");
  }
-diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.js
---- a/toolkit/mozapps/extensions/content/extensions.js	Thu Sep 15 09:36:07 2011 +0100
-+++ b/toolkit/mozapps/extensions/content/extensions.js	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js	Mon Nov 21 11:40:20 2011 -0800
++++ b/toolkit/mozapps/extensions/content/extensions.js	Tue Nov 22 14:14:16 2011 +0100
 @@ -59,6 +59,7 @@
  const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
  const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
@@ -505,26 +493,26 @@ diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.js
  
  const BRANCH_REGEXP = /^([^\.]+\.[0-9]+[a-z]*).*/gi;
  
-@@ -117,6 +118,18 @@
- 
- function initialize() {
+@@ -122,6 +123,18 @@
+     return;
+   }
    document.removeEventListener("load", initialize, true);
 +
-+ // should we allow the window to close when the user hits the ESC key?
-+ let closeOnEscape = false; // default for Firefox 4+
-+ try {
-+   closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
-+ } catch(e) { }
-+ if (!closeOnEscape) {
-+   let escapeKeyElt = document.getElementById("escapeKey");
-+   if (escapeKeyElt)
-+     escapeKeyElt.setAttribute("disabled", "true");
-+ }
++  // should we allow the window to close when the user hits the ESC key?
++  let closeOnEscape = false; // default for Firefox 4+
++  try {
++    closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
++  } catch(e) { }
++  if (!closeOnEscape) {
++    let escapeKeyElt = document.getElementById("escapeKey");
++    if (escapeKeyElt)
++      escapeKeyElt.setAttribute("disabled", "true");
++  }
 +
    gViewController.initialize();
    gCategories.initialize();
    gHeader.initialize();
-@@ -2458,7 +2471,7 @@
+@@ -2463,7 +2476,7 @@
  
      for (let i = 0; i < this._listBox.itemCount; i++) {
        let item = this._listBox.childNodes[i];
@@ -533,9 +521,9 @@ diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.js
          this._listBox.removeChild(item);
          this.showEmptyNotice(this._listBox.itemCount == 0);
          return;
-diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.xul
---- a/toolkit/mozapps/extensions/content/extensions.xul	Thu Sep 15 09:36:07 2011 +0100
-+++ b/toolkit/mozapps/extensions/content/extensions.xul	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 toolkit/mozapps/extensions/content/extensions.xul
+--- a/toolkit/mozapps/extensions/content/extensions.xul	Mon Nov 21 11:40:20 2011 -0800
++++ b/toolkit/mozapps/extensions/content/extensions.xul	Tue Nov 22 14:14:16 2011 +0100
 @@ -65,6 +65,10 @@
    <script type="application/javascript"
            src="chrome://global/content/contentAreaUtils.js"/>
@@ -547,9 +535,9 @@ diff -r 5faaa652594f toolkit/mozapps/extensions/content/extensions.xul
    <popupset>
      <!-- menu for an addon item -->
      <menupopup id="addonitem-popup">
-diff -r 5faaa652594f toolkit/mozapps/handling/nsContentDispatchChooser.js
---- a/toolkit/mozapps/handling/nsContentDispatchChooser.js	Thu Sep 15 09:36:07 2011 +0100
-+++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js	Mon Nov 21 14:40:20 2011 +0100
+diff -r 8ceaedf06a57 toolkit/mozapps/handling/nsContentDispatchChooser.js
+--- a/toolkit/mozapps/handling/nsContentDispatchChooser.js	Mon Nov 21 11:40:20 2011 -0800
++++ b/toolkit/mozapps/handling/nsContentDispatchChooser.js	Tue Nov 22 14:14:16 2011 +0100
 @@ -101,12 +101,44 @@
      params.appendElement(aURI, false);
      params.appendElement(aWindowContext, false);
@@ -596,20 +584,17 @@ diff -r 5faaa652594f toolkit/mozapps/handling/nsContentDispatchChooser.js
                    params);
    },
  
-diff -r 5faaa652594f widget/src/cocoa/nsMenuItemX.mm
---- a/widget/src/cocoa/nsMenuItemX.mm	Thu Sep 15 09:36:07 2011 +0100
-+++ b/widget/src/cocoa/nsMenuItemX.mm	Mon Nov 21 14:40:20 2011 +0100
-@@ -284,8 +284,31 @@
-       nsAutoString modifiersStr;
-       keyContent->GetAttr(kNameSpaceID_None, nsWidgetAtoms::modifiers, modifiersStr);
+diff -r 8ceaedf06a57 widget/src/cocoa/nsMenuItemX.mm
+--- a/widget/src/cocoa/nsMenuItemX.mm	Mon Nov 21 11:40:20 2011 -0800
++++ b/widget/src/cocoa/nsMenuItemX.mm	Tue Nov 22 14:14:16 2011 +0100
+@@ -282,6 +282,29 @@
        PRUint8 modifiers = nsMenuUtilsX::GeckoModifiersForNodeAttribute(modifiersStr);
-+      unsigned int macModifiers = nsMenuUtilsX::MacModifiersForGeckoModifiers(modifiers);
  
--      unsigned int macModifiers = nsMenuUtilsX::MacModifiersForGeckoModifiers(modifiers);
+       unsigned int macModifiers = nsMenuUtilsX::MacModifiersForGeckoModifiers(modifiers);
 +      // If we're empty, try the keyCode instead.
 +      if (keyChar.Equals(NS_LITERAL_STRING(" ")) || keyChar.IsEmpty()) {
 +
-+        keyContent->GetAttr(kNameSpaceID_None, nsWidgetAtoms::keycode, keyChar);
++        keyContent->GetAttr(kNameSpaceID_None, nsGkAtoms::keycode, keyChar);
 +
 +        if (keyChar.Equals(NS_LITERAL_STRING("VK_F2"))) {
 +          unichar ch[1];
@@ -632,11 +617,11 @@ diff -r 5faaa652594f widget/src/cocoa/nsMenuItemX.mm
        [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
  
        NSString *keyEquivalent = [[NSString stringWithCharacters:(unichar*)keyChar.get()
-diff -r 5faaa652594f widget/src/gtk2/nsWindow.cpp
---- a/widget/src/gtk2/nsWindow.cpp	Thu Sep 15 09:36:07 2011 +0100
-+++ b/widget/src/gtk2/nsWindow.cpp	Mon Nov 21 14:40:20 2011 +0100
-@@ -4059,6 +4059,8 @@
-                 gdk_window_add_filter(mShell->window,
+diff -r 8ceaedf06a57 widget/src/gtk2/nsWindow.cpp
+--- a/widget/src/gtk2/nsWindow.cpp	Mon Nov 21 11:40:20 2011 -0800
++++ b/widget/src/gtk2/nsWindow.cpp	Tue Nov 22 14:14:16 2011 +0100
+@@ -4025,6 +4025,8 @@
+                 gdk_window_add_filter(gtk_widget_get_window(mShell),
                                        popup_take_focus_filter, NULL); 
  #endif
 +                // XXX BlueGriffon ugly hack to work around bug 662770
@@ -644,14 +629,3 @@ diff -r 5faaa652594f widget/src/gtk2/nsWindow.cpp
              }
  
              GdkWindowTypeHint gtkTypeHint;
-diff -r 5faaa652594f widget/src/xpwidgets/nsWidgetAtomList.h
---- a/widget/src/xpwidgets/nsWidgetAtomList.h	Thu Sep 15 09:36:07 2011 +0100
-+++ b/widget/src/xpwidgets/nsWidgetAtomList.h	Mon Nov 21 14:40:20 2011 +0100
-@@ -85,6 +85,7 @@
- WIDGET_ATOM(input, "input")
- WIDGET_ATOM(indeterminate, "indeterminate")
- WIDGET_ATOM(key, "key") // The key element / attribute
-+WIDGET_ATOM(keycode, "keycode")
- WIDGET_ATOM(label, "label")
- WIDGET_ATOM(max, "max")
- WIDGET_ATOM(maxpos, "maxpos")
