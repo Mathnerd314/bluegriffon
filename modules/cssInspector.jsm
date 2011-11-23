@@ -46,6 +46,18 @@
 
 var EXPORTED_SYMBOLS = ["CssInspector", "CSSParser"];
 
+const kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
+const kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";
+const kCHARSET_RULE_MISSING_WS = "Missing mandatory whitespace after @charset";
+const kIMPORT_RULE_MISSING_URL = "Missing URL in @import rule";
+const kURL_EOF = "Unexpected end of stylesheet";
+const kURL_WS_INSIDE = "Multiple tokens inside a url() notation";
+const kVARIABLES_RULE_POSITION = "@variables rule invalid at this position in the stylesheet";
+const kIMPORT_RULE_POSITION = "@import rule invalid at this position in the stylesheet";
+const kNAMESPACE_RULE_POSITION = "@namespace rule invalid at this position in the stylesheet";
+const kCHARSET_RULE_CHARSET_SOF = "@charset rule invalid at this position in the stylesheet";
+const kUNKNOWN_AT_RULE = "Unknow @-rule";
+
 /* FROM http://peter.sh/data/vendor-prefixed-css.php?js=1 */
 
 const kENGINES = [
@@ -3752,6 +3764,159 @@ CSSParser.prototype = {
     return "";
   },
 
+  parseKeyframesRule: function(aToken, aSheet) {
+    var currentLine = CountLF(this.mScanner.getAlreadyScanned());
+    var s = aToken.value;
+    var valid = false;
+    var keyframesRule = new jscsspKeyframesRule();
+    keyframesRule.currentLine = currentLine;
+    this.preserveState();
+    var token = this.getToken(true, true);
+    var foundName = false;
+    while (token.isNotNull()) {
+      if (token.isIdent()) {
+        // should be the keyframes' name
+        foundName = true;
+        s += " " + token.value;
+        keyframesRule.name = token.value;
+        token = this.getToken(true, true);
+        if (token.isSymbol("{"))
+          this.ungetToken();
+        else {
+          // error...
+          token.type = jscsspToken.NULL_TYPE;
+          break;
+        }
+      }
+      else if (token.isSymbol("{")) {
+        if (!foundName) {
+          token.type = jscsspToken.NULL_TYPE;
+          // not a valid keyframes at-rule
+        }
+        break;
+      }
+      else {
+        token.type = jscsspToken.NULL_TYPE;
+        // not a valid keyframes at-rule
+        break;
+      }
+      token = this.getToken(true, true);
+    }
+
+    if (token.isSymbol("{") && keyframesRule.name) {
+      // ok let's parse keyframe rules now...
+      s += " { ";
+      token = this.getToken(true, false);
+      while (token.isNotNull()) {
+        if (token.isComment() && this.mPreserveComments) {
+          s += " " + token.value;
+          var comment = new jscsspComment();
+          comment.parsedCssText = token.value;
+          keyframesRule.cssRules.push(comment);
+        } else if (token.isSymbol("}")) {
+          valid = true;
+          break;
+        } else {
+          var r = this.parseKeyframeRule(token, keyframesRule, true);
+          if (r)
+            s += r;
+        }
+        token = this.getToken(true, false);
+      }
+    }
+    if (valid) {
+      this.forgetState();
+      keyframesRule.currentLine = currentLine;
+      keyframesRule.parsedCssText = s;
+      aSheet.cssRules.push(keyframesRule);
+      return true;
+    }
+    this.restoreState();
+    return false;
+  },
+
+  parseKeyframeRule: function(aToken, aOwner) {
+    var currentLine = CountLF(this.mScanner.getAlreadyScanned());
+    this.preserveState();
+    var token = aToken;
+
+    // find the keyframe keys
+    var key = "";
+    while (token.isNotNull()) {
+      if (token.isIdent() || token.isPercentage()) {
+        if (token.isIdent()
+            && !token.isIdent("from")
+            && !token.isIdent("to")) {
+          key = "";
+          break;
+        }
+        key += token.value;
+        token = this.getToken(true, true);
+        if (token.isSymbol("{")) {
+          this.ungetToken();
+          break;
+        }
+        else 
+          if (token.isSymbol(",")) {
+            key += ", ";
+          }
+          else {
+            key = "";
+            break;
+          }
+      }
+      else {
+        key = "";
+        break;
+      }
+      token = this.getToken(true, true);
+    }
+
+    var valid = false;
+    var declarations = [];
+    if (key) {
+      var s = key;
+      token = this.getToken(true, true);
+      if (token.isSymbol("{")) {
+        s += " { ";
+        token = this.getToken(true, false);
+        while (true) {
+          if (!token.isNotNull()) {
+            valid = true;
+            break;
+          }
+          if (token.isSymbol("}")) {
+            s += "}";
+            valid = true;
+            break;
+          } else {
+            var d = this.parseDeclaration(token, declarations, true, true, aOwner);
+            s += ((d && declarations.length) ? " " : "") + d;
+          }
+          token = this.getToken(true, false);
+        }
+      }
+    }
+    else {
+      // key is invalid so the whole rule is invalid with it
+    }
+
+    if (valid) {
+      var rule = new jscsspKeyframeRule();
+      rule.currentLine = currentLine;
+      rule.parsedCssText = s;
+      rule.declarations = declarations;
+      rule.keyText = key;
+      rule.parentRule = aOwner;
+      aOwner.cssRules.push(rule);
+      return s;
+    }
+    this.restoreState();
+    s = this.currentToken().value;
+    this.addUnknownAtRule(aOwner, s);
+    return "";
+  },
+
   parseMediaRule: function(aToken, aSheet) {
     var currentLine = CountLF(this.mScanner.getAlreadyScanned());
     var s = aToken.value;
@@ -3778,7 +3943,8 @@ CSSParser.prototype = {
             break;
           }
         }
-      } else if (token.isSymbol("{"))
+      }
+      else if (token.isSymbol("{"))
         break;
       else if (foundMedia) {
         token.type = jscsspToken.NULL_TYPE;
@@ -4258,6 +4424,10 @@ CSSParser.prototype = {
           else
             this.addUnknownAtRule(sheet, token.value);
         }
+        else if (token.isAtRule("@-moz-keyframes")) {
+          if (!this.parseKeyframesRule(token, sheet))
+            this.addUnknownAtRule(sheet, token.value);
+        }
         else if (token.isAtRule("@charset")) {
           this.reportError(kCHARSET_RULE_CHARSET_SOF);
           this.addUnknownAtRule(sheet, token.value);
@@ -4439,11 +4609,15 @@ var kJscsspIMPORT_RULE    = 3;
 var kJscsspMEDIA_RULE     = 4;
 var kJscsspFONT_FACE_RULE = 5;
 var kJscsspPAGE_RULE      = 6;
-var kJscsspVARIABLES_RULE = 7;
+
+var kJscsspKEYFRAMES_RULE = 7;
+var kJscsspKEYFRAME_RULE  = 8;
 
 var kJscsspNAMESPACE_RULE = 100;
 var kJscsspCOMMENT        = 101;
 var kJscsspWHITE_SPACE    = 102;
+
+var kJscsspVARIABLES_RULE = 200;
 
 var kJscsspSTYLE_DECLARATION = 1000;
 
@@ -4851,6 +5025,94 @@ jscsspFontFaceRule.prototype = {
   }
 };
 
+/* kJscsspKEYFRAMES_RULE */
+function jscsspKeyframesRule()
+{
+  this.type = kJscsspKEYFRAMES_RULE;
+  this.parsedCssText = null;
+  this.cssRules = [];
+  this.name = null;
+  this.parentStyleSheet = null;
+  this.parentRule = null;
+}
+
+jscsspKeyframesRule.prototype = {
+  cssText: function() {
+    var rv = "";
+    var prefixes = ["moz", "webkit", "ms", "o"];
+    for (var p = 0; p < prefixes.length; p++) {
+      rv += gTABS
+            + "@-" + prefixes[p] + "-keyframes "
+            + this.name + " {\n";
+      var preservedGTABS = gTABS;
+      gTABS += "  ";
+      for (var i = 0; i < this.cssRules.length; i++)
+        rv += gTABS + this.cssRules[i].cssText() + "\n";
+      gTABS = preservedGTABS;
+    }
+    rv += gTABS + "}\n";
+    return rv;
+  },
+
+  setCssText: function(val) {
+    var sheet = {cssRules: []};
+    var parser = new CSSParser(val);
+    var token = parser.getToken(true, true);
+    if (token.isAtRule("@-mozkeyframes")) {
+      if (parser.parseKeyframesRule(token, sheet)) {
+        var newRule = sheet.cssRules[0];
+        this.cssRules = newRule.cssRules;
+        this.name = newRule.name;
+        this.parsedCssText = newRule.parsedCssText;
+        return;
+      }
+    }
+    throw DOMException.SYNTAX_ERR;
+  }
+};
+
+/* kJscsspKEYFRAME_RULE */
+function jscsspKeyframeRule()
+{
+  this.type = kJscsspKEYFRAME_RULE;
+  this.parsedCssText = null;
+  this.declarations = []
+  this.keyText = null;
+  this.parentStyleSheet = null;
+  this.parentRule = null;
+}
+
+jscsspKeyframeRule.prototype = {
+  cssText: function() {
+    var rv = this.keyText + " {\n";
+    var preservedGTABS = gTABS;
+    gTABS += "  ";
+    for (var i = 0; i < this.declarations.length; i++) {
+      var declText = this.declarations[i].cssText();
+      if (declText)
+        rv += gTABS + this.declarations[i].cssText() + "\n";
+    }
+    gTABS = preservedGTABS;
+    return rv + gTABS + "}";
+  },
+
+  setCssText: function(val) {
+    var sheet = {cssRules: []};
+    var parser = new CSSParser(val);
+    var token = parser.getToken(true, true);
+    if (!token.isNotNull()) {
+      if (parser.parseKeyframeRule(token, sheet, false)) {
+        var newRule = sheet.cssRules[0];
+        this.keyText = newRule.keyText;
+        this.declarations = newRule.declarations;
+        this.parsedCssText = newRule.parsedCssText;
+        return;
+      }
+    }
+    throw DOMException.SYNTAX_ERR;
+  }
+};
+
 /* kJscsspMEDIA_RULE */
 
 function jscsspMediaRule()
@@ -5158,7 +5420,7 @@ function ParseURL(buffer) {
         result.host += buffer.charAt(start++);
       }
     } else if(section == "PORT") {
-      if(buffer.charAt(start) = '/') {
+      if(buffer.charAt(start) == '/') {
         section = "PATH";
       } else if(buffer.charAt(start) == '?') {
         section = "QUERY";
