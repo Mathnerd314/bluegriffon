@@ -151,7 +151,7 @@
     </toolbarbutton>
 
     <toolbarbutton id="align-left-button" type="radio" group="align" autoCheck="false"
-                   command="cmd_renderedHTMLEnabler"
+                   observes="cmd_renderedHTMLEnabler"
                    oncommand="ComposerCommands.doStatefulCommand('cmd_align', 'left')"
                    tooltiptext="&alignLeft.tooltip;" label="&alignLeft.label;" >
       <observes element="cmd_align" attribute="state" 
@@ -159,7 +159,7 @@
     </toolbarbutton>
 
     <toolbarbutton id="align-center-button" type="radio" group="align" autoCheck="false"
-                   command="cmd_renderedHTMLEnabler"
+                   observes="cmd_renderedHTMLEnabler"
                    oncommand="ComposerCommands.doStatefulCommand('cmd_align', 'center')"
                    tooltiptext="&alignCenter.tooltip;" label="&alignCenter.label;" >
       <observes element="cmd_align" attribute="state" 
@@ -167,7 +167,7 @@
     </toolbarbutton>
 
     <toolbarbutton id="align-right-button" type="radio" group="align" autoCheck="false"
-                   command="cmd_renderedHTMLEnabler"
+                   observes="cmd_renderedHTMLEnabler"
                    oncommand="ComposerCommands.doStatefulCommand('cmd_align', 'right')"
                    tooltiptext="&alignRight.tooltip;" label="&alignRight.label;" >
       <observes element="cmd_align" attribute="state"
@@ -175,7 +175,7 @@
     </toolbarbutton>
 
     <toolbarbutton id="align-justify-button" type="radio" group="align" autoCheck="false"
-                   command="cmd_renderedHTMLEnabler"
+                   observes="cmd_renderedHTMLEnabler"
                    oncommand="ComposerCommands.doStatefulCommand('cmd_align', 'justify')"
                    tooltiptext="&alignJustify.tooltip;" label="&alignJustify.label;" >
       <observes element="cmd_align" attribute="state"
