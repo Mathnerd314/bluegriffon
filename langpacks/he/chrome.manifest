@@ -12,7 +12,6 @@ locale branding he chrome/he/locale/branding/
 locale necko he chrome/he/locale/he/necko/
 locale testpilot he chrome/he/locale/feedback/
 locale passwordmgr he chrome/he/locale/he/passwordmgr/
-manifest chrome/he.manifest
 locale global he chrome/he/locale/he/global/
 locale autoconfig he chrome/he/locale/he/autoconfig/
 locale places he chrome/he/locale/he/places/

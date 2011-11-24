@@ -1,35 +1,35 @@
-<!ENTITY permissionsManager.title        "Permissions Manager">
+<!ENTITY permissionsManager.title        "权限管理器">
 
-<!ENTITY sites.search                    "Search Sites">
-<!ENTITY sites.allSites                  "All Sites">
+<!ENTITY sites.search                    "搜索站点">
+<!ENTITY sites.allSites                  "所有站点">
 
 <!-- LOCALIZATION NOTE (permissions.header.start, permissions.header.end): These strings
      surround the host name of the site to make the header for the permissions page.
      example: "Permissions for mozilla.org" -->
-<!ENTITY header.site.start               "Permissions for">
+<!ENTITY header.site.start               "权限">
 <!ENTITY header.site.end                 "">
 
-<!ENTITY header.defaults                 "Default Permissions for All Sites">
+<!ENTITY header.defaults                 "对所有站点的默认权限">
 
-<!ENTITY permissions.forgetSite          "Forget About This Site">
+<!ENTITY permissions.forgetSite          "清除此站点信息">
 
-<!ENTITY permission.alwaysAsk            "Always Ask">
-<!ENTITY permission.allow                "Allow">
-<!ENTITY permission.allowForSession      "Allow for Session">
-<!ENTITY permission.block                "Block">
+<!ENTITY permission.alwaysAsk            "总是询问">
+<!ENTITY permission.allow                "允许">
+<!ENTITY permission.allowForSession      "在当前会话中允许">
+<!ENTITY permission.block                "阻止">
 
-<!ENTITY password.label                  "Store Passwords">
-<!ENTITY password.manage                 "Manage Passwords…">
+<!ENTITY password.label                  "存储密码">
+<!ENTITY password.manage                 "管理密码…">
 
-<!ENTITY cookie.label                    "Set Cookies">
-<!ENTITY cookie.remove                   "Remove Cookies">
-<!ENTITY cookie.manage                   "Manage Cookies…">
-<!ENTITY cookie.removeAll                "Remove All Cookies">
+<!ENTITY cookie.label                    "设置 Cookie">
+<!ENTITY cookie.remove                   "移除 Cookie">
+<!ENTITY cookie.manage                   "管理 Cookie…">
+<!ENTITY cookie.removeAll                "移除所有 Cookie">
 
-<!ENTITY geo.label                       "Share Location">
+<!ENTITY geo.label                       "共享位置信息">
 
 <!-- LOCALIZATION NOTE (indexedDB.label): This is describing indexedDB storage
      using the same language used for the permIndexedDB string in browser/pageInfo.dtd -->
-<!ENTITY indexedDB.label                 "Maintain Offline Storage">
+<!ENTITY indexedDB.label                 "维护离线存储">
 
-<!ENTITY popup.label                     "Open Pop-up Windows">
+<!ENTITY popup.label                     "打开弹出窗口">

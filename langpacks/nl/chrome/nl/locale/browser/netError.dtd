@@ -52,6 +52,9 @@
 <!ENTITY netInterrupt.title "De verbinding werd onderbroken">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "Document verlopen">
+<!ENTITY notCached.longDesc "<p>Het verzochte document is niet beschikbaar in &brandShortName;'s-buffer.</p><ul><li>Vanwege een veiligheidsvoorzorgmaatregel zal &brandShortName; vertrouwelijke documenten niet automatisch opnieuw aanvragen.</li><li>Klik om het document opnieuw aan te vragen van de website.</li></ul>">
+
 <!ENTITY netOffline.title "Offlinemodus">
 <!ENTITY netOffline.longDesc2 "
 <ul>
@@ -176,7 +179,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>U kunt beter geen uitzondering toevoegen als u een internetverbinding gebruikt die u niet volledig vertrouwt, of als u normaal gesproken geen waarschuwing krijgt voor deze server.</p>

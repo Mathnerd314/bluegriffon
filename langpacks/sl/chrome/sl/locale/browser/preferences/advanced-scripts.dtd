@@ -12,3 +12,6 @@
 <!ENTITY raiseLowerWindows.accesskey "D">
 <!ENTITY disableContextMenus.label "onemogočijo ali zamenjajo vsebinske menije">
 <!ENTITY disableContextMenus.accesskey "O">
+<!ENTITY moveResizePopupWindows.accesskey "M">
+
+<!ENTITY moveResizePopupWindows.label     "Move or resize popup windows">

@@ -13,3 +13,6 @@
 <!ENTITY raiseLowerWindows.accesskey    "R">
 <!ENTITY disableContextMenus.label      "우클릭메뉴 사용을 막거나 바꾸기">
 <!ENTITY disableContextMenus.accesskey  "D">
+<!ENTITY moveResizePopupWindows.accesskey "M">
+
+<!ENTITY moveResizePopupWindows.label     "Move or resize popup windows">

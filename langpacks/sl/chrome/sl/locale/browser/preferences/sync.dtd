@@ -40,5 +40,7 @@
 <!ENTITY prefs.ppLink.label         "Politika zasebnosti">
 <!ENTITY changePassword2.label        "Change Password…">
 <!ENTITY myRecoveryKey.label          "My Recovery Key">
+
+<!ENTITY pairDevice.label             "Pair a Device">
 <!ENTITY resetSync2.label             "Reset Sync…">
 <!ENTITY unlinkDevice.label           "Unlink This Device">

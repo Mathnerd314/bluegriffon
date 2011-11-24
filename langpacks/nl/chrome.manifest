@@ -1,5 +1,4 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-manifest chrome/nl.manifest
 locale autoconfig nl chrome/nl/locale/nl/autoconfig/
 locale mozapps nl chrome/nl/locale/nl/mozapps/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd

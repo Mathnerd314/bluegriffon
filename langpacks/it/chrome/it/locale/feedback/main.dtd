@@ -19,7 +19,7 @@
 <!ENTITY testpilot.notification.close.tooltip "Chiudi">
 <!ENTITY testpilot.enable.label "Attiva Studi utente">
 <!ENTITY testpilot.feedbackbutton.label "Feedback">
-<!ENTITY testpilot.happy.label "BlueGriffon mi ha reso felice perché…">
-<!ENTITY testpilot.sad.label "BlueGriffon mi ha reso triste perché…">
+<!ENTITY testpilot.happy.label "Firefox mi ha reso felice perché…">
+<!ENTITY testpilot.sad.label "Firefox mi ha reso triste perché…">
 <!ENTITY testpilot.broken.label "Segnala un sito web non funzionante…">
 <!ENTITY testpilot.idea.label "Invia un suggerimento…">

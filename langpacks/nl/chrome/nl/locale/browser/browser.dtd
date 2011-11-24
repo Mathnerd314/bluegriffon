@@ -90,6 +90,7 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "W">
 <!ENTITY fullScreenExit.label "Volledigschermmodus verlaten">
 <!ENTITY fullScreenExit.accesskey "d">
+<!ENTITY domFullScreenWarning.label "Druk op ESC om volledigschermmodus te verlaten">
 
 <!ENTITY closeWindow.label "Venster sluiten">
 <!ENTITY closeWindow.accesskey "e">
@@ -212,10 +213,13 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-<!ENTITY inspectPanelTitle.label      "HTML">
-<!ENTITY inspectButton.label          "Inspecteren">
-<!ENTITY inspectButton.accesskey      "I">
-    
+<!ENTITY inspectPanelTitle.label        "HTML">
+<!ENTITY inspectButton.label            "Inspecteren">
+<!ENTITY inspectButton.accesskey        "I">
+<!ENTITY inspectCloseButton.tooltiptext "Inspector sluiten">
+<!ENTITY inspectStyleButton.label     "Stijl">
+<!ENTITY inspectStyleButton.accesskey "S">
+
 <!ENTITY getMoreDevtoolsCmd.label        "Meer hulpmiddelen verkrijgen">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "M">
 
@@ -432,7 +436,13 @@ can reach it easily. -->
 <!ENTITY mediaHideControls.accesskey "B">
 <!ENTITY videoFullScreen.label       "Volledig scherm">
 <!ENTITY videoFullScreen.accesskey   "V">
+<!ENTITY videoSaveImage.label        "Snapshot opslaan als…">
+<!ENTITY videoSaveImage.accesskey    "S">
 
+<!ENTITY videoShowStats.label        "Statistieken tonen">
+<!ENTITY videoShowStats.accesskey    "t">
+<!ENTITY videoHideStats.label        "Statistieken verbergen">
+<!ENTITY videoHideStats.accesskey    "t">
 
 <!-- LOCALIZATION NOTE :
 fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey2 and
@@ -564,3 +574,10 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "Add-onbalk sluiten">
 <!ENTITY toggleAddonBarCmd.key        "/">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "Style Editor">

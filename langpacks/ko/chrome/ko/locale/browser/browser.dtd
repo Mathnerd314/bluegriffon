@@ -510,6 +510,23 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "부가 기능 모음 닫기">
 <!ENTITY toggleAddonBarCmd.key        "/">
+<!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
+<!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
 <!ENTITY inspectContextMenu.label     "Inspect Element">
+<!ENTITY inspectStyleButton.accesskey "S">
+<!ENTITY inspectStyleButton.label     "Style">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "Style Editor">
+<!ENTITY videoHideStats.accesskey    "t">
+<!ENTITY videoHideStats.label        "Hide Statistics">
+<!ENTITY videoSaveImage.accesskey    "S">
+<!ENTITY videoSaveImage.label        "Save Snapshot As…">
+<!ENTITY videoShowStats.accesskey    "t">
+<!ENTITY videoShowStats.label        "Show Statistics">

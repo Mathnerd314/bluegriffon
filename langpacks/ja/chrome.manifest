@@ -7,7 +7,6 @@ override chrome://global/locale/appstrings.properties chrome://browser/locale/ap
 locale branding ja chrome/ja/locale/branding/
 locale testpilot ja chrome/ja/locale/feedback/
 locale necko ja chrome/ja/locale/ja/necko/
-manifest chrome/ja.manifest
 locale passwordmgr ja chrome/ja/locale/ja/passwordmgr/
 locale autoconfig ja chrome/ja/locale/ja/autoconfig/
 locale cookie ja chrome/ja/locale/ja/cookie/

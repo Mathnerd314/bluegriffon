@@ -1,5 +1,4 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-manifest chrome/de.manifest
 locale pippki de chrome/de/locale/de/pippki/
 locale testpilot de chrome/de/locale/feedback/
 locale global de chrome/de/locale/de/global/

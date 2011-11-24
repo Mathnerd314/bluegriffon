@@ -18,7 +18,6 @@ locale places zh-TW chrome/zh-TW/locale/zh-TW/places/
 locale alerts zh-TW chrome/zh-TW/locale/zh-TW/alerts/
 locale pippki zh-TW chrome/zh-TW/locale/zh-TW/pippki/
 locale necko zh-TW chrome/zh-TW/locale/zh-TW/necko/
-manifest chrome/zh-TW.manifest
 locale bluegriffon zh-TW base/locale/bluegriffon/
 locale branding zh-TW base/locale/branding/
 locale fs zh-TW extensions/fs/

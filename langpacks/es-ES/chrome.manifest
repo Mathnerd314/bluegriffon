@@ -1,6 +1,5 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
 locale alerts es-ES chrome/es-ES/locale/es-ES/alerts/
-manifest chrome/es-ES.manifest
 locale necko es-ES chrome/es-ES/locale/es-ES/necko/
 locale testpilot es-ES chrome/es-ES/locale/feedback/
 locale autoconfig es-ES chrome/es-ES/locale/es-ES/autoconfig/

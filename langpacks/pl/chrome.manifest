@@ -1,6 +1,5 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
 locale browser-region pl chrome/pl/locale/browser-region/
-manifest chrome/pl.manifest
 locale branding pl chrome/pl/locale/branding/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
 locale testpilot pl chrome/pl/locale/feedback/

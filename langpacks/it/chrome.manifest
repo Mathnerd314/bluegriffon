@@ -1,5 +1,4 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-manifest chrome/it.manifest
 locale autoconfig it chrome/it/locale/it/autoconfig/
 locale global-platform it chrome/it/locale/it/global-platform/
 locale branding it chrome/it/locale/branding/

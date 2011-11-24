@@ -8,7 +8,7 @@
 <!ENTITY testpilot.settings.hasNewResults.label "une étude dispose de nouveaux résultats">
 <!ENTITY testpilot.settings.alwaysSubmitData.label "Envoyer automatiquement mes informations (ne pas demander)">
 <!ENTITY testpilot.allYourStudies.label             "Toutes vos études d'utilisation…">
-<!ENTITY testpilot.about.label "À propos de Pilot">
+<!ENTITY testpilot.about.label "À propos de Test Pilot">
 
 <!-- all studies window -->
 <!ENTITY testpilot.studiesWindow.title "Vos études Test Pilot">
@@ -24,10 +24,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip "Fermer">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label "Activer les études d'utilisation">
 <!ENTITY testpilot.feedbackbutton.label "Réagir">
-<!ENTITY testpilot.happy.label "J'aime BlueGriffon car…">
-<!ENTITY testpilot.sad.label "Je n'aime pas BlueGriffon car…">
+<!ENTITY testpilot.happy.label "J'aime Firefox car…">
+<!ENTITY testpilot.sad.label "Je n'aime pas Firefox car…">
 <!ENTITY testpilot.broken.label "Signaler ce site Web comme non fonctionnel…">
 <!ENTITY testpilot.idea.label "Nous faire une suggestion…">

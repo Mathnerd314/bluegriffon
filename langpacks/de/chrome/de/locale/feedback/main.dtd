@@ -25,10 +25,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Schließen">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Anwender-Studien einschalten">
 <!ENTITY testpilot.feedbackbutton.label                "Feedback">
-<!ENTITY testpilot.happy.label        "Ich bin glücklich mit BlueGriffon, weil…">
-<!ENTITY testpilot.sad.label          "Ich bin nicht glücklich mit BlueGriffon, weil…">
+<!ENTITY testpilot.happy.label        "Ich bin glücklich mit Firefox, weil…">
+<!ENTITY testpilot.sad.label          "Ich bin nicht glücklich mit Firefox, weil…">
 <!ENTITY testpilot.broken.label      "Diese Seite als kaputt melden…">
 <!ENTITY testpilot.idea.label        "Anregung senden…">

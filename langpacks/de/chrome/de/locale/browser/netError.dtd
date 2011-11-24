@@ -16,8 +16,8 @@
 <!ENTITY dnsNotFound.longDesc "
 <ul>
   <li>Bitte überprüfen Sie die Adresse auf Tippfehler, wie
-    <strong>ww</strong>.beispiel.de statt
-    <strong>www</strong>.beispiel.de</li>
+    <strong>ww</strong>.example.com statt
+    <strong>www</strong>.example.com</li>
   <li>Wenn Sie auch keine andere Website aufrufen können, überprüfen Sie bitte die 
 	Netzwerk-/Internetverbindung.</li>
   <li>Wenn Ihr Computer oder Netzwerk von einer Firewall oder einem Proxy geschützt wird, stellen Sie bitte sicher,
@@ -43,7 +43,7 @@
 <!ENTITY malformedURI.longDesc "
 <ul>
   <li>Web-Adressen sehen für gewöhnlich folgendermaßen aus:
-    <strong>http://www.beispiel.de/</strong></li>
+    <strong>http://www.example.com/</strong></li>
   <li>Bitte stellen Sie sicher, dass Sie nicht den umgekehrten, s
 	ondern den einfachen Schrägstrich verwenden (<strong>/</strong>).</li>
 </ul>
@@ -166,6 +166,9 @@
 <!ENTITY cspFrameAncestorBlocked.title "Blockiert durch Inhaltsicherheitsrichtlinie (Content Security Policy)">
 <!ENTITY cspFrameAncestorBlocked.longDesc "<p>Laden dieser Seite in dieser Weise wurde vom Browser verhindert, weil sie eine Sicherheitsrichtlinie hat, die das nicht erlaubt.</p>">
 
+<!ENTITY corruptedContentError.title "Fehler: Beschädigte Inhalte">
+<!ENTITY corruptedContentError.longDesc "<p>Die Seite, die Sie anzusehen versuchen, kann nicht angezeigt werden, da ein Fehler in der Datenübertragung festgestellt wurde.</p><ul><li>Bitte kontaktieren Sie die Website-Betreiber, um sie über dieses Problem zu verständigen.</li></ul>">
+
 <!ENTITY securityOverride.linkText "Oder Sie können eine Ausnahme hinzufügen…">
 <!ENTITY securityOverride.getMeOutOfHereButton "Website verlassen!">
 <!ENTITY securityOverride.exceptionButtonLabel "Ausnahme hinzufügen…">
@@ -173,7 +176,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Sie sollten keine Ausnahme hinzufügen, wenn Sie nicht absolutes Vertrauen in die Sicherheit Ihrer aktuellen Verbindung haben oder wenn Sie bisher keine Warnung für diesen Server erhalten haben.</p>
@@ -181,9 +184,9 @@ functionality specific to BlueGriffon. -->
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
 
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
+<!ENTITY remoteXUL.title "Remote-XUL">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>Bitte informieren Sie den Website-Inhaber über dieses Problem.</li></ul></p>">
+<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
 
-<!ENTITY remoteXUL.title "Remote XUL">
+<!ENTITY notCached.title "Document Expired">

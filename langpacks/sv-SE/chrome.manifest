@@ -9,7 +9,6 @@ locale branding sv-SE chrome/sv-SE/locale/branding/
 locale necko sv-SE chrome/sv-SE/locale/sv-SE/necko/
 locale weave sv-SE chrome/sv-SE/locale/sv-SE/
 locale cookie sv-SE chrome/sv-SE/locale/sv-SE/cookie/
-manifest chrome/sv-SE.manifest
 locale passwordmgr sv-SE chrome/sv-SE/locale/sv-SE/passwordmgr/
 locale global-region sv-SE chrome/sv-SE/locale/sv-SE/global-region/
 locale places sv-SE chrome/sv-SE/locale/sv-SE/places/

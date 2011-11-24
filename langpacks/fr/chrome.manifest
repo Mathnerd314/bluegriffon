@@ -1,5 +1,4 @@
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-manifest chrome/fr.manifest
 locale cookie fr chrome/fr/locale/fr/cookie/
 locale weave fr chrome/fr/locale/fr/
 locale pipnss fr chrome/fr/locale/fr/pipnss/

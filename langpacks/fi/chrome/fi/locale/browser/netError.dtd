@@ -55,7 +55,7 @@
 <!ENTITY netOffline.title "Yhteydettömässä tilassa">
 <!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
      indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the BlueGriffon button
+     since it could be in either the normal menu (Mac/Linux) or the Firefox button
      menu (Windows).
 -->
 <!ENTITY netOffline.overrideLongDesc "
@@ -178,7 +178,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Älä lisää poikkeussääntöä jos et ole aivan varma käyttämäsi Internet-yhteyden turvallisuudesta, tai jos et ole aikaisemmin nähnyt vastaavaa varoitusta tälle palvelimelle.</p>
@@ -194,6 +194,9 @@ functionality specific to BlueGriffon. -->
   <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
 </ul>
 ">
+<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
+
+<!ENTITY notCached.title "Document Expired">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
 
 <!ENTITY remoteXUL.title "Remote XUL">

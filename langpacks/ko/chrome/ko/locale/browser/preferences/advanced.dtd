@@ -98,3 +98,21 @@
 <!ENTITY blockAutoRefresh.accesskey "b">
 <!ENTITY verify2.label "유효성 확인">
 <!ENTITY verify2.accesskey "V">
+<!ENTITY enableAddonsUpdate3.accesskey   "o">
+<!ENTITY enableAddonsUpdate3.label       "Add-ons">
+
+<!ENTITY updateApp.label                 "&brandShortName; updates:">
+<!ENTITY updateAuto.accesskey            "A">
+<!ENTITY updateAuto.label                "Automatically install updates (recommended: improved security)">
+<!ENTITY updateAutoAddonWarn.accesskey   "W">
+
+<!ENTITY updateAutoAddonWarn.label       "Warn me if this will disable any of my add-ons">
+<!ENTITY updateCheck.accesskey           "C">
+<!ENTITY updateCheck.label               "Check for updates, but let me choose whether to install them">
+<!ENTITY updateManual.accesskey          "N">
+<!ENTITY updateManual.label              "Never check for updates (not recommended: security risk)">
+
+<!ENTITY updateOthers.label              "Automatically update:">
+<!ENTITY useService.accesskey            "b">
+
+<!ENTITY useService.label                "Use a background service to install updates">

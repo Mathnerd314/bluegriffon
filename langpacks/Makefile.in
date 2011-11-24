@@ -13,14 +13,14 @@ endif
 
 _AVAILABLE_LOCALES =\
     en-US \
-    fr-FR \
+    fr \
     zh-CN \
     es-ES \
     cs \
-    de-DE \
-    he-IL \
-    it-IT \
-    ja-JP \
+    de \
+    he \
+    it \
+    ja \
     zh-TW \
     nl \
     ko \

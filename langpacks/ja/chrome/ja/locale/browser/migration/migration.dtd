@@ -7,7 +7,7 @@
 
 <!ENTITY importFromIE.label		"Microsoft Internet Explorer">
 <!ENTITY importFromIE.accesskey		"M">
-<!ENTITY importFromPhoenix.label	"BlueGriffon 0.8、Firebird または Phoenix">
+<!ENTITY importFromPhoenix.label	"Firefox 0.8、Firebird または Phoenix">
 <!ENTITY importFromPhoenix.accesskey	"P">
 <!ENTITY importFromNothing.label	"設定をインポートしない">
 <!ENTITY importFromNothing.accesskey	"D">

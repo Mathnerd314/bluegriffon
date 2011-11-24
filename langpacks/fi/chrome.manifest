@@ -14,7 +14,6 @@ locale cookie fi chrome/fi/locale/fi/cookie/
 locale passwordmgr fi chrome/fi/locale/fi/passwordmgr/
 locale mozapps fi chrome/fi/locale/fi/mozapps/
 locale autoconfig fi chrome/fi/locale/fi/autoconfig/
-manifest chrome/fi.manifest
 locale alerts fi chrome/fi/locale/fi/alerts/
 locale global-platform fi chrome/fi/locale/fi/global-platform/
 locale pipnss fi chrome/fi/locale/fi/pipnss/

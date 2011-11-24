@@ -40,3 +40,6 @@
 <!ENTITY report.disabled                                     "דיווח קריסות מנוטרל.">
 <!ENTITY report.failed                                       "השליחה נכשלה.">
 <!ENTITY report.unavailable                                  "אין דיווח זמין.">
+<!ENTITY clickToPlayPlugin                                   "Tap here to activate plugin.">
+<!-- LOCALIZATION NOTE: report.* strings should be as short as possible, ideally 2-3 words. -->
+<!ENTITY report.checkbox                                     "…and send crash report">

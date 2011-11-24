@@ -68,6 +68,7 @@
 <!ENTITY fullScreenAutohide.accesskey "N">
 <!ENTITY fullScreenExit.label "Ritorna a schermo normale">
 <!ENTITY fullScreenExit.accesskey "R">
+<!ENTITY domFullScreenWarning.label "Premere ESC per uscire dalla modalità a schermo intero">
 <!ENTITY closeWindow.label "Chiudi finestra">
 <!ENTITY closeWindow.accesskey "d">
 <!ENTITY bookmarksMenu.label "Segnalibri">
@@ -157,8 +158,15 @@
 <!ENTITY scratchpad.keycode "VK_F4">
 <!ENTITY scratchpad.keytext "F4">
 <!ENTITY inspectPanelTitle.label "HTML">
-<!ENTITY inspectButton.label "Analisi">
+<!ENTITY inspectButton.label "Analizza">
 <!ENTITY inspectButton.accesskey "A">
+<!ENTITY inspectCloseButton.tooltiptext "Chiudi lo strumento di analisi">
+<!ENTITY inspectStyleButton.label "Stile">
+<!ENTITY inspectStyleButton.accesskey "S">
+<!ENTITY styleeditor.label "Editor stili">
+<!ENTITY styleeditor.accesskey "y">
+<!ENTITY styleeditor.keycode "VK_F7">
+<!ENTITY styleeditor.keytext "F7">
 <!ENTITY getMoreDevtoolsCmd.label "Altri strumenti di sviluppo">
 <!ENTITY getMoreDevtoolsCmd.accesskey "A">
 <!ENTITY fileMenu.label "File">
@@ -336,6 +344,12 @@
 <!ENTITY mediaHideControls.accesskey "c">
 <!ENTITY videoFullScreen.label "A tutto schermo">
 <!ENTITY videoFullScreen.accesskey "u">
+<!ENTITY videoSaveImage.label "Salva fotogramma come…">
+<!ENTITY videoSaveImage.accesskey "f">
+<!ENTITY videoShowStats.label "Visualizza statistiche">
+<!ENTITY videoShowStats.accesskey "h">
+<!ENTITY videoHideStats.label "Nascondi statistiche">
+<!ENTITY videoHideStats.accesskey "h">
 <!ENTITY fullZoomEnlargeCmd.label "Aumenta zoom">
 <!ENTITY fullZoomEnlargeCmd.accesskey "u">
 <!ENTITY fullZoomEnlargeCmd.commandkey "+">

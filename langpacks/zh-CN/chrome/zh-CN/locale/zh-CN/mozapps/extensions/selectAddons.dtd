@@ -1,45 +1,45 @@
 <!ENTITY upgrade.style               "width: 93ch; height: 448px;">
 
-<!ENTITY checking.heading            "Checking Your Add-ons">
-<!ENTITY checking.progress.label     "Checking your add-ons for compatibility with this version of &brandShortName;.">
+<!ENTITY checking.heading            "正在检查您的附加组件">
+<!ENTITY checking.progress.label     "正在检查您的附加组件与此 &brandShortName; 版本的兼容性。">
 
-<!ENTITY select.heading              "Select Your Add-ons">
+<!ENTITY select.heading              "选择您的附加组件">
 <!-- LOCALIZATION NOTE (select.description): The term used for "third parties"
      here should match the string source.other in selectAddons.properties. -->
-<!ENTITY select.description          "Make &brandShortName; even faster by disabling add-ons you no longer use. Add-ons already installed by third parties will be disabled automatically unless you select them below.">
-<!ENTITY select.keep                 "Keep">
+<!ENTITY select.description          "禁用您不再使用的附加组件，让 &brandShortName; 变得更快。已经由第三方安装的附加组件将被自动禁用，直到您在下面选择它们。">
+<!ENTITY select.keep                 "保留">
 <!-- LOCALIZATION NOTE (select.keep.style): Should be a width wide enough for
      the string in select.keep above. -->
 <!ENTITY select.keep.style           "width: 6ch;">
-<!ENTITY select.action               "Action">
+<!ENTITY select.action               "操作">
 <!-- LOCALIZATION NOTE (select.action.style): Should be a width wide enough for
      the action strings in selectAddons.properties or brandShortName. -->
 <!ENTITY select.action.style         "width: 35ch;">
-<!ENTITY select.source               "Installed By">
-<!ENTITY select.name                 "Name">
+<!ENTITY select.source               "安装者为">
+<!ENTITY select.name                 "名称">
 <!-- LOCALIZATION NOTE (select.name.style): Should be a width small enough so
      the source column still has enough room for the source strings in
      selectAddons.properties. -->
 <!ENTITY select.name.style           "width: 33ch;">
 
-<!ENTITY confirm.heading             "Select Your Add-ons">
+<!ENTITY confirm.heading             "选择您的附加组件">
 <!-- LOCALIZATION NOTE (confirm.description): The term used for "third parties"
      here should match the string source.other in selectAddons.properties. -->
-<!ENTITY confirm.description         "Make &brandShortName; even faster by disabling add-ons you no longer use. Add-ons already installed by third parties will be disabled automatically unless you select them below.">
+<!ENTITY confirm.description         "禁用您不再使用的附加组件，让 &brandShortName; 变得更快。已经由第三方安装的附加组件将被自动禁用，直到您在下面选择它们。">
 
-<!ENTITY action.disable.heading      "The following add-ons will be disabled:">
-<!ENTITY action.incompatible.heading "The following add-ons are disabled, but will be enabled as soon as they are compatible:">
-<!ENTITY action.update.heading       "The following add-ons will be updated:">
-<!ENTITY action.enable.heading       "The following add-ons will be enabled:">
+<!ENTITY action.disable.heading      "以下附加组件将被禁用：">
+<!ENTITY action.incompatible.heading "以下附加组件已被禁用，但当它们兼容后将会尽快启用。">
+<!ENTITY action.update.heading       "以下附加组件将被更新：">
+<!ENTITY action.enable.heading       "以下附加组件将被启用：">
 
-<!ENTITY update.heading              "Updating Your Add-ons">
-<!ENTITY update.progress.label       "Downloading and installing updates for your selected add-ons.">
+<!ENTITY update.heading              "正在更新您的附加组件">
+<!ENTITY update.progress.label       "正在下载并安装您所选的附加组件更新。">
 
-<!ENTITY errors.heading              "&brandShortName; could not update some of your add-ons.">
-<!ENTITY errors.description          "Installing updates for some of your add-ons failed. &brandShortName; will automatically try to update them again later.">
+<!ENTITY errors.heading              "&brandShortName; 无法更新您的某些附加组件。">
+<!ENTITY errors.description          "正在安装您某些已失败的附加组件更新。&brandShortName; 稍后会自动尝试再次更新它们。">
 
-<!ENTITY footer.label                "You can always change your add-ons by going to the Add-ons Manager.">
-<!ENTITY cancel.label                "Cancel">
-<!ENTITY back.label                  "Back">
-<!ENTITY next.label                  "Next">
-<!ENTITY done.label                  "Done">
+<!ENTITY footer.label                "您随时可以去附加组件管理器更改您的附加组件。">
+<!ENTITY cancel.label                "取消">
+<!ENTITY back.label                  "上一步">
+<!ENTITY next.label                  "下一步">
+<!ENTITY done.label                  "完成">

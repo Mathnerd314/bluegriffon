@@ -5,6 +5,9 @@
 <!ENTITY startupHomePage.label     "Startseite anzeigen">
 <!ENTITY startupBlankPage.label    "Leere Seite anzeigen">
 <!ENTITY startupLastSession.label  "Fenster und Tabs der letzten Sitzung anzeigen">
+<!ENTITY restoreOnDemand.label     "Tabs erst laden, wenn sie angewählt werden">
+<!ENTITY restoreOnDemand.accesskey "n">
+
 <!ENTITY homepage.label            "Startseite:">
 <!ENTITY homepage.accesskey        "S">
 <!ENTITY useCurrentPage.label      "Aktuelle Seite verwenden">
@@ -38,5 +41,3 @@
 <!ENTITY manageAddons.accesskey       "v">
 <!ENTITY chooseBookmark.accesskey  "B">
 <!ENTITY chooseBookmark.label      "Use Bookmark…">
-<!ENTITY restoreOnDemand.accesskey "l">
-<!ENTITY restoreOnDemand.label     "Don’t load tabs until selected">

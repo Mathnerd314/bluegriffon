@@ -90,6 +90,7 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "M">
 <!ENTITY fullScreenExit.label "Quitter le mode plein écran">
 <!ENTITY fullScreenExit.accesskey "Q">
+<!ENTITY domFullScreenWarning.label "Appuyer sur Échap pour quitter le mode plein écran">
 
 <!ENTITY closeWindow.label "Fermer la fenêtre">
 <!ENTITY closeWindow.accesskey "r">
@@ -189,10 +190,12 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.accesskey      "W">
 <!ENTITY webConsoleCmd.commandkey     "k">
 
-<!ENTITY inspectPanelTitle.label      "HTML">
 <!ENTITY inspectMenu.label            "Examiner">
 <!ENTITY inspectMenu.accesskey        "E">
 <!ENTITY inspectMenu.commandkey       "I">
+
+<!ENTITY inspectContextMenu.label     "Examiner l'élément">
+<!ENTITY inspectContextMenu.accesskey "Q">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -209,8 +212,12 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-<!ENTITY inspectButton.label          "Examiner">
-<!ENTITY inspectButton.accesskey      "E">
+<!ENTITY inspectPanelTitle.label        "HTML">
+<!ENTITY inspectButton.label            "Examiner">
+<!ENTITY inspectButton.accesskey        "E">
+<!ENTITY inspectCloseButton.tooltiptext "Fermer l'inspecteur">
+<!ENTITY inspectStyleButton.label     "Style">
+<!ENTITY inspectStyleButton.accesskey "S">
 
 <!ENTITY getMoreDevtoolsCmd.label        "Obtenir d'autres outils">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "b">
@@ -430,6 +437,13 @@ can reach it easily. -->
 <!ENTITY mediaHideControls.accesskey "M">
 <!ENTITY videoFullScreen.label       "Plein écran">
 <!ENTITY videoFullScreen.accesskey   "P">
+<!ENTITY videoSaveImage.label        "Enregistrer un instantané sous…">
+<!ENTITY videoSaveImage.accesskey    "s">
+
+<!ENTITY videoShowStats.label        "Afficher les statistiques">
+<!ENTITY videoShowStats.accesskey    "t">
+<!ENTITY videoHideStats.label        "Masquer les statistiques">
+<!ENTITY videoHideStats.accesskey    "t">
 
 <!-- LOCALIZATION NOTE :
 fullZoomEnlargeCmd.commandkey3, fullZoomReduceCmd.commandkey2 and
@@ -561,6 +575,10 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "Fermer la barre des modules">
 <!ENTITY toggleAddonBarCmd.key        "/">
-<!ENTITY inspectContextMenu.accesskey "Q">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
 
-<!ENTITY inspectContextMenu.label     "Inspect Element">
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "Style Editor">

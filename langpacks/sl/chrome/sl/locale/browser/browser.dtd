@@ -553,9 +553,11 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "Zapri vrstico dodatkov">
 <!ENTITY toggleAddonBarCmd.key        "/"><!ENTITY backForwardButtonMenu.tooltip "Right-click or pull down to show history">
 <!ENTITY backForwardButtonMenuMac.tooltip "Pull down to show history">
+<!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "M">
 
 <!ENTITY getMoreDevtoolsCmd.label        "Get More Tools">
+<!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
 <!ENTITY inspectContextMenu.label     "Inspect Element">
@@ -575,7 +577,20 @@ just addresses the organization to follow, e.g. "This site is run by " -->
   -  "simple discardable text editor". -->
 <!ENTITY scratchpad.label             "Scratchpad">
 <!ENTITY searchFocus.commandkey2      "e">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "Style Editor">
 <!ENTITY unsortedBookmarksCmd.label "Unsorted Bookmarks">
+<!ENTITY videoHideStats.accesskey    "t">
+<!ENTITY videoHideStats.label        "Hide Statistics">
+<!ENTITY videoSaveImage.accesskey    "S">
+<!ENTITY videoSaveImage.label        "Save Snapshot As…">
+<!ENTITY videoShowStats.accesskey    "t">
+<!ENTITY videoShowStats.label        "Show Statistics">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
 <!ENTITY webDeveloperMenu.label       "Web Developer">
