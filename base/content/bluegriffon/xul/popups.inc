@@ -165,6 +165,8 @@
     <menuitem id="cMenu_cut" key="key_cut"/>
     <menuitem id="cMenu_copy" key="key_copy"/>
     <menuitem id="cMenu_paste" key="key_paste"/>
+    <menuitem label="&pasteNoFormatting.label;"
+              command="cmd_pasteNoFormatting"/>
     <menuitem id="cMenu_delete" key="key_delete"/>
     <menuseparator/>
     <menuitem id="cMenu_selectAll" key="key_selectAll"/>

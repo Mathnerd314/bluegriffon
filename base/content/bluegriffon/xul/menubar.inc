@@ -42,6 +42,7 @@
         <menuitem id="menu_cut" />
         <menuitem id="menu_copy" />
         <menuitem id="menu_paste"/>
+        <menuitem id="menu_pasteNoFormatting_cm" command="cmd_pasteNoFormatting"/>
         <menuitem id="menu_delete"/>
         <menuseparator/>
         <menu label="&select.label;">

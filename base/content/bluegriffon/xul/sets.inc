@@ -201,7 +201,11 @@
   <command id="cmd_copyHTMLCode"
            oncommand="goDoCommand('cmd_copyHTMLCode')"
            disabled="true"/>
-           
+  <command id="cmd_pasteNoFormatting" label="&pasteNoFormatting.label;"
+           accesskey="&pasteNoFormatting.accesskey;"
+           oncommand="goDoCommand('cmd_pasteNoFormatting')"
+           disabled="true"/>
+
 </commandset>
 
 <commandset id="composerSaveMenuItems"
