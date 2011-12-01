@@ -38,6 +38,7 @@ pref("extensions.dss.enabled", false);          // Dynamic Skin Switching
 pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
                                                 // restart.
 pref("extensions.closeOnEscape", true);
+pref("extensions.ui.lastCategory", "addons://list/extension");
 
 // browser preferences
 pref("bluegriffon.display.use_system_colors", true);
