@@ -2910,10 +2910,10 @@ exports.isLinux = (os == "linux");
 exports.isIE = ! + "\v1";
 
 /** Is this Firefox or related? */
-exports.isGecko = exports.isMozilla = window.controllers && window.navigator.product === "Gecko";
+exports.isGecko = exports.isMozilla = true;
 
 /** oldGecko == rev < 2.0 **/
-exports.isOldGecko = exports.isGecko && /rv\:1/.test(navigator.userAgent);
+exports.isOldGecko = false;
 
 /** Is this Opera */
 exports.isOpera = window.opera && Object.prototype.toString.call(window.opera) == "[object Opera]";
