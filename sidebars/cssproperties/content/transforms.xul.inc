@@ -5,46 +5,149 @@
       </hbox>
 
       <vbox class="section" id="transformsSection">
-        <hbox align="center">
-          <label value="&hTransformOrigin.label;"/>
-          <menulist id="transformOriginXMenulist" editable="true"
-                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
-                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
-            <menupopup anonid="transformOriginXMenupopup"
-                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-              <menuseparator/>
-              <menuitem label="&leftTransformOrigin.label;" value="left"/>
-              <menuitem label="&centerTransformOrigin.label;" value="center"/>
-              <menuitem label="&rightTransformOrigin.label;" value="right"/>
-            </menupopup>
-          </menulist>
-          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
-          <label value="&vTransformOrigin.label;"/>
-          <menulist id="transformOriginYMenulist" editable="true"
-                    oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
-                    oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
-            <menupopup anonid="transformOriginYMenupopup"
-                       onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-              <menuseparator/>
-              <menuitem label="&topTransformOrigin.label;" value="top"/>
-              <menuitem label="&centerTransformOrigin.label;" value="center"/>
-              <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
-            </menupopup>
-          </menulist>
-          <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
-                       ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
-        </hbox>    
+        <grid>
+          <columns>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+            <column/>
+          </columns>
+          <rows>
+            <row align="center">
+              <spacer/>
+              <label value="X" style="text-align: center"/>
+              <spacer/>
+              <label value="Y" style="text-align: center"/>
+              <spacer/>
+              <label value="Z" style="text-align: center"/>
+            </row>
+            <row align="center">
+              <label value="&transformOrigin.label;"/>
+              <menulist id="transformOriginXMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
+                <menupopup anonid="transformOriginXMenupopup"
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  <menuseparator/>
+                  <menuitem label="&leftTransformOrigin.label;" value="left"/>
+                  <menuitem label="&centerTransformOrigin.label;" value="center"/>
+                  <menuitem label="&rightTransformOrigin.label;" value="right"/>
+                </menupopup>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+              <menulist id="transformOriginYMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
+                <menupopup anonid="transformOriginYMenupopup"
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  <menuseparator/>
+                  <menuitem label="&topTransformOrigin.label;" value="top"/>
+                  <menuitem label="&centerTransformOrigin.label;" value="center"/>
+                  <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
+                </menupopup>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+              <menulist id="transformOriginZMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', '', true, ReapplyTransforms)">
+                <menupopup anonid="transformOriginZMenupopup"
+                           onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')"/>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+            </row>
+
+            <row align="center">
+              <label value="&perspectivOrigin.label;"/>
+              <menulist id="perspectiveOriginXMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
+                <menupopup anonid="perspectiveOriginXMenupopup"
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  <menuseparator/>
+                  <menuitem label="&leftTransformOrigin.label;" value="left"/>
+                  <menuitem label="&centerTransformOrigin.label;" value="center"/>
+                  <menuitem label="&rightTransformOrigin.label;" value="right"/>
+                </menupopup>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+              <menulist id="perspectiveOriginYMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'left center right', true, ReapplyTransforms)">
+                <menupopup anonid="perspectiveOriginYMenupopup"
+                           onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
+                  <menuseparator/>
+                  <menuitem label="&topTransformOrigin.label;" value="top"/>
+                  <menuitem label="&centerTransformOrigin.label;" value="center"/>
+                  <menuitem label="&bottomTransformOrigin.label;" value="bottom"/>
+                </menupopup>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+            </row>
+
+            <row align="center">
+              <label value="&perspectiveDepth.label;"/>
+              <menulist id="perspectiveMenulist" editable="true"
+                        oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)"
+                        oninput="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)">
+                <menupopup anonid="perspectiveMenupopup"
+                           onpopupshowing="PopulateLengths(this, 'px pt cm in mm pc em ex rem ch')"/>
+              </menulist>
+              <spinbuttons onup="IncreaseLength(this, 'px pt cm in mm pc em ex rem ch', ReapplyTransforms)"
+                           ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
+            </row>
+
+            <row align="center">
+              <label value="&transformStyle.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&transformStyleFlat.label;"
+                               value="flat" property="-moz-transform-style" type="checkbox"
+                               id="transformStyleFlatButton" group="transform-style"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&transformStyle3D.label;"
+                               value="preserve-3D" property="-moz-transform-style" type="checkbox"
+                               id="transformStyle3DButton" group="transform-style"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+
+            <row align="center">
+              <label value="&backfaceVisibility.label;"/>
+              <hbox align="center">
+                <toolbarbutton class="multibutton" label="&backfaceVisibilityVisible.label;"
+                               value="visible" property="-moz-backface-visibility" type="checkbox"
+                               id="backfaceVisibilityVisibleButton" group="backface-visibility"
+                               oncommand="ToggleProperty(this)"/>
+                <toolbarbutton class="multibutton" label="&backfaceVisibilityHidden.label;"
+                               value="hidden" property="-moz-backface-visibility" type="checkbox"
+                               id="backfaceVisibilityHiddenButton" group="backface-visibility"
+                               oncommand="ToggleProperty(this)"/>
+              </hbox>
+            </row>
+          </rows>
+        </grid>
+
         <richlistbox id="transformsRichlistbox" rows="6"
                      onselect="OnTransformSelect(this)"/>
+
         <hbox class="listboxBg">
           <toolbarbutton id="addTransformButton" class="listboxBgPlusButton" type="menu"
                          oncommand="AddTransform(event)">
             <menupopup id="addTransformMenupopup">
               <menuitem label="&rotation.label;"    value="rotate"/>
-              <menuitem label="&translation.label;" value="translate"/>
+              <menuitem label="&translation.label;" value="translate3d"/>
               <menuitem label="&skew.label;"        value="skew"/>
-              <menuitem label="&scale.label;"       value="scale"/>
+              <menuitem label="&scale.label;"       value="scale3d"/>
+              <menuseparator/>
+              <menuitem label="&perspective.label;" value="perspective"/>
+              <menuitem label="&rotation3D.label;"  value="rotate3d"/>
             </menupopup>
           </toolbarbutton>
           <toolbarbutton id="removeTransformButton" class="listboxBgMinusButton"

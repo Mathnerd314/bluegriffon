@@ -8,15 +8,15 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-fi@bluegriffon.org"
                em:name="Suomenkielinen (FI) Language Pack"
-               em:version="11.0.1.3.1"
+               em:version="11.0.1.4"
                em:type="8"
                em:creator="Suomennosprojekti">
 
     <em:targetApplication>
       <Description>
         <em:id>bluegriffon@disruptive-innovations.com</em:id>
-        <em:minVersion>1.3.1</em:minVersion>
-        <em:maxVersion>1.3.1</em:maxVersion>
+        <em:minVersion>1.4</em:minVersion>
+        <em:maxVersion>1.4</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

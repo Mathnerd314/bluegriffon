@@ -37,6 +37,11 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
+<!DOCTYPE bindings [
+  <!ENTITY % rotatorDTD SYSTEM "chrome://bluegriffon/locale/rotator.dtd" >
+  %rotatorDTD;
+]>
+
 <bindings id="rotatorBindings"
           xmlns="http://www.mozilla.org/xbl"
           xmlns:html="http://www.w3.org/1999/xhtml"
@@ -60,7 +65,7 @@
                    value="0"
                    onchange="this.parentNode.reflectPosition(event, true)"
                    oninput="this.parentNode.reflectPosition(event, true)"/>
-      <xul:label value="degrees" xbl:inherits="disabled"/>
+      <xul:label value="&degrees.label;" xbl:inherits="disabled"/>
     </content>
 
     <implementation>
