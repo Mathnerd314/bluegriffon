@@ -49,3 +49,5 @@
 <!ENTITY done.title			"インポート完了">
 <!ENTITY done.label			"次のデータが正常にインポートされました:">
 
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">

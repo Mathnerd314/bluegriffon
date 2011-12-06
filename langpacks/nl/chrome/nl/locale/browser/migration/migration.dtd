@@ -32,3 +32,5 @@
 
 <!ENTITY done.title                     "Importeren voltooid">
 <!ENTITY done.label                     "De volgende items zijn succesvol geïmporteerd:">
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">

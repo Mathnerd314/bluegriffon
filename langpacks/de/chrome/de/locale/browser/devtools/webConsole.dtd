@@ -1,22 +1,16 @@
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
+<!ENTITY networkPanel.requestURL                  "Request-URL">
+<!ENTITY networkPanel.requestMethod               "Request-Methode">
+<!ENTITY networkPanel.statusCode                  "Status-Code">
 
-<!ENTITY networkPanel.requestURL                  "Request URL">
-<!ENTITY networkPanel.requestMethod               "Request Method">
-<!ENTITY networkPanel.statusCode                  "Status Code">
+<!ENTITY networkPanel.requestHeaders              "Request-Headers">
+<!ENTITY networkPanel.requestCookie               "Gesendetes Cookie">
+<!ENTITY networkPanel.requestBody                 "Request-Body">
+<!ENTITY networkPanel.requestFormData             "Gesendete Formulardaten">
 
-<!ENTITY networkPanel.requestHeaders              "Request Headers">
-<!ENTITY networkPanel.requestCookie               "Sent Cookie">
-<!ENTITY networkPanel.requestBody                 "Request Body">
-<!ENTITY networkPanel.requestFormData             "Sent Form Data">
-
-<!ENTITY networkPanel.responseHeaders             "Response Headers">
-<!ENTITY networkPanel.responseBody                "Response Body">
-<!ENTITY networkPanel.responseBodyCached          "Cached Data">
-<!ENTITY networkPanel.responseBodyUnknownType     "Unknown Content Type">
-<!ENTITY networkPanel.responseNoBody              "No Response Body">
-<!ENTITY networkPanel.responseImage               "Received Image">
-<!ENTITY networkPanel.responseImageCached         "Cached Image">
+<!ENTITY networkPanel.responseHeaders             "Response-Header">
+<!ENTITY networkPanel.responseBody                "Response-Body">
+<!ENTITY networkPanel.responseBodyCached          "Gecachte Daten">
+<!ENTITY networkPanel.responseBodyUnknownType     "Unbekannter Content-Typ">
+<!ENTITY networkPanel.responseNoBody              "Kein Response-Body">
+<!ENTITY networkPanel.responseImage               "Empfangene Grafik">
+<!ENTITY networkPanel.responseImageCached         "Gecachte Grafik">

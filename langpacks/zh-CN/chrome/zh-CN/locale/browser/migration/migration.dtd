@@ -33,3 +33,5 @@
 <!ENTITY done.title                     "导入完成">
 <!ENTITY done.label                     "下列各项已被成功导入：">
 
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">

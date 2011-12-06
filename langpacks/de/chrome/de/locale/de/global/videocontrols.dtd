@@ -2,6 +2,23 @@
 <!ENTITY playButton.pauseLabel "Anhalten">
 <!ENTITY muteButton.muteLabel "Ton aus">
 <!ENTITY muteButton.unmuteLabel "Ton an">
+<!ENTITY fullscreenButton.enterfullscreenlabel "Vollbild">
+<!ENTITY fullscreenButton.exitfullscreenlabel "Vollbild-Modus verlassen">
+
+<!ENTITY stats.media "Medien">
+<!ENTITY stats.size "Größe">
+<!ENTITY stats.activity "Aktivität">
+<!ENTITY stats.activityPaused "Pausiert">
+<!ENTITY stats.activityPlaying "Wird abgespielt">
+<!ENTITY stats.activityEnded "Beendet">
+<!ENTITY stats.activitySeeking "(suchen)">
+<!ENTITY stats.volume "Lautstärke">
+<!ENTITY stats.channels "Kanäle">
+<!ENTITY stats.sampleRate "Sampling-Rate">
+<!ENTITY stats.framesParsed "Frames verarbeitet">
+<!ENTITY stats.framesDecoded "Frames dekodiert">
+<!ENTITY stats.framesPresented "Frames präsentiert">
+<!ENTITY stats.framesPainted "Frames gezeichnet">
 
 <!-- LOCALIZATION NOTE (scrubberScale.nameFormat): the #1 string is the current
 media position, and the #2 string is the total duration. For example, when at
@@ -9,18 +26,3 @@ the 5 minute mark in a 6 hour long video, #1 would be "5:00" and #2 would be
 "6:00:00", result string would be "5:00 of 6:00:00 elapsed".
 -->
 <!ENTITY scrubberScale.nameFormat "#1 von #2 verstrichen">
-<!ENTITY stats.activity "Activity">
-<!ENTITY stats.activityEnded "Ended">
-<!ENTITY stats.activityPaused "Paused">
-<!ENTITY stats.activityPlaying "Playing">
-<!ENTITY stats.activitySeeking "(seeking)">
-<!ENTITY stats.channels "Channels">
-<!ENTITY stats.framesDecoded "Frames decoded">
-<!ENTITY stats.framesPainted "Frames painted">
-<!ENTITY stats.framesParsed "Frames parsed">
-<!ENTITY stats.framesPresented "Frames presented">
-
-<!ENTITY stats.media "Media">
-<!ENTITY stats.sampleRate "Sample Rate">
-<!ENTITY stats.size "Size">
-<!ENTITY stats.volume "Volume">

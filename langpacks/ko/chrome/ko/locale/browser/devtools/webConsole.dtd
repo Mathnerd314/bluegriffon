@@ -1,22 +1,16 @@
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
+<!ENTITY networkPanel.requestURL                  "요청 URL">
+<!ENTITY networkPanel.requestMethod               "요청 방식">
+<!ENTITY networkPanel.statusCode                  "상태 코드">
 
-<!ENTITY networkPanel.requestURL                  "Request URL">
-<!ENTITY networkPanel.requestMethod               "Request Method">
-<!ENTITY networkPanel.statusCode                  "Status Code">
+<!ENTITY networkPanel.requestHeaders              "요청 헤더">
+<!ENTITY networkPanel.requestCookie               "쿠키 정보">
+<!ENTITY networkPanel.requestBody                 "요청 전문y">
+<!ENTITY networkPanel.requestFormData             "폼 데이터">
 
-<!ENTITY networkPanel.requestHeaders              "Request Headers">
-<!ENTITY networkPanel.requestCookie               "Sent Cookie">
-<!ENTITY networkPanel.requestBody                 "Request Body">
-<!ENTITY networkPanel.requestFormData             "Sent Form Data">
-
-<!ENTITY networkPanel.responseHeaders             "Response Headers">
-<!ENTITY networkPanel.responseBody                "Response Body">
-<!ENTITY networkPanel.responseBodyCached          "Cached Data">
-<!ENTITY networkPanel.responseBodyUnknownType     "Unknown Content Type">
-<!ENTITY networkPanel.responseNoBody              "No Response Body">
-<!ENTITY networkPanel.responseImage               "Received Image">
-<!ENTITY networkPanel.responseImageCached         "Cached Image">
+<!ENTITY networkPanel.responseHeaders             "응답 헤더">
+<!ENTITY networkPanel.responseBody                "응답 전문">
+<!ENTITY networkPanel.responseBodyCached          "캐시 데이터">
+<!ENTITY networkPanel.responseBodyUnknownType     "콘텐츠 형식 없음">
+<!ENTITY networkPanel.responseNoBody              "응답 내용이 없음">
+<!ENTITY networkPanel.responseImage               "응답 이미지">
+<!ENTITY networkPanel.responseImageCached         "캐쉬된 이미지">

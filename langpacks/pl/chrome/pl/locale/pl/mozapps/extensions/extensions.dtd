@@ -202,3 +202,6 @@
 <!ENTITY eula.accept                          "Zaakceptuj i zainstaluj…">
 
 <!ENTITY settings.path.button.label           "Przeglądaj…">
+<!-- LOCALIZATION NOTE (search.commandKey):
+     The search command key should match findOnCmd.commandkey from browser.dtd -->
+<!ENTITY search.commandkey                    "f">

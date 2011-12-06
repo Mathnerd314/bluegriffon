@@ -33,3 +33,5 @@
 <!ENTITY done.title                     "היבוא הושלם">
 <!ENTITY done.label                     "הפריטים הבאים יובאו בהצלחה:">
 
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">

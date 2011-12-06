@@ -1,12 +1,6 @@
 <!-- LOCALIZATION NOTE : FILE This file contains the Scratchpad window strings -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
 
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
 <!-- LOCALIZATION NOTE (scratchpad.title):
   -  The Scratchpad is intended to provide a simple text editor for creating
   -  and evaluating bits of JavaScript code for the purposes of function
@@ -16,67 +10,67 @@
   -  "Scratchpad" in your locale. You should feel free to find a close
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
-<!ENTITY window.title                 "Scratchpad">
+<!ENTITY window.title                 "Notizblock">
 
-<!ENTITY fileMenu.label               "File">
-<!ENTITY fileMenu.accesskey           "F">
+<!ENTITY fileMenu.label               "Datei">
+<!ENTITY fileMenu.accesskey           "D">
 
-<!ENTITY newWindowCmd.label           "New Window">
+<!ENTITY newWindowCmd.label           "Neues Fenster">
 <!ENTITY newWindowCmd.accesskey       "N">
 <!ENTITY newWindowCmd.commandkey      "n">
 
-<!ENTITY openFileCmd.label            "Open File…">
-<!ENTITY openFileCmd.accesskey        "O">
+<!ENTITY openFileCmd.label            "Datei öffnen…">
+<!ENTITY openFileCmd.accesskey        "a">
 <!ENTITY openFileCmd.commandkey       "o">
 
-<!ENTITY saveFileCmd.label            "Save">
+<!ENTITY saveFileCmd.label            "Speichern">
 <!ENTITY saveFileCmd.accesskey        "S">
 <!ENTITY saveFileCmd.commandkey       "s">
 
-<!ENTITY saveFileAsCmd.label          "Save As…">
-<!ENTITY saveFileAsCmd.accesskey      "A">
+<!ENTITY saveFileAsCmd.label          "Speichern unter…">
+<!ENTITY saveFileAsCmd.accesskey      "u">
 
-<!ENTITY closeCmd.label               "Close">
+<!ENTITY closeCmd.label               "Schließen">
 <!ENTITY closeCmd.key                 "W">
-<!ENTITY closeCmd.accesskey           "C">
+<!ENTITY closeCmd.accesskey           "c">
 
-<!ENTITY editMenu.label               "Edit">
-<!ENTITY editMenu.accesskey           "E">
+<!ENTITY editMenu.label               "Bearbeiten">
+<!ENTITY editMenu.accesskey           "B">
 
-<!ENTITY undoCmd.label                "Undo">
+<!ENTITY undoCmd.label                "Rückgängig">
 <!ENTITY undoCmd.key                  "Z">
-<!ENTITY undoCmd.accesskey            "U">
+<!ENTITY undoCmd.accesskey            "R">
 
-<!ENTITY redoCmd.label                "Redo">
+<!ENTITY redoCmd.label                "Wiederherstellen">
 <!ENTITY redoCmd.key                  "Y">
-<!ENTITY redoCmd.accesskey            "R">
+<!ENTITY redoCmd.accesskey            "W">
 
-<!ENTITY cutCmd.label                 "Cut">
+<!ENTITY cutCmd.label                 "Ausschneiden">
 <!ENTITY cutCmd.key                   "X">
-<!ENTITY cutCmd.accesskey             "t">
+<!ENTITY cutCmd.accesskey             "u">
 
-<!ENTITY copyCmd.label                "Copy">
+<!ENTITY copyCmd.label                "Kopieren">
 <!ENTITY copyCmd.key                  "C">
-<!ENTITY copyCmd.accesskey            "C">
+<!ENTITY copyCmd.accesskey            "K">
 
-<!ENTITY pasteCmd.label               "Paste">
+<!ENTITY pasteCmd.label               "Einfügen">
 <!ENTITY pasteCmd.key                 "V">
-<!ENTITY pasteCmd.accesskey           "P">
+<!ENTITY pasteCmd.accesskey           "E">
 
-<!ENTITY selectAllCmd.label           "Select All">
+<!ENTITY selectAllCmd.label           "Alles auswählen">
 <!ENTITY selectAllCmd.key             "A">
 <!ENTITY selectAllCmd.accesskey       "A">
 
-<!ENTITY run.label                    "Run">
+<!ENTITY run.label                    "Ausführen">
 <!ENTITY run.accesskey                "R">
 <!ENTITY run.key                      "r">
 
-<!ENTITY inspect.label                "Inspect">
-<!ENTITY inspect.accesskey            "I">
+<!ENTITY inspect.label                "Untersuchen">
+<!ENTITY inspect.accesskey            "U">
 <!ENTITY inspect.key                  "i">
 
-<!ENTITY display.label                "Display">
-<!ENTITY display.accesskey            "D">
+<!ENTITY display.label                "Anzeigen">
+<!ENTITY display.accesskey            "z">
 <!ENTITY display.key                  "l">
 
 <!-- LOCALIZATION NOTE (environmentMenu.label, accesskey): This menu item was
@@ -85,12 +79,12 @@
   -  the user is evaluating against. I.e., Content (current tab) or Chrome
   -  (browser).
   -->
-<!ENTITY environmentMenu.label        "Environment">
-<!ENTITY environmentMenu.accesskey    "N">
+<!ENTITY environmentMenu.label        "Umgebung">
+<!ENTITY environmentMenu.accesskey    "U">
 
 
-<!ENTITY contentContext.label         "Content">
-<!ENTITY contentContext.accesskey     "C">
+<!ENTITY contentContext.label         "Inhalt">
+<!ENTITY contentContext.accesskey     "n">
 
 <!-- LOCALIZATION NOTE (browserContext.label, accesskey): This menu item is used
   -  to select an execution environment for the browser window itself as opposed
@@ -101,23 +95,28 @@
 <!ENTITY browserContext.label         "Browser">
 <!ENTITY browserContext.accesskey     "B">
 
+<!-- LOCALIZATION NOTE (resetContext.label): This command allows the developer
+  -  to reset/clear the global object of the environment where the code executes.
+  -->
+<!ENTITY resetContext.label           "Zurücksetzen">
+<!ENTITY resetContext.accesskey       "Z">
+
+<!ENTITY executeMenu.label            "Ausführen">
+<!ENTITY executeMenu.accesskey        "X">
+
+<!ENTITY toolsMenu.label              "Tools">
+<!ENTITY toolsMenu.accesskey          "T">
+
+<!ENTITY errorConsoleCmd.label        "Fehler-Konsole">
+<!ENTITY errorConsoleCmd.accesskey    "F">
+<!ENTITY errorConsoleCmd.commandkey   "j">
+
+<!ENTITY webConsoleCmd.label          "Web-Konsole">
+<!ENTITY webConsoleCmd.accesskey      "W">
+<!ENTITY webConsoleCmd.commandkey     "k">
+<!ENTITY resetContext2.accesskey      "T">
+
 <!-- LOCALIZATION NOTE (resetContext2.label): This command allows the developer
   -  to reset/clear the global object of the environment where the code executes.
   -->
 <!ENTITY resetContext2.label          "Reset Variables">
-<!ENTITY resetContext2.accesskey      "T">
-
-<!ENTITY executeMenu.label            "Execute">
-<!ENTITY executeMenu.accesskey        "X">
-
-<!-- LOCALIZATION NOTE (errorConsoleCmd.commandkey): This command key launches
-  -  the browser Error Console, the key should be identical to the property of
-  -  the same name in browser.dtd.
-  -->
-<!ENTITY errorConsoleCmd.commandkey   "j">
-
-<!-- LOCALIZATION NOTE (webConsoleCmd.commandkey): This command key launches
-  -  the browser WebConsole, the key should be identical to the property of
-  -  the same name in browser.dtd.
-  -->
-<!ENTITY webConsoleCmd.commandkey     "k">

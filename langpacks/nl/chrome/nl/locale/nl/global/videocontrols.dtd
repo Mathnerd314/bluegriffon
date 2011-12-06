@@ -25,3 +25,5 @@ hour long video, #1 would be "5:00" and #2 would be "6:00:00", result string
 would be "5:00 of 6:00:00 elapsed".
 -->
 <!ENTITY scrubberScale.nameFormat "#1 van #2 verstreken">
+<!ENTITY fullscreenButton.enterfullscreenlabel "Full Screen">
+<!ENTITY fullscreenButton.exitfullscreenlabel "Exit Full Screen">

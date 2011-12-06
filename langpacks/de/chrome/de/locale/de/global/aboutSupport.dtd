@@ -21,6 +21,7 @@
 <!ENTITY aboutSupport.appBasicsBuildConfig "Build-Konfiguration">
 <!ENTITY aboutSupport.appBasicsUserAgent "User-Agent">
 <!ENTITY aboutSupport.appBasicsCrashIDs "Absturzberichte">
+<!ENTITY aboutSupport.appBasicsMemoryUse "Speicherverwendung">
 
 <!ENTITY aboutSupport.show.label "Ordner anzeigen">
 
@@ -39,4 +40,3 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Update-Chronik">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Alles in die Zwischenablage kopieren">
-<!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">

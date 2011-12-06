@@ -79,3 +79,7 @@
 <!ENTITY integer.accesskey "ס">
 <!ENTITY boolean.label "בוליאני">
 <!ENTITY boolean.accesskey "ב">
+<!ENTITY focusSearch.key "r">
+<!ENTITY searchPrefs.accesskey "r">
+
+<!ENTITY searchPrefs.label "Search:">

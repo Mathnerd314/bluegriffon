@@ -49,6 +49,7 @@
 <!ENTITY fullScreenCmd.macCommandKey	"f">
 <!ENTITY showAllTabsCmd.label		"모든 탭 표시">
 <!ENTITY showAllTabsCmd.accesskey	"A">
+
 <!ENTITY fullScreenMinimize.tooltip "최소화">
 <!ENTITY fullScreenRestore.tooltip "복구">
 <!ENTITY fullScreenClose.tooltip "닫기">
@@ -56,6 +57,8 @@
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "원래 화면으로 복구">
 <!ENTITY fullScreenExit.accesskey "F">
+<!ENTITY domFullScreenWarning.label "원래 창으로 돌아오려면 ESC 누르기">
+
 <!ENTITY closeWindow.label "창 닫기">
 <!ENTITY bookmarksMenu.label "북마크">
 <!ENTITY bookmarksMenu.accesskey "B">
@@ -325,6 +328,15 @@ can reach it easily. -->
 <!ENTITY mediaHideControls.accesskey "C">
 <!ENTITY videoFullScreen.label       "전체 화면">
 <!ENTITY videoFullScreen.accesskey   "F">
+<!ENTITY videoSaveImage.label        "현재 스냅삿 저장…">
+<!ENTITY videoSaveImage.accesskey    "S">
+<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
+"Hide Statistics" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY videoShowStats.label        "통계 보기">
+<!ENTITY videoShowStats.accesskey    "t">
+<!ENTITY videoHideStats.label        "통계 숨기기">
+<!ENTITY videoHideStats.accesskey    "t">
 
 <!ENTITY newTabButton.tooltip  "새 탭 열기">
 <!ENTITY newWindowButton.tooltip "새 창 열기">
@@ -398,6 +410,9 @@ can reach it easily. -->
 <!ENTITY inspectMenu.accesskey        "T">
 <!ENTITY inspectMenu.commandkey       "I">
 
+<!ENTITY inspectContextMenu.label     "요소 검사">
+<!ENTITY inspectContextMenu.accesskey "Q">
+
 <!-- LOCALIZATION NOTE (scratchpad.label) : This menu item label appears
 - in the Tools menu. See bug 653093.
 - The Scratchpad is intended to provide a simple text editor for creating
@@ -417,6 +432,16 @@ can reach it easily. -->
 <!ENTITY inspectPanelTitle.label      "HTML">
 <!ENTITY inspectButton.label          "문서 검사">
 <!ENTITY inspectButton.accesskey      "I">
+<!ENTITY inspectCloseButton.tooltiptext "검사 닫기">
+<!ENTITY inspectStyleButton.label     "스타일">
+<!ENTITY inspectStyleButton.accesskey "S">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "스타일 편집기">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
 
 <!ENTITY getMoreDevtoolsCmd.label "기타 도구">
 <!ENTITY getMoreDevtoolsCmd.accesskey "M">
@@ -510,23 +535,3 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "부가 기능 모음 닫기">
 <!ENTITY toggleAddonBarCmd.key        "/">
-<!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
-<!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
-<!ENTITY inspectContextMenu.accesskey "Q">
-
-<!ENTITY inspectContextMenu.label     "Inspect Element">
-<!ENTITY inspectStyleButton.accesskey "S">
-<!ENTITY inspectStyleButton.label     "Style">
-<!ENTITY styleeditor.accesskey        "y">
-<!ENTITY styleeditor.keycode          "VK_F7">
-<!ENTITY styleeditor.keytext          "F7">
-
-<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
-  -  in the Tools menu. -->
-<!ENTITY styleeditor.label            "Style Editor">
-<!ENTITY videoHideStats.accesskey    "t">
-<!ENTITY videoHideStats.label        "Hide Statistics">
-<!ENTITY videoSaveImage.accesskey    "S">
-<!ENTITY videoSaveImage.label        "Save Snapshot As…">
-<!ENTITY videoShowStats.accesskey    "t">
-<!ENTITY videoShowStats.label        "Show Statistics">

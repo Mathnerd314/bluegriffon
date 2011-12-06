@@ -204,5 +204,8 @@
 <!-- global informations -->
 <!ENTITY info.plugincheck.label                 "Check to see if your plugins are up to date">
 <!ENTITY info.plugincheck.tooltip               "Check to see if your plugins are up to date">
+<!-- LOCALIZATION NOTE (search.commandKey):
+     The search command key should match findOnCmd.commandkey from browser.dtd -->
+<!ENTITY search.commandkey                    "f">
 
 <!ENTITY settings.path.button.label           "Browse…">

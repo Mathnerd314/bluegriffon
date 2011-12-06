@@ -579,4 +579,7 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY videoSaveImage.accesskey    "S">
 <!ENTITY videoSaveImage.label        "Save Snapshot As…">
 <!ENTITY videoShowStats.accesskey    "t">
+<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
+"Hide Statistics" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY videoShowStats.label        "Show Statistics">

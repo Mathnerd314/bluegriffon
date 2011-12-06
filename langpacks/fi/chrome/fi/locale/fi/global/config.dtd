@@ -79,3 +79,7 @@
 <!ENTITY integer.accesskey "K">
 <!ENTITY boolean.label "Totuusarvo">
 <!ENTITY boolean.accesskey "T">
+<!ENTITY focusSearch.key "r">
+<!ENTITY searchPrefs.accesskey "r">
+
+<!ENTITY searchPrefs.label "Search:">

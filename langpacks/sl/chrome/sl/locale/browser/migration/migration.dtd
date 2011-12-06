@@ -33,3 +33,5 @@
 <!ENTITY done.title "Konec uvoza">
 <!ENTITY done.label "Uspešno je bilo uvoženo naslednje:">
 
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">

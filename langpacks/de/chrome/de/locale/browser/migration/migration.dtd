@@ -33,3 +33,5 @@
 <!ENTITY done.title                     "Importieren abgeschlossen">
 <!ENTITY done.label                     "Folgende Daten wurden erfolgreich importiert:">
 
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromChrome.label         "Chrome">
