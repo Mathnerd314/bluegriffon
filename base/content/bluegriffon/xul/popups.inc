@@ -192,6 +192,7 @@
     <menuseparator id="separator_before_ctableInsertMenu"/>
     <menu id="ctableInsertMenu" label="&tableInsertMenu2.label;" accesskey="&tableinsertmenu.accesskey;">
       <menupopup>
+        <menuitem label="&tableCaption.label;"                                                command="cmd_InsertTableCaption"/>
         <menuitem label="&tableRowAbove.label;"     accesskey="&tablerow.accesskey;"          command="cmd_InsertRowAbove"/>
         <menuitem label="&tableRowBelow.label;"     accesskey="&tablerowbelow.accesskey;"     command="cmd_InsertRowBelow"/>
         <menuseparator />
@@ -204,16 +205,18 @@
     </menu>
     <menu id="ctableSelectMenu" label="&tableSelectMenu2.label;" accesskey="&tableselectmenu.accesskey;">
       <menupopup id="ctableSelectPopup">
-        <menuitem id="cmenu_SelectTable"    label="&tableTable.label;"    accesskey="&tabletable.accesskey;"    command="cmd_SelectTable"    />
-        <menuitem id="cmenu_SelectRow"      label="&tableRow.label;"      accesskey="&tablerow.accesskey;"      command="cmd_SelectRow"      />
-        <menuitem id="cmenu_SelectColumn"   label="&tableColumn.label;"   accesskey="&tablecolumn.accesskey;"   command="cmd_SelectColumn"   />
-        <menuitem id="cmenu_SelectCell"     label="&tableCell.label;"     accesskey="&tablecell.accesskey;"     command="cmd_SelectCell"     />
-        <menuitem id="cmenu_SelectAllCells" label="&tableAllCells.label;" accesskey="&tableallcells.accesskey;" command="cmd_SelectAllCells" />
+        <menuitem id="cmenu_SelectTable"       label="&tableTable.label;"    accesskey="&tabletable.accesskey;"    command="cmd_SelectTable"    />
+        <menuitem id="menu_SelectTableCaption" label="&tableCaption.label;"                                        command="cmd_SelectTableCaption"    />
+        <menuitem id="cmenu_SelectRow"         label="&tableRow.label;"      accesskey="&tablerow.accesskey;"      command="cmd_SelectRow"      />
+        <menuitem id="cmenu_SelectColumn"      label="&tableColumn.label;"   accesskey="&tablecolumn.accesskey;"   command="cmd_SelectColumn"   />
+        <menuitem id="cmenu_SelectCell"        label="&tableCell.label;"     accesskey="&tablecell.accesskey;"     command="cmd_SelectCell"     />
+        <menuitem id="cmenu_SelectAllCells"    label="&tableAllCells.label;" accesskey="&tableallcells.accesskey;" command="cmd_SelectAllCells" />
       </menupopup>
     </menu>
     <menu id="ctableDeleteMenu" label="&tableDeleteMenu2.label;" accesskey="&tabledeletemenu.accesskey;">
       <menupopup id="ctableDeletePopup">
         <menuitem id="cmenu_DeleteTable"         label="&tableTable.label;"        accesskey="&tabletable.accesskey;"          command="cmd_DeleteTable"/>
+        <menuitem id="menu_DeleteTableCaption"   label="&tableCaption.label;"                                                  command="cmd_DeleteTableCaption"/>
         <menuitem id="cmenu_DeleteRow"           label="&tableRows.label;"         accesskey="&tablerow.accesskey;"            command="cmd_DeleteRow"/>
         <menuitem id="cmenu_DeleteColumn"        label="&tableColumns.label;"      accesskey="&tablecolumn.accesskey;"         command="cmd_DeleteColumn"/>
         <menuitem id="cmenu_DeleteCell"          label="&tableCells.label;"        accesskey="&tablecell.accesskey;"           command="cmd_DeleteCell"/>

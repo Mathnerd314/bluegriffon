@@ -234,11 +234,13 @@
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <!-- Table menu -->
   <command id="cmd_SelectTable"         oncommand="goDoCommand('cmd_SelectTable')"/>
+  <command id="cmd_SelectTableCaption"  oncommand="goDoCommand('cmd_SelectTableCaption')"/>
   <command id="cmd_SelectRow"           oncommand="goDoCommand('cmd_SelectRow')"/>
   <command id="cmd_SelectColumn"        oncommand="goDoCommand('cmd_SelectColumn')"/>
   <command id="cmd_SelectCell"          oncommand="goDoCommand('cmd_SelectCell')"/>
   <command id="cmd_SelectAllCells"      oncommand="goDoCommand('cmd_SelectAllCells')"/>
   <command id="cmd_InsertTable"         oncommand="goDoCommand('cmd_InsertTable')"/>
+  <command id="cmd_InsertTableCaption"  oncommand="goDoCommand('cmd_InsertTableCaption')"/>
   <command id="cmd_InsertRowAbove"      oncommand="goDoCommand('cmd_InsertRowAbove')"/>
   <command id="cmd_InsertRowBelow"      oncommand="goDoCommand('cmd_InsertRowBelow')"/>
   <command id="cmd_InsertColumnBefore"  oncommand="goDoCommand('cmd_InsertColumnBefore')"/>
@@ -246,6 +248,7 @@
   <command id="cmd_InsertCellBefore"    oncommand="goDoCommand('cmd_InsertCellBefore')"/>
   <command id="cmd_InsertCellAfter"     oncommand="goDoCommand('cmd_InsertCellAfter')"/>
   <command id="cmd_DeleteTable"         oncommand="goDoCommand('cmd_DeleteTable')"/>
+  <command id="cmd_DeleteTableCaption"  oncommand="goDoCommand('cmd_DeleteTableCaption')"/>
   <command id="cmd_DeleteRow"           oncommand="goDoCommand('cmd_DeleteRow')"/>
   <command id="cmd_DeleteColumn"        oncommand="goDoCommand('cmd_DeleteColumn')"/>
   <command id="cmd_DeleteCell"          oncommand="goDoCommand('cmd_DeleteCell')"/>

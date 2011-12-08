@@ -65,6 +65,36 @@ var bgSelectTableCommand =
   }
 };
 
+var bgSelectTableCaptionCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    if (element &&
+        EditorUtils.getCurrentEditorElement() &&
+        EditorUtils.isDocumentEditable() &&
+        EditorUtils.isEditingRenderedHTML() &&
+        GetCurrentViewMode() == "wysiwyg") {
+      // but do we already have a caption?
+      return  (element.firstElementChild
+               && element.firstElementChild.nodeName == "caption");
+    }
+    return false;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    try {
+      EditorUtils.getCurrentEditor().selectElement(element.firstElementChild);
+    } catch(e) {}
+    window.content.focus();
+  }
+};
+
 var bgSelectTableRowCommand =
 {
   isCommandEnabled: function(aCommand, dummy)
@@ -156,6 +186,40 @@ var bgSelectAllTableCellsCommand =
   {
     try {
       EditorUtils.getCurrentTableEditor().selectAllTableCells();
+    } catch(e) {}
+    window.content.focus();
+  }
+};
+
+var bgInsertTableCaptionCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    if (element &&
+        EditorUtils.getCurrentEditorElement() &&
+        EditorUtils.isDocumentEditable() &&
+        EditorUtils.isEditingRenderedHTML() &&
+        GetCurrentViewMode() == "wysiwyg") {
+      // but do we already have a caption?
+      return  (!element.firstElementChild
+               || element.firstElementChild.nodeName != "caption");
+    }
+    return false;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    try {
+      var caption = EditorUtils.getCurrentEditor().createElementWithDefaults("caption");
+      var brNode = EditorUtils.getCurrentDocument().createElement("br");
+      caption.appendChild(brNode);
+      EditorUtils.getCurrentEditor().insertNode(caption, element, 0);
+      EditorUtils.getCurrentEditor().selectElement(brNode);
     } catch(e) {}
     window.content.focus();
   }
@@ -324,6 +388,36 @@ var bgDeleteTableCommand =
   {
     try {
       EditorUtils.getCurrentTableEditor().deleteTable();
+    } catch(e) {}
+    window.content.focus();
+  }
+};
+
+var bgDeleteTableCaptionCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    if (element &&
+        EditorUtils.getCurrentEditorElement() &&
+        EditorUtils.isDocumentEditable() &&
+        EditorUtils.isEditingRenderedHTML() &&
+        GetCurrentViewMode() == "wysiwyg") {
+      // but do we already have a caption?
+      return  (element.firstElementChild
+               && element.firstElementChild.nodeName == "caption");
+    }
+    return false;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties(["table"]);
+    try {
+      EditorUtils.getCurrentEditor().deleteNode(element.firstElementChild);
     } catch(e) {}
     window.content.focus();
   }
