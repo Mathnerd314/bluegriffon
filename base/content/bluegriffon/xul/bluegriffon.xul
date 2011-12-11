@@ -44,11 +44,13 @@
 
 <!DOCTYPE window [
   <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
+  <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
   <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
   <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
   <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
   %bluegriffonDTD;
+  %findbarDTD;
   %structurebarDTD;
   %ariaDTD;
   %brandDTD;

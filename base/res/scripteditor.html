@@ -35,11 +35,13 @@
     return document.getElementById("editor");
   }
 
-  function installBespin(aKeyPressCallback, aTheme, aTagsArray, aEditorUtils) {
+  function installBespin(aKeyPressCallback, aTheme, aTagsArray, aEditorUtils, aReadyCallback, aReadyValue) {
     getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
     gTheme = aTheme;
     html_tags = aTagsArray;
     editorUtils = aEditorUtils;
+    gReadyCallback = aReadyCallback;
+    gReadyValue = aReadyValue;
   }
 
   function useTheme(aTheme) {
@@ -67,9 +69,11 @@
   window.onload = function() {
     gEditor = ace.edit("editor");
     useTheme(gTheme);
-    
-    var HTMLMode = require("ace/mode/html").Mode;
-    gEditor.getSession().setMode(new HTMLMode());
+    if (gReadyCallback)
+      gReadyCallback(gReadyValue);
+
+    var JavaScriptMode = require("ace/mode/javascript").Mode;
+    gEditor.getSession().setMode(new JavaScriptMode());
 
     function bindKey(win, mac) {
         return {

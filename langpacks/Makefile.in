@@ -13,21 +13,6 @@ endif
 
 _AVAILABLE_LOCALES =\
     en-US \
-    fr \
-    zh-CN \
-    es-ES \
-    cs \
-    de \
-    he \
-    it \
-    ja \
-    zh-TW \
-    nl \
-    ko \
-    sl \
-    pl \
-    fi \
-    sv-SE \
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)

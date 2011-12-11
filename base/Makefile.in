@@ -57,6 +57,7 @@ endif
 
 _FILES = \
 	$(srcdir)/res/bespin.html \
+	$(srcdir)/res/scripteditor.html \
 	$(srcdir)/res/html_transitional.html \
 	$(srcdir)/res/html_strict.html \
 	$(srcdir)/res/xhtml_transitional.xhtml \

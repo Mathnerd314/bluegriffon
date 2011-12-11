@@ -1,3 +1,64 @@
+Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/l10nHelper.jsm");
+
+var bespinEditor = null;
+var gSource = {value: ""};
+
+function _InstallBespin(aValue)
+{
+  var theme = null;
+  try {
+    theme = GetPrefs().getCharPref("bluegriffon.source.theme");
+  }
+  catch(e) {}
+
+  gDialog.bespinIframe.addEventListener("load", function() {InstallBespin(gDialog.bespinIframe, theme, aValue);}, true);
+  gDialog.bespinIframe.setAttribute("src", "resource://app/res/scripteditor.html");
+  gDialog.bespinIframe.setAttribute("onclick", "OnBespinFocus(this)");
+}
+
+function Startup()
+{
+  if ("arguments" in window)
+    gSource = window.arguments[0];
+
+  GetUIElements();
+
+  _InstallBespin(gSource.value);
+}
+
+function CommitChanges()
+{
+  gSource.cancelled = false;
+  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  gSource.value = bespinEditor.getSession().getValue();
+  window.close();
+}
+
+function OnBespinFocus(aIframe)
+{
+  aIframe.focus();
+}
+
+function InstallBespin(aIframe, aTheme, aValue)
+{
+  aIframe.contentWindow.installBespin(BespinKeyPressCallback,
+                                      aTheme,
+                                      [],
+                                      EditorUtils,
+                                      SetSource, aValue);
+}
+
+function SetSource(aValue)
+{
+  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  
+  bespinEditor.getSession().setValue(aValue);
+	bespinEditor.getSession().setUseWrapMode(false);
+  gDialog.bespinIframe.focus();
+}
+
 function onBespinFocus(aIframe)
 {
   aIframe.focus();
@@ -10,68 +71,32 @@ function onBespinLineBlur(aElt)
 
 function onBespinLineKeypress(aEvent, aElt)
 {
+  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
   if (aEvent.keyCode == 13) {
     var line = aElt.value;
-    EditorUtils.getCurrentSourceEditor().gotoLine(parseInt(line));
+    bespinEditor.gotoLine(parseInt(line));
     onBespinLineBlur(aElt);
-    onBespinFocus(EditorUtils.getCurrentSourceEditorElement());
+    onBespinFocus(gDialog.bespinIframe);
   }
   if (aEvent.keyCode == 13 ||
       (aEvent.keyCode == 27 && !aEvent.which)) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    EditorUtils.getCurrentSourceEditorElement().focus();
+    gDialog.bespinIframe.focus();
   }
 }
 
 function ToggleBespinFindCaseSensitivity()
 {
-  var bespinIframe = EditorUtils.getCurrentSourceEditorElement(); 
+  var bespinIframe = gDialog.bespinIframe;
   var selPoint = bespinIframe.getUserData("selPoint");
-  BespinFind(bespinIframe.getUserData("findLastDirection"));
+  //bespinEditor = gDialog.bespinIframe.contentWindow.gEditor.setCursor(selPoint);
+  BespinFind(bespinIframe.getUserData("findLastDirection"), true);
 }
 
 function BespinFind(aForward, aInitial)
 {
-  if (GetCurrentViewMode() == "wysiwyg") {
-    if (!gDialog.bespinFindTextbox.value) {
-      gDialog.bespinFindPrevious.hidden = true;
-      gDialog.bespinFindNext.hidden = true;
-      gDialog.bespinToolbox2.hidden = true;
-      return false;
-    }
-    var findInst = EditorUtils.getCurrentEditorElement().webBrowserFind;
-    findInst.searchString  = gDialog.bespinFindTextbox.value;
-    findInst.matchCase     = gDialog.bespinFindCaseSensitive.checked;
-    findInst.wrapFind      = true;
-    findInst.findBackwards = !aForward;
-    findInst.searchFrames  = true;
-    findInst.entireWord    = false;
-
-    var findInFrames = findInst.QueryInterface(Components.interfaces.nsIWebBrowserFindInFrames);
-    findInFrames.rootSearchFrame = EditorUtils.getCurrentEditorElement().contentWindow;
-    findInFrames.currentSearchFrame = findInFrames.rootSearchFrame;
-
-    if (aInitial)
-      EditorUtils.getCurrentEditor().beginningOfDocument();
-    var result = findInst.findNext();
-    gDialog.bespinFindTextbox.focus();
-    if (result) {
-      gDialog.bespinFindCaseSensitive.hidden = false;
-      gDialog.bespinFindPrevious.hidden = false;
-      gDialog.bespinFindNext.hidden = false;
-      gDialog.bespinFindTextbox.className = "";
-      gDialog.bespinToolbox2.hidden = false;
-      return true;
-    }
-    gDialog.bespinFindPrevious.hidden = true;
-    gDialog.bespinFindNext.hidden = true;
-    gDialog.bespinFindTextbox.className = "notfound";
-    gDialog.bespinToolbox2.hidden = true;
-    return false;
-  }
-  else {
-    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
+    var bespinIframe = gDialog.bespinIframe;
     var bespinEditor = bespinIframe.contentWindow.gEditor;
     bespinIframe.setUserData("findLastDirection", aForward, null);
     var query = gDialog.bespinFindTextbox.value;
@@ -117,7 +142,6 @@ function BespinFind(aForward, aInitial)
     gDialog.bespinFindTextbox.className = "";
     gDialog.bespinToolbox2.hidden = false;
     return true;
-  }
 }
 
 function onBespinFindClear(aEvent, aElt)
@@ -136,11 +160,7 @@ function onBespinFindKeypress(aEvent)
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    if (GetCurrentViewMode() == "source")
-      EditorUtils.getCurrentSourceEditorElement().focus();
-    else {
-      window.content.focus();
-    }
+      gDialog.bespinIframe.focus();
   }
 }
 
@@ -194,15 +214,11 @@ function BespinKeyPressCallback(aEvent)
 
 function BespinReplace()
 {
-  if (GetCurrentViewMode() == "source") {
-    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
+    var bespinIframe = gDialog.bespinIframe;
     var bespinEditor = bespinIframe.contentWindow.gEditor;
     var selection = bespinEditor.getSession().getSelection();
     var r = selection.getRange();
     bespinEditor.$tryReplace(r, gDialog.bespinReplaceTextbox.value)
-  }
-  else
-    ReplaceInWysiwyg();
 }
 
 function BespinReplaceAndFind()
@@ -214,22 +230,9 @@ function BespinReplaceAndFind()
 function BespinReplaceAll()
 {
   var occurences = 0;
-  if (GetCurrentViewMode() == "source") {
-    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    occurences = bespinEditor.replaceAll(gDialog.bespinReplaceTextbox.value);
-  }
-  else {
-    var found = true;
-    var editor = EditorUtils.getCurrentEditor();
-    editor.beginTransaction();
-    while (found) {
-      occurences++;
-      ReplaceInWysiwyg();
-      found = BespinFind(true, false);
-    }
-    editor.endTransaction();
-  }
+  var bespinIframe = gDialog.bespinIframe;;
+  var bespinEditor = bespinIframe.contentWindow.gEditor;
+  occurences = bespinEditor.replaceAll(gDialog.bespinReplaceTextbox.value);
   var title = L10NUtils.getString("ReplaceAll");
   var msg = L10NUtils.getString("ReplacedPart1") +
             " " +
@@ -243,22 +246,13 @@ function WysiwygShowFindBar()
 {
   gDialog.bespinToolbox1.hidden = false;
   var editor = EditorUtils.getCurrentEditor();
-  if (GetCurrentViewMode() == "wysiwyg") {
-    var text = editor.outputToString("text/plain", 1).trim();
-    if (text) {
-      gDialog.bespinFindTextbox.value = text;
-      BespinFind(true, true);
-    }
-  }
-  else {
-    var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    var selectionRange = bespinEditor.getSelectionRange();
-    var text = bespinEditor.getSession().getTextRange(selectionRange)
-    if (text) {
-      gDialog.bespinFindTextbox.value = text;
-      BespinFind(true, true);
-    }
+  var bespinIframe = gDialog.bespinIframe;
+  var bespinEditor = bespinIframe.contentWindow.gEditor;
+  var selectionRange = bespinEditor.getSelectionRange();
+  var text = bespinEditor.getSession().getTextRange(selectionRange)
+  if (text) {
+    gDialog.bespinFindTextbox.value = text;
+    BespinFind(true, true);
   }
   gDialog.bespinFindTextbox.focus();
 }
@@ -267,76 +261,5 @@ function CloseFindBar()
 {
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
-  window.content.focus();
+  gDialog.bespinIframe.contentWindow.focus();
 }
-
-function ReplaceInWysiwyg()
-{
-  var editor = EditorUtils.getCurrentEditor();
-
-  // Does the current selection match the find string?
-  var selection = editor.selection;
-
-  var selStr = selection.toString();
-  var specStr = gDialog.bespinFindTextbox.value;
-  if (!gDialog.bespinFindCaseSensitive.checked)
-  {
-    selStr = selStr.toLowerCase();
-    specStr = specStr.toLowerCase();
-  }
-  // Unfortunately, because of whitespace we can't just check
-  // whether (selStr == specStr), but have to loop ourselves.
-  // N chars of whitespace in specStr can match any M >= N in selStr.
-  var matches = true;
-  var specLen = specStr.length;
-  var selLen = selStr.length;
-  if (selLen < specLen)
-    matches = false;
-  else
-  {
-    var specArray = specStr.match(/\S+|\s+/g);
-    var selArray = selStr.match(/\S+|\s+/g);
-    if ( specArray.length != selArray.length)
-      matches = false;
-    else
-    {
-      for (var i=0; i<selArray.length; i++)
-      {
-        if (selArray[i] != specArray[i])
-        {
-          if ( /\S/.test(selArray[i][0]) || /\S/.test(specArray[i][0]) )
-          {
-            // not a space chunk -- match fails
-            matches = false;
-            break;
-          }
-          else if ( selArray[i].length < specArray[i].length )
-          {
-            // if it's a space chunk then we only care that sel be
-            // at least as long as spec
-            matches = false;
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  // If the current selection doesn't match the pattern,
-  // then we want to find the next match, but not do the replace.
-  // That's what most other apps seem to do.
-  // So here, just return.
-  if (!matches)
-    return false;
-
-  // nsPlaintextEditor::InsertText fails if the string is empty,
-  // so make that a special case:
-  var replStr = gDialog.bespinReplaceTextbox.value;
-  if (replStr == "")
-    editor.deleteSelection(0);
-  else
-    editor.insertText(replStr);
-
-  return true;
-}
-
