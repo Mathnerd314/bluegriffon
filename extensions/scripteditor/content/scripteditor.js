@@ -37,6 +37,7 @@
 
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://app/modules/urlHelper.jsm");
 
 var gMain = null;
 const disabledUI = ["ProjectPlusButton", "ProjectMinusButton", "ProjectConfigButton",
@@ -155,13 +156,28 @@ function Inspect()
       var item = document.createElement("listitem");
       item.setAttribute("scriptIndex", i);
       var hasSrc = s.hasAttribute("src");
-      item.setAttribute("image", hasSrc ? "chrome://scripteditor/skin/web.png" :
-                                         "chrome://scripteditor/skin/embedded.png");
-      item.setAttribute("label", hasSrc ? s.getAttribute("src") : s.textContent.substr(0, 60).trim());
-      item.setAttribute("tooltiptext", hasSrc ? "External script at " + s.getAttribute("src")
-                                              : s.textContent.trim());
+      var url = s.src;
+      if (!UrlUtils.isTextURI(url))
+        url = UrlUtils.makeAbsoluteUrl(url);
+
+      item.setAttribute("image", hasSrc ? "chrome://scripteditor/skin/web.png"
+                                        : "chrome://scripteditor/skin/embedded.png");
+      if (hasSrc && UrlUtils.newURI(s.src).scheme != "file") {
+        item.setAttribute("style", "font-style: italic");
+        item.setAttribute("label", s.getAttribute("src"));
+        item.setAttribute("tooltiptext", "External script at " + s.getAttribute("src"));
+      }
+      else {
+        var contents = hasSrc ? GetFileContents(url) : "";
+        item.setAttribute("label", (hasSrc ? contents : s.textContent).substr(0, 60).replace( /\n/g, " ").trim());
+        item.setAttribute("tooltiptext", hasSrc ? "External script at " + s.getAttribute("src") + "\n\n" + contents
+                                                : s.textContent.trim());
+      }
+
+
       item.setAttribute("class", "listitem-iconic " + (hasSrc ? "external" : "embedded"));
       item.setAttribute("crop",  hasSrc ? "center" : "end");
+      item.setAttribute("scriptsrc", url);
 
       gDialog.scriptLists.appendChild(item);
     }
@@ -221,19 +237,27 @@ function onDbleClick(aTarget)
     return;
   aTarget instanceof Components.interfaces.nsIDOMNSElement;
   var classes = aTarget.classList;
-  if (classes.contains("embedded"))
+  var scriptSrc = aTarget.getAttribute("scriptsrc");
+  if (classes.contains("embedded") || scriptSrc.substr(0, 8) == "file:///")
   {
     var scriptIndex = parseInt(aTarget.getAttribute("scriptIndex"));
     var editor = gMain.EditorUtils.getCurrentEditor();
     var scripts = editor.document.querySelectorAll("head > script");
     var s = scripts[scriptIndex];
-    var source = s.textContent;
+    var source;
+    if (classes.contains("embedded"))
+      source = s.textContent;
+    else
+      source = GetFileContents(scriptSrc);
     var rv = {value: source, cancelled: false};
     window.openDialog("chrome://scripteditor/content/editor.xul","_blank",
-                      "chrome,modal=yes,titlebar,resizable=yes,dialog=no", rv);
+                      "chrome,modal=yes,titlebar,resizable=yes,dialog=no", rv, scriptSrc);
     if (!rv.cancelled)
     {
-      s.textContent = rv.value;
+      if (classes.contains("embedded"))
+        s.textContent = rv.value;
+      else
+        SaveFileContents(scriptSrc, rv.value);
       Inspect();
     }
   }
@@ -313,3 +337,45 @@ function Move(aIncrement)
   gDialog.scriptLists.selectedIndex = scriptIndex + aIncrement;
 }
 
+function GetFileContents(aSpec)
+{
+  var data = "";
+  var file = UrlUtils.newLocalFile(aSpec);
+  var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+                createInstance(Components.interfaces.nsIFileInputStream);
+  var cstream = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+                createInstance(Components.interfaces.nsIConverterInputStream);
+  fstream.init(file, -1, 0, 0);
+  cstream.init(fstream, "UTF-8", 0, 0); // you can use another encoding here if you wish
+  
+  let (str = {}) {
+    let read = 0;
+    do { 
+      read = cstream.readString(0xffffffff, str); // read as much as we can and put it in str.value
+      data += str.value;
+    } while (read != 0);
+  }
+  cstream.close(); // this closes fstream
+  return data;
+}
+
+function SaveFileContents(aSpec, aSource)
+{
+  var file = UrlUtils.newLocalFile(aSpec);
+  var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+                 createInstance(Components.interfaces.nsIFileOutputStream);
+  
+  // use 0x02 | 0x10 to open file for appending.
+  foStream.init(file, 0x02 | 0x08 | 0x20, 0666, 0); 
+  // write, create, truncate
+  // In a c file operation, we have no need to set file mode with or operation,
+  // directly using "r" or "w" usually.
+  
+  // if you are sure there will never ever be any non-ascii text in data you can 
+  // also call foStream.writeData directly
+  var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+                  createInstance(Components.interfaces.nsIConverterOutputStream);
+  converter.init(foStream, "UTF-8", 0, 0);
+  converter.writeString(aSource);
+  converter.close(); // this closes foStream
+}

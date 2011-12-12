@@ -23,6 +23,9 @@ function Startup()
   if ("arguments" in window)
     gSource = window.arguments[0];
 
+  var src = window.arguments[1];
+  if (src)
+    window.document.documentElement.setAttribute("title", "BlueGriffon - " + src.substr(src.lastIndexOf("/") + 1));
   GetUIElements();
 
   _InstallBespin(gSource.value);
