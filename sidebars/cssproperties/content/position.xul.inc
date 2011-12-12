@@ -1,13 +1,13 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="positionSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&positionSectionHeader.label;"/>
       </hbox>
 
       <grid class="section" id="positionSection">
         <columns><column/><column/></columns>
         <rows>
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&display.label;"/>
             <hbox>
               <menulist id="displayMenulist" sizetopopup="none"
@@ -41,7 +41,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&visibility.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" label="&visibleVisibility.label;" value="visible" property="visibility" type="checkbox"
@@ -56,7 +56,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&float.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" tooltiptext="&leftFloat.label;" value="left" property="float" type="checkbox"
@@ -74,7 +74,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&clear.label;"/>
             <hbox>
               <hbox align="center">
@@ -98,7 +98,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&overflow.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" label="&visibleOverlow.label;" value="visible" property="overflow" type="checkbox"
@@ -116,7 +116,7 @@
             </hbox>
           </row>
 
-           <row align="center">
+           <row align="center" animatable="false">
             <label value="&textOverflow.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" label="&clipTextOverflow.label;" value="clip" property="text-overflow" type="checkbox"
@@ -128,7 +128,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&position.label;"/>
             <hbox align="center">
               <toolbarbutton class="multibutton" label="&staticPosition.label;" value="static" property="position" type="checkbox"

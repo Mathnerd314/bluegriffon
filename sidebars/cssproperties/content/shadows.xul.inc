@@ -1,11 +1,11 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="shadowsSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&shadowsSectionHeader.label;"/>
       </hbox>
 
       <vbox class="section" id="shadowsSection">
-        <vbox>
+        <vbox animatable="true">
           <richlistbox id="textShadowRichlistbox" rows="6"
                        onselect="OnTextShadowSelect(this)"/>
           <hbox class="listboxBg">
@@ -25,7 +25,7 @@
           </hbox>
         </vbox>
 
-        <vbox id="boxShadowVbox">
+        <vbox id="boxShadowVbox" animatable="true">
           <richlistbox id="boxShadowRichlistbox" rows="6"
                        onselect="OnBoxShadowSelect(this)"/>
           <hbox class="listboxBg">

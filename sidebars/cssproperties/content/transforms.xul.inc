@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="transformsSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&transformsSectionHeader.label;"/>
       </hbox>
 
@@ -92,7 +92,7 @@
                            ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&perspectiveDepth.label;"/>
               <menulist id="perspectiveMenulist" editable="true"
                         oncommand="onLengthMenulistCommand(this, 'px pt cm in mm pc em ex rem ch', 'none', true, ReapplyTransforms)"
@@ -104,7 +104,7 @@
                            ondown="DecreaseLength(this, 'px pt cm in mm pc em ex rem ch', true, ReapplyTransforms)"/>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&transformStyle.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&transformStyleFlat.label;"
@@ -118,7 +118,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&backfaceVisibility.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&backfaceVisibilityVisible.label;"

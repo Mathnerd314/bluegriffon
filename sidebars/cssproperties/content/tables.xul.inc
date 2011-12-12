@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="tablesSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&tablesSectionHeader.label;"/>
       </hbox>
 
@@ -8,7 +8,7 @@
         <grid>
           <columns><column/><column/></columns>
           <rows>
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&tableLayout.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton"
@@ -22,7 +22,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&captionSide.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton"
@@ -36,7 +36,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&borderCollapse.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton"
@@ -72,7 +72,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&emptyCells.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton"

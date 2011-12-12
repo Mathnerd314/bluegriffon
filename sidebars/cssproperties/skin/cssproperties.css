@@ -103,6 +103,7 @@ hbox.csspropertiesHeader {
 }
 
 hbox.csspropertiesHeader > image {
+  list-style-image: url("chrome://cssproperties/skin/filter.png");
   -moz-transform: rotate(-90deg);
   -moz-transition: -moz-transform 0.2s;
 }

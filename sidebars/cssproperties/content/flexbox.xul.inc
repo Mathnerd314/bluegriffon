@@ -1,20 +1,20 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="flexboxSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&flexboxSectionHeader.label;"/>
       </hbox>
 
       <vbox class="section" id="flexboxSection">
-        <checkbox label="&enableFlexBox.label;"
+        <checkbox label="&enableFlexBox.label;" animatable="false"
                   id="flexBoxEnabledCheckbox"
                   oncommand="ToggleFlexBox()"/>
-        <checkbox label="&inlineBox.label;" class="indent"
+        <checkbox label="&inlineBox.label;" class="indent" animatable="false"
                   id="inlineBoxCheckbox"
                   oncommand="ToggleFlexBox()"/>
         <grid>
           <columns><column/><column/></columns>
           <rows>
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&boxAlign.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&startBoxAlign.label;" value="start" property="-moz-box-align" type="checkbox"
@@ -39,7 +39,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&boxDirection.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&normalBoxDirection.label;" value="normal" property="-moz-box-direction" type="checkbox"
@@ -51,7 +51,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&boxOrientation.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&horizontalBoxOrientation.label;" value="horizontal" property="-moz-box-orient" type="checkbox"
@@ -73,7 +73,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&boxOrdinalGroup.label;"/>
               <hbox>
                 <textbox id="boxOrdinalGroupTextbox" type="number" min="0"
@@ -83,7 +83,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&boxPack.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&startBoxPack.label;" value="start" property="-moz-box-pack" type="checkbox"

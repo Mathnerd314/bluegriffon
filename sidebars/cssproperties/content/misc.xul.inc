@@ -1,10 +1,11 @@
       <hbox align="center" class="csspropertiesHeader last" context="sectionHeaderContext"
-            id="miscSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+            id="miscSectionHeader" onclick="ToggleSection(event, this)"
+            animatable="false">
+        <image />
         <label value="&miscSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="miscSection">
+      <vbox class="section" id="miscSection" animatable="false">
         <grid>
           <columns><column/><column/></columns>
           <rows>

@@ -1,11 +1,11 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="colorsSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&colorsSectionHeader.label;"/>
       </hbox>
 
       <vbox class="section" id="colorsSection">
-        <hbox align="center" style="margin-bottom:1em">
+        <hbox align="center" style="margin-bottom:1em" animatable="true">
           <label value="&color.label;"/>
           <hbox>
             <ecolorpicker id="colorColorpicker"
@@ -27,7 +27,7 @@
                           oncommand="SetColor(this)"/>
           </hbox>
         </hbox>
-        <grid>
+        <grid animatable="true">
           <columns><column/><column flex="1"/></columns>
           <rows>
             <row align="top">

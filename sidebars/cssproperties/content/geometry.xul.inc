@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="geometrySectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&geometrySectionHeader.label;"/>
       </hbox>
 
@@ -10,7 +10,7 @@
         <grid>
           <columns><column/><column/><column/><column/><column/></columns>
           <rows>
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&width.label;"/>
               <menulist sizetopopup="none" editable="true" id="widthMenulist" property="width"
                         checkimageratio="true"
@@ -29,7 +29,7 @@
                         id="preserveImageRatioCheckbox"/>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&height.label;"/>
               <menulist sizetopopup="none" editable="true" id="heightMenulist" property="height"
                         checkimageratio="true"
@@ -48,7 +48,7 @@
                       oncommand="GetNaturalSize()"/>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&minWidth.label;"/>
               <menulist sizetopopup="none" editable="true" id="minWidthMenulist" property="min-width"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
@@ -75,7 +75,7 @@
                 </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&minHeight.label;"/>
               <menulist sizetopopup="none" editable="true" id="minHeightMenulist" property="min-height"
                         oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', 'none', false)"
@@ -105,7 +105,7 @@
           </rows>
         </grid>
 
-        <vbox id="geometry-margin-box">
+        <vbox id="geometry-margin-box" animatable="true">
 
           <hbox align="center">
             <label value="&margins.label;"/>

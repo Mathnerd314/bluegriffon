@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="columnSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&columnsSectionHeader.label;"/>
       </hbox>
 
@@ -76,7 +76,7 @@
             </hbox>
           </row>
 
-          <row align="center">
+          <row align="center" animatable="false">
             <label value="&columnRuleStyle.label;"/>
             <hbox align="center">
               <menulist id="columnRuleStyleMenulist" property="-moz-column-rule-style"

@@ -1,6 +1,6 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
             id="generalSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+        <image />
         <label value="&generalSectionHeader.label;"/>
       </hbox>
 
@@ -9,7 +9,8 @@
         <grid>
           <columns><column/><column/></columns>
           <rows>
-            <row align="top">
+
+            <row align="top" animatable="false">
               <label value="&fontFamily.label;"/>
               <vbox>
                 <listbox id="fontFamilyListbox"
@@ -40,7 +41,7 @@
               </vbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&fontSize.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="fontSizeMenulist" property="font-size"
@@ -66,7 +67,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&lineHeight.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="lineHeightMenulist" property="line-height"
@@ -83,7 +84,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&fontWeight.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&fontWeightBold.label;" value="bold" property="font-weight" type="checkbox"
@@ -98,7 +99,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&fontStyle.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&fontStyleItalic.label;" value="italic" property="font-style" type="checkbox"
@@ -110,7 +111,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&textDecoration.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
@@ -128,7 +129,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&textTransform.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&textTransformLowercase.label;" value="lowercase" property="text-transform" type="checkbox"
@@ -143,7 +144,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&fontVariant.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&fontVariantNormal.label;" value="normal" property="font-variant" type="checkbox"
@@ -155,7 +156,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&textAlign.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" image="chrome://bluegriffon/skin/formatToolbar/align-left.png"
@@ -177,7 +178,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <spacer flex="1"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&textAlignStart.label;"
@@ -191,7 +192,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&verticalAlign.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="verticalAlignMenulist" property="vertical-align"
@@ -216,7 +217,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&direction.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-right.png"
@@ -230,7 +231,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&letterSpacing.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="letterSpacingMenulist" property="letter-spacing"
@@ -247,7 +248,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&wordSpacing.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="wordSpacingMenulist" property="word-spacing"
@@ -264,7 +265,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="false">
               <label value="&wordWrap.label;"/>
               <hbox align="center">
                 <toolbarbutton class="multibutton" label="&normalWordWrap.label;"
@@ -278,7 +279,7 @@
               </hbox>
             </row>
 
-            <row align="center">
+            <row align="center" animatable="true">
               <label value="&textIndent.label;"/>
               <hbox align="center">
                 <menulist editable="true" id="textIndentMenulist" property="text-indent"

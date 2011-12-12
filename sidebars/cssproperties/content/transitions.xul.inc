@@ -1,10 +1,11 @@
       <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="transitionsSectionHeader" onclick="ToggleSection(event, this)">
-        <image src="chrome://cssproperties/skin/filter.png"/>
+            id="transitionsSectionHeader" onclick="ToggleSection(event, this)"
+            animatable="false">
+        <image />
         <label value="&transitionsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="transitionsSection">
+      <vbox class="section" id="transitionsSection" animatable="false">
           <richlistbox id="transitionsRichlistbox" rows="6"
                        onselect="OnTransitionSelect(this)"/>
           <hbox class="listboxBg">
