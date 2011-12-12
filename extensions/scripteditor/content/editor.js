@@ -181,6 +181,10 @@ function BespinKeyPressCallback(aEvent)
         aEvent.preventDefault();
         WysiwygShowFindBar();
         break;
+      case 103: // meta-g
+        aEvent.preventDefault();
+        FindNext();
+        break;
       case 108: // meta-l
         aEvent.preventDefault();
         gDialog.bespinToolbox1.hidden = false;
@@ -255,6 +259,13 @@ function WysiwygShowFindBar()
     BespinFind(true, true);
   }
   gDialog.bespinFindTextbox.focus();
+}
+
+function FindNext()
+{
+  if (!gDialog.bespinToolbox1.hidden) {
+    BespinFind(true, false);
+  }
 }
 
 function CloseFindBar()

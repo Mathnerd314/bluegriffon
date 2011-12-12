@@ -11,6 +11,7 @@
                      onclick="BespinReplaceAndFind()"/>
               <label value="&replace.label;"/>
               <textbox id="bespinReplaceTextbox"
+                       onkeypress="BespinKeyPressCallback(event);"
                        size="10"
                        type="search"/>
             </hbox>
@@ -22,7 +23,7 @@
                      id="bespinLineLabel"/>
               <textbox id="bespinLineTextbox"
                        size="5"
-                       onkeypress="onBespinLineKeypress(event, this)"
+                       onkeypress="BespinKeyPressCallback(event); onBespinLineKeypress(event, this)"
                        onblur="onBespinLineBlur(this)"/>
               <spacer flex="1"/>
               <label  id="bespinFindPrevious"
@@ -44,7 +45,7 @@
                        size="10"
                        type="search"
                        oncommand="onBespinFindClear(event, this)"
-                       onkeypress="onBespinFindKeypress(event)"
+                       onkeypress="BespinKeyPressCallback(event); onBespinFindKeypress(event)"
                        onblur="onBespinFindClear(event, this)"
                        oninput="BespinFind(true, true)"/>
             </hbox>
