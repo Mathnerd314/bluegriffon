@@ -62,45 +62,9 @@
   <stringbundle id="bundle" src="chrome://scripteditor/locale/scripteditor.properties"/>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-#ifndef XP_MACOSX
-	  <hbox id="ProjectMgrBox">
-	    <toolbarbutton id="ProjectPlusButton"
-	                   tooltiptext="&newScript.tooltip;"
-	                   type="menu">
-	      <menupopup>
-	        <menuitem label="&addExternalScript.label;"
-	                  oncommand="AddExternalScript()"/>
-	         <menuitem label="&addEmbeddedScript.label;"
-	                  oncommand="AddEmbeddedScript()"/>
-	      </menupopup>
-	    </toolbarbutton>
-	    <toolbarbutton disabled="true"
-	                   oncommand="DeleteScript()"
-	                   tooltiptext="&removeScript.tooltip;"
-	                   id="ProjectMinusButton"/>
-	    <toolbarbutton disabled="true"
-	                   type="menu"
-	                   tooltiptext="&modifyScript.tooltip;"
-	                   id="ProjectConfigButton">
-	      <menupopup onpopupshowing="UpdateConfigMenu()">
-	        <menuitem label="&editScript.label;"
-	                  oncommand="EditScript()"
-	                  id="editScriptMenuitem"/>
-	        <menuseparator/>
-	        <menuitem label="&moveUp.label;"
-	                  oncommand="Move(-1)"
-	                  id="moveUpMenuitem"/>
-	        <menuitem label="&moveDown.label;"
-	                  oncommand="Move(+1)"
-	                  id="moveDownMenuitem"/>
-	      </menupopup>
-	    </toolbarbutton>
-  </hbox>
-#endif
 	  <listbox id="scriptLists" flex="1"
 	           ondblclick="onDbleClick(event.originalTarget)"
 	           onselect="SelectScript()"/>
-#ifdef XP_MACOSX
 	  <hbox id="ProjectMgrBox" class="listboxBg">
 	    <toolbarbutton class="listboxBgPlusButton"
 	                   tooltiptext="&newScript.tooltip;"
@@ -136,6 +100,5 @@
 	      </menupopup>
 	    </toolbarbutton>
 	  </hbox>
-#endif
   </vbox>
 </page>

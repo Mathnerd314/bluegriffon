@@ -53,7 +53,7 @@
               label="&scripteditor.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_scripteditor"
+              oncommand="start_scripteditor()"
 #else
               type="checkbox"
 #endif
