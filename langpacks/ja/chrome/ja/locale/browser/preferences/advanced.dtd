@@ -105,8 +105,6 @@
 <!ENTITY verify2.accesskey			"V">
 <!ENTITY viewSecurityDevices.label		"セキュリティデバイス...">
 <!ENTITY viewSecurityDevices.accesskey		"y">
-<!ENTITY enableAddonsUpdate3.accesskey   "o">
-<!ENTITY enableAddonsUpdate3.label       "Add-ons">
 <!ENTITY submitTelemetry.accesskey       "P">
 <!ENTITY submitTelemetry.label           "Submit performance data">
 

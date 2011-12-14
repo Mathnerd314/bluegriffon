@@ -107,8 +107,6 @@
 <!ENTITY verify2.accesskey                "V">
 <!ENTITY viewSecurityDevices.label       "Kryptographie-Module">
 <!ENTITY viewSecurityDevices.accesskey   "K">
-<!ENTITY enableAddonsUpdate3.accesskey   "o">
-<!ENTITY enableAddonsUpdate3.label       "Add-ons">
 
 <!ENTITY updateApp.label                 "&brandShortName; updates:">
 <!ENTITY updateAuto.accesskey            "A">

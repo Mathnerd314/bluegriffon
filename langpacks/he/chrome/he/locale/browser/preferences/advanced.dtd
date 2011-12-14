@@ -107,8 +107,6 @@
 <!ENTITY verify2.accesskey               "א">
 <!ENTITY viewSecurityDevices.label       "התקני אבטחה">
 <!ENTITY viewSecurityDevices.accesskey   "ה">
-<!ENTITY enableAddonsUpdate3.accesskey   "o">
-<!ENTITY enableAddonsUpdate3.label       "Add-ons">
 
 <!ENTITY updateApp.label                 "&brandShortName; updates:">
 <!ENTITY updateAuto.accesskey            "A">

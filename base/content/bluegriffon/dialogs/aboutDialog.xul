@@ -88,6 +88,12 @@
   
         <hbox>
           <spacer flex="1"/>
+          <label id="build" value="Build @GRE_BUILDID@"/>
+          <spacer flex="1"/>
+        </hbox>
+  
+        <hbox>
+          <spacer flex="1"/>
           <label id="codename" value="&codeName; '@CODE_NAME@'"/>
           <spacer flex="1"/>
         </hbox>

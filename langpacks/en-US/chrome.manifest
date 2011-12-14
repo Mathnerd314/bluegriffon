@@ -14,9 +14,9 @@ locale global-platform en-US chrome/en-US/locale/en-US/global-platform/
 locale global en-US chrome/en-US/locale/en-US/global/
 locale pippki en-US chrome/en-US/locale/en-US/pippki/
 locale browser en-US chrome/en-US/locale/browser/
+locale pipnss en-US chrome/en-US/locale/en-US/pipnss/
 locale passwordmgr en-US chrome/en-US/locale/en-US/passwordmgr/
 locale alerts en-US chrome/en-US/locale/en-US/alerts/
-locale pipnss en-US chrome/en-US/locale/en-US/pipnss/
 locale weave en-US chrome/en-US/locale/en-US/
 locale bluegriffon en-US base/locale/bluegriffon/
 locale branding en-US base/locale/branding/

@@ -64,3 +64,7 @@ install::
 	@echo "BlueGriffon can't be installed directly."
 	@exit 1
 
+distribution::
+ifdef MOZ_UPDATE_PACKAGING
+	$(MAKE) -C $(DIST)/../tools/update-packaging
+endif

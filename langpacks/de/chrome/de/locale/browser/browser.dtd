@@ -195,6 +195,9 @@ can reach it easily. -->
 <!ENTITY inspectMenu.accesskey        "U">
 <!ENTITY inspectMenu.commandkey       "I">
 
+<!ENTITY inspectContextMenu.label     "Element untersuchen">
+<!ENTITY inspectContextMenu.accesskey "Q">
+
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
   -  The Scratchpad is intended to provide a simple text editor for creating
@@ -562,9 +565,6 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY toggleAddonBarCmd.key        "/">
 <!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
 <!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
-<!ENTITY inspectContextMenu.accesskey "Q">
-
-<!ENTITY inspectContextMenu.label     "Inspect Element">
 <!ENTITY inspectStyleButton.accesskey "S">
 <!ENTITY inspectStyleButton.label     "Style">
 <!ENTITY styleeditor.accesskey        "y">

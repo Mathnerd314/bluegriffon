@@ -333,3 +333,7 @@ panel[floating="true"] {
 #editorBarLabel:hover:active {
   color: red;
 }
+
+#menu_updates[loading="true"] {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+}

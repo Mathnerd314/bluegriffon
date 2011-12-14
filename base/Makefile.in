@@ -44,11 +44,13 @@ include $(DEPTH)/config/autoconf.mk
 
 APP_VERSION = $(shell cat $(srcdir)/../config/version.txt)
 CODE_NAME = $(shell cat $(srcdir)/../config/codename.txt)
+GRE_BUILDID = $(shell $(PYTHON) $(topsrcdir)/config/printconfigsetting.py $(LIBXUL_DIST)/bin/platform.ini Build BuildID)
 
 DEFINES += \
 	-DAPP_NAME=$(MOZ_APP_DISPLAYNAME) \
 	-DAPP_VERSION=$(APP_VERSION) \
 	-DCODE_NAME=$(CODE_NAME) \
+	-DGRE_BUILDID=$(GRE_BUILDID) \
 	$(NULL)
 
 ifneq (,$(filter mac cocoa, $(MOZ_WIDGET_TOOLKIT)))

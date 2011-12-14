@@ -1747,3 +1747,81 @@ function CreateOrUpdateTableOfContents()
   window.openDialog("chrome://bluegriffon/content/dialogs/insertTOC.xul","_blank",
                     "chrome,modal,titlebar");
 }
+
+function ShowUpdates()
+{
+  // copied from checkForUpdates in mozilla/browser/base/content/utilityOverlay.js
+  var um =
+    Components.classes["@mozilla.org/updates/update-manager;1"]
+              .getService(Components.interfaces.nsIUpdateManager);
+  var prompter =
+    Components.classes["@mozilla.org/updates/update-prompt;1"]
+              .createInstance(Components.interfaces.nsIUpdatePrompt);
+
+  // If there's an update ready to be applied, show the "Update Downloaded"
+  // UI instead and let the user know they have to restart the browser for
+  // the changes to be applied.
+  if (um.activeUpdate && um.activeUpdate.state == "pending")
+    prompter.showUpdateDownloaded(um.activeUpdate);
+  else
+    prompter.checkForUpdates();
+}
+
+function CheckForUpdates(aPopup)
+{
+  var item = aPopup.querySelector("#menu_updates");
+  if (item) {
+    // copied from buildHelpMenu in mozilla/browser/base/content/utilityOverlay.js
+    var updates =
+      Components.classes["@mozilla.org/updates/update-service;1"]
+                .getService(Components.interfaces.nsIApplicationUpdateService);
+    var um =
+      Components.classes["@mozilla.org/updates/update-manager;1"]
+                .getService(Components.interfaces.nsIUpdateManager);
+
+    // Disable the UI if the update enabled pref has been locked by the
+    // administrator or if we cannot update for some other reason
+    var checkForUpdates = item;
+    var canCheckForUpdates = updates.canCheckForUpdates;
+    checkForUpdates.setAttribute("disabled", !canCheckForUpdates);
+    if (!canCheckForUpdates)
+      return;
+
+    var strings =
+      Services.strings
+              .createBundle("chrome://bluegriffon/locale/updates.properties");
+    var activeUpdate = um.activeUpdate;
+
+    // If there's an active update, substitute its name into the label
+    // we show for this item, otherwise display a generic label.
+    function getStringWithUpdateName(key) {
+      if (activeUpdate && activeUpdate.name)
+        return strings.formatStringFromName(key, [activeUpdate.name], 1);
+      return strings.formatStringFromName(key, ["..."], 1);
+    }
+
+    // By default, show "Check for Updates..."
+    var key = "update.checkInsideButton";
+    if (activeUpdate) {
+      switch (activeUpdate.state) {
+      case "downloading":
+        // If we're downloading an update at present, show the text:
+        // "Downloading Instantbird x.x..." otherwise we're paused, and show
+        // "Resume Downloading Instantbird x.x..."
+        key = updates.isDownloading ? "update.checkInsideButton" : "update.resumeButton";
+        break;
+      case "pending":
+        // If we're waiting for the user to restart, show: "Apply Downloaded
+        // Updates Now..."
+        key = "update.restart.applyButton";
+        break;
+      }
+    }
+    checkForUpdates.label     = getStringWithUpdateName(key + ".label");
+    checkForUpdates.accessKey = strings.GetStringFromName(key + ".accesskey");
+    if (um.activeUpdate && updates.isDownloading)
+      checkForUpdates.setAttribute("loading", "true");
+    else
+      checkForUpdates.removeAttribute("loading");
+  }
+}

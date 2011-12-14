@@ -96,16 +96,7 @@ var BGUpdateManager = {
     catch(e) {}
 
     var updatesEnabled = true;
-    try {
-      updatesEnabled = prefs.getBoolPref(this.kPREF_UPDATES_ENABLED);
-    }
-    catch(e) {}
-
     var updateFrequency = "launch";
-    try {
-      updateFrequency = prefs.getCharPref(this.kPREF_UPDATE_FREQUENCY);
-    }
-    catch(e) {}
 
     if (updatesEnabled &&
         (updateFrequency == "launch" ||
@@ -202,44 +193,29 @@ var BGUpdateManager = {
     if (doc &&
         doc.documentElement.nodeName == "update") {
       var child = doc.documentElement.firstElementChild;
-      var currentVersion, homeURL;
       var message = "", messageURL = "";
       while (child) {
         switch (child.nodeName)
         {
-          case "currentVersion": currentVersion = child.textContent; break;
-          case "homeURL":        homeURL = child.textContent; break;
           case "message":        message = child.textContent; break;
           case "messageURL":     messageURL = child.textContent; break;
           default:               break;
         }
         child = child.nextElementSibling;
       }
-      if (currentVersion && homeURL) {
-        var gApp = Services.appinfo;
-        var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
-        if (Services.vc.compare(gApp.version, currentVersion) < 0) {
-          // aaaaah, we found a more recent version...
-          window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                            null, null);
-          return;
-        }
-        else {
-          if ("BlueGriffonIsUpToDate" in window)
-            BlueGriffonIsUpToDate();
-          var lastMessage = "";
-          try {
-            lastMessage = Services.prefs.getCharPref(this.kPREF_UPDATE_MESSAGE);
-          }
-          catch(e){}
-          if (message && lastMessage != message) {
-            Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
-            window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                              message, messageURL);
-          }
-          return;
-        }
+      var lastMessage = "";
+      try {
+        lastMessage = Services.prefs.getCharPref(this.kPREF_UPDATE_MESSAGE);
       }
+      catch(e){}
+      if (message && lastMessage != message) {
+        Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
+        var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
+        window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
+                          message, messageURL);
+      }
+      return;
     }
   }
 };
+  

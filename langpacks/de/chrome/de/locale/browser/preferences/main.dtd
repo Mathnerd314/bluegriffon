@@ -13,8 +13,8 @@
 <!ENTITY useCurrentPage.label      "Aktuelle Seite verwenden">
 <!ENTITY useCurrentPage.accesskey  "A">
 <!ENTITY useMultiple.label         "Aktuelle Seiten verwenden">
-<!ENTITY useBookmark.label         "Lesezeichen verwenden">
-<!ENTITY useBookmark.accesskey     "L">
+<!ENTITY chooseBookmark.label      "Lesezeichen verwenden…">
+<!ENTITY chooseBookmark.accesskey  "L">
 <!ENTITY restoreDefault.label      "Standard wiederherstellen">
 <!ENTITY restoreDefault.accesskey  "t">
 
@@ -39,5 +39,3 @@
 <!ENTITY manageAddonsDescUnix2.label  "Add-on-Optionen ändern">
 <!ENTITY manageAddons.label           "Add-ons verwalten…">
 <!ENTITY manageAddons.accesskey       "v">
-<!ENTITY chooseBookmark.accesskey  "B">
-<!ENTITY chooseBookmark.label      "Use Bookmark…">

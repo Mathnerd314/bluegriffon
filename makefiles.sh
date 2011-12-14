@@ -53,6 +53,7 @@ bluegriffon/themes/mac/Makefile
 bluegriffon/extensions/svg-edit/Makefile
 bluegriffon/extensions/gfd/Makefile
 bluegriffon/extensions/fs/Makefile
+bluegriffon/extensions/scripteditor/Makefile
 bluegriffon/stubs/Makefile
 bluegriffon/stubs/csseditor/Makefile
 bluegriffon/stubs/eyedropper/Makefile

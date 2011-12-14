@@ -38,11 +38,11 @@
             onpaneload="OnStylesPaneLoad()"
             image="chrome://bluegriffon/skin/prefs/styles.png"
             src="chrome://bluegriffon/content/prefs/styles.xul"/>
-  <prefpane id="updatePrefPane"
+  <!--prefpane id="updatePrefPane"
             label="&update.title;"
             onpaneload="OnUpdatePaneLoad()"
             image="chrome://bluegriffon/skin/prefs/update.png"
-            src="chrome://bluegriffon/content/prefs/update.xul"/>
+            src="chrome://bluegriffon/content/prefs/update.xul"/-->
   <prefpane id="advancedPrefPane"
             label="&advanced.title;"
             onpaneload="OnAdvancedPaneLoad()"
@@ -65,7 +65,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/prefs.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/newPage.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/>
+  <!--script type="application/javascript" src="chrome://bluegriffon/content/prefs/update.js"/-->
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/styles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/shortcuts.js"/>

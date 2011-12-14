@@ -37,10 +37,8 @@
 #include "nsISupports.idl"
 #include "nsIBaseWindow.idl"
 
-[scriptable, uuid(2E707864-FCFD-4B46-946F-36EE75B059A6)]
+[scriptable, uuid(CBD29152-34E9-495B-A853-EBAC91B09591)]
 interface diIOSXDockIconBadger : nsISupports
 {
-  void setIconValue(in long aCount);
-  void restoreIcon();
   void setDocumentEdited(in nsIBaseWindow aWindow, in boolean aIsEdited);
 };

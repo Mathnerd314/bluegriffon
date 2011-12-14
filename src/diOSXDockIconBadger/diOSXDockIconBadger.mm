@@ -61,22 +61,6 @@ diOSXDockIconBadger::~diOSXDockIconBadger()
 NS_IMPL_ISUPPORTS1(diOSXDockIconBadger, diIOSXDockIconBadger)
 
 NS_IMETHODIMP
-diOSXDockIconBadger::RestoreIcon()
-{
-  NSDockTile *aTile = [[NSApplication sharedApplication] dockTile];
-  [aTile setBadgeLabel: nil];
-	return NS_OK;
-}
-
-NS_IMETHODIMP
-diOSXDockIconBadger::SetIconValue(int aCount)
-{
-  NSDockTile *aTile = [[NSApplication sharedApplication] dockTile];
-  [aTile setBadgeLabel:[NSString stringWithFormat:@"%i", aCount]];
-  return NS_OK;
-}
-
-NS_IMETHODIMP
 diOSXDockIconBadger::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 
 {
   nsCOMPtr<nsIWidget> widget = nsnull;
