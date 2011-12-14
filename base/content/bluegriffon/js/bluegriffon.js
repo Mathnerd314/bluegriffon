@@ -1694,12 +1694,12 @@ function UpdateBadge()
   var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                          .getInterface(Components.interfaces.nsIWebNavigation)
                          .QueryInterface(Components.interfaces.nsIBaseWindow);
-  var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
-                         .createInstance(Components.interfaces.diIOSXDockIconBadger);
+  var badger = Components.classes["@mozilla.org/widget/macdocksupport;1"]
+                 .getService(Components.interfaces.nsIMacDockSupport);
   if (n)
-    badger.setIconValue(n);
+    badger.badgeText = n;
   else
-    badger.restoreIcon();
+    badger.badgeText = "";
 }
 
 function ResetBadge()
@@ -1707,9 +1707,9 @@ function ResetBadge()
   var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                          .getInterface(Components.interfaces.nsIWebNavigation)
                          .QueryInterface(Components.interfaces.nsIBaseWindow);
-  var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
-                         .createInstance(Components.interfaces.diIOSXDockIconBadger);
-  badger.restoreIcon();
+  var badger = Components.classes["@mozilla.org/widget/macdocksupport;1"]
+                 .getService(Components.interfaces.nsIMacDockSupport);
+  badger.badgeText = "";
 }
 #endif
 
