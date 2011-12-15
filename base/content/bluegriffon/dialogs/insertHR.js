@@ -206,18 +206,32 @@ function onAccept()
     gEditor.insertElementAtSelection(gNode, true);
   }
 
+  var attributeLess = false;
+  if(!gDialog.colorColorpicker.shownColor
+     && !gDialog.widthMenulist.value
+     && !gDialog.heightMenulist.value
+     && gDialog.shadedCheckbox.checked
+     && !gDialog.leftAlignButton.hasAttribute("checked")
+     && !gDialog.centerAlignButton.hasAttribute("checked")
+     && !gDialog.rightAlignButton.hasAttribute("checked")) {
+    attributeLess = true;
+   }
 
   gEditor.removeAttribute(gNode, "width");
   var txn = new diStyleAttrChangeTxn(gNode, "width", gDialog.widthMenulist.value, "");
   gEditor.transactionManager.doTransaction(txn);
   gEditor.incrementModificationCount(1);  
 
+  gEditor.removeAttribute(gNode, "height");
   txn = new diStyleAttrChangeTxn(gNode, "height", gDialog.heightMenulist.value, "");
   gEditor.transactionManager.doTransaction(txn);
   gEditor.incrementModificationCount(1);  
 
   gEditor.removeAttribute(gNode, "color");
-   txn = new diStyleAttrChangeTxn(gNode, "color", gDialog.colorColorpicker.color, "");
+  txn = new diStyleAttrChangeTxn(gNode, "color",
+                                 attributeLess ? gDialog.colorColorpicker.shownColor
+                                               : gDialog.colorColorpicker.color,
+                                 "");
   gEditor.transactionManager.doTransaction(txn);
   gEditor.incrementModificationCount(1);  
 
@@ -229,17 +243,19 @@ function onAccept()
 
   gEditor.removeAttribute(gNode, "align");
   var ml = "", mr = "";
-  if (gDialog.leftAlignButton.hasAttribute("checked")) {
-    ml = "0px";
-    mr = "auto";
-  }
-  else if (gDialog.centerAlignButton.hasAttribute("checked")) {
-    ml = "auto";
-    mr = "auto";
-  }
-  else if (gDialog.rightAlignButton.hasAttribute("checked")) {
-    ml = "auto";
-    mr = "0px";
+  if (!attributeLess) {
+    if (gDialog.leftAlignButton.hasAttribute("checked")) {
+      ml = "0px";
+      mr = "auto";
+    }
+    else if (gDialog.centerAlignButton.hasAttribute("checked")) {
+      ml = "auto";
+      mr = "auto";
+    }
+    else if (gDialog.rightAlignButton.hasAttribute("checked")) {
+      ml = "auto";
+      mr = "0px";
+    }
   }
   txn = new diStyleAttrChangeTxn(gNode, "margin-left", ml, "");
   gEditor.transactionManager.doTransaction(txn);

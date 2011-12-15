@@ -68,6 +68,9 @@
                 onget="return this.getAttribute('color');"
                 onset="this.setAttribute('color', val); this.mColorBox.style.backgroundColor = val;"/>
 
+      <property name="shownColor"
+                onget="return this.mColorBox.style.backgroundColor;"/>
+
       <method name="open">
         <parameter name="aColorObjectId"/>
         <parameter name="aWindowTitle"/>

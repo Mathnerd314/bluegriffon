@@ -60,7 +60,7 @@
 
   <groupbox>
     <caption label="&style.label;"/>
-    <checkbox label="&shaded.label;" id="shadedCheckbox"/>
+    <checkbox label="&shaded.label;" id="shadedCheckbox" checked="true"/>
     <grid>
       <columns><column/><column/></columns>
       <rows>
