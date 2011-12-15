@@ -1,5 +1,37 @@
 //-----------------------------------------------------------------------------------
 
+function ApplyToNodesArray(aFunctor, aEditor)
+{
+  var nodes = [], node;
+  if (aEditor
+      && aEditor.selection.rangeCount > 1) {
+    var selection = aEditor.selection;
+    var count = selection.rangeCount;
+    for (var i = 0; i < count; i++) {
+      var range = selection.getRangeAt(i);
+      if (range.startContainer == range.endContainer
+          && range.startOffset + 1 == range.endOffset
+          && range.startContainer.nodeType == Node.ELEMENT_NODE) {
+        node = range.startContainer.childNodes[range.startOffset];
+      }
+      else
+        node = selection.getRangeAt(i).commonAncestorContainer;
+      nodes.push(node);
+    }
+  }
+  else
+    nodes.push(EditorUtils.getSelectionContainer().node);
+
+  aEditor.beginTransaction();
+  for (var k = 0 ; k < nodes.length; k++) {
+    node = nodes[k];
+    aFunctor(node, arguments);
+  }
+  aEditor.endTransaction();
+
+  return nodes;
+}
+
 var cmdClass =
 {
   isCommandEnabled: function(aCommand, dummy)
@@ -32,38 +64,46 @@ var cmdClass =
   doCommandParams: function(aCommandName, aParams, aRefCon)
   {
     var className = aParams.getCStringValue("state_attribute");
-    var node = EditorUtils.getSelectionContainer().node;
 
-    if (className) {
-      var classes = node.classList;
-  
-      var newList = className;
-      if (classes)
-      {
-        var found = false;
-        newList = [];
-        for (var i = 0; i < classes.length; i++)
+    function functor(aNode) {
+      var editor = arguments[1][1];
+      var cn = arguments[1][2];
+
+      if (cn) {
+        var classes = aNode.classList;
+    
+        var newList = cn;
+        if (classes)
         {
-          if (classes[i] == className)
-            found = true;
-          else
-          newList.push(classes[i]);;
+          var found = false;
+          newList = [];
+          for (var i = 0; i < classes.length; i++)
+          {
+            if (classes[i] == cn)
+              found = true;
+            else
+            newList.push(classes[i]);;
+          }
+          if (!found)
+            newList.push(cn);
         }
-        if (!found)
-          newList.push(className);
+        if (newList.length)
+          editor.setAttribute(aNode, "class", newList.join(" "));
+        else
+          editor.removeAttribute(aNode, "class");
       }
-      if (newList.length)
-        EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
       else
-        EditorUtils.getCurrentEditor().removeAttribute(node, "class");
+        editor.removeAttribute(aNode, "class");
     }
-    else
-      EditorUtils.getCurrentEditor().removeAttribute(node, "class");
+
+    var nodes = ApplyToNodesArray(functor,
+                                  EditorUtils.getCurrentEditor(),
+                                  className);
+
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", node, false);
+    NotifierUtils.notify("selection", nodes[0], false);
   }
 };
-
 
 var cmdId =
 {
@@ -161,14 +201,23 @@ var cmdAriaRole =
   doCommandParams: function(aCommandName, aParams, aRefCon)
   {
     var role = aParams.getCStringValue("state_attribute");
-    var node = EditorUtils.getSelectionContainer().node;
 
-    if (role)
-      EditorUtils.getCurrentEditor().setAttribute(node, "role", role);
-    else
-      EditorUtils.getCurrentEditor().removeAttribute(node, "role");
+    function functor(aNode) {
+      var editor = arguments[1][1];
+      var r = arguments[1][2];
+      if (r)
+        editor.setAttribute(aNode, "role", r);
+      else
+        editor.removeAttribute(aNode, "role");
+    }
+
+    var nodes = ApplyToNodesArray(functor,
+                                  EditorUtils.getCurrentEditor(),
+                                  role);
+
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", node, false);
+    NotifierUtils.notify("selection", nodes[0], false);
+
   }
 };
 
