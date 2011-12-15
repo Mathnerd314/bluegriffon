@@ -73,7 +73,10 @@ var AutoInsertTable = {
     var tableBody = doc.createElement("tbody");
     tableElement.appendChild(tableBody);
     tableElement.setAttribute("border", "1");
-    tableElement.setAttribute("width", "100%");
+    if (doc.doctype && doc.doctype.publicId == "") // html5
+      tableElement.setAttribute("style", "width: 100%");
+    else
+      tableElement.setAttribute("width", "100%");
     var firstCell = null;
     for (var i = 0; i < this.mRow; i++)
     {
