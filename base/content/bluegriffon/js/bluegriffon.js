@@ -1319,8 +1319,9 @@ function OnClick(aEvent)
 {
   // this is necessary to be able to select for instance video elements
   var target = aEvent.explicitOriginalTarget;
-  if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement ||
-                 target instanceof Components.interfaces.nsIDOMHTMLAudioElement)) {
+  if (target && (target instanceof Components.interfaces.nsIDOMHTMLVideoElement
+                 || target instanceof Components.interfaces.nsIDOMHTMLAudioElement
+                 || target instanceof Components.interfaces.nsIDOMHTMLSelectElement)) {
     EditorUtils.getCurrentEditor().selectElement(target);
   }
 }

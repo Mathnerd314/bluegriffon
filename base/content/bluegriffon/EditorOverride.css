@@ -86,10 +86,10 @@ a:link img, a:visited img {
 
 /* Allow double-clicks on these widgets to open properties dialogs
    XXX except when the widget has disabled attribute */
-input, textarea, keygen {
+input, textarea, keygen, select, option {
   -moz-user-select: all !important;
   -moz-user-input: auto !important;
-  -moz-user-focus: none !important;
+  -moz-user-focus: ignore !important;
 }
 
 textarea {
@@ -146,10 +146,6 @@ label, button {
 }
 
 ::-moz-display-comboboxcontrol-frame {
-  -moz-user-select: text !important;
-}
-
-option {
   -moz-user-select: text !important;
 }
 
