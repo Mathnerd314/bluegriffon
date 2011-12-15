@@ -252,23 +252,23 @@
                   command="cmd_span"
                   accesskey="&spanCmd.accesskey;"/>
         <menuseparator/>
-        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         command="cmd_bold"          type="checkbox"/>
-        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       command="cmd_italic"        type="checkbox"/>
-        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    command="cmd_underline"     type="checkbox" key="underlinekb"/>
-        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   command="cmd_strikethrough" type="checkbox"/>
-        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  command="cmd_superscript"   type="checkbox"/>
-        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    command="cmd_subscript"     type="checkbox"/>
-        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    command="cmd_tt"            type="checkbox"/>
-        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  command="cmd_nobreak"       type="checkbox"/>
+        <menuitem label="&styleBoldCmd.label;"        accesskey="&stylebold.accesskey;"         observes="cmd_bold"          type="checkbox"/>
+        <menuitem label="&styleItalicCmd.label;"      accesskey="&styleitalic.accesskey;"       observes="cmd_italic"        type="checkbox"/>
+        <menuitem label="&styleUnderlineCmd.label;"   accesskey="&styleunderline.accesskey;"    observes="cmd_underline"     type="checkbox" key="underlinekb"/>
+        <menuitem label="&styleStrikeThruCmd.label;"  accesskey="&stylestrikethru.accesskey;"   observes="cmd_strikethrough" type="checkbox"/>
+        <menuitem label="&styleSuperscriptCmd.label;" accesskey="&stylesuperscript.accesskey;"  observes="cmd_superscript"   type="checkbox"/>
+        <menuitem label="&styleSubscriptCmd.label;"   accesskey="&stylesubscript.accesskey;"    observes="cmd_subscript"     type="checkbox"/>
+        <menuitem label="&fontFixedWidth.label;"      accesskey="&fontfixedwidth.accesskey;"    observes="cmd_tt"            type="checkbox"/>
+        <menuitem label="&styleNonbreakingCmd.label;" accesskey="&stylenonbreaking.accesskey;"  observes="cmd_nobreak"       type="checkbox"/>
         <menuseparator/>
-        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           command="cmd_em"            type="checkbox" key="emkb"/>
-        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       command="cmd_strong"        type="checkbox" key="strongkb"/>
-        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         command="cmd_cite"          type="checkbox"/>
-        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         command="cmd_abbr"          type="checkbox"/>
-        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      command="cmd_acronym"       type="checkbox"/>
-        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         command="cmd_code"          type="checkbox" key="codekb"/>
-        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         command="cmd_samp"          type="checkbox"/>
-        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          command="cmd_var"           type="checkbox"/>
+        <menuitem label="&styleEm.label;"             accesskey="&styleEm.accesskey;"           observes="cmd_em"            type="checkbox" key="emkb"/>
+        <menuitem label="&styleStrong.label;"         accesskey="&styleStrong.accesskey;"       observes="cmd_strong"        type="checkbox" key="strongkb"/>
+        <menuitem label="&styleCite.label;"           accesskey="&styleCite.accesskey;"         observes="cmd_cite"          type="checkbox"/>
+        <menuitem label="&styleAbbr.label;"           accesskey="&styleAbbr.accesskey;"         observes="cmd_abbr"          type="checkbox"/>
+        <menuitem label="&styleAcronym.label;"        accesskey="&styleAcronym.accesskey;"      observes="cmd_acronym"       type="checkbox"/>
+        <menuitem label="&styleCode.label;"           accesskey="&styleCode.accesskey;"         observes="cmd_code"          type="checkbox" key="codekb"/>
+        <menuitem label="&styleSamp.label;"           accesskey="&styleSamp.accesskey;"         observes="cmd_samp"          type="checkbox"/>
+        <menuitem label="&styleVar.label;"            accesskey="&styleVar.accesskey;"          observes="cmd_var"           type="checkbox"/>
         <menuseparator/>
         <menuitem id="menu_removeAllStyles"  label="&removeAllStyles.label;"  accesskey="&removeAllStyles.accesskey;"  command="cmd_removeStyles"/>
         <menuitem id="menu_removeAllLinks"   label="&removeAllLinks.label;"   accesskey="&removeAllLinks.accesskey;"   command="cmd_removeLinks"/>
