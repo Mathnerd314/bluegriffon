@@ -52,8 +52,10 @@ var cmdClass =
         if (!found)
           newList.push(className);
       }
-  
-      EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
+      if (newList.length)
+        EditorUtils.getCurrentEditor().setAttribute(node, "class", newList.join(" "));
+      else
+        EditorUtils.getCurrentEditor().removeAttribute(node, "class");
     }
     else
       EditorUtils.getCurrentEditor().removeAttribute(node, "class");
