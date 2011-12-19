@@ -144,3 +144,6 @@ pref("app.update.timer", 600000);
 pref("app.update.showInstalledUI", false);
 pref("app.update.incompatible.mode", 0);
 pref("app.update.log", false);
+
+pref("bluegriffon.css.colors.names.enabled", true);
+pref("bluegriffon.css.colors.type", "hex");
