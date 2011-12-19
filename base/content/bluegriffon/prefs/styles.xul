@@ -11,13 +11,16 @@
 
   <prefpane id="stylesPrefPane">
     <preferences>
-      <preference id="pref-csspolicy"       name="bluegriffon.css.policy" type="string"/>
-      <preference id="pref-cssprefix"       name="bluegriffon.css.prefix" type="string"/>
+      <preference id="pref-csspolicy"        name="bluegriffon.css.policy" type="string"/>
+      <preference id="pref-cssprefix"        name="bluegriffon.css.prefix" type="string"/>
 
-      <preference id="pref-support-gecko"   name="bluegriffon.css.support.gecko" type="bool"/>
-      <preference id="pref-support-webkit"  name="bluegriffon.css.support.webkit" type="bool"/>
-      <preference id="pref-support-presto"  name="bluegriffon.css.support.presto" type="bool"/>
-      <preference id="pref-support-trident" name="bluegriffon.css.support.trident" type="bool"/>
+      <preference id="pref-css-output-names" name="bluegriffon.css.colors.names.enabled" type="bool"/>
+      <preference id="pref-css-output-type"  name="bluegriffon.css.colors.type" type="string"/>
+
+      <preference id="pref-support-gecko"    name="bluegriffon.css.support.gecko" type="bool"/>
+      <preference id="pref-support-webkit"   name="bluegriffon.css.support.webkit" type="bool"/>
+      <preference id="pref-support-presto"   name="bluegriffon.css.support.presto" type="bool"/>
+      <preference id="pref-support-trident"  name="bluegriffon.css.support.trident" type="bool"/>
     </preferences>
     <groupbox>
       <caption label="&cssPolicy.caption;"/>
@@ -39,6 +42,18 @@
                id="manualRadio"
                value="manual"
                tooltiptext="&iDecide.desc;"/>
+      </radiogroup>
+    </groupbox>
+    <groupbox>
+      <caption label="&cssColors.captions;"/>
+      <checkbox id="outputCssColorNamesCheckbox"
+                label="&outputCssColorNames.label;"
+                preference="pref-css-output-names"/>
+      <radiogroup id="cssColorTypeRadiogroup"
+                  orient="horizontal"
+                  preference="pref-css-output-type">
+        <radio label="&rgbColors.label;" value="rgb"/>
+        <radio label="&hexColors.label;" value="hex"/>
       </radiogroup>
     </groupbox>
     <groupbox>
