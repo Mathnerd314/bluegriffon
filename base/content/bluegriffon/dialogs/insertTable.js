@@ -332,13 +332,13 @@ function OnlyDigits(aElt)
 
 function Increase(aId)
 {
-  var value = gDialog[aId].value;
+  var value = gDialog[aId].value ? gDialog[aId].value : "0";
   gDialog[aId].value = parseInt(value) + 1;
 }
 
 function Decrease(aId)
 {
-  var value = gDialog[aId].value;
+  var value = gDialog[aId].value ? gDialog[aId].value : "0";
   value = Math.max( 0, parseInt(value) - 1);
   gDialog[aId].value = value;
 }
