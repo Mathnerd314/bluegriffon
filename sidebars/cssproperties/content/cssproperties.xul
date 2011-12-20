@@ -67,6 +67,7 @@
 
   <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
+  <stringbundle id="bluegriffonBundle"     src="chrome://cssproperties/locale/bluegriffon.properties"/>
 
   <panelset>
     <panel level="top" noautohide="true" id="bezierPanel"

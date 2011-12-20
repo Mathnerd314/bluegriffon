@@ -354,7 +354,24 @@ function ApplyStyles(aStyles)
           }
           valid = (null != result.value.match( gXmlNAMERegExp ));
         }
+        var id = result.value;
+        var elt = id ? editor.document.getElementById(id) : null;
+        var rv = 0;
+        if (elt && elt != gCurrentElement)
+          rv = PromptUtils.confirmWithTitle(
+                                 L10NUtils.getString("IdAlreadyTaken"),
+                                 L10NUtils.getString("RemoveIdFromElement"),
+                                 L10NUtils.getString("YesRemoveId"),
+                                 L10NUtils.getString("NoCancel"),
+                                 null);
+        if (rv == 1) {
+          Inspect();
+          return;
+        }
         editor.beginTransaction();
+        if (elt && elt != gCurrentElement) {
+          editor.removeAttribute(elt, "id");
+        }
         editor.setAttribute(gCurrentElement, "id", result.value);
       }
       break;
