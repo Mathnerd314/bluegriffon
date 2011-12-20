@@ -378,7 +378,8 @@
             <menuitem label="&useInlineStyles.label;" value="inline"/>
           </menupopup>
         </menulist>
-        <menulist id="classPicker" editable="true" hidden="true">
+        <menulist id="classPicker" editable="true" hidden="true"
+                  oninput="CheckClass(this)">
           <menupopup id="classPickerPopup"/>
         </menulist>
         <textbox id="IDPicker" hidden="true"/>

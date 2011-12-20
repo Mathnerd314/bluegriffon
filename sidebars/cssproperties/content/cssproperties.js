@@ -54,6 +54,7 @@ var gIsPanelActive = false;
 #endif
 #endif
 var gPrefs = null;
+var gXmlNAMERegExp = null;
 
 function Startup()
 {
@@ -110,6 +111,9 @@ function Startup()
     if (c)
       SelectionChanged(null, c.node, c.oneElementSelected);
   }
+  var nameStartChar = "A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+  var nameChar = nameStartChar + "\-\.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
+  gXmlNAMERegExp = new RegExp("^[" + nameStartChar + "][" + nameChar + "]*$");
 }
 
 function Shutdown()
@@ -189,6 +193,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   }
   if (item)
     gDialog.classPicker.selectedItem = item;
+  CheckClass(gDialog.classPicker);
 
   gDialog.typePicker.setAttribute("value", gCurrentElement.nodeName);
 
@@ -215,6 +220,19 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
        (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
        ">" +
        gCurrentElement.innerHTML.substr(0, 100));
+}
+
+function CheckClass(aElt)
+{
+  var value = aElt.value;
+  var valid;
+  if (value && value.match( gXmlNAMERegExp ))
+    valid = "true";
+  else if (!value)
+    valid = "empty";
+  else
+    valid = "false";
+  aElt.setAttribute("valid", valid);
 }
 
 function onCssPolicyChange(aElt)
@@ -324,12 +342,17 @@ function ApplyStyles(aStyles)
       }
       else {
         var result = {};
-        if (!PromptUtils.prompt(window,
-                                gDialog.csspropertiesBundle.getString("EnterAnId"),
-                                gDialog.csspropertiesBundle.getString("EnterUniqueId"),
-                                result)) {
-          Inspect();
-          return;
+        var valid = false;
+
+        while (!valid) {
+          if (!PromptUtils.prompt(window,
+                                  gDialog.csspropertiesBundle.getString("EnterAnId"),
+                                  gDialog.csspropertiesBundle.getString("EnterUniqueId"),
+                                  result)) {
+            Inspect();
+            return;
+          }
+          valid = (null != result.value.match( gXmlNAMERegExp ));
         }
         editor.beginTransaction();
         editor.setAttribute(gCurrentElement, "id", result.value);
@@ -355,6 +378,14 @@ function ApplyStyles(aStyles)
         }
       }
       else {
+        CheckClass(gDialog.classPicker);
+        if (gDialog.classPicker.getAttribute("valid") == "false"){
+          PromptUtils.alertWithTitle(gDialog.csspropertiesBundle.getString("NoClasSelected"),
+                                     gDialog.csspropertiesBundle.getString("PleaseSelectAClass"),
+                                     window);
+          Inspect();
+          return;
+        }
         editor.beginTransaction();
         // make sure the element carries the user-selected class
         className = gDialog.classPicker.value;

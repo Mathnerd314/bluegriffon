@@ -92,6 +92,10 @@
   min-width: 7em;
 }
 
+#classPicker[valid="false"] html|*.menulist-editable-input {
+  background-color: #ffcccc ! important;
+}
+
 hbox.csspropertiesHeader {
   border-top: thin solid silver;
   padding-left: 3px;
