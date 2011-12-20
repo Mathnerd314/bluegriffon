@@ -52,7 +52,7 @@
       <hbox align="center">
         <spacer flex="1"/>
         <button label="&configEditor.label;"
-                oncommand="OpenAppModalWindow(window, 'about:config', 'Config', true)"/>
+                oncommand='document.documentElement.openWindow("Preferences:ConfigManager", "chrome://global/content/config.xul", "", null);'/>
       </hbox>
     </groupbox>
   </prefpane>
