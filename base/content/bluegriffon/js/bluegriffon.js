@@ -822,6 +822,16 @@ function ToggleViewMode(aElement)
     sourceIframe.contentWindow.gChangeCallback = onSourceChangeCallback;
     sourceIframe.setUserData("oldSource", source, null);
 
+    var theme = null;
+    try {
+      theme = GetPrefs().getCharPref("bluegriffon.source.theme");
+    }
+    catch(e) {}
+    sourceIframe.contentWindow.installCodeMirror(BespinKeyPressCallback,
+                                                 theme,
+                                                 null,
+                                                 EditorUtils);
+
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)
       lastEditableChild.data = lastEditableChild.data.replace( /\s*$/, "\n");

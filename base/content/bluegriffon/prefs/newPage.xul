@@ -85,6 +85,6 @@
     </groupbox>
   </prefpane>
 
-  <script type="application/javascript" src="resource://app/res/ace/themes-list.js"/>
+  <script type="application/javascript" src="resource://app/res/cm2/themes-list.js"/>
 
 </overlay>

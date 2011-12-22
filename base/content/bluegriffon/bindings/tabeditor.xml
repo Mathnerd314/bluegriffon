@@ -449,18 +449,11 @@
 
       <method name="_installBespin">
         <parameter name="aIframe"/>
-        <parameter name="aTheme"/>
         <body>
         <![CDATA[
             var _self = this; 
             aIframe.removeEventListener("pageshow", function() {_self._installBespin(aIframe);}, true);
 
-            /*
-            aIframe.contentWindow.installBespin(BespinKeyPressCallback,
-                                                aTheme,
-                                                HTML5Helper.mHTML5_ELEMENTS,
-                                                EditorUtils);
-            */
             gDialog.sourceModeButton.removeAttribute("busy");
             window.updateCommands("mode_switch");
        ]]>
@@ -478,13 +471,8 @@
 
             var iframe = document.createElement("iframe");
             var _self = this;
-            var theme = null;
-            try {
-              theme = GetPrefs().getCharPref("bluegriffon.source.theme");
-            }
-            catch(e) {}
             gDialog.sourceModeButton.setAttribute("busy", "true");
-            iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
+            iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
             iframe.setAttribute("src", "resource://app/res/cm2.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);

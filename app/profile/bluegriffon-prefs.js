@@ -17,9 +17,9 @@ pref("toolbar.customization.usesheet", false); // false otherwise
 #endif
 
 /* debugging prefs */
-pref("browser.dom.window.dump.enabled", false);
-pref("javascript.options.showInConsole", false);
-pref("javascript.options.strict", false);
+pref("browser.dom.window.dump.enabled", true);
+pref("javascript.options.showInConsole", true);
+pref("javascript.options.strict", true);
 pref("nglayout.debug.disable_xul_cache", true);
 pref("nglayout.debug.disable_xul_fastload", true);
 
@@ -117,7 +117,7 @@ pref("html5.enable", true);
 pref("bluegriffon.defaults.doctype", "kXHTML5");
 pref("media.autoplay.enabled", false);
 
-pref("bluegriffon.source.theme", "clouds");
+pref("bluegriffon.source.theme", "light");
 pref("bluegriffon.source.entities", "basic");
 pref("bluegriffon.source.auto-indent", true);
 pref("bluegriffon.source.wrap", true);

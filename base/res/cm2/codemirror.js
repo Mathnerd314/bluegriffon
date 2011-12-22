@@ -1711,7 +1711,7 @@ var CodeMirror = (function() {
   CodeMirror.defaults = {
     value: "",
     mode: null,
-    theme: "default",
+    theme: "light",
     indentUnit: 2,
     indentWithTabs: false,
     tabSize: 4,
