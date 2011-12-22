@@ -455,10 +455,12 @@
             var _self = this; 
             aIframe.removeEventListener("pageshow", function() {_self._installBespin(aIframe);}, true);
 
+            /*
             aIframe.contentWindow.installBespin(BespinKeyPressCallback,
                                                 aTheme,
                                                 HTML5Helper.mHTML5_ELEMENTS,
                                                 EditorUtils);
+            */
             gDialog.sourceModeButton.removeAttribute("busy");
             window.updateCommands("mode_switch");
        ]]>
@@ -483,7 +485,7 @@
             catch(e) {}
             gDialog.sourceModeButton.setAttribute("busy", "true");
             iframe.addEventListener("load", function() {_self._installBespin(iframe, theme);}, true);
-            iframe.setAttribute("src", "resource://app/res/bespin.html");
+            iframe.setAttribute("src", "resource://app/res/cm2.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);
 

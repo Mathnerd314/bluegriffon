@@ -45,9 +45,9 @@ var cmdSave =
         var mode = GetCurrentViewMode();
         if (mode == "source") {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var bespinIframe = editorElement.previousSibling;
-          var bespinEditor = bespinIframe.contentWindow.gEditor;
-          var source = bespinEditor.getSession().getValue();
+          var sourceIframe = editorElement.previousSibling;
+          var sourceEditor = sourceIframe.contentWindow.gEditor;
+          var source = sourceEditor.getValue();
 
           result = FileUtils.saveSourceDocument(source,
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
@@ -88,9 +88,9 @@ var cmdSaveAs =
         var mode = GetCurrentViewMode();
         if (mode == "source") {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var bespinIframe = editorElement.previousSibling;
-          var bespinEditor = bespinIframe.contentWindow.gEditor;
-          var source = bespinEditor.getSession().getValue();
+          var sourceIframe = editorElement.previousSibling;
+          var sourceEditor = sourceIframe.contentWindow.gEditor;
+          var source = sourceEditor.getValue();
 
           result = FileUtils.saveSourceDocument(source,
                      true,

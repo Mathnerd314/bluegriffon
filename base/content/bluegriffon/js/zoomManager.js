@@ -110,16 +110,16 @@ var BGZoomManager = {
 
   addToSourceViewFontSize: function(aIncrement) {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    var bespinIframe = editorElement.previousSibling;
-    var bespinEditor = bespinIframe.contentWindow.getEditableElement();
+    var sourceIframe = editorElement.previousSibling;
+    var sourceEditor = sourceIframe.contentWindow.getEditableElement();
 
-    var fontSize = bespinEditor.ownerDocument
+    var fontSize = sourceEditor.ownerDocument
                                .defaultView
-                               .getComputedStyle(bespinEditor, "")
+                               .getComputedStyle(sourceEditor, "")
                                .getPropertyCSSValue("font-size")
                                .getFloatValue(CSSPrimitiveValue.CSS_PX)
     fontSize = Math.max(fontSize + aIncrement, 6);
-    bespinEditor.style.fontSize = fontSize + "px";
+    sourceEditor.style.fontSize = fontSize + "px";
   },
 
   enlarge: function BGZoomManager_enlarge(aMenulist)
