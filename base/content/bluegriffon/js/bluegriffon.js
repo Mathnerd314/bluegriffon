@@ -718,6 +718,66 @@ function GetCurrentViewMode()
          "wysiwyg";
 }
 
+function onSourceChangeCallback(source)
+{
+  var doctype = EditorUtils.getCurrentDocument().doctype;
+  var systemId = doctype ? doctype.systemId : null;
+  var isXML = false;
+  switch (systemId) {
+    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+    case "http://www.w3.org/TR/html4/loose.dtd":
+    case null:
+      isXML = false;
+      break;
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+      isXML = true;
+      break;
+    case "":
+      isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+      break;
+  }
+
+  var editorElement  = EditorUtils.getCurrentEditorElement();
+  var sourceIframe   = editorElement.previousSibling;
+  var sourceEditor   = sourceIframe.contentWindow.gEditor;
+  var sourceDocument = sourceIframe.contentWindow.document;
+
+  if (isXML) {
+    if (sourceEditor.lastErrorLine) {
+      var lineInfo = sourceEditor.lineInfo(sourceEditor.lastErrorLine - 1);
+      var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
+      var markerClassArray = markerClass.split(" ");
+      markerClassArray.splice(markerClassArray.indexOf("error"), 1);
+      sourceEditor.setMarker(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
+      sourceEditor.lastErrorLine = 0;
+    }
+    var xmlParser = new DOMParser();
+    try {
+      var doc = xmlParser.parseFromString(source, "text/xml");
+      if (doc.documentElement.nodeName == "parsererror") {
+        var message = doc.documentElement.firstChild.data.
+          replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
+        var error = doc.documentElement.lastChild.textContent;
+        var line = parseInt(doc.documentElement.getAttribute("line"));
+        var lineInfo = sourceEditor.lineInfo(line - 1);
+        var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
+        var markerClassArray = markerClass.split(" ");
+        if (-1 == markerClassArray.indexOf("error"))
+          markerClassArray.push("error");
+        sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
+        sourceEditor.lastErrorLine = line;
+
+        var visible = sourceEditor.visibleLines();
+        if (line >= visible.to || line < visible.from)
+          sourceEditor.setCursor(line - 1, 0);
+        return;
+      }
+    }
+    catch(e) {alert(e)}
+  }
+}
+
 function ToggleViewMode(aElement)
 {
   if (!aElement) // sanity case
@@ -761,9 +821,20 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    var bespinIframe = editorElement.previousSibling;
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    bespinIframe.setUserData("oldSource", source, null);
+    var sourceIframe = editorElement.previousSibling;
+    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    sourceIframe.contentWindow.gChangeCallback = onSourceChangeCallback;
+    sourceIframe.setUserData("oldSource", source, null);
+
+    var theme = null;
+    try {
+      theme = GetPrefs().getCharPref("bluegriffon.source.theme");
+    }
+    catch(e) {}
+    sourceIframe.contentWindow.installCodeMirror(BespinKeyPressCallback,
+                                                 theme,
+                                                 null,
+                                                 EditorUtils);
 
     var lastEditableChild = editor.document.body.lastChild;
     if (lastEditableChild.nodeType == Node.TEXT_NODE)
@@ -774,42 +845,40 @@ function ToggleViewMode(aElement)
 
     UnmarkSelection();
 
-    //bespinEditor.value = "";
-    bespinEditor.getSession().setValue(source);
-    bespinEditor.getSession().setUseWrapMode(false);
-    if (flags.value & nsIDE.OutputWrap) {
-      bespinEditor.setShowPrintMargin(true);
-      bespinEditor.setPrintMarginColumn(flags.maxColumnPref);
+    sourceEditor.setValue(source.replace( /\r/g, "\n"));
+    /*if (flags.value & nsIDE.OutputWrap) {
+      sourceEditor.setShowPrintMargin(true);
+      sourceEditor.setPrintMarginColumn(flags.maxColumnPref);
     }
     else {
-      bespinEditor.setShowPrintMargin(false);
-    }
+      sourceEditor.setShowPrintMargin(false);
+    }*/
     NotifierUtils.notify("afterEnteringSourceMode");
     editorElement.parentNode.selectedIndex = 0;
 
-    MarkSelectionInAce(bespinEditor, source);
-
-    bespinIframe.focus();
-    bespinEditor.focus();
+    sourceIframe.focus();
+    sourceEditor.refresh();
+    sourceEditor.focus();
+    MarkSelectionInAce(sourceEditor, source);
   }
   else if (mode == "wysiwyg")
   {
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
-    var bespinIframe = editorElement.previousSibling;
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    if (bespinEditor)
+    var sourceIframe = editorElement.previousSibling;
+    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    if (sourceEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
-      source = bespinEditor.getSession().getValue();
-      bespinEditor.blur();
-      var oldSource = bespinIframe.getUserData("oldSource"); 
+      source = sourceEditor.getValue();
+      //sourceEditor.blur();
+      var oldSource = sourceIframe.getUserData("oldSource"); 
       if (source != oldSource) {
         var doctype = EditorUtils.getCurrentDocument().doctype;
-        var publicId = doctype ? doctype.publicId : null;
+        var systemId = doctype ? doctype.systemId : null;
         var isXML = false;
-        switch (publicId) {
+        switch (systemId) {
           case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
           case "http://www.w3.org/TR/html4/loose.dtd":
           case null:
@@ -1218,7 +1287,6 @@ function OnDoubleClick(aEvent)
       cmdInsertKeygenCommand.doCommand();
       break;
     case "output":
-      cmdInsertOutputCommand.doCommand();
       break;
     case "progress":
       cmdInsertProgressCommand.doCommand();
@@ -1621,40 +1689,26 @@ function UnmarkSelection()
   }
 }
 
-function MarkSelectionInAce(aAceEditor)
+function MarkSelectionInAce(aSourceEditor)
 {
   const kBGBGBG = "--BG--";
 
-  var selection = aAceEditor.getSession().getSelection();
-  selection.setSelectionRange({ start: { row: 0, column: 0 },
-                                end:   { row: 0, column: 0 } });
+  aSourceEditor.setSelection( { line: 0, ch: 0 }, { line: 0, ch: 0 } );
 
-  var range = aAceEditor.find(kBGBGBG, { backwards: false,
-                                         wrap: true,
-                                         caseSensitive: true,
-                                         wholeWord: false,
-                                         regExp: false
-                              });
-  var startRow    = range.start.row;
-  var startColumn = range.start.column;
-  selection.setSelectionRange({ start: { row: 0, column: 0 },
-                                end:   { row: 0, column: 0 } });
-  aAceEditor.replace("");
+  var searchCursor = aSourceEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+  searchCursor.findNext();
+  var startRow    = searchCursor.from().line;
+  var startColumn = searchCursor.from().ch;
+  searchCursor.replace("");
 
-  var range = aAceEditor.find(kBGBGBG, { backwards: false,
-                                         wrap: true,
-                                         caseSensitive: true,
-                                         wholeWord: false,
-                                         regExp: false
-                              });
-  var endRow      = range.start.row;
-  var endColumn   = range.start.column;
-  aAceEditor.replace("");
+  searchCursor = aSourceEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+  searchCursor.findNext();
+  var endRow      = searchCursor.from().line;
+  var endColumn   = searchCursor.from().ch;
+  searchCursor.replace("");
 
-  aAceEditor.gotoLine(startRow);
-  selection.setSelectionRange({ start: { row: startRow, column: startColumn },
-                                end:   { row: endRow,   column: endColumn } });
-  aAceEditor.reset();
+  aSourceEditor.clearHistory();
+  aSourceEditor.setSelection( { line: startRow, ch: startColumn }, { line: endRow, ch: endColumn } );
 }
 
 function FillAceThemesMenupopup()
