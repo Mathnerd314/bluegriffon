@@ -58,7 +58,6 @@ DEFINES += -DTOOLBAR_CUSTOMIZATION_SHEET
 endif
 
 _FILES = \
-	$(srcdir)/res/bespin.html \
 	$(srcdir)/res/cm2.html \
 	$(srcdir)/res/scripteditor.html \
 	$(srcdir)/res/html_transitional.html \
@@ -72,48 +71,6 @@ _FILES = \
 	$(srcdir)/res/reset-fonts-grids.css \
 	$(srcdir)/res/base-min.css \
 	$(NULL)
-
-_ACE_RESOURCE_FILES = \
-	$(srcdir)/res/ace/ace-uncompressed.js \
-	$(srcdir)/res/ace/cockpit-uncompressed.js \
-	$(srcdir)/res/ace/keybinding-emacs.js \
-	$(srcdir)/res/ace/keybinding-vim.js \
-	$(srcdir)/res/ace/mode-c_cpp.js \
-	$(srcdir)/res/ace/mode-clojure.js \
-	$(srcdir)/res/ace/mode-coffee.js \
-	$(srcdir)/res/ace/mode-csharp.js \
-	$(srcdir)/res/ace/mode-css.js \
-	$(srcdir)/res/ace/mode-html.js \
-	$(srcdir)/res/ace/mode-java.js \
-	$(srcdir)/res/ace/mode-javascript.js \
-	$(srcdir)/res/ace/mode-json.js \
-	$(srcdir)/res/ace/mode-perl.js \
-	$(srcdir)/res/ace/mode-php.js \
-	$(srcdir)/res/ace/mode-python.js \
-	$(srcdir)/res/ace/mode-ruby.js \
-	$(srcdir)/res/ace/mode-scss.js \
-	$(srcdir)/res/ace/mode-svg.js \
-	$(srcdir)/res/ace/mode-xml.js \
-	$(srcdir)/res/ace/theme-clouds.js \
-	$(srcdir)/res/ace/theme-clouds_midnight.js \
-	$(srcdir)/res/ace/theme-cobalt.js \
-	$(srcdir)/res/ace/theme-crimson_editor.js \
-	$(srcdir)/res/ace/theme-dawn.js \
-	$(srcdir)/res/ace/theme-eclipse.js \
-	$(srcdir)/res/ace/theme-idle_fingers.js \
-	$(srcdir)/res/ace/theme-kr_theme.js \
-	$(srcdir)/res/ace/theme-merbivore.js \
-	$(srcdir)/res/ace/theme-merbivore_soft.js \
-	$(srcdir)/res/ace/theme-mono_industrial.js \
-	$(srcdir)/res/ace/theme-monokai.js \
-	$(srcdir)/res/ace/theme-pastel_on_dark.js \
-	$(srcdir)/res/ace/theme-twilight.js \
-	$(srcdir)/res/ace/theme-vibrant_ink.js \
-	$(srcdir)/res/ace/themes-list.js \
-	$(srcdir)/res/ace/worker-coffee.js \
-	$(srcdir)/res/ace/worker-css.js \
-	$(srcdir)/res/ace/worker-javascript.js \
-  $(NULL)
 
 _CM2_RESOURCE_FILES = \
 	$(srcdir)/res/cm2/changes.js \
@@ -130,9 +87,9 @@ _CM2_RESOURCE_FILES = \
 	$(srcdir)/res/cm2/eclipse.css \
 	$(srcdir)/res/cm2/elegant.css \
 	$(srcdir)/res/cm2/emacs.js \
-  $(srcdir)/res/cm2/foldcode.js \
-  $(srcdir)/res/cm2/foldtag.js \
-  $(srcdir)/res/cm2/foldtag.css \
+	$(srcdir)/res/cm2/foldcode.js \
+	$(srcdir)/res/cm2/foldtag.js \
+	$(srcdir)/res/cm2/foldtag.css \
 	$(srcdir)/res/cm2/formatting.js \
 	$(srcdir)/res/cm2/gfm.js \
 	$(srcdir)/res/cm2/groovy.js \
@@ -143,6 +100,7 @@ _CM2_RESOURCE_FILES = \
 	$(srcdir)/res/cm2/javascript-hint.js \
 	$(srcdir)/res/cm2/javascript.js \
 	$(srcdir)/res/cm2/jinja2.js \
+	$(srcdir)/res/cm2/light.css \
 	$(srcdir)/res/cm2/lua.js \
 	$(srcdir)/res/cm2/markdown.js \
 	$(srcdir)/res/cm2/monokai.css \
@@ -171,6 +129,7 @@ _CM2_RESOURCE_FILES = \
 	$(srcdir)/res/cm2/spec.js \
 	$(srcdir)/res/cm2/stex.js \
 	$(srcdir)/res/cm2/tiddlywiki.js \
+	$(srcdir)/res/cm2/themes-list.js \
 	$(srcdir)/res/cm2/velocity.js \
 	$(srcdir)/res/cm2/vim.js \
 	$(srcdir)/res/cm2/xml.js \
@@ -180,16 +139,12 @@ _CM2_RESOURCE_FILES = \
 
 libs::
 	$(INSTALL) $(_FILES) $(DIST)/bin/res
-	mkdir -p $(DIST)/bin/res/ace
 	mkdir -p $(DIST)/bin/res/cm2
-	$(INSTALL) $(_ACE_RESOURCE_FILES) $(DIST)/bin/res/ace
 	$(INSTALL) $(_CM2_RESOURCE_FILES) $(DIST)/bin/res/cm2
 
 install::
 	$(SYSINSTALL) $(IFLAGS1) $(_FILES) $(DESTDIR)$(mozappdir)/res
-	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/ace
 	mkdir -p $(DESTDIR)$(mozappdir)/res/resources/cm2
-	$(INSTALL) $(_ACE_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/ace
 	$(INSTALL) $(_CM2_RESOURCE_FILES) $(DESTDIR)$(mozappdir)/res/resources/cm2
 
 include $(topsrcdir)/config/rules.mk

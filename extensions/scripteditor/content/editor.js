@@ -1,4 +1,5 @@
 Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://gre/modules/reflect.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 
@@ -35,7 +36,7 @@ function CommitChanges()
 {
   gSource.cancelled = false;
   var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
-  gSource.value = bespinEditor.getSession().getValue();
+  gSource.value = bespinEditor.getValue();
   window.close();
 }
 
@@ -44,22 +45,46 @@ function OnBespinFocus(aIframe)
   aIframe.focus();
 }
 
-function InstallBespin(aIframe, aTheme, aValue)
+function SourceChangeCallback()
 {
-  aIframe.contentWindow.installBespin(BespinKeyPressCallback,
-                                      aTheme,
-                                      [],
-                                      EditorUtils,
-                                      SetSource, aValue);
+  var sourceEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  var value = sourceEditor.getValue();
+
+  if (sourceEditor.lastErrorLine) {
+    var lineInfo = sourceEditor.lineInfo(sourceEditor.lastErrorLine - 1);
+    var markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
+    var markerClassArray = markerClass.split(" ");
+    markerClassArray.splice(markerClassArray.indexOf("error"), 1);
+    sourceEditor.setMarker(sourceEditor.lastErrorLine - 1, null, markerClassArray.join(" "));
+    sourceEditor.lastErrorLine = 0;
+  }
+
+  try {
+    Reflect.parse(value);
+  }
+  catch(e) {
+    var line = e.lineNumber;
+
+    lineInfo = sourceEditor.lineInfo(line - 1);
+    markerClass = lineInfo.markerClass ? lineInfo.markerClass : "";
+    markerClassArray = markerClass.split(" ");
+    if (-1 == markerClassArray.indexOf("error"))
+      markerClassArray.push("error");
+    sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
+    sourceEditor.lastErrorLine = line;
+
+    var visible = sourceEditor.visibleLines();
+    if (line >= visible.to || line < visible.from)
+      sourceEditor.setCursor(line - 1, 0);
+  }
 }
 
-function SetSource(aValue)
+function InstallBespin(aIframe, aTheme, aValue)
 {
-  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
-  
-  bespinEditor.getSession().setValue(aValue);
-	bespinEditor.getSession().setUseWrapMode(false);
-  gDialog.bespinIframe.focus();
+  aIframe.contentWindow.installCodeMirror(BespinKeyPressCallback,
+                                          SourceChangeCallback,
+                                          aTheme,
+                                          aValue);
 }
 
 function onBespinFocus(aIframe)
@@ -77,15 +102,16 @@ function onBespinLineKeypress(aEvent, aElt)
   var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
   if (aEvent.keyCode == 13) {
     var line = aElt.value;
-    bespinEditor.gotoLine(parseInt(line));
+    bespinEditor.setCursor(parseInt(line) - 1, 0);
     onBespinLineBlur(aElt);
-    onBespinFocus(gDialog.bespinIframe);
+    onBespinFocus(bespinEditor);
   }
   if (aEvent.keyCode == 13 ||
       (aEvent.keyCode == 27 && !aEvent.which)) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    gDialog.bespinIframe.focus();
+    bespinEditor.lastNeedle = null;
+    bespinEditor.focus();
   }
 }
 
@@ -99,37 +125,40 @@ function ToggleBespinFindCaseSensitivity()
 
 function BespinFind(aForward, aInitial)
 {
-    var bespinIframe = gDialog.bespinIframe;
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    bespinIframe.setUserData("findLastDirection", aForward, null);
+    var sourceIframe = gDialog.bespinIframe;
+    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    sourceIframe.setUserData("findLastDirection", aForward, null);
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
-    var range = null;
-    if (aInitial) {
-      var selection = bespinEditor.getSession().getSelection();
-      if (!selection.isEmpty()) {
-        var r = selection.getRange();
-        var start = r.start;
-        selection.setSelectionRange({ start: { row: start.row, column: start.column },
-                                      end:   { row: start.row, column: start.column } });
-      }
-      range = bespinEditor.find(query, { backwards: false,
-                                         wrap: true,
-                                         caseSensitive: isCaseSensitive,
-                                         wholeWord: false,
-                                         regExp: false
-                              });
+    var found = false;
+    if (aInitial || !sourceEditor.lastNeedle) {
+      var selection = sourceEditor.getCursor(true);
+      sourceEditor.lastNeedle = sourceEditor.getSearchCursor(query, { line: selection.line, ch: selection.ch }, isCaseSensitive);
+      found = sourceEditor.lastNeedle.findNext();
     }
     else {
       if (aForward) {
-        range = bespinEditor.findNext();
+        found = sourceEditor.lastNeedle.findNext();
       }
       else {
-        range = bespinEditor.findPrevious();
+        found = sourceEditor.lastNeedle.findPrevious();
       }
     }
-  
-    if (!range) {
+
+    if (!found) { // maybe we hit the document's limits
+      if (aForward) {
+        sourceEditor.lastNeedle = sourceEditor.getSearchCursor(query, { line: 0, ch: 0 }, isCaseSensitive);
+        found = sourceEditor.lastNeedle.findNext();
+      }
+      else {
+        var line = sourceEditor.lineCount() - 1;
+        var lineProse = sourceEditor.getLine(line);
+        sourceEditor.lastNeedle = sourceEditor.getSearchCursor(query, { line: line, ch: lineProse.length -1 }, isCaseSensitive);
+        found = sourceEditor.lastNeedle.findPrevious();
+      }
+    }
+
+    if (!found) {
       //gDialog.bespinFindCaseSensitive.hidden = true;
       gDialog.bespinFindPrevious.hidden = true;
       gDialog.bespinFindNext.hidden = true;
@@ -137,8 +166,8 @@ function BespinFind(aForward, aInitial)
       gDialog.bespinToolbox2.hidden = true;
       return false;
     }
-    bespinEditor.getSession().getSelection().setSelectionRange(range, false);
 
+    sourceEditor.setSelection(sourceEditor.lastNeedle.from(), sourceEditor.lastNeedle.to());
     gDialog.bespinFindCaseSensitive.hidden = false;
     gDialog.bespinFindPrevious.hidden = false;
     gDialog.bespinFindNext.hidden = false;
@@ -163,7 +192,9 @@ function onBespinFindKeypress(aEvent)
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-      gDialog.bespinIframe.focus();
+      var sourceIframe = gDialog.bespinIframe;
+      var sourceEditor = sourceIframe.contentWindow.gEditor;
+      sourceEditor.focus();
   }
 }
 
@@ -221,11 +252,14 @@ function BespinKeyPressCallback(aEvent)
 
 function BespinReplace()
 {
-    var bespinIframe = gDialog.bespinIframe;
-    var bespinEditor = bespinIframe.contentWindow.gEditor;
-    var selection = bespinEditor.getSession().getSelection();
-    var r = selection.getRange();
-    bespinEditor.$tryReplace(r, gDialog.bespinReplaceTextbox.value)
+    var sourceIframe = gDialog.bespinIframe;
+    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    if (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
+      var end = sourceEditor.lastNeedle.to();
+      sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
+      sourceEditor.setCursor(end);
+      //sourceEditor.focus();
+    }
 }
 
 function BespinReplaceAndFind()
@@ -237,9 +271,17 @@ function BespinReplaceAndFind()
 function BespinReplaceAll()
 {
   var occurences = 0;
-  var bespinIframe = gDialog.bespinIframe;;
-  var bespinEditor = bespinIframe.contentWindow.gEditor;
-  occurences = bespinEditor.replaceAll(gDialog.bespinReplaceTextbox.value);
+  var sourceIframe = gDialog.bespinIframe;
+  var sourceEditor = sourceIframe.contentWindow.gEditor;
+
+  var query = gDialog.bespinFindTextbox.value;
+  var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
+  sourceEditor.lastNeedle = sourceEditor.getSearchCursor(query, { line: 0, ch: 0 }, isCaseSensitive);
+
+  while (sourceEditor.lastNeedle.findNext()) {
+    occurences++;
+    sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
+  }
   var title = L10NUtils.getString("ReplaceAll");
   var msg = L10NUtils.getString("ReplacedPart1") +
             " " +
@@ -252,11 +294,9 @@ function BespinReplaceAll()
 function WysiwygShowFindBar()
 {
   gDialog.bespinToolbox1.hidden = false;
-  var editor = EditorUtils.getCurrentEditor();
-  var bespinIframe = gDialog.bespinIframe;
-  var bespinEditor = bespinIframe.contentWindow.gEditor;
-  var selectionRange = bespinEditor.getSelectionRange();
-  var text = bespinEditor.getSession().getTextRange(selectionRange)
+  var sourceIframe = gDialog.bespinIframe;
+  var sourceEditor = sourceIframe.contentWindow.gEditor;
+  var text = sourceEditor.getSelection();
   if (text) {
     gDialog.bespinFindTextbox.value = text;
     BespinFind(true, true);
@@ -264,16 +304,12 @@ function WysiwygShowFindBar()
   gDialog.bespinFindTextbox.focus();
 }
 
-function FindNext()
-{
-  if (!gDialog.bespinToolbox1.hidden) {
-    BespinFind(true, false);
-  }
-}
 
 function CloseFindBar()
 {
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
-  gDialog.bespinIframe.contentWindow.focus();
+  var sourceIframe = gDialog.bespinIframe;
+  var sourceEditor = sourceIframe.contentWindow.gEditor;
+  sourceEditor.focus();
 }

@@ -131,6 +131,7 @@ var CodeMirror = (function() {
     var instance = wrapper.CodeMirror = {
       getValue: getValue,
       setValue: operation(setValue),
+      visibleLines: visibleLines,
       getSelection: getSelection,
       replaceSelection: operation(replaceSelection),
       focus: function(){focusInput(); onFocus(); fastPoll();},

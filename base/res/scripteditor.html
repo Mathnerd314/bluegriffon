@@ -1,55 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <style type="text/css" media="screen">
-    body {
-        overflow: hidden;
-    }
-    
-    #editor { 
+    .CodeMirror { 
         margin: 0;
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        background-color: #fefefe;
     }
+    .CodeMirror-scroll {height: 100% ! important}
+    .CodeMirror-gutter {cursor: pointer;}
   </style>
+  <link rel="stylesheet" href="cm2/codemirror.css" />
+  <link rel="stylesheet" href="cm2/foldtag.css" />
+
+  <script src="cm2/codemirror.js" type="text/javascript" ></script>
+  <script src="cm2/searchcursor.js" type="text/javascript" ></script>
+  <script src="cm2/foldcode.js" type="text/javascript" ></script>
+  <script src="cm2/javascript.js" type="text/javascript" ></script>
+
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/cobalt.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/eclipse.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/elegant.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/light.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/monokai.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/neat.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/night.css" />
+  <link rel="stylesheet" id="theme" type="text/css" href="cm2/rubyblue.css" />
 </head>
 <body>
 
-<pre id="editor"></pre>
-<script src="resource://app/res/ace/themes-list.js" type="text/javascript" charset="utf-8"></script>
-<script src="resource://app/res/ace/ace-uncompressed.js" type="text/javascript" charset="utf-8"></script>
-<script src="resource://app/res/ace/mode-html.js" type="text/javascript" charset="utf-8"></script>
+<textarea id="code" name="code"></textarea>
 <script>
   var gEditor = null;
-  var gTheme  = "clouds";
-  var autocompleting = false;
-  var html_tags = [];
-  var editorUtils = null;
-  var startSel = null;
+  var gChangeCallback = null;
+  var gKeyPressCallback = null;
+  var gChangeTimer = null;
+  var gTheme  = "light";
+  var gInstalled = false;
+  var gInitialValue = "";
+
+  window.onload = function(){
+     var foldFunc = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
+      function keyEvent(cm, e) {
+        if (e.keyCode == 81 && e.ctrlKey) {
+          if (e.type == "keydown") {
+            e.stop();
+            setTimeout(function() {foldFunc(cm, cm.getCursor().line);}, 50);
+          }
+          return true;
+        }
+      }
+
+     function changeFunc() {
+       if (gChangeTimer)
+         clearTimeout(gChangeTimer);
+       if (gChangeCallback)
+         gChangeTimer = setTimeout(gChangeCallback, 500, gEditor.getValue());
+     }
+
+     gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        tabSize: 2,
+        fixedGutter: true,
+        extraGutterSize: 4,
+        indentUnit: 2,
+        indentWithTabs: false,
+        matchBrackets: true,
+        onGutterClick: foldFunc,
+        onChange: changeFunc,
+        theme: gTheme
+     });
+    getEditableElement().addEventListener("keypress", gKeyPressCallback, true);
+    gEditor.setValue(gInitialValue);
+    gEditor.focus();
+    alert(gEditor.visibleLines())
+   };
 
   function getEditableElement() {
-    return document.getElementById("editor");
-  }
-
-  function installBespin(aKeyPressCallback, aTheme, aTagsArray, aEditorUtils, aReadyCallback, aReadyValue) {
-    getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
-    gTheme = aTheme;
-    html_tags = aTagsArray;
-    editorUtils = aEditorUtils;
-    gReadyCallback = aReadyCallback;
-    gReadyValue = aReadyValue;
+    return document.querySelector(".CodeMirror");
   }
 
   function useTheme(aTheme) {
-    if (gEditor) {
-      gEditor.setTheme("ace/theme/" + aTheme);
-      if (aTheme != gTheme)
-        gTheme = aTheme;
-    }
+    gTheme = aTheme;
+    gEditor.setOption("theme", aTheme);
   }
 
   function getCurrentTheme()
@@ -57,377 +96,12 @@
     return gTheme;
   }
 
-  var head = document.querySelector("head");
-  for (var i = 0; i < kTHEMES.length; i++) {
-    var s = document.createElement("script");
-    s.setAttribute("type", "text/javascript");
-    s.setAttribute("charset", "utf-8");
-    s.setAttribute("src", "resource://app/res/ace/theme-" + kTHEMES[i] + ".js");
-    head.appendChild(s);
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aTheme, aValue) {
+    gKeyPressCallback = aKeyPressCallback;
+    gChangeCallback = aChangeCallback;
+    gTheme = aTheme;
+    gInitialValue = aValue;
   }
-
-  window.onload = function() {
-    gEditor = ace.edit("editor");
-    useTheme(gTheme);
-    if (gReadyCallback)
-      gReadyCallback(gReadyValue);
-
-    var JavaScriptMode = require("ace/mode/javascript").Mode;
-    gEditor.getSession().setMode(new JavaScriptMode());
-
-    function bindKey(win, mac) {
-        return {
-            win: win,
-            mac: mac,
-            sender: "editor"
-        };
-    }
-
-    var canon = require("pilot/canon");
-    //canon.removeCommand("findnext");
-    //canon.removeCommand("findprevious");
-    //canon.removeCommand("find");
-    //canon.removeCommand("replace");
-    //canon.removeCommand("gotoline");
-    canon.addCommand({
-        name: "gotoline",
-        bindKey: bindKey("Ctrl-L", "Command-L"),
-        exec: function(env, args, request) {
-        }
-    });
-    canon.addCommand({
-        name: "findnext",
-        bindKey: bindKey("Ctrl-K", "Command-G"),
-        exec: function(env, args, request) {  }
-    });
-    canon.addCommand({
-        name: "findprevious",
-        bindKey: bindKey("Ctrl-Shift-K", "Command-Shift-G"),
-        exec: function(env, args, request) {  }
-    });
-    canon.addCommand({
-        name: "find",
-        bindKey: bindKey("Ctrl-F", "Command-F"),
-        exec: function(env, args, request) { }
-    });
-    canon.addCommand({
-        name: "replace",
-        bindKey: bindKey("Ctrl-R", "Command-Option-F"),
-        exec: function(env, args, request) { }
-    });
-    canon.addCommand({
-        name: "replaceall",
-        bindKey: bindKey("Ctrl-Shift-R", "Command-Shift-Option-F"),
-        exec: function(env, args, request) { }
-    });
-
-    window.Insert = function(aTag) {
-      autocompleting = false;
-      var sel = gEditor.selection.getRange();
-
-      var line = gEditor.getSession().getLine(sel.start.row);            
-      line = line.substr(0,sel.start.column);            
-      var pos = line.lastIndexOf('<');
-      var text = line.substr(pos+1);
-      sel.start.column = sel.start.column - text.length
-      gEditor.selection.setSelectionRange(sel);
-      gEditor.insert(aTag);
-
-      var tagObject = null;
-      for (var i = 0; !tagObject && i < html_tags.length; i++) {
-        if (aTag == html_tags[i].tag)
-          tagObject = html_tags[i];
-      }
-      if (tagObject) {
-        if (tagObject.empty) {
-          if (editorUtils.isXHTMLDocument())
-            gEditor.insert(" />");
-          else
-            gEditor.insert(">");
-        }
-        else {
-          gEditor.insert(">");
-          sel = gEditor.selection.getRange();
-          var range = gEditor.find("</", {
-                                              backwards: false,
-                                              wrap: true,
-                                              caseSensitive: true,
-                                              wholeWord: false,
-                                              regExp: false
-                                            });
-          gEditor.selection.setSelectionRange(sel);
-          if (range) {
-            range.start.column += 2;
-            range.end.column = range.start.column + aTag.length;
-            var textRange = gEditor.getSession().doc.getTextRange(range);
-            if (textRange == aTag) {
-              // do nothing
-            }
-            else {
-              gEditor.insert("</" + aTag + ">");
-              gEditor.selection.setSelectionRange(sel);
-            }
-          }
-          else {
-            gEditor.insert("</" + aTag + ">");
-            gEditor.selection.setSelectionRange(sel);
-          }
-        }
-      }
-      else {
-        gEditor.insert(">");
-      }
-    }
-
-    window.DblClickOnOption = function(aEvent) {
-      var aOption = aEvent.originalTarget;
-      Insert(aOption.value);
-    };
-
-    canon.addCommand({
-      name: "autocomplete",
-      exec: function(env, args, request) {
-        var sel = env.editor.getSelection();
-        var session = env.editor.getSession();
-
-        var lead = sel.getSelectionLead();
-        var pos = env.editor.renderer.textToScreenCoordinates(lead.row, lead.column);
-
-        var ac = document.getElementById('ac');
-
-        if (!ac) {
-          ac = document.createElement('select');
-          ac.id = 'ac';
-          ac.namme = 'ac';
-          ac.style.position = 'absolute';
-          ac.style.zIndex = 100;;
-          ac.style.width = '140px';
-          ac.size = 10;
-        }
-        
-        //compute the container offset
-        var obj = env.editor.container;
-
-        var curleft = 0;
-        var curtop = 0;
-        if (obj.offsetParent) {
-          do {
-            curleft += obj.offsetLeft;
-            curtop += obj.offsetTop;
-          } while (obj = obj.offsetParent);
-        }            
-
-        //position autocomplete
-        ac.style.top = pos.pageY - curtop + 20 + "px";
-        ac.style.left = pos.pageX - curleft + "px";
-        ac.style.display = 'block';
-        ac.style.background = 'white';
-
-        var sel = env.editor.selection.getRange();
-
-        var line = env.editor.getSession().getLine(sel.start.row);            
-
-        line = line.substr(0,sel.start.column);            
-        var pos = line.lastIndexOf('<');
-        var text = line.substr(pos+1);
-
-        var tag;
-        for(i in html_tags) {
-          if (!html_tags.hasOwnProperty(i)
-              || html_tags[i].tag != html_tags[i].label) {
-            continue;
-          }
-
-          tag = html_tags[i].tag;          
-
-          if ( text ) {
-            if ( text != tag.substr(0,text.length) ) {
-              continue;
-            }
-          }
-
-          var option = document.createElement('option');
-          option.text = tag;
-          option.value = tag;
-          
-          try {
-            ac.add(option, null); // standards compliant; doesn't work in IE
-          }
-          catch(ex) {
-            ac.add(option); // IE only
-          }
-        };
-        
-        if ( !ac.length) {
-          autocompleting = false;
-          
-          return false;
-        }
-        
-        ac.selectedIndex = 0;            
-    
-        ac.addEventListener("dblclick", DblClickOnOption, false);
-        env.editor.container.appendChild(ac);
-        
-        autocompleting = true;
-      }
-    });
-    
-    canon.addCommand({
-      name: "langle",
-      bindKey: {
-        win: "<", // <
-        mac: "<", // <
-        sender: "editor"
-      },
-      exec: function(env, args, request) {
-        env.editor.insert('<');
-        startSel = gEditor.selection.getRange();
-        
-        var canon = require("pilot/canon");
-          
-        var command = canon.getCommand('autocomplete');
-          
-        command.exec(env);          
-      }
-    });
-
-    canon.addCommand({
-      name: "up",
-      bindKey: {
-        win: "Up",
-        mac: "Up",
-        sender: "editor"
-      },
-      exec: function(env, args, request) {
-        if ( document.getElementById('ac') ) {
-          var select = document.getElementById('ac');
-          
-          if ( select.selectedIndex==0 ) {
-            select.selectedIndex = select.options.length-1;
-          }else{
-            select.selectedIndex = select.selectedIndex-1;
-          }
-        }else{
-          env.editor.navigateUp(args.times);
-        }
-      }
-    });
-    
-    canon.addCommand({
-      name: "down",
-      bindKey: {
-        win: "Down",
-        mac: "Down",
-        sender: "editor"
-      },
-      exec: function(env, args, request) {
-        if ( document.getElementById('ac') ) {
-          var select = document.getElementById('ac');
-          
-          if ( select.selectedIndex==select.options.length-1 ) {
-            select.selectedIndex = 0;
-          }else{
-            select.selectedIndex = select.selectedIndex+1;
-          }
-        }else{
-          env.editor.navigateDown(args.times);
-        }
-      }
-    });
-    
-    canon.addCommand({
-      name: "escape",
-      bindKey: {
-        win: "Esc",
-        mac: "Esc",
-        sender: "editor"
-      },
-      exec: function(env, args, request) {
-        var ac = document.getElementById('ac');
-         if (ac) {              
-          ac.parentNode.removeChild(ac);
-          autocompleting = false;
-        }
-      }
-    });
-    
-    canon.addCommand({
-      name: "enter",
-      bindKey: {
-        win: "Return",
-        mac: "Return",
-        sender: "editor"
-      },
-      exec: function(env, args, request) {
-        if ( document.getElementById('ac') ) {
-          var select = document.getElementById('ac');
-          var tag = select.options[select.selectedIndex].value;
-          Insert(tag);
-        }else{
-          env.editor.insert('\n');
-        }
-      }
-    });
-    
-    canon.addCommand({
-      name: "inserttext",
-      exec: function(env, args, request) {
-        var ac = document.getElementById('ac');
-         if (ac) {              
-          ac.parentNode.removeChild(ac);
-          autocompleting = false;
-        }
-        env.editor.insert(args.text  || "");
-
-      }
-    });
-
-    window.OnEditorChange = function() {
-      var ac = document.getElementById('ac');
-      if (autocompleting && ac) {
-        var sel = gEditor.selection.getRange();
-        sel.start.row = startSel.start.row;
-        sel.start.column = startSel.start.column;
-        var text = gEditor.getSession().doc.getTextRange(sel);
-        
-        if (text
-           && (text[text.length - 1] == ">"
-               || text.match( /[^a-zA-Z0-9\.\-_]/ ))) {
-          ac.parentNode.removeChild(ac);
-        }
-        else {
-          var option = ac.firstChild;
-          var selectionPlaced = false;
-          while (option) {
-            if (option.value.substr(0, text.length) == text) {
-              option.removeAttribute("style");
-              if (!selectionPlaced
-                  && ac.value.substr(0, text.length) != text) {
-                ac.value = option.value;
-                selectionPlaced = true;
-              }
-            }
-            else 
-              option.setAttribute("style", "display: none");
-            option = option.nextSibling;
-          }
-        }
-      }
-      else if (ac)
-       ac.parentNode.removeChild(ac);
-    }
-    gEditor.getSession().selection.on('changeCursor',OnEditorChange);
-    canon.addCommand({
-        name: "backspaceinAutocomplete",
-        bindKey: { win: "Ctrl-Backspace|Command-Backspace|Option-Backspace|Shift-Backspace|Backspace",
-                   mac: "Ctrl-Backspace|Command-Backspace|Shift-Backspace|Backspace|Ctrl-H",
-                   sender: "editor"
-                 },
-        exec: function(env, args, request) { gEditor.removeLeft(); OnEditorChange(); }
-      });
-
-  };
-</script><
+</script>
 </body>
 </html>
