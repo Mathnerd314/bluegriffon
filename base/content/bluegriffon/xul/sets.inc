@@ -105,8 +105,6 @@
   <command id="cmd_meter"             oncommand="goDoCommand('cmd_meter')"/>
   <command id="cmd_datalist"          oncommand="goDoCommand('cmd_datalist')"/>
 
-  <command id="cmd_stylesheets"       oncommand="goDoCommand('cmd_stylesheets')"/>
-
   <command id="cmd_pageProperties"    oncommand="goDoCommand('cmd_pageProperties')"/>
 
   <command id="cmd_spellCheck"        oncommand="goDoCommand('cmd_spellCheck')"/>

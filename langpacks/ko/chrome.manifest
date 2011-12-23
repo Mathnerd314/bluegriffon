@@ -24,3 +24,5 @@ locale fs ko extensions/fs/
 locale gfd ko extensions/gfd/
 locale cssproperties ko sidebars/cssproperties/
 locale domexplorer ko sidebars/domexplorer/
+locale scripteditor ko sidebars/scripteditor/
+locale stylesheets ko sidebars/stylesheets/

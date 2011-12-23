@@ -24,3 +24,5 @@ locale fs fr extensions/fs/
 locale gfd fr extensions/gfd/
 locale cssproperties fr sidebars/cssproperties/
 locale domexplorer fr sidebars/domexplorer/
+locale scripteditor fr sidebars/scripteditor/
+locale stylesheets fr sidebars/stylesheets/

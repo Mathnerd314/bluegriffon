@@ -24,3 +24,5 @@ locale fs zh-CN extensions/fs/
 locale gfd zh-CN extensions/gfd/
 locale cssproperties zh-CN sidebars/cssproperties/
 locale domexplorer zh-CN sidebars/domexplorer/
+locale scripteditor zh-CN sidebars/scripteditor/
+locale stylesheets zh-CN sidebars/stylesheets/

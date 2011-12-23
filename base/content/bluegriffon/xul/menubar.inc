@@ -231,10 +231,6 @@
                   command="cmd_html"
                   accesskey="&htmlToolbarCmd.key;"/>
         <menuseparator/>
-        <menuitem label="&stylesheetsToolbarCmd.label;"
-                  accesskey="&stylesheetsToolbarCmd.key;"
-                  command="cmd_stylesheets"/>
-        <menuseparator/>
         <menu label="&webfonts.label;">
           <menupopup id="webfontsMenupopup"/>
         </menu>

@@ -24,3 +24,5 @@ locale fs zh-TW extensions/fs/
 locale gfd zh-TW extensions/gfd/
 locale cssproperties zh-TW sidebars/cssproperties/
 locale domexplorer zh-TW sidebars/domexplorer/
+locale scripteditor zh-TW sidebars/scripteditor/
+locale stylesheets zh-TW sidebars/stylesheets/

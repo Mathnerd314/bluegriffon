@@ -391,8 +391,6 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
     commandTable.registerCommand("cmd_replace",     cmdBgFindCommand);
 
-    commandTable.registerCommand("cmd_stylesheets", cmdStylesheetsCommand);
-
     commandTable.registerCommand("cmd_span",        cmdSpanCommand);
 
     commandTable.registerCommand("cmd_pageProperties", cmdPagePropertiesCommand);

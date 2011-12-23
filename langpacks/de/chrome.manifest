@@ -24,3 +24,5 @@ locale fs de extensions/fs/
 locale gfd de extensions/gfd/
 locale cssproperties de sidebars/cssproperties/
 locale domexplorer de sidebars/domexplorer/
+locale scripteditor de sidebars/scripteditor/
+locale stylesheets de sidebars/stylesheets/

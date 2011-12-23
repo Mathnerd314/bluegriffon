@@ -42,7 +42,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += cssproperties domexplorer
+DIRS += stylesheets scripteditor cssproperties domexplorer
 
 include $(topsrcdir)/config/rules.mk
 
