@@ -293,10 +293,10 @@ function OpenStylesheet()
   var elt = treeitem.getUserData("element");
 
   var href = elt.href;
-  if (href || href.substr(0, 8) == "file:///")
+  if (!href || href.substr(0, 8) == "file:///")
   {
     if (elt.nodeName.toLowerCase() == "style")
-      source = s.textContent;
+      source = elt.textContent;
     else
       source = GetFileContents(href);
     var rv = {value: source, cancelled: false};
@@ -305,7 +305,7 @@ function OpenStylesheet()
     if (!rv.cancelled)
     {
       if (elt.nodeName.toLowerCase() == "style")
-        s.textContent = rv.value;
+        elt.textContent = rv.value;
       else {
         var hrefAttr = elt.getAttribute("href");
         const cacheService = Components.classes["@mozilla.org/network/cache-service;1"].getService(Components.interfaces.nsICacheService);
