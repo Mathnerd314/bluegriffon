@@ -307,18 +307,14 @@ function OpenStylesheet()
       if (elt.nodeName.toLowerCase() == "style")
         elt.textContent = rv.value;
       else {
-        var hrefAttr = elt.getAttribute("href");
-        const cacheService = Components.classes["@mozilla.org/network/cache-service;1"].getService(Components.interfaces.nsICacheService);
-        cacheService.evictEntries(0);
         SaveFileContents(href, rv.value);
+
         var parent = elt.parentNode;
         var nextElt = elt.nextSibling;
         parent.removeChild(elt);
-        elt = null;
-        var e = gDoc.createElement("link");
-        e.setAttribute("rel", "stylesheet");
-        e.setAttribute("href", hrefAttr);
-        parent.insertBefore(e, nextElt);
+
+        // reinsert the owner element to force reload of stylesheet
+        parent.insertBefore(elt, nextElt);
       }
       Inspect();
     }
