@@ -3,6 +3,7 @@ Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/bgQuit.jsm");
 Components.utils.import("resource://gre/modules/AddonManager.jsm");
+Components.utils.import("resource://gre/modules/fileChanges.jsm");
 
 var gContentWindow = null;
 
@@ -69,6 +70,17 @@ function Startup()
 
   AddonManager.getAddonByID("inspector@mozilla.org",
     function(addon) { if(addon) document.getElementById("menu_inspector").hidden = false; } );
+
+  NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
+}
+
+var gLookingForFileChangesTimeout = null;
+
+function BlueGriffon_lookForFileChanges() {
+  if (gLookingForFileChangesTimeout)
+    clearTimeout(gLookingForFileChangesTimeout);
+
+  gLookingForFileChangesTimeout = setTimeout(function() { FileChangeUtils.lookForChanges(); }, 500);
 }
 
 var gLastTabsArray;

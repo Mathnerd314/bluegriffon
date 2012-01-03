@@ -46,6 +46,7 @@ Components.utils.import("resource://app/modules/fileHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 Components.utils.import("resource://app/modules/handlersManager.jsm");
 Components.utils.import("resource://app/modules/screens.jsm");
+Components.utils.import("resource://app/modules/fileChanges.jsm");
 
 #include blanks.inc
 

@@ -1,5 +1,7 @@
 function Shutdown()
 {
+  NotifierUtils.removeNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
+
   try {
     var pbi = Services.prefs.QueryInterface(Components.interfaces.nsIPrefBranchInternal);
     pbi.removeObserver("bluegriffon.", BlueGriffonPrefsObserver, false);

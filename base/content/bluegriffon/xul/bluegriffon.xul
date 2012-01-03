@@ -58,17 +58,17 @@
 ]>            
 
 <window
-  id     = "Bluegriffon"
+  id         = "Bluegriffon"
   windowtype = "bluegriffon"
-  title  = "&window.title;"
-  width  = "900"
-  height = "600"
-  persist="screenX screenY width height"
-  onload = "Startup()"
-  onunload = "Shutdown()"
-  onclose = "return onClose()"
-  xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  xmlns:html="http://www.w3.org/1999/xhtml">
+  title      = "&window.title;"
+  width      = "900"
+  height     = "600"
+  persist    ="screenX screenY width height"
+  onload     = "Startup()"
+  onunload   = "Shutdown()"
+  onclose    = "return onClose()"
+  xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html ="http://www.w3.org/1999/xhtml">
 
 #include scripts.inc
 
