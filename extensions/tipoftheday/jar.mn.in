@@ -1,6 +1,4 @@
 tipoftheday.jar:
-#%   content tipoftheday                      jar:tipoftheday.jar!/content/tipoftheday/
-#%   locale  tipoftheday              en-US   jar:en-US.jar!/locale/en-US/tipoftheday/
 %   content tipoftheday                       %content/tipoftheday/
 %   overlay chrome://bluegriffon/content/xul/bluegriffon.xul    chrome://tipoftheday/content/tipofthedayOverlay.xul
     content/tipoftheday/tipoftheday.css       (content/tipoftheday.css)
