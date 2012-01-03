@@ -83,8 +83,10 @@ function InitDialog()
   targetsArray.sort();
   if (targetsArray.length) {
     for (var i = 0; i < targetsArray.length; i++) {
-      var item = "#" + targetsArray[i];
-      gDialog.urlMenulist.appendItem(item, item);
+      if (!i || targetsArray[i] != targetsArray[i-1]) {
+        var item = "#" + targetsArray[i];
+        gDialog.urlMenulist.appendItem(item, item);
+      }
     }
   }
   else {
