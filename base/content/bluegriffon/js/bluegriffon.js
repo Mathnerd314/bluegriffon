@@ -807,7 +807,7 @@ function ToggleViewMode(aElement)
     gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
 
-    var mimeType = EditorUtils.getCurrentDocument().contentType;
+    var mimeType = EditorUtils.getCurrentDocumentMimeType();
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
     var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + mimeType]
                    .createInstance(nsIDE);
