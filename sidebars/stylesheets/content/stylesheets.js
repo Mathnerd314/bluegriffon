@@ -315,6 +315,7 @@ function OpenStylesheet()
 
         // reinsert the owner element to force reload of stylesheet
         parent.insertBefore(elt, nextElt);
+        gMain.EditorUtils.getCurrentEditor().incrementModificationCount();
       }
       Inspect();
     }

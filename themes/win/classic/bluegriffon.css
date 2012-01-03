@@ -340,3 +340,7 @@ panel[floating="true"] {
 #editorBarLabel:hover:active {
   color: red;
 }
+
+tipoftheday {
+  -moz-binding: url("chrome://tipoftheday/content/tipoftheday.xml#tipoftheday");
+}

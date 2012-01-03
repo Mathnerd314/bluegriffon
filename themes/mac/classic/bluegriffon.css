@@ -337,3 +337,7 @@ panel[floating="true"] {
 #menu_updates[loading="true"] {
   list-style-image: url("chrome://global/skin/icons/loading_16.png");
 }
+
+tipoftheday {
+  -moz-binding: url("chrome://tipoftheday/content/tipoftheday.xml#tipoftheday");
+}

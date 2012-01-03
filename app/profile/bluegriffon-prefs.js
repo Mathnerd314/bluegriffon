@@ -147,3 +147,5 @@ pref("app.update.log", false);
 
 pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
+
+pref("tipoftheday.openAtStartup", true);
