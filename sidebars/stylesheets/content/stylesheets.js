@@ -292,6 +292,8 @@ function OpenStylesheet()
   var treeitem = contentView.getItemAtIndex(index);
   var elt = treeitem.getUserData("element");
 
+  var editor = gMain.EditorUtils.getCurrentEditor();
+
   var href = elt.href;
   if (!href || href.substr(0, 8) == "file:///")
   {
@@ -299,13 +301,22 @@ function OpenStylesheet()
       source = elt.textContent;
     else
       source = GetFileContents(href);
-    var rv = {value: source, cancelled: false};
+    var rv = {value: source, cancelled: true};
     window.openDialog("chrome://stylesheets/content/editor.xul","_blank",
                       "chrome,modal=yes,titlebar,resizable=yes,dialog=no", rv, href);
     if (!rv.cancelled)
     {
-      if (elt.nodeName.toLowerCase() == "style")
-        elt.textContent = rv.value;
+      if (elt.nodeName.toLowerCase() == "style") {
+        editor.beginTransaction();
+        var child = elt.lastChild;
+        while (child) {
+          var tmp = child.previousSibling;
+          editor.deleteNode(child);
+          child = tmp;
+        }
+        editor.insertNode(editor.document.createTextNode(rv.value), elt, 0);
+        editor.endTransaction();
+      }
       else {
         SaveFileContents(href, rv.value);
 
