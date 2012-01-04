@@ -220,11 +220,11 @@
             <row align="center" animatable="false">
               <label value="&direction.label;"/>
               <hbox align="center">
-                <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-right.png"
+                <toolbarbutton class="multibutton" label="▶¶"
                                value="ltr" property="direction" type="checkbox" group="direction"
                                id="ltrDirectionButton" tooltiptext="&ltrDirection.label;"
                                oncommand="ToggleProperty(this)"/>
-                <toolbarbutton class="multibutton" image="chrome://cssproperties/skin/general/arrow-left.png"
+                <toolbarbutton class="multibutton" label="¶◀"
                                value="rtl" property="direction" type="checkbox" group="direction"
                                id="rtlDirectionButton" tooltiptext="&rtlDirection.label;"
                                oncommand="ToggleProperty(this)"/>

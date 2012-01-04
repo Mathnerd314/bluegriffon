@@ -27,12 +27,12 @@
                   name="direction"/>
         <menuseparator/>
         <menuitem id="ltrDirectionContextMenuitem"
-                  label="&ltrDirectionMenu.label;"
+                  label="▶¶ (&ltrDirectionMenu.label;)"
                   value="ltr"
                   type="radio"
                   name="direction"/>
         <menuitem id="rtlDirectionContextMenuitem"
-                  label="&rtlDirectionMenu.label;"
+                  label="¶◀ (&rtlDirectionMenu.label;)"
                   value="rtl"
                   type="radio"
                   name="direction"/>
