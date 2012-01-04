@@ -26,3 +26,4 @@ locale cssproperties es-ES sidebars/cssproperties/
 locale domexplorer es-ES sidebars/domexplorer/
 locale scripteditor es-ES sidebars/scripteditor/
 locale stylesheets es-ES sidebars/stylesheets/
+locale tipoftheday es-ES extensions/tipoftheday/

@@ -26,3 +26,4 @@ locale cssproperties sv-SE sidebars/cssproperties/
 locale domexplorer sv-SE sidebars/domexplorer/
 locale scripteditor sv-SE sidebars/scripteditor/
 locale stylesheets sv-SE sidebars/stylesheets/
+locale tipoftheday sv-SE extensions/tipoftheday/

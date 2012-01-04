@@ -26,3 +26,4 @@ locale cssproperties zh-TW sidebars/cssproperties/
 locale domexplorer zh-TW sidebars/domexplorer/
 locale scripteditor zh-TW sidebars/scripteditor/
 locale stylesheets zh-TW sidebars/stylesheets/
+locale tipoftheday zh-TW extensions/tipoftheday/

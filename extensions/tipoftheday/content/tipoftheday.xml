@@ -115,7 +115,7 @@
               var prefs = window.GetPrefs();
               var openOnStartup = prefs.getBoolPref("tipoftheday.openAtStartup");
               if (openOnStartup || forceOpen)
-                openDialog("chrome://tipoftheday/content/tipoftheday.xul","_blank","chrome,modal,close=yes,dialog=no",this);
+                openDialog("chrome://tipoftheday/content/tipoftheday.xul","_blank","chrome,modal,close=yes,dialog=no,resizable=yes",this);
             }
           ]]></body>
       </method>

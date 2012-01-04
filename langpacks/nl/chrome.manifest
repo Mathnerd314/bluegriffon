@@ -26,3 +26,4 @@ locale cssproperties nl sidebars/cssproperties/
 locale domexplorer nl sidebars/domexplorer/
 locale scripteditor nl sidebars/scripteditor/
 locale stylesheets nl sidebars/stylesheets/
+locale tipoftheday nl extensions/tipoftheday/

@@ -40,6 +40,7 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://tipoftheday/content/tipoftheday.css" type="text/css"?>
+<?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 
 <!DOCTYPE window SYSTEM "chrome://tipoftheday/locale/tipoftheday.dtd">
 
@@ -48,6 +49,7 @@
     xmlns:html="http://www.w3.org/1999/xhtml"
     onload="Init();"
     onunload="CloseTip();"
+    persist="screenX screenY width height"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <script type="application/x-javascript" src="chrome://tipoftheday/content/tipoftheday.js"/>
@@ -69,17 +71,16 @@
       <div id="tipoftheday-right-description" xmlns="http://www.w3.org/1999/xhtml">...</div>
     </vbox>
   </hbox>
-
-  <hbox id="tipoftheday-bottom-box" align="center">
-    <checkbox id="tipoftheday-bottom-checkbox" label="&startupCheckbox.label;"
+  <hbox id="toolbox" class="listboxBg">
+    <toolbarbutton class="listboxBgUpButton"
+                   tooltiptext="&previousTipButton.label;"
+                   oncommand="doNextTip(-1)"/>
+    <toolbarbutton class="listboxBgDownButton"
+                   tooltiptext="&nextTipButton.label;"
+                   oncommand="doNextTip(1)"/>
+    <checkbox id="tipoftheday-bottom-checkbox"
+              label="&startupCheckbox.label;"
               flex="1" oncommand="doCheckbox(this);"/>
-    <spacer flex="1"/>
-    <button id="tipoftheday-previous-button" label="« &previousTipButton.label;"
-            oncommand="doNextTip(-1);"/>
-    <button id="tipoftheday-next-button" label="&nextTipButton.label; »"
-            oncommand="doNextTip(1);"/>
-    <button id="tipoftheday-close-button" label="&closeTipButton.label;"
-            oncommand="CloseTip();"/>
   </hbox>
 
 </window>

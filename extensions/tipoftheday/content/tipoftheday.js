@@ -45,7 +45,6 @@ const nsIFileInputStream       = Components.interfaces.nsIFileInputStream;
 const nsIScriptableInputStream = Components.interfaces.nsIScriptableInputStream;
 
 var tipOfTheDayElement;
-var gLocation;
 var gPrefs;
 var gPrefsService;
 var gPrefsBranch;
@@ -138,12 +137,10 @@ function Init()
       throw "no item";
   } catch(e) { alert("src error="+e);window.close() };
 
-  SetWindowLocation();
 }
 
 function CloseTip()
 {
-  SaveWindowLocation();
   var tipoftheday = window.opener.document.getElementById("tipoftheday");
   if (tipoftheday)
   {
@@ -228,29 +225,6 @@ function convertToUnicode(aCharset, aSrc )
   var unicodeConverter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
   unicodeConverter.charset = aCharset;
   return unicodeConverter.ConvertToUnicode( aSrc );
-}
-
-function SetWindowLocation()
-{
-  gLocation = document.getElementById("location");
-  if (gLocation)
-  {
-    window.screenX = Math.max(0, Math.min(window.opener.screenX + Number(gLocation.getAttribute("offsetX")),
-                                          screen.availWidth - window.outerWidth));
-    window.screenY = Math.max(0, Math.min(window.opener.screenY + Number(gLocation.getAttribute("offsetY")),
-                                          screen.availHeight - window.outerHeight));
-  }
-}
-
-function SaveWindowLocation()
-{
-  if (gLocation)
-  {
-    var newOffsetX = window.screenX - window.opener.screenX;
-    var newOffsetY = window.screenY - window.opener.screenY;
-    gLocation.setAttribute("offsetX", window.screenX - window.opener.screenX);
-    gLocation.setAttribute("offsetY", window.screenY - window.opener.screenY);
-  }
 }
 
 function GetPrefsService()

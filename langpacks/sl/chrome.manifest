@@ -26,3 +26,4 @@ locale cssproperties sl sidebars/cssproperties/
 locale domexplorer sl sidebars/domexplorer/
 locale scripteditor sl sidebars/scripteditor/
 locale stylesheets sl sidebars/stylesheets/
+locale tipoftheday sl extensions/tipoftheday/
