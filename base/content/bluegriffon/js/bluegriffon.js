@@ -224,7 +224,9 @@ function UpdateWindowTitle()
                                  .formatStringFromName("titleFormat",
                                                        [windowTitle, titleModifier],
                                                        2);
+    return windowTitle;                                                       
   } catch (e) { }
+  return "";
 }
 
 function onParagraphFormatChange(paraMenuList, commandID)

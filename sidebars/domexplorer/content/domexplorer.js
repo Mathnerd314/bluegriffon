@@ -231,8 +231,10 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   }
   if (selected) {
     var tmp = gDialog.elementsTree.getAttribute("onselect");
-    gDialog.elementsTree.removeAttribute("onselect")
-    gDialog.elementsTree.view.selection.select(gDialog.elementsTree.contentView.getIndexOfItem(selected));
+    gDialog.elementsTree.removeAttribute("onselect");
+    var index = gDialog.elementsTree.contentView.getIndexOfItem(selected);
+    gDialog.elementsTree.treeBoxObject.scrollToRow(index);
+    gDialog.elementsTree.view.selection.select(index);
     gDialog.elementsTree.setAttribute("onselect", tmp)
   }
 

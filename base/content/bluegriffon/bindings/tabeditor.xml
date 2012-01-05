@@ -411,12 +411,6 @@
         <body>
         <![CDATA[
           var e     = aEvent.currentTarget;
-          var title = aEvent.target.title;
-
-          if (/*!e.getEditor(e.contentWindow) &&*/ !title)
-          {
-            title = L10NUtils.getString("untitled");
-          }
 
           var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
           var tabs      = tabeditor.mTabs.childNodes;
@@ -427,8 +421,8 @@
             if (editors.item(i).lastChild == e)
             {
               var tab = tabs.item(i);
+              var title = UpdateWindowTitle();
               tab.label = title;
-              UpdateWindowTitle();
               return;
             }
           }          

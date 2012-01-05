@@ -69,7 +69,7 @@ var gEditorDocumentObserver =
           return; 
 
         // Set window title
-        UpdateWindowTitle();
+        gDialog.tabeditor.selectedTab.label = UpdateWindowTitle();
         UpdateTabHTMLDialect(editor)
 
         window.content.focus();
