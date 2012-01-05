@@ -165,7 +165,7 @@ function PanelClosed(aNotification, aPanelId)
     gIsPanelActive = false;
 }
 
-function SelectionChanged(aArgs, aElt, aOneElementSelected)
+function SelectionChanged(aArgs, aElt, aOneElementSelected, aSelectedInDOMETree)
 {
   if (!gIsPanelActive) {
     gCurrentElement = aElt;
@@ -233,13 +233,27 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     var tmp = gDialog.elementsTree.getAttribute("onselect");
     gDialog.elementsTree.removeAttribute("onselect");
     var index = gDialog.elementsTree.contentView.getIndexOfItem(selected);
-    gDialog.elementsTree.treeBoxObject.scrollToRow(index);
+    if (!aSelectedInDOMETree)
+      gDialog.elementsTree.treeBoxObject.scrollToRow(index);
     gDialog.elementsTree.view.selection.select(index);
-    gDialog.elementsTree.setAttribute("onselect", tmp)
+    gDialog.elementsTree.setAttribute("onselect", tmp);
+
+    if (aSelectedInDOMETree) {
+      setTimeout(RepaintElement, 1200);
+      gCurrentElement.setAttribute("_moz_flasher", "true");
+    }
   }
 
   UpdateAttributes();
   UpdateStyles();
+}
+
+function RepaintElement()
+{
+  var elts = gMain.EditorUtils.getCurrentDocument().querySelectorAll("*[\_moz_flasher]");
+  for (var i = 0; i < elts.length; i++) {
+    elts[i].removeAttribute("_moz_flasher");
+  }
 }
 
 function GetSelectedElementInTree()
@@ -274,7 +288,7 @@ function ElementSelectedInTree()
   gMain.ComposerCommands.mLastSelectedElement = null;
   gMain.ScrollToElement(node);
   try {
-    SelectionChanged(null, node, true);
+    SelectionChanged(null, node, true, true);
   }
   catch(e) {}
 }

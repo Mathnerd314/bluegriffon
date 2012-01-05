@@ -392,3 +392,22 @@ a[\_moz_anonclass="mozTableRemoveRow"]:active {
 nvu|php, nvu|comment {
   display: none ! important;
 }
+
+@-moz-keyframes flasher {
+  from {
+    outline-color: #CC0000 ! important;
+  }
+  to {
+    outline-color: white ! important;
+  }
+}
+
+*[\_moz_flasher] {
+  -moz-animation-name: flasher;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-iteration-count: 5;
+  outline-width: 2px ! important;
+  outline-style: solid ! important;
+  outline-color: white ! important;
+}
+

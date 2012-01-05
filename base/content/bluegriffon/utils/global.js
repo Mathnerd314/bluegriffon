@@ -445,5 +445,7 @@ function ScrollToElement(aElement)
     y += aElement.offsetTop;
     aElement = aElement.offsetParent;
   }
-  EditorUtils.getCurrentEditorElement().contentWindow.scrollTo(x, y);
+  var editorElt = EditorUtils.getCurrentEditorElement();
+  y = Math.max(0, y - editorElt.boxObject.height/2);
+  editorElt.contentWindow.scrollTo(x, y);
 }
