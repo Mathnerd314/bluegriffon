@@ -846,7 +846,7 @@ function ToggleViewMode(aElement)
 
     UnmarkSelection();
 
-    sourceEditor.setValue(source.replace( /\r/g, "\n"));
+    sourceEditor.setValue(source.replace( /\r\n/g, "\n").replace( /\r/g, "\n"));
     /*if (flags.value & nsIDE.OutputWrap) {
       sourceEditor.setShowPrintMargin(true);
       sourceEditor.setPrintMarginColumn(flags.maxColumnPref);

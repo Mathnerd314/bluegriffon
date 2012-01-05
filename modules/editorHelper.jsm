@@ -818,22 +818,32 @@ var EditorUtils = {
 	    flags |= nsIDE.OutputWrap;
 	    maxColumnPref = Services.prefs.getIntPref("bluegriffon.source.wrap.maxColumn");
 	  }
-	
-	  var osString = Components.classes["@mozilla.org/xre/app-info;1"]
-	                   .getService(Components.interfaces.nsIXULRuntime).OS;
-	  switch (osString) {
-	    case "WINNT":
-	      flags |= nsIDE.OutputLFLineBreak;
-	      flags |= nsIDE.OutputCRLineBreak;
-	      break;
-	    case "Darwin":
-	      flags |= nsIDE.OutputCRLineBreak;
-	      break;
-	    case "Linux":
-	    default:
-	      flags |= nsIDE.OutputLFLineBreak;
-	      break;
-	  }
+
+    var forceLF = false;
+    try {
+      forceLF = Services.prefs.getBoolPref("bluegriffon.defaults.forceLF");
+    }
+    catch(e) {}
+
+    if (forceLF)
+      flags |= nsIDE.OutputLFLineBreak;
+    else {
+  	  var osString = Components.classes["@mozilla.org/xre/app-info;1"]
+  	                   .getService(Components.interfaces.nsIXULRuntime).OS;
+  	  switch (osString) {
+  	    case "WINNT":
+  	      flags |= nsIDE.OutputLFLineBreak;
+  	      flags |= nsIDE.OutputCRLineBreak;
+  	      break;
+  	    case "Darwin":
+  	      flags |= nsIDE.OutputCRLineBreak;
+  	      break;
+  	    case "Linux":
+  	    default:
+  	      flags |= nsIDE.OutputLFLineBreak;
+  	      break;
+  	  }
+    }
 	
 	  var encodeEntity = Services.prefs.getCharPref("bluegriffon.source.entities");
 	  switch (encodeEntity) {
