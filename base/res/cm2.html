@@ -15,6 +15,7 @@
     }
     .CodeMirror-scroll {height: 100% ! important}
     .CodeMirror-gutter {cursor: pointer;}
+    .activeline {background: #f0fcff !important;}
   </style>
   <link rel="stylesheet" href="cm2/codemirror.css" />
   <link rel="stylesheet" href="cm2/foldtag.css" />
@@ -74,9 +75,14 @@
         matchBrackets: true,
         onGutterClick: foldFunc,
         onChange: changeFunc,
-        mode: "text/html"
+        mode: "text/html",
+        onCursorActivity: function() {
+          gEditor.setLineClass(hlLine, null);
+          hlLine = gEditor.setLineClass(gEditor.getCursor().line, "activeline");
+        }
       });
-    useTheme(gTheme);
+      var hlLine = gEditor.setLineClass(0, "activeline");
+      useTheme(gTheme);
   };
 
   function getEditableElement() {
