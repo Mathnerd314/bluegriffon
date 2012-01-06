@@ -74,8 +74,8 @@ function SourceChangeCallback()
     sourceEditor.lastErrorLine = line;
 
     var visible = sourceEditor.visibleLines();
-    if (line >= visible.to || line < visible.from)
-      sourceEditor.setCursor(line - 1, 0);
+    if (line-1 >= visible.to || line-1 < visible.from)
+      sourceEditor.setCursor(line - 1, ch);
   }
 }
 
