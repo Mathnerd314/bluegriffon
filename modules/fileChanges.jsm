@@ -3,12 +3,13 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
-Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 
 var EXPORTED_SYMBOLS = ["FileChangeUtils"];
 
 var FileChangeUtils = {
+
+  kCSSRule: Components.interfaces.nsIDOMCSSRule,
 
   mFileInfo: {},
   mLinkedFiles: {},
@@ -131,6 +132,39 @@ var FileChangeUtils = {
     }
   },
 
+  _enumerateStyleSheet: function(aSheet, aCallback)
+  {
+    if (aCallback(aSheet))
+      return;
+    var rules = aSheet.cssRules;
+    for (var j = 0; j < rules.length; j++)
+    {
+      var rule = rules.item(j);
+      switch (rule.type)
+      {
+        case FileChangeUtils.kCSSRule.IMPORT_RULE:
+          this._enumerateStyleSheet(rule.styleSheet, aCallback);
+          break;
+        case FileChangeUtils.kCSSRule.MEDIA_RULE:
+          this._enumerateStyleSheet(rule, aCallback);
+          break;
+        default:
+          break;
+      }
+
+    }
+  },
+
+  enumerateStyleSheets: function(aDocument, aCallback)
+  {
+    var stylesheetsList = aDocument.styleSheets;
+    for (var i = 0; i < stylesheetsList.length; i++)
+    {
+      var sheet = stylesheetsList.item(i);
+      this._enumerateStyleSheet(sheet, aCallback);
+    }
+  },
+
   lookForChangesForEditor: function(aElt)
   {
     if (!aElt) // sanity check
@@ -164,7 +198,7 @@ var FileChangeUtils = {
       for (var i = 0; i < cssRules.length; i++)
       {
         var rule = cssRules.item(i);
-        if (rule.type == CssUtils.kCSSRule.IMPORT_RULE)
+        if (rule.type == FileChangeUtils.kCSSRule.IMPORT_RULE)
         {
           var src = rule.styleSheet.href;
           if (src && src.substr(0, 7) == "file://") {
@@ -175,7 +209,7 @@ var FileChangeUtils = {
       return false;
     }
   
-    CssUtils.enumerateStyleSheets(doc, enumerateImportedSheets);
+    this.enumerateStyleSheets(doc, enumerateImportedSheets);
   },
 
   addLinkedFile: function(aSrc, aNode)
@@ -192,5 +226,13 @@ var FileChangeUtils = {
       this.mLinkedFiles[aSrc] = { lastMod: lastMod,
                                   nodes:   [aNode] };
     }
+  },
+
+  notifyFileModifiedByBlueGriffon: function(aSpec)
+  {
+    if (!aSpec) // early way out
+      return;
+    if (aSpec in this.mFileInfo)
+      delete this.mFileInfo[aSpec];
   }
 };
