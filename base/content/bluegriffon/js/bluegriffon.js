@@ -827,7 +827,6 @@ function ToggleViewMode(aElement)
     var sourceIframe = editorElement.previousSibling;
     var sourceEditor = sourceIframe.contentWindow.gEditor;
     sourceIframe.contentWindow.gChangeCallback = onSourceChangeCallback;
-    sourceIframe.setUserData("oldSource", source, null);
 
     var theme = null;
     try {
@@ -863,6 +862,7 @@ function ToggleViewMode(aElement)
     sourceEditor.refresh();
     sourceEditor.focus();
     MarkSelectionInAce(sourceEditor, source);
+    sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
   }
   else if (mode == "wysiwyg")
   {
