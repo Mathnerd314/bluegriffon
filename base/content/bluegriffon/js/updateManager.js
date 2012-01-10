@@ -194,9 +194,12 @@ var BGUpdateManager = {
         doc.documentElement.nodeName == "update") {
       var child = doc.documentElement.firstElementChild;
       var message = "", messageURL = "";
+      var currentVersion, homeURL;
       while (child) {
         switch (child.nodeName)
         {
+          case "currentVersion": currentVersion = child.textContent; break;
+          case "homeURL":        homeURL = child.textContent; break;
           case "message":        message = child.textContent; break;
           case "messageURL":     messageURL = child.textContent; break;
           default:               break;
@@ -208,6 +211,10 @@ var BGUpdateManager = {
         lastMessage = Services.prefs.getCharPref(this.kPREF_UPDATE_MESSAGE);
       }
       catch(e){}
+      var gApp = Services.appinfo;
+      if (Services.vc.compare(gApp.version, currentVersion) < 0) {
+        ShowUpdates();
+      }
       if (message && lastMessage != message) {
         Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
         var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
