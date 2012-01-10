@@ -1,4 +1,3 @@
-#! /bin/sh
 # ***** BEGIN LICENSE BLOCK *****
 # Version: MPL 1.1/GPL 2.0/LGPL 2.1
 #
@@ -12,15 +11,14 @@
 # for the specific language governing rights and limitations under the
 # License.
 #
-# The Original Code is the the Mozilla build system
+# The Original Code is the Mozilla Installer code.
 #
-# The Initial Developer of the Original Code is
-# Ben Turner <mozilla@songbirdnest.com>
-#
-# Portions created by the Initial Developer are Copyright (C) 2007
+# The Initial Developer of the Original Code is Mozilla Foundation
+# Portions created by the Initial Developer are Copyright (C) 2006
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s):
+#  Robert Strong <robert.bugzilla@gmail.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -36,38 +34,13 @@
 #
 # ***** END LICENSE BLOCK *****
 
-add_makefiles "
-bluegriffon/Makefile
-bluegriffon/app/Makefile
-bluegriffon/base/Makefile
-bluegriffon/extensions/Makefile
-bluegriffon/installer/Makefile
-bluegriffon/installer/windows/Makefile
-bluegriffon/sidebars/Makefile
-bluegriffon/src/Makefile
-bluegriffon/src/dibgutils/Makefile
-bluegriffon/src/diOSXDockIconBadger/Makefile
-bluegriffon/themes/Makefile
-bluegriffon/modules/Makefile
-bluegriffon/themes/win/Makefile
-bluegriffon/themes/mac/Makefile
-bluegriffon/extensions/svg-edit/Makefile
-bluegriffon/extensions/gfd/Makefile
-bluegriffon/extensions/fs/Makefile
-bluegriffon/extensions/tipoftheday/Makefile
-bluegriffon/stubs/Makefile
-bluegriffon/stubs/csseditor/Makefile
-bluegriffon/stubs/eyedropper/Makefile
-bluegriffon/stubs/fullscreen/Makefile
-bluegriffon/stubs/mathml2/Makefile
-bluegriffon/stubs/snippets/Makefile
-bluegriffon/stubs/tableLayout/Makefile
-bluegriffon/stubs/thumbnailer/Makefile
-bluegriffon/sidebars/cssproperties/Makefile
-bluegriffon/sidebars/domexplorer/Makefile
-bluegriffon/sidebars/scripteditor/Makefile
-bluegriffon/sidebars/stylesheets/Makefile
-bluegriffon/langpacks/Makefile
-bluegriffon/locales/Makefile
-bluegriffon/components/Makefile
-"
+# NSIS branding defines for official release builds.
+# The nightly build branding.nsi is located in browser/installer/windows/nsis/
+# The unofficial build branding.nsi is located in browser/branding/unofficial/
+
+# BrandFullNameInternal is used for some registry and file system values
+# instead of BrandFullName and typically should not be modified.
+!define BrandFullNameInternal "BlueGriffon"
+!define CompanyName           "Disruptive Innovation SAS"
+!define URLInfoAbout          "http://www.bluegriffon.org"
+!define URLUpdateInfo         "http://www.bluegriffon.org"

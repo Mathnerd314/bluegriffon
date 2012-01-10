@@ -1,4 +1,3 @@
-#! /bin/sh
 # ***** BEGIN LICENSE BLOCK *****
 # Version: MPL 1.1/GPL 2.0/LGPL 2.1
 #
@@ -12,15 +11,15 @@
 # for the specific language governing rights and limitations under the
 # License.
 #
-# The Original Code is the the Mozilla build system
+# The Original Code is mozilla.org code.
 #
-# The Initial Developer of the Original Code is
-# Ben Turner <mozilla@songbirdnest.com>
-#
-# Portions created by the Initial Developer are Copyright (C) 2007
+# The Initial Developer of the Original Code is Mozilla Foundation.
+# Portions created by the Initial Developer are Copyright (C) 2009
 # the Initial Developer. All Rights Reserved.
 #
 # Contributor(s):
+#   Justin Dolske <dolske@mozilla.com> (original author)
+#   Jared Wein <jwein@mozilla.com>
 #
 # Alternatively, the contents of this file may be used under the terms of
 # either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -36,38 +35,56 @@
 #
 # ***** END LICENSE BLOCK *****
 
-add_makefiles "
-bluegriffon/Makefile
-bluegriffon/app/Makefile
-bluegriffon/base/Makefile
-bluegriffon/extensions/Makefile
-bluegriffon/installer/Makefile
-bluegriffon/installer/windows/Makefile
-bluegriffon/sidebars/Makefile
-bluegriffon/src/Makefile
-bluegriffon/src/dibgutils/Makefile
-bluegriffon/src/diOSXDockIconBadger/Makefile
-bluegriffon/themes/Makefile
-bluegriffon/modules/Makefile
-bluegriffon/themes/win/Makefile
-bluegriffon/themes/mac/Makefile
-bluegriffon/extensions/svg-edit/Makefile
-bluegriffon/extensions/gfd/Makefile
-bluegriffon/extensions/fs/Makefile
-bluegriffon/extensions/tipoftheday/Makefile
-bluegriffon/stubs/Makefile
-bluegriffon/stubs/csseditor/Makefile
-bluegriffon/stubs/eyedropper/Makefile
-bluegriffon/stubs/fullscreen/Makefile
-bluegriffon/stubs/mathml2/Makefile
-bluegriffon/stubs/snippets/Makefile
-bluegriffon/stubs/tableLayout/Makefile
-bluegriffon/stubs/thumbnailer/Makefile
-bluegriffon/sidebars/cssproperties/Makefile
-bluegriffon/sidebars/domexplorer/Makefile
-bluegriffon/sidebars/scripteditor/Makefile
-bluegriffon/sidebars/stylesheets/Makefile
-bluegriffon/langpacks/Makefile
-bluegriffon/locales/Makefile
-bluegriffon/components/Makefile
-"
+DEPTH = ../..
+topsrcdir = @top_srcdir@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+include $(DEPTH)/config/autoconf.mk
+
+include $(topsrcdir)/config/rules.mk
+
+WINDOWS_BRANDING_FILES = \
+	bluegriffon.ico \
+	document.ico \
+	branding.nsi \
+	wizHeader.bmp \
+	wizHeaderRTL.bmp \
+	wizWatermark.bmp \
+	$(NULL)
+
+OSX_BRANDING_FILES = \
+	background.png \
+	bluegriffon.icns \
+	disk.icns \
+	document.icns \
+	dsstore \
+	$(NULL)
+
+LINUX_BRANDING_FILES = \
+	default16.png \
+	default32.png \
+	default48.png \
+	mozicon128.png \
+	$(NULL)
+
+OS2_BRANDING_FILES = \
+	bluegriffon-os2.ico \
+	document-os2.ico \
+	$(NULL)
+
+export::
+	$(NSINSTALL) -D $(DIST)/branding
+ifeq ($(MOZ_WIDGET_TOOLKIT),windows)
+	cp $(addprefix $(srcdir)/, $(WINDOWS_BRANDING_FILES)) $(DIST)/branding/
+endif
+ifeq ($(MOZ_WIDGET_TOOLKIT),cocoa)
+	cp $(addprefix $(srcdir)/, $(OSX_BRANDING_FILES)) $(DIST)/branding/
+endif
+ifeq ($(MOZ_WIDGET_TOOLKIT),gtk2)
+	cp $(addprefix $(srcdir)/, $(LINUX_BRANDING_FILES)) $(DIST)/branding/
+	$(NSINSTALL) -D $(DIST)/install
+endif
+ifeq ($(OS_ARCH),OS2)
+	cp $(addprefix $(srcdir)/, $(OS2_BRANDING_FILES)) $(DIST)/branding/
+endif
