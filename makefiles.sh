@@ -40,6 +40,7 @@ add_makefiles "
 bluegriffon/Makefile
 bluegriffon/app/Makefile
 bluegriffon/base/Makefile
+bluegriffon/branding/Makefile
 bluegriffon/extensions/Makefile
 bluegriffon/installer/Makefile
 bluegriffon/installer/windows/Makefile
