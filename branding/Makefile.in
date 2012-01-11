@@ -57,7 +57,6 @@ OSX_BRANDING_FILES = \
 	background.png \
 	bluegriffon.icns \
 	disk.icns \
-	document.icns \
 	dsstore \
 	$(NULL)
 
