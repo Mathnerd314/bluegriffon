@@ -60,7 +60,6 @@ ifdef MOZ_INSTALLER
 # For Windows build the uninstaller during the application build since the
 # uninstaller is included with the application for mar file generation.
 libs::
-  $(MAKE) -C installer/windows uninstaller
-
+	$(MAKE) -C installer/windows uninstaller
 endif
 endif
