@@ -24,10 +24,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Stäng">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Aktivera användarstudier">
 <!ENTITY testpilot.feedbackbutton.label                "Feedback">
-<!ENTITY testpilot.happy.label        "Firefox gjorde mig glad därför att…">
-<!ENTITY testpilot.sad.label          "Firefox gjorde mig ledsen därför att…">
+<!ENTITY testpilot.happy.label        "BlueGriffon gjorde mig glad därför att…">
+<!ENTITY testpilot.sad.label          "BlueGriffon gjorde mig ledsen därför att…">
 <!ENTITY testpilot.broken.label      "Rapportera problem med webbplatsen…">
 <!ENTITY testpilot.idea.label        "Ge oss ett förslag…">

@@ -166,7 +166,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "<p>您不應該在您不完全信任的網路連線，或是不曾看到關於此伺服器的警告的情況下增加例外。</p>
 
