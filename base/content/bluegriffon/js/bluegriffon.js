@@ -809,6 +809,7 @@ function ToggleViewMode(aElement)
   {
     gDialog.structurebar.style.visibility = "hidden";
     HandlersManager.hideAllHandlers();
+    gDialog.tabeditor.enableRulers(false);
 
     var mimeType = EditorUtils.getCurrentDocumentMimeType();
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
@@ -869,6 +870,8 @@ function ToggleViewMode(aElement)
     // Reduce the undo count so we don't use too much memory
     //   during multiple uses of source window 
     //   (reinserting entire doc caches all nodes)
+    gDialog.tabeditor.enableRulers(true);
+
     var sourceIframe = editorElement.previousSibling;
     var sourceEditor = sourceIframe.contentWindow.gEditor;
     if (sourceEditor)

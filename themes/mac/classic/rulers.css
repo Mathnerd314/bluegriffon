@@ -12,10 +12,14 @@ svg|text {
   color: white;
 }
 
-hruler[disabled], vruler[disabled]  { display: none;}
-hruler, vruler      { display: -moz-box;
-                     background-color: transparent;
-                   }
+hruler[disabled], vruler[disabled]  {
+  visibility: hidden;
+}
+
+hruler, vruler {
+  display: -moz-box;
+  background-color: transparent;
+}
 
 hruler {
   stroke-width: 4px;
@@ -29,6 +33,7 @@ hruler {
   margin: 2px 0px;
   position: absolute;
 }
+
 vruler {
   stroke-width: 4px;
   font-family: -moz-fixed;

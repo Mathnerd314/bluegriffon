@@ -395,6 +395,22 @@
         </body>
       </method>
 
+      <method name="enableRulers">
+        <parameter name="aEnabled" />
+        <body>
+        <![CDATA[
+          if (aEnabled) {
+            this.mHruler.removeAttribute("disabled");
+            this.mVruler.removeAttribute("disabled");
+          }
+          else {
+            this.mHruler.setAttribute("disabled", "true");
+            this.mVruler.setAttribute("disabled", "true");
+          }
+        ]]>
+        </body>
+      </method>
+
       <method name="finishInstall">
         <parameter name="aPL" />
         <body>
