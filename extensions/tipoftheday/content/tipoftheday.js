@@ -58,7 +58,6 @@ function Init()
   tipOfTheDayElement = window.arguments[0];
 
   gDialog.tipofthedaybottomcheckbox   = document.getElementById("tipoftheday-bottom-checkbox");
-  gDialog.tipofthedayclosebutton      = document.getElementById("tipoftheday-close-button");
   gDialog.tipofthedayleftlabel        = document.getElementById("tipoftheday-left-label");
   gDialog.tipofthedayrightdescription = document.getElementById("tipoftheday-right-description");
 
@@ -157,7 +156,6 @@ function doFocus() {
   if (!window.firstFocus) {
     window.firstFocus = true;
     doNextTip(1);
-    gDialog.tipofthedayclosebutton.focus();
   }
 }
 

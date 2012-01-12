@@ -350,16 +350,11 @@
     </menu>
 
     <menu id="toolsMenu" label="&toolsMenu.label;" accesskey="&toolsMenu.accesskey;">
-      <menupopup id="toolsPopup" onpopupshowing="CheckForUpdates(this)">
+      <menupopup id="toolsPopup">
         <menuitem id="menu_cleanup" command="cmd_cleanup"/>
         <menuseparator/>
         <menuitem label="&addonsMenu.label;"  oncommand="OpenExtensionsManager()"/>
         <menuseparator/>
-#ifndef XP_MACOSX
-        <menuitem id="menu_updates" label="&lookForUpdates.label;"
-                  oncommand="ShowUpdates()"/>
-        <menuseparator/>
-#endif
         <menuitem label="&consoleMenu.label;"  oncommand="OpenConsole()"/>
         <menuseparator id="menu_PrefsSeparator"/>
         <menuitem id="menu_preferences"
@@ -382,15 +377,10 @@
     </menu>
 
     <menu id="helpMenu" label="&helpMenu.label;" accesskey="&helpMenu.accesskey;">
-      <menupopup id="helpMenuPopup" onpopupshowing="CheckForUpdates(this)">
+      <menupopup id="helpMenuPopup">
         <menuitem label="&aboutComposer.label;"
                   id="aboutName"
                   oncommand="AboutComposer()"/>
-#ifdef XP_MACOSX
-        <menuitem id="menu_updates" label="&lookForUpdates.label;"
-                  oncommand="ShowUpdates()"/>
-        <menuseparator/>
-#endif
         <menuitem label="&homePage.label;"
                   oncommand="loadExternalURL('http://bluegriffon.org')"/>
         <menuseparator/>

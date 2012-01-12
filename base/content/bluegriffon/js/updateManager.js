@@ -96,7 +96,16 @@ var BGUpdateManager = {
     catch(e) {}
 
     var updatesEnabled = true;
+    try {
+      updatesEnabled = prefs.getBoolPref(this.kPREF_UPDATES_ENABLED);
+    }
+    catch(e) {}
+
     var updateFrequency = "launch";
+    try {
+      updateFrequency = prefs.getCharPref(this.kPREF_UPDATE_FREQUENCY);
+    }
+    catch(e) {}
 
     if (updatesEnabled &&
         (updateFrequency == "launch" ||
@@ -212,16 +221,23 @@ var BGUpdateManager = {
       }
       catch(e){}
       var gApp = Services.appinfo;
-      if (Services.vc.compare(gApp.version, currentVersion) < 0) {
-        ShowUpdates();
+      if (currentVersion && homeURL) {
+        if (Services.vc.compare(gApp.version, currentVersion) < 0) {
+          var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
+          window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
+                            null, null);
+        }
+        else {
+          if ("BlueGriffonIsUpToDate" in window)
+            BlueGriffonIsUpToDate();
+          if (message && lastMessage != message) {
+            Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
+            var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
+            window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
+                              message, messageURL);
+          }
+        }
       }
-      if (message && lastMessage != message) {
-        Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
-        var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
-        window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                          message, messageURL);
-      }
-      return;
     }
   }
 };
