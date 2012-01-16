@@ -161,6 +161,9 @@
 
   <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
   <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
+
+  <command id="cmd_fontColor"       state=""/>
+  <command id="cmd_highlight"       state="transparent"/>
 </commandset>
 
 <commandset id="selectionBasedCommands"

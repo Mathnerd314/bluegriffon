@@ -152,6 +152,8 @@ var ComposerCommands = {
         case "cmd_align":
         case "cmd_fontFace":
         case "cmd_class":
+        case "cmd_fontColor":
+        case "cmd_highlight":
         case "cmd_id":
         case "cmd_ariaRole":
           this.pokeMultiStateUI(command, params);
@@ -442,6 +444,13 @@ var ComposerCommands = {
   _updateSelectionBased: function _updateSelectionBased(aElement, aOneElementSelected, aDontNotify)
   {
     NotifierUtils.notify("selection_strict", aElement, aOneElementSelected);
+
+    if (!EditorUtils.getCurrentEditor().selection.isCollapsed) {
+      InContextHelper.showInContextPanel(aElement);
+    }
+    else {
+      InContextHelper.hideInContextPanel();
+    }
 
     var path = "";
     var node = aElement;

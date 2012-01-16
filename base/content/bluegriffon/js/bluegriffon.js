@@ -406,7 +406,7 @@ function onFontFaceChange(fontFaceMenuList, commandID)
   }
   else
   {
-    var menuPopup = document.getElementById("FontFacePopup");
+    var menuPopup = fontFaceMenuList.menupopup;
     var menuItems = menuPopup.childNodes;
     for (var i=0; i < menuItems.length; i++)
     {
@@ -805,6 +805,7 @@ function ToggleViewMode(aElement)
 
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
+  InContextHelper.hideInContextPanel();
   if (mode == "source")
   {
     gDialog.structurebar.style.visibility = "hidden";
@@ -1884,5 +1885,38 @@ function CheckForUpdates(aPopup)
       checkForUpdates.setAttribute("loading", "true");
     else
       checkForUpdates.removeAttribute("loading");
+  }
+}
+
+function onFontColorChange()
+{
+  var commandNode = document.getElementById("cmd_fontColor");
+  if (commandNode)
+  {
+    var color = commandNode.getAttribute("state");
+    var button = document.getElementById("inContextTextColorColorpicker");
+    if (button)
+    {
+      // No color set - get color set on page or other defaults
+      if (!color || color == "mixed")
+        color = "transparent";
+      button.color = color;
+    }
+  }
+}
+
+function onBackgroundColorChange()
+{
+  var commandNode = document.getElementById("cmd_highlight");
+  if (commandNode)
+  {
+    var color = commandNode.getAttribute("state");
+    var button = document.getElementById("inContextBackgroundColorColorpicker");
+    if (button)
+    {
+      if (!color || color == "mixed")
+        color = "transparent";
+      button.color = color;
+    }
   }
 }
