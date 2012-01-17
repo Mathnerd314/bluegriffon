@@ -49,6 +49,7 @@ function Startup()
   BGUpdateManager.check();
   
   initLocalFontFaceMenu(gDialog.FontFacePopup);
+  initLocalFontFaceMenu(gDialog.inContextFontFacePopup);
 
   try {
     var pbi = Services.prefs.QueryInterface(Components.interfaces.nsIPrefBranchInternal);

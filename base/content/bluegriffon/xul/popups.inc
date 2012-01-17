@@ -231,5 +231,77 @@
     <menuitem id="cmenu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
   </menupopup>
 
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  <popup id="inContextStylePanel" noautohide="true">
+#else
+  <panel id="inContextStylePanel">
+#endif
+#else
+  <panel id="inContextStylePanel">
+#endif
+    <menulist class="toolbar-focustarget" command="cmd_renderedHTMLEnabler"
+              id="inContextFontFaceSelect" tooltiptext="&FontFaceSelect.tooltip;" crop="right"
+              sizetopopup="none">
+      <observes element="cmd_fontFace" attribute="state" onbroadcast="onFontFaceChange(this.parentNode, 'cmd_fontFace')"/>
+      <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"
+                 onpopupshowing="initFontFaceMenu(this);">
+        <menuitem label="&fontVarWidth.label;"      value="" class="menuitem-non-iconic-accel"/>
+        <menuitem label="&fontFixedWidth.label;"    value="tt" class="menuitem-non-iconic-accel"/>
+        <menuseparator/>
+        <menuitem label="&fontHelveticaFont.label;" value="Helvetica, Arial, sans-serif" class="menuitem-non-iconic-accel"/>
+        <menuitem label="&fontTimes.label;"         value="Times New Roman, Times, serif" class="menuitem-non-iconic-accel"/>
+        <menuitem label="&fontCourier.label;"       value="Courier New, Courier, monospace" class="menuitem-non-iconic-accel"/>
+        <menuseparator/>
+      </menupopup>
+    </menulist>
+    <hbox align="center">
+      <toolbarbutton id="inContextStrongButton" type="checkbox" autoCheck="false" command="cmd_strong" label="&strongToolbarCmd.label;"
+                     tooltiptext="&strongToolbarCmd.tooltip;">
+        <observes element="cmd_strong" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_strong')"/>
+      </toolbarbutton>
+    
+      <toolbarbutton id="inContextEmButton" type="checkbox" autoCheck="false" command="cmd_em" label="&emToolbarCmd.label;"
+                     tooltiptext="&emToolbarCmd.tooltip;">
+        <observes element="cmd_em" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_em')"/>
+      </toolbarbutton>
+
+      <toolbarbutton id="inContextCodeButton" type="checkbox" autoCheck="false" command="cmd_code" label="&codeToolbarCmd.label;"
+                     tooltiptext="&codeToolbarCmd.tooltip;">
+        <observes element="cmd_code" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_code')"/>
+      </toolbarbutton>
+
+      <toolbarbutton id="inContextUnderlineButton" type="checkbox" autoCheck="false" command="cmd_underline" label="&underlineToolbarCmd.label;"
+                     tooltiptext="&underlineToolbarCmd.tooltip;">
+        <observes element="cmd_underline" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_underline')"/>
+      </toolbarbutton>
+
+      <stack>
+        <observes element="cmd_highlight"       attribute="state" onbroadcast="onBackgroundColorChange()"/>
+        <observes element="cmd_fontColor"       attribute="state" onbroadcast="onFontColorChange()"/>
+        <ecolorpicker id="inContextBackgroundColorColorpicker"
+                      colorObjectId="BackgroundColor"
+                      tooltiptext="&bgColor.label;"
+                      windowTitle="Background color"
+                      oncommand="EditorUtils.getCurrentEditor().setInlineProperty('font', 'bgcolor', this.color)"
+                      showTransparency="true"/>
+        <ecolorpicker id="inContextTextColorColorpicker"
+                      color="transparent"
+                      tooltiptext="&color.label;"
+                      colorObjectId="TextColor"
+                      windowTitle="Text color"
+                      oncommand="EditorUtils.getCurrentEditor().setInlineProperty('font', 'color', this.color)"
+                      showTransparency="false"/>
+      </stack>
+    </hbox>
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  </popup>
+#else
+  </panel>
+#endif
+#else
+  </panel>
+#endif
 </popupset>
 

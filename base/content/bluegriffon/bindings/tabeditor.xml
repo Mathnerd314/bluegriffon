@@ -529,6 +529,7 @@
         <parameter name="aTabeditor"/>
         <body>
         <![CDATA[
+           InContextHelper.hideInContextPanel();
            var activeSourceDeck = document.getElementById("sourceTreeDeck");
            if (activeSourceDeck &&
                aTabeditor.selectedIndex < activeSourceDeck.childNodes.length)
@@ -560,6 +561,10 @@
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
              deck.lastChild.focus();
+             var selcon = EditorUtils.getSelectionContainer();
+             if (selcon)
+               gDialog.structurebar.selectionChanged(null, selcon.node,
+                                                     selcon.oneElementSelected);
            }
            window.updateCommands("navigation");
            window.updateCommands("style");

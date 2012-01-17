@@ -55,7 +55,7 @@
 <!ENTITY netOffline.title "Nepovezan način">
 <!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
      indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the Firefox button
+     since it could be in either the normal menu (Mac/Linux) or the BlueGriffon button
      menu (Windows).
 -->
 <!ENTITY netOffline.overrideLongDesc "
@@ -175,7 +175,7 @@ začasna in lahko poskusite znova pozneje.</li>
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Ne dodajajte izjeme, če uporabljate povezavo, ki ji ne zaupate popolnoma, ali če od tega strežnika običajno ne prejemate takšnih opozoril.</p> 
