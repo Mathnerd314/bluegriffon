@@ -231,7 +231,15 @@
     <menuitem id="cmenu_tableProperties"  label="&tableProperties.label;"  accesskey="&tableProperties.accesskey;"  command="cmd_editTable"/>
   </menupopup>
 
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  <popup id="inContextStylePanel" noautohide="true">
+#else
   <panel id="inContextStylePanel">
+#endif
+#else
+  <panel id="inContextStylePanel">
+#endif
     <menulist class="toolbar-focustarget" command="cmd_renderedHTMLEnabler"
               id="inContextFontFaceSelect" tooltiptext="&FontFaceSelect.tooltip;" crop="right"
               sizetopopup="none">
@@ -286,6 +294,14 @@
                       showTransparency="false"/>
       </stack>
     </hbox>
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  </popup>
+#else
   </panel>
+#endif
+#else
+  </panel>
+#endif
 </popupset>
 

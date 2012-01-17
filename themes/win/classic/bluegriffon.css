@@ -327,9 +327,12 @@ panel[floating="true"] {
   -moz-transition: opacity 0.5s;
 }
 
+panel#inContextStylePanel {
+ -moz-binding: url("chrome://bluegriffon/content/bindings/inContext.xml#inContext");
+}
+
 #inContextStylePanel {
-  -moz-binding: url("chrome://bluegriffon/content/bindings/inContext.xml#inContext");
-	padding: 4px;
+  padding: 4px;
   -moz-appearance: none;
   background-color: white;
   color: black;

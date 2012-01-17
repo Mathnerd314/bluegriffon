@@ -89,7 +89,12 @@ var InContextHelper = {
   onMouseMove: function(aEvent) {
     if (gDialog.inContextStylePanel.state == "closed") // early way out if we can
       return;
-  
+
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+    return;
+#endif
+#endif  
     var panelBoxObject = gDialog.inContextStylePanel.boxObject;
     var panelRect = { left: panelBoxObject.screenX,
                       top: panelBoxObject.screenY,
