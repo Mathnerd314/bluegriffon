@@ -36,12 +36,26 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://app/modules/editorHelper.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 var InContextHelper = {
   mDocument: null,
 
+  isInContextEnabled: function()
+  {
+    var inContextEnabled = false;
+    try {
+      inContextEnabled = Services.prefs.getBoolPref("bluegriffon.inContext.enabled");
+    }
+    catch(e) {}
+    return inContextEnabled;
+  },
+
   hideInContextPanel: function()
   {
+    if (!this.isInContextEnabled())
+      return;
+
     if (this.mDocument) {
       this.mDocument.documentElement.removeEventListener("mousemove", InContextHelper.onMouseMove, true);
       this.mDocument.documentElement.removeEventListener("mouseleave", InContextHelper.onMouseLeave, true);
@@ -51,24 +65,25 @@ var InContextHelper = {
   },
 
   showInContextPanel: function(aElement) {
-    var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
-    var elementRect = aElement.getBoundingClientRect();
-    gDialog.inContextStylePanel.openPopup(aElement, "after_start",
-                                          10,
-                                          - elementRect.bottom + selectionRect.top - 80,
-                                          false, true);
-    this.mDocument = EditorUtils.getCurrentDocument();
-    this.mDocument.documentElement.addEventListener("mousemove", InContextHelper.onMouseMove, true);
-    this.mDocument.documentElement.addEventListener("mouseleave", InContextHelper.onMouseLeave, true);
-    gDialog.inContextStylePanel.style.opacity = "";
+    if (gDialog.inContextStylePanel.state != "closed")
+      this.hideInContextPanel();
+
+    if (this.isInContextEnabled()) {
+      var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
+      var elementRect = aElement.getBoundingClientRect();
+      gDialog.inContextStylePanel.openPopup(aElement, "after_start",
+                                            selectionRect.left - elementRect.left + 10,
+                                            - elementRect.bottom + selectionRect.top - 80,
+                                            false, true);
+      this.mDocument = EditorUtils.getCurrentDocument();
+      this.mDocument.documentElement.addEventListener("mousemove", InContextHelper.onMouseMove, true);
+      this.mDocument.documentElement.addEventListener("mouseleave", InContextHelper.onMouseLeave, true);
+      gDialog.inContextStylePanel.style.opacity = "";
+    }
   },
 
   onMouseLeave: function(aEvent) {
     //gDialog.inContextStylePanel.style.opacity = "0";
-  },
-
-  onMouseEnter: function(aEvent) {
-    gDialog.inContextStylePanel.style.opacity = "1";
   },
 
   onMouseMove: function(aEvent) {
