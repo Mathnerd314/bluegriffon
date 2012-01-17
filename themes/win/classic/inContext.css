@@ -42,11 +42,7 @@
   -moz-outline-radius: 2px;
 }
 
-#inContextStylePanel {
-  padding: 4px;
-}
-
-#inContextStylePanel:hover {
+/#inContextStylePanel:hover {
   opacity: 1 ! important;
 }
 

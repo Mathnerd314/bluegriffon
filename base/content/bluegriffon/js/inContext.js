@@ -54,7 +54,7 @@ var InContextHelper = {
     var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
     var elementRect = aElement.getBoundingClientRect();
     gDialog.inContextStylePanel.openPopup(aElement, "after_start",
-                                          selectionRect.right - elementRect.left + 10,
+                                          10,
                                           - elementRect.bottom + selectionRect.top - 80,
                                           false, true);
     this.mDocument = EditorUtils.getCurrentDocument();
@@ -64,7 +64,7 @@ var InContextHelper = {
   },
 
   onMouseLeave: function(aEvent) {
-    gDialog.inContextStylePanel.style.opacity = "0";
+    //gDialog.inContextStylePanel.style.opacity = "0";
   },
 
   onMouseEnter: function(aEvent) {

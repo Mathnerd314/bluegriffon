@@ -25,6 +25,7 @@ bluegriffon.jar:
   content/bluegriffon/bindings/lengthbox.xml            (content/bluegriffon/bindings/lengthbox.xml)
   content/bluegriffon/bindings/cssClassPicker.xml       (content/bluegriffon/bindings/cssClassPicker.xml)
   content/bluegriffon/bindings/floatingpanel.xml        (content/bluegriffon/bindings/floatingpanel.xml)
+  content/bluegriffon/bindings/inContext.xml            (content/bluegriffon/bindings/inContext.xml)
   content/bluegriffon/bindings/media.xml                (content/bluegriffon/bindings/media.xml)
 * content/bluegriffon/js/commands.js                    (content/bluegriffon/js/commands.js)
   content/bluegriffon/js/inContext.js                   (content/bluegriffon/js/inContext.js)

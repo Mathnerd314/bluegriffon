@@ -40,6 +40,7 @@
 @import url("chrome://bluegriffon/skin/structurebar.css");
 @import url("chrome://bluegriffon/skin/mainToolbar.css");
 @import url("chrome://bluegriffon/skin/formatToolbar.css");
+@import url("chrome://bluegriffon/skin/inContext.css");
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace svg url("http://www.w3.org/2000/svg");
@@ -325,6 +326,16 @@ panel[floating="true"] {
   -moz-border-radius: 5px;
   -moz-transition: opacity 0.5s;
 }
+
+#inContextStylePanel {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/inContext.xml#inContext");
+	padding: 4px;
+  -moz-appearance: none;
+  background-color: white;
+  color: black;
+  -moz-border-radius: 5px;
+}
+
 
 /* link to add-ons */
 
