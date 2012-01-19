@@ -39,3 +39,5 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "服务条款">
 <!ENTITY prefs.ppLink.label         "隐私策略">
+<!ENTITY engine.addons.accesskey    "A">
+<!ENTITY engine.addons.label        "Add-ons">

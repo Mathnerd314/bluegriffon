@@ -18,3 +18,5 @@
 <!ENTITY spellNoSuggestions.label "(brak sugestii)">
 <!ENTITY spellDictionaries.label "Języki">
 <!ENTITY spellDictionaries.accesskey "J">
+<!ENTITY spellUndoAddToDictionary.accesskey "n">
+<!ENTITY spellUndoAddToDictionary.label "Undo Add To Dictionary">

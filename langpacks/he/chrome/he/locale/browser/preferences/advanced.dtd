@@ -107,6 +107,14 @@
 <!ENTITY verify2.accesskey               "א">
 <!ENTITY viewSecurityDevices.label       "התקני אבטחה">
 <!ENTITY viewSecurityDevices.accesskey   "ה">
+<!ENTITY clearOfflineAppCacheNow.accesskey "N">
+<!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
+
+<!ENTITY httpCache.label                 "Cached Web Content">
+
+<!ENTITY offlineAppsList2.label          "The following websites are allowed to store data for offline use:">
+
+<!ENTITY offlineStorage2.label           "Offline Web Content and User Data">
 
 <!ENTITY updateApp.label                 "&brandShortName; updates:">
 <!ENTITY updateAuto.accesskey            "A">

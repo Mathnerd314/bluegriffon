@@ -18,3 +18,5 @@
 <!ENTITY spellNoSuggestions.label "(Keine Korrekturvorschläge)">
 <!ENTITY spellDictionaries.label "Sprachen">
 <!ENTITY spellDictionaries.accesskey "S">
+<!ENTITY spellUndoAddToDictionary.accesskey "n">
+<!ENTITY spellUndoAddToDictionary.label "Undo Add To Dictionary">

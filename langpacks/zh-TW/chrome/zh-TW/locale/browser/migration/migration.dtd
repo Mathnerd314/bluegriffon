@@ -9,12 +9,12 @@
 <!ENTITY importFromIE.accesskey         "M">
 <!ENTITY importFromNothing.label        "不要匯入任何東西">
 <!ENTITY importFromNothing.accesskey    "D">
-<!ENTITY importFromOpera.label          "Opera">
-<!ENTITY importFromOpera.accesskey      "O">
 <!ENTITY importFromSafari.label         "Safari">
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "x">
 <!ENTITY importFromHTMLFile.label       "HTML 檔案">
 <!ENTITY importFromHTMLFile.accesskey   "F">
 

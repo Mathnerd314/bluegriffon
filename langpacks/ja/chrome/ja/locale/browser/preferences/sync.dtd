@@ -39,6 +39,8 @@
 <!ENTITY prefs.tosLink.label        "利用規約">
 <!ENTITY prefs.ppLink.label         "プライバシーポリシー">
 <!ENTITY changePassword2.label        "Change Password…">
+<!ENTITY engine.addons.accesskey    "A">
+<!ENTITY engine.addons.label        "Add-ons">
 <!ENTITY myRecoveryKey.label          "My Recovery Key">
 
 <!ENTITY pairDevice.label             "Pair a Device">

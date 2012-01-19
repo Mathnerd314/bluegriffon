@@ -107,6 +107,8 @@
 <!ENTITY continueUsing.label "Zdaj lahko nadaljujete z uporabo &brandShortName;a.">
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
+<!ENTITY engine.addons.accesskey    "A">
+<!ENTITY engine.addons.label        "Add-ons">
 <!ENTITY existingRecoveryKey.description "You can get a copy of your Recovery Key by going to &syncBrand.shortName.label; Options on your other device, and selecting  &#x0022;My Recovery Key&#x0022; under &#x0022;Manage Account&#x0022;.">
 <!ENTITY pairDevice.dialog.description.label "To activate your new device, select &#x0022;Set Up Sync&#x0022; on the device.">
 <!ENTITY pairDevice.setup.description.label  "To activate, select &#x0022;Pair a Device&#x0022; on your other device.">
@@ -122,6 +124,10 @@
 
 <!-- My Recovery Key dialog -->
 <!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; Cares About Your Privacy">
+
+<!-- First page of the wizard -->
+
+<!ENTITY setup.pickSetupType.description2 "Welcome! If you've never used &syncBrand.fullName.label; before, you will need to create a new account.">
 <!ENTITY signIn.recoveryKey.accesskey   "K">
 <!ENTITY signIn.recoveryKey.label       "Recovery Key">
 <!ENTITY syncGenerateNewKey.label  "Generate a new key">

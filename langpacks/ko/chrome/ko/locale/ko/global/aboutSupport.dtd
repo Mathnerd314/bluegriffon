@@ -38,3 +38,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "업데이트 기록">
 
 <!ENTITY aboutSupport.copyToClipboard.label "클립보드에 복사하기">
+
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">

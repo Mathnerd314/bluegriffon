@@ -36,3 +36,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.copyToClipboard.label	"クリップボードにコピー">
 <!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">
+
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">

@@ -40,3 +40,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Updategeschiedenis">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Alles naar klembord kopiëren">
+
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">

@@ -109,3 +109,9 @@
 <!ENTITY setup.successPage.title   "설정 완료">
 <!ENTITY changeOptions.label "아래 동기화 설정을 선택해 방식을 변경할 수 있습니다.">
 <!ENTITY continueUsing.label "&brandShortName;를 계속 사용할 수 있습니다.">
+<!ENTITY engine.addons.accesskey    "A">
+<!ENTITY engine.addons.label        "Add-ons">
+
+<!-- First page of the wizard -->
+
+<!ENTITY setup.pickSetupType.description2 "Welcome! If you've never used &syncBrand.fullName.label; before, you will need to create a new account.">

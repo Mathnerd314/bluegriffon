@@ -2,7 +2,7 @@
 
 <!-- First page of the wizard -->
 
-<!ENTITY setup.pickSetupType.description "Welkom. Als u &syncBrand.fullName.label; nog nooit eerder hebt gebruikt, dient u een nieuwe account aan te maken.">
+<!ENTITY setup.pickSetupType.description2 "Welkom! Als u &syncBrand.fullName.label; nog nooit eerder hebt gebruikt, dient u een nieuwe account aan te maken.">
 <!ENTITY button.createNewAccount.label "Een nieuwe account aanmaken">
 <!ENTITY button.haveAccount.label      "Ik heb een account">
 
@@ -88,6 +88,8 @@
 <!ENTITY engine.passwords.accesskey "W">
 <!ENTITY engine.prefs.label         "Voorkeuren">
 <!ENTITY engine.prefs.accesskey     "V">
+<!ENTITY engine.addons.label        "Add-ons">
+<!ENTITY engine.addons.accesskey    "A">
  
 <!ENTITY choice2.merge.main.label      "De gegevens van deze computer met uw &syncBrand.shortName.label;-gegevens laten samengaan">
 <!ENTITY choice2.merge.recommended.label "Aanbevolen:">

@@ -564,8 +564,15 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "Add-on-Leiste schließen">
 <!ENTITY toggleAddonBarCmd.key        "/">
 <!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
+<!ENTITY inspect3DViewButton.accesskey "W">
+
+<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
+  -  alternate view for the Inspector, creating a 3D visualization of the
+  -  webpage. -->
+<!ENTITY inspect3DViewButton.label     "3D View">
 <!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
 <!ENTITY inspectStyleButton.accesskey "S">
+
 <!ENTITY inspectStyleButton.label     "Style">
 <!ENTITY styleeditor.accesskey        "y">
 <!ENTITY styleeditor.keycode          "VK_F7">

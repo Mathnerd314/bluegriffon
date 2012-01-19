@@ -105,3 +105,11 @@
 <!ENTITY blockAutoRefresh.accesskey "b">
 <!ENTITY verify2.label "유효성 확인">
 <!ENTITY verify2.accesskey "V">
+<!ENTITY clearOfflineAppCacheNow.accesskey "N">
+<!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
+
+<!ENTITY httpCache.label                 "Cached Web Content">
+
+<!ENTITY offlineAppsList2.label          "The following websites are allowed to store data for offline use:">
+
+<!ENTITY offlineStorage2.label           "Offline Web Content and User Data">

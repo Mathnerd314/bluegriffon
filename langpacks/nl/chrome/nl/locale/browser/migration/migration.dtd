@@ -9,12 +9,10 @@
 <!ENTITY importFromIE.accesskey         "M">
 <!ENTITY importFromNothing.label        "Niets importeren">
 <!ENTITY importFromNothing.accesskey    "t">
-<!ENTITY importFromSeamonkey.label      "Netscape 6, 7 of Mozilla 1.x">
-<!ENTITY importFromSeamonkey.accesskey  "N">
-<!ENTITY importFromOpera.label          "Opera">
-<!ENTITY importFromOpera.accesskey      "O">
 <!ENTITY importFromSafari.label         "Safari">
 <!ENTITY importFromSafari.accesskey     "S">
+<!ENTITY importFromChrome.label         "Chrome">
+<!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromHTMLFile.label       "Uit een HTML-bestand">
 <!ENTITY importFromHTMLFile.accesskey   "U">
 
@@ -32,5 +30,5 @@
 
 <!ENTITY done.title                     "Importeren voltooid">
 <!ENTITY done.label                     "De volgende items zijn succesvol geïmporteerd:">
-<!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromChrome.label         "Chrome">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

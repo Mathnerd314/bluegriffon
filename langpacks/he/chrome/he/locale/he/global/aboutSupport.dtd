@@ -38,3 +38,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.copyToClipboard.label "העתק הכל ללוח">
 <!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">
+
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">

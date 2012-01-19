@@ -43,9 +43,9 @@
 <!ENTITY aboutWarningButton.label "Ich werde vorsichtig sein, versprochen!">
 <!ENTITY aboutWarningCheckbox.label "Diese Meldung beim nächsten Mal anzeigen">
 
-<!ENTITY filterPrefs.label "Filter:">
-<!ENTITY filterPrefs.accesskey "F">
-<!ENTITY focusFilter.key "f">
+<!ENTITY searchPrefs.label "Suchen:">
+<!ENTITY searchPrefs.accesskey "S">
+<!ENTITY focusSearch.key "r">
 
 <!-- Columns -->
 <!ENTITY prefColumn.label "Einstellungsname">
@@ -79,7 +79,3 @@
 <!ENTITY integer.accesskey "I">
 <!ENTITY boolean.label "Boolean">
 <!ENTITY boolean.accesskey "B">
-<!ENTITY focusSearch.key "r">
-<!ENTITY searchPrefs.accesskey "r">
-
-<!ENTITY searchPrefs.label "Search:">

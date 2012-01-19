@@ -105,6 +105,14 @@
 <!ENTITY verify2.accesskey			"V">
 <!ENTITY viewSecurityDevices.label		"セキュリティデバイス...">
 <!ENTITY viewSecurityDevices.accesskey		"y">
+<!ENTITY clearOfflineAppCacheNow.accesskey "N">
+<!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
+
+<!ENTITY httpCache.label                 "Cached Web Content">
+
+<!ENTITY offlineAppsList2.label          "The following websites are allowed to store data for offline use:">
+
+<!ENTITY offlineStorage2.label           "Offline Web Content and User Data">
 <!ENTITY submitTelemetry.accesskey       "P">
 <!ENTITY submitTelemetry.label           "Submit performance data">
 

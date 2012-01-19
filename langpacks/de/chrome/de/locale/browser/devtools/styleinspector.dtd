@@ -1,32 +1,18 @@
-<!-- LOCALIZATION NOTE : FILE The correct localization of this file might be to
-  - keep it in English, or another language commonly spoken among web developers.
-  - You want to make that choice consistent across the developer tools.
-  - A good criteria is the language in which you'd find the best
-  - documentation on web development on the web. -->
-
 <!-- LOCALIZATION NOTE (userStylesLabel): This is the label for the checkbox
   -  that specifies whether the styles that are not from the user's stylesheet
   -  should be displayed or not. -->
-<!ENTITY userStylesLabel    "Only user styles">
+<!ENTITY userStylesLabel    "Nur Anwender-Stile">
 
-<!-- LOCALIZATION NOTE (userStylesSearch): This is the placeholder that goes in
-  -  the search box when no search term has been entered. -->
-<!ENTITY userStylesSearch      "Search">
-
-<!-- LOCALIZATION NOTE (selectedElementLabel): This is the label for the path of
+<!-- LOCALIZATION NOTE (lookingAtLabel): This is the label for the path of
   -  the highlighted element in the web page. This path is based on the document
   -  tree. -->
-<!ENTITY selectedElementLabel  "Selected element:">
+<!ENTITY lookingAtLabel        "Untersucht:">
 
-<!-- LOCALIZATION NOTE (noPropertiesFound): In the case where there are no CSS
-  -  properties to display e.g. due to search criteria this message is
-  -  displayed. -->
-<!ENTITY noPropertiesFound     "No CSS properties found.">
-
-<!-- LOCALIZATION NOTE (unmatchedSelectors): For each style property
-  -  the panel shows whether there are any selectors that do not match the
-  -  currently selected element. -->
-<!ENTITY unmatchedSelectors    "Unmatched selectors">
+<!-- LOCALIZATION NOTE (helpLinkTitle): For each style property
+  -  the user can hover it and get a help link button which allows one to
+  -  quickly jump to the documentation from the Mozilla Developer Network site.
+  -  This is the link title shown in the hover tooltip. -->
+<!ENTITY helpLinkTitle         "Dokumentation dieser Eigenschaft lesen">
 
 <!-- LOCALIZATION NOTE (bestMatch, matched, parentMatch & unmatched): For each
   -  style property the panel shows the rules which hold that specific property.
@@ -35,5 +21,24 @@
   -  user has highlighted. -->
 <!ENTITY bestMatch             "Best Match">
 <!ENTITY matched               "Matched">
+
+<!-- LOCALIZATION NOTE (noPropertiesFound): In the case where there are no CSS
+  -  properties to display e.g. due to search criteria this message is
+  -  displayed. -->
+<!ENTITY noPropertiesFound     "No CSS properties found.">
 <!ENTITY parentMatch           "Parent Match">
+
+<!-- LOCALIZATION NOTE (selectedElementLabel): This is the label for the path of
+  -  the highlighted element in the web page. This path is based on the document
+  -  tree. -->
+<!ENTITY selectedElementLabel  "Selected element:">
 <!ENTITY unmatched             "Unmatched">
+
+<!-- LOCALIZATION NOTE (unmatchedSelectors): For each style property
+  -  the panel shows whether there are any selectors that do not match the
+  -  currently selected element. -->
+<!ENTITY unmatchedSelectors    "Unmatched selectors">
+
+<!-- LOCALIZATION NOTE (userStylesSearch): This is the placeholder that goes in
+  -  the search box when no search term has been entered. -->
+<!ENTITY userStylesSearch      "Search">

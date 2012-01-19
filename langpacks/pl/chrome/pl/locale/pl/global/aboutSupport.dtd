@@ -42,3 +42,5 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Historia aktualizacji">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Skopiuj wszystko do schowka">
+
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">

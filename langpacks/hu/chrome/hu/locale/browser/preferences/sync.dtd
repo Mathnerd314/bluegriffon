@@ -1,0 +1,48 @@
+<!-- The page shown when not logged in... -->
+<!ENTITY setupButton.label          "A &syncBrand.fullName.label; beállítása">
+<!ENTITY setupButton.accesskey      "A">
+<!ENTITY weaveDesc.label            "A &syncBrand.fullName.label; lehetővé teszi az előzmények, könyvjelzők, jelszavak és megnyitott lapok elérését minden eszközön.">
+
+<!-- The page shown when logged in... -->
+
+<!-- Login error feedback -->
+<!ENTITY updatePass.label             "Frissítés">
+<!ENTITY resetPass.label              "Törlés">
+
+<!-- Manage Account -->
+<!ENTITY manageAccount.label          "Fiók kezelése">
+<!ENTITY manageAccount.accesskey      "F">
+<!ENTITY viewQuota.label              "Kvóta megtekintése">
+<!ENTITY changePassword.label         "Jelszócsere">
+<!ENTITY mySyncKey.label              "Saját Sync-kulcs">
+<!ENTITY resetSync.label              "Sync alaphelyzetbe">
+<!ENTITY addDevice.label              "Eszköz hozzáadása">
+
+<!ENTITY syncMy.label               "Szinkronizálandó">
+<!ENTITY engine.bookmarks.label     "Könyvjelzők">
+<!ENTITY engine.bookmarks.accesskey "K">
+<!ENTITY engine.tabs.label          "Lapok">
+<!ENTITY engine.tabs.accesskey      "L">
+<!ENTITY engine.history.label       "Előzmények">
+<!ENTITY engine.history.accesskey   "E">
+<!ENTITY engine.passwords.label     "Jelszavak">
+<!ENTITY engine.passwords.accesskey "J">
+<!ENTITY engine.prefs.label         "Beállítások">
+<!ENTITY engine.prefs.accesskey     "B">
+
+<!-- Device Settings -->
+<!ENTITY syncComputerName.label       "Számítógép neve:">
+<!ENTITY syncComputerName.accesskey   "S">
+<!ENTITY deactivateDevice.label       "Eszköz deaktiválása">
+
+<!-- Footer stuff -->
+<!ENTITY prefs.tosLink.label        "A szolgáltatás feltételei">
+<!ENTITY prefs.ppLink.label         "Adatvédelmi irányelvek">
+<!ENTITY changePassword2.label        "Change Password…">
+<!ENTITY engine.addons.accesskey    "A">
+<!ENTITY engine.addons.label        "Add-ons">
+<!ENTITY myRecoveryKey.label          "My Recovery Key">
+
+<!ENTITY pairDevice.label             "Pair a Device">
+<!ENTITY resetSync2.label             "Reset Sync…">
+<!ENTITY unlinkDevice.label           "Unlink This Device">

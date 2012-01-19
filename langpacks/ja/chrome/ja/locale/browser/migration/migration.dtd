@@ -51,3 +51,5 @@
 
 <!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromChrome.label         "Chrome">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

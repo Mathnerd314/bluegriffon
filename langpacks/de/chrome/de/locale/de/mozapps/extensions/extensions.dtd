@@ -1,5 +1,10 @@
 <!ENTITY addons.windowTitle                   "Add-ons-Manager">
+
 <!ENTITY search.placeholder                   "Alle Add-ons durchsuchen">
+<!-- LOCALIZATION NOTE (search.commandKey):
+     The search command key should match findOnCmd.commandkey from browser.dtd -->
+<!ENTITY search.commandkey                    "f">
+
 <!ENTITY loading.label                        "Laden…">
 <!ENTITY listEmpty.installed.label            "Es sind keine Add-ons dieses Typs installiert">
 <!ENTITY listEmpty.availableUpdates.label     "Keine Updates gefunden">
@@ -201,6 +206,3 @@ einige der besten und populärsten Add-ons zum Ausprobieren anbieten.">
 <!ENTITY eula.accept                          "Akzeptieren und installieren…">
 
 <!ENTITY settings.path.button.label           "Durchsuchen…">
-<!-- LOCALIZATION NOTE (search.commandKey):
-     The search command key should match findOnCmd.commandkey from browser.dtd -->
-<!ENTITY search.commandkey                    "f">
