@@ -42,7 +42,7 @@ function TransformsSectionIniter(aElt, aRuleset)
       break;
   }
 
-  var mts = CssInspector.getCascadedValue(aRuleset, "-moz-transformation-style");
+  var mts = CssInspector.getCascadedValue(aRuleset, "-moz-transform-style");
   CheckToggle(gDialog.transformStyleFlatButton, mts == "flat");
   CheckToggle(gDialog.transformStyle3DButton,   mts == "preserve-3d");
 
