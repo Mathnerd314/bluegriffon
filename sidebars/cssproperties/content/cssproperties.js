@@ -195,7 +195,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     gDialog.classPicker.selectedItem = item;
   CheckClass(gDialog.classPicker);
 
-  gDialog.typePicker.setAttribute("value", gCurrentElement.nodeName);
+  gDialog.typePicker.setAttribute("value", gCurrentElement.localName);
 
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
@@ -215,7 +215,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
     gIniters[i](aElt, ruleset);
 
   gDialog.currentElementBox.setAttribute("value",
-       "<" + gCurrentElement.nodeName.toLowerCase() +
+       "<" + gCurrentElement.localName +
        (gCurrentElement.id ? " id='" + gCurrentElement.id + "'" : "") +
        (gCurrentElement.className ? " class='" + gCurrentElement.className + "'" : "") +
        ">" +
@@ -447,7 +447,7 @@ function ApplyStyles(aStyles)
 
       case "type":
           ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
-                                         "", "", gCurrentElement.nodeName);
+                                         "", "", gCurrentElement.localName);
         break;
       default:
         break;
@@ -464,7 +464,7 @@ function FindLastEditableStyleSheet()
   var child = headElt.lastElementChild;
   var found = false;
   while (!found && child) {
-    var name = child.nodeName.toLowerCase();
+    var name = child.localName;
     if (name == "style" ||
         (name == "link" &&
          child.getAttribute("rel").toLowerCase() == "stylesheet" &&
@@ -706,7 +706,7 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
         }
       }
       if (aElt.hasAttribute("checkimageratio") &&
-          gCurrentElement.nodeName.toLowerCase() == "img" &&
+          gCurrentElement.localName == "img" &&
           gDialog.preserveImageRatioCheckbox.checked) {
         var id = aElt.id;
         var otherId = (id == "widthMenulist") ? "heightMenulist" : "widthMenulist";
