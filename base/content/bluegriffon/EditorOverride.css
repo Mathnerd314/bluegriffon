@@ -393,6 +393,13 @@ nvu|php, nvu|comment {
   display: none ! important;
 }
 
+* {
+  /* Do NOT allow animations and transitions to run in an editor */
+  /* if you except the ones blow this current rule */
+  -moz-animation: none ! important;
+  -moz-transition: none ! important;
+}
+
 @-moz-keyframes flasher {
   from {
     outline-color: #CC0000 ! important;
@@ -403,9 +410,7 @@ nvu|php, nvu|comment {
 }
 
 *[\_moz_flasher] {
-  -moz-animation-name: flasher;
-  -moz-animation-duration: 0.2s;
-  -moz-animation-iteration-count: 5;
+  -moz-animation: flasher 0.2s 5 ! important;
   outline-width: 2px ! important;
   outline-style: solid ! important;
   outline-color: white ! important;
