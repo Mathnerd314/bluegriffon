@@ -34,11 +34,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#include "nsISupports.idl"
-#include "nsIBaseWindow.idl"
+#include "diIOSIntegration.h"
 
-[scriptable, uuid(CBD29152-34E9-495B-A853-EBAC91B09591)]
-interface diIOSXDockIconBadger : nsISupports
-{
-  void setDocumentEdited(in nsIBaseWindow aWindow, in boolean aIsEdited);
+class diOSIntegration : public diIOSIntegration {
+
+  public:
+    diOSIntegration();
+    virtual ~diOSIntegration();
+
+    NS_DECL_ISUPPORTS
+
+    NS_DECL_DIIOSINTEGRATION
+  
 };

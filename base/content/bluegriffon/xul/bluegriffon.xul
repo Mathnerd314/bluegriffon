@@ -66,6 +66,8 @@
   persist    ="screenX screenY width height"
   onload     = "Startup()"
   onunload   = "Shutdown()"
+  onfocus    = "gDialog.fooStatus.setAttribute('value', Date.parse(new Date()) )"
+  onblur     = "ontopblur()"
   onclose    = "return onClose()"
   xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
   xmlns:html ="http://www.w3.org/1999/xhtml">
@@ -187,6 +189,7 @@
         <label id="editorBarLabel" value="&getAddOns.label;"
                onclick="OpenAddonsSite()"/>
         <spacer flex="1"/>
+        <label value="foo" id="fooStatus"/>
         <statusbarpanel id="zoomPanel">
           <spinbuttons onup="BGZoomManager.enlarge(this.nextSibling)"
                        ondown="BGZoomManager.reduce(this.nextSibling)"/>

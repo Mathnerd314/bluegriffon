@@ -130,7 +130,7 @@
 @BINPATH@/components/crypto-SDR.js
 @BINPATH@/components/dibadge.manifest
 @BINPATH@/components/dibgutils.xpt
-@BINPATH@/components/diOSXDockIconBadger.xpt
+@BINPATH@/components/diOSIntegration.xpt
 @BINPATH@/components/directory.xpt
 @BINPATH@/components/docshell.xpt
 @BINPATH@/components/dom.xpt

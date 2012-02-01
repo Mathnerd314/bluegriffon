@@ -1,4 +1,3 @@
-/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -12,11 +11,11 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is mozilla.org code.
+ * The Original Code is diMacIntegration code.
  *
  * The Initial Developer of the Original Code is
- * Netscape Communications Corporation.
- * Portions created by the Initial Developer are Copyright (C) 1998
+ * Disruptive Innovations SARL
+ * Portions created by the Initial Developer are Copyright (C) 2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
@@ -34,15 +33,39 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
+#define MOZILLA_INTERNAL_API 1
 
-#ifndef diOSXDockIconBadgerCIID_h__
-#define diOSXDockIconBadgerCIID_h__
+#include "mozilla/ModuleUtils.h"
+#include "nsIServiceManager.h"
+#include "diOSIntegration.h"
+#include "diOSIntegrationCIID.h"
+#include "nsXPIDLString.h"
 
-#define DI_OSX_DOCK_ICON_BADGER_CONTRACTID \
-  "@disruptive-innovations.com/macintegration/osxdockbadger;1"
-// F15D9C2E-D0A3-4ACB-B76C-A838562AD948
-#define DI_OSX_DOCK_ICON_BADGER_CID { 0xF15D9C2E, 0xD0A3, 0x4ACB, \
-    { 0xB7, 0x6C, 0xA8, 0x38, 0x56, 0x2A, 0xD9, 0x48}}
+// Define the constructor function for the objects
+NS_GENERIC_FACTORY_CONSTRUCTOR(diOSIntegration)
 
-#endif // diOSXDockIconBadgerCIID_h__
+NS_DEFINE_NAMED_CID(DI_OS_INTEGRATION_CID);
 
+static const mozilla::Module::CIDEntry kPermissionsCIDs[] = {
+  { &kDI_OS_INTEGRATION_CID, false, NULL, diOSIntegrationConstructor },
+  { NULL }
+};
+
+static const mozilla::Module::ContractIDEntry kPermissionsContracts[] = {
+  { DI_OS_INTEGRATION_CONTRACTID, &kDI_OS_INTEGRATION_CID },
+  { NULL }
+};
+
+static const mozilla::Module::CategoryEntry kPermissionsCategories[] = {
+  { XPCOM_DIRECTORY_PROVIDER_CATEGORY, "bg-osutils", DI_OS_INTEGRATION_CONTRACTID },
+  { NULL }
+};
+
+static const mozilla::Module kPermissionsModule = {
+  mozilla::Module::kVersion,
+  kPermissionsCIDs,
+  kPermissionsContracts,
+  kPermissionsCategories
+};
+
+NSMODULE_DEFN(nsPermissionsModule) = &kPermissionsModule;

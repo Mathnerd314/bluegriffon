@@ -643,8 +643,8 @@
           var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                                  .getInterface(Components.interfaces.nsIWebNavigation)
                                  .QueryInterface(Components.interfaces.nsIBaseWindow);
-          var badger = Components.classes["@disruptive-innovations.com/macintegration/osxdockbadger;1"]
-                                 .createInstance(Components.interfaces.diIOSXDockIconBadger);
+          var badger = Components.classes["@disruptive-innovations.com/osintegration/badger;1"]
+                                 .createInstance(Components.interfaces.diIOSIntegration);
           var modifiedDocuments = this.getNumberOfModifiedDocuments(); 
           badger.setDocumentEdited(baseWindow, (0 != modifiedDocuments));
         ]]>

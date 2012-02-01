@@ -34,16 +34,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#include "diIOSXDockIconBadger.h"
+#include "nsISupports.idl"
+#include "nsIBaseWindow.idl"
 
-class diOSXDockIconBadger : public diIOSXDockIconBadger {
-
-  public:
-    diOSXDockIconBadger();
-    virtual ~diOSXDockIconBadger();
-
-    NS_DECL_ISUPPORTS
-
-    NS_DECL_DIIOSXDOCKICONBADGER
-  
+[scriptable, uuid(1F9DB6C5-1C79-4E3A-B3CE-64D38CC51DCF)]
+interface diIOSIntegration : nsISupports
+{
+  void setDocumentEdited(in nsIBaseWindow aWindow, in boolean aIsEdited);
+  boolean isMiniaturized(in nsIBaseWindow aWindow);
 };

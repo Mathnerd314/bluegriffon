@@ -1,3 +1,4 @@
+/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -11,15 +12,18 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is diMacIntegration code.
+ * The Original Code is Mac OSX New Mail Notification Code..
  *
  * The Initial Developer of the Original Code is
- * Disruptive Innovations SARL
- * Portions created by the Initial Developer are Copyright (C) 2009
+ * The Mozilla Foundation.
+ * Portions created by the Initial Developer are Copyright (C) 2005
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *
+ *  Scott MacGregor <mscott@mozilla.org>
+ *  Jon Baumgartner <jon@bergenstreetsoftware.com>
+ *  Daniel Glazman <daniel@glazman.org>
+ *  
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -33,39 +37,49 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-#define MOZILLA_INTERNAL_API 1
 
-#include "mozilla/ModuleUtils.h"
-#include "nsIServiceManager.h"
-#include "diOSXDockIconBadger.h"
-#include "diOSXDockIconBadgerCIID.h"
-#include "nsXPIDLString.h"
+#include "diIOSIntegration.h"
+#include "diOSIntegrationCIID.h"
+#include "diOSIntegration.h"
 
-// Define the constructor function for the objects
-NS_GENERIC_FACTORY_CONSTRUCTOR(diOSXDockIconBadger)
+#include "nscore.h"
+#include <Carbon/Carbon.h>
+#import <Cocoa/Cocoa.h>
 
-NS_DEFINE_NAMED_CID(DI_OSX_DOCK_ICON_BADGER_CID);
+#include "nsCOMPtr.h"
+#include "nsIBaseWindow.h"
+#include "nsIWidget.h"
 
-static const mozilla::Module::CIDEntry kPermissionsCIDs[] = {
-  { &kDI_OSX_DOCK_ICON_BADGER_CID, false, NULL, diOSXDockIconBadgerConstructor },
-  { NULL }
-};
+diOSIntegration::diOSIntegration()
+{
+}
 
-static const mozilla::Module::ContractIDEntry kPermissionsContracts[] = {
-  { DI_OSX_DOCK_ICON_BADGER_CONTRACTID, &kDI_OSX_DOCK_ICON_BADGER_CID },
-  { NULL }
-};
+diOSIntegration::~diOSIntegration()
+{
+}
 
-static const mozilla::Module::CategoryEntry kPermissionsCategories[] = {
-  { XPCOM_DIRECTORY_PROVIDER_CATEGORY, "bg-macutils", DI_OSX_DOCK_ICON_BADGER_CONTRACTID },
-  { NULL }
-};
+NS_IMPL_ISUPPORTS1(diOSIntegration, diIOSIntegration)
 
-static const mozilla::Module kPermissionsModule = {
-  mozilla::Module::kVersion,
-  kPermissionsCIDs,
-  kPermissionsContracts,
-  kPermissionsCategories
-};
+NS_IMETHODIMP
+diOSIntegration::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 
+{
+  nsCOMPtr<nsIWidget> widget = nsnull;
+  aWindow->GetMainWidget(getter_AddRefs(widget));
+  if (widget) {
+    NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
+    [cocoaWindow setDocumentEdited:aIsEdited];
+  }
+  return NS_OK;
+}
 
-NSMODULE_DEFN(nsPermissionsModule) = &kPermissionsModule;
+NS_IMETHODIMP
+diOSIntegration::IsMiniaturized(nsIBaseWindow *aWindow, bool *aIsMiniaturized) 
+{
+  nsCOMPtr<nsIWidget> widget = nsnull;
+  aWindow->GetMainWidget(getter_AddRefs(widget));
+  if (widget) {
+    NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
+    *aIsMiniaturized = [cocoaWindow isMiniaturized];
+  }
+  return NS_OK;
+}

@@ -1,4 +1,4 @@
-/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
@@ -12,18 +12,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Mac OSX New Mail Notification Code..
+ * The Original Code is mozilla.org code.
  *
  * The Initial Developer of the Original Code is
- * The Mozilla Foundation.
- * Portions created by the Initial Developer are Copyright (C) 2005
+ * Netscape Communications Corporation.
+ * Portions created by the Initial Developer are Copyright (C) 1998
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *  Scott MacGregor <mscott@mozilla.org>
- *  Jon Baumgartner <jon@bergenstreetsoftware.com>
- *  Daniel Glazman <daniel@glazman.org>
- *  
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -38,37 +35,13 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#include "diIOSXDockIconBadger.h"
-#include "diOSXDockIconBadgerCIID.h"
-#include "diOSXDockIconBadger.h"
+#ifndef diOSIntegrationCIID_h__
+#define diOSIntegrationCIID_h__
 
-#include "nscore.h"
-#include <Carbon/Carbon.h>
-#import <Cocoa/Cocoa.h>
-
-#include "nsCOMPtr.h"
-#include "nsIBaseWindow.h"
-#include "nsIWidget.h"
-
-diOSXDockIconBadger::diOSXDockIconBadger()
-{
-}
-
-diOSXDockIconBadger::~diOSXDockIconBadger()
-{
-}
-
-NS_IMPL_ISUPPORTS1(diOSXDockIconBadger, diIOSXDockIconBadger)
-
-NS_IMETHODIMP
-diOSXDockIconBadger::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 
-{
-  nsCOMPtr<nsIWidget> widget = nsnull;
-  aWindow->GetMainWidget(getter_AddRefs(widget));
-  if (widget) {
-    NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
-    [cocoaWindow setDocumentEdited:aIsEdited];
-  }
-  return NS_OK;
-}
+#define DI_OS_INTEGRATION_CONTRACTID \
+  "@disruptive-innovations.com/osintegration/badger;1"
+// F15D9C2E-D0A3-4ACB-B76C-A838562AD948
+#define DI_OS_INTEGRATION_CID { 0x97641AFB, 0x99F5, 0x4798, \
+    { 0xB2, 0x70, 0x8A, 0x96, 0x92, 0xCE, 0x98, 0x67}}
+#endif // diOSIntegrationCIID_h__
 

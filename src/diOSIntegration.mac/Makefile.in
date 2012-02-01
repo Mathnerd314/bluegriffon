@@ -6,27 +6,27 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-MODULE = diOSXDockIconBadger
-XPIDL_MODULE		= diOSXDockIconBadger
-LIBRARY_NAME	= macinteg
-SHORT_LIBNAME = macinteg
+MODULE = diOSIntegration
+XPIDL_MODULE		= diOSIntegration
+LIBRARY_NAME	= osinteg
+SHORT_LIBNAME = osinteg
 EXPORT_LIBRARY	= 1
 IS_COMPONENT	= 1
-MODULE_NAME	= diOSXDockIconBadger
+MODULE_NAME	= diOSIntegration
 FORCE_SHARED_LIB = 1
 
 XPIDLSRCS	= \
-		diIOSXDockIconBadger.idl \
+		diIOSIntegration.idl \
 		$(NULL)
 
 EXPORTS		= \
-		diOSXDockIconBadgerCIID.h \
+		diOSIntegrationCIID.h \
 		$(NULL)
 
-CMMSRCS         = diOSXDockIconBadger.mm
+CMMSRCS         = diOSIntegration.mm
 
 CPPSRCS   = \
-    diOSXDockIconBadgerFactory.cpp \
+    diOSIntegrationFactory.cpp \
     $(NULL)
 
 EXTRA_DSO_LDOPTS = \
