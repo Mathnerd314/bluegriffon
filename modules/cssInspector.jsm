@@ -5061,17 +5061,34 @@ jscsspKeyframesRule.prototype = {
   cssText: function() {
     var rv = "";
     var prefixes = ["moz", "webkit", "ms", "o"];
-    for (var p = 0; p < prefixes.length; p++) {
-      rv += gTABS
-            + "@-" + prefixes[p] + "-keyframes "
-            + this.name + " {\n";
-      var preservedGTABS = gTABS;
-      gTABS += "  ";
-      for (var i = 0; i < this.cssRules.length; i++)
-        rv += gTABS + this.cssRules[i].cssText() + "\n";
-      gTABS = preservedGTABS;
+    var useGecko = true;
+    var useWebkit = true;
+    var usePresto = true;
+    var useTrident = true;
+    try {
+      var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                     .getService(Components.interfaces.nsIPrefBranch);
+    
+      useGecko   = prefs.getBoolPref("bluegriffon.css.support.gecko");
+      useWebkit  = prefs.getBoolPref("bluegriffon.css.support.webkit");
+      usePresto  = prefs.getBoolPref("bluegriffon.css.support.presto");
+      useTrident = prefs.getBoolPref("bluegriffon.css.support.trident");
     }
-    rv += gTABS + "}\n";
+    catch(e) {}
+    var usePrefixes = [useGecko, useWebkit, usePresto, useTrident];
+    for (var p = 0; p < prefixes.length; p++) {
+      if (usePrefixes[p]) {
+        rv += gTABS
+              + "@-" + prefixes[p] + "-keyframes "
+              + this.name + " {\n";
+        var preservedGTABS = gTABS;
+        gTABS += "  ";
+        for (var i = 0; i < this.cssRules.length; i++)
+          rv += gTABS + this.cssRules[i].cssText() + "\n";
+        gTABS = preservedGTABS;
+        rv += gTABS + "}\n\n";
+      }
+    }
     return rv;
   },
 
