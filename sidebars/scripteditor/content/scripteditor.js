@@ -223,7 +223,6 @@ function UpdateConfigMenu()
 {
   var index = gDialog.scriptLists.selectedIndex;
   var item  =  gDialog.scriptLists.selectedItem;
-  item instanceof Components.interfaces.nsIDOMNSElement;
   var classes = item.classList;
   gDialog.editScriptMenuitem.disabled  = !classes.contains("embedded");
 
