@@ -234,7 +234,6 @@ function onDbleClick(aTarget)
 {
   if (aTarget.nodeName != "listitem")
     return;
-  aTarget instanceof Components.interfaces.nsIDOMNSElement;
   var classes = aTarget.classList;
   var scriptSrc = aTarget.getAttribute("scriptsrc");
   if (classes.contains("embedded") || scriptSrc.substr(0, 8) == "file:///")
