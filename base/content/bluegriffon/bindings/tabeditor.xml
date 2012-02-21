@@ -313,6 +313,9 @@
                     RecentPagesHandler.saveRecentFilesPrefs();
                     RecentPagesHandler.buildRecentPagesMenu();
                     editor.beginningOfDocument();
+                    // force editor to acquire focus and show caret... workaround for bug 351
+                    gDialog["menulist-zoompanel"].focus();
+                    this.mEditor.contentWindow.focus();
                   }
                 }
               },
