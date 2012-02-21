@@ -54,6 +54,13 @@
 
   </groupbox>
   <groupbox>
+    <caption label="&title.caption;"/>
+    <hbox align="center">
+      <label value="&title.label;"/>
+      <textbox id="titleTextbox" flex="1"/>
+    </hbox>
+  </groupbox>
+  <groupbox>
     <caption label="&windowTarget.label;"/>
     <checkbox id="applyTargetAttributeCheckbox"
               label="&openIn.label;"

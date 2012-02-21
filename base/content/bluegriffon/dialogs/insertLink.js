@@ -31,6 +31,9 @@ function InitDialog()
     gDialog.linkLabel.setAttribute("value", gNode.textContent.trim());
     var url = gNode.getAttribute("href");
     gDialog.urlMenulist.value = url;
+
+    gDialog.titleTextbox.value = gNode.getAttribute("title");
+
     gDialog.relativeURLCheckbox.checked =
        !(url.substr(0,7) == "http://" ||
          url.substr(0,8) == "https://" ||
@@ -162,9 +165,17 @@ function onAccept()
                    : gDialog.targetAttributeMenulist.value)
                : "";
 
+  gEditor.beginTransaction();
+
   if (gNode) {
     if (url) {
+      if (gDialog.titleTextbox.value)
+        gEditor.setAttribute(gNode, "title", gDialog.titleTextbox.value);
+      else
+        gEditor.removeAttribute(gNode, "title");
+
       gEditor.setAttribute(gNode, "href", url);
+
       if (target)
         gEditor.setAttribute(gNode, "target", target);
       else
@@ -175,7 +186,6 @@ function onAccept()
       var parent = gNode.parentNode;
       var childNodes = parent.childNodes;
       gEditor.setShouldTxnSetSelection(false);
-      gEditor.beginTransaction();
 
       while (childNodes[offset] != gNode)
         ++offset;
@@ -189,7 +199,6 @@ function onAccept()
 
       gEditor.deleteNode(gNode);
 
-      gEditor.endTransaction();
       gEditor.setShouldTxnSetSelection(true);
     }
   }
@@ -208,6 +217,10 @@ function onAccept()
   else {
     var anchor = gEditor.document.createElement("a");
     anchor.setAttribute("href", url);
+    if (gDialog.titleTextbox.value)
+      gEditor.setAttribute(anchor, "title", gDialog.titleTextbox.value);
+    else
+      gEditor.removeAttribute(anchor, "title");
     if (target)
       anchor.setAttribute("target", target);
     try {
@@ -215,6 +228,8 @@ function onAccept()
     }
     catch (e) {}
   }
+
+  gEditor.endTransaction();
 }
 
 function ToggleTargetAttribute()
