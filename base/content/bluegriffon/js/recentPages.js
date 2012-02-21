@@ -48,15 +48,7 @@ var RecentPagesHandler = {
       var menuItem = document.createElement("menuitem");
       if (menuItem)
       {
-        var accessKey;
-        if (menuIndex <= 9)
-          accessKey = String(menuIndex);
-        else if (menuIndex == 10)
-          accessKey = "0";
-        else
-          accessKey = " ";
-  
-        var itemString = accessKey+" ";
+        var itemString = "";
   
         // Show "title [url]" or just the URL
         if (title)
@@ -71,8 +63,6 @@ var RecentPagesHandler = {
         menuItem.setAttribute("label", itemString);
         menuItem.setAttribute("crop", "center");
         menuItem.setAttribute("value", url);
-        if (accessKey != " ")
-          menuItem.setAttribute("accesskey", accessKey);
         menupopup.appendChild(menuItem);
       }
     }
