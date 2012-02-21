@@ -1083,7 +1083,7 @@ function OpenPreferences()
   if (w)
     w.focus();
   else {
-    var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes";
+    var features = "chrome,titlebar,toolbar,centerscreen,dialog=yes,resizable=yes";
     window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
   }
 }
@@ -1919,16 +1919,4 @@ function onBackgroundColorChange()
       button.color = color;
     }
   }
-}
-
-function ontopblur()
-{
-  var baseWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                         .getInterface(Components.interfaces.nsIWebNavigation)
-                         .QueryInterface(Components.interfaces.nsIBaseWindow);
-  var badger = Components.classes["@disruptive-innovations.com/osintegration/badger;1"]
-                         .createInstance(Components.interfaces.diIOSIntegration);
-  var isminified = badger.isMiniaturized(baseWindow);
-  if (isminified)
-    alert("minification");
 }
