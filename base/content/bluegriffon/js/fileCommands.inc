@@ -27,9 +27,8 @@ var cmdSave =
       var docUrl = EditorUtils.getDocumentUrl();
       return EditorUtils.isDocumentEditable()
               && (GetCurrentViewMode() == "source"
-                  || (EditorUtils.isDocumentModified()
-                      || UrlUtils.isUrlOfBlankDocument(docUrl)
-                      || UrlUtils.getScheme(docUrl) != "file"));
+                  || EditorUtils.isDocumentModified()
+                  || UrlUtils.isUrlOfBlankDocument(docUrl));
     } catch (e) {return false;}
   },
   
@@ -61,6 +60,7 @@ var cmdSave =
                      EditorUtils.getCurrentDocumentMimeType());
         }
         window.content.focus();
+        window.updateCommands("style");
         if (result)
           StoreUrlInLocationDB(EditorUtils.getDocumentUrl());
       }
