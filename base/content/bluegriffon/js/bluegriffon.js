@@ -1464,6 +1464,7 @@ function ToggleAllTagsMode()
   if (tab) {
     var editor = EditorUtils.getCurrentEditor();
     editor instanceof Components.interfaces.nsIEditorStyleSheets;
+    var scrollTop = editor.document.documentElement.scrollTop;
     if (tab.hasAttribute("alltags")) {
       tab.removeAttribute("alltags");
       editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", false);
@@ -1472,6 +1473,7 @@ function ToggleAllTagsMode()
       tab.setAttribute("alltags", "true");
       editor.enableStyleSheet("chrome://bluegriffon/content/EditorAllTags.css", true);
     }
+    editor.document.documentElement.scrollTop = scrollTop;
   }
 }
 
