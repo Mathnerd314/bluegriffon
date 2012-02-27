@@ -73,13 +73,12 @@ diOSIntegration::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited)
 }
 
 NS_IMETHODIMP
-diOSIntegration::IsMiniaturized(nsIBaseWindow *aWindow, bool *aIsMiniaturized) 
+diOSIntegration::Show(nsIBaseWindow *aWindow, bool aState) 
 {
   nsCOMPtr<nsIWidget> widget = nsnull;
   aWindow->GetMainWidget(getter_AddRefs(widget));
   if (widget) {
-    NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
-    *aIsMiniaturized = [cocoaWindow isMiniaturized];
+    widget->Show(aState);
   }
   return NS_OK;
 }

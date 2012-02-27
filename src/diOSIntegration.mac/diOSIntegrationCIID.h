@@ -40,8 +40,8 @@
 
 #define DI_OS_INTEGRATION_CONTRACTID \
   "@disruptive-innovations.com/osintegration/badger;1"
-// F15D9C2E-D0A3-4ACB-B76C-A838562AD948
-#define DI_OS_INTEGRATION_CID { 0x97641AFB, 0x99F5, 0x4798, \
+
+#define DI_OS_INTEGRATION_CID { 0x97652AFB, 0x99F5, 0x4798, \
     { 0xB2, 0x70, 0x8A, 0x96, 0x92, 0xCE, 0x98, 0x67}}
 #endif // diOSIntegrationCIID_h__
 

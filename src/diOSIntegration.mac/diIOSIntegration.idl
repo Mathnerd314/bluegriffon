@@ -37,9 +37,9 @@
 #include "nsISupports.idl"
 #include "nsIBaseWindow.idl"
 
-[scriptable, uuid(1F9DB6C5-1C79-4E3A-B3CE-64D38CC51DCF)]
+[scriptable, uuid(0F3155C8-4FCA-4B00-8171-CE943DC1ED10)]
 interface diIOSIntegration : nsISupports
 {
   void setDocumentEdited(in nsIBaseWindow aWindow, in boolean aIsEdited);
-  boolean isMiniaturized(in nsIBaseWindow aWindow);
+  void show(in nsIBaseWindow aWindow, in boolean aState);
 };

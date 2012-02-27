@@ -73,6 +73,8 @@ function Startup()
     function(addon) { if(addon) document.getElementById("menu_inspector").hidden = false; } );
 
   NotifierUtils.addNotifierCallback("selection_strict", BlueGriffon_lookForFileChanges, this);
+
+  window.addEventListener("sizemodechange", onSizeModeChange, false);
 }
 
 var gLookingForFileChangesTimeout = null;

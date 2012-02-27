@@ -228,3 +228,54 @@ var BlueGriffonPrefsObserver = {
   }
 };
 
+
+const nsIDCW = Components.interfaces.nsIDOMChromeWindow;
+var gLastWindowState = -1;
+
+function onSizeModeChange()
+{
+  var badger = Components.classes["@disruptive-innovations.com/osintegration/badger;1"]
+                         .createInstance(Components.interfaces.diIOSIntegration);
+  var wm = Services.wm;
+  var hidden = wm.getMostRecentWindow("hidden-main");
+  var enumerator = wm.getEnumerator( "" );
+  switch (window.windowState) {
+    case nsIDCW.STATE_MINIMIZED:
+      {
+        // minified
+        gLastWindowState = window.windowState;
+        while ( enumerator.hasMoreElements() )
+        {
+          var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+          if (win.opener
+              && win.document.documentElement.id != "Bluegriffon"
+              && (win.opener == window || win.opener.document.documentElement.id == "hidden-window")) {
+            var baseWindow = win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                                   .getInterface(Components.interfaces.nsIWebNavigation)
+                                   .QueryInterface(Components.interfaces.nsIBaseWindow);
+            badger.show(baseWindow, false);
+          }
+        }
+      }
+      break;
+    default:
+      if (gLastWindowState == nsIDCW.STATE_MINIMIZED) {
+        // raised
+        gLastWindowState = -1;
+        while ( enumerator.hasMoreElements() )
+        {
+          var win = enumerator.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+          if (win.opener
+              && win.document.documentElement.id != "Bluegriffon"
+              && (win.opener == window || win.opener.document.documentElement.id == "hidden-window")) {
+            var baseWindow = win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                                   .getInterface(Components.interfaces.nsIWebNavigation)
+                                   .QueryInterface(Components.interfaces.nsIBaseWindow);
+            badger.show(baseWindow, true);
+          }
+        }
+      }
+      break;
+  }
+}
+
