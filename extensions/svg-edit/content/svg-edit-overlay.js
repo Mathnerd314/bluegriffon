@@ -21,7 +21,7 @@ function start_svg_edit(aString) {
     .addEventListener("svgEditorReady", svgEditorReady, false);
   var url = "chrome://svg-edit/content/svg-edit.xul";
   SVGWindow = window.openDialog(url, "_blank",
-          "menubar=yes,toolbar=no,resizable=yes,sizemode=normal");
+          "menubar=yes,toolbar=no,resizable=yes,sizemode=normal,dialog=no");
 }
 
 function InsertSVGAtSelection(aString)

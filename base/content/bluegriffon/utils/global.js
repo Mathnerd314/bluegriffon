@@ -400,7 +400,7 @@ function OpenAppModalWindow(aParentWindow, aChromeURL, aWindowName, aResizable)
 #endif
                 aChromeURL,
                 aWindowName,
-                "chrome,titlebar,centerscreen,modal=yes" +
+                "chrome,titlebar,centerscreen,modal=yes,dialog=no" +
                   (aResizable ? ",resizable" : ""),
                 args);
 };
