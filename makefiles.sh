@@ -47,7 +47,7 @@ bluegriffon/installer/windows/Makefile
 bluegriffon/sidebars/Makefile
 bluegriffon/src/Makefile
 bluegriffon/src/dibgutils/Makefile
-bluegriffon/src/diOSIntegration/Makefile
+bluegriffon/src/diOSIntegration.mac/Makefile
 bluegriffon/themes/Makefile
 bluegriffon/modules/Makefile
 bluegriffon/themes/win/Makefile
@@ -63,6 +63,7 @@ bluegriffon/stubs/fullscreen/Makefile
 bluegriffon/stubs/mathml2/Makefile
 bluegriffon/stubs/snippets/Makefile
 bluegriffon/stubs/tableLayout/Makefile
+bluegriffon/stubs/templatesManager2/Makefile
 bluegriffon/stubs/thumbnailer/Makefile
 bluegriffon/sidebars/cssproperties/Makefile
 bluegriffon/sidebars/domexplorer/Makefile

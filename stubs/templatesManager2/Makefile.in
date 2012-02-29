@@ -45,9 +45,9 @@ include $(DEPTH)/config/autoconf.mk
 MODULE = templatesManager
 USE_EXTENSION_MANIFEST = 1
 
-XPI_NAME    = templatesManager
+XPI_NAME    = templatesManager@bluegriffon.com
 INSTALL_EXTENSION_ID  = templatesManager@bluegriffon.com
-XPI_PKGNAME   = templatesManager
+XPI_PKGNAME   = templatesManager@bluegriffon.com
   
 DIST_FILES = install.rdf README.txt
 

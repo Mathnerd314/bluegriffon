@@ -60,6 +60,8 @@
 #include "nsWindowsWMain.cpp"
 #endif
 
+bool gInXPCOMLoadOnMainThread = false;
+
 static void Output(const char *fmt, ... )
 {
   va_list ap;
