@@ -16,7 +16,6 @@
   <script type="application/x-javascript" src="chrome://templatesmanager/content/templatesManagerOverlay.js"/>
 
   <popup id="fileMenu_popup">
-    <menuseparator/>
     <menuitem label="&templatesManager.label;"
               id="templatesManagerItem"
               insertafter="menu_RecentFiles"

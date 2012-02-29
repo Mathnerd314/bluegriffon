@@ -17,7 +17,7 @@
     <content align="center">
         <xul:label anonid="templateName" xbl:inherits="value=name" />
         <xul:toolbarbutton anonid="templateThumbnail"
-                           xbl:inherits="image=thumbnail"
+                           xbl:inherits="url=thumbnail"
                            oncommand="ShowPreview(this.parentNode)" />
         <xul:description anonid="templateDescription"></xul:description>
         <xul:label anonid="templateLicense"

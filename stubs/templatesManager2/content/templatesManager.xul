@@ -12,6 +12,7 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:html="http://www.w3.org/1999/xhtml"
         persist="screenX screenY width height"
+        onresize="ShowImagesInViewport()"
         onload="Startup()">
 
   <!-- Methods common to all editor dialogs -->
@@ -31,7 +32,8 @@
 
   <hbox id="mainBox" flex="1">
     <vbox id="templateFamiliesVbox">
-      <listbox id="templateFamiliesListbox" flex="1"
+      <listbox id="templateFamiliesListbox"
+               flex="1"
                onselect="ShowTemplatesForFamily(this)">
 			  <listhead>
           <listheader label="&sources.col;"/>
@@ -42,6 +44,11 @@
           <listcol flex="1"/>
           <listcol/>
 			  </listcols>
+
+        <listitem>
+          <listcell label="&personalTemplates.label;"/>
+          <listcell label="0" id="personalTemplatesCountListcell"/>
+        </listitem>
       </listbox>
       <hbox class="listboxBg">
         <label value=" "/>
@@ -76,8 +83,8 @@
       </hbox>
       <stack flex="1">
         <iframe src="about:blank" flex="1" id="previewBox"/>
-        <vbox flex="1" id="templatesBox" style="overflow: auto">
-          <description id="templatesDescription"/>
+        <vbox flex="1" id="templatesBox" style="overflow: auto" onscroll="ShowImagesInViewport()">
+          <description id="templatesDescription" flex="1"/>
         </vbox>
       </stack>
     </vbox>
