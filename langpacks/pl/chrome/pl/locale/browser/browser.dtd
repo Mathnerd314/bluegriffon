@@ -227,8 +227,13 @@ can reach it easily. -->
 <!ENTITY inspectButton.label            "Zbadaj">
 <!ENTITY inspectButton.accesskey        "b">
 <!ENTITY inspectCloseButton.tooltiptext "Zamknij Inspektora">
-<!ENTITY inspect3DButton.label        "3D">
-<!ENTITY inspect3DButton.accesskey    "M">
+
+<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
+  -  alternate view for the Inspector, creating a 3D visualization of the
+  -  webpage. -->
+<!ENTITY inspect3DViewButton.label     "Widok 3D">
+<!ENTITY inspect3DViewButton.accesskey "W">
+
 <!ENTITY inspectStyleButton.label     "Styl">
 <!ENTITY inspectStyleButton.accesskey "S">
 
@@ -580,9 +585,3 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "Zamknij pasek dodatków">
 <!ENTITY toggleAddonBarCmd.key        "/">
-<!ENTITY inspect3DViewButton.accesskey "W">
-
-<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
-  -  alternate view for the Inspector, creating a 3D visualization of the
-  -  webpage. -->
-<!ENTITY inspect3DViewButton.label     "3D View">

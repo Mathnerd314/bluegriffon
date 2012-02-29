@@ -7,3 +7,5 @@
 <!ENTITY setDesktopBackground.title "Munkaasztalháttér beállítása">
 <!ENTITY openDesktopPrefs.label     "Munkaasztal beállítóablakának megnyitása">
 <!ENTITY closeWindow.key            "w">
+<!ENTITY fill.label                 "Fill">
+<!ENTITY fit.label                  "Fit">

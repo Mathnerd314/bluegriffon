@@ -7,3 +7,5 @@
 <!ENTITY setDesktopBackground.title "배경 화면으로 설정">
 <!ENTITY openDesktopPrefs.label     "배경 화면 환경 설정 열기">
 <!ENTITY closeWindow.key            "w">
+<!ENTITY fill.label                 "Fill">
+<!ENTITY fit.label                  "Fit">

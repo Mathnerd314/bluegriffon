@@ -41,5 +41,3 @@
 <!ENTITY report.failed                                       "Pošiljanje ni uspelo.">
 <!ENTITY report.unavailable                                  "Ni poročil.">
 <!ENTITY clickToPlayPlugin                                   "Tap here to activate plugin.">
-<!-- LOCALIZATION NOTE: report.* strings should be as short as possible, ideally 2-3 words. -->
-<!ENTITY report.checkbox                                     "…and send crash report">

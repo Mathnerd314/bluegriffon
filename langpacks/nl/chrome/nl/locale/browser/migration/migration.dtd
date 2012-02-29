@@ -13,6 +13,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "x">
 <!ENTITY importFromHTMLFile.label       "Uit een HTML-bestand">
 <!ENTITY importFromHTMLFile.accesskey   "U">
 
@@ -29,6 +31,4 @@
 <!ENTITY selectProfile.label            "De volgende profielen zijn beschikbaar om uit te importeren:">
 
 <!ENTITY done.title                     "Importeren voltooid">
-<!ENTITY done.label                     "De volgende items zijn succesvol geïmporteerd:">
-<!ENTITY importFromBlueGriffon.accesskey    "X">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY done.label                     "De volgende items zijn met succes geïmporteerd:">

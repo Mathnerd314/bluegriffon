@@ -79,3 +79,6 @@
 
 <!ENTITY  clearOnCloseSettings.label     "Einstellungen…">
 <!ENTITY  clearOnCloseSettings.accesskey "E">
+<!ENTITY  rememberHistory2.accesskey  "b">
+
+<!ENTITY  rememberHistory2.label      "Remember my browsing and download history">

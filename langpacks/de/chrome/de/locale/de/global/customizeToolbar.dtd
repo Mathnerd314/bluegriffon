@@ -10,3 +10,4 @@
 <!ENTITY addNewToolbar.label      "Neue Symbolleiste">
 <!ENTITY saveChanges.label        "Fertig">
 <!ENTITY undoChanges.label        "Änderungen verwerfen">
+<!ENTITY dialog.dimensions        "width: 92ch; height: 36em;">

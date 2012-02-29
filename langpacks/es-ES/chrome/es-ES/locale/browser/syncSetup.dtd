@@ -82,3 +82,4 @@
 <!ENTITY setup.successPage.title "Instalación completada">
 <!ENTITY changeOptions.label "Puede cambiar esta preferencia seleccionando las opciones de Sync más abajo.">
 <!ENTITY continueUsing.label "Puede continuar usando &brandShortName;.">
+<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">

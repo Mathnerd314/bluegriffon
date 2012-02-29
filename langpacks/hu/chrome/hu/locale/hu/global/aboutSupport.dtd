@@ -40,5 +40,17 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.copyToClipboard.label "Másolás a vágólapra">
 <!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
+This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDir.
+Windows/Mac use the term "Folder" instead of "Directory" -->
+<!ENTITY aboutSupport.appBasicsProfileDirWinMac "Profile Folder">
+<!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
+
+<!ENTITY aboutSupport.jsTitle "JavaScript">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">
+
+<!ENTITY aboutSupport.showDir.label "Open Directory">
+<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
+variant of aboutSupport.showDir.label. -->
+<!ENTITY aboutSupport.showWin.label "Show Folder">

@@ -7,3 +7,5 @@
 <!ENTITY setDesktopBackground.title "Nastavi ozadje namizja">
 <!ENTITY openDesktopPrefs.label "Odpri nastavitve namizja">
 <!ENTITY closeWindow.key "w">
+<!ENTITY fill.label                 "Fill">
+<!ENTITY fit.label                  "Fit">

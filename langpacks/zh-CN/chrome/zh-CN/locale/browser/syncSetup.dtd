@@ -107,6 +107,7 @@
 <!ENTITY continueUsing.label "您现在可以继续使用 &brandShortName;。">
 <!ENTITY engine.addons.accesskey    "A">
 <!ENTITY engine.addons.label        "Add-ons">
+<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">
 
 <!-- First page of the wizard -->
 

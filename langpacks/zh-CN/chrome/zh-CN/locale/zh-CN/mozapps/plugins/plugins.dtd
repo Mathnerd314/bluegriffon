@@ -41,3 +41,5 @@
 <!ENTITY report.disabled                                     "禁用崩溃报告。">
 <!ENTITY report.failed                                       "提交失败。">
 <!ENTITY report.unavailable                                  "无可用报告。">
+<!-- LOCALIZATION NOTE (report.please): This and the other report.* strings should be as short as possible, ideally 2-3 words. -->
+<!ENTITY report.please                                       "Send crash report">

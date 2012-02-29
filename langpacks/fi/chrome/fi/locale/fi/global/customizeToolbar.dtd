@@ -10,3 +10,4 @@
 <!ENTITY addNewToolbar.label       "Uusi työkalupalkki">
 <!ENTITY saveChanges.label         "Valmis">
 <!ENTITY undoChanges.label         "Kumoa muutokset">
+<!ENTITY dialog.dimensions        "width: 92ch; height: 36em;">

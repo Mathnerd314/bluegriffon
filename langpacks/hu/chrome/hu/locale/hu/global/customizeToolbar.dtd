@@ -10,3 +10,4 @@
 <!ENTITY addNewToolbar.label      "Új eszköztár">
 <!ENTITY saveChanges.label        "Kész">
 <!ENTITY undoChanges.label        "Visszavonás">
+<!ENTITY dialog.dimensions        "width: 92ch; height: 36em;">

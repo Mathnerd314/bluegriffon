@@ -13,6 +13,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
 <!ENTITY importFromHTMLFile.label       "Z pliku HTML">
 <!ENTITY importFromHTMLFile.accesskey   "p">
 
@@ -31,5 +33,3 @@
 <!ENTITY done.title                     "Importowanie zakończone">
 <!ENTITY done.label                     "Poniższe elementy zostały zaimportowane:">
 
-<!ENTITY importFromBlueGriffon.accesskey    "X">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

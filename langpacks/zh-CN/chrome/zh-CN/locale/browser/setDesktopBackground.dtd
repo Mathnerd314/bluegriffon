@@ -7,3 +7,5 @@
 <!ENTITY setDesktopBackground.title "设置桌面背景">
 <!ENTITY openDesktopPrefs.label     "打开桌面首选项">
 <!ENTITY closeWindow.key            "w">
+<!ENTITY fill.label                 "Fill">
+<!ENTITY fit.label                  "Fit">

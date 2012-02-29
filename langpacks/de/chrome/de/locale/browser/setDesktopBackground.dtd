@@ -7,3 +7,5 @@
 <!ENTITY setDesktopBackground.title "Hintergrundbild einrichten">
 <!ENTITY openDesktopPrefs.label     "Desktop-Einstellungen öffnen">
 <!ENTITY closeWindow.key            "w">
+<!ENTITY fill.label                 "Fill">
+<!ENTITY fit.label                  "Fit">

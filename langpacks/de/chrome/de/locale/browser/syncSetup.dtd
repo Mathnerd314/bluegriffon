@@ -120,6 +120,7 @@
 <!ENTITY recoveryKeyBackup.description "Your Recovery Key is required to access &syncBrand.fullName.label; on other machines. Please create a backup copy. We cannot help you recover your Recovery Key.">
 <!ENTITY recoveryKeyEntry.accesskey    "K">
 <!ENTITY recoveryKeyEntry.label        "Your Recovery Key">
+<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">
 
 <!-- First page of the wizard -->
 

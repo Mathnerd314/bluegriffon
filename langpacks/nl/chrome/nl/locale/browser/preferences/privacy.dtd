@@ -61,14 +61,11 @@
 <!ENTITY  dontrememberActions.clearHistory.label "alle huidige geschiedenis wissen">
 <!ENTITY  dontrememberActions.post.label         ".">
 
-<!ENTITY  privateBrowsingPermanent2.label "Altijd privénavigatiemodus gebruiken">
+<!ENTITY  privateBrowsingPermanent2.label "Altijd de privénavigatiemodus gebruiken">
 <!ENTITY  privateBrowsingPermanent2.accesskey "p">
 
-<!ENTITY  rememberHistory.label      "Mijn navigatiegeschiedenis onthouden">
-<!ENTITY  rememberHistory.accesskey  "n">
-
-<!ENTITY  rememberDownload.label         "Downloadgeschiedenis onthouden">
-<!ENTITY  rememberDownload.accesskey     "D">
+<!ENTITY  rememberHistory2.label      "Mijn navigatiegeschiedenis en downloadgeschiedenis onthouden">
+<!ENTITY  rememberHistory2.accesskey  "n">
 
 <!ENTITY  rememberSearchForm.label       "Zoek- en formuliergeschiedenis onthouden">
 <!ENTITY  rememberSearchForm.accesskey   "f">

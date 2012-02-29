@@ -9,13 +9,15 @@
 <!ENTITY aboutSupport.appBasicsName "Nombre">
 <!ENTITY aboutSupport.appBasicsVersion "Versión">
 <!ENTITY aboutSupport.appBasicsProfileDir "Directorio de perfil ">
+<!ENTITY aboutSupport.appBasicsProfileDirWinMac "Carpeta del perfil">
 <!ENTITY aboutSupport.appBasicsEnabledPlugins "Plugins activados">
 <!ENTITY aboutSupport.appBasicsBuildConfig "Configuración de compilación">
 <!ENTITY aboutSupport.appBasicsUserAgent "Agente de usuario">
 <!ENTITY aboutSupport.appBasicsCrashIDs "Informes de fallos">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Uso de memoria">
-<!ENTITY aboutSupport.show.label "Abrir la carpeta que lo contiene">
+<!ENTITY aboutSupport.showDir.label "Abrir directorio">
 <!ENTITY aboutSupport.showMac.label "Mostrar en Finder">
+<!ENTITY aboutSupport.showWin.label "Mostrar carpeta">
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Preferencias importantes modificadas">
 <!ENTITY aboutSupport.modifiedPrefsName "Nombre">
 <!ENTITY aboutSupport.modifiedPrefsValue "Valor">
@@ -23,3 +25,6 @@
 <!ENTITY aboutSupport.installationHistoryTitle "Historial de instalaciones">
 <!ENTITY aboutSupport.updateHistoryTitle "Historial de actualizaciones">
 <!ENTITY aboutSupport.copyToClipboard.label "Copiar todo al portapapeles">
+<!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
+
+<!ENTITY aboutSupport.jsTitle "JavaScript">

@@ -20,7 +20,8 @@
 <!ENTITY aboutSupport.appBasicsBuildConfig "빌드 설정">
 <!ENTITY aboutSupport.appBasicsUserAgent "사용자 에이전트">
 <!ENTITY aboutSupport.appBasicsCrashIDs "문제점 보고서">
-<!ENTITY aboutSupport.appBasicsMemoryUse	"메모리 사용량">
+<!ENTITY aboutSupport.appBasicsMemoryUse "메모리 사용">
+
 <!ENTITY aboutSupport.show.label "폴더 열기">
 
 <!-- LOCALIZATION NOTE (aboutSupport.showMac.label): This is the Mac-specific
@@ -38,5 +39,17 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "업데이트 기록">
 
 <!ENTITY aboutSupport.copyToClipboard.label "클립보드에 복사하기">
+<!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
+This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDir.
+Windows/Mac use the term "Folder" instead of "Directory" -->
+<!ENTITY aboutSupport.appBasicsProfileDirWinMac "Profile Folder">
+<!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
+
+<!ENTITY aboutSupport.jsTitle "JavaScript">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">
+
+<!ENTITY aboutSupport.showDir.label "Open Directory">
+<!-- LOCALIZATION NOTE (aboutSupport.showWin.label): This is the Windows-specific
+variant of aboutSupport.showDir.label. -->
+<!ENTITY aboutSupport.showWin.label "Show Folder">

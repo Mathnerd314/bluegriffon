@@ -33,9 +33,10 @@
 <!ENTITY engine.passwords.accesskey "P">
 <!ENTITY engine.prefs.label         "환경 설정">
 <!ENTITY engine.prefs.accesskey     "S">
+<!ENTITY engine.addons.label        "부가 기능">
+<!ENTITY engine.addons.accesskey    "A">
+
 
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "서비스 약관">
 <!ENTITY prefs.ppLink.label         "개인 정보 정책">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">

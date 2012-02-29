@@ -61,6 +61,26 @@
 <!ENTITY selectAllCmd.key             "A">
 <!ENTITY selectAllCmd.accesskey       "Z">
 
+<!ENTITY findCmd.label                "Znajdź…">
+<!ENTITY findCmd.key                  "F">
+<!ENTITY findCmd.accesskey            "n">
+
+<!ENTITY findAgainCmd.label           "Znajdź ponownie…">
+<!-- LOCALIZATION NOTE (findAgainCmd.key): This key is used only on Macs.
+  -  Windows and Linux builds use the F3 key which is not localizable on purpose.
+  -->
+<!ENTITY findAgainCmd.key             "G">
+<!ENTITY findAgainCmd.accesskey       "j">
+<!-- LOCALIZATION NOTE (findPreviousCmd.key): This key is used only on Macs.
+  -  Windows and Linux builds use the Shift-F3 key which is not localizable on
+  -  purpose.
+  -->
+<!ENTITY findPreviousCmd.key          "G">
+
+<!ENTITY gotoLineCmd.label            "Przeskocz do linii…">
+<!ENTITY gotoLineCmd.key              "J">
+<!ENTITY gotoLineCmd.accesskey        "s">
+
 <!ENTITY run.label                    "Uruchom">
 <!ENTITY run.accesskey                "U">
 <!ENTITY run.key                      "r">
@@ -115,3 +135,14 @@
   -  the same name in browser.dtd.
   -->
 <!ENTITY webConsoleCmd.commandkey     "k">
+<!ENTITY documentationLink.accesskey  "D">
+
+<!ENTITY documentationLink.label      "Scratchpad Help on MDN">
+<!ENTITY helpMenu.accesskey           "H">
+
+<!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"
+  -  for the help button in the menubar but Gnome does not.
+  -->
+<!ENTITY helpMenu.label               "Help">
+<!ENTITY helpMenuWin.accesskey        "H">
+<!ENTITY helpMenuWin.label            "Help">

@@ -24,3 +24,6 @@
 
 <!ENTITY changeAndRestartButton.label "Változtatások végrehajtása és újraindítás">
 <!ENTITY continueButton.label         "Folytatás csökkentett módban">
+<!ENTITY autoSafeModeDescription.label "We sincerely apologize for the inconvenience. &brandShortName; is now running in Safe Mode, which temporarily disables your custom settings, themes, and extensions.">
+
+<!ENTITY autoSafeModeIntro.label      "&brandShortName; Closed Unexpectedly While Starting">
