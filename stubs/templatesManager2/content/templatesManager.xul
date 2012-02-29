@@ -84,7 +84,7 @@
       <stack flex="1">
         <iframe src="about:blank" flex="1" id="previewBox"/>
         <vbox flex="1" id="templatesBox" style="overflow: auto" onscroll="ShowImagesInViewport()">
-          <description id="templatesDescription" flex="1"/>
+          <description id="templatesDescription" />
         </vbox>
       </stack>
     </vbox>

@@ -16,8 +16,7 @@
   margin-left: 4px;
   background-color: white;
   border: thin solid silver;
-  -moz-transition: -moz-transform 1s;
-  -moz-transform: rotateY(0deg); 
+  display: none; 
 }
 
 #infoBox.previewMode #templatesBox {
@@ -28,12 +27,11 @@
   margin-left: 4px;
   background-color: white;
   border: thin solid silver;
-  -moz-transition: -moz-transform 2s 1s;
-  -moz-transform: rotateY(90deg); 
+  display: none; 
 }
 
 #infoBox.previewMode #previewBox {
-  -moz-transform: rotateY(0deg); 
+  display: -moz-box; 
 }
 
 
