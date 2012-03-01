@@ -52,6 +52,9 @@
 <!ENTITY netInterrupt.title "Fehler: Datenübertragung unterbrochen">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "Dokument erloschen">
+<!ENTITY notCached.longDesc "<p>Das angefragte Dokument ist nicht im Browser-Cache verfügbar.</p><ul><li>Als Sicherheitsmaßnahme fragt der Browser um vertrauliche Dokumente nicht automatisch erneut an.</li><li>Klicken Sie &quot;Nochmal versuchen&quot;, um das Dokument erneut von der Website anzufragen.</li></ul>">
+
 <!ENTITY netOffline.title "Fehler: Offline-Modus">
 <!ENTITY netOffline.longDesc2 "
 <ul>
@@ -187,6 +190,3 @@ functionality specific to BlueGriffon. -->
 
 <!ENTITY remoteXUL.title "Remote-XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Bitte informieren Sie den Website-Inhaber über dieses Problem.</li></ul></p>">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
-
-<!ENTITY notCached.title "Document Expired">

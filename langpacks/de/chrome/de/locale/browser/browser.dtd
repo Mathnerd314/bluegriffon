@@ -90,6 +90,7 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "a">
 <!ENTITY fullScreenExit.label "Vollbildmodus beenden">
 <!ENTITY fullScreenExit.accesskey "V">
+<!ENTITY domFullScreenWarning.label "Drücken Sie ESC, um den Vollbild-Modus zu verlassen">
 
 <!ENTITY closeWindow.label "Fenster schließen">
 <!ENTITY closeWindow.accesskey "c">
@@ -190,7 +191,6 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.accesskey      "W">
 <!ENTITY webConsoleCmd.commandkey     "k">
 
-<!ENTITY inspectPanelTitle.label      "HTML">
 <!ENTITY inspectMenu.label            "Untersuchen">
 <!ENTITY inspectMenu.accesskey        "U">
 <!ENTITY inspectMenu.commandkey       "I">
@@ -213,9 +213,12 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-
-<!ENTITY inspectButton.label          "Untersuchen">
-<!ENTITY inspectButton.accesskey      "U">
+<!ENTITY inspectPanelTitle.label      	"HTML">
+<!ENTITY inspectButton.label          	"Untersuchen">
+<!ENTITY inspectButton.accesskey      	"U">
+<!ENTITY inspectCloseButton.tooltiptext "Inspektor schließen">
+<!ENTITY inspectStyleButton.label     	"Style">
+<!ENTITY inspectStyleButton.accesskey 	"S">
 
 <!ENTITY getMoreDevtoolsCmd.label        "Weitere Tools laden">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "W">
@@ -418,20 +421,38 @@ can reach it easily. -->
 <!ENTITY thisFrameMenu.accesskey          "F">
 
 <!-- Media (video/audio) controls -->
+<!-- LOCALIZATION NOTE: The access keys for "Play" and 
+"Pause" are the same because the two context-menu 
+items are mutually exclusive. -->
 <!ENTITY mediaPlay.label             "Abspielen">
 <!ENTITY mediaPlay.accesskey         "A">
 <!ENTITY mediaPause.label            "Anhalten">
 <!ENTITY mediaPause.accesskey        "A">
+<!-- LOCALIZATION NOTE: The access keys for "Mute" and
+"Unmute" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY mediaMute.label             "Ton aus">
 <!ENTITY mediaMute.accesskey         "T">
 <!ENTITY mediaUnmute.label           "Ton an">
 <!ENTITY mediaUnmute.accesskey       "T">
+<!-- LOCALIZATION NOTE: The access keys for "Show Controls" and
+"Hide Controls" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY mediaShowControls.label     "Steuerung anzeigen">
 <!ENTITY mediaShowControls.accesskey "S">
 <!ENTITY mediaHideControls.label     "Steuerung ausblenden">
 <!ENTITY mediaHideControls.accesskey "S">
 <!ENTITY videoFullScreen.label       "Vollbild">
 <!ENTITY videoFullScreen.accesskey   "V">
+<!ENTITY videoSaveImage.label        "Bildschirmfoto speichern unter…">
+<!ENTITY videoSaveImage.accesskey    "B">
+<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
+"Hide Statistics" are the same because the two context-menu
+items are mutually exclusive. -->
+<!ENTITY videoShowStats.label        "Statistiken einblenden">
+<!ENTITY videoShowStats.accesskey    "k">
+<!ENTITY videoHideStats.label        "Statistiken ausblenden">
+<!ENTITY videoHideStats.accesskey    "k">
 
 
 <!-- LOCALIZATION NOTE :
@@ -563,17 +584,33 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "Add-on-Leiste schließen">
 <!ENTITY toggleAddonBarCmd.key        "/">
-<!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
+
+<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
+toolbar button -->
+<!ENTITY htmlPanel.accesskey          "H">
+
+<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
+activates the Web Developer->Inspect UI's HTML Tree Panel. -->
+<!ENTITY htmlPanel.label              "HTML">
+
+<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
+hovers over the HTML panel's toolbar button. -->
+<!ENTITY htmlPanel.tooltiptext        "HTML panel">
 <!ENTITY inspect3DViewButton.accesskey "W">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
 <!ENTITY inspect3DViewButton.label     "3D View">
-<!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
-<!ENTITY inspectStyleButton.accesskey "S">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
 
-<!ENTITY inspectStyleButton.label     "Style">
+<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
+<!ENTITY inspectorHTMLDelete.accesskey      "D">
+
+<!ENTITY inspectorHTMLDelete.label          "Delete Node">
 <!ENTITY styleeditor.accesskey        "y">
 <!ENTITY styleeditor.keycode          "VK_F7">
 <!ENTITY styleeditor.keytext          "F7">
@@ -581,12 +618,3 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
   -  in the Tools menu. -->
 <!ENTITY styleeditor.label            "Style Editor">
-<!ENTITY videoHideStats.accesskey    "t">
-<!ENTITY videoHideStats.label        "Hide Statistics">
-<!ENTITY videoSaveImage.accesskey    "S">
-<!ENTITY videoSaveImage.label        "Save Snapshot As…">
-<!ENTITY videoShowStats.accesskey    "t">
-<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
-"Hide Statistics" are the same because the two context-menu
-items are mutually exclusive. -->
-<!ENTITY videoShowStats.label        "Show Statistics">

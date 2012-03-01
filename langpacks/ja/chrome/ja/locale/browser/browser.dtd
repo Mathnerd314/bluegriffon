@@ -559,6 +559,18 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY getMoreDevtoolsCmd.accesskey    "M">
 
 <!ENTITY getMoreDevtoolsCmd.label        "Get More Tools">
+
+<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
+toolbar button -->
+<!ENTITY htmlPanel.accesskey          "H">
+
+<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
+activates the Web Developer->Inspect UI's HTML Tree Panel. -->
+<!ENTITY htmlPanel.label              "HTML">
+
+<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
+hovers over the HTML panel's toolbar button. -->
+<!ENTITY htmlPanel.tooltiptext        "HTML panel">
 <!ENTITY inspect3DViewButton.accesskey "W">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
@@ -569,6 +581,15 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY inspectContextMenu.accesskey "Q">
 
 <!ENTITY inspectContextMenu.label     "Inspect Element">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+
+<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
+<!ENTITY inspectorHTMLDelete.accesskey      "D">
+
+<!ENTITY inspectorHTMLDelete.label          "Delete Node">
 <!ENTITY scratchpad.accesskey         "s">
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">

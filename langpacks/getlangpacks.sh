@@ -8,10 +8,10 @@ LOCALES="cs de es-ES fi fr he hu it ja ko nl pl sl sv-SE zh-CN zh-TW"
 R_VERSION=`echo $VERSION | sed -e "s/\./\\\\\./" | sed -e "s/\n//"`
 R_BG_VERSION=`echo $BG_VERSION | sed -e "s/\./\\\\\./" | sed -e "s/\n//"`
 
-wget ftp://ftp.mozilla.org/pub/firefox/nightly/2012-02-23-03-12-36-mozilla-central/firefox-$VERSION.en-US.langpack.xpi
+wget ftp://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-$VERSION.en-US.langpack.xpi
 for i in `echo $LOCALES`
 do
-    wget ftp://ftp.mozilla.org/pub/firefox/nightly/2012-02-23-03-12-36-mozilla-central-l10n/win32/xpi//firefox-$VERSION.$i.langpack.xpi
+    wget ftp://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-central-l10n/win32/xpi/firefox-$VERSION.$i.langpack.xpi
 done
 
 for i in `echo "en-US "$LOCALES`

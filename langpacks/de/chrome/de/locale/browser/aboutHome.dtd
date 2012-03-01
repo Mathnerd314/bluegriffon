@@ -19,6 +19,5 @@
 -->
 <!ENTITY abouthome.defaultSnippet2.v1 "Es ist leicht, BlueGriffon optimal auf Ihre Bedürfnisse anzupassen. <a>Wählen Sie aus Tausenden von Add-ons</a>.">
 
-<!ENTITY abouthome.pairDevice.label  "Pair a Device">
-
-<!ENTITY abouthome.syncSetup.label   "Set Up Sync">
+<!ENTITY abouthome.syncSetup.label   "Sync einrichten">
+<!ENTITY abouthome.pairDevice.label  "Gerät verbinden">

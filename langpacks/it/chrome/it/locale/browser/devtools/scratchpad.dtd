@@ -60,20 +60,15 @@
 <!ENTITY contentContext.accesskey "C">
 <!ENTITY browserContext.label "Browser">
 <!ENTITY browserContext.accesskey "B">
+<!ENTITY helpMenu.label "Aiuto">
+<!ENTITY helpMenu.accesskey "A">
+<!ENTITY helpMenuWin.label "Aiuto">
+<!ENTITY helpMenuWin.accesskey "A">
+<!ENTITY documentationLink.label "Documentazione su MDN">
+<!ENTITY documentationLink.accesskey "D">
 <!ENTITY resetContext2.label "Reimposta variabili">
 <!ENTITY resetContext2.accesskey "m">
 <!ENTITY executeMenu.label "Esecuzione">
 <!ENTITY executeMenu.accesskey "E">
 <!ENTITY errorConsoleCmd.commandkey "j">
 <!ENTITY webConsoleCmd.commandkey "k">
-<!ENTITY documentationLink.accesskey  "D">
-
-<!ENTITY documentationLink.label      "Scratchpad Help on MDN">
-<!ENTITY helpMenu.accesskey           "H">
-
-<!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"
-  -  for the help button in the menubar but Gnome does not.
-  -->
-<!ENTITY helpMenu.label               "Help">
-<!ENTITY helpMenuWin.accesskey        "H">
-<!ENTITY helpMenuWin.label            "Help">
