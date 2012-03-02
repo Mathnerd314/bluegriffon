@@ -8,7 +8,7 @@
 }
 
 #bespinLineTextbox {
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
   padding-left: 5px;
@@ -21,7 +21,7 @@
 #bespinReplaceTextbox {
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   height: 16px;
   font-size: 11px;
   padding: 0px 5px;
@@ -49,7 +49,7 @@
   padding: 0px 12px 0px 12px;
   -moz-appearance: none;
   font-size: smaller;
-  -moz-border-radius: 11px;
+  border-radius: 11px;
   border-top: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -64,15 +64,15 @@
 
 #bespinFindPrevious {
   padding: 0px 8px 0px 12px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-bottomright: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
   margin-right: 0px;
 }
 
 #bespinFindNext {
   padding: 0px 12px 0px 8px;
-  -moz-border-radius-topleft: 0px;
-  -moz-border-radius-bottomleft: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   margin-left: 0px;
 }
 

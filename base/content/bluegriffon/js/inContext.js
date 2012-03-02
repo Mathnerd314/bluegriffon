@@ -45,7 +45,7 @@ var InContextHelper = {
   {
     var inContextEnabled = false;
     try {
-      inContextEnabled = Services.prefs.getBoolPref("bluegriffon.inContext.enabled");
+      inContextEnabled = Services.prefs.getBoolPref("bluegriffon.floatingToolbar.enabled");
     }
     catch(e) {}
     return inContextEnabled;
@@ -57,8 +57,8 @@ var InContextHelper = {
       return;
 
     if (this.mDocument) {
-      this.mDocument.documentElement.removeEventListener("mousemove", InContextHelper.onMouseMove, true);
-      this.mDocument.documentElement.removeEventListener("mouseleave", InContextHelper.onMouseLeave, true);
+      //this.mDocument.documentElement.removeEventListener("mousemove", InContextHelper.onMouseMove, true);
+      //this.mDocument.documentElement.removeEventListener("mouseleave", InContextHelper.onMouseLeave, true);
       this.mDocument = null;
     }
     gDialog.inContextStylePanel.hidePopup();
@@ -71,13 +71,13 @@ var InContextHelper = {
     if (this.isInContextEnabled()) {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
-      gDialog.inContextStylePanel.openPopup(aElement, "after_start",
-                                            selectionRect.left - elementRect.left + 10,
-                                            - elementRect.bottom + selectionRect.top - 80,
-                                            false, true);
+      gDialog.inContextStylePanel.openPopup(aElement, "after_pointer",
+                                            selectionRect.left - elementRect.left,
+                                            (elementRect.top < 0) ?  -elementRect.top : selectionRect.top - elementRect.top,
+                                            false, false);
       this.mDocument = EditorUtils.getCurrentDocument();
-      this.mDocument.documentElement.addEventListener("mousemove", InContextHelper.onMouseMove, true);
-      this.mDocument.documentElement.addEventListener("mouseleave", InContextHelper.onMouseLeave, true);
+      //this.mDocument.documentElement.addEventListener("mousemove", InContextHelper.onMouseMove, true);
+      //this.mDocument.documentElement.addEventListener("mouseleave", InContextHelper.onMouseLeave, true);
       gDialog.inContextStylePanel.style.opacity = "";
     }
   },

@@ -64,7 +64,7 @@
   background-image: -moz-linear-gradient(#d0d0d0, silver);
 %endif
   margin-bottom: 0.5em;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #sectionHeaderContext {
@@ -83,7 +83,7 @@
   font-family: -moz-fixed;
   padding: 0.5em;
   border: thin solid gray;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   font-size: larger;
 }
 
@@ -159,18 +159,18 @@ toolbarbutton.multibutton {
 %endif
   -moz-appearance: none;
   border: thin silver solid;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 toolbarbutton.multibutton + toolbarbutton.multibutton {
-  -moz-border-radius-topleft: 0px;
-  -moz-border-radius-bottomleft: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   border-left: 0px;
 }
 
 toolbarbutton.multibutton:last-child {
-  -moz-border-radius-topright: 5px; 
-  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px; 
+  border-bottom-right-radius: 5px;
   margin-right: 1em;
 }
 

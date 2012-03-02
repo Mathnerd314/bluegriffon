@@ -65,8 +65,8 @@
 .tabeditor-tab {
   -moz-appearance: none;
   background-color: rgb(216, 213, 196);
-  -moz-border-radius-topleft: 4px;
-  -moz-border-radius-topright: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .tabeditor-tab[selected="true"] {

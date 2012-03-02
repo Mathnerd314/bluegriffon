@@ -170,7 +170,7 @@
   margin-left: 3px;
   cursor: pointer;
   border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -306,7 +306,7 @@
   border-right: 1px solid #808080;
   border-bottom: 1px solid #808080;
   border-radius: 8px;
-  -moz-border-radius: 8px;
+  border-radius: 8px;
   -webkit-border-radius: 8px;
 }
 
@@ -601,7 +601,7 @@ span.zoom_tool {
   background-color: #E8E8E8;
   cursor: pointer;
   border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
@@ -857,21 +857,21 @@ span.zoom_tool {
 #svg_editor #option_lists ul li {
   margin: 0;
   border-radius: 0;
-  -moz-border-radius: 0;
+  border-radius: 0;
   -webkit-border-radius: 0;
 }
 
 .color_tool > *:first-child {
-  -moz-border-radius-topleft: 4px;
-  -moz-border-radius-bottomleft: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   -webkit-border-top-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   padding-right: 0;
 }
 
 .color_tool > *:last-child {
-  -moz-border-radius-topright: 4px;
-  -moz-border-radius-bottomright: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
   -webkit-border-top-right-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
 }
@@ -883,7 +883,7 @@ span.zoom_tool {
   background: #f0f0f0;
   height: 26px;
   border-radius: 4px;
-  -moz-border-radius: 4px;
+  border-radius: 4px;
   -webkit-border-radius: 4px;
   padding: 0 3px;
 }
@@ -1089,7 +1089,7 @@ span.zoom_tool {
   border-left-color: #FFF;
 
   border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
@@ -1166,7 +1166,7 @@ span.zoom_tool {
 
 #dialog_container, #dialog_content {
   border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -webkit-border-radius: 5px;
 }
 
@@ -1216,7 +1216,7 @@ span.zoom_tool {
   height: 24px;
   margin: 0;
   border-radius: 0px;
-  -moz-border-radius: 0px;
+  border-radius: 0px;
   -webkit-border-radius: 0px;  
 }
 
@@ -1231,7 +1231,7 @@ span.zoom_tool {
   display: none;
   font: 14px/17px Lucida Sans, Helvetica, Verdana, sans-serif;
   border-radius: 5px;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -moz-box-shadow: 2px 5px 10px rgba(0,0,0,.3);
   -webkit-box-shadow: 2px 5px 10px rgba(0,0,0,.3);
   box-shadow: 2px 5px 10px rgba(0,0,0,.3);

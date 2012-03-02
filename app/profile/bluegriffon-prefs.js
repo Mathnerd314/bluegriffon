@@ -153,3 +153,7 @@ pref("bluegriffon.css.colors.names.enabled", true);
 pref("bluegriffon.css.colors.type", "hex");
 
 pref("tipoftheday.openAtStartup", true);
+
+
+// Enable Floating Toolbar
+pref("bluegriffon.floatingToolbar.enabled", true);

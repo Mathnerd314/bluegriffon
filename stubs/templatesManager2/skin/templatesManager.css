@@ -43,7 +43,7 @@ docTemplate {
   margin: 4px;
   padding: 4px;
   border: thin solid #f0f0f0;
-  -moz-border-radius: 5px; 
+  border-radius: 5px; 
 }
 
 docTemplate:hover {

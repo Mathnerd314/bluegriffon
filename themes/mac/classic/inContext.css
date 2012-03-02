@@ -30,9 +30,6 @@
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/underline-disabled.png");
 }
 
-
-
-
 #inContextStylePanel toolbarbutton .toolbarbutton-text {
   display: none;
 }
@@ -44,6 +41,10 @@
 
 #inContextStylePanel {
   padding: 4px;
+}
+
+#inContextStylePanel .panel-arrowcontent {
+  background: -moz-linear-gradient(rgba(85,85,85,1), #cccccc) ! important
 }
 
 #inContextStylePanel:hover {

@@ -6,8 +6,8 @@
    xmlns:xbl="http://www.mozilla.org/xbl">
 
   <binding id="inContext"
-           extends="chrome://global/content/bindings/popup.xml#panel">
-    <content noautohide="true" level="floating">
+           extends="chrome://global/content/bindings/popup.xml#arrowpanel">
+    <content noautohide="true">
       <children/>
     </content>
   </binding>

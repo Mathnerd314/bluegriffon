@@ -48,7 +48,7 @@
 ecolorpicker {
   width: 24px;
   height: 24px;
-  -moz-border-radius: 12px;
+  border-radius: 12px;
   border: 1px solid #858585;
   background-color: ThreeDFace;
   padding: 3px;
@@ -61,7 +61,7 @@ ecolorpicker:hover:active {
 
 .colorpicker-button-colorbox {
   border: 1px solid #d0d0d0;
-  -moz-border-radius: 11px;
+  border-radius: 11px;
   background-color: ThreeDFace;
 }
 

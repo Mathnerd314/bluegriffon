@@ -99,7 +99,7 @@ tabeditor > tabbox {
 .tabeditor-tab {
   -moz-box-alig: center;
   -moz-appearance: none;
-  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
   color: #222;
   color: black;
   margin-bottom: 1px;

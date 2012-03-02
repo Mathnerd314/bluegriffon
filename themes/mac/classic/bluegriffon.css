@@ -163,14 +163,14 @@ grippy[disabled="true"] {
 
 .multiButton.left,
 .multiButton:not(.left):not(.right):not(.center) {
-  -moz-border-radius-topleft: 2px;
-  -moz-border-radius-bottomleft: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 .multiButton.right,
 .multiButton:not(.left):not(.right):not(.center) {
-  -moz-border-radius-topright: 2px;
-  -moz-border-radius-bottomright: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
 }
 
 .multiButton:not([disabled]):active,
@@ -202,7 +202,7 @@ grippy[disabled="true"] {
 }
 
 #bespinLineTextbox {
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
   padding-left: 5px;
@@ -215,7 +215,7 @@ grippy[disabled="true"] {
 #bespinReplaceTextbox {
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   height: 16px;
   font-size: 11px;
   padding: 0px 5px;
@@ -243,7 +243,7 @@ grippy[disabled="true"] {
   padding: 0px 12px 0px 12px;
   -moz-appearance: none;
   font-size: smaller;
-  -moz-border-radius: 11px;
+  border-radius: 11px;
   border-top: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -258,15 +258,15 @@ grippy[disabled="true"] {
 
 #bespinFindPrevious {
   padding: 0px 8px 0px 12px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-bottomright: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
   margin-right: 0px;
 }
 
 #bespinFindNext {
   padding: 0px 12px 0px 8px;
-  -moz-border-radius-topleft: 0px;
-  -moz-border-radius-bottomleft: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   margin-left: 0px;
 }
 
@@ -316,7 +316,7 @@ panel[floating="true"] {
   -moz-appearance: none; 
   background-color: rgba(96,96,96,0.9);
   color: white;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -moz-transition: opacity 0.5s;
 }
 

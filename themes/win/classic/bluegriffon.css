@@ -160,14 +160,14 @@ grippy[disabled="true"] {
 
 .multiButton.left,
 .multiButton:not(.left):not(.right):not(.center) {
-  -moz-border-radius-topleft: 0.5em;
-  -moz-border-radius-bottomleft: 0.5em;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
 }
 
 .multiButton.right,
 .multiButton:not(.left):not(.right):not(.center) {
-  -moz-border-radius-topright: 0.5em;
-  -moz-border-radius-bottomright: 0.5em;
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
 }
 
 .multiButton:not([selected="true"]):not([disabled]) {
@@ -204,7 +204,7 @@ grippy[disabled="true"] {
 }
 
 #bespinLineTextbox {
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
   padding-left: 5px;
@@ -216,7 +216,7 @@ grippy[disabled="true"] {
 #bespinFindTextbox {
   -moz-appearance: none;
   border: thin solid rgb(40, 32, 28);
-  -moz-border-radius: 11px 11px 11px 11px;
+  border-radius: 11px 11px 11px 11px;
   font-size: 11px;
   padding: 0px 5px;
   background-color: rgb(208, 208, 208);
@@ -243,8 +243,8 @@ grippy[disabled="true"] {
   -moz-appearance: none;
   font-size: smaller;
   padding: 0px 8px 0px 12px;
-  -moz-border-radius-topleft: 11px;
-  -moz-border-radius-bottomleft: 11px;
+  border-top-left-radius: 11px;
+  border-bottom-left-radius: 11px;
   border-top: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -262,8 +262,8 @@ grippy[disabled="true"] {
   -moz-appearance: none;
   font-size: smaller;
   padding: 0px 12px 0px 8px;
-  -moz-border-radius-topright: 11px;
-  -moz-border-radius-bottomright: 11px;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
   border-top: 1px solid #aaa;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -323,7 +323,7 @@ panel[floating="true"] {
   -moz-appearance: none;
   background-color: #606060;
   color: white;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
   -moz-transition: opacity 0.5s;
 }
 
@@ -336,7 +336,7 @@ panel#inContextStylePanel {
   -moz-appearance: none;
   background-color: white;
   color: black;
-  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 
