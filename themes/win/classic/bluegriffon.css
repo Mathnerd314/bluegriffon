@@ -327,19 +327,6 @@ panel[floating="true"] {
   -moz-transition: opacity 0.5s;
 }
 
-panel#inContextStylePanel {
- -moz-binding: url("chrome://bluegriffon/content/bindings/inContext.xml#inContext");
-}
-
-#inContextStylePanel {
-  padding: 4px;
-  -moz-appearance: none;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-}
-
-
 /* link to add-ons */
 
 #editorBarLabel {
