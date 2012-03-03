@@ -518,16 +518,21 @@ function ToggleProperty(aElt)
   var resetter  = aElt.getAttribute("resetter");
   var group     = aElt.getAttribute("group");
   var agregator = aElt.getAttribute("agregator");
+
   var others = [];
   if (agregator)
     others = document.querySelectorAll("[agregator='" + agregator + "']");
   else if (group)
     others = document.querySelectorAll("[group='" + group + "']");
+
   for (var i = 0; i < others.length; i++) {
     var e = others[i];
     if (e != aElt) {
-      if (resetter == "true" || group)
+      if (resetter == aElt.id
+          || resetter == e.id
+          || group) {
         e.removeAttribute("checked");
+      }
       else {
         if (agregator && e.hasAttribute("checked"))
           value += " " + e.getAttribute("value");

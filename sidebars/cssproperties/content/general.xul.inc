@@ -114,16 +114,25 @@
             <row align="center" animatable="false">
               <label value="&textDecoration.label;"/>
               <hbox align="center">
+                <hbox align="center">
+	                <toolbarbutton class="multibutton" label="&textDecorationNone.label;" value="none" property="text-decoration" type="checkbox"
+	                               id="textDecorationNoneButton" agregator="text-decoration"
+	                               resetter="textDecorationNoneButton"
+	                               oncommand="ToggleProperty(this)"/>
+                </hbox>
                 <toolbarbutton class="multibutton" label="&textDecorationUnderline.label;" value="underline" property="text-decoration" type="checkbox"
                                style="text-decoration: underline" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
                                id="textDecorationUnderlineButton"
                                oncommand="ToggleProperty(this)"/>
                 <toolbarbutton class="multibutton" label="&textDecorationOverline.label;" value="overline" property="text-decoration" type="checkbox"
                                style="text-decoration: overline" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
                                id="textDecorationOverlineButton"
                                oncommand="ToggleProperty(this)"/>
                 <toolbarbutton class="multibutton" label="&textDecorationLinethrough.label;" value="line-through" property="text-decoration" type="checkbox"
                                style="text-decoration: line-through" agregator="text-decoration"
+                               resetter="textDecorationNoneButton"
                                id="textDecorationLinethroughButton"
                                oncommand="ToggleProperty(this)"/>
               </hbox>
