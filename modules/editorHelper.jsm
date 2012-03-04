@@ -854,7 +854,9 @@ var EditorUtils = {
 	    default: break;
 	  }
 	
-	  return {value: flags, maxColumnPref: maxColumnPref};
+    flags |= nsIDE.OutputDontRewriteEncodingDeclaration;
+
+    return {value: flags, maxColumnPref: maxColumnPref};
 	},
 
   get activeViewActive()    { return this.mActiveViewActive; },
