@@ -244,8 +244,12 @@
          noautofocus="true"
          align="center"
          forcearrow="true">
-    <menulist class="toolbar-focustarget" command="cmd_renderedHTMLEnabler"
-              id="inContextFontFaceSelect" tooltiptext="&FontFaceSelect.tooltip;" crop="right"
+    <menulist class="toolbar-focustarget"
+              command="cmd_renderedHTMLEnabler"
+              id="inContextFontFaceSelect"
+              tooltiptext="&FontFaceSelect.tooltip;"
+              crop="right"
+              style="width: 17em"
               sizetopopup="none">
       <observes element="cmd_fontFace" attribute="state" onbroadcast="onFontFaceChange(this.parentNode, 'cmd_fontFace')"/>
       <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"

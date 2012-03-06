@@ -11,8 +11,10 @@
 
   <prefpane id="newPagePrefPane">
     <preferences>
-      <preference id="pref-author"              name="bluegriffon.author"                type="unichar"/>
+      <preference id="pref-author"              name="bluegriffon.author"                  type="unichar"/>
+      <preference id="pref-floating-toolbar"    name="bluegriffon.floatingToolbar.enabled" type="bool"/>
     </preferences>
+
     <groupbox>
       <caption label="&author.caption;"/>
       <hbox align="center">
@@ -21,6 +23,7 @@
                  preference="pref-author"/>
       </hbox>
     </groupbox>
+
     <groupbox>
       <caption label="&zoom.label;"/>
       <hbox align="center">
@@ -35,6 +38,12 @@
                  oninput="OnZoomTextInput(this)"/>
         <label value="%"/>
       </hbox>
+    </groupbox>
+
+    <groupbox>
+      <caption label="&editingFeatures.label;"/>
+      <checkbox id="floatingToolbarCheckbox" preference="pref-floating-toolbar"
+                label="&enableFloatingToolbar.label;" />
     </groupbox>
   </prefpane>
 

@@ -39,7 +39,6 @@ Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 
 var InContextHelper = {
-  mDocument: null,
 
   isInContextEnabled: function()
   {
@@ -56,11 +55,6 @@ var InContextHelper = {
     if (!this.isInContextEnabled())
       return;
 
-    if (this.mDocument) {
-      //this.mDocument.documentElement.removeEventListener("mousemove", InContextHelper.onMouseMove, true);
-      //this.mDocument.documentElement.removeEventListener("mouseleave", InContextHelper.onMouseLeave, true);
-      this.mDocument = null;
-    }
     gDialog.inContextStylePanel.hidePopup();
   },
 
@@ -75,60 +69,6 @@ var InContextHelper = {
                                             selectionRect.left - elementRect.left,
                                             (elementRect.top < 0) ?  -elementRect.top : selectionRect.top - elementRect.top,
                                             false, false);
-      this.mDocument = EditorUtils.getCurrentDocument();
-      //this.mDocument.documentElement.addEventListener("mousemove", InContextHelper.onMouseMove, true);
-      //this.mDocument.documentElement.addEventListener("mouseleave", InContextHelper.onMouseLeave, true);
-      gDialog.inContextStylePanel.style.opacity = "";
     }
-  },
-
-  onMouseLeave: function(aEvent) {
-    //gDialog.inContextStylePanel.style.opacity = "0";
-  },
-
-  onMouseMove: function(aEvent) {
-    if (gDialog.inContextStylePanel.state == "closed") // early way out if we can
-      return;
-
-#ifdef XP_UNIX
-#ifndef XP_MACOSX
-    return;
-#endif
-#endif  
-    var panelBoxObject = gDialog.inContextStylePanel.boxObject;
-    var panelRect = { left: panelBoxObject.screenX,
-                      top: panelBoxObject.screenY,
-                      right: panelBoxObject.screenX + panelBoxObject.width,
-                      bottom: panelBoxObject.screenY + panelBoxObject.height };
-    var x = aEvent.screenX;
-    var y = aEvent.screenY;
-    var distance = 0;
-    if (x < panelRect.left) {
-      if (y < panelRect.top)
-        distance = Math.sqrt( (y - panelRect.top)*(y - panelRect.top) + (x - panelRect.left)*(x - panelRect.left));
-      else if (y > panelRect.bottom)
-        distance = Math.sqrt( (y - panelRect.bottom)*(y - panelRect.bottom) + (x - panelRect.left)*(x - panelRect.left));
-      else
-        distance = panelRect.left - x;
-    }
-    else if (x >= panelRect.left && x <= panelRect.right) {
-      if (y < panelRect.top)
-        distance = panelRect.top - y;
-      else if (y > panelRect.bottom)
-        distance = y - panelRect.bottom;
-      else
-        distance = 0;
-    }
-    else {
-      if (y < panelRect.top)
-        distance = Math.sqrt( (y - panelRect.top)*(y - panelRect.top) + (x - panelRect.right)*(x - panelRect.right));
-      else if (y > panelRect.bottom)
-        distance = Math.sqrt( (y - panelRect.bottom)*(y - panelRect.bottom) + (x - panelRect.right)*(x - panelRect.right));
-      else
-        distance = x - panelRect.right;
-    }
-  
-    distance = Math.min(distance, 30);
-    gDialog.inContextStylePanel.style.opacity = (1 - distance / 30);
   }
 }
