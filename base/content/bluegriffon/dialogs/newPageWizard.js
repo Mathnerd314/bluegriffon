@@ -658,7 +658,17 @@ function Apply()
     }
   
     /* character set */
-    EditorUtils.setDocumentCharacterSet(gDialog.charsetMenulist.value);
+    var meta = EditorUtils.getCurrentDocument().querySelector('meta[http-equiv="content-type"]');
+    if (meta) {
+      meta.parentNode.removeChild(meta);
+    }
+    meta = EditorUtils.getCurrentDocument().createElement("meta");
+    meta.setAttribute("http-equiv", "content-type");
+    EditorUtils.insertMetaElement(meta,
+                                  EditorUtils.getCurrentDocumentMimeType() + "; charset="
+                                    + gDialog.charsetMenulist.value,
+                                  true, false);
+    EditorUtils.getCurrentEditor().documentCharacterSet = gDialog.charsetMenulist.value;
   }
   catch(e) {}
 

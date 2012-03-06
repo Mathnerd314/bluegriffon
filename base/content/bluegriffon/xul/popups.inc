@@ -1,5 +1,12 @@
 <popupset id="editorPopupSet">
 
+  <menupopup id="tabContextPopup">
+    <menuitem id="closeTabTabContextMenu"         label="&closeTab.label;" />
+    <menuitem id="closeOtherTabsTabContextMenu"   label="&closeOtherTabs.label;" />
+    <menuseparator />
+    <menuitem id="revertTabContextMenu"           label="&revert.label;" />
+  </menupopup>
+
   <menupopup id="main-toolbar-context-menu">
     <menuitem oncommand="CustomizeToolbar('MainToolbox');" id="CustomizeMainToolbar" label="&customizeToolbar.label;" accesskey="&customizeToolbar.accesskey;"/>
   </menupopup>

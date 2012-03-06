@@ -77,6 +77,11 @@ var FileUtils = {
     if (editorType != "html")
       throw NS_ERROR_NOT_IMPLEMENTED;
   
+    var converter = Components.classes['@mozilla.org/intl/scriptableunicodeconverter']
+                    .getService(Components.interfaces.nsIScriptableUnicodeConverter);
+    converter.charset = editor.documentCharacterSet;
+    aSource = converter.ConvertFromUnicode(aSource);
+
     var urlstring = EditorUtils.getDocumentUrl();
     var mustShowFileDialog = (aSaveAs ||
                               UrlUtils.isUrlOfBlankDocument(urlstring) ||
@@ -193,7 +198,7 @@ var FileUtils = {
       // also call foStream.writeData directly
       var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
                       createInstance(Components.interfaces.nsIConverterOutputStream);
-      converter.init(foStream, "UTF-8", 0, 0);
+      converter.init(foStream, editor.documentCharacterSet, 0, 0);
       converter.writeString(aSource);
       converter.close(); // this closes foStream
     }
@@ -366,29 +371,19 @@ var FileUtils = {
       var systemId = doctype ? doctype.systemId : null;
       var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + aMimeType]
                      .createInstance(Components.interfaces.nsIDocumentEncoder);
-      encoder.setCharset("UTF-8");
+      encoder.setCharset(editor.documentCharacterSet);
       encoder.init(editorDoc, aMimeType, flags.value);
       if (flags.value & Components.interfaces.nsIDocumentEncoder.OutputWrap)
         encoder.setWrapColumn(flags.maxColumnPref);
   
-      var source = encoder.encodeToString();
       // file is nsIFile, data is a string
       var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                      createInstance(Components.interfaces.nsIFileOutputStream);
       
       // use 0x02 | 0x10 to open file for appending.
       foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
-      // write, create, truncate
-      // In a c file operation, we have no need to set file mode with or operation,
-      // directly using "r" or "w" usually.
-      
-      // if you are sure there will never ever be any non-ascii text in data you can 
-      // also call foStream.writeData directly
-      var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
-                      createInstance(Components.interfaces.nsIConverterOutputStream);
-      converter.init(foStream, "UTF-8", 0, 0);
-      converter.writeString(source);
-      converter.close(); // this closes foStream
+      encoder.encodeToStream(foStream);
+      foStream.close(); // this closes foStream
 
       //success = this.outputFileWithPersistAPI(editorDoc, destinationLocation, relatedFilesDir, aMimeType);
     }

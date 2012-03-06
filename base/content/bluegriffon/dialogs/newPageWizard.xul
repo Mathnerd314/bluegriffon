@@ -140,7 +140,7 @@
           <textbox id="pageKeywords" spellcheck="true"/>
         </row>
         <row align="center">
-          <label value="&language.label;"
+          <label value="&documentLanguage.label;"
                  control="pageLanguage"
                  accesskey="&language.accesskey;"/>
           <hbox align="center">

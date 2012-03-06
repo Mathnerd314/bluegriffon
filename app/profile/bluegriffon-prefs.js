@@ -25,6 +25,8 @@ pref("nglayout.debug.disable_xul_fastload", true);
 
 pref("general.useragent.extra.mybrowser", "@MOZ_APP_NAME@/@MOZ_APP_VERSION@");
 pref("intl.locale.matchOS", true);
+pref("intl.accept_charsets", "iso-8859-1,*,utf-8");
+pref("browser.display.use_document_fonts", 1);
 
 pref("extensions.update.autoUpdateDefault", true);
 pref("extensions.update.enabled", false);
@@ -39,6 +41,8 @@ pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending af
                                                 // restart.
 pref("extensions.closeOnEscape", true);
 pref("extensions.ui.lastCategory", "addons://list/extension");
+pref("extensions.shownSelectionUI", false);
+pref("extensions.showMismatchUI", false);
 
 // browser preferences
 pref("bluegriffon.display.use_system_colors", true);

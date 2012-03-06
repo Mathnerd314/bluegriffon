@@ -116,12 +116,7 @@ var cmdCloseTab =
 {
   isCommandEnabled: function(aCommand, dummy)
   {
-    // Always allow saving when editing a remote document,
-    //  otherwise the document modified state would prevent that
-    //  when you first open a remote file.
-    try {
-      return EditorUtils.isDocumentEditable();
-    } catch (e) {return false;}
+    return true;
   },
   
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -131,7 +126,8 @@ var cmdCloseTab =
   {
     var editorElement = EditorUtils.getCurrentEditorElement();
     if (!editorElement) // sanity check
-      return;
+      window.close();
+
     var mode = editorElement.parentNode.getAttribute("previousMode");
     if (mode == "source") {
       ToggleViewMode(gDialog.wysiwygModeButton);

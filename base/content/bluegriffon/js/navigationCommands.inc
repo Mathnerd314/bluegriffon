@@ -50,6 +50,21 @@ var cmdNew =
   }
 };
 
+var cmdNewWindow =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+  doCommand: function(aCommand)
+  {
+    OpenNewWindow("");
+  }
+};
+
 var cmdNewWizard =
 {
   isCommandEnabled: function(aCommand, dummy)

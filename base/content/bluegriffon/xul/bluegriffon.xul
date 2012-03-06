@@ -43,12 +43,14 @@
 #include overlays.inc
 
 <!DOCTYPE window [
+  <!ENTITY % tabEditorDTD    SYSTEM "chrome://bluegriffon/locale/tabeditor.dtd" >
   <!ENTITY % bluegriffonDTD  SYSTEM "chrome://bluegriffon/locale/bluegriffon.dtd" >
   <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
   <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
   <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
   <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
+  %tabEditorDTD;
   %bluegriffonDTD;
   %findbarDTD;
   %structurebarDTD;

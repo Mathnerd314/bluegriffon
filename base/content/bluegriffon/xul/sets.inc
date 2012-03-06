@@ -39,6 +39,7 @@
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <command id="cmd_stopLoading" disabled="true" oncommand="goDoCommand('cmd_stopLoading')"/>
   <command id="cmd_new"                         oncommand="goDoCommand('cmd_new')"/>
+  <command id="cmd_newWindow"                   oncommand="goDoCommand('cmd_newWindow')"/>
   <command id="cmd_newWizard"                   oncommand="goDoCommand('cmd_newWizard')"/>
 
   <command id="Tasks:Inspector"   oncommand="inspectDOMDocument();"/>
@@ -263,7 +264,9 @@
 </commandset>
 
 <keyset id="editorKeys">
-  <key id="key_newNavigator" key="n" modifiers="accel" observes="cmd_new"/>
+  <key id="key_newNavigator"   key="t" modifiers="accel"       observes="cmd_new"/>
+  <key id="key_newWindow"      key="n" modifiers="accel"       observes="cmd_newWindow"/>
+  <key id="key_newWithOptions" key="n" modifiers="accel,shift" oncommand="NewDocumentWithOptions(event);"/>
 </keyset>
 
 <stringbundleset id="languageSet">

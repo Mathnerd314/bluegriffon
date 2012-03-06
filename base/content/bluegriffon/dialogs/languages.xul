@@ -29,6 +29,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/languages.dtd">
 
 <dialog title="&window.title;"
+        id="selectLanguageWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="Startup()"
         buttons="accept,cancel"

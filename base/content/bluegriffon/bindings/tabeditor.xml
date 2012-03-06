@@ -57,7 +57,7 @@
 
     <content>
       <xul:tabbox anonid="EditorTabbox" flex="1" onselect="">
-        <xul:hbox class="tabeditor-strip">
+        <xul:hbox class="tabeditor-strip" >
           <xul:tabs flex="1" anonid="EditorTabs" closebutton="true"
                     class="tabeditor-tabs"
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
@@ -306,6 +306,27 @@
                     }
                   }
                   if (editor) {
+                    try {
+                      var charset = EditorUtils.getCurrentEditorElement().docShell.charset;
+            	        var contentViewer = EditorUtils.getCurrentEditorElement().docShell.contentViewer;
+            			    contentViewer.QueryInterface(Components.interfaces.nsIMarkupDocumentViewer);
+                      var metas = editor.document.querySelectorAll("meta");
+                      for (var i = 0; !charset && i < metas.length; i++) {
+                        var meta = metas[i];
+                        if (meta.getAttribute("http-equiv")
+                            && meta.getAttribute("http-equiv").toLowerCase() == "content-type") {
+                          var match = meta.getAttribute("content").match( /charset\s*=\s*(.*)$/i );
+                          if (match)
+                            charset = match[1].trim();
+                        }
+                      }
+                      if (charset) {
+                        editor.documentCharacterSet = charset;
+                        editor.resetModificationCount();
+                      }
+                    }
+                    catch(e) { alert(e) }
+
                     window.updateCommands("navigation");
                     window.updateCommands("create");
   
@@ -361,6 +382,7 @@
             var newTab = this.mTabs.appendItem(aTitle,
                            UrlUtils.stripUsernamePassword(aURL, null, null));
             newTab.setAttribute("label", aTitle);
+            newTab.setAttribute("context", "tabContextPopup");
             newTab.setAttribute("class", "tabeditor-tab");
             newTab.setAttribute("maxwidth", 200);
             newTab.setAttribute("width", 0);
@@ -503,7 +525,9 @@
       <method name="getCurrentEditorElement">
         <body>
         <![CDATA[
-            if (this.mTabpanels.selectedPanel)
+            if (this.mTabpanels.childNodes
+                && this.mTabpanels.childNodes.length
+                && this.mTabpanels.selectedPanel)
               return this.mTabpanels.selectedPanel.lastChild;
             return null;
         ]]>

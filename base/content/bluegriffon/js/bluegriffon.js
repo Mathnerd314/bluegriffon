@@ -104,10 +104,6 @@ function NewDocumentWithOptions(aEvent)
   window.openDialog("chrome://bluegriffon/content/dialogs/newDocument.xul","_blank",
               "chrome,modal,titlebar", rv);
   if (aEvent) aEvent.stopPropagation();
-  if (rv.value)
-  {
-    OpenFile(window[rv.value], (rv.where == "tab"));
-  }
 }
 
 function OpenFile(aURL, aInTab)
@@ -819,7 +815,7 @@ function ToggleViewMode(aElement)
 
     var flags = EditorUtils.getSerializationFlags(EditorUtils.getCurrentDocument());
 
-    encoder.setCharset("UTF-8");
+    encoder.setCharset(editor.documentCharacterSet);
     encoder.init(EditorUtils.getCurrentDocument(), mimeType, flags.value);
     if (flags.value & nsIDE.OutputWrap)
       encoder.setWrapColumn(flags.maxColumnPref);

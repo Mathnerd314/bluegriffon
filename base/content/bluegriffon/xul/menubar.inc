@@ -15,6 +15,10 @@
         </menu>
 
         <menuseparator/>
+        <menuitem label="&newWindow.label;" key="key_newWindow"
+                  command="cmd_newWindow" />
+
+        <menuseparator/>
         <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
 
         <menuseparator/>
