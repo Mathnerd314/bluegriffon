@@ -12,14 +12,6 @@
   <prefpane id="newPagePrefPane">
     <preferences>
       <preference id="pref-author"              name="bluegriffon.author"                type="unichar"/>
-      <preference id="pref-source-theme"        name="bluegriffon.source.theme"          type="string"/>
-      <preference id="pref-source-entities"     name="bluegriffon.source.entities"       type="string"/>
-
-      <preference id="pref-source-indent"       name="bluegriffon.source.auto-indent"    type="bool"/>
-      <preference id="pref-source-wrap"         name="bluegriffon.source.wrap"           type="bool"/>
-      <preference id="pref-source-wrap-col"     name="bluegriffon.source.wrap.maxColumn" type="int"/>
-      <preference id="pref-source-nowrap-langs" name="bluegriffon.source.wrap.language-exclusions" type="string"/>
-      <preference id="pref-source-excl-langs"   name="bluegriffon.source.wrap.exclude-languages" type="bool"/>
     </preferences>
     <groupbox>
       <caption label="&author.caption;"/>
@@ -44,47 +36,6 @@
         <label value="%"/>
       </hbox>
     </groupbox>
-    <groupbox>
-      <caption label="&source.label;"/>
-      <hbox align="center">
-        <label value="&theme.label;"/>
-        <menulist id="sourceThemeMenulist"
-                  preference="pref-source-theme">
-          <menupopup id="sourceThemeMenupopup"/>
-        </menulist>
-      </hbox>
-
-      <vbox>
-        <label value="&specialChars.description;"/>
-        <menulist id="entitiesOutputMenulist"
-                  class="indent"
-                  preference="pref-source-entities">
-          <menupopup>
-            <menuitem label="&basicEncoding.label;"          value="basic"/>
-            <menuitem label="&latin1EntitiesEncoding.label;" value="latin1"/>
-            <menuitem label="&htmlEntitiesEncoding.label;"   value="html"/>
-            <menuitem label="&allEntitiesEncoding.label;"    value="unicode"/>
-          </menupopup>
-        </menulist>
-      </vbox>
-      <checkbox label="&autoIndent.label;" preference="pref-source-indent" id="autoIdentCheckbox"/>
-      <checkbox label="&wrap.label;"       preference="pref-source-wrap"   id="wrapCheckbox"
-                oncommand="toggleWrapping()"/>
-      <hbox class="indent" align="center">
-        <label value="&wrapColumn.label;" id="maxColumnLabel"/>
-        <textbox size="4" type="number" preference="pref-source-wrap-col" id="maxColumnCheckbox"/>
-      </hbox>
-      <vbox>
-        <checkbox class="indent" label="&noWrapForLanguages.label;" id="noWrapForLanguagesCheckbox"
-                  preference="pref-source-excl-langs"/>
-        <hbox align="center">
-          <textbox class="indent" flex="1" preference="pref-source-nowrap-langs" id="langExclusionsTextbox"/>
-          <label value="&langExclusionExample.label;" id="langExclusionExampleLabel"/>
-        </hbox>
-      </vbox>
-    </groupbox>
   </prefpane>
-
-  <script type="application/javascript" src="resource://app/res/cm2/themes-list.js"/>
 
 </overlay>
