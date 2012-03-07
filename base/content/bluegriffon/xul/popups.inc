@@ -1,8 +1,8 @@
 <popupset id="editorPopupSet">
 
   <menupopup id="tabContextPopup">
-    <menuitem id="closeTabTabContextMenu"         label="&closeTab.label;" />
-    <menuitem id="closeOtherTabsTabContextMenu"   label="&closeOtherTabs.label;" />
+    <menuitem id="closeTabTabContextMenu"         label="&closeTab.label;"       oncommand="CloseOneTab()" />
+    <menuitem id="closeOtherTabsTabContextMenu"   label="&closeOtherTabs.label;" oncommand="CloseAllTabsButOne()" />
     <menuseparator />
     <menuitem id="revertTabContextMenu"           label="&revert.label;" oncommand="RevertTab()" />
   </menupopup>

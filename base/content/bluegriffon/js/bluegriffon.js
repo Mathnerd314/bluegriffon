@@ -1960,3 +1960,48 @@ function RevertTab()
     OpenFile(url, true);
   }
 }
+
+function CloseOneTab()
+{
+  var tab = document.popupNode;
+
+  if (gDialog.tabeditor.selectedTab != tab) {
+    // not the current tab, make sure to select it
+    var index = 0;
+    var child = tab;
+    while (child.previousElementSibling) {
+      index++;
+      child = child.previousElementSibling;
+    }
+    gDialog.tabeditor.selectedIndex = index;
+  }
+
+  cmdCloseTab.doCommand();
+}
+
+function CloseAllTabsButOne()
+{
+  var tab = document.popupNode;
+
+  var child = tab.parentNode.firstElementChild;
+  while (child) {
+    var tmp = child.nextElementSibling;
+
+    if (child != tab) {
+      var index = 0;
+      var child2 = child;
+      while (child2.previousElementSibling) {
+        index++;
+        child2 = child2.previousElementSibling;
+      }
+      gDialog.tabeditor.selectedIndex = index;
+
+      if (cmdCloseTab.doCommand() == 1)
+        child = null;
+      else
+        child = tmp;
+    }
+    else
+      child = tmp;
+  }
+}

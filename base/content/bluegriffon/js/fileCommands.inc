@@ -146,7 +146,7 @@ var cmdCloseTab =
          case 0:
            if (!cmdSave.doCommand()) {
              SaveCurrentTabLocation();
-             return rv;
+             return 1;
            }
          default: break;
        }
