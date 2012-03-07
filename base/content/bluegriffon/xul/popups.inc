@@ -4,7 +4,7 @@
     <menuitem id="closeTabTabContextMenu"         label="&closeTab.label;" />
     <menuitem id="closeOtherTabsTabContextMenu"   label="&closeOtherTabs.label;" />
     <menuseparator />
-    <menuitem id="revertTabContextMenu"           label="&revert.label;" />
+    <menuitem id="revertTabContextMenu"           label="&revert.label;" oncommand="RevertTab()" />
   </menupopup>
 
   <menupopup id="main-toolbar-context-menu">

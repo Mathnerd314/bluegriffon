@@ -1918,3 +1918,43 @@ function onBackgroundColorChange()
     }
   }
 }
+
+function RevertTab() { // revert the document in a tab
+  var tab = document.popupNode;
+  var child = tab;
+
+  if (gDialog.tabeditor.selectedTab != tab) {
+    // not the current tab, make sure to select it
+    var index = 0;
+    while (child.previousElementSibling) {
+      index++;
+      child = child.previousElementSibling;
+    }
+    gDialog.tabeditor.selectedIndex = index;
+  }
+
+  var rv = 0;
+  if (EditorUtils.isDocumentModified()) {
+    var promptService = Services.prompt;
+    var title = EditorUtils.getDocumentTitle();
+    if (!title)
+      title = L10NUtils.getString("untitled");
+  
+    var msg = L10NUtils.getString("AbandonChanges").replace(/%title%/,title);
+    rv = promptService.confirmEx(
+               window,
+               L10NUtils.getString("RevertCaption"),
+               msg,
+               (promptService.BUTTON_TITLE_REVERT * promptService.BUTTON_POS_0)
+                 + (promptService.BUTTON_TITLE_CANCEL * promptService.BUTTON_POS_1),
+               null, null, null, null, {value:0});
+  }
+
+  if (rv == 0)
+  {
+    var url = EditorUtils.getDocumentUrl();
+    
+    doCloseTab(tab);
+    OpenFile(url, true);
+  }
+}
