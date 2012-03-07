@@ -1919,13 +1919,14 @@ function onBackgroundColorChange()
   }
 }
 
-function RevertTab() { // revert the document in a tab
+function RevertTab()
+{
   var tab = document.popupNode;
-  var child = tab;
 
   if (gDialog.tabeditor.selectedTab != tab) {
     // not the current tab, make sure to select it
     var index = 0;
+    var child = tab;
     while (child.previousElementSibling) {
       index++;
       child = child.previousElementSibling;
@@ -1936,6 +1937,7 @@ function RevertTab() { // revert the document in a tab
   var rv = 0;
   if (EditorUtils.isDocumentModified()) {
     var promptService = Services.prompt;
+
     var title = EditorUtils.getDocumentTitle();
     if (!title)
       title = L10NUtils.getString("untitled");
