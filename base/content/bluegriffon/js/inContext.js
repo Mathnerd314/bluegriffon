@@ -40,6 +40,8 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 var InContextHelper = {
 
+  mCancelNext: false,
+
   isInContextEnabled: function()
   {
     var inContextEnabled = false;
@@ -58,6 +60,10 @@ var InContextHelper = {
     gDialog.inContextStylePanel.hidePopup();
   },
 
+  cancelNextInContextPanel: function() {
+    this.mCancelNext = true;
+  },
+
   showInContextPanel: function(aElement) {
     if (gDialog.inContextStylePanel.state != "closed")
       this.hideInContextPanel();
@@ -65,10 +71,18 @@ var InContextHelper = {
     if (this.isInContextEnabled()) {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
-      gDialog.inContextStylePanel.openPopup(aElement, "after_pointer",
-                                            selectionRect.left - elementRect.left,
-                                            (elementRect.top < 0) ?  -elementRect.top : selectionRect.top - elementRect.top,
-                                            false, false);
+      setTimeout(this._showInContextPanel, 1000, aElement, elementRect, selectionRect);
     }
+  },
+
+  _showInContextPanel: function(aElement, elementRect, selectionRect) {
+    if (InContextHelper.mCancelNext) {
+      InContextHelper.mCancelNext = false;
+      return;
+    }
+    gDialog.inContextStylePanel.openPopup(aElement, "after_pointer",
+                                          selectionRect.left - elementRect.left,
+                                          (elementRect.top < 0) ?  -elementRect.top : selectionRect.top - elementRect.top,
+                                          false, false);
   }
 }

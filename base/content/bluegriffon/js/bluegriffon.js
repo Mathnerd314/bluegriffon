@@ -1056,7 +1056,7 @@ function doSaveTabsBeforeQuit()
   var l = tabs.length;
   for (var i = l-1; i >= 0; i--) {
     var tab = tabs.item(i);
-    tabeditor.mTabbox = tab;
+    tabeditor.selectedIndex = i;
     var closed = cmdCloseTab.doCommand();
     if (1 == closed)
       return false;
@@ -1245,79 +1245,103 @@ function OnDoubleClick(aEvent)
 
   switch (node.nodeName.toLowerCase()) {
     case "a":
-      if (node.hasAttribute("href"))
+      if (node.hasAttribute("href")) {
+        InContextHelper.cancelNextInContextPanel();
         cmdInsertLinkCommand.doCommand();
-      if (node.hasAttribute("name") || node.id)
+      }
+      if (node.hasAttribute("name") || node.id) {
+        InContextHelper.cancelNextInContextPanel();
         cmdInsertAnchorCommand.doCommand();
+      }
       break;
     case "img":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertImageCommand.doCommand();
       break;
     case "video":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertVideoCommand.doCommand();
       break;
     case "audio":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertAudioCommand.doCommand();
       break;
     case "hr":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertHRCommand.doCommand();
       break;
     case "form":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertFormCommand.doCommand();
       break;
     case "input":
+      InContextHelper.cancelNextInContextPanel();
       window.openDialog("chrome://bluegriffon/content/dialogs/insertFormInput.xul","_blank",
                         "chrome,modal,titlebar,resizable=no,dialog=yes", node, node.getAttribute("type"));
       break;
    case "fieldset":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertFieldsetCommand.doCommand();
       break;
    case "label":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertLabelCommand.doCommand();
       break;
     case "button":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertButtonCommand.doCommand();
       break;
     case "select":
     case "option":
     case "optgroup":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertSelectCommand.doCommand();
       break;
     case "textarea":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertTextareaCommand.doCommand();
       break;
     case "keygen":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertKeygenCommand.doCommand();
       break;
     case "output":
       break;
     case "progress":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertProgressCommand.doCommand();
       break;
     case "meter":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertMeterCommand.doCommand();
       break;
     case "datalist":
+      InContextHelper.cancelNextInContextPanel();
       cmdInsertDatalistCommand.doCommand();
       break;
     case "td":
     case "th":
       // fire the table properties dialog only if the selection is collapsed
-      if (EditorUtils.getCurrentEditor().selection.isCollapsed)
-        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node); 
+      if (EditorUtils.getCurrentEditor().selection.isCollapsed) {
+        InContextHelper.cancelNextInContextPanel();
+        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, node);
+      }
       break;
     case "li":
     case "ul":
     case "ol":
       {
         var selContainer = EditorUtils.getSelectionContainer();
-        if (selContainer.oneElementSelected)
+        if (selContainer.oneElementSelected) {
+          InContextHelper.cancelNextInContextPanel();
           cmdEditListCommand.doCommand();
+        }
       }
       break;
     default:
       if (node.namespaceURI == "http://www.w3.org/2000/svg")
       {
+        InContextHelper.cancelNextInContextPanel();
         while (node.parentNode && node.parentNode.namespaceURI == "http://www.w3.org/2000/svg")
           node = node.parentNode;
         EditorUtils.getCurrentEditor().selectElement(node);
