@@ -57,18 +57,16 @@
               </xul:menulist>
             </xul:row>
             <xul:row align="center">
-              <xul:label value="&backgroundRepeat.label;"/>
-              <xul:menulist anonid="backgrounditem-repeat" sizetopopup="none" editable="true"
+              <xul:label value="&backgroundRepeatX.label;"/>
+              <xul:menulist anonid="backgrounditem-repeatx" sizetopopup="none" editable="true"
                             oncommand="this.value = event.originalTarget.value"
                             property="background-repeat">
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
-                  <xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
-                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/>
-                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
+                  <!--xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
+                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/-->
                   <xul:menuseparator/>
-                  <xul:menuitem label="&backgroundRepeatUserDefined.label;"
-                                oncommand=""/>
+                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
                 </xul:menupopup>
               </xul:menulist>
               <xul:spacer/>
@@ -78,6 +76,30 @@
                 <xul:menupopup>
                   <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
                   <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
+                </xul:menupopup>
+              </xul:menulist>
+            </xul:row>
+            <xul:row align="center">
+              <xul:label value="&backgroundRepeatY.label;"/>
+              <xul:menulist anonid="backgrounditem-repeaty" sizetopopup="none" editable="true"
+                            oncommand="this.value = event.originalTarget.value"
+                            property="background-repeat">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundRepeatRepeat.label;"    value="repeat"/>
+                  <!--xul:menuitem label="&backgroundRepeatSpace.label;"     value="space"/>
+                  <xul:menuitem label="&backgroundRepeatRound.label;"     value="round"/-->
+                  <xul:menuseparator/>
+                  <xul:menuitem label="&backgroundRepeatNorepeat.label;"  value="no-repeat"/>
+                </xul:menupopup>
+              </xul:menulist>
+              <xul:spacer/>
+              <xul:label value="&backgroundOrigin.label;"/>
+              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none"
+                            property="background-origin">
+                <xul:menupopup>
+                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
+                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
                   <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
                 </xul:menupopup>
               </xul:menulist>
@@ -111,16 +133,6 @@
                   </xul:grid>
                   <xul:menuseparator/>
                   <xul:menuitem label="&backgroundPositionUserDefined.label;"/>
-                </xul:menupopup>
-              </xul:menulist>
-              <xul:spacer/>
-              <xul:label value="&backgroundOrigin.label;"/>
-              <xul:menulist anonid="backgrounditem-origin" sizetopopup="none"
-                            property="background-origin">
-                <xul:menupopup>
-                  <xul:menuitem label="&backgroundPaddingbox.label;" value="padding-box"/>
-                  <xul:menuitem label="&backgroundBorderbox.label;"  value="border-box"/>
-                  <xul:menuitem label="&backgroundContentbox.label;" value="content-box"/>
                 </xul:menupopup>
               </xul:menulist>
             </xul:row>
@@ -166,7 +178,8 @@
         <body><![CDATA[
           this.getChild("backgrounditem-attachment").value = "";
           this.getChild("backgrounditem-size").value = "";
-          this.getChild("backgrounditem-repeat").value = "";
+          this.getChild("backgrounditem-repeatx").value = "";
+          this.getChild("backgrounditem-repeaty").value = "";
           this.getChild("backgrounditem-clip").value = "";
           this.getChild("backgrounditem-attachment").value = "";
           this.getChild("backgrounditem-position").value = "";

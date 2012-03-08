@@ -46,8 +46,6 @@ function ColorsSectionIniter(aElt, aRuleset)
       }
       item.getChild("backgrounditem-attachment").value =
         (i < bgAttachment.length ? bgAttachment[i].trim() : "");
-      item.getChild("backgrounditem-repeat").value =
-        (i < bgRepeat.length ? bgRepeat[i].trim() : "");
       item.getChild("backgrounditem-position").value =
         (i < bgPosition.length ? bgPosition[i].trim() : "");
       item.getChild("backgrounditem-size").value =
@@ -56,6 +54,40 @@ function ColorsSectionIniter(aElt, aRuleset)
         (i < bgClip.length ? bgClip[i].trim() : "");
       item.getChild("backgrounditem-origin").value =
         (i < bgOrigin.length ? bgOrigin[i].trim() : "");
+
+      var itemx = item.getChild("backgrounditem-repeatx");
+      var itemy = item.getChild("backgrounditem-repeaty");
+      itemx.value = "";
+      itemy.value = "";
+      if (i < bgRepeat.length) {
+        var v = bgRepeat[i].trim().toLowerCase();
+        switch (v) {
+          case "repeat-x":
+            itemx.value = "repeat";
+            itemy.value = "no-repeat";
+            break;
+          case "repeat-y":
+            itemx.value = "no-repeat";
+            itemy.value = "repeat";
+            break;
+          case "repeat":
+          case "space":
+          case "round":
+          case "no-repeat":
+            itemx.value = v;
+            itemy.value = v;
+            break;
+          default:
+            {
+              var vArray = v.split(" ");
+              if (vArray.length == 2) {
+                itemx.value = vArray[0];
+                itemy.value = vArray[1];
+              }
+            }
+            break;
+        }
+      }
     }
   }
 }
@@ -191,16 +223,40 @@ function FlushBackgroundProperties(aEvent)
 {
   var target = aEvent.originalTarget;
   while (target && !target.hasAttribute("property"))
-    target = target.parentNode;
+    target = target.parentNode; 
   var property = target.getAttribute("property");
-  var anonid = target.getAttribute("anonid");
-
-  var valueArray = []
-  var items = document.querySelectorAll("richlistitem.backgrounditem");
-  for (var i = 0; i < items.length; i++) {
-    var xulElt = items[i].getChild(anonid);
-    valueArray.push( xulElt.value );
+  var valueArray = [];
+  if (property == "background-repeat") {
+    var anonid = target.getAttribute("anonid");
+  
+    var items = document.querySelectorAll("richlistitem.backgrounditem");
+    for (var i = 0; i < items.length; i++) {
+      var vx = items[i].getChild("backgrounditem-repeatx").value.trim().toLowerCase();
+      var vy = items[i].getChild("backgrounditem-repeaty").value.trim().toLowerCase();
+      var v = "";
+      if ((!vx || vx == "repeat") && vy == "no-repeat")
+        v = "repeat-x";
+      else if ((!vy || vy == "repeat") && vx == "no-repeat")
+        v = "repeat-y";
+      else if (vx == vy)
+        v = vx;
+      else {
+        vx = vx ? vx : "repeat";
+        vy = vy ? vy : "repeat";
+        v = vx + " " + vy;
+        v = v.trim();
+      }
+      valueArray.push( v );
+    }
   }
+  else {
+    var items = document.querySelectorAll("richlistitem.backgrounditem");
+    for (var i = 0; i < items.length; i++) {
+      var xulElt = items[i].getChild(anonid);
+      valueArray.push( xulElt.value );
+    }
+  }
+  
   // cleanup
   for (var i = valueArray.length - 1 ; i >=0; i++)
     if (valueArray[i] == "")
