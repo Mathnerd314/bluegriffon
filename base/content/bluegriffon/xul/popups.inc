@@ -242,6 +242,7 @@
          type="arrow"
          fade="slow"
          noautofocus="true"
+         noautohide="true"
          align="center"
          forcearrow="true">
     <menulist class="toolbar-focustarget"

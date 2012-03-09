@@ -65,13 +65,17 @@ var InContextHelper = {
   },
 
   showInContextPanel: function(aElement) {
-    if (gDialog.inContextStylePanel.state != "closed")
-      this.hideInContextPanel();
+    
+    var delay = 1000;
+    
+    if (gDialog.inContextStylePanel.state != "closed") {
+      delay = 0;
+    }
 
     if (this.isInContextEnabled()) {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
-      setTimeout(this._showInContextPanel, 1000, aElement, elementRect, selectionRect);
+      setTimeout(this._showInContextPanel, delay, aElement, elementRect, selectionRect);
     }
   },
 
