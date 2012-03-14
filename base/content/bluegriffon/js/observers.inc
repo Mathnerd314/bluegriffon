@@ -225,6 +225,32 @@ var BlueGriffonPrefsObserver = {
                 null,
                 gDialog.structurebar.mLastNode,
                 gDialog.structurebar.mOneElementSelected);
+    else if (prefName == "bluegriffon.display.comments"
+             || prefName == "bluegriffon.display.php"
+             || prefName == "bluegriffon.display.pi") {
+      var valueArray = [];
+      if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
+        valueArray.push("comment");
+      if (!Services.prefs.getBoolPref("bluegriffon.display.php"))
+        valueArray.push("php");
+      if (!Services.prefs.getBoolPref("bluegriffon.display.pi"))
+        valueArray.push("pi");
+      var value = valueArray.join(" ");
+
+      var windowEnumerator = Services.wm.getEnumerator("bluegriffon");
+      while (windowEnumerator.hasMoreElements()) {
+        var w = windowEnumerator.getNext();
+        var editors = w.gDialog.tabeditor.mTabpanels.childNodes;
+        for (var i = 0; i < editors.length; i++) {
+          try {
+            var e = editors[i].lastChild;
+            var innerEditor = e.getEditor(e.contentWindow);
+            innerEditor.document.documentElement.setAttribute("_moz_hide", value);
+          }
+          catch(e) {}
+        }
+      }
+    }
   }
 };
 

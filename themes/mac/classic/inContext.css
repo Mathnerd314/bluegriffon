@@ -40,7 +40,7 @@
 }
 
 #inContextStylePanel {
-  padding: 4px;
+  padding-top: 4px;
 }
 
 #inContextStylePanel .panel-arrowcontent {
@@ -61,4 +61,14 @@ ecolorpicker {
 
 #inContextBackgroundColorColorpicker {
   margin: 9px 0px 0px 9px;
+}
+
+#inContextStylePanel .resizingBox {
+  height: 6px;
+  background: transparent;
+  cursor: -moz-grab
+}
+
+#inContextStylePanel .resizingBox:active {
+  cursor: -moz-grabbing;
 }

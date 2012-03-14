@@ -234,6 +234,8 @@
         <menuitem label="&htmlToolbarCmd.label;"
                   command="cmd_html"
                   accesskey="&htmlToolbarCmd.key;"/>
+        <menuitem label="&commentOrPHPOrPI.label;"
+                  command="cmd_commentOrPI"/>
         <menuseparator/>
         <menu label="&webfonts.label;">
           <menupopup id="webfontsMenupopup"/>

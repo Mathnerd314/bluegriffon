@@ -407,7 +407,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_structureFirstChild", cmdStructureFirstChildCommand);
     commandTable.registerCommand("cmd_structureNext", cmdStructureNextCommand);
     commandTable.registerCommand("cmd_structurePrevious", cmdStructurePreviousCommand);
-},
+
+    commandTable.registerCommand("cmd_commentOrPI",  cmdCommentOrPICommand);
+  },
 
   setupFormatCommands: function setupFormatCommands()
   {

@@ -2,6 +2,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diInnerHtmlChangedTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diCommentOrPIChangeTxn.js"/>
 
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>

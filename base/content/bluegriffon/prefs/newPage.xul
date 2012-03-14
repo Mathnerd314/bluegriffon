@@ -13,6 +13,10 @@
     <preferences>
       <preference id="pref-author"              name="bluegriffon.author"                  type="unichar"/>
       <preference id="pref-floating-toolbar"    name="bluegriffon.floatingToolbar.enabled" type="bool"/>
+
+      <preference id="pref-show-comments"       name="bluegriffon.display.comments"        type="bool"/>
+      <preference id="pref-show-php"            name="bluegriffon.display.php"             type="bool"/>
+      <preference id="pref-show-pi"             name="bluegriffon.display.pi"              type="bool"/>
     </preferences>
 
     <groupbox>
@@ -44,6 +48,10 @@
       <caption label="&editingFeatures.label;"/>
       <checkbox id="floatingToolbarCheckbox" preference="pref-floating-toolbar"
                 label="&enableFloatingToolbar.label;" />
+
+      <checkbox id="showCommentsCheckbox" preference="pref-show-comments" label="&showComments.label;"/>
+      <checkbox id="showPHPCheckbox"      preference="pref-show-php"      label="&showPHP.label;"/>
+      <checkbox id="showPICheckbox"       preference="pref-show-pi"       label="&showPI.label;"/>
     </groupbox>
   </prefpane>
 

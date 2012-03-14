@@ -131,16 +131,19 @@
           {
             var newLabel = document.createElement("toolbarbutton");
 
-            var text = "<" + node.nodeName.toLowerCase();
-            if (showIDs && node.id)
+            var isBlueGriffonNS = (node.namespaceURI == "http://disruptive-innovations.com/zoo/bluegriffon");
+
+            var text = (isBlueGriffonNS ? "" : "<")
+                       + node.nodeName.toLowerCase();
+            if (!isBlueGriffonNS && showIDs && node.id)
               text += " #" + node.id;
-            if (showClasses && node.hasAttribute("class"))
+            if (!isBlueGriffonNS && showClasses && node.hasAttribute("class"))
               text += " ." + node.getAttribute("class").replace( / /g, ".");
-            if (showLang && node.hasAttribute("lang"))
+            if (!isBlueGriffonNS && showLang && node.hasAttribute("lang"))
               text += " :lang(" + node.getAttribute("lang") + ")";
-            if (showRole && node.hasAttribute("role"))
+            if (!isBlueGriffonNS && showRole && node.hasAttribute("role"))
               text += " :role(" + node.getAttribute("role") + ")";
-            text += ">"
+            text += (isBlueGriffonNS ? "" : ">")
 
             newLabel.setAttribute("label",     text);
             if (aOneElementSelected && aNode == node)

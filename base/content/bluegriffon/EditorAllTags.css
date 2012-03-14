@@ -1,5 +1,5 @@
 *:not([\_moz_anonclass])::before {
-    font-family: monospace;
+  font-family: monospace;
   font-size: 12px;
   font-weight: normal;
   font-style: normal;

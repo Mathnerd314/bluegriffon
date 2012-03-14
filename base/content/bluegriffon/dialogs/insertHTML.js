@@ -7,6 +7,12 @@ function Startup()
 
 function onAccept()
 {
-  EditorUtils.getCurrentEditor().insertHTML(gDialog.htmlTextbox.value);
+  var editor = EditorUtils.getCurrentEditor();
+
+  editor.beginTransaction();
+  editor.insertHTML(gDialog.htmlTextbox.value);
+  window.opener.MakePhpAndCommentsVisible(EditorUtils.getCurrentDocument());
+  editor.endTransaction();
+
   return true;
 }

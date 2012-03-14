@@ -254,6 +254,19 @@
 
                     var editor = this.mEditor.getEditor(this.mEditor.contentWindow);
                     if (editor) {
+                      var valueArray = [];
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
+                        valueArray.push("comment");
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.php"))
+                        valueArray.push("php");
+                      if (!Services.prefs.getBoolPref("bluegriffon.display.pi"))
+                        valueArray.push("pi");
+                      var value = valueArray.join(" ");
+                      editor.document.documentElement.setAttribute("_moz_hide", value);
+
+                      MakePhpAndCommentsVisible(editor.document);
+                      editor.resetModificationCount();
+
                       var links = editor.document.querySelectorAll("link");
                       for (var i = 0; i < links.length; i++) {
                         var l = links[i];

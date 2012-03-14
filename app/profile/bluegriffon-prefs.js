@@ -56,6 +56,10 @@ pref("bluegriffon.returnKey.createsParagraph", true);
 pref("bluegriffon.spellCheck.enabled", true);
 pref("bluegriffon.spellCheck.suggestions", 10);
 
+pref("bluegriffon.display.comments", true);
+pref("bluegriffon.display.php", true);
+pref("bluegriffon.display.pi", true);
+
 // document preferences
 pref("bluegriffon.author", "");
 

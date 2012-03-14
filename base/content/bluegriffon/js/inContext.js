@@ -41,6 +41,12 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 var InContextHelper = {
 
   mCancelNext: false,
+  mElement: null,
+  mStartScreenX: 0,
+  mStartScreenY: 0,
+  mResizing: false,
+
+  mResizedElement: null,
 
   isInContextEnabled: function()
   {
@@ -67,14 +73,29 @@ var InContextHelper = {
   showInContextPanel: function(aElement) {
     
     var delay = 1000;
-    
     if (gDialog.inContextStylePanel.state != "closed") {
+      this.onPopupHiding();
       delay = 0;
     }
 
+    this.mElement = aElement;
+    
     if (this.isInContextEnabled()) {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
+      if (aElement.getAttribute("xmlns") == "http://disruptive-innovations.com/zoo/bluegriffon") {
+        gDialog.elementStyling.hidden = true;
+        gDialog.commentHacking.hidden = (aElement.nodeName != "comment");
+        gDialog.phpHacking.hidden     = (aElement.nodeName != "php");
+        gDialog.piHacking.hidden      = (aElement.nodeName != "pi");
+      }
+      else {
+        gDialog.commentHacking.hidden = true;
+        gDialog.phpHacking.hidden = true;
+        gDialog.piHacking.hidden = true;
+        gDialog.elementStyling.hidden = false;
+        
+      }
       setTimeout(this._showInContextPanel, delay, aElement, elementRect, selectionRect);
     }
   },
@@ -88,5 +109,94 @@ var InContextHelper = {
                                           selectionRect.left - elementRect.left,
                                           (elementRect.top < 0) ?  -elementRect.top : selectionRect.top - elementRect.top,
                                           false, false);
+    if (!gDialog.commentHacking.hidden) {
+      gDialog.commentHackingTextbox.value = aElement.lastChild.data;
+      gDialog.commentHackingTextbox.focus();
+    }
+    else if (!gDialog.phpHacking.hidden) {
+      gDialog.phpHackingTextbox.value = aElement.lastChild.data;
+      gDialog.phpHackingTextbox.focus();
+    }
+    else if (!gDialog.piHacking.hidden) {
+      gDialog.piDataHackingBox.value = aElement.lastChild.data;
+      gDialog.piTargetHackingBox.value = aElement.lastChild.target;
+      gDialog.piDataHackingBox.focus();
+    }
+  },
+
+  onPopupHiding: function() {
+    if (!this.mElement)
+      return;
+    if (!gDialog.commentHacking.hidden) {
+      var comment = gDialog.commentHackingTextbox.value;
+      var text = comment;
+      if (text.length > 22)
+        text = text.substr(0, 22) + "...";
+      if (this.mElement.lastChild.data != comment) {
+        // update
+        var editor = EditorUtils.getCurrentEditor();
+        editor.beginTransaction();
+        editor.setAttribute(this.mElement, "title", text);
+	      var txn = new diCommentOrPIChangeTxn(this.mElement.lastChild, comment);
+	      editor.transactionManager.doTransaction(txn);
+        editor.endTransaction();
+      }
+    }
+    else if (!gDialog.phpHacking.hidden) {
+      var data = gDialog.phpHackingTextbox.value;
+      var text = data;
+      if (text.length > 22)
+        text = text.substr(0, 22) + "...";
+      if (this.mElement.lastChild.data != data) {
+        // update
+        var editor = EditorUtils.getCurrentEditor();
+        editor.beginTransaction();
+        editor.setAttribute(this.mElement, "title", text);
+        var txn = new diCommentOrPIChangeTxn(this.mElement.lastChild, data);
+        editor.transactionManager.doTransaction(txn);
+        editor.endTransaction();
+      }
+    }
+    else if (!gDialog.piHacking.hidden) {
+      var data   = gDialog.piDataHackingBox.value;
+      var target = gDialog.piTargetHackingBox.value;
+      var text = target + " " + data;
+      if (text.length > 22)
+        text = text.substr(0, 22) + "...";
+      if (this.mElement.lastChild.data != data) {
+        // update
+        var editor = EditorUtils.getCurrentEditor();
+        editor.beginTransaction();
+        editor.setAttribute(this.mElement, "title", text);
+        var txn = new diCommentOrPIChangeTxn(this.mElement.lastChild, data);
+        editor.transactionManager.doTransaction(txn);
+        editor.endTransaction();
+      }
+    }
+  },
+
+  startResizing: function(aEvent, aElt) {
+    this.mResizedElement = gDialog[aElt.getAttribute("element")];
+    this.mStartScreenX = aEvent.screenX;
+    this.mStartScreenY = aEvent.screenY;
+    this.mStartWidth = this.mResizedElement.boxObject.width;
+    this.mStartHeight = this.mResizedElement.boxObject.height;
+    this.mResizing = true;
+    aElt.setCapture(false);
+  },
+
+  moveResizer: function(aEvent, aElt) {
+    if (!this.mResizing)
+      return;
+    var screenX = aEvent.screenX;
+    var screenY = aEvent.screenY;
+    this.mResizedElement.style.width = (this.mStartWidth + screenX - this.mStartScreenX) + "px";
+    this.mResizedElement.style.height = (this.mStartHeight + screenY - this.mStartScreenY) + "px";
+  },
+
+  stopResizing: function(aEvent, aElt) {
+    this.mResizing = false;
+    aElt.releaseCapture();
+    document.persist(this.mResizedElement.id, "style");
   }
 }

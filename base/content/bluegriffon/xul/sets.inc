@@ -65,6 +65,7 @@
   <command id="cmd_hr"               oncommand="goDoCommand('cmd_hr')"/>
   <command id="cmd_css"              oncommand="goDoCommand('cmd_css')"/>
   <command id="cmd_domexplorer"      oncommand="goDoCommand('cmd_domexplorer')"/>
+  <command id="cmd_commentOrPI"      oncommand="goDoCommand('cmd_commentOrPI')"/>
   <command id="cmd_video"            oncommand="goDoCommand('cmd_video')"/>
   <command id="cmd_audio"            oncommand="goDoCommand('cmd_audio')"/>
   <command id="cmd_html"             oncommand="goDoCommand('cmd_html')"/>

@@ -243,28 +243,28 @@
          fade="slow"
          noautofocus="true"
          noautohide="true"
-         align="center"
-         forcearrow="true">
-    <menulist class="toolbar-focustarget"
-              command="cmd_renderedHTMLEnabler"
-              id="inContextFontFaceSelect"
-              tooltiptext="&FontFaceSelect.tooltip;"
-              crop="right"
-              style="width: 17em"
-              sizetopopup="none">
-      <observes element="cmd_fontFace" attribute="state" onbroadcast="onFontFaceChange(this.parentNode, 'cmd_fontFace')"/>
-      <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"
-                 onpopupshowing="initFontFaceMenu(this);">
-        <menuitem label="&fontVarWidth.label;"      value="" class="menuitem-non-iconic-accel"/>
-        <menuitem label="&fontFixedWidth.label;"    value="tt" class="menuitem-non-iconic-accel"/>
-        <menuseparator/>
-        <menuitem label="&fontHelveticaFont.label;" value="Helvetica, Arial, sans-serif" class="menuitem-non-iconic-accel"/>
-        <menuitem label="&fontTimes.label;"         value="Times New Roman, Times, serif" class="menuitem-non-iconic-accel"/>
-        <menuitem label="&fontCourier.label;"       value="Courier New, Courier, monospace" class="menuitem-non-iconic-accel"/>
-        <menuseparator/>
-      </menupopup>
-    </menulist>
-    <hbox align="center">
+         forcearrow="true"
+         onpopuphiding="InContextHelper.onPopupHiding()">
+    <hbox align="center" id="elementStyling">
+      <menulist class="toolbar-focustarget"
+                command="cmd_renderedHTMLEnabler"
+                id="inContextFontFaceSelect"
+                tooltiptext="&FontFaceSelect.tooltip;"
+                crop="right"
+                style="width: 17em"
+                sizetopopup="none">
+        <observes element="cmd_fontFace" attribute="state" onbroadcast="onFontFaceChange(this.parentNode, 'cmd_fontFace')"/>
+        <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"
+                   onpopupshowing="initFontFaceMenu(this);">
+          <menuitem label="&fontVarWidth.label;"      value="" class="menuitem-non-iconic-accel"/>
+          <menuitem label="&fontFixedWidth.label;"    value="tt" class="menuitem-non-iconic-accel"/>
+          <menuseparator/>
+          <menuitem label="&fontHelveticaFont.label;" value="Helvetica, Arial, sans-serif" class="menuitem-non-iconic-accel"/>
+          <menuitem label="&fontTimes.label;"         value="Times New Roman, Times, serif" class="menuitem-non-iconic-accel"/>
+          <menuitem label="&fontCourier.label;"       value="Courier New, Courier, monospace" class="menuitem-non-iconic-accel"/>
+          <menuseparator/>
+        </menupopup>
+      </menulist>
       <toolbarbutton id="inContextStrongButton" type="checkbox" autoCheck="false" command="cmd_strong" label="&strongToolbarCmd.label;"
                      tooltiptext="&strongToolbarCmd.tooltip;">
         <observes element="cmd_strong" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_strong')"/>
@@ -274,17 +274,17 @@
                      tooltiptext="&emToolbarCmd.tooltip;">
         <observes element="cmd_em" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_em')"/>
       </toolbarbutton>
-
+  
       <toolbarbutton id="inContextCodeButton" type="checkbox" autoCheck="false" command="cmd_code" label="&codeToolbarCmd.label;"
                      tooltiptext="&codeToolbarCmd.tooltip;">
         <observes element="cmd_code" type="checkbox" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_code')"/>
       </toolbarbutton>
-
+  
       <toolbarbutton id="inContextUnderlineButton" type="checkbox" autoCheck="false" command="cmd_underline" label="&underlineToolbarCmd.label;"
                      tooltiptext="&underlineToolbarCmd.tooltip;">
         <observes element="cmd_underline" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_underline')"/>
       </toolbarbutton>
-
+  
       <stack>
         <observes element="cmd_highlight"       attribute="state" onbroadcast="onBackgroundColorChange()"/>
         <observes element="cmd_fontColor"       attribute="state" onbroadcast="onFontColorChange()"/>
@@ -303,6 +303,71 @@
                       showTransparency="false"/>
       </stack>
     </hbox>
+
+    <vbox id="commentHacking">
+      <label value="&editComment.label;"/>
+      <stack>
+	      <textbox id="commentHackingTextbox"
+	               style="font-family: -moz-fixed"
+	               multiline="true"
+	               rows="6"
+	               cols="40" />
+        <hbox class="resizingBox" element="commentHackingTextbox"
+              bottom="1" left="0" right="0"
+              onmousedown="InContextHelper.startResizing(event, this)"
+              onmouseup="InContextHelper.stopResizing(event, this)"
+              onmousemove="InContextHelper.moveResizer(event, this)">
+          <spacer flex="1"/>
+          <hbox style="width: 30px; border-top: gray thin solid; border-bottom: gray thin solid"/>
+          <spacer flex="1"/>
+        </hbox>
+      </stack>
+    </vbox>
+
+    <vbox id="phpHacking">
+      <label value="&editPHP.label;"/>
+      <stack>
+        <textbox id="phpHackingTextbox"
+                 style="font-family: -moz-fixed"
+                 multiline="true"
+                 rows="6"
+                 cols="40" />
+        <hbox class="resizingBox" element="phpHackingTextbox"
+              bottom="1" left="0" right="0"
+              onmousedown="InContextHelper.startResizing(event, this)"
+              onmouseup="InContextHelper.stopResizing(event, this)"
+              onmousemove="InContextHelper.moveResizer(event, this)">
+          <spacer flex="1"/>
+          <hbox style="width: 30px; border-top: gray thin solid; border-bottom: gray thin solid"/>
+          <spacer flex="1"/>
+        </hbox>
+      </stack>
+    </vbox>
+
+    <vbox id="piHacking">
+      <label value="&editPI.label;"/>
+      <hbox align="center">
+        <label value="&targetPI.label;"/>
+        <textbox id="piTargetHackingBox" readonly="true" style="color: silver"/>
+      </hbox>
+      <label value="&dataPI.label;"/>
+      <stack>
+        <textbox id="piDataHackingBox"
+                 style="font-family: -moz-fixed"
+                 multiline="true"
+                 rows="6"
+                 cols="40" />
+        <hbox class="resizingBox" element="piDataHackingBox"
+              bottom="1" left="0" right="0"
+              onmousedown="InContextHelper.startResizing(event, this)"
+              onmouseup="InContextHelper.stopResizing(event, this)"
+              onmousemove="InContextHelper.moveResizer(event, this)">
+          <spacer flex="1"/>
+          <hbox style="width: 30px; border-top: gray thin solid; border-bottom: gray thin solid"/>
+          <spacer flex="1"/>
+        </hbox>
+      </stack>
+    </vbox>
   </panel>
 </popupset>
 

@@ -51,6 +51,7 @@ bluegriffon.jar:
   content/bluegriffon/txns/diStyleAttrChangeTxn.js      (content/bluegriffon/txns/diStyleAttrChangeTxn.js)
   content/bluegriffon/txns/diChangeFileStylesheetTxn.js (content/bluegriffon/txns/diChangeFileStylesheetTxn.js)
   content/bluegriffon/txns/diNodeInsertionTxn.js        (content/bluegriffon/txns/diNodeInsertionTxn.js)
+  content/bluegriffon/txns/diCommentOrPIChangeTxn.js    (content/bluegriffon/txns/diCommentOrPIChangeTxn.js)
 * content/bluegriffon/dialogs/aboutDialog.xul           (content/bluegriffon/dialogs/aboutDialog.xul)
 * content/bluegriffon/dialogs/aboutDialog.js            (content/bluegriffon/dialogs/aboutDialog.js)
   content/bluegriffon/credits.xhtml                     (content/bluegriffon/credits.xhtml)
@@ -151,4 +152,6 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/listProperties.xul        (content/bluegriffon/dialogs/listProperties.xul)
   content/bluegriffon/dialogs/insertTOC.js              (content/bluegriffon/dialogs/insertTOC.js)
   content/bluegriffon/dialogs/insertTOC.xul             (content/bluegriffon/dialogs/insertTOC.xul)
+  content/bluegriffon/dialogs/insertCommentOrPI.js      (content/bluegriffon/dialogs/insertCommentOrPI.js)
+  content/bluegriffon/dialogs/insertCommentOrPI.xul     (content/bluegriffon/dialogs/insertCommentOrPI.xul)
 

@@ -237,8 +237,7 @@ function onParagraphFormatChange(paraMenuList, commandID)
   if (state == "body")
     state = "";
 
-  if (state == "mixed")
-  {
+  if (state == "mixed") {
     //Selection is the "mixed" ( > 1 style) state
     paraMenuList.selectedItem = null;
     //paraMenuList.setAttribute("label",GetString('Mixed'));
@@ -925,6 +924,7 @@ function ToggleViewMode(aElement)
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
+
         editorElement.parentNode.selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
         window.content.focus();
@@ -987,6 +987,7 @@ function RebuildFromSource(aDoc, aContext)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     // clone body
     CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
+    MakePhpAndCommentsVisible(editor.document);
     editor.endTransaction();
 
     // the window title is updated by DOMTitleChanged event
@@ -1244,6 +1245,14 @@ function OnDoubleClick(aEvent)
     return;
 
   switch (node.nodeName.toLowerCase()) {
+    case "comment":
+    case "php":
+    case "pi":
+      if (node.namespaceURI == "http://disruptive-innovations.com/zoo/bluegriffon"
+          && !InContextHelper.isInContextEnabled()) {
+        window.openDialog("chrome://bluegriffon/content/dialogs/insertCommentOrPI.xul", "_blank",
+                          "chrome,close,titlebar,modal,resizable=yes", node);
+      }
     case "a":
       if (node.hasAttribute("href")) {
         InContextHelper.cancelNextInContextPanel();
@@ -2029,3 +2038,5 @@ function CloseAllTabsButOne()
       child = tmp;
   }
 }
+
+#include phpAndComments.inc

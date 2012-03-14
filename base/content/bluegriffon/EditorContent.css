@@ -50,7 +50,7 @@
 a[name], a[id] {
   min-height: 17px; margin-left: 2px; margin-top: 2px;
   padding-left: 20px; 
-  background-image: url(chrome://bluegriffon/skin/tags/tag-anchor.gif);
+  background-image: url("chrome://bluegriffon/skin/tags/tag-anchor.gif");
   background-repeat: no-repeat; 
   background-position: top left;
 }
@@ -101,10 +101,29 @@ img {
   -moz-force-broken-image-icon: 1;
 }
 
-bluegriffon|comment {
- font-family: monospace;
- background-color: silver;
- border-radius: 4px 4px 4px 4px;
+bluegriffon|comment,
+bluegriffon|php,
+bluegriffon|pi {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  color: #050505;
+  padding: 0px 5px;
+  background: -moz-linear-gradient(
+    top,
+    #f7ff00 0%,
+    #ffbf00);
+  border-radius: 30px;
+  border: 1px solid #918491;
+  -moz-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 0px 0px 1px rgba(255,255,255,0.7);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.2),
+    0px 0px 0px rgba(255,255,255,0);
+ -moz-margin-end: 5px;
+ -moz-margin-start: 5px;
  -moz-user-select: all;
  -moz-user-focus: normal;
  -moz-user-input: disabled;
@@ -112,8 +131,21 @@ bluegriffon|comment {
  display: inline;
 }
 
-bluegriffon|comment::before { content: "<!--"; }
+bluegriffon|comment::before { content: "<!--" attr(title); }
 bluegriffon|comment::after { content: "-->"; }
+
+bluegriffon|php::before { content: "<?php " attr(title); }
+bluegriffon|php::after { content: "?>"; }
+
+bluegriffon|pi::before { content: "<?" attr(title); }
+bluegriffon|pi::after { content: "?>"; }
+
+html[\_moz_hide*="comment"] bluegriffon|comment,
+html[\_moz_hide*="php"] bluegriffon|php,
+html[\_moz_hide*="pi"] bluegriffon|pi
+ {
+  display: none;
+}
 
 table > bluegriffon|*,
 tbody > bluegriffon|*,

@@ -357,3 +357,23 @@ var cmdStructurePreviousCommand =
    }
 
 };
+
+var cmdCommentOrPICommand = {
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            !EditorUtils.activeViewActive  &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    window.openDialog("chrome://bluegriffon/content/dialogs/insertCommentOrPI.xul", "_blank",
+                      "chrome,close,titlebar,modal,resizable=yes", null);
+  }
+};
