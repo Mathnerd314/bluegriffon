@@ -84,6 +84,11 @@ var InContextHelper = {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
       if (aElement.getAttribute("xmlns") == "http://disruptive-innovations.com/zoo/bluegriffon") {
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+        return;
+#endif
+#endif
         gDialog.elementStyling.hidden = true;
         gDialog.commentHacking.hidden = (aElement.nodeName != "comment");
         gDialog.phpHacking.hidden     = (aElement.nodeName != "php");

@@ -1249,10 +1249,16 @@ function OnDoubleClick(aEvent)
     case "php":
     case "pi":
       if (node.namespaceURI == "http://disruptive-innovations.com/zoo/bluegriffon"
-          && !InContextHelper.isInContextEnabled()) {
+#ifdef XP_MACOSX
+          && !InContextHelper.isInContextEnabled()
+#else
+#ifndef XP_UNIX
+          && !InContextHelper.isInContextEnabled()
+#endif
+#endif
+         )
         window.openDialog("chrome://bluegriffon/content/dialogs/insertCommentOrPI.xul", "_blank",
                           "chrome,close,titlebar,modal,resizable=yes", node);
-      }
     case "a":
       if (node.hasAttribute("href")) {
         InContextHelper.cancelNextInContextPanel();
