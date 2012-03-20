@@ -57,6 +57,13 @@ function InitDialog()
       }
       ToggleTargetAttribute();
     }
+    if (url.substr(0, 7) == "mailto:") {
+      gDialog.urlMenulist.value = url.substr(7);
+      gDialog.emailCheckbox.checked = true;
+    }
+    else
+      gDialog.emailCheckbox.checked = false;
+
     gDialog.urlMenulist.focus();
   }
   else {
@@ -157,8 +164,10 @@ function ToggleRelativeOrAbsolute()
 function onAccept()
 {
   var url = gDialog.urlMenulist.value;
-  if (url && gDialog.emailCheckbox.checked)
-    url = "mailto:" + url;
+  if (url && gDialog.emailCheckbox.checked) {
+    if (url.substr(0, 7) != "mailto:")
+      url = "mailto:" + url;
+  }
   var target = gDialog.applyTargetAttributeCheckbox.checked
                ? ((gDialog.targetAttributeMenulist.value == "x")
                    ? gDialog.userDefinedValueTextbox.value
