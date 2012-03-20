@@ -29,6 +29,7 @@ _AVAILABLE_LOCALES =\
     zh-CN \
     zh-TW \
     hu \
+    sr \
     $(NULL)
     
 libs::$(_AVAILABLE_LOCALES)
