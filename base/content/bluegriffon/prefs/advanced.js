@@ -69,7 +69,8 @@ function changeLocale() {
     }
     var main = window.opener;
     if (EditorUtils.getCurrentEditorElement())
-      main.ToggleViewMode(main.gDialog.wysiwygModeButton);
+      if (!main.ToggleViewMode(main.gDialog.wysiwygModeButton))
+        return;
     if (main.doSaveTabsBeforeQuit()) {
     // Restart application
       var appStartup = Components.classes["@mozilla.org/toolkit/app-startup;1"]

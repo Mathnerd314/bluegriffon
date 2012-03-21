@@ -130,7 +130,8 @@ var cmdCloseTab =
 
     var mode = editorElement.parentNode.getAttribute("previousMode");
     if (mode == "source") {
-      ToggleViewMode(gDialog.wysiwygModeButton);
+      if (!ToggleViewMode(gDialog.wysiwygModeButton))
+        return;
     }
     if (EditorUtils.isDocumentModified()) {
       var rv = PromptUtils.confirmWithTitle(

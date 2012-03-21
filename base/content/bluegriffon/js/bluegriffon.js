@@ -779,11 +779,11 @@ function onSourceChangeCallback(source)
 function ToggleViewMode(aElement)
 {
   if (!aElement) // sanity case
-    return;
+    return false;
 
   var mode =  aElement.getAttribute("mode");
   if (mode == GetCurrentViewMode())
-    return;
+    return true;
 
   var child = aElement.parentNode.firstChild;
   while (child) {
@@ -906,7 +906,7 @@ function ToggleViewMode(aElement)
             gDialog.wysiwygModeButton.removeAttribute("selected");
             gDialog.sourceModeButton.setAttribute("selected", "true");
             editorElement.parentNode.setAttribute("currentmode", "source");
-            return;
+            return false;
           }
           gDialog.structurebar.style.visibility = "";
           RebuildFromSource(doc);
@@ -924,6 +924,7 @@ function ToggleViewMode(aElement)
   }
   editorElement.parentNode.setAttribute("previousMode", mode);
   window.updateCommands("style");
+  return true;
 }
 
 function CloneElementContents(editor, sourceElt, destElt)
