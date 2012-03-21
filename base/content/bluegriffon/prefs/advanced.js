@@ -67,7 +67,7 @@ function changeLocale() {
                             Components.interfaces.nsISupportsString,
                             supportsString);
     }
-    var main = window.opener;
+    var main = EditorUtils.getCurrentEditorWindow();
     if (EditorUtils.getCurrentEditorElement())
       if (!main.ToggleViewMode(main.gDialog.wysiwygModeButton))
         return;
