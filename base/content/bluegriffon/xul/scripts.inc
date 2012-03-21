@@ -19,7 +19,6 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/js/recentPages.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/toolbars.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/languages.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/utils/htmlParser.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/recentPages.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/updateManager.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/rotate.js"/>

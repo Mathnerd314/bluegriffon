@@ -894,33 +894,24 @@ function ToggleViewMode(aElement)
             isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
             break;
         }
-        if (isXML) {
-          var xmlParser = new DOMParser();
-          try {
-            var doc = xmlParser.parseFromString(source, "text/xml");
-            if (doc.documentElement.nodeName == "parsererror") {
-              var message = doc.documentElement.firstChild.data.
-                replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
-              var error = doc.documentElement.lastChild.textContent;
-              window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
-                                "chrome,modal,titlebar", message, error);
-              gDialog.wysiwygModeButton.removeAttribute("selected");
-              gDialog.sourceModeButton.setAttribute("selected", "true");
-              editorElement.parentNode.setAttribute("currentmode", "source");
-              return;
-            }
-            gDialog.structurebar.style.visibility = "";
-            RebuildFromSource(doc);
+        var parser = new DOMParser();
+        try {
+          var doc = parser.parseFromString(source, isXML ? "text/xml" : "text/html");
+          if (doc.documentElement.nodeName == "parsererror") {
+            var message = doc.documentElement.firstChild.data.
+              replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
+            var error = doc.documentElement.lastChild.textContent;
+            window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
+                              "chrome,modal,titlebar", message, error);
+            gDialog.wysiwygModeButton.removeAttribute("selected");
+            gDialog.sourceModeButton.setAttribute("selected", "true");
+            editorElement.parentNode.setAttribute("currentmode", "source");
+            return;
           }
-          catch(e) {alert(e)}
+          gDialog.structurebar.style.visibility = "";
+          RebuildFromSource(doc);
         }
-        else {
-          var hp = new htmlParser(gDialog.parserIframe);
-          hp.parseHTML(source,
-                       EditorUtils.getDocumentUrl(),
-                       function(aDoc, ctx) { gDialog.structurebar.style.visibility = "";; RebuildFromSource(aDoc, ctx); },
-                       hp);
-        }
+        catch(e) {alert(e)}
       }
       else {
         NotifierUtils.notify("afterLeavingSourceMode");

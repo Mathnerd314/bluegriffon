@@ -9,7 +9,6 @@ bluegriffon.jar:
 * content/bluegriffon/js/bluegriffon.js                 (content/bluegriffon/js/bluegriffon.js)
   content/bluegriffon/utils/dgid.js                     (content/bluegriffon/utils/dgid.js)
 * content/bluegriffon/utils/global.js                   (content/bluegriffon/utils/global.js)
-  content/bluegriffon/utils/htmlParser.js               (content/bluegriffon/utils/htmlParser.js)
   content/bluegriffon/utils/notifiers.js                (content/bluegriffon/utils/notifiers.js)
   content/bluegriffon/bindings/ecolorpicker.xml         (content/bluegriffon/bindings/ecolorpicker.xml)
   content/bluegriffon/bindings/filepickerbutton.css     (content/bluegriffon/bindings/filepickerbutton.css)
