@@ -241,8 +241,6 @@
   <panel id="inContextStylePanel"
          type="arrow"
          fade="slow"
-         noautofocus="true"
-         noautohide="true"
          forcearrow="true"
          onpopuphiding="InContextHelper.onPopupHiding()">
     <hbox align="center" id="elementStyling">
