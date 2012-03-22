@@ -345,3 +345,10 @@ panel[floating="true"] {
 tipoftheday {
   -moz-binding: url("chrome://tipoftheday/content/tipoftheday.xml#tipoftheday");
 }
+
+/*********** menupopups *************/
+
+popup {
+  -moz-appearance: menupopup;
+  background-color: menu;
+}
