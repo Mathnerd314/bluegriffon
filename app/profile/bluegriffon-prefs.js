@@ -167,3 +167,6 @@ pref("tipoftheday.openAtStartup", true);
 
 // Enable Floating Toolbar
 pref("bluegriffon.floatingToolbar.enabled", true);
+
+// make links absolute when copied
+pref("clipboard.absoluteLinks", true);

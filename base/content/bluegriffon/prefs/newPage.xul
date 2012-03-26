@@ -17,6 +17,8 @@
       <preference id="pref-show-comments"       name="bluegriffon.display.comments"        type="bool"/>
       <preference id="pref-show-php"            name="bluegriffon.display.php"             type="bool"/>
       <preference id="pref-show-pi"             name="bluegriffon.display.pi"              type="bool"/>
+
+      <preference id="pref-absolute-links"      name="clipboard.absoluteLinks"             type="bool"/>
     </preferences>
 
     <groupbox>
@@ -52,6 +54,15 @@
       <checkbox id="showCommentsCheckbox" preference="pref-show-comments" label="&showComments.label;"/>
       <checkbox id="showPHPCheckbox"      preference="pref-show-php"      label="&showPHP.label;"/>
       <checkbox id="showPICheckbox"       preference="pref-show-pi"       label="&showPI.label;"/>
+      <spacer style="height: 1em"/>
+      <label value="&linksManagement.label;"/>
+      <radiogroup class="indent"
+                  orient="horizontal"
+                  id="linksManagementRadiogroup"
+                  preference="pref-absolute-links">
+        <radio label="&preserveRelative.label;" value="false"/>
+        <radio label="&makeAbsolute.label;"     value="true"/>
+      </radiogroup>
     </groupbox>
   </prefpane>
 
