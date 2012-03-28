@@ -11,14 +11,14 @@
 
   <prefpane id="newPagePrefPane">
     <preferences>
-      <preference id="pref-author"              name="bluegriffon.author"                  type="unichar"/>
-      <preference id="pref-floating-toolbar"    name="bluegriffon.floatingToolbar.enabled" type="bool"/>
-
-      <preference id="pref-show-comments"       name="bluegriffon.display.comments"        type="bool"/>
-      <preference id="pref-show-php"            name="bluegriffon.display.php"             type="bool"/>
-      <preference id="pref-show-pi"             name="bluegriffon.display.pi"              type="bool"/>
-
-      <preference id="pref-absolute-links"      name="clipboard.absoluteLinks"             type="bool"/>
+      <preference id="pref-author"              name="bluegriffon.author"                     type="unichar"/>
+      <preference id="pref-returnKey"           name="bluegriffon.returnKey.createsParagraph" type="bool"/>
+      <preference id="pref-floating-toolbar"    name="bluegriffon.floatingToolbar.enabled"    type="bool"/>
+      <preference id="pref-show-comments"       name="bluegriffon.display.comments"           type="bool"/>
+      <preference id="pref-show-php"            name="bluegriffon.display.php"                type="bool"/>
+      <preference id="pref-show-pi"             name="bluegriffon.display.pi"                 type="bool"/>
+      <preference id="pref-absolute-links"      name="clipboard.absoluteLinks"                type="bool"/>
+      <preference id="pref-keep-backup"         name="bluegriffon.defaults.backups"           type="bool"/>
     </preferences>
 
     <groupbox>
@@ -48,13 +48,18 @@
 
     <groupbox>
       <caption label="&editingFeatures.label;"/>
+      <checkbox label="&keepBackup.label;" id="keepBackupP" preference="pref-keep-backup" />
+      <spacer style="height: 5px"/>
+      <checkbox label="&returnKey.label;" id="crInPCreatesNewP" preference="pref-returnKey" />
+      <spacer style="height: 5px"/>
       <checkbox id="floatingToolbarCheckbox" preference="pref-floating-toolbar"
                 label="&enableFloatingToolbar.label;" />
+      <spacer style="height: 5px"/>
 
       <checkbox id="showCommentsCheckbox" preference="pref-show-comments" label="&showComments.label;"/>
       <checkbox id="showPHPCheckbox"      preference="pref-show-php"      label="&showPHP.label;"/>
       <checkbox id="showPICheckbox"       preference="pref-show-pi"       label="&showPI.label;"/>
-      <spacer style="height: 1em"/>
+      <spacer style="height: 5px"/>
       <label value="&linksManagement.label;"/>
       <radiogroup class="indent"
                   orient="horizontal"

@@ -126,6 +126,7 @@ pref("bluegriffon.defaults.doctype", "kXHTML5");
 pref("media.autoplay.enabled", false);
 
 pref("bluegriffon.defaults.forceLF", false);
+pref("bluegriffon.defaults.backups", true);
 
 pref("bluegriffon.source.theme", "light");
 pref("bluegriffon.source.entities", "basic");

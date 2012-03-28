@@ -18,7 +18,6 @@
       <preference id="pref-showClasses"    name="bluegriffon.structurebar.class.show" type="bool"/>
       <preference id="pref-showLangs"      name="bluegriffon.structurebar.lang.show" type="bool"/>
       <preference id="pref-showAriaRole"   name="bluegriffon.structurebar.role.show" type="bool"/>
-      <preference id="pref-returnKey"      name="bluegriffon.returnKey.createsParagraph" type="bool"/>
       <preference id="pref-spellCheck"     name="bluegriffon.spellCheck.enabled" type="bool"/>
       <preference id="pref-suggestions"    name="bluegriffon.spellCheck.suggestions" type="int"/>
     </preferences>
@@ -72,16 +71,6 @@
           </row>
         </rows>
       </grid>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&returnKey.caption;" />
-      <hbox align="center">
-        <checkbox label="&returnKey.label;"
-                  id="crInPCreatesNewP"
-                  preference="pref-returnKey"
-                  />
-      </hbox>
     </groupbox>
 
     <groupbox>

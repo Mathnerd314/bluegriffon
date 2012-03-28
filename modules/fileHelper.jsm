@@ -131,59 +131,14 @@ var FileUtils = {
         }
       }
   
-      // this is the location where the related files will go
-      var relatedFilesDir = null;
-      
-      // First check pref for saving associated files
-      var saveAssociatedFiles = false;
-      try {
-        var prefs = GetPrefs();
-        saveAssociatedFiles = prefs.getBoolPref("editor.save_associated_files");
-      } catch (e) {}
-  
-      // Only change links or move files if pref is set 
-      //  and we are saving to a new location
-      if (saveAssociatedFiles && aSaveAs)
-      {
-        try {
-          if (tempLocalFile)
-          {
-            // if we are saving to the same parent directory, don't set relatedFilesDir
-            // grab old location, chop off file
-            // grab new location, chop off file, compare
-            var oldLocation = EditorUtils.getDocumentUrl();
-            var oldLocationLastSlash = oldLocation.lastIndexOf("\/");
-            if (oldLocationLastSlash != -1)
-              oldLocation = oldLocation.slice(0, oldLocationLastSlash);
-  
-            var relatedFilesDirStr = urlstring;
-            var newLocationLastSlash = relatedFilesDirStr.lastIndexOf("\/");
-            if (newLocationLastSlash != -1)
-              relatedFilesDirStr = relatedFilesDirStr.slice(0, newLocationLastSlash);
-            if (oldLocation == relatedFilesDirStr || UrlUtils.isUrlOfBlankDocument(oldLocation))
-              relatedFilesDir = null;
-            else
-              relatedFilesDir = tempLocalFile.parent;
-          }
-          else
-          {
-            var lastSlash = urlstring.lastIndexOf("\/");
-            if (lastSlash != -1)
-            {
-              var relatedFilesDirString = urlstring.slice(0, lastSlash + 1);  // include last slash
-              ioService = UrlUtils.getIOService();
-              relatedFilesDir = ioService.newURI(relatedFilesDirString, editor.documentCharacterSet, null);
-            }
-          }
-        } catch(e) { relatedFilesDir = null; }
-      }
-  
       var destinationLocation;
       if (tempLocalFile)
         destinationLocation = tempLocalFile;
       else
         destinationLocation = docURI;
   
+      this.backupFile(destinationLocation);
+
       // file is nsIFile, data is a string
       var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
                      createInstance(Components.interfaces.nsIFileOutputStream);
@@ -313,59 +268,14 @@ var FileUtils = {
         }
       }
   
-      // this is the location where the related files will go
-      var relatedFilesDir = null;
-      
-      // First check pref for saving associated files
-      var saveAssociatedFiles = false;
-      try {
-        var prefs = GetPrefs();
-        saveAssociatedFiles = prefs.getBoolPref("editor.save_associated_files");
-      } catch (e) {}
-  
-      // Only change links or move files if pref is set 
-      //  and we are saving to a new location
-      if (saveAssociatedFiles && aSaveAs)
-      {
-        try {
-          if (tempLocalFile)
-          {
-            // if we are saving to the same parent directory, don't set relatedFilesDir
-            // grab old location, chop off file
-            // grab new location, chop off file, compare
-            var oldLocation = EditorUtils.getDocumentUrl();
-            var oldLocationLastSlash = oldLocation.lastIndexOf("\/");
-            if (oldLocationLastSlash != -1)
-              oldLocation = oldLocation.slice(0, oldLocationLastSlash);
-  
-            var relatedFilesDirStr = urlstring;
-            var newLocationLastSlash = relatedFilesDirStr.lastIndexOf("\/");
-            if (newLocationLastSlash != -1)
-              relatedFilesDirStr = relatedFilesDirStr.slice(0, newLocationLastSlash);
-            if (oldLocation == relatedFilesDirStr || UrlUtils.isUrlOfBlankDocument(oldLocation))
-              relatedFilesDir = null;
-            else
-              relatedFilesDir = tempLocalFile.parent;
-          }
-          else
-          {
-            var lastSlash = urlstring.lastIndexOf("\/");
-            if (lastSlash != -1)
-            {
-              var relatedFilesDirString = urlstring.slice(0, lastSlash + 1);  // include last slash
-              ioService = UrlUtils.getIOService();
-              relatedFilesDir = ioService.newURI(relatedFilesDirString, editor.documentCharacterSet, null);
-            }
-          }
-        } catch(e) { relatedFilesDir = null; }
-      }
-  
       var destinationLocation;
       if (tempLocalFile)
         destinationLocation = tempLocalFile;
       else
         destinationLocation = docURI;
-  
+
+      this.backupFile(destinationLocation);
+
       var flags = EditorUtils.getSerializationFlags(EditorUtils.getCurrentDocument());
       var doctype = editorDoc.doctype;
       var systemId = doctype ? doctype.systemId : null;
@@ -384,8 +294,6 @@ var FileUtils = {
       foStream.init(destinationLocation, 0x02 | 0x08 | 0x20, 0666, 0); 
       encoder.encodeToStream(foStream);
       foStream.close(); // this closes foStream
-
-      //success = this.outputFileWithPersistAPI(editorDoc, destinationLocation, relatedFilesDir, aMimeType);
     }
     catch (e)
     {
@@ -425,6 +333,30 @@ var FileUtils = {
       PromptUtils.alertWithTitle(saveDocStr, failedStr, EditorUtils.getCurrentEditorWindow());
     }
     return success;
+  },
+
+  backupFile: function(aFile)
+  {
+    var keepBackup = true;
+    try {
+      keepBackup = Services.prefs.getBoolPref("bluegriffon.defaults.backups");
+    }
+    catch(e) {}
+
+    try { // try to create a backup
+      if (keepBackup
+          && aFile
+          && aFile.exists()
+          && aFile.isWritable()) {
+        var newLeafName = aFile.clone().leafName;
+        var newLeafNameArray = newLeafName.split(".");
+        if (newLeafNameArray[newLeafNameArray.length - 1] != "bak")
+          newLeafNameArray.push("bak");
+        newLeafName = newLeafNameArray.join(".");
+        aFile.copyTo(null, newLeafName);
+      }
+    }
+    catch(e) {};
   },
 
   promptAndSetTitleIfNone: function()
@@ -468,9 +400,7 @@ var FileUtils = {
     // Set filters according to the type of output
     if (aDoSaveAsText)
       fp.appendFilters(this.nsIFilePicker.filterText);
-    /* else if (CurrentDocumentIsTemplate())
-      fp.appendFilter(GetString("HTMLtemplates"), "*.mzt"); */
-    else if (EditorUtils.isXHTMLDocument()) // only if XHTML 1 file
+    else if (EditorUtils.isXHTMLDocument())
       fp.appendFilter(L10NUtils.getString("XHTMLfiles"), "*.xhtml");
     else {
       aMIMEType = "text/html";
