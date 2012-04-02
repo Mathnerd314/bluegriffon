@@ -48,6 +48,13 @@ var InContextHelper = {
 
   mResizedElement: null,
 
+  mIsEnabled: true,
+
+  enable: function(aEnabled)
+  {
+    this.mIsEnabled = aEnabled;
+  },
+
   isInContextEnabled: function()
   {
     var inContextEnabled = false;
@@ -55,7 +62,7 @@ var InContextHelper = {
       inContextEnabled = Services.prefs.getBoolPref("bluegriffon.floatingToolbar.enabled");
     }
     catch(e) {}
-    return inContextEnabled;
+    return inContextEnabled && this.mIsEnabled;
   },
 
   hideInContextPanel: function()
@@ -80,7 +87,7 @@ var InContextHelper = {
 
     this.mElement = aElement;
     
-    if (this.isInContextEnabled()) {
+    if (this.mElement && this.isInContextEnabled()) {
       var selectionRect = EditorUtils.getCurrentEditor().selection.getRangeAt(0).getBoundingClientRect();
       var elementRect = aElement.getBoundingClientRect();
       if (aElement.getAttribute("xmlns") == "http://disruptive-innovations.com/zoo/bluegriffon") {
@@ -97,6 +104,10 @@ var InContextHelper = {
         
       }
       setTimeout(this._showInContextPanel, delay, aElement, elementRect, selectionRect);
+    }
+    else {
+      // for instance if we arrive here from the findbar
+      this.enable(true);
     }
   },
 

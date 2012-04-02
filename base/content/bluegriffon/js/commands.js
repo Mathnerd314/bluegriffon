@@ -100,10 +100,28 @@ var ComposerCommands = {
         else
           commandNode.setAttribute("disabled", "true");
 
-        goUpdateCommand(commandID);  // enable or disable
+        this.goUpdateCommand(commandID);  // enable or disable
         if (commandNode.hasAttribute("state"))
           this.goUpdateCommandState(commandID);
       }
+    }
+  },
+
+  goUpdateCommand: function(aCommand)
+  {
+    try {
+      var controller = EditorUtils.getCurrentEditorElement().contentWindow.controllers.getControllerForCommand(aCommand);
+      if (!controller)
+        controller = top.document.commandDispatcher.getControllerForCommand(aCommand)
+      var enabled = false;
+      if (controller)
+        enabled = controller.isCommandEnabled(aCommand);
+  
+      goSetCommandEnabled(aCommand, enabled);
+    }
+    catch (e) {
+      Components.utils.reportError("An error occurred updating the " +
+                                   aCommand + " command: " + e);
     }
   },
 
