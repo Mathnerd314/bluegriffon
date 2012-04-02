@@ -15,6 +15,7 @@ var gAuthorWasEdited = false;
 var gDescriptionWasEdited = false;
 var gKeywordsWasEdited = false;
 var gLanguageWasEdited = false;
+var gCharset = "";
 var gPrefs;
 
 function Startup()
@@ -93,6 +94,34 @@ function Startup()
     gInsertNewKeywords = true;
   }
 
+  var strings = gDialog.bundle.strings;
+  var charsets = [];
+  while (strings.hasMoreElements())
+  {
+    var s = strings.getNext().QueryInterface(Components.interfaces.nsIPropertyElement);
+    var key = s.key.replace( /\.title/g , "");
+    var value = s.value;
+    if (key.substr(0, 7) != "chardet")
+      charsets.push( { key: key, value: value } );
+  }
+
+  function compareCharsets(a, b)
+  {
+    if (a.value > b.value)
+      return 1;
+    if (a.value < b.value)
+      return -1;
+    return 0;
+  }
+  charsets.sort(compareCharsets);
+  for (var i = 0; i < charsets.length; i++)
+  {
+    var menuitem = document.createElement("menuitem");
+    menuitem.setAttribute("label", charsets[i].value);
+    menuitem.setAttribute("value", charsets[i].key);
+    gDialog.charsetMenupopup.appendChild(menuitem);
+  }
+
   gRootElement = EditorUtils.getCurrentEditor().rootElement;
   InitDialog();
 
@@ -117,6 +146,8 @@ function InitDialog()
   gDialog.pageDescription.value = gDescriptionElement.getAttribute("content");
   gDialog.pageKeywords.value    = gKeywordsElement.getAttribute("content");
 
+  gCharset = EditorUtils.getCurrentEditor().documentCharacterSet.toLowerCase();
+  gDialog.charsetMenulist.value = gCharset;
 }
 
 function onAccept()
@@ -150,6 +181,9 @@ function onAccept()
     EditorUtils.getCurrentDocument().documentElement.
       setAttribute("dir", gDialog.directionRadio.value);
 
+  if (gDialog.charsetMenulist.value != gCharset) {
+    EditorUtils.getCurrentEditor().documentCharacterSet = gDialog.charsetMenulist.value;
+  }
   editor.endTransaction();
 
   return true;

@@ -58,6 +58,8 @@
   <script type="application/x-javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript" src="chrome://bluegriffon/content/dialogs/pageProperties.js"/>
 
+  <stringbundle id="bundle" src="chrome://global/locale/charsetTitles.properties"/>
+
   <grid flex="1">
     <columns><column/><column flex="1"/></columns>
     <rows>
@@ -107,6 +109,13 @@
           <button label="&selectLanguage.label;"
                   oncommand="SelectLanguage(this)"/>
        </hbox>
+      </row>
+      <row align="center">
+        <label value="&charset.label;"
+               control="charsetMenulist" />
+        <menulist id="charsetMenulist" value="utf-8">
+          <menupopup id="charsetMenupopup"/>
+        </menulist>
       </row>
       <row align="center">
         <label value="&direction.label;"
