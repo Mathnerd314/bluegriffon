@@ -56,53 +56,61 @@ function MakePhpAndCommentsVisible(doc)
                                         NodeFilter.SHOW_COMMENT | NodeFilter.SHOW_PROCESSING_INSTRUCTION,
                                         acceptNode,
                                         true);
-  if (treeWalker) {
-    var anchorNode = treeWalker.nextNode();
-    while (anchorNode) {
-      var tmp = treeWalker.nextNode();
 
-      if (anchorNode.nodeType == Node.COMMENT_NODE)
-      {
-        var data = anchorNode.data;
-        var target = "";
-        var d      = "";
-        if (data.substr(0, 4) == "?php" && data[data.length - 1] == "?") {
-          target = "php"
-          d      = data.substr(5, data.length - 6);
-        }
-        else if (data[0] == "?" && data[data.length - 1] == "?") {
-          target = data.substr(1, data.indexOf(" ") - 1);
-          d      = data.substr(data.indexOf(" ") + 1);
-          d      = d.substring(0, d.length - 1);
-         }
-
-         if (target) {
-          var pi = doc.createProcessingInstruction(target, d);
-
-          var txn = new diNodeInsertionTxn(pi, anchorNode.parentNode, anchorNode);
-          editor.transactionManager.doTransaction(txn);
-          editor.deleteNode(anchorNode);
-          anchorNode = pi;
-         }
+  function _tweakNode(aNode) {
+    if (aNode.nodeType == Node.COMMENT_NODE)
+    {
+      // do we have a comment created from a PI?
+      var data = aNode.data;
+      var target = "";
+      var d      = "";
+      if (data.substr(0, 4) == "?php" && data[data.length - 1] == "?") {
+        target = "php"
+        d      = data.substr(5, data.length - 6);
       }
+      else if (data[0] == "?" && data[data.length - 1] == "?") {
+        target = data.substr(1, data.indexOf(" ") - 1);
+        d      = data.substr(data.indexOf(" ") + 1);
+        d      = d.substring(0, d.length - 1);
+       }
 
+       if (target) {
+        var pi = doc.createProcessingInstruction(target, d);
+
+        var txn = new diNodeInsertionTxn(pi, aNode.parentNode, aNode);
+        editor.transactionManager.doTransaction(txn);
+        //editor.deleteNode(aNode);
+        txn = new diNodeDeletionTxn(aNode);
+        editor.transactionManager.doTransaction(txn);
+        aNode = pi;
+       }
+    }
+
+    var p = aNode;
+    var ok = false;
+    while (p && !ok) {
+      var n = p.nodeName.toLowerCase();
+      ok = (n == "body" || n == "head");
+      p = p.parentNode;
+    }
+    if (ok) {
       var span, text;
-      if (anchorNode.nodeType == Node.COMMENT_NODE)
+      if (aNode.nodeType == Node.COMMENT_NODE)
       {
           span = doc.createElementNS(BLUEGRIFFON_NS, "comment");
-          text = anchorNode.data;
+          text = aNode.data;
       }
-      else if (anchorNode.nodeType == Node.PROCESSING_INSTRUCTION_NODE)
+      else if (aNode.nodeType == Node.PROCESSING_INSTRUCTION_NODE)
       {
-        if (anchorNode.target == "php")
+        if (aNode.target == "php")
         {
           span = doc.createElementNS(BLUEGRIFFON_NS, "php");
-          text = anchorNode.data;
+          text = aNode.data;
         }
         else
         {
           span = doc.createElementNS(BLUEGRIFFON_NS, "pi");
-          text = anchorNode.target + " " + anchorNode.data;
+          text = aNode.target + " " + aNode.data;
         }
       }
 
@@ -110,15 +118,29 @@ function MakePhpAndCommentsVisible(doc)
       if (text.length > 22)
         text = text.substr(0, 22) + "...";
       span.setAttribute("title", text);
-      txn = new diNodeInsertionTxn(span, anchorNode.parentNode, anchorNode);
+      txn = new diNodeInsertionTxn(span, aNode.parentNode, aNode);
       editor.transactionManager.doTransaction(txn);
 
-      var clone = anchorNode.cloneNode(true);
+      var clone = aNode.cloneNode(true);
       txn = new diNodeInsertionTxn(clone, span, null);
       editor.transactionManager.doTransaction(txn);
-      editor.deleteNode(anchorNode);
-      
+      editor.deleteNode(aNode);
+    }
+  }
+
+  if (treeWalker) {
+    var anchorNode = treeWalker.nextNode();
+    while (anchorNode) {
+      var tmp = treeWalker.nextNode();
+      _tweakNode(anchorNode)
       anchorNode = tmp;
     }
   }
+  var anchorNode = doc.firstChild;
+  while (anchorNode) {
+    var tmp = anchorNode.nextSibling;
+    _tweakNode(anchorNode)
+    anchorNode = tmp;
+  }
 }
+

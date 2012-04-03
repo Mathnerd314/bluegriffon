@@ -1,6 +1,7 @@
   <script type="application/x-javascript" src="chrome://inspector/content/hooks.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diInnerHtmlChangedTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diNodeInsertionTxn.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/txns/diNodeDeletionTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diStyleAttrChangeTxn.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/txns/diCommentOrPIChangeTxn.js"/>
 

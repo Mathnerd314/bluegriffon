@@ -48,6 +48,8 @@ EXTRA_COMPONENTS = \
 	bgCommandHandler.manifest \
   bgCharUnicodeAutocomplete.js \
   bgCharUnicodeAutocomplete.manifest \
+  phpStreamConverter.js \
+  phpStreamConverter.manifest \
   $(NULL)
 
 EXTRA_PP_COMPONENTS = bgCommandHandler.js

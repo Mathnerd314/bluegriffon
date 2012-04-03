@@ -482,6 +482,9 @@ var FileUtils = {
         docURI = docURI.QueryInterface(Components.interfaces.nsIURL);
   
         // grab the file name
+        if (docURI.fileExtension.toLowerCase() == "php")
+          return unescape(docURI.fileName);
+
         var url = docURI.fileBaseName;
         if (url)
           return unescape(url+extension);

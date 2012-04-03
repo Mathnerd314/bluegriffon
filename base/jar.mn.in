@@ -50,6 +50,7 @@ bluegriffon.jar:
   content/bluegriffon/txns/diStyleAttrChangeTxn.js      (content/bluegriffon/txns/diStyleAttrChangeTxn.js)
   content/bluegriffon/txns/diChangeFileStylesheetTxn.js (content/bluegriffon/txns/diChangeFileStylesheetTxn.js)
   content/bluegriffon/txns/diNodeInsertionTxn.js        (content/bluegriffon/txns/diNodeInsertionTxn.js)
+  content/bluegriffon/txns/diNodeDeletionTxn.js         (content/bluegriffon/txns/diNodeDeletionTxn.js)
   content/bluegriffon/txns/diCommentOrPIChangeTxn.js    (content/bluegriffon/txns/diCommentOrPIChangeTxn.js)
 * content/bluegriffon/dialogs/aboutDialog.xul           (content/bluegriffon/dialogs/aboutDialog.xul)
 * content/bluegriffon/dialogs/aboutDialog.js            (content/bluegriffon/dialogs/aboutDialog.js)

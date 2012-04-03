@@ -63,7 +63,7 @@ function onChooseFile()
     fp.init(window, gDialog.bundle.getString("chooseFileDialogTitle"), nsIFilePicker.modeOpen);
     
     fp.appendFilters(nsIFilePicker.filterHTML);
-    fp.appendFilter(gDialog.bundle.getString("templateFilter"), "*.mzt");
+    fp.appendFilter(gDialog.bundle.getString("PHPfiles"), "*.php");
     fp.appendFilters(nsIFilePicker.filterText);
     fp.appendFilters(nsIFilePicker.filterAll);
 

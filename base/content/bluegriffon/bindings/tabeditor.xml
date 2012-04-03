@@ -266,6 +266,7 @@
 
                       MakePhpAndCommentsVisible(editor.document);
                       editor.resetModificationCount();
+                      editor.transactionManager.clear();
 
                       var links = editor.document.querySelectorAll("link");
                       for (var i = 0; i < links.length; i++) {
@@ -336,6 +337,7 @@
                       if (charset) {
                         editor.documentCharacterSet = charset;
                         editor.resetModificationCount();
+                        editor.transactionManager.clear();
                       }
                     }
                     catch(e) { alert(e) }

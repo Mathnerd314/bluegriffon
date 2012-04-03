@@ -110,7 +110,9 @@ var ComposerCommands = {
   goUpdateCommand: function(aCommand)
   {
     try {
-      var controller = EditorUtils.getCurrentEditorElement().contentWindow.controllers.getControllerForCommand(aCommand);
+      var controller = EditorUtils.getCurrentEditorElement()
+                       ? EditorUtils.getCurrentEditorElement().contentWindow.controllers.getControllerForCommand(aCommand)
+                       : null;
       if (!controller)
         controller = top.document.commandDispatcher.getControllerForCommand(aCommand)
       var enabled = false;
