@@ -346,7 +346,7 @@
   position: relative;
   width: 200px;
   padding: 5px;
-  -moz-box-shadow: #555 1px 1px 4px;
+  box-shadow: #555 1px 1px 4px;
   -webkit-box-shadow: #555 1px 1px 4px;
   font-size: 1.1em;
   display: none;
@@ -1232,7 +1232,6 @@ span.zoom_tool {
   font: 14px/17px Lucida Sans, Helvetica, Verdana, sans-serif;
   border-radius: 5px;
   border-radius: 5px;
-  -moz-box-shadow: 2px 5px 10px rgba(0,0,0,.3);
   -webkit-box-shadow: 2px 5px 10px rgba(0,0,0,.3);
   box-shadow: 2px 5px 10px rgba(0,0,0,.3);
 }

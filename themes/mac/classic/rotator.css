@@ -51,7 +51,7 @@ rotator {
   width: 41px;
   background:  -moz-linear-gradient(45deg, #a0a0a0, #d0d0d0);
   border-radius: 100px;
-  -moz-box-shadow: #606060 1px 1px 3px;
+  box-shadow: #606060 1px 1px 3px;
 }
 
 [anonid="innerRotator"] {
