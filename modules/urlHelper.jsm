@@ -80,11 +80,13 @@ var UrlUtils = {
 
   newLocalFile:  function(url) {
     var filePath = this.url2path(url);
+    var nsFile = null;
     try {
-      var nsFile = Components.classes['@mozilla.org/file/local;1']
+      nsFile = Components.classes['@mozilla.org/file/local;1']
                              .createInstance(Components.interfaces.nsILocalFile);
       nsFile.initWithPath(filePath);
     } catch(e) {
+      nsFile = null;
     }
     return nsFile;
   },
