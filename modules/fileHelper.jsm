@@ -149,13 +149,8 @@ var FileUtils = {
       // In a c file operation, we have no need to set file mode with or operation,
       // directly using "r" or "w" usually.
       
-      // if you are sure there will never ever be any non-ascii text in data you can 
-      // also call foStream.writeData directly
-      var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
-                      createInstance(Components.interfaces.nsIConverterOutputStream);
-      converter.init(foStream, editor.documentCharacterSet, 0, 0);
-      converter.writeString(aSource);
-      converter.close(); // this closes foStream
+      foStream.write(aSource, aSource.length);
+      foStream.close();
     }
     catch (e)
     {
