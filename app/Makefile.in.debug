@@ -284,6 +284,8 @@ else
 endif
 	-cp -L $(DIST)/bin/mangle $(DIST)/bin/shlibsign $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)
 	cp -RL $(srcdir)/macbuild/Contents/Resources/bluegriffon.icns $(DIST)/$(APP_NAME).app/Contents/Resources/bluegriffon.icns
+	cp -L /Users/glazou/Desktop/add-ons/venkman-0.9.88.2.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions/\{f13b157f-b174-47e7-a34d-4815ddfdfeb8\}.xpi
+	cp -L /Users/glazou/Desktop/add-ons/inspector.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions/inspector\@mozilla.org.xpi
 	printf APPLDIBG > $(DIST)/$(APP_NAME).app/Contents/PkgInfo
 #       remove CVS dirs from packaged app
 	find $(DIST)/$(APP_NAME).app -type d -name ".svn" -prune -exec rm -rf {} \;
@@ -311,8 +313,6 @@ libs::
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 	$(INSTALL) $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/* $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions 
 	rm -fr $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/*
-	cp /Users/glazou/Desktop/add-ons/inspector\@mozilla.org.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
-	cp /Users/glazou/Desktop/add-ons/venkman\@mozilla.org.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
 else
 	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/distribution/extensions 
 	rm -fr  $(DIST)/bin/extensions/*
