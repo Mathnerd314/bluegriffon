@@ -242,6 +242,7 @@
          type="arrow"
          fade="slow"
          forcearrow="true"
+         noautofocus="true"
          onpopuphiding="InContextHelper.onPopupHiding()">
     <hbox align="center" id="elementStyling">
       <menulist class="toolbar-focustarget"

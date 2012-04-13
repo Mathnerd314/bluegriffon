@@ -6,9 +6,6 @@
                      oncommand="NewDocument(event);"
                      tooltiptext="&newToolbarCmd.tooltip;">
         <menupopup>
-          <!--menuitem label="&pageInNewTab.label;"          oncommand="NewDocument(event);" default="true"/>
-          <menuitem label="&pageInNewWindow.label;"       oncommand="NewDocumentInNewWindow(event);"/>
-          <menuseparator/-->
           <menuitem label="&newOtherCmd.label;"     oncommand="NewDocumentWithOptions(event);"
                     key="key_newWithOptions" />
         </menupopup>
