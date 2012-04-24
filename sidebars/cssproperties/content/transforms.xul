@@ -1,10 +1,29 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="transformsSectionHeader" onclick="ToggleSection(event, this)">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="transformsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/transforms.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="transformsSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="15">
         <image />
         <label value="&transformsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="transformsSection">
+      <vbox class="section" id="transformsSection" position="16">
         <grid>
           <columns>
             <column/>
@@ -156,3 +175,5 @@
           
         </hbox>
       </vbox>
+  </vbox>
+</overlay>

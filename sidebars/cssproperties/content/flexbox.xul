@@ -1,10 +1,29 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="flexboxSectionHeader" onclick="ToggleSection(event, this)">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="flexboxOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/flexbox.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="flexboxSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="19">
         <image />
         <label value="&flexboxSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="flexboxSection">
+      <vbox class="section" id="flexboxSection" position="20">
         <checkbox label="&enableFlexBox.label;" animatable="false"
                   id="flexBoxEnabledCheckbox"
                   oncommand="ToggleFlexBox()"/>
@@ -105,3 +124,5 @@
           </rows>
         </grid>
       </vbox>
+  </vbox>
+</overlay>

@@ -1,11 +1,30 @@
-      <hbox align="center" class="csspropertiesHeader last" context="sectionHeaderContext"
-            id="miscSectionHeader" onclick="ToggleSection(event, this)"
-            animatable="false">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="miscOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/misc.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader last"
+            context="sectionHeaderContext"
+            id="miscSectionHeader"
+            onclick="ToggleSection(event, this)"
+            animatable="false"
+            position="24">
         <image />
         <label value="&miscSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="miscSection" animatable="false">
+      <vbox class="section" id="miscSection" animatable="false" position="25">
         <grid>
           <columns><column/><column/></columns>
           <rows>
@@ -128,3 +147,5 @@
           </rows>
         </grid>
       </vbox>
+  </vbox>
+</overlay>

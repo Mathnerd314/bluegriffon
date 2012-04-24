@@ -1,11 +1,30 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="geometrySectionHeader" onclick="ToggleSection(event, this)">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="geometryOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/geometry.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="geometrySectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="5">
         <image />
         <label value="&geometrySectionHeader.label;"/>
       </hbox>
 
       
-      <vbox class="section" id="geometrySection">
+      <vbox class="section" id="geometrySection" position="6">
 
         <grid>
           <columns><column/><column/><column/><column/><column/></columns>
@@ -239,3 +258,5 @@
 
         </vbox>
       </vbox>
+  </vbox>
+</overlay>

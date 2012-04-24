@@ -1,4 +1,18 @@
-  <panelset>
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="popupsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/bezier.js"/>
+
+  <panelset id="csspropertiesPanelset">
     <panel level="top" noautohide="true" id="bezierPanel"
            alwaysontop="true">
       <hbox align="center">
@@ -292,3 +306,5 @@
       </hbox>
     </panel>
   </panelset>
+
+</overlay>

@@ -42,6 +42,22 @@
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
+<?xul-overlay href="chrome://cssproperties/content/popups.xul"?>
+
+<?xul-overlay href="chrome://cssproperties/content/general.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/colors.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/geometry.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/position.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/borders.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/shadows.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/lists.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/transforms.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/transitions.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/flexbox.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/columns.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/tables.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/misc.xul"?>
+
 <!DOCTYPE page [
   <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
   %csspropertiesDTD;
@@ -64,13 +80,12 @@
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/txns/diChangeFileStylesheetTxn.js"/>
   <script type="application/x-javascript"  src="chrome://cssproperties/content/cssproperties.js"/>
   <script type="application/x-javascript"  src="chrome://cssproperties/content/common.js"/>
-  <script type="application/x-javascript"  src="chrome://cssproperties/content/bezier.js"/>
 
   <stringbundle id="csspropertiesBundle"   src="chrome://cssproperties/locale/cssproperties.properties"/>
   <stringbundle id="backgrounditemBundle"  src="chrome://cssproperties/locale/backgrounditem.properties"/>
   <stringbundle id="bluegriffonBundle"     src="chrome://cssproperties/locale/bluegriffon.properties"/>
 
-#include popups.xul.inc
+  <panelset id="csspropertiesPanelset" />
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
     <vbox id="mainBoxHeader">
@@ -101,21 +116,7 @@
       </hbox>
     </vbox>
 
-    <vbox flex="1" id="propertiesBox">
-#include general.xul.inc
-#include colors.xul.inc
-#include geometry.xul.inc
-#include position.xul.inc
-#include borders.xul.inc
-#include shadows.xul.inc
-#include lists.xul.inc
-#include transforms.xul.inc
-#include transitions.xul.inc
-#include flexbox.xul.inc
-#include columns.xul.inc
-#include tables.xul.inc
-#include misc.xul.inc
-    </vbox>
+    <vbox flex="1" id="propertiesBox" />
   </vbox>
 
 </page>

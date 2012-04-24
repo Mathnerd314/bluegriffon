@@ -1,10 +1,31 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="generalSectionHeader" onclick="ToggleSection(event, this)">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="generalOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/general.js" />
+
+  <vbox id="propertiesBox">
+        <hbox align="center"
+              class="csspropertiesHeader"
+              context="sectionHeaderContext"
+              id="generalSectionHeader"
+              onclick="ToggleSection(event, this)"
+              position="1">
         <image />
         <label value="&generalSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="generalSection">
+      <vbox class="section"
+            id="generalSection"
+            position="2">
 
         <grid>
           <columns><column/><column/></columns>
@@ -304,3 +325,5 @@
           </rows>
         </grid>
       </vbox>
+  </vbox>
+</overlay>

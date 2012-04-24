@@ -1,11 +1,30 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="listsSectionHeader" onclick="ToggleSection(event, this)"
-            animatable="false">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="listsOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/lists.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="listsSectionHeader"
+            onclick="ToggleSection(event, this)"
+            animatable="false"
+            poisition="13">
         <image />
         <label value="&listsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="listsSection" animatable="false">
+      <vbox class="section" id="listsSection" animatable="false" position="14">
         <grid>
           <columns><column/><column/></columns>
           <rows>
@@ -107,3 +126,5 @@
           </rows>
         </grid>
       </vbox>
+  </vbox>
+</overlay>

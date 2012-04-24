@@ -712,20 +712,6 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   }
 }
 
-#include general.js.inc
-#include colors.js.inc
-#include geometry.js.inc
-#include position.js.inc
-#include borders.js.inc
-#include shadows.js.inc
-#include lists.js.inc
-#include transforms.js.inc
-#include transitions.js.inc
-#include flexbox.js.inc
-#include columns.js.inc
-#include tables.js.inc
-#include misc.js.inc
-
 function ToggleHover(aElt)
 {
   if (aElt.checked && gDialog.cssPolicyMenulist.value == "inline")

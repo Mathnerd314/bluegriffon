@@ -1,10 +1,29 @@
-      <hbox align="center" class="csspropertiesHeader" context="sectionHeaderContext"
-            id="bordersSectionHeader" onclick="ToggleSection(event, this)">
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+  <!ENTITY % backgrounditemDTD SYSTEM "chrome://cssproperties/locale/backgrounditem.dtd" >
+  %backgrounditemDTD;
+]>
+
+<overlay id="bordersOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/borders.js" />
+
+  <vbox id="propertiesBox">
+      <hbox align="center"
+            class="csspropertiesHeader"
+            context="sectionHeaderContext"
+            id="bordersSectionHeader"
+            onclick="ToggleSection(event, this)"
+            position="9">
         <image />
         <label value="&bordersSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="bordersSection">
+      <vbox class="section" id="bordersSection" position="10">
         <checkbox label="&sameBorderOnFourEdges.label;"
                   id="sameBorderOnFourEdgesCheckbox"
                   oncommand="ToggleSameBorderOnFourEdges(this)"/>
@@ -458,4 +477,5 @@
           </vbox>
         </vbox>
       </vbox>
-
+  </vbox>
+</overlay>
