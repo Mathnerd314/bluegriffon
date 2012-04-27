@@ -268,22 +268,6 @@ function UpdateStylesheet()
   Inspect();
 }
 
-function UpdateStylesheet()
-{
-  var tree = gDialog.contentsTree;
-  var contentView = tree.contentView;
-  var view = tree.view;
-  var index = view.selection.currentIndex;
-  var treeitem = contentView.getItemAtIndex(index);
-  var elt = treeitem.getUserData("element");
-
-  window.openDialog("chrome://bluegriffon/content/dialogs/editStylesheet.xul",
-                    "_blank",
-                    "chrome,modal,titlebar,resizable=yes,dialog=yes",
-                    elt);
-  Inspect();
-}
-
 function OpenStylesheet()
 {
   var tree = gDialog.contentsTree;
