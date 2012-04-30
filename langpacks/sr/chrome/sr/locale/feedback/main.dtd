@@ -24,7 +24,7 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Затвори">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Омогући проучавања корисничка">
 <!ENTITY testpilot.feedbackbutton.label                "Повратне информације">
 <!ENTITY testpilot.happy.label        "Фајерфокс ме је усрећио зато што...">

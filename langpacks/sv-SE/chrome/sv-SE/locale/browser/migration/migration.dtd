@@ -21,7 +21,7 @@
    - the provisions above, a recipient may use your version of this file under
    - the terms of any one of the MPL, the GPL or the LGPL.
    - 
-   - The Original Code is the Mozilla Swedish translation for Mozilla Firefox.
+   - The Original Code is the Mozilla Swedish translation for Mozilla BlueGriffon.
    - 
    - The Initial Developer of the Original Code is Hasse Wallanger.
    - 
@@ -43,8 +43,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromFirefox.label        "Firefox">
-<!ENTITY importFromFirefox.accesskey    "X">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
 
 <!ENTITY noMigrationSources.label       "Hittade inget program som innehåller bokmärken, historik eller lösenord.">
 
