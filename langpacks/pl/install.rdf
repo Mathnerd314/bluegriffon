@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-pl@bluegriffon.org"
                em:name="Polski Language Pack"
-               em:version="1.5.1"
+               em:version="13.0.1.5.1"
                em:type="8"
                em:creator="Aviary.pl">
     <em:contributor>Zbigniew Braniecki</em:contributor> <em:contributor>Marek Stępień</em:contributor> <em:contributor>Piotr Komoda</em:contributor> <em:contributor>Marek Wawoczny</em:contributor> <em:contributor>Piotr Bartecki</em:contributor> <em:contributor>Kornel Misiejuk</em:contributor> <em:contributor>Wadim Dziedzic</em:contributor>
