@@ -9,12 +9,12 @@
 <!ENTITY importFromIE.accesskey         "M">
 <!ENTITY importFromNothing.label        "Nichts importieren">
 <!ENTITY importFromNothing.accesskey    "h">
-<!ENTITY importFromSeamonkey.label      "Netscape 6, 7 oder Mozilla 1.x">
-<!ENTITY importFromSeamonkey.accesskey  "N">
-<!ENTITY importFromOpera.label          "Opera">
-<!ENTITY importFromOpera.accesskey      "O">
 <!ENTITY importFromSafari.label         "Safari">
 <!ENTITY importFromSafari.accesskey     "S">
+<!ENTITY importFromChrome.label         "Chrome">
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "F">
 <!ENTITY importFromHTMLFile.label       "Aus HTML-Datei">
 <!ENTITY importFromHTMLFile.accesskey   "D">
 
@@ -33,7 +33,3 @@
 <!ENTITY done.title                     "Importieren abgeschlossen">
 <!ENTITY done.label                     "Folgende Daten wurden erfolgreich importiert:">
 
-<!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromChrome.label         "Chrome">
-<!ENTITY importFromBlueGriffon.accesskey    "X">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

@@ -74,6 +74,7 @@
 
 <!ENTITY  clearOnCloseSettings.label     "Подешавања…">
 <!ENTITY  clearOnCloseSettings.accesskey "t">
+
 <!ENTITY doNotTrack.accesskey           "d">
 
 <!ENTITY doNotTrack.label               "Tell websites I do not want to be tracked">

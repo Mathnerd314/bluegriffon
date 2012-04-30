@@ -10,4 +10,5 @@
 <!ENTITY addNewToolbar.label		"ツールバーを追加">
 <!ENTITY saveChanges.label		"完了">
 <!ENTITY undoChanges.label		"元に戻す">
+
 <!ENTITY dialog.dimensions        "width: 92ch; height: 36em;">

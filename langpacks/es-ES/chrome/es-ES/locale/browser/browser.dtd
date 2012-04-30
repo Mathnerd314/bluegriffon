@@ -157,10 +157,13 @@
 <!ENTITY scratchpad.accesskey "b">
 <!ENTITY scratchpad.keycode "VK_F4">
 <!ENTITY scratchpad.keytext "F4">
-<!ENTITY inspectPanelTitle.label "HTML">
-<!ENTITY inspectButton.label "Inspeccionar">
-<!ENTITY inspectButton.accesskey "I">
 <!ENTITY inspectCloseButton.tooltiptext "Cerrar el Inspector">
+<!ENTITY inspectorHTMLCopyInner.label "Copiar HTML interno">
+<!ENTITY inspectorHTMLCopyInner.accesskey "I">
+<!ENTITY inspectorHTMLCopyOuter.label "Copiar HTML externo">
+<!ENTITY inspectorHTMLCopyOuter.accesskey "O">
+<!ENTITY inspectorHTMLDelete.label "Eliminar nodo">
+<!ENTITY inspectorHTMLDelete.accesskey "m">
 <!ENTITY inspect3DViewButton.label "Vista 3D">
 <!ENTITY inspect3DViewButton.accesskey "V">
 <!ENTITY inspectStyleButton.label "Estilo">
@@ -435,24 +438,15 @@
 <!ENTITY syncToolbarButton.label "Sync">
 <!ENTITY addonBarCloseButton.tooltip "Cerrar la barra de complementos">
 <!ENTITY toggleAddonBarCmd.key "/">
+<!ENTITY markupButton.arialabel "Marcado">
+<!ENTITY markupButton.accesskey "M">
 
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
+<!ENTITY devToolbar.commandkey "v">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
+<!ENTITY inspectorButton.label "Inspector">
+<!ENTITY scriptsButton.label "Scripts">
 
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
-<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
-
-<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
-<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
-
-<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
-<!ENTITY inspectorHTMLDelete.accesskey      "D">
-
-<!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!ENTITY webConsoleButton.label "Web Console">

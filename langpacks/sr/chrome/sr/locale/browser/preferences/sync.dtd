@@ -38,6 +38,7 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "Услови коришћења услуге">
 <!ENTITY prefs.ppLink.label         "Политика приватности">
+
 <!ENTITY changePassword2.label        "Change Password…">
 <!ENTITY engine.addons.accesskey    "A">
 <!ENTITY engine.addons.label        "Add-ons">

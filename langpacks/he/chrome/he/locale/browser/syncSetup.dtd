@@ -108,6 +108,7 @@
 <!ENTITY setup.successPage.title "ההתקנה הושלמה">
 <!ENTITY changeOptions.label "ניתן לשנות העדפה זו על ידי בחירה באפשרויות הסנכרון להלן.">
 <!ENTITY continueUsing.label "כעת תוכל להמשיך להשתמש ב־&brandShortName;.">
+
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
 <!ENTITY engine.addons.accesskey    "A">

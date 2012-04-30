@@ -4,19 +4,19 @@
   - A good criteria is the language in which you'd find the best
   - documentation on web development on the web. -->
 
-<!ENTITY networkPanel.requestURL                  "Request URL">
-<!ENTITY networkPanel.requestMethod               "Request Method">
-<!ENTITY networkPanel.statusCode                  "Status Code">
+<!ENTITY networkPanel.requestURL                  "Kért URL">
+<!ENTITY networkPanel.requestMethod               "Kérési mód">
+<!ENTITY networkPanel.statusCode                  "Állapotkód">
 
-<!ENTITY networkPanel.requestHeaders              "Request Headers">
-<!ENTITY networkPanel.requestCookie               "Sent Cookie">
-<!ENTITY networkPanel.requestBody                 "Request Body">
-<!ENTITY networkPanel.requestFormData             "Sent Form Data">
+<!ENTITY networkPanel.requestHeaders              "Kérés fejléce">
+<!ENTITY networkPanel.requestCookie               "Elküldött süti">
+<!ENTITY networkPanel.requestBody                 "Kérés törzse">
+<!ENTITY networkPanel.requestFormData             "Elküldött űrlapadat">
 
-<!ENTITY networkPanel.responseHeaders             "Response Headers">
-<!ENTITY networkPanel.responseBody                "Response Body">
-<!ENTITY networkPanel.responseBodyCached          "Cached Data">
-<!ENTITY networkPanel.responseBodyUnknownType     "Unknown Content Type">
-<!ENTITY networkPanel.responseNoBody              "No Response Body">
-<!ENTITY networkPanel.responseImage               "Received Image">
-<!ENTITY networkPanel.responseImageCached         "Cached Image">
+<!ENTITY networkPanel.responseHeaders             "Válasz fejléce">
+<!ENTITY networkPanel.responseBody                "Válasz törzse">
+<!ENTITY networkPanel.responseBodyCached          "Gyorsítótárazott adatok">
+<!ENTITY networkPanel.responseBodyUnknownType     "Ismeretlen tartalomtípus">
+<!ENTITY networkPanel.responseNoBody              "Nincs választörzs">
+<!ENTITY networkPanel.responseImage               "Kapott kép">
+<!ENTITY networkPanel.responseImageCached         "Gyorsítótárazott kép">

@@ -49,6 +49,7 @@
 <!ENTITY done.title                      "Tuonti valmis">
 <!ENTITY done.label                      "Seuraavat tiedot tuotiin:">
 
+
 <!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromBlueGriffon.accesskey    "X">

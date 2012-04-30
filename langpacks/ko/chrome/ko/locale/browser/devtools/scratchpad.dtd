@@ -106,29 +106,10 @@
 <!ENTITY errorConsoleCmd.commandkey   "j">
 
 <!ENTITY webConsoleCmd.commandkey	"k">
+
 <!ENTITY documentationLink.accesskey  "D">
 
 <!ENTITY documentationLink.label      "Scratchpad Help on MDN">
-<!ENTITY findAgainCmd.accesskey       "g">
-<!-- LOCALIZATION NOTE (findAgainCmd.key): This key is used only on Macs.
-  -  Windows and Linux builds use the F3 key which is not localizable on purpose.
-  -->
-<!ENTITY findAgainCmd.key             "G">
-
-<!ENTITY findAgainCmd.label           "Find Again…">
-<!ENTITY findCmd.accesskey            "F">
-<!ENTITY findCmd.key                  "F">
-
-<!ENTITY findCmd.label                "Find…">
-<!-- LOCALIZATION NOTE (findPreviousCmd.key): This key is used only on Macs.
-  -  Windows and Linux builds use the Shift-F3 key which is not localizable on
-  -  purpose.
-  -->
-<!ENTITY findPreviousCmd.key          "G">
-<!ENTITY gotoLineCmd.accesskey        "J">
-<!ENTITY gotoLineCmd.key              "J">
-
-<!ENTITY gotoLineCmd.label            "Jump to line…">
 <!ENTITY helpMenu.accesskey           "H">
 
 <!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"

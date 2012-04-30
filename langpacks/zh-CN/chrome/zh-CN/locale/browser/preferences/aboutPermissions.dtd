@@ -33,3 +33,6 @@
 <!ENTITY indexedDB.label                 "维护离线存储">
 
 <!ENTITY popup.label                     "打开弹出窗口">
+
+
+<!ENTITY plugins.label                   "Plugins">

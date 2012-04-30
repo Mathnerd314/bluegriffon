@@ -18,85 +18,65 @@
   -  "simple discardable text editor". -->
 <!ENTITY window.title                 "Scratchpad">
 
-<!ENTITY fileMenu.label               "File">
+<!ENTITY fileMenu.label               "Fájl">
 <!ENTITY fileMenu.accesskey           "F">
 
-<!ENTITY newWindowCmd.label           "New Window">
-<!ENTITY newWindowCmd.accesskey       "N">
+<!ENTITY newWindowCmd.label           "Új ablak">
+<!ENTITY newWindowCmd.accesskey       "a">
 <!ENTITY newWindowCmd.commandkey      "n">
 
-<!ENTITY openFileCmd.label            "Open File…">
-<!ENTITY openFileCmd.accesskey        "O">
+<!ENTITY openFileCmd.label            "Fájl megnyitása...">
+<!ENTITY openFileCmd.accesskey        "F">
 <!ENTITY openFileCmd.commandkey       "o">
 
-<!ENTITY saveFileCmd.label            "Save">
-<!ENTITY saveFileCmd.accesskey        "S">
+<!ENTITY saveFileCmd.label            "Mentés">
+<!ENTITY saveFileCmd.accesskey        "M">
 <!ENTITY saveFileCmd.commandkey       "s">
 
-<!ENTITY saveFileAsCmd.label          "Save As…">
-<!ENTITY saveFileAsCmd.accesskey      "A">
+<!ENTITY saveFileAsCmd.label          "Mentés másként...">
+<!ENTITY saveFileAsCmd.accesskey      "e">
 
-<!ENTITY closeCmd.label               "Close">
+<!ENTITY closeCmd.label               "Bezárás">
 <!ENTITY closeCmd.key                 "W">
-<!ENTITY closeCmd.accesskey           "C">
+<!ENTITY closeCmd.accesskey           "B">
 
-<!ENTITY editMenu.label               "Edit">
-<!ENTITY editMenu.accesskey           "E">
+<!ENTITY editMenu.label               "Szerkesztés">
+<!ENTITY editMenu.accesskey           "z">
 
-<!ENTITY undoCmd.label                "Undo">
+<!ENTITY undoCmd.label                "Visszavonás">
 <!ENTITY undoCmd.key                  "Z">
-<!ENTITY undoCmd.accesskey            "U">
+<!ENTITY undoCmd.accesskey            "V">
 
-<!ENTITY redoCmd.label                "Redo">
+<!ENTITY redoCmd.label                "Újra">
 <!ENTITY redoCmd.key                  "Y">
-<!ENTITY redoCmd.accesskey            "R">
+<!ENTITY redoCmd.accesskey            "r">
 
-<!ENTITY cutCmd.label                 "Cut">
+<!ENTITY cutCmd.label                 "Kivágás">
 <!ENTITY cutCmd.key                   "X">
-<!ENTITY cutCmd.accesskey             "t">
+<!ENTITY cutCmd.accesskey             "K">
 
-<!ENTITY copyCmd.label                "Copy">
+<!ENTITY copyCmd.label                "Másolás">
 <!ENTITY copyCmd.key                  "C">
-<!ENTITY copyCmd.accesskey            "C">
+<!ENTITY copyCmd.accesskey            "M">
 
-<!ENTITY pasteCmd.label               "Paste">
+<!ENTITY pasteCmd.label               "Beillesztés">
 <!ENTITY pasteCmd.key                 "V">
-<!ENTITY pasteCmd.accesskey           "P">
+<!ENTITY pasteCmd.accesskey           "B">
 
-<!ENTITY selectAllCmd.label           "Select All">
+<!ENTITY selectAllCmd.label           "Minden kijelölése">
 <!ENTITY selectAllCmd.key             "A">
-<!ENTITY selectAllCmd.accesskey       "A">
+<!ENTITY selectAllCmd.accesskey       "i">
 
-<!ENTITY findCmd.label                "Find…">
-<!ENTITY findCmd.key                  "F">
-<!ENTITY findCmd.accesskey            "F">
-
-<!ENTITY findAgainCmd.label           "Find Again…">
-<!-- LOCALIZATION NOTE (findAgainCmd.key): This key is used only on Macs.
-  -  Windows and Linux builds use the F3 key which is not localizable on purpose.
-  -->
-<!ENTITY findAgainCmd.key             "G">
-<!ENTITY findAgainCmd.accesskey       "g">
-<!-- LOCALIZATION NOTE (findPreviousCmd.key): This key is used only on Macs.
-  -  Windows and Linux builds use the Shift-F3 key which is not localizable on
-  -  purpose.
-  -->
-<!ENTITY findPreviousCmd.key          "G">
-
-<!ENTITY gotoLineCmd.label            "Jump to line…">
-<!ENTITY gotoLineCmd.key              "J">
-<!ENTITY gotoLineCmd.accesskey        "J">
-
-<!ENTITY run.label                    "Run">
-<!ENTITY run.accesskey                "R">
+<!ENTITY run.label                    "Futtatás">
+<!ENTITY run.accesskey                "F">
 <!ENTITY run.key                      "r">
 
-<!ENTITY inspect.label                "Inspect">
-<!ENTITY inspect.accesskey            "I">
+<!ENTITY inspect.label                "Vizsgálat">
+<!ENTITY inspect.accesskey            "V">
 <!ENTITY inspect.key                  "i">
 
-<!ENTITY display.label                "Display">
-<!ENTITY display.accesskey            "D">
+<!ENTITY display.label                "Megjelenítés">
+<!ENTITY display.accesskey            "M">
 <!ENTITY display.key                  "l">
 
 <!-- LOCALIZATION NOTE (environmentMenu.label, accesskey): This menu item was
@@ -105,12 +85,12 @@
   -  the user is evaluating against. I.e., Content (current tab) or Chrome
   -  (browser).
   -->
-<!ENTITY environmentMenu.label        "Environment">
-<!ENTITY environmentMenu.accesskey    "N">
+<!ENTITY environmentMenu.label        "Környezet">
+<!ENTITY environmentMenu.accesskey    "K">
 
 
-<!ENTITY contentContext.label         "Content">
-<!ENTITY contentContext.accesskey     "C">
+<!ENTITY contentContext.label         "Tartalom">
+<!ENTITY contentContext.accesskey     "T">
 
 <!-- LOCALIZATION NOTE (browserContext.label, accesskey): This menu item is used
   -  to select an execution environment for the browser window itself as opposed
@@ -118,29 +98,17 @@
   -  enabled via the devtools.chrome.enabled preference. Formerly, this label
   -  was called "Chrome".
   -->
-<!ENTITY browserContext.label         "Browser">
+<!ENTITY browserContext.label         "Böngésző">
 <!ENTITY browserContext.accesskey     "B">
-
-<!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"
-  -  for the help button in the menubar but Gnome does not.
-  -->
-<!ENTITY helpMenu.label               "Help">
-<!ENTITY helpMenu.accesskey           "H">
-<!ENTITY helpMenuWin.label            "Help">
-<!ENTITY helpMenuWin.accesskey        "H">
-
-<!ENTITY documentationLink.label      "Scratchpad Help on MDN">
-<!ENTITY documentationLink.accesskey  "D">
-
 
 <!-- LOCALIZATION NOTE (resetContext2.label): This command allows the developer
   -  to reset/clear the global object of the environment where the code executes.
   -->
-<!ENTITY resetContext2.label          "Reset Variables">
-<!ENTITY resetContext2.accesskey      "T">
+<!ENTITY resetContext2.label          "Változók alaphelyzetbe">
+<!ENTITY resetContext2.accesskey      "a">
 
-<!ENTITY executeMenu.label            "Execute">
-<!ENTITY executeMenu.accesskey        "X">
+<!ENTITY executeMenu.label            "Végrehajtás">
+<!ENTITY executeMenu.accesskey        "V">
 
 <!-- LOCALIZATION NOTE (errorConsoleCmd.commandkey): This command key launches
   -  the browser Error Console, the key should be identical to the property of
@@ -153,3 +121,15 @@
   -  the same name in browser.dtd.
   -->
 <!ENTITY webConsoleCmd.commandkey     "k">
+
+<!ENTITY documentationLink.accesskey  "D">
+
+<!ENTITY documentationLink.label      "Scratchpad Help on MDN">
+<!ENTITY helpMenu.accesskey           "H">
+
+<!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"
+  -  for the help button in the menubar but Gnome does not.
+  -->
+<!ENTITY helpMenu.label               "Help">
+<!ENTITY helpMenuWin.accesskey        "H">
+<!ENTITY helpMenuWin.label            "Help">

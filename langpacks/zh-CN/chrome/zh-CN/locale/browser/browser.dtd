@@ -90,7 +90,7 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "退出全屏模式">
 <!ENTITY fullScreenExit.accesskey "F">
-<!ENTITY domFullScreenWarning.label "请按 ESC 键离开全频模式">
+<!ENTITY domFullScreenWarning.label "按 ESC 键离开全屏模式">
 
 <!ENTITY closeWindow.label "关闭窗口">
 <!ENTITY closeWindow.accesskey "d">
@@ -137,7 +137,7 @@ can reach it easily. -->
 <!ENTITY homeButton.label             "主页">
 
 <!ENTITY tabGroupsButton.label        "标签页组">
-<!ENTITY tabGroupsButton.tooltip      "将您的标签页分组">
+<!ENTITY tabGroupsButton.tooltip      "给您的标签页分组">
 
 <!ENTITY feedButton.label             "订阅">
 <!ENTITY feedButton.tooltip           "订阅此页…">
@@ -191,7 +191,7 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.accesskey      "W">
 <!ENTITY webConsoleCmd.commandkey     "k">
 
-<!ENTITY inspectMenu.label            "检查">
+<!ENTITY inspectMenu.label            "查看">
 <!ENTITY inspectMenu.accesskey        "T">
 <!ENTITY inspectMenu.commandkey       "I">
 
@@ -208,14 +208,39 @@ can reach it easily. -->
   -  "Scratchpad" in your locale. You should feel free to find a close
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
-<!ENTITY scratchpad.label             "暂存器">
+<!ENTITY scratchpad.label             "代码片段速记器">
 <!ENTITY scratchpad.accesskey         "s">
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-<!ENTITY inspectPanelTitle.label      "HTML">
-<!ENTITY inspectButton.label          "检查">
-<!ENTITY inspectButton.accesskey      "I">
+<!ENTITY inspectButton.label            "查看">
+<!ENTITY inspectButton.accesskey        "I">
+<!ENTITY inspectCloseButton.tooltiptext "关闭查看器">
+
+<!ENTITY inspectorHTMLCopyInner.label       "复制内部 HTML">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "复制外部 HTML">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
+
+<!ENTITY inspectorHTMLDelete.label          "删除节点">
+<!ENTITY inspectorHTMLDelete.accesskey      "D">
+
+<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
+  -  alternate view for the Inspector, creating a 3D visualization of the
+  -  webpage. -->
+<!ENTITY inspect3DViewButton.label     "三维视图">
+<!ENTITY inspect3DViewButton.accesskey "W">
+
+<!ENTITY inspectStyleButton.label     "样式">
+<!ENTITY inspectStyleButton.accesskey "S">
+
+<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
+  -  in the Tools menu. -->
+<!ENTITY styleeditor.label            "样式编辑器">
+<!ENTITY styleeditor.accesskey        "y">
+<!ENTITY styleeditor.keycode          "VK_F7">
+<!ENTITY styleeditor.keytext          "F7">
 
 <!ENTITY getMoreDevtoolsCmd.label        "获取更多工具">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "M">
@@ -294,9 +319,9 @@ can reach it easily. -->
 <!ENTITY appMenuSidebars.label "侧边栏">
 <!ENTITY appMenuFind.label "查找…">
 <!ENTITY appMenuUnsorted.label "未分类书签">
-<!ENTITY appMenuWebDeveloper.label "Web 开发人员">
+<!ENTITY appMenuWebDeveloper.label "Web 开发者">
 <!ENTITY appMenuGettingStarted.label "新手上路">
-<!ENTITY appMenuSafeMode.label "重新启动并禁用附加组件…">
+<!ENTITY appMenuSafeMode.label "以安全模式重新启动…">
 <!ENTITY appMenuSafeMode.accesskey "R">
 
 <!ENTITY openCmd.commandkey           "l">
@@ -336,14 +361,14 @@ can reach it easily. -->
 <!ENTITY openLinkCmd.accesskey        "W">
 <!ENTITY openLinkCmdInCurrent.label     "打开链接">
 <!ENTITY openLinkCmdInCurrent.accesskey "O">
-<!ENTITY openFrameCmdInTab.label      "在新标签页中打开帧">
+<!ENTITY openFrameCmdInTab.label      "在新标签页中打开框架">
 <!ENTITY openFrameCmdInTab.accesskey  "T">
-<!ENTITY openFrameCmd.label           "在新窗口打开帧">
+<!ENTITY openFrameCmd.label           "在新窗口中打开框架">
 <!ENTITY openFrameCmd.accesskey       "W">
-<!ENTITY showOnlyThisFrameCmd.label     "仅显示当前帧">
+<!ENTITY showOnlyThisFrameCmd.label     "仅显示此框架">
 <!ENTITY showOnlyThisFrameCmd.accesskey "S">
 <!ENTITY reloadCmd.commandkey         "r">
-<!ENTITY reloadFrameCmd.label         "重新载入帧">
+<!ENTITY reloadFrameCmd.label         "重新载入框架">
 <!ENTITY reloadFrameCmd.accesskey     "R">
 <!ENTITY viewPartialSourceForSelectionCmd.label "查看选中部分源代码">
 <!ENTITY viewPartialSourceForMathMLCmd.label    "查看 MathML 源代码">
@@ -352,11 +377,11 @@ can reach it easily. -->
 <!ENTITY viewPartialSourceCmd.accesskey "e">
 <!ENTITY viewPageSourceCmd.label      "查看页面源代码">
 <!ENTITY viewPageSourceCmd.accesskey  "V">
-<!ENTITY viewFrameSourceCmd.label     "查看帧源代码">
+<!ENTITY viewFrameSourceCmd.label     "查看框架源代码">
 <!ENTITY viewFrameSourceCmd.accesskey "V">
 <!ENTITY viewPageInfoCmd.label        "查看页面信息">
 <!ENTITY viewPageInfoCmd.accesskey    "I">
-<!ENTITY viewFrameInfoCmd.label       "查看帧信息">
+<!ENTITY viewFrameInfoCmd.label       "查看框架信息">
 <!ENTITY viewFrameInfoCmd.accesskey   "I">
 <!ENTITY reloadImageCmd.label         "重新载入图像">
 <!ENTITY reloadImageCmd.accesskey     "R">
@@ -366,7 +391,7 @@ can reach it easily. -->
 <!ENTITY viewImageInfoCmd.accesskey   "f">
 <!ENTITY viewVideoCmd.label           "查看视频">
 <!ENTITY viewVideoCmd.accesskey       "I">
-<!ENTITY viewBGImageCmd.label         "查看背景图片">
+<!ENTITY viewBGImageCmd.label         "查看背景图像">
 <!ENTITY viewBGImageCmd.accesskey     "w">
 <!ENTITY setDesktopBackgroundCmd.label      "设为桌面背景…">
 <!ENTITY setDesktopBackgroundCmd.accesskey  "S">
@@ -374,7 +399,7 @@ can reach it easily. -->
 <!ENTITY bookmarkPageCmd2.accesskey   "m">
 <!ENTITY bookmarkThisLinkCmd.label      "将此链接加为书签">
 <!ENTITY bookmarkThisLinkCmd.accesskey  "L">
-<!ENTITY bookmarkThisFrameCmd.label      "将此帧加为书签">
+<!ENTITY bookmarkThisFrameCmd.label      "将此框架加为书签">
 <!ENTITY bookmarkThisFrameCmd.accesskey  "m">
 <!ENTITY sendPageCmd.label            "发送页面…">
 <!ENTITY sendPageCmd.accesskey        "e">
@@ -383,15 +408,15 @@ can reach it easily. -->
 <!-- alternate for content area context menu -->
 <!ENTITY savePageCmd.accesskey2       "P">
 <!ENTITY savePageCmd.commandkey       "s">
-<!ENTITY saveFrameCmd.label           "帧另存为…">
+<!ENTITY saveFrameCmd.label           "框架另存为…">
 <!ENTITY saveFrameCmd.accesskey       "F">
-<!ENTITY printFrameCmd.label          "打印帧…">
+<!ENTITY printFrameCmd.label          "打印框架…">
 <!ENTITY printFrameCmd.accesskey      "P">
 <!ENTITY saveLinkCmd.label            "链接另存为…">
 <!ENTITY saveLinkCmd.accesskey        "k">
 <!ENTITY sendLinkCmd.label            "发送链接…"> 
 <!ENTITY sendLinkCmd.accesskey        "d">
-<!ENTITY saveImageCmd.label           "图片另存为…">
+<!ENTITY saveImageCmd.label           "图像另存为…">
 <!ENTITY saveImageCmd.accesskey       "v">
 <!ENTITY saveVideoCmd.label           "视频另存为…">
 <!ENTITY saveVideoCmd.accesskey       "v">
@@ -415,18 +440,27 @@ can reach it easily. -->
 <!ENTITY copyAudioURLCmd.accesskey    "o">
 <!ENTITY copyEmailCmd.label           "复制邮件地址">
 <!ENTITY copyEmailCmd.accesskey       "E">
-<!ENTITY thisFrameMenu.label              "本帧">
+<!ENTITY thisFrameMenu.label              "此框架">
 <!ENTITY thisFrameMenu.accesskey          "h">
 
 <!-- Media (video/audio) controls -->
+<!-- LOCALIZATION NOTE: The access keys for "Play" and
+"Pause" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY mediaPlay.label             "播放">
 <!ENTITY mediaPlay.accesskey         "P">
 <!ENTITY mediaPause.label            "暂停">
 <!ENTITY mediaPause.accesskey        "P">
+<!-- LOCALIZATION NOTE: The access keys for "Mute" and
+"Unmute" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY mediaMute.label             "静音">
 <!ENTITY mediaMute.accesskey         "M">
 <!ENTITY mediaUnmute.label           "恢复声音">
 <!ENTITY mediaUnmute.accesskey       "m">
+<!-- LOCALIZATION NOTE: The access keys for "Show Controls" and
+"Hide Controls" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY mediaShowControls.label     "显示控制界面">
 <!ENTITY mediaShowControls.accesskey "C">
 <!ENTITY mediaHideControls.label     "隐藏控制界面">
@@ -435,6 +469,9 @@ can reach it easily. -->
 <!ENTITY videoFullScreen.accesskey   "F">
 <!ENTITY videoSaveImage.label        "快照另存为…">
 <!ENTITY videoSaveImage.accesskey    "S">
+<!-- LOCALIZATION NOTE: The access keys for "Show Statistics" and
+"Hide Statistics" are the same because the two context-menu
+items are mutually exclusive. -->
 <!ENTITY videoShowStats.label        "显示统计信息">
 <!ENTITY videoShowStats.accesskey    "t">
 <!ENTITY videoHideStats.label        "隐藏统计信息">
@@ -571,40 +608,33 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "关闭附加组件栏">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
-
 <!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
 activates the Web Developer->Inspect UI's HTML Tree Panel. -->
 <!ENTITY htmlPanel.label              "HTML">
 
 <!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
 hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
-<!ENTITY inspect3DViewButton.accesskey "W">
+<!ENTITY htmlPanel.tooltiptext        "HTML 面板">
 
-<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
-  -  alternate view for the Inspector, creating a 3D visualization of the
-  -  webpage. -->
-<!ENTITY inspect3DViewButton.label     "3D View">
-<!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
-<!ENTITY inspectStyleButton.accesskey "S">
+<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
+toolbar button -->
+<!ENTITY htmlPanel.accesskey          "H">
 
-<!ENTITY inspectStyleButton.label     "Style">
-<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+<!ENTITY devToolbar.commandkey "v">
 
-<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
-<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
+<!ENTITY inspectorButton.label "Inspector">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey          "M">
 
-<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
-<!ENTITY inspectorHTMLDelete.accesskey      "D">
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "Markup">
+<!ENTITY scriptsButton.label "Scripts">
 
-<!ENTITY inspectorHTMLDelete.label          "Delete Node">
-<!ENTITY styleeditor.accesskey        "y">
-<!ENTITY styleeditor.keycode          "VK_F7">
-<!ENTITY styleeditor.keytext          "F7">
-
-<!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
-  -  in the Tools menu. -->
-<!ENTITY styleeditor.label            "Style Editor">
+<!ENTITY webConsoleButton.label "Web Console">

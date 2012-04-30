@@ -43,9 +43,9 @@
 <!ENTITY aboutWarningButton.label "Óvatos leszek, megígérem!">
 <!ENTITY aboutWarningCheckbox.label "A figyelmeztetés megjelenítése legközelebb">
 
-<!ENTITY filterPrefs.label "Szűrő:">
-<!ENTITY filterPrefs.accesskey "S">
-<!ENTITY focusFilter.key "f">
+<!ENTITY searchPrefs.label "Keresés:">
+<!ENTITY searchPrefs.accesskey "r">
+<!ENTITY focusSearch.key "r">
 
 <!-- Columns -->
 <!ENTITY prefColumn.label "Beállítás neve">
@@ -79,7 +79,3 @@
 <!ENTITY integer.accesskey "E">
 <!ENTITY boolean.label "Logikai">
 <!ENTITY boolean.accesskey "L">
-<!ENTITY focusSearch.key "r">
-<!ENTITY searchPrefs.accesskey "r">
-
-<!ENTITY searchPrefs.label "Search:">

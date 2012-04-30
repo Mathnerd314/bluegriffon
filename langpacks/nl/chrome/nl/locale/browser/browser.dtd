@@ -213,16 +213,22 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-<!ENTITY inspectPanelTitle.label        "HTML">
-<!ENTITY inspectButton.label            "Inspecteren">
-<!ENTITY inspectButton.accesskey        "I">
 <!ENTITY inspectCloseButton.tooltiptext "Inspector sluiten">
+
+<!ENTITY inspectorHTMLCopyInner.label       "Binnenste HTML kopiëren">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "i">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "Buitenste HTML kopiëren">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "u">
+
+<!ENTITY inspectorHTMLDelete.label          "Node verwijderen">
+<!ENTITY inspectorHTMLDelete.accesskey      "v">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
-<!ENTITY inspect3DViewButton.label     "3D View">
-<!ENTITY inspect3DViewButton.accesskey "W">
+<!ENTITY inspect3DViewButton.label     "3D-weergave">
+<!ENTITY inspect3DViewButton.accesskey "w">
 
 <!ENTITY inspectStyleButton.label     "Stijl">
 <!ENTITY inspectStyleButton.accesskey "S">
@@ -600,23 +606,21 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "Add-onbalk sluiten">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "Markup">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
 toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
+<!ENTITY markupButton.accesskey          "M">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
+<!ENTITY devToolbar.commandkey "v">
 
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
-<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
+<!ENTITY inspectorButton.label "Inspector">
+<!ENTITY scriptsButton.label "Scripts">
 
-<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
-<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
-
-<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
-<!ENTITY inspectorHTMLDelete.accesskey      "D">
-
-<!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!ENTITY webConsoleButton.label "Web Console">

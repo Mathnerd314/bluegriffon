@@ -74,3 +74,6 @@
      example: You are currently on the _Stable_ update channel. -->
 <!ENTITY channel.description.start "Nyní používáte aktualizační kanál ">
 <!ENTITY channel.description.end ".">
+
+<!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
+<!ENTITY warningDesc.telemetryDesc  "It automatically sends information about performance, hardware, usage and customizations back to &vendorShortName; to help make &brandShortName; better.">

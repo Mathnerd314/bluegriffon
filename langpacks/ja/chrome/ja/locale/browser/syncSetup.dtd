@@ -106,6 +106,7 @@
 <!ENTITY setup.successPage.title      "セットアップが完了しました">
 <!ENTITY changeOptions.label    "この設定は、下の同期オプションを選択することで変更できます。">
 <!ENTITY continueUsing.label    "今から &brandShortName; を使い続けることができます。">
+
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
 <!ENTITY engine.addons.accesskey    "A">

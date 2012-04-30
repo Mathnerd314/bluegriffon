@@ -33,3 +33,7 @@
 <!ENTITY report.disabled "문제점 보고서가 비활성화 되었습니다.">
 <!ENTITY report.failed "제출에 실패했습니다.">
 <!ENTITY report.unavailable "제출할 리포트가 없습니다.">
+
+<!ENTITY clickToPlayPlugins                                  "Click here to activate plugins.">
+<!-- LOCALIZATION NOTE (tapToPlayPlugin): Mobile (used for touch interfaces) only has one type of plugin possible. -->
+<!ENTITY tapToPlayPlugin                                     "Tap here to activate plugin.">

@@ -196,7 +196,7 @@ can reach it easily. -->
 <!ENTITY inspectMenu.commandkey       "I">
 
 <!ENTITY inspectContextMenu.label     "檢測元素">
-<!ENTITY inspectContextMenu.accesskey "I">
+<!ENTITY inspectContextMenu.accesskey "Q">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -213,10 +213,16 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
 
-<!ENTITY inspectPanelTitle.label        "HTML">
-<!ENTITY inspectButton.label            "檢測">
-<!ENTITY inspectButton.accesskey        "I">
 <!ENTITY inspectCloseButton.tooltiptext "關閉檢測器">
+
+<!ENTITY inspectorHTMLCopyInner.label       "複製內部 HTML">
+<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+
+<!ENTITY inspectorHTMLCopyOuter.label       "複製外部 HTML">
+<!ENTITY inspectorHTMLCopyOuter.accesskey   "o">
+
+<!ENTITY inspectorHTMLDelete.label          "刪除節點">
+<!ENTITY inspectorHTMLDelete.accesskey      "D">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
@@ -274,7 +280,7 @@ can reach it easily. -->
 <!ENTITY clearRecentHistory.label               "清除最近的歷史記錄…">
 <!ENTITY clearRecentHistory.accesskey           "H">
 
-<!-- LOCALIZATION NOTE : These two strings can share an access key beause they never appear together on the menu -->
+<!-- LOCALIZATION NOTE : These two strings can share an access key because they never appear together on the menu -->
 <!ENTITY privateBrowsingCmd.start.label         "進入隱私瀏覽模式">
 <!ENTITY privateBrowsingCmd.start.accesskey     "P">
 <!ENTITY privateBrowsingCmd.stop.label          "停止隱私瀏覽模式">
@@ -299,7 +305,7 @@ can reach it easily. -->
 <!ENTITY historyUndoMenu.label "最近關閉的分頁">
 <!-- LOCALIZATION NOTE (historyUndoWindowMenu): see bug 394759 -->
 <!ENTITY historyUndoWindowMenu.label "最近關閉的視窗">
-<!ENTITY historyRestoreLastSession.label "還原先前的瀏覽紀錄">
+<!ENTITY historyRestoreLastSession.label "回復先前的瀏覽狀態">
 
 <!ENTITY historyHomeCmd.label "首頁">
 <!ENTITY showAllHistoryCmd2.label "顯示所有瀏覽記錄">
@@ -592,7 +598,7 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY syncBrand.shortName.label    "Sync">
 
 <!ENTITY syncSetup.label              "設定 &syncBrand.shortName.label;…">
-<!ENTITY syncSetup.accesskey          "s">
+<!ENTITY syncSetup.accesskey          "Y">
 <!ENTITY syncSyncNowItem.label        "立刻同步">
 <!ENTITY syncSyncNowItem.accesskey    "S">
 <!ENTITY syncToolbarButton.label      "同步">
@@ -600,23 +606,21 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "關閉附加元件列">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "標記">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
 toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
+<!ENTITY markupButton.accesskey          "M">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
+<!ENTITY devToolbar.commandkey "v">
 
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
-<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
+<!ENTITY inspectorButton.label "Inspector">
+<!ENTITY scriptsButton.label "Scripts">
 
-<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
-<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
-
-<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
-<!ENTITY inspectorHTMLDelete.accesskey      "D">
-
-<!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!ENTITY webConsoleButton.label "Web Console">

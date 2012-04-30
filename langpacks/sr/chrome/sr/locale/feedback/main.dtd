@@ -24,10 +24,11 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Затвори">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Омогући проучавања корисничка">
 <!ENTITY testpilot.feedbackbutton.label                "Повратне информације">
 <!ENTITY testpilot.happy.label        "Фајерфокс ме је усрећио зато што...">
 <!ENTITY testpilot.sad.label          "Фајерфокс ме је растужио зато што...">
+
 <!ENTITY testpilot.broken.label      "Report this website as broken…">
 <!ENTITY testpilot.idea.label        "Give us a suggestion…">

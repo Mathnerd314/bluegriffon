@@ -90,3 +90,5 @@
 <!ENTITY  securityView.privacy.viewPasswords.accessKey  "ס">
 
 <!ENTITY  securityView.technical.header                 "פירוט טכני">
+
+<!ENTITY  permPlugins           "Activate Plugins">

@@ -18,5 +18,6 @@
 <!ENTITY spellNoSuggestions.label "(нема предлога)">
 <!ENTITY spellDictionaries.label "Језици">
 <!ENTITY spellDictionaries.accesskey "L">
+
 <!ENTITY spellUndoAddToDictionary.accesskey "n">
 <!ENTITY spellUndoAddToDictionary.label "Undo Add To Dictionary">

@@ -12,7 +12,7 @@
 
 <!-- New Account AND Existing Account -->
 <!ENTITY server.label               "伺服器">
-<!ENTITY serverType.main.label      "&syncBrand.fullName.label; 伺服器">
+<!ENTITY serverType.default.label      "預設: Mozilla &syncBrand.fullName.label; 伺服器">
 <!ENTITY serverType.custom2.label   "使用自訂伺服器…">
 <!ENTITY signIn.account2.label      "帳號">
 <!ENTITY signIn.account2.accesskey  "A">
@@ -37,7 +37,7 @@
 <!ENTITY setup.tosAgree2.label      "與">
 <!ENTITY setup.ppLink.label         "隱私權保護政策">
 <!ENTITY setup.tosAgree3.label      "">
-<!ENTITY setup.tosAgree2.accesskey  "a">
+<!ENTITY setup.tosAgree2.accesskey  "">
 
 <!-- My Recovery Key dialog -->
 <!ENTITY setup.newRecoveryKeyPage.title.label "&brandShortName; 在乎您的隱私">
@@ -107,4 +107,3 @@
 <!ENTITY setup.successPage.title "完成設定">
 <!ENTITY changeOptions.label "您可以在以下的同步選項修改這個設定。">
 <!ENTITY continueUsing.label "您現在可以繼續使用 &brandShortName;。">
-<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">

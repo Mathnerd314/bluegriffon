@@ -132,6 +132,7 @@
 <!ENTITY byLastVisited.accesskey  "z">
 <!ENTITY byDayAndSite.label       "Po datumu in strani">
 <!ENTITY byDayAndSite.accesskey   "t">
+
 <!ENTITY exportBookmarksToHTML.accesskey   "E">
 <!ENTITY exportBookmarksToHTML.label       "Export Bookmarks to HTML…">
 <!ENTITY importBookmarksFromHTML.accesskey "I">

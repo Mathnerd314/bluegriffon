@@ -70,6 +70,7 @@
 
 <!ENTITY doNotTrack.label                "웹 사이트에 방문자 추적 중지 요청">
 <!ENTITY doNotTrack.accesskey            "d">
+
 <!ENTITY  rememberHistory2.accesskey  "b">
 
 <!ENTITY  rememberHistory2.label      "Remember my browsing and download history">

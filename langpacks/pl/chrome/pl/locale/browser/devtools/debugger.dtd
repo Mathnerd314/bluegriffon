@@ -19,6 +19,20 @@
   -  button that closes the debugger UI. -->
 <!ENTITY debuggerUI.closeButton      "Zamknij">
 
+
+<!-- LOCALIZATION NOTE (debuggerUI.stepOverButton): This is the label for the
+  -  button that steps over a function call. -->
+<!ENTITY debuggerUI.stepOverButton   "Przejdź dalej">
+
+<!-- LOCALIZATION NOTE (debuggerUI.stepInButton): This is the label for the
+  -  button that steps into a function call. -->
+<!ENTITY debuggerUI.stepInButton     "Wejdź do środka">
+
+<!-- LOCALIZATION NOTE (debuggerUI.stepOutButton): This is the label for the
+  -  button that steps out of a function call. -->
+<!ENTITY debuggerUI.stepOutButton    "Wykonaj do powrotu">
+
+
 <!-- LOCALIZATION NOTE (debuggerUI.stackTitle): This is the label for the
   -  widget that displays the call stack frames in the debugger. -->
 <!ENTITY debuggerUI.stackTitle       "Stos wywołań">
@@ -32,3 +46,12 @@
   -  widget that displays the variables in the various available scopes in the
   -  debugger. -->
 <!ENTITY debuggerUI.propertiesTitle  "Zmienne w zasięgu">
+
+
+<!-- LOCALIZATION NOTE (debuggerUI.emptyFilterText): This is the text that
+  -  appears in the filter text box when it is empty. -->
+<!ENTITY debuggerUI.emptyFilterText  "Filter scripts">
+
+<!-- LOCALIZATION NOTE (remoteDebuggerMenu.label): This is the label for the
+  -  application menu item that opens the remote debugger UI. -->
+<!ENTITY remoteDebuggerMenu.label    "Remote Debugger">

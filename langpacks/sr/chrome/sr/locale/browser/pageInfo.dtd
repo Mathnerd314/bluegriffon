@@ -90,3 +90,5 @@
 <!ENTITY  securityView.privacy.viewPasswords.accessKey  "с">
 
 <!ENTITY  securityView.technical.header                 "Технички детаљи">
+
+<!ENTITY  permPlugins           "Activate Plugins">

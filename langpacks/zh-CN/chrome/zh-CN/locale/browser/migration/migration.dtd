@@ -9,12 +9,12 @@
 <!ENTITY importFromIE.accesskey         "M">
 <!ENTITY importFromNothing.label        "不导入任何数据">
 <!ENTITY importFromNothing.accesskey    "D">
-<!ENTITY importFromSeamonkey.label      "Netscape 6, 7 或者 Mozilla 1.x">
-<!ENTITY importFromSeamonkey.accesskey  "N">
-<!ENTITY importFromOpera.label          "Opera">
-<!ENTITY importFromOpera.accesskey      "O">
 <!ENTITY importFromSafari.label         "Safari">
 <!ENTITY importFromSafari.accesskey     "S">
+<!ENTITY importFromChrome.label         "Chrome">
+<!ENTITY importFromChrome.accesskey     "C">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
 <!ENTITY importFromHTMLFile.label       "从一个 HTML 文件">
 <!ENTITY importFromHTMLFile.accesskey   "F">
 
@@ -33,7 +33,3 @@
 <!ENTITY done.title                     "导入完成">
 <!ENTITY done.label                     "下列各项已被成功导入：">
 
-<!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromChrome.label         "Chrome">
-<!ENTITY importFromBlueGriffon.accesskey    "X">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

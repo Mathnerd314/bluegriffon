@@ -534,23 +534,18 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "부가 기능 모음 닫기">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
+<!ENTITY devToolbar.commandkey "v">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
-
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
 <!ENTITY inspect3DViewButton.accesskey "W">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
 <!ENTITY inspect3DViewButton.label     "3D View">
+<!ENTITY inspectorButton.label "Inspector">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "I">
 
 <!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
@@ -560,3 +555,15 @@ hovers over the HTML panel's toolbar button. -->
 <!ENTITY inspectorHTMLDelete.accesskey      "D">
 
 <!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey          "M">
+
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "Markup">
+<!ENTITY scriptsButton.label "Scripts">
+
+<!ENTITY webConsoleButton.label "Web Console">

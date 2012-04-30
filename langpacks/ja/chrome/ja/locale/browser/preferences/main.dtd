@@ -35,6 +35,7 @@
 <!ENTITY manageAddonsDescUnix2.label	"アドオンの設定を変更できます。">
 <!ENTITY manageAddons.label		"アドオンを管理...">
 <!ENTITY manageAddons.accesskey		"M">
+
 <!ENTITY chooseBookmark.accesskey  "B">
 <!ENTITY chooseBookmark.label      "Use Bookmark…">
 <!ENTITY restoreOnDemand.accesskey "l">

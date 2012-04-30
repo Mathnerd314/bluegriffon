@@ -36,10 +36,13 @@
 <!ENTITY report.disabled					"クラッシュレポートの送信は無効になっています">
 <!ENTITY report.failed						"レポートを送信できませんでした">
 <!ENTITY report.unavailable					"送信するレポートはありません">
-<!ENTITY clickToPlayPlugin                                   "Tap here to activate plugin.">
+
+<!ENTITY clickToPlayPlugins                                  "Click here to activate plugins.">
 <!ENTITY disabledPlugin                                      "This plugin is disabled.">
 
 <!ENTITY installPlugin                                       "Install plugin…">
 <!ENTITY managePlugins                                       "Manage plugins…">
 
 <!ENTITY missingPlugin                                       "A plugin is needed to display this content.">
+<!-- LOCALIZATION NOTE (tapToPlayPlugin): Mobile (used for touch interfaces) only has one type of plugin possible. -->
+<!ENTITY tapToPlayPlugin                                     "Tap here to activate plugin.">

@@ -140,6 +140,7 @@
 <!ENTITY byLastVisited.accesskey  "L">
 <!ENTITY byDayAndSite.label       "По датуму и сајту">
 <!ENTITY byDayAndSite.accesskey   "t">
+
 <!ENTITY exportBookmarksToHTML.accesskey   "E">
 <!ENTITY exportBookmarksToHTML.label       "Export Bookmarks to HTML…">
 <!ENTITY importBookmarksFromHTML.accesskey "I">

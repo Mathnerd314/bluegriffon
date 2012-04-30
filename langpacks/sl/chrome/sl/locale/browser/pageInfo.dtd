@@ -90,3 +90,5 @@
 <!ENTITY securityView.privacy.viewPasswords.accessKey "g">
 
 <!ENTITY securityView.technical.header "Tehnične podrobnosti">
+
+<!ENTITY  permPlugins           "Activate Plugins">

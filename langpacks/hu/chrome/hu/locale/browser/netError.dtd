@@ -52,16 +52,13 @@
 <!ENTITY netInterrupt.title "A kapcsolat megszakadt">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "A dokumentum lejárt">
+<!ENTITY notCached.longDesc "<p>A kért dokumentum nem érhető el a &brandShortName; gyorsítótárában.</p><ul><li>Biztonsági okokból a &brandShortName; nem kéri le automatikusan az érzékeny adatokat tartalmazó dokumentumokat.</li><li>Kattintson a „Próbálja újra” gombra, hogy újra lekérje a dokumentumot a webhelyről.</li></ul>">
+
 <!ENTITY netOffline.title "Kapcsolat nélküli mód">
-<!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
-     indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the BlueGriffon button
-     menu (Windows).
--->
-<!ENTITY netOffline.overrideLongDesc "
+<!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Kapcsolja ki a „Kapcsolat nélküli munka” menüelemet, majd próbálja újra.</li>
-</ul>
+  <li>Nyomja meg a &quot;Próbálja újra&quot; gombot az online módhoz és az oldal újratöltéséhez.</li> </ul>
 ">
 
 <!ENTITY contentEncodingError.title "Tartalomkódolási hiba">
@@ -100,7 +97,7 @@
 </ul>
 ">
 
-<!ENTITY proxyResolveFailure.title " Nem található a proxykiszolgáló">
+<!ENTITY proxyResolveFailure.title "Nem található a proxykiszolgáló">
 <!ENTITY proxyResolveFailure.longDesc "
 <ul>
   <li>Ellenőrizze a proxybeállításokat, hogy helyesek-e.</li>
@@ -129,8 +126,8 @@
 <!ENTITY nssFailure2.title "A biztonságos kapcsolat sikertelen">
 <!ENTITY nssFailure2.longDesc "
 <ul>
-  <li>A megtekinteni kívánt oldal nem jeleníthető meg, mert a kapott adatok hitelesége nem volt ellenőrizhető.</li>
-  <li>Értesítse a webhely tulajdonosait erről a problémáról. A másik lehetőség, hogy a Súgó menü megfelelő menüpontjának segítségével jelentse be ezt a hibás webhelyet.</li>
+  <li>A megtekinteni kívánt oldal nem jeleníthető meg, mert a kapott adatok hitelessége nem ellenőrizhető.</li>
+  <li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról. A másik lehetőség, hogy a Súgó menü megfelelő menüpontjának segítségével jelentse be ezt a hibás webhelyet.</li>
 </ul>
 ">
 
@@ -170,6 +167,10 @@ ideiglenes, és később újra megpróbálhatja.</li>
 <!ENTITY cspFrameAncestorBlocked.title "Blokkolva a tartalombiztonsági irányelv szerint">
 <!ENTITY cspFrameAncestorBlocked.longDesc "<p>A &brandShortName; nem engedte meg, hogy az oldalt ezen a módon betöltse, mert az oldal tartalombiztonsági irányelve ezt tiltja.</p>">
 
+<!ENTITY corruptedContentError.title "Sérült tartalom hiba">
+<!ENTITY corruptedContentError.longDesc "<p>A megtekinteni kívánt oldal nem jeleníthető meg, mert az adatátvitel közben hiba történt.</p><ul><li>Lépjen kapcsolatba a webhely üzemeltetőjével, és értesítse a problémáról.</li></ul>">
+
+
 <!ENTITY securityOverride.linkText "Vagy hozzáadhat egy kivételt...">
 <!ENTITY securityOverride.getMeOutOfHereButton "Oldal elhagyása">
 <!ENTITY securityOverride.exceptionButtonLabel "Kivétel hozzáadása...">
@@ -181,20 +182,10 @@ functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Ne adjon hozzá kivételt, ha nem teljesen megbízható internetkapcsolatot használ, vagy ha nem szokta látni ezt a figyelmeztetést ennél a kiszolgálónál.</p>
+
 <button id='getMeOutOfHereButton'>&securityOverride.getMeOutOfHereButton;</button>
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
 <!ENTITY remoteXUL.title "Távoli XUL">
 <!ENTITY remoteXUL.longDesc "<p><ul><li>Értesítse a webhely tulajdonosait erről a problémáról.</li></ul></p>">
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
-
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY netOffline.longDesc2 "
-<ul>
-  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
-</ul>
-">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
-
-<!ENTITY notCached.title "Document Expired">

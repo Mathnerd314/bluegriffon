@@ -2,7 +2,7 @@
 
 <!-- First page of the wizard -->
 
-<!ENTITY setup.pickSetupType.description "Willkommen! Wenn Sie &syncBrand.fullName.label; bisher noch nicht genutzt haben, müssen Sie ein neues Benutzerkonto anlegen.">
+<!ENTITY setup.pickSetupType.description2 "Willkommen! Wenn Sie &syncBrand.fullName.label; bisher noch nicht genutzt haben, müssen Sie ein neues Benutzerkonto anlegen.">
 <!ENTITY button.createNewAccount.label "Neues Benutzerkonto anlegen">
 <!ENTITY button.haveAccount.label      "Ich habe ein Benutzerkonto">
 
@@ -12,7 +12,7 @@
 
 <!-- New Account AND Existing Account -->
 <!ENTITY server.label               "Server">
-<!ENTITY serverType.main.label      "&syncBrand.fullName.label;-Server">
+<!ENTITY serverType.default.label   "Standard: Mozilla &syncBrand.fullName.label;-Server">
 <!ENTITY serverType.custom2.label    "Eigenen Server verwenden…">
 <!ENTITY signIn.account2.label       "Benutzerkonto">
 <!ENTITY signIn.account2.accesskey   "B">
@@ -89,6 +89,8 @@
 <!ENTITY engine.passwords.accesskey "P">
 <!ENTITY engine.prefs.label         "Einstellungen">
 <!ENTITY engine.prefs.accesskey     "E">
+<!ENTITY engine.addons.label        "Add-ons">
+<!ENTITY engine.addons.accesskey    "A">
 
 <!ENTITY choice2.merge.main.label      "Zusammenführen der Daten auf diesem Computer mit den &syncBrand.shortName.label;-Daten">
 <!ENTITY choice2.merge.recommended.label "Empfohlen:">
@@ -106,10 +108,3 @@
 <!ENTITY setup.successPage.title   "Setup abgeschlossen!">
 <!ENTITY changeOptions.label "Sie können diese Einstellung ändern, indem Sie die Sync-Einstellungen unten auswählen.">
 <!ENTITY continueUsing.label "Sie können &brandShortName; nun verwenden.">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">
-<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">
-
-<!-- First page of the wizard -->
-
-<!ENTITY setup.pickSetupType.description2 "Welcome! If you've never used &syncBrand.fullName.label; before, you will need to create a new account.">

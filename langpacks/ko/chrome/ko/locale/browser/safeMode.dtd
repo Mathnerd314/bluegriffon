@@ -15,6 +15,7 @@
 <!ENTITY continueButton.label "안전 모드 계속">
 <!ENTITY disableAddons.label "모든 부가 기능 사용 중지">
 <!ENTITY disableAddons.accesskey "D">
+
 <!ENTITY autoSafeModeDescription.label "We sincerely apologize for the inconvenience. &brandShortName; is now running in Safe Mode, which temporarily disables your custom settings, themes, and extensions.">
 
 <!ENTITY autoSafeModeIntro.label      "&brandShortName; Closed Unexpectedly While Starting">

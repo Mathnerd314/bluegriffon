@@ -79,6 +79,7 @@
 <!ENTITY integer.accesskey "I">
 <!ENTITY boolean.label "Булово (boolean)">
 <!ENTITY boolean.accesskey "b">
+
 <!ENTITY focusSearch.key "r">
 <!ENTITY searchPrefs.accesskey "r">
 

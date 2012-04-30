@@ -106,6 +106,7 @@
 <!ENTITY setup.successPage.title "Asennus on valmis">
 <!ENTITY changeOptions.label "Voit muuttaa tätä asetusta valitsemalla alta synkronointiasetukset.">
 <!ENTITY continueUsing.label "Voit nyt jatkaa &brandShortName;in käyttämistä.">
+
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
 <!ENTITY engine.addons.accesskey    "A">

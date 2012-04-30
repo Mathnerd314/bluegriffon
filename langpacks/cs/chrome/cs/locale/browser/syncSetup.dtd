@@ -12,7 +12,7 @@
 
 <!-- New Account AND Existing Account -->
 <!ENTITY server.label "Server">
-<!ENTITY serverType.main.label "Server &syncBrand.fullName.label;">
+<!ENTITY serverType.default.label "Výchozí: Server &syncBrand.fullName.label;">
 <!ENTITY serverType.custom2.label "Použít vlastní server…">
 <!ENTITY signIn.account2.label "Účet">
 <!ENTITY signIn.account2.accesskey "e">
@@ -107,4 +107,3 @@
 <!ENTITY setup.successPage.title "Nastavení dokončeno!">
 <!ENTITY changeOptions.label "Vaše nastavení lze změnit v dialogu možnosti Sync níže.">
 <!ENTITY continueUsing.label "Nyní můžete pokračovat v používání aplikace &brandShortName;.">
-<!ENTITY serverType.default.label      "Default: Mozilla &syncBrand.fullName.label; server">

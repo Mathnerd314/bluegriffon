@@ -105,6 +105,7 @@
 <!ENTITY setup.successPage.title  "Namestitev končana!">
 <!ENTITY changeOptions.label "To nastavitev lahko spremenite z izbiro Možnosti sinhronizacije.">
 <!ENTITY continueUsing.label "Zdaj lahko nadaljujete z uporabo &brandShortName;a.">
+
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
 <!ENTITY engine.addons.accesskey    "A">

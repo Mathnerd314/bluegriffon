@@ -24,6 +24,7 @@
 
 <!ENTITY changeAndRestartButton.label "Направи измене и покрени поново">
 <!ENTITY continueButton.label         "Настави рад у безбедном моду">
+
 <!ENTITY autoSafeModeDescription.label "We sincerely apologize for the inconvenience. &brandShortName; is now running in Safe Mode, which temporarily disables your custom settings, themes, and extensions.">
 
 <!ENTITY autoSafeModeIntro.label      "&brandShortName; Closed Unexpectedly While Starting">

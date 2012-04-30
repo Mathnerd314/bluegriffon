@@ -90,3 +90,5 @@
 <!ENTITY  securityView.privacy.viewPasswords.accessKey  "u">
 
 <!ENTITY  securityView.technical.header                 "Tekniset tiedot">
+
+<!ENTITY  permPlugins           "Activate Plugins">

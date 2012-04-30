@@ -30,6 +30,8 @@
 <!ENTITY engine.passwords.accesskey "P">
 <!ENTITY engine.prefs.label         "首选项">
 <!ENTITY engine.prefs.accesskey     "S">
+<!ENTITY engine.addons.label        "附加组件">
+<!ENTITY engine.addons.accesskey    "A">
 
 <!-- Device Settings -->
 <!ENTITY syncComputerName.label       "计算机名：">
@@ -39,5 +41,3 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "服务条款">
 <!ENTITY prefs.ppLink.label         "隐私策略">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">

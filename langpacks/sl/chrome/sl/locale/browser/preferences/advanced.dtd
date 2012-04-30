@@ -108,6 +108,7 @@
 <!ENTITY verify2.accesskey "V">
 <!ENTITY viewSecurityDevices.label "Varnostne naprave">
 <!ENTITY viewSecurityDevices.accesskey "v">
+
 <!ENTITY clearOfflineAppCacheNow.accesskey "N">
 <!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
 

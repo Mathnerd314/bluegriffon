@@ -39,6 +39,7 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "업데이트 기록">
 
 <!ENTITY aboutSupport.copyToClipboard.label "클립보드에 복사하기">
+
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
 This is the Windows- and Mac-specific variant of aboutSupport.appBasicsProfileDir.
 Windows/Mac use the term "Folder" instead of "Directory" -->
@@ -46,6 +47,8 @@ Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
+
+<!ENTITY aboutSupport.libraryVersionsTitle "Library Versions">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">
 

@@ -106,6 +106,7 @@
 <!ENTITY setup.successPage.title "Подешавање параметара је завршено">
 <!ENTITY changeOptions.label "Ову поставку можете да измените тако што ћете изабрати „Опције усклађивања” испод.">
 <!ENTITY continueUsing.label "Сада можете да почнете користити &brandShortName;.">
+
 <!ENTITY addDevice.dialog.recoveryKey.label     "To activate your device you will need to enter your Recovery Key. Please print or save this key and take it with you.">
 <!ENTITY button.haveAccount.label      "I Have an Account">
 <!ENTITY engine.addons.accesskey    "A">

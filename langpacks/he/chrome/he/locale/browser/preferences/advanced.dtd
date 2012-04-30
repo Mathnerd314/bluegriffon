@@ -107,6 +107,7 @@
 <!ENTITY verify2.accesskey               "א">
 <!ENTITY viewSecurityDevices.label       "התקני אבטחה">
 <!ENTITY viewSecurityDevices.accesskey   "ה">
+
 <!ENTITY clearOfflineAppCacheNow.accesskey "N">
 <!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
 

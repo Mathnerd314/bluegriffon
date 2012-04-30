@@ -557,27 +557,22 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY addonBarCloseButton.tooltip  "סגירת שורת התוספות">
 <!ENTITY toggleAddonBarCmd.key        "/">
+
 <!ENTITY backForwardButtonMenu.tooltip "Right-click or pull down to show history">
 <!ENTITY backForwardButtonMenuMac.tooltip "Pull down to show history">
+<!ENTITY devToolbar.commandkey "v">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbarMenu.label "Developer Toolbar">
 <!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
-
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
-
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
-
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML panel">
 <!ENTITY inspect3DViewButton.accesskey "W">
 
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
 <!ENTITY inspect3DViewButton.label     "3D View">
+
 <!ENTITY inspectCloseButton.tooltiptext "Close Inspector">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
@@ -585,6 +580,7 @@ hovers over the HTML panel's toolbar button. -->
 <!ENTITY inspectStyleButton.accesskey "S">
 
 <!ENTITY inspectStyleButton.label     "Style">
+<!ENTITY inspectorButton.label "Inspector">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "I">
 
 <!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
@@ -594,6 +590,16 @@ hovers over the HTML panel's toolbar button. -->
 <!ENTITY inspectorHTMLDelete.accesskey      "D">
 
 <!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey          "M">
+
+<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
+located in front of the breadcrumbs display in the inspector toolbar. The button
+doesn't display any label, but exposes a label to screen-readers with "aria-label".
+-->
+<!ENTITY markupButton.arialabel          "Markup">
+<!ENTITY scriptsButton.label "Scripts">
 <!ENTITY searchFocus.commandkey2      "e">
 <!ENTITY styleeditor.accesskey        "y">
 <!ENTITY styleeditor.keycode          "VK_F7">
@@ -611,3 +617,5 @@ hovers over the HTML panel's toolbar button. -->
 "Hide Statistics" are the same because the two context-menu
 items are mutually exclusive. -->
 <!ENTITY videoShowStats.label        "Show Statistics">
+
+<!ENTITY webConsoleButton.label "Web Console">

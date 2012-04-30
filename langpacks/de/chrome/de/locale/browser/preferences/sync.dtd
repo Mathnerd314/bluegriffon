@@ -30,6 +30,8 @@
 <!ENTITY engine.passwords.accesskey "P">
 <!ENTITY engine.prefs.label         "Einstellungen">
 <!ENTITY engine.prefs.accesskey     "E">
+<!ENTITY engine.addons.label        "Add-ons">
+<!ENTITY engine.addons.accesskey    "A">
 
 <!-- Device Settings -->
 <!ENTITY syncComputerName.label       "Computer-Name:">
@@ -39,5 +41,3 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "Nutzungsbedingungen">
 <!ENTITY prefs.ppLink.label         "Datenschutzrichtlinie">
-<!ENTITY engine.addons.accesskey    "A">
-<!ENTITY engine.addons.label        "Add-ons">

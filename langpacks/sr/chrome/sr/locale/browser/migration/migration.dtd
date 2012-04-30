@@ -49,6 +49,7 @@
 <!ENTITY done.title                     "Увоз је завршен">
 <!ENTITY done.label                     "Следеће ставке су успешно увезене:">
 
+
 <!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromBlueGriffon.accesskey    "X">

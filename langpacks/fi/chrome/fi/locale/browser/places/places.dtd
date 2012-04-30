@@ -140,6 +140,7 @@
 <!ENTITY byLastVisited.accesskey  "a">
 <!ENTITY byDayAndSite.label       "Päivämäärän ja sivuston mukaan">
 <!ENTITY byDayAndSite.accesskey   "j">
+
 <!ENTITY exportBookmarksToHTML.accesskey   "E">
 <!ENTITY exportBookmarksToHTML.label       "Export Bookmarks to HTML…">
 <!ENTITY importBookmarksFromHTML.accesskey "I">

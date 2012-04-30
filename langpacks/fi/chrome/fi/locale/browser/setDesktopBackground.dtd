@@ -7,5 +7,6 @@
 <!ENTITY setDesktopBackground.title  "Aseta työpöydän taustakuva">
 <!ENTITY openDesktopPrefs.label      "Avaa työpöydän asetukset">
 <!ENTITY closeWindow.key             "w">
+
 <!ENTITY fill.label                 "Fill">
 <!ENTITY fit.label                  "Fit">

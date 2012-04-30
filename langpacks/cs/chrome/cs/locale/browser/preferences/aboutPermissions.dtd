@@ -33,3 +33,6 @@
 <!ENTITY indexedDB.label "Správa offline úložiště">
 
 <!ENTITY popup.label "Otevírat vyskakovací okna">
+
+
+<!ENTITY plugins.label                   "Plugins">

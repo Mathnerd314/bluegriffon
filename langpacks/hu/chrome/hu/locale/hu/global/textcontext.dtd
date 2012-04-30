@@ -18,5 +18,6 @@
 <!ENTITY spellNoSuggestions.label "(Nincs javaslat)">
 <!ENTITY spellDictionaries.label "Nyelvek">
 <!ENTITY spellDictionaries.accesskey "N">
+
 <!ENTITY spellUndoAddToDictionary.accesskey "n">
 <!ENTITY spellUndoAddToDictionary.label "Undo Add To Dictionary">

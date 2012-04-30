@@ -12,6 +12,7 @@
 <!ENTITY raiseLowerWindows.accesskey    "R">
 <!ENTITY disableContextMenus.label      "Укидање или замена контекстних менија">
 <!ENTITY disableContextMenus.accesskey  "D">
+
 <!ENTITY moveResizePopupWindows.accesskey "M">
 
 <!ENTITY moveResizePopupWindows.label     "Move or resize popup windows">

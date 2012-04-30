@@ -10,4 +10,5 @@
 <!ENTITY addNewToolbar.label      "סרגל כלים חדש">
 <!ENTITY saveChanges.label        "סיום">
 <!ENTITY undoChanges.label        "בטל שינויים">
+
 <!ENTITY dialog.dimensions        "width: 92ch; height: 36em;">

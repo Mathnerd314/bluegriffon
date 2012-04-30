@@ -16,7 +16,7 @@
 <!ENTITY rights.intro-point1b		"Mozilla Public License">
 <!ENTITY rights.intro-point1c		" の条項下で提供されます。これにより、あなたは &brandShortName; を使用、複製、配布することができます。あなたはまた、&brandShortName; のソースコードを必要に応じて修正することもできます。Mozilla Public License では、あなたが修正したバージョンを配布することも認めています。">
 
-<!ENTITY rights.intro-point2-a		"Mozilla Foundation とその関係団体の商標およびロゴについては、BlueGriffon の製品名およびロゴを含めこれに限定されず、何らの権利もあなたに与えるものではありません。商標について詳しくは ">
+<!ENTITY rights.intro-point2-a		"Mozilla Foundation とその関係団体の商標およびロゴについては、Firefox の製品名およびロゴを含めこれに限定されず、何らの権利もあなたに与えるものではありません。商標について詳しくは ">
 <!ENTITY rights.intro-point2-b		"Mozilla 商標ポリシー">
 <!ENTITY rights.intro-point2-c		" をご確認ください。">
 
@@ -85,7 +85,7 @@
 <!ENTITY rights.webservices-term6	"&vendorShortName; では、本利用規約を必要に応じて改訂することがあります。本利用規約は、&vendorShortName; の書面による合意なしに変更もしくは終了されることはありません。">
 <!ENTITY rights.webservices-term7	"本利用規約は、法の抵触に関する規定を除いて米国カリフォルニア州法に準拠するものとします。本契約の一部が無効または執行不能と判断された場合でも、残りの部分は引き続き有効に存続するものとします。本利用規約は、参考のために作成した日本語訳文であり、ライセンスの内容を表示するものではありません。利用規約の内容については英文の規約によるものとします。本訳文と英文の規約に矛盾があった場合には英文の規約が優先します。">
 <!-- 利用規約やライセンス関連の参考 URL:
-http://www.mozilla.com/en-US/legal/eula/BlueGriffon-ja.html
+http://www.mozilla.com/en-US/legal/eula/firefox-ja.html
 http://www.mozilla-japan.org/MPL/MPL-1.1J.html
 http://www.microsoft.com/japan/windows/products/windowsvista/useterms/default.mspx
 http://www.microsoft.com/japan/windowsserver2008/howtobuy/licensing/eula/web.mspx

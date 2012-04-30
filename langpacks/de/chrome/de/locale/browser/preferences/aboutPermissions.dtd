@@ -33,3 +33,6 @@
 <!ENTITY indexedDB.label                 "Offline-Speicher verwalten">
 
 <!ENTITY popup.label                     "Pop-up-Fenster öffnen">
+
+
+<!ENTITY plugins.label                   "Plugins">

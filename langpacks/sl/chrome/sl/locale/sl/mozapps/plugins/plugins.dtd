@@ -40,4 +40,7 @@
 <!ENTITY report.disabled                                     "Pošiljanje poročil onemogočeno.">
 <!ENTITY report.failed                                       "Pošiljanje ni uspelo.">
 <!ENTITY report.unavailable                                  "Ni poročil.">
-<!ENTITY clickToPlayPlugin                                   "Tap here to activate plugin.">
+
+<!ENTITY clickToPlayPlugins                                  "Click here to activate plugins.">
+<!-- LOCALIZATION NOTE (tapToPlayPlugin): Mobile (used for touch interfaces) only has one type of plugin possible. -->
+<!ENTITY tapToPlayPlugin                                     "Tap here to activate plugin.">

@@ -37,6 +37,7 @@ variant of aboutSupport.show.label.  This allows us to use the preferred
 <!ENTITY aboutSupport.updateHistoryTitle "Историјат унапређења">
 
 <!ENTITY aboutSupport.copyToClipboard.label "Копирај све у оставу">
+
 <!ENTITY aboutSupport.appBasicsCrashIDs "Crash Reports">
 <!ENTITY aboutSupport.appBasicsMemoryUse "Memory Use">
 <!-- LOCALIZATION NOTE (aboutSupport.appBasicsProfileDirWinMac):
@@ -46,6 +47,8 @@ Windows/Mac use the term "Folder" instead of "Directory" -->
 <!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
+
+<!ENTITY aboutSupport.libraryVersionsTitle "Library Versions">
 
 <!ENTITY aboutSupport.modifiedKeyPrefsTitle "Important Modified Preferences">
 

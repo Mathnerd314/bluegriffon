@@ -12,6 +12,7 @@
 <!ENTITY raiseLowerWindows.accesskey    "N">
 <!ENTITY disableContextMenus.label      "Poistaa tai muuttaa ponnahdusvalikkoja">
 <!ENTITY disableContextMenus.accesskey  "P">
+
 <!ENTITY moveResizePopupWindows.accesskey "M">
 
 <!ENTITY moveResizePopupWindows.label     "Move or resize popup windows">

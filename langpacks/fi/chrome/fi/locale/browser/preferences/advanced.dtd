@@ -107,6 +107,7 @@
 <!ENTITY verify2.accesskey               "m">
 <!ENTITY viewSecurityDevices.label       "Turvallisuuslaitteet">
 <!ENTITY viewSecurityDevices.accesskey   "T">
+
 <!ENTITY clearOfflineAppCacheNow.accesskey "N">
 <!ENTITY clearOfflineAppCacheNow.label   "Clear Now">
 

@@ -48,7 +48,7 @@
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
      one line with linkText being wrapped in an anchor that links to a site to download
-     the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in
+     the latest version of Firefox (e.g. http://www.firefox.com). As this is all in
      one line, try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.failed.start        "업데이트를 실패했습니다. ">
 <!ENTITY update.failed.linkText     "최신 버전 다운로드">
@@ -56,7 +56,7 @@
 
 <!-- LOCALIZATION NOTE (update.manual.start,update.manual.end): update.manual.start and update.manual.end
      all go into one line and have an anchor in between with text that is the same as the link to a site
-     to download the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in one line,
+     to download the latest version of Firefox (e.g. http://www.firefox.com). As this is all in one line,
      try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.manual.start        "업데이트 위치 ">
 <!ENTITY update.manual.end          "">
@@ -74,3 +74,6 @@
      example: You are currently on the _Stable_ update channel. -->
 <!ENTITY channel.description.start  "현재 사용 중인 업데이트 채널은 ">
 <!ENTITY channel.description.end    " 입니다.">
+
+<!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
+<!ENTITY warningDesc.telemetryDesc  "It automatically sends information about performance, hardware, usage and customizations back to &vendorShortName; to help make &brandShortName; better.">
