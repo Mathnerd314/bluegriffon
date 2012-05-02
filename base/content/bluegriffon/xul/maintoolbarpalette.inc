@@ -1,6 +1,6 @@
   <toolbarpalette id="ComposerToolbarPalette">
 
-      <toolbarbutton id="newButton"
+      <toolbarbutton id="newButton"  class="toolbarbutton-1"
                      label="&newMenu.label;"
                      type="menu-button"
                      oncommand="NewDocument(event);"
@@ -11,7 +11,7 @@
         </menupopup>
       </toolbarbutton>
 
-      <toolbarbutton id="openButton"
+      <toolbarbutton id="openButton"  class="toolbarbutton-1"
                      label="&openMenu.label;"
                      type="menu-button"
                      oncommand="OpenLocation(event, 'tab');"
