@@ -227,7 +227,6 @@
                       statusbarDeck.selectedPanel = document.getElementById("progressBar");
                     if (progress)
                       progress.setAttribute("style", "");
-                    this.mTab.setAttribute("busy", "true");
                   }
                   else if (aStateFlags & nsIWebProgressListener.STATE_STOP)
                   {
@@ -404,6 +403,7 @@
             newTab.setAttribute("minwidth", 30);
             newTab.setAttribute("flex", 100);
             newTab.setAttribute("crop", "end");
+            newTab.setAttribute("busy", "true");
 
             this.mTabpanels.appendChild(newBox);
 
