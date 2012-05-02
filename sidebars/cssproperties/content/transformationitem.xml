@@ -219,6 +219,9 @@
         <setter>
         <![CDATA[
           this.getChild("rotatorX").value = val;
+          if ("" == val) {
+            this.getChild("rotatorX").disabled = true;
+          }
         ]]>
         </setter>
       </property>
@@ -232,6 +235,9 @@
         <setter>
         <![CDATA[
           this.getChild("rotatorY").value = val;
+          if ("" == val) {
+            this.getChild("rotatorY").disabled = true;
+          }
         ]]>
         </setter>
       </property>

@@ -285,14 +285,26 @@ function ReapplyTransforms()
         {
           var x = item.valueX;
           var y = item.valueY;
-          if (!x && !y)
+          if (!x && !y) {
+            item.getChild('rotatorX').disabled = false;
+            item.getChild('rotatorY').disabled = false;
             return;
-          if (x && y && parseFloat(x) && parseFloat(y))
-            transforms.push("skew(" + x + "deg, " + y + "deg)");
-          else if (x && parseFloat(x))
+          }
+          // skew() removed from CSS Transformations !
+          /*if (x && y && parseFloat(x) && parseFloat(y))
+            transforms.push("skew(" + x + "deg, " + y + "deg)");*/
+          if (x && parseFloat(x)) {
             transforms.push("skewX(" + x + "deg)");
-          else if (y && parseFloat(y))
+            item.getChild('rotatorY').disabled = true;
+          }
+          else if (y && parseFloat(y)) {
             transforms.push("skewY(" + y + "deg)");
+            item.getChild('rotatorX').disabled = true;
+          }
+          else {
+            item.getChild('rotatorX').disabled = false;
+            item.getChild('rotatorY').disabled = false;
+          }
         }
         break;
       case "scale3dTransform":
