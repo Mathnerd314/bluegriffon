@@ -766,9 +766,6 @@ function onSourceChangeCallback(source)
         sourceEditor.setMarker(line - 1, null, markerClassArray.join(" "));
         sourceEditor.lastErrorLine = line;
 
-        var visible = sourceEditor.visibleLines();
-        if (line >= visible.to || line < visible.from)
-          sourceEditor.setCursor(line - 1, 0);
         return;
       }
     }
