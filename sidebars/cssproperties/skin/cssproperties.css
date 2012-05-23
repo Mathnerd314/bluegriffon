@@ -112,6 +112,10 @@ hbox.csspropertiesHeader > image {
   -moz-transition: -moz-transform 0.2s;
 }
 
+hbox.csspropertiesHeader:-moz-locale-dir(rtl) > image {
+  -moz-transform: rotate(+90deg) ;
+}
+
 hbox.csspropertiesHeader[open="true"] > image {
   -moz-transform: rotate(0deg) !important;
 }
@@ -137,50 +141,6 @@ hbox.csspropertiesHeader[open="true"] + .section {
 
 menulist:not(#cssPolicyMenulist):not(#listStyleTypeMenulist) {
   width: 10em;
-}
-
-toolbarbutton.multibutton[checked],
-toolbarbutton.multibutton:hover:active:not([disabled]) {
-  text-shadow: rgba(129, 211, 255, 1) 0 0 3px;
-  box-shadow: 
-    inset rgba(0, 0, 0, 1) 0 2px 8px, 
-    inset rgba(0, 0, 0, 1) 0 1px 1px,
-    inset rgba(255, 255, 255, 0.5) 0 -16px 8px,
-    rgba(255, 255, 255, 0.1) 0 1px;
-}
-
-toolbarbutton.multibutton {
-  margin: 4px 0px;
-  padding: 1px 1px;
-%ifdef XP_MACOSX
-  background-image: -moz-linear-gradient(#e0e0e0, #d0d0d0, #e0e0e0);
-%else
-  background-image: -moz-linear-gradient(#cac7b6, #dbd8b7, #cac7b6);
-%endif
-  -moz-appearance: none;
-  border: thin silver solid;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-toolbarbutton.multibutton + toolbarbutton.multibutton {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  border-left: 0px;
-}
-
-toolbarbutton.multibutton:last-child {
-  border-top-right-radius: 5px; 
-  border-bottom-right-radius: 5px;
-  margin-right: 1em;
-}
-
-toolbarbutton.multibutton .toolbarbutton-icon[src] {
-  margin-left: 1em;
-  margin-right: 1em;
-}
-
-toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
-  display: none;
 }
 
 .listboxBg {

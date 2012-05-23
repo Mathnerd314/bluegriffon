@@ -9,12 +9,9 @@ filepickerbutton {
 
 toolbarbutton.multibutton[checked],
 toolbarbutton.multibutton:hover:active:not([disabled]) {
-  text-shadow: rgba(129, 211, 255, 1) 0 0 3px;
-  box-shadow: 
-    inset rgba(0, 0, 0, 1) 0 2px 8px, 
-    inset rgba(0, 0, 0, 1) 0 1px 1px,
-    inset rgba(255, 255, 255, 0.5) 0 -16px 8px,
-    rgba(255, 255, 255, 0.1) 0 1px;
+  text-shadow: 0 1px rgba(255, 255, 255, .4);
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 1px rgba(255,255,255,0.2);
 }
 
 toolbarbutton.multibutton {
@@ -27,19 +24,40 @@ toolbarbutton.multibutton {
 %endif
   -moz-appearance: none;
   border: thin silver solid;
+}
+
+toolbarbutton.multibutton:-moz-locale-dir(ltr) {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-toolbarbutton.multibutton + toolbarbutton.multibutton {
+
+toolbarbutton.multibutton:-moz-locale-dir(rtl) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+toolbarbutton.multibutton:-moz-locale-dir(ltr) + toolbarbutton.multibutton {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   border-left: 0px;
 }
 
-toolbarbutton.multibutton:last-child {
+toolbarbutton.multibutton:-moz-locale-dir(rtl) + toolbarbutton.multibutton {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+toolbarbutton.multibutton:last-child:-moz-locale-dir(ltr) {
   border-top-right-radius: 5px; 
   border-bottom-right-radius: 5px;
   margin-right: 1em;
+}
+
+toolbarbutton.multibutton:last-child:-moz-locale-dir(rtl) {
+  border-top-left-radius: 5px; 
+  border-bottom-left-radius: 5px;
+  margin-left: 1em;
 }
 
 toolbarbutton.multibutton .toolbarbutton-icon[src] {
@@ -50,7 +68,6 @@ toolbarbutton.multibutton .toolbarbutton-icon[src] {
 toolbarbutton.multibutton:not([label]) .toolbarbutton-text {
   display: none;
 }
-
 medium {
   -moz-binding: url('chrome://bluegriffon/content/bindings/media.xml#medium');
 }
