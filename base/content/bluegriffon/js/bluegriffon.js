@@ -804,6 +804,8 @@ function ToggleViewMode(aElement)
     HandlersManager.hideAllHandlers();
     gDialog.tabeditor.enableRulers(false);
 
+    EditorUtils.cleanup();
+
     var mimeType = EditorUtils.getCurrentDocumentMimeType();
     const nsIDE = Components.interfaces.nsIDocumentEncoder;
     var encoder = Components.classes["@mozilla.org/layout/documentEncoder;1?type=" + mimeType]
