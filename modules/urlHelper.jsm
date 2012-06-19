@@ -431,6 +431,20 @@ var UrlUtils = {
     return filename ? filename : "";
   },
 
+  getFileExtension: function getFileExtension(aURLSpec)
+  {
+    var filename = "";
+    var uri = this._getURI(aURLSpec);
+    if (uri)
+    {
+      var url = uri.QueryInterface(Components.interfaces.nsIURL);
+      if (url)
+        filename = url.fileExtension;
+    }
+
+    return filename ? filename : "";
+  },
+
   stripUsernamePassword: function stripUsernamePassword(aURLSpec, usernameObj, passwordObj)
   {
     var urlspec = aURLSpec.trim();

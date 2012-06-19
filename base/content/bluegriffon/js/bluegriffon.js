@@ -897,8 +897,9 @@ function ToggleViewMode(aElement)
         try {
           var doc = parser.parseFromString(source, isXML ? "text/xml" : "text/html");
           if (doc.documentElement.nodeName == "parsererror") {
-            var message = doc.documentElement.firstChild.data.
-              replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g , ", ");
+            var message = doc.documentElement.firstChild.data
+                             .replace( /Location\: chrome\:\/\/bluegriffon\/content\/xul\/bluegriffon.xul/g ,
+                                       ", ");
             var error = doc.documentElement.lastChild.textContent;
             window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
                               "chrome,modal,titlebar", message, error);
@@ -908,7 +909,7 @@ function ToggleViewMode(aElement)
             return false;
           }
           gDialog.structurebar.style.visibility = "";
-          RebuildFromSource(doc);
+          RebuildFromSource(doc, isXML);
         }
         catch(e) {alert(e)}
       }
@@ -962,12 +963,62 @@ function CloneElementContents(editor, sourceElt, destElt)
   } while (!stopIt);
 }
 
-function RebuildFromSource(aDoc, aContext)
+function RebuildFromSource(aDoc, isXML)
 {
-  if (aContext)
-    delete aContext;
+  if (isXML) {
+    var fileExt = UrlUtils.getFileExtension( UrlUtils.getDocumentUrl());
+    var xhtmlExt = (fileExt == "xhtm" || fileExt == "xhtml");
+
+    var styles = aDoc.querySelectorAll("style");
+    var found = false, switchToCDATA = false;
+    for (var i = 0; i < styles.length; i++) {
+      var style = styles[i];
+      var child = style.firstChild;
+      while (child) {
+        var tmp = child.nextSibling;
+
+        if (child.nodeType == Node.COMMENT_NODE) {
+          if (xhtmlExt) {
+            // XHTML document with xhtml extension and HTML comments, offer to
+            // convert to CDATA sections
+            if (!found) {
+              found = true;
+  
+              var rv = PromptUtils.confirmWithTitle(
+                                    L10NUtils.getString("HTMLCommentsInXHTMLTitle"),
+                                    L10NUtils.getString("HTMLCommentsInXHTMLMessage"),
+                                    L10NUtils.getString("HTMLCommentsInXHTMLOK"),
+                                    L10NUtils.getString("HTMLCommentsInXHTMLCancel"),
+                                    "");
+              if (rv == 1) { // cancel button
+                child = null;
+                tmp = null;
+              }
+            }
+  
+            if (child) {
+              var e = aDoc.createCDATASection(child.data);
+              style.insertBefore(e, child);
+              style.removeChild(child);
+            }
+          }
+          else {
+            // if we have a XHTML document with a HTML file extension, the user wants to
+            // preserve the HTML comments :-(
+            var e = aDoc.createTextNode("<!--" + child.data + "-->");
+            style.insertBefore(e, child);
+            style.removeChild(child);
+          }
+        }
+
+        child = tmp;
+      }
+    }
+  }
+
   EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
   var editor = EditorUtils.getCurrentEditor();
+
   try {
 
     // make sure everything is aggregated under one single txn
@@ -1075,156 +1126,6 @@ function OpenPreferences()
     window.openDialog("chrome://bluegriffon/content/prefs/prefs.xul", "Preferences", features);
   }
 }
-
-function UpdateSidebarsMenuStatus()
-{
-  gDialog.leftSidebarMenuitem.setAttribute("checked",  (gDialog.splitter1.getAttribute("state") != "collapsed"));
-  gDialog.rightSidebarMenuitem.setAttribute("checked", (gDialog.splitter2.getAttribute("state") != "collapsed"));
-}
-
-function ToggleSidebarCollapsing(aElt, aId)
-{
-  var checked = aElt.getAttribute("checked");
-  if (checked == "true")
-    gDialog[aId].removeAttribute("state");
-  else
-    gDialog[aId].setAttribute("state", "collapsed");
-}
-
-var JSEditor = {
-
-  deleteSelection: function(aEvent) {
-    if (!aEvent.isChar || aEvent.which != 97)
-      return;
-    aEvent.preventDefault();
-
-    var doc = EditorUtils.getCurrentDocument();
-    var selection = EditorUtils.getCurrentEditor().selection;
-    if (selection.isCollapsed) // early way out if we can
-      return;
-
-    var nodes = [];
-    for (var count = 0; count < selection.rangeCount; count++) {
-      var range = selection.getRangeAt(count);
-      var startContainer = range.startContainer;
-      var endContainer   = range.endContainer;
-      var startOffset    = range.startOffset;
-      var endOffset      = range.endOffset;
-      var node;
-      if (startContainer.nodeType == Node.TEXT_NODE)
-        node = startContainer;
-      else
-        node = startContainer.childNodes.item(startOffset);
-
-      var endNode;
-      if (endContainer.nodeType == Node.TEXT_NODE)
-        endNode = endContainer;
-      else
-        endNode = endContainer.childNodes.item(endOffset);
-
-      selection.collapseToStart();
-      var nextOrUp = false;
-      do {
-        var dir = "";
-        if (nextOrUp) {
-          if (node.nextSibling) {
-            node = node.nextSibling;
-            dir = "next";
-            nextOrUp = false;
-          }
-          else {
-            node = node.parentNode;
-            dir = "up";
-          }
-        }
-        else if (node.firstChild) {
-          node = node.firstChild;
-          dir = "down";
-        }
-        else if (node.nextSibling) {
-          node = node.nextSibling;
-          dir = "next";
-        }
-        else
-          nextOrUp = true;
-        nodes.push({node: node, dir: dir});
-      }
-      while (node && node != endNode);
-
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i];
-        if (i && n.dir == "next" && n.node.nodeType == Node.ELEMENT_NODE) {
-          var previousNode = this.getPreviousVisibleNode(n.node);
-          if (previousNode &&
-              previousNode.nodeType == Node.ELEMENT_NODE &&
-              previousNode.nodeName.toLowerCase() == n.node.nodeName.toLowerCase()) {
-            var mergeable = false;
-            switch (n.node.nodeName.toLowerCase()) {
-              case "dl":
-              case "ul":
-              case "ol":
-              case "p":
-              case "h1":
-              case "h2":
-              case "h3":
-              case "h4":
-              case "h5":
-              case "h6":
-                mergeable = true;
-                break;
-              default: break;
-            }
-            if (mergeable) {
-              while (n.node.firstChild)
-                previousNode.appendChild(n.node.firstChild);
-              n.node.parentNode.removeChild(n.node);
-            }
-          }
-        }
-      }
-
-      for (var i = 0; i < nodes.length; i++) {
-        var node = nodes[i].node;
-        if (node.firstChild || !node.parentNode)
-          continue;
-
-        if (node == range.startContainer &&
-            range.startOffset) {
-          var t = doc.createTextNode(node.data.substr(0, range.startOffset));
-          node.parentNode.insertBefore(t, node);
-        }
-        if (node == endContainer &&
-                 endOffset != node.data.length) {
-          var t = doc.createTextNode(node.data.substr(range.endOffset));
-          node.parentNode.insertBefore(t, node.nextSibling);
-        }
-
-        var parent = node.parentNode;
-        if (parent) {
-          parent.removeChild(node);
-          while (!parent.firstChild) {
-            var tmp = parent.parentNode;
-            tmp.removeChild(parent);
-            parent = tmp;
-          }
-        }
-      }
-    }
-  },
-
-  getPreviousVisibleNode: function (aNode) {
-    var node = aNode.previousSibling;
-    var retNode = null;
-    while (!retNode && node) {
-      if (node.nodeType != Node.TEXT_NODE ||
-          node.data.match ( /\S/g ))
-        retNode = node;
-      else
-        node = node.previousSibling;
-    }
-    return retNode;
-  }
-};
 
 function OnDoubleClick(aEvent)
 {
