@@ -209,7 +209,7 @@ function UpdateWindowTitle()
       var scheme = UrlUtils.getScheme(docUrl);
       var filename = UrlUtils.getFilename(docUrl);
       if (filename)
-        windowTitle += " [" + scheme + ":/.../" + filename + "]";
+        windowTitle += " [" + scheme + ":/.../" + decodeURI(filename) + "]";
 
       // TODO: 1. Save changed title in the recent pages data in prefs
     }
