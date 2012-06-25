@@ -79,6 +79,38 @@ function InitDialog()
       gDialog.linkLabel.setAttribute("value", GetSelectionAsText().trim());
       gDialog.urlMenulist.focus();
     }
+
+    var clip = Components.classes["@mozilla.org/widget/clipboard;1"]
+                         .getService(Components.interfaces.nsIClipboard);
+    if (clip) {
+    
+      var trans = Components.classes["@mozilla.org/widget/transferable;1"]
+                            .createInstance(Components.interfaces.nsITransferable);
+      if (trans) {
+        trans.addDataFlavor("text/unicode");
+
+        clip.getData(trans, clip.kGlobalClipboard);
+        
+        var str       = new Object();
+        var strLength = new Object();
+        
+        trans.getTransferData("text/unicode", str, strLength);
+        if (str) {
+          str = str.value.QueryInterface(Components.interfaces.nsISupportsString);
+          pastetext = str.data.substring(0, strLength.value / 2);
+          if (pastetext) {
+            try {
+              var uri = Components.classes['@mozilla.org/network/standard-url;1']
+                                  .createInstance(Components.interfaces.nsIURL);
+              uri.spec = pastetext;
+              gDialog.urlMenulist.value = uri.spec;
+            }
+            catch(e) {}
+          }
+        }
+      }
+    }
+
   }
 
   var targets = gEditor.document.querySelectorAll("[id],a[name]");
