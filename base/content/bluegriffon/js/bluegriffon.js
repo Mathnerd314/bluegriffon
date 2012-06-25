@@ -1029,6 +1029,17 @@ function RebuildFromSource(aDoc, isXML)
     CloneElementContents(editor, aDoc.querySelector("head"), editor.document.querySelector("head"));
     // clone body
     CloneElementContents(editor, aDoc.querySelector("body"), editor.document.body);
+
+    var valueArray = [];
+    if (!Services.prefs.getBoolPref("bluegriffon.display.comments"))
+      valueArray.push("comment");
+    if (!Services.prefs.getBoolPref("bluegriffon.display.php"))
+      valueArray.push("php");
+    if (!Services.prefs.getBoolPref("bluegriffon.display.pi"))
+      valueArray.push("pi");
+    var value = valueArray.join(" ");
+    editor.document.documentElement.setAttribute("_moz_hide", value);
+
     MakePhpAndCommentsVisible(editor.document);
     editor.endTransaction();
 
