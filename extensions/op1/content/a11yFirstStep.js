@@ -753,7 +753,9 @@ var OPQUAST_CRITERIA = [
 
   {
     label: "TDHaveHeadersAttributeIfTHHasId",
-    checker: function(aDoc) {
+    checker: function(aDoc, aSource) {
+      if (aSource)
+        return -1;
       var inRows = aDoc.querySelectorAll("th[id] ~ td:not([headers])");
       if (inRows && inRows.length)
         return false;
