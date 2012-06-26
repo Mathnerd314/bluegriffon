@@ -442,7 +442,10 @@ var OPQUAST_CRITERIA = [
       var elts = aDoc.querySelectorAll("a[href] img[alt]");
       for (var i = 0; i < elts.length; i++) {
         var e = elts[i];
-        if (e.textContent.trim() == e.getAttribute("alt").trim())
+        var anchor = e;
+        while (anchor && anchor.nodeName.toLowerCase() != "a")
+          anchor = anchor.parentNode;
+        if (anchor.textContent.trim() == e.getAttribute("alt").trim())
           return false;
       }
       return true;
