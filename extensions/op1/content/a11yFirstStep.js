@@ -184,79 +184,49 @@ var OPQUAST_CRITERIA = [
   {
     label: "AtLeastOneH1InBody",
     checker: function(aDoc) {
-      return (aDoc.querySelector("html > body > h1") != null);
+      return (aDoc.querySelector("html > body  h1") != null);
     }
   },
 
   {
     label: "NoEmptyH1",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h1");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h1:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyH2",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h2");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h2:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyH3",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h3");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h3:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyH4",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h4");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h4:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyH5",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h5");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h5:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyH6",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h6");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("h6:-moz-only-whitespace");
     }
   },
 
@@ -357,12 +327,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "NoEmptyLI",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("li");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("li:-moz-only-whitespace");
     }
   },
 
@@ -383,36 +348,21 @@ var OPQUAST_CRITERIA = [
   {
     label: "NoEmptyP",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("p");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("p:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyAExceptAnchors",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("a[href]");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("a[href]:-moz-only-whitespace");
     }
   },
 
   {
     label: "NoEmptyButton",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("button");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("button:-moz-only-whitespace");
     }
   },
 
@@ -468,7 +418,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "noEmptyAltForImageLoneChildOfAnchorOrButton",
     checker: function(aDoc) {
-      return !aDoc.querySelector("a > img:only-child[alt=''],button > img:only-child[alt='']");
+      return !aDoc.querySelector("a > img:-moz-first-node:-moz-last-node[alt=''],button > img:-moz-first-node:-moz-last-node[alt='']");
     }
   },
 
@@ -608,12 +558,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "noEmptyCaption",
     checker: function(aDoc) {
-      var captions = aDoc.querySelectorAll("table > caption");
-      for (var i = 0; i < captions.length; i++) {
-        if (captions[i].textContent.trim() == "" && !captions[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("table > caption:-moz-only-whitespace");
     }
   },
 
@@ -933,12 +878,7 @@ var OPQUAST_CRITERIA = [
   {
     label:"noEmptyLegendElement",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("legend");
-      for (var i = 0; i < elts.length; i++) {
-        if (elts[i].textContent.trim() == "" && !elts[i].firstElementChild)
-          return false;
-      }
-      return true;
+      return !aDoc.querySelector("legend:-moz-only-whitespace");
     }
   },
 
