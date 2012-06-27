@@ -798,6 +798,25 @@ function ToggleViewMode(aElement)
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
   InContextHelper.hideInContextPanel();
+
+  var doctype = EditorUtils.getCurrentDocument().doctype;
+  var systemId = doctype ? doctype.systemId : null;
+  var isXML = false;
+  switch (systemId) {
+    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+    case "http://www.w3.org/TR/html4/loose.dtd":
+    case null:
+      isXML = false;
+      break;
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+      isXML = true;
+      break;
+    case "":
+      isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+      break;
+  }
+
   if (mode == "source")
   {
     gDialog.structurebar.style.visibility = "hidden";
@@ -859,6 +878,8 @@ function ToggleViewMode(aElement)
     sourceEditor.focus();
     MarkSelectionInAce(sourceEditor, source);
     sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
+
+    sourceIframe.contentWindow.isXML = isXML;
   }
   else if (mode == "wysiwyg")
   {
@@ -876,23 +897,6 @@ function ToggleViewMode(aElement)
       //sourceEditor.blur();
       var oldSource = sourceIframe.getUserData("oldSource"); 
       if (source != oldSource) {
-        var doctype = EditorUtils.getCurrentDocument().doctype;
-        var systemId = doctype ? doctype.systemId : null;
-        var isXML = false;
-        switch (systemId) {
-          case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
-          case "http://www.w3.org/TR/html4/loose.dtd":
-          case null:
-            isXML = false;
-            break;
-          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
-          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-            isXML = true;
-            break;
-          case "":
-            isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
-            break;
-        }
         var parser = new DOMParser();
         try {
           var doc = parser.parseFromString(source, isXML ? "text/xml" : "text/html");

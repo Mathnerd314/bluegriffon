@@ -471,7 +471,10 @@
       tagName = token.state.htmlState && token.state.htmlState.tagName;
       if (selfClosers[tagName]) {
         event.stop();
-        editor.replaceRange("/>", cursor);
+        if (isXML)
+          editor.replaceRange("/>", cursor);
+        else
+          editor.replaceRange(">", cursor);
         return editor.setCursor(cursor.line, cursor.ch + 2);
       } else if (tagName && token.string.match(/[^>\/]$/)) {
         event.stop();
