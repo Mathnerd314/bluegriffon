@@ -831,7 +831,7 @@ var OPQUAST_CRITERIA = [
     checker: function(aDoc) {
       var forms = aDoc.querySelectorAll("form");
       for (var i = 0; i < forms.length; i++) {
-        var elts = forms[i].querySelector("button[type='submit'],button[type='button'],image[type='submit'],image[type='image'],image[type='button']");
+        var elts = forms[i].querySelector("button[type='submit'],button[type='button'],input[type='submit'],input[type='image'],input[type='button']");
         if (!elts || !elts.length)
           return false;
       }

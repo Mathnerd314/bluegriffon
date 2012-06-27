@@ -4,7 +4,7 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>op1@bluegriffon.com</em:id>
-    <em:version>0.9</em:version>
+    <em:version>0.9.1.5.2.99.20120524</em:version>
   
     <em:targetApplication>
       <!-- BlueGriffon -->
@@ -22,13 +22,6 @@
     <em:contributor>Temesis</em:contributor>
     <em:homepageURL>http://www.disruptive-innovations.com/</em:homepageURL>
     <em:iconURL>chrome://op1/skin/op1-icon.png</em:iconURL>
-
-    <em:file>
-      <Description about="op1.jar">
-        <em:package>content/</em:package>
-        <em:locale>locale/en-US/</em:locale>
-      </Description>
-    </em:file>
 
   </Description>
 </RDF>

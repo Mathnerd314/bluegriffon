@@ -45,9 +45,9 @@ include $(DEPTH)/config/autoconf.mk
 MODULE = op1
 USE_EXTENSION_MANIFEST = 1
 
-XPI_NAME    = op1
+XPI_NAME    = op1@bluegriffon.com
 INSTALL_EXTENSION_ID  = op1@bluegriffon.com
-XPI_PKGNAME   = op1
+XPI_PKGNAME   = op1@bluegriffon.com
   
 DIST_FILES = install.rdf
 

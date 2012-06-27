@@ -1,4 +1,3 @@
-
 op1.jar:
 % content   op1          %content/op1/
 % skin      op1         classic/1.0 %skin/classic/op1/
@@ -12,13 +11,3 @@ op1.jar:
   skin/classic/op1/opquast.png         (skin/opquast.png)
   skin/classic/op1/op1.css             (skin/op1.css)
 
-op1-locale.jar:
-% locale    op1    en-US    %locale/en-US/op1/
-% locale    op1    fr       %locale/fr/op1/
-  locale/en-US/op1/op1Overlay.dtd      (locale/en-US/op1Overlay.dtd)
-  locale/en-US/op1/op1.dtd             (locale/en-US/op1.dtd)
-  locale/en-US/op1/a11yFirstStep.properties (locale/en-US/a11yFirstStep.properties)
-  locale/fr/op1/op1Overlay.dtd         (locale/fr/op1Overlay.dtd)
-  locale/fr/op1/op1.dtd                (locale/fr/op1.dtd)
-  locale/fr/op1/a11yFirstStep.properties (locale/fr/a11yFirstStep.properties)
-  
