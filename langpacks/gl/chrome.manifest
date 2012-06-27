@@ -28,4 +28,4 @@ locale domexplorer gl sidebars/domexplorer/
 locale scripteditor gl sidebars/scripteditor/
 locale stylesheets gl sidebars/stylesheets/
 locale tipoftheday gl extensions/tipoftheday/
-
+locale op1 gl extensions/op1/
