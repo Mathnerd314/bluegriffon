@@ -152,32 +152,28 @@ var OPQUAST_CRITERIA = [
   {
     label: "TitleForFrames",
     checker: function(aDoc) {
-      var e = aDoc.querySelector("frame:not([title])");
-      return (null == e);
+      return !aDoc.querySelector("frame:not([title])");
     }
   },
 
   {
     label: "NoEmptyTitleForFrames",
     checker: function(aDoc) {
-      var e = aDoc.querySelector("frame[title]:not([title=''])");
-      return (null == e);
+      return !aDoc.querySelector("frame[title='']");
     }
   },
 
   {
     label: "TitleForIFrames",
     checker: function(aDoc) {
-      var e = aDoc.querySelector("iframe:not([title])");
-      return (null == e);
+      return !aDoc.querySelector("iframe:not([title])");
     }
   },
 
   {
     label: "NoEmptyTitleForIFrames",
     checker: function(aDoc) {
-      var e = aDoc.querySelector("iframe[title]:not([title=''])");
-      return (null == e);
+      return !aDoc.querySelector("iframe[title='']");
     }
   },
 
@@ -243,7 +239,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "H3Order",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h2,h3,h4,h5,h6");
+      var elts = aDoc.querySelectorAll("h1,h2,h3,h4,h5,h6");
       for (var i = 0; i < elts.length; i++) {
         if (elts[i].nodeName.toLowerCase() == "h3") {
           if (0 == i)
@@ -259,7 +255,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "H4Order",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h3,h4,h5,h6");
+      var elts = aDoc.querySelectorAll("h1,h2,h3,h4,h5,h6");
       for (var i = 0; i < elts.length; i++) {
         if (elts[i].nodeName.toLowerCase() == "h4") {
           if (0 == i)
@@ -276,7 +272,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "H5Order",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h4,h5,h6");
+      var elts = aDoc.querySelectorAll("h1,h2,h3,h4,h5,h6");
       for (var i = 0; i < elts.length; i++) {
         if (elts[i].nodeName.toLowerCase() == "h5") {
           if (0 == i)
@@ -294,7 +290,7 @@ var OPQUAST_CRITERIA = [
   {
     label: "H6Order",
     checker: function(aDoc) {
-      var elts = aDoc.querySelectorAll("h5,h6");
+      var elts = aDoc.querySelectorAll("h1,h2,h3,h4,h5,h6");
       for (var i = 0; i < elts.length; i++) {
         if (elts[i].nodeName.toLowerCase() == "h6") {
           if (0 == i)
@@ -487,7 +483,7 @@ var OPQUAST_CRITERIA = [
     checker: function(aDoc) {
       var imgs = aDoc.querySelectorAll("img[longdesc]");
       for (var i = 0; i < imgs.length; i++) {
-        var longdesc = imgs[i].getAttribute("longdec");
+        var longdesc = imgs[i].getAttribute("longdesc");
         try {
           var uri = Components.classes['@mozilla.org/network/standard-url;1']
                               .createInstance(Components.interfaces.nsIURL);
