@@ -1,5 +1,6 @@
-<!--
--->
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!ENTITY  pageInfoWindow.width  "600">
 <!ENTITY  pageInfoWindow.height "500">
@@ -63,6 +64,7 @@
 <!ENTITY  permInstall           "Extensies of thema’s installeren">
 <!ENTITY  permGeo               "Locatie doorgeven">
 <!ENTITY  permPlugins           "Plug-ins activeren">
+<!ENTITY  permFullscreen        "Volledig scherm betreden">
 
 <!ENTITY  permIndexedDB              "Offlineopslag onderhouden">
 <!ENTITY  permClearStorage           "Opslag wissen">

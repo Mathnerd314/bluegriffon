@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
 
@@ -19,15 +23,15 @@
 <!ENTITY  closeOtherTabs.label               "Overige tabbladen sluiten">
 <!ENTITY  closeOtherTabs.accesskey           "e">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
 used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
 can reach it easily. -->
-<!ENTITY  pinAppTab.label                    "Vastzetten als app-tabblad">
-<!ENTITY  pinAppTab.accesskey                "V">
-<!ENTITY  unpinAppTab.label                  "Tabblad losmaken">
-<!ENTITY  unpinAppTab.accesskey              "b">
+<!ENTITY  pinTab.label                       "Tabblad vastzetten">
+<!ENTITY  pinTab.accesskey                   "v">
+<!ENTITY  unpinTab.label                     "Tabblad losmaken">
+<!ENTITY  unpinTab.accesskey                 "b">
 <!ENTITY  moveToGroup.label                  "Verplaatsen naar groep">
 <!ENTITY  moveToGroup.accesskey              "r">
 <!ENTITY  moveToNewGroup.label               "Nieuwe groep">
@@ -77,6 +81,12 @@ can reach it easily. -->
 <!ENTITY pageInfoCmd.label "Pagina-info">
 <!ENTITY pageInfoCmd.accesskey "i">
 <!ENTITY pageInfoCmd.commandkey "i">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "Schermvullende weergave">
+<!ENTITY enterFullScreenCmd.accesskey "S">
+<!ENTITY exitFullScreenCmd.label "Schermvullende weergave verlaten">
+<!ENTITY exitFullScreenCmd.accesskey "S">
 <!ENTITY fullScreenCmd.label "Volledig scherm">
 <!ENTITY fullScreenCmd.accesskey "d">
 <!ENTITY fullScreenCmd.macCommandKey "f">
@@ -90,7 +100,13 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "W">
 <!ENTITY fullScreenExit.label "Volledigschermmodus verlaten">
 <!ENTITY fullScreenExit.accesskey "d">
-<!ENTITY domFullScreenWarning.label "Druk op ESC om de volledigschermmodus te verlaten">
+<!ENTITY fullscreenAllowButton.label "Toestaan">
+<!ENTITY fullscreenExitButton.label "Weigeren">
+<!ENTITY fullscreenApproval.value "Volledig scherm toestaan?">
+
+<!ENTITY fullscreenExitHint.value "Druk op ESC om de volledigschermmodus te verlaten.">
+<!ENTITY leaveDOMFullScreen.label "Volledig scherm verlaten">
+<!ENTITY leaveDOMFullScreen.accesskey "v">
 
 <!ENTITY closeWindow.label "Venster sluiten">
 <!ENTITY closeWindow.accesskey "e">
@@ -99,6 +115,7 @@ can reach it easily. -->
 <!ENTITY bookmarksMenu.accesskey "a">
 <!ENTITY bookmarkThisPageCmd.label "Bladwijzer voor deze pagina maken">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "Abonneren op deze pagina">
 <!ENTITY subscribeToPageMenuitem.label "Abonneren op deze pagina…">
 <!ENTITY addCurPagesCmd.label "Bladwijzer voor alle tabbladen maken…">
@@ -190,6 +207,7 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.label          "Webconsole">
 <!ENTITY webConsoleCmd.accesskey      "W">
 <!ENTITY webConsoleCmd.commandkey     "k">
+<!ENTITY remoteWebConsoleCmd.label    "Externe Webconsole">
 
 <!ENTITY inspectMenu.label            "Inspecteren">
 <!ENTITY inspectMenu.accesskey        "t">
@@ -197,6 +215,10 @@ can reach it easily. -->
 
 <!ENTITY inspectContextMenu.label     "Element inspecteren">
 <!ENTITY inspectContextMenu.accesskey "E">
+
+<!ENTITY responsiveDesignTool.label   "Responsive Design-weergave">
+<!ENTITY responsiveDesignTool.accesskey "R">
+<!ENTITY responsiveDesignTool.commandkey "M">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -214,6 +236,14 @@ can reach it easily. -->
 <!ENTITY scratchpad.keytext           "F4">
 
 <!ENTITY inspectCloseButton.tooltiptext "Inspector sluiten">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Zijbalk sluiten">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "Ontwikkelaarswerkbalk sluiten">
+<!ENTITY devToolbarMenu.label 		   "Ontwikkelaarswerkbalk">
+<!ENTITY devToolbarMenu.accesskey          "O">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "Meer hulpmiddelen">	
 
 <!ENTITY inspectorHTMLCopyInner.label       "Binnenste HTML kopiëren">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "i">
@@ -228,7 +258,7 @@ can reach it easily. -->
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
 <!ENTITY inspect3DViewButton.label     "3D-weergave">
-<!ENTITY inspect3DViewButton.accesskey "w">
+<!ENTITY inspect3DViewButton.accesskey "e">
 
 <!ENTITY inspectStyleButton.label     "Stijl">
 <!ENTITY inspectStyleButton.accesskey "S">
@@ -248,6 +278,8 @@ can reach it easily. -->
 <!ENTITY newNavigatorCmd.label        "Nieuw venster">
 <!ENTITY newNavigatorCmd.key        "N">
 <!ENTITY newNavigatorCmd.accesskey      "N">
+<!ENTITY newPrivateWindow.label     "Nieuw privévenster">
+<!ENTITY newPrivateWindow.accesskey "v">
 
 <!ENTITY editMenu.label         "Bewerken"> 
 <!ENTITY editMenu.accesskey       "w"> 
@@ -399,8 +431,8 @@ can reach it easily. -->
 <!ENTITY bookmarkThisLinkCmd.accesskey  "m">
 <!ENTITY bookmarkThisFrameCmd.label      "Bladwijzer voor dit deelvenster maken">
 <!ENTITY bookmarkThisFrameCmd.accesskey  "m">
-<!ENTITY sendPageCmd.label            "Koppeling versturen…">
-<!ENTITY sendPageCmd.accesskey        "u">
+<!ENTITY emailPageCmd.label           "Koppeling e-mailen…">
+<!ENTITY emailPageCmd.accesskey       "m">
 <!ENTITY savePageCmd.label            "Pagina opslaan als…">
 <!ENTITY savePageCmd.accesskey        "p">
 <!-- alternate for content area context menu -->
@@ -412,20 +444,18 @@ can reach it easily. -->
 <!ENTITY printFrameCmd.accesskey      "a">
 <!ENTITY saveLinkCmd.label            "Koppeling opslaan als…">
 <!ENTITY saveLinkCmd.accesskey        "l">
-<!ENTITY sendLinkCmd.label            "Koppeling versturen…">
-<!ENTITY sendLinkCmd.accesskey        "u">
 <!ENTITY saveImageCmd.label           "Afbeelding opslaan als…">
 <!ENTITY saveImageCmd.accesskey       "n">
 <!ENTITY saveVideoCmd.label           "Video opslaan als…">
 <!ENTITY saveVideoCmd.accesskey       "n">
 <!ENTITY saveAudioCmd.label           "Audio opslaan als…">
 <!ENTITY saveAudioCmd.accesskey       "n">
-<!ENTITY sendImageCmd.label           "Afbeelding versturen…">
-<!ENTITY sendImageCmd.accesskey       "s">
-<!ENTITY sendVideoCmd.label           "Video versturen…">
-<!ENTITY sendVideoCmd.accesskey       "s">
-<!ENTITY sendAudioCmd.label           "Audio versturen…">
-<!ENTITY sendAudioCmd.accesskey       "s">
+<!ENTITY emailImageCmd.label          "Afbeelding e-mailen…">
+<!ENTITY emailImageCmd.accesskey      "a">
+<!ENTITY emailVideoCmd.label          "Video e-mailen…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "Audio e-mailen…">
+<!ENTITY emailAudioCmd.accesskey      "a">
 <!ENTITY copyLinkCmd.label            "Koppelingslocatie kopiëren">
 <!ENTITY copyLinkCmd.accesskey        "p">
 <!ENTITY copyImageCmd.label           "Afbeeldingslocatie kopiëren">
@@ -592,8 +622,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Browsertabbladen">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu.label     "Tabbladen van andere computers">
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "Tabbladen van andere apparaten">
 
 <!ENTITY syncBrand.shortName.label    "Sync">
 
@@ -615,12 +645,19 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
 toolbar button -->
 <!ENTITY markupButton.accesskey          "M">
 
-<!ENTITY devToolbar.commandkey "v">
+<!ENTITY socialToolbar.title        "Sociale-werkbalkknop">
+<!ENTITY social.notLoggedIn.label   "Niet aangemeld">
 
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspectorButton.label "Inspector">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY social.ok.label       "OK">
+<!ENTITY social.ok.accesskey   "O">
 
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY social.toggleSidebar.label "Zijbalk tonen">
+<!ENTITY social.toggleSidebar.accesskey "Z">
+
+<!ENTITY social.toggleNotifications.label "Desktopnotificaties tonen">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.activated.undobutton.label "Ongedaan maken">
+<!ENTITY social.activated.undobutton.accesskey "O">
+
+<!ENTITY social.chatBar.commandkey "c">

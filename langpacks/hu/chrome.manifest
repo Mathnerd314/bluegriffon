@@ -14,11 +14,11 @@ locale branding hu chrome/hu/locale/branding/
 locale alerts hu chrome/hu/locale/hu/alerts/
 locale weave hu chrome/hu/locale/hu/
 locale pippki hu chrome/hu/locale/hu/pippki/
+locale pdf.js hu chrome/hu/locale/pdfviewer/
 locale global hu chrome/hu/locale/hu/global/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
 locale global-platform hu chrome/hu/locale/hu/global-platform/
 locale places hu chrome/hu/locale/hu/places/
-locale webapprt hu chrome/hu/locale/webapprt/
 locale bluegriffon hu base/locale/bluegriffon/
 locale branding hu base/locale/branding/
 locale fs hu extensions/fs/
@@ -28,4 +28,4 @@ locale domexplorer hu sidebars/domexplorer/
 locale scripteditor hu sidebars/scripteditor/
 locale stylesheets hu sidebars/stylesheets/
 locale tipoftheday hu extensions/tipoftheday/
-locale op1 hu extensions/op1/
+

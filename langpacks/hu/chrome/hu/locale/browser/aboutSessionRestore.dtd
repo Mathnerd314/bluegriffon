@@ -17,3 +17,6 @@
 <!ENTITY restorepage.listHeader     "Ablakok és lapok">
 <!-- LOCALIZATION NOTE: &#37;S will be replaced with a number. -->
 <!ENTITY restorepage.windowLabel    "&#37;S. ablak">
+
+<!ENTITY restorepage.close.access   "C">
+<!ENTITY restorepage.closeButton    "Close">

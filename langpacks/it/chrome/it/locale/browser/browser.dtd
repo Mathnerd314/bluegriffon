@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY mainWindow.title "&brandFullName;">
 <!ENTITY mainWindow.titlemodifier "&brandFullName;">
 <!ENTITY mainWindow.titlemodifiermenuseparator " - ">
@@ -8,10 +12,10 @@
 <!ENTITY reloadAllTabs.accesskey "u">
 <!ENTITY closeOtherTabs.label "Chiudi le altre schede">
 <!ENTITY closeOtherTabs.accesskey "a">
-<!ENTITY pinAppTab.label "Blocca come Scheda applicazione">
-<!ENTITY pinAppTab.accesskey "h">
-<!ENTITY unpinAppTab.label "Sblocca scheda">
-<!ENTITY unpinAppTab.accesskey "h">
+<!ENTITY pinTab.label "Blocca scheda">
+<!ENTITY pinTab.accesskey "h">
+<!ENTITY unpinTab.label "Sblocca scheda">
+<!ENTITY unpinTab.accesskey "h">
 <!ENTITY moveToGroup.label "Sposta nel gruppo">
 <!ENTITY moveToGroup.accesskey "o">
 <!ENTITY moveToNewGroup.label "Nuovo gruppo">
@@ -56,6 +60,10 @@
 <!ENTITY pageInfoCmd.label "Informazioni sulla pagina">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
+<!ENTITY enterFullScreenCmd.label "Passa a schermo intero">
+<!ENTITY enterFullScreenCmd.accesskey "h">
+<!ENTITY exitFullScreenCmd.label "Esci da schermo intero">
+<!ENTITY exitFullScreenCmd.accesskey "h">
 <!ENTITY fullScreenCmd.label "Schermo intero">
 <!ENTITY fullScreenCmd.accesskey "S">
 <!ENTITY fullScreenCmd.macCommandKey "f">
@@ -68,13 +76,19 @@
 <!ENTITY fullScreenAutohide.accesskey "N">
 <!ENTITY fullScreenExit.label "Esci da schermo intero">
 <!ENTITY fullScreenExit.accesskey "E">
-<!ENTITY domFullScreenWarning.label "Premere ESC per abbandonare la modalità schermo intero">
+<!ENTITY fullscreenAllowButton.label "Permetti">
+<!ENTITY fullscreenExitButton.label "Nega">
+<!ENTITY fullscreenApproval.value "Consenti passaggio a schermo intero?">
+<!ENTITY fullscreenExitHint.value "Premere ESC per uscire in qualunque momento dalla modalità a schermo intero.">
+<!ENTITY leaveDOMFullScreen.label "Esci da schermo intero">
+<!ENTITY leaveDOMFullScreen.accesskey "h">
 <!ENTITY closeWindow.label "Chiudi finestra">
 <!ENTITY closeWindow.accesskey "d">
 <!ENTITY bookmarksMenu.label "Segnalibri">
 <!ENTITY bookmarksMenu.accesskey "e">
 <!ENTITY bookmarkThisPageCmd.label "Aggiungi pagina ai segnalibri…">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "Abbonati a questa pagina">
 <!ENTITY subscribeToPageMenuitem.label "Abbonati a questa pagina…">
 <!ENTITY addCurPagesCmd.label "Tutte le schede nei segnalibri…">
@@ -148,16 +162,27 @@
 <!ENTITY webConsoleCmd.label "Console web">
 <!ENTITY webConsoleCmd.accesskey "w">
 <!ENTITY webConsoleCmd.commandkey "k">
+<!ENTITY remoteWebConsoleCmd.label "Console web remota">
 <!ENTITY inspectMenu.label "Analisi pagina">
 <!ENTITY inspectMenu.accesskey "s">
 <!ENTITY inspectMenu.commandkey "I">
 <!ENTITY inspectContextMenu.label "Analizza elemento">
 <!ENTITY inspectContextMenu.accesskey "t">
+<!ENTITY responsiveDesignTool.label "Visualizzazione flessibile">
+<!ENTITY responsiveDesignTool.accesskey "u">
+<!ENTITY responsiveDesignTool.commandkey "M">
 <!ENTITY scratchpad.label "Blocco per gli appunti">
 <!ENTITY scratchpad.accesskey "B">
 <!ENTITY scratchpad.keycode "VK_F4">
 <!ENTITY scratchpad.keytext "F4">
 <!ENTITY inspectCloseButton.tooltiptext "Chiudi lo strumento di analisi">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Chiudi la barra laterale">
+<!ENTITY devToolbarCloseButton.tooltiptext "Chiudi la Barra sviluppatori">
+<!ENTITY devToolbarMenu.label "Barra sviluppatori">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbar.keycode "VK_F2">
+<!ENTITY devToolbar.keytext "F2">
+<!ENTITY devToolbarOtherToolsButton.label "Altri strumenti">
 <!ENTITY inspectorHTMLCopyInner.label "Copia HTML interno">
 <!ENTITY inspectorHTMLCopyInner.accesskey "M">
 <!ENTITY inspectorHTMLCopyOuter.label "Copia HTML esterno">
@@ -179,6 +204,8 @@
 <!ENTITY newNavigatorCmd.label "Nuova finestra">
 <!ENTITY newNavigatorCmd.key "N">
 <!ENTITY newNavigatorCmd.accesskey "f">
+<!ENTITY newPrivateWindow.label "Nuova finestra anonima">
+<!ENTITY newPrivateWindow.accesskey "u">
 <!ENTITY editMenu.label "Modifica">
 <!ENTITY editMenu.accesskey "M">
 <!ENTITY undoCmd.label "Annulla">
@@ -295,8 +322,8 @@
 <!ENTITY bookmarkThisLinkCmd.accesskey "A">
 <!ENTITY bookmarkThisFrameCmd.label "Aggiungi riquadro nei segnalibri…">
 <!ENTITY bookmarkThisFrameCmd.accesskey "e">
-<!ENTITY sendPageCmd.label "Invia link…">
-<!ENTITY sendPageCmd.accesskey "n">
+<!ENTITY emailPageCmd.label "Invia link per email…">
+<!ENTITY emailPageCmd.accesskey "I">
 <!ENTITY savePageCmd.label "Salva pagina con nome…">
 <!ENTITY savePageCmd.accesskey "v">
 <!ENTITY savePageCmd.accesskey2 "g">
@@ -307,20 +334,18 @@
 <!ENTITY printFrameCmd.accesskey "u">
 <!ENTITY saveLinkCmd.label "Salva destinazione con nome…">
 <!ENTITY saveLinkCmd.accesskey "d">
-<!ENTITY sendLinkCmd.label "Invia link…">
-<!ENTITY sendLinkCmd.accesskey "I">
 <!ENTITY saveImageCmd.label "Salva immagine con nome…">
 <!ENTITY saveImageCmd.accesskey "e">
 <!ENTITY saveVideoCmd.label "Salva video come…">
 <!ENTITY saveVideoCmd.accesskey "S">
 <!ENTITY saveAudioCmd.label "Salva audio come…">
 <!ENTITY saveAudioCmd.accesskey "S">
-<!ENTITY sendImageCmd.label "Invia immagine…">
-<!ENTITY sendImageCmd.accesskey "n">
-<!ENTITY sendVideoCmd.label "Invia video…">
-<!ENTITY sendVideoCmd.accesskey "n">
-<!ENTITY sendAudioCmd.label "Invia audio…">
-<!ENTITY sendAudioCmd.accesskey "n">
+<!ENTITY emailImageCmd.label "Invia immagine per email…">
+<!ENTITY emailImageCmd.accesskey "n">
+<!ENTITY emailVideoCmd.label "Invia video per email…">
+<!ENTITY emailVideoCmd.accesskey "n">
+<!ENTITY emailAudioCmd.label "Invia audio per email…">
+<!ENTITY emailAudioCmd.accesskey "n">
 <!ENTITY copyLinkCmd.label "Copia indirizzo">
 <!ENTITY copyLinkCmd.accesskey "z">
 <!ENTITY copyImageCmd.label "Copia indirizzo immagine">
@@ -331,7 +356,7 @@
 <!ENTITY copyVideoURLCmd.accesskey "o">
 <!ENTITY copyAudioURLCmd.label "Copia indirizzo audio">
 <!ENTITY copyAudioURLCmd.accesskey "o">
-<!ENTITY copyEmailCmd.label "Copia indirizzo e-mail">
+<!ENTITY copyEmailCmd.label "Copia indirizzo email">
 <!ENTITY copyEmailCmd.accesskey "e">
 <!ENTITY thisFrameMenu.label "Questo riquadro">
 <!ENTITY thisFrameMenu.accesskey "Q">
@@ -374,7 +399,7 @@
 <!ENTITY fullZoom.accesskey "Z">
 <!ENTITY newTabButton.tooltip "Apri una nuova scheda">
 <!ENTITY newWindowButton.tooltip "Apri una nuova finestra">
-<!ENTITY sidebarCloseButton.tooltip "Chiudi barra laterale">
+<!ENTITY sidebarCloseButton.tooltip "Chiudi la barra laterale">
 <!ENTITY cutButton.tooltip "Taglia">
 <!ENTITY copyButton.tooltip "Copia">
 <!ENTITY pasteButton.tooltip "Incolla">
@@ -429,7 +454,7 @@
 <!ENTITY downloadMonitor2.tooltip "Fare clic per aprire la finestra dei download">
 <!ENTITY allTabs.filter.emptyText "Cerca tra le schede">
 <!ENTITY tabsToolbar.label "Schede del browser">
-<!ENTITY syncTabsMenu.label "Schede da altri computer">
+<!ENTITY syncTabsMenu2.label "Schede da altri dispositivi">
 <!ENTITY syncBrand.shortName.label "Sync">
 <!ENTITY syncSetup.label "Configurazione di &syncBrand.shortName.label;…">
 <!ENTITY syncSetup.accesskey "y">
@@ -440,13 +465,14 @@
 <!ENTITY toggleAddonBarCmd.key "/">
 <!ENTITY markupButton.arialabel "Codice">
 <!ENTITY markupButton.accesskey "C">
-
-<!ENTITY devToolbar.commandkey "v">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspectorButton.label "Inspector">
-<!ENTITY scriptsButton.label "Scripts">
-
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY socialToolbar.title "Pulsante barra degli strumenti social">
+<!ENTITY social.notLoggedIn.label "Accesso non effettuato">
+<!ENTITY social.ok.label "OK">
+<!ENTITY social.ok.accesskey "O">
+<!ENTITY social.toggleSidebar.label "Visualizza barra laterale">
+<!ENTITY social.toggleSidebar.accesskey "V">
+<!ENTITY social.toggleNotifications.label "Visualizza notifiche desktop">
+<!ENTITY social.toggleNotifications.accesskey "k">
+<!ENTITY social.activated.undobutton.label "Annulla">
+<!ENTITY social.activated.undobutton.accesskey "A">
+<!ENTITY social.chatBar.commandkey "c">

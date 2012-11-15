@@ -7,7 +7,6 @@ locale mozapps fr chrome/fr/locale/fr/mozapps/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
 locale alerts fr chrome/fr/locale/fr/alerts/
 locale passwordmgr fr chrome/fr/locale/fr/passwordmgr/
-locale webapprt fr chrome/fr/locale/webapprt/
 locale necko fr chrome/fr/locale/fr/necko/
 locale browser fr chrome/fr/locale/browser/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
@@ -19,6 +18,7 @@ locale branding fr chrome/fr/locale/branding/
 locale pippki fr chrome/fr/locale/fr/pippki/
 locale pipnss fr chrome/fr/locale/fr/pipnss/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+locale pdf.js fr chrome/fr/locale/pdfviewer/
 locale bluegriffon fr base/locale/bluegriffon/
 locale branding fr base/locale/branding/
 locale fs fr extensions/fs/
@@ -28,4 +28,4 @@ locale domexplorer fr sidebars/domexplorer/
 locale scripteditor fr sidebars/scripteditor/
 locale stylesheets fr sidebars/stylesheets/
 locale tipoftheday fr extensions/tipoftheday/
-locale op1 fr extensions/op1/
+

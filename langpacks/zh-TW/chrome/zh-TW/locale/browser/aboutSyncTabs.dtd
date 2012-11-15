@@ -1,5 +1,9 @@
-<!-- LOCALIZATION NOTE (tabs.otherComputers.label): Keep this in sync with syncTabsMenu.label from browser.dtd -->
-<!ENTITY tabs.otherComputers.label               "來自其他電腦的分頁">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!-- LOCALIZATION NOTE (tabs.otherDevices.label): Keep this in sync with syncTabsMenu2.label from browser.dtd -->
+<!ENTITY tabs.otherDevices.label               "來自其他裝置的分頁">
 
 <!ENTITY tabs.searchText.label                   "在這裡尋找分頁…">
 
@@ -15,3 +19,4 @@
 <!ENTITY tabs.context.bookmarkMultipleTabs.accesskey  "B">
 <!ENTITY tabs.context.refreshList.label               "重新整理列表">
 <!ENTITY tabs.context.refreshList.accesskey           "R">
+

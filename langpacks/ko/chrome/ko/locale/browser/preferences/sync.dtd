@@ -40,3 +40,8 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "서비스 약관">
 <!ENTITY prefs.ppLink.label         "개인 정보 정책">
+
+<!ENTITY syncDeviceName.accesskey   "c">
+
+<!-- Device Settings -->
+<!ENTITY syncDeviceName.label       "Device Name:">

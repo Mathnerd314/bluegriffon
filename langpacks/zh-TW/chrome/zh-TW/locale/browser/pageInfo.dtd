@@ -1,5 +1,6 @@
-<!--
--->
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 <!ENTITY  pageInfoWindow.width  "600">
 <!ENTITY  pageInfoWindow.height "500">
@@ -63,6 +64,7 @@
 <!ENTITY  permInstall           "安裝擴充套件或佈景主題">
 <!ENTITY  permGeo               "透露地理位置">
 <!ENTITY  permPlugins           "啟用外掛程式">
+<!ENTITY  permFullscreen        "進入全螢幕模式">
 
 <!ENTITY  permIndexedDB              "使用離線儲存空間">
 <!ENTITY  permClearStorage           "清除儲存空間">
@@ -91,3 +93,4 @@
 <!ENTITY  securityView.privacy.viewPasswords.accessKey  "w">
 
 <!ENTITY  securityView.technical.header                 "技術細節">
+

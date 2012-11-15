@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY testpilot.brand.label "Test Pilot">
 <!ENTITY testpilot.settings.label "Impostazioni">
 <!ENTITY testpilot.settings.dataSubmission.label "Trasmissione dei dati">
@@ -19,7 +23,7 @@
 <!ENTITY testpilot.notification.close.tooltip "Chiudi">
 <!ENTITY testpilot.enable.label "Attiva Studi utente">
 <!ENTITY testpilot.feedbackbutton.label "Feedback">
-<!ENTITY testpilot.happy.label "BlueGriffon mi ha reso felice perché…">
-<!ENTITY testpilot.sad.label "BlueGriffon mi ha reso triste perché…">
+<!ENTITY testpilot.happy.label "Firefox mi ha reso felice perché…">
+<!ENTITY testpilot.sad.label "Firefox mi ha reso triste perché…">
 <!ENTITY testpilot.broken.label "Segnala un sito web non funzionante…">
 <!ENTITY testpilot.idea.label "Invia un suggerimento…">

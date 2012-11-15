@@ -1,4 +1,7 @@
 <!--
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
 <!ENTITY  pageInfoWindow.width  "600">
@@ -8,7 +11,7 @@
 <!ENTITY  copy.label            "העתק">
 <!ENTITY  copy.accesskey        "ה">
 <!ENTITY  selectall.key         "A">
-<!ENTITY  selectall.label       "בחר הכל">
+<!ENTITY  selectall.label       "בחר הכול">
 <!ENTITY  selectall.accesskey   "ב">
 <!ENTITY  closeWindow.key       "w">
 
@@ -36,7 +39,7 @@
 <!ENTITY  mediaType             "סוג">
 <!ENTITY  mediaSize             "גודל">
 <!ENTITY  mediaCount            "כמות">
-<!ENTITY  mediaDimension        "מימדים:">
+<!ENTITY  mediaDimension        "ממדים:">
 <!ENTITY  mediaLongdesc         "תיאור:">
 <!ENTITY  mediaBlockImage.accesskey "ח">
 <!ENTITY  mediaSaveAs           "שמור בשם...">
@@ -62,6 +65,8 @@
 <!ENTITY  permCookie            "קביעת עוגיות">
 <!ENTITY  permInstall           "התקנת הרחבות או ערכות נושא">
 <!ENTITY  permGeo               "שיתוף מיקום">
+<!ENTITY  permPlugins           "הפעלת תוספים חיצוניים">
+<!ENTITY  permFullscreen        "כניסה למסך מלא">
 
 <!ENTITY  permIndexedDB              "תחזוקת אחסון לא מקוון">
 <!ENTITY  permClearStorage           "מחק אחסון">
@@ -85,10 +90,9 @@
 <!ENTITY  securityView.privacy.cookies                  "האם אתר זה שומר מידע (עוגיות) על המחשב שלי?">
 <!ENTITY  securityView.privacy.viewCookies              "הצג עוגיות">
 <!ENTITY  securityView.privacy.viewCookies.accessKey    "ע">
-<!ENTITY  securityView.privacy.passwords                "האם שמרתי סיסמאות עבור אתר זה?">
-<!ENTITY  securityView.privacy.viewPasswords            "הצג סיסמאות שמורות">
+<!ENTITY  securityView.privacy.passwords                "האם שמרתי ססמאות עבור אתר זה?">
+<!ENTITY  securityView.privacy.viewPasswords            "הצג ססמאות שמורות">
 <!ENTITY  securityView.privacy.viewPasswords.accessKey  "ס">
 
 <!ENTITY  securityView.technical.header                 "פירוט טכני">
 
-<!ENTITY  permPlugins           "Activate Plugins">

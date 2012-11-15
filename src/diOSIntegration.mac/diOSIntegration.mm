@@ -63,7 +63,7 @@ NS_IMPL_ISUPPORTS1(diOSIntegration, diIOSIntegration)
 NS_IMETHODIMP
 diOSIntegration::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited) 
 {
-  nsCOMPtr<nsIWidget> widget = nsnull;
+  nsCOMPtr<nsIWidget> widget = nullptr;
   aWindow->GetMainWidget(getter_AddRefs(widget));
   if (widget) {
     NSWindow *cocoaWindow = (NSWindow*)widget->GetNativeData(NS_NATIVE_WINDOW);
@@ -75,7 +75,7 @@ diOSIntegration::SetDocumentEdited(nsIBaseWindow *aWindow, bool aIsEdited)
 NS_IMETHODIMP
 diOSIntegration::Show(nsIBaseWindow *aWindow, bool aState) 
 {
-  nsCOMPtr<nsIWidget> widget = nsnull;
+  nsCOMPtr<nsIWidget> widget = nullptr;
   aWindow->GetMainWidget(getter_AddRefs(widget));
   if (widget) {
     widget->Show(aState);

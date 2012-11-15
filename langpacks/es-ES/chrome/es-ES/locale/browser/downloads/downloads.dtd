@@ -1,5 +1,10 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/.  -->
+
 <!ENTITY indicator.tooltiptext "Descargas">
 <!ENTITY downloads.title "Descargas">
+<!ENTITY downloads.width "65ch">
 <!ENTITY cmd.pause.label "Pausar">
 <!ENTITY cmd.pause.accesskey "P">
 <!ENTITY cmd.resume.label "Continuar">
@@ -19,5 +24,22 @@
 <!ENTITY cmd.removeFromList.accesskey "e">
 <!ENTITY cmd.clearList.label "Limpiar lista">
 <!ENTITY cmd.clearList.accesskey "a">
-<!ENTITY downloadshistory.label "Mostrar todas las descargas">
-<!ENTITY downloadshistory.accesskey "S">
+
+
+<!-- LOCALIZATION NOTE (downloadDetails.width):
+     Width of details for a Downloads Panel item (which directly influences the
+     width of the Downloads Panel) expressed using a CSS unit. The longest
+     labels that should fit in the item width are usually those of in-progress
+     downloads and those of blocked downloads.
+
+     A good rule of thumb is to try to determine the longest string possible
+     that an in-progress download could display, and use that value in ch
+     units.
+
+     For example, in English, a long string would be:
+
+     59 minutes, 59 seconds remaining - 1022 of 1023 KB
+
+     That's 50 characters, so we set the width at 50ch.
+     -->
+<!ENTITY downloadDetails.width            "50ch">

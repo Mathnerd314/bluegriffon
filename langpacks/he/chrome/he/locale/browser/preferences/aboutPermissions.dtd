@@ -1,37 +1,46 @@
-<!ENTITY permissionsManager.title        "Permissions Manager">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY sites.search                    "Search Sites">
-<!ENTITY sites.allSites                  "All Sites">
+<!ENTITY permissionsManager.title        "מנהל הרשאות">
+
+<!ENTITY sites.search                    "חיפוש אתרים">
+<!ENTITY sites.allSites                  "כל האתרים">
 
 <!-- LOCALIZATION NOTE (permissions.header.start, permissions.header.end): These strings
      surround the host name of the site to make the header for the permissions page.
      example: "Permissions for mozilla.org" -->
-<!ENTITY header.site.start               "Permissions for">
+<!ENTITY header.site.start               "הרשאות עבור">
 <!ENTITY header.site.end                 "">
 
-<!ENTITY header.defaults                 "Default Permissions for All Sites">
+<!ENTITY header.defaults                 "הרשאות התחלתיות לכל האתרים">
 
-<!ENTITY permissions.forgetSite          "Forget About This Site">
+<!ENTITY permissions.forgetSite          "שכח מאתר זה">
 
-<!ENTITY permission.alwaysAsk            "Always Ask">
-<!ENTITY permission.allow                "Allow">
-<!ENTITY permission.allowForSession      "Allow for Session">
-<!ENTITY permission.block                "Block">
+<!ENTITY permission.alwaysAsk            "שאל תמיד">
+<!ENTITY permission.allow                "אפשר">
+<!ENTITY permission.allowForSession      "אפשר להפעלה זו">
+<!ENTITY permission.block                "חסום">
 
-<!ENTITY password.label                  "Store Passwords">
-<!ENTITY password.manage                 "Manage Passwords…">
+<!ENTITY password.label                  "שמירת ססמאות">
+<!ENTITY password.manage                 "ניהול ססמאות…">
 
-<!ENTITY cookie.label                    "Set Cookies">
-<!ENTITY cookie.remove                   "Remove Cookies">
-<!ENTITY cookie.manage                   "Manage Cookies…">
-<!ENTITY cookie.removeAll                "Remove All Cookies">
+<!ENTITY cookie.label                    "קביעת עוגיות">
+<!ENTITY cookie.remove                   "הסרת עוגיות">
+<!ENTITY cookie.manage                   "ניהול עוגיות…">
+<!ENTITY cookie.removeAll                "הסרת כל העוגיות">
 
-<!ENTITY geo.label                       "Share Location">
+<!ENTITY geo.label                       "שיתוף מיקום">
 
-<!ENTITY plugins.label                   "Plugins">
+<!ENTITY plugins.label                   "תוספים חיצוניים">
 
 <!-- LOCALIZATION NOTE (indexedDB.label): This is describing indexedDB storage
      using the same language used for the permIndexedDB string in browser/pageInfo.dtd -->
-<!ENTITY indexedDB.label                 "Maintain Offline Storage">
+<!ENTITY indexedDB.label                 "תחזוקת אחסון לא מקוון">
 
-<!ENTITY popup.label                     "Open Pop-up Windows">
+<!ENTITY popup.label                     "פתיחת חלונות קופצים">
+
+<!ENTITY fullscreen.label                "מסך מלא">
+
+
+<!ENTITY permission.allowFirstPartyOnly  "Allow First Party Only">

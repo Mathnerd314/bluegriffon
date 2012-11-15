@@ -18,7 +18,7 @@ locale global he chrome/he/locale/he/global/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
 locale global-region he chrome/he/locale/he/global-region/
 locale testpilot he chrome/he/locale/feedback/
-locale webapprt he chrome/he/locale/webapprt/
+locale pdf.js he chrome/he/locale/pdfviewer/
 locale bluegriffon he base/locale/bluegriffon/
 locale branding he base/locale/branding/
 locale fs he extensions/fs/
@@ -28,4 +28,4 @@ locale domexplorer he sidebars/domexplorer/
 locale scripteditor he sidebars/scripteditor/
 locale stylesheets he sidebars/stylesheets/
 locale tipoftheday he extensions/tipoftheday/
-locale op1 he extensions/op1/
+

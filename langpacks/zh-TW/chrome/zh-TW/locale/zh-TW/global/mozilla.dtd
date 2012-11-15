@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY mozilla.title
 'The Book of Mozilla, 11:9'>
 
@@ -12,3 +16,4 @@ sacred words</a></em>, and <em><a href="http://wiki.mozilla.org/About:mozilla">s
 
 <!ENTITY mozilla.from
 'from <strong>The Book of Mozilla,</strong> 11:9<br/><small>(10th Edition)</small>'>
+

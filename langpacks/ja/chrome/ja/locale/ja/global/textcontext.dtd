@@ -19,5 +19,7 @@
 <!ENTITY spellDictionaries.label	"言語">
 <!ENTITY spellDictionaries.accesskey	"l">
 
+<!ENTITY spellCheckToggle.accesskey "g">
+<!ENTITY spellCheckToggle.label "Check Spelling">
 <!ENTITY spellUndoAddToDictionary.accesskey "n">
 <!ENTITY spellUndoAddToDictionary.label "Undo Add To Dictionary">

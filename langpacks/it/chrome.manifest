@@ -1,4 +1,5 @@
 locale mozapps it chrome/it/locale/it/mozapps/
+locale pdf.js it chrome/it/locale/pdfviewer/
 locale global-region it chrome/it/locale/it/global-region/
 locale pipnss it chrome/it/locale/it/pipnss/
 locale weave it chrome/it/locale/it/
@@ -13,7 +14,6 @@ locale branding it chrome/it/locale/branding/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale places it chrome/it/locale/it/places/
 locale browser it chrome/it/locale/browser/
-locale webapprt it chrome/it/locale/webapprt/
 locale global-platform it chrome/it/locale/it/global-platform/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
 locale necko it chrome/it/locale/it/necko/
@@ -28,4 +28,4 @@ locale domexplorer it sidebars/domexplorer/
 locale scripteditor it sidebars/scripteditor/
 locale stylesheets it sidebars/stylesheets/
 locale tipoftheday it extensions/tipoftheday/
-locale op1 it extensions/op1/
+

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
 
@@ -19,15 +23,14 @@
 <!ENTITY  closeOtherTabs.label               "Pechar as outras lapelas">
 <!ENTITY  closeOtherTabs.accesskey           "o">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
-used as a metaphor for expressing the fact that these tabs are "pinned" to the
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
 can reach it easily. -->
-<!ENTITY  pinAppTab.label                    "Fixar lapela">
-<!ENTITY  pinAppTab.accesskey                "p">
-<!ENTITY  unpinAppTab.label                  "Eliminar lapela fixa">
-<!ENTITY  unpinAppTab.accesskey              "x">
+<!ENTITY  pinTab.label                       "Fixar lapela">
+<!ENTITY  pinTab.accesskey                   "p">
+<!ENTITY  unpinTab.label                     "Eliminar lapela fixa">
+<!ENTITY  unpinTab.accesskey                 "x">
 <!ENTITY  moveToGroup.label                  "Mover ao grupo">
 <!ENTITY  moveToGroup.accesskey              "M">
 <!ENTITY  moveToNewGroup.label               "Novo grupo">
@@ -86,20 +89,23 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY fullScreenCmd.label "Pantalla completa">
 <!ENTITY fullScreenCmd.accesskey "a">
 <!ENTITY fullScreenCmd.macCommandKey "f">
-<!ENTITY showAllTabsCmd.label "Mostrar todas as lapelas">
+<!ENTITY showAllTabsCmd.label "Amosar todas as lapelas">
 <!ENTITY showAllTabsCmd.accesskey "a">
 
 <!ENTITY fullScreenMinimize.tooltip "Minimizar">
 <!ENTITY fullScreenRestore.tooltip "Restaurar">
 <!ENTITY fullScreenClose.tooltip "Pechar">
-<!ENTITY fullScreenAutohide.label "Ocultar barras">
-<!ENTITY fullScreenAutohide.accesskey "O">
+<!ENTITY fullScreenAutohide.label "Agochar barras">
+<!ENTITY fullScreenAutohide.accesskey "o">
 <!ENTITY fullScreenExit.label "Saír do modo Pantalla completa">
 <!ENTITY fullScreenExit.accesskey "c">
 <!ENTITY fullscreenAllowButton.label "Permitir">
 <!ENTITY fullscreenExitButton.label "Denegar">
 <!ENTITY fullscreenApproval.value "Permitir pantalla completa?">
+
 <!ENTITY fullscreenExitHint.value "En calquera momento prema ESC para saír de pantalla completa">
+<!ENTITY leaveDOMFullScreen.label "Saír de pantalla completa">
+<!ENTITY leaveDOMFullScreen.accesskey "a">
 
 <!ENTITY closeWindow.label "Pechar xanela">
 <!ENTITY closeWindow.accesskey "P">
@@ -108,12 +114,13 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarksMenu.accesskey "M">
 <!ENTITY bookmarkThisPageCmd.label "Marcar esta páxina">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "Subscribirse a esta páxina">
 <!ENTITY subscribeToPageMenuitem.label "Subscribirse a esta páxina…">
 <!ENTITY addCurPagesCmd.label "Marcar todas as lapelas…">
-<!ENTITY showAllBookmarks2.label "Mostrar todos os marcadores">
+<!ENTITY showAllBookmarks2.label "Amosar todos os marcadores">
 <!ENTITY unsortedBookmarksCmd.label "Marcadores sen ordenar">
-<!ENTITY bookmarksToolbarChevron.tooltip "Mostrar máis marcadores">
+<!ENTITY bookmarksToolbarChevron.tooltip "Amosar máis marcadores">
 
 <!ENTITY backCmd.label                "Atrás">
 <!ENTITY backCmd.accesskey            "A">
@@ -121,8 +128,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY forwardCmd.label             "Adiante">
 <!ENTITY forwardCmd.accesskey         "d">
 <!ENTITY forwardButton.tooltip        "Avanzar unha páxina">
-<!ENTITY backForwardButtonMenu.tooltip "Prema o botón dereito ou prema o rato mentres se move cara abaixo para mostrar o historial">
-<!ENTITY backForwardButtonMenuMac.tooltip "Prema o rato mentres se move cara abaixo para mostrar o historial">
+<!ENTITY backForwardButtonMenu.tooltip "Prema o botón dereito ou prema o rato mentres se move cara abaixo para amosar o historial">
+<!ENTITY backForwardButtonMenuMac.tooltip "Prema o rato mentres se move cara abaixo para amosar o historial">
 <!ENTITY reloadCmd.label              "Recargar">
 <!ENTITY reloadCmd.accesskey          "R">
 <!ENTITY reloadButton.tooltip         "Recargar a páxina actual">
@@ -152,14 +159,14 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY feedButton.tooltip           "Subscribirse a esta páxina…">
 
 <!ENTITY bookmarksButton.label          "Marcadores">
-<!ENTITY bookmarksButton.tooltip        "Mostrar os marcadores">
+<!ENTITY bookmarksButton.tooltip        "Amosar os marcadores">
 <!ENTITY bookmarksButton.accesskey  "M">
 <!ENTITY bookmarksCmd.commandkey "b">
 
 <!ENTITY bookmarksMenuButton.label          "Marcadores">
-<!ENTITY bookmarksMenuButton.tooltip        "Mostrar os marcadores">
+<!ENTITY bookmarksMenuButton.tooltip        "Amosar os marcadores">
 <!ENTITY bookmarksMenuButton.unsorted.label "Marcadores sen ordenar">
-<!ENTITY viewBookmarksSidebar.label         "Mostrar na barra lateral">
+<!ENTITY viewBookmarksSidebar.label         "Amosar na barra lateral">
 <!ENTITY viewBookmarksToolbar.label         "Ver a barra de marcadores">
 
 <!-- LOCALIZATION NOTE (bookmarksSidebarGtkCmd.commandkey): This command
@@ -169,7 +176,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarksWinCmd.commandkey "i">
 
 <!ENTITY historyButton.label            "Historial">
-<!ENTITY historyButton.tooltip          "Mostrar as páxinas visitadas recentemente">
+<!ENTITY historyButton.tooltip          "Amosar as páxinas visitadas recentemente">
 <!ENTITY historySidebarCmd.accesskey    "s">
 <!ENTITY historySidebarCmd.commandKey   "h">
 
@@ -181,7 +188,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY search.label                 "Buscar na web">
 <!ENTITY search.accesskey             "B">
 <!ENTITY downloads.label              "Descargas">
-<!ENTITY downloads.tooltip            "Mostrar o progreso das descargas activas">
+<!ENTITY downloads.tooltip            "Amosar o progreso das descargas activas">
 <!ENTITY downloads.accesskey          "D">
 <!ENTITY downloads.commandkey         "j">
 <!ENTITY downloadsUnix.commandkey     "y">
@@ -199,13 +206,18 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY webConsoleCmd.label          "Consola web">
 <!ENTITY webConsoleCmd.accesskey      "w">
 <!ENTITY webConsoleCmd.commandkey     "k">
+<!ENTITY remoteWebConsoleCmd.label    "Consola web remota">
 
 <!ENTITY inspectMenu.label            "Inspeccionar">
 <!ENTITY inspectMenu.accesskey        "I">
 <!ENTITY inspectMenu.commandkey       "I">
 
 <!ENTITY inspectContextMenu.label     "Inspeccionar elemento">
-<!ENTITY inspectContextMenu.accesskey "Q">
+<!ENTITY inspectContextMenu.accesskey "I">
+
+<!ENTITY responsiveDesignTool.label   "Modo Responsive Design">
+<!ENTITY responsiveDesignTool.accesskey "r">
+<!ENTITY responsiveDesignTool.commandkey "M">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -223,15 +235,14 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY scratchpad.keytext           "F4">
 
 <!ENTITY inspectCloseButton.tooltiptext "Pechar o inspector">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Pechar a barra lateral">
 
 <!ENTITY devToolbarCloseButton.tooltiptext "Pechar a barra de desenvolvemento">
-<!ENTITY devToolbarMenu.label "Barra de desenvolvemento">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbar.commandkey "v">
-
-<!ENTITY webConsoleButton.label "Consola web">
-<!ENTITY inspectorButton.label "Inspector">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY devToolbarMenu.label              "Barra de desenvolvemento">
+<!ENTITY devToolbarMenu.accesskey          "v">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "Máis ferramentas">
 
 <!ENTITY inspectorHTMLCopyInner.label       "Copiar HTML interno">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "i">
@@ -242,21 +253,11 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY inspectorHTMLDelete.label          "Eliminar nodo">
 <!ENTITY inspectorHTMLDelete.accesskey      "d">
 
-<!-- LOCALIZATION NOTE (inspectOptionButton.*): The menu in the Inspector
-  -  toolbar.  -->
-<!ENTITY inspectOptionButton.tooltiptext    "Opcións do Inspector">
-
-<!-- LOCALIZATION NOTE: These are for the menu in the Inspector Toolbar -->
-<!ENTITY inspectorToggleVeil.label          "Reducir intensidade da páxina">
-<!ENTITY inspectorToggleVeil.accesskey      "d">
-<!ENTITY inspectorToggleInfobar.label       "Mostrar información do nodo">
-<!ENTITY inspectorToggleInfobar.accesskey   "s">
-
 <!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
   -  alternate view for the Inspector, creating a 3D visualization of the
   -  webpage. -->
 <!ENTITY inspect3DViewButton.label     "Vista 3D">
-<!ENTITY inspect3DViewButton.accesskey "W">
+<!ENTITY inspect3DViewButton.accesskey "3">
 
 <!ENTITY inspectStyleButton.label     "Estilo">
 <!ENTITY inspectStyleButton.accesskey "s">
@@ -276,6 +277,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY newNavigatorCmd.label        "Nova xanela">
 <!ENTITY newNavigatorCmd.key        "N">
 <!ENTITY newNavigatorCmd.accesskey      "N">
+<!ENTITY newPrivateWindow.label     "Nova xanela privada">
+<!ENTITY newPrivateWindow.accesskey "v">
 
 <!ENTITY editMenu.label         "Editar"> 
 <!ENTITY editMenu.accesskey       "E"> 
@@ -336,7 +339,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY historyRestoreLastSession.label "Restaurar a sesión anterior">
 
 <!ENTITY historyHomeCmd.label "Inicio">
-<!ENTITY showAllHistoryCmd2.label "Mostrar todo o historial">
+<!ENTITY showAllHistoryCmd2.label "Amosar todo o historial">
 <!ENTITY showAllHistoryCmd.commandkey "H">
 
 <!ENTITY appMenuEdit.label "Editar">
@@ -391,7 +394,7 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY openFrameCmdInTab.accesskey  "h">
 <!ENTITY openFrameCmd.label           "Abrir o marco nunha nova xanela">
 <!ENTITY openFrameCmd.accesskey       "x">
-<!ENTITY showOnlyThisFrameCmd.label     "Mostrar só este marco">
+<!ENTITY showOnlyThisFrameCmd.label     "Amosar só este marco">
 <!ENTITY showOnlyThisFrameCmd.accesskey "M">
 <!ENTITY reloadCmd.commandkey         "r">
 <!ENTITY reloadFrameCmd.label         "Recargar o marco">
@@ -427,8 +430,8 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY bookmarkThisLinkCmd.accesskey  "l">
 <!ENTITY bookmarkThisFrameCmd.label      "Marcar este marco">
 <!ENTITY bookmarkThisFrameCmd.accesskey  "m">
-<!ENTITY sendPageCmd.label            "Enviar ligazón…">
-<!ENTITY sendPageCmd.accesskey        "E">
+<!ENTITY emailPageCmd.label           "Enviar a ligazón por correo…">
+<!ENTITY emailPageCmd.accesskey       "E">
 <!ENTITY savePageCmd.label            "Gardar páxina como…">
 <!ENTITY savePageCmd.accesskey        "G">
 <!-- alternate for content area context menu -->
@@ -440,20 +443,18 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY printFrameCmd.accesskey      "I">
 <!ENTITY saveLinkCmd.label            "Gardar ligazón como…">
 <!ENTITY saveLinkCmd.accesskey        "l">
-<!ENTITY sendLinkCmd.label            "Enviar ligazón…"> 
-<!ENTITY sendLinkCmd.accesskey        "l">
 <!ENTITY saveImageCmd.label           "Gardar imaxe como…">
 <!ENTITY saveImageCmd.accesskey       "G">
 <!ENTITY saveVideoCmd.label           "Gardar vídeo como…">
 <!ENTITY saveVideoCmd.accesskey       "v">
-<!ENTITY saveAudioCmd.label           "Gardar audio como…">
+<!ENTITY saveAudioCmd.label           "Gardar son como…">
 <!ENTITY saveAudioCmd.accesskey       "a">
-<!ENTITY sendImageCmd.label           "Enviar imaxe…">
-<!ENTITY sendImageCmd.accesskey       "n">
-<!ENTITY sendVideoCmd.label           "Enviar vídeo…">
-<!ENTITY sendVideoCmd.accesskey       "d">
-<!ENTITY sendAudioCmd.label           "Enviar audio…">
-<!ENTITY sendAudioCmd.accesskey       "u">
+<!ENTITY emailImageCmd.label          "Enviar a imaxe por correo…">
+<!ENTITY emailImageCmd.accesskey      "a">
+<!ENTITY emailVideoCmd.label          "Enviar o vídeo por correo…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "Enviar o ficheiro de son por correo…">
+<!ENTITY emailAudioCmd.accesskey      "a">
 <!ENTITY copyLinkCmd.label            "Copiar a localización da ligazón">
 <!ENTITY copyLinkCmd.accesskey        "l">
 <!ENTITY copyImageCmd.label           "Copiar a localización da imaxe">
@@ -478,17 +479,17 @@ These should match what Safari and other Apple applications use on OS X Lion. --
 <!ENTITY mediaMute.accesskey         "m">
 <!ENTITY mediaUnmute.label           "Desenmudecer">
 <!ENTITY mediaUnmute.accesskey       "m">
-<!ENTITY mediaShowControls.label     "Mostrar controis">
+<!ENTITY mediaShowControls.label     "Amosar controis">
 <!ENTITY mediaShowControls.accesskey "M">
-<!ENTITY mediaHideControls.label     "Ocultar controis">
-<!ENTITY mediaHideControls.accesskey "O">
+<!ENTITY mediaHideControls.label     "Agochar controis">
+<!ENTITY mediaHideControls.accesskey "o">
 <!ENTITY videoFullScreen.label       "Pantalla completa">
 <!ENTITY videoFullScreen.accesskey   "P">
 <!ENTITY videoSaveImage.label        "Gardar a captura como…">
 <!ENTITY videoSaveImage.accesskey    "G">
-<!ENTITY videoShowStats.label        "Mostrar as estatísticas">
+<!ENTITY videoShowStats.label        "Amosar as estatísticas">
 <!ENTITY videoShowStats.accesskey    "t">
-<!ENTITY videoHideStats.label        "Ocultar as estatísticas">
+<!ENTITY videoHideStats.label        "Agochar as estatísticas">
 <!ENTITY videoHideStats.accesskey    "t">
 
 <!-- LOCALIZATION NOTE :
@@ -526,7 +527,7 @@ you can use these alternative items. Otherwise, their values should be empty.  -
 <!ENTITY copyButton.tooltip             "Copiar">
 <!ENTITY pasteButton.tooltip            "Pegar">
 
-<!ENTITY fullScreenButton.tooltip       "Mostrar a xanela en pantalla completa">
+<!ENTITY fullScreenButton.tooltip       "Amosar a xanela en pantalla completa">
 
 <!ENTITY zoomOutButton.tooltip          "Reducir">
 <!ENTITY zoomInButton.tooltip           "Ampliar">
@@ -608,8 +609,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Lapelas do navegador">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu.label     "As lapelas doutros equipos">
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "As lapelas doutros dispositivos">
 
 <!ENTITY syncBrand.shortName.label    "Sync">
 
@@ -630,3 +631,20 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
 <!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
 toolbar button -->
 <!ENTITY markupButton.accesskey          "M">
+
+<!ENTITY socialToolbar.title        "Botón da barra social">
+<!ENTITY social.notLoggedIn.label   "Non está identificado">
+
+<!ENTITY social.ok.label       "Aceptar">
+<!ENTITY social.ok.accesskey   "A">
+
+<!ENTITY social.toggleSidebar.label "Amosar barra lateral">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleNotifications.label "Amosar notificacións de escritorio">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.activated.undobutton.label "Desfacer">
+<!ENTITY social.activated.undobutton.accesskey "D">
+
+<!ENTITY social.chatBar.commandkey "c">

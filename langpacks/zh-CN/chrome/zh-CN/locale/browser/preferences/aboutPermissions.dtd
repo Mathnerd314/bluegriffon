@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY permissionsManager.title        "权限管理器">
 
 <!ENTITY sites.search                    "搜索站点">
@@ -16,6 +20,7 @@
 <!ENTITY permission.alwaysAsk            "总是询问">
 <!ENTITY permission.allow                "允许">
 <!ENTITY permission.allowForSession      "在当前会话中允许">
+<!ENTITY permission.allowFirstPartyOnly  "仅允许第一方">
 <!ENTITY permission.block                "阻止">
 
 <!ENTITY password.label                  "存储密码">
@@ -28,11 +33,12 @@
 
 <!ENTITY geo.label                       "共享位置信息">
 
+<!ENTITY plugins.label                   "插件">
+
 <!-- LOCALIZATION NOTE (indexedDB.label): This is describing indexedDB storage
      using the same language used for the permIndexedDB string in browser/pageInfo.dtd -->
 <!ENTITY indexedDB.label                 "维护离线存储">
 
 <!ENTITY popup.label                     "打开弹出窗口">
 
-
-<!ENTITY plugins.label                   "Plugins">
+<!ENTITY fullscreen.label                "全屏">

@@ -28,11 +28,14 @@
 
 <!ENTITY geo.label                       "Standort weitergeben">
 
+<!ENTITY plugins.label                   "Plugins">
+
 <!-- LOCALIZATION NOTE (indexedDB.label): This is describing indexedDB storage
      using the same language used for the permIndexedDB string in browser/pageInfo.dtd -->
 <!ENTITY indexedDB.label                 "Offline-Speicher verwalten">
 
 <!ENTITY popup.label                     "Pop-up-Fenster öffnen">
 
+<!ENTITY fullscreen.label                "Zu Vollbild wechseln">
 
-<!ENTITY plugins.label                   "Plugins">
+<!ENTITY permission.allowFirstPartyOnly  "Allow First Party Only">

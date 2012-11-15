@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 
 <!ENTITY migrationWizard.title          "Importeerassistent">
 
@@ -13,8 +17,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
-<!ENTITY importFromBlueGriffon.accesskey    "x">
+<!ENTITY importFromFirefox.label        "Firefox">
+<!ENTITY importFromFirefox.accesskey    "x">
 
 <!ENTITY noMigrationSources.label       "Er zijn geen programma’s gevonden die bladwijzers, geschiedenis of wachtwoorden bevatten.">
 

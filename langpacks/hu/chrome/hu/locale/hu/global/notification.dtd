@@ -1,3 +1,6 @@
 <!ENTITY closeNotification.tooltip "Üzenet bezárása">
 
 <!ENTITY closeNotificationItem.label "Most nem">
+
+
+<!ENTITY checkForUpdates "Check for updates…">

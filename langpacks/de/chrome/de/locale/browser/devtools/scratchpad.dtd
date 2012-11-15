@@ -10,7 +10,7 @@
   -  "Scratchpad" in your locale. You should feel free to find a close
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
-<!ENTITY window.title                 "Notizblock">
+<!ENTITY window.title                 "JavaScript-Umgebung">
 
 <!ENTITY fileMenu.label               "Datei">
 <!ENTITY fileMenu.accesskey           "D">
@@ -22,6 +22,9 @@
 <!ENTITY openFileCmd.label            "Datei öffnen…">
 <!ENTITY openFileCmd.accesskey        "a">
 <!ENTITY openFileCmd.commandkey       "o">
+
+<!ENTITY openRecentMenu.label         "Kürzlich verwendete Datei öffnen">
+<!ENTITY openRecentMenu.accesskey     "K">
 
 <!ENTITY saveFileCmd.label            "Speichern">
 <!ENTITY saveFileCmd.accesskey        "S">
@@ -79,7 +82,7 @@
 <!ENTITY helpMenuWin.label            "Hilfe">
 <!ENTITY helpMenuWin.accesskey        "H">
 
-<!ENTITY documentationLink.label      "Hilfe zum Notizblock auf MDN (englisch)">
+<!ENTITY documentationLink.label      "Hilfe zur JavaScript-Umgebung auf MDN (englisch)">
 <!ENTITY documentationLink.accesskey  "M">
 
 
@@ -90,7 +93,7 @@
 <!ENTITY resetContext2.accesskey       "Z">
 
 <!ENTITY executeMenu.label            "Ausführen">
-<!ENTITY executeMenu.accesskey        "X">
+<!ENTITY executeMenu.accesskey        "f">
 
 <!-- LOCALIZATION NOTE (errorConsoleCmd.commandkey): This command key launches
   -  the browser Error Console, the key should be identical to the property of
@@ -103,3 +106,11 @@
   -  the same name in browser.dtd.
   -->
 <!ENTITY webConsoleCmd.commandkey     "k">
+
+<!ENTITY reloadAndRun.accesskey       "E">
+<!ENTITY reloadAndRun.key             "r">
+
+<!ENTITY reloadAndRun.label           "Reload And Run">
+<!ENTITY revertCmd.accesskey          "t">
+
+<!ENTITY revertCmd.label              "Revert…">

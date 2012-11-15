@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "Informationen zur Fehlerbehebung">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -47,9 +51,19 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "Inkrementelle GC">
 
+<!ENTITY aboutSupport.a11yTitle "Barrierefreiheit">
+<!ENTITY aboutSupport.a11yActivated "Aktiviert">
+<!ENTITY aboutSupport.a11yForceDisabled "Barrierefreiheit verhindern">
+
 <!ENTITY aboutSupport.libraryVersionsTitle "Bibliotheken-Versionen">
 
 <!ENTITY aboutSupport.installationHistoryTitle "Installations-Chronik">
 <!ENTITY aboutSupport.updateHistoryTitle "Update-Chronik">
 
-<!ENTITY aboutSupport.copyToClipboard.label "Alles in die Zwischenablage kopieren">
+<!ENTITY aboutSupport.copyTextToClipboard.label "Text in die Zwischenablage kopieren">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "Rohdaten in die Zwischenablage kopieren">
+
+<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
+
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js Preferences">

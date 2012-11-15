@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY setupButton.label "Configurazione di &syncBrand.fullName.label;">
 <!ENTITY setupButton.accesskey "C">
 <!ENTITY weaveDesc.label "&syncBrand.fullName.label; consente l'accesso alla cronologia, ai segnalibri, alle password e alle schede aperte da tutti i propri dispositivi.">
@@ -23,8 +27,8 @@
 <!ENTITY engine.prefs.accesskey "z">
 <!ENTITY engine.addons.label "Componenti aggiuntivi">
 <!ENTITY engine.addons.accesskey "o">
-<!ENTITY syncComputerName.label "Nome del computer:">
-<!ENTITY syncComputerName.accesskey "u">
+<!ENTITY syncDeviceName.label "Nome dispositivo:">
+<!ENTITY syncDeviceName.accesskey "m">
 <!ENTITY unlinkDevice.label "Scollega questo dispositivo">
 <!ENTITY prefs.tosLink.label "Condizioni di utilizzo del servizio">
 <!ENTITY prefs.ppLink.label "Informativa sulla privacy">

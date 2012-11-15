@@ -1,12 +1,12 @@
+locale pdf.js pl chrome/pl/locale/pdfviewer/
 locale pipnss pl chrome/pl/locale/pl/pipnss/
 locale necko pl chrome/pl/locale/pl/necko/
 locale places pl chrome/pl/locale/pl/places/
-locale cookie pl chrome/pl/locale/pl/cookie/
+locale pippki pl chrome/pl/locale/pl/pippki/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
 locale branding pl chrome/pl/locale/branding/
 locale global-platform pl chrome/pl/locale/pl/global-platform/
-locale pippki pl chrome/pl/locale/pl/pippki/
-locale webapprt pl chrome/pl/locale/webapprt/
+locale cookie pl chrome/pl/locale/pl/cookie/
 locale mozapps pl chrome/pl/locale/pl/mozapps/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale alerts pl chrome/pl/locale/pl/alerts/
@@ -28,4 +28,4 @@ locale domexplorer pl sidebars/domexplorer/
 locale scripteditor pl sidebars/scripteditor/
 locale stylesheets pl sidebars/stylesheets/
 locale tipoftheday pl extensions/tipoftheday/
-locale op1 pl extensions/op1/
+

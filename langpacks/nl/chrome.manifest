@@ -2,7 +2,6 @@ locale necko nl chrome/nl/locale/nl/necko/
 locale global-platform nl chrome/nl/locale/nl/global-platform/
 locale browser-region nl chrome/nl/locale/browser-region/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-locale webapprt nl chrome/nl/locale/webapprt/
 locale alerts nl chrome/nl/locale/nl/alerts/
 locale browser nl chrome/nl/locale/browser/
 locale global-region nl chrome/nl/locale/nl/global-region/
@@ -17,6 +16,7 @@ locale pippki nl chrome/nl/locale/nl/pippki/
 locale cookie nl chrome/nl/locale/nl/cookie/
 locale autoconfig nl chrome/nl/locale/nl/autoconfig/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+locale pdf.js nl chrome/nl/locale/pdfviewer/
 locale places nl chrome/nl/locale/nl/places/
 locale testpilot nl chrome/nl/locale/feedback/
 locale bluegriffon nl base/locale/bluegriffon/
@@ -28,4 +28,4 @@ locale domexplorer nl sidebars/domexplorer/
 locale scripteditor nl sidebars/scripteditor/
 locale stylesheets nl sidebars/stylesheets/
 locale tipoftheday nl extensions/tipoftheday/
-locale op1 nl extensions/op1/
+

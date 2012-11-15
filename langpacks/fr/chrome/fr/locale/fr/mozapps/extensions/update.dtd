@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY  updateWizard.title              "Mise à jour de &brandShortName;">
 
 <!ENTITY  offline.title                   "&brandShortName; est en mode déconnecté">
@@ -16,7 +20,7 @@
 <!ENTITY  found.wizard.title              "Modules compatibles trouvés">
 <!ENTITY  found.top.label                 "Sélectionnez les modules que vous désirez installer :">
 <!ENTITY  found.disabledXPinstall.label   "Ces mises à jour ne peuvent pas être installées car l'installation de logiciels est actuellement désactivée. Vous pouvez changer ce paramètre ci-dessous.">
-<!ENTITY  found.enableXPInstall.label     "Autoriser les sites Web à installer des logiciels">
+<!ENTITY  found.enableXPInstall.label     "Autoriser les sites web à installer des logiciels">
 <!ENTITY  found.enableXPInstall.accesskey "A">
 
 <!ENTITY  installing.wizard.title         "Installation des modules compatibles">

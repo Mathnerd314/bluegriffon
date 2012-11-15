@@ -13,11 +13,11 @@ locale global-platform cs chrome/cs/locale/cs/global-platform/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale alerts cs chrome/cs/locale/cs/alerts/
 locale mozapps cs chrome/cs/locale/cs/mozapps/
+locale pdf.js cs chrome/cs/locale/pdfviewer/
 locale global cs chrome/cs/locale/cs/global/
 locale browser cs chrome/cs/locale/browser/
 locale pipnss cs chrome/cs/locale/cs/pipnss/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
-locale webapprt cs chrome/cs/locale/webapprt/
 locale testpilot cs chrome/cs/locale/feedback/
 locale bluegriffon cs base/locale/bluegriffon/
 locale branding cs base/locale/branding/
@@ -28,4 +28,4 @@ locale domexplorer cs sidebars/domexplorer/
 locale scripteditor cs sidebars/scripteditor/
 locale stylesheets cs sidebars/stylesheets/
 locale tipoftheday cs extensions/tipoftheday/
-locale op1 cs extensions/op1/
+

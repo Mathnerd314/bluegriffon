@@ -8,8 +8,8 @@ locale necko ko chrome/ko/locale/ko/necko/
 locale pippki ko chrome/ko/locale/ko/pippki/
 locale global-region ko chrome/ko/locale/ko/global-region/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
-locale webapprt ko chrome/ko/locale/webapprt/
 locale alerts ko chrome/ko/locale/ko/alerts/
+locale pdf.js ko chrome/ko/locale/pdfviewer/
 locale browser-region ko chrome/ko/locale/browser-region/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
 locale autoconfig ko chrome/ko/locale/ko/autoconfig/
@@ -28,4 +28,4 @@ locale domexplorer ko sidebars/domexplorer/
 locale scripteditor ko sidebars/scripteditor/
 locale stylesheets ko sidebars/stylesheets/
 locale tipoftheday ko extensions/tipoftheday/
-locale op1 ko extensions/op1/
+

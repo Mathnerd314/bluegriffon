@@ -4,7 +4,8 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>eyedropper@bluegriffon.com</em:id>
-    <em:version>0.1.5.2.99.20120524</em:version>
+    <em:version>0.1.5.99</em:version>
+    <em:type>2</em:type>
   
     <em:targetApplication>
       <!-- BlueGriffon -->
@@ -21,13 +22,6 @@
     <em:creator>Disruptive Innovations SARL</em:creator>
     <em:homepageURL>http://www.disruptive-innovations.com/</em:homepageURL>
     <em:iconURL>chrome://eyedropper/skin/eyedropper-icon.png</em:iconURL>
-
-    <em:file>
-      <Description about="eyedropper.jar">
-        <em:package>content/</em:package>
-        <em:locale>locale/en-US/</em:locale>
-      </Description>
-    </em:file>
 
   </Description>
 </RDF>

@@ -2,8 +2,8 @@
 
 <!-- LOCALIZATION NOTE (warningDesc.version): This is a warning about the experimental nature of Nightly and Aurora builds. It is only shown in those versions. -->
 <!ENTITY warningDesc.version        "&brandShortName; ist experimentell und könnte instabil sein.">
-<!-- LOCALIZATION NOTE (warningDesc.telemetry): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
-<!ENTITY warningDesc.telemetry      "Um &brandShortName; verbessern zu können, werden automatisch Informationen zu Testzwecken an &vendorShortName; gesendet.">
+<!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
+<!ENTITY warningDesc.telemetryDesc  "Um &brandShortName; verbessern zu können, werden automatisch Daten zu Performanz, Hardware-Eigenschaften, Feature-Nutzung und Browser-Anpassungen an &vendorShortName; gesendet.">
 
 <!-- LOCALIZATION NOTE (community.exp.*) This paragraph is shown in "experimental" builds, i.e. Nightly and Aurora builds, instead of the other "community.*" strings below. -->
 <!ENTITY community.exp.start        "">
@@ -49,7 +49,7 @@
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
      one line with linkText being wrapped in an anchor that links to a site to download
-     the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in
+     the latest version of Firefox (e.g. http://www.firefox.com). As this is all in
      one line, try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.failed.start        "Update fehlgeschlagen. ">
 <!ENTITY update.failed.linkText     "Laden Sie die neueste Version herunter">
@@ -57,7 +57,7 @@
 
 <!-- LOCALIZATION NOTE (update.manual.start,update.manual.end): update.manual.start and update.manual.end
      all go into one line and have an anchor in between with text that is the same as the link to a site
-     to download the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in one line,
+     to download the latest version of Firefox (e.g. http://www.firefox.com). As this is all in one line,
      try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.manual.start        "Updates verfügbar unter ">
 <!ENTITY update.manual.end          "">
@@ -70,11 +70,10 @@
 <!ENTITY update.downloading.start   "Update  wird heruntergeladen — ">
 <!ENTITY update.downloading.end     "">
 
+<!ENTITY update.applying            "Update wird entpackt…">
+
 <!-- LOCALIZATION NOTE (channel.description.start,channel.description.end): channel.description.start and
      channel.description.end create one sentence, with the current channel label inserted in between.
      example: You are currently on the _Stable_ update channel. -->
 <!ENTITY channel.description.start  "Sie sind derzeit auf dem Update-Kanal ">
 <!ENTITY channel.description.end    ". ">
-
-<!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
-<!ENTITY warningDesc.telemetryDesc  "It automatically sends information about performance, hardware, usage and customizations back to &vendorShortName; to help make &brandShortName; better.">

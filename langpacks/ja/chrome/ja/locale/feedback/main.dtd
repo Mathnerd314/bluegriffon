@@ -25,10 +25,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "閉じる">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "ユーザ調査に参加する">
 <!ENTITY testpilot.feedbackbutton.label                "フィードバック">
-<!ENTITY testpilot.happy.label        "BlueGriffon の良いところを伝える...">
-<!ENTITY testpilot.sad.label          "BlueGriffon の悪いところを伝える...">
+<!ENTITY testpilot.happy.label        "Firefox の良いところを伝える...">
+<!ENTITY testpilot.sad.label          "Firefox の悪いところを伝える...">
 <!ENTITY testpilot.broken.label       "このサイトを不具合のあるサイトとして報告...">
-<!ENTITY testpilot.idea.label         "BlueGriffon について提案...">
+<!ENTITY testpilot.idea.label         "Firefox について提案...">

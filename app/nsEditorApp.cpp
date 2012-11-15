@@ -112,7 +112,7 @@ int main(int argc, char* argv[])
 {
   ScopedLogging log;
 
-  nsCOMPtr<nsILocalFile> appini;
+  nsCOMPtr<nsIFile> appini;
   nsresult rv = XRE_GetBinaryPath(argv[0], getter_AddRefs(appini));
   if (NS_FAILED(rv)) {
     Output("Couldn't calculate the application directory.");
@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 
   // Allow firefox.exe to launch XULRunner apps via -app <application.ini>
   // Note that -app must be the *first* argument.
-  char *appEnv = nsnull;
+  char *appEnv = nullptr;
   const char *appDataFile = PR_GetEnv("XUL_APP_FILE");
   if (appDataFile && *appDataFile) {
     rv = XRE_GetFileFromPath(appDataFile, getter_AddRefs(appini));
@@ -157,7 +157,7 @@ int main(int argc, char* argv[])
     return 255;
   }
 
-  int result = XRE_main(argc, argv, appData);
+  int result = XRE_main(argc, argv, appData, 0);
   XRE_FreeAppData(appData);
   if (appEnv)
     PR_smprintf_free(appEnv);

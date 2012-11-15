@@ -1,4 +1,7 @@
 <!--
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 
 <!ENTITY  pageInfoWindow.width  "600" >
@@ -61,8 +64,9 @@
 <!ENTITY  permPopup             "Otwieranie wyskakujących okien">
 <!ENTITY  permCookie            "Zapisywanie ciasteczek">
 <!ENTITY  permInstall           "Instalacja rozszerzeń i motywów">
-<!ENTITY  permGeo               "Udostępnij położenie">
-<!ENTITY  permPlugins           "Aktywuj wtyczki">
+<!ENTITY  permGeo               "Udostępnianie położenia">
+<!ENTITY  permPlugins           "Aktywacja wtyczki">
+<!ENTITY  permFullscreen        "Przejście do trybu pełnoekranowego">
 
 <!ENTITY  permIndexedDB              "Zarządzanie danymi offline">
 <!ENTITY  permClearStorage           "Wyczyść dane offline">

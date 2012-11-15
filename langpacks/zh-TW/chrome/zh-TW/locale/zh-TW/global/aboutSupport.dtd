@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "疑難排解資訊">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -36,7 +40,7 @@ variant of aboutSupport.showDir.label.  This allows us to use the preferred
 variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.showWin.label "開啟資料夾">
 
-<!ENTITY aboutSupport.modifiedKeyPrefsTitle "匯入已修改的偏好設定">
+<!ENTITY aboutSupport.modifiedKeyPrefsTitle "已修改的重要偏好設定">
 <!ENTITY aboutSupport.modifiedPrefsName "名稱">
 <!ENTITY aboutSupport.modifiedPrefsValue "值">
 
@@ -45,9 +49,20 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
 
+<!ENTITY aboutSupport.a11yTitle "輔助功能">
+<!ENTITY aboutSupport.a11yActivated "已啟用">
+<!ENTITY aboutSupport.a11yForceDisabled "已強迫停用輔助功能">
+
 <!ENTITY aboutSupport.libraryVersionsTitle "程式庫版本">
 
 <!ENTITY aboutSupport.installationHistoryTitle "安裝紀錄">
 <!ENTITY aboutSupport.updateHistoryTitle "更新記錄">
 
-<!ENTITY aboutSupport.copyToClipboard.label "全部複製到剪貼簿">
+<!ENTITY aboutSupport.copyTextToClipboard.label "將文字複製到剪貼簿">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "將原始資料複製到剪貼簿">
+
+
+<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
+
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js Preferences">

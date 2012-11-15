@@ -523,6 +523,7 @@
             var _self = this;
             gDialog.sourceModeButton.setAttribute("busy", "true");
             iframe.addEventListener("load", function() {_self._installBespin(iframe);}, true);
+            iframe.setAttribute("type", "chrome");
             iframe.setAttribute("src", "resource://app/res/cm2.html");
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);

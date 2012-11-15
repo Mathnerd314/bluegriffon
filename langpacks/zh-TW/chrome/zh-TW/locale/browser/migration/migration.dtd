@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 
 <!ENTITY migrationWizard.title          "匯入精靈">
 
@@ -13,10 +17,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
-<!ENTITY importFromBlueGriffon.accesskey    "x">
-<!ENTITY importFromHTMLFile.label       "HTML 檔案">
-<!ENTITY importFromHTMLFile.accesskey   "F">
+<!ENTITY importFromFirefox.label        "Firefox">
+<!ENTITY importFromFirefox.accesskey    "x">
 
 <!ENTITY noMigrationSources.label       "找不到包含書籤、瀏覽記錄或密碼等個人資訊的瀏覽程式。">
 
@@ -32,4 +34,5 @@
 
 <!ENTITY done.title                     "匯入完成">
 <!ENTITY done.label                     "下列項目已成功匯入:">
+
 

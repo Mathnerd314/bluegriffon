@@ -17,3 +17,6 @@
 <!ENTITY restorepage.listHeader     "Прозоре и језичке">
 <!-- LOCALIZATION NOTE: &#37;S will be replaced with a number. -->
 <!ENTITY restorepage.windowLabel    "Прозор &#37;S">
+
+<!ENTITY restorepage.close.access   "C">
+<!ENTITY restorepage.closeButton    "Close">

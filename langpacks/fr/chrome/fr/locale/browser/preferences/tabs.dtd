@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY newWindowsAsTabs.label       "Ouvrir un nouvel onglet au lieu d'une nouvelle fenêtre">
 <!ENTITY newWindowsAsTabs.accesskey   "O">
 
@@ -9,6 +13,9 @@
 
 <!ENTITY showTabBar.label             "Toujours afficher la barre des onglets">
 <!ENTITY showTabBar.accesskey         "T">
+
+<!ENTITY restoreTabsOnDemand.label        "Ne pas charger les onglets tant qu'ils ne sont pas sélectionnés">
+<!ENTITY restoreTabsOnDemand.accesskey    "N">
 
 <!ENTITY switchToNewTabs.label        "Lors de l'ouverture d'un lien dans un nouvel onglet, basculer vers celui-ci immédiatement">
 <!ENTITY switchToNewTabs.accesskey    "L">

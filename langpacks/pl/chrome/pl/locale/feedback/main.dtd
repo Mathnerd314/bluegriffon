@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY testpilot.brand.label                      "Pilot testowy">
 <!-- browser window: menu and status bar -->
 <!ENTITY testpilot.settings.label                   "Ustawienia">
@@ -25,10 +29,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Zamknij">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Włącz badania użytkownika">
 <!ENTITY testpilot.feedbackbutton.label                "Informacje zwrotne">
-<!ENTITY testpilot.happy.label        "BlueGriffon spodobał mi się, ponieważ…">
-<!ENTITY testpilot.sad.label          "BlueGriffon rozczarował mnie, ponieważ…">
+<!ENTITY testpilot.happy.label        "Firefox spodobał mi się, ponieważ…">
+<!ENTITY testpilot.sad.label          "Firefox rozczarował mnie, ponieważ…">
 <!ENTITY testpilot.broken.label      "Zgłoś tę witrynę jako uszkodzoną…">
 <!ENTITY testpilot.idea.label        "Przekaż nam sugestię…">

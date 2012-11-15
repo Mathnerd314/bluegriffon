@@ -135,6 +135,28 @@
     html_tags = aTagsArray;
     editorUtils = aEditorUtils;
   }
+
+  function markSelection()
+  {
+    const kBGBGBG = "--BG--";
+  
+    gEditor.setSelection( { line: 0, ch: 0 }, { line: 0, ch: 0 } );
+  
+    var searchCursor = gEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+    searchCursor.findNext();
+    var startRow    = searchCursor.from().line;
+    var startColumn = searchCursor.from().ch;
+    searchCursor.replace("");
+  
+    searchCursor = gEditor.getSearchCursor(kBGBGBG, { line: 0, ch: 0 }, true);
+    searchCursor.findNext();
+    var endRow      = searchCursor.from().line;
+    var endColumn   = searchCursor.from().ch;
+    searchCursor.replace("");
+  
+    gEditor.clearHistory();
+    gEditor.setSelection( { line: startRow, ch: startColumn }, { line: endRow, ch: endColumn } );
+  }
 </script>
 </body>
 </html>

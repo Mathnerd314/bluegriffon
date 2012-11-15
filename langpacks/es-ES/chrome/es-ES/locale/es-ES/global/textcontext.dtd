@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY cutCmd.label "Cortar">
 <!ENTITY cutCmd.accesskey "t">
 <!ENTITY copyCmd.label "Copiar">
@@ -14,8 +18,8 @@
 <!ENTITY spellAddToDictionary.accesskey "o">
 <!ENTITY spellUndoAddToDictionary.label "Deshacer Añadir al diccionario">
 <!ENTITY spellUndoAddToDictionary.accesskey "h">
-<!ENTITY spellCheckEnable.label "Revisar ortografía">
-<!ENTITY spellCheckEnable.accesskey "S">
+<!ENTITY spellCheckToggle.label "Comprobar ortografía">
+<!ENTITY spellCheckToggle.accesskey "b">
 <!ENTITY spellNoSuggestions.label "(No hay sugerencias de ortografía)">
 <!ENTITY spellDictionaries.label "Idiomas">
 <!ENTITY spellDictionaries.accesskey "I">

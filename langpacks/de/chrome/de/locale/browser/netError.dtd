@@ -44,8 +44,8 @@
 <ul>
   <li>Web-Adressen sehen für gewöhnlich folgendermaßen aus:
     <strong>http://www.example.com/</strong></li>
-  <li>Bitte stellen Sie sicher, dass Sie nicht den umgekehrten, s
-	ondern den einfachen Schrägstrich verwenden (<strong>/</strong>).</li>
+  <li>Bitte stellen Sie sicher, dass Sie nicht den umgekehrten,
+    sondern den einfachen Schrägstrich verwenden (<strong>/</strong>).</li>
 </ul>
 ">
 
@@ -179,7 +179,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Sie sollten keine Ausnahme hinzufügen, wenn Sie nicht absolutes Vertrauen in die Sicherheit Ihrer aktuellen Verbindung haben oder wenn Sie bisher keine Warnung für diesen Server erhalten haben.</p>

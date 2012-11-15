@@ -66,3 +66,6 @@
 <!ENTITY closeCmd.commandkey "с">  
 <!ENTITY focus1.commandkey   "l">  
 <!ENTITY focus2.commandkey   "в">  
+
+<!ENTITY filter.accesskey   "F">
+<!ENTITY filter.label       "Filter">

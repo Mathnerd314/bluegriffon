@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY upgrade.style               "width: 100ch; height: 448px;">
 
 <!ENTITY checking.heading            "正在檢查您的附加元件">
@@ -43,3 +47,4 @@
 <!ENTITY back.label                  "上一頁">
 <!ENTITY next.label                  "下一頁">
 <!ENTITY done.label                  "完成">
+

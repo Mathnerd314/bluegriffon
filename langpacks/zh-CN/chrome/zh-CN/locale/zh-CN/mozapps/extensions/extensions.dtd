@@ -1,3 +1,6 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!ENTITY addons.windowTitle                   "附加组件管理器">
 
 <!ENTITY search.placeholder                   "搜索所有附加组件">
@@ -118,7 +121,7 @@
 <!ENTITY detail.homepage.label                "主页">
 <!ENTITY detail.numberOfDownloads.label       "下载">
 
-<!ENTITY detail.contributions.description     "此附加组件的开发者希望您能捐助，以支持其继续发展。">
+<!ENTITY detail.contributions.description     "此附加组件的开发者希望通过您的小额捐款，帮助支持其持续开发。">
 
 <!ENTITY detail.updateType                    "自动更新">
 <!ENTITY detail.updateDefault.label           "默认">
@@ -168,7 +171,7 @@
 
 <!ENTITY addon.homepage                       "主页">
 <!ENTITY addon.details.label                  "更多">
-<!ENTITY addon.details.tooltip                "显示该附加组件的更多详情">
+<!ENTITY addon.details.tooltip                "显示此附加组件的更多细节">
 <!ENTITY addon.unknownDate                    "未知">
 <!-- LOCALIZATION NOTE (addon.disabled.postfix): This is used in a normal list
      to signify that an add-on is disabled, in the form
@@ -193,11 +196,11 @@
 <!ENTITY addon.checkingForUpdates.label       "正在检查更新…">
 <!ENTITY addon.releaseNotes.label             "发行说明：">
 <!ENTITY addon.loadingReleaseNotes.label      "载入中…">
-<!ENTITY addon.errorLoadingReleaseNotes.label "抱歉，载入该发行说明时发生了一个错误。">
+<!ENTITY addon.errorLoadingReleaseNotes.label "抱歉，载入发行说明时发生错误。">
 
 <!ENTITY addon.createdBy.label                "创建者 ">
 
-<!ENTITY eula.title                           "用户协议">
+<!ENTITY eula.title                           "最终用户许可协议">
 <!ENTITY eula.width                           "560px">
 <!ENTITY eula.height                          "400px">
 <!ENTITY eula.accept                          "接受并安装…">

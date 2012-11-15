@@ -1,3 +1,4 @@
+locale browser sr chrome/sr/locale/browser/
 locale pippki sr chrome/sr/locale/sr/pippki/
 locale global sr chrome/sr/locale/sr/global/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
@@ -5,12 +6,11 @@ locale autoconfig sr chrome/sr/locale/sr/autoconfig/
 locale weave sr chrome/sr/locale/sr/
 locale pipnss sr chrome/sr/locale/sr/pipnss/
 locale global-platform sr chrome/sr/locale/sr/global-platform/
-locale browser sr chrome/sr/locale/browser/
+locale pdf.js sr chrome/sr/locale/pdfviewer/
 locale browser-region sr chrome/sr/locale/browser-region/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale testpilot sr chrome/sr/locale/feedback/
 locale global-region sr chrome/sr/locale/sr/global-region/
-locale webapprt sr chrome/sr/locale/webapprt/
 locale mozapps sr chrome/sr/locale/sr/mozapps/
 locale cookie sr chrome/sr/locale/sr/cookie/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
@@ -28,4 +28,4 @@ locale domexplorer sr sidebars/domexplorer/
 locale scripteditor sr sidebars/scripteditor/
 locale stylesheets sr sidebars/stylesheets/
 locale tipoftheday sr extensions/tipoftheday/
-locale op1 sr extensions/op1/
+

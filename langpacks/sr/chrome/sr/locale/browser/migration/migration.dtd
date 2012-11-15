@@ -7,7 +7,7 @@
 
 <!ENTITY importFromIE.label             "Микрософтов интернет експлорер (Microsoft Internet Explorer)">
 <!ENTITY importFromIE.accesskey         "M">
-<!ENTITY importFromPhoenix.label        "BlueGriffon 0.8, Firebird или Phoenix">
+<!ENTITY importFromPhoenix.label        "Firefox 0.8, Firebird или Phoenix">
 <!ENTITY importFromPhoenix.accesskey    "P">
 <!ENTITY importFromNothing.label        "Не увози ништа">
 <!ENTITY importFromNothing.accesskey    "D">
@@ -52,5 +52,5 @@
 
 <!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromChrome.label         "Chrome">
-<!ENTITY importFromBlueGriffon.accesskey    "X">
-<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromFirefox.accesskey    "X">
+<!ENTITY importFromFirefox.label        "Firefox">

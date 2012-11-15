@@ -1,11 +1,10 @@
 locale browser-region gl chrome/gl/locale/browser-region/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-locale webapprt gl chrome/gl/locale/webapprt/
 locale weave gl chrome/gl/locale/gl/
 locale mozapps gl chrome/gl/locale/gl/mozapps/
 locale cookie gl chrome/gl/locale/gl/cookie/
-locale pipnss gl chrome/gl/locale/gl/pipnss/
 locale pippki gl chrome/gl/locale/gl/pippki/
+locale pipnss gl chrome/gl/locale/gl/pipnss/
 locale global-region gl chrome/gl/locale/gl/global-region/
 locale places gl chrome/gl/locale/gl/places/
 locale global gl chrome/gl/locale/gl/global/
@@ -18,6 +17,7 @@ locale alerts gl chrome/gl/locale/gl/alerts/
 locale autoconfig gl chrome/gl/locale/gl/autoconfig/
 locale global-platform gl chrome/gl/locale/gl/global-platform/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
+locale pdf.js gl chrome/gl/locale/pdfviewer/
 locale browser gl chrome/gl/locale/browser/
 locale bluegriffon gl base/locale/bluegriffon/
 locale branding gl base/locale/branding/
@@ -28,4 +28,4 @@ locale domexplorer gl sidebars/domexplorer/
 locale scripteditor gl sidebars/scripteditor/
 locale stylesheets gl sidebars/stylesheets/
 locale tipoftheday gl extensions/tipoftheday/
-locale op1 gl extensions/op1/
+

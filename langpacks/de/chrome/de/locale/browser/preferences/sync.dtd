@@ -41,3 +41,8 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "Nutzungsbedingungen">
 <!ENTITY prefs.ppLink.label         "Datenschutzrichtlinie">
+
+<!ENTITY syncDeviceName.accesskey   "c">
+
+<!-- Device Settings -->
+<!ENTITY syncDeviceName.label       "Device Name:">

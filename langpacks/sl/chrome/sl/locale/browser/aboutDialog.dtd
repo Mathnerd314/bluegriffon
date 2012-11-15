@@ -1,12 +1,26 @@
 <!ENTITY aboutDialog.title          "O &brandFullName;u">
 
+<!-- LOCALIZATION NOTE (warningDesc.version): This is a warning about the experimental nature of Nightly and Aurora builds. It is only shown in those versions. -->
+<!ENTITY warningDesc.version        "Izdaja &brandShortName; je poskusna in lahko deluje nezanesljivo.">
+<!-- LOCALIZATION NOTE (warningDesc.telemetry): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
+<!ENTITY warningDesc.telemetry      "Samodejno pošilja podatke neprofitni organizaciji &vendorShortName;, da bi bila izdaja &brandShortName; še boljša.">
+
+<!-- LOCALIZATION NOTE (community.exp.*) This paragraph is shown in "experimental" builds, i.e. Nightly and Aurora builds, instead of the other "community.*" strings below. -->
+<!ENTITY community.exp.start        "">
+<!-- LOCALIZATION NOTE (community.exp.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
+<!ENTITY community.exp.mozillaLink  "&vendorShortName;">
+<!ENTITY community.exp.middle       " je ">
+<!-- LOCALIZATION NOTE (community.exp.creditslink): This is a link title that links to about:credits. -->
+<!ENTITY community.exp.creditsLink  "globalna skupnost,">
+<!ENTITY community.exp.end          " ki si prizadeva, da bi splet ostal odprt, javen in dostopen vsem.">
+
 <!ENTITY community.start2           "&brandShortName; razvija ">
 <!-- LOCALIZATION NOTE (community.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
 <!ENTITY community.mozillaLink      "&vendorShortName;">
 <!ENTITY community.middle2          ", ">
 <!-- LOCALIZATION NOTE (community.creditsLink): This is a link title that links to about:credits. -->
 <!ENTITY community.creditsLink      "globalna skupnost, ">
-<!ENTITY community.end2             " ki si prizadeva za boljši internet. Verjamemo, da mora biti internet odprt, javen ter dostopen vsem in brez omejitev.">
+<!ENTITY community.end3             " ki si prizadeva, da bi splet ostal odprt, javen in dostopen vsem.">
 
 <!ENTITY contribute.start           "Se vam sliši zanimivo? ">
 <!-- LOCALIZATION NOTE (contribute.getInvolvedLink): This is a link title that links to http://www.mozilla.org/contribute/. -->
@@ -34,7 +48,7 @@
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
      one line with linkText being wrapped in an anchor that links to a site to download
-     the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in
+     the latest version of Firefox (e.g. http://www.firefox.com). As this is all in
      one line, try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.failed.start        "Posodobitev ni uspela. ">
 <!ENTITY update.failed.linkText     "Prenesite najnovejšo različico">
@@ -42,7 +56,7 @@
 
 <!-- LOCALIZATION NOTE (update.manual.start,update.manual.end): update.manual.start and update.manual.end
      all go into one line and have an anchor in between with text that is the same as the link to a site
-     to download the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in one line,
+     to download the latest version of Firefox (e.g. http://www.firefox.com). As this is all in one line,
      try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.manual.start        "Posodobitve so na voljo na ">
 <!ENTITY update.manual.end          "">
@@ -55,24 +69,13 @@
 <!ENTITY update.downloading.start   "Prenašanje posodobitev — ">
 <!ENTITY update.downloading.end     "">
 
-<!ENTITY channel.description.end    " update channel. ">
-
 <!-- LOCALIZATION NOTE (channel.description.start,channel.description.end): channel.description.start and
      channel.description.end create one sentence, with the current channel label inserted in between.
      example: You are currently on the _Stable_ update channel. -->
-<!ENTITY channel.description.start  "You are currently on the ">
-<!ENTITY community.end3             " working together to keep the Web open, public and accessible to all.">
-<!-- LOCALIZATION NOTE (community.exp.creditslink): This is a link title that links to about:credits. -->
-<!ENTITY community.exp.creditsLink  "global community">
-<!ENTITY community.exp.end          " working together to keep the Web open, public and accessible to all.">
-<!ENTITY community.exp.middle       " is a ">
-<!-- LOCALIZATION NOTE (community.exp.mozillaLink): This is a link title that links to http://www.mozilla.org/. -->
-<!ENTITY community.exp.mozillaLink  "&vendorShortName;">
+<!ENTITY channel.description.start  "Uporabljate posodobitveni kanal ">
+<!ENTITY channel.description.end    ". ">
 
-<!-- LOCALIZATION NOTE (community.exp.*) This paragraph is shown in "experimental" builds, i.e. Nightly and Aurora builds, instead of the other "community.*" strings below. -->
-<!ENTITY community.exp.start        "">
+
+<!ENTITY update.applying            "Applying update…">
 <!-- LOCALIZATION NOTE (warningDesc.telemetryDesc): This is a notification that Nightly/Aurora builds automatically send Telemetry data back to Mozilla. It is only shown in those versions. "It" refers to brandShortName. -->
 <!ENTITY warningDesc.telemetryDesc  "It automatically sends information about performance, hardware, usage and customizations back to &vendorShortName; to help make &brandShortName; better.">
-
-<!-- LOCALIZATION NOTE (warningDesc.version): This is a warning about the experimental nature of Nightly and Aurora builds. It is only shown in those versions. -->
-<!ENTITY warningDesc.version        "&brandShortName; is experimental and may be unstable.">

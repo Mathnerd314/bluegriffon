@@ -2,10 +2,10 @@ locale autoconfig sv-SE chrome/sv-SE/locale/sv-SE/autoconfig/
 locale global sv-SE chrome/sv-SE/locale/sv-SE/global/
 locale necko sv-SE chrome/sv-SE/locale/sv-SE/necko/
 locale alerts sv-SE chrome/sv-SE/locale/sv-SE/alerts/
+locale pdf.js sv-SE chrome/sv-SE/locale/pdfviewer/
 override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
 locale browser-region sv-SE chrome/sv-SE/locale/browser-region/
 locale global-platform sv-SE chrome/sv-SE/locale/sv-SE/global-platform/
-locale webapprt sv-SE chrome/sv-SE/locale/webapprt/
 locale testpilot sv-SE chrome/sv-SE/locale/feedback/
 locale cookie sv-SE chrome/sv-SE/locale/sv-SE/cookie/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
@@ -28,4 +28,4 @@ locale domexplorer sv-SE sidebars/domexplorer/
 locale scripteditor sv-SE sidebars/scripteditor/
 locale stylesheets sv-SE sidebars/stylesheets/
 locale tipoftheday sv-SE extensions/tipoftheday/
-locale op1 sv-SE extensions/op1/
+

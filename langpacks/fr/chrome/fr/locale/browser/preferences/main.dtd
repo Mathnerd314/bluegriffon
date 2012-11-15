@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY startup.label             "Démarrage">
 
 <!ENTITY startupPage.label         "Au démarrage de &brandShortName; :">
@@ -5,8 +9,6 @@
 <!ENTITY startupHomePage.label     "Afficher ma page d'accueil">
 <!ENTITY startupBlankPage.label    "Afficher une page vide">
 <!ENTITY startupLastSession.label  "Afficher les derniers onglets et fenêtres utilisés">
-<!ENTITY restoreOnDemand.label     "Ne pas charger les onglets tant qu'ils ne sont pas sélectionnés">
-<!ENTITY restoreOnDemand.accesskey "l">
 
 <!ENTITY homepage.label            "Page d'accueil :">
 <!ENTITY homepage.accesskey        "a">
@@ -32,9 +34,3 @@
 <!ENTITY chooseFolderMac.accesskey    "C">
 <!ENTITY alwaysAsk.label "Toujours demander où enregistrer les fichiers">
 <!ENTITY alwaysAsk.accesskey "T">
-
-<!ENTITY addonsMgr.label            "Modules complémentaires">
-<!ENTITY manageAddonsDescWin.label  "Modifie les options pour vos modules">
-<!ENTITY manageAddonsDescUnix2.label "Modifie les préférences pour vos modules">
-<!ENTITY manageAddons.label         "Gérer les modules complémentaires…">
-<!ENTITY manageAddons.accesskey     "G">

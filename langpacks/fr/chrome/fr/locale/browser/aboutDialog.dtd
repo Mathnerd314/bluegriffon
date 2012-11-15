@@ -48,7 +48,7 @@
 <!-- LOCALIZATION NOTE (update.failed.start,update.failed.linkText,update.failed.end):
      update.failed.start, update.failed.linkText, and update.failed.end all go into
      one line with linkText being wrapped in an anchor that links to a site to download
-     the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in
+     the latest version of Firefox (e.g. http://www.firefox.com). As this is all in
      one line, try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.failed.start        "La mise à jour a échoué. ">
 <!ENTITY update.failed.linkText     "Télécharger la dernière version">
@@ -56,7 +56,7 @@
 
 <!-- LOCALIZATION NOTE (update.manual.start,update.manual.end): update.manual.start and update.manual.end
      all go into one line and have an anchor in between with text that is the same as the link to a site
-     to download the latest version of BlueGriffon (e.g. http://www.BlueGriffon.com). As this is all in one line,
+     to download the latest version of Firefox (e.g. http://www.firefox.com). As this is all in one line,
      try to make the localized text short (see bug 596813 for screenshots). -->
 <!ENTITY update.manual.start        "Mises à jour disponibles à ">
 <!ENTITY update.manual.end          "">
@@ -68,6 +68,8 @@
      example: Downloading update — 111 KB of 13 MB -->
 <!ENTITY update.downloading.start   "Téléchargement de la mise à jour — ">
 <!ENTITY update.downloading.end     "">
+
+<!ENTITY update.applying            "Application de la mise à jour…">
 
 <!-- LOCALIZATION NOTE (channel.description.start,channel.description.end): channel.description.start and
      channel.description.end create one sentence, with the current channel label inserted in between.

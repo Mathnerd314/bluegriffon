@@ -52,15 +52,13 @@
 <!ENTITY netInterrupt.title "Povezava je bila prekinjena">
 <!ENTITY netInterrupt.longDesc "&sharedLongDesc;">
 
+<!ENTITY notCached.title "Dokument je potekel">
+<!ENTITY notCached.longDesc "<p>Zahtevan dokument ni več na voljo v predpomnilniku &brandShortName;a.</p><ul><li>&brandShortName; občutljivih dokumentov iz varnostnih razlogov samodejno ne nalaga ponovno.</li><li>Kliknite poskusi znova za ponovno nalaganje dokumenta s spletne strani.</li></ul>">
+
 <!ENTITY netOffline.title "Nepovezan način">
-<!-- LOCALIZATION NOTE (netOffline.overrideLongDesc) - This string should
-     indicate that "Work Offline" is a menu item without being too specific,
-     since it could be in either the normal menu (Mac/Linux) or the BlueGriffon button
-     menu (Windows).
--->
-<!ENTITY netOffline.overrideLongDesc "
+<!ENTITY netOffline.longDesc2 "
 <ul>
-  <li>Odstranite izbiro &quot;Nepovezan način&quot; v meniju in poskusite znova.</li>
+  <li>Kliknite &quot;Poskusi znova&quot; za preklop v povezan način in ponovno naložite stran.</li>
 </ul>
 ">
 
@@ -168,6 +166,10 @@ začasna in lahko poskusite znova pozneje.</li>
 <!ENTITY cspFrameAncestorBlocked.title "Zavrnjeno zaradi varnostne politike vsebine">
 <!ENTITY cspFrameAncestorBlocked.longDesc "<p>&brandShortName; je preprečil nalaganje strani v takšni obliki, ker tako določa varnostna politika vsebine.</p>">
 
+<!ENTITY corruptedContentError.title "Okvara vsebine">
+<!ENTITY corruptedContentError.longDesc "<p>Strani, ki si jo želite ogledati, ni mogoče prikazati, ker je bila med prenosom podatkov odkrita napaka.</p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul>">
+
+
 <!ENTITY securityOverride.linkText "Lahko pa dodate izjemo...">
 <!ENTITY securityOverride.getMeOutOfHereButton "Odpelji me na domačo stran!">
 <!ENTITY securityOverride.exceptionButtonLabel "Dodaj izjemo...">
@@ -175,7 +177,7 @@ začasna in lahko poskusite znova pozneje.</li>
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Ne dodajajte izjeme, če uporabljate povezavo, ki ji ne zaupate popolnoma, ali če od tega strežnika običajno ne prejemate takšnih opozoril.</p> 
@@ -184,17 +186,5 @@ functionality specific to BlueGriffon. -->
 <button id='exceptionDialogButton'>&securityOverride.exceptionButtonLabel;</button>
 ">
 
-<!ENTITY corruptedContentError.longDesc "<p>The page you are trying to view cannot be shown because an error in the data transmission was detected.</p><ul><li>Please contact the website owners to inform them of this problem.</li></ul>">
-
-<!ENTITY corruptedContentError.title "Corrupted Content Error">
-<!ENTITY netOffline.longDesc2 "
-<ul>
-  <li>Press &quot;Try Again&quot; to switch to online mode and reload the page.</li>
-</ul>
-">
-<!ENTITY notCached.longDesc "<p>The requested document is not available in &brandShortName;'s cache.</p><ul><li>As a security precaution, &brandShortName; does not automatically re-request sensitive documents.</li><li>Click Try Again to re-request the document from the website.</li></ul>">
-
-<!ENTITY notCached.title "Document Expired">
-<!ENTITY remoteXUL.longDesc "<p><ul><li>Please contact the website owners to inform them of this problem.</li></ul></p>">
-
-<!ENTITY remoteXUL.title "Remote XUL">
+<!ENTITY remoteXUL.title "Oddaljeni XUL">
+<!ENTITY remoteXUL.longDesc "<p><ul><li>O napaki obvestite lastnike spletne strani.</li></ul></p>">

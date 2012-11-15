@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
 
@@ -19,15 +23,15 @@
 <!ENTITY  closeOtherTabs.label               "關閉其他分頁">
 <!ENTITY  closeOtherTabs.accesskey           "o">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
 used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
 can reach it easily. -->
-<!ENTITY  pinAppTab.label                    "釘選成應用程式分頁">
-<!ENTITY  pinAppTab.accesskey                "P">
-<!ENTITY  unpinAppTab.label                  "還原成普通分頁">
-<!ENTITY  unpinAppTab.accesskey              "b">
+<!ENTITY  pinTab.label                       "釘選分頁">
+<!ENTITY  pinTab.accesskey                   "P">
+<!ENTITY  unpinTab.label                     "還原成普通分頁">
+<!ENTITY  unpinTab.accesskey                 "b">
 <!ENTITY  moveToGroup.label                  "移動到群組">
 <!ENTITY  moveToGroup.accesskey              "M">
 <!ENTITY  moveToNewGroup.label               "新群組">
@@ -77,6 +81,12 @@ can reach it easily. -->
 <!ENTITY pageInfoCmd.label "頁面資訊">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "進入全螢幕模式">
+<!ENTITY enterFullScreenCmd.accesskey "F">
+<!ENTITY exitFullScreenCmd.label "離開全螢幕模式">
+<!ENTITY exitFullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.label "全螢幕">
 <!ENTITY fullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.macCommandKey "f">
@@ -90,7 +100,13 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "離開全螢幕模式">
 <!ENTITY fullScreenExit.accesskey "F">
-<!ENTITY domFullScreenWarning.label "按 ESC 鍵以離開全螢幕模式">
+<!ENTITY fullscreenAllowButton.label "允許">
+<!ENTITY fullscreenExitButton.label "拒絕">
+<!ENTITY fullscreenApproval.value "允許進入全螢幕模式？">
+
+<!ENTITY fullscreenExitHint.value "隨時按下 ESC 鍵以離開全螢幕模式。">
+<!ENTITY leaveDOMFullScreen.label "離開全螢幕模式">
+<!ENTITY leaveDOMFullScreen.accesskey "u">
 
 <!ENTITY closeWindow.label "關閉視窗">
 <!ENTITY closeWindow.accesskey "d">
@@ -99,6 +115,7 @@ can reach it easily. -->
 <!ENTITY bookmarksMenu.accesskey "B">
 <!ENTITY bookmarkThisPageCmd.label "此頁加入書籤">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "訂閱此頁面">
 <!ENTITY subscribeToPageMenuitem.label "訂閱此頁面…">
 <!ENTITY addCurPagesCmd.label "所有分頁加入書籤…">
@@ -111,7 +128,7 @@ can reach it easily. -->
 <!ENTITY backButton.tooltip           "回到上一頁">
 <!ENTITY forwardCmd.label             "下一頁">
 <!ENTITY forwardCmd.accesskey         "F">
-<!ENTITY forwardButton.tooltip        "到下一頁">
+<!ENTITY forwardButton.tooltip        "前進下一頁">
 <!ENTITY backForwardButtonMenu.tooltip "按右鍵或向下拉以顯示歷史記錄">
 <!ENTITY backForwardButtonMenuMac.tooltip "向下拉以顯示歷史記錄">
 <!ENTITY reloadCmd.label              "重新載入">
@@ -123,7 +140,7 @@ can reach it easily. -->
 <!ENTITY stopButton.tooltip           "停止載入此網頁">
 <!ENTITY goEndCap.tooltip             "按此瀏覽位址列中的網址">
 <!ENTITY printButton.label            "列印">
-<!ENTITY printButton.tooltip          "列印頁面">
+<!ENTITY printButton.tooltip          "列印此頁">
 
 <!ENTITY backForwardItem.title        "上一頁／下一頁">
 <!ENTITY locationItem.title           "位址">
@@ -198,6 +215,10 @@ can reach it easily. -->
 <!ENTITY inspectContextMenu.label     "檢測元素">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
+<!ENTITY responsiveDesignTool.label   "適應性設計檢視模式">
+<!ENTITY responsiveDesignTool.accesskey "R">
+<!ENTITY responsiveDesignTool.commandkey "M">
+
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
   -  The Scratchpad is intended to provide a simple text editor for creating
@@ -214,6 +235,14 @@ can reach it easily. -->
 <!ENTITY scratchpad.keytext           "F4">
 
 <!ENTITY inspectCloseButton.tooltiptext "關閉檢測器">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "關閉側邊欄">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "關閉開發者工具列">
+<!ENTITY devToolbarMenu.label              "開發者工具列">
+<!ENTITY devToolbarMenu.accesskey          "v">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "其他工具">
 
 <!ENTITY inspectorHTMLCopyInner.label       "複製內部 HTML">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "I">
@@ -391,7 +420,7 @@ can reach it easily. -->
 <!ENTITY viewVideoCmd.accesskey       "i">
 <!ENTITY viewBGImageCmd.label         "檢視背景圖片">
 <!ENTITY viewBGImageCmd.accesskey     "w">
-<!ENTITY setDesktopBackgroundCmd.label      "設為桌面背景…">
+<!ENTITY setDesktopBackgroundCmd.label      "設為桌布…">
 <!ENTITY setDesktopBackgroundCmd.accesskey  "S">
 <!ENTITY bookmarkPageCmd2.label       "此頁加入書籤">
 <!ENTITY bookmarkPageCmd2.accesskey   "m">
@@ -399,8 +428,8 @@ can reach it easily. -->
 <!ENTITY bookmarkThisLinkCmd.accesskey  "L">
 <!ENTITY bookmarkThisFrameCmd.label      "此頁框加入書籤">
 <!ENTITY bookmarkThisFrameCmd.accesskey  "m">
-<!ENTITY sendPageCmd.label            "郵寄網址…">
-<!ENTITY sendPageCmd.accesskey        "e">
+<!ENTITY emailPageCmd.label           "郵寄鏈結…">
+<!ENTITY emailPageCmd.accesskey       "E">
 <!ENTITY savePageCmd.label            "另存新檔…">
 <!ENTITY savePageCmd.accesskey        "a">
 <!-- alternate for content area context menu -->
@@ -412,20 +441,18 @@ can reach it easily. -->
 <!ENTITY printFrameCmd.accesskey      "P">
 <!ENTITY saveLinkCmd.label            "鏈結另存新檔…">
 <!ENTITY saveLinkCmd.accesskey        "k">
-<!ENTITY sendLinkCmd.label            "郵寄此鏈結…"> 
-<!ENTITY sendLinkCmd.accesskey        "d">
 <!ENTITY saveImageCmd.label           "圖片另存新檔…">
 <!ENTITY saveImageCmd.accesskey       "v">
 <!ENTITY saveVideoCmd.label           "另存視訊檔案…">
 <!ENTITY saveVideoCmd.accesskey       "v">
 <!ENTITY saveAudioCmd.label           "另存音訊檔案…">
 <!ENTITY saveAudioCmd.accesskey       "v">
-<!ENTITY sendImageCmd.label           "郵寄此圖片…">
-<!ENTITY sendImageCmd.accesskey       "n">
-<!ENTITY sendVideoCmd.label           "郵寄視訊檔案…">
-<!ENTITY sendVideoCmd.accesskey       "n">
-<!ENTITY sendAudioCmd.label           "郵寄音訊檔案…">
-<!ENTITY sendAudioCmd.accesskey       "n">
+<!ENTITY emailImageCmd.label          "郵寄圖片…">
+<!ENTITY emailImageCmd.accesskey      "a">
+<!ENTITY emailVideoCmd.label          "郵寄視訊…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "郵寄音訊…">
+<!ENTITY emailAudioCmd.accesskey      "a">
 <!ENTITY copyLinkCmd.label            "複製鏈結網址">
 <!ENTITY copyLinkCmd.accesskey        "a">
 <!ENTITY copyImageCmd.label           "複製圖片網址">
@@ -592,8 +619,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "瀏覽器分頁">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu.label     "來自其他電腦的分頁">
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "來自其他裝置的分頁">
 
 <!ENTITY syncBrand.shortName.label    "Sync">
 
@@ -615,12 +642,24 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
 toolbar button -->
 <!ENTITY markupButton.accesskey          "M">
 
-<!ENTITY devToolbar.commandkey "v">
+<!ENTITY socialToolbar.title        "社交工具列按鈕">
+<!ENTITY social.notLoggedIn.label   "未登入">
 
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspectorButton.label "Inspector">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY social.ok.label       "確定">
+<!ENTITY social.ok.accesskey   "O">
 
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY social.toggleSidebar.label "顯示側邊欄">
+<!ENTITY social.toggleSidebar.accesskey "S">
+
+<!ENTITY social.toggleNotifications.label "顯示桌面通知">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.activated.undobutton.label "復原">
+<!ENTITY social.activated.undobutton.accesskey "U">
+
+
+<!ENTITY newPrivateWindow.accesskey "W">
+<!ENTITY newPrivateWindow.label     "New Private Window">
+<!ENTITY remoteWebConsoleCmd.label    "Remote Web Console">
+
+<!ENTITY social.chatBar.commandkey "c">

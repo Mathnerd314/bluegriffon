@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY restorepage.tabtitle       "Przywracanie sesji">
 <!-- LOCALIZATION NOTE: The title is intended to be apologetic and disarming, expressing dismay
      and regret that we are unable to restore the session for the user -->
@@ -8,8 +12,8 @@
 <!ENTITY restorepage.startNew       "rozpocząć nową sesję przeglądania">
 <!ENTITY restorepage.tryagainButton "Przywróć">
 <!ENTITY restorepage.restore.access "r">
-<!ENTITY restorepage.cancelButton   "Rozpocznij nową sesję">
-<!ENTITY restorepage.cancel.access  "o">
+<!ENTITY restorepage.closeButton    "Zamknij">
+<!ENTITY restorepage.close.access   "Z">
 
 <!ENTITY restorepage.restoreHeader  "Przywróć">
 <!ENTITY restorepage.listHeader     "Okna i karty">

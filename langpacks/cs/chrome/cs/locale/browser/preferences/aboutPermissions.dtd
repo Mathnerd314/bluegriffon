@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY permissionsManager.title "Správce oprávnění">
 
 <!ENTITY sites.search "Hledat servery">
@@ -16,7 +20,8 @@
 <!ENTITY permission.alwaysAsk "Vždy se zeptat">
 <!ENTITY permission.allow "Povolit">
 <!ENTITY permission.allowForSession "Povolit pro relaci">
-<!ENTITY permission.block "Blokovat">
+<!ENTITY permission.allowFirstPartyOnly "Blokovat třetí strany">
+<!ENTITY permission.block "Blokovat vše">
 
 <!ENTITY password.label "Ukládat hesla">
 <!ENTITY password.manage "Správce hesel…">
@@ -28,11 +33,12 @@
 
 <!ENTITY geo.label "Prozradit polohu">
 
+<!ENTITY plugins.label "Zásuvné moduly">
+
 <!-- LOCALIZATION NOTE (indexedDB.label): This is describing indexedDB storage
  using the same language used for the permIndexedDB string in browser/pageInfo.dtd -->
 <!ENTITY indexedDB.label "Správa offline úložiště">
 
 <!ENTITY popup.label "Otevírat vyskakovací okna">
 
-
-<!ENTITY plugins.label                   "Plugins">
+<!ENTITY fullscreen.label "Celá obrazovka">

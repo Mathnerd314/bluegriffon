@@ -48,10 +48,10 @@
   <!ENTITY % findbarDTD      SYSTEM "chrome://bluegriffon/locale/findbar.dtd" >
   <!ENTITY % structurebarDTD SYSTEM "chrome://bluegriffon/locale/structurebar.dtd" >
   <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
-  <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
-  %baseMenuOverlayDTD;
+  <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
   %tabEditorDTD;
+  %baseMenuOverlayDTD;
   %bluegriffonDTD;
   %findbarDTD;
   %structurebarDTD;

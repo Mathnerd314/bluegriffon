@@ -1,4 +1,3 @@
-locale webapprt zh-CN chrome/zh-CN/locale/webapprt/
 locale branding zh-CN chrome/zh-CN/locale/branding/
 locale global-region zh-CN chrome/zh-CN/locale/zh-CN/global-region/
 locale testpilot zh-CN chrome/zh-CN/locale/feedback/
@@ -11,6 +10,7 @@ locale cookie zh-CN chrome/zh-CN/locale/zh-CN/cookie/
 override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
 locale weave zh-CN chrome/zh-CN/locale/zh-CN/
 locale pipnss zh-CN chrome/zh-CN/locale/zh-CN/pipnss/
+locale pdf.js zh-CN chrome/zh-CN/locale/pdfviewer/
 locale browser-region zh-CN chrome/zh-CN/locale/browser-region/
 locale necko zh-CN chrome/zh-CN/locale/zh-CN/necko/
 override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
@@ -28,4 +28,4 @@ locale domexplorer zh-CN sidebars/domexplorer/
 locale scripteditor zh-CN sidebars/scripteditor/
 locale stylesheets zh-CN sidebars/stylesheets/
 locale tipoftheday zh-CN extensions/tipoftheday/
-locale op1 zh-CN extensions/op1/
+

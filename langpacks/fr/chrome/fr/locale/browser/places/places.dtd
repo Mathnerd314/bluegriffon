@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE (places.library.title): use "Library", "Archive" or "Repository" -->
 <!ENTITY places.library.title "Bibliothèque">
 <!ENTITY places.library.width "730">
@@ -22,11 +26,6 @@
 <!ENTITY view.sortAscending.accesskey "A">
 <!ENTITY view.sortDescending.label "Ordre décroissant (Z > A)">
 <!ENTITY view.sortDescending.accesskey "Z">
-
-<!ENTITY cmd.findInBookmarks.label "Rechercher dans les marque-pages…">
-<!ENTITY cmd.findInBookmarks.accesskey "c">
-<!ENTITY cmd.findCurrent.label "Rechercher dans la sélection courante…">
-<!ENTITY cmd.findCurrent.accesskey "R">
 
 <!ENTITY importBookmarksFromHTML.label     "Importer des marque-pages au format HTML…">
 <!ENTITY importBookmarksFromHTML.accesskey "I">
@@ -91,18 +90,6 @@
 
 <!ENTITY search.label "Rechercher :">
 <!ENTITY search.accesskey "R">
-
-<!ENTITY search.in.label "Rechercher dans :">
-<!ENTITY search.scopeFolder.label "Dossier sélectionné">
-<!ENTITY search.scopeFolder.accesskey "n">
-<!ENTITY search.scopeBookmarks.label "Marque-pages">
-<!ENTITY search.scopeBookmarks.accesskey "M">
-<!ENTITY search.scopeDownloads.label "Téléchargements">
-<!ENTITY search.scopeDownloads.accesskey "T">
-<!ENTITY search.scopeHistory.label "Historique">
-<!ENTITY search.scopeHistory.accesskey "H">
-<!ENTITY saveSearch.label "Enregistrer">
-<!ENTITY saveSearch.accesskey "E">
 
 <!ENTITY cmd.find.key "F">
 

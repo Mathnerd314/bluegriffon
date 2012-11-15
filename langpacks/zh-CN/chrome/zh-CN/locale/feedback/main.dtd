@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY testpilot.brand.label                      "试飞员">
 <!ENTITY testpilot.settings.label                   "设置">
 <!ENTITY testpilot.settings.dataSubmission.label    "数据提交">
@@ -24,10 +28,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "关闭">
 
-<!-- BlueGriffon 4 beta version UI -->
+<!-- Firefox 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "启用用户研究">
 <!ENTITY testpilot.feedbackbutton.label                "反馈">
-<!ENTITY testpilot.happy.label        "BlueGriffon 令我高兴，因为...">
-<!ENTITY testpilot.sad.label          "BlueGriffon 让我伤心，因为...">
+<!ENTITY testpilot.happy.label        "Firefox 令我高兴，因为...">
+<!ENTITY testpilot.sad.label          "Firefox 让我伤心，因为...">
 <!ENTITY testpilot.broken.label      "报告该网站无法正常浏览…">
 <!ENTITY testpilot.idea.label        "提交建议…">

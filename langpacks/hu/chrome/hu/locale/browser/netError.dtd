@@ -178,7 +178,7 @@ ideiglenes, és később újra megpróbálhatja.</li>
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to BlueGriffon. -->
+functionality specific to firefox. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Ne adjon hozzá kivételt, ha nem teljesen megbízható internetkapcsolatot használ, vagy ha nem szokta látni ezt a figyelmeztetést ennél a kiszolgálónál.</p>

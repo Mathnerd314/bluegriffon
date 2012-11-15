@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY migrationWizard.title "Asistente de importación">
 <!ENTITY importFrom.label "Importar opciones, marcadores, historial, contraseñas y otros datos de:">
 <!ENTITY importFromUnix.label "Importar preferencias, marcadores, historial, contraseñas y otros datos de:">
@@ -10,10 +14,8 @@
 <!ENTITY importFromSafari.accesskey "S">
 <!ENTITY importFromChrome.label "Chrome">
 <!ENTITY importFromChrome.accesskey "C">
-<!ENTITY importFromBlueGriffon.label "BlueGriffon">
-<!ENTITY importFromBlueGriffon.accesskey "X">
-<!ENTITY importFromHTMLFile.label "Desde un archivo HTML">
-<!ENTITY importFromHTMLFile.accesskey "v">
+<!ENTITY importFromFirefox.label "Firefox">
+<!ENTITY importFromFirefox.accesskey "X">
 <!ENTITY noMigrationSources.label "No se pudieron encontrar programas que contuvieran marcadores, historial o datos de contraseñas.">
 <!ENTITY importSource.title "Importar configuración y datos">
 <!ENTITY importItems.title "Elementos a importar">

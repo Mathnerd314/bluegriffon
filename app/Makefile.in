@@ -108,8 +108,12 @@ endif
 
 CPPSRCS = nsEditorApp.cpp
 
-LOCAL_INCLUDES += -I$(topsrcdir)/toolkit/xre
-LOCAL_INCLUDES += -I$(topsrcdir)/xpcom/base
+LOCAL_INCLUDES += \
+  -I$(topsrcdir)/toolkit/xre \
+  -I$(topsrcdir)/toolkit/profile \
+  -I$(topsrcdir)/xpcom/base \
+  -I$(topsrcdir)/xpcom/build \
+  $(NULL)
 
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 LIBS += $(DIST)/bin/XUL
@@ -284,6 +288,9 @@ else
 endif
 	-cp -L $(DIST)/bin/mangle $(DIST)/bin/shlibsign $(DIST)/$(APP_NAME).app/Contents/$(APPFILES)
 	cp -RL $(srcdir)/macbuild/Contents/Resources/bluegriffon.icns $(DIST)/$(APP_NAME).app/Contents/Resources/bluegriffon.icns
+	mkdir -p $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
+	cp -L /Users/glazou/Desktop/add-ons/venkman-0.9.88.2.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions/\{f13b157f-b174-47e7-a34d-4815ddfdfeb8\}.xpi
+	cp -L /Users/glazou/Desktop/add-ons/inspector.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions/inspector\@mozilla.org.xpi
 	printf APPLDIBG > $(DIST)/$(APP_NAME).app/Contents/PkgInfo
 #       remove CVS dirs from packaged app
 	find $(DIST)/$(APP_NAME).app -type d -name ".svn" -prune -exec rm -rf {} \;
@@ -310,7 +317,7 @@ endif # LIBXUL_SDK
 libs::
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 	$(INSTALL) $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/* $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions 
-	rm -fr $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/*
+#	rm -fr $(DIST)/$(APP_NAME).app/Contents/MacOS/extensions/*
 else
 	$(INSTALL) $(DIST)/xpi-stage/*.xpi $(DIST)/bin/distribution/extensions 
 	rm -fr  $(DIST)/bin/extensions/*

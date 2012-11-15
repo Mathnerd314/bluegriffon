@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY addons.windowTitle "Administrador de complementos">
 <!ENTITY search.placeholder "Buscar complementos">
 <!ENTITY search.commandkey "f">
@@ -32,9 +36,9 @@
 <!ENTITY updates.viewUpdates.accesskey "V">
 <!ENTITY updates.updateAddonsAutomatically.label "Actualizar complementos automáticamente">
 <!ENTITY updates.updateAddonsAutomatically.accesskey "A">
-<!ENTITY updates.resetUpdatesToAutomatic.label "Reiniciar todos los complementos para actualizarlos automáticamente">
+<!ENTITY updates.resetUpdatesToAutomatic.label "Configurar todos los complementos para que se actualicen automáticamente">
 <!ENTITY updates.resetUpdatesToAutomatic.accesskey "R">
-<!ENTITY updates.resetUpdatesToManual.label "Reiniciar todos los complementos para actualizarlos manualmente">
+<!ENTITY updates.resetUpdatesToManual.label "Configurar todos los complementos para que se actualicen manualmente">
 <!ENTITY updates.resetUpdatesToManual.accesskey "R">
 <!ENTITY updates.updating.label "Actualizando complementos">
 <!ENTITY updates.installed.label "Se han actualizado sus complementos.">

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- The page shown when not logged in... -->
 <!ENTITY setupButton.label          "設定 &syncBrand.fullName.label;">
 <!ENTITY setupButton.accesskey      "s">
@@ -34,10 +38,11 @@
 <!ENTITY engine.addons.accesskey    "A">
 
 <!-- Device Settings -->
-<!ENTITY syncComputerName.label       "電腦名稱:">
-<!ENTITY syncComputerName.accesskey   "C">
+<!ENTITY syncDeviceName.label       "裝置名稱:">
+<!ENTITY syncDeviceName.accesskey   "c">
 <!ENTITY unlinkDevice.label           "解除此裝置的連結">
 
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "服務條款">
 <!ENTITY prefs.ppLink.label         "隱私權保護政策">
+

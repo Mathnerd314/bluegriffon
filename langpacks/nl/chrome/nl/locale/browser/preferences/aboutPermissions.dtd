@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY permissionsManager.title        "Toestemmingenbeheerder">
 
 <!ENTITY sites.search                    "Websites zoeken">
@@ -16,6 +20,7 @@
 <!ENTITY permission.alwaysAsk            "Altijd vragen">
 <!ENTITY permission.allow                "Toestaan">
 <!ENTITY permission.allowForSession      "Toestaan voor sessie">
+<!ENTITY permission.allowFirstPartyOnly  "Blokker van derden">
 <!ENTITY permission.block                "Blokkeren">
 
 <!ENTITY password.label                  "Wachtwoorden opslaan">
@@ -35,3 +40,5 @@
 <!ENTITY indexedDB.label                 "Offlineopslag onderhouden">
 
 <!ENTITY popup.label                     "Pop-upvensters openen">
+
+<!ENTITY fullscreen.label                "Volledig scherm">

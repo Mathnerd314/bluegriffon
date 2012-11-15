@@ -67,3 +67,8 @@
 <!ENTITY loaddevice.browse.accesskey            "S">
 
 <!ENTITY loaddevice.title  "Lataa PKCS#11-laite">
+
+<!-- LOCALIZATION NOTE (devmgr.style): This is CSS style for Device Manager
+     window size. Don't translate "width" nor "height". Adjust the numbers
+     to make window contents fit. -->
+<!ENTITY devmgr.style                           "width: 52em; height: 32em;">

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY window.title "Blocco per gli appunti">
 <!ENTITY fileMenu.label "File">
 <!ENTITY fileMenu.accesskey "F">
@@ -7,6 +11,10 @@
 <!ENTITY openFileCmd.label "Apri file…">
 <!ENTITY openFileCmd.accesskey "A">
 <!ENTITY openFileCmd.commandkey "o">
+<!ENTITY openRecentMenu.label "Apri recenti">
+<!ENTITY openRecentMenu.accesskey "r">
+<!ENTITY revertCmd.label "Ripristina…">
+<!ENTITY revertCmd.accesskey "t">
 <!ENTITY saveFileCmd.label "Salva">
 <!ENTITY saveFileCmd.accesskey "S">
 <!ENTITY saveFileCmd.commandkey "s">
@@ -40,6 +48,9 @@
 <!ENTITY documentationLink.accesskey "D">
 <!ENTITY resetContext2.label "Reimposta variabili">
 <!ENTITY resetContext2.accesskey "m">
+<!ENTITY reloadAndRun.label "Ricarica ed esegui">
+<!ENTITY reloadAndRun.accesskey "R">
+<!ENTITY reloadAndRun.key "r">
 <!ENTITY executeMenu.label "Esecuzione">
 <!ENTITY executeMenu.accesskey "E">
 <!ENTITY errorConsoleCmd.commandkey "j">

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the Scratchpad window strings -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
 
@@ -28,6 +32,12 @@
 <!ENTITY openFileCmd.label            "Öppna fil…">
 <!ENTITY openFileCmd.accesskey        "Ö">
 <!ENTITY openFileCmd.commandkey       "o">
+
+<!ENTITY openRecentMenu.label         "Öppna senaste">
+<!ENTITY openRecentMenu.accesskey     "a">
+
+<!ENTITY revertCmd.label              "Återgå…">
+<!ENTITY revertCmd.accesskey          "Å">
 
 <!ENTITY saveFileCmd.label            "Spara">
 <!ENTITY saveFileCmd.accesskey        "S">
@@ -94,6 +104,10 @@
   -->
 <!ENTITY resetContext2.label          "Återställ variabler">
 <!ENTITY resetContext2.accesskey      "Å">
+
+<!ENTITY reloadAndRun.label           "Ladda om och kör">
+<!ENTITY reloadAndRun.accesskey       "L">
+<!ENTITY reloadAndRun.key             "r">
 
 <!ENTITY executeMenu.label            "Kör">
 <!ENTITY executeMenu.accesskey        "K">

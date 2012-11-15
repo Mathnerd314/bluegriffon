@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "Felsökningsinformation">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -42,14 +46,23 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.modifiedPrefsName "Namn">
 <!ENTITY aboutSupport.modifiedPrefsValue "Värde">
 
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js-inställningar">
+<!ENTITY aboutSupport.userJSDescription "Din profilmapp innehåller en <a id='prefs-user-js-link'>user.js-fil</a> som inkluderar inställningar som inte har skapats av &brandShortName;.">
+
 <!ENTITY aboutSupport.graphicsTitle "Grafik">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "Incremental GC">
+
+<!ENTITY aboutSupport.a11yTitle "Tillgänglighet">
+<!ENTITY aboutSupport.a11yActivated "Aktiverad">
+<!ENTITY aboutSupport.a11yForceDisabled "Förhindra tillgänglighet">
 
 <!ENTITY aboutSupport.libraryVersionsTitle "Biblioteksversioner">
 
 <!ENTITY aboutSupport.installationHistoryTitle "Installationshistorik">
 <!ENTITY aboutSupport.updateHistoryTitle "Uppdateringshistorik">
 
-<!ENTITY aboutSupport.copyToClipboard.label "Kopiera allt till urklipp">
+<!ENTITY aboutSupport.copyTextToClipboard.label "Kopiera text till urklipp">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "Kopiera rådata till urklipp">

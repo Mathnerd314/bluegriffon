@@ -116,3 +116,7 @@
 <!ENTITY verify2.accesskey               "r">
 <!ENTITY viewSecurityDevices.label       "Adatvédelmi eszközök">
 <!ENTITY viewSecurityDevices.accesskey   "A">
+
+<!ENTITY isDefault.label                 "&brandShortName; is currently your default browser">
+<!ENTITY setDefault.accesskey            "d">
+<!ENTITY setDefault.label                "Make &brandShortName; the default browser">

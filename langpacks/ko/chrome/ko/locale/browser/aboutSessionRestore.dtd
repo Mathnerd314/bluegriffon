@@ -17,3 +17,6 @@ and regret that we are unable to restore the session for the user -->
 <!ENTITY restorepage.listHeader     "창 및 탭">
 <!-- LOCALIZATION NOTE: &#37;S will be replaced with a number. -->
 <!ENTITY restorepage.windowLabel    "창 &#37;S">
+
+<!ENTITY restorepage.close.access   "C">
+<!ENTITY restorepage.closeButton    "Close">

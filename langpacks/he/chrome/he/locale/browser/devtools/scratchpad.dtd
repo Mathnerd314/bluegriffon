@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the Scratchpad window strings -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
 
@@ -16,43 +20,43 @@
   -  "Scratchpad" in your locale. You should feel free to find a close
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
-<!ENTITY window.title                 "Scratchpad">
+<!ENTITY window.title                 "דף טיוטה">
 
-<!ENTITY fileMenu.label               "File">
-<!ENTITY fileMenu.accesskey           "F">
+<!ENTITY fileMenu.label               "קובץ">
+<!ENTITY fileMenu.accesskey           "ק">
 
-<!ENTITY newWindowCmd.label           "New Window">
-<!ENTITY newWindowCmd.accesskey       "N">
+<!ENTITY newWindowCmd.label           "חלון חדש">
+<!ENTITY newWindowCmd.accesskey       "ח">
 <!ENTITY newWindowCmd.commandkey      "n">
 
-<!ENTITY openFileCmd.label            "Open File…">
-<!ENTITY openFileCmd.accesskey        "O">
-<!ENTITY openFileCmd.commandkey       "o">
+<!ENTITY openFileCmd.label            "פתיחת קובץ…">
+<!ENTITY openFileCmd.accesskey        "פ">
+<!ENTITY openFileCmd.commandkey       "פ">
 
-<!ENTITY saveFileCmd.label            "Save">
-<!ENTITY saveFileCmd.accesskey        "S">
-<!ENTITY saveFileCmd.commandkey       "s">
+<!ENTITY saveFileCmd.label            "שמירה">
+<!ENTITY saveFileCmd.accesskey        "ש">
+<!ENTITY saveFileCmd.commandkey       "ש">
 
-<!ENTITY saveFileAsCmd.label          "Save As…">
-<!ENTITY saveFileAsCmd.accesskey      "A">
+<!ENTITY saveFileAsCmd.label          "שמירה בשם…">
+<!ENTITY saveFileAsCmd.accesskey      "ש">
 
-<!ENTITY closeCmd.label               "Close">
-<!ENTITY closeCmd.key                 "W">
-<!ENTITY closeCmd.accesskey           "C">
+<!ENTITY closeCmd.label               "סגירה">
+<!ENTITY closeCmd.key                 "ס">
+<!ENTITY closeCmd.accesskey           "ס">
 
-<!ENTITY editMenu.label               "Edit">
-<!ENTITY editMenu.accesskey           "E">
+<!ENTITY editMenu.label               "עריכה">
+<!ENTITY editMenu.accesskey           "ע">
 
-<!ENTITY run.label                    "Run">
-<!ENTITY run.accesskey                "R">
-<!ENTITY run.key                      "r">
+<!ENTITY run.label                    "הרצה">
+<!ENTITY run.accesskey                "ר">
+<!ENTITY run.key                      "R">
 
-<!ENTITY inspect.label                "Inspect">
-<!ENTITY inspect.accesskey            "I">
-<!ENTITY inspect.key                  "i">
+<!ENTITY inspect.label                "חקירה">
+<!ENTITY inspect.accesskey            "ח">
+<!ENTITY inspect.key                  "ח">
 
-<!ENTITY display.label                "Display">
-<!ENTITY display.accesskey            "D">
+<!ENTITY display.label                "תצוגה">
+<!ENTITY display.accesskey            "ת">
 <!ENTITY display.key                  "l">
 
 <!-- LOCALIZATION NOTE (environmentMenu.label, accesskey): This menu item was
@@ -61,12 +65,12 @@
   -  the user is evaluating against. I.e., Content (current tab) or Chrome
   -  (browser).
   -->
-<!ENTITY environmentMenu.label        "Environment">
-<!ENTITY environmentMenu.accesskey    "N">
+<!ENTITY environmentMenu.label        "סביבה">
+<!ENTITY environmentMenu.accesskey    "ס">
 
 
-<!ENTITY contentContext.label         "Content">
-<!ENTITY contentContext.accesskey     "C">
+<!ENTITY contentContext.label         "תוכן">
+<!ENTITY contentContext.accesskey     "ת">
 
 <!-- LOCALIZATION NOTE (browserContext.label, accesskey): This menu item is used
   -  to select an execution environment for the browser window itself as opposed
@@ -74,29 +78,29 @@
   -  enabled via the devtools.chrome.enabled preference. Formerly, this label
   -  was called "Chrome".
   -->
-<!ENTITY browserContext.label         "Browser">
-<!ENTITY browserContext.accesskey     "B">
+<!ENTITY browserContext.label         "דפדפן">
+<!ENTITY browserContext.accesskey     "ד">
 
 <!-- LOCALIZATION NOTE some localizations of Windows (ex:french, german) use "?"
   -  for the help button in the menubar but Gnome does not.
   -->
-<!ENTITY helpMenu.label               "Help">
-<!ENTITY helpMenu.accesskey           "H">
-<!ENTITY helpMenuWin.label            "Help">
-<!ENTITY helpMenuWin.accesskey        "H">
+<!ENTITY helpMenu.label               "עזרה">
+<!ENTITY helpMenu.accesskey           "ע">
+<!ENTITY helpMenuWin.label            "עזרה">
+<!ENTITY helpMenuWin.accesskey        "ע">
 
-<!ENTITY documentationLink.label      "Scratchpad Help on MDN">
-<!ENTITY documentationLink.accesskey  "D">
+<!ENTITY documentationLink.label      "עזרה עבור דף טיוטא ב־MDN">
+<!ENTITY documentationLink.accesskey  "ע">
 
 
 <!-- LOCALIZATION NOTE (resetContext2.label): This command allows the developer
   -  to reset/clear the global object of the environment where the code executes.
   -->
-<!ENTITY resetContext2.label          "Reset Variables">
-<!ENTITY resetContext2.accesskey      "T">
+<!ENTITY resetContext2.label          "איפוס משתנים">
+<!ENTITY resetContext2.accesskey      "א">
 
-<!ENTITY executeMenu.label            "Execute">
-<!ENTITY executeMenu.accesskey        "X">
+<!ENTITY executeMenu.label            "ביצוע">
+<!ENTITY executeMenu.accesskey        "ב">
 
 <!-- LOCALIZATION NOTE (errorConsoleCmd.commandkey): This command key launches
   -  the browser Error Console, the key should be identical to the property of
@@ -109,3 +113,15 @@
   -  the same name in browser.dtd.
   -->
 <!ENTITY webConsoleCmd.commandkey     "k">
+
+
+<!ENTITY openRecentMenu.accesskey     "R">
+
+<!ENTITY openRecentMenu.label         "Open Recent">
+<!ENTITY reloadAndRun.accesskey       "E">
+<!ENTITY reloadAndRun.key             "r">
+
+<!ENTITY reloadAndRun.label           "Reload And Run">
+<!ENTITY revertCmd.accesskey          "t">
+
+<!ENTITY revertCmd.label              "Revert…">

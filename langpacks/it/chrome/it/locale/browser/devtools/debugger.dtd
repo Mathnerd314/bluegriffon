@@ -1,18 +1,20 @@
-<!ENTITY debuggerMenu.label "Debugger script">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<!ENTITY debuggerMenu.label2 "Debugger">
+<!ENTITY debuggerMenu.accesskey "D">
+<!ENTITY remoteDebuggerMenu.label "Debugger remoto">
+<!ENTITY chromeDebuggerMenu.label "Browser debugger">
 <!ENTITY debuggerMenu.commandkey "S">
-<!ENTITY debuggerUI.closeButton "Chiudi">
-<!ENTITY debuggerUI.stepOverButton "Ignora">
-<!ENTITY debuggerUI.stepInButton "Entra">
-<!ENTITY debuggerUI.stepOutButton "Esci">
-<!ENTITY debuggerUI.stackTitle "Stack chiamata">
-<!ENTITY debuggerUI.scriptTitle "Script">
-<!ENTITY debuggerUI.propertiesTitle "Ambito variabili">
-
-
-<!-- LOCALIZATION NOTE (debuggerUI.emptyFilterText): This is the text that
-  -  appears in the filter text box when it is empty. -->
-<!ENTITY debuggerUI.emptyFilterText  "Filter scripts">
-
-<!-- LOCALIZATION NOTE (remoteDebuggerMenu.label): This is the label for the
-  -  application menu item that opens the remote debugger UI. -->
-<!ENTITY remoteDebuggerMenu.label    "Remote Debugger">
+<!ENTITY debuggerUI.closeButton.tooltip "Chiudi">
+<!ENTITY debuggerUI.optsButton.tooltip "Opzioni debugger">
+<!ENTITY debuggerUI.pauseExceptions "Metti in pausa su eccezioni">
+<!ENTITY debuggerUI.pauseExceptions.key "M">
+<!ENTITY debuggerUI.showPanesOnInit "Visualizza pannelli all'avvio">
+<!ENTITY debuggerUI.showPanesOnInit.key "V">
+<!ENTITY debuggerUI.showVarsSearch "Visualizza campo di ricerca variabili">
+<!ENTITY debuggerUI.showVarsSearch.key "u">
+<!ENTITY debuggerUI.showNonEnums "Visualizza proprietà nascoste">
+<!ENTITY debuggerUI.showNonEnums.key "s">
+<!ENTITY debuggerUI.searchPanelTitle "Operatori">

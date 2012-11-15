@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY startup.label             "启动">
 
 <!ENTITY startupPage.label         "启动 &brandShortName; 时:">
@@ -5,8 +9,6 @@
 <!ENTITY startupHomePage.label     "显示我的主页">
 <!ENTITY startupBlankPage.label    "显示空白页">
 <!ENTITY startupLastSession.label  "显示上次打开的窗口和标签页">
-<!ENTITY restoreOnDemand.label     "选择之前不要加载">
-<!ENTITY restoreOnDemand.accesskey "l">
 
 <!ENTITY homepage.label            "主页:">
 <!ENTITY homepage.accesskey        "P">
@@ -30,11 +32,5 @@
 <!ENTITY chooseFolderWin.accesskey    "o">
 <!ENTITY chooseFolderMac.label        "选择…">
 <!ENTITY chooseFolderMac.accesskey    "e">
-<!ENTITY alwaysAsk.label "总是询问我保存文件到哪">
+<!ENTITY alwaysAsk.label "总是询问保存文件的位置">
 <!ENTITY alwaysAsk.accesskey "A">
-
-<!ENTITY addonsMgr.label               "附加组件">
-<!ENTITY manageAddonsDescWin.label     "修改附加组件的选项">
-<!ENTITY manageAddonsDescUnix2.label   "修改附加组件的首选项">
-<!ENTITY manageAddons.label            "管理附加组件…">
-<!ENTITY manageAddons.accesskey        "M">

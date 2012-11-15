@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys -->
 
@@ -19,15 +23,15 @@
 <!ENTITY closeOtherTabs.label "Zavřít ostatní panely">
 <!ENTITY closeOtherTabs.accesskey "v">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
 used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
 can reach it easily. -->
-<!ENTITY pinAppTab.label "Připnout panel">
-<!ENTITY pinAppTab.accesskey "a">
-<!ENTITY unpinAppTab.label "Odepnout panel">
-<!ENTITY unpinAppTab.accesskey "a">
+<!ENTITY pinTab.label "Připnout panel">
+<!ENTITY pinTab.accesskey "a">
+<!ENTITY unpinTab.label "Odepnout panel">
+<!ENTITY unpinTab.accesskey "a">
 <!ENTITY moveToGroup.label "Přesunout do skupiny">
 <!ENTITY moveToGroup.accesskey "s">
 <!ENTITY moveToNewGroup.label "Nová skupina">
@@ -77,6 +81,12 @@ can reach it easily. -->
 <!ENTITY pageInfoCmd.label "Informace o stránce">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "Spustit režim celé obrazovky">
+<!ENTITY enterFullScreenCmd.accesskey "r">
+<!ENTITY exitFullScreenCmd.label "Ukončit režim celé obrazovky">
+<!ENTITY exitFullScreenCmd.accesskey "r">
 <!ENTITY fullScreenCmd.label "Celá obrazovka">
 <!ENTITY fullScreenCmd.accesskey "C">
 <!ENTITY fullScreenCmd.macCommandKey "f">
@@ -90,7 +100,13 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "S">
 <!ENTITY fullScreenExit.label "Ukončit režim celé obrazovky">
 <!ENTITY fullScreenExit.accesskey "k">
-<!ENTITY domFullScreenWarning.label "K ukončení režimu celé obrazovky stiskněte klávesu ESC">
+<!ENTITY fullscreenAllowButton.label "Povolit">
+<!ENTITY fullscreenExitButton.label "Zakázat">
+<!ENTITY fullscreenApproval.value "Povolit režim celé obrazovky?">
+
+<!ENTITY fullscreenExitHint.value "K ukončení režimu celé obrazovky stiskněte klávesu ESC">
+<!ENTITY leaveDOMFullScreen.label "Ukončit režim celé obrazovky">
+<!ENTITY leaveDOMFullScreen.accesskey "k">
 
 <!ENTITY closeWindow.label "Zavřít okno">
 <!ENTITY closeWindow.accesskey "a">
@@ -99,6 +115,7 @@ can reach it easily. -->
 <!ENTITY bookmarksMenu.accesskey "o">
 <!ENTITY bookmarkThisPageCmd.label "Přidat stránku do záložek">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "Odebírat kanál této stránky">
 <!ENTITY subscribeToPageMenuitem.label "Odebírat kanál této stránky…">
 <!ENTITY addCurPagesCmd.label "Přidat všechny panely do záložek…">
@@ -190,6 +207,7 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.label "Webová konzola">
 <!ENTITY webConsoleCmd.accesskey "W">
 <!ENTITY webConsoleCmd.commandkey "k">
+<!ENTITY remoteWebConsoleCmd.label "Vzdálená webová konzola">
 
 <!ENTITY inspectMenu.label "Prozkoumat stránku">
 <!ENTITY inspectMenu.accesskey "P">
@@ -197,6 +215,10 @@ can reach it easily. -->
 
 <!ENTITY inspectContextMenu.label "Prozkoumat prvek">
 <!ENTITY inspectContextMenu.accesskey "P">
+
+<!ENTITY responsiveDesignTool.label "Responzivní design">
+<!ENTITY responsiveDesignTool.accesskey "R">
+<!ENTITY responsiveDesignTool.commandkey "M">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -214,6 +236,14 @@ can reach it easily. -->
 <!ENTITY scratchpad.keytext "F4">
 
 <!ENTITY inspectCloseButton.tooltiptext "Zavře průzkumníka">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Zavře postranní lištu">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "Zavře lištu vývoje">
+<!ENTITY devToolbarMenu.label "Lišta vývoje">
+<!ENTITY devToolbarMenu.accesskey "v">
+<!ENTITY devToolbar.keycode "VK_F2">
+<!ENTITY devToolbar.keytext "F2">
+<!ENTITY devToolbarOtherToolsButton.label "Další nástroje">
 
 <!ENTITY inspectorHTMLCopyInner.label "Kopírovat vnitřní HTML">
 <!ENTITY inspectorHTMLCopyInner.accesskey "p">
@@ -248,6 +278,8 @@ can reach it easily. -->
 <!ENTITY newNavigatorCmd.label "Nové okno">
 <!ENTITY newNavigatorCmd.key "N">
 <!ENTITY newNavigatorCmd.accesskey "N">
+<!ENTITY newPrivateWindow.label "Nové anonymní okno">
+<!ENTITY newPrivateWindow.accesskey "a">
 
 <!ENTITY editMenu.label "Úpravy">
 <!ENTITY editMenu.accesskey "a">
@@ -399,8 +431,8 @@ can reach it easily. -->
 <!ENTITY bookmarkThisLinkCmd.accesskey "d">
 <!ENTITY bookmarkThisFrameCmd.label "Přidat rám do záložek">
 <!ENTITY bookmarkThisFrameCmd.accesskey "d">
-<!ENTITY sendPageCmd.label "Odeslat stránku…">
-<!ENTITY sendPageCmd.accesskey "e">
+<!ENTITY emailPageCmd.label "Odeslat odkaz…">
+<!ENTITY emailPageCmd.accesskey "e">
 <!ENTITY savePageCmd.label "Uložit stránku jako…">
 <!ENTITY savePageCmd.accesskey "U">
 <!-- alternate for content area context menu -->
@@ -412,20 +444,18 @@ can reach it easily. -->
 <!ENTITY printFrameCmd.accesskey "T">
 <!ENTITY saveLinkCmd.label "Uložit odkaz jako…">
 <!ENTITY saveLinkCmd.accesskey "U">
-<!ENTITY sendLinkCmd.label "Odeslat odkaz…">
-<!ENTITY sendLinkCmd.accesskey "d">
 <!ENTITY saveImageCmd.label "Uložit obrázek jako…">
 <!ENTITY saveImageCmd.accesskey "l">
 <!ENTITY saveVideoCmd.label "Uložit video jako…">
 <!ENTITY saveVideoCmd.accesskey "l">
 <!ENTITY saveAudioCmd.label "Uložit audio jako……">
 <!ENTITY saveAudioCmd.accesskey "l">
-<!ENTITY sendImageCmd.label "Odeslat obrázek…">
-<!ENTITY sendImageCmd.accesskey "e">
-<!ENTITY sendVideoCmd.label "Odeslat video…">
-<!ENTITY sendVideoCmd.accesskey "e">
-<!ENTITY sendAudioCmd.label "Odeslat audio…">
-<!ENTITY sendAudioCmd.accesskey "e">
+<!ENTITY emailImageCmd.label "Odeslat obrázek…">
+<!ENTITY emailImageCmd.accesskey "e">
+<!ENTITY emailVideoCmd.label "Odeslat video…">
+<!ENTITY emailVideoCmd.accesskey "e">
+<!ENTITY emailAudioCmd.label "Odeslat audio…">
+<!ENTITY emailAudioCmd.accesskey "e">
 <!ENTITY copyLinkCmd.label "Kopírovat adresu odkazu">
 <!ENTITY copyLinkCmd.accesskey "s">
 <!ENTITY copyImageCmd.label "Kopírovat adresu obrázku">
@@ -592,8 +622,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "Ouška panelů">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu.label "Panely z jiných počítačů">
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label "Panely z jiných zařízení">
 
 <!ENTITY syncBrand.shortName.label "Sync">
 
@@ -606,33 +636,29 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "Zavře lištu doplňků">
 <!ENTITY toggleAddonBarCmd.key "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label "HTML">
-
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext "Panel HTML">
-
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey "H">
-
-<!ENTITY devToolbar.commandkey "v">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspectorButton.label "Inspector">
-<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
-toolbar button -->
-<!ENTITY markupButton.accesskey          "M">
-
 <!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
 located in front of the breadcrumbs display in the inspector toolbar. The button
 doesn't display any label, but exposes a label to screen-readers with "aria-label".
 -->
-<!ENTITY markupButton.arialabel          "Markup">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY markupButton.arialabel "Značky">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey "Z">
 
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY socialToolbar.title "Tlačítko sdílení">
+<!ENTITY social.notLoggedIn.label "Nepřihlášen">
+
+<!ENTITY social.ok.label "OK">
+<!ENTITY social.ok.accesskey "O">
+
+<!ENTITY social.toggleSidebar.label "Zobrazit postranní lištu">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleNotifications.label "Zobrazit oznámení">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.activated.undobutton.label "Zpět">
+<!ENTITY social.activated.undobutton.accesskey "Z">
+
+
+<!ENTITY social.chatBar.commandkey "c">

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY cutCmd.label "Knippen">
 <!ENTITY cutCmd.accesskey "n">
 <!ENTITY copyCmd.label "Kopiëren">
@@ -15,8 +19,8 @@
 <!ENTITY spellAddToDictionary.accesskey "T">
 <!ENTITY spellUndoAddToDictionary.label "Toevoegen aan woordenboek ongedaan maken">
 <!ENTITY spellUndoAddToDictionary.accesskey "n">
-<!ENTITY spellCheckEnable.label "Spelling controleren">
-<!ENTITY spellCheckEnable.accesskey "c">
+<!ENTITY spellCheckToggle.label "Spelling controleren">
+<!ENTITY spellCheckToggle.accesskey "c">
 <!ENTITY spellNoSuggestions.label "(Geen spellingsuggesties)">
 <!ENTITY spellDictionaries.label "Talen">
 <!ENTITY spellDictionaries.accesskey "l">

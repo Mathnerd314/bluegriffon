@@ -15,3 +15,8 @@
 <!ENTITY tabs.context.bookmarkMultipleTabs.accesskey  "L">
 <!ENTITY tabs.context.refreshList.label               "Päivitä lista">
 <!ENTITY tabs.context.refreshList.accesskey           "P">
+
+
+
+<!-- LOCALIZATION NOTE (tabs.otherDevices.label): Keep this in sync with syncTabsMenu2.label from browser.dtd -->
+<!ENTITY tabs.otherDevices.label               "Tabs From Other Devices">

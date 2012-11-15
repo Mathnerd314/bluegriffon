@@ -556,12 +556,32 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 
 <!ENTITY backForwardButtonMenu.tooltip "Right-click or pull down to show history">
 <!ENTITY backForwardButtonMenuMac.tooltip "Pull down to show history">
-<!ENTITY devToolbar.commandkey "v">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
 
 <!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY domFullScreenWarning.label "Press ESC to leave full-screen mode">
+<!ENTITY devToolbarMenu.accesskey          "v">
+<!ENTITY devToolbarMenu.label              "Developer Toolbar">
+<!ENTITY devToolbarOtherToolsButton.label  "More Tools">
+<!ENTITY emailAudioCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "Email Audio…">
+<!ENTITY emailImageCmd.accesskey      "g">
+<!ENTITY emailImageCmd.label          "Email Image…">
+<!ENTITY emailPageCmd.accesskey       "E">
+<!ENTITY emailPageCmd.label           "Email Link…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailVideoCmd.label          "Email Video…">
+<!ENTITY enterFullScreenCmd.accesskey "F">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "Enter Full Screen">
+<!ENTITY exitFullScreenCmd.accesskey "F">
+<!ENTITY exitFullScreenCmd.label "Exit Full Screen">
+<!ENTITY fullscreenAllowButton.label "Allow">
+<!ENTITY fullscreenApproval.value "Allow fullscreen?">
+<!ENTITY fullscreenExitButton.label "Deny">
+
+<!ENTITY fullscreenExitHint.value "Press ESC at any time to exit fullscreen.">
 <!ENTITY getMoreDevtoolsCmd.accesskey    "M">
 
 <!ENTITY getMoreDevtoolsCmd.label        "Get More Tools">
@@ -576,7 +596,7 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY inspectContextMenu.accesskey "Q">
 
 <!ENTITY inspectContextMenu.label     "Inspect Element">
-<!ENTITY inspectorButton.label "Inspector">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Close sidebar">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "I">
 
 <!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
@@ -586,6 +606,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY inspectorHTMLDelete.accesskey      "D">
 
 <!ENTITY inspectorHTMLDelete.label          "Delete Node">
+<!ENTITY leaveDOMFullScreen.accesskey "u">
+<!ENTITY leaveDOMFullScreen.label "Exit Full Screen">
 <!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
 toolbar button -->
 <!ENTITY markupButton.accesskey          "M">
@@ -595,6 +617,21 @@ located in front of the breadcrumbs display in the inspector toolbar. The button
 doesn't display any label, but exposes a label to screen-readers with "aria-label".
 -->
 <!ENTITY markupButton.arialabel          "Markup">
+<!ENTITY newPrivateWindow.accesskey "W">
+<!ENTITY newPrivateWindow.label     "New Private Window">
+<!ENTITY  pinTab.accesskey                   "P">
+
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
+used as a metaphor for expressing the fact that these tabs are "pinned" to the
+left edge of the tabstrip. Really we just want the string to express the idea
+that this is a lightweight and reversible action that keeps your tab where you
+can reach it easily. -->
+<!ENTITY  pinTab.label                       "Pin Tab">
+<!ENTITY remoteWebConsoleCmd.label    "Remote Web Console">
+<!ENTITY responsiveDesignTool.accesskey "R">
+<!ENTITY responsiveDesignTool.commandkey "M">
+
+<!ENTITY responsiveDesignTool.label   "Responsive Design View">
 <!ENTITY scratchpad.accesskey         "s">
 <!ENTITY scratchpad.keycode           "VK_F4">
 <!ENTITY scratchpad.keytext           "F4">
@@ -610,8 +647,25 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
   -  approximation to it or choose a word (or words) that means
   -  "simple discardable text editor". -->
 <!ENTITY scratchpad.label             "Scratchpad">
-<!ENTITY scriptsButton.label "Scripts">
 <!ENTITY searchFocus.commandkey2      "e">
+<!ENTITY sharePageCmd.commandkey "l">
+<!ENTITY social.activated.undobutton.accesskey "U">
+
+<!ENTITY social.activated.undobutton.label "Undo">
+
+<!ENTITY social.chatBar.commandkey "c">
+<!ENTITY social.notLoggedIn.label   "Not logged in">
+<!ENTITY social.ok.accesskey   "O">
+
+<!ENTITY social.ok.label       "OK">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.toggleNotifications.label "Show desktop notifications">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleSidebar.label "Show sidebar">
+
+<!ENTITY socialToolbar.title        "Social Toolbar Button">
 <!ENTITY styleeditor.accesskey        "y">
 <!ENTITY styleeditor.keycode          "VK_F7">
 <!ENTITY styleeditor.keytext          "F7">
@@ -619,6 +673,11 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
 <!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
   -  in the Tools menu. -->
 <!ENTITY styleeditor.label            "Style Editor">
+
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "Tabs From Other Devices">
+<!ENTITY  unpinTab.accesskey                 "b">
+<!ENTITY  unpinTab.label                     "Unpin Tab">
 <!ENTITY unsortedBookmarksCmd.label "Unsorted Bookmarks">
 <!ENTITY videoHideStats.accesskey    "t">
 <!ENTITY videoHideStats.label        "Hide Statistics">
@@ -629,8 +688,6 @@ doesn't display any label, but exposes a label to screen-readers with "aria-labe
 "Hide Statistics" are the same because the two context-menu
 items are mutually exclusive. -->
 <!ENTITY videoShowStats.label        "Show Statistics">
-
-<!ENTITY webConsoleButton.label "Web Console">
 <!ENTITY webDeveloperMenu.accesskey   "W">
 
 <!ENTITY webDeveloperMenu.label       "Web Developer">

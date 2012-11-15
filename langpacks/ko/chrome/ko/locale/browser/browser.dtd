@@ -44,6 +44,12 @@
 <!ENTITY pageInfoCmd.label "페이지 정보">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
+
+<!ENTITY enterFullScreenCmd.label  "전체 화면으로 표시">
+<!ENTITY enterFullScreenCmd.accesskey  "F">
+<!ENTITY exitFullScreenCmd.label   "원래 화면으로 복구">
+<!ENTITY exitFullScreenCmd.accesskey   "F">
+
 <!ENTITY fullScreenCmd.label "전체 화면">
 <!ENTITY fullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.macCommandKey	"f">
@@ -56,14 +62,27 @@
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "원래 화면으로 복구">
 <!ENTITY fullScreenExit.accesskey "F">
-<!ENTITY domFullScreenWarning.label "원래 화면으로 돌아가려면 ESC 누르기">
+
+<!ENTITY fullscreenAllowButton.label   "허가">
+<!ENTITY fullscreenExitButton.label    "거부">
+<!ENTITY fullscreenApproval.value  "전체 화면 표시 모드를 허가합니까?">
+
+<!ENTITY fullscreenExitHint.value  "ESC 키를 누르면, 전체 화면 표시 모드를 종료합니다.">
+<!ENTITY leaveDOMFullScreen.label  "전체 화면 표시 모드 종료">
+<!ENTITY leaveDOMFullScreen.accesskey  "u">
 
 <!ENTITY closeWindow.label "창 닫기">
+<!ENTITY closeWindow.accesskey "d">
+
 <!ENTITY bookmarksMenu.label "북마크">
 <!ENTITY bookmarksMenu.accesskey "B">
-<!ENTITY bookmarkThisPageCmd.label "북마크에 추가">
+<!ENTITY bookmarkThisPageCmd.label "현재 페이지 북마크에 추가">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
-<!ENTITY showAllBookmarks2.label "북마크 관리…">
+
+<!ENTITY subscribeToPageMenupopup.label "현재 페이지 구독하기">
+<!ENTITY subscribeToPageMenuitem.label "현재 페이지 구독하기…">
+<!ENTITY addCurPagesCmd.label "모든 탭 북마크 추가…">
+<!ENTITY showAllBookmarks2.label "모든 북마크 보기">
 <!ENTITY unsortedBookmarksCmd.label "미 분류 북마크">
 <!ENTITY bookmarksToolbarChevron.tooltip "북마크 계속 보기">
 
@@ -82,7 +101,7 @@
 <!ENTITY stopCmd.accesskey "S">
 <!ENTITY stopCmd.macCommandKey ".">
 <!ENTITY stopButton.tooltip "이 페이지 읽기 중지">
-<!ENTITY goEndCap.tooltip "주소 표시줄에 주소를 입력하십시오.">
+<!ENTITY goEndCap.tooltip "주소 표시줄에 있는 주소로 접속하기">
 <!ENTITY feedButton.label "구독하기">
 <!ENTITY feedButton.tooltip		"페이지 구독하기…">
 <!ENTITY printButton.label "인쇄">
@@ -256,15 +275,15 @@ can reach it easily. -->
 <!ENTITY viewPageInfoCmd.accesskey "I">
 <!ENTITY viewFrameInfoCmd.label "프레임 등록 정보">
 <!ENTITY viewFrameInfoCmd.accesskey "I">
-<!ENTITY reloadImageCmd.label         "그림 다시 읽기">
+<!ENTITY reloadImageCmd.label         "이미지 다시 읽기">
 <!ENTITY reloadImageCmd.accesskey     "R">
-<!ENTITY viewImageCmd.label "그림 보기">
+<!ENTITY viewImageCmd.label "이미지 보기">
 <!ENTITY viewImageCmd.accesskey "I">
-<!ENTITY viewImageInfoCmd.label       "그림 정보 보기">
+<!ENTITY viewImageInfoCmd.label       "이미지 정보 보기">
 <!ENTITY viewImageInfoCmd.accesskey   "f">
 <!ENTITY viewVideoCmd.label           "동영상 보기">
 <!ENTITY viewVideoCmd.accesskey       "I">
-<!ENTITY viewBGImageCmd.label "배경 그림 보기">
+<!ENTITY viewBGImageCmd.label "배경 이미지 보기">
 <!ENTITY viewBGImageCmd.accesskey "w">
 <!ENTITY setDesktopBackgroundCmd.label "배경으로 지정…">
 <!ENTITY setDesktopBackgroundCmd.accesskey "S">
@@ -285,13 +304,13 @@ can reach it easily. -->
 <!ENTITY saveLinkCmd.accesskey "k">
 <!ENTITY sendLinkCmd.label "메일로 링크 보내기…">
 <!ENTITY sendLinkCmd.accesskey "d">
-<!ENTITY saveImageCmd.label "다른 이름으로 그림 저장…">
+<!ENTITY saveImageCmd.label "다른 이름으로 이미지 저장…">
 <!ENTITY saveImageCmd.accesskey "v">
 <!ENTITY saveVideoCmd.label           "다른 이름으로 동영상 저장…">
 <!ENTITY saveVideoCmd.accesskey       "v">
 <!ENTITY saveAudioCmd.label           "다른 이름으로 오디오 저장…">
 <!ENTITY saveAudioCmd.accesskey       "v">
-<!ENTITY sendImageCmd.label 			"그림 보내기…">
+<!ENTITY sendImageCmd.label 			"이미지 보내기…">
 <!ENTITY sendImageCmd.accesskey 		"n">
 <!ENTITY sendVideoCmd.label           "동영상 보내기…">
 <!ENTITY sendVideoCmd.accesskey       "n">
@@ -299,9 +318,9 @@ can reach it easily. -->
 <!ENTITY sendAudioCmd.accesskey       "n">
 <!ENTITY copyLinkCmd.label "링크 주소 복사">
 <!ENTITY copyLinkCmd.accesskey "a">
-<!ENTITY copyImageCmd.label "그림 주소 복사">
+<!ENTITY copyImageCmd.label "이미지 주소 복사">
 <!ENTITY copyImageCmd.accesskey "o">
-<!ENTITY copyImageContentsCmd.label "그림 복사">
+<!ENTITY copyImageContentsCmd.label "이미지 복사">
 <!ENTITY copyImageContentsCmd.accesskey "y">
 <!ENTITY copyVideoURLCmd.label        "동영상 주소 복사">
 <!ENTITY copyVideoURLCmd.accesskey    "o">
@@ -409,6 +428,10 @@ can reach it easily. -->
 <!ENTITY inspectContextMenu.label     "요소 검사">
 <!ENTITY inspectContextMenu.accesskey "Q">
 
+<!ENTITY responsiveDesignTool.label        "반응형 웹 디자인 보기">
+<!ENTITY responsiveDesignTool.accesskey        "R">
+<!ENTITY responsiveDesignTool.commandkey   "M">
+
 <!-- LOCALIZATION NOTE (scratchpad.label) : This menu item label appears
 - in the Tools menu. See bug 653093.
 - The Scratchpad is intended to provide a simple text editor for creating
@@ -425,14 +448,20 @@ can reach it easily. -->
 <!ENTITY scratchpad.keycode "VK_F4">
 <!ENTITY scratchpad.keytext "F4">
 
-<!ENTITY inspectPanelTitle.label      "HTML">
-<!ENTITY inspectButton.label          "문서 검사">
-<!ENTITY inspectButton.accesskey      "I">
 <!ENTITY inspectCloseButton.tooltiptext "검사기 닫기">
-<!ENTITY inspect3DButton.label		"3D">
-<!ENTITY inspect3DButton.accesskey	"M">
+<!ENTITY inspect3DViewButton.label		"3D 보기">
+<!ENTITY inspect3DViewButton.accesskey	"W">
 <!ENTITY inspectStyleButton.label	"스타일">
 <!ENTITY inspectStyleButton.accesskey "S">
+
+<!ENTITY inspectorHTMLCopyInner.label		"내부 HTML 북사">
+<!ENTITY inspectorHTMLCopyInner.accesskey	"I">
+
+<!ENTITY inspectorHTMLCopyOuter.label		"외부 HTML 복사">
+<!ENTITY inspectorHTMLCopyOuter.accesskey	"O">
+
+<!ENTITY inspectorHTMLDelete.label		"노드 삭제">
+<!ENTITY inspectorHTMLDelete.accesskey		"D">
 
 <!-- LOCALIZATION NOTE (styleeditor.label): This menu item label appears
 -  in the Tools menu. -->
@@ -534,36 +563,71 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "부가 기능 모음 닫기">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!ENTITY devToolbar.commandkey "v">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspect3DViewButton.accesskey "W">
-
-<!-- LOCALIZATION NOTE (inspect3DViewButton.label): This button shows an
-  -  alternate view for the Inspector, creating a 3D visualization of the
-  -  webpage. -->
-<!ENTITY inspect3DViewButton.label     "3D View">
-<!ENTITY inspectorButton.label "Inspector">
-<!ENTITY inspectorHTMLCopyInner.accesskey   "I">
-
-<!ENTITY inspectorHTMLCopyInner.label       "Copy Inner HTML">
-<!ENTITY inspectorHTMLCopyOuter.accesskey   "O">
-
-<!ENTITY inspectorHTMLCopyOuter.label       "Copy Outer HTML">
-<!ENTITY inspectorHTMLDelete.accesskey      "D">
-
-<!ENTITY inspectorHTMLDelete.label          "Delete Node">
-<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
-toolbar button -->
+<!ENTITY markupButton.arialabel          "마크업">
 <!ENTITY markupButton.accesskey          "M">
 
-<!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
-located in front of the breadcrumbs display in the inspector toolbar. The button
-doesn't display any label, but exposes a label to screen-readers with "aria-label".
--->
-<!ENTITY markupButton.arialabel          "Markup">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY devToolbarCloseButton.tooltiptext "개발자 도구 모음 닫기">
+<!ENTITY devToolbarMenu.label          "개발자 도구 모음">
+<!ENTITY devToolbarMenu.accesskey      "v">
+<!ENTITY devToolbar.commandkey         "v">
 
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY webConsoleButton.label            "웹 콘솔">
+<!ENTITY inspectorButton.label         "문서 검사">
+<!ENTITY scriptsButton.label           "스크립트 디버거">
+
+<!-- LOCALIZATION NOTE (inspectOptionButton.*): The menu in the Inspector
+  -  toolbar.  -->
+<!ENTITY inspectOptionButton.tooltiptext   "문사 검사 설정">
+
+<!-- LOCALIZATION NOTE: These are for the menu in the Inspector Toolbar -->
+<!ENTITY inspectorToggleVeil.label     "페이지 어둡게하기">
+<!ENTITY inspectorToggleVeil.accesskey     "D">
+<!ENTITY inspectorToggleInfobar.label      "노드 정보 표시">
+<!ENTITY inspectorToggleInfobar.accesskey  "S">
+
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "More Tools">
+<!ENTITY emailAudioCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "Email Audio…">
+<!ENTITY emailImageCmd.accesskey      "g">
+<!ENTITY emailImageCmd.label          "Email Image…">
+<!ENTITY emailPageCmd.accesskey       "E">
+<!ENTITY emailPageCmd.label           "Email Link…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailVideoCmd.label          "Email Video…">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "Close sidebar">
+<!ENTITY newPrivateWindow.accesskey "W">
+<!ENTITY newPrivateWindow.label     "New Private Window">
+<!ENTITY  pinTab.accesskey                   "P">
+
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
+used as a metaphor for expressing the fact that these tabs are "pinned" to the
+left edge of the tabstrip. Really we just want the string to express the idea
+that this is a lightweight and reversible action that keeps your tab where you
+can reach it easily. -->
+<!ENTITY  pinTab.label                       "Pin Tab">
+<!ENTITY remoteWebConsoleCmd.label    "Remote Web Console">
+<!ENTITY sharePageCmd.commandkey "l">
+<!ENTITY social.activated.undobutton.accesskey "U">
+
+<!ENTITY social.activated.undobutton.label "Undo">
+
+<!ENTITY social.chatBar.commandkey "c">
+<!ENTITY social.notLoggedIn.label   "Not logged in">
+<!ENTITY social.ok.accesskey   "O">
+
+<!ENTITY social.ok.label       "OK">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.toggleNotifications.label "Show desktop notifications">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleSidebar.label "Show sidebar">
+
+<!ENTITY socialToolbar.title        "Social Toolbar Button">
+
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "Tabs From Other Devices">
+<!ENTITY  unpinTab.accesskey                 "b">
+<!ENTITY  unpinTab.label                     "Unpin Tab">

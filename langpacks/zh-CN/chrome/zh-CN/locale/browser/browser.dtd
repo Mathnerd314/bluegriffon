@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!-- LOCALIZATION NOTE : FILE This file contains the browser main menu items -->
 <!-- LOCALIZATION NOTE : FILE Do not translate commandkeys --> 
 
@@ -19,15 +23,15 @@
 <!ENTITY  closeOtherTabs.label               "关闭其他标签页">
 <!ENTITY  closeOtherTabs.accesskey           "o">
 
-<!-- LOCALIZATION NOTE (pinAppTab.label, unpinAppTab.label): "Pin" is being
+<!-- LOCALIZATION NOTE (pinTab.label, unpinTab.label): "Pin" is being
 used as a metaphor for expressing the fact that these tabs are "pinned" to the
 left edge of the tabstrip. Really we just want the string to express the idea
 that this is a lightweight and reversible action that keeps your tab where you
 can reach it easily. -->
-<!ENTITY  pinAppTab.label                    "固定为应用标签页">
-<!ENTITY  pinAppTab.accesskey                "P">
-<!ENTITY  unpinAppTab.label                  "取消固定标签页">
-<!ENTITY  unpinAppTab.accesskey              "b">
+<!ENTITY  pinTab.label                       "固定标签页">
+<!ENTITY  pinTab.accesskey                   "P">
+<!ENTITY  unpinTab.label                     "取消固定标签页">
+<!ENTITY  unpinTab.accesskey                 "b">
 <!ENTITY  moveToGroup.label                  "移至组">
 <!ENTITY  moveToGroup.accesskey              "M">
 <!ENTITY  moveToNewGroup.label               "新建组">
@@ -77,6 +81,12 @@ can reach it easily. -->
 <!ENTITY pageInfoCmd.label "页面信息">
 <!ENTITY pageInfoCmd.accesskey "I">
 <!ENTITY pageInfoCmd.commandkey "i">
+<!-- LOCALIZATION NOTE (enterFullScreenCmd.label, exitFullScreenCmd.label):
+These should match what Safari and other Apple applications use on OS X Lion. -->
+<!ENTITY enterFullScreenCmd.label "进入全屏">
+<!ENTITY enterFullScreenCmd.accesskey "F">
+<!ENTITY exitFullScreenCmd.label "退出全屏">
+<!ENTITY exitFullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.label "全屏">
 <!ENTITY fullScreenCmd.accesskey "F">
 <!ENTITY fullScreenCmd.macCommandKey "f">
@@ -90,7 +100,13 @@ can reach it easily. -->
 <!ENTITY fullScreenAutohide.accesskey "H">
 <!ENTITY fullScreenExit.label "退出全屏模式">
 <!ENTITY fullScreenExit.accesskey "F">
-<!ENTITY domFullScreenWarning.label "按 ESC 键离开全屏模式">
+<!ENTITY fullscreenAllowButton.label "允许">
+<!ENTITY fullscreenExitButton.label "拒绝">
+<!ENTITY fullscreenApproval.value "允许全屏？">
+
+<!ENTITY fullscreenExitHint.value "可随时按 ESC 退出全屏。">
+<!ENTITY leaveDOMFullScreen.label "退出全屏">
+<!ENTITY leaveDOMFullScreen.accesskey "u">
 
 <!ENTITY closeWindow.label "关闭窗口">
 <!ENTITY closeWindow.accesskey "d">
@@ -99,10 +115,11 @@ can reach it easily. -->
 <!ENTITY bookmarksMenu.accesskey "B">
 <!ENTITY bookmarkThisPageCmd.label "将此页加为书签">
 <!ENTITY bookmarkThisPageCmd.commandkey "d">
+<!ENTITY sharePageCmd.commandkey "l">
 <!ENTITY subscribeToPageMenupopup.label "订阅此页">
 <!ENTITY subscribeToPageMenuitem.label "订阅此页…">
 <!ENTITY addCurPagesCmd.label "将所有标签页加入书签…">
-<!ENTITY showAllBookmarks2.label "显示所有书签">
+<!ENTITY showAllBookmarks2.label "管理所有书签">
 <!ENTITY unsortedBookmarksCmd.label "未分类书签">
 <!ENTITY bookmarksToolbarChevron.tooltip "显示更多书签">
 
@@ -192,11 +209,15 @@ can reach it easily. -->
 <!ENTITY webConsoleCmd.commandkey     "k">
 
 <!ENTITY inspectMenu.label            "查看">
-<!ENTITY inspectMenu.accesskey        "T">
+<!ENTITY inspectMenu.accesskey        "I">
 <!ENTITY inspectMenu.commandkey       "I">
 
 <!ENTITY inspectContextMenu.label     "查看元素">
 <!ENTITY inspectContextMenu.accesskey "Q">
+
+<!ENTITY responsiveDesignTool.label   "自适应设计视图">
+<!ENTITY responsiveDesignTool.accesskey "R">
+<!ENTITY responsiveDesignTool.commandkey "M">
 
 <!-- LOCALIZATION NOTE (scratchpad.label): This menu item label appears
   -  in the Tools menu. See bug 653093.
@@ -216,6 +237,14 @@ can reach it easily. -->
 <!ENTITY inspectButton.label            "查看">
 <!ENTITY inspectButton.accesskey        "I">
 <!ENTITY inspectCloseButton.tooltiptext "关闭查看器">
+<!ENTITY inspectSidebarCloseButton.tooltiptext "关闭侧栏">
+
+<!ENTITY devToolbarCloseButton.tooltiptext "关闭开发者工具栏">
+<!ENTITY devToolbarMenu.label              "开发者工具栏">
+<!ENTITY devToolbarMenu.accesskey          "v">
+<!ENTITY devToolbar.keycode                "VK_F2">
+<!ENTITY devToolbar.keytext                "F2">
+<!ENTITY devToolbarOtherToolsButton.label  "更多工具">
 
 <!ENTITY inspectorHTMLCopyInner.label       "复制内部 HTML">
 <!ENTITY inspectorHTMLCopyInner.accesskey   "I">
@@ -282,7 +311,7 @@ can reach it easily. -->
 <!ENTITY clearRecentHistory.label               "清空最近历史记录…">
 <!ENTITY clearRecentHistory.accesskey           "H">
 
-<!-- LOCALIZATION NOTE : These two strings can share an access key beause they never appear together on the menu -->
+<!-- LOCALIZATION NOTE : These two strings can share an access key because they never appear together on the menu -->
 <!ENTITY privateBrowsingCmd.start.label         "进入隐私浏览模式">
 <!ENTITY privateBrowsingCmd.start.accesskey     "P">
 <!ENTITY privateBrowsingCmd.stop.label          "退出隐私浏览模式">
@@ -310,7 +339,7 @@ can reach it easily. -->
 <!ENTITY historyRestoreLastSession.label "恢复上一次会话">
 
 <!ENTITY historyHomeCmd.label "主页">
-<!ENTITY showAllHistoryCmd2.label "显示所有历史">
+<!ENTITY showAllHistoryCmd2.label "管理所有历史记录">
 <!ENTITY showAllHistoryCmd.commandkey "H">
 
 <!ENTITY appMenuEdit.label "编辑">
@@ -401,8 +430,8 @@ can reach it easily. -->
 <!ENTITY bookmarkThisLinkCmd.accesskey  "L">
 <!ENTITY bookmarkThisFrameCmd.label      "将此框架加为书签">
 <!ENTITY bookmarkThisFrameCmd.accesskey  "m">
-<!ENTITY sendPageCmd.label            "发送页面…">
-<!ENTITY sendPageCmd.accesskey        "e">
+<!ENTITY emailPageCmd.label           "电邮链接…">
+<!ENTITY emailPageCmd.accesskey       "E">
 <!ENTITY savePageCmd.label            "页面另存为…">
 <!ENTITY savePageCmd.accesskey        "A">
 <!-- alternate for content area context menu -->
@@ -414,20 +443,18 @@ can reach it easily. -->
 <!ENTITY printFrameCmd.accesskey      "P">
 <!ENTITY saveLinkCmd.label            "链接另存为…">
 <!ENTITY saveLinkCmd.accesskey        "k">
-<!ENTITY sendLinkCmd.label            "发送链接…"> 
-<!ENTITY sendLinkCmd.accesskey        "d">
 <!ENTITY saveImageCmd.label           "图像另存为…">
 <!ENTITY saveImageCmd.accesskey       "v">
 <!ENTITY saveVideoCmd.label           "视频另存为…">
 <!ENTITY saveVideoCmd.accesskey       "v">
 <!ENTITY saveAudioCmd.label           "音频另存为…">
 <!ENTITY saveAudioCmd.accesskey       "v">
-<!ENTITY sendImageCmd.label           "发送图片…">
-<!ENTITY sendImageCmd.accesskey       "n">
-<!ENTITY sendVideoCmd.label           "发送视频…">
-<!ENTITY sendVideoCmd.accesskey       "n">
-<!ENTITY sendAudioCmd.label           "发送音频…">
-<!ENTITY sendAudioCmd.accesskey       "n">
+<!ENTITY emailImageCmd.label          "电邮图片…">
+<!ENTITY emailImageCmd.accesskey      "g">
+<!ENTITY emailVideoCmd.label          "电邮视频…">
+<!ENTITY emailVideoCmd.accesskey      "a">
+<!ENTITY emailAudioCmd.label          "电邮音频…">
+<!ENTITY emailAudioCmd.accesskey      "a">
 <!ENTITY copyLinkCmd.label            "复制链接地址">
 <!ENTITY copyLinkCmd.accesskey        "a">
 <!ENTITY copyImageCmd.label           "复制图片地址">
@@ -594,8 +621,8 @@ just addresses the organization to follow, e.g. "This site is run by " -->
      The word "toolbar" is appended automatically and should not be contained below! -->
 <!ENTITY tabsToolbar.label "浏览器标签">
 
-<!-- LOCALIZATION NOTE (syncTabsMenu.label): This appears in the history menu -->
-<!ENTITY syncTabsMenu.label     "来自其他计算机的标签页">
+<!-- LOCALIZATION NOTE (syncTabsMenu2.label): This appears in the history menu -->
+<!ENTITY syncTabsMenu2.label     "来自其他设备的标签页">
 
 <!ENTITY syncBrand.shortName.label    "同步">
 
@@ -608,33 +635,32 @@ just addresses the organization to follow, e.g. "This site is run by " -->
 <!ENTITY addonBarCloseButton.tooltip  "关闭附加组件栏">
 <!ENTITY toggleAddonBarCmd.key        "/">
 
-<!-- LOCALIZATION NOTE (htmlPanel.label): This is a label for a button that
-activates the Web Developer->Inspect UI's HTML Tree Panel. -->
-<!ENTITY htmlPanel.label              "HTML">
-
-<!-- LOCALIZATION NOTE (htmlPanel.tooltiptext): The text that appears when a user
-hovers over the HTML panel's toolbar button. -->
-<!ENTITY htmlPanel.tooltiptext        "HTML 面板">
-
-<!-- LOCALIZATION NOTE (htmlPanel.accesskey): The key bound to the HTML panel's
-toolbar button -->
-<!ENTITY htmlPanel.accesskey          "H">
-
-<!ENTITY devToolbar.commandkey "v">
-
-<!ENTITY devToolbarCloseButton.tooltiptext "Close Developer Toolbar">
-<!ENTITY devToolbarMenu.accesskey "v">
-<!ENTITY devToolbarMenu.label "Developer Toolbar">
-<!ENTITY inspectorButton.label "Inspector">
-<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
-toolbar button -->
-<!ENTITY markupButton.accesskey          "M">
-
 <!-- LOCALIZATION NOTE (markupButton.arialabel): The markup button is the button
 located in front of the breadcrumbs display in the inspector toolbar. The button
 doesn't display any label, but exposes a label to screen-readers with "aria-label".
 -->
-<!ENTITY markupButton.arialabel          "Markup">
-<!ENTITY scriptsButton.label "Scripts">
+<!ENTITY markupButton.arialabel          "标记">
+<!-- LOCALIZATION NOTE (markupButton.accesskey): The key bound to the Markup panel's
+toolbar button -->
+<!ENTITY markupButton.accesskey          "M">
 
-<!ENTITY webConsoleButton.label "Web Console">
+<!ENTITY socialToolbar.title        "社交工具栏按钮">
+<!ENTITY social.notLoggedIn.label   "没有登录">
+
+<!ENTITY social.ok.label       "OK">
+<!ENTITY social.ok.accesskey   "O">
+
+<!ENTITY social.toggleSidebar.label "显示侧栏">
+<!ENTITY social.toggleSidebar.accesskey "s">
+
+<!ENTITY social.toggleNotifications.label "显示桌面通知">
+<!ENTITY social.toggleNotifications.accesskey "n">
+
+<!ENTITY social.activated.undobutton.label "撤销">
+<!ENTITY social.activated.undobutton.accesskey "U">
+
+<!ENTITY newPrivateWindow.accesskey "W">
+<!ENTITY newPrivateWindow.label     "New Private Window">
+<!ENTITY remoteWebConsoleCmd.label    "Remote Web Console">
+
+<!ENTITY social.chatBar.commandkey "c">

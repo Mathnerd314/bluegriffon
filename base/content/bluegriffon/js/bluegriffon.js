@@ -738,7 +738,7 @@ function onSourceChangeCallback(source)
 
   var editorElement  = EditorUtils.getCurrentEditorElement();
   var sourceIframe   = editorElement.previousSibling;
-  var sourceEditor   = sourceIframe.contentWindow.gEditor;
+  var sourceEditor   = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   var sourceDocument = sourceIframe.contentWindow.document;
 
   if (isXML) {
@@ -840,15 +840,15 @@ function ToggleViewMode(aElement)
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
     var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
-    sourceIframe.contentWindow.gChangeCallback = onSourceChangeCallback;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
+    sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
 
     var theme = null;
     try {
       theme = GetPrefs().getCharPref("bluegriffon.source.theme");
     }
     catch(e) {}
-    sourceIframe.contentWindow.installCodeMirror(BespinKeyPressCallback,
+    sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  theme,
                                                  null,
                                                  EditorUtils);
@@ -876,10 +876,10 @@ function ToggleViewMode(aElement)
     sourceIframe.focus();
     sourceEditor.refresh();
     sourceEditor.focus();
-    MarkSelectionInAce(sourceEditor, source);
+    sourceIframe.contentWindow.wrappedJSObject.markSelection();
     sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
 
-    sourceIframe.contentWindow.isXML = isXML;
+    sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
   }
   else if (mode == "wysiwyg")
   {
@@ -889,7 +889,7 @@ function ToggleViewMode(aElement)
     gDialog.tabeditor.enableRulers(true);
 
     var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");

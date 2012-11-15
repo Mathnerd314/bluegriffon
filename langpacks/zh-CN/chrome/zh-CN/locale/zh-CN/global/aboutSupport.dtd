@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY aboutSupport.pageTitle "故障排除信息">
 
 <!-- LOCALIZATION NOTE (aboutSupport.pageSubtitle): don't change the 'supportLink' id. -->
@@ -43,9 +47,19 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.jsTitle "JavaScript">
 <!ENTITY aboutSupport.jsIncrementalGC "增量式垃圾收集器">
 
+<!ENTITY aboutSupport.a11yTitle "可用性">
+<!ENTITY aboutSupport.a11yActivated "已激活">
+<!ENTITY aboutSupport.a11yForceDisabled "阻止辅助功能">
+
 <!ENTITY aboutSupport.libraryVersionsTitle "库版本">
 
 <!ENTITY aboutSupport.installationHistoryTitle "安装历史记录">
 <!ENTITY aboutSupport.updateHistoryTitle "更新历史">
 
-<!ENTITY aboutSupport.copyToClipboard.label "全部复制到剪贴板">
+<!ENTITY aboutSupport.copyTextToClipboard.label "复制文本到剪贴板">
+<!ENTITY aboutSupport.copyRawDataToClipboard.label "复制原始数据到剪贴板">
+
+<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
+
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js Preferences">

@@ -1,3 +1,7 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
 <!ENTITY permissionsManager.title        "Gestion des permissions">
 
 <!ENTITY sites.search                    "Rechercher des sites">
@@ -16,6 +20,7 @@
 <!ENTITY permission.alwaysAsk            "Toujours demander">
 <!ENTITY permission.allow                "Autoriser">
 <!ENTITY permission.allowForSession      "Autoriser pour la session">
+<!ENTITY permission.allowFirstPartyOnly  "Domaine principal seul">
 <!ENTITY permission.block                "Bloquer">
 
 <!ENTITY password.label                  "Enregistrer des mots de passe">
@@ -35,3 +40,5 @@
 <!ENTITY indexedDB.label                 "Conserver des données hors connexion">
 
 <!ENTITY popup.label                     "Ouvrir des fenêtres popup">
+
+<!ENTITY fullscreen.label                "Plein écran">

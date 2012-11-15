@@ -41,3 +41,8 @@
 <!-- Footer stuff -->
 <!ENTITY prefs.tosLink.label        "A szolgáltatás feltételei">
 <!ENTITY prefs.ppLink.label         "Adatvédelmi irányelvek">
+
+<!ENTITY syncDeviceName.accesskey   "c">
+
+<!-- Device Settings -->
+<!ENTITY syncDeviceName.label       "Device Name:">
