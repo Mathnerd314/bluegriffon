@@ -117,8 +117,11 @@ var CssUtils = {
           var selectorText = rule.selectorText;
           var matches = aDetector(selectorText);
           if (matches)
-            for (var j = 0; j < matches.length; j++)
-              classList.push(matches[j].substr(1));
+            for (var j = 0; j < matches.length; j++) {
+              var m = matches[j].substr(1);
+              if (classList.indexOf(m) == -1)
+                classList.push(m);
+            }
         }
       }
       return false;
