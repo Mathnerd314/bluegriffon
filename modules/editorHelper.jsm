@@ -100,7 +100,7 @@ var EditorUtils = {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
       var bespinIframe = editorElement.previousSibling;
-      var bespinEditor = bespinIframe.contentWindow.gEditor;
+      var bespinEditor = bespinIframe.contentWindow.wrappedJSObject.gEditor;
       return bespinEditor;
     }
     return null;
