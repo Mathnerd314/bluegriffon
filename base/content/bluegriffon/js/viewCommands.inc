@@ -52,3 +52,25 @@ var cmdBrowseCommand =
     return rv;
   }
 };
+
+
+var cmdToggleView =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var nextMode = GetCurrentViewMode() === 'wysiwyg'
+                   ? 'source'
+                   : 'wysiwyg';
+    ToggleViewMode(gDialog[nextMode + 'ModeButton']);
+  }
+};
+

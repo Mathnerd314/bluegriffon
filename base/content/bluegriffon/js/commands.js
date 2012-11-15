@@ -319,6 +319,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_save",        cmdSave);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
     commandTable.registerCommand("cmd_closeTab",    cmdCloseTab);
+    commandTable.registerCommand("cmd_toggleView",  cmdToggleView);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
     commandTable.registerCommand("cmd_new",         cmdNew);
     commandTable.registerCommand("cmd_newWindow",   cmdNewWindow);

@@ -20,6 +20,8 @@
   <key id="structurenextkb"       keycode="VK_F4"              observes="cmd_structureNext"/>
   <key id="structurepreviousbkb"  keycode="VK_F4"              observes="cmd_structurePrevious" modifiers="shift"/>
 
+  <key id="toggleviewkb"          keycode="VK_F8"              observes="cmd_toggleView"/>
+
 #ifdef XP_MACOSX
   <key id="key_preferencesCmdMac" key="&preferencesCmdMac.commandkey;" modifiers="accel"/>
   <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac.commandkey;" modifiers="accel"/>
@@ -112,6 +114,8 @@
   <command id="cmd_spellCheck"        oncommand="goDoCommand('cmd_spellCheck')"/>
 
   <command id="cmd_gotoLink"          oncommand="goDoCommand('cmd_gotoLink')"/>
+
+  <command id="cmd_toggleView"        oncommand="goDoCommand('cmd_toggleView')"/>
 </commandset>
 
 <commandset id="composerStyleMenuItems"

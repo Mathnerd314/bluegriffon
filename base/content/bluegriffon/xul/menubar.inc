@@ -113,6 +113,12 @@
             </menu>
           </menupopup>
         </menu>
+        <menuseparator/>
+        <menuitem label="&toggleViewMenu.label;"
+                  id="toggleViewMenuitem"
+                  accesskey="&toggleViewMenu.accesskey;"
+                  key="toggleviewkb"
+                  command="cmd_toggleView"/>
       </menupopup>
     </menu>
 
