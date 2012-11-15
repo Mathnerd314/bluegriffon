@@ -209,7 +209,7 @@ function TextboxChanged(aId)
 
 function SelectLanguage(aElt)
 {
-  var retValue = { lang: "" };
+  var retValue = { lang: gDialog.pageLanguage.value };
   window.openDialog("chrome://bluegriffon/content/dialogs/languages.xul","_blank",
                     "chrome,modal,dialog=yes,titlebar", null, retValue);
   if (gDialog.pageLanguage.value != retValue.lang) {

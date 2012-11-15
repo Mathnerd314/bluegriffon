@@ -75,8 +75,11 @@ var returnValue = null;
 
     window.sizeToContent();
   }
-  else
+  else {
     returnValue = window.arguments[1];
+    if (returnValue && ("lang" in returnValue) && returnValue.lang)
+      gDialog.currentLanguage.value = returnValue.lang;
+  }
   gOkButton = document.documentElement.getButton("accept");
   gOkButton.setAttribute("disabled", "true");
 #ifndef XP_MACOSX
@@ -124,6 +127,15 @@ function onListboxSelect()
     }
   }
   catch(e) {}
+}
+
+function onListboxDblClick(aEvent)
+{
+  if (aEvent.originalTarget.localName == "listitem") {
+    // we're sure it's selected
+    onAccept();
+    window.close();
+  }
 }
 
 function onTextboxInput()
