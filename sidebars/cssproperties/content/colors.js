@@ -150,20 +150,43 @@ function ReapplyBackgrounds()
 
 function RepaintGradient()
 {
-  var angle = gDialog.linearGradientAngleCheckbox.checked ? gDialog.linearGradientAngleRotator.value + "deg"
-                                                          : "";
-  var startingPoint = gDialog.linearGradientStartingPointCheckbox.checked ? gDialog.linearGradientStartingPointMenulist.value
-                                                          : "";
-  var hOffset = gDialog.linearGradientHorizOffsetCheckbox.checked ? gDialog.linearGradientHorizOffset.value
-                                                          : "";
+
   var type = gDialog.shapeAndSizeTab.hidden
-             ? (gDialog.repeatingGradientCheckbox.checked ? "-moz-repeating-linear-gradient(" : "-moz-linear-gradient(")
-             : (gDialog.repeatingGradientCheckbox.checked ? "-moz-repeating--radial-gradient(" : "-moz-radial-gradient(");
-  var str = type + ((angle || startingPoint) ? angle + " " + startingPoint + "," : "");
-  if (!gDialog.shapeAndSizeTab.hidden) {
-    var shape = gDialog.radialGradientShape.selectedItem.value;
-    var size  = gDialog.radioGradientSize.value;
-    str += ((shape || size) ? shape + " " + size + "," : "");
+             ? (gDialog.repeatingGradientCheckbox.checked ? "repeating-linear-gradient(" : "linear-gradient(")
+             : (gDialog.repeatingGradientCheckbox.checked ? "repeating-radial-gradient(" : "radial-gradient(");
+  var str = "";
+  if (type == "linear-gradient(" || type == "repeating-linear-gradient(") {
+    var angle =    gDialog.linearGradientAngleCheckbox.checked
+                     ? gDialog.linearGradientAngleRotator.value + "deg"
+                     : "";
+    var position = gDialog.linearGradientDirectionCheckbox.checked
+                     ? gDialog.linearGradientDirectionMenulist.value
+                     : "";
+    str = type
+          + (angle ? angle + "," : "")
+          + (position ? "to " + position + "," : "")
+  }
+  else {
+    var shape = gDialog.radialShapeCheckbox.checked
+                  ? gDialog.radialGradientShape.value
+                  : "";
+    var extent = gDialog.radialSizeCheckbox.checked
+                   ? gDialog.radialGradientSize.value
+                   : "";
+    var lengths = gDialog.radialEllipseRayCheckbox.checked
+                    ? ((shape == "circle")
+                         ? gDialog.radialEllipseXRayMenulist.value
+                         : gDialog.radialEllipseXRayMenulist.value + " " + gDialog.radialEllipseYRayMenulist.value)
+                    : "";
+    var position = gDialog.radialPositionCheckbox.checked
+                     ? gDialog.radialPositionMenulist.value
+                     : "";
+    str = type +
+         (shape ? shape + " " : "") +
+         (extent ? extent + " " : "") +
+         (lengths ? lengths + " " : "") +
+         (position ? "at " + position : "") +
+         (shape || extent || lengths || position ? ", " : "");
   }
 
   var stops = gDialog.colorStopsRichlistbox.querySelectorAll("richlistitem.colorstopitem");
@@ -303,4 +326,59 @@ function MakeAbsoluteUrlBackgroundImage()
     gDialog.imageURLTextbox.value = spec;
     gDialog.relativeBackgroundImageCheckbox.checked = false;
   }
+}
+
+function LinearAngleSelected(aElt)
+{
+  if (aElt.checked) {
+    gDialog.linearGradientDirectionCheckbox.checked = false;
+  }
+  RepaintGradient();
+}
+
+function LinearDirectionSelected(aElt)
+{
+  if (aElt.checked) {
+    gDialog.linearGradientAngleCheckbox.checked = false;
+  }
+  RepaintGradient();
+}
+
+function RadialShapeSelected()
+{
+  if (gDialog.radialShapeCheckbox.checked) {
+    switch (gDialog.radialGradientShape.value) {
+    case "circle":
+      gDialog.radialSecondRayHbox.setAttribute("style", "visibility: hidden");
+      break;
+    case "ellipse":
+      gDialog.radialSecondRayHbox.removeAttribute("style");
+      break;
+    }
+  }
+  else {
+    if (!gDialog.radialSizeCheckbox.checked && !gDialog.radialEllipseRayCheckbox.checked) {
+      gDialog.radialSecondRayHbox.removeAttribute("hidden");
+    }
+  }
+  RepaintGradient();
+}
+
+function RadialSizeSelected()
+{
+  if (gDialog.radialSizeCheckbox.checked)
+    gDialog.radialEllipseRayCheckbox.checked = false;
+  RepaintGradient();
+}
+
+function RadialEllipseRaySelected()
+{
+  if (gDialog.radialEllipseRayCheckbox.checked)
+    gDialog.radialSizeCheckbox.checked = false;
+  RepaintGradient();
+}
+
+function RadialPositionSelected()
+{
+  RepaintGradient();
 }

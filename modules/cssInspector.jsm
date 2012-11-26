@@ -62,37 +62,32 @@ const kUNKNOWN_AT_RULE = "Unknow @-rule";
 
 /* FROM http://peter.sh/data/vendor-prefixed-css.php?js=1 */
 
-const kENGINES = [
-  "webkit",
-  "presto",
-  "trident",
-  "generic"
-];
-
 const kCSS_VENDOR_VALUES = {
   "-moz-box":             {"webkit": "-webkit-box",        "presto": "", "trident": "", "generic": "box" },
   "-moz-inline-box":      {"webkit": "-webkit-inline-box", "presto": "", "trident": "", "generic": "inline-box" },
   "-moz-initial":         {"webkit": "",                   "presto": "", "trident": "", "generic": "initial" },
-  "-moz-linear-gradient": {"webkit20110101": FilterLinearGradientForOutput,
-                           "webkit": FilterLinearGradientForOutput,
-                           "presto": "",
-                           "trident": "",
-                           "generic": FilterLinearGradientForOutput },
-  "-moz-radial-gradient": {"webkit20110101": FilterRadialGradientForOutput,
-                           "webkit": FilterRadialGradientForOutput,
-                           "presto": "",
-                           "trident": "",
-                           "generic": FilterRadialGradientForOutput },
-  "-moz-repeating-linear-gradient": {"webkit20110101": "",
-                           "webkit": FilterRepeatingGradientForOutput,
-                           "presto": "",
-                           "trident": "",
-                           "generic": FilterRepeatingGradientForOutput },
-  "-moz-repeating-radial-gradient": {"webkit20110101": "",
-                           "webkit": FilterRepeatingGradientForOutput,
-                           "presto": "",
-                           "trident": "",
-                           "generic": FilterRepeatingGradientForOutput }
+
+  "linear-gradient": {"webkit20110101":FilterLinearGradient,
+                           "webkit": FilterLinearGradient,
+                           "presto": FilterLinearGradient,
+                           "trident": FilterLinearGradient,
+                           "gecko1.9.2": FilterLinearGradient },
+  "repeating-linear-gradient": {"webkit20110101":FilterLinearGradient,
+                           "webkit": FilterLinearGradient,
+                           "presto": FilterLinearGradient,
+                           "trident": FilterLinearGradient,
+                           "gecko1.9.2": FilterLinearGradient },
+
+  "radial-gradient": {"webkit20110101":FilterRadialGradient,
+                           "webkit": FilterRadialGradient,
+                           "presto": FilterRadialGradient,
+                           "trident": FilterRadialGradient,
+                           "gecko1.9.2": FilterRadialGradient },
+  "repeating-radial-gradient": {"webkit20110101":FilterRadialGradient,
+                           "webkit": FilterRadialGradient,
+                           "presto": FilterRadialGradient,
+                           "trident": FilterRadialGradient,
+                           "gecko1.9.2": FilterRadialGradient }
 };
 
 const kCSS_VENDOR_PREFIXES = {"lastUpdate":1333637407,"properties":[
@@ -654,15 +649,7 @@ var CssInspector = {
     if (!color)
       return null;
     token = parser.getToken(true, true);
-    if (token.isPercentage() ||
-        token.isDimensionOfUnit("cm") ||
-        token.isDimensionOfUnit("mm") ||
-        token.isDimensionOfUnit("in") ||
-        token.isDimensionOfUnit("pc") ||
-        token.isDimensionOfUnit("px") ||
-        token.isDimensionOfUnit("em") ||
-        token.isDimensionOfUnit("ex") ||
-        token.isDimensionOfUnit("pt")) {
+    if (token.isLength()) {
       position = token.value;
       token = parser.getToken(true, true);
     }
@@ -671,114 +658,139 @@ var CssInspector = {
 
   parseGradient: function (parser, token)
   {
+    var kHPos = {"left": true, "right": true };
+    var kVPos = {"top": true, "bottom": true };
+    var kPos = {"left": true, "right": true, "top": true, "bottom": true, "center": true};
+
     var isRadial = false;
     var gradient = { isRepeating: false };
     if (token.isNotNull()) {
-      if (token.isFunction("-moz-linear-gradient(") ||
-          token.isFunction("-moz-radial-gradient(") ||
-          token.isFunction("-moz-repeating-linear-gradient(") ||
-          token.isFunction("-moz-repeating-radial-gradient(")) {
-        if (token.isFunction("-moz-radial-gradient(") ||
-            token.isFunction("-moz-repeating-radial-gradient(")) {
+      if (token.isFunction("linear-gradient(") ||
+          token.isFunction("radial-gradient(") ||
+          token.isFunction("repeating-linear-gradient(") ||
+          token.isFunction("repeating-radial-gradient(")) {
+        if (token.isFunction("radial-gradient(") ||
+            token.isFunction("repeating-radial-gradient(")) {
           gradient.isRadial = true;
         }
-        if (token.isFunction("-moz-repeating-linear-gradient(") ||
-            token.isFunction("-moz-repeating-radial-gradient(")) {
+        if (token.isFunction("repeating-linear-gradient(") ||
+            token.isFunction("repeating-radial-gradient(")) {
           gradient.isRepeating = true;
         }
         
 
         token = parser.getToken(true, true);
-        var haveGradientLine = false;
-        var foundHorizPosition = false;
+        var foundPosition = false;
         var haveAngle = false;
 
+        /********** LINEAR **********/
         if (token.isAngle()) {
           gradient.angle = token.value;
-          haveGradientLine = true;
           haveAngle = true;
           token = parser.getToken(true, true);
-        }
-
-        if (token.isLength()
-            || token.isIdent("top")
-            || token.isIdent("center")
-            || token.isIdent("bottom")
-            || token.isIdent("left")
-            || token.isIdent("right")) {
-          haveGradientLine = true;
-          if (token.isLength()
-            || token.isIdent("left")
-            || token.isIdent("right")) {
-            foundHorizPosition = true;
-          }
-          gradient.position = token.value;
-          token = parser.getToken(true, true);
-        }
-
-        if (haveGradientLine) {
-          if (!haveAngle && token.isAngle()) { // we have an angle here
-            gradient.angle = token.value;
-            haveAngle = true;
-            token = parser.getToken(true, true);
-          }
-
-          else if (token.isLength()
-                  || (foundHorizPosition && (token.isIdent("top")
-                                             || token.isIdent("center")
-                                             || token.isIdent("bottom")))
-                  || (!foundHorizPosition && (token.isLength()
-                                              || token.isIdent("top")
-                                              || token.isIdent("center")
-                                              || token.isIdent("bottom")
-                                              || token.isIdent("left")
-                                              || token.isIdent("right")))) {
-            gradient.position = ("position" in gradient) ? gradient.position + " ": "";
-            gradient.position += token.value;
-            token = parser.getToken(true, true);
-          }
-
-          if (!haveAngle && token.isAngle()) { // we have an angle here
-            gradient.angle = token.value;
-            haveAngle = true;
-            token = parser.getToken(true, true);
-          }
-
-          // we must find a comma here
           if (!token.isSymbol(","))
             return null;
           token = parser.getToken(true, true);
         }
 
-        // ok... Let's deal with the rest now
-        if (gradient.isRadial) {
-          if (token.isIdent("circle") ||
-              token.isIdent("ellipse")) {
-            gradient.shape = token.value;
+        else if (token.isIdent("to")) {
+          foundPosition = true;
+          token = parser.getToken(true, true);
+          if (token.isIdent("top")
+              || token.isIdent("bottom")
+              || token.isIdent("left")
+              || token.isIdent("right")) {
+            gradient.position = token.value;
             token = parser.getToken(true, true);
+            if (((gradient.position == "top" || gradient.position == "bottom") && (token.isIdent("left") || token.isIdent("right")))
+                || ((gradient.position == "left" || gradient.position == "right") && (token.isIdent("top") || token.isIdent("bottom")))) {
+              gradient.position += " " + token.value;
+              token = parser.getToken(true, true);
+            }
           }
-          if (token.isIdent("closest-side") ||
-                   token.isIdent("closest-corner") ||
-                   token.isIdent("farthest-side") ||
-                   token.isIdent("farthest-corner") ||
-                   token.isIdent("contain") ||
-                   token.isIdent("cover")) {
-            gradient.size = token.value;
-            token = parser.getToken(true, true);
-          }
-          if (!("shape" in gradient) &&
-              (token.isIdent("circle") ||
-               token.isIdent("ellipse"))) {
-            // we can still have the second value...
-            gradient.shape = token.value;
-            token = parser.getToken(true, true);
-          }
-          if ((("shape" in gradient) || ("size" in gradient)) && !token.isSymbol(","))
+          else
             return null;
-          else if (("shape" in gradient) || ("size" in gradient))
-            token = parser.getToken(true, true);
+
+          if (!token.isSymbol(","))
+            return null;
+          token = parser.getToken(true, true);
         }
 
+        /********** RADIAL **********/
+        else if (gradient.isRadial) {
+          gradient.shape = "";
+          gradient.extent = "";
+          gradient.positions = [];
+          gradient.at = "";
+
+          while (!token.isIdent("at") && !token.isSymbol(",")) {
+            if (!gradient.shape
+                     && (token.isIdent("circle") || token.isIdent("ellipse"))) {
+               gradient.shape = token.value;
+               token = parser.getToken(true, true);
+            }
+            else if (!gradient.extent
+                     && (token.isIdent("closest-corner")
+                         || token.isIdent("closes-side")
+                         || token.isIdent("farthest-corner")
+                         || token.isIdent("farthest-corner"))) {
+              gradient.extent = token.value;
+              token = parser.getToken(true, true);
+            }
+            else if (gradient.positions.length < 2 && token.isLength()){
+              gradient.positions.push(token.value);
+              token = parser.getToken(true, true);
+            }
+            else
+              break;
+          }
+
+          // verify if the shape is null of well defined
+          if ((gradient.positions.length == 1 && !gradient.extent && (gradient.shape == "circle" || !gradient.shape))
+              || (gradient.positions.length == 2 && !gradient.extent && (gradient.shape == "ellipse" || !gradient.shape))
+              || (!gradient.positions.length && gradient.extent)
+              || (!gradient.positions.length && !gradient.extent)) {
+            // shape ok
+          }
+          else  {
+            return null;
+          }
+  
+          if (token.isIdent("at")) {
+            token = parser.getToken(true, true);
+            if (((token.isIdent() && token.value in kPos)
+                || token.isDimension()
+                || token.isNumber("0")
+                || token.isPercentage())) {
+              gradient.at = token.value;
+              token = parser.getToken(true, true);
+              if (token.isDimension() || token.isNumber("0") || token.isPercentage()) {
+                gradient.at += " " + token.value;
+              }
+              else if (token.isIdent() && token.value in kPos) {
+                if ((gradient.at in kHPos && token.value in kHPos) ||
+                    (gradient.at in kVPos && token.value in kVPos))
+                  return "";
+                gradient.at += " " + token.value;
+              }
+              else {
+                parser.ungetToken();
+                gradient.at += " center";
+              }
+            }
+            else
+              return null;
+
+            token = parser.getToken(true, true);
+          }
+
+          if (gradient.shape || gradient.extent || gradient.positions.length || gradient.at) {
+            if (!token.isSymbol(","))
+              return null;
+            token = parser.getToken(true, true);
+          }
+        }
+ 
         // now color stops...
         var stop1 = this.parseColorStop(parser, token);
         if (!stop1)
@@ -1080,10 +1092,10 @@ var CssInspector = {
         backgrounds.push( { type: "image", value: "url(" + urlContent });
         token = parser.getToken(true, true);
       }
-      else if (token.isFunction("-moz-linear-gradient(") ||
-               token.isFunction("-moz-radial-gradient(") ||
-               token.isFunction("-moz-repeating-linear-gradient(") ||
-               token.isFunction("-moz-repeating-radial-gradient(")) {
+      else if (token.isFunction("linear-gradient(") ||
+               token.isFunction("radial-gradient(") ||
+               token.isFunction("repeating-linear-gradient(") ||
+               token.isFunction("repeating-radial-gradient(")) {
         var gradient = this.parseGradient(parser, token);
         backgrounds.push( { type: gradient.isRadial ? "radial-gradient" : "linear-gradient", value: gradient });
         token = parser.getToken(true, true);
@@ -1106,17 +1118,20 @@ var CssInspector = {
   serializeGradient: function(gradient)
   {
     var s = gradient.isRadial
-              ? (gradient.isRepeating ? "-moz-repeating-radial-gradient(" : "-moz-radial-gradient(" )
-              : (gradient.isRepeating ? "-moz-repeating-linear-gradient(" : "-moz-linear-gradient(" );
+              ? (gradient.isRepeating ? "repeating-radial-gradient(" : "radial-gradient(" )
+              : (gradient.isRepeating ? "repeating-linear-gradient(" : "linear-gradient(" );
     if (gradient.angle || gradient.position)
-      s += (gradient.angle ? gradient.angle + " ": "") +
-           (gradient.position ? gradient.position : "") +
+      s += (gradient.angle ? gradient.angle: "") +
+           (gradient.position ? "to " + gradient.position : "") +
            ", ";
-    if (gradient.isRadial && (gradient.shape || gradient.size))
-      s += (gradient.shape ? gradient.shape : "") +
-           " " +
-           (gradient.size ? gradient.size : "") +
-           ", ";
+
+    if (gradient.isRadial)
+      s += (gradient.shape ? gradient.shape + " " : "") +
+           (gradient.extent ? gradient.extent + " " : "") +
+           (gradient.positions.length ? gradient.positions.join(" ") + " " : "") +
+           (gradient.at ? "at " + gradient.at + " " : "") +
+           (gradient.shape || gradient.extent || gradient.positions.length || gradient.at ? ", " : "");
+
     for (var i = 0; i < gradient.stops.length; i++) {
       var colorstop = gradient.stops[i];
       s += colorstop.color + (colorstop.position ? " " + colorstop.position : "");
@@ -3208,10 +3223,10 @@ CSSParser.prototype = {
         }
 
         else if (!bgImage &&
-                 (token.isFunction("-moz-linear-gradient(")
-                  || token.isFunction("-moz-radial-gradient(")
-                  || token.isFunction("-moz-repeating-linear-gradient(")
-                  || token.isFunction("-moz-repeating-radial-gradient("))) {
+                 (token.isFunction("linear-gradient(")
+                  || token.isFunction("radial-gradient(")
+                  || token.isFunction("repeating-linear-gradient(")
+                  || token.isFunction("repeating-radial-gradient("))) {
           var gradient = CssInspector.parseGradient(this, token);
           if (gradient)
             bgImage = CssInspector.serializeGradient(gradient);
@@ -4936,9 +4951,10 @@ jscsspDeclaration.prototype = {
   cssText: function() {
     var prefixes = CssInspector.prefixesForProperty(this.property);
 
+    var rv = "";
     if (this.property in this.kUNMODIFIED_COMMA_SEPARATED_PROPERTIES) {
       if (prefixes) {
-        var rv = "";
+        rv = "";
         for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
           var property = prefixes[propertyIndex];
           rv += (propertyIndex ? gTABS : "") + property + ": ";
@@ -4952,7 +4968,7 @@ jscsspDeclaration.prototype = {
     }
 
     if (prefixes) {
-      var rv = "";
+      rv = "";
       for (var propertyIndex = 0; propertyIndex < prefixes.length; propertyIndex++) {
         var property = prefixes[propertyIndex];
         rv += (propertyIndex ? gTABS : "") + property + ": ";
@@ -4968,9 +4984,8 @@ jscsspDeclaration.prototype = {
       return rv;
     }
 
-    var rv = this.property + ": ";
     var separator = (this.property in this.kCOMMA_SEPARATED) ? ", " : " ";
-    var extras = {"webkit": false, "presto": false, "trident": false, "generic": false }
+    var extras = {"webkit": false, "presto": false, "trident": false, "gecko1.9.2": false, "generic": false }
     for (var i = 0; i < this.values.length; i++) {
       var v = this.values[i].cssText();
       if (v != null) {
@@ -4983,12 +4998,10 @@ jscsspDeclaration.prototype = {
             extras[j] = extras[j] || (kCSS_VENDOR_VALUES[kwd][j] != "");
           }
         }
-        rv += (i ? separator : "") + v;
       }
       else
         return null;
     }
-    rv += (this.priority ? " !important" : "") + ";";
 
     for (var j in extras) {
       if (extras[j]) {
@@ -5021,6 +5034,16 @@ jscsspDeclaration.prototype = {
           rv += "\n" + gTABS + "/* Impossible to translate property " + this.property + " for " + j + " */";
       }
     }
+
+    rv += "\n" + gTABS + this.property + ": ";
+    for (var i = 0; i < this.values.length; i++) {
+      var v = this.values[i].cssText();
+      if (v != null) {
+        rv += (i ? separator : "") + v;
+      }
+    }
+    rv += (this.priority ? " !important" : "") + ";";
+
     return rv;
   },
 
@@ -5541,70 +5564,49 @@ function CountLF(s)
 }
 
 
-function FilterLinearGradientForOutput(aValue, aEngine)
+function FilterLinearGradient(aValue, aEngine)
 {
-  if (aEngine == "generic")
-    return aValue.substr(5);
-
-  if (aEngine == "webkit")
-    return aValue.replace( /\-moz\-/g , "-webkit-")
-
-  if (aEngine != "webkit20110101")
-    return "";
-
   var g = CssInspector.parseBackgroundImages(aValue)[0];
+  if (!g.value)
+    return null;
 
-  var cancelled = false;
-  var str = "-webkit-gradient(linear, ";
+  var str = "";
   var position = ("position" in g.value) ? g.value.position.toLowerCase() : "";
   var angle    = ("angle" in g.value) ? g.value.angle.toLowerCase() : "";
-  // normalize angle
-  if (angle) {
-    var match = angle.match(/^([0-9\-\.\\+]+)([a-z]*)/);
-    var angle = parseFloat(match[1]);
-    var unit  = match[2];
-    switch (unit) {
-      case "grad": angle = angle * 90 / 100; break;
-      case "rad":  angle = angle * 180 / Math.PI; break;
-      default: break;
-    }
-    while (angle < 0)
-      angle += 360;
-    while (angle >= 360)
-      angle -= 360;
-  }
-  // get startpoint w/o keywords
-  var startpoint = [];
-  var endpoint = [];
-  if (position != "") {
-    if (position == "center")
-      position = "center center";
-    startpoint = position.split(" ");
-    if (angle == "" && angle != 0) {
-      // no angle, then we just turn the point 180 degrees around center
-      switch (startpoint[0]) {
-        case "left":   endpoint.push("right"); break;
-        case "center": endpoint.push("center"); break;
-        case "right":  endpoint.push("left"); break;
-        default: {
-            var match = startpoint[0].match(/^([0-9\-\.\\+]+)([a-z]*)/);
-            var v     = parseFloat(match[0]);
-            var unit  = match[1];
-            if (unit == "%") {
-              endpoint.push((100-v) + "%");
-            }
-            else
-              cancelled = true;
-          }
-          break;
+
+  if ("webkit20110101" == aEngine) {
+    var cancelled = false;
+    str = "-webkit-gradient(linear, ";
+    // normalize angle
+    if (angle) {
+      var match = angle.match(/^([0-9\-\.\\+]+)([a-z]*)/);
+      var angle = parseFloat(match[1]);
+      var unit  = match[2];
+      switch (unit) {
+        case "grad": angle = angle * 90 / 100; break;
+        case "rad":  angle = angle * 180 / Math.PI; break;
+        default: break;
       }
-      if (!cancelled)
-        switch (startpoint[1]) {
-          case "top":    endpoint.push("bottom"); break;
+      while (angle < 0)
+        angle += 360;
+      while (angle >= 360)
+        angle -= 360;
+    }
+    // get startpoint w/o keywords
+    var startpoint = [];
+    var endpoint = [];
+    if (position != "") {
+      if (position == "center")
+        position = "center center";
+      startpoint = position.split(" ");
+      if (angle == "" && angle != 0) {
+        // no angle, then we just turn the point 180 degrees around center
+        switch (startpoint[0]) {
+          case "left":   endpoint.push("right"); break;
           case "center": endpoint.push("center"); break;
-          case "bottom": endpoint.push("top"); break;
+          case "right":  endpoint.push("left"); break;
           default: {
-              var match = startpoint[1].match(/^([0-9\-\.\\+]+)([a-z]*)/);
+              var match = startpoint[0].match(/^([0-9\-\.\\+]+)([a-z]*)/);
               var v     = parseFloat(match[0]);
               var unit  = match[1];
               if (unit == "%") {
@@ -5615,131 +5617,151 @@ function FilterLinearGradientForOutput(aValue, aEngine)
             }
             break;
         }
+        if (!cancelled)
+          switch (startpoint[1]) {
+            case "top":    endpoint.push("bottom"); break;
+            case "center": endpoint.push("center"); break;
+            case "bottom": endpoint.push("top"); break;
+            default: {
+                var match = startpoint[1].match(/^([0-9\-\.\\+]+)([a-z]*)/);
+                var v     = parseFloat(match[0]);
+                var unit  = match[1];
+                if (unit == "%") {
+                  endpoint.push((100-v) + "%");
+                }
+                else
+                  cancelled = true;
+              }
+              break;
+          }
+      }
+      else {
+        switch (angle) {
+          case 0:    endpoint.push("right"); endpoint.push(startpoint[1]); break;
+          case 90:   endpoint.push(startpoint[0]); endpoint.push("top"); break;
+          case 180:  endpoint.push("left"); endpoint.push(startpoint[1]); break;
+          case 270:  endpoint.push(startpoint[0]); endpoint.push("bottom"); break;
+          default:     cancelled = true; break;
+        }
+      }
     }
     else {
+      // no position defined, we accept only vertical and horizontal
+      if (angle == "")
+        angle = 270;
       switch (angle) {
-        case 0:    endpoint.push("right"); endpoint.push(startpoint[1]); break;
-        case 90:   endpoint.push(startpoint[0]); endpoint.push("top"); break;
-        case 180:  endpoint.push("left"); endpoint.push(startpoint[1]); break;
-        case 270:  endpoint.push(startpoint[0]); endpoint.push("bottom"); break;
+        case 0:    startpoint= ["left", "center"];   endpoint = ["right", "center"]; break;
+        case 90:   startpoint= ["center", "bottom"]; endpoint = ["center", "top"]; break;
+        case 180:  startpoint= ["right", "center"];  endpoint = ["left", "center"]; break;
+        case 270:  startpoint= ["center", "top"];    endpoint = ["center", "bottom"]; break;
         default:     cancelled = true; break;
       }
     }
-  }
-  else {
-    // no position defined, we accept only vertical and horizontal
-    if (angle == "")
-      angle = 270;
-    switch (angle) {
-      case 0:    startpoint= ["left", "center"];   endpoint = ["right", "center"]; break;
-      case 90:   startpoint= ["center", "bottom"]; endpoint = ["center", "top"]; break;
-      case 180:  startpoint= ["right", "center"];  endpoint = ["left", "center"]; break;
-      case 270:  startpoint= ["center", "top"];    endpoint = ["center", "bottom"]; break;
-      default:     cancelled = true; break;
-    }
-  }
-
-  if (cancelled)
-    return "";
-
-  str += startpoint.join(" ") + ", " + endpoint.join(" ");
-  if (!g.value.stops[0].position)
-    g.value.stops[0].position = "0%";
-  if (!g.value.stops[g.value.stops.length-1].position)
-    g.value.stops[g.value.stops.length-1].position = "100%";
-  var current = 0;
-  for (var i = 0; i < g.value.stops.length && !cancelled; i++) {
-    var s = g.value.stops[i];
-    if (s.position) {
-      if (s.position.indexOf("%") == -1) {
-        cancelled = true;
-        break;
+  
+    if (cancelled)
+      return "";
+  
+    str += startpoint.join(" ") + ", " + endpoint.join(" ");
+    if (!g.value.stops[0].position)
+      g.value.stops[0].position = "0%";
+    if (!g.value.stops[g.value.stops.length-1].position)
+      g.value.stops[g.value.stops.length-1].position = "100%";
+    var current = 0;
+    for (var i = 0; i < g.value.stops.length && !cancelled; i++) {
+      var s = g.value.stops[i];
+      if (s.position) {
+        if (s.position.indexOf("%") == -1) {
+          cancelled = true;
+          break;
+        }
       }
-    }
-    else {
-      var j = i + 1;
-      while (j < g.value.stops.length && !g.value.stops[j].position)
-        j++;
-      var inc = parseFloat(g.value.stops[j].position) - current;
-      for (var k = i; k < j; k++) {
-        g.value.stops[k].position = (current + inc * (k - i + 1) / (j - i + 1)) + "%";
+      else {
+        var j = i + 1;
+        while (j < g.value.stops.length && !g.value.stops[j].position)
+          j++;
+        var inc = parseFloat(g.value.stops[j].position) - current;
+        for (var k = i; k < j; k++) {
+          g.value.stops[k].position = (current + inc * (k - i + 1) / (j - i + 1)) + "%";
+        }
       }
+      current = parseFloat(s.position);
+      str += ", color-stop(" + (parseFloat(current) / 100) + ", " + s.color + ")";
     }
-    current = parseFloat(s.position);
-    str += ", color-stop(" + (parseFloat(current) / 100) + ", " + s.color + ")";
-  }
-
-  if (cancelled)
-    return "";
-  return str + ")";
-}
-
-function FilterRadialGradientForOutput(aValue, aEngine)
-{
-  if (aEngine == "generic")
-    return aValue.substr(5);
-
-  else if (aEngine == "webkit")
-    return aValue.replace( /\-moz\-/g , "-webkit-")
-
-  else if (aEngine != "webkit20110101")
-    return "";
-
-  var g = CssInspector.parseBackgroundImages(aValue)[0];
-
-  var shape = ("shape" in g.value) ? g.value.shape : "";
-  var size  = ("size"  in g.value) ? g.value.size : "";
-  if (shape != "circle"
-      || (size != "farthest-corner" && size != "cover"))
-    return "";
-
-  if (g.value.stops.length < 2
-      || !("position" in g.value.stops[0])
-      || !g.value.stops[g.value.stops.length - 1].position
-      || !("position" in g.value.stops[0])
-      || !g.value.stops[g.value.stops.length - 1].position)
-    return "";
-
-  for (var i = 0; i < g.value.stops.length; i++) {
-    var s = g.value.stops[i];
-    if (("position" in s) && s.position && s.position.indexOf("px") == -1)
+  
+    if (cancelled)
       return "";
   }
-
-  var str = "-webkit-gradient(radial, ";
-  var position  = ("position"  in g.value) ? g.value.position : "center center";
-  str += position + ", " +  parseFloat(g.value.stops[0].position) + ", ";
-  str += position + ", " +  parseFloat(g.value.stops[g.value.stops.length - 1].position);
-
-  // at this point we're sure to deal with pixels
-  var current = parseFloat(g.value.stops[0].position);
-  for (var i = 0; i < g.value.stops.length; i++) {
-    var s = g.value.stops[i];
-    if (!("position" in s) || !s.position) {
-      var j = i + 1;
-      while (j < g.value.stops.length && !g.value.stops[j].position)
-        j++;
-      var inc = parseFloat(g.value.stops[j].position) - current;
-      for (var k = i; k < j; k++) {
-        g.value.stops[k].position = (current + inc * (k - i + 1) / (j - i + 1)) + "px";
-      }
+  else {
+    str = (g.value.isRepeating ? "repeating-" : "") + "linear-gradient(";
+    if (angle || position)
+      str += (angle ? angle : position) + ", ";
+  
+    for (var i = 0; i < g.value.stops.length; i++) {
+      var s = g.value.stops[i];
+      str += s.color
+             + (s.position ? " " + s.position : "")
+             + ((i != g.value.stops.length -1) ? ", " : "");
     }
-    current = parseFloat(s.position);
-    var c = (current - parseFloat(g.value.stops[0].position)) /
-            (parseFloat(g.value.stops[g.value.stops.length - 1].position) - parseFloat(g.value.stops[0].position));
-    str += ", color-stop(" + c + ", " + s.color + ")";
   }
-  str += ")"
+  str += ")";
+
+  switch (aEngine) {
+    case "webkit":     str = "-webkit-"  + str; break;
+    case "gecko1.9.2": str = "-moz-"  + str; break;
+    case "presto":     str = "-o-"  + str; break;
+    case "trident":    str = "-ms-"  + str; break;
+    default:           break;
+  }
   return str;
 }
 
-function FilterRepeatingGradientForOutput(aValue, aEngine)
+function FilterRadialGradient(aValue, aEngine)
 {
-  if (aEngine == "generic")
-    return aValue.substr(5);
+  var g = CssInspector.parseBackgroundImages(aValue)[0];
+  if (!g.value)
+    return null;
 
-  else if (aEngine == "webkit")
-    return aValue.replace( /\-moz\-/g , "-webkit-")
+  // oh come on, this is now so painful to deal with ; no way I'm going to implement this
+  if ("webkit20110101" == aEngine)
+    return null;
+  
+  var str = (g.value.isRepeating ? "repeating-" : "") + "radial-gradient(";
+  var shape = ("shape" in g.value) ? g.value.shape : "";
+  var extent  = ("extent"  in g.value) ? g.value.extent : "";
+  var lengths = "";
+  switch (g.value.positions.length) {
+    case 1:
+      lengths = g.value.positions[0] + " " + g.value.positions[0];
+      break;
+    case 2:
+      lengths = g.value.positions[0] + " " + g.value.positions[1];
+      break;
+    default:
+      break;
+  }
+  var at = g.value.at;
 
-  return "";
+  str += (at ? at + ", " : "")
+         + ((shape || extent || at)
+            ? (shape ? shape + " " : "")
+              + (extent ? extent + " " : "")
+              + (lengths ? lengths + " " : "")
+              + ", "
+            : "");
+  for (var i = 0; i < g.value.stops.length; i++) {
+    var s = g.value.stops[i];
+    str += s.color
+           + (s.position ? " " + s.position : "")
+           + ((i != g.value.stops.length -1) ? ", " : "");
+  }
+  str += ")";
+
+  switch (aEngine) {
+    case "webkit":     str = "-webkit-"  + str; break;
+    case "gecko1.9.2": str = "-moz-"  + str; break;
+    case "presto":     str = "-o-"  + str; break;
+    case "trident":    str = "-ms-"  + str; break;
+    default:           break;
+  }
+  return str;
 }

@@ -254,19 +254,11 @@
                   setTimeout(function(aType) {
                     gDialog.linearGradientPropertiesTabbox.selectedIndex = 0;
                     gDialog.shapeAndSizeTab.hidden = (aType != "radial-gradient");
+                    gDialog.angleTab.hidden = (aType == "radial-gradient");
                     gDialog.radialGradientShape.value = "";
-                    gDialog.radioGradientSize.value = "";
+                    gDialog.radialGradientSize.value = "";
                     gDialog.linearGradientAngleRotator.value = "0";
                     gDialog.linearGradientAngleCheckbox.checked = false;
-                    gDialog.linearGradientStartingPointCheckbox.checked = false;
-                    gDialog.linearGradientStartingPointMenulist.value = "";
-                    gDialog.linearGradientPreview.style.backgroundImage = "none";
-                    gDialog.linearGradientStartingPointCheckbox.checked = false;
-                    gDialog.linearGradientStartingPointMenulist.value = "";
-                    gDialog.linearGradientHorizOffsetCheckbox.checked = false;
-                    gDialog.linearGradientHorizOffset.value = "";
-                    gDialog.linearGradientVertOffsetCheckbox.checked = false;
-                    gDialog.linearGradientVertOffset.value = "";
   
                     if (_self.parsedValue) {
                       var gradient = _self.parsedValue;
@@ -277,42 +269,32 @@
                         gDialog.linearGradientAngleRotator.value = parseFloat(gradient.angle);
                       }
                       if ("position" in gradient) {
-                        var positionArray = gradient.position.split(" ");
-                        var position = "", hOffset = "", vOffset = "";
-                        for (var i = 0; i < positionArray.length; i++) {
-                          switch (positionArray[i]) {
-                            case "left":
-                            case "right":
-                            case "top":
-                            case "bottom":
-                            case "center":
-                              position += positionArray[i] + " ";
-                              break;
-                            default:
-                              if (hOffset)
-                                vOffset = positionArray[i];
-                              else
-                                hOffset = positionArray[i];
-                          }
-                        }
-                        if (position) {
-                          gDialog.linearGradientStartingPointCheckbox.checked = true;
-                          gDialog.linearGradientStartingPointMenulist.value = position.trim();
-                        }
-                        if (hOffset) {
-                          gDialog.linearGradientHorizOffsetCheckbox.checked = true;
-                          gDialog.linearGradientHorizOffset.value = hOffset;
-                        }
-                        if (vOffset) {
-                          gDialog.linearGradientVertOffsetCheckbox.checked = true;
-                          gDialog.linearGradientVertOffset.value = vOffset;
-                        }
+                        gDialog.linearGradientDirectionCheckbox.checked = true;
+                        gDialog.linearGradientDirectionMenulist.value = gradient.position;
                       }
                       if (aType == "radial-gradient") {
-                        if ("shape" in gradient)
-                          gDialog.radialGradientShape.value = gradient.shape;
-                        if ("size" in gradient)
-                          gDialog.radioGradientSize.value = gradient.size;
+                        gDialog.radialGradientShape.value = gradient.shape;
+                        gDialog.radialShapeCheckbox.checked = ("" != gradient.shape);
+ 
+                        gDialog.radialGradientSize.value = gradient.extent;
+                        gDialog.radialSizeCheckbox.checked = ("" != gradient.extent);
+
+                        if (gradient.positions.length) {
+                          gDialog.radialEllipseRayRow.checked = true; 
+                          gDialog.radialEllipseXRayMenulist.value = gradient.positions[0];
+                          if (2 == gradient.positions.length)
+                            gDialog.radialEllipseYRayMenulist.value = gradient.positions[1];
+                          else
+                            gDialog.radialEllipseYRayMenulist.value = "";
+                        }
+                        else {
+                          gDialog.radialEllipseRayRow.checked = false;
+                          gDialog.radialEllipseXRayMenulist.value = "";
+                          gDialog.radialEllipseYRayMenulist.value = "";
+                        }
+
+                        gDialog.radialPositionMenulist.value = gradient.at;
+                        gDialog.radialPositionCheckbox.checked = ("" != gradient.at);
                       }
                       gDialog.linearGradientPreview.style.backgroundImage =
                         _self.getChild("backgrounditemButton").style.backgroundImage;

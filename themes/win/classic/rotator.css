@@ -60,6 +60,7 @@ rotator {
   width: 37px;
   background-color: rgba(80%,80%,80%, 0.5);
   border-radius: 100px;
+  transform: rotate(-90deg);
 }
 
 rotateGrippy {

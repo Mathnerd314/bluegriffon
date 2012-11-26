@@ -181,8 +181,7 @@
           <tabs>
             <tab label="&colorStops.tab;"/>
             <tab label="&shapeAndSize.tab;" id="shapeAndSizeTab"/>
-            <tab label="&angle.tab;"/>
-            <tab label="&startingPoint.tab;"/>
+            <tab label="&angle.tab;" id="angleTab"/>
           </tabs>
           <tabpanels>
             <vbox flex="1">
@@ -200,23 +199,25 @@
               </hbox>
             </vbox>
             <grid id="shapeAndSizeTabpanel">
-              <columns><column/><column/></columns>
+              <columns><column/><column/><column/><column/></columns>
               <rows>
                 <row align="center">
+                  <checkbox id="radialShapeCheckbox"
+                            oncommand="RadialShapeSelected()" />
                   <label value="&shape.label;"/>
                   <radiogroup id="radialGradientShape" orient="horizontal"
-                              oncommand="RepaintGradient()">
+                              oncommand="gDialog.radialShapeCheckbox.checked=true; RadialShapeSelected()">
                     <radio label="&circularShape.label;" value="circle" selected="true"/>
                     <radio label="&ellipticShape.label;" value="ellipse"/>
                   </radiogroup>
                 </row>
                 <row align="center">
+                  <checkbox id="radialSizeCheckbox"
+                            oncommand="RadialSizeSelected()" />
                   <label value="&size.label;"/>
-                  <menulist id="radioGradientSize" sizetopopup="none"
-                            oncommand="RepaintGradient()">
+                  <menulist id="radialGradientSize" sizetopopup="none"
+                            oncommand="gDialog.radialSizeCheckbox.checked=true; RadialSizeSelected()">
                     <menupopup>
-                      <menuitem label="---" value=""/>
-                      <menuseparator/>
                       <menuitem label="closest-side (contain)" value="closest-side"/>
                       <menuitem label="closest-corner" value="closest-corner"/>
                       <menuitem label="farthest-side" value="farthest-side"/>
@@ -224,78 +225,105 @@
                     </menupopup>
                   </menulist>
                 </row>
-              </rows>
-            </grid>
-            <hbox align="center" flex="1">
-              <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
-                        oncommand="RepaintGradient()"/>
-              <rotator id="linearGradientAngleRotator"
-                       onchange="gDialog.linearGradientAngleCheckbox.checked=true;RepaintGradient()"
-                       negated="true"/>
-            </hbox>
-            <grid>
-              <columns><column/><column/></columns>
-              <rows>
-                <row align="center">
-                  <checkbox label="&startingPoint.checkbox;" id="linearGradientStartingPointCheckbox"
-                            oncommand="RepaintGradient()"/>
-                  <hbox>
-                    <menulist sizetopopup="none" editable="true" id="linearGradientStartingPointMenulist"
-                              oncommand="RepaintGradient()">
-                      <menupopup>
-                        <grid class="multipane-menu"
-                                  oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
-                          <columns><column/><column/><column/></columns>
-                          <rows>
-                            <row align="center">
-                              <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
-                              <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
-                              <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
-                            </row>
-                            <row align="center">
-                              <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
-                              <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
-                              <menuitem label="&backgroundPositionRightBottom.label;" value="right center"/>
-                            </row>
-                            <row align="center">
-                              <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
-                              <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
-                              <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
-                            </row>
-                          </rows>
-                        </grid>
-                      </menupopup>
+                <row align="center" id="radialEllipseRayRow">
+                  <checkbox id="radialEllipseRayCheckbox"
+                            oncommand="RadialEllipseRaySelected()" />
+                  <label value="&radius.label;"/>
+                  <hbox align="center">
+                    <menulist editable="true" id="radialEllipseXRayMenulist"
+                              oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                              oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
+                      <menupopup id="radialEllipseXRayMenupopup"
+                                 onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
                     </menulist>
+                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
+                  </hbox>
+                  <hbox align="center" id="radialSecondRayHbox">
+                    <menulist editable="true" id="radialEllipseYRayMenulist"
+                              oncommand="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                              oninput="onLengthMenulistCommand(this, ' % px pt cm in mm pc em ex rem ch', 'normal', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()">
+                      <menupopup id="radialEllipseYRayMenupopup"
+                                 onpopupshowing="PopulateLengths(this, ' % px pt cm in mm pc em ex rem ch')" />
+                    </menulist>
+                    <spinbuttons onup="IncreaseLength(this, ' % px pt cm in mm pc em ex rem ch'); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"
+                                 ondown="DecreaseLength(this, ' % px pt cm in mm pc em ex rem ch', false); gDialog.radialEllipseRayCheckbox.checked=true; RadialEllipseRaySelected()"/>
                   </hbox>
                 </row>
                 <row align="center">
-                  <checkbox label="&horizOffset.checkbox;" id="linearGradientHorizOffsetCheckbox"
-                            oncommand="RepaintGradient()"/>
-                  <hbox>
-                    <menulist editable="true" id="linearGradientHorizOffset" sizetopopup="none"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()"
-                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()">
-                      <menupopup id="linearGradientHorizOffsetMenupopup"
-                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                      </menupopup>
-                    </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); RepaintGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true); RepaintGradient()"/>
-                    <checkbox label="&vertOffset.checkbox;" id="linearGradientVertOffsetCheckbox"
-                              oncommand="RepaintGradient()"/>
-                    <menulist editable="true" id="linearGradientVertOffset" sizetopopup="none"
-                              oncommand="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()"
-                              oninput="onLengthMenulistCommand(this, '% px pt cm in mm pc em ex rem ch', '', true); RepaintGradient()">
-                      <menupopup id="linearGradientVertOffsetMenupopup"
-                                 onpopupshowing="PopulateLengths(this, '% px pt cm in mm pc em ex rem ch')">
-                      </menupopup>
-                    </menulist>
-                    <spinbuttons onup="IncreaseLength(this, '% px pt cm in mm pc em ex rem ch'); RepaintGradient()"
-                                 ondown="DecreaseLength(this, '% px pt cm in mm pc em ex rem ch', true); RepaintGradient()"/>
-                  </hbox>
-                 </row>
+                  <checkbox id="radialPositionCheckbox"
+                            oncommand="RadialPositionSelected()" />
+                  <label value="&position.label;"/>
+                  <menulist id="radialPositionMenulist" sizetopopup="none" editable="true"
+                                oncommand="gDialog.radialPositionCheckbox.checked=true; this.value = event.originalTarget.value; RadialPositionSelected()"
+                                oninput="gDialog.radialPositionCheckbox.checked=true; RadialPositionSelected()">
+                    <menupopup>
+                      <grid class="multipane-menu">
+                        <columns><column/><column/><column/></columns>
+                        <rows>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                            <menuitem label="&backgroundPositionCenterTop.label;" value="center top"/>
+                            <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                          </row>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftCenter.label;" value="left center"/>
+                            <menuitem label="&backgroundPositionCenterCenter.label;" value="center"/>
+                            <menuitem label="&backgroundPositionRightCenter.label;" value="right center"/>
+                          </row>
+                          <row align="center">
+                            <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                            <menuitem label="&backgroundPositionCenterBottom.label;" value="center bottom"/>
+                            <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                          </row>
+                        </rows>
+                      </grid>
+                      <menuseparator/>
+                      <menuitem label="&backgroundPositionUserDefined.label;"/>
+                    </menupopup>
+                  </menulist>
+                </row>
               </rows>
             </grid>
+            <vbox>
+              <hbox align="center">
+                <checkbox label="&angle.checkbox;" id="linearGradientAngleCheckbox"
+                          oncommand="LinearAngleSelected(this)"/>
+                <rotator id="linearGradientAngleRotator"
+                         onchange="gDialog.linearGradientAngleCheckbox.checked=true; LinearAngleSelected(gDialog.linearGradientAngleCheckbox)"
+                         negated="true"/>
+              </hbox>
+              <hbox align="center">
+                <checkbox label="&boxDirection.label;" id="linearGradientDirectionCheckbox"
+                          oncommand="LinearDirectionSelected(this)"/>
+                <menulist id="linearGradientDirectionMenulist" sizetopopup="none" editable="true"
+                          oncommand="this.value = event.originalTarget.value; gDialog.linearGradientDirectionCheckbox.checked=true; LinearDirectionSelected(gDialog.linearGradientDirectionCheckbox)">
+                  <menupopup>
+                    <grid class="multipane-menu"
+                          oncommand="this.parentNode.parentNode.value = event.originalTarget.value">
+                      <columns><column/><column/><column/></columns>
+                      <rows>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftTop.label;" value="left top"/>
+                          <menuitem label="&backgroundPositionCenterTop.label;" value="top"/>
+                          <menuitem label="&backgroundPositionRightTop.label;" value="right top"/>
+                        </row>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftCenter.label;" value="left"/>
+                          <spacer/>
+                          <menuitem label="&backgroundPositionRightCenter.label;" value="right"/>
+                        </row>
+                        <row align="center">
+                          <menuitem label="&backgroundPositionLeftBottom.label;" value="left bottom"/>
+                          <menuitem label="&backgroundPositionCenterBottom.label;" value="bottom"/>
+                          <menuitem label="&backgroundPositionRightBottom.label;" value="right bottom"/>
+                        </row>
+                      </rows>
+                    </grid>
+                  </menupopup>
+                </menulist>
+              </hbox>
+            </vbox>
           </tabpanels>
         </tabbox>
       </hbox>
