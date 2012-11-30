@@ -416,3 +416,35 @@ nvu|php, nvu|comment {
   outline-color: white ! important;
 }
 
+/***** TABLES ****/
+
+ thead, tbody, tfoot { cursor: row-resize }
+ tr { cursor: col-resize }
+ th, td { cursor: default }
+
+div[\_moz_anonclass="tableRowResizer"] {
+  position: absolute;
+  height: 4px;
+  background-color: gray;
+  z-index: 2147483647; /* max value for this property */
+}
+
+div[\_moz_anonclass="tableColResizer"] {
+  position: absolute;
+  width: 4px;
+  background-color: gray;
+  z-index: 2147483647; /* max value for this property */
+}
+
+div[\_moz_anonclass="tableResizerInfo"] {
+  position: absolute;
+  background-color: silver;
+  color: black;
+  font-family: Lucida Grande;
+  font-size: x-small;
+  font-weight: bold;
+  padding: 2px;
+  border-radius: 2px;
+  white-space: pre;
+  z-index: 2147483647; /* max value for this property */
+}

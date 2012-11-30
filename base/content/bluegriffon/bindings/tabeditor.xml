@@ -310,6 +310,7 @@
                       editor.selection.QueryInterface(Components.interfaces.nsISelectionPrivate)
                         .addSelectionListener(ComposerCommands.selectionListener);
                       editor.addEditorObserver(ComposerCommands.selectionListener);
+                      editor.addEditorMouseObserver(ComposerCommands.selectionListener);
                     }
                     if (editor &&
                         "ActiveSourceTree" in window)

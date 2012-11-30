@@ -530,7 +530,20 @@ var ComposerCommands = {
     EditAction: function()
     {
       ComposerCommands.updateSelectionBased(false);
+    },
+
+    MouseDown: function(aClientX, aClientY, aTarget, aIsShiftKey) {
+      return TableResizer.MouseDown(aClientX, aClientY, aTarget, aIsShiftKey);
+    },
+
+    MouseMove: function(aClientX, aClientY, aTarget, aIsShiftKey) {
+      return TableResizer.MouseMove(aClientX, aClientY, aTarget, aIsShiftKey);
+    },
+
+    MouseUp: function(aClientX, aClientY, aTarget, aIsShiftKey) {
+      return TableResizer.MouseUp(aClientX, aClientY, aTarget, aIsShiftKey);
     }
+
   }
 };
 

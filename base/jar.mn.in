@@ -154,4 +154,5 @@ bluegriffon.jar:
   content/bluegriffon/dialogs/insertTOC.xul             (content/bluegriffon/dialogs/insertTOC.xul)
   content/bluegriffon/dialogs/insertCommentOrPI.js      (content/bluegriffon/dialogs/insertCommentOrPI.js)
   content/bluegriffon/dialogs/insertCommentOrPI.xul     (content/bluegriffon/dialogs/insertCommentOrPI.xul)
+  content/bluegriffon/js/tableResizer.js                (content/bluegriffon/js/tableResizer.js)
 
