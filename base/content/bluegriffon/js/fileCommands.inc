@@ -16,6 +16,42 @@ var cmdOpen =
   }
 };
 
+var cmdOpenFile =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return true;    // we can always do this
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    try {
+      var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+      fp.init(window,
+              gDialog.bundleOpenLocation.getString("chooseFileDialogTitle"),
+              Components.interfaces.nsIFilePicker.modeOpen);
+      
+      fp.appendFilters(Components.interfaces.nsIFilePicker.filterHTML);
+      fp.appendFilter(gDialog.bundleOpenLocation.getString("PHPfiles"), "*.php");
+      fp.appendFilters(Components.interfaces.nsIFilePicker.filterText);
+      fp.appendFilters(Components.interfaces.nsIFilePicker.filterAll);
+  
+      if (fp.show() == Components.interfaces.nsIFilePicker.returnOK
+          && fp.fileURL.spec
+          && fp.fileURL.spec.length > 0)
+      {
+        StoreUrlInLocationDB(fp.fileURL.spec);
+        OpenFile(fp.fileURL.spec, true);
+      }
+    }
+    catch(ex) {
+    }
+  }
+};
+
 var cmdSave =
 {
   isCommandEnabled: function(aCommand, dummy)

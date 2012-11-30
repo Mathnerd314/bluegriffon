@@ -20,6 +20,7 @@
 
         <menuseparator/>
         <menuitem id="openPageMenuitem" accesskey="&openPage.accesskey;" key="openpagekb" command="cmd_open"/>
+        <menuitem id="openFileMenuitem"                                  key="openfilekb" command="cmd_openFile"/>
 
         <menuseparator/>
         <menuitem id="saveMenuitem"   key="savekb" command="cmd_save"/>

@@ -5,7 +5,8 @@
   <key id="saveaskb"            key="&filesaveas.key;"       observes="cmd_saveAs"    modifiers="accel,shift"/>
   <key id="key_quitApplication" key="&quit.key;"                                      modifiers="accel"/>
   <key id="closetabkb"          key="&closeWindow.key;"      observes="cmd_closeTab"  modifiers="accel"/>
-  <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel"/>
+  <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel,shift"/>
+  <key id="openfilekb"          key="&openPage.key;"         observes="cmd_openFile"  modifiers="accel"/>
   <key id="findkb"              key="&findCmd.key;"          observes="cmd_bgfind"    modifiers="accel"/>
   <key id="replacekb"           key="&replaceCmd.key;"       observes="cmd_replace"   modifiers="accel"/>
 
@@ -52,7 +53,8 @@
             commandupdater="true"
             events="create"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
-  <command id="cmd_open"         label="&openPage.label;" oncommand="goDoCommand('cmd_open')"/>
+  <command id="cmd_open"         label="&openPage.label;"    oncommand="goDoCommand('cmd_open')"/>
+  <command id="cmd_openFile"     label="&openFileCmd.label;" oncommand="goDoCommand('cmd_openFile')"/>
 </commandset>
 
 <commandset id="composerMenuItems"
@@ -280,6 +282,7 @@
   <stringbundle id="bundlePreferences"  src="chrome://bluegriffon/locale/language.properties"/>
   <stringbundle id="bundleHTML5"        src="chrome://bluegriffon/locale/html5.properties"/>
   <stringbundle id="bundleAccepted"     src="resource://gre/res/language.properties"/>
+  <stringbundle id="bundleOpenLocation" src="chrome://bluegriffon/locale/openLocation.properties"/>
 </stringbundleset>
 
 <stringbundleset id="otherBundles"/>
