@@ -1659,7 +1659,7 @@ function FillAceThemesMenupopup()
 {
   deleteAllChildren(gDialog.themesMenupopup);
   var aceIframe = EditorUtils.getCurrentSourceEditorElement();
-  var currentTheme = aceIframe.contentWindow.getCurrentTheme();
+  var currentTheme = aceIframe.contentWindow.wrappedJSObject.getCurrentTheme();
   for (var i = 0; i < kTHEMES.length; i++) {
     var s = document.createElement("menuitem");
     s.setAttribute("label", kTHEMES[i]);
@@ -1675,7 +1675,7 @@ function UseAceTheme(aEvent)
 {
   var theme = aEvent.originalTarget.getAttribute("value");
   var aceIframe = EditorUtils.getCurrentSourceEditorElement();
-  aceIframe.contentWindow.useTheme(theme);
+  aceIframe.contentWindow.wrappedJSObject.useTheme(theme);
 }
 
 #ifdef XP_MACOSX
