@@ -313,21 +313,8 @@ var CssUtils = {
       str = parsedSheet.cssText();
     }
 
-    var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
-                    createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
-    var charset = "UTF-8";
-    if (aSheet
-        && aSheet.cssRules
-        && aSheet.cssRules.length
-        && aSheet.cssRules.item(0).type == Components.interfaces.nsIDOMCSSRule.CHARSET_RULE)
-      charset = aSheet.cssRules.item(0).encoding;
-    converter.charset = charset;
-    var outText = converter.ConvertFromUnicode(str) + converter.Finish();
-
-    var doctype = EditorUtils.getCurrentDocumentMimeType();
-    // pfff, xhtml parsed strictly as xml is a pain...
     var textNode;
-    textNode = styleElt.ownerDocument.createTextNode("\n" + outText);
+    textNode = styleElt.ownerDocument.createTextNode("\n" + str);
     if (editor)
       editor.insertNode(textNode, styleElt, 0);
     else
