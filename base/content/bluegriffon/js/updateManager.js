@@ -40,7 +40,7 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 var BGUpdateManager = {
 
   kPREF_APPID:            "bluegriffon.updates.id",
-  kPREF_LAST_UPDATE:      "blugriffon.updates.last",
+  kPREF_LAST_UPDATE:      "bluegriffon.updates.last",
   kPREF_UPDATES_ENABLED:  "bluegriffon.updates.check.enabled",
   kPREF_UPDATE_FREQUENCY: "bluegriffon.updates.frequency",
   kPREF_UPDATE_MESSAGE:   "bluegriffon.updates.message",
@@ -91,7 +91,7 @@ var BGUpdateManager = {
 
     var lastCheck = 0;
     try {
-      lastCheck = parseInt(prefs.getIntPref(this.kPREF_LAST_UPDATE));
+      lastCheck = parseInt(prefs.getCharPref(this.kPREF_LAST_UPDATE));
     }
     catch(e) {}
 
@@ -195,7 +195,7 @@ var BGUpdateManager = {
     if (gDialog.updateThrobber)
       gDialog.updateThrobber.hidden = true;
     // update the last update's time
-    Services.prefs.setIntPref(this.kPREF_LAST_UPDATE, Date.parse(new Date()));
+    Services.prefs.setCharPref(this.kPREF_LAST_UPDATE, Date.parse(new Date()));
 
     var rq = aEvent.target;
     var doc = rq.responseXML; 
