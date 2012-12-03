@@ -187,7 +187,7 @@ var cmdAriaRole =
     var selContainer = EditorUtils.getSelectionContainer();
     if (selContainer)
     {
-      var role = EditorUtils.getBlockContainer(selContainer.node).getAttribute("role");
+      var role = selContainer.node.getAttribute("role");
       if (role)
       {
         aParams.setCStringValue("state_attribute", role);
