@@ -222,10 +222,17 @@ var BGUpdateManager = {
       catch(e){}
       var gApp = Services.appinfo;
       if (currentVersion && homeURL) {
-        if (Services.vc.compare(gApp.version, currentVersion) < 0) {
+        var skipped = "";
+        try {
+          skipped = Services.prefs.getCharPref("bluegriffon.updates.skipped");
+        }
+        catch(e){}
+        currentVersion = "1.8";
+        if (Services.vc.compare(gApp.version, currentVersion) < 0
+            && (currentVersion != skipped || ("BlueGriffonIsUpToDate" in window))) {
           var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
           window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                            null, null);
+                            null, null, currentVersion);
         }
         else {
           if ("BlueGriffonIsUpToDate" in window)
@@ -234,7 +241,7 @@ var BGUpdateManager = {
             Services.prefs.setCharPref(this.kPREF_UPDATE_MESSAGE, message);
             var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
             window.openDialog("chrome://bluegriffon/content/dialogs/updateAvailable.xul", "", features,
-                              message, messageURL);
+                              message, messageURL, 0);
           }
         }
       }

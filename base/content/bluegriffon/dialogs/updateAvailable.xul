@@ -26,7 +26,11 @@
       <vbox class="indent">
         <description id="warningMessage"
                      style="font-size: larger">&warningMessage.description;</description>
+        <label value="" id="versionLabel" style="text-align:center"/>
         <hbox>
+          <button id="skipVersionButton"
+                  label="&dontAskAgain.label;"
+                  oncommand="SkipVersion()"/>
           <spacer flex="1"/>
           <button id="downloadButton"
                   label="&download.button;"
