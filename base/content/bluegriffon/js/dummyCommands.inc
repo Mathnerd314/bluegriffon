@@ -142,6 +142,35 @@ var cmdGotoLinkCommand =
   }
 };
 
+var cmdEditLinkCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    if (EditorUtils.getCurrentEditorElement() &&
+        EditorUtils.isDocumentEditable() &&
+        EditorUtils.isEditingRenderedHTML() &&
+        GetCurrentViewMode() == "wysiwyg") {
+      var element = EditorUtils.getObjectForProperties(["a"], "href");
+      if (element) {
+        var url = UrlUtils.makeRelativeUrl(element.getAttribute("href"));
+        if (url.length && url[0] != "#")
+          return true;
+      }
+    }
+    return false;
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var element = EditorUtils.getObjectForProperties(["a"], "href");
+    var target = element.getAttribute("href");
+    OpenFile(target, true);
+  }
+};
+
 function GetSelectionContainerForNavigation()
 {
   var s = EditorUtils.getCurrentEditor().selection;

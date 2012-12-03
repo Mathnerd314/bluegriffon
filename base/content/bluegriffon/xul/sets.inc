@@ -116,6 +116,7 @@
   <command id="cmd_spellCheck"        oncommand="goDoCommand('cmd_spellCheck')"/>
 
   <command id="cmd_gotoLink"          oncommand="goDoCommand('cmd_gotoLink')"/>
+  <command id="cmd_editLink"          oncommand="goDoCommand('cmd_editLink')"/>
 
   <command id="cmd_toggleView"        oncommand="goDoCommand('cmd_toggleView')"/>
 </commandset>

@@ -78,6 +78,9 @@
                   label="&gotoLink.label;"
                   accesskey="&gotoLink.accesskey;"
                   command="cmd_gotoLink"/>
+        <menuitem id="menu_editLink"
+                  label="&openLinkCmdInTab.label;"
+                  command="cmd_editLink"/>
         <menuseparator/>
         <menuitem label="&spellCheck.label;"
                   accesskey="&spellCheck.accesskey;"

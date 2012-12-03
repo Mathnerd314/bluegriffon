@@ -196,6 +196,7 @@
               accesskey="&cMenu_insertLink.accesskey;"
               command="cmd_link"/>
     <menuitem id="cMenu_gotoLink" label="&gotoLink.label;" command="cmd_gotoLink"/>
+    <menuitem id="cMenu_editLink" label="&openLinkCmdInTab.label;" command="cmd_editLink"/>
     <menuseparator id="separator_before_ctableInsertMenu"/>
     <menu id="ctableInsertMenu" label="&tableInsertMenu2.label;" accesskey="&tableinsertmenu.accesskey;">
       <menupopup>
