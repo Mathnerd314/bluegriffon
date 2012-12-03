@@ -109,6 +109,9 @@ function onDoctypeToggle(aElt)
   var isHtml5 = (value == "HTML5" || value == "XHTML5");
   SetEnabledElementAndControl(gDialog.transitionalRadio, !isHtml5);
   SetEnabledElementAndControl(gDialog.strictRadio, !isHtml5);
+  if (value == "XHTML5")
+    gDialog.charsetMenulist.value = "utf-8";
+  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
 }
 
 function SelectLanguage(aElt)

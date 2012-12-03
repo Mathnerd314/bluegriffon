@@ -180,6 +180,9 @@ function ToggleDoctype(aElt)
   var isHtml5 = (value == "HTML5" || value == "XHTML5");
   SetEnabledElement(gDialog.transitionalRadio, !isHtml5);
   SetEnabledElement(gDialog.strictRadio, !isHtml5);
+  if (value == "XHTML5")
+    gDialog.charsetMenulist.value = "utf-8";
+  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
 }
 
 function EnableUserDefinedColorsControls()
@@ -658,17 +661,30 @@ function Apply()
     }
   
     /* character set */
-    var meta = EditorUtils.getCurrentDocument().querySelector('meta[http-equiv="content-type"]');
-    if (meta) {
-      meta.parentNode.removeChild(meta);
-    }
-    meta = EditorUtils.getCurrentDocument().createElement("meta");
-    meta.setAttribute("http-equiv", "content-type");
-    EditorUtils.insertMetaElement(meta,
-                                  EditorUtils.getCurrentDocumentMimeType() + "; charset="
-                                    + gDialog.charsetMenulist.value,
-                                  true, false);
     EditorUtils.getCurrentEditor().documentCharacterSet = gDialog.charsetMenulist.value;
+    var value = gDialog.languageRadiogroup.value;
+    var isXhtml5 = (value == "XHTML5");
+    var metaElts = EditorUtils.getCurrentDocument().querySelectorAll('meta');
+    if (metaElts && metaElts.length) {
+      for (var i = 0; i < metaElts.length; i++) {
+        var m = metaElts[i];
+        if ((m.hasAttribute("http-equiv") && m.getAttribute("http-equiv").toLowerCase() == "content-type")
+            || meta.hasAttribute("charset"))
+          m.parentNode.removeChild(m);
+      }
+    }
+    var meta = EditorUtils.getCurrentDocument().createElement("meta");
+    if (isXhtml5) {
+      meta.setAttribute("charset", gDialog.charsetMenulist.value);
+      EditorUtils.appendHeadElement(meta);
+    }
+    else {
+      meta.setAttribute("http-equiv", "content-type");
+      EditorUtils.insertMetaElement(meta,
+                                    EditorUtils.getCurrentDocumentMimeType() + "; charset="
+                                      + gDialog.charsetMenulist.value,
+                                    true, false);
+    }
   }
   catch(e) {}
 

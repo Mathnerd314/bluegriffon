@@ -132,10 +132,11 @@ function Startup()
 
 function InitDialog()
 {
-  if (EditorUtils.getCurrentDocument().documentElement.hasAttribute("lang"))
-    gDialog.pageLanguage.value = EditorUtils.getCurrentDocument().documentElement.getAttribute("lang");
-  if (EditorUtils.getCurrentDocument().documentElement.hasAttribute("dir"))
-    gDialog.directionRadio.value = EditorUtils.getCurrentDocument().documentElement.getAttribute("dir");
+  var doc = EditorUtils.getCurrentDocument();
+  if (doc.documentElement.hasAttribute("lang"))
+    gDialog.pageLanguage.value = doc.documentElement.getAttribute("lang");
+  if (doc.documentElement.hasAttribute("dir"))
+    gDialog.directionRadio.value = doc.documentElement.getAttribute("dir");
 
   gDialog.pageTitle.value = EditorUtils.getDocumentTitle();
 
@@ -148,6 +149,11 @@ function InitDialog()
 
   gCharset = EditorUtils.getCurrentEditor().documentCharacterSet.toLowerCase();
   gDialog.charsetMenulist.value = gCharset;
+  if (doc.doctype
+      && doc.doctype.publicId == ""
+      && doc.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
+    SetEnabledElement(gDialog.charsetMenulist, false);
+  }
 }
 
 function onAccept()

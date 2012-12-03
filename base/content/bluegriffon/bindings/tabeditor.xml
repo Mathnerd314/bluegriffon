@@ -332,10 +332,36 @@
                           var match = meta.getAttribute("content").match( /charset\s*=\s*(.*)$/i );
                           if (match)
                             charset = match[1].trim();
-                        }
+                        } else if (meta.hasAttribute("charset"))
+                          charset = meta.getAttribute("charset");
                       }
                       if (charset) {
                         editor.documentCharacterSet = charset;
+
+                        var metaElts = editor.document.querySelectorAll('meta');
+                        if (metaElts && metaElts.length) {
+                          for (var i = 0; i < metaElts.length; i++) {
+                            var m = metaElts[i];
+                            if ((m.hasAttribute("http-equiv") && m.getAttribute("http-equiv").toLowerCase() == "content-type")
+                                || m.hasAttribute("charset"))
+                              m.parentNode.removeChild(m);
+                          }
+                        }
+                        var meta = editor.document.createElement("meta");
+                        if (editor.document.doctype
+                            && editor.document.doctype.publicId == ""
+                            && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
+                          meta.setAttribute("charset", charset);
+                          EditorUtils.appendHeadElement(meta);
+                        }
+                        else {
+                          meta.setAttribute("http-equiv", "content-type");
+                          EditorUtils.insertMetaElement(meta,
+                                                        EditorUtils.getCurrentDocumentMimeType() + "; charset="
+                                                          + charset,
+                                                        true, false);
+                        }
+
                         editor.resetModificationCount();
                         editor.transactionManager.clear();
                       }
