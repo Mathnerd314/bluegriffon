@@ -227,7 +227,6 @@ var BGUpdateManager = {
           skipped = Services.prefs.getCharPref("bluegriffon.updates.skipped");
         }
         catch(e){}
-        currentVersion = "1.8";
         if (Services.vc.compare(gApp.version, currentVersion) < 0
             && (currentVersion != skipped || ("BlueGriffonIsUpToDate" in window))) {
           var features = "chrome,titlebar,toolbar,modal,centerscreen,dialog=no";
