@@ -1894,9 +1894,10 @@ function RevertTab()
   if (rv == 0)
   {
     var url = EditorUtils.getDocumentUrl();
-    
-    doCloseTab(tab);
-    OpenFile(url, true);
+    var editorElt = EditorUtils.getCurrentEditorElement();
+
+    editorElt.setAttribute("src", "about:blank");
+    editorElt.setAttribute("src", url);
   }
 }
 
