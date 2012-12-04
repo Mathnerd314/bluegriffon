@@ -188,6 +188,9 @@
     <toolbarbutton id="outdentButton" command="cmd_outdent" label="&outdentToolbarCmd.label;"
                    tooltiptext="&outdentToolbarCmd.tooltip;"/>
 
+    <toolbarbutton id="blockquoteButton" command="cmd_blockquote" label="&blockquoteToolbarCmd.label;"
+                   tooltiptext="&blockquoteToolbarCmd.tooltip;"/>
+
     <toolbarbutton id="ddButton" type="radio" group="lists" autoCheck="false" command="cmd_dd"
                    tooltiptext="&definitionDescription.tooltip;" label="&definitionDescription.label;">
         <observes element="cmd_dd" attribute="state" onbroadcast="onButtonUpdate(this.parentNode, 'cmd_dd')"/>

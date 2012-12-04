@@ -167,6 +167,7 @@
 
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
+  <command id="cmd_blockquote"                     oncommand="goDoCommand('cmd_blockquote')"/>
 
   <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
   <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>

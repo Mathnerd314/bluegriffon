@@ -193,6 +193,16 @@ toolbaritem  menulist {
   list-style-image: url("chrome://bluegriffon/skin/formatToolbar/outdent-disabled.png");
 }
 
+/****** BLOCKQUOTE ******/
+
+#indentButton {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote.png");
+}
+
+#indentButton[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/blockquote-disabled.png");
+}
+
 /****** DD ******/
 
 #ddButton {

@@ -530,3 +530,26 @@ var cmdSpanCommand =
     ComposerCommands.updateSelectionBased(false);
   }
 };
+
+var cmdBlockquoteCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    var editor = EditorUtils.getCurrentEditor();
+    editor.isCSSEnabled = false;
+    editor.indent("indent");
+    editor.isCSSEnabled = true;
+  }
+};
+

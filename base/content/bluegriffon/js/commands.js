@@ -417,6 +417,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_replace",     cmdBgFindCommand);
 
     commandTable.registerCommand("cmd_span",        cmdSpanCommand);
+    commandTable.registerCommand("cmd_blockquote",  cmdBlockquoteCommand);
 
     commandTable.registerCommand("cmd_pageProperties", cmdPagePropertiesCommand);
 

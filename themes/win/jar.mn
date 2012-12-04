@@ -27,6 +27,8 @@ bluegriffon.jar:
   skin/classic/bluegriffon/formatToolbar/dt.png  (classic/formatToolbar/dt.png)
   skin/classic/bluegriffon/formatToolbar/em-disabled.png  (classic/formatToolbar/em-disabled.png)
   skin/classic/bluegriffon/formatToolbar/em.png  (classic/formatToolbar/em.png)
+  skin/classic/bluegriffon/formatToolbar/blockquote-disabled.png  (classic/formatToolbar/blockquote-disabled.png)
+  skin/classic/bluegriffon/formatToolbar/blockquote.png  (classic/formatToolbar/blockquote.png)
   skin/classic/bluegriffon/formatToolbar/indent-disabled.png  (classic/formatToolbar/indent-disabled.png)
   skin/classic/bluegriffon/formatToolbar/indent.png  (classic/formatToolbar/indent.png)
   skin/classic/bluegriffon/formatToolbar/italic-disabled.png  (classic/formatToolbar/italic-disabled.png)
