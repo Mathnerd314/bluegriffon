@@ -177,9 +177,9 @@ function ToggleDoctype(aElt)
     return;
 
   var value = aElt.value;
-  var isHtml5 = (value == "HTML5" || value == "XHTML5");
-  SetEnabledElement(gDialog.transitionalRadio, !isHtml5);
-  SetEnabledElement(gDialog.strictRadio, !isHtml5);
+  var noTransitional = (value == "HTML5" || value == "XHTML5" || value == "XHTML11");
+  SetEnabledElement(gDialog.transitionalRadio, !noTransitional);
+  SetEnabledElement(gDialog.strictRadio, !noTransitional);
   if (value == "XHTML5")
     gDialog.charsetMenulist.value = "utf-8";
   SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
@@ -710,10 +710,10 @@ function CreateNewDocument()
   document.persist("whereRadiogroup", "value");
 
   var value = gDialog.languageRadiogroup.value;
-  var isHtml5 = (value == "HTML5" || value == "XHTML5");
+  var noDoctype = (value == "HTML5" || value == "XHTML5" || value == "XHTML11");
 
   var docType = "k" + value +
-                (isHtml5 ? "" : "_" + gDialog.doctypeRadiogroup.value);
+                (noDoctype ? "" : "_" + gDialog.doctypeRadiogroup.value);
   w.OpenFile(w[docType], true);
   return false;
 }

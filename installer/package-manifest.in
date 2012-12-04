@@ -654,6 +654,7 @@
 @BINPATH@/res/TopLevelImageDocument.css
 @BINPATH@/res/TopLevelVideoDocument.css
 @BINPATH@/res/xhtml5.xhtml
+@BINPATH@/res/xhtml11.xhtml
 @BINPATH@/res/xhtml_strict.xhtml
 @BINPATH@/res/xhtml_transitional.xhtml
 @BINPATH@/run-mozilla.sh

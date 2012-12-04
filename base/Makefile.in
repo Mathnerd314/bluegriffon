@@ -67,6 +67,7 @@ _FILES = \
 	$(srcdir)/res/xhtml_strict.xhtml \
 	$(srcdir)/res/html5.html \
 	$(srcdir)/res/xhtml5.xhtml \
+	$(srcdir)/res/xhtml11.xhtml \
 	$(srcdir)/res/rotatorCenterBG.png \
 	$(srcdir)/res/rotate_icon.png \
 	$(srcdir)/res/reset-fonts-grids.css \

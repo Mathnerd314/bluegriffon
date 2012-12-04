@@ -544,6 +544,7 @@ var EditorUtils = {
         break;
       case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
       case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+      case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
         isXML = true;
         break;
       case "":

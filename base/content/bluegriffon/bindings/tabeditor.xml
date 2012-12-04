@@ -321,9 +321,8 @@
                   }
                   if (editor) {
                     try {
-                      var charset = EditorUtils.getCurrentEditorElement().docShell.charset;
-            	        var contentViewer = EditorUtils.getCurrentEditorElement().docShell.contentViewer;
-            			    contentViewer.QueryInterface(Components.interfaces.nsIMarkupDocumentViewer);
+                      var charset = "";
+
                       var metas = editor.document.querySelectorAll("meta");
                       for (var i = 0; !charset && i < metas.length; i++) {
                         var meta = metas[i];
@@ -335,36 +334,38 @@
                         } else if (meta.hasAttribute("charset"))
                           charset = meta.getAttribute("charset");
                       }
-                      if (charset) {
-                        editor.documentCharacterSet = charset;
+                      if (!charset)
+                        charset = EditorUtils.getCurrentEditorElement().docShell.charset;
 
-                        var metaElts = editor.document.querySelectorAll('meta');
-                        if (metaElts && metaElts.length) {
-                          for (var i = 0; i < metaElts.length; i++) {
-                            var m = metaElts[i];
-                            if ((m.hasAttribute("http-equiv") && m.getAttribute("http-equiv").toLowerCase() == "content-type")
-                                || m.hasAttribute("charset"))
-                              m.parentNode.removeChild(m);
-                          }
-                        }
-                        var meta = editor.document.createElement("meta");
-                        if (editor.document.doctype
-                            && editor.document.doctype.publicId == ""
-                            && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
-                          meta.setAttribute("charset", charset);
-                          EditorUtils.appendHeadElement(meta);
-                        }
-                        else {
-                          meta.setAttribute("http-equiv", "content-type");
-                          EditorUtils.insertMetaElement(meta,
-                                                        EditorUtils.getCurrentDocumentMimeType() + "; charset="
-                                                          + charset,
-                                                        true, false);
-                        }
+                      editor.documentCharacterSet = charset;
 
-                        editor.resetModificationCount();
-                        editor.transactionManager.clear();
+                      var metaElts = editor.document.querySelectorAll('meta');
+                      if (metaElts && metaElts.length) {
+                        for (var i = 0; i < metaElts.length; i++) {
+                          var m = metaElts[i];
+                          if ((m.hasAttribute("http-equiv") && m.getAttribute("http-equiv").toLowerCase() == "content-type")
+                              || m.hasAttribute("charset"))
+                            m.parentNode.removeChild(m);
+                        }
                       }
+                      var meta = editor.document.createElement("meta");
+                      if (editor.document.doctype
+                          && editor.document.doctype.publicId == ""
+                          && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
+                        meta.setAttribute("charset", charset);
+                        EditorUtils.appendHeadElement(meta);
+                      }
+                      else {
+                        meta.setAttribute("http-equiv", "content-type");
+                        EditorUtils.insertMetaElement(meta,
+                                                      EditorUtils.getCurrentDocumentMimeType() + "; charset="
+                                                        + charset,
+                                                      true, false);
+                      }
+
+                      editor.resetModificationCount();
+                      editor.transactionManager.clear();
+
                     }
                     catch(e) { alert(e) }
 

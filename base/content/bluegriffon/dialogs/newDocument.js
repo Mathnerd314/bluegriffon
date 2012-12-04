@@ -64,6 +64,9 @@ function InitDialog()
     case "kXHTML5":
       gDialog.languageRadiogroup.value = "XHTML5";
       break;
+    case "kXHTML11":
+      gDialog.languageRadiogroup.value = "XHTML11";
+      break;
     case "kHTML_STRICT":
       gDialog.languageRadiogroup.value = "HTML";
       gDialog.doctypeRadiogroup.value = "STRICT";
@@ -92,7 +95,7 @@ function onAccept()
   
   gRv.value = "k" +
               gDialog.languageRadiogroup.value;
-  if (gRv.value != "kHTML5" && gRv.value != "kXHTML5")
+  if (gRv.value != "kHTML5" && gRv.value != "kXHTML5" && gRv.value != "kXHTML11")
     gRv.value += "_" + gDialog.doctypeRadiogroup.value;
 
   GetPrefs().setCharPref("bluegriffon.defaults.doctype", gRv.value);
@@ -106,9 +109,9 @@ function onAccept()
 function onDoctypeToggle(aElt)
 {
   var value = aElt.value;
-  var isHtml5 = (value == "HTML5" || value == "XHTML5");
-  SetEnabledElementAndControl(gDialog.transitionalRadio, !isHtml5);
-  SetEnabledElementAndControl(gDialog.strictRadio, !isHtml5);
+  var noTransitional = (value == "HTML5" || value == "XHTML5" || value == "XHTML11");
+  SetEnabledElementAndControl(gDialog.transitionalRadio, !noTransitional);
+  SetEnabledElementAndControl(gDialog.strictRadio, !noTransitional);
   if (value == "XHTML5")
     gDialog.charsetMenulist.value = "utf-8";
   SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
@@ -169,7 +172,6 @@ function SimilarToCurrent()
       type = {doctype: "XHTML", strict: false };
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-      type = {doctype: "XHTML", strict: true };
       break;
     case "":
       type = {doctype:

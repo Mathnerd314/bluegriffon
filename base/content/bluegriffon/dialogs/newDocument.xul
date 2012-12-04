@@ -34,6 +34,8 @@
              value="HTML"/>
       <radio label="&xhtml.label;"
              value="XHTML"/>
+      <radio label="&xhtml11.label;"
+             value="XHTML11"/>
       <radio label="&html5.label;"
              value="HTML5"/>
       <radio label="&xhtml5.label;"

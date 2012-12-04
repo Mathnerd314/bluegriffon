@@ -729,6 +729,7 @@ function onSourceChangeCallback(source)
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
       isXML = true;
       break;
     case "":
@@ -810,6 +811,7 @@ function ToggleViewMode(aElement)
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
       isXML = true;
       break;
     case "":
@@ -1365,6 +1367,9 @@ function UpdateTabHTMLDialect(editor)
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
       tab.setAttribute("tooltiptext", "XHTML 1");
+      break;
+    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
+      tab.setAttribute("tooltiptext", "XHTML 1.1");
       break;
     case "":
       tab.setAttribute("tooltiptext",
