@@ -18,7 +18,6 @@ _AVAILABLE_LOCALES =\
     es-ES \
     fi \
     fr \
-    gl \
     he \
     it \
     ja \
@@ -32,22 +31,17 @@ _AVAILABLE_LOCALES =\
     hu \
     sr \
     $(NULL)
-
-.PHONY: $(_AVAILABLE_LOCALES)
-
+    
 libs::$(_AVAILABLE_LOCALES)
+	mkdir -p $(FINAL_TARGET)/distribution/extensions
+	rm -f $(FINAL_TARGET)/distribution/extensions/*.xpi
+	rm -f $(srcdir)/*.xpi
+	$(foreach f,$^, cd $(srcdir)/`basename $f`; zip -qr ../langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
+	$(foreach f,$^, cd $(topsrcdir)/bluegriffon/locales/`basename $f`; zip -qr $(topsrcdir)/bluegriffon/langpacks/langpack-`basename $f`@bluegriffon.org.xpi `find . -type f | grep -v svn` ;)
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-	mkdir -p $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/bundles
-	rm -fr $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/bundles/*
-	$(foreach f,$^, mkdir $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/bundles/langpack-$f@bluegriffon.org ;)
-	$(foreach f,$^, cp -r $(topsrcdir)/bluegriffon/locales/$f/* $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/bundles/langpack-$f@bluegriffon.org ; )
-	$(foreach f,$^, cp -r $(srcdir)/$f/* $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/bundles/langpack-$f@bluegriffon.org ; )
+	$(INSTALL) $(srcdir)/*.xpi $(DIST)/$(APP_NAME).app/Contents/MacOS/distribution/extensions
 else
-	mkdir -p $(DIST)/bin/distribution/bundles
-	rm -fr $(DIST)/bin/distribution/bundles/*
-	$(foreach f,$^, mkdir $(DIST)/bin/distribution/bundles/langpack-$f@bluegriffon.org ;)
-	cd $(DIST)/bin/distribution/bundles
-	$(foreach f,$^, cd langpack-$f@bluegriffon.org; unzip $(topsrcdir)/bluegriffon/langpacks/langpack-$f@bluegriffon.org.xpi ;)
+	$(INSTALL) $(srcdir)/*.xpi $(DIST)/bin/distribution/extensions
 endif
 
 include $(topsrcdir)/config/rules.mk
