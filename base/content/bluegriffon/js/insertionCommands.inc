@@ -547,9 +547,10 @@ var cmdBlockquoteCommand =
   doCommand: function(aCommand)
   {
     var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
     editor.isCSSEnabled = false;
     editor.indent("indent");
-    editor.isCSSEnabled = true;
+    editor.isCSSEnabled = isCSSEnabled;
   }
 };
 

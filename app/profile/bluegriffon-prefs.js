@@ -47,7 +47,6 @@ pref("extensions.logging.enabled", true);
 
 // browser preferences
 pref("image.animation_mode", "none");
-pref("editor.use_css", true);
 pref("bluegriffon.display.use_system_colors", true);
 pref("bluegriffon.display.foreground_color", "#000000");
 pref("bluegriffon.display.background_color", "#ffffff");
