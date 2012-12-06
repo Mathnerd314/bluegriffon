@@ -247,6 +247,8 @@ var ComposerCommands = {
     {
       var cmdParams = this.newCommandParams();
       this.goDoCommandParams(cmdStr, cmdParams);
+      if (cmdParams)
+        this.pokeStyleUI(cmdStr, cmdParams.getBooleanValue("state_all"));
     } catch(e) {}
   },
 
