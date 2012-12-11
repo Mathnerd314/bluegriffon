@@ -710,6 +710,8 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     else
       CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
   }
+
+  gMain.NotifierUtils.notify("tabSelected", "panel-stylesheets");
 }
 
 function ToggleHover(aElt)
