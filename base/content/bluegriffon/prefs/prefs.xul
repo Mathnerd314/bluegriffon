@@ -29,6 +29,10 @@
             label="&general.title;"
             image="chrome://bluegriffon/skin/prefs/general.png"
             src="chrome://bluegriffon/content/prefs/general.xul"/>
+  <prefpane id="filePrefPane"
+            label="&file.title;"
+            image="chrome://bluegriffon/skin/prefs/file.png"
+            src="chrome://bluegriffon/content/prefs/file.xul"/>
   <prefpane id="newPagePrefPane"
             label="&newPage.title;"
             onpaneload="OnNewPagePaneLoad()"
@@ -77,6 +81,7 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/styles.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/advanced.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/shortcuts.js"/>
+  <script type="application/javascript" src="chrome://bluegriffon/content/prefs/file.js"/>
 #ifdef XP_MACOSX
   <script type="application/javascript" src="chrome://bluegriffon/content/prefs/osx.js"/>
 #endif

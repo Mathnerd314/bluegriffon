@@ -12,8 +12,6 @@
   <prefpane id="generalPrefPane">
     <preferences>
       <preference id="pref-tabmode"        name="bluegriffon.tabs.position" type="string"/>
-      <preference id="pref-historyCount"   name="bluegriffon.history.url_maximum" type="int"/>
-      <preference id="pref-restoreSession" name="bluegriffon.defaults.restorePreviousSession" type="bool"/>
       <preference id="pref-showIDs"        name="bluegriffon.structurebar.id.show" type="bool"/>
       <preference id="pref-showClasses"    name="bluegriffon.structurebar.class.show" type="bool"/>
       <preference id="pref-showLangs"      name="bluegriffon.structurebar.lang.show" type="bool"/>
@@ -31,20 +29,6 @@
         <radio label="&centerTabPosition.label;" value="center"/>
         <radio label="&rightTabPosition.label;" value="right"/>
       </radiogroup>
-    </groupbox>
-
-    <groupbox>
-      <caption label="&fileHistory.caption;"/>
-      <hbox align="center">
-        <label value="&fileHistoryDepth.label;"/>
-        <textbox id="historyCount" preference="pref-historyCount"
-                 type="number" size="3" maxlength="3"
-                 min="1" max="50" increment="1"/>
-        <label value="&files.label;"/>
-      </hbox>
-      <checkbox id="restoreSessionCheckbox"
-                preference="pref-restoreSession"
-                label="&restoreLastSession.label;"/>
     </groupbox>
 
     <groupbox>

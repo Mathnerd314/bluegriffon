@@ -77,6 +77,10 @@ pref("bluegriffon.defaults.table.text_wrap", "");
 pref("bluegriffon.defaults.table.cell_spacing", "2");
 pref("bluegriffon.defaults.table.cell_padding", "2");
 
+// file extension preferences
+pref("bluegriffon.defaults.extension.application-xhtml+xml", "xhtml");
+pref("bluegriffon.defaults.extension.text-html", "html");
+
 // CSS policy
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
@@ -173,3 +177,5 @@ pref("bluegriffon.floatingToolbar.enabled", true);
 
 // make links absolute when copied
 pref("clipboard.absoluteLinks", true);
+
+// pref("extensions.venkman.enableChromeFilter", false);
