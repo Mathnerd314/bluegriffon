@@ -43,15 +43,7 @@ var gMain = null;
 const disabledUI = ["ProjectPlusButton", "ProjectMinusButton", "ProjectConfigButton",
                     "scriptLists"];
 
-#ifdef XP_MACOSX
-var gIsPanelActive = false;
-#else
-#ifdef XP_UNIX
 var gIsPanelActive = true;
-#else
-var gIsPanelActive = false;
-#endif
-#endif
 
 function Startup()
 {

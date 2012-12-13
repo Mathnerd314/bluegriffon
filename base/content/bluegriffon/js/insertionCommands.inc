@@ -106,18 +106,15 @@ var cmdCssPanelCommand =
 
   doCommand: function(aCommand)
   {
+    gDialog["panel-cssproperties-menuitem"].setAttribute("checked", "true");
 #ifdef XP_UNIX
 #ifdef XP_MACOSX
-    var panel = gDialog["panel-cssproperties"];
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
+    TogglePanel(gDialog["panel-cssproperties-menuitem"]);
 #else
-    start_css();
+    start_panel(gDialog["panel-cssproperties-menuitem"]);
 #endif
 #else
-    var panel = gDialog["panel-cssproperties"];
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
+    TogglePanel(gDialog["panel-cssproperties-menuitem"]);
 #endif
   }
 };
@@ -137,18 +134,15 @@ var cmdDomExplorerPanelCommand =
 
   doCommand: function(aCommand)
   {
+    gDialog["panel-domexplorer-menuitem"].setAttribute("checked", "true");
 #ifdef XP_UNIX
 #ifdef XP_MACOSX
-    var panel = gDialog["panel-domexplorer"];
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
+    TogglePanel(gDialog["panel-domexplorer-menuitem"]);
 #else
-    start_domexplorer();
+    start_panel(gDialog["panel-domexplorer-menuitem"]);
 #endif
 #else
-    var panel = gDialog["panel-domexplorer"];
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
+    TogglePanel(gDialog["panel-domexplorer-menuitem"]);
 #endif
   }
 };

@@ -45,15 +45,15 @@
 <overlay id="scripteditorOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/x-javascript"  src="chrome://scripteditor/content/scripteditorOverlay.js"/>
-
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-scripteditor-menuitem"
               panel="panel-scripteditor"
+              windowType="BlueGriffon:ScriptEditor"
+              url="chrome://scripteditor/content/scripteditor.xul"
               label="&scripteditor.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_scripteditor()"
+              oncommand="start_panel()"
 #else
               type="checkbox"
 #endif
@@ -69,8 +69,7 @@
            floating="true"
            label="&scripteditor.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://scripteditor/content/scripteditor.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #else
@@ -80,16 +79,11 @@
            floating="true"
            label="&scripteditor.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://scripteditor/content/scripteditor.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #endif
 #endif
-
-  <commandset id="webNavigationItems">
-    <command id="cmd_scriptEditor" oncommand="goDoCommand('cmd_scriptEditor')"/>
-  </commandset>
 
 </overlay>         
 

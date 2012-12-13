@@ -44,15 +44,9 @@ Components.utils.import("resource://app/modules/prompterHelper.jsm");
 var gMain = null;
 var gCurrentElement = null;
 var gInUtils;
-#ifdef XP_MACOSX
-var gIsPanelActive = false;
-#else
-#ifdef XP_UNIX
+
 var gIsPanelActive = true;
-#else
-var gIsPanelActive = false;
-#endif
-#endif
+
 var gPrefs = null;
 var gXmlNAMERegExp = null;
 

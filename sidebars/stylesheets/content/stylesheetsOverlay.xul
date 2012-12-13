@@ -50,10 +50,12 @@
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-stylesheets-menuitem"
               panel="panel-stylesheets"
+              windowType="BlueGriffon:StyleSheets"
+              url="chrome://stylesheets/content/stylesheets.xul"
               label="&stylesheetsPanel.title;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_stylesheets()"
+              oncommand="start_panel()"
 #else
               type="checkbox"
 #endif
@@ -69,8 +71,7 @@
            floating="true"
            label="&stylesheetsPanel.title;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://stylesheets/content/stylesheets.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #else
@@ -80,8 +81,7 @@
            floating="true"
            label="&stylesheetsPanel.title;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://stylesheets/content/stylesheets.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #endif

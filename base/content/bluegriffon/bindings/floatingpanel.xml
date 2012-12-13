@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 
+<!DOCTYPE bindings [
+  <!ENTITY % floatingpanelBindingsDTD SYSTEM "chrome://bluegriffon/locale/panels.dtd" >
+  %floatingpanelBindingsDTD;
+]>
+
 <bindings id="floatingpanelBindings"
    xmlns="http://www.mozilla.org/xbl"
    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -15,11 +20,16 @@
     <content noautohide="true" level="floating">
       <xul:hbox align="center" class="titleholder">
         <xul:image class="floatingpanel-close"
+                   tooltiptext="&closePanel.label;"
                    onclick="this.parentNode.parentNode.closePanel()"/>
         <xul:titlebar flex="1">
           <xul:label xbl:inherits="value=label"/>
         </xul:titlebar>
+        <xul:image class="pin"
+                   tooltiptext="&deckPanel.label;"
+                   onclick="PinPanel()"/>
         <xul:image class="floatinpanel-align"
+                   tooltiptext="&alignPanels.label;"
                    onclick="AlignAllPanels()"/>
       </xul:hbox>
       <children/>
@@ -66,6 +76,30 @@
               this.sizeTo(this.getAttribute("width"), this.getAttribute("height"));
             BlueGriffonVars.lastPanelRaised = this;
           } catch(e) {}
+        ]]>
+        </body>
+      </method>
+
+      <method name="PinPanel">
+        <body>
+        <![CDATA[
+            this.hidePopup();
+            this.removeAttribute("style");
+            this.setAttribute("open", "false");
+            this.setAttribute("decked", "true");
+            this.setAttribute("indeck", "true");
+            var iframe = this.firstElementChild;
+            var src = iframe.getAttribute("src");
+            var wjo = iframe.contentWindow.wrappedJSObject;
+            if (wjo && "Shutdown" in wjo)
+              wjo.Shutdown();
+            document.persist(this.id, "open");
+            document.persist(this.id, "decked");
+            document.persist(this.id, "indeck");
+
+            gDialog.deckedPanelsTabs.addPanel(this.getAttribute("label"),
+                                              src,
+                                              this.id);
         ]]>
         </body>
       </method>

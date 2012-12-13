@@ -23,6 +23,7 @@ bluegriffon.jar:
   content/bluegriffon/bindings/rotator.xml              (content/bluegriffon/bindings/rotator.xml)
   content/bluegriffon/bindings/lengthbox.xml            (content/bluegriffon/bindings/lengthbox.xml)
   content/bluegriffon/bindings/cssClassPicker.xml       (content/bluegriffon/bindings/cssClassPicker.xml)
+  content/bluegriffon/bindings/deckedPanelsTabs.xml     (content/bluegriffon/bindings/deckedPanelsTabs.xml)
   content/bluegriffon/bindings/floatingpanel.xml        (content/bluegriffon/bindings/floatingpanel.xml)
   content/bluegriffon/bindings/inContext.xml            (content/bluegriffon/bindings/inContext.xml)
   content/bluegriffon/bindings/media.xml                (content/bluegriffon/bindings/media.xml)

@@ -9,15 +9,7 @@ var gMain = null;
 var gDoc = null;
 var gEditor = null;
 
-#ifdef XP_MACOSX
-var gIsPanelActive = false;
-#else
-#ifdef XP_UNIX
 var gIsPanelActive = true;
-#else
-var gIsPanelActive = false;
-#endif
-#endif
 
 function Startup()
 {

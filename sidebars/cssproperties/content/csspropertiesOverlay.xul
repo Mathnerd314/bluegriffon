@@ -56,9 +56,11 @@
     <menuitem id="panel-cssproperties-menuitem"
               panel="panel-cssproperties"
               label="&cssproperties.label;"
+              windowType="BlueGriffon:CSSProperties"
+              url="chrome://cssproperties/content/cssproperties.xul"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_css()"
+              oncommand="start_panel(this)"
 #else
               type="checkbox"
 #endif
@@ -76,8 +78,7 @@
            height="600"
            label="&cssproperties.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://cssproperties/content/cssproperties.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #else
@@ -89,8 +90,7 @@
            floating="true"
            label="&cssproperties.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://cssproperties/content/cssproperties.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #endif

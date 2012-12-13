@@ -57,10 +57,12 @@
   <menupopup id="panelsMenuPopup">
     <menuitem id="panel-domexplorer-menuitem"
               panel="panel-domexplorer"
+              windowType="BlueGriffon:DOMExplorer"
+              url="chrome://domexplorer/content/domexplorer.xul"
               label="&domexplorer.label;"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
-              oncommand="start_domexplorer()"
+              oncommand="start_panel()"
 #else
               type="checkbox"
 #endif
@@ -78,8 +80,7 @@
            height="600"
            label="&domexplorer.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://domexplorer/content/domexplorer.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #else
@@ -91,8 +92,7 @@
            floating="true"
            label="&domexplorer.label;">
       <iframe type="chrome"
-              flex="1"
-              src="chrome://domexplorer/content/domexplorer.xul"/>
+              flex="1"/>
     </panel>
   </panelset>
 #endif

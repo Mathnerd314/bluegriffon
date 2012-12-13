@@ -125,6 +125,19 @@
       <vbox flex="1">
         <box flex="1" id="tabeditorContainer" >
           <tabeditor flex="1" id="tabeditor" visibility="hidden" persist="tabmode"/>
+            <splitter id="deckedPanelsSplitter"
+                      collapse="after">
+#ifndef XP_MACOSX
+              <grippy/>
+#endif
+            </splitter>
+            <vbox id="deckedPanels" style="background-color: #e2e2e2;"
+                  persist="width">
+              <deckedPanelsTabs id="deckedPanelsTabs"/>
+              <iframe id="deckPanelsIframe"
+                      type="chrome"
+                      flex="1"/>
+            </vbox>
         </box>
 #include findbar.inc
         <iframe id="parserIframe" src="about:blank" hidden="true" type="content"/>

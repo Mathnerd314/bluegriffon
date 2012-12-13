@@ -39,3 +39,8 @@ box[anonid="resizer"]:-moz-locale-dir(rtl) {
   list-style-image: url("chrome://bluegriffon/skin/panels/align-vertical-center.png");
   margin-right: 4px;
 }
+
+.pin {
+  list-style-image: url("chrome://bluegriffon/skin/panels/pin.png");
+  margin-right: 4px;
+}

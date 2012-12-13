@@ -38,6 +38,7 @@ function Startup()
   ComposerCommands.setupMainCommands();
   window.updateCommands("style");
   RestoreShortcuts();
+  RestorePanels();
 
   InstallCustomizationDoneCallbacks();
 
@@ -187,5 +188,24 @@ function RestoreShortcuts()
   }
   catch(e) {
     // no shortcut DB yet, do nothing
+  }
+}
+
+function RestorePanels()
+{
+  var items = document.querySelectorAll("#panelsMenuPopup > menuitem[panel]");
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var panelid = item.getAttribute("panel");
+    var panel = document.getElementById(panelid);
+    if (panel.getAttribute("open") == "true") {
+      panel.firstElementChild.setAttribute("src", item.getAttribute("url"));
+    }
+    else if (panel.getAttribute("decked") == "true"
+             && panel.getAttribute("indeck") == "true") {
+        gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
+                                          item.getAttribute("url"),
+                                          panelid);
+	  }
   }
 }

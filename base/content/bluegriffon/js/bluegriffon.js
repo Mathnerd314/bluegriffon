@@ -1295,7 +1295,9 @@ function UpdatePanelsStatusInMenu()
   var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
   while (child) {
     var panel = gDialog[child.getAttribute("panel")];
-    if (panel.popupBoxObject.popupState == "open")
+    if (panel.popupBoxObject.popupState == "open"
+        || (panel.getAttribute("decked") == "true"
+            && panel.getAttribute("indeck") == "true"))
       child.setAttribute("checked", "true");
     else
       child.removeAttribute("checked");
@@ -1304,28 +1306,83 @@ function UpdatePanelsStatusInMenu()
   }
 }
 
-function TogglePanel(aEvent)
+function start_panel(aElt)
+{
+  var w = null;
+  // TODO case decked="true"
+  try {
+    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow(aElt.getAttribute("windowType"));
+  }
+  catch(e){}
+  if (w)
+    w.focus();
+  else
+    window.open(aElt.getAttribute("url"),"_blank",
+               "chrome,resizable,scrollbars=yes");
+}
+
+function TogglePanel(aElt)
 {
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
   return;
 #endif
 #endif
-  var menuitem = aEvent.originalTarget;
-  if (!menuitem.hasAttribute("panel"))
+  if (!aElt.hasAttribute("panel"))
     return;
 
-  var panel = gDialog[aEvent.originalTarget.getAttribute("panel")];
-  if (menuitem.getAttribute("checked") == "true") {
-    panel.openPanel(null, false);
-    NotifierUtils.notify("redrawPanel", panel.id);
+  var panel = gDialog[aElt.getAttribute("panel")];
+  if (aElt.getAttribute("checked") == "true") { // open the panel
+    if (panel.getAttribute("decked") == "true") { // should appear in deck
+      if (panel.getAttribute("indeck") != "true") { // not in deck yet
+        panel.setAttribute("indeck", "true");
+        document.persist(panel.id, "indeck");
+    
+        gDialog.deckedPanelsTabs.addPanel(aElt.getAttribute("label"),
+                                          aElt.getAttribute("url"),
+                                          panel.id);
+      }
+      else { // already in deck
+        var tab = gDialog.deckedPanelsTabs.querySelector("label[panelid='" + panel.id + "']"); 
+        gDialog.deckedPanelsTabs.deckedPanelSelected({target: tab});
+      }
+    }
+    else {
+      var iframe = panel.firstElementChild;
+      iframe.setAttribute("src", aElt.getAttribute("url"));
+      panel.openPanel(null, false);
+    }
+    NotifierUtils.notify("redrawPanel", panel.id);    
   }
-  else {
-    NotifierUtils.notify("panelClosed", panel.id);
-    panel.closePanel();
+  else { // close the panel
+    if (panel.getAttribute("decked") == "true") {
+      if (panel.getAttribute("indeck") == "true") {
+        var tab = gDialog.deckedPanelsTabs.querySelector("label[panelid='" + panel.id + "']"); 
+        var newTab = null;
+        if (tab.nextElementSibling)
+          newTab = tab.nextElementSibling;
+        else if (tab.previousElementSibling)
+          newTab = tab.previousElementSibling;
+
+        panel.setAttribute("indeck", "false");
+        document.persist(panel.id, "indeck");
+        tab.parentNode.removeChild(tab);
+
+        if (newTab) {
+          newTab.setAttribute("selected", "true");
+          gDialog.deckPanelsIframe.setAttribute("src", newTab.getAttribute("url"));
+        }
+        else
+          gDialog.deckPanelsIframe.setAttribute("src", "about:blank");
+      }
+    }
+    else {
+      NotifierUtils.notify("panelClosed", panel.id);
+      panel.closePanel();
+    }
   }
 }
-
 
 function OnClick(aEvent)
 {

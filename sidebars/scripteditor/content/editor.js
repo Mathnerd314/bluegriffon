@@ -35,7 +35,7 @@ function Startup()
 function CommitChanges()
 {
   gSource.cancelled = false;
-  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  var bespinEditor = gDialog.bespinIframe.contentWindow.wrappedJSObject.gEditor;
   gSource.value = bespinEditor.getValue();
   window.close();
 }
@@ -47,7 +47,7 @@ function OnBespinFocus(aIframe)
 
 function SourceChangeCallback()
 {
-  var sourceEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  var sourceEditor = gDialog.bespinIframe.contentWindow.wrappedJSObject.gEditor;
   var value = sourceEditor.getValue();
 
   if (sourceEditor.lastErrorLine) {
@@ -81,7 +81,7 @@ function SourceChangeCallback()
 
 function InstallBespin(aIframe, aTheme, aValue)
 {
-  aIframe.contentWindow.installCodeMirror(BespinKeyPressCallback,
+  aIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                           SourceChangeCallback,
                                           aTheme,
                                           aValue);
@@ -99,7 +99,7 @@ function onBespinLineBlur(aElt)
 
 function onBespinLineKeypress(aEvent, aElt)
 {
-  var bespinEditor = gDialog.bespinIframe.contentWindow.gEditor;
+  var bespinEditor = gDialog.bespinIframe.contentWindow.wrappedJSObject.gEditor;
   if (aEvent.keyCode == 13) {
     var line = aElt.value;
     bespinEditor.setCursor(parseInt(line) - 1, 0);
@@ -119,14 +119,14 @@ function ToggleBespinFindCaseSensitivity()
 {
   var bespinIframe = gDialog.bespinIframe;
   var selPoint = bespinIframe.getUserData("selPoint");
-  //bespinEditor = gDialog.bespinIframe.contentWindow.gEditor.setCursor(selPoint);
+  //bespinEditor = gDialog.bespinIframe.contentWindow.wrappedJSObject.gEditor.setCursor(selPoint);
   BespinFind(bespinIframe.getUserData("findLastDirection"), true);
 }
 
 function BespinFind(aForward, aInitial)
 {
     var sourceIframe = gDialog.bespinIframe;
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     sourceIframe.setUserData("findLastDirection", aForward, null);
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
@@ -193,7 +193,7 @@ function onBespinFindKeypress(aEvent)
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
       var sourceIframe = gDialog.bespinIframe;
-      var sourceEditor = sourceIframe.contentWindow.gEditor;
+      var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
       sourceEditor.focus();
   }
 }
@@ -253,7 +253,7 @@ function BespinKeyPressCallback(aEvent)
 function BespinReplace()
 {
     var sourceIframe = gDialog.bespinIframe;
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
       var end = sourceEditor.lastNeedle.to();
       sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
@@ -272,7 +272,7 @@ function BespinReplaceAll()
 {
   var occurences = 0;
   var sourceIframe = gDialog.bespinIframe;
-  var sourceEditor = sourceIframe.contentWindow.gEditor;
+  var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
   var query = gDialog.bespinFindTextbox.value;
   var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
@@ -295,7 +295,7 @@ function WysiwygShowFindBar()
 {
   gDialog.bespinToolbox1.hidden = false;
   var sourceIframe = gDialog.bespinIframe;
-  var sourceEditor = sourceIframe.contentWindow.gEditor;
+  var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   var text = sourceEditor.getSelection();
   if (text) {
     gDialog.bespinFindTextbox.value = text;
@@ -310,6 +310,6 @@ function CloseFindBar()
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
   var sourceIframe = gDialog.bespinIframe;
-  var sourceEditor = sourceIframe.contentWindow.gEditor;
+  var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   sourceEditor.focus();
 }

@@ -341,7 +341,7 @@
     </menu>
 
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
-          oncommand="TogglePanel(event)">
+          oncommand="TogglePanel(event.originalTarget)">
       <menupopup id="panelsMenuPopup"
 #ifdef XP_UNIX
 #ifdef XP_MACOSX

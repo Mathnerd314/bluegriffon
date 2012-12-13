@@ -23,7 +23,7 @@
   </keyset>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-    <tree id="contentsTree" flex="1" style="margin: 0px; min-width: 200px; height: 200px"
+    <tree id="contentsTree" flex="1" style="margin: 0px; margin-top: 4px; min-width: 200px; height: 200px"
           treelines="true"
           onselect="UpdateButtons()"
           ondblclick="OpenStylesheet()">
