@@ -343,25 +343,23 @@
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
           oncommand="TogglePanel(event.originalTarget)">
       <menupopup id="panelsMenuPopup"
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
-                 onpopupshowing="UpdatePanelsStatusInMenu()"
-#endif
-#else
-                 onpopupshowing="UpdatePanelsStatusInMenu()"
-#endif
-                 >
+                 onpopupshowing="UpdatePanelsStatusInMenu()">
 #ifdef XP_UNIX
 #ifdef XP_MACOSX
         <menuitem label="&alignPanels.label;"
                   oncommand="AlignAllPanels()"/>
-        <menuseparator id="beforeAllPanelsMenuseparator"/>
+#else
+        <menu label="Deck" id="deckMenu">
+          <menupopup id="deckMenupopup"
+          		       onpopupshowing="UpdateDeckMenu()"
+          		       oncommand="DeckOrUndeckPanel(event)"/>
+        </menu>
 #endif
 #else
         <menuitem label="&alignPanels.label;"
                   oncommand="AlignAllPanels()"/>
-        <menuseparator id="beforeAllPanelsMenuseparator"/>
 #endif
+        <menuseparator id="beforeAllPanelsMenuseparator"/>
       </menupopup>
     </menu>
 

@@ -60,14 +60,11 @@
               windowType="BlueGriffon:DOMExplorer"
               url="chrome://domexplorer/content/domexplorer.xul"
               label="&domexplorer.label;"
+              type="checkbox"
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
               oncommand="start_panel()"
-#else
-              type="checkbox"
 #endif
-#else
-              type="checkbox"
 #endif
               />
   </menupopup>

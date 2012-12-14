@@ -352,3 +352,49 @@ popup {
   -moz-appearance: menupopup;
   background-color: menu;
 }
+
+/*********** decked panels *************/
+
+deckedPanelsTabs  {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/deckedPanelsTabs.xml#deckedPanelsTabs");
+  overflow: hidden;
+  -moz-box-orient: horizontal;
+  background: url("chrome://bluegriffon/skin/tabeditor-tabs-bkgnd.png") repeat-x;
+  height: 25px;
+  padding: 0px;
+  padding-left: 4px;
+  margin: 0px;
+}
+
+deckedPanelsTabs > label {
+  margin: 0px;
+  margin-top: 4px;
+  background-color: #b0b0b0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: thin solid gray;
+  border-bottom: none 0px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-width: 2px;
+  box-shadow: 1px -1px 3px gray,
+              inset 0px -1px 1px gray;
+}
+
+deckedPanelsTabs > label:not([selected="true"]):hover {
+  background-color: transparent;
+  background-image: linear-gradient(0deg, #ededed, #b0b0b0);
+}
+
+deckedPanelsTabs > label:not([selected="true"]):hover:active {
+  background: #ededed;
+}
+
+deckedPanelsTabs > label[selected="true"] {
+  margin: 0px;
+  margin-top: 4px;
+  background-color: #ededed;
+  box-shadow: 1px -1px 3px gray;
+}

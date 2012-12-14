@@ -1285,14 +1285,91 @@ function AlignAllPanels()
   return;
 }
 
-function UpdatePanelsStatusInMenu()
-{
 #ifdef XP_UNIX
 #ifndef XP_MACOSX
+
+function UpdateDeckMenu()
+{
+  deleteAllChildren(gDialog.deckMenupopup);
+  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+  while (child) {
+    if (child.getAttribute("checked") == "true") {
+      var item = document.createElement("menuitem");
+      item.setAttribute("label", child.getAttribute("label"));
+      item.setAttribute("panel", child.getAttribute("panel"));
+      item.setAttribute("type",  "checkbox");
+      if (child.getAttribute("decked") == "true")
+        item.setAttribute("checked", "true");
+      gDialog.deckMenupopup.appendChild(item);
+    }
+
+    child = child.nextSibling;
+  }
+}
+
+function DeckOrUndeckPanel(aEvent)
+{
+  var menuitem = aEvent.target;
+  // we know the panel is visible...
+  var realMenuitem = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+  while (realMenuitem) {
+
+    if (realMenuitem.getAttribute("panel") == menuitem.getAttribute("panel")) { // that's the one
+      // first close the panel
+      start_panel(realMenuitem);
+      if (menuitem.getAttribute("checked") == "true")
+        realMenuitem.setAttribute("decked", "true");
+      else
+        realMenuitem.removeAttribute("decked");
+
+      start_panel(realMenuitem);
+      return;
+    }
+
+    realMenuitem = realMenuitem.nextElementSibling;
+  }
+}
+
+#endif
+#endif
+
+function UpdatePanelsStatusInMenu()
+{
+  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
+#ifdef XP_UNIX
+#ifndef XP_MACOSX
+  while(child) {
+    var w1, w2 = null;
+    // TODO case decked="true"
+    try {
+      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+      w1 = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow(child.getAttribute("windowType"));
+    }
+    catch(e){}
+    if (!w1) { // try to find a decked panel
+      w2 = gDialog.deckedPanelsTabs.querySelector("label[panelid='" + child.getAttribute("panel") + "']");
+    }
+
+    if (w1) {
+      child.setAttribute("checked", "true");
+      child.setAttribute("decked",  "false");
+    }
+    else if (w2) {
+      child.setAttribute("checked", "true");
+      child.setAttribute("decked",  "true");
+      child.setAttribute("indeck",  "true");
+    }
+    else
+      child.removeAttribute("checked");
+
+    document.persist(child.id, "checked");
+    document.persist(child.id, "decked");
+    document.persist(child.id, "indeck");
+    child = child.nextElementSibling;
+  }
   return;
 #endif
 #endif
-  var child = gDialog.beforeAllPanelsMenuseparator.nextSibling;
   while (child) {
     var panel = gDialog[child.getAttribute("panel")];
     if (panel.popupBoxObject.popupState == "open"
@@ -1302,24 +1379,43 @@ function UpdatePanelsStatusInMenu()
     else
       child.removeAttribute("checked");
 
-    child = child.nextSibling;
+    child = child.nextElementSibling;
   }
 }
 
 function start_panel(aElt)
 {
-  var w = null;
-  // TODO case decked="true"
-  try {
-    var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
-    w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow(aElt.getAttribute("windowType"));
+  UpdatePanelsStatusInMenu();
+
+  if (aElt.getAttribute("checked") == "true") { // panel is visible
+    if (aElt.getAttribute("decked") == "true"
+        && aElt.getAttribute("indeck") == "true") { // visible in deck
+      var tab = gDialog.deckedPanelsTabs.querySelector("label[panelid='" + aElt.getAttribute("panel") + "']");
+      if (tab)
+        gDialog.deckedPanelsTabs.doCloseDeckedPanel(tab);
+      else
+        alert("panel not found");
+    }
+    else { // visible in standalone window
+      var windowManager = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService();
+      var w = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator).getMostRecentWindow(aElt.getAttribute("windowType"));
+      w.close();
+    }
   }
-  catch(e){}
-  if (w)
-    w.focus();
-  else
-    window.open(aElt.getAttribute("url"),"_blank",
-               "chrome,resizable,scrollbars=yes");
+  else { // panel is still invisible
+    if (aElt.getAttribute("decked") == "true") { // should be opened in the deck
+      gDialog.deckedPanelsTabs.addPanel(aElt.getAttribute("label"),
+                                        aElt.getAttribute("url"),
+                                        aElt.getAttribute("panel"));
+     }
+    else { // should be opened as a standalone window
+      window.open(aElt.getAttribute("url"),"_blank",
+                 "chrome,resizable,scrollbars=yes");
+    }
+  }
+  
+  UpdatePanelsStatusInMenu();
+  document.persist(aElt.id, "checked");
 }
 
 function TogglePanel(aElt)

@@ -198,14 +198,29 @@ function RestorePanels()
     var item = items[i];
     var panelid = item.getAttribute("panel");
     var panel = document.getElementById(panelid);
-    if (panel.getAttribute("open") == "true") {
-      panel.firstElementChild.setAttribute("src", item.getAttribute("url"));
-    }
-    else if (panel.getAttribute("decked") == "true"
-             && panel.getAttribute("indeck") == "true") {
-        gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
-                                          item.getAttribute("url"),
-                                          panelid);
+    if (panel) {
+      if (panel.getAttribute("open") == "true") {
+        panel.firstElementChild.setAttribute("src", item.getAttribute("url"));
+      }
+      else if (panel.getAttribute("decked") == "true"
+               && panel.getAttribute("indeck") == "true") {
+          gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
+                                            item.getAttribute("url"),
+                                            panelid);
+  	  }
+	  }
+	  else { // linux case :(
+      if (item.getAttribute("checked") == "true") {
+        if (item.getAttribute("decked") == "true") {
+          gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
+                                            item.getAttribute("url"),
+                                            panelid);
+        }
+        else {
+          window.open(item.getAttribute("url"),"_blank",
+                     "chrome,resizable,scrollbars=yes");
+        }
+      }
 	  }
   }
 }
