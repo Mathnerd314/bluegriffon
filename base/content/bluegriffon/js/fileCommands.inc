@@ -88,6 +88,11 @@ var cmdSave =
                      UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl()),
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
+          if (result) { 
+            // we must update the original source to detect if the document has
+            // changed when we leave source mode; b=479
+            sourceIframe.setUserData("oldSource", source, null);
+          }
         }
         else {
           EditorUtils.cleanup();
