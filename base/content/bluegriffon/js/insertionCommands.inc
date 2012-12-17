@@ -106,16 +106,7 @@ var cmdCssPanelCommand =
 
   doCommand: function(aCommand)
   {
-    gDialog["panel-cssproperties-menuitem"].setAttribute("checked", "true");
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
-    TogglePanel(gDialog["panel-cssproperties-menuitem"]);
-#else
     start_panel(gDialog["panel-cssproperties-menuitem"]);
-#endif
-#else
-    TogglePanel(gDialog["panel-cssproperties-menuitem"]);
-#endif
   }
 };
 
@@ -134,16 +125,7 @@ var cmdDomExplorerPanelCommand =
 
   doCommand: function(aCommand)
   {
-    gDialog["panel-domexplorer-menuitem"].setAttribute("checked", "true");
-#ifdef XP_UNIX
-#ifdef XP_MACOSX
-    TogglePanel(gDialog["panel-domexplorer-menuitem"]);
-#else
     start_panel(gDialog["panel-domexplorer-menuitem"]);
-#endif
-#else
-    TogglePanel(gDialog["panel-domexplorer-menuitem"]);
-#endif
   }
 };
 

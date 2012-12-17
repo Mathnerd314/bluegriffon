@@ -198,19 +198,19 @@ function RestorePanels()
     var item = items[i];
     var panelid = item.getAttribute("panel");
     var panel = document.getElementById(panelid);
-    if (panel) {
-      if (panel.getAttribute("open") == "true") {
-        panel.firstElementChild.setAttribute("src", item.getAttribute("url"));
-      }
-      else if (panel.getAttribute("decked") == "true"
-               && panel.getAttribute("indeck") == "true") {
+    //var s = ""; for (var k = 0; k < item.attributes.length; k++) s+= item.attributes.item(k).nodeName + "=" + item.attributes.item(k).nodeValue + "\n"; alert(s);
+    if (item.getAttribute("checked") == "true") {
+      if (panel) {
+        if (item.getAttribute("decked") == "true") {
           gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
                                             item.getAttribute("url"),
                                             panelid);
+        }
+        else {
+          panel.firstElementChild.setAttribute("src", item.getAttribute("url"));
+        }
   	  }
-	  }
-	  else { // linux case :(
-      if (item.getAttribute("checked") == "true") {
+  	  else { // linux case :(
         if (item.getAttribute("decked") == "true") {
           gDialog.deckedPanelsTabs.addPanel(item.getAttribute("label"),
                                             item.getAttribute("url"),
@@ -221,6 +221,6 @@ function RestorePanels()
                      "chrome,resizable,scrollbars=yes");
         }
       }
-	  }
+    }
   }
 }

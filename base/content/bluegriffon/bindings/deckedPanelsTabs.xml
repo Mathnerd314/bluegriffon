@@ -79,21 +79,12 @@
           var panelid = tab.getAttribute("panelid");
           var menuitem = document.querySelector("menuitem[panel='" + panelid + "'][url]");
           var panel = document.getElementById(panelid);
-          if (panel) { // Windows and OS X
-            this.CloseDeckedPanel();
-            panel.setAttribute("decked", "false");
-            document.persist(panelid, "decked");
-            menuitem.setAttribute("checked", "true");
-            TogglePanel(menuitem);
-          }
-          else { // Linux...
-            UpdatePanelsStatusInMenu();
-            start_panel(menuitem);
-            menuitem.removeAttribute("decked");
-            document.persist(menuitem.id, "decked");
-            start_panel(menuitem);
-            UpdatePanelsStatusInMenu();
-          }
+          UpdatePanelsStatusInMenu();
+          this.CloseDeckedPanel();
+          menuitem.setAttribute("decked", "false");
+          document.persist(menuitem.id, "decked");
+          start_panel(menuitem);
+          UpdatePanelsStatusInMenu();
         ]]>
         </body>
       </method>
@@ -110,10 +101,6 @@
 
           var panelid = tab.getAttribute("panelid");
           var panel = document.getElementById(panelid);
-          if (panel) { // only happens for linux :-(
-            panel.setAttribute("indeck", "false");
-            document.persist(panelid, "indeck");
-          }
           tab.parentNode.removeChild(tab);
 
           if (newTab) {
@@ -122,6 +109,8 @@
           }
           else
             gDialog.deckPanelsIframe.setAttribute("src", "about:blank");
+
+          UpdatePanelsStatusInMenu();
         ]]>
         </body>
       </method>

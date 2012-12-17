@@ -58,13 +58,7 @@
               label="&cssproperties.label;"
               windowType="BlueGriffon:CSSProperties"
               url="chrome://cssproperties/content/cssproperties.xul"
-              type="checkbox"
-#ifdef XP_UNIX
-#ifndef XP_MACOSX
-              oncommand="start_panel(this)"
-#endif
-#endif
-              />
+              type="checkbox"/>
   </menupopup>
 
 #ifdef XP_MACOSX

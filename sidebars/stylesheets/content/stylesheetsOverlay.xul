@@ -53,13 +53,7 @@
               windowType="BlueGriffon:StyleSheets"
               url="chrome://stylesheets/content/stylesheets.xul"
               label="&stylesheetsPanel.title;"
-              type="checkbox"
-#ifdef XP_UNIX
-#ifndef XP_MACOSX
-              oncommand="start_panel()"
-#endif
-#endif
-              />
+              type="checkbox"/>
   </menupopup>
 
 #ifdef XP_MACOSX

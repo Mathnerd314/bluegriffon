@@ -86,16 +86,18 @@
             this.hidePopup();
             this.removeAttribute("style");
             this.setAttribute("open", "false");
-            this.setAttribute("decked", "true");
-            this.setAttribute("indeck", "true");
+            var menuitem = document.querySelector("#panelsMenuPopup > menuitem[panel='" + this.id + "']");
+            menuitem.setAttribute("decked", "true");
+            menuitem.setAttribute("checked", "true");
             var iframe = this.firstElementChild;
             var src = iframe.getAttribute("src");
             var wjo = iframe.contentWindow.wrappedJSObject;
             if (wjo && "Shutdown" in wjo)
               wjo.Shutdown();
+            iframe.setAttribute("src", "about:blank");
             document.persist(this.id, "open");
-            document.persist(this.id, "decked");
-            document.persist(this.id, "indeck");
+            document.persist(menuitem.id, "decked");
+            document.persist(menuitem.id, "checked");
 
             gDialog.deckedPanelsTabs.addPanel(this.getAttribute("label"),
                                               src,
@@ -105,7 +107,14 @@
       </method>
 
       <method name="closePanel">
+        <parameter name="aNow"/>
         <body><![CDATA[
+          if (aNow) {
+            this.hidePopup();
+            this.setAttribute("open", "false");
+            document.persist(this.id, "open");
+            return;
+          }
           this.setAttribute("style", "opacity: 0");
           var _self = this;
           setTimeout(function() {

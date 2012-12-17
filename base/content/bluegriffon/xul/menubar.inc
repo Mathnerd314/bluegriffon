@@ -341,24 +341,23 @@
     </menu>
 
     <menu id="panelsMenu" label="&panelsMenu.label;" accesskey="&panelsMenu.accesskey;"
-          oncommand="TogglePanel(event.originalTarget)">
+          oncommand="start_panel(event.originalTarget)">
       <menupopup id="panelsMenuPopup"
                  onpopupshowing="UpdatePanelsStatusInMenu()">
 #ifdef XP_UNIX
 #ifdef XP_MACOSX
         <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels()"/>
-#else
-        <menu label="Deck" id="deckMenu">
-          <menupopup id="deckMenupopup"
-          		       onpopupshowing="UpdateDeckMenu()"
-          		       oncommand="DeckOrUndeckPanel(event)"/>
-        </menu>
+                  oncommand="AlignAllPanels();"/>
 #endif
 #else
         <menuitem label="&alignPanels.label;"
-                  oncommand="AlignAllPanels()"/>
+                  oncommand="AlignAllPanels();"/>
 #endif
+        <menu label="&deckMenu.label;" id="deckMenu">
+          <menupopup id="deckMenupopup"
+                     onpopupshowing="UpdateDeckMenu()"
+                     oncommand="DeckOrUndeckPanel(event);"/>
+        </menu>
         <menuseparator id="beforeAllPanelsMenuseparator"/>
       </menupopup>
     </menu>
