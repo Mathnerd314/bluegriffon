@@ -79,12 +79,10 @@
           var panelid = tab.getAttribute("panelid");
           var menuitem = document.querySelector("menuitem[panel='" + panelid + "'][url]");
           var panel = document.getElementById(panelid);
-          UpdatePanelsStatusInMenu();
           this.CloseDeckedPanel();
           menuitem.setAttribute("decked", "false");
           document.persist(menuitem.id, "decked");
           start_panel(menuitem);
-          UpdatePanelsStatusInMenu();
         ]]>
         </body>
       </method>
