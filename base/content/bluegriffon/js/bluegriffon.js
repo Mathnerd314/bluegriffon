@@ -63,7 +63,7 @@ var gSYSTEM = "MACOSX";
 var gSYSTEM = "UNIX";
 #endif
 #else
-var GSYSTEM = "WINDOWS";
+var gSYSTEM = "WINDOWS";
 #endif
 
 function OpenLocation(aEvent, type)
