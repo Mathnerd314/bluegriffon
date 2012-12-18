@@ -1167,9 +1167,14 @@ function OnDoubleClick(aEvent)
     case "php":
     case "pi":
       if (node.namespaceURI == "http://disruptive-innovations.com/zoo/bluegriffon"
-          && !InContextHelper.isInContextEnabled())
-        window.openDialog("chrome://bluegriffon/content/dialogs/insertCommentOrPI.xul", "_blank",
-                          "chrome,close,titlebar,modal,resizable=yes", node);
+          && !InContextHelper.isInContextEnabled()) {
+        if (node.nodeName.toLowerCase() == "comment"
+            && node.lastChild.data.substr(0, 6) == "mozToc")
+          CreateOrUpdateTableOfContents();
+        else
+          window.openDialog("chrome://bluegriffon/content/dialogs/insertCommentOrPI.xul", "_blank",
+                            "chrome,close,titlebar,modal,resizable=yes", node);
+      }
     case "a":
       if (node.hasAttribute("href")) {
         InContextHelper.cancelNextInContextPanel();

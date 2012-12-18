@@ -111,11 +111,14 @@ function Startup()
     // let's look at the children of the TOC ; if we find a comment beginning
     // with "mozToc", it contains the TOC definition
     for (i = 0; i< nodeList.length; ++i) {
-      if (nodeList.item(i).nodeType == Node.COMMENT_NODE &&
-          nodeList.item(i).data.substr(0, kMozTocLength) == kMozToc) {
+      var n = nodeList.item(i);
+      if (n.nodeType == Node.ELEMENT_NODE &&
+          n.localName == "comment" &&
+          n.namespaceURI == "http://disruptive-innovations.com/zoo/bluegriffon" &&
+          n.getAttribute("title").substr(0, kMozTocLength) == kMozToc) {
         // yep, there is already a definition here; parse it !
-        headers = nodeList.item(i).data.substr(kMozTocLength + 1,
-                                    nodeList.item(i).length - kMozTocLength - 1);
+        headers = n.lastChild.data.substr(kMozTocLength + 1,
+                                    n.lastChild.data.length - kMozTocLength - 1);
         break;
       }
     }
@@ -306,7 +309,10 @@ function BuildTOC(update)
   
         // forge a comment we'll insert in the TOC ; that comment will hold
         // the TOC definition for us
-        var ct = theDocument.createComment(commentText);
+        var ct = theDocument.createElementNS("http://disruptive-innovations.com/zoo/bluegriffon", "comment");
+        ct.setAttribute("title", commentText);
+        var ctct = theDocument.createComment(commentText);
+        ct.appendChild(ctct);
         toc.appendChild(ct);
   
         // assign a special class to the TOC top element if the TOC is readonly

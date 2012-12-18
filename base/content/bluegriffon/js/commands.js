@@ -474,7 +474,7 @@ var ComposerCommands = {
   {
     NotifierUtils.notify("selection_strict", aElement, aOneElementSelected);
 
-    if (!EditorUtils.getCurrentEditor().selection.isCollapsed) {
+    if (EditorUtils.getCurrentEditor() && !EditorUtils.getCurrentEditor().selection.isCollapsed) {
       InContextHelper.showInContextPanel(aElement);
     }
     else {

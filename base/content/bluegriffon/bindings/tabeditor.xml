@@ -319,7 +319,7 @@
                       var sourceElt = source.mSourceTreeXULElement;
                     }
                   }
-                  if (editor) {
+                  if (editor && editor.document) {
                     try {
                       var charset = "";
 
@@ -367,7 +367,10 @@
                       editor.transactionManager.clear();
 
                     }
-                    catch(e) { alert(e) }
+                    catch(e) {
+                      // uncomment the following line only for debuggin reasons
+                      // alert("tabeditor: " + e);
+                    }
 
                     window.updateCommands("navigation");
                     window.updateCommands("create");
