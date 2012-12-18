@@ -184,7 +184,7 @@
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Du bör endast lägga till ett undantag om du använder en internetanslutning som du har ett fullständigt förtroende för, eller om du är van vid att se en varning för den här servern.</p>

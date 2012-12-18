@@ -184,7 +184,7 @@ za chvíli.</li>
 <!-- LOCALIZATION NOTE (securityOverride.warningContent) - Do not translate the
 contents of the <button> tags. It uses strings already defined above. The
 button is included here (instead of netError.xhtml) because it exposes
-functionality specific to firefox. -->
+functionality specific to BlueGriffon. -->
 
 <!ENTITY securityOverride.warningContent "
 <p>Není doporučováno přidávat výjimku, pokud nemůžete svému internetovému spojení plně důvěřovat nebo pokud nejste u tohoto serveru zvyklí vídat podobná varování.</p>

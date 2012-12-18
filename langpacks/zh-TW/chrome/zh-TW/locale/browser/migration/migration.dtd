@@ -17,8 +17,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromFirefox.label        "Firefox">
-<!ENTITY importFromFirefox.accesskey    "x">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "x">
 
 <!ENTITY noMigrationSources.label       "找不到包含書籤、瀏覽記錄或密碼等個人資訊的瀏覽程式。">
 

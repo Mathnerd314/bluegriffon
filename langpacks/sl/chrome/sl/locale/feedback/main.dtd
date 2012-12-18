@@ -24,10 +24,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Zapri">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Vključi raziskave uporabnikov">
 <!ENTITY testpilot.feedbackbutton.label                "Sporoči">
-<!ENTITY testpilot.happy.label        "Firefox me je osrečil, ker …">
-<!ENTITY testpilot.sad.label          "Firefox me je razočaral, ker …">
+<!ENTITY testpilot.happy.label        "BlueGriffon me je osrečil, ker …">
+<!ENTITY testpilot.sad.label          "BlueGriffon me je razočaral, ker …">
 <!ENTITY testpilot.broken.label      "Ta stran ne deluje pravilno …">
 <!ENTITY testpilot.idea.label        "Predlogi …">

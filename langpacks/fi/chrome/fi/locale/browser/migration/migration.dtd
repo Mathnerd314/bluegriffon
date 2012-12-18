@@ -7,7 +7,7 @@
 
 <!ENTITY importFromIE.label              "Microsoft Internet Explorer">
 <!ENTITY importFromIE.accesskey          "M">
-<!ENTITY importFromPhoenix.label         "Firefox 0.8, Firebird tai Phoenix">
+<!ENTITY importFromPhoenix.label         "BlueGriffon 0.8, Firebird tai Phoenix">
 <!ENTITY importFromPhoenix.accesskey     "P">
 <!ENTITY importFromNothing.label         "Älä tuo mitään">
 <!ENTITY importFromNothing.accesskey     "Ä">
@@ -52,5 +52,5 @@
 
 <!ENTITY importFromChrome.accesskey     "C">
 <!ENTITY importFromChrome.label         "Chrome">
-<!ENTITY importFromFirefox.accesskey    "X">
-<!ENTITY importFromFirefox.label        "Firefox">
+<!ENTITY importFromBlueGriffon.accesskey    "X">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">

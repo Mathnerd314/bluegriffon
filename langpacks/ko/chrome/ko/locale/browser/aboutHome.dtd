@@ -12,13 +12,13 @@
 <!ENTITY abouthome.searchEngineButton.label "검색">
 
 <!-- LOCALIZATION NOTE (abouthome.defaultSnippet1.v1):
-     text in <a/> will be linked to the Firefox features page on mozilla.com
+     text in <a/> will be linked to the BlueGriffon features page on mozilla.com
 -->
-<!ENTITY abouthome.defaultSnippet1.v1 "Firefox를 선택해 주셔서 감사합니다. 더 멋진 인터넷 여행을 위해 <a>주요 기능</a>을 살펴 보시기 바랍니다.">
+<!ENTITY abouthome.defaultSnippet1.v1 "BlueGriffon를 선택해 주셔서 감사합니다. 더 멋진 인터넷 여행을 위해 <a>주요 기능</a>을 살펴 보시기 바랍니다.">
 <!-- LOCALIZATION NOTE (abouthome.defaultSnippet2.v1):
      text in <a/> will be linked to the featured add-ons on addons.mozilla.org
 -->
-<!ENTITY abouthome.defaultSnippet2.v1 "Firefox를 여러분만의 맞춤 기능을 제공할 수 있습니다. <a>수천개 부가 기능</a>에서 골라 보십시오.">
+<!ENTITY abouthome.defaultSnippet2.v1 "BlueGriffon를 여러분만의 맞춤 기능을 제공할 수 있습니다. <a>수천개 부가 기능</a>에서 골라 보십시오.">
 
 <!ENTITY abouthome.bookmarksButton.label		"북마크">
 <!ENTITY abouthome.historyButton.label			"방문기록">

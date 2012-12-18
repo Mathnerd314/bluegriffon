@@ -13,8 +13,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromFirefox.label        "Firefox">
-<!ENTITY importFromFirefox.accesskey    "F">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "F">
 
 <!ENTITY noMigrationSources.label       "Es konnte kein Programm gefunden werden, das Lesezeichen-, Chronik- oder Passwortdaten enthält.">
 

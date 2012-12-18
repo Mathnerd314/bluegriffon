@@ -17,8 +17,8 @@
 <!ENTITY importFromSafari.accesskey     "S">
 <!ENTITY importFromChrome.label         "Chrome">
 <!ENTITY importFromChrome.accesskey     "C">
-<!ENTITY importFromFirefox.label        "Firefox">
-<!ENTITY importFromFirefox.accesskey    "x">
+<!ENTITY importFromBlueGriffon.label        "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey    "x">
 
 <!ENTITY noMigrationSources.label       "לא נמצאו תוכנות שמכילות סימניות, היסטוריה, או מידע ססמאות.">
 

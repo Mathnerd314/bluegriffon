@@ -28,11 +28,11 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "關閉">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "開啟使用者研究">
 <!ENTITY testpilot.feedbackbutton.label                "意見回饋">
-<!ENTITY testpilot.happy.label        "Firefox 讓我覺得高興，因為…">
-<!ENTITY testpilot.sad.label          "Firefox 讓我覺得不高興，因為…">
+<!ENTITY testpilot.happy.label        "BlueGriffon 讓我覺得高興，因為…">
+<!ENTITY testpilot.sad.label          "BlueGriffon 讓我覺得不高興，因為…">
 <!ENTITY testpilot.broken.label      "回報不正常的網站…">
 <!ENTITY testpilot.idea.label        "給我們一些建議…">
 

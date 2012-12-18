@@ -28,10 +28,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip "Fermer">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label "Activer les études d'utilisation">
 <!ENTITY testpilot.feedbackbutton.label "Réagir">
-<!ENTITY testpilot.happy.label "J'aime Firefox car…">
-<!ENTITY testpilot.sad.label "Je n'aime pas Firefox car…">
+<!ENTITY testpilot.happy.label "J'aime BlueGriffon car…">
+<!ENTITY testpilot.sad.label "Je n'aime pas BlueGriffon car…">
 <!ENTITY testpilot.broken.label "Signaler ce site web comme non fonctionnel…">
 <!ENTITY testpilot.idea.label "Nous faire une suggestion…">

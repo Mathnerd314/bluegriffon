@@ -24,10 +24,10 @@
 <!-- notification -->
 <!ENTITY testpilot.notification.close.tooltip            "Sulje">
 
-<!-- Firefox 4 beta version UI -->
+<!-- BlueGriffon 4 beta version UI -->
 <!ENTITY testpilot.enable.label                        "Aseta käyttäjätutkimukset päälle">
 <!ENTITY testpilot.feedbackbutton.label                "Palaute">
-<!ENTITY testpilot.happy.label        "Firefox teki minut iloiseksi…">
-<!ENTITY testpilot.sad.label          "Firefox teki minut surulliseksi…">
+<!ENTITY testpilot.happy.label        "BlueGriffon teki minut iloiseksi…">
+<!ENTITY testpilot.sad.label          "BlueGriffon teki minut surulliseksi…">
 <!ENTITY testpilot.broken.label      "Ilmoita rikkinäinen verkkosivusto…">
 <!ENTITY testpilot.idea.label        "Anna parannusehdotus…">

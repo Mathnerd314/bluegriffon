@@ -14,8 +14,8 @@
 <!ENTITY importFromSafari.accesskey "S">
 <!ENTITY importFromChrome.label "Chrome">
 <!ENTITY importFromChrome.accesskey "C">
-<!ENTITY importFromFirefox.label "Firefox">
-<!ENTITY importFromFirefox.accesskey "x">
+<!ENTITY importFromBlueGriffon.label "BlueGriffon">
+<!ENTITY importFromBlueGriffon.accesskey "x">
 <!ENTITY noMigrationSources.label "Non è stato trovato alcun programma contenente segnalibri, cronologie o password.">
 <!ENTITY importSource.title "Importa impostazioni e dati">
 <!ENTITY importItems.title "Oggetti da importare">
