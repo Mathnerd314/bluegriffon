@@ -10,7 +10,7 @@
   xmlns  = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <prefpane id="filePrefPane">
-    <preferences>
+    <preferences id="filePreferences">
       <preference id="pref-historyCount"    name="bluegriffon.history.url_maximum" type="int"/>
       <preference id="pref-restoreSession"  name="bluegriffon.defaults.restorePreviousSession" type="bool"/>
       <preference id="pref-extension-html"  name="bluegriffon.defaults.extension.text-html" type="string"/>

@@ -1100,8 +1100,10 @@ var CssInspector = {
         backgrounds.push( { type: gradient.isRadial ? "radial-gradient" : "linear-gradient", value: gradient });
         token = parser.getToken(true, true);
       }
-      else if (token.isIdent("none")) {
-        backgrounds.push( { type: "none" });
+      else if (token.isIdent("none") ||
+               token.isIdent("inherit") ||
+               token.isIdent("initial")) {
+        backgrounds.push( { type: token.value });
         token = parser.getToken(true, true);
       }
       else
