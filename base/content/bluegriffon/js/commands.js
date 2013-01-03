@@ -252,6 +252,15 @@ var ComposerCommands = {
     } catch(e) {}
   },
 
+  doStatefulCSSCommand: function doStatefulCSSCommand(commandID, newState)
+  {
+    var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
+    editor.isCSSEnabled = true;
+    this.doStatefulCommand(commandID, newState);
+    editor.isCSSEnabled = isCSSEnabled;
+  },
+
   doStatefulCommand: function doStatefulCommand(commandID, newState)
   {
     var commandNode = document.getElementById(commandID);

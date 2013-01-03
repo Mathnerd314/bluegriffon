@@ -234,6 +234,15 @@ function UpdateWindowTitle()
   return "";
 }
 
+function ApplyDirectColorChange(aType, aColor)
+{
+    var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
+    editor.isCSSEnabled = true;
+    editor.setInlineProperty('font', aType, aColor)
+    editor.isCSSEnabled = isCSSEnabled;
+}
+
 function onParagraphFormatChange(paraMenuList, commandID)
 {
   if (!paraMenuList)
