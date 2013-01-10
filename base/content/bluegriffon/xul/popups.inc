@@ -254,7 +254,7 @@
                 style="width: 17em"
                 sizetopopup="none">
         <observes element="cmd_fontFace" attribute="state" onbroadcast="onFontFaceChange(this.parentNode, 'cmd_fontFace')"/>
-        <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCSSCommand('cmd_fontFace', event.target.value)"
+        <menupopup id="inContextFontFacePopup" oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"
                    onpopupshowing="initFontFaceMenu(this);">
           <menuitem label="&fontVarWidth.label;"      value="" class="menuitem-non-iconic-accel"/>
           <menuitem label="&fontFixedWidth.label;"    value="tt" class="menuitem-non-iconic-accel"/>

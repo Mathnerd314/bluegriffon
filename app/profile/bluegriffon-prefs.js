@@ -82,6 +82,7 @@ pref("bluegriffon.defaults.extension.application-xhtml+xml", "xhtml");
 pref("bluegriffon.defaults.extension.text-html", "html");
 
 // CSS policy
+pref("editor.use_css", true);
 pref("bluegriffon.css.policy", "manual");
 pref("bluegriffon.css.prefix", "BG_");
 pref("bluegriffon.css.support.gecko", true);
@@ -173,7 +174,7 @@ pref("tipoftheday.openAtStartup", true);
 
 
 // Enable Floating Toolbar
-pref("bluegriffon.floatingToolbar.enabled", true);
+pref("bluegriffon.floatingToolbar.enabled", false);
 
 // make links absolute when copied
 pref("clipboard.absoluteLinks", true);

@@ -570,3 +570,21 @@ var ComposerCommands = {
 #include editCommands.inc
 #include tableCommands.inc
 
+function goDoNoCSSCommand(aCommand)
+{
+  try {
+    var controller = top.document.commandDispatcher
+                        .getControllerForCommand(aCommand);
+    if (controller && controller.isCommandEnabled(aCommand)) {
+      var editor = EditorUtils.getCurrentEditor();
+      var isCSSEnabled = editor.isCSSEnabled;
+      editor.isCSSEnabled = false;
+      controller.doCommand(aCommand);
+      editor.isCSSEnabled = isCSSEnabled;
+    }
+  }
+  catch (e) {
+    Components.utils.reportError("An error occurred executing the " +
+                                 aCommand + " command: " + e);
+  }
+}

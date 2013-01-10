@@ -146,7 +146,7 @@
   <command id="cmd_span"                           oncommand="goDoCommand('cmd_span')"/>
 
   <command id="cmd_paragraphState" state=""        oncommand="ComposerCommands.doStatefulCommand('cmd_paragraphState', event.target.value)"/>
-  <command id="cmd_fontFace"     state=""          oncommand="ComposerCommands.doStatefulCSSCommand('cmd_fontFace', event.target.value)"/>
+  <command id="cmd_fontFace"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_fontFace', event.target.value)"/>
   <command id="cmd_class"        state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_class', event.target.value)"/>
   <command id="cmd_id"           state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_id', event.target.value)"/>
   <command id="cmd_ariaRole"     state=""          oncommand="ComposerCommands.doStatefulCommand('cmd_ariaRole', event.target.value)"/>
@@ -167,7 +167,7 @@
 
   <command id="cmd_indent"                         oncommand="goDoCommand('cmd_indent')"/>
   <command id="cmd_outdent"                        oncommand="goDoCommand('cmd_outdent')"/>
-  <command id="cmd_blockquote"                     oncommand="goDoCommand('cmd_blockquote')"/>
+  <command id="cmd_blockquote"                     oncommand="goDoNoCSSCommand('cmd_blockquote')"/>
 
   <command id="cmd_removeStyles"                   oncommand="goDoCommand('cmd_removeStyles')"/>
   <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>

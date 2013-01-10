@@ -40,7 +40,7 @@ function onFocus()
     source = true;
     var editorElement = EditorUtils.getCurrentEditorElement();
     var sourceIframe = editorElement.previousSibling;
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor)
     {
       source = sourceEditor.getValue();

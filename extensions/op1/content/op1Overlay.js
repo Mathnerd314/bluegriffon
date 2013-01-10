@@ -23,7 +23,7 @@ var cmdOp1Command =
     }
     else
       window.openDialog("chrome://op1/content/op1.xul","_blank",
-                        "chrome,dialog=no,modal=no,titlebar,resizable=yes");
+                        "chrome,dialog=no,modal=no,titlebar=yes,resizable=yes");
   }
 };
 
