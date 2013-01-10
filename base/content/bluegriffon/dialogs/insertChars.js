@@ -132,7 +132,7 @@ function onAccept()
     else {
       var editorElement = EditorUtils.getCurrentEditorElement();
       var bespinIframe = editorElement.previousSibling;
-      var bespinEditor = bespinIframe.contentWindow.gEditor;
+      var bespinEditor = bespinIframe.contentWindow.wrappedJSObject.gEditor;
       var selection = bespinEditor.getSession().getSelection();
       var r = selection.getRange();
       bespinEditor.$tryReplace(r, char)

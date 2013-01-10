@@ -201,15 +201,18 @@ function BespinReplaceAll()
   var occurences = 0;
   if (GetCurrentViewMode() == "source") {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
 
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
-    sourceEditor.lastNeedle = sourceEditor.getSearchCursor(query, { line: 0, ch: 0 }, isCaseSensitive);
+    BespinFind(true, false);
 
-    while (sourceEditor.lastNeedle.findNext()) {
+    while (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
       occurences++;
+      var end = sourceEditor.lastNeedle.to();
       sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
+      sourceEditor.setCursor(end);
+      BespinFind(true, false);
     }
   }
   else {
@@ -246,7 +249,7 @@ function WysiwygShowFindBar()
   }
   else {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
-    var sourceEditor = sourceIframe.contentWindow.gEditor;
+    var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     var text = sourceEditor.getSelection();
     if (text) {
       gDialog.bespinFindTextbox.value = text;
