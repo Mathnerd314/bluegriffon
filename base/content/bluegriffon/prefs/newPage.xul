@@ -13,7 +13,6 @@
     <preferences>
       <preference id="pref-author"              name="bluegriffon.author"                     type="unichar"/>
       <preference id="pref-returnKey"           name="bluegriffon.returnKey.createsParagraph" type="bool"/>
-      <preference id="pref-floating-toolbar"    name="bluegriffon.floatingToolbar.enabled"    type="bool"/>
       <preference id="pref-show-comments"       name="bluegriffon.display.comments"           type="bool"/>
       <preference id="pref-show-php"            name="bluegriffon.display.php"                type="bool"/>
       <preference id="pref-show-pi"             name="bluegriffon.display.pi"                 type="bool"/>
@@ -52,8 +51,6 @@
       <spacer style="height: 5px"/>
       <checkbox label="&returnKey.label;" id="crInPCreatesNewP" preference="pref-returnKey" />
       <spacer style="height: 5px"/>
-      <checkbox id="floatingToolbarCheckbox" preference="pref-floating-toolbar"
-                label="&enableFloatingToolbar.label;" />
       <spacer style="height: 5px"/>
 
       <checkbox id="showCommentsCheckbox" preference="pref-show-comments" label="&showComments.label;"/>

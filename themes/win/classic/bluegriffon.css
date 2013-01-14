@@ -40,7 +40,6 @@
 @import url("chrome://bluegriffon/skin/structurebar.css");
 @import url("chrome://bluegriffon/skin/mainToolbar.css");
 @import url("chrome://bluegriffon/skin/formatToolbar.css");
-@import url("chrome://bluegriffon/skin/inContext.css");
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 @namespace svg url("http://www.w3.org/2000/svg");
@@ -398,4 +397,14 @@ deckedPanelsTabs > label[selected="true"] {
   margin-top: 4px;
   background-color: #ededed;
   box-shadow: 1px -1px 3px gray;
+}
+
+/* COLOR AND BGCOLOR PICKERS */
+
+#TextColorColorpicker {
+  margin: 0px 9px 9px 0px;
+}
+
+#BackgroundColorColorpicker {
+  margin: 9px 0px 0px 9px;
 }

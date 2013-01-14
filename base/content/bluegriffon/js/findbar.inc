@@ -56,7 +56,6 @@ function BespinFind(aForward, aInitial)
     if (aInitial)
       EditorUtils.getCurrentEditor().beginningOfDocument();
 
-    InContextHelper.enable(false);
     var result = findInst.findNext();
 
     gDialog.bespinFindTextbox.focus();
@@ -121,7 +120,6 @@ function onBespinFindKeypress(aEvent)
       EditorUtils.getCurrentSourceEditorElement().focus();
     else {
       window.content.focus();
-      InContextHelper.showInContextPanel(InContextHelper.mElement);
     }
   }
 }
@@ -263,7 +261,6 @@ function CloseFindBar()
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
   window.content.focus();
-  InContextHelper.showInContextPanel(InContextHelper.mElement);
 }
 
 function ReplaceInWysiwyg()

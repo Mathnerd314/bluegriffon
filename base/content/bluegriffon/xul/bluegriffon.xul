@@ -117,7 +117,7 @@
              align="center"
              context="format-toolbar-context-menu"
              customizable="true"
-             defaultset="spacer,IdButtonsBox,ClassButtonsBox,FontFaceSelectBox,separator,ARIARoleSelectBox"/>
+             defaultset="spacer,IdButtonsBox,ClassButtonsBox,separator,ColorsBox,FontFaceSelectBox,separator,ARIARoleSelectBox"/>
     <toolbarset id="customFormatToolbars" context="format-toolbar-context-menu"/>
   </toolbox>
 

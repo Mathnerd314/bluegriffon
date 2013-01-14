@@ -483,13 +483,6 @@ var ComposerCommands = {
   {
     NotifierUtils.notify("selection_strict", aElement, aOneElementSelected);
 
-    if (EditorUtils.getCurrentEditor() && !EditorUtils.getCurrentEditor().selection.isCollapsed) {
-      InContextHelper.showInContextPanel(aElement);
-    }
-    else {
-      InContextHelper.hideInContextPanel();
-    }
-
     var path = "";
     var node = aElement;
     while (node && node.nodeType == Node.ELEMENT_NODE) {

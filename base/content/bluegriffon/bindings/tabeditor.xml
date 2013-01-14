@@ -603,7 +603,6 @@
         <parameter name="aTabeditor"/>
         <body>
         <![CDATA[
-           InContextHelper.hideInContextPanel();
            var activeSourceDeck = document.getElementById("sourceTreeDeck");
            if (activeSourceDeck &&
                aTabeditor.selectedIndex < activeSourceDeck.childNodes.length)

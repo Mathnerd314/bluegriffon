@@ -8,7 +8,6 @@
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/utils/notifiers.js"/>
-  <script type="application/javascript" src="chrome://bluegriffon/content/js/inContext.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/commands.js"/>
   <script type="application/javascript" src="chrome://bluegriffon/content/js/bluegriffon.js"/>
   <script type="application/javascript" src="chrome://global/content/globalOverlay.js"/>

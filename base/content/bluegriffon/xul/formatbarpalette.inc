@@ -256,4 +256,25 @@
 
     <toolbarbutton id="rotateButton" command="cmd_renderedHTMLEnabler" label="Rotate" tooltiptext="Rotate"
                    type="checkbox" oncommand="CSSRotationsHandler.toggle(this)"/>
+
+    <toolbaritem id="ColorsBox">
+      <stack>
+        <observes element="cmd_highlight"       attribute="state" onbroadcast="onBackgroundColorChange()"/>
+        <observes element="cmd_fontColor"       attribute="state" onbroadcast="onFontColorChange()"/>
+        <ecolorpicker id="BackgroundColorColorpicker"
+                      colorObjectId="BackgroundColor"
+                      tooltiptext="&bgColor.label;"
+                      windowTitle="Background color"
+                      oncommand="ApplyDirectColorChange('bgcolor', this.color)"
+                      showTransparency="true"/>
+        <ecolorpicker id="TextColorColorpicker"
+                      color="transparent"
+                      tooltiptext="&color.label;"
+                      colorObjectId="TextColor"
+                      windowTitle="Text color"
+                      oncommand="ApplyDirectColorChange('color', this.color)"
+                      showTransparency="false"/>
+      </stack>
+    </toolbaritem>
+
   </toolbarpalette>

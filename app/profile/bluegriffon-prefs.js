@@ -172,10 +172,6 @@ pref("bluegriffon.css.colors.type", "hex");
 
 pref("tipoftheday.openAtStartup", true);
 
-
-// Enable Floating Toolbar
-pref("bluegriffon.floatingToolbar.enabled", false);
-
 // make links absolute when copied
 pref("clipboard.absoluteLinks", true);
 
