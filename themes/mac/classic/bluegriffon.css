@@ -397,10 +397,6 @@ deckedPanelsTabs > label[selected="true"] {
 
 /* COLOR AND BGCOLOR PICKERS */
 
-#TextColorColorpicker {
-  margin: 0px 9px 9px 0px;
-}
-
-#BackgroundColorColorpicker {
-  margin: 9px 0px 0px 9px;
+ecolorpicker {
+  -moz-binding: url("chrome://bluegriffon/content/bindings/ecolorpicker.xml#ecolorpicker");
 }

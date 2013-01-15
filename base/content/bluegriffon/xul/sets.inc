@@ -123,7 +123,7 @@
 
 <commandset id="composerStyleMenuItems"
             commandupdater="true"
-            events="create,style,mode_switch"
+            events="create,select,style,mode_switch"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
   <command id="cmd_bold"         state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_bold')"/>
   <command id="cmd_italic"       state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_italic')"/>
@@ -173,7 +173,7 @@
   <command id="cmd_removeLinks"                    oncommand="goDoCommand('cmd_removeLinks')"/>
 
   <command id="cmd_fontColor"       state=""/>
-  <command id="cmd_highlight"       state="transparent"/>
+  <command id="cmd_backgroundColor" state="transparent"/>
 </commandset>
 
 <commandset id="selectionBasedCommands"

@@ -172,11 +172,17 @@ var ComposerCommands = {
         case "cmd_align":
         case "cmd_fontFace":
         case "cmd_class":
-        case "cmd_fontColor":
-        case "cmd_highlight":
         case "cmd_id":
         case "cmd_ariaRole":
-          this.pokeMultiStateUI(command, params);
+          this.pokeMultiStateUI(command);
+          break;
+
+        case "cmd_fontColor":
+          this.pokeFontColorState(command);
+          break;
+
+        case "cmd_backgroundColor":
+          this.pokeBackgroundColorState(command, params);
           break;
 
         case "cmd_indent":
@@ -187,6 +193,40 @@ var ComposerCommands = {
       }
     }
     catch (e) {  }
+  },
+
+  pokeFontColorState: function pokeFontColorState(uiID)
+  {
+    try {
+    var commandNode = top.document.getElementById(uiID);
+    if (!commandNode)
+      return;
+    
+    var editor = EditorUtils.getCurrentEditor();
+    var isMixed = {value: false};
+    var uiState = editor.getFontColorState(isMixed);
+    commandNode.setAttribute("state", uiState);
+    var button = document.getElementById("TextColorColorpicker");
+    if (button)
+      button.color = uiState;
+    } catch(e) {  }
+  },
+
+  pokeBackgroundColorState: function pokeBackgroundColorState(uiID)
+  {
+    try {
+    var commandNode = top.document.getElementById(uiID);
+    if (!commandNode)
+      return;
+    
+    var editor = EditorUtils.getCurrentEditor();
+    var isMixed = {value: false};
+    var uiState = editor.getBackgroundColorState(isMixed);
+    commandNode.setAttribute("state", uiState);
+    var button = document.getElementById("BackgroundColorColorpicker");
+    if (button)
+      button.color = uiState;
+    } catch(e) {  }
   },
 
   pokeStyleUI: function pokeStyleUI(uiID, aDesiredState)

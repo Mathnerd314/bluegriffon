@@ -234,12 +234,21 @@ function UpdateWindowTitle()
   return "";
 }
 
-function ApplyDirectColorChange(aType, aColor)
+function ApplyDirectTextColorChange(aColor)
 {
     var editor = EditorUtils.getCurrentEditor();
     var isCSSEnabled = editor.isCSSEnabled;
     editor.isCSSEnabled = true;
-    editor.setInlineProperty('font', aType, aColor)
+    editor.setInlineProperty('font', 'color', aColor)
+    editor.isCSSEnabled = isCSSEnabled;
+}
+
+function ApplyDirectBackgroundColorChange(aColor)
+{
+    var editor = EditorUtils.getCurrentEditor();
+    var isCSSEnabled = editor.isCSSEnabled;
+    editor.isCSSEnabled = true;
+    editor.setBackgroundColor(aColor)
     editor.isCSSEnabled = isCSSEnabled;
 }
 
