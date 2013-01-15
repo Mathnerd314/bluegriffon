@@ -20,6 +20,7 @@
  *
  * Contributor(s):
  *   Daniel Glazman <daniel.glazman@disruptive-innovations.com>, Original author
+ *   EVENTRIC LLC.
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -370,6 +371,9 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_openFile",    cmdOpenFile);
     commandTable.registerCommand("cmd_save",        cmdSave);
     commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
+    commandTable.registerCommand("cmd_print",       cmdPrint);
+    commandTable.registerCommand("cmd_printSettings", cmdPrintSetup);
+    commandTable.registerCommand("cmd_saveAs",      cmdSaveAs);
     commandTable.registerCommand("cmd_closeTab",    cmdCloseTab);
     commandTable.registerCommand("cmd_toggleView",  cmdToggleView);
     commandTable.registerCommand("cmd_fullScreen",  cmdFullScreen);
@@ -602,6 +606,7 @@ var ComposerCommands = {
 #include insertionCommands.inc
 #include editCommands.inc
 #include tableCommands.inc
+#include printCommands.inc
 
 function goDoNoCSSCommand(aCommand)
 {

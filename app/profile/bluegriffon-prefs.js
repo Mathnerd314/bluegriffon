@@ -175,4 +175,54 @@ pref("tipoftheday.openAtStartup", true);
 // make links absolute when copied
 pref("clipboard.absoluteLinks", true);
 
-// pref("extensions.venkman.enableChromeFilter", false);
+pref("extensions.venkman.enableChromeFilter", false);
+
+// Print header customization
+// Use the following codes:
+// &T - Title
+// &U - Document URL
+// &D - Date/Time
+// &P - Page Number
+// &PT - Page Number "of" Page total
+// Set each header to a string containing zero or one of these codes
+// and the code will be replaced in that string by the corresponding data
+pref("print.print_headerleft", "&T");
+pref("print.print_headercenter", "");
+pref("print.print_headerright", "&U");
+pref("print.print_footerleft", "&PT");
+pref("print.print_footercenter", "");
+pref("print.print_footerright", "&D");
+pref("print.show_print_progress", true);
+
+// When this is set to false each window has its own PrintSettings
+// and a change in one window does not affect the others
+pref("print.use_global_printsettings", true);
+
+// Save the Printings after each print job
+pref("print.save_print_settings", true);
+
+pref("print.whileInPrintPreview", true);
+
+// Cache old Presentation when going into Print Preview
+pref("print.always_cache_old_pres", false);
+
+// Enables you to specify the amount of the paper that is to be treated
+// as unwriteable.  The print_edge_XXX and print_margin_XXX preferences
+// are treated as offsets that are added to this pref.
+// Default is "-1", which means "use the system default".  (If there is
+// no system default, then the -1 is treated as if it were 0.)
+// This is used by both Printing and Print Preview.
+// Units are in 1/100ths of an inch.
+pref("print.print_unwriteable_margin_top",    -1);
+pref("print.print_unwriteable_margin_left",   -1);
+pref("print.print_unwriteable_margin_right",  -1);
+pref("print.print_unwriteable_margin_bottom", -1);
+
+// Enables you to specify the gap from the edge of the paper's 
+// unwriteable area to the margin.
+// This is used by both Printing and Print Preview
+// Units are in 1/100ths of an inch.
+pref("print.print_edge_top", 0);
+pref("print.print_edge_left", 0);
+pref("print.print_edge_right", 0);
+pref("print.print_edge_bottom", 0);

@@ -27,6 +27,10 @@
         <menuitem id="saveAsMenuitem" key="saveaskb" command="cmd_saveAs"/>
 
         <menuseparator/>
+        <menuitem id="printSettingsMenuitem" command="cmd_printSettings"/>
+        <menuitem id="printMenuitem"         command="cmd_print" key="printkb"/>
+
+        <menuseparator/>
         <menuitem id="closeTabMenuitem" key="closetabkb" command="cmd_closeTab"/>
 
         <menuseparator id="menu_FileQuitSeparator"/>

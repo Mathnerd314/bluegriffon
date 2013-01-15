@@ -56,6 +56,7 @@ EXTRA_JS_MODULES = colourPickerHelper.jsm \
 	screens.jsm \
 	projectManager.jsm \
 	fileChanges.jsm \
+	printHelper.jsm \
 	$(NULL)
 
 ifneq (cocoa,$(MOZ_WIDGET_TOOLKIT))

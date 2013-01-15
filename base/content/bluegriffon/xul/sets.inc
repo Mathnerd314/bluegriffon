@@ -28,6 +28,8 @@
   <key id="key_hideThisAppCmdMac" key="&hideThisAppCmdMac.commandkey;" modifiers="accel"/>
   <key id="key_hideOtherAppsCmdMac" key="&hideOtherAppsCmdMac.commandkey;" modifiers="accel,alt"/>
 #endif
+
+  <key id="printkb"               key="&printCmd.commandkey;" observes="cmd_print" modifiers="accel"/>
 </keyset>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->
@@ -226,6 +228,9 @@
   <command id="cmd_save"           label="&saveCmd.label;"           oncommand="goDoCommand('cmd_save')"/>
   <command id="cmd_saveAs"         label="&saveAsCmd.label;"         oncommand="goDoCommand('cmd_saveAs')"/>
   <command id="cmd_closeTab"       label="&closeTabCmd.label;"       oncommand="goDoCommand('cmd_closeTab')"/>
+
+  <command id="cmd_print"          label="&printCmd.label;"          oncommand="goDoCommand('cmd_print')"/>
+  <command id="cmd_printSettings"  label="&printSetupCmd.label;"     oncommand="goDoCommand('cmd_printSettings')"/>
 
   <command id="cmd_bgfind"         label="&findCmd.label;"           accesskey="&findCmd.accesskey;"    oncommand="goDoCommand('cmd_bgfind')"/>
   <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;" oncommand="goDoCommand('cmd_replace')"/>
