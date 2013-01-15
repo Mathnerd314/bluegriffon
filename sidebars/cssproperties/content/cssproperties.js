@@ -290,9 +290,9 @@ function SaveSelection()
     var r = selection.getRangeAt(i);
     gSavedSelection.push( {
                             startContainer: r.startContainer,
-                           startOffset   : r.startOffset,
-                           endContainer  : r.endContainer,
-                           endOffset     : r.endOffset
+                            startOffset   : r.startOffset,
+                            endContainer  : r.endContainer,
+                            endOffset     : r.endOffset
                          });
   }
 }
@@ -413,6 +413,7 @@ function ApplyStyles(aStyles)
   }
 
   SaveSelection();
+  var elt = gCurrentElement;
   for (var i = 0; i < aStyles.length; i++) {
     var s = aStyles[i];
     var property = s.property;
@@ -421,13 +422,13 @@ function ApplyStyles(aStyles)
     switch (gDialog.cssPolicyMenulist.value) {
 
       case "id":
-          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
-                                         "#", "#", gCurrentElement.id);
+          ApplyStyleChangesToStylesheets(editor, elt, property, value,
+                                         "#", "#", elt.id);
         break;
 
       case "inline":
         try {
-          var txn = new diStyleAttrChangeTxn(gCurrentElement, property, value, "");
+          var txn = new diStyleAttrChangeTxn(elt, property, value, "");
           EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
           EditorUtils.getCurrentEditor().incrementModificationCount(1);  
         }
@@ -435,19 +436,20 @@ function ApplyStyles(aStyles)
         break;
 
       case "class":
-          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
+          ApplyStyleChangesToStylesheets(editor, elt, property, value,
                                          ".", "\\.", className);
         break;
 
       case "type":
-          ApplyStyleChangesToStylesheets(editor, gCurrentElement, property, value,
-                                         "", "", gCurrentElement.localName);
+          ApplyStyleChangesToStylesheets(editor, elt, property, value,
+                                         "", "", elt.localName);
         break;
       default:
         break;
     }
   }
   editor.endTransaction();
+  SelectionChanged(null, elt, true);
   RestoreSelection();
 }
 
@@ -705,7 +707,6 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
       CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
   }
 
-  gMain.NotifierUtils.notify("tabSelected", "panel-stylesheets");
 }
 
 function ToggleHover(aElt)

@@ -51,84 +51,86 @@ var TableResizer = {
     mInfo2: null,
 
     MouseDown: function(aClientX, aClientY, aTarget, aIsShiftKey) {
-      switch(aTarget.localName.toLowerCase()) {
-        case "tbody":
-          {
-            this.mStartY = aClientY;
-            var doc = EditorUtils.getCurrentDocument();
-            this.mBefore = doc.elementFromPoint(aClientX, aClientY - 5);
-            this.mMin = this.mBefore.getBoundingClientRect().top;
-            var div = doc.createElement("div");
-            div.setAttribute("_moz_anonclass", "tableRowResizer");
-            div.style.top = (aClientY + doc.documentElement.scrollTop - 2) + "px";
-            var tbr = this.mBefore.parentNode.parentNode.parentNode.getBoundingClientRect();
-            div.style.left = (tbr.left + doc.documentElement.scrollLeft) + "px";
-            div.style.width = (tbr.right - tbr.left) + "px";
-            EditorUtils.getCurrentEditor().rootElement.appendChild(div);
-            this.mBar = div;
-
-            this.mInfo1 = doc.createElement("div");
-            this.mInfo1.setAttribute("_moz_anonclass", "tableResizerInfo");
-            this.mInfo1.style.top = (aClientY + doc.documentElement.scrollTop - 22) + "px";
-            this.mInfo1.style.left = (aClientX + doc.documentElement.scrollLeft + 10) + "px";
-            var hBefore = this.parsedGetComputedStyle(this.mBefore, "height");
-            this.mInfo1.textContent = Math.floor(hBefore) + "px";
-            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo1);
-
-            aTarget.setCapture(true);
-            this.mResizerType = "tbody";
-            this.mIsMoving = true;
-
-            return true;
-          }
-        break;
-        case "tr":
-          {
-            this.mStartX = aClientX;
-            var doc = EditorUtils.getCurrentDocument();
-            this.mBefore = doc.elementFromPoint(aClientX - 5, aClientY);
-            this.mAfter  = doc.elementFromPoint(aClientX + 5, aClientY);
-            this.mMin = this.mBefore.getBoundingClientRect().left;
-            this.mMax = this.mAfter.getBoundingClientRect().right;
-            var div = doc.createElement("div");
-            div.setAttribute("_moz_anonclass", "tableColResizer");
-            div.style.left = (aClientX + doc.documentElement.scrollLeft - 2) + "px";
-            var tbr = this.mBefore.parentNode.parentNode.parentNode.getBoundingClientRect();
-            div.style.top = (tbr.top + doc.documentElement.scrollTop) + "px";
-            div.style.height = (tbr.bottom - tbr.top) + "px";
-            EditorUtils.getCurrentEditor().rootElement.appendChild(div);
-            this.mBar = div;
-
-            this.mInfo1 = doc.createElement("div");
-            this.mInfo2 = doc.createElement("div");
-            this.mInfo1.setAttribute("_moz_anonclass", "tableResizerInfo");
-            this.mInfo2.setAttribute("_moz_anonclass", "tableResizerInfo");
-            this.mInfo1.style.right = (doc.documentElement.clientWidth - aClientX - doc.documentElement.scrollLeft + 8) + "px";
-            this.mInfo2.style.left = (aClientX + doc.documentElement.scrollLeft + 8) + "px";
-            this.mInfo1.style.top = (aClientY + doc.documentElement.scrollTop + 10) + "px";
-            this.mInfo2.style.top = (aClientY + doc.documentElement.scrollTop + 10) + "px";
-            var hBefore = this.parsedGetComputedStyle(this.mBefore, "width");
-            var hAfter  = this.parsedGetComputedStyle(this.mAfter, "width");
-            this.mInfo1.textContent = Math.floor(hBefore) + "px\n"
-                         + Math.floor(100 * 10 * (hBefore)
-                                      / this.parsedGetComputedStyle(this.mBefore.parentNode.parentNode.parentNode, "width")) / 10 + "%"
-    
-            this.mInfo2.textContent = Math.floor(hAfter) + "px\n"
-                         + Math.floor(100 * 10 * (hAfter)
-                                      / this.parsedGetComputedStyle(this.mAfter.parentNode.parentNode.parentNode, "width")) / 10 + "%"
-
-            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo1);
-            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo2);
-
-
-            aTarget.setCapture(true);
-            this.mResizerType = "tr";
-            this.mIsMoving = true;
-
-            return true;
-          }
-          break;
-        default: break;
+      if (aTarget) {
+	      switch(aTarget.localName.toLowerCase()) {
+	        case "tbody":
+	          {
+	            this.mStartY = aClientY;
+	            var doc = EditorUtils.getCurrentDocument();
+	            this.mBefore = doc.elementFromPoint(aClientX, aClientY - 5);
+	            this.mMin = this.mBefore.getBoundingClientRect().top;
+	            var div = doc.createElement("div");
+	            div.setAttribute("_moz_anonclass", "tableRowResizer");
+	            div.style.top = (aClientY + doc.documentElement.scrollTop - 2) + "px";
+	            var tbr = this.mBefore.parentNode.parentNode.parentNode.getBoundingClientRect();
+	            div.style.left = (tbr.left + doc.documentElement.scrollLeft) + "px";
+	            div.style.width = (tbr.right - tbr.left) + "px";
+	            EditorUtils.getCurrentEditor().rootElement.appendChild(div);
+	            this.mBar = div;
+	
+	            this.mInfo1 = doc.createElement("div");
+	            this.mInfo1.setAttribute("_moz_anonclass", "tableResizerInfo");
+	            this.mInfo1.style.top = (aClientY + doc.documentElement.scrollTop - 22) + "px";
+	            this.mInfo1.style.left = (aClientX + doc.documentElement.scrollLeft + 10) + "px";
+	            var hBefore = this.parsedGetComputedStyle(this.mBefore, "height");
+	            this.mInfo1.textContent = Math.floor(hBefore) + "px";
+	            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo1);
+	
+	            aTarget.setCapture(true);
+	            this.mResizerType = "tbody";
+	            this.mIsMoving = true;
+	
+	            return true;
+	          }
+	        break;
+	        case "tr":
+	          {
+	            this.mStartX = aClientX;
+	            var doc = EditorUtils.getCurrentDocument();
+	            this.mBefore = doc.elementFromPoint(aClientX - 5, aClientY);
+	            this.mAfter  = doc.elementFromPoint(aClientX + 5, aClientY);
+	            this.mMin = this.mBefore.getBoundingClientRect().left;
+	            this.mMax = this.mAfter.getBoundingClientRect().right;
+	            var div = doc.createElement("div");
+	            div.setAttribute("_moz_anonclass", "tableColResizer");
+	            div.style.left = (aClientX + doc.documentElement.scrollLeft - 2) + "px";
+	            var tbr = this.mBefore.parentNode.parentNode.parentNode.getBoundingClientRect();
+	            div.style.top = (tbr.top + doc.documentElement.scrollTop) + "px";
+	            div.style.height = (tbr.bottom - tbr.top) + "px";
+	            EditorUtils.getCurrentEditor().rootElement.appendChild(div);
+	            this.mBar = div;
+	
+	            this.mInfo1 = doc.createElement("div");
+	            this.mInfo2 = doc.createElement("div");
+	            this.mInfo1.setAttribute("_moz_anonclass", "tableResizerInfo");
+	            this.mInfo2.setAttribute("_moz_anonclass", "tableResizerInfo");
+	            this.mInfo1.style.right = (doc.documentElement.clientWidth - aClientX - doc.documentElement.scrollLeft + 8) + "px";
+	            this.mInfo2.style.left = (aClientX + doc.documentElement.scrollLeft + 8) + "px";
+	            this.mInfo1.style.top = (aClientY + doc.documentElement.scrollTop + 10) + "px";
+	            this.mInfo2.style.top = (aClientY + doc.documentElement.scrollTop + 10) + "px";
+	            var hBefore = this.parsedGetComputedStyle(this.mBefore, "width");
+	            var hAfter  = this.parsedGetComputedStyle(this.mAfter, "width");
+	            this.mInfo1.textContent = Math.floor(hBefore) + "px\n"
+	                         + Math.floor(100 * 10 * (hBefore)
+	                                      / this.parsedGetComputedStyle(this.mBefore.parentNode.parentNode.parentNode, "width")) / 10 + "%"
+	    
+	            this.mInfo2.textContent = Math.floor(hAfter) + "px\n"
+	                         + Math.floor(100 * 10 * (hAfter)
+	                                      / this.parsedGetComputedStyle(this.mAfter.parentNode.parentNode.parentNode, "width")) / 10 + "%"
+	
+	            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo1);
+	            EditorUtils.getCurrentEditor().rootElement.appendChild(this.mInfo2);
+	
+	
+	            aTarget.setCapture(true);
+	            this.mResizerType = "tr";
+	            this.mIsMoving = true;
+	
+	            return true;
+	          }
+	          break;
+	        default: break;
+	      }
       }
       return false;
     },

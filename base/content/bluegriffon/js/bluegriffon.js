@@ -267,7 +267,7 @@ function onParagraphFormatChange(paraMenuList, commandID)
   if (state == "mixed") {
     //Selection is the "mixed" ( > 1 style) state
     paraMenuList.selectedItem = null;
-    //paraMenuList.setAttribute("label",GetString('Mixed'));
+    //paraMenuList.setAttribute("label","--");
     paraMenuList.setAttribute("label", "mixed");
   }
   else
@@ -424,7 +424,7 @@ function onFontFaceChange(fontFaceMenuList, commandID)
   {
     //Selection is the "mixed" ( > 1 style) state
     fontFaceMenuList.selectedItem = null;
-    fontFaceMenuList.setAttribute("label",GetString('Mixed'));
+    fontFaceMenuList.setAttribute("label","--");
   }
   else
   {
