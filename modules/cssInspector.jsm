@@ -4721,7 +4721,7 @@ jscsspStylesheet.prototype = {
   cssText: function() {
     var rv = "";
     for (var i = 0; i < this.cssRules.length; i++)
-      rv += this.cssRules[i].cssText() + "\n";
+      rv += this.cssRules[i].cssText() + "\n\n";
     return rv;
   },
 
@@ -5264,16 +5264,16 @@ function jscsspStyleRule()
 
 jscsspStyleRule.prototype = {
   cssText: function() {
-    var rv = this.mSelectorText + " {\n";
+    var rv = this.mSelectorText + " {";
     var preservedGTABS = gTABS;
     gTABS += "  ";
     for (var i = 0; i < this.declarations.length; i++) {
       var declText = this.declarations[i].cssText();
       if (declText)
-        rv += gTABS + this.declarations[i].cssText() + "\n";
+        rv += gTABS + this.declarations[i].cssText() ;
     }
     gTABS = preservedGTABS;
-    return rv + gTABS + "}";
+    return rv + gTABS + "\n}";
   },
 
   setCssText: function(val) {
