@@ -162,7 +162,7 @@ nsBlueGriffonContentHandler.prototype = {
   /* nsIContentHandler */
 
   handleContent : function bch_handleContent(contentType, context, request) {
-    Services.prompt(null, "a", "b")
+    Services.prompt.alert(null, "nsBlueGriffonContentHandler", "handleContent");
   }
 };
 
