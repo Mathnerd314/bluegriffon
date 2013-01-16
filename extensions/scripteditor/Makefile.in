@@ -49,7 +49,7 @@ XPI_NAME    = scripteditor@bluegriffon.com
 INSTALL_EXTENSION_ID  = scripteditor@bluegriffon.com
 XPI_PKGNAME   = scripteditor@bluegriffon.com
   
-DIST_FILES = install.rdf
+DIST_FILES += install.rdf
 
 include $(topsrcdir)/config/rules.mk
 
