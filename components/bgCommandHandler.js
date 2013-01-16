@@ -127,6 +127,7 @@ nsBlueGriffonContentHandler.prototype = {
       return;
     var ar = cmdLine.handleFlagWithParam("file", false);
     if (ar) {
+      cmdLine.preventDefault = true;
       var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                          .getService(nsIWindowMediator);
       var e = Services.wm.getEnumerator("bluegriffon");
@@ -263,10 +264,11 @@ nsDefaultCommandLineHandler.prototype = {
                              "chrome,dialog=no,all",
                              cmdLine);
 #else
-    return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
-                             "_blank",
-                             "chrome,dialog=no,all",
-                             "");
+    if (!cmdLine.preventDefault)
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               "");
 #endif
   },
 
