@@ -42,7 +42,7 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-MODULE = fullscreen
+MODULE = fullscreen@bluegriffon.com
 USE_EXTENSION_MANIFEST = 1
 
 XPI_NAME    = fullscreen@bluegriffon.com
