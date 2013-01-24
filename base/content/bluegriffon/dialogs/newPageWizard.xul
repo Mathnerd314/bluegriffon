@@ -44,8 +44,10 @@
 <!DOCTYPE wizard [
   <!ENTITY % pagePropertiesDTD SYSTEM "chrome://bluegriffon/locale/newPageWizard.dtd" >
   <!ENTITY % filePickingDTD SYSTEM "chrome://bluegriffon/locale/filePicking.dtd" >
+  <!ENTITY % polyglotDTD SYSTEM "chrome://bluegriffon/locale/polyglot.dtd" >
   %pagePropertiesDTD;
   %filePickingDTD;
+  %polyglotDTD;
 ]>
 
 <wizard id="newPageWizard"
@@ -91,8 +93,10 @@
                value="HTML"/>
         <radio label="&xhtml.label;"
                value="XHTML"/>
+        <spacer flex="1"/>
         <radio label="&xhtml11.label;"
                value="XHTML11"/>
+        <spacer flex="1"/>
         <radio label="&html5.label;"
                value="HTML5"/>
         <radio label="&xhtml5.label;"
@@ -109,6 +113,10 @@
         <radio label="&strict.label;"
                id="strictRadio"
                value="STRICT"/>
+        <spacer flex="1"/>
+      <checkbox id="polyglotCheckbox"
+                label="&polyglot.label;"
+                oncommand="ToggleDoctype(gDialog.languageRadiogroup)"/>
       </radiogroup>
     </groupbox>
   </wizardpage>

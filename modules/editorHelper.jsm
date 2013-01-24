@@ -529,10 +529,21 @@ var EditorUtils = {
     return (mimetype == "application/xhtml+xml");
   },
 
+  isPolyglotHtml5: function()
+  {
+    var doc = this.getCurrentDocument();
+    var doctype = doc.doctype;
+    var systemId = doctype ? doc.doctype.systemId : null;
+    var isXML = (doc.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+    return (systemId == ""
+            && isXML
+            && !this.getCurrentDocument().hasXMLDeclaration);
+    
+  },
+
   getCurrentDocumentMimeType: function()
   {
     var doc = this.getCurrentDocument();
-    var editorMimeType = doc.contentType;
     var doctype = doc.doctype;
     var systemId = doctype ? doc.doctype.systemId : null;
     var isXML = false;

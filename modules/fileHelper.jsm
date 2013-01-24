@@ -395,8 +395,13 @@ var FileUtils = {
     // Set filters according to the type of output
     if (aDoSaveAsText)
       fp.appendFilters(this.nsIFilePicker.filterText);
-    else if (EditorUtils.isXHTMLDocument())
-      fp.appendFilter(L10NUtils.getString("XHTMLfiles"), "*.xhtml");
+    else if (EditorUtils.isXHTMLDocument()) {
+      if (EditorUtils.isPolyglotHtml5()) {
+        fp.appendFilters(this.nsIFilePicker.filterHTML);
+      }
+      else
+        fp.appendFilter(L10NUtils.getString("XHTMLfiles"), "*.xhtml");
+    }
     else {
       aMIMEType = "text/html";
       fp.appendFilters(this.nsIFilePicker.filterHTML);
@@ -550,8 +555,9 @@ var FileUtils = {
 
   getExtensionBasedOnMimeType: function(aMIMEType)
   {
-    /*if (CurrentDocumentIsTemplate())
-      return "mzt";*/
+    if (EditorUtils.isPolyglotHtml5()) {
+      aMIMEType = "text/html";
+    }
 
     try {
       var preferred = Services.prefs.getCharPref(

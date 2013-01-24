@@ -168,6 +168,36 @@ function InitDialog()
   gDialog.underlineLinks.checked = gPrefs.getBoolPref("bluegriffon.display.underline_links");
   gDialog.userDefinedColors.checked = !gUseSystemColors;
   EnableUserDefinedColorsControls();
+
+  gDialog.polyglotCheckbox.checked = GetPrefs().getBoolPref("bluegriffon.defaults.html5.polyglot");
+
+  switch (GetPrefs().getCharPref("bluegriffon.defaults.doctype")) {
+    case "kHTML5":
+      gDialog.languageRadiogroup.value = "HTML5";
+      break;
+    case "kXHTML5":
+      gDialog.languageRadiogroup.value = "XHTML5";
+      break;
+    case "kXHTML11":
+      gDialog.languageRadiogroup.value = "XHTML11";
+      break;
+    case "kHTML_STRICT":
+      gDialog.languageRadiogroup.value = "HTML";
+      gDialog.doctypeRadiogroup.value = "STRICT";
+      break;
+    case "kHTML_TRANSITIONAL":
+      gDialog.languageRadiogroup.value = "HTML";
+      gDialog.doctypeRadiogroup.value = "TRANSITIONAL";
+      break;
+    case "kXHTML_STRICT":
+      gDialog.languageRadiogroup.value = "XHTML";
+      gDialog.doctypeRadiogroup.value = "STRICT";
+      break;
+    case "kXHTML_TRANSITIONAL":
+      gDialog.languageRadiogroup.value = "XHTML";
+      gDialog.doctypeRadiogroup.value = "TRANSITIONAL";
+      break;
+  }
   ToggleDoctype(gDialog.languageRadiogroup);
 }
 
@@ -178,11 +208,13 @@ function ToggleDoctype(aElt)
 
   var value = aElt.value;
   var noTransitional = (value == "HTML5" || value == "XHTML5" || value == "XHTML11");
-  SetEnabledElement(gDialog.transitionalRadio, !noTransitional);
-  SetEnabledElement(gDialog.strictRadio, !noTransitional);
+  SetEnabledElementAndControl(gDialog.transitionalRadio, !noTransitional);
+  SetEnabledElementAndControl(gDialog.strictRadio, !noTransitional);
   if (value == "XHTML5")
     gDialog.charsetMenulist.value = "utf-8";
-  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
+  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5" &&
+                                              (value != "HTML5" || !gDialog.polyglotCheckbox.checked)));
+  SetEnabledElement(gDialog.polyglotCheckbox, (value == "HTML5" || value == "XHTML5"));
 }
 
 function EnableUserDefinedColorsControls()
@@ -708,13 +740,19 @@ function CreateNewDocument()
   document.persist("languageRadiogroup", "value");
   document.persist("doctypeRadiogroup", "value");
   document.persist("whereRadiogroup", "value");
+  document.persist("polyglotCheckbox", "checked");
 
-  var value = gDialog.languageRadiogroup.value;
-  var noDoctype = (value == "HTML5" || value == "XHTML5" || value == "XHTML11");
-
-  var docType = "k" + value +
-                (noDoctype ? "" : "_" + gDialog.doctypeRadiogroup.value);
-  w.OpenFile(w[docType], true);
+  var doctype = "";
+  if ((gDialog.languageRadiogroup.value == "HTML5" || gDialog.languageRadiogroup.value == "XHTML5")
+      && gDialog.polyglotCheckbox.checked)
+    doctype = "kPOLYGLOT";
+  else {
+    doctype = "k" +
+                gDialog.languageRadiogroup.value;
+    if (doctype != "kHTML5" && doctype != "kXHTML5" && doctype != "kXHTML11")
+      doctype += "_" + gDialog.doctypeRadiogroup.value;
+  }
+  w.OpenFile(w[doctype], true);
   return false;
 }
 

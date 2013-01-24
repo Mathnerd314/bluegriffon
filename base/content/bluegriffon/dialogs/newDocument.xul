@@ -3,7 +3,12 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<!DOCTYPE dialog SYSTEM "chrome://bluegriffon/locale/newDocument.dtd">
+<!DOCTYPE dialog [
+  <!ENTITY % newDocumentDTD SYSTEM "chrome://bluegriffon/locale/newDocument.dtd" >
+  <!ENTITY % polyglotDTD SYSTEM "chrome://bluegriffon/locale/polyglot.dtd" >
+  %newDocumentDTD;
+  %polyglotDTD;
+]>
 
 <dialog title="&window.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -34,8 +39,10 @@
              value="HTML"/>
       <radio label="&xhtml.label;"
              value="XHTML"/>
+      <spacer flex="1"/>
       <radio label="&xhtml11.label;"
              value="XHTML11"/>
+      <spacer flex="1"/>
       <radio label="&html5.label;"
              value="HTML5"/>
       <radio label="&xhtml5.label;"
@@ -43,13 +50,17 @@
     </radiogroup>
     <radiogroup id="doctypeRadiogroup"
                 orient="horizontal"
-                class="indent">
+                style="margin-left: 15px; margin-right: 15px">
       <radio label="&transitional.label;"
              id="transitionalRadio"
              value="TRANSITIONAL"/>
       <radio label="&strict.label;"
              id="strictRadio"
              value="STRICT"/>
+      <spacer flex="1"/>
+      <checkbox id="polyglotCheckbox"
+                label="&polyglot.label;"
+                oncommand="onDoctypeToggle(gDialog.languageRadiogroup)"/>
     </radiogroup>
   </groupbox>
 

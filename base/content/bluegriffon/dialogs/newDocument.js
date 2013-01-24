@@ -57,6 +57,8 @@ function InitDialog()
   }
   gDialog.charsetMenulist.value = "utf-8";
 
+  gDialog.polyglotCheckbox.checked = GetPrefs().getBoolPref("bluegriffon.defaults.html5.polyglot");
+
   switch (GetPrefs().getCharPref("bluegriffon.defaults.doctype")) {
     case "kHTML5":
       gDialog.languageRadiogroup.value = "HTML5";
@@ -92,13 +94,19 @@ function onAccept()
   document.persist("languageRadiogroup", "value");
   document.persist("doctypeRadiogroup", "value");
   //document.persist("whereRadiogroup", "value");
-  
-  gRv.value = "k" +
-              gDialog.languageRadiogroup.value;
-  if (gRv.value != "kHTML5" && gRv.value != "kXHTML5" && gRv.value != "kXHTML11")
-    gRv.value += "_" + gDialog.doctypeRadiogroup.value;
+
+  if ((gDialog.languageRadiogroup.value == "HTML5" || gDialog.languageRadiogroup.value == "XHTML5")
+      && gDialog.polyglotCheckbox.checked)
+    gRv.value = "kPOLYGLOT";
+  else {
+    gRv.value = "k" +
+                gDialog.languageRadiogroup.value;
+    if (gRv.value != "kHTML5" && gRv.value != "kXHTML5" && gRv.value != "kXHTML11")
+      gRv.value += "_" + gDialog.doctypeRadiogroup.value;
+  }
 
   GetPrefs().setCharPref("bluegriffon.defaults.doctype", gRv.value);
+  GetPrefs().setBoolPref("bluegriffon.defaults.html5.polyglot", gDialog.polyglotCheckbox.checked);
 
   var w = EditorUtils.getCurrentEditorWindow();
   w.OpenFile(w[gRv.value], true);
@@ -114,7 +122,9 @@ function onDoctypeToggle(aElt)
   SetEnabledElementAndControl(gDialog.strictRadio, !noTransitional);
   if (value == "XHTML5")
     gDialog.charsetMenulist.value = "utf-8";
-  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5"));
+  SetEnabledElement(gDialog.charsetMenulist, (value != "XHTML5" &&
+                                              (value != "HTML5" || !gDialog.polyglotCheckbox.checked)));
+  SetEnabledElement(gDialog.polyglotCheckbox, (value == "HTML5" || value == "XHTML5"));
 }
 
 function SelectLanguage(aElt)
