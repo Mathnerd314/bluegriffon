@@ -175,7 +175,7 @@ var ComposerCommands = {
         case "cmd_class":
         case "cmd_id":
         case "cmd_ariaRole":
-          this.pokeMultiStateUI(command);
+          this.pokeMultiStateUI(command, params);
           break;
 
         case "cmd_fontColor":
