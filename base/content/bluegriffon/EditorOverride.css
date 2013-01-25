@@ -400,7 +400,7 @@ nvu|php, nvu|comment {
   -moz-transition: none ! important;
 }
 
-@-moz-keyframes flasher {
+@keyframes flasher {
   from {
     outline-color: #CC0000 ! important;
   }

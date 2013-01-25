@@ -45,6 +45,7 @@
 */
 
 @namespace bluegriffon url("http://disruptive-innovations.com/zoo/bluegriffon");
+@namespace svg url("http://www.w3.org/2000/svg");
 
 
 a[name], a[id] {

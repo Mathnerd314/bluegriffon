@@ -155,7 +155,7 @@ function DocumentCreated()
   EditorUtils.insertMetaElement(meta,
                                 EditorUtils.getCurrentDocumentMimeType() + "; charset="
                                   + gDialog.charsetMenulist.value,
-                                true, false);
+                                true, true);
   EditorUtils.getCurrentEditor().documentCharacterSet = gDialog.charsetMenulist.value;
   window.close();
 }

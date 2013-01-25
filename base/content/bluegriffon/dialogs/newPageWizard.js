@@ -708,14 +708,14 @@ function Apply()
     var meta = EditorUtils.getCurrentDocument().createElement("meta");
     if (isXhtml5) {
       meta.setAttribute("charset", gDialog.charsetMenulist.value);
-      EditorUtils.appendHeadElement(meta);
+      EditorUtils.prependHeadElement(meta);
     }
     else {
       meta.setAttribute("http-equiv", "content-type");
       EditorUtils.insertMetaElement(meta,
                                     EditorUtils.getCurrentDocumentMimeType() + "; charset="
                                       + gDialog.charsetMenulist.value,
-                                    true, false);
+                                    true, true);
     }
   }
   catch(e) {}

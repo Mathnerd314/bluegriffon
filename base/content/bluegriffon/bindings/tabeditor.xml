@@ -230,6 +230,11 @@
                   }
                   else if (aStateFlags & nsIWebProgressListener.STATE_STOP)
                   {
+                    if (this._requestsStarted
+                        && this._requestsFinished
+                        && this._requestsStarted == this._requestsFinished ) { // finished !
+                      this.mEditorSheets = false;
+                    } 
                     if (progress)
                       progress.setAttribute("style", "display: none");
                     this.onStatusChange(aWebProgress, aRequest, 0, "Done");
@@ -353,14 +358,14 @@
                           && editor.document.doctype.publicId == ""
                           && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
                         meta.setAttribute("charset", charset);
-                        EditorUtils.appendHeadElement(meta);
+                        EditorUtils.prependHeadElement(meta);
                       }
                       else {
                         meta.setAttribute("http-equiv", "content-type");
                         EditorUtils.insertMetaElement(meta,
                                                       EditorUtils.getCurrentDocumentMimeType() + "; charset="
                                                         + charset,
-                                                      true, false);
+                                                      true, true);
                       }
 
                       editor.resetModificationCount();
@@ -412,7 +417,7 @@
 
                 mTabeditor: null,
                 mEditor: null,
-                mEditorSheets: false,
+                mEditorSheets: true,
                 mURL: null,
                 mTab: null
             };
