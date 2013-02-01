@@ -91,7 +91,7 @@ var cmdSave =
           if (result) { 
             // we must update the original source to detect if the document has
             // changed when we leave source mode; b=479
-            sourceIframe.setUserData("oldSource", source, null);
+            sourceIframe.setUserData("lastSaved", source, null);
           }
         }
         else {
@@ -138,6 +138,11 @@ var cmdSaveAs =
                      true,
                      false,
                      EditorUtils.getCurrentDocumentMimeType());
+          if (result) { 
+            // we must update the original source to detect if the document has
+            // changed when we leave source mode; b=479
+            sourceIframe.setUserData("lastSaved", source, null);
+          }
         }
         else {
           EditorUtils.cleanup();

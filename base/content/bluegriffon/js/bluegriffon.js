@@ -906,6 +906,7 @@ function ToggleViewMode(aElement)
     sourceEditor.focus();
     sourceIframe.contentWindow.wrappedJSObject.markSelection();
     sourceIframe.setUserData("oldSource", sourceEditor.getValue(), null);
+    sourceIframe.setUserData("lastSaved", "", null);
 
     sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
   }
@@ -942,6 +943,9 @@ function ToggleViewMode(aElement)
           }
           gDialog.structurebar.style.visibility = "";
           RebuildFromSource(doc, isXML);
+          var lastSaved = sourceIframe.getUserData("lastSaved");
+          if (lastSaved == source)
+            EditorUtils.getCurrentEditor().resetModificationCount();  
         }
         catch(e) {alert(e)}
       }
@@ -952,6 +956,7 @@ function ToggleViewMode(aElement)
         gDialog.structurebar.style.visibility = "";
         window.content.focus();
       }
+      sourceIframe.setUserData("lastSaved", "", null);
     }
   }
   editorElement.parentNode.setAttribute("previousMode", mode);
