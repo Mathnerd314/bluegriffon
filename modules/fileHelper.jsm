@@ -175,8 +175,11 @@ var FileUtils = {
         //   window title loses the extra [filename] part that this adds
         EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
   
-        if (!aSaveCopy)
+        if (!aSaveCopy) {
           editor.resetModificationCount();
+          EditorUtils.getCurrentSourceWindow().ResetModificationCount();
+          EditorUtils.getCurrentEditorWindow().BespinChangeCallback();
+        }
         // this should cause notification to listeners that document has changed
   
         // Set UI based on whether we're editing a remote or local url
@@ -313,8 +316,11 @@ var FileUtils = {
         //   window title loses the extra [filename] part that this adds
         EditorUtils.getCurrentEditorWindow().UpdateWindowTitle();
   
-        if (!aSaveCopy)
+        if (!aSaveCopy) {
           editor.resetModificationCount();
+          EditorUtils.getCurrentSourceWindow().ResetModificationCount();
+          EditorUtils.getCurrentEditorWindow().BespinChangeCallback();
+        }
         // this should cause notification to listeners that document has changed
   
         // Set UI based on whether we're editing a remote or local url

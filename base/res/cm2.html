@@ -54,6 +54,8 @@
   var gChangeTimer = null;
   var gTheme  = "light";
 
+  var gModificationCount = 0;
+
   window.onload = function(){
      var foldFunc = CodeMirror.newFoldFunction(CodeMirror.tagRangeFinder);
       function keyEvent(cm, e) {
@@ -67,10 +69,13 @@
       }
 
      function changeFunc() {
-       if (gChangeTimer)
+       gModificationCount++;
+       if (gChangeTimer) {
          clearTimeout(gChangeTimer);
+         gChangeTimer = null;
+       }
        if (gChangeCallback)
-         gChangeTimer = setTimeout(gChangeCallback, 500, gEditor.getValue());
+         gChangeTimer = setTimeout(gChangeCallback, 100, gEditor.getValue());
      }
 
      gEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -127,9 +132,10 @@
   }
 
   var gInstalled = false;
-  function installCodeMirror(aKeyPressCallback, aTheme, aTagsArray, aEditorUtils) {
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aTheme, aTagsArray, aEditorUtils) {
     if (gInstalled) return;
     getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
+    gChangeCallback = aChangeCallback;
     useTheme(aTheme);
     html_tags = aTagsArray;
     editorUtils = aEditorUtils;
@@ -190,6 +196,16 @@
       gEditor.setSelection(gEditor.lastNeedle.from(), gEditor.lastNeedle.to());
 
     return found;
+  }
+
+  function ResetModificationCount()
+  {
+    gModificationCount = 0;
+  }
+
+  function GetModificationCount()
+  {
+    return gModificationCount;
   }
 </script>
 </body>

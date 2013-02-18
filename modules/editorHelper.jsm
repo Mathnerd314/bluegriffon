@@ -86,11 +86,28 @@ var EditorUtils = {
     return null;
   },  
 
+  getCurrentViewMode: function getCurrentViewMode()
+  {
+    return this.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
+           "wysiwyg";
+  },
+
   getCurrentSourceEditorElement: function()
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
       return editorElement.previousSibling;
+    }
+    return null;
+  },
+
+  getCurrentSourceWindow: function()
+  {
+    var editorElement = this.getCurrentEditorElement();
+    if (editorElement) {
+      var bespinIframe = editorElement.previousSibling;
+      var bespinWindow = bespinIframe.contentWindow.wrappedJSObject;
+      return bespinWindow;
     }
     return null;
   },
@@ -209,7 +226,10 @@ var EditorUtils = {
   isDocumentModified: function isDocumentModified()
   {
     try {
-      return this.getCurrentEditor().documentModified;
+      if (this.getCurrentEditor().documentModified)
+        return true;
+      if (this.getCurrentSourceWindow().GetModificationCount())
+        return true;
     } catch (e) { }
     return false;
   },

@@ -877,6 +877,7 @@ function ToggleViewMode(aElement)
     }
     catch(e) {}
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
+                                                 BespinChangeCallback,
                                                  theme,
                                                  null,
                                                  EditorUtils);
@@ -909,6 +910,7 @@ function ToggleViewMode(aElement)
     sourceIframe.setUserData("lastSaved", "", null);
 
     sourceIframe.contentWindow.wrappedJSObject.isXML = isXML;
+    EditorUtils.getCurrentSourceWindow().ResetModificationCount();
   }
   else if (mode == "wysiwyg")
   {

@@ -333,3 +333,12 @@ function ReplaceInWysiwyg()
   return true;
 }
 
+function BespinChangeCallback()
+{
+  gDialog.tabeditor.showCurrentTabAsModified(EditorUtils.isDocumentModified());    // || IsHTMLSourceChanged());
+
+#ifdef XP_MACOSX
+  gDialog.tabeditor.updateOSXCloseButton();
+  UpdateBadge();
+#endif
+}
