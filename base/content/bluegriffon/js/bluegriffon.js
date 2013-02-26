@@ -204,15 +204,22 @@ function onButtonUpdate(button, commmandID)
   button.checked = state == "true";
 }
 
-function UpdateWindowTitle()
+function UpdateWindowTitle(aEditorElement)
 {
+  if (!aEditorElement) {
+    aEditorElement = EditorUtils.getCurrentEditorElement();
+    if (!aEditorElement) // sanity check
+      return "";
+  }
+
   try {
-    var windowTitle = EditorUtils.getDocumentTitle();
+    var doc = aEditorElement.contentDocument;
+    var windowTitle = doc.title;
     if (!windowTitle)
       windowTitle = L10NUtils.getString("untitled");
 
     // Append just the 'leaf' filename to the Doc. Title for the window caption
-    var docUrl = UrlUtils.getDocumentUrl();
+    var docUrl = doc.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL;
     if (docUrl && !UrlUtils.isUrlOfBlankDocument(docUrl))
     {
       var scheme = UrlUtils.getScheme(docUrl);
@@ -751,6 +758,8 @@ function onSourceChangeCallback(source)
   switch (systemId) {
     case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
     case "http://www.w3.org/TR/html4/loose.dtd":
+    case "http://www.w3.org/TR/REC-html40/strict.dtd":
+    case "http://www.w3.org/TR/REC-html40/loose.dtd":
     case null:
       isXML = false;
       break;
@@ -832,6 +841,8 @@ function ToggleViewMode(aElement)
   switch (systemId) {
     case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
     case "http://www.w3.org/TR/html4/loose.dtd":
+    case "http://www.w3.org/TR/REC-html40/strict.dtd":
+    case "http://www.w3.org/TR/REC-html40/loose.dtd":
     case null:
       isXML = false;
       break;
@@ -1477,31 +1488,46 @@ function start_css()
                "chrome,resizable,scrollbars=yes");
 }
 
-function UpdateTabHTMLDialect(editor)
+function UpdateTabHTMLDialect(aEditorElement)
 {
-  var doctype = editor.document.doctype;
-  var systemId = doctype ? doctype.systemId : null;
-  var tab = gDialog.tabeditor.selectedTab;
-  switch (systemId) {
-    case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
-    case "http://www.w3.org/TR/html4/loose.dtd":
-    case null:
-      tab.setAttribute("tooltiptext", "HTML 4");
-      break;
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
-    case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
-      tab.setAttribute("tooltiptext", "XHTML 1");
-      break;
-    case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
-      tab.setAttribute("tooltiptext", "XHTML 1.1");
-      break;
-    case "":
-      tab.setAttribute("tooltiptext",
-         (editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
-           "XHTML 5" : "HTML 5");
-      break;
-    default: break; // should never happen...
-  }
+  var tabeditor = gDialog.tabeditor;
+  var tabs      = tabeditor.mTabs.childNodes;
+  var editors   = tabeditor.mTabpanels.childNodes;
+  var l = editors.length;
+  for (var i = 0; i < l; i++)
+  {
+    if (editors.item(i).lastChild == aEditorElement)
+    {
+      var tab = tabs.item(i);
+
+      var doctype = aEditorElement.contentDocument.doctype;
+      var systemId = doctype ? doctype.systemId : null;
+      switch (systemId) {
+        case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+        case "http://www.w3.org/TR/html4/loose.dtd":
+        case "http://www.w3.org/TR/REC-html40/strict.dtd":
+        case "http://www.w3.org/TR/REC-html40/loose.dtd":
+        case null:
+          tab.setAttribute("tooltiptext", "HTML 4");
+          break;
+        case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+        case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+          tab.setAttribute("tooltiptext", "XHTML 1");
+          break;
+        case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
+          tab.setAttribute("tooltiptext", "XHTML 1.1");
+          break;
+        case "":
+          tab.setAttribute("tooltiptext",
+             (aEditorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
+               "XHTML 5" : "HTML 5");
+          break;
+        default: break; // should never happen...
+      }
+      return;
+    }
+  }          
+
 }
 
 function OpenAddonsSite()

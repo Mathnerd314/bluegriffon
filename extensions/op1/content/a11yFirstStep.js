@@ -13,6 +13,8 @@ var OPQUAST_CRITERIA = [
       switch (systemId) {
         case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
         case "http://www.w3.org/TR/html4/loose.dtd":
+        case "http://www.w3.org/TR/REC-html40/strict.dtd":
+        case "http://www.w3.org/TR/REC-html40/loose.dtd":
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
         case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd": // XHTML 1.1

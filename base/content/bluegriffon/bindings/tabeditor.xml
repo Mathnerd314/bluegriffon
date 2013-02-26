@@ -281,15 +281,17 @@
                           this.mTab.setAttribute("image", l.getAttribute("href"));
                         }
                       }
-                      if (UrlUtils.isUrlOfBlankDocument(EditorUtils.getDocumentUrl())) {
+                      if (UrlUtils.isUrlOfBlankDocument(editor.document.QueryInterface(Components.interfaces.nsIDOMHTMLDocument).URL)) {
                         var authorMeta = editor.document.querySelector("meta[name='author']");
                         if (!authorMeta)
                           try {
                             // add author's meta
                             var author = GetPrefs().getComplexValue("bluegriffon.author",
                                                                     Components.interfaces.nsISupportsString).data;
-                            var meta = EditorUtils.createMetaElement("author");
-                            EditorUtils.insertMetaElement(meta, author, true, false);
+                            var meta = editor.document.createElement("meta");
+                            meta.setAttribute("name", "author");
+                            meta.setAttribute("content", author);
+                            editor.document.querySelector("head").appendChild(meta);
                           }
                           catch(e) {}
                       }
@@ -340,7 +342,7 @@
                           charset = meta.getAttribute("charset");
                       }
                       if (!charset)
-                        charset = EditorUtils.getCurrentEditorElement().docShell.charset;
+                        charset = this.mEditor.docShell.charset;
 
                       editor.documentCharacterSet = charset;
 
@@ -354,19 +356,40 @@
                         }
                       }
                       var meta = editor.document.createElement("meta");
+                      var head = editor.document.querySelector("head");
                       if (editor.document.doctype
                           && editor.document.doctype.publicId == ""
                           && editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") { // XHTML5
                         meta.setAttribute("charset", charset);
-                        EditorUtils.prependHeadElement(meta);
+                        head.insertBefore(meta, head.firstChild);
                       }
                       else {
                         meta.setAttribute("http-equiv", "content-type");
-                        EditorUtils.insertMetaElement(meta,
-                                                      EditorUtils.getCurrentDocumentMimeType() + "; charset="
-                                                        + charset,
-                                                      true, true);
+                        var doctype = editor.document.doctype;
+                        var systemId = doctype ? doctype.systemId : null;
+                        var isXML = false;
+                        switch (systemId) {
+                          case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+                          case "http://www.w3.org/TR/html4/loose.dtd":
+                          case "http://www.w3.org/TR/REC-html40/strict.dtd":
+                          case "http://www.w3.org/TR/REC-html40/loose.dtd":
+                          case null:
+                            isXML = false;
+                            break;
+                          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
+                          case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd":
+                          case "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd":
+                            isXML = true;
+                            break;
+                          case "":
+                            isXML = (editor.document.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+                            break;
+                        }
+                        meta.setAttribute("content", (isXML ? "application/xhtml+xml" : "text/html") + "; charset=" + charset);
+                        head.insertBefore(meta, head.firstChild);
                       }
+
+                      UpdateTabHTMLDialect(this.mEditor);
 
                       editor.resetModificationCount();
                       editor.transactionManager.clear();
@@ -388,6 +411,7 @@
                     gDialog["menulist-zoompanel"].focus();
                     this.mEditor.contentWindow.focus();
                     editor.resetModificationCount();
+                    editor.transactionManager.clear();
                   }
                 }
               },
@@ -504,6 +528,8 @@
         <body>
         <![CDATA[
           var e     = aEvent.currentTarget;
+          if (!e)
+            return;
 
           var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
           var tabs      = tabeditor.mTabs.childNodes;
@@ -514,8 +540,9 @@
             if (editors.item(i).lastChild == e)
             {
               var tab = tabs.item(i);
-              var title = UpdateWindowTitle();
-              tab.label = title;
+              var title = UpdateWindowTitle(e);
+              if (title)
+                tab.label = title;
               return;
             }
           }          

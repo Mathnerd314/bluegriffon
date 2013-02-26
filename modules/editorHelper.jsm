@@ -570,6 +570,8 @@ var EditorUtils = {
     switch (systemId) {
       case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
       case "http://www.w3.org/TR/html4/loose.dtd":
+      case "http://www.w3.org/TR/REC-html40/strict.dtd":
+      case "http://www.w3.org/TR/REC-html40/loose.dtd":
       case null:
         isXML = false;
         break;
