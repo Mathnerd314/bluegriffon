@@ -878,7 +878,7 @@ var CssInspector = {
             token.isDimensionOfUnit("em") ||
             token.isDimensionOfUnit("ex") ||
             token.isDimensionOfUnit("pt")) {
-          var offsetX = token.value;
+          var offsetY = token.value;
           token = parser.getToken(true, true);
         }
         else
@@ -944,7 +944,9 @@ var CssInspector = {
                         color: color,
                         offsetX: offsetX, offsetY: offsetY,
                         blurRadius: blurRadius,
-                        spreadRadius: spreadRadius } );
+                        spreadRadius: spreadRadius,
+                        inset: inset
+                      } );
 
         if (token.isSymbol(",")) {
           inset = false;

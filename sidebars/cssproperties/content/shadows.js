@@ -69,18 +69,21 @@ function ReapplyTextShadows()
 {
   var items = gDialog.textShadowRichlistbox.querySelectorAll("richlistitem");
   var shadows = [];
+  const r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     var s;
     if (item.className == "shadowTextShadow") {
       if (item.offsetX != "" && item.offsetY != "") {
-        var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
         var mX = item.offsetX.match(r);
         var mY = item.offsetY.match(r);
         if (!mX || !mY || !mX[2] || !mY[2])
           return;
       }
       else
+        return;
+      var mBlurRadius   = item.blurRadius.match(r);
+      if (!mBlurRadius || !mBlurRadius[2])
         return;
       s = item.color + " " + item.offsetX + " " + item.offsetY + " " + item.blurRadius;
     }
@@ -136,12 +139,12 @@ function ReapplyBoxShadows()
 {
   var items = gDialog.boxShadowRichlistbox.querySelectorAll("richlistitem");
   var shadows = [];
+  const r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
     var s;
     if (item.className == "shadowBoxShadow") {
       if (item.offsetX != "" && item.offsetY != "") {
-        var r = new RegExp( "([+-]?[0-9]*\\.[0-9]+|[+-]?[0-9]+)(" + '% px pt cm in mm pc em ex rem ch'.replace( / /g, "|") + ")*", "");
         var mX = item.offsetX.match(r);
         var mY = item.offsetY.match(r);
         if (!mX || !mY || !mX[2] || !mY[2])
@@ -150,6 +153,10 @@ function ReapplyBoxShadows()
       else
         return;
       s = (item.inset ? "inset " : "");
+      var mBlurRadius   = item.blurRadius.match(r);
+      var mSpreadRadius = item.spreadRadius.match(r);
+      if (!mBlurRadius || !mSpreadRadius || !mBlurRadius[2] || !mSpreadRadius[2])
+        return;
       s += item.offsetX + " " + item.offsetY + " " + item.blurRadius + " " +
            item.spreadRadius + " " + item.color;
     }

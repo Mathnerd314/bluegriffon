@@ -105,7 +105,7 @@
         </getter>
         <setter>
         <![CDATA[
-          this.getChild("color").checked = val;
+          this.getChild("inset").checked = val;
         ]]>
         </setter>
       </property>
