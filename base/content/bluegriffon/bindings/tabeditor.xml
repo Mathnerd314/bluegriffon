@@ -288,10 +288,12 @@
                             // add author's meta
                             var author = GetPrefs().getComplexValue("bluegriffon.author",
                                                                     Components.interfaces.nsISupportsString).data;
-                            var meta = editor.document.createElement("meta");
-                            meta.setAttribute("name", "author");
-                            meta.setAttribute("content", author);
-                            editor.document.querySelector("head").appendChild(meta);
+                            if (author) {
+                              var meta = editor.document.createElement("meta");
+                              meta.setAttribute("name", "author");
+                              meta.setAttribute("content", author);
+                              editor.document.querySelector("head").appendChild(meta);
+                            }
                           }
                           catch(e) {}
                       }
