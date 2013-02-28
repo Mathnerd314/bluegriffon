@@ -172,9 +172,11 @@ function SimilarToCurrent()
 
   switch (systemId) {
     case "http://www.w3.org/TR/html4/strict.dtd": // HTML 4
+    case "http://www.w3.org/TR/REC-html40/strict.dtd":
       type = {doctype: "HTML", strict: true };
       break;
     case "http://www.w3.org/TR/html4/loose.dtd":
+    case "http://www.w3.org/TR/REC-html40/loose.dtd":
     case null:
       type = {doctype: "HTML", strict: false };
       break;

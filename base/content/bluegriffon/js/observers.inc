@@ -68,10 +68,6 @@ var gEditorDocumentObserver =
         if (editorStatus)
           return; 
 
-        // Set window title
-        gDialog.tabeditor.selectedTab.label = UpdateWindowTitle();
-        UpdateTabHTMLDialect(editor)
-
         window.content.focus();
         
         NotifierUtils.notify("documentCreated");
