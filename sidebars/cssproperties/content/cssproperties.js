@@ -52,6 +52,10 @@ var gXmlNAMERegExp = null;
 
 function Startup()
 {
+  var nameStartChar = "A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+  var nameChar = nameStartChar + "\-\.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
+  gXmlNAMERegExp = new RegExp("^[" + nameStartChar + "][" + nameChar + "]*$");
+
   GetUIElements();
 
   Bezier.init();
@@ -105,9 +109,6 @@ function Startup()
     if (c)
       SelectionChanged(null, c.node, c.oneElementSelected);
   }
-  var nameStartChar = "A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
-  var nameChar = nameStartChar + "\-\.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
-  gXmlNAMERegExp = new RegExp("^[" + nameStartChar + "][" + nameChar + "]*$");
 }
 
 function Shutdown()
@@ -187,7 +188,9 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
   }
   if (item)
     gDialog.classPicker.selectedItem = item;
-  CheckClass(gDialog.classPicker);
+
+  if (gDialog.cssPolicyMenulist.value == "class")
+    CheckClass(gDialog.classPicker);
 
   gDialog.typePicker.setAttribute("value", gCurrentElement.localName);
 
@@ -218,7 +221,7 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 
 function CheckClass(aElt)
 {
-  var value = aElt.value;
+  var value = (aElt.editor ? aElt.editor.outputToString("text/plain", 0) : aElt.value)
   var valid;
   if (value && value.match( gXmlNAMERegExp ))
     valid = "true";
@@ -236,6 +239,7 @@ function onCssPolicyChange(aElt)
     case "class":
       gDialog.classPicker.hidden = false;
       gDialog.typePicker.hidden  = true;
+      CheckClass(gDialog.classPicker);
       gDialog.classPicker.focus();
       break;
     case "id":
@@ -371,7 +375,7 @@ function ApplyStyles(aStyles)
       break;
 
     case "class":
-      if (!gDialog.classPicker.value) {
+      if (!(gDialog.classPicker.editor ? gDialog.classPicker.editor.outputToString("text/plain", 0) : gDialog.classPicker.value)) {
         if (cssPolicy == "automatic") {
           var prefix = gPrefs.getCharPref("bluegriffon.css.prefix");
           className = prefix + new Date().valueOf() +
@@ -399,8 +403,8 @@ function ApplyStyles(aStyles)
         }
         editor.beginTransaction();
         // make sure the element carries the user-selected class
-        className = gDialog.classPicker.value;
-        if (!gCurrentElement.classList.contains(gDialog.classPicker.value)) {
+        className = (gDialog.classPicker.editor ? gDialog.classPicker.editor.outputToString("text/plain", 0) : gDialog.classPicker.value);
+        if (!gCurrentElement.classList.contains(className)) {
           var c = (gCurrentElement.classList ? gCurrentElement.classList + " " : "") + className;
           editor.setAttribute(gCurrentElement, "class", className);
         }
