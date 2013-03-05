@@ -69,6 +69,21 @@ toolbaritem  menulist {
   min-height: 20px ! important
 }
 
+/****** encapsulation ******/
+
+#EncapsulateSelect {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/tag.png");
+  margin: 0px !important;
+}
+
+#EncapsulateSelect * {
+  margin: 0px !important;
+}
+
+#EncapsulateSelect[disabled="true"] {
+  list-style-image: url("chrome://bluegriffon/skin/formatToolbar/tag-disabled.png");
+}
+
 /****** EM ******/
 
 #emButton {

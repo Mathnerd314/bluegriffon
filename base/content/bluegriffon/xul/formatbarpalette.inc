@@ -277,4 +277,14 @@
       </hbox>
     </toolbaritem>
 
+    <toolbarbutton id="EncapsulateSelect"
+                   type="menu-button"
+                   tooltiptext="&encapsulate.tooltip;"
+                   observes="cmd_renderedHTMLEnabler"
+                   tag="span"
+                   oncommand="Encapsulate(event, this)">
+      <menupopup id="EncapsulateSelectMenupopup"
+                 onpopupshowing="initEncapsulateMenu(this);" />
+    </toolbarbutton>
+
   </toolbarpalette>

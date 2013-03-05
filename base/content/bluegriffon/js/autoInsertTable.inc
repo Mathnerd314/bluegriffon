@@ -68,7 +68,6 @@ var AutoInsertTable = {
   
     var editor = EditorUtils.getCurrentEditor();
     var doc = EditorUtils.getCurrentDocument();
-    editor.beginTransaction();
     var tableElement = doc.createElement("table");
     var tableBody = doc.createElement("tbody");
     tableElement.appendChild(tableBody);
@@ -90,10 +89,17 @@ var AutoInsertTable = {
         newRow.appendChild(newCell);
       }
     }
-    editor.insertElementAtSelection(tableElement, true);
-    editor.endTransaction();
-    editor.selection.collapse(firstCell, 0);
-    window.content.focus();
+    if (GetCurrentViewMode() == "wysiwyg") {
+      editor.insertElementAtSelection(tableElement, true);
+      editor.selection.collapse(firstCell, 0);
+      window.content.focus();
+    }
+    else {
+      var src = style_html(tableElement.outerHTML);
+      var srcEditor = EditorUtils.getCurrentSourceEditor();
+      srcEditor.replaceSelection(src);
+      EditorUtils.getCurrentSourceWindow().focus();
+    }
   },
 
   increaseSize: function(aX, aY)

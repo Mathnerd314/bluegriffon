@@ -317,8 +317,44 @@ function onARIARoleChangeStructureBar(commandID)
 
 /************* GLOBAL VARS *************/
 
+/************* Encapsulation menu ******/
 
+function initEncapsulateMenu(menuPopup)
+{
+  deleteAllChildren(menuPopup);
 
+  var elts = HTML5Helper.mHTML5_ELEMENTS;
+  for (var i = 0; i < elts.length; i++) {
+    var e = elts[i];
+    if (!e.block && !e.empty) {
+      var label = e.label;
+      try {
+        var str = gDialog.bundleHTML5.getString(label);
+        label = str;
+      }
+      catch(e) {}
+      var item = document.createElement("menuitem");
+      item.setAttribute("label", label);
+      item.setAttribute("html5index", i);
+      item.setAttribute("oncommand", "Encapsulate(event, this)")
+      menuPopup.appendChild(item);
+    }
+  }
+}
+
+function Encapsulate(event, aItem)
+{
+  event.stopPropagation();
+  var elt;
+  if (aItem.hasAttribute("html5index")) {
+    var index = parseInt(aItem.getAttribute("html5index"));
+    elt = HTML5Helper.mHTML5_ELEMENTS[index];
+  }
+  else {
+    elt = { tag:  aItem.getAttribute("tag") };
+  }
+  EditorUtils.getCurrentEditor().setInlineProperty(elt.tag, "", "");
+}
 /************* FONT FACE ****************/
 
 function initFontFaceMenu(menuPopup)
@@ -479,7 +515,7 @@ function OnBlurFromClassMenulist(aEvent)
     else
       EditorUtils.getCurrentEditor().removeAttribute(node, "class");
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", node, false);
+    NotifierUtils.notify("selection_strict", node, true);
   }  
 }
 
@@ -513,7 +549,7 @@ function OnBlurFromIdMenulist(aEvent)
     else
       EditorUtils.getCurrentEditor().removeAttribute(node, "id");
     // be kind with the rest of the world
-    NotifierUtils.notify("selection", node, false);
+    NotifierUtils.notify("selection_strict", node, true);
   }  
 }
 

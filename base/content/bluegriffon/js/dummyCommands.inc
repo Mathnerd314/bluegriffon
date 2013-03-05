@@ -406,3 +406,22 @@ var cmdCommentOrPICommand = {
                       "chrome,close,titlebar,modal,resizable=yes", null);
   }
 };
+
+var cmdEncapsulateCommand = {
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML() &&
+            !EditorUtils.activeViewActive  &&
+            GetCurrentViewMode() == "wysiwyg");
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    alert(2);
+  }
+};

@@ -488,6 +488,8 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_structurePrevious", cmdStructurePreviousCommand);
 
     commandTable.registerCommand("cmd_commentOrPI",  cmdCommentOrPICommand);
+    
+    commandTable.registerCommand("cmd_encapsulate", cmdEncapsulateCommand);
   },
 
   setupFormatCommands: function setupFormatCommands()

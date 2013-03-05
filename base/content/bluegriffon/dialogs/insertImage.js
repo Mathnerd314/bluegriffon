@@ -42,8 +42,9 @@ function onAccept()
   var altText = gDialog.alternateTextTextbox.value;
   var longdesc = gDialog.longDescTextbox.value;
 
-  var editor = EditorUtils.getCurrentEditor(); 
-  if (gNode) {
+  var isWysiwyg = (EditorUtils.getCurrentViewMode() == "wysiwyg");
+  if (gNode && isWysiwyg) {
+    var editor = EditorUtils.getCurrentEditor(); 
     editor.beginTransaction();
     editor.setAttribute(gNode, "src", url);
     if (altText)
@@ -69,7 +70,13 @@ function onAccept()
       imgElement.setAttribute("title", title);
     if (longdesc)
       imgElement.setAttribute("longdesc", longdesc);
-    editor.insertElementAtSelection(imgElement, true);
+    if (isWysiwyg) 
+      editor.insertElementAtSelection(imgElement, true);
+    else {
+      var src = style_html(imgElement.outerHTML);
+      var srcEditor = EditorUtils.getCurrentSourceEditor();
+      srcEditor.replaceSelection(src);
+    }
   }
 }
 

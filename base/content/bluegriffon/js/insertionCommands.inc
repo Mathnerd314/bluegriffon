@@ -5,8 +5,7 @@ var cmdInsertOrEditTableCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isEditingRenderedHTML());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -14,11 +13,13 @@ var cmdInsertOrEditTableCommand =
 
   doCommand: function(aCommand)
   {
-    var element = EditorUtils.getObjectForProperties(
-          ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "caption"]);
-    if (element) {
-      OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
-      return;
+    if (GetCurrentViewMode() == "wysiwyg") {
+      var element = EditorUtils.getObjectForProperties(
+            ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "caption"]);
+      if (element) {
+        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
+        return;
+      }
     }
 
     // reset the table insertion panel
@@ -34,8 +35,7 @@ var cmdInsertImageCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isEditingRenderedHTML());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -43,7 +43,9 @@ var cmdInsertImageCommand =
 
   doCommand: function(aCommand)
   {
-    var element = EditorUtils.getObjectForProperties(["img"]);
+    var element = (GetCurrentViewMode() == "wysiwyg")
+                  ? EditorUtils.getObjectForProperties(["img"])
+                  : null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertImage.xul","_blank",
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element, null);
   }
