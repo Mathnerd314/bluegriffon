@@ -57,8 +57,7 @@ var cmdInsertAnchorCommand =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isEditingRenderedHTML());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -66,7 +65,9 @@ var cmdInsertAnchorCommand =
 
   doCommand: function(aCommand)
   {
-    var element = EditorUtils.getObjectForProperties(["a"]);
+    var element = (GetCurrentViewMode() == "wysiwyg")
+                  ? EditorUtils.getObjectForProperties(["a"])
+                  : null;
     window.openDialog("chrome://bluegriffon/content/dialogs/insertAnchor.xul","_blank",
                       "chrome,modal,titlebar,resizable=yes,dialog=yes", element);
   }
