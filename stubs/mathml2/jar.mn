@@ -5,9 +5,9 @@ mathml.jar:
 % overlay   chrome://bluegriffon/content/xul/bluegriffon.xul    chrome://mathml/content/mathmlOverlay.xul
 % style  chrome://global/content/customizeToolbar.xul           chrome://mathml/skin/mathmlToolbar.css
 % style  chrome://bluegriffon/content/xul/bluegriffon.xul       chrome://mathml/skin/mathmlToolbar.css
-* content/mathml/mathmlOverlay.xul           (content/mathmlOverlay.xul)
-* content/mathml/mathmlOverlay.js            (content/mathmlOverlay.js)
-* skin/classic/mathml/mathmlOverlay.css      (skin/mathmlOverlay.css)
+  content/mathml/mathmlOverlay.xul           (content/mathmlOverlay.xul)
+  content/mathml/mathmlOverlay.js            (content/mathmlOverlay.js)
+  skin/classic/mathml/mathmlOverlay.css      (skin/mathmlOverlay.css)
   skin/classic/mathml/mathml.png             (skin/mathml.png)
   skin/classic/mathml/mathml-icon.png        (skin/mathml-icon.png)
   skin/classic/mathml/small/mathml.png       (skin/small/mathml.png)
@@ -17,4 +17,3 @@ mathml-locale.jar:
 % locale    mathml    en-US    %locale/en-US/mathml/
   locale/en-US/mathml/mathmlOverlay.dtd      (locale/en-US/mathmlOverlay.dtd)
   locale/en-US/mathml/mathmlOverlay.properties      (locale/en-US/mathmlOverlay.properties)
-  

@@ -1,0 +1,6 @@
+DIRS += [
+    'cssproperties',
+    'domexplorer',
+    'scripteditor',
+    'stylesheets'
+]

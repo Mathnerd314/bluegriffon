@@ -227,3 +227,5 @@ pref("print.print_edge_top", 0);
 pref("print.print_edge_left", 0);
 pref("print.print_edge_right", 0);
 pref("print.print_edge_bottom", 0);
+
+pref("layout.css.flexbox.enabled", false);

@@ -43,8 +43,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS		+= src locales modules base themes extensions stubs sidebars langpacks components branding app
-
 
 ifeq ($(OS_ARCH),WINNT)
 ifdef MOZ_INSTALLER

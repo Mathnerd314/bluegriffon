@@ -42,10 +42,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-DIRS += dibgutils
-ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
-DIRS += diOSIntegration.mac
-endif
 
 include $(topsrcdir)/config/rules.mk
 

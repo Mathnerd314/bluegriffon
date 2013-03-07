@@ -36,10 +36,10 @@
 # ***** END LICENSE BLOCK *****
 
 ifndef LIBXUL_SDK
-include $(topsrcdir)/toolkit/toolkit-tiers.mk
+#include $(topsrcdir)/toolkit/toolkit-tiers.mk
 endif
 
-TIERS += app
+#TIERS += app
 
 ifdef MOZ_EXTENSIONS
 tier_app_dirs += extensions
