@@ -186,7 +186,7 @@ function OpenConsole()
 
 function OpenExtensionsManager()
 {
-  window.openDialog("chrome://mozapps/content/extensions/extensions.xul?type=extensions",
+  window.openDialog("chrome://mozapps/content/extensions/extensions.xul",
                     "",
                     "chrome,dialog=no,resizable");
 }
