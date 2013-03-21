@@ -41,18 +41,6 @@ endif
 
 #TIERS += app
 
-ifdef MOZ_EXTENSIONS
-tier_app_dirs += extensions
-endif
-
-ifdef MOZ_BRANDING_DIRECTORY
-tier_app_dirs += $(MOZ_BRANDING_DIRECTORY)
-endif
-
-tier_app_dirs += \
-	bluegriffon \
-	$(NULL)
-
 installer:
 	@echo "BlueGriffon doesn't have an installer yet."
 	@exit 1

@@ -8,7 +8,7 @@ if not CONFIG['LIBXUL_SDK']:
     app_libxul_static_dirs = []
     include('/toolkit/toolkit.mozbuild')
 
-add_tier_dir('app', 'extensions')
+#add_tier_dir('app', 'extensions')
 
 # Never add tier dirs after browser because they apparently won't get
 # packaged properly on Mac.
