@@ -3,36 +3,61 @@ RegisterIniter(FlexBoxSectionIniter);
 function FlexBoxSectionIniter(aElt, aRuleset)
 {
   var d = CssInspector.getCascadedValue(aRuleset, "display");
-  gDialog.flexBoxEnabledCheckbox.checked = (d == "-moz-box" || d == "-moz-inline-box");
+  gDialog.flexBoxEnabledCheckbox.checked = (d == "flex" || d == "inline-flex");
   gDialog.inlineBoxCheckbox.disabled = !gDialog.flexBoxEnabledCheckbox.checked;
-  gDialog.inlineBoxCheckbox.checked = (d == "-moz-inline-box");
+  gDialog.inlineBoxCheckbox.checked = (d == "inline-flex");
 
-  var ba = CssInspector.getCascadedValue(aRuleset, "-moz-box-align");
-  CheckToggle(gDialog.startBoxAlignButton,    ba == "start");
-  CheckToggle(gDialog.centerBoxAlignButton,   ba == "center");
-  CheckToggle(gDialog.endBoxAlignButton,      ba == "end");
-  CheckToggle(gDialog.baselineBoxAlignButton, ba == "baseline");
-  CheckToggle(gDialog.stretchBoxAlignButton,  ba == "stretch");
+  var ai = CssInspector.getCascadedValue(aRuleset, "align-items");
+  CheckToggle(gDialog.startBoxAlignButton,    ai == "flex-start");
+  CheckToggle(gDialog.centerBoxAlignButton,   ai == "center");
+  CheckToggle(gDialog.endBoxAlignButton,      ai == "flex-end");
+  CheckToggle(gDialog.baselineBoxAlignButton, ai == "baseline");
+  CheckToggle(gDialog.stretchBoxAlignButton,  ai == "stretch");
 
-  var bd = CssInspector.getCascadedValue(aRuleset, "-moz-box-direction");
-  CheckToggle(gDialog.normalBoxDirectionButton,    bd == "normal");
-  CheckToggle(gDialog.reverseBoxDirectionButton,   bd == "reverse");
+  var as = CssInspector.getCascadedValue(aRuleset, "align-self");
+  CheckToggle(gDialog.startSelfAlignButton,    as == "flex-start");
+  CheckToggle(gDialog.centerSelfAlignButton,   as == "center");
+  CheckToggle(gDialog.endSelfAlignButton,      as == "flex-end");
+  CheckToggle(gDialog.baselineSelfAlignButton, as == "baseline");
+  CheckToggle(gDialog.stretchSelfAlignButton,  as == "stretch");
+  CheckToggle(gDialog.autoSelfAlignButton,     as == "auto");
 
-  var bf = CssInspector.getCascadedValue(aRuleset, "-moz-box-flex");
-  gDialog.boxFlexTextbox.value = bf;
+  /* NOT YET IMPLEMENTED BY GECKO
+  var ac = CssInspector.getCascadedValue(aRuleset, "align-content");
+  CheckToggle(gDialog.startAlignContentButton,    ac == "flex-start");
+  CheckToggle(gDialog.centerAlignContentButton,   ac == "center");
+  CheckToggle(gDialog.endAlignContentButton,      ac == "flex-end");
+  CheckToggle(gDialog.stretchAlignContentButton,  ac == "stretch");
+  CheckToggle(gDialog.spaceAroundAlignContentButton,     ac == "space-around");
+  CheckToggle(gDialog.spaceAroundAlignContentButton,     ac == "space-between");
+  */
 
-  var bo = CssInspector.getCascadedValue(aRuleset, "-moz-box-orient");
-  CheckToggle(gDialog.horizontalBoxOrientButton,   bo == "horizontal");
-  CheckToggle(gDialog.verticalBoxOrientButton,     bo == "vertical");
+  var jc = CssInspector.getCascadedValue(aRuleset, "justify-content");
+  CheckToggle(gDialog.startJustifyContentButton,    jc == "flex-start");
+  CheckToggle(gDialog.centerJustifyContentButton,   jc == "center");
+  CheckToggle(gDialog.endJustifyContentButton,      jc == "flex-end");
+  CheckToggle(gDialog.stretchJustifyContentButton,  jc == "stretch");
+  CheckToggle(gDialog.spaceAroundJustifyContentButton,     jc == "space-around");
+  CheckToggle(gDialog.spaceAroundJustifyContentButton,     jc == "space-between");
 
-  var bog = CssInspector.getCascadedValue(aRuleset, "-moz-box-ordinal-group");
+  var fd = CssInspector.getCascadedValue(aRuleset, "flex-direction");
+  CheckToggle(gDialog.rowBoxDirectionButton,            (fd == "row"));
+  CheckToggle(gDialog.reversedRowBoxDirectionButton,    (fd == "row-reverse"));
+  CheckToggle(gDialog.columnBoxDirectionButton,         (fd == "column"));
+  CheckToggle(gDialog.reversedColumnBoxDirectionButton, (fd == "column-reverse"));
+
+  var fg = CssInspector.getCascadedValue(aRuleset, "flex-grow");
+  gDialog.flexGrowTextbox.value = fg;
+
+  var fs = CssInspector.getCascadedValue(aRuleset, "flex-shrink");
+  gDialog.flexShrinkTextbox.value = fs;
+
+  var fb = CssInspector.getCascadedValue(aRuleset, "flex-basis");
+  gDialog.flexBasisMenulist.value = fb;
+
+  var bog = CssInspector.getCascadedValue(aRuleset, "order");
   gDialog.boxOrdinalGroupTextbox.value = bog;
 
-  var bp = CssInspector.getCascadedValue(aRuleset, "-moz-box-pack");
-  CheckToggle(gDialog.startBoxPackButton,    bp == "start");
-  CheckToggle(gDialog.centerBoxPackButton,   bp == "center");
-  CheckToggle(gDialog.endBoxPackButton,      bp == "end");
-  CheckToggle(gDialog.justifyBoxPackButton,  bp == "justify");
 }
 
 function ToggleFlexBox()
@@ -42,8 +67,9 @@ function ToggleFlexBox()
                  {
                    property: "display",
                    value: gDialog.flexBoxEnabledCheckbox.checked ?
-                          (gDialog.inlineBoxCheckbox.checked ? "-moz-inline-box" : "-moz-box") :
+                          (gDialog.inlineBoxCheckbox.checked ? "inline-flex" : "flex") :
                           ""
                  }
                ]);
 }
+
