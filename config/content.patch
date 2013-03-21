@@ -58,32 +58,6 @@ diff --git a/caps/src/nsScriptSecurityManager.cpp b/caps/src/nsScriptSecurityMan
                                   nsIProtocolHandler::URI_IS_UI_RESOURCE,
                                   &sourceIsChrome);
          NS_ENSURE_SUCCESS(rv, rv);
-diff --git a/config/rules.mk b/config/rules.mk
---- a/config/rules.mk
-+++ b/config/rules.mk
-@@ -1581,19 +1581,19 @@ endif
- endif
- 
- ifdef INSTALL_EXTENSION_ID
- ifndef XPI_NAME
- $(error XPI_NAME must be set for INSTALL_EXTENSION_ID)
- endif
- 
- libs::
--	$(RM) -r "$(DIST)/bin/extensions/$(INSTALL_EXTENSION_ID)"
--	$(NSINSTALL) -D "$(DIST)/bin/extensions/$(INSTALL_EXTENSION_ID)"
--	cd $(FINAL_TARGET) && tar $(TAR_CREATE_FLAGS) - . | (cd "../../bin/extensions/$(INSTALL_EXTENSION_ID)" && tar -xf -)
-+	$(RM) -r "$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID)"
-+	$(NSINSTALL) -D "$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID)"
-+	$(call copy_dir,$(FINAL_TARGET),$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID))
- 
- endif
- 
- #############################################################################
- # MDDEPDIR is the subdirectory where all the dependency files are placed.
- #   This uses a make rule (instead of a macro) to support parallel
- #   builds (-jN). If this were done in the LOOP_OVER_DIRS macro, two
- #   processes could simultaneously try to create the same directory.
 diff --git a/content/base/public/nsIDocumentEncoder.idl b/content/base/public/nsIDocumentEncoder.idl
 --- a/content/base/public/nsIDocumentEncoder.idl
 +++ b/content/base/public/nsIDocumentEncoder.idl
@@ -1587,6 +1561,28 @@ diff --git a/editor/idl/nsIEditor.idl b/editor/idl/nsIEditor.idl
  
    /** Add a DocumentStateListener to the editors list of doc state listeners. */
    void addDocumentStateListener(in nsIDocumentStateListener listener);
+diff --git a/editor/idl/nsIEditorMouseObserver.idl b/editor/idl/nsIEditorMouseObserver.idl
+new file mode 100644
+--- /dev/null
++++ b/editor/idl/nsIEditorMouseObserver.idl
+@@ -0,0 +1,17 @@
++/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "nsISupports.idl"
++#include "domstubs.idl"
++
++
++[scriptable, uuid(7A76F573-7512-4051-BB20-E6E279F26F55)]
++
++interface nsIEditorMouseObserver : nsISupports {
++
++  bool MouseDown(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseUp(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++  bool MouseMove(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
++};
 diff --git a/editor/idl/nsIEditorObserver.idl b/editor/idl/nsIEditorObserver.idl
 --- a/editor/idl/nsIEditorObserver.idl
 +++ b/editor/idl/nsIEditorObserver.idl
@@ -2800,32 +2796,6 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
  NS_GFX_(nscolor) NS_HSL2RGB(float h, float s, float l);
  
  #endif /* nsColor_h___ */
-diff --git a/js/src/config/rules.mk b/js/src/config/rules.mk
---- a/js/src/config/rules.mk
-+++ b/js/src/config/rules.mk
-@@ -1581,19 +1581,19 @@ endif
- endif
- 
- ifdef INSTALL_EXTENSION_ID
- ifndef XPI_NAME
- $(error XPI_NAME must be set for INSTALL_EXTENSION_ID)
- endif
- 
- libs::
--	$(RM) -r "$(DIST)/bin/extensions/$(INSTALL_EXTENSION_ID)"
--	$(NSINSTALL) -D "$(DIST)/bin/extensions/$(INSTALL_EXTENSION_ID)"
--	cd $(FINAL_TARGET) && tar $(TAR_CREATE_FLAGS) - . | (cd "../../bin/extensions/$(INSTALL_EXTENSION_ID)" && tar -xf -)
-+	$(RM) -r "$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID)"
-+	$(NSINSTALL) -D "$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID)"
-+	$(call copy_dir,$(FINAL_TARGET),$(DIST)/bin$(DIST_SUBDIR:%=/%)/extensions/$(INSTALL_EXTENSION_ID))
- 
- endif
- 
- #############################################################################
- # MDDEPDIR is the subdirectory where all the dependency files are placed.
- #   This uses a make rule (instead of a macro) to support parallel
- #   builds (-jN). If this were done in the LOOP_OVER_DIRS macro, two
- #   processes could simultaneously try to create the same directory.
 diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 --- a/layout/style/Loader.cpp
 +++ b/layout/style/Loader.cpp
@@ -3205,7 +3175,7 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/
  
  // Use integers so search scores are sortable by nsIXULSortService
  const SEARCH_SCORE_MATCH_WHOLEWORD = 10;
-@@ -72,16 +73,28 @@ var gPendingInitializations = 1;
+@@ -72,16 +73,28 @@ __defineGetter__("gIsInitializing", func
  
  function initialize(event) {
    // XXXbz this listener gets _all_ load events for all nodes in the
