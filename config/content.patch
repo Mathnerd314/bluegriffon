@@ -149,7 +149,7 @@ diff --git a/content/base/src/nsCopySupport.cpp b/content/base/src/nsCopySupport
 diff --git a/content/base/src/nsDocument.cpp b/content/base/src/nsDocument.cpp
 --- a/content/base/src/nsDocument.cpp
 +++ b/content/base/src/nsDocument.cpp
-@@ -6283,16 +6283,23 @@ nsIDocument::GetInputEncoding(nsAString&
+@@ -6284,16 +6284,23 @@ nsIDocument::GetInputEncoding(nsAString&
  NS_IMETHODIMP
  nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
  {
@@ -1561,28 +1561,6 @@ diff --git a/editor/idl/nsIEditor.idl b/editor/idl/nsIEditor.idl
  
    /** Add a DocumentStateListener to the editors list of doc state listeners. */
    void addDocumentStateListener(in nsIDocumentStateListener listener);
-diff --git a/editor/idl/nsIEditorMouseObserver.idl b/editor/idl/nsIEditorMouseObserver.idl
-new file mode 100644
---- /dev/null
-+++ b/editor/idl/nsIEditorMouseObserver.idl
-@@ -0,0 +1,17 @@
-+/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-+/* This Source Code Form is subject to the terms of the Mozilla Public
-+ * License, v. 2.0. If a copy of the MPL was not distributed with this
-+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-+
-+#include "nsISupports.idl"
-+#include "domstubs.idl"
-+
-+
-+[scriptable, uuid(7A76F573-7512-4051-BB20-E6E279F26F55)]
-+
-+interface nsIEditorMouseObserver : nsISupports {
-+
-+  bool MouseDown(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
-+  bool MouseUp(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
-+  bool MouseMove(in int32_t aClientX, in int32_t aClientY, in nsIDOMNode aTarget, in boolean aShiftKey);
-+};
 diff --git a/editor/idl/nsIEditorObserver.idl b/editor/idl/nsIEditorObserver.idl
 --- a/editor/idl/nsIEditorObserver.idl
 +++ b/editor/idl/nsIEditorObserver.idl
@@ -2173,6 +2151,33 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      // Getters must addref
      NS_ADDREF(*aReturn);
    }
+@@ -5428,18 +5427,24 @@ bool
+ nsHTMLEditor::IsEditable(nsIContent* aNode) {
+   if (!nsPlaintextEditor::IsEditable(aNode)) {
+     return false;
+   }
+   if (aNode->IsElement()) {
+     // If we're dealing with an element, then ask it whether it's editable.
+     return aNode->IsEditable();
+   }
+-  // We might be dealing with a text node for example, which we always consider
+-  // to be editable.
++  // We might be dealing with a text node for example, which we consider
++  // to be editable if it's a significant text node
++  if (IsTextNode(aNode)) {
++    nsCOMPtr<nsIContent> content = do_QueryInterface(aNode);
++    bool isEmptyTextNode = false;
++    IsVisTextNode(content, &isEmptyTextNode, true);
++    return !isEmptyTextNode;
++  }
+   return true;
+ }
+ 
+ // virtual MOZ_OVERRIDE
+ dom::Element*
+ nsHTMLEditor::GetEditorRoot()
+ {
+   return GetActiveEditingHost();
 diff --git a/editor/libeditor/html/nsHTMLEditor.h b/editor/libeditor/html/nsHTMLEditor.h
 --- a/editor/libeditor/html/nsHTMLEditor.h
 +++ b/editor/libeditor/html/nsHTMLEditor.h
@@ -2385,7 +2390,8 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
        // subtree iterator works - it will not have reported it).
        if (IsTextNode(endNode) && IsEditable(endNode)) {
          nsCOMPtr<nsIDOMCharacterData> nodeAsText = do_QueryInterface(endNode);
-@@ -262,23 +262,24 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
+@@ -261,24 +261,27 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
+   MOZ_ASSERT(aProperty);
    MOZ_ASSERT_IF(aAttribute, aValue);
  
    nsCOMPtr<dom::Element> element = do_QueryInterface(aContent);
@@ -2393,17 +2399,19 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
      return false;
    }
  
++  uint32_t attrCount = aContent->GetAttrCount();
++  bool noAttr = !attrCount
++                || (attrCount == 1 && aContent->GetAttrNameAt(0)->Equals(nsGkAtoms::mozdirty));
    // First check for <b>, <i>, etc.
 -  if (element->IsHTML(aProperty) && !element->GetAttrCount() &&
-+  uint32_t attrCount = element->GetAttrCount();
-+  if (element->IsHTML(aProperty) && !attrCount &&
++  if (element->IsHTML(aProperty) && noAttr &&
        (!aAttribute || aAttribute->IsEmpty())) {
      return true;
    }
  
    // Special cases for various equivalencies: <strong>, <em>, <s>
 -  if (!element->GetAttrCount() &&
-+  if (!attrCount &&
++  if (noAttr &&
        ((aProperty == nsGkAtoms::b && element->IsHTML(nsGkAtoms::strong)) ||
         (aProperty == nsGkAtoms::i && element->IsHTML(nsGkAtoms::em)) ||
         (aProperty == nsGkAtoms::strike && element->IsHTML(nsGkAtoms::s)))) {
@@ -2412,7 +2420,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
    // Now look for things like <font>
    if (aAttribute && !aAttribute->IsEmpty()) {
-@@ -295,17 +296,19 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
+@@ -295,17 +298,19 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
        return true;
      }
    }
@@ -2433,7 +2441,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    // "text-decoration: underline", which decomposes into four different text-*
    // properties.  So for now, we just create a span, add the desired style, and
    // see if it matches.
-@@ -392,25 +395,26 @@ nsHTMLEditor::SetInlinePropertyOnTextNod
+@@ -392,25 +397,26 @@ nsHTMLEditor::SetInlinePropertyOnTextNod
      sibling = GetNextHTMLSibling(content);
      if (IsSimpleModifiableNode(sibling, aProperty, aAttribute, aValue)) {
        // following sib is already right kind of inline node; slide this over into it
@@ -2462,7 +2470,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    // recurse to its children.
    if (!TagCanContain(nsGkAtoms::span, aNode->AsDOMNode())) {
      if (aNode->HasChildren()) {
-@@ -424,17 +428,17 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -424,17 +430,17 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
            arrayOfNodes.AppendObject(child);
          }
        }
@@ -2481,7 +2489,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
    // First check if there's an adjacent sibling we can put our node into.
    nsresult res;
-@@ -470,18 +474,19 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -470,18 +476,19 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
                   mHTMLCSSUtils->IsCSSEditableProperty(aNode, aProperty, aAttribute)) ||
                  // bgcolor is always done using CSS
                  aAttribute->EqualsLiteral("bgcolor");
@@ -2503,7 +2511,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
        NS_ENSURE_SUCCESS(res, res);
      }
  
-@@ -510,52 +515,54 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -510,52 +517,54 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
                                aAttribute, aValue);
  }
  
@@ -2562,7 +2570,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    if ((previousSibling && previousSibling->GetParentNode() != parent) ||
        (nextSibling && nextSibling->GetParentNode() != parent)) {
      return NS_ERROR_UNEXPECTED;
-@@ -568,17 +575,17 @@ nsHTMLEditor::SetInlinePropertyOnNode(ns
+@@ -568,17 +577,17 @@ nsHTMLEditor::SetInlinePropertyOnNode(ns
        nodesToSet.AppendObject(cur);
      }
      cur = cur->GetNextSibling();
@@ -2581,7 +2589,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
  
  nsresult nsHTMLEditor::SplitStyleAboveRange(nsIDOMRange *inRange, 
-@@ -1455,17 +1462,17 @@ nsresult nsHTMLEditor::RemoveInlinePrope
+@@ -1455,17 +1464,17 @@ nsresult nsHTMLEditor::RemoveInlinePrope
                aAttribute, isSet , cssValue, nsHTMLCSSUtils::eComputed);
              if (isSet) {
                // startNode's computed style indicates the CSS equivalence to the HTML style to
@@ -3175,7 +3183,7 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/
  
  // Use integers so search scores are sortable by nsIXULSortService
  const SEARCH_SCORE_MATCH_WHOLEWORD = 10;
-@@ -72,16 +73,28 @@ __defineGetter__("gIsInitializing", func
+@@ -72,16 +73,28 @@ var gPendingInitializations = 1;
  
  function initialize(event) {
    // XXXbz this listener gets _all_ load events for all nodes in the
