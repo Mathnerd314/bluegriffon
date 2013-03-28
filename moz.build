@@ -15,6 +15,7 @@ DIRS += [
     'themes',
     'sidebars',
     'extensions',
+    'stubs',
     'branding'
 ]
 
