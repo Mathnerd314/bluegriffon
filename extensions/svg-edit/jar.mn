@@ -212,7 +212,6 @@ svg-edit.jar:
 	content/editor/svg-editor.css    (content/editor/svg-editor.css)
 	content/editor/svg-editor.html    (content/editor/svg-editor.html)
 	content/editor/svg-editor.js    (content/editor/svg-editor.js)
-	content/editor/svg-editor.manifest    (content/editor/svg-editor.manifest)
 	content/editor/svg-editor.min.js    (content/editor/svg-editor.min.js)
 	content/editor/svgcanvas.js    (content/editor/svgcanvas.js)
 	content/editor/svgcanvas.min.js    (content/editor/svgcanvas.min.js)
