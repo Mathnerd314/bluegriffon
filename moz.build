@@ -12,10 +12,10 @@ DIRS += [
     'locales',
     'modules',
     'src',
-    'stubs',
     'themes',
     'sidebars',
-    'extensions'
+    'extensions',
+    'branding'
 ]
 
 DIRS += [
