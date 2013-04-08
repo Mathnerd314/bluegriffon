@@ -796,7 +796,6 @@ function onSourceChangeCallback(source)
     case "http://www.w3.org/TR/html4/loose.dtd":
     case "http://www.w3.org/TR/REC-html40/strict.dtd":
     case "http://www.w3.org/TR/REC-html40/loose.dtd":
-    case null:
       isXML = false;
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
@@ -806,6 +805,9 @@ function onSourceChangeCallback(source)
       break;
     case "":
       isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+      break;
+    case null:
+      isXML = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
       break;
   }
 
@@ -879,7 +881,6 @@ function ToggleViewMode(aElement)
     case "http://www.w3.org/TR/html4/loose.dtd":
     case "http://www.w3.org/TR/REC-html40/strict.dtd":
     case "http://www.w3.org/TR/REC-html40/loose.dtd":
-    case null:
       isXML = false;
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
@@ -889,6 +890,9 @@ function ToggleViewMode(aElement)
       break;
     case "":
       isXML = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+      break;
+    case null:
+      isXML = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
       break;
   }
 
@@ -1543,7 +1547,6 @@ function UpdateTabHTMLDialect(aEditorElement)
         case "http://www.w3.org/TR/html4/loose.dtd":
         case "http://www.w3.org/TR/REC-html40/strict.dtd":
         case "http://www.w3.org/TR/REC-html40/loose.dtd":
-        case null:
           tab.setAttribute("tooltiptext", "HTML 4");
           break;
         case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
@@ -1558,6 +1561,12 @@ function UpdateTabHTMLDialect(aEditorElement)
              (aEditorElement.contentDocument.documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml") ?
                "XHTML 5" : "HTML 5");
           break;
+        case null:
+	        if (aEditorElement.contentDocument.compatMode == "CSS1Compat")
+	         tab.setAttribute("tooltiptext", "XHTML 5");
+	        else
+	         tab.setAttribute("tooltiptext", "HTML 4");
+	        break;
         default: break; // should never happen...
       }
       return;

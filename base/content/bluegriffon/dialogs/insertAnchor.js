@@ -29,7 +29,6 @@ function InitDialog()
     case "http://www.w3.org/TR/html4/loose.dtd":
     case "http://www.w3.org/TR/REC-html40/strict.dtd":
     case "http://www.w3.org/TR/REC-html40/loose.dtd":
-    case null:
       gIsXml = false;
       break;
     case "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd": // XHTML 1
@@ -39,6 +38,9 @@ function InitDialog()
       break;
     case "":
       gIsXml = (EditorUtils.getCurrentDocument().documentElement.getAttribute("xmlns") == "http://www.w3.org/1999/xhtml");
+      break;
+    case null:
+      gIsXml = (EditorUtils.getCurrentDocument().compatMode == "CSS1Compat");
       break;
   }
 
