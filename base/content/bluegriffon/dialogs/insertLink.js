@@ -81,7 +81,7 @@ function InitDialog()
       gDialog.urlMenulist.focus();
     }
 
-    url = UrlUtils.getURLFromClipboard();
+    url = UrlUtils.getClipboardAsString();
     if (url)
       gDialog.urlMenulist.value = url;
   }

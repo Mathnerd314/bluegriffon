@@ -588,7 +588,7 @@ var UrlUtils = {
     return null;
   },
 
-  getURLFromClipboard: function()
+  getClipboardAsString: function()
   {
     var clip = Components.classes["@mozilla.org/widget/clipboard;1"]
                          .getService(Components.interfaces.nsIClipboard);
@@ -609,20 +609,28 @@ var UrlUtils = {
           str = str.value.QueryInterface(Components.interfaces.nsISupportsString);
           pastetext = str.data.substring(0, strLength.value / 2);
           if (pastetext) {
-            try {
-              var uri = Components.classes['@mozilla.org/network/standard-url;1']
-                                  .createInstance(Components.interfaces.nsIURL);
-              uri.spec = pastetext;
-              return decodeURI(uri.spec);
-            }
-            catch(e) { }
+            return pastetext
           }
         }
       }
     }
     return "";
-  }
+  },
 
+  getURLFromClipboard: function()
+  {
+    var pastetext = this.getClipboardAsString();
+    if (pastetext) {
+      try {
+        var uri = Components.classes['@mozilla.org/network/standard-url;1']
+                            .createInstance(Components.interfaces.nsIURL);
+        uri.spec = pastetext;
+        return decodeURI(uri.spec);
+      }
+      catch(e) { }
+    }
+    return "";
+  }
 };
 
 
