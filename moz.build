@@ -16,7 +16,6 @@ DIRS += [
     'src',
     'extensions',
     'stubs',
-    'private',
     'branding'
 ]
 
