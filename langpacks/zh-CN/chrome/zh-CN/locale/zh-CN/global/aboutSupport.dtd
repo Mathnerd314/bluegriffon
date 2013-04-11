@@ -42,6 +42,10 @@ variant of aboutSupport.showDir.label. -->
 <!ENTITY aboutSupport.modifiedPrefsName "名称">
 <!ENTITY aboutSupport.modifiedPrefsValue "值">
 
+<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
+<!ENTITY aboutSupport.userJSTitle "user.js 设置">
+<!ENTITY aboutSupport.userJSDescription "你的个人配置文件夹包含一个 <a id='prefs-user-js-link'>user.js 文件</a> ，其中的设置不是由 &brandShortName; 创建的。">
+
 <!ENTITY aboutSupport.graphicsTitle "图像">
 
 <!ENTITY aboutSupport.jsTitle "JavaScript">
@@ -58,8 +62,3 @@ variant of aboutSupport.showDir.label. -->
 
 <!ENTITY aboutSupport.copyTextToClipboard.label "复制文本到剪贴板">
 <!ENTITY aboutSupport.copyRawDataToClipboard.label "复制原始数据到剪贴板">
-
-<!ENTITY aboutSupport.userJSDescription "Your profile folder contains a <a id='prefs-user-js-link'>user.js file</a>, which includes preferences that were not created by &brandShortName;.">
-
-<!-- LOCALIZATION NOTE (aboutSupport.userJSTitle, aboutSupport.userJSDescription): user.js is the name of the preference override file being checked. -->
-<!ENTITY aboutSupport.userJSTitle "user.js Preferences">

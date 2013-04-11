@@ -1,0 +1,16 @@
+{"type":"text/x-moz-place-container","root":"placesRoot","children":
+  [{"type":"text/x-moz-place-container","title":"Marque-pages","annos":[{"name":"metro/bookmarksRoot","expires":4,"type":1,"value":1}],
+    "children":
+     [
+       {"index":1,"title":"À propos de Mozilla", "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fr/about/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":2,"title":"Débuter avec Firefox",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fr/firefox/central/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":3,"title":"Contribuer",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fr/firefox/community/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+     ]
+  }]
+}

@@ -1,0 +1,4 @@
+override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
+override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
+locale branding en-US en-US/locale/branding/
+locale browser en-US en-US/locale/browser/

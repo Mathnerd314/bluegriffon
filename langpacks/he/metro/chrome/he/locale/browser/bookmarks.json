@@ -1,0 +1,16 @@
+{"type":"text/x-moz-place-container","root":"placesRoot","children":
+  [{"type":"text/x-moz-place-container","title":"סימניות","annos":[{"name":"metro/bookmarksRoot","expires":4,"type":1,"value":1}],
+    "children":
+     [
+       {"index":1,"title":"אודותינו", "type":"text/x-moz-place", "uri":"http://www.mozilla.com/he/about/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":2,"title":"התחל כאן",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/he/firefox/central/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":3,"title":"היה מעורב",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/he/firefox/community/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+     ]
+  }]
+}

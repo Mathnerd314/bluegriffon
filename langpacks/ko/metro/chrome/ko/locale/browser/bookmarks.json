@@ -1,0 +1,16 @@
+{"type":"text/x-moz-place-container","root":"placesRoot","children":
+  [{"type":"text/x-moz-place-container","title":"북마크","annos":[{"name":"metro/bookmarksRoot","expires":4,"type":1,"value":1}],
+    "children":
+     [
+       {"index":1,"title":"만든 사람들 소개", "type":"text/x-moz-place", "uri":"http://www.mozilla.org/ko/about/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":2,"title":"Firefox 시작하기",  "type":"text/x-moz-place", "uri":"http://www.mozilla.org/ko/firefox/central/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":3,"title":"사용자 모임 참여하기",  "type":"text/x-moz-place", "uri":"http://www.mozilla.org/ko/firefox/community/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+     ]
+  }]
+}

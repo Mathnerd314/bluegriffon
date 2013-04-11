@@ -1,3 +1,6 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <!-- rights.locale-direction instead of the usual local.dir entity, so RTL can skip translating page. -->
 <!ENTITY rights.locale-direction "ltr">
 <!ENTITY rights.pagetitle       "about:rights">
@@ -18,7 +21,7 @@
 
 <!ENTITY rights.intro-point2-a "Ön nem kapott jogot vagy felhatalmazást a védjegyek
           használatára sem a Mozilla Foundationtől, sem mástól, beleértve – de nem csak
-          erre korlátozva – a BlueGriffon nevet és logót. A védjegyekről további információ ">
+          erre korlátozva – a Firefox nevet és logót. A védjegyekről további információ ">
 <!ENTITY rights.intro-point2-b "itt">
 <!ENTITY rights.intro-point2-c " olvasható.">
 

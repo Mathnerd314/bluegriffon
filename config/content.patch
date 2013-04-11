@@ -22,7 +22,7 @@ diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
 diff --git a/caps/src/nsScriptSecurityManager.cpp b/caps/src/nsScriptSecurityManager.cpp
 --- a/caps/src/nsScriptSecurityManager.cpp
 +++ b/caps/src/nsScriptSecurityManager.cpp
-@@ -1408,16 +1408,17 @@ nsScriptSecurityManager::CheckLoadURIWit
+@@ -1406,16 +1406,17 @@ nsScriptSecurityManager::CheckLoadURIWit
      }
  
      // Check for chrome target URI
@@ -40,7 +40,7 @@ diff --git a/caps/src/nsScriptSecurityManager.cpp b/caps/src/nsScriptSecurityMan
  
              // allow load only if chrome package is whitelisted
              nsCOMPtr<nsIXULChromeRegistry> reg(do_GetService(
-@@ -1449,16 +1450,17 @@ nsScriptSecurityManager::CheckLoadURIWit
+@@ -1447,16 +1448,17 @@ nsScriptSecurityManager::CheckLoadURIWit
      }
  
      // Check for target URI pointing to a file
@@ -105,26 +105,27 @@ diff --git a/content/base/public/nsIDocumentEncoder.idl b/content/base/public/ns
 diff --git a/content/base/src/nsCopySupport.cpp b/content/base/src/nsCopySupport.cpp
 --- a/content/base/src/nsCopySupport.cpp
 +++ b/content/base/src/nsCopySupport.cpp
-@@ -411,17 +411,17 @@ nsresult nsCopySupport::IsPlainTextConte
-     }
-   }
-   
-   // also consider ourselves in a text widget if we can't find an html
-   // document. Note that XHTML is not counted as HTML here, because we can't
-   // copy it properly (all the copy code for non-plaintext assumes using HTML
-   // serializers and parsers is OK, and those mess up XHTML).
-   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
--  if (!(htmlDoc && aDoc->IsHTML()))
-+  if (!htmlDoc)
-     *aIsPlainTextContext = true;
+@@ -115,17 +115,18 @@ SelectionCopyHelper(nsISelection *aSel, 
+   nsAutoString buf;
+   rv = docEncoder->EncodeToString(buf);
+   NS_ENSURE_SUCCESS(rv, rv);
  
-   return NS_OK;
- }
+   // The mime type is ultimately text/html if the encoder successfully encoded
+   // the selection as text/html.
+   rv = docEncoder->GetMimeType(mimeType);
+   NS_ENSURE_SUCCESS(rv, rv);
+-  bool encodedTextHTML = mimeType.EqualsLiteral(kHTMLMime);
++  bool encodedTextHTML = mimeType.EqualsLiteral(kHTMLMime) ||
++                         mimeType.EqualsLiteral("application/xhtml+xml");
  
- nsresult
- nsCopySupport::GetContents(const nsACString& aMimeType, uint32_t aFlags, nsISelection *aSel, nsIDocument *aDoc, nsAString& outdata)
- {
-@@ -575,18 +575,19 @@ static nsresult AppendDOMNode(nsITransfe
+   // First, prepare the text/plain clipboard flavor.
+   nsAutoString textPlainBuf;
+   if (selForcedTextPlain) {
+     // Nothing to do.  buf contains the final, preformatted, raw text/plain.
+     textPlainBuf.Assign(buf);
+   } else {
+     // Redo the encoding, but this time use pretty printing.
+@@ -494,18 +495,19 @@ static nsresult AppendDOMNode(nsITransfe
    // serializers and parsers is OK, and those mess up XHTML).
    nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(domDocument, &rv);
    NS_ENSURE_SUCCESS(rv, NS_OK);
@@ -149,7 +150,7 @@ diff --git a/content/base/src/nsCopySupport.cpp b/content/base/src/nsCopySupport
 diff --git a/content/base/src/nsDocument.cpp b/content/base/src/nsDocument.cpp
 --- a/content/base/src/nsDocument.cpp
 +++ b/content/base/src/nsDocument.cpp
-@@ -6284,16 +6284,23 @@ nsIDocument::GetInputEncoding(nsAString&
+@@ -6385,16 +6385,23 @@ nsIDocument::GetInputEncoding(nsAString&
  NS_IMETHODIMP
  nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
  {
@@ -176,7 +177,7 @@ diff --git a/content/base/src/nsDocument.cpp b/content/base/src/nsDocument.cpp
 diff --git a/content/base/src/nsDocumentEncoder.cpp b/content/base/src/nsDocumentEncoder.cpp
 --- a/content/base/src/nsDocumentEncoder.cpp
 +++ b/content/base/src/nsDocumentEncoder.cpp
-@@ -47,16 +47,18 @@
+@@ -48,16 +48,18 @@
  #include "nsTArray.h"
  #include "nsIFrame.h"
  #include "nsStringBuffer.h"
@@ -195,7 +196,7 @@ diff --git a/content/base/src/nsDocumentEncoder.cpp b/content/base/src/nsDocumen
  enum nsRangeIterationDirection {
    kDirectionOut = -1,
    kDirectionIn = 1
-@@ -104,16 +106,21 @@ protected:
+@@ -105,16 +107,21 @@ protected:
  
    bool IsVisibleNode(nsINode* aNode)
    {
@@ -217,7 +218,7 @@ diff --git a/content/base/src/nsDocumentEncoder.cpp b/content/base/src/nsDocumen
            }
            return false;
          }
-@@ -1318,17 +1325,19 @@ nsHTMLCopyEncoder::Init(nsIDOMDocument* 
+@@ -1307,17 +1314,19 @@ nsHTMLCopyEncoder::Init(nsIDOMDocument* 
    if (aMimeType.EqualsLiteral("text/plain")) {
      mMimeType.AssignLiteral("text/plain");
    } else {
@@ -238,25 +239,25 @@ diff --git a/content/base/src/nsDocumentEncoder.cpp b/content/base/src/nsDocumen
  }
  
  NS_IMETHODIMP
-@@ -1384,17 +1393,17 @@ nsHTMLCopyEncoder::SetSelection(nsISelec
-         mIsTextWidget = true;
-         break;
-       }
-     }
-   }
-   
-   // also consider ourselves in a text widget if we can't find an html document
-   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
--  if (!(htmlDoc && mDocument->IsHTML()))
-+  if (!htmlDoc)
-     mIsTextWidget = true;
-   
-   // normalize selection if we are not in a widget
-   if (mIsTextWidget) 
+@@ -1381,17 +1390,17 @@ nsHTMLCopyEncoder::SetSelection(nsISelec
    {
      mSelection = aSelection;
      mMimeType.AssignLiteral("text/plain");
      return NS_OK;
+   }
+ 
+   // also consider ourselves in a text widget if we can't find an html document
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
+-  if (!(htmlDoc && mDocument->IsHTML())) {
++  if (!htmlDoc) {
+     mIsTextWidget = true;
+     mSelection = aSelection;
+     // mMimeType is set to text/plain when encoding starts.
+     return NS_OK;
+   }
+   
+   // there's no Clone() for selection! fix...
+   //nsresult rv = aSelection->Clone(getter_AddRefs(mSelection);
 diff --git a/content/base/src/nsHTMLContentSerializer.cpp b/content/base/src/nsHTMLContentSerializer.cpp
 --- a/content/base/src/nsHTMLContentSerializer.cpp
 +++ b/content/base/src/nsHTMLContentSerializer.cpp
@@ -562,7 +563,7 @@ diff --git a/content/base/src/nsXHTMLContentSerializer.cpp b/content/base/src/ns
    mIsCopying = aIsCopying;
    mIsFirstChildOfOL = false;
    mInBody = 0;
-@@ -727,17 +719,26 @@ nsXHTMLContentSerializer::LineBreakBefor
+@@ -725,17 +717,26 @@ nsXHTMLContentSerializer::LineBreakBefor
  
    if (aName == nsGkAtoms::title ||
        aName == nsGkAtoms::meta  ||
@@ -590,7 +591,7 @@ diff --git a/content/base/src/nsXHTMLContentSerializer.cpp b/content/base/src/ns
      if (parserService) {
        bool res;
        parserService->
-@@ -754,17 +755,17 @@ nsXHTMLContentSerializer::LineBreakAfter
+@@ -752,17 +753,17 @@ nsXHTMLContentSerializer::LineBreakAfter
  {
  
    if (aNamespaceID != kNameSpaceID_XHTML) {
@@ -609,7 +610,7 @@ diff --git a/content/base/src/nsXHTMLContentSerializer.cpp b/content/base/src/ns
        (aName == nsGkAtoms::tr) ||
        (aName == nsGkAtoms::br) ||
        (aName == nsGkAtoms::meta) ||
-@@ -791,17 +792,20 @@ nsXHTMLContentSerializer::LineBreakBefor
+@@ -789,17 +790,20 @@ nsXHTMLContentSerializer::LineBreakBefor
    if ((aName == nsGkAtoms::html) ||
        (aName == nsGkAtoms::head) ||
        (aName == nsGkAtoms::body) ||
@@ -631,7 +632,7 @@ diff --git a/content/base/src/nsXHTMLContentSerializer.cpp b/content/base/src/ns
  bool 
  nsXHTMLContentSerializer::LineBreakAfterClose(int32_t aNamespaceID, nsIAtom* aName)
  {
-@@ -856,16 +860,18 @@ nsXHTMLContentSerializer::MaybeEnterInPr
+@@ -854,16 +858,18 @@ nsXHTMLContentSerializer::MaybeEnterInPr
  
    if (name == nsGkAtoms::pre ||
        name == nsGkAtoms::script ||
@@ -650,7 +651,7 @@ diff --git a/content/base/src/nsXHTMLContentSerializer.cpp b/content/base/src/ns
  {
    if (aNode->GetNameSpaceID() != kNameSpaceID_XHTML) {
      return;
-@@ -874,16 +880,18 @@ nsXHTMLContentSerializer::MaybeLeaveFrom
+@@ -872,16 +878,18 @@ nsXHTMLContentSerializer::MaybeLeaveFrom
    nsIAtom *name = aNode->Tag();
    if (name == nsGkAtoms::pre ||
        name == nsGkAtoms::script ||
@@ -1184,7 +1185,7 @@ diff --git a/content/xbl/src/nsXBLContentSink.h b/content/xbl/src/nsXBLContentSi
 diff --git a/content/xml/document/src/nsXMLContentSink.cpp b/content/xml/document/src/nsXMLContentSink.cpp
 --- a/content/xml/document/src/nsXMLContentSink.cpp
 +++ b/content/xml/document/src/nsXMLContentSink.cpp
-@@ -1352,16 +1352,18 @@ nsXMLContentSink::HandleXMLDeclaration(c
+@@ -1346,16 +1346,18 @@ nsXMLContentSink::HandleXMLDeclaration(c
  
    return DidProcessATokenImpl();
  }
@@ -1203,7 +1204,7 @@ diff --git a/content/xml/document/src/nsXMLContentSink.cpp b/content/xml/documen
    // The expat driver should report the error.  We're just cleaning up the mess.
    *_retval = true;
    
-@@ -1403,26 +1405,34 @@ nsXMLContentSink::ReportError(const PRUn
+@@ -1397,26 +1399,34 @@ nsXMLContentSink::ReportError(const PRUn
    // release the nodes on stack
    mContentStack.Clear();
    mNotifyLevel = 0;
@@ -1265,7 +1266,7 @@ diff --git a/content/xslt/src/xslt/txMozillaStylesheetCompiler.cpp b/content/xsl
 diff --git a/content/xul/document/src/nsXULContentSink.cpp b/content/xul/document/src/nsXULContentSink.cpp
 --- a/content/xul/document/src/nsXULContentSink.cpp
 +++ b/content/xul/document/src/nsXULContentSink.cpp
-@@ -652,16 +652,18 @@ XULContentSinkImpl::HandleXMLDeclaration
+@@ -683,16 +683,18 @@ XULContentSinkImpl::HandleXMLDeclaration
    return NS_OK;
  }
  
@@ -1361,7 +1362,7 @@ diff --git a/dom/base/nsFocusManager.cpp b/dom/base/nsFocusManager.cpp
 diff --git a/dom/interfaces/core/nsIDOMDocument.idl b/dom/interfaces/core/nsIDOMDocument.idl
 --- a/dom/interfaces/core/nsIDOMDocument.idl
 +++ b/dom/interfaces/core/nsIDOMDocument.idl
-@@ -70,16 +70,19 @@ interface nsIDOMDocument : nsIDOMNode
+@@ -69,16 +69,19 @@ interface nsIDOMDocument : nsIDOMNode
    // Introduced in DOM Level 3:
    readonly attribute DOMString       documentURI;
    // Alias introduced for all documents in recent DOM standards
@@ -1499,27 +1500,23 @@ diff --git a/editor/composer/src/nsComposerCommands.cpp b/editor/composer/src/ns
  }
  
  NS_IMETHODIMP
-diff --git a/editor/idl/Makefile.in b/editor/idl/Makefile.in
---- a/editor/idl/Makefile.in
-+++ b/editor/idl/Makefile.in
-@@ -15,16 +15,17 @@ GRE_MODULE      := 1
+diff --git a/editor/idl/moz.build b/editor/idl/moz.build
+--- a/editor/idl/moz.build
++++ b/editor/idl/moz.build
+@@ -18,12 +18,13 @@ XPIDL_SOURCES += [
+     'nsIHTMLEditor.idl',
+     'nsIHTMLInlineTableEditor.idl',
+     'nsIHTMLObjectResizeListener.idl',
+     'nsIHTMLObjectResizer.idl',
+     'nsIPlaintextEditor.idl',
+     'nsITableEditor.idl',
+     'nsIURIRefObject.idl',
+     'nsPIEditorTransaction.idl',
++    'nsIEditorMouseObserver.idl'
+ ]
  
- XPIDLSRCS       := \
-                 nsIDocumentStateListener.idl \
-                 nsIEditActionListener.idl \
-                 nsIEditor.idl \
-                 nsIEditorIMESupport.idl \
-                 nsIEditorMailSupport.idl \
-                 nsIEditorObserver.idl \
-+                nsIEditorMouseObserver.idl \
-                 nsIEditorSpellCheck.idl \
-                 nsIEditorStyleSheets.idl \
-                 nsIHTMLEditor.idl \
-                 nsIHTMLObjectResizer.idl \
-                 nsIHTMLAbsPosEditor.idl \
-                 nsIHTMLObjectResizeListener.idl \
-                 nsIHTMLInlineTableEditor.idl \
-                 nsIPlaintextEditor.idl \
+ MODULE = 'editor'
+ 
 diff --git a/editor/idl/nsIEditor.idl b/editor/idl/nsIEditor.idl
 --- a/editor/idl/nsIEditor.idl
 +++ b/editor/idl/nsIEditor.idl
@@ -1935,7 +1932,7 @@ diff --git a/editor/libeditor/base/nsEditorEventListener.h b/editor/libeditor/ba
 diff --git a/editor/libeditor/html/nsHTMLDataTransfer.cpp b/editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp
 +++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp
-@@ -1318,24 +1318,53 @@ NS_IMETHODIMP nsHTMLEditor::InsertFromTr
+@@ -1320,24 +1320,53 @@ NS_IMETHODIMP nsHTMLEditor::InsertFromTr
            nsAutoCString text;
            textDataObj->GetData(text);
            NS_ASSERTION(text.Length() <= len, "Invalid length!");
@@ -1994,29 +1991,7 @@ diff --git a/editor/libeditor/html/nsHTMLDataTransfer.cpp b/editor/libeditor/htm
 diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/nsHTMLEditRules.cpp
 --- a/editor/libeditor/html/nsHTMLEditRules.cpp
 +++ b/editor/libeditor/html/nsHTMLEditRules.cpp
-@@ -452,18 +452,19 @@ nsHTMLEditRules::AfterEditInner(EditActi
-     if ( (action != EditAction::insertText &&
-          action != EditAction::insertIMEText) )
-     {
-       res = mHTMLEditor->CollapseAdjacentTextNodes(mDocChangeRange);
-       NS_ENSURE_SUCCESS(res, res);
-     }
- 
-     // clean up any empty nodes in the selection
--    res = RemoveEmptyNodes();
--    NS_ENSURE_SUCCESS(res, res);
-+    // BLUEGRIFFON, fix for bug 261
-+    //res = RemoveEmptyNodes();
-+    //NS_ENSURE_SUCCESS(res, res);
- 
-     // attempt to transform any unneeded nbsp's into spaces after doing various operations
-     if ((action == EditAction::insertText) || 
-         (action == EditAction::insertIMEText) ||
-         (action == EditAction::deleteSelection) ||
-         (action == EditAction::insertBreak) || 
-         (action == EditAction::htmlPaste ||
-         (action == EditAction::loadHTML)))
-@@ -1344,49 +1345,18 @@ nsHTMLEditRules::WillInsertText(EditActi
+@@ -1410,51 +1410,18 @@ nsHTMLEditRules::WillInsertText(EditActi
      int32_t pos = 0;
      NS_NAMED_LITERAL_STRING(newlineStr, LFSTR);
          
@@ -2049,11 +2024,13 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
 -        // is it a return?
 -        if (subStr.Equals(newlineStr))
 -        {
+-          NS_ENSURE_STATE(mHTMLEditor);
 -          res = mHTMLEditor->CreateBRImpl(address_of(curNode), &curOffset, address_of(unused), nsIEditor::eNone);
 -          pos++;
 -        }
 -        else
 -        {
+-          NS_ENSURE_STATE(mHTMLEditor);
 -          res = mHTMLEditor->InsertTextImpl(subStr, address_of(curNode), &curOffset, doc);
 -        }
 -        NS_ENSURE_SUCCESS(res, res);
@@ -2068,14 +2045,14 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        char specialChars[] = {TAB, nsCRT::LF, 0};
        while (unicodeBuf && (pos != -1) && (pos < (int32_t)inString->Length()))
        {
-@@ -4392,17 +4362,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
-         res = mHTMLEditor->RelativeFontChangeOnTextNode(dir, nodeAsText,
+@@ -4685,17 +4652,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
                                                          0, -1);
          NS_ENSURE_SUCCESS(res, res);
        }
      }
  
      while (item) {
+       NS_ENSURE_STATE(mHTMLEditor);
        res = mHTMLEditor->SetInlinePropertyOnNode(node, item->tag, &item->attr,
 -                                                 &item->value);
 +                                                 &item->value, false);
@@ -2087,12 +2064,12 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
      return aSelection->Collapse(node, offset);
    }
  
-@@ -6537,16 +6507,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
-       res = aSelection->Collapse(aListItem,0);
+@@ -6929,16 +6896,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
      }
      else
      {
        // otherwise kill this listitem
+       NS_ENSURE_STATE(mHTMLEditor);
        res = mHTMLEditor->DeleteNode(aListItem);
        NS_ENSURE_SUCCESS(res, res);
  
@@ -2102,15 +2079,15 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        // time to insert a paragraph
        NS_NAMED_LITERAL_STRING(pType, "p");
        nsCOMPtr<nsIDOMNode> pNode;
+       NS_ENSURE_STATE(mHTMLEditor);
        res = mHTMLEditor->CreateNode(pType, listparent, offset+1, getter_AddRefs(pNode));
        NS_ENSURE_SUCCESS(res, res);
  
        // append a <br> to it
-       nsCOMPtr<nsIDOMNode> brNode;
 diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHTMLEditor.cpp
 --- a/editor/libeditor/html/nsHTMLEditor.cpp
 +++ b/editor/libeditor/html/nsHTMLEditor.cpp
-@@ -263,17 +263,18 @@ nsHTMLEditor::Init(nsIDOMDocument *aDoc,
+@@ -265,17 +265,18 @@ nsHTMLEditor::Init(nsIDOMDocument *aDoc,
      // init the type-in state
      mTypeInState = new TypeInState();
  
@@ -2130,7 +2107,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      if (selection) 
      {
        nsCOMPtr<nsISelectionPrivate> selPriv(do_QueryInterface(selection));
-@@ -1778,17 +1779,18 @@ nsHTMLEditor::GetCSSBackgroundColorState
+@@ -1779,17 +1780,18 @@ nsHTMLEditor::GetCSSBackgroundColorState
    NS_ENSURE_SUCCESS(res, res);
    NS_ENSURE_TRUE(parent, NS_ERROR_NULL_POINTER);
  
@@ -2150,7 +2127,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
    
    NS_ENSURE_TRUE(nodeToExamine, NS_ERROR_NULL_POINTER);
  
-@@ -2618,21 +2620,18 @@ nsHTMLEditor::CreateElementWithDefaults(
+@@ -2615,21 +2617,18 @@ nsHTMLEditor::CreateElementWithDefaults(
  
    // Set default values for new elements
    if (TagName.EqualsLiteral("table")) {
@@ -2173,7 +2150,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      // Getters must addref
      NS_ADDREF(*aReturn);
    }
-@@ -5428,18 +5427,24 @@ bool
+@@ -5429,18 +5428,24 @@ bool
  nsHTMLEditor::IsEditable(nsIContent* aNode) {
    if (!nsPlaintextEditor::IsEditable(aNode)) {
      return false;
@@ -2393,7 +2370,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorEventListener.h b/editor/libedito
 diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html/nsHTMLEditorStyle.cpp
 --- a/editor/libeditor/html/nsHTMLEditorStyle.cpp
 +++ b/editor/libeditor/html/nsHTMLEditorStyle.cpp
-@@ -218,17 +218,17 @@ nsHTMLEditor::SetInlineProperty(nsIAtom 
+@@ -220,17 +220,17 @@ nsHTMLEditor::SetInlineProperty(nsIAtom 
          NS_ENSURE_SUCCESS(res, res);
        }
  
@@ -2412,7 +2389,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
        // subtree iterator works - it will not have reported it).
        if (IsTextNode(endNode) && IsEditable(endNode)) {
          nsCOMPtr<nsIDOMCharacterData> nodeAsText = do_QueryInterface(endNode);
-@@ -261,24 +261,27 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
+@@ -263,24 +263,27 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
    MOZ_ASSERT(aProperty);
    MOZ_ASSERT_IF(aAttribute, aValue);
  
@@ -2442,7 +2419,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
    // Now look for things like <font>
    if (aAttribute && !aAttribute->IsEmpty()) {
-@@ -295,17 +298,19 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
+@@ -297,17 +300,19 @@ nsHTMLEditor::IsSimpleModifiableNode(nsI
        return true;
      }
    }
@@ -2463,7 +2440,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    // "text-decoration: underline", which decomposes into four different text-*
    // properties.  So for now, we just create a span, add the desired style, and
    // see if it matches.
-@@ -392,25 +397,26 @@ nsHTMLEditor::SetInlinePropertyOnTextNod
+@@ -394,25 +399,26 @@ nsHTMLEditor::SetInlinePropertyOnTextNod
      sibling = GetNextHTMLSibling(content);
      if (IsSimpleModifiableNode(sibling, aProperty, aAttribute, aValue)) {
        // following sib is already right kind of inline node; slide this over into it
@@ -2492,7 +2469,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    // recurse to its children.
    if (!TagCanContain(nsGkAtoms::span, aNode->AsDOMNode())) {
      if (aNode->HasChildren()) {
-@@ -424,17 +430,17 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -426,17 +432,17 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
            arrayOfNodes.AppendObject(child);
          }
        }
@@ -2511,7 +2488,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
    // First check if there's an adjacent sibling we can put our node into.
    nsresult res;
-@@ -470,18 +476,19 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -472,18 +478,19 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
                   mHTMLCSSUtils->IsCSSEditableProperty(aNode, aProperty, aAttribute)) ||
                  // bgcolor is always done using CSS
                  aAttribute->EqualsLiteral("bgcolor");
@@ -2533,7 +2510,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
        NS_ENSURE_SUCCESS(res, res);
      }
  
-@@ -510,52 +517,54 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
+@@ -512,52 +519,54 @@ nsHTMLEditor::SetInlinePropertyOnNodeImp
                                aAttribute, aValue);
  }
  
@@ -2592,7 +2569,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
    if ((previousSibling && previousSibling->GetParentNode() != parent) ||
        (nextSibling && nextSibling->GetParentNode() != parent)) {
      return NS_ERROR_UNEXPECTED;
-@@ -568,17 +577,17 @@ nsHTMLEditor::SetInlinePropertyOnNode(ns
+@@ -570,17 +579,17 @@ nsHTMLEditor::SetInlinePropertyOnNode(ns
        nodesToSet.AppendObject(cur);
      }
      cur = cur->GetNextSibling();
@@ -2611,7 +2588,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
  
  
  nsresult nsHTMLEditor::SplitStyleAboveRange(nsIDOMRange *inRange, 
-@@ -1455,17 +1464,17 @@ nsresult nsHTMLEditor::RemoveInlinePrope
+@@ -1459,17 +1468,17 @@ nsresult nsHTMLEditor::RemoveInlinePrope
                aAttribute, isSet , cssValue, nsHTMLCSSUtils::eComputed);
              if (isSet) {
                // startNode's computed style indicates the CSS equivalence to the HTML style to
@@ -2651,7 +2628,7 @@ diff --git a/editor/libeditor/html/nsTableEditor.cpp b/editor/libeditor/html/nsT
  #include "nsIEditor.h"
  #include "nsIFrame.h"
  #include "nsIHTMLEditor.h"
-@@ -2328,38 +2329,87 @@ nsHTMLEditor::MergeCells(nsCOMPtr<nsIDOM
+@@ -2335,38 +2336,87 @@ nsHTMLEditor::MergeCells(nsCOMPtr<nsIDOM
    nsCOMPtr<dom::Element> targetCell = do_QueryInterface(aTargetCell);
    nsCOMPtr<dom::Element> cellToMerge = do_QueryInterface(aCellToMerge);
    NS_ENSURE_TRUE(targetCell && cellToMerge, NS_ERROR_NULL_POINTER);
@@ -2808,7 +2785,7 @@ diff --git a/gfx/src/nsColor.cpp b/gfx/src/nsColor.cpp
 diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
 --- a/gfx/src/nsColor.h
 +++ b/gfx/src/nsColor.h
-@@ -61,13 +61,17 @@ NS_GFX_(bool) NS_LooseHexToRGB(const nsS
+@@ -61,16 +61,20 @@ NS_GFX_(bool) NS_LooseHexToRGB(const nsS
  
  // There is no function to translate a color to a hex string, because
  // the hex-string syntax does not support transparency.
@@ -2825,7 +2802,10 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
  // the float parameters are all expected to be in the range 0-1
  NS_GFX_(nscolor) NS_HSL2RGB(float h, float s, float l);
  
- #endif /* nsColor_h___ */
+ // Return a color name for the given nscolor.  If there is no color
+ // name for it, returns null.  If there are multiple possible color
+ // names for the given color, the first one in nsColorNameList.h
+ // (which is generally the first one in alphabetical order) will be
 diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 --- a/layout/style/Loader.cpp
 +++ b/layout/style/Loader.cpp
@@ -2852,8 +2832,8 @@ diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 --- a/layout/style/nsCSSValue.cpp
 +++ b/layout/style/nsCSSValue.cpp
-@@ -11,16 +11,17 @@
- #include "imgIRequest.h"
+@@ -12,16 +12,17 @@
+ #include "nsIDocument.h"
  #include "nsIPrincipal.h"
  #include "nsCSSProps.h"
  #include "nsContentUtils.h"
@@ -2870,7 +2850,7 @@ diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
    : mUnit(aUnit)
  {
    NS_ABORT_IF_FALSE(aUnit == eCSSUnit_Integer || aUnit == eCSSUnit_Enumerated ||
-@@ -852,41 +853,83 @@ nsCSSValue::AppendToString(nsCSSProperty
+@@ -853,41 +854,83 @@ nsCSSValue::AppendToString(nsCSSProperty
      nsAutoCString str;
      if (nsCSSProps::GetColorName(GetIntValue(), str)){
        AppendASCIItoUTF16(str, aResult);
@@ -3205,7 +3185,7 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/
  
  // Use integers so search scores are sortable by nsIXULSortService
  const SEARCH_SCORE_MATCH_WHOLEWORD = 10;
-@@ -72,16 +73,28 @@ var gPendingInitializations = 1;
+@@ -72,16 +73,28 @@ this.__defineGetter__("gIsInitializing",
  
  function initialize(event) {
    // XXXbz this listener gets _all_ load events for all nodes in the
@@ -3234,7 +3214,7 @@ diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/
    Services.obs.notifyObservers(window, "EM-loaded", "");
  
    // If the initial view has already been selected (by a call to loadView from
-@@ -2439,17 +2452,17 @@ var gListView = {
+@@ -2446,17 +2459,17 @@ var gListView = {
      this._listBox.insertBefore(item, this._listBox.firstChild);
      this.showEmptyNotice(false);
    },
@@ -3382,7 +3362,7 @@ diff --git a/widget/cocoa/nsMenuItemX.mm b/widget/cocoa/nsMenuItemX.mm
 diff --git a/widget/gtk2/nsWindow.cpp b/widget/gtk2/nsWindow.cpp
 --- a/widget/gtk2/nsWindow.cpp
 +++ b/widget/gtk2/nsWindow.cpp
-@@ -3484,16 +3484,18 @@ nsWindow::Create(nsIWidget        *aPare
+@@ -3487,16 +3487,18 @@ nsWindow::Create(nsIWidget        *aPare
                  gtk_window_set_accept_focus(GTK_WINDOW(mShell), FALSE);
  #ifdef MOZ_X11
                  // ... but when the window manager offers focus through

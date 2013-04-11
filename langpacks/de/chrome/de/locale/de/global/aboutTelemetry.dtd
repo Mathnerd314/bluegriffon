@@ -2,65 +2,64 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutTelemetry.pageTitle "Telemetry Data">
-
-<!ENTITY aboutTelemetry.pageSubtitle "
-  This page shows the performance and feature-use data collected by Telemetry.
-  This information is submitted anonymously to Mozilla to help improve &brandShortName;.
-">
+<!ENTITY aboutTelemetry.pageTitle "Telemetriedaten">
 
 <!ENTITY aboutTelemetry.telemetryEnabled "
-  Telemetry is <span>enabled</span>.
+  Telemetrie ist <span>aktiviert</span>.
 ">
 
 <!ENTITY aboutTelemetry.telemetryDisabled "
-  Telemetry is <span>disabled</span>.
+  Telemetrie ist <span>deaktiviert</span>.
 ">
 
 <!ENTITY aboutTelemetry.slowSqlSection "
-  Slow SQL Statements
+  Langsame SQL-Befehle
 ">
 
 <!ENTITY aboutTelemetry.chromeHangsSection "
-  Browser Hangs
+  Browserhänger
 ">
 
 <!ENTITY aboutTelemetry.histogramsSection "
-  Histograms
+  Histogramme
 ">
 
 <!ENTITY aboutTelemetry.simpleMeasurementsSection "
-  Simple Measurements
+  Einfache Messdaten
+">
+
+<!ENTITY aboutTelemetry.lateWritesSection "
+  Späte Schreibvorgänge
 ">
 
 <!ENTITY aboutTelemetry.systemInfoSection "
-  System Information
+  Systeminformationen
 ">
 
 <!ENTITY aboutTelemetry.addonHistogramsSection "
-  Histograms Collected by Add-ons
+  Histogramme aus Daten, die von Add-ons gesammelt wurden
 ">
 
 <!ENTITY aboutTelemetry.toggleOn "
-  Click to expand section
+  Zum Erweitern klicken
 ">
 
 <!ENTITY aboutTelemetry.toggleOff "
-  Click to collapse section
+  Zum Ausblenden klicken
 ">
 
 <!ENTITY aboutTelemetry.emptySection "
-  (No data collected)
+  (Keine Daten gesammelt)
 ">
 
 <!ENTITY aboutTelemetry.fullSqlWarning "
-  NOTE: Slow SQL debugging is enabled. Full SQL strings may be displayed below but they will not be submitted to Telemetry.
+  HINWEIS: Das Debuggen langsamer SQL-Befehle ist aktiv. Es können vollständige SQL-Befehle weiter unten angezeigt werden, diese werden aber nicht durch die Telemetrie übertragen.
 ">
 
 <!ENTITY aboutTelemetry.fetchSymbols "
-  Fetch function names for hang stacks
+  Funktionsnamen für Aufruflisten von Hängern abfragen
 ">
 
 <!ENTITY aboutTelemetry.hideSymbols "
-  Show raw data from hangs
+  Rohdaten von Hängern anzeigen
 ">

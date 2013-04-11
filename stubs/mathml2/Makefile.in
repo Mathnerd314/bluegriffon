@@ -42,7 +42,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-MODULE = mathml@bluegriffon.com
 XPI_NAME    = mathml@bluegriffon.com
 USE_EXTENSION_MANIFEST = 1
 

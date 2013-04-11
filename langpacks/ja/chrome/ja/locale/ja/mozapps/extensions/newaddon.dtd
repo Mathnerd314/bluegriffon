@@ -2,14 +2,12 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY title           "Install Add-on">
-<!ENTITY intro           "Another program on your computer would like to modify
-                          &brandShortName; with the following add-on:">
-<!ENTITY warning         "Install add-ons only from authors whom you trust.">
-<!ENTITY allow           "Allow this installation">
-<!ENTITY later           "You can always change your mind at any time by going
-                          to the Add-ons Manager.">
-<!ENTITY continue        "Continue">
-<!ENTITY restartMessage  "You must restart &brandShortName; to finish installing this add-on.">
-<!ENTITY restartButton   "Restart &brandShortName;">
-<!ENTITY cancelButton    "Cancel">
+<!ENTITY title		"アドオンのインストール">
+<!ENTITY intro		"あなたのコンピュータにインストールされた他のプログラムが &brandShortName; に次のアドオンをインストールしようとしています:">
+<!ENTITY warning	"信頼できる作者のアドオンのみをインストールしてください。">
+<!ENTITY allow		"このインストールを許可する">
+<!ENTITY later		"ここでインストールしたアドオンは、いつでもアドオンマネージャから有効と無効を切り替えられます。">
+<!ENTITY continue	"次へ">
+<!ENTITY restartMessage	"このアドオンのインストールを完了するために &brandShortName; を再起動してください。">
+<!ENTITY restartButton	"&brandShortName; を再起動">
+<!ENTITY cancelButton	"キャンセル">

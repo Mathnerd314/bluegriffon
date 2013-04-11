@@ -2,65 +2,70 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutTelemetry.pageTitle "Telemetry Data">
+<!ENTITY aboutTelemetry.pageTitle "Telemetriai adatok">
 
 <!ENTITY aboutTelemetry.pageSubtitle "
-  This page shows the performance and feature-use data collected by Telemetry.
-  This information is submitted anonymously to Mozilla to help improve &brandShortName;.
+  Ez az oldal megjeleníti a telemetria által gyűjtött teljesítmény- és funkcióhasználati adatokat.
+  Ezek az információk névtelenül kerülnek elküldésre a Mozillának a &brandShortName; tökéletesítése érdekében.
 ">
 
 <!ENTITY aboutTelemetry.telemetryEnabled "
-  Telemetry is <span>enabled</span>.
+  A telemetria <span>bekapcsolva</span>.
 ">
 
 <!ENTITY aboutTelemetry.telemetryDisabled "
-  Telemetry is <span>disabled</span>.
+  A telemetria <span>kikapcsolva</span>.
 ">
 
 <!ENTITY aboutTelemetry.slowSqlSection "
-  Slow SQL Statements
+  Lassú SQL utasítások
 ">
 
 <!ENTITY aboutTelemetry.chromeHangsSection "
-  Browser Hangs
+  Böngészőlefagyások
 ">
 
 <!ENTITY aboutTelemetry.histogramsSection "
-  Histograms
+  Hisztogramok
 ">
 
 <!ENTITY aboutTelemetry.simpleMeasurementsSection "
-  Simple Measurements
+  Egyszerű mérési eszközök
 ">
 
 <!ENTITY aboutTelemetry.systemInfoSection "
-  System Information
+  Rendszerinformációk
 ">
 
 <!ENTITY aboutTelemetry.addonHistogramsSection "
-  Histograms Collected by Add-ons
+  Kiegészítők által gyűjtött hisztogramok
 ">
 
 <!ENTITY aboutTelemetry.toggleOn "
-  Click to expand section
+  Kattintson a szakasz kibontásához
 ">
 
 <!ENTITY aboutTelemetry.toggleOff "
-  Click to collapse section
+  Kattintson a szakasz összecsukásához
 ">
 
 <!ENTITY aboutTelemetry.emptySection "
-  (No data collected)
+  (Nincsenek összegyűjtött adatok)
 ">
 
 <!ENTITY aboutTelemetry.fullSqlWarning "
-  NOTE: Slow SQL debugging is enabled. Full SQL strings may be displayed below but they will not be submitted to Telemetry.
+  MEGJEGYZÉS: A lassú SQL hibakeresés be van kapcsolva. Alább megjelenhetnek teljes SQL karakterláncok, de ezek nem kerülnek elküldésre a telemetriának.
 ">
 
 <!ENTITY aboutTelemetry.fetchSymbols "
-  Fetch function names for hang stacks
+  Függvénynevek lekérése a lefagyási vermekhez
 ">
 
 <!ENTITY aboutTelemetry.hideSymbols "
-  Show raw data from hangs
+  Nyers adatok megjelenítése a lefagyásokból
+">
+
+
+<!ENTITY aboutTelemetry.lateWritesSection "
+  Late Writes
 ">

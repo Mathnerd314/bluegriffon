@@ -1,0 +1,16 @@
+{"type":"text/x-moz-place-container","root":"placesRoot","children":
+  [{"type":"text/x-moz-place-container","title":"书签","annos":[{"name":"metro/bookmarksRoot","expires":4,"type":1,"value":1}],
+    "children":
+     [
+       {"index":1,"title":"关于我们", "type":"text/x-moz-place", "uri":"http://www.mozilla.com/zh-CN/about/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":2,"title":"新手上路",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/zh-CN/firefox/central/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":3,"title":"加入进来",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/zh-CN/firefox/community/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+     ]
+  }]
+}

@@ -2,65 +2,65 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutTelemetry.pageTitle "Telemetry Data">
-
-<!ENTITY aboutTelemetry.pageSubtitle "
-  This page shows the performance and feature-use data collected by Telemetry.
-  This information is submitted anonymously to Mozilla to help improve &brandShortName;.
-">
+<!ENTITY aboutTelemetry.pageTitle "Dane Telemetrii">
 
 <!ENTITY aboutTelemetry.telemetryEnabled "
-  Telemetry is <span>enabled</span>.
+  Telemetria jest <span>włączona</span>.
 ">
 
 <!ENTITY aboutTelemetry.telemetryDisabled "
-  Telemetry is <span>disabled</span>.
+  Telemetria jest <span>wyłączona</span>.
 ">
 
 <!ENTITY aboutTelemetry.slowSqlSection "
-  Slow SQL Statements
+  Powolne polecenia SQL
 ">
 
 <!ENTITY aboutTelemetry.chromeHangsSection "
-  Browser Hangs
+  Zawieszenia przeglądarki
 ">
 
 <!ENTITY aboutTelemetry.histogramsSection "
-  Histograms
+  Histogramy
 ">
 
 <!ENTITY aboutTelemetry.simpleMeasurementsSection "
-  Simple Measurements
+  Proste pomiary
+">
+
+<!ENTITY aboutTelemetry.lateWritesSection "
+  Późne zapisy
 ">
 
 <!ENTITY aboutTelemetry.systemInfoSection "
-  System Information
+  Informacje systemowe
 ">
 
 <!ENTITY aboutTelemetry.addonHistogramsSection "
-  Histograms Collected by Add-ons
+  Histogramy zebrane przez dodatki
 ">
 
 <!ENTITY aboutTelemetry.toggleOn "
-  Click to expand section
+  Kliknij, by rozwinąć sekcję
 ">
 
 <!ENTITY aboutTelemetry.toggleOff "
-  Click to collapse section
+  Kliknij, by zwinąć sekcję
 ">
 
 <!ENTITY aboutTelemetry.emptySection "
-  (No data collected)
+  (Brak zebranych danych)
 ">
 
 <!ENTITY aboutTelemetry.fullSqlWarning "
-  NOTE: Slow SQL debugging is enabled. Full SQL strings may be displayed below but they will not be submitted to Telemetry.
+  UWAGA: Debugowanie powolnych poleceń SQL jest włączone. Pełne ciągi SQLmogą być widoczne poniżej, ale nie
+  zostaną przesłane do Telemetrii.
 ">
 
 <!ENTITY aboutTelemetry.fetchSymbols "
-  Fetch function names for hang stacks
+  Pobierz nazwy funkcji dla zawieszonych stosów
 ">
 
 <!ENTITY aboutTelemetry.hideSymbols "
-  Show raw data from hangs
+  Wyświetl nieprzetworzone dane z zawieszeń
 ">

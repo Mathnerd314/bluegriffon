@@ -4,11 +4,6 @@
 
 <!ENTITY aboutTelemetry.pageTitle "Données télémétriques">
 
-<!ENTITY aboutTelemetry.pageSubtitle "
-  Cette page affiche les données de performances et d'utilisation des fonctionnalités collectées par télémétrie.
-  Ces informations sont envoyées de façon annonyme à Mozilla pour aider à l'amélioration de &brandShortName;.
-">
-
 <!ENTITY aboutTelemetry.telemetryEnabled "
   La télémétrie est <span>activée</span>.
 ">
@@ -33,6 +28,10 @@
   Mesures simples
 ">
 
+<!ENTITY aboutTelemetry.lateWritesSection "
+  Écritures tardives
+">
+
 <!ENTITY aboutTelemetry.systemInfoSection "
   Informations du système
 ">
@@ -42,11 +41,11 @@
 ">
 
 <!ENTITY aboutTelemetry.toggleOn "
-  Cliquez pour développer la section
+  Cliquer pour développer la section
 ">
 
 <!ENTITY aboutTelemetry.toggleOff "
-  Cliquez pour réduire la section
+  Cliquer pour réduire la section
 ">
 
 <!ENTITY aboutTelemetry.emptySection "

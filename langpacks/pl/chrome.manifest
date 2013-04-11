@@ -1,31 +1,5 @@
-locale pdf.js pl chrome/pl/locale/pdfviewer/
-locale pipnss pl chrome/pl/locale/pl/pipnss/
-locale necko pl chrome/pl/locale/pl/necko/
-locale places pl chrome/pl/locale/pl/places/
-locale pippki pl chrome/pl/locale/pl/pippki/
-override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-locale branding pl chrome/pl/locale/branding/
-locale global-platform pl chrome/pl/locale/pl/global-platform/
-locale cookie pl chrome/pl/locale/pl/cookie/
-locale mozapps pl chrome/pl/locale/pl/mozapps/
-override chrome://global/locale/appstrings.properties chrome://browser/locale/appstrings.properties
-locale alerts pl chrome/pl/locale/pl/alerts/
-locale testpilot pl chrome/pl/locale/feedback/
-locale browser pl chrome/pl/locale/browser/
-locale passwordmgr pl chrome/pl/locale/pl/passwordmgr/
-locale global-region pl chrome/pl/locale/pl/global-region/
-override chrome://mozapps/locale/downloads/settingsChange.dtd chrome://browser/locale/downloads/settingsChange.dtd
-locale autoconfig pl chrome/pl/locale/pl/autoconfig/
-locale weave pl chrome/pl/locale/pl/
-locale global pl chrome/pl/locale/pl/global/
-locale browser-region pl chrome/pl/locale/browser-region/
-locale bluegriffon pl base/locale/bluegriffon/
-locale branding pl base/locale/branding/
-locale fs pl extensions/fs/
-locale gfd pl extensions/gfd/
-locale cssproperties pl sidebars/cssproperties/
-locale domexplorer pl sidebars/domexplorer/
-locale scripteditor pl sidebars/scripteditor/
-locale stylesheets pl sidebars/stylesheets/
-locale tipoftheday pl extensions/tipoftheday/
-
+manifest chrome/pl.manifest
+manifest browser/chrome.manifest application=bluegriffon@disruptive-innovations.com
+manifest webapprt/chrome.manifest application=bluegriffon@disruptive-innovations.com
+manifest metro/chrome.manifest application={99bceaaa-e3c6-48c1-b981-ef9b46b67d60}
+manifest bluegriffon/chrome.manifest application=bluegriffon@disruptive-innovations.com

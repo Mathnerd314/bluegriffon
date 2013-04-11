@@ -2,65 +2,49 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<!ENTITY aboutTelemetry.pageTitle "Telemetry Data">
-
-<!ENTITY aboutTelemetry.pageSubtitle "
-  This page shows the performance and feature-use data collected by Telemetry.
-  This information is submitted anonymously to Mozilla to help improve &brandShortName;.
-">
-
+<!ENTITY aboutTelemetry.pageTitle "Datos de Telemetry">
 <!ENTITY aboutTelemetry.telemetryEnabled "
-  Telemetry is <span>enabled</span>.
+  Telemetry está <span>activado</span>.
 ">
-
 <!ENTITY aboutTelemetry.telemetryDisabled "
-  Telemetry is <span>disabled</span>.
+  Telemetry está <span>desactivado</span>.
 ">
-
 <!ENTITY aboutTelemetry.slowSqlSection "
-  Slow SQL Statements
+  Sentencias SQL lentas
 ">
-
 <!ENTITY aboutTelemetry.chromeHangsSection "
-  Browser Hangs
+  El navegador se cuelga
 ">
-
 <!ENTITY aboutTelemetry.histogramsSection "
-  Histograms
+  Histogramas
 ">
-
 <!ENTITY aboutTelemetry.simpleMeasurementsSection "
-  Simple Measurements
+  Medidas simples
 ">
-
+<!ENTITY aboutTelemetry.lateWritesSection "
+  Escrituras demoradas
+">
 <!ENTITY aboutTelemetry.systemInfoSection "
-  System Information
+  Información de sistema
 ">
-
 <!ENTITY aboutTelemetry.addonHistogramsSection "
-  Histograms Collected by Add-ons
+  Histogramas recopilados por complementos
 ">
-
 <!ENTITY aboutTelemetry.toggleOn "
-  Click to expand section
+  Pulse para desplegar la sección
 ">
-
 <!ENTITY aboutTelemetry.toggleOff "
-  Click to collapse section
+  Pulse para replegar la sección
 ">
-
 <!ENTITY aboutTelemetry.emptySection "
-  (No data collected)
+  (No se han recopilado datos)
 ">
-
 <!ENTITY aboutTelemetry.fullSqlWarning "
-  NOTE: Slow SQL debugging is enabled. Full SQL strings may be displayed below but they will not be submitted to Telemetry.
+  NOTA: la depuración SQL lenta está activada. Pueden motrarse cadenas completas de SQL pero no se enviarán a Telemetry.
 ">
-
 <!ENTITY aboutTelemetry.fetchSymbols "
-  Fetch function names for hang stacks
+  Recuperar nombres de función de las pilas de cuelgue
 ">
-
 <!ENTITY aboutTelemetry.hideSymbols "
-  Show raw data from hangs
+  Mostrar datos no procesados de cuelgues
 ">

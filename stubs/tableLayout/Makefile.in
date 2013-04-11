@@ -42,7 +42,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-MODULE = tablelayout@bluegriffon.com
 USE_EXTENSION_MANIFEST = 1
 
 XPI_NAME    = tablelayout@bluegriffon.com

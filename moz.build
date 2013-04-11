@@ -6,16 +6,17 @@
 CONFIGURE_SUBST_FILES += ['installer/Makefile']
 
 DIRS += [
-    'base',
     'components',
     'langpacks',
     'locales',
+    'base',
     'modules',
-    'src',
     'themes',
     'sidebars',
+    'src',
     'extensions',
     'stubs',
+    'private',
     'branding'
 ]
 

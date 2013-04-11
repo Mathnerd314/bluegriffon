@@ -1,0 +1,16 @@
+{"type":"text/x-moz-place-container","root":"placesRoot","children":
+  [{"type":"text/x-moz-place-container","title":"Kirjanmerkit","annos":[{"name":"metro/bookmarksRoot","expires":4,"type":1,"value":1}],
+    "children":
+     [
+       {"index":1,"title":"Tietoja Mozillasta", "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fi/about/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":2,"title":"Aloitussivu",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fi/firefox/central/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+       {"index":3,"title":"Osallistu projektiin",  "type":"text/x-moz-place", "uri":"http://www.mozilla.com/fi/firefox/community/",
+        "iconUri":"chrome://branding/content/favicon32.png"
+       },
+     ]
+  }]
+}

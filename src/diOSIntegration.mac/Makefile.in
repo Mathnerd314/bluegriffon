@@ -6,8 +6,6 @@ VPATH		= @srcdir@
 
 include $(DEPTH)/config/autoconf.mk
 
-MODULE = diOSIntegration
-XPIDL_MODULE		= diOSIntegration
 LIBRARY_NAME	= osinteg
 SHORT_LIBNAME = osinteg
 EXPORT_LIBRARY	= 1
@@ -15,9 +13,6 @@ IS_COMPONENT	= 1
 MODULE_NAME	= diOSIntegration
 FORCE_SHARED_LIB = 1
 
-XPIDLSRCS	= \
-		diIOSIntegration.idl \
-		$(NULL)
 
 EXPORTS		= \
 		diOSIntegrationCIID.h \
