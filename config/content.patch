@@ -1602,6 +1602,27 @@ diff --git a/editor/idl/nsIEditorObserver.idl b/editor/idl/nsIEditorObserver.idl
   * when the editor has completed a user action. 
   *
   */
+diff --git a/editor/libeditor/base/nsEditPropertyAtomList.h b/editor/libeditor/base/nsEditPropertyAtomList.h
+--- a/editor/libeditor/base/nsEditPropertyAtomList.h
++++ b/editor/libeditor/base/nsEditPropertyAtomList.h
+@@ -119,16 +119,17 @@ EDITOR_ATOM(main, "main")
+ EDITOR_ATOM(map, "map")
+ EDITOR_ATOM(mark, "mark")
+ EDITOR_ATOM(meter, "meter")
+ EDITOR_ATOM(menuitem, "menuitem")
+ EDITOR_ATOM(mozdirty, "_moz_dirty")
+ EDITOR_ATOM(mozEditorBogusNode, "_moz_editor_bogus_node")
+ EDITOR_ATOM(name, "name")
+ EDITOR_ATOM(nav, "nav")
++EDITOR_ATOM(nobr, "nobr")
+ EDITOR_ATOM(noscript, "noscript")
+ EDITOR_ATOM(object, "object")
+ EDITOR_ATOM(ol, "ol")
+ EDITOR_ATOM(output, "output")
+ EDITOR_ATOM(p, "p")
+ EDITOR_ATOM(pre, "pre")
+ EDITOR_ATOM(progress, "progress")
+ EDITOR_ATOM(q, "q")
 diff --git a/editor/libeditor/base/nsEditor.cpp b/editor/libeditor/base/nsEditor.cpp
 --- a/editor/libeditor/base/nsEditor.cpp
 +++ b/editor/libeditor/base/nsEditor.cpp
@@ -1929,6 +1950,46 @@ diff --git a/editor/libeditor/base/nsEditorEventListener.h b/editor/libeditor/ba
  
  protected:
    nsresult InstallToEditor();
+diff --git a/editor/libeditor/html/nsHTMLCSSUtils.cpp b/editor/libeditor/html/nsHTMLCSSUtils.cpp
+--- a/editor/libeditor/html/nsHTMLCSSUtils.cpp
++++ b/editor/libeditor/html/nsHTMLCSSUtils.cpp
+@@ -330,16 +330,17 @@ nsHTMLCSSUtils::IsCSSEditableProperty(ns
+   // brade: shouldn't some of the above go below the next block?
+ 
+   // html inline styles B I TT U STRIKE and COLOR/FACE on FONT
+   if (nsEditProperty::b == aProperty
+       || nsEditProperty::i == aProperty
+       || nsEditProperty::tt == aProperty
+       || nsEditProperty::u == aProperty
+       || nsEditProperty::strike == aProperty
++      || nsEditProperty::nobr == aProperty
+       || ((nsEditProperty::font == aProperty) && aAttribute &&
+            (aAttribute->EqualsLiteral("color") ||
+             aAttribute->EqualsLiteral("face")))) {
+     return true;
+   }
+ 
+   // ALIGN attribute on elements supporting it
+   if (aAttribute && (aAttribute->EqualsLiteral("align")) &&
+@@ -838,16 +839,18 @@ nsHTMLCSSUtils::GenerateCSSDeclarationsF
+   if (nsEditProperty::b == aHTMLProperty) {
+     equivTable = boldEquivTable;
+   } else if (nsEditProperty::i == aHTMLProperty) {
+     equivTable = italicEquivTable;
+   } else if (nsEditProperty::u == aHTMLProperty) {
+     equivTable = underlineEquivTable;
+   } else if (nsEditProperty::strike == aHTMLProperty) {
+     equivTable = strikeEquivTable;
++  } else if (nsEditProperty::nobr == aHTMLProperty) {
++    equivTable = nowrapEquivTable;
+   } else if (nsEditProperty::tt == aHTMLProperty) {
+     equivTable = ttEquivTable;
+   } else if (aAttribute) {
+     if (nsEditProperty::font == aHTMLProperty &&
+         aAttribute->EqualsLiteral("color")) {
+       equivTable = fontColorEquivTable;
+     } else if (nsEditProperty::font == aHTMLProperty &&
+                aAttribute->EqualsLiteral("face")) {
 diff --git a/editor/libeditor/html/nsHTMLDataTransfer.cpp b/editor/libeditor/html/nsHTMLDataTransfer.cpp
 --- a/editor/libeditor/html/nsHTMLDataTransfer.cpp
 +++ b/editor/libeditor/html/nsHTMLDataTransfer.cpp
@@ -2084,6 +2145,28 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        NS_ENSURE_SUCCESS(res, res);
  
        // append a <br> to it
+diff --git a/editor/libeditor/html/nsHTMLEditUtils.cpp b/editor/libeditor/html/nsHTMLEditUtils.cpp
+--- a/editor/libeditor/html/nsHTMLEditUtils.cpp
++++ b/editor/libeditor/html/nsHTMLEditUtils.cpp
+@@ -700,17 +700,17 @@ static const nsElementInfo kElements[eHT
+   ELEM(mark, true, true, GROUP_PHRASE, GROUP_INLINE_ELEMENT),
+   ELEM(marquee, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(menu, true, true, GROUP_BLOCK, GROUP_LI | GROUP_FLOW_ELEMENT),
+   ELEM(menuitem, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(meta, false, false, GROUP_HEAD_CONTENT, GROUP_NONE),
+   ELEM(meter, true, false, GROUP_SPECIAL, GROUP_FLOW_ELEMENT),
+   ELEM(multicol, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(nav, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+-  ELEM(nobr, false, false, GROUP_NONE, GROUP_NONE),
++  ELEM(nobr, false, false, GROUP_PHRASE, GROUP_INLINE_ELEMENT),
+   ELEM(noembed, false, false, GROUP_NONE, GROUP_NONE),
+   ELEM(noframes, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+   ELEM(noscript, true, true, GROUP_BLOCK, GROUP_FLOW_ELEMENT),
+   ELEM(object, true, true, GROUP_SPECIAL | GROUP_BLOCK,
+        GROUP_FLOW_ELEMENT | GROUP_OBJECT_CONTENT),
+   // XXX Can contain self and ul because editor does sublists illegally.
+   ELEM(ol, true, true, GROUP_BLOCK | GROUP_OL_UL,
+        GROUP_LI | GROUP_OL_UL),
 diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHTMLEditor.cpp
 --- a/editor/libeditor/html/nsHTMLEditor.cpp
 +++ b/editor/libeditor/html/nsHTMLEditor.cpp
