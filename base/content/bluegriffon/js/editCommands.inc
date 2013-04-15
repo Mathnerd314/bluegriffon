@@ -19,6 +19,24 @@ var cmdBgFindCommand =
   }
 };
 
+var cmdBgFindAgainCommand =
+{
+  isCommandEnabled: function(aCommand, dummy)
+  {
+    return (EditorUtils.getCurrentEditorElement() &&
+            EditorUtils.isDocumentEditable() &&
+            EditorUtils.isEditingRenderedHTML());
+  },
+
+  getCommandStateParams: function(aCommand, aParams, aRefCon) {},
+  doCommandParams: function(aCommand, aParams, aRefCon) {},
+
+  doCommand: function(aCommand)
+  {
+    BespinFind(true, false);
+  }
+};
+
 var bgSpellingCommand =
 {
   isCommandEnabled: function(aCommand, dummy)

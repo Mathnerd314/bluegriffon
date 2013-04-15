@@ -469,6 +469,7 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_ariaRole",    cmdAriaRole);
 
     commandTable.registerCommand("cmd_bgfind",      cmdBgFindCommand);
+    commandTable.registerCommand("cmd_bgfindagain", cmdBgFindAgainCommand);
     commandTable.registerCommand("cmd_replace",     cmdBgFindCommand);
 
     commandTable.registerCommand("cmd_span",        cmdSpanCommand);

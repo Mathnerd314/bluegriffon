@@ -8,6 +8,7 @@
   <key id="openpagekb"          key="&openPage.key;"         observes="cmd_open"      modifiers="accel,shift"/>
   <key id="openfilekb"          key="&openPage.key;"         observes="cmd_openFile"  modifiers="accel"/>
   <key id="findkb"              key="&findCmd.key;"          observes="cmd_bgfind"    modifiers="accel"/>
+  <key id="findagainkb"         key="&findAgainCmd.key;"     observes="cmd_bgfindagain" modifiers="accel"/>
   <key id="replacekb"           key="&replaceCmd.key;"       observes="cmd_replace"   modifiers="accel"/>
 
   <key id="strongkb"            key="&styleStrong.key;"      observes="cmd_strong"    modifiers="accel"/>
@@ -235,6 +236,7 @@
   <command id="cmd_printSettings"  label="&printSetupCmd.label;"     oncommand="goDoCommand('cmd_printSettings')"/>
 
   <command id="cmd_bgfind"         label="&findCmd.label;"           accesskey="&findCmd.accesskey;"    oncommand="goDoCommand('cmd_bgfind')"/>
+  <command id="cmd_bgfindagain"    label="&findAgainCmd.label;"      accesskey="&findAgainCmd.accesskey;" oncommand="goDoCommand('cmd_bgfindagain')"/>
   <command id="cmd_replace"        label="&replaceCmd.label;"        accesskey="&replaceCmd.accesskey;" oncommand="goDoCommand('cmd_replace')"/>
   <command id="cmd_browse"                                           oncommand="goDoCommand('cmd_browse')"/>
 </commandset>

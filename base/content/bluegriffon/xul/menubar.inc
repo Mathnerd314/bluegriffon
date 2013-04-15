@@ -92,6 +92,8 @@
         <menuseparator/>
         <menuitem id="bgmenu_find" command="cmd_bgfind"
                   key="findkb"/>
+        <menuitem id="bgmenu_findAgain" command="cmd_bgfindagain"
+                  key="findagainkb"/>
         <menuitem id="bgmenu_replace" command="cmd_replace"
                   key="replacekb"/>
       </menupopup>
