@@ -1161,6 +1161,7 @@ function doCloseTab(aTab)
     tabbox.parentNode.setAttribute("visibility", "hidden");
     if (gDialog.structurebar)
       gDialog.structurebar.className = "hidden";
+    document.title = "BlueGriffon";
   }
   window.updateCommands("style");
   NotifierUtils.notify("tabClosed");
