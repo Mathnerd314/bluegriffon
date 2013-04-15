@@ -2499,9 +2499,9 @@ diff --git a/editor/libeditor/html/nsHTMLEditorStyle.cpp b/editor/libeditor/html
      // don't have one, we need to make one.
 -    if (aNode->IsElement() && aNode->AsElement()->IsHTML(nsGkAtoms::span) &&
 -        !aNode->AsElement()->GetAttrCount()) {
-+    if (aAvoidNestingForCSS ||
-+        (aNode->IsElement() && aNode->AsElement()->IsHTML(nsGkAtoms::span) &&
-+         !aNode->AsElement()->GetAttrCount())) {
++    if (aNode->IsElement() &&
++        (aAvoidNestingForCSS ||
++         (aNode->AsElement()->IsHTML(nsGkAtoms::span) && !aNode->AsElement()->GetAttrCount()))) {
        tmp = aNode->AsElement();
      } else {
        res = InsertContainerAbove(aNode, getter_AddRefs(tmp),
