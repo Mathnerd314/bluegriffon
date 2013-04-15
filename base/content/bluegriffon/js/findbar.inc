@@ -200,27 +200,53 @@ function BespinReplaceAll()
   if (GetCurrentViewMode() == "source") {
     var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
-
+    sourceEditor.setCursor(0,0);
     var query = gDialog.bespinFindTextbox.value;
     var isCaseSensitive = gDialog.bespinFindCaseSensitive.checked;
-    BespinFind(true, false);
 
-    while (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
+    sourceIframe.contentWindow.wrappedJSObject.findNeedle(true, true, query, isCaseSensitive);
+
+    //BespinFind(true, false);
+
+    while (sourceEditor.lastNeedle &&
+           sourceEditor.lastNeedle.from() &&
+           sourceEditor.lastNeedle.to()) {
       occurences++;
       var end = sourceEditor.lastNeedle.to();
       sourceEditor.lastNeedle.replace(gDialog.bespinReplaceTextbox.value);
       sourceEditor.setCursor(end);
+
       BespinFind(true, false);
+      var from = sourceEditor.getCursor(true);
+      if (from.line == end.line && from.ch == end.ch)
+        break;
     }
   }
   else {
     var found = true;
     var editor = EditorUtils.getCurrentEditor();
+
+    var findInst = EditorUtils.getCurrentEditorElement().webBrowserFind;
+    findInst.searchString  = gDialog.bespinFindTextbox.value;
+    findInst.matchCase     = gDialog.bespinFindCaseSensitive.checked;
+    findInst.wrapFind      = false;
+    findInst.findBackwards = false;
+    findInst.searchFrames  = true;
+    findInst.entireWord    = false;
+
+    var findInFrames = findInst.QueryInterface(Components.interfaces.nsIWebBrowserFindInFrames);
+    findInFrames.rootSearchFrame = EditorUtils.getCurrentEditorElement().contentWindow;
+    findInFrames.currentSearchFrame = findInFrames.rootSearchFrame;
+
+    EditorUtils.getCurrentEditor().beginningOfDocument();
+
+    var result = findInst.findNext();
+
     editor.beginTransaction();
-    while (found) {
+    while (result) {
       occurences++;
       ReplaceInWysiwyg();
-      found = BespinFind(true, false);
+      result = findInst.findNext();
     }
     editor.endTransaction();
   }
