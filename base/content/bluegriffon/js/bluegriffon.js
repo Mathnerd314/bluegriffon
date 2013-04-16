@@ -976,6 +976,8 @@ function ToggleViewMode(aElement)
     {
       NotifierUtils.notify("beforeLeavingSourceMode");
       source = sourceEditor.getValue();
+      var spellchecking = Services.prefs.getBoolPref("bluegriffon.spellCheck.enabled");
+      Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", false);
       //sourceEditor.blur();
       var oldSource = sourceIframe.getUserData("oldSource"); 
       if (source != oldSource) {
@@ -992,13 +994,14 @@ function ToggleViewMode(aElement)
             gDialog.wysiwygModeButton.removeAttribute("selected");
             gDialog.sourceModeButton.setAttribute("selected", "true");
             editorElement.parentNode.setAttribute("currentmode", "source");
+            Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
             return false;
           }
           gDialog.structurebar.style.visibility = "";
           RebuildFromSource(doc, isXML);
           var lastSaved = sourceIframe.getUserData("lastSaved");
           if (lastSaved == source)
-            EditorUtils.getCurrentEditor().resetModificationCount();  
+            EditorUtils.getCurrentEditor().resetModificationCount();
         }
         catch(e) {alert(e)}
       }
@@ -1010,6 +1013,7 @@ function ToggleViewMode(aElement)
         window.content.focus();
       }
       sourceIframe.setUserData("lastSaved", "", null);
+      Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
     }
   }
   editorElement.parentNode.setAttribute("previousMode", mode);
