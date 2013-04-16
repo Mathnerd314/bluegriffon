@@ -42,7 +42,6 @@ function CommitChanges()
 
 function InstallBespin(aIframe, aTheme, aValue)
 {
-  //window.addEventListener("keypress", BespinKeyPressCallback, true);
   aIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                           null,
                                           aTheme,
