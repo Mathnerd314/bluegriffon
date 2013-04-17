@@ -8,7 +8,7 @@
   <Description about="urn:mozilla:install-manifest"
                em:id="langpack-fr@bluegriffon.org"
                em:name="Français Language Pack"
-               em:version="1.6.2.99.20130411"
+               em:version="23.0.1.6.2.99.20130411"
                em:type="8"
                em:creator="L'équipe FrenchMozilla">
     <em:contributor>Philippe Dessante</em:contributor><em:contributor>Benoît Leseul</em:contributor><em:contributor>Vincent Béron</em:contributor><em:contributor>Cédric Corazza</em:contributor><em:contributor>Marie Léger-St-Jean</em:contributor><em:contributor>Jérôme Schell</em:contributor>
