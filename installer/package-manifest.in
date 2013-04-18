@@ -136,17 +136,14 @@
 @BINPATH@/update.locale
 @BINPATH@/platform.ini
 @BINPATH@/res/
-@BINPATH@/Throbber-small.gif
 @BINPATH@/xpcshell
 @BINPATH@/mozilla-xremote-client
 @BINPATH@/hyphenation/
 @BINPATH@/application.ini
 @BINPATH@/greprefs.js
 @BINPATH@/icons/updater.png
-@BINPATH@/crashreporter
 @BINPATH@/plugin-container
 @BINPATH@/components/
-@BINPATH@/crashreporter.ini
 @BINPATH@/bluegriffon-bin
 #endif
 #else
