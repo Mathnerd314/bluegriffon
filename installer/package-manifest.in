@@ -22,6 +22,7 @@
 @BINPATH@/chrome/bluegriffon-@AB_CD@.manifest
 
 [xpcom]
+#ifdef XP_UNIX
 #ifdef XP_MACOSX
 @BINPATH@/libfreebl3.dylib
 @BINPATH@/libmozalloc.dylib
@@ -37,6 +38,21 @@
 @BINPATH@/libsmime3.dylib
 @BINPATH@/libsoftokn3.dylib
 @BINPATH@/libssl3.dylib
+#else
+@BINPATH@/libxul.so
+@BINPATH@/libplds4.so
+@BINPATH@/libmozsqlite3.so
+@BINPATH@/libnssdbm3.so
+@BINPATH@/libplc4.so
+@BINPATH@/libnssutil3.so
+@BINPATH@/libnss3.so
+@BINPATH@/libfreebl3.so
+@BINPATH@/libsmime3.so
+@BINPATH@/libsoftokn3.so
+@BINPATH@/libnspr4.so
+@BINPATH@/libmozalloc.so
+@BINPATH@/libssl3.so
+#endif
 #else
 #ifdef XP_WIN32
 @BINPATH@/AccessibleMarshal.dll
@@ -66,6 +82,7 @@
 #endif
 
 [bluegriffon]
+#ifdef XP_UNIX
 #ifdef XP_MACOSX
 @BINPATH@/application.ini
 @BINPATH@/bluegriffon
@@ -100,6 +117,38 @@
 @BINPATH@/updater.app/Contents/Resources/updater.icns
 @BINPATH@/xpcshell
 @BINPATH@/XUL
+#else
+@BINPATH@/modules/
+@BINPATH@/distribution/
+@BINPATH@/js-gdb.py
+@BINPATH@/defaults/pref/bluegriffon-prefs.js
+@BINPATH@/defaults/pref/services-common.js
+@BINPATH@/defaults/profile/bluegriffon-prefs.js
+@BINPATH@/defaults/autoconfig/platform.js
+@BINPATH@/defaults/autoconfig/prefcalls.js
+@BINPATH@/chrome/
+@BINPATH@/chrome.manifest
+@BINPATH@/bluegriffon
+@BINPATH@/dictionaries/
+@BINPATH@/updater
+@BINPATH@/dependentlibs.list
+@BINPATH@/run-mozilla.sh
+@BINPATH@/update.locale
+@BINPATH@/platform.ini
+@BINPATH@/res/
+@BINPATH@/Throbber-small.gif
+@BINPATH@/xpcshell
+@BINPATH@/mozilla-xremote-client
+@BINPATH@/hyphenation/
+@BINPATH@/application.ini
+@BINPATH@/greprefs.js
+@BINPATH@/icons/updater.png
+@BINPATH@/crashreporter
+@BINPATH@/plugin-container
+@BINPATH@/components/
+@BINPATH@/crashreporter.ini
+@BINPATH@/bluegriffon-bin
+#endif
 #else
 #ifdef XP_WIN32
 @BINPATH@/application.ini
