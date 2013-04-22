@@ -53,8 +53,10 @@ function BespinFind(aForward, aInitial)
     findInFrames.rootSearchFrame = EditorUtils.getCurrentEditorElement().contentWindow;
     findInFrames.currentSearchFrame = findInFrames.rootSearchFrame;
 
-    if (aInitial)
-      EditorUtils.getCurrentEditor().beginningOfDocument();
+    if (aInitial) {
+      // not sure about that one, let's comment it out for the time being
+      //EditorUtils.getCurrentEditor().beginningOfDocument();
+    }
 
     var result = findInst.findNext();
 
