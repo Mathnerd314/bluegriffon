@@ -89,7 +89,7 @@ function Shutdown()
 
 function Startup()
 {
-  window.sizeToContent();
+  //window.sizeToContent();
 #ifndef XP_MACOSX
   CenterDialogOnOpener();
 #endif
@@ -133,7 +133,7 @@ function Startup()
   gDialog.charsetMenulist.value = "utf-8";
 
   InitDialog();
-  window.sizeToContent();  
+  //window.sizeToContent();  
 }
 
 function InitDialog()

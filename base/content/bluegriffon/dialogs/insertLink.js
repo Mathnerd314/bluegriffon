@@ -8,7 +8,6 @@ var gCollapsedSelection = false;
 
 function Startup()
 {
-  window.sizeToContent();
   gNode = window.arguments[0];
   gEditor = EditorUtils.getCurrentEditor();
 
@@ -19,7 +18,7 @@ function Startup()
 
   InitDialog();
   CheckURL();
-  window.sizeToContent();
+  //window.sizeToContent();
 }
 
 function InitDialog()

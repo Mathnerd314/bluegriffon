@@ -28,7 +28,7 @@ function Startup()
   }
 
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
-  window.sizeToContent();
+  //window.sizeToContent();
 #ifndef XP_MACOSX
   CenterDialogOnOpener();
 #endif

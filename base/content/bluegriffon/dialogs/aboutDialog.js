@@ -1,9 +1,9 @@
 function Startup()
 {
   var windowElt = document.documentElement;
-  if (!windowElt.hasAttribute("width") &&
+  /*if (!windowElt.hasAttribute("width") &&
       !windowElt.hasAttribute("height"))
-    window.sizeToContent();
+    window.sizeToContent();*/
   document.getElementById("iframe").addEventListener(
     "pageshow",
     onIframeLoaded,

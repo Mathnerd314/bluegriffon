@@ -4,6 +4,6 @@ Components.utils.import("resource://app/modules/prompterHelper.jsm");
 
 function Startup()
 {
-  window.sizeToContent();
+  //window.sizeToContent();
   GetUIElements();
 }

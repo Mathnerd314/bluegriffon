@@ -13,7 +13,6 @@
         onload = "Startup()"
         buttons="accept,cancel"
         ondialogaccept="return onAccept();"
-        width="400"
         persist="screenX screenY width height">
 
   <!-- Methods common to all editor dialogs -->

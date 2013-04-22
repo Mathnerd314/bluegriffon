@@ -10,7 +10,7 @@ function Startup()
   GetUIElements();
 
   InitDialog();
-  window.sizeToContent();
+  //window.sizeToContent();
 }
 
 function CheckFormName(aElt)

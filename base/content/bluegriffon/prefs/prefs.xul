@@ -13,7 +13,7 @@
   type   = "prefwindow"
   title  = "&window.title;"
   onload = "Startup()"
-  width="600" style="min-width: 600px"
+  style="min-width: 600px"
   persist="screenX screenY width height"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">

@@ -39,7 +39,7 @@ function Startup()
                          };
   }
   document.documentElement.getButton("accept").setAttribute("disabled", "true");
-  window.sizeToContent();
+  //window.sizeToContent();
 }
 
 function onFontSelected(aElt)

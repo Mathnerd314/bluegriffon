@@ -17,7 +17,7 @@ function Startup()
     UpdateDialog();
   else
     UpdateType();
-  window.sizeToContent();
+  //window.sizeToContent();
 }
 
 function CheckURL(aTextboxId, aCheckboxId)

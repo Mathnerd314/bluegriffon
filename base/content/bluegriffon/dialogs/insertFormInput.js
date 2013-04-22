@@ -60,7 +60,7 @@ function Startup()
     document.documentElement.getButton("accept").disabled = false;
   }
 
-  window.sizeToContent();
+  //window.sizeToContent();
   AdaptDialog();
 }
 
@@ -78,7 +78,7 @@ function AdaptDialog()
     var attr = row.getAttribute("attribute");
     row.collapsed = (visibleAttributes.indexOf(attr) == -1);
   }
-  window.sizeToContent();
+  //window.sizeToContent();
 }
 
 function onAccept()

@@ -73,7 +73,7 @@ var returnValue = null;
     else
       gDialog.currentLanguageBox.setAttribute("hidden", "true");
 
-    window.sizeToContent();
+    //window.sizeToContent();
   }
   else {
     returnValue = window.arguments[1];
