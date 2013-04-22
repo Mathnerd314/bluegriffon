@@ -96,6 +96,8 @@
     var hlLine = gEditor.setLineClass(0, "activeline");
     getEditableElement().addEventListener("keypress", gKeyPressCallback, true);
     gEditor.setValue(gInitialValue);
+    gEditor.clearHistory();
+    gEditor.ResetModificationCount();
     gEditor.focus();
    };
 
