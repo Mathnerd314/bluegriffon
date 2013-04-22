@@ -14,32 +14,29 @@ ac_add_options  --enable-application=bluegriffon
 mk_add_options MOZ_UPDATER=1
 
 # Comment out the following lines for an optimized build
-mk_add_options MOZ_OBJDIR=/c/bin/opt/official1.4
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/../../bin/opt/official1.7
 ac_add_options --enable-optimize
-ac_add_options --enable-strip
 ac_add_options --disable-debug
-ac_add_options --disable-tests
 
 # Comment out the following lines for a debug build
 #mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/binaries-debug
 #ac_add_options --disable-optimize
 #ac_add_options --enable-debug
-#ac_add_options --enable-tests
 
 # If you have Vista, comment the following line
 #ac_add_options --disable-vista-sdk-requirements
 
-ac_add_options --enable-installer
+ac_add_options --disable-tests
 ac_add_options --disable-javaxpcom
 ac_add_options --disable-activex
 ac_add_options --disable-activex-scripting
 ac_add_options --disable-crashreporter
-
 ac_add_options --enable-jemalloc
-
 ac_add_options --enable-webm
-
+ac_add_options --disable-webrtc
+ac_add_options --disable-dbm
 ac_add_options --enable-updater
 ac_add_options --enable-update-packaging
 
-#mk_add_options MOZ_MAKE_FLAGS="-j8"
+mk_add_options MOZ_MAKE_FLAGS="-j8"
+
