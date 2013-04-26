@@ -104,15 +104,6 @@
 @BINPATH@/res/
 @BINPATH@/run-mozilla.sh
 @BINPATH@/shlibsign
-@BINPATH@/update.locale
-@BINPATH@/updater.app/Contents/Info.plist
-@BINPATH@/updater.app/Contents/MacOS/updater
-@BINPATH@/updater.app/Contents/PkgInfo
-@BINPATH@/updater.app/Contents/Resources/English.lproj/InfoPlist.strings
-@BINPATH@/updater.app/Contents/Resources/English.lproj/MainMenu.nib/classes.nib
-@BINPATH@/updater.app/Contents/Resources/English.lproj/MainMenu.nib/info.nib
-@BINPATH@/updater.app/Contents/Resources/English.lproj/MainMenu.nib/keyedobjects.nib
-@BINPATH@/updater.app/Contents/Resources/updater.icns
 @BINPATH@/xpcshell
 @BINPATH@/XUL
 #else
@@ -128,10 +119,8 @@
 @BINPATH@/chrome.manifest
 @BINPATH@/bluegriffon
 @BINPATH@/dictionaries/
-@BINPATH@/updater
 @BINPATH@/dependentlibs.list
 @BINPATH@/run-mozilla.sh
-@BINPATH@/update.locale
 @BINPATH@/platform.ini
 @BINPATH@/res/
 @BINPATH@/xpcshell
@@ -139,7 +128,6 @@
 @BINPATH@/hyphenation/
 @BINPATH@/application.ini
 @BINPATH@/greprefs.js
-@BINPATH@/icons/updater.png
 @BINPATH@/plugin-container
 @BINPATH@/components/
 @BINPATH@/bluegriffon-bin
@@ -166,8 +154,6 @@
 @BINPATH@/plugin-container.exe
 @BINPATH@/plugin-hang-ui.exe
 @BINPATH@/res/
-@BINPATH@/update.locale
-@BINPATH@/updater.exe
 @BINPATH@/xpcshell.exe
 #endif
 #endif
