@@ -43,8 +43,8 @@ function onAccept()
   var longdesc = gDialog.longDescTextbox.value;
 
   var isWysiwyg = (EditorUtils.getCurrentViewMode() == "wysiwyg");
+  var editor = EditorUtils.getCurrentEditor(); 
   if (gNode && isWysiwyg) {
-    var editor = EditorUtils.getCurrentEditor(); 
     editor.beginTransaction();
     editor.setAttribute(gNode, "src", url);
     if (altText)
