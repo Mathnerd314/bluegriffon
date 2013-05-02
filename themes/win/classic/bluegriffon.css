@@ -75,6 +75,15 @@ vruler {
   -moz-binding: url('chrome://bluegriffon/content/bindings/rulers.xml#vruler');
 }
 
+responsiveRuler {
+  -moz-binding: url('chrome://bluegriffon/content/bindings/responsive.xml#responsiveRuler');
+  height: 34px; width: 100% ! important; display: -moz-box; position: absolute
+}
+responsiveRuler svg|svg {
+  height: 34px;
+  width: 100%;
+}
+
 .menuitem-iconic .menu-iconic-left {
   display: -moz-box !important;
 }

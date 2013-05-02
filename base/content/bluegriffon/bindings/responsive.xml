@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is BlueGriffon.
+   -
+   - The Initial Developer of the Original Code is
+   - Disruptive Innovations SARL.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -   Daniel Glazman (daniel.glazman@disruptive-innovations.com), Original Author
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+
+<bindings id="responsiveRulerBindings"
+          xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:svg="http://www.w3.org/2000/svg">
+
+  <binding id="responsiveRuler">
+
+     <resources>
+      <stylesheet src="chrome://bluegriffon/skin/responsive.css"/>
+    </resources>
+
+     <content>
+        <xul:panel type="arrow" anonid="infoPopup" orient="vertical">
+          <xul:grid>
+            <xul:columns>
+              <xul:column/>
+              <xul:column/>
+            </xul:columns>
+            <xul:rows>
+              <xul:row align="center">
+                <xul:label value="Marker's position:"/>
+                <xul:textbox type="number" anonid="infoMarkerPosition"/>
+              </xul:row>
+              <xul:row>
+                <xul:spacer/>
+                <xul:hbox>
+                  <xul:spacer flex="1"/>
+                  <xul:button label="Delete width marker"/>
+                </xul:hbox>
+              </xul:row>
+            </xul:rows>
+          </xul:grid>          
+        </xul:panel>
+        <svg:svg
+             height="34"
+             anonid="svg"
+             xmlns="http://www.w3.org/2000/svg"
+             preserveAspectRatio="xMidYMid meet">
+          <svg:g anonid="SVGbg">
+            <svg:rect class="rulerBackground" x="0" y="10" width="100%" height="24" />
+            <svg:rect class="rulerTop"        x="0" y="10" width="100%" height="1" />
+          </svg:g>
+          <svg:g anonid="SVGGroup"/>
+          <svg:g anonid="SVGmarkers"/>
+        </svg:svg>
+      </content>
+
+    <implementation>
+
+      <constructor>
+        <![CDATA[
+          NotifierUtils.addNotifierCallback("zoom",    this.onZoom, this);
+          this.reset();
+        ]]>
+      </constructor>
+
+      <property name="currentQuery" readonly="true">
+        <getter>
+        <![CDATA[
+          var SVGmarkers = this.getChild("SVGmarkers");
+          var path = SVGmarkers.querySelector('path[selected]');
+          if (path)
+            return parseFloat(path.getAttribute("query"))
+          return null;
+        ]]>
+        </getter>
+      </property>
+
+      <method name="reset">
+        <body><![CDATA[
+          var zoom = 1;
+          if (EditorUtils.getCurrentEditorElement())
+            zoom = BGZoomManager.getCurrentZoom();
+
+          var svg = this.getChild("svg");
+          var SVGGroup = this.getChild("SVGGroup");
+
+          deleteAllChildren(SVGGroup);
+
+          for (i = 0; i < 5000; i += 5) {
+            var n = i/100;
+            if (n == Math.floor(n)) {
+              var e = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+              e.setAttribute("width", "1");
+              e.setAttribute("height", "10");
+              e.setAttribute("x", i * zoom);
+              e.setAttribute("y", "10");
+              SVGGroup.appendChild(e);
+  
+              var f = document.createElementNS("http://www.w3.org/2000/svg", "text");
+              f.setAttribute("x", i * zoom);
+              f.setAttribute("y", "30");
+              f.textContent = i;
+              SVGGroup.appendChild(f);
+            }
+            else if (n*10 == Math.floor(n*10)){
+              var e = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+              e.setAttribute("width", "1");
+              e.setAttribute("height", "5");
+              e.setAttribute("x", i * zoom);
+              e.setAttribute("y", "10");
+              SVGGroup.appendChild(e);
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="onZoom">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          this.reset();
+        ]]></body>
+      </method>
+
+      <method name="onClick">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+        ]]></body>
+      </method>
+
+      <method name="onSplitter">
+        <parameter name="aEvent"/>
+        <body><![CDATA[
+          if (!EditorUtils.getCurrentEditorElement().hasAttribute("width"))
+            return;
+
+          var SVGmarkers = this.getChild("SVGmarkers");
+          var paths = SVGmarkers.querySelectorAll("path");
+          var queries = [];
+          for (var i = 0; i < paths.length; i++) {
+            paths[i].removeAttribute("selected");
+            queries.push(parseFloat(paths[i].getAttribute("query")));
+          }
+          queries.sort(function(a,b){if (a<b) return -1; if (a>b) return 1; return 0;});
+
+          var query = -1;
+          var w = parseFloat(EditorUtils.getCurrentEditorElement().getAttribute("width"));
+          for (var i = 0; query == -1 && i < queries.length; i++) {
+            if (queries[i] >= w)
+              query = queries[i];
+          }
+          if (query != -1) {
+            var path = SVGmarkers.querySelector('path[query="' + query + '"]');
+            if (path)
+              path.setAttribute("selected", "true");
+          }
+          var node = EditorUtils.getSelectionContainer().node;
+          NotifierUtils.notify("selection", node, true);
+        ]]></body>
+      </method>
+
+      <method name="addMarker">
+        <parameter name="x"/>
+        <body><![CDATA[
+          var SVGmarkers = this.getChild("SVGmarkers");
+          var e = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          e.setAttribute("d", "M " + x + " 10 L" + (x-10) + " 0 L" + (x+10) + " 0  Z");
+          e.setAttribute("query", x);
+          var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
+          var te = document.createTextNode(x + "px");
+          t.appendChild(te);
+          e.appendChild(t);
+          SVGmarkers.appendChild(e);
+
+          this.onSplitter();
+        ]]></body>
+      </method>
+
+      <method name="getChild">
+        <parameter name="aChildName"/>
+        <body><![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", aChildName);
+        ]]></body>
+      </method>
+
+    </implementation>
+
+    <handlers>
+      <handler event="click" button="2" clickcount="1">
+        <![CDATA[
+          if (event.originalTarget.localName == "path") {
+            this.getChild("infoMarkerPosition").value = event.originalTarget.getAttribute("query");
+            this.getChild("infoPopup").openPopup(event.originalTarget, "after_start", 0, 21,
+                                                 false, true);
+          }
+        ]]>
+      </handler>
+
+      <handler event="click" button="0" clickcount="1">
+        <![CDATA[
+          var editorElement = EditorUtils.getCurrentEditorElement();
+          switch (event.originalTarget.localName) {
+            case "rect":
+            case "text":
+              this.addMarker(event.layerX);
+              break;
+            case "svg":
+              {
+                var x = event.layerX;
+
+                var SVGmarkers = this.getChild("SVGmarkers");
+                var paths = SVGmarkers.querySelectorAll("path");
+                var queries = [];
+                for (var i = 0; i < paths.length; i++) {
+                  queries.push(parseFloat(paths[i].getAttribute("query")));
+                }
+                queries.sort(function(a,b){if (a<b) return -1; if (a>b) return 1; return 0;});
+      
+                var query = -1;
+                for (var i = 0; query == -1 && i < queries.length; i++) {
+                  if (queries[i] >= x)
+                    query = queries[i];
+                }
+                event = null;
+                if (query != -1) {
+                  var path = SVGmarkers.querySelector('path[query="' + query + '"]');
+                  if (path)
+                    event = { originalTarget: path };
+                }
+              }
+              // no break on purpose
+            case "path":
+              {
+                var SVGmarkers = this.getChild("SVGmarkers");
+                var paths = SVGmarkers.querySelectorAll("path");
+                var oneSelected = false;
+                for (var i = 0; i < paths.length; i++) {
+                  if (paths[i].hasAttribute("selected")) {
+                    oneSelected = true;
+                    paths[i].removeAttribute("selected");
+                  }
+                }
+                if (event) {
+                  event.originalTarget.setAttribute("selected", "true");
+                  editorElement.removeAttribute("flex");
+                  if (editorElement.hasAttribute("width")) {
+                    editorElement.setAttribute("noTransition", "true");
+                    editorElement.setAttribute("style",
+                        "width: " +
+                        editorElement.getAttribute("width") + "px");
+                    editorElement.removeAttribute("width");
+                  }
+                  else if (!oneSelected) {
+                    editorElement.setAttribute("style",
+                        "width: " +
+                        document.defaultView.getComputedStyle(this, "").getPropertyValue("width"));
+                  }
+                  var _self = this;
+                  setTimeout(function(a,b){
+                               editorElement.removeAttribute("noTransition");
+                               editorElement.setAttribute(a,b);
+                               editorElement.parentNode.lastChild.removeAttribute("width");
+                               editorElement.parentNode.lastChild.setAttribute("flex", "1");
+                             }, 100,
+                             "style", "width: " + event.originalTarget.getAttribute("query") + "px");
+                }
+                else {
+                  var tm = 0;
+                  if (editorElement.hasAttribute("width")) {
+                      var w = editorElement.getAttribute("width");
+                      editorElement.setAttribute("noTransition", "true");
+                      editorElement.removeAttribute("width");
+                      editorElement.setAttribute("style", "width: " + w + "px");
+                      editorElement.parentNode.lastChild.setAttribute("flex", "1");
+                      tm = 100;
+                  }
+                  var _self = this;
+                  setTimeout(function() {
+                      editorElement.removeAttribute("noTransition");
+                      editorElement.setAttribute("style",
+                          "width: " +
+                          document.defaultView.getComputedStyle(_self, "").getPropertyValue("width"));
+                      setTimeout(function(a,b){ editorElement.setAttribute(a,b);
+                                                editorElement.removeAttribute("style");
+                                                editorElement.removeAttribute("width");
+                                                editorElement.parentNode.lastChild.removeAttribute("flex");
+                                                editorElement.parentNode.lastChild.setAttribute("width", "0");
+                                              }, 200,
+                                 "flex", "1");
+                    }, tm);
+                }
+              }
+              var node = EditorUtils.getSelectionContainer().node;
+              NotifierUtils.notify("selection_strict", node, true);
+
+              break;
+          }
+        ]]>
+      </handler>
+    </handlers>
+
+  </binding>
+</bindings>
+      

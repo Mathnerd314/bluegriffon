@@ -69,6 +69,7 @@ var BGZoomManager = {
   setCurrentZoom: function BGZoomManager_setCurrentZoom(aZoom)
   {
     this.getMarkupDocumentViewer().fullZoom = aZoom;
+    NotifierUtils.notify("zoom");
   },
 
   fillZoomValues: function BGZoomManager_fillZoomValues(aPopup)
@@ -110,7 +111,7 @@ var BGZoomManager = {
 
   addToSourceViewFontSize: function(aIncrement) {
     var editorElement = EditorUtils.getCurrentEditorElement();
-    var sourceIframe = editorElement.previousSibling;
+    var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.getEditableElement();
 
     var fontSize = sourceEditor.ownerDocument

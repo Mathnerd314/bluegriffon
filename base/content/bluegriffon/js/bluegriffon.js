@@ -782,7 +782,7 @@ function OnKeyPressWhileChangingTag(event)
 /************ VIEW MODE ********/
 function GetCurrentViewMode()
 {
-  return EditorUtils.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
+  return EditorUtils.getCurrentEditorElement().parentNode.parentNode.getAttribute("currentmode") ||
          "wysiwyg";
 }
 
@@ -812,7 +812,7 @@ function onSourceChangeCallback(source)
   }
 
   var editorElement  = EditorUtils.getCurrentEditorElement();
-  var sourceIframe   = editorElement.previousSibling;
+  var sourceIframe   = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor   = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   var sourceDocument = sourceIframe.contentWindow.document;
 
@@ -868,7 +868,7 @@ function ToggleViewMode(aElement)
 
   var editor = EditorUtils.getCurrentEditor();
   var editorElement = EditorUtils.getCurrentEditorElement();
-  editorElement.parentNode.setAttribute("currentmode", mode);
+  EditorUtils.getCurrentEditorDeck().setAttribute("currentmode", mode);
 
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
@@ -918,7 +918,7 @@ function ToggleViewMode(aElement)
 
     NotifierUtils.notify("beforeEnteringSourceMode");
     var source = encoder.encodeToString();
-    var sourceIframe = editorElement.previousSibling;
+    var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     sourceIframe.contentWindow.wrappedJSObject.gChangeCallback = onSourceChangeCallback;
 
@@ -951,7 +951,7 @@ function ToggleViewMode(aElement)
       sourceEditor.setShowPrintMargin(false);
     }*/
     NotifierUtils.notify("afterEnteringSourceMode");
-    editorElement.parentNode.selectedIndex = 0;
+    EditorUtils.getCurrentEditorDeck().selectedIndex = 0;
 
     sourceIframe.focus();
     sourceEditor.refresh();
@@ -970,7 +970,7 @@ function ToggleViewMode(aElement)
     //   (reinserting entire doc caches all nodes)
     gDialog.tabeditor.enableRulers(true);
 
-    var sourceIframe = editorElement.previousSibling;
+    var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     if (sourceEditor)
     {
@@ -993,7 +993,7 @@ function ToggleViewMode(aElement)
                               "chrome,modal,titlebar", message, error);
             gDialog.wysiwygModeButton.removeAttribute("selected");
             gDialog.sourceModeButton.setAttribute("selected", "true");
-            editorElement.parentNode.setAttribute("currentmode", "source");
+            EditorUtils.getCurrentEditorDeck().setAttribute("currentmode", "source");
             Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
             return false;
           }
@@ -1008,7 +1008,7 @@ function ToggleViewMode(aElement)
       else {
         NotifierUtils.notify("afterLeavingSourceMode");
 
-        editorElement.parentNode.selectedIndex = 1;
+        EditorUtils.getCurrentEditorDeck().selectedIndex = 1;
         gDialog.structurebar.style.visibility = "";
         window.content.focus();
       }
@@ -1016,7 +1016,7 @@ function ToggleViewMode(aElement)
       Services.prefs.setBoolPref("bluegriffon.spellCheck.enabled", spellchecking);
     }
   }
-  editorElement.parentNode.setAttribute("previousMode", mode);
+  EditorUtils.getCurrentEditorDeck().setAttribute("previousMode", mode);
   window.updateCommands("style");
   return true;
 }
@@ -1110,7 +1110,7 @@ function RebuildFromSource(aDoc, isXML)
     }
   }
 
-  EditorUtils.getCurrentEditorElement().parentNode.selectedIndex = 1;
+  EditorUtils.getCurrentEditorDeck().selectedIndex = 1;
   var editor = EditorUtils.getCurrentEditor();
 
   try {
@@ -1162,6 +1162,7 @@ function doCloseTab(aTab)
   if (!tabpanels.childNodes.length) {
     tabbox.parentNode.mHruler.setAttribute("disabled", "true");
     tabbox.parentNode.mVruler.setAttribute("disabled", "true");
+    tabbox.parentNode.mResponsiveRuler.setAttribute("disabled", "true");
     tabbox.parentNode.setAttribute("visibility", "hidden");
     if (gDialog.structurebar)
       gDialog.structurebar.className = "hidden";
@@ -1541,7 +1542,7 @@ function UpdateTabHTMLDialect(aEditorElement)
   var l = editors.length;
   for (var i = 0; i < l; i++)
   {
-    if (editors.item(i).lastChild == aEditorElement)
+    if (editors.item(i).firstChild.lastChild == aEditorElement)
     {
       var tab = tabs.item(i);
 

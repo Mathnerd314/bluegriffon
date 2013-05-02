@@ -80,7 +80,7 @@ var cmdSave =
         var mode = GetCurrentViewMode();
         if (mode == "source") {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 
@@ -130,7 +130,7 @@ var cmdSaveAs =
         var mode = GetCurrentViewMode();
         if (mode == "source") {
           var editorElement = EditorUtils.getCurrentEditorElement();
-          var sourceIframe = editorElement.previousSibling;
+          var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
           var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
           var source = sourceEditor.getValue();
 

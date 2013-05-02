@@ -143,7 +143,7 @@ tabeditor > tabbox {
 
 .tabeditor-strip {
   margin-top: -1px;
-  border-bottom: 1px solid #404040;
+  border-bottom: 1px solid silver;
   background-color: #9B9B9B;
 }
 
@@ -212,4 +212,12 @@ tabeditor[tabmode="left"] .tabs-left {
 tabeditor[tabmode="right"] .tabs-right {
   max-width: 8px !important;
   -moz-box-flex: 0 ! important;
+}
+
+editor:not([noTransition]) {
+  transition: width 0.2s ease-in 0s;
+}
+
+deck > hbox{
+  overflow: auto;
 }

@@ -63,8 +63,12 @@
                     setfocus="false" onselect="onTabSelected(event, this.parentNode.parentNode)"/>
         </xul:hbox>
         <xul:grid flex="1">
-          <xul:columns><xul:column /><xul:column flex="1"/></xul:columns>
+          <xul:columns><xul:column /><xul:column id="flexingEditorColumn" flex="1"/></xul:columns>
           <xul:rows>
+            <xul:row>
+              <xul:spacer/>
+              <xul:responsiveRuler anonid="responsiveRuler" disabled="true"/>
+            </xul:row>
             <xul:row>
               <xul:spacer/>
               <xul:hruler anonid="hruler" disabled="true"/>
@@ -93,6 +97,14 @@
         <getter>
         <![CDATA[
           return document.getAnonymousElementByAttribute(this, "anonid", "vruler");
+        ]]>
+        </getter>
+      </property>
+
+      <property name="mResponsiveRuler">
+        <getter>
+        <![CDATA[
+          return document.getAnonymousElementByAttribute(this, "anonid", "responsiveRuler");
         ]]>
         </getter>
       </property>
@@ -130,9 +142,11 @@
       <destructor>
         <![CDATA[
           const editors = this.mTabPanels.childNodes;
+          var _self = this;
           for (var i = 0; i < editors.length; i++)
           {
-            editors[i].lastChild.removeEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            editors[i].lastChild.firstChild.removeEventListener("DOMTitleChanged",
+              function(e) { _self.changeTabTitle(e) }, false);
           }
         ]]>
       </destructor>
@@ -454,9 +468,10 @@
             this.mHruler.removeAttribute("disabled");
             this.mHruler.addObject("foo", 50, 200);
             this.mVruler.removeAttribute("disabled");
+            this.mResponsiveRuler.removeAttribute("disabled");
 
             var newBox = this._newEditor();
-            var newEditorElement = newBox.lastChild;
+            var newEditorElement = newBox.lastChild.firstChild;
 
             var newTab = this.mTabs.appendItem(aTitle,
                            UrlUtils.stripUsernamePassword(aURL, null, null));
@@ -482,7 +497,7 @@
             var _self = this;
             newEditorElement.addEventListener("load", function(evt) { 
                 if (evt.originalTarget == content.document){ _self.finishInstall(progressListener); } }, true);
-            newEditorElement.addEventListener("DOMTitleChanged", this.changeTabTitle, false);
+            newEditorElement.addEventListener("DOMTitleChanged", function(e) { _self.changeTabTitle(e) }, false);
 
             newEditorElement.addEventListener("dblclick", function(evt) { OnDoubleClick(evt) }, true);
             newEditorElement.addEventListener("click", function(evt) { OnClick(evt) }, true);
@@ -507,10 +522,12 @@
           if (aEnabled) {
             this.mHruler.removeAttribute("disabled");
             this.mVruler.removeAttribute("disabled");
+            this.mResponsiveRuler.removeAttribute("disabled");
           }
           else {
             this.mHruler.setAttribute("disabled", "true");
             this.mVruler.setAttribute("disabled", "true");
+            this.mResponsiveRuler.setAttribute("disabled", "true");
           }
         ]]>
         </body>
@@ -535,13 +552,12 @@
           if (!e)
             return;
 
-          var tabeditor = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-          var tabs      = tabeditor.mTabs.childNodes;
-          var editors   = tabeditor.mTabpanels.childNodes;
+          var tabs      = this.mTabs.childNodes;
+          var editors   = this.mTabpanels.childNodes;
           var l = editors.length;
           for (var i = 0; i < l; i++)
           {
-            if (editors.item(i).lastChild == e)
+            if (editors.item(i).lastChild.firstChild == e)
             {
               var tab = tabs.item(i);
               var title = UpdateWindowTitle(e);
@@ -581,9 +597,11 @@
       <method name="_newEditor">
         <body>
         <![CDATA[
+            Components.utils.import("resource://app/modules/l10nHelper.jsm");
+
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
-              editors.item(i).lastChild.removeAttribute("type");
+              editors.item(i).lastChild.firstChild.removeAttribute("type");
 
             var newBox = document.createElement("deck");
 
@@ -596,11 +614,29 @@
             iframe.setAttribute("onclick", "onBespinFocus(this)");
             newBox.appendChild(iframe);
 
+            var hbox = document.createElement("hbox");
+            newBox.appendChild(hbox);
+
             var newEditorElement = document.createElement("editor");
             newEditorElement.setAttribute("context", "editorContextMenu");
             newEditorElement.setAttribute("type", "content-primary");
-            newBox.appendChild(newEditorElement);
+            newEditorElement.setAttribute("flex", "1");
+            hbox.appendChild(newEditorElement);
 
+            var splitter = document.createElement("splitter");
+            splitter.setAttribute("tooltiptext", L10NUtils.getString("viewportWidthSplitter"));
+            splitter.setAttribute("resizebefore", "closest");
+            splitter.setAttribute("collapse", "after");
+            splitter.addEventListener("command", function(e) { _self.mResponsiveRuler.onSplitter(e) }, true );
+#ifdef XP_MACOSX
+            var grippy = document.createElement("grippy");
+            splitter.appendChild(grippy);
+#endif
+            hbox.appendChild(splitter);
+
+            var b = document.createElement("box");
+            b.setAttribute("width", "0");
+            hbox.appendChild(b);
             return newBox;
         ]]>
         </body>
@@ -609,10 +645,21 @@
       <method name="getCurrentEditorElement">
         <body>
         <![CDATA[
+            var deck = this.getCurrentEditorDeck();
+            if (deck)
+              return deck.lastChild.firstChild;
+            return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="getCurrentEditorDeck">
+        <body>
+        <![CDATA[
             if (this.mTabpanels.childNodes
                 && this.mTabpanels.childNodes.length
                 && this.mTabpanels.selectedPanel)
-              return this.mTabpanels.selectedPanel.lastChild;
+              return this.mTabpanels.selectedPanel;
             return null;
         ]]>
         </body>
@@ -625,7 +672,7 @@
             var editors = this.mTabpanels.childNodes;
             for (var i = 0; i < editors.length; i++)
             {
-              var editorElt = editors.item(i).lastChild;
+              var editorElt = editors.item(i).lastChild.firstChild;
               var editor = editorElt.getEditor(editorElt.contentWindow);
               if (editor.document.URL == aURL)
                 return editorElt;
@@ -647,7 +694,7 @@
 
            var editors = this.mTabpanels.childNodes;
            for (var i = 0; i < editors.length; i++)
-             editors.item(i).lastChild.removeAttribute("type");
+             editors.item(i).lastChild.firstChild.removeAttribute("type");
 
            this.getCurrentEditorElement().setAttribute("type", "content-primary");
            window.content.focus();
@@ -655,7 +702,7 @@
            window.UpdateWindowTitle();
 
            NotifierUtils.notify("tabSelected");
-           var deck = this.getCurrentEditorElement().parentNode;
+           var deck = this.getCurrentEditorDeck();
            var mode = deck.getAttribute("previousMode");
            deck.selectedIndex = (mode == "source") ? 0 : 1;
            gDialog.bespinToolbox1.hidden = true;
@@ -670,7 +717,7 @@
              gDialog.wysiwygModeButton.setAttribute("selected", "true");
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
-             deck.lastChild.focus();
+             deck.lastChild.firstChild.focus();
              var selcon = EditorUtils.getSelectionContainer();
              if (selcon)
                gDialog.structurebar.selectionChanged(null, selcon.node,
@@ -707,7 +754,7 @@
           var i, l = editors.length;
           for (i=0; i< l; i++)
           {
-            var e = editors[i].lastChild;
+            var e = editors[i].lastChild.firstChild;
             var elt = e.getEditor(e.contentWindow);
             if (elt &&
                 this._trimTrailingSlash(elt.document.URL) == this._trimTrailingSlash(aURL))

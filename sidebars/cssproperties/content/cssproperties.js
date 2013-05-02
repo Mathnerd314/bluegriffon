@@ -576,6 +576,8 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
   EditorUtils.getCurrentEditor().incrementModificationCount(1);  
 
+  // find the media query if any
+  var query = EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
   var state;
@@ -591,7 +593,7 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
   }
   var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
-  if (inspectedRule && inspectedRule.rule) {
+  if (inspectedRule && inspectedRule.rule && RulesMatchesQuery(inspectedRule.rule, query)) {
     // ok, that property is already applied through a CSS rule
 
     // is that rule dependent on the ID selector for that ID?
@@ -694,16 +696,18 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     var sheet;
     var existingRule = CssInspector.findLastRuleInRulesetForSelector(
                          ruleset, aDelimitor + aIdent);
-    if (existingRule &&
+    if (existingRule && RulesMatchesQuery(existingRule, query) &&
           (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
       sheet = existingRule.parentStyleSheet;
       existingRule.style.setProperty(property, value, "");
     }
     else {
       sheet = FindLastEditableStyleSheet();
-      sheet.insertRule(aDelimitor + aIdent + "{" +
-                         property + ": " + value + " " + "}",
-                       sheet.cssRules.length);
+      var str = (query ? "@media screen and (max-width: " + query + "px) {" : "") +
+                       aDelimitor + aIdent + "{" +
+                         property + ": " + value + " " + "}" +
+                         (query  ? " ]" : "");
+      sheet.insertRule(str, sheet.cssRules.length);
     }
     if (sheet.ownerNode.href)
       CssInspector.serializeFileStyleSheet(sheet, sheet.href);
@@ -720,3 +724,22 @@ function ToggleHover(aElt)
   var node = gCurrentElement;
   SelectionChanged(null, node, null);
 }
+
+function RulesMatchesQuery(rule, query)
+{
+  if (!query) // no media query specified, we always match
+    return true;
+
+  query = "screen and (max-width: " + query + "px)";
+
+  if ((rule.parentRule &&
+       rule.parentRule.type == CSSRule.MEDIA_RULE &&
+       rule.parentRule.media.mediaText == query) ||
+      (rule.parentStyleSheet &&
+       rule.parentStyleSheet.media &&
+       rule.parentStyleSheet.media.mediaText == query))
+    return true;
+  
+  return false;
+}
+

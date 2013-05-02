@@ -86,6 +86,22 @@ var EditorUtils = {
     return null;
   },  
 
+  getCurrentEditorDeck: function getCurrentEditorDeck()
+  {
+    var tabeditor = this.getCurrentTabEditor();
+    if (tabeditor)
+      return tabeditor.getCurrentEditorDeck() ;
+    return null;
+  },  
+
+  getCurrentEditorDeck: function getCurrentEditorDeck()
+  {
+    var tabeditor = this.getCurrentTabEditor();
+    if (tabeditor)
+      return tabeditor.getCurrentEditorDeck() ;
+    return null;
+  },  
+
   getCurrentViewMode: function getCurrentViewMode()
   {
     return this.getCurrentEditorElement().parentNode.getAttribute("currentmode") ||
@@ -96,7 +112,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      return editorElement.previousSibling;
+      return editorElement.parentNode.previousSibling;
     }
     return null;
   },
@@ -105,7 +121,7 @@ var EditorUtils = {
   {
     var editorElement = this.getCurrentEditorElement();
     if (editorElement) {
-      var bespinIframe = editorElement.previousSibling;
+      var bespinIframe = editorElement.parentNode.previousSibling;
       var bespinWindow = bespinIframe.contentWindow.wrappedJSObject;
       return bespinWindow;
     }

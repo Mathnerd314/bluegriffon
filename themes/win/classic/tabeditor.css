@@ -96,3 +96,11 @@ tabeditor[tabmode="right"] .tabs-right {
   max-width: 8px !important;
   -moz-box-flex: 0 ! important;
 }
+
+editor:not([noTransition]) {
+  transition: width 0.2s ease-in 0s;
+}
+
+deck > hbox{
+  overflow: auto;
+}

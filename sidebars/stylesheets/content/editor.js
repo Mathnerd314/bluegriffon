@@ -79,13 +79,13 @@ function onBespinLineKeypress(aEvent, aElt)
 
 function ToggleBespinFindCaseSensitivity()
 {
-  var bespinIframe = gDialog.bespinIframe;
+  var bespinIframe = EditorUtils.getCurrentSourceEditorElement();
   BespinFind(bespinIframe.getUserData("findLastDirection"), true);
 }
 
 function BespinFind(aForward, aInitial)
 {
-  var sourceIframe = gDialog.bespinIframe;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   sourceIframe.setUserData("findLastDirection", aForward, null);
   var query = gDialog.bespinFindTextbox.value;
@@ -126,7 +126,7 @@ function onBespinFindKeypress(aEvent)
   if (aEvent.keyCode == 27 && !aEvent.which) { // ESC key
     gDialog.bespinToolbox1.hidden = true;
     gDialog.bespinToolbox2.hidden = true;
-    var sourceIframe = gDialog.bespinIframe;
+    var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
     var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
     sourceEditor.focus();
   }
@@ -189,7 +189,7 @@ function BespinKeyPressCallback(aEvent)
 
 function BespinReplace()
 {
-  var sourceIframe = gDialog.bespinIframe;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   if (sourceEditor.lastNeedle && sourceEditor.lastNeedle.from() && sourceEditor.lastNeedle.to()) {
     var end = sourceEditor.lastNeedle.to();
@@ -208,7 +208,7 @@ function BespinReplaceAndFind()
 function BespinReplaceAll()
 {
   var occurences = 0;
-  var sourceIframe = gDialog.bespinIframe;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   sourceEditor.setCursor(0,0);
   var query = gDialog.bespinFindTextbox.value;
@@ -245,7 +245,7 @@ function WysiwygShowFindBar()
 {
   gDialog.bespinToolbox1.hidden = false;
 
-  var sourceIframe = gDialog.bespinIframe;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   var text = sourceEditor.getSelection();
   if (text) {
@@ -259,7 +259,7 @@ function CloseFindBar()
 {
   gDialog.bespinToolbox1.hidden = true;
   gDialog.bespinToolbox2.hidden = true;
-  var sourceIframe = gDialog.bespinIframe;
+  var sourceIframe = EditorUtils.getCurrentSourceEditorElement();
   var sourceEditor = sourceIframe.contentWindow.wrappedJSObject.gEditor;
   sourceEditor.focus();
 }

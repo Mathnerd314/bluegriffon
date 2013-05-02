@@ -1,0 +1,48 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace svg url("http://www.w3.org/2000/svg");
+
+svg|svg {
+  width: 100% ! important;
+  height: 34px;
+}
+
+svg|rect[class="rulerBackground"] {
+  opacity: 1;
+  fill: #404040;
+  fill-opacity:1;
+}
+
+svg|rect[class="rulerTop"] {
+  opacity: 1;
+  fill: white;
+  fill-opacity: 1;
+}
+
+svg|g[anonid="SVGGroup"] svg|rect {
+  opacity: 1;
+  fill: #ffffff;
+  fill-opacity:1
+}
+
+svg|g[anonid="SVGGroup"] svg|text {
+  font-family: monospace;
+  font-size: 10px;
+  fill: white;
+  font-weight: bold
+}
+
+responsiveRuler[disabled]  {
+  visibility: hidden;
+}
+
+@-moz-keyframes selectedQuery {
+  from { fill: silver; }
+  to   { fill: gray; }
+}
+svg|*[selected] {
+  fill: orange;
+  stroke: gray;
+  -moz-animate: selectedQuery 2s linear 0s infinite alternate;
+}
+svg|path {cursor: pointer; fill: silver}
+svg|g { cursor: crosshair;}
