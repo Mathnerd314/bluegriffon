@@ -409,6 +409,8 @@
 
                       UpdateTabHTMLDialect(this.mEditor);
 
+                      document.getAnonymousElementByAttribute(this.mTabeditor, "anonid", "responsiveRuler").reset();
+
                       editor.resetModificationCount();
                       editor.transactionManager.clear();
 
@@ -520,14 +522,14 @@
         <body>
         <![CDATA[
           if (aEnabled) {
-            this.mHruler.removeAttribute("disabled");
+            this.mHruler.parentNode.removeAttribute("hidden");
             this.mVruler.removeAttribute("disabled");
-            this.mResponsiveRuler.removeAttribute("disabled");
+            this.mResponsiveRuler.parentNode.removeAttribute("hidden");
           }
           else {
-            this.mHruler.setAttribute("disabled", "true");
+            this.mHruler.parentNode.setAttribute("hidden", "true");
             this.mVruler.setAttribute("disabled", "true");
-            this.mResponsiveRuler.setAttribute("disabled", "true");
+            this.mResponsiveRuler.parentNode.setAttribute("hidden", "true");
           }
         ]]>
         </body>

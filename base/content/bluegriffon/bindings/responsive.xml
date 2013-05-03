@@ -91,10 +91,21 @@
 
       <constructor>
         <![CDATA[
-          NotifierUtils.addNotifierCallback("zoom",    this.onZoom, this);
+          NotifierUtils.addNotifierCallback("zoom",        this.onZoom, this);
+          NotifierUtils.addNotifierCallback("tabSelected", this.reset,  this);
+          this.init();
           this.reset();
         ]]>
       </constructor>
+
+      <destructor>
+        <![CDATA[
+          NotifierUtils.removeNotifierCallback("zoom",        this.onZoom, this);
+          NotifierUtils.removeNotifierCallback("tabSelected", this.reset,  this);
+        ]]>
+      </destructor>
+
+      <field name="mRegexp">/(only\s)?screen\s+and\s+\(max\-width\s*:\s*(\d*(\.\d*)?)px\)/;</field>
 
       <property name="currentQuery" readonly="true">
         <getter>
@@ -108,7 +119,7 @@
         </getter>
       </property>
 
-      <method name="reset">
+      <method name="init">
         <body><![CDATA[
           var zoom = 1;
           if (EditorUtils.getCurrentEditorElement())
@@ -150,7 +161,7 @@
       <method name="onZoom">
         <parameter name="aEvent"/>
         <body><![CDATA[
-          this.reset();
+          this.init();
         ]]></body>
       </method>
 
@@ -215,6 +226,68 @@
         ]]></body>
       </method>
 
+      <method name="_collectMediaQueries">
+        <parameter name="aSheet"/>
+        <parameter name="aQueries"/>
+        <body><![CDATA[
+          if (!aSheet)
+            return;
+          if (aSheet.media &&
+              aSheet.media.mediaText) {
+            var m = aSheet.media.mediaText.match(this.mRegexp);
+            if (m)
+              aQueries.push(m[2]);
+          }
+          this._collectMediaQueriesFromRules(aSheet.cssRules, aQueries);
+        ]]></body>
+      </method>
+
+      <method name="_collectMediaQueriesFromRules">
+        <parameter name="aRules"/>
+        <parameter name="aQueries"/>
+        <body><![CDATA[
+          for (var i = 0; i < aRules.length; i++) {
+            var rule = aRules[i];
+            switch (rule.type) {
+              case CSSRule.IMPORT_RULE:
+                this._collectMediaQueries(rule.styleSheet, aQueries);
+                break;
+              case CSSRule.MEDIA_RULE:
+                if (rule.media.mediaText) {
+			            var m = rule.media.mediaText.match(this.mRegexp);
+			            if (m)
+			              aQueries.push(m[2]);
+                }
+                break;
+              default: break;
+            }
+          }
+        ]]></body>
+      </method>
+
+      <method name="reset">
+        <body><![CDATA[
+          var SVGmarkers = this.getChild("SVGmarkers");
+
+          // first clear all existing markers
+          var paths = SVGmarkers.querySelectorAll("path");
+          for (var i = 0; i < paths.length; i++) {
+            SVGmarkers.removeChild(paths[i]);
+          }
+
+          var doc = EditorUtils.getCurrentDocument();
+          if (!doc) // early way out, nothing to do
+            return;
+          var queries = [];
+          var ss = doc.styleSheets;
+          for (var i = 0; i < ss.length; i++) {
+            this._collectMediaQueries(ss[i], queries);
+          }
+          for (var i = 0; i < queries.length; i++) {
+            this.addMarker(parseFloat(queries[i]));
+          }
+        ]]></body>
+      </method>
     </implementation>
 
     <handlers>

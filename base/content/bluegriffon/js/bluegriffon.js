@@ -1542,7 +1542,7 @@ function UpdateTabHTMLDialect(aEditorElement)
   var l = editors.length;
   for (var i = 0; i < l; i++)
   {
-    if (editors.item(i).firstChild.lastChild == aEditorElement)
+    if (editors.item(i).lastChild.firstChild == aEditorElement)
     {
       var tab = tabs.item(i);
 
