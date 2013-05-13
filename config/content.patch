@@ -2233,7 +2233,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      // Getters must addref
      NS_ADDREF(*aReturn);
    }
-@@ -5429,18 +5428,24 @@ bool
+@@ -5429,18 +5428,26 @@ bool
  nsHTMLEditor::IsEditable(nsIContent* aNode) {
    if (!nsPlaintextEditor::IsEditable(aNode)) {
      return false;
@@ -2246,12 +2246,14 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
 -  // to be editable.
 +  // We might be dealing with a text node for example, which we consider
 +  // to be editable if it's a significant text node
++  /*
 +  if (IsTextNode(aNode)) {
 +    nsCOMPtr<nsIContent> content = do_QueryInterface(aNode);
 +    bool isEmptyTextNode = false;
 +    IsVisTextNode(content, &isEmptyTextNode, true);
 +    return !isEmptyTextNode;
 +  }
++  */
    return true;
  }
  
