@@ -61,13 +61,17 @@
             <xul:rows>
               <xul:row align="center">
                 <xul:label value="Marker's position:"/>
-                <xul:textbox type="number" anonid="infoMarkerPosition"/>
+                <xul:textbox type="number" anonid="infoMarkerPosition"
+                             oncommand="CheckMarkerWidthChange(this)"
+                             oninput="CheckMarkerWidthChange(this)"/>
               </xul:row>
               <xul:row>
                 <xul:spacer/>
                 <xul:hbox>
                   <xul:spacer flex="1"/>
-                  <xul:button label="Delete width marker"/>
+                  <xul:button label="Delete marker"/>
+                  <xul:button label="Update marker" anonid="updateMarker" disabled="true"
+                              oncommand="UpdateMarker()"/>
                 </xul:hbox>
               </xul:row>
             </xul:rows>
@@ -158,6 +162,62 @@
         ]]></body>
       </method>
 
+      <method name="CheckMarkerWidthChange">
+        <parameter name="aElt"/>
+        <body><![CDATA[
+          var v = parseFloat(aElt.getAttribute("originalValue"));
+          if (v != aElt.value)
+            this.getChild("updateMarker").removeAttribute("disabled");
+          else
+            this.getChild("updateMarker").setAttribute("disabled", "true");
+        ]]></body>
+      </method>
+
+      <method name="UpdateMarker">
+        <body><![CDATA[
+          Components.utils.import("resource://app/modules/editorHelper.jsm");
+          Components.utils.import("resource://app/modules/urlHelper.jsm");
+          Components.utils.import("resource://app/modules/cssHelper.jsm");
+          Components.utils.import("resource://app/modules/cssInspector.jsm");
+
+          var ov = this.getChild("infoMarkerPosition").getAttribute("originalValue");
+          var v  = this.getChild("infoMarkerPosition").value;
+
+          var doc = EditorUtils.getCurrentDocument();
+          if (!doc) // early way out, nothing to do
+            return;
+
+          var queries = [];
+          var ss = doc.styleSheets;
+          for (var i = 0; i < ss.length; i++) {
+            this._collectMediaQueries(ss[i], queries, true);
+          }
+          for (var i = 0; i < queries.length; i++) {
+            if (queries[i].v == ov) {
+              var o = queries[i].o;
+              o.media.mediaText = "only screen and (max-width: " + v + "px)";
+              var sheet = null;
+              if (o instanceof CSSRule)
+                sheet = o.parentStyleSheet;
+              else
+                sheet = o;
+
+              if (sheet.ownerNode.href)
+                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+              else
+                CssUtils.reserializeEmbeddedStylesheet(sheet, EditorUtils.getCurrentEditor());
+            }
+          }
+          var SVGmarkers = this.getChild("SVGmarkers");
+          var path = SVGmarkers.querySelector('path[query="' + ov + '"]');
+          if (path) {
+            var x = parseFloat(v);
+            path.setAttribute("d", "M " + x + " 10 L" + (x-10) + " 0 L" + (x+10) + " 0  Z");
+            path.setAttribute("query", x);
+          }
+        ]]></body>
+      </method>
+
       <method name="onZoom">
         <parameter name="aEvent"/>
         <body><![CDATA[
@@ -209,10 +269,10 @@
           var e = document.createElementNS("http://www.w3.org/2000/svg", "path");
           e.setAttribute("d", "M " + x + " 10 L" + (x-10) + " 0 L" + (x+10) + " 0  Z");
           e.setAttribute("query", x);
-          var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
+          /*var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
           var te = document.createTextNode(x + "px");
           t.appendChild(te);
-          e.appendChild(t);
+          e.appendChild(t);*/
           SVGmarkers.appendChild(e);
 
           this.onSplitter();
@@ -229,34 +289,44 @@
       <method name="_collectMediaQueries">
         <parameter name="aSheet"/>
         <parameter name="aQueries"/>
+        <parameter name="aCollectRules"/>
         <body><![CDATA[
           if (!aSheet)
             return;
           if (aSheet.media &&
               aSheet.media.mediaText) {
             var m = aSheet.media.mediaText.match(this.mRegexp);
-            if (m)
-              aQueries.push(m[2]);
+            if (m) {
+              if (aCollectRules)
+                aQueries.push( { o: aSheet, v: m[2] } );
+              else
+                aQueries.push(m[2]);
+            }
           }
-          this._collectMediaQueriesFromRules(aSheet.cssRules, aQueries);
+          this._collectMediaQueriesFromRules(aSheet.cssRules, aQueries, aCollectRules);
         ]]></body>
       </method>
 
       <method name="_collectMediaQueriesFromRules">
         <parameter name="aRules"/>
         <parameter name="aQueries"/>
+        <parameter name="aCollectRules"/>
         <body><![CDATA[
           for (var i = 0; i < aRules.length; i++) {
             var rule = aRules[i];
             switch (rule.type) {
               case CSSRule.IMPORT_RULE:
-                this._collectMediaQueries(rule.styleSheet, aQueries);
+                this._collectMediaQueries(rule.styleSheet, aQueries, aCollectRules);
                 break;
               case CSSRule.MEDIA_RULE:
                 if (rule.media.mediaText) {
-			            var m = rule.media.mediaText.match(this.mRegexp);
-			            if (m)
-			              aQueries.push(m[2]);
+                  var m = rule.media.mediaText.match(this.mRegexp);
+                  if (m) {
+                    if (aCollectRules)
+                      aQueries.push( { o: rule, v: m[2] } );
+                    else
+                      aQueries.push(m[2]);
+                  }
                 }
                 break;
               default: break;
@@ -281,7 +351,7 @@
           var queries = [];
           var ss = doc.styleSheets;
           for (var i = 0; i < ss.length; i++) {
-            this._collectMediaQueries(ss[i], queries);
+            this._collectMediaQueries(ss[i], queries, false);
           }
           for (var i = 0; i < queries.length; i++) {
             this.addMarker(parseFloat(queries[i]));
@@ -294,7 +364,10 @@
       <handler event="click" button="2" clickcount="1">
         <![CDATA[
           if (event.originalTarget.localName == "path") {
-            this.getChild("infoMarkerPosition").value = event.originalTarget.getAttribute("query");
+            var v = event.originalTarget.getAttribute("query");
+            this.getChild("infoMarkerPosition").setAttribute("originalValue", v);
+            this.getChild("infoMarkerPosition").value = v;
+            this.getChild("updateMarker").setAttribute("disabled", "true");
             this.getChild("infoPopup").openPopup(event.originalTarget, "after_start", 0, 21,
                                                  false, true);
           }
