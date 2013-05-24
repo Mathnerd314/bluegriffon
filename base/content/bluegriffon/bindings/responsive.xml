@@ -16,8 +16,8 @@
    - The Original Code is BlueGriffon.
    -
    - The Initial Developer of the Original Code is
-   - Disruptive Innovations SARL.
-   - Portions created by the Initial Developer are Copyright (C) 2006
+   - Disruptive Innovations SAS.
+   - Portions created by the Initial Developer are Copyright (C) 2013
    - the Initial Developer. All Rights Reserved.
    -
    - Contributor(s):
@@ -37,6 +37,11 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
+
+<!DOCTYPE bindings [
+  <!ENTITY % responsiveRulerBindingsDTD SYSTEM "chrome://bluegriffon/locale/responsive.dtd" >
+  %responsiveRulerBindingsDTD;
+]>
 
 <bindings id="responsiveRulerBindings"
           xmlns="http://www.mozilla.org/xbl"
@@ -60,7 +65,7 @@
             </xul:columns>
             <xul:rows>
               <xul:row align="center">
-                <xul:label value="Marker's position:"/>
+                <xul:label value="&markerPosition.label;"/>
                 <xul:textbox type="number" anonid="infoMarkerPosition"
                              oncommand="CheckMarkerWidthChange(this)"
                              oninput="CheckMarkerWidthChange(this)"/>
@@ -69,8 +74,8 @@
                 <xul:spacer/>
                 <xul:hbox>
                   <xul:spacer flex="1"/>
-                  <xul:button label="Delete marker"/>
-                  <xul:button label="Update marker" anonid="updateMarker" disabled="true"
+                  <xul:button label="&deleteMarker.label;"/>
+                  <xul:button label="&updateMarker.label;" anonid="updateMarker" disabled="true"
                               oncommand="UpdateMarker()"/>
                 </xul:hbox>
               </xul:row>
@@ -125,9 +130,7 @@
 
       <method name="init">
         <body><![CDATA[
-          var zoom = 1;
-          if (EditorUtils.getCurrentEditorElement())
-            zoom = BGZoomManager.getCurrentZoom();
+          var zoom = this.getZoom();
 
           var svg = this.getChild("svg");
           var SVGGroup = this.getChild("SVGGroup");
@@ -192,6 +195,7 @@
           for (var i = 0; i < ss.length; i++) {
             this._collectMediaQueries(ss[i], queries, true);
           }
+          var sheets = [];
           for (var i = 0; i < queries.length; i++) {
             if (queries[i].v == ov) {
               var o = queries[i].o;
@@ -201,20 +205,28 @@
                 sheet = o.parentStyleSheet;
               else
                 sheet = o;
-
-              if (sheet.ownerNode.href)
-                CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-              else
-                CssUtils.reserializeEmbeddedStylesheet(sheet, EditorUtils.getCurrentEditor());
+              if (sheets.indexOf(sheet) == -1)
+                sheets.push(sheet);
             }
+          }
+          for (var i = 0; i < sheets.length; i++) {
+            var sheet = sheets[i];
+            if (sheet.ownerNode && sheet.ownerNode.href)
+              CssInspector.serializeFileStyleSheet(sheet, sheet.href);
+            else
+              CssUtils.reserializeEmbeddedStylesheet(sheet, EditorUtils.getCurrentEditor());
           }
           var SVGmarkers = this.getChild("SVGmarkers");
           var path = SVGmarkers.querySelector('path[query="' + ov + '"]');
+          var zoom = this.getZoom();
           if (path) {
             var x = parseFloat(v);
-            path.setAttribute("d", "M " + x + " 10 L" + (x-10) + " 0 L" + (x+10) + " 0  Z");
+            path.setAttribute("d", "M " + (x * zoom) + " 10 L" + ((x * zoom)-10) + " 0 L" + ((x * zoom)+10) + " 0  Z");
             path.setAttribute("query", x);
+            path.nextElementSibling.textContent = x;
+            path.nextElementSibling.setAttribute("x", x * zoom - 11);
           }
+          this.getChild("infoPopup").hidePopup();
         ]]></body>
       </method>
 
@@ -222,6 +234,7 @@
         <parameter name="aEvent"/>
         <body><![CDATA[
           this.init();
+          this.reset();
         ]]></body>
       </method>
 
@@ -262,18 +275,36 @@
         ]]></body>
       </method>
 
+      <method name="getZoom">
+        <body><![CDATA[
+          var zoom = 1;
+          if (EditorUtils.getCurrentEditorElement())
+            zoom = BGZoomManager.getCurrentZoom();
+          return zoom;
+        ]]></body>
+      </method>
+
       <method name="addMarker">
         <parameter name="x"/>
+        <parameter name="aIsRefresh"/>
         <body><![CDATA[
+          var zoom = this.getZoom();
+          if (!aIsRefresh)
+            x = x / zoom;
+
           var SVGmarkers = this.getChild("SVGmarkers");
           var e = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          e.setAttribute("d", "M " + x + " 10 L" + (x-10) + " 0 L" + (x+10) + " 0  Z");
+          e.setAttribute("d", "M " + (x * zoom) + " 10 L" + ((x * zoom) - 10) + " 0 L" + ((x * zoom) + 10) + " 0  Z");
           e.setAttribute("query", x);
-          /*var t = document.createElementNS("http://www.w3.org/2000/svg", "title");
-          var te = document.createTextNode(x + "px");
-          t.appendChild(te);
-          e.appendChild(t);*/
           SVGmarkers.appendChild(e);
+
+          var f = document.createElementNS("http://www.w3.org/2000/svg", "text");
+          f.setAttribute("text-anchor", "end");
+          f.setAttribute("font-size", "8pt");
+          f.setAttribute("x", x * zoom - 11);
+          f.setAttribute("y", "10");
+          f.textContent = x;
+          SVGmarkers.appendChild(f);
 
           this.onSplitter();
         ]]></body>
@@ -340,7 +371,7 @@
           var SVGmarkers = this.getChild("SVGmarkers");
 
           // first clear all existing markers
-          var paths = SVGmarkers.querySelectorAll("path");
+          var paths = SVGmarkers.querySelectorAll("path,text");
           for (var i = 0; i < paths.length; i++) {
             SVGmarkers.removeChild(paths[i]);
           }
@@ -354,7 +385,7 @@
             this._collectMediaQueries(ss[i], queries, false);
           }
           for (var i = 0; i < queries.length; i++) {
-            this.addMarker(parseFloat(queries[i]));
+            this.addMarker(parseFloat(queries[i]), true);
           }
         ]]></body>
       </method>
@@ -377,14 +408,21 @@
       <handler event="click" button="0" clickcount="1">
         <![CDATA[
           var editorElement = EditorUtils.getCurrentEditorElement();
-          switch (event.originalTarget.localName) {
+          var e = event.originalTarget;
+          if (e.localName == "text" &&
+              e.parentNode.getAttribute("anonid") == "SVGmarkers") {
+            e = e.previousElementSibling;
+            event = { originalTarget: e };
+          }
+          switch (e.localName) {
             case "rect":
             case "text":
-              this.addMarker(event.layerX);
+              this.addMarker(event.layerX, false);
               break;
             case "svg":
               {
-                var x = event.layerX;
+                var zoom = this.getZoom();
+                var x = event.layerX / zoom;
 
                 var SVGmarkers = this.getChild("SVGmarkers");
                 var paths = SVGmarkers.querySelectorAll("path");
@@ -434,13 +472,14 @@
                         document.defaultView.getComputedStyle(this, "").getPropertyValue("width"));
                   }
                   var _self = this;
+                  var zoom = this.getZoom();
                   setTimeout(function(a,b){
                                editorElement.removeAttribute("noTransition");
                                editorElement.setAttribute(a,b);
                                editorElement.parentNode.lastChild.removeAttribute("width");
                                editorElement.parentNode.lastChild.setAttribute("flex", "1");
                              }, 100,
-                             "style", "width: " + event.originalTarget.getAttribute("query") + "px");
+                             "style", "width: " + parseFloat(event.originalTarget.getAttribute("query") * zoom) + "px");
                 }
                 else {
                   var tm = 0;
