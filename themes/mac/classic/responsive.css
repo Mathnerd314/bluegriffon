@@ -46,3 +46,7 @@ svg|*[selected] {
 }
 svg|path {cursor: pointer; fill: silver}
 svg|g { cursor: crosshair;}
+
+svg|g[anonid="SVGmarkers"] {
+  cursor: default;
+}
