@@ -101,6 +101,22 @@ nsBlueGriffonContentHandler.prototype = {
     }
   },
 
+  /* helper functions */
+
+  mChromeURL : null,
+
+  get chromeURL() {
+    if (this.mChromeURL) {
+      return this.mChromeURL;
+    }
+
+    var prefb = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(nsIPrefBranch);
+    this.mChromeURL = prefb.getCharPref("browser.chromeURL");
+
+    return this.mChromeURL;
+  },
+
   /* nsISupports */
   QueryInterface : XPCOMUtils.generateQI([nsICommandLineHandler,
                                           nsIContentHandler]),
@@ -110,19 +126,27 @@ nsBlueGriffonContentHandler.prototype = {
     if (!cmdLine.length)
       return;
 
-    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                       .getService(nsIWindowMediator);
-    var e = Services.wm.getEnumerator("bluegriffon");
-    var mostRecent = null;
-    if (e && e.hasMoreElements()) {
-      mostRecent = e.getNext();
+    var url = null;
+#ifndef XP_MACOSX
+    if (cmdLine.length == 1) {
+      var arg = cmdLine.getArgument(0);
+      if (arg[0] != "-")
+        url = arg;
     }
+#endif
 
     var ar = cmdLine.handleFlagWithParam("file", false);
-    if (ar) {
+    if (ar || url) {
       cmdLine.preventDefault = true;
+      var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                         .getService(nsIWindowMediator);
+      var e = Services.wm.getEnumerator("bluegriffon");
+      var mostRecent = null;
+      if (e && e.hasMoreElements()) {
+        mostRecent = e.getNext();
+      }
       if (mostRecent) {
-        var localFile = UrlUtils.newLocalFile(ar);
+        var localFile = UrlUtils.newLocalFile(ar || url);
         var ioService =
           Components.classes["@mozilla.org/network/io-service;1"]
                     .getService(Components.interfaces.nsIIOService);
@@ -135,29 +159,25 @@ nsBlueGriffonContentHandler.prototype = {
         var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
         var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
                               .getInterface(nsIDOMWindow);
-        cmdLine.preventDefault = true;
         rootWin.OpenFile(url, true);
         return;
       }
-      else {
-        cmdLine.preventDefault = true;
-        return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul", "_blank", "chrome,dialog=no,all", ar);
-      }
+      else
+        openWindow(null, gBlueGriffonContentHandler.chromeURL, "_blank", "chrome,dialog=no,all", ar || url);
     }
 
-    var url = cmdLine.handleFlagWithParam("url", false);
+    url = cmdLine.handleFlagWithParam("url", false);
     if (url) {
+      cmdLine.preventDefault = true;
       if (mostRecent) {
         var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
                            .getInterface(nsIWebNavigation);
         var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
         var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
                               .getInterface(nsIDOMWindow);
-        cmdLine.preventDefault = true;
         rootWin.OpenFile(url, true);
         return;
       }
-      cmdLine.preventDefault = true;
       return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
                                "_blank",
                                "chrome,dialog=no,all",
@@ -170,6 +190,7 @@ nsBlueGriffonContentHandler.prototype = {
   /* nsIContentHandler */
 
   handleContent : function bch_handleContent(contentType, context, request) {
+    Services.prompt.alert(null, "nsBlueGriffonContentHandler", "handleContent");
   }
 };
 
@@ -196,8 +217,107 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
-    return;
+/*
+    var url = null;
+#ifndef XP_MACOSX
+    if (cmdLine.length == 1) {
+      var arg = cmdLine.getArgument(0);
+      if (arg[0] != "-")
+        url = arg;
+    }
+#endif
+
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(nsIWindowMediator);
+    var e = Services.wm.getEnumerator("bluegriffon");
+    var mostRecent = null;
+    if (e && e.hasMoreElements()) {
+      mostRecent = e.getNext();
+    }
+
+    var ar = cmdLine.handleFlagWithParam("file", false);
+    if (ar || url) {
+       cmdLine.preventDefault = true;
+      if (mostRecent) {
+        var localFile = UrlUtils.newLocalFile(ar || url);
+        var ioService =
+          Components.classes["@mozilla.org/network/io-service;1"]
+                    .getService(Components.interfaces.nsIIOService);
+        var fileHandler =
+          ioService.getProtocolHandler("file")
+                   .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+        url = fileHandler.getURLSpecFromFile(localFile);
+        var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
+                           .getInterface(nsIWebNavigation);
+        var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
+        var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
+                              .getInterface(nsIDOMWindow);
+        rootWin.OpenFile(url, true);
+        return;
+      }
+
+#ifdef XP_MACOSX
+      return;
+#else
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               ar || url);
+#endif
+    }
+    url = cmdLine.handleFlagWithParam("url", false);
+    if (url) {
+    	cmdLine.preventDefault = true;
+      if (mostRecent) {
+        var navNav = mostRecent.QueryInterface(nsIInterfaceRequestor)
+                           .getInterface(nsIWebNavigation);
+        var rootItem = navNav.QueryInterface(nsIDocShellTreeItem).rootTreeItem;
+        var rootWin = rootItem.QueryInterface(nsIInterfaceRequestor)
+                              .getInterface(nsIDOMWindow);
+        rootWin.OpenFile(url, true);
+        return;
+      }
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               url);
+    }
+    if (mostRecent) {
+      mostRecent.focus();
+      return mostRecent;
+    }
+#ifdef TAGADA
+    var wwatch = Components.classes["@mozilla.org/embedcomp/window-watcher;1"]
+                           .getService(nsIWindowWatcher);
+    return wwatch.openWindow(null, this.hiddenChromeURL,
+                             "_blank",
+                             "chrome,dialog=no,all",
+                             cmdLine);
+#else
+    if (!cmdLine.preventDefault)
+      return openWindow(null, "chrome://bluegriffon/content/xul/bluegriffon.xul",
+                               "_blank",
+                               "chrome,dialog=no,all",
+                               "");
+#endif
+*/
   },
+
+#ifdef XP_MACOSX
+  mHiddenChromeURL : null,
+
+  get hiddenChromeURL() {
+    if (this.mHiddenChromeURL) {
+      return this.mHiddenChromeURL;
+    }
+
+    var prefb = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(nsIPrefBranch);
+    this.mHiddenChromeURL = prefb.getCharPref("browser.hiddenWindowChromeURL");
+
+    return this.mHiddenChromeURL;
+  },
+#endif
 
   helpInfo : ""
 };

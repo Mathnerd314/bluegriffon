@@ -1,7 +1,7 @@
 #filter substitution
 
 pref("toolkit.defaultChromeURI", "chrome://bluegriffon/content/xul/bluegriffon.xul");
-//pref("browser.chromeURL", "chrome://bluegriffon/content/xul/bluegriffon.xul");
+pref("browser.chromeURL", "chrome://bluegriffon/content/xul/bluegriffon.xul");
 pref("browser.hiddenWindowChromeURL", "chrome://bluegriffon/content/xul/hiddenWindow.xul");
 pref("toolkit.singletonWindowType", "bluegriffon");
 pref("bluegriffon.singletonWindowType", "bluegriffon");
