@@ -217,7 +217,7 @@ nsDefaultCommandLineHandler.prototype = {
 
   /* nsICommandLineHandler */
   handle : function dch_handle(cmdLine) {
-/*
+
     var url = null;
 #ifndef XP_MACOSX
     if (cmdLine.length == 1) {
@@ -300,7 +300,7 @@ nsDefaultCommandLineHandler.prototype = {
                                "chrome,dialog=no,all",
                                "");
 #endif
-*/
+
   },
 
 #ifdef XP_MACOSX
