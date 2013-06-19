@@ -116,6 +116,7 @@ function FontsInit()
     var i1 = document.createElement("image");
     i1.setAttribute("src", "chrome://cssproperties/skin/fontFeatures/" + id1 + ".png");
     i1.setAttribute("tooltiptext",
+                    "(" + id1 + ") " +
                     L10NUtils.getStringFromURL("FF" + id1,
                                                "chrome://cssproperties/locale/fontFeatures.properties"));
     h1.appendChild(i1);
@@ -141,6 +142,7 @@ function FontsInit()
 	    var i2 = document.createElement("image");
 	    i2.setAttribute("src", "chrome://cssproperties/skin/fontFeatures/" + id2 + ".png");
 	    i2.setAttribute("tooltiptext",
+                    "(" + id2 + ") " +
 	                    L10NUtils.getStringFromURL("FF" + id2,
 	                                               "chrome://cssproperties/locale/fontFeatures.properties"));
 	    h2.appendChild(i2);

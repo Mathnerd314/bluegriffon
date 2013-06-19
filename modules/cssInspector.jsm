@@ -4965,7 +4965,8 @@ jscsspDeclaration.prototype = {
     "-moz-transition-duration": true,
     "-moz-transition-timing-function": true,
     "-moz-transition-delay": true,
-    "src": true
+    "src": true,
+    "-moz-font-feature-settings": true
   },
 
   cssText: function() {

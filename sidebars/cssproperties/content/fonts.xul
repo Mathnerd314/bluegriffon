@@ -19,7 +19,7 @@
               onclick="ToggleSection(event, this)"
               position="3">
         <image />
-        <label value="Font Features"/>
+        <label value="&fontsSectionHeader.label;"/>
       </hbox>
 
       <vbox class="section"
