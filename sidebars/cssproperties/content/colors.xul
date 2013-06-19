@@ -18,12 +18,12 @@
             context="sectionHeaderContext"
             id="colorsSectionHeader"
             onclick="ToggleSection(event, this)"
-            position="3">
+            position="5">
         <image />
         <label value="&colorsSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="colorsSection" position="4">
+      <vbox class="section" id="colorsSection" position="6">
         <hbox align="center" style="margin-bottom:1em" animatable="true">
           <label value="&color.label;"/>
           <hbox>

@@ -19,12 +19,12 @@
             id="miscSectionHeader"
             onclick="ToggleSection(event, this)"
             animatable="false"
-            position="25">
+            position="27">
         <image />
         <label value="&miscSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="miscSection" animatable="false" position="26">
+      <vbox class="section" id="miscSection" animatable="false" position="28">
         <grid>
           <columns><column/><column/></columns>
           <rows>

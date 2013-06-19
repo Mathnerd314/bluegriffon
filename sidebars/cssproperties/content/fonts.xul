@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % csspropertiesDTD SYSTEM "chrome://cssproperties/locale/cssproperties.dtd">
+  %csspropertiesDTD;
+]>
+
+<overlay id="fontsOverlay"
+         xmlns:html = "http://www.w3.org/1999/xhtml"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript"  src="chrome://cssproperties/content/fonts.js" />
+
+  <vbox id="propertiesBox">
+        <hbox align="center"
+              class="csspropertiesHeader"
+              context="sectionHeaderContext"
+              id="fontsSectionHeader"
+              onclick="ToggleSection(event, this)"
+              position="3">
+        <image />
+        <label value="Font Features"/>
+      </hbox>
+
+      <vbox class="section"
+            id="fontsSection"
+            position="4">
+        <grid id="ffGrid">
+          <columns><column/><column/><column/><column flex="1"/><column/><column/><column/></columns>
+          <rows>
+            <row align="center">
+              <checkbox id="ffAALT"/>
+              <textbox id="ffAALTval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/aalt.png" tooltiptext="Access all alternates"/></hbox>
+              <spacer/>
+              <checkbox id="ffCALT"/>
+              <textbox id="ffCALTval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/calt.png" tooltiptext="Contextual alternates"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffSALT"/>
+              <textbox id="ffSALTval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/salt.png" tooltiptext="Stylistic alternates"/></hbox>
+              <spacer/>
+              <checkbox id="ffLIGA"/>
+              <textbox id="ffLIGAval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/liga.png" tooltiptext="Standard ligatures"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffCLIG"/>
+              <textbox id="ffCLIGval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/clig.png" tooltiptext="Contextual ligatures"/></hbox>
+              <spacer/>
+              <checkbox id="ffDLIG"/>
+              <textbox id="ffDLIGval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/dlig.png" tooltiptext="Discretionary ligatures"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffHIST"/>
+              <textbox id="ffHISTval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/hist.png" tooltiptext="Historical forms"/></hbox>
+              <spacer/>
+              <checkbox id="ffHLIG"/>
+              <textbox id="ffHLIGval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/hlig.png" tooltiptext="Historical ligatures"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffUNIC"/>
+              <textbox id="ffUNICval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/unic.png" tooltiptext="Unicase"/></hbox>
+             <spacer/>
+              <checkbox id="ffSMCP"/>
+              <textbox id="ffSMCPval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/smcp.png" tooltiptext="Small capitals"/></hbox>
+             </row>
+            <row align="center">
+              <checkbox id="ffC2SC"/>
+              <textbox id="ffC2SCval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/c2sc.png" tooltiptext="Small capitals from capitals"/></hbox>
+              <spacer/>
+              <checkbox id="ffC2PC"/>
+              <textbox id="ffC2PCval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/c2pc.png" tooltiptext="Petite capitals from capitals"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffPCAP"/>
+              <textbox id="ffPCAPval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/pcap.png" tooltiptext="Petite capitals"/></hbox>
+              <spacer/>
+              <checkbox id="ffCASE"/>
+              <textbox id="ffCASEval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/case.png" tooltiptext="Case sensitive forms"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffCPSP"/>
+              <textbox id="ffCPSPval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/cpsp.png" tooltiptext="Capital spacing"/></hbox>
+              <spacer/>
+              <checkbox id="ffTITL"/>
+              <textbox id="ffTITLval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/titl.png" tooltiptext="Titling"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffSWSH"/>
+              <textbox id="ffSWSHval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/swsh.png" tooltiptext="Swash"/></hbox>
+              <spacer/>
+              <checkbox id="ffCSWH"/>
+              <textbox id="ffCSWHval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/cswh.png" tooltiptext="Contextual swash"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffFRAC"/>
+              <textbox id="ffFRACval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/frac.png" tooltiptext="Fractions"/></hbox>
+              <spacer/>
+              <checkbox id="ffAFRC"/>
+              <textbox id="ffAFRCval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/afrc.png" tooltiptext="Alternative fractions"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffORDN"/>
+              <textbox id="ffORDNval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/ordn.png" tooltiptext="Ordinals"/></hbox>
+              <spacer/>
+              <checkbox id="ffNUMR"/>
+              <textbox id="ffNUMRval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/numr.png" tooltiptext="Numerators"/></hbox>
+            </row>
+          </rows>
+        </grid>
+      </vbox>
+  </vbox>
+</overlay>

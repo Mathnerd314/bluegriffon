@@ -18,13 +18,13 @@
             context="sectionHeaderContext"
             id="geometrySectionHeader"
             onclick="ToggleSection(event, this)"
-            position="5">
+            position="7">
         <image />
         <label value="&geometrySectionHeader.label;"/>
       </hbox>
 
       
-      <vbox class="section" id="geometrySection" position="6">
+      <vbox class="section" id="geometrySection" position="8">
 
         <grid>
           <columns><column/><column/><column/><column/><column/></columns>

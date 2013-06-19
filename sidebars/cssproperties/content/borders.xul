@@ -18,12 +18,12 @@
             context="sectionHeaderContext"
             id="bordersSectionHeader"
             onclick="ToggleSection(event, this)"
-            position="9">
+            position="11">
         <image />
         <label value="&bordersSectionHeader.label;"/>
       </hbox>
 
-      <vbox class="section" id="bordersSection" position="10">
+      <vbox class="section" id="bordersSection" position="12">
         <checkbox label="&sameBorderOnFourEdges.label;"
                   id="sameBorderOnFourEdgesCheckbox"
                   oncommand="ToggleSameBorderOnFourEdges(this)"/>

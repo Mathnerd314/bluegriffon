@@ -18,12 +18,12 @@
             context="sectionHeaderContext"
             id="positionSectionHeader"
             onclick="ToggleSection(event, this)"
-            position="7">
+            position="9">
         <image />
         <label value="&positionSectionHeader.label;"/>
       </hbox>
 
-      <grid class="section" id="positionSection" position="8">
+      <grid class="section" id="positionSection" position="10">
         <columns><column/><column/></columns>
         <rows>
           <row align="center" animatable="false">

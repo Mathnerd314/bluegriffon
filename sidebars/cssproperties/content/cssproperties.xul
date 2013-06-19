@@ -45,6 +45,7 @@
 <?xul-overlay href="chrome://cssproperties/content/popups.xul"?>
 
 <?xul-overlay href="chrome://cssproperties/content/general.xul"?>
+<?xul-overlay href="chrome://cssproperties/content/fonts.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/colors.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/geometry.xul"?>
 <?xul-overlay href="chrome://cssproperties/content/position.xul"?>
