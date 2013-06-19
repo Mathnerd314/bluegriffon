@@ -27,8 +27,8 @@
             position="4">
         <grid id="ffGrid">
           <columns><column/><column/><column/><column flex="1"/><column/><column/><column/></columns>
-          <rows>
-            <row align="center">
+          <rows id="ffRows">
+            <!--row align="center">
               <checkbox id="ffAALT"/>
               <textbox id="ffAALTval" size="2"/>
               <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/aalt.png" tooltiptext="Access all alternates"/></hbox>
@@ -127,8 +127,41 @@
               <textbox id="ffNUMRval" size="2"/>
               <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/numr.png" tooltiptext="Numerators"/></hbox>
             </row>
+            <row align="center">
+              <checkbox id="ffDNOM"/>
+              <textbox id="ffDNOMval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/dnom.png" tooltiptext="Denominators"/></hbox>
+              <spacer/>
+              <checkbox id="ffSINF"/>
+              <textbox id="ffSINFval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/sinf.png" tooltiptext="Scientific inferiors"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffSUPS"/>
+              <textbox id="ffSUPSval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/sups.png" tooltiptext="Superscript"/></hbox>
+              <spacer/>
+              <checkbox id="ffSUBS"/>
+              <textbox id="ffSUBSval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/subs.png" tooltiptext="Subscript"/></hbox>
+            </row>
+            <row align="center">
+              <checkbox id="ffONUM"/>
+              <textbox id="ffONUMval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/onum.png" tooltiptext="Oldstyle figures"/></hbox>
+              <spacer/>
+              <checkbox id="ffLNUM"/>
+              <textbox id="ffLNUMval" size="2"/>
+              <hbox align="center"><image src="chrome://cssproperties/skin/fontFeatures/lnum.png" tooltiptext="Lining Figures"/></hbox>
+            </row-->
           </rows>
         </grid>
       </vbox>
   </vbox>
+  <script type="application/x-javascript">
+    <![CDATA[
+      window.addEventListener('load',
+                              FontsInit,
+                              false);
+    ]]></script>
 </overlay>
