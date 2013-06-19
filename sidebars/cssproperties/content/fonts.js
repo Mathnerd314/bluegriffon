@@ -53,6 +53,38 @@ RegisterIniter(FontsSectionIniter);
 
 function FontsSectionIniter(aElt, aRuleset)
 {
+  var ff = CssInspector.getCascadedValue(aRuleset, "-moz-font-feature-settings");
+
+  var checkboxes = document.getElementById("ffRows").querySelectorAll("checkbox");
+  var rv = [];
+  for (var i = 0; i < checkboxes.length; i++) {
+    var c = checkboxes[i];
+    var t = c.nextElementSibling;
+    c.checked = false;
+    t.setAttribute("disabled", "true");
+  }
+
+  var ffArray = ff.split(",");
+  for (var i = 0; i < ffArray.length; i++) {
+    var f = ffArray[i].trim();
+    var m = f.match( /"(....)"\s*([^\s]*)|'(....)'\s*([^\s]*)/ );
+    if (m) {
+      if (m[1]) {
+        var e = document.getElementById("ff" + m[1].toUpperCase());
+        e.checked = true;
+        e.nextElementSibling.removeAttribute("disabled");
+        if (m[2])
+          e.nextElementSibling.value = m[2];
+      }
+      else if (m[3]) {
+        var e = document.getElementById("ff" + m[3].toUpperCase());
+        e.nextElementSibling.removeAttribute("disabled");
+        e.checked = true;
+        if (m[4])
+          e.nextElementSibling.value = m[4];
+      }
+    }
+  }
 }
 
 function FontsInit()
@@ -123,15 +155,17 @@ function ReserializeFontFeatures(aElt)
   var rv = [];
   for (var i = 0; i < checkboxes.length; i++) {
     var c = checkboxes[i];
+    var t = c.nextElementSibling;
     if (c.checked) {
-
       var id = c.getAttribute("id").substr(2, 4).toLowerCase();
       var str = '"' + id + '"';
-      var t = c.nextElementSibling;
+      t.removeAttribute("disabled");
       if (t.value)
         str += " " + t.value;
       rv.push(str);
     }
+    else
+      t.setAttribute("disabled", "true");
   }
   if (rv.length)
     ApplyStyles([
