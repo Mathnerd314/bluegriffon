@@ -332,6 +332,51 @@ var CssUtils = {
     catch(e) { }
 
     return 0;
+  },
+
+  getAllMediaQueries: function(aDocument)
+  {
+    var rv = [];
+    var r = /(only\s)?screen\s+and\s+\(max\-width\s*:\s*(\d*(\.\d*)?)px\)/ ;
+  
+    function enumerateRules(aSheet)
+    {
+      var remote = (aSheet.ownerNode instanceof Components.interfaces.nsIDOMHTMLLinkElement)
+                   && (aSheet.href.substr(0, 6) == "http://");
+
+      if (aSheet.media && aSheet.media.mediaText) {
+        var m = aSheet.media.mediaText.match(r);
+        if (m) {
+          if (aCollectRules)
+            rv.push( { o: aSheet, v: m[2], e: remote } );
+          else
+            rv.push(m[2]);
+        }
+      }
+
+      var cssRules = aSheet.cssRules;
+      for (var i = 0; i < cssRules.length; i++)
+      {
+        var rule = cssRules.item(i);
+        if (rule.type == CssUtils.kCSSRule.MEDIA_RULE)
+        {
+          if (rule.media.mediaText) {
+            var m = rule.media.mediaText.match(r);
+            if (m) {
+              if (aCollectRules)
+                rv.push( { o: rule, v: m[2], e: remote } );
+              else
+                rv.push(m[2]);
+            }
+          }
+        }
+      }
+      return true;
+    }
+  
+    CssUtils.enumerateStyleSheets(aDocument, enumerateRules);
+
+    return rv;
   }
 };
 

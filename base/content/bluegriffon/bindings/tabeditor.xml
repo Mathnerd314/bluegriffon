@@ -712,11 +712,19 @@
            if (mode == "source") {
              gDialog.sourceModeButton.setAttribute("selected", "true");
              gDialog.wysiwygModeButton.removeAttribute("selected");
+             gDialog.printPreviewModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "hidden";
              deck.firstChild.focus();
            }
            else {
-             gDialog.wysiwygModeButton.setAttribute("selected", "true");
+             if (EditorUtils.getCurrentEditor().getMedium() == "screen") {
+               gDialog.wysiwygModeButton.setAttribute("selected", "true");
+               gDialog.printPreviewModeButton.removeAttribute("selected");
+             }
+             else {
+               gDialog.printPreviewModeButton.setAttribute("selected", "true");
+               gDialog.wysiwygModeButton.removeAttribute("selected");
+             }
              gDialog.sourceModeButton.removeAttribute("selected");
              gDialog.structurebar.style.visibility = "";
              deck.lastChild.firstChild.focus();

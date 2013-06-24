@@ -577,7 +577,10 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   EditorUtils.getCurrentEditor().incrementModificationCount(1);  
 
   // find the media query if any
-  var query = EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
+  var query = "";
+  if (EditorUtils.getCurrentEditor().getMedium() == "print")
+    query = "print";
+  //= EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
   var state;
@@ -703,10 +706,10 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     }
     else {
       sheet = FindLastEditableStyleSheet();
-      var str = (query ? "@media screen and (max-width: " + query + "px) {" : "") +
+      var str = (query ? "@media " + query + " {" : "") +
                        aDelimitor + aIdent + "{" +
                          property + ": " + value + " " + "}" +
-                         (query  ? " ]" : "");
+                         (query  ? " }" : "");
       sheet.insertRule(str, sheet.cssRules.length);
     }
     if (sheet.ownerNode.href)
@@ -730,7 +733,7 @@ function RulesMatchesQuery(rule, query)
   if (!query) // no media query specified, we always match
     return true;
 
-  query = "screen and (max-width: " + query + "px)";
+  //query = "screen and (max-width: " + query + "px)";
 
   if ((rule.parentRule &&
        rule.parentRule.type == CSSRule.MEDIA_RULE &&

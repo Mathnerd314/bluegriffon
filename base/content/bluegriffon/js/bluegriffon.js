@@ -853,6 +853,12 @@ function ToggleViewMode(aElement)
   if (!aElement) // sanity case
     return false;
 
+  var editor = EditorUtils.getCurrentEditor();
+  if (aElement.id == "wysiwygModeButton")
+    editor.setMedium("screen");
+  else if (aElement.id == "printPreviewModeButton")
+    editor.setMedium("print");
+
   var mode =  aElement.getAttribute("mode");
   if (mode == GetCurrentViewMode())
     return true;
@@ -866,7 +872,6 @@ function ToggleViewMode(aElement)
     child = child.nextSibling;
   }
 
-  var editor = EditorUtils.getCurrentEditor();
   var editorElement = EditorUtils.getCurrentEditorElement();
   EditorUtils.getCurrentEditorDeck().setAttribute("currentmode", mode);
 
@@ -991,6 +996,7 @@ function ToggleViewMode(aElement)
             var error = doc.documentElement.lastChild.textContent;
             window.openDialog("chrome://bluegriffon/content/dialogs/parsingError.xul", "_blank",
                               "chrome,modal,titlebar", message, error);
+            gDialog.printPreviewModeButton.removeAttribute("selected");
             gDialog.wysiwygModeButton.removeAttribute("selected");
             gDialog.sourceModeButton.setAttribute("selected", "true");
             EditorUtils.getCurrentEditorDeck().setAttribute("currentmode", "source");

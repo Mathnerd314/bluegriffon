@@ -193,7 +193,7 @@
           var queries = [];
           var ss = doc.styleSheets;
           for (var i = 0; i < ss.length; i++) {
-            this._collectMediaQueries(ss[i], queries, true);
+            this._collectMediaQueries(ss[i], queries, true, false);
           }
           var sheets = [];
           for (var i = 0; i < queries.length; i++) {
@@ -288,6 +288,7 @@
         <parameter name="x"/>
         <parameter name="aIsRefresh"/>
         <body><![CDATA[
+        EditorUtils.getCurrentEditor().setMedium("print");
           var zoom = this.getZoom();
           if (!aIsRefresh)
             x = x / zoom;
@@ -321,20 +322,29 @@
         <parameter name="aSheet"/>
         <parameter name="aQueries"/>
         <parameter name="aCollectRules"/>
+        <parameter name="aAllQueries"/>
         <body><![CDATA[
           if (!aSheet)
             return;
           if (aSheet.media &&
               aSheet.media.mediaText) {
-            var m = aSheet.media.mediaText.match(this.mRegexp);
-            if (m) {
+            if (aAllQueries) {
               if (aCollectRules)
-                aQueries.push( { o: aSheet, v: m[2] } );
+                aQueries.push( { o: aSheet, v: aSheet.media.mediaText } );
               else
-                aQueries.push(m[2]);
+                aQueries.push(aSheet.media.mediaText);
+            }
+            else {
+	            var m = aSheet.media.mediaText.match(this.mRegexp);
+	            if (m) {
+	              if (aCollectRules)
+	                aQueries.push( { o: aSheet, v: m[2] } );
+	              else
+	                aQueries.push(m[2]);
+	            }
             }
           }
-          this._collectMediaQueriesFromRules(aSheet.cssRules, aQueries, aCollectRules);
+          this._collectMediaQueriesFromRules(aSheet.cssRules, aQueries, aCollectRules, aAllQueries);
         ]]></body>
       </method>
 
@@ -342,21 +352,30 @@
         <parameter name="aRules"/>
         <parameter name="aQueries"/>
         <parameter name="aCollectRules"/>
+        <parameter name="aAllQueries"/>
         <body><![CDATA[
           for (var i = 0; i < aRules.length; i++) {
             var rule = aRules[i];
             switch (rule.type) {
               case CSSRule.IMPORT_RULE:
-                this._collectMediaQueries(rule.styleSheet, aQueries, aCollectRules);
+                this._collectMediaQueries(rule.styleSheet, aQueries, aCollectRules, aAllQueries);
                 break;
               case CSSRule.MEDIA_RULE:
                 if (rule.media.mediaText) {
-                  var m = rule.media.mediaText.match(this.mRegexp);
-                  if (m) {
-                    if (aCollectRules)
-                      aQueries.push( { o: rule, v: m[2] } );
-                    else
-                      aQueries.push(m[2]);
+			            if (aAllQueries) {
+			              if (aCollectRules)
+			                aQueries.push( { o: rule, v: rule.media.mediaText } );
+			              else
+			                aQueries.push(rule.media.mediaText);
+			            }
+			            else {
+	                  var m = rule.media.mediaText.match(this.mRegexp);
+	                  if (m) {
+	                    if (aCollectRules)
+	                      aQueries.push( { o: rule, v: m[2] } );
+	                    else
+	                      aQueries.push(m[2]);
+	                  }
                   }
                 }
                 break;
@@ -368,6 +387,8 @@
 
       <method name="reset">
         <body><![CDATA[
+          Components.utils.import("resource://app/modules/cssInspector.jsm");
+
           var SVGmarkers = this.getChild("SVGmarkers");
 
           // first clear all existing markers
@@ -382,10 +403,21 @@
           var queries = [];
           var ss = doc.styleSheets;
           for (var i = 0; i < ss.length; i++) {
-            this._collectMediaQueries(ss[i], queries, false);
+            this._collectMediaQueries(ss[i], queries, false, true);
           }
           for (var i = 0; i < queries.length; i++) {
-            this.addMarker(parseFloat(queries[i]), true);
+            var m = queries[i].match(this.mRegexp);
+            if (m)
+              this.addMarker(parseFloat(m[2]), true);
+            else {
+              var parsed = CssInspector.parseMediaQuery(queries[i]);
+              //alert(queries[i] + "\n" + (parsed ? parsed.toSource() : null));
+              var done = doc.documentElement.getUserData("MediaQueryWarning");
+              if (!done) {
+                doc.documentElement.setUserData("MediaQueryWarning", true, null);
+                alert("this document uses media queries that BlueGriffon cannot handle (yet)");
+              }
+            }
           }
         ]]></body>
       </method>
