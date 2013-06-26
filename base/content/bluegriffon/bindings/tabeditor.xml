@@ -343,8 +343,13 @@
                         } else if (meta.hasAttribute("charset"))
                           charset = meta.getAttribute("charset");
                       }
-                      if (!charset)
-                        charset = this.mEditor.docShell.charset;
+                      if (!charset) {
+                        // do we deal with a newly created document?
+                        if (this.mURL.substr(0, 11) == "resource://")
+                          charset = "UTF-8";
+                        else
+                          charset = this.mEditor.docShell.charset;
+                      }
 
                       editor.documentCharacterSet = charset;
 
