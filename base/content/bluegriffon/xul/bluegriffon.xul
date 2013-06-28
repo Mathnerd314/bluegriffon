@@ -158,7 +158,13 @@
                    oncommand="ToggleViewMode(this)"
                    mode="source"
                    observes="cmd_viewModeEnabler"/>
-        </tabs>
+          <tab
+                   id="printPreviewModeButton"
+                   label="&printMode.label;"
+                   oncommand="ToggleViewMode(this)"
+                   mode="wysiwyg"
+                   observes="cmd_viewModeEnabler"/>
+       </tabs>
 #else
         <hbox id="modeTabbox" previousMode="wysiwyg" flex="1">
           <spacer flex="1"/>
@@ -169,11 +175,17 @@
                    onclick="ToggleViewMode(this)"
                    mode="wysiwyg"
                    observes="cmd_viewModeEnabler"/>
-          <label class="multiButton right"
+          <label class="multiButton"
                    id="sourceModeButton"
                    value="&sourceMode.label;"
                    onclick="ToggleViewMode(this)"
                    mode="source"
+                   observes="cmd_viewModeEnabler"/>
+          <label class="multiButton right"
+                   id="printPreviewModeButton"
+                   value="&printMode.label;"
+                   onclick="ToggleViewMode(this)"
+                   mode="wysiwyg"
                    observes="cmd_viewModeEnabler"/>
           <spacer flex="1"/>
         </hbox>

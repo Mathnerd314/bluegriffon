@@ -457,7 +457,7 @@ function ApplyStyles(aStyles)
   RestoreSelection();
 }
 
-function FindLastEditableStyleSheet()
+function FindLastEditableStyleSheet(aQuery)
 {
   var doc = EditorUtils.getCurrentDocument();
   var headElt = doc.querySelector("head");
@@ -472,12 +472,14 @@ function FindLastEditableStyleSheet()
       var media = child.getAttribute("media") || "";
       var mediaArray = media.split(",");
       mediaArray.forEach(function(element,index,array) {array[index] = array[index].toLowerCase().trim()});
-      var isForScreen = (!media || media == "all" || mediaArray.indexOf("screen") != -1);
+      var isForRightMedium = aQuery
+                             ? (mediaArray.indexOf(aQuery) != -1)
+                             : (!media || media == "all" || mediaArray.indexOf("screen") != -1);
       if (name == "link") {
         var uri = Components.classes["@mozilla.org/network/io-service;1"]
                                 .getService(Components.interfaces.nsIIOService)
                                 .newURI(child.sheet.href, null, null);
-        if (uri.scheme == "file" && isForScreen) {
+        if (uri.scheme == "file" && isForRightMedium) {
           // is the file writable ?
           var file = UrlUtils.newLocalFile(UrlUtils.makeAbsoluteUrl(child.sheet.href));
           if (file.isWritable())
@@ -488,7 +490,7 @@ function FindLastEditableStyleSheet()
         else
           child = child.previousElementSibling;
       }
-      else if (isForScreen)
+      else if (isForRightMedium)
         found = true;
       else
         child = child.previousElementSibling;
@@ -568,14 +570,24 @@ function onLengthMenulistCommand(aElt, aUnitsString, aIdentsString, aAllowNegati
     aCallback(aElt);
 }
 
-function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
-                                        aDelimitor, aRegExpDelimitor, aIdent)
+function ApplyStyleChangesToStylesheets(editor,           // the current editor
+                                        aElement,         // the selection container element
+                                        property,         // the property we try to set/reset
+                                        value,            // the value or "" for that property
+                                        aDelimitor,       // a character
+                                        aRegExpDelimitor, // the same in regexp form
+                                        aIdent)           // the ident needed to create a rule
 {
   // first, clean the style attribute for the style to apply
   var txn = new diStyleAttrChangeTxn(aElement, property, "", "");
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
   EditorUtils.getCurrentEditor().incrementModificationCount(1);  
 
+  // find the media query if any
+  var query = "";
+  if (EditorUtils.getCurrentEditor().getMedium() == "print")
+    query = "print";
+  //= EditorUtils.getCurrentTabEditor().mResponsiveRuler.currentQuery;
   var inspector = Components.classes["@mozilla.org/inspector/dom-utils;1"]
                     .getService(Components.interfaces.inIDOMUtils);
   var state;
@@ -590,6 +602,104 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
   if (gDialog.hoverStateCheckbox.checked) {
     inspector.setContentState(gCurrentElement.ownerDocument.documentElement, state | 4);
   }
+
+  var whereToInsert;
+  switch (query) {
+    case "":
+      whereToInsert = FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent);
+      if (whereToInsert.sheet) {
+        if (whereToInsert.rule) {
+          if (value) {
+            whereToInsert.rule.style.setProperty(property, value, whereToInsert.priority);
+          }
+          else
+            whereToInsert.rule.style.removeProperty(property);
+          if (!whereToInsert.rule.style.length)
+            whereToInsert.sheet.deleteRule(whereToInsert.rule);
+        }
+        else { // we don't have a rule host so we need to append a new rule
+          whereToInsert.sheet.insertRule(aDelimitor + aIdent + "{" +
+                                           property + ": " + value + " " +
+                                           (whereToInsert. priority ? "!important" : "") + "}",
+                                         whereToInsert.sheet.cssRules.length);
+        }
+    
+        if (whereToInsert.sheet.ownerNode.href)
+          CssInspector.serializeFileStyleSheet(whereToInsert.sheet, whereToInsert.sheet.href);
+        else
+          CssUtils.reserializeEmbeddedStylesheet(whereToInsert.sheet, editor);
+    
+      }
+      else if (!whereToInsert.impossible) {
+        // the style attribute case, unfortunately...
+        var txn = new diStyleAttrChangeTxn(aElement, property, value, "important");
+        EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
+        EditorUtils.getCurrentEditor().incrementModificationCount(1);  
+      }
+      else {
+        // unfortunately impossible, warn the user...
+        // TBD XXX
+      }
+      break;
+      
+    case "print":
+      whereToInsert = FindWhereToInsertRuleForPrint(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent, aElement);
+      if (whereToInsert.sheet) {
+        if (whereToInsert.rule) {
+          if (whereToInsert.rule.type == CSSRule.MEDIA_RULE) {
+            whereToInsert.rule.insertRule(aDelimitor + aIdent + "{" +
+                                             property + ": " + value + " " +
+                                             (whereToInsert. priority ? "!important" : "") + "}",
+                                           whereToInsert.rule.cssRules.length);
+          }
+          else { // STYLE_RULE
+            if (value) {
+              whereToInsert.rule.style.setProperty(property, value, whereToInsert.priority);
+            }
+            else 
+              whereToInsert.rule.style.removeProperty(property);
+            if (!whereToInsert.rule.style.length) 
+              whereToInsert.sheet.deleteRule(whereToInsert.rule);
+          }
+        }
+        else { // we don't have a rule host so we need to append a new rule
+          // two cases depending on the sheet's media
+          if (IsSheetOnlyForPrint(whereToInsert.sheet))
+            whereToInsert.sheet.insertRule(aDelimitor + aIdent + "{" +
+                                             property + ": " + value + " " +
+                                             (whereToInsert. priority ? "!important" : "") + "}",
+                                           whereToInsert.sheet.cssRules.length);
+          else
+            whereToInsert.sheet.insertRule("@media print { " + aDelimitor + aIdent + "{" +
+                                             property + ": " + value + " " +
+                                             (whereToInsert. priority ? "!important" : "") + "}}",
+                                           whereToInsert.sheet.cssRules.length);
+        }
+    
+        if (whereToInsert.sheet.ownerNode.href)
+          CssInspector.serializeFileStyleSheet(whereToInsert.sheet, whereToInsert.sheet.href);
+        else
+          CssUtils.reserializeEmbeddedStylesheet(whereToInsert.sheet, editor);
+    
+      }
+      else {
+        // unfortunately impossible, warn the user...
+        // TBD XXX
+      }
+      break;
+
+    default: break;
+  }
+
+}
+
+function FindWhereToInsertRuleForScreen(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent)
+{
+  var rv = { sheet: null,
+             rule: null,
+             priority: "",
+             impossible: false };
+
   var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
   if (inspectedRule && inspectedRule.rule) {
     // ok, that property is already applied through a CSS rule
@@ -608,22 +718,10 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
       if (topSheet.ownerNode &&
           (!sheet.href || sheet.href.substr(0, 4) != "http")) {
         // yes we can edit it...
-        if (sheet.href) { // external stylesheet
-          var txn = new diChangeFileStylesheetTxn(sheet.href, inspectedRule.rule,
-                                                  property, value, priority);
-          EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);  
-        }
-        else { // it's an embedded stylesheet
-          if (value) {
-            inspectedRule.rule.style.setProperty(property, value, priority);
-          }
-          else
-            inspectedRule.rule.style.removeProperty(property);
-          if (!inspectedRule.rule.style.length)
-            sheet.deleteRule(inspectedRule.rule);
-          CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-        }
-        return;
+        rv.sheet = sheet;
+        rv.rule = inspectedRule.rule;
+        rv.priority = priority;
+        return rv;
       }
     }
     // we need to check if the rule
@@ -633,85 +731,69 @@ function ApplyStyleChangesToStylesheets(editor, aElement, property, value,
     // attached to the document
     var sheet = FindLastEditableStyleSheet();
     var spec = inspectedRule.specificity;
-    if (!spec.a &&
-        ((spec.b == 1 && spec.c == 0 && spec.d == 0) ||
-         !spec.b)) { 
-      var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                           ruleset, aDelimitor + aIdent);
+    var refSpecificity;
+    switch (aDelimitor) {
+      case "#": refSpecificity = {a:0, b:1, c:0, d:0}; break;
+      case ".": refSpecificity = {a:0, b:0, c:1, d:0}; break;
+      case "":  refSpecificity = {a:0, b:0, c:0, d:1}; break;
+      default: break; // should never happen
+    }
+    if (compareSpecificities(refSpecificity, spec) >= 0) { 
+      var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent);
       if (existingRule &&
           (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
-        sheet = existingRule.parentStyleSheet;
-        existingRule.style.setProperty(property, value, priority);
+        rv.sheet = existingRule.parentStyleSheet;
+        rv.rule = inspectedRule.rule;
+        rv.priority = priority;
+        return rv;
       }
-      else { 
-        // cool, we can just create a new rule with an ID selector
-        // but don't forget to set the priority...
-        sheet.insertRule(aDelimitor + aIdent + "{" +
-                           property + ": " + value + " " +
-                           (priority ? "!important" : "") + "}",
-                         sheet.cssRules.length);
-      }
-      if (sheet.ownerNode.href)
-        CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-      else
-        CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-      return;
+      // cool, we can just create a new rule with an ID selector
+      // but don't forget to set the priority...
+      rv.sheet = sheet;
+      rv.priority = priority;
+      return rv;
     }
     // at this point, we have a greater specificity; hum, then what's
     // the priority of the declaration?
     if (!priority) {
-      var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                           ruleset, aDelimitor + aIdent);
+      var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent);
       if (existingRule &&
           (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
-        sheet = existingRule.parentStyleSheet;
-        existingRule.style.setProperty(property, value, "important");
+        rv.sheet = existingRule.parentStyleSheet;
+        rv.rule = inspectedRule.rule;
+        rv.priority = "important";
+        return rv;
       }
-      else {
-        // no priority, so cool we can create a !important declaration
-        // for the ID
-        sheet.insertRule(aDelimitor + aIdent + "{" +
-                           property + ": " + value + " !important }",
-                         sheet.cssRules.length);
-      }
-      if (sheet.ownerNode.href)
-        CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-      else
-        CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
-      return;
+      // no priority, so cool we can create a !important declaration
+      // for the ID
+      rv.sheet = sheet;
+      rv.priority = "important";
+      return rv;
     }
     // argl, it's already a !important declaration :-( our only
     // choice is a !important style attribute... We can't just clean the
     // style on inspectedRule because some other rules could also apply
     // is that one goes away.
-    var txn = new diStyleAttrChangeTxn(aElement, property, value, "important");
-    EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
-    EditorUtils.getCurrentEditor().incrementModificationCount(1);  
-  }
-  else {
-    // oh, the property is not applied yet, let's just create a rule
-    // with the ID selector for that property
-    var sheet;
-    var existingRule = CssInspector.findLastRuleInRulesetForSelector(
-                         ruleset, aDelimitor + aIdent);
-    if (existingRule &&
-          (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
-      sheet = existingRule.parentStyleSheet;
-      existingRule.style.setProperty(property, value, "");
-    }
-    else {
-      sheet = FindLastEditableStyleSheet();
-      sheet.insertRule(aDelimitor + aIdent + "{" +
-                         property + ": " + value + " " + "}",
-                       sheet.cssRules.length);
-    }
-    if (sheet.ownerNode.href)
-      CssInspector.serializeFileStyleSheet(sheet, sheet.href);
-    else
-      CssUtils.reserializeEmbeddedStylesheet(sheet, editor);
+
+    // nothing to set
+    return rv;
   }
 
+  // oh, the property is not applied yet, let's just create a rule
+  // with the ID selector for that property
+  var sheet;
+  var existingRule = CssInspector.findLastRuleInRulesetForSelector(ruleset, aDelimitor + aIdent);
+  if (existingRule &&
+        (!existingRule.parentStyleSheet.href || existingRule.parentStyleSheet.href.substr(0, 4) != "http")) {
+    rv.sheet = existingRule.parentStyleSheet;
+    rv.rule = existingRule;
+  }
+  else {
+    rv.sheet = FindLastEditableStyleSheet();
+  }
+  return rv;
 }
+
 
 function ToggleHover(aElt)
 {
@@ -719,4 +801,183 @@ function ToggleHover(aElt)
     gDialog.cssPolicyMenulist.value = "id";
   var node = gCurrentElement;
   SelectionChanged(null, node, null);
+}
+
+function RulesMatchesQuery(rule, query)
+{
+  if (!query) // no media query specified, we always match
+    return true;
+
+  //query = "screen and (max-width: " + query + "px)";
+
+  if ((rule.parentRule &&
+       rule.parentRule.type == CSSRule.MEDIA_RULE &&
+       rule.parentRule.media.mediaText == query) ||
+      (rule.parentStyleSheet &&
+       rule.parentStyleSheet.media &&
+       rule.parentStyleSheet.media.mediaText == query))
+    return true;
+  
+  return false;
+}
+
+function compareSpecificities(s1, s2)
+{
+  if (s1.a > s2.a ||
+      (s1.a == s2.a && s1.b > s2.b) ||
+      (s1.a == s2.a && s1.b == s2.b && s1.c > s2.c) ||
+      (s1.a == s2.a && s1.b == s2.b && s1.c == s2.c && s1.d > s2.d))
+    return +1;
+  if (s2.a > s1.a ||
+      (s2.a == s1.a && s2.b > s1.b) ||
+      (s2.a == s1.a && s2.b == s1.b && s2.c > s1.c) ||
+      (s2.a == s1.a && s2.b == s1.b && s2.c == s1.c && s2.d > s1.d))
+    return -1;
+  return 0;
+}
+
+function FindWhereToInsertRuleForPrint(ruleset, property, value, aDelimitor, aRegExpDelimitor, aIdent, aElement)
+{
+  var rv = { sheet: null,
+             rule: null,
+             priority: "",
+             impossible: false };
+
+  var inspectedRule = CssInspector.findRuleForProperty(ruleset, property);
+  if (inspectedRule && inspectedRule.rule && RulesMatchesQuery(inspectedRule.rule, "print")) {
+    // ok, that property is already applied through a CSS rule
+
+    // is that rule dependent on the ID selector for that ID?
+    // if yes, let's try to tweak it
+    var priority = inspectedRule.rule.style.getPropertyPriority(property);
+    var selector = inspectedRule.rule.selectorText;
+    var r = new RegExp( aRegExpDelimitor + aIdent + "$|" + aRegExpDelimitor + aIdent + "[\.:,\\[]", "g");
+    if (selector.match(r)) {
+      // yes! can we edit the corresponding stylesheet or not?
+      var sheet = inspectedRule.rule.parentStyleSheet;
+      var topSheet = sheet;
+      while (topSheet.parentStyleSheet)
+        topSheet = topSheet.parentStyleSheet;
+      if (topSheet.ownerNode &&
+          (!sheet.href || sheet.href.substr(0, 4) != "http")) {
+        // yes we can edit it...
+        rv.sheet = sheet;
+        rv.rule = inspectedRule.rule;
+        rv.priority = priority;
+        return rv;
+      }
+    }
+  }
+
+  var sheet = FindLastEditableStylesheetForPrint();
+  rv.sheet = sheet;
+  function findMediaPrintRuleOrMatch(aRules, aElement, aDelimitor, aSelectorText, aTop) {
+    var refSpecificity = {a:0, b:0, c:0, d:0};
+    switch (aDelimitor) {
+      case "#": refSpecificity = {a:0, b:1, c:0, d:0}; break;
+      case ".": refSpecificity = {a:0, b:0, c:1, d:0}; break;
+      case "":  refSpecificity = {a:0, b:0, c:0, d:1}; break;
+      default: break; // should never happen
+    }
+    if (aRules.length) {
+      var index = aRules.length - 1;
+      while (index >= 0) {
+        var rule = aRules.item(index);
+        if (rule.type == CSSRule.STYLE_RULE) {
+          if (!aTop && rule.selectorText == aSelectorText)
+            return rule;
+          if (aElement.mozMatchesSelector(rule.selectorText)) {
+            var parser = new CSSParser();
+            parser._init();
+            parser.mPreserveWS       = false;
+            parser.mPreserveComments = false;
+            parser.mPreservedTokens = [];
+            parser.mScanner.init(rule.selectorText);
+            var token = parser.getToken(false, false);
+            if (token.isNotNull()) {
+              var selector = parser.parseSelector(token, true);
+              if (compareSpecificities(selector.specificity, refSpecificity) >= 0)
+                return aTop ? null : rule.parentRule; // gah we need to create a new rule
+            }
+          }
+        }
+        else if (rule.type == CSSRule.MEDIA_RULE && rule.media.mediaText == "print") {
+          var r = findMediaPrintRuleOrMatch(rule.cssRules, aElement, aDelimitor, aSelectorText, false);
+          return r ? r : rule;
+        }
+        index--;
+      }
+    }
+    return null;
+  }
+  rv.rule = findMediaPrintRuleOrMatch(sheet.cssRules, aElement, aDelimitor, aDelimitor + aIdent, true);
+  rv.priority = priority;
+  return rv;
+}
+
+function FindLastEditableStylesheetForPrint()
+{
+  var doc = EditorUtils.getCurrentDocument();
+  var headElt = doc.querySelector("head");
+  var styleElts = doc.querySelectorAll("head > style, head > link[rel='stylesheet' i]");
+  var found = false;
+
+  if (styleElts.length) {
+    var elt = styleElts[styleElts.length -1];
+
+    if (IsSheetForPrint(elt.sheet) || IsSheetForAllMedia(elt.sheet)) {
+      var name = elt.localName;
+      if (name == "link") {
+        var uri = Components.classes["@mozilla.org/network/io-service;1"]
+                                .getService(Components.interfaces.nsIIOService)
+                                .newURI(child.sheet.href, null, null);
+        if (uri.scheme == "file") {
+          // is the file writable ?
+          var file = UrlUtils.newLocalFile(UrlUtils.makeAbsoluteUrl(elt.sheet.href));
+          if (file.isWritable())
+            found = true;
+        }
+      }
+      else
+        found = true;
+    }
+
+    if (found) {
+      return elt.sheet;
+    }
+  }
+
+  var styleElt = doc.createElement("style");
+  styleElt.setAttribute("type", "text/css");
+  EditorUtils.getCurrentEditor().insertNode(styleElt, headElt, headElt.childNodes.length);
+  return styleElt.sheet;
+}
+
+function IsSheetForAllMedia(aSheet)
+{
+  if (!aSheet)
+    return false;
+
+  var media = aSheet.media.mediaText || "";
+  return (!media || media == "all");
+}
+
+function IsSheetForPrint(aSheet)
+{
+  if (!aSheet)
+    return false;
+
+  var media = aSheet.media.mediaText || "";
+  var mediaArray = media.split(",");
+  mediaArray.forEach(function(element,index,array) {array[index] = array[index].toLowerCase().trim()});
+  return (mediaArray.indexOf("print") != -1)
+}
+
+function IsSheetOnlyForPrint(aSheet)
+{
+  if (!aSheet)
+    return false;
+
+  var media = aSheet.media.mediaText || "";
+  return (media == "print");
 }

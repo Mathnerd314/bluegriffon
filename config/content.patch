@@ -1602,6 +1602,48 @@ diff --git a/editor/idl/nsIEditorObserver.idl b/editor/idl/nsIEditorObserver.idl
   * when the editor has completed a user action. 
   *
   */
+diff --git a/editor/idl/nsIHTMLEditor.idl b/editor/idl/nsIHTMLEditor.idl
+--- a/editor/idl/nsIHTMLEditor.idl
++++ b/editor/idl/nsIHTMLEditor.idl
+@@ -17,17 +17,17 @@ namespace mozilla {
+ namespace dom {
+ class Element;
+ }
+ }
+ %}
+ 
+ [ptr] native Element (mozilla::dom::Element);
+ 
+-[scriptable, uuid(833f30de-94c7-4630-a852-2300ef329d7b)]
++[scriptable, uuid(46BAFC7A-407F-45ED-8B4A-49D7D01F2974)]
+ 
+ interface nsIHTMLEditor : nsISupports
+ {
+ %{C++
+   typedef short EAlignment;
+ %}
+ 
+   // used by GetAlignment()
+@@ -493,16 +493,19 @@ interface nsIHTMLEditor : nsISupports
+   /** 
+    * A boolean which is true is the HTMLEditor has been instantiated
+    * with CSS knowledge and if the CSS pref is currently checked
+    *
+    * @return    true if CSS handled and enabled
+    */
+   attribute boolean isCSSEnabled;
+ 
++  AString getMedium();
++  void setMedium(in AString aMedium);
++
+   /**
+    * Add listener for insertion override
+    * @param inFilter  function which callers want called during insertion
+    */
+   void addInsertionListener(in nsIContentFilter inFilter);
+ 
+   /**
+    * Remove listener for insertion override
 diff --git a/editor/libeditor/base/nsEditPropertyAtomList.h b/editor/libeditor/base/nsEditPropertyAtomList.h
 --- a/editor/libeditor/base/nsEditPropertyAtomList.h
 +++ b/editor/libeditor/base/nsEditPropertyAtomList.h
@@ -2233,7 +2275,56 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      // Getters must addref
      NS_ADDREF(*aReturn);
    }
-@@ -5429,18 +5428,26 @@ bool
+@@ -4953,16 +4952,48 @@ nsHTMLEditor::GetElementOrigin(nsIDOMEle
+   NS_ENSURE_TRUE(container, NS_OK);
+   nsPoint off = frame->GetOffsetTo(container);
+   aX = nsPresContext::AppUnitsToIntCSSPixels(off.x);
+   aY = nsPresContext::AppUnitsToIntCSSPixels(off.y);
+ 
+   return NS_OK;
+ }
+ 
++/* AString getMedium (); */
++NS_IMETHODIMP
++nsHTMLEditor::GetMedium(nsAString & _retval)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    nsIAtom *medium = ps->GetPresContext()->Medium();
++    if (medium == nsGkAtoms::screen)
++      _retval.AssignLiteral("screen");
++    else
++      _retval.AssignLiteral("print");
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
++/* void setMedium (in AString aMedium); */
++NS_IMETHODIMP
++nsHTMLEditor::SetMedium(const nsAString & aMedium)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    ps->GetPresContext()->SetMedium(aMedium);
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
+ nsresult
+ nsHTMLEditor::EndUpdateViewBatch()
+ {
+   nsresult res = nsEditor::EndUpdateViewBatch();
+   NS_ENSURE_SUCCESS(res, res);
+ 
+   // We may need to show resizing handles or update existing ones after
+   // all transactions are done. This way of doing is preferred to DOM
+@@ -5429,18 +5460,26 @@ bool
  nsHTMLEditor::IsEditable(nsIContent* aNode) {
    if (!nsPlaintextEditor::IsEditable(aNode)) {
      return false;
@@ -2891,6 +2982,57 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
  // name for it, returns null.  If there are multiple possible color
  // names for the given color, the first one in nsColorNameList.h
  // (which is generally the first one in alphabetical order) will be
+diff --git a/layout/base/nsPresContext.cpp b/layout/base/nsPresContext.cpp
+--- a/layout/base/nsPresContext.cpp
++++ b/layout/base/nsPresContext.cpp
+@@ -2869,8 +2869,25 @@ nsRootPresContext::SizeOfExcludingThis(n
+ 
+   // Measurement of the following members may be added later if DMD finds it is
+   // worthwhile:
+   // - mNotifyDidPaintTimer
+   // - mRegisteredPlugins
+   // - mWillPaintObservers
+   // - mWillPaintFallbackEvent
+ }
++
++void
++nsPresContext::SetMedium(const nsAString & aMedium)
++{
++  if (aMedium.EqualsLiteral("screen")) {
++    mMedium = nsGkAtoms::screen;
++    mType = eContext_Galley;
++    mPaginated = false;
++  }
++  else {
++    mMedium = nsGkAtoms::print;
++    mType = eContext_PageLayout;
++    mPaginated = true;
++  }
++  //RebuildAllStyleData(NS_STYLE_HINT_REFLOW);
++  MediaFeatureValuesChanged(eAlwaysRebuildStyle, NS_STYLE_HINT_REFLOW);
++}
+diff --git a/layout/base/nsPresContext.h b/layout/base/nsPresContext.h
+--- a/layout/base/nsPresContext.h
++++ b/layout/base/nsPresContext.h
+@@ -301,16 +301,18 @@ public:
+   { SetImageAnimationModeExternal(aMode); }
+ #endif
+ 
+   /** 
+    * Get medium of presentation
+    */
+   nsIAtom* Medium() { return mMedium; }
+ 
++  void SetMedium(const nsAString & aMedium);
++
+   void* AllocateFromShell(size_t aSize)
+   {
+     if (mShell)
+       return mShell->AllocateMisc(aSize);
+     return nullptr;
+   }
+ 
+   void FreeToShell(size_t aSize, void* aFreeChunk)
 diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 --- a/layout/style/Loader.cpp
 +++ b/layout/style/Loader.cpp
@@ -2914,6 +3056,46 @@ diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
      }
  
      if (sheet) {
+diff --git a/layout/style/nsCSSParser.cpp b/layout/style/nsCSSParser.cpp
+--- a/layout/style/nsCSSParser.cpp
++++ b/layout/style/nsCSSParser.cpp
+@@ -3337,25 +3337,34 @@ CSSParserImpl::ParseAttributeSelector(in
+         return eSelectorParsingStatus_Error;
+       }
+       if ((eCSSToken_Ident == mToken.mType) || (eCSSToken_String == mToken.mType)) {
+         nsAutoString  value(mToken.mIdent);
+         if (! GetToken(true)) { // premature EOF
+           REPORT_UNEXPECTED_EOF(PEAttSelCloseEOF);
+           return eSelectorParsingStatus_Error;
+         }
++        bool isCaseSensitive = true;
++        if (eCSSToken_Ident == mToken.mType && mToken.mIdent.LowerCaseEqualsLiteral("i")) {
++          // Case-insensitive attribute selectors from Selectors Level 4 section 6.3
++          isCaseSensitive = false;
++          if (! GetToken(true)) { // premature EOF
++            REPORT_UNEXPECTED_EOF(PEAttSelValueEOF);
++            return eSelectorParsingStatus_Error;
++          }
++        }
++
+         if (mToken.IsSymbol(']')) {
+-          bool isCaseSensitive = true;
+ 
+           // For cases when this style sheet is applied to an HTML
+           // element in an HTML document, and the attribute selector is
+           // for a non-namespaced attribute, then check to see if it's
+           // one of the known attributes whose VALUE is
+           // case-insensitive.
+-          if (nameSpaceID == kNameSpaceID_None) {
++          if (isCaseSensitive && nameSpaceID == kNameSpaceID_None) {
+             static const char* caseInsensitiveHTMLAttribute[] = {
+               // list based on http://www.w3.org/TR/html4/
+               "lang",
+               "dir",
+               "http-equiv",
+               "text",
+               "link",
+               "vlink",
 diff --git a/layout/style/nsCSSValue.cpp b/layout/style/nsCSSValue.cpp
 --- a/layout/style/nsCSSValue.cpp
 +++ b/layout/style/nsCSSValue.cpp
