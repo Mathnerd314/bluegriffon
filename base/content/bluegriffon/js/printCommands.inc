@@ -19,8 +19,7 @@ var cmdPrint =
   {
     return (EditorUtils.getCurrentEditorElement() &&
             EditorUtils.isDocumentEditable() &&
-            EditorUtils.isEditingRenderedHTML() &&
-            GetCurrentViewMode() == "wysiwyg");
+            EditorUtils.isEditingRenderedHTML());
   },
 
   getCommandStateParams: function(aCommand, aParams, aRefCon) {},
@@ -28,7 +27,17 @@ var cmdPrint =
 
   doCommand: function(aCommand)
   {
-    PrintHelper.print(EditorUtils.getCurrentEditorElement().contentWindow);
+    if (GetCurrentViewMode() == "wysiwyg")
+      PrintHelper.print(EditorUtils.getCurrentEditorElement().contentWindow);
+    else {
+	    var editorElement = EditorUtils.getCurrentEditorElement();
+	    if (editorElement) {
+	      var sourceIframe = editorElement.previousSibling;
+	      var sourceWindow = sourceIframe.contentWindow;
+
+        PrintHelper.print(sourceWindow);
+      }
+    }
   }
 };
 
