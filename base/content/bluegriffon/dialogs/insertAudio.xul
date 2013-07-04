@@ -34,7 +34,7 @@
                       title="&selectFile.label;"/>
   </hbox>
   <hbox align="center">
-    <image src="chrome://bluegriffon/skin/throbber16.png"
+    <image src="chrome://bluegriffon/skin/throbber16.gif"
            id="throbber"
            cx="0"/>
     <checkbox class="indent" id="relativeURLCheckbox"

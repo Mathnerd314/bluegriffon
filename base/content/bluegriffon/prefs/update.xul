@@ -29,7 +29,7 @@
       </radiogroup>
       <hbox align="center">
         <button label="&checkNow.button;" oncommand="CheckNow()"/>
-        <image src="chrome://bluegriffon/skin/throbber16.png" id="updateThrobber"
+        <image src="chrome://bluegriffon/skin/throbber16.gif" id="updateThrobber"
                hidden="true"/>
         <spacer flex="1"/>
         <label value="&privacyPolicy.label;" style="color: blue; text-decoration: underline; cursor: pointer"
