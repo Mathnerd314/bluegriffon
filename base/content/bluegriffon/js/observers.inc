@@ -119,7 +119,8 @@ var ResizeEventNotifier = {
 
   onResizeEvent: function ResizeEventNotifier_onResizeEvent(aEvent)
   {
-    NotifierUtils.notify("resizeEvent");
+    if (aEvent.target.document.location.href == "chrome://bluegriffon/content/xul/bluegriffon.xul")
+      NotifierUtils.notify("resizeEvent");
   }
 };
 

@@ -116,6 +116,23 @@ var PromptUtils = {
     return false;
   },
 
+  alertCheck: function(aParent, aDialogTitle, aText, aCheckMsg, aCheckState)
+  {
+    var promptService = this._getPromptService();
+    if (promptService)
+    {
+      try {
+	      var rv = promptService.alertCheck(aParent ? aParent : EditorUtils.getCurrentEditorWindow(),
+	                                        aDialogTitle, aText, aCheckMsg, aCheckState);
+        return rv;
+      }
+      catch(e) {
+        promptService.alert(aParent, "", e);
+      }
+    }
+    return false;
+  },
+
   prompt: function(window, captionStr, msgStr, result)
   {
     return this._getPromptService().prompt(window, captionStr, msgStr, result, null, {value:0});

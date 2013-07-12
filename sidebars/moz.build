@@ -2,5 +2,6 @@ DIRS += [
     'cssproperties',
     'domexplorer',
     'scripteditor',
-    'stylesheets'
+    'stylesheets',
+    'its20'
 ]

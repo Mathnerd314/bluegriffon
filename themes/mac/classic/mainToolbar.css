@@ -97,6 +97,10 @@
   list-style-image: url("chrome://domexplorer/skin/domexplorer.png");
 }
 
+#its20Button {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/translate.png");
+}
+
 /************ SMALL ICONS **************/
 
 #MainToolbox > toolbar[iconsize="small"] toolbarbutton {
@@ -167,6 +171,10 @@
 
 #MainToolbox > toolbar[iconsize="small"] #domexplorerButton {
   list-style-image: url("chrome://domexplorer/skin/small/domexplorer.png");
+}
+
+#MainToolbox > toolbar[iconsize="small"] #its20Button {
+  list-style-image: url("chrome://bluegriffon/skin/mainToolbar/small/translate.png");
 }
 
 /***************** THROBBER **************/
