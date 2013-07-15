@@ -41,22 +41,26 @@ RegisterIniter(TranslateSectionIniter, true);
 
 function TranslateSectionResetter()
 {
+  // reset the UI for local Translate attributes
   gDialog.translateYesButton.removeAttribute("checked");
   gDialog.translateNoButton.removeAttribute("checked");
 }
 
 function TranslateSectionIniter(aElt)
 {
+  // update the checkbox buttons
   var translate = aElt.getAttribute("translate");
   Toggle(gDialog.translateYesButton, "yes" == translate);
   Toggle(gDialog.translateNoButton,  "no"  == translate);
 
+  // we have to deal with inheritance...
   if (aElt.parentNode
       && aElt.parentNode.nodeType == Node.ELEMENT_NODE
       && !gDialog.translateYesButton.hasAttribute("checked")
       && !gDialog.translateNoButton.hasAttribute("checked"))
     ReflowGlobalRulesInUI(aElt.parentNode, false, ["translateRule"]);
 
+  // show a close button if we have local settings
   if (gCurrentElement == aElt) {
     if ("yes" != translate && "no"  != translate)
       gDialog.deleteTranslateRule.removeAttribute("visible");
@@ -66,6 +70,9 @@ function TranslateSectionIniter(aElt)
   }
 }
 
+/* user clicked on the deletion button for local attrs
+ * 
+ */
 function TranslateSectionDeleter()
 {
   ApplyLocalITS( [

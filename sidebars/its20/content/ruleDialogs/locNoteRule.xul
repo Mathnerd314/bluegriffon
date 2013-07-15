@@ -39,58 +39,74 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://its20/skin/its20.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
-<?xul-overlay href="chrome://its20/content/localAttrs/translate.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/locNote.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/term.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/popups1.xul"?>
-
-<?xul-overlay href="chrome://its20/content/global.xul"?>
+<?xul-overlay href="chrome://its20/content/ruleDialogs/selector.xul"?>
 
 <!DOCTYPE page [
-  <!ENTITY % its20DTD SYSTEM "chrome://its20/locale/its20.dtd">
-  %its20DTD;
+  <!ENTITY % locNoteRuleDTD SYSTEM "chrome://its20/locale/locNoteRule.dtd">
+  %locNoteRuleDTD;
 ]>
 
-<page id         = "its20"
-      windowtype = "BlueGriffon:its20"
-      title      = "&window.title;"
-      xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-      xmlns:html = "http://www.w3.org/1999/xhtml"
-      onload     = "Startup()"
-      onunload   = "Shutdown()">
+<dialog id         = "locNoteRuleDialog"
+        windowtype = "BlueGriffon:its20:locNoteRule"
+        title      = "&window.title;"
+        xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist    = "screenX screenY width height"
+        ondialogaccept = "Accept()"
+        onload     = "Startup()"
+        onunload   = "Shutdown()">
 
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
   <script type="application/x-javascript"  src="chrome://its20/content/implemented.js"/>
-  <script type="application/x-javascript"  src="chrome://its20/content/its20.js"/>
-  <script type="application/x-javascript"  src="chrome://its20/content/common.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/common.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/locNoteRule.js"/>
 
-  <stringbundle id="its20Bundle"   src="chrome://its20/locale/its20.properties"/>
+  <groupbox id="selectorGroupbox"/>
 
-  <popupset id="popupset"/>
-
-  <vbox id="mainBox" flex="1" style="visibility: hidden">
-    <tabbox flex="1">
-      <tabs>
-        <tab label="&locally.label;"/>
-        <tab label="&globally.label;"/>
-      </tabs>
-      <tabpanels flex="1" id="tabpanels">
-        <vbox id="propertiesBox">
-		      <label id="currentElementBox"
-		             crop="end"/>
-        </vbox>
-      </tabpanels>
-    </tabbox>
-    <hbox id="loadingBox" loads="0" align="center">
-      <image src="chrome://bluegriffon/skin/throbber16.gif" id="throbber"/>
-      <label value="&loading.label;"/>
+  <groupbox>
+    <hbox>
+      <spacer flex="1"/>
+      <hbox>
+        <toolbarbutton class="multibutton" label="&description.label;" value="description" type="checkbox"
+                       id="descriptionLocNocTypeButton" group="locNoteType" checked="true"
+                       oncommand="Toggle(this)"/>
+        <toolbarbutton class="multibutton" label="&alert.label;" value="alert" type="checkbox"
+                       id="alertLocNocTypeButton" group="locNoteType"
+                       oncommand="Toggle(this)"/>
+      </hbox>
+      <spacer flex="1"/>
     </hbox>
-  </vbox>
-
-</page>
+    <radiogroup id="locNoteSwitchRadiogroup"
+                oncommand="ToggleLocNoteSwitchRadiogroup(event)">
+      <radio value="locNote"
+             label="&locNote.label;"
+             id="locNoteRadio"/>
+        <textbox id="locNoteTextbox"
+                 multiline="true"
+                 class="indent"/>
+      <radio value="locNotePointer"
+             label="&locNotePointer.label;"
+             id="locNotePointerRadio"/>
+        <textbox id="locNotePointerTextbox"
+                 class="indent"/>
+      <radio value="locNoteRef"
+             label="&locNoteRef.label;"
+             id="locNoteRefRadio"/>
+        <menulist id="locNoteRefMenulist"
+                  editable="true"
+                  class="indent">
+          <menupopup id="locNoteRefMenupopup"
+                     onpopupshowing="ListAllIDrefs(this)"/>
+        </menulist>
+      <radio value="locNoteRefPointer"
+             label="&locNoteRefPointer.label;"
+             id="locNoteRefPointerRadio"/>
+        <textbox id="locNoteRefPointerTextbox"
+                 class="indent"/>
+    </radiogroup>
+  </groupbox>
+</dialog>

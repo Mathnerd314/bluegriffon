@@ -393,7 +393,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
   // init the attribute values
   var translate = "";
   var locNote = "", locNoteRef = "", locNoteType = "";
-  var term = "", termInfoRef = "", termConfidence = "";
+  var term = "", termInfoRef = "";
   switch (queryLanguage) {
     case "css":
       {
@@ -432,7 +432,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
           }
         }
 
-        // find all translate rules
+        // find all termRule rules
         if (aFilters.indexOf("termRule") != -1) {
           var termRules = aDoc.querySelectorAll("termRule");
           for (var termRule of termRules) {
@@ -484,7 +484,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             // get the selector and the rest
             var selector = ExpandParameters(locNoteRule.getAttribute("selector"), aDoc);
             // we need a namespace resolver for the prefixes in XPath
-            var nsResolver = aElt.ownerDocument.createNSResolver(translateRule);
+            var nsResolver = aElt.ownerDocument.createNSResolver(locNoteRule);
   
             // get a snapshot of matching elements
             var matches = aElt.ownerDocument.evaluate(selector,
@@ -514,12 +514,12 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
           }
         }
 
-        // find all translate rules
+        // find all termRule rules
         if (aFilters.indexOf("termRule") != -1) {
           var termRules = aDoc.querySelectorAll("termRule");
           for (var termRule of termRules) {
             // get the selector
-            var selector = ExpandParameters(termRules.getAttribute("selector"), aDoc);
+            var selector = ExpandParameters(termRule.getAttribute("selector"), aDoc);
             // we need a namespace resolver for the prefixes in XPath
             var nsResolver = aElt.ownerDocument.createNSResolver(termRule);
   
@@ -680,6 +680,10 @@ function LoadRemoteResource(aLink, aURL, aElt)
   req.send(null);
 }
 
+/* the following is a workaround for a painful related to listbox elements
+ * inside a floating panel, flexing columns not being resized correctly when
+ * the window shrinks
+ */
 var gResizeTimeOut = 0;
 function OnResizeEvent(aEvent)
 {
@@ -703,23 +707,33 @@ function _onResizeEvent()
     gDialog.paramsBox.removeAttribute("style");}, 100);
 }
 
+/*
+ * we maintain a non persistent list of URLs that should not trigger a warning
+ * when the application has a problem loading or parsing them
+ */
 var NoWarnList = [];
 
 function DisposableAlert(aParent, aDialogTitle, aText, aHref)
 {
+  // early way out if we're already in the no-warning list
   if (NoWarnList.indexOf(aHref) != -1)
     return;
 
+  // show a dialog with a checkbox
   var rv = {value: false};
   PromptUtils.alertCheck(aParent, aDialogTitle, aText,
                            aHref
                              ? gDialog.its20Bundle.getString("DontWarnAgainForUrl")
                              : gDialog.its20Bundle.getString("DontWarnAgainForInline"),
                            rv);
+  // yes, user wants to add that URL to the no-warning list...
   if (rv.value)
     NoWarnList.push(aHref);
 }
 
+/* for a given ITS rule type, get the main value we show in the bottommost list
+ * of the global.xul overlay
+ */
 function GetMainValueFromITSRule(aRule)
 {
   var rv = "";

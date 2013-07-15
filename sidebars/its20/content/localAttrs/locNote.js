@@ -45,6 +45,7 @@ RegisterIniter(LocNoteSectionIniter, true);
 
 function LocNoteSectionResetter()
 {
+  // reset the UI for local Localization Note attributes
   gDialog.descriptionLocNoteTypeButton.removeAttribute("checked");
   gDialog.alertLocNoteTypeButton.removeAttribute("checked");
   gDialog.locNoteRadio.checked = true;
@@ -57,8 +58,10 @@ function LocNoteSectionIniter(aElt)
 {
   var hasNote    = aElt.hasAttribute("its-loc-note");
   var hasNoteRef = aElt.hasAttribute("its-loc-note-ref");
-  
+
+  // according to the spec (section 8.3.2), we need one of the two attributes
   if (hasNote || hasNoteRef) {
+    // reflect its-loc-note-type in UI
     switch (aElt.getAttribute("its-loc-note-type")) {
       case "description":
         gDialog.descriptionLocNoteTypeButton.setAttribute("checked", "true");
@@ -75,6 +78,7 @@ function LocNoteSectionIniter(aElt)
     }
   }
 
+  // now update the UI for the attributes if present
   if (hasNoteRef) {
     gDialog.locNoteRadiogroup.value = "locNoteRef";
     gDialog.locNoteTextbox.value = "";
@@ -88,12 +92,14 @@ function LocNoteSectionIniter(aElt)
     gDialog.locNoteRefMenulist.value = "";
   }
 
+  // we have to deal with inheritance...
   if (aElt.parentNode
       && aElt.parentNode.nodeType == Node.ELEMENT_NODE
       && !gDialog.descriptionLocNoteTypeButton.hasAttribute("checked")
       && !gDialog.alertLocNoteTypeButton.hasAttribute("checked"))
     ReflowGlobalRulesInUI(aElt.parentNode, false, ["locNoteRule"]);
 
+  // show a close button if we have local settings
   if (gCurrentElement == aElt) {
     if (hasNote || hasNoteRef || aElt.hasAttribute("its-loc-note-type"))
       gDialog.deleteLocNoteRule.setAttribute("visible", "true");
@@ -102,6 +108,9 @@ function LocNoteSectionIniter(aElt)
   } 
 }
 
+/* list all the IDs in the document
+ * 
+ */
 function ListAllIDrefs(menuPopup)
 {
   deleteAllChildren(menuPopup);
@@ -134,6 +143,10 @@ function ListAllIDrefs(menuPopup)
     }
   }
 }
+
+/* apply the UI changes
+ * 
+ */
 function ApplyLocNoteChanges(e)
 {
   if (e)
@@ -160,6 +173,9 @@ function ApplyLocNoteChanges(e)
   }
 }
 
+/* user clicked on the deletion button for local attrs
+ * 
+ */
 function LocNoteSectionDeleter()
 {
   ApplyLocalITS( [

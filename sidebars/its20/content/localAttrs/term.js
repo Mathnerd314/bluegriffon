@@ -45,6 +45,7 @@ RegisterIniter(TermSectionIniter, true);
 
 function TermSectionResetter()
 {
+  // reset the UI for local Terminology attributes
   gDialog.yesTermTerminologyButton.removeAttribute("checked");
   gDialog.noTermTerminologyButton.removeAttribute("checked");
   gDialog.termInfoRefMenulist.value = "";
@@ -58,12 +59,17 @@ function TermSectionResetter()
 function TermSectionIniter(aElt)
 {
   var term = aElt.getAttribute("its-term");
+  // only deal with it if @term is yes or no
   if (term == "yes" || term == "no") {
+    // we can directly show the deletion button since according to
+    // section 8.4.2, Terminology is not inherited
     gDialog.deleteTermRule.setAttribute("visible", "true");
 
+    // update the checkbox buttons
     Toggle(gDialog.yesTermTerminologyButton, "yes" == term);
     Toggle(gDialog.noTermTerminologyButton,  "no"  == term);
   
+    // update UI for the two other optional attributes 
     if (aElt.hasAttribute("its-term-info-ref")) {
       gDialog.termInfoRefCheckbox.checked = true;
       gDialog.termInfoRefMenulist.disabled = false;
@@ -92,6 +98,10 @@ function TermSectionIniter(aElt)
   }
 }
 
+
+/* apply the UI changes
+ * 
+ */
 function ApplyTermChanges(e)
 {
   if (e)
@@ -122,6 +132,9 @@ function ApplyTermChanges(e)
   }
 }
 
+/* user clicked on the deletion button for local attrs
+ * 
+ */
 function TermSectionDeleter()
 {
   ApplyLocalITS( [
@@ -132,6 +145,9 @@ function TermSectionDeleter()
   ReflowGlobalRulesInUI(gCurrentElement, true, ["termRule"]);
 }
 
+/* update the scale depending on the attached textbox and vcie-versa
+ * 
+ */
 function TermConfidenceScaleChanged(e)
 {
   if (gDialog.termConfidenceTextbox) {
@@ -148,6 +164,9 @@ function TermConfidenceTextboxChanged(e)
   }
 }
 
+/* enable/disable the UI depending on the checkboxes
+ * 
+ */
 function onTermConfidenceToggled()
 {
   var c = gDialog.termConfidenceCheckbox.checked;

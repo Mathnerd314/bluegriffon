@@ -39,58 +39,73 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://its20/skin/its20.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
-<?xul-overlay href="chrome://its20/content/localAttrs/translate.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/locNote.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/term.xul"?>
-<?xul-overlay href="chrome://its20/content/localAttrs/popups1.xul"?>
-
-<?xul-overlay href="chrome://its20/content/global.xul"?>
+<?xul-overlay href="chrome://its20/content/ruleDialogs/selector.xul"?>
 
 <!DOCTYPE page [
-  <!ENTITY % its20DTD SYSTEM "chrome://its20/locale/its20.dtd">
-  %its20DTD;
+  <!ENTITY % termRuleDTD SYSTEM "chrome://its20/locale/termRule.dtd">
+  %termRuleDTD;
 ]>
 
-<page id         = "its20"
-      windowtype = "BlueGriffon:its20"
-      title      = "&window.title;"
-      xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-      xmlns:html = "http://www.w3.org/1999/xhtml"
-      onload     = "Startup()"
-      onunload   = "Shutdown()">
+<dialog id         = "termRuleDialog"
+        windowtype = "BlueGriffon:its20:termRule"
+        title      = "&window.title;"
+        xmlns      = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist    = "screenX screenY width height"
+        ondialogaccept = "Accept()"
+        onload     = "Startup()"
+        onunload   = "Shutdown()">
 
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/dgid.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/global.js"/>
   <script type="application/x-javascript"  src="chrome://bluegriffon/content/utils/prompter.js"/>
   <script type="application/x-javascript"  src="chrome://its20/content/implemented.js"/>
-  <script type="application/x-javascript"  src="chrome://its20/content/its20.js"/>
-  <script type="application/x-javascript"  src="chrome://its20/content/common.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/common.js"/>
+  <script type="application/x-javascript"  src="chrome://its20/content/ruleDialogs/termRule.js"/>
 
-  <stringbundle id="its20Bundle"   src="chrome://its20/locale/its20.properties"/>
+  <groupbox id="selectorGroupbox"/>
 
-  <popupset id="popupset"/>
-
-  <vbox id="mainBox" flex="1" style="visibility: hidden">
-    <tabbox flex="1">
-      <tabs>
-        <tab label="&locally.label;"/>
-        <tab label="&globally.label;"/>
-      </tabs>
-      <tabpanels flex="1" id="tabpanels">
-        <vbox id="propertiesBox">
-		      <label id="currentElementBox"
-		             crop="end"/>
-        </vbox>
-      </tabpanels>
-    </tabbox>
-    <hbox id="loadingBox" loads="0" align="center">
-      <image src="chrome://bluegriffon/skin/throbber16.gif" id="throbber"/>
-      <label value="&loading.label;"/>
+  <groupbox>
+    <hbox>
+      <spacer flex="1"/>
+      <hbox>
+        <toolbarbutton class="multibutton" label="&yesTerm.label;" value="yes" type="checkbox"
+                       id="yesTermButton" group="term" checked="true"
+                       oncommand="Toggle(this)"/>
+        <toolbarbutton class="multibutton" label="&noTerm.label;" value="no" type="checkbox"
+                       id="noTermButton" group="term"
+                       oncommand="Toggle(this)"/>
+      </hbox>
+      <spacer flex="1"/>
     </hbox>
-  </vbox>
+    <radiogroup id="termInfoSwitchRadiogroup"
+                oncommand="ToggleTermInfoSwitchRadiogroup(event)">
+      <radio value="none"
+             label="&noTermInfo.label;"
+             id="noTermInfoRadio"/>
+ 
+      <radio value="termInfoPointer"
+             label="&termInfoPointer.label;"
+             id="termInfoPointerRadio"/>
+        <textbox id="termInfoPointerTextbox"
+                 class="indent"/>
 
-</page>
+      <radio value="termInfoRef"
+             label="&termInfoRef.label;"
+             id="termInfoRefRadio"/>
+        <menulist id="termInfoRefMenulist"
+                  editable="true"
+                  class="indent">
+          <menupopup id="termInfoRefMenupopup"
+                     onpopupshowing="ListAllIDrefs(this)"/>
+        </menulist>
+      <radio value="termInfoRefPointer"
+             label="&termInfoRefPointer.label;"
+             id="termInfoRefPointerRadio"/>
+        <textbox id="termInfoRefPointerTextbox"
+                 class="indent"/>
+    </radiogroup>
+  </groupbox>
+</dialog>

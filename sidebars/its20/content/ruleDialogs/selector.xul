@@ -54,9 +54,15 @@
       <label value="&cssSelector.label;" id="cssSelectorLabel"/>
       <label value="&xpathSelector.label;" id="xpathSelectorLabel"/>
       <textbox id="selectorTextbox"
+               oninput="onSelectorPresent()"
                flex="1"/>
       <button label="&magicButton.label;"
               oncommand="MagicButton(gCurrentElement, gQueryLanguage, gSourceDocument)"/>
+    </hbox>
+    <hbox align="center" class="indent" id="prefixHbox">
+      <label value="&prefixreport1.label;"/>
+      <label id="prefixLabel"/>
+      <label value="&prefixreport2.label;"/>
     </hbox>
   </groupbox>
 </overlay>

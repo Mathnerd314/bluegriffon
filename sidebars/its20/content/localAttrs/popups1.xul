@@ -47,6 +47,11 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <popupset id="popupset">
+    <menupopup id="sectionHeaderContext">
+      <menuitem label="&closeOtherSections.label;" oncommand="CloseAllSection(false)"/>
+      <menuitem label="&closeAllSections.label;" oncommand="CloseAllSection(true)"/>
+    </menupopup>
+
     <panel id="addRulesetPanel"
            noautohide="true"
            level="floating"

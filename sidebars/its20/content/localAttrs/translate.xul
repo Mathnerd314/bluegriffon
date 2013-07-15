@@ -46,7 +46,7 @@
 <overlay id="translateOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/x-javascript"  src="chrome://its20/content/translate.js" />
+  <script type="application/x-javascript"  src="chrome://its20/content/localAttrs/translate.js" />
 
   <vbox id="propertiesBox">
     <hbox class="csspropertiesHeader" open="true" align="center"

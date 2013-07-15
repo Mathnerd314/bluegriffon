@@ -115,6 +115,13 @@ hbox.csspropertiesHeader[open="true"] + .section {
   opacity: 1;
 }
 
+#sectionHeaderContext {
+  background-color: white;
+}
+#sectionHeaderContext menuitem {
+  font-size: smaller;
+}
+
 .section:last-child {
   border-bottom: thin solid gray;
 }
@@ -153,7 +160,7 @@ listitem.remote {
 }
 
 #rulesBox listcell:nth-of-type(1) {
-  padding-right: 2em;
+  padding-right: 1em;
 }
 
 #rulesBox listcell:nth-of-type(2) {

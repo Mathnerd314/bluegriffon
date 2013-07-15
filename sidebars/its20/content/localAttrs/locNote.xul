@@ -43,77 +43,64 @@
   %its20DTD;
 ]>
 
-<overlay id="termOverlay"
+<overlay id="locNoteOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script type="application/x-javascript"  src="chrome://its20/content/term.js" />
+  <script type="application/x-javascript"  src="chrome://its20/content/localAttrs/locNote.js" />
 
   <vbox id="propertiesBox">
     <hbox class="csspropertiesHeader" open="true" align="center"
           context="sectionHeaderContext"
-          id="termSectionHeader"
+          id="locNoteSectionHeader"
           onclick="ToggleSection(event, this)"
-          position="6">
+          position="4">
       <image />
-      <label value="&termSectionHeader.label;"/>
+      <label value="&locNoteSectionHeader.label;"/>
       <spacer flex="1"/>
-      <toolbarbutton id="deleteTermRule"
+      <toolbarbutton id="deleteLocNoteRule"
                      class="deleteRuleButton"
-                     onclick="DeleteLocalRule(event, TermSectionDeleter)"
+                     onclick="DeleteLocalRule(event, LocNoteSectionDeleter)"
                      tooltiptext="&deleteLocalRule.label;" />
     </hbox>
 
     <vbox class="section"
-          id="termSection"
-          position="7">
+          id="locNoteSection"
+          position="5">
       <hbox align="center">
         <spacer flex="1"/>
         <hbox>
-	        <toolbarbutton class="multibutton left" label="&yesTermTerminology.label;" value="yes" property="its-term" type="checkbox"
-	                       id="yesTermTerminologyButton" group="term"
-	                       oncommand="ToggleProperty(this); ApplyTermChanges()"/>
-	        <toolbarbutton class="multibutton right" label="&noTermTerminology.label;" value="no" property="its-term" type="checkbox"
-	                       id="noTermTerminologyButton" group="term"
-	                       oncommand="ToggleProperty(this); ApplyTermChanges()"/>
+	        <toolbarbutton class="multibutton" label="&descriptionLocNoteType.label;" value="description" property="its-loc-note-type" type="checkbox"
+	                       id="descriptionLocNoteTypeButton" group="locNoteType"
+	                       oncommand="ToggleProperty(this)"/>
+	        <toolbarbutton class="multibutton" label="&alertLocNoteType.label;" value="alert" property="its-loc-note-type" type="checkbox"
+	                       id="alertLocNoteTypeButton" group="locNoteType"
+	                       oncommand="ToggleProperty(this)"/>
         </hbox>
         <spacer flex="1"/>
       </hbox>
-      <checkbox id="termInfoRefCheckbox"
-                oncommand="onTermInfoRefToggled()"
-                label="&termIRI.label;"
-                checked="false"/>
-      <menulist id="termInfoRefMenulist"
-                editable="true"
-                disabled="true"
-                oninput="ApplyTermChanges(this)"
-                oncommand="ApplyTermChanges(this)"
-                class="indent"
-                flex="1">
-        <menupopup id="termInfoeRefMenupopup"
-                   onpopupshowing="ListAllIDrefs(this)"/>
-      </menulist>
-      <checkbox id="termConfidenceCheckbox"
-                oncommand="onTermConfidenceToggled()"
-                label="&termConfidence.label;"
-                checked="false"/>
-      <hbox align="center" class="indent">
-        <scale min="1"
-               max="100"
-               id="termConfidenceScale"
-               flex="1"
-               disabled="true"
-               onchange="TermConfidenceScaleChanged(this)"/>
-        <textbox id="termConfidenceTextbox"
-                 type="number"
-                 decimalplaces="2"
-                 min="0"
-                 max="1"
-                 increment="0.05"
-                 size="4"
-                 disabled="true"
-                 oninput="TermConfidenceTextboxChanged(this)"
-                 oncommand="TermConfidenceTextboxChanged(this)"/>
-      </hbox>
+      <radiogroup id="locNoteRadiogroup">
+        <radio id="locNoteRadio" value="locNote"
+               oncommand="ApplyLocNoteChanges()"
+               label="&locNoteContents.label;"/>
+        <textbox id="locNoteTextbox"
+                 class="indent"
+                 flex="1"
+                 oninput="ApplyLocNoteChanges(this)"
+                 multiline="true"/>
+        <radio id="locNoteRefRadio"
+               oncommand="ApplyLocNoteChanges()"
+               value="locNoteRef"
+               label="&locNoteIRI.label;"/>
+        <menulist id="locNoteRefMenulist"
+                  editable="true"
+                  oninput="ApplyLocNoteChanges(this)"
+                  oncommand="ApplyLocNoteChanges(this)"
+                  class="indent"
+                  flex="1">
+          <menupopup id="locNoteRefMenupopup"
+                     onpopupshowing="ListAllIDrefs(this)"/>
+        </menulist>
+      </radiogroup>
     </vbox>
   </vbox>
 </overlay>

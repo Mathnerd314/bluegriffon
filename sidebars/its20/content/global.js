@@ -126,9 +126,12 @@ function SerializeITSDocToScriptElement(aDoc, aScriptElement)
 {
   var oSerializer = new XMLSerializer();
   str = oSerializer.serializeToString(aDoc.documentElement)
-                   .replace(/&gt;/, ">")
-                   .replace(/&lt;/, "<")
-                   .replace(/&amp;/, "&");
+                   .replace(/&gt;/g, ">")
+                   .replace(/&lt;/g, "<")
+                   .replace(/&amp;/g, "&")
+                   .replace(/>\s*<its/g, ">\n  <its")
+                   .replace(/<its:locNote>/g, "  <its:locNote>")
+                   .replace(/<\/its:rules/g, "\n</its:rules");
 
   var editor = EditorUtils.getCurrentEditor();
   editor.beginTransaction();
@@ -894,8 +897,8 @@ function RuleUp()
   var rule = gDialog.rulesBox.selectedItem.getUserData("rule");
   var target = rule.previousElementSibling;
 
-  var txn = new diNodeInsertionTxn(param,
-                                   param.parentNode,
+  var txn = new diNodeInsertionTxn(rule,
+                                   rule.parentNode,
                                    target);
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
 
@@ -911,7 +914,7 @@ function RuleUp()
   gDialog.rulesBox.selectedIndex = ruleIndex - 1;
 }
 
-function ParamDown()
+function RuleDown()
 {
   var index = gDialog.rulesetsBox.selectedIndex;
   if (index < 0) { // sanity case...
@@ -928,8 +931,8 @@ function ParamDown()
   var rule = gDialog.rulesBox.selectedItem.getUserData("rule");
   var target = rule.nextElementSibling;
 
-  var txn = new diNodeInsertionTxn(param,
-                                   param.parentNode,
+  var txn = new diNodeInsertionTxn(rule,
+                                   rule.parentNode,
                                    target.nextElementSibling);
   EditorUtils.getCurrentEditor().transactionManager.doTransaction(txn);
 
@@ -943,4 +946,37 @@ function ParamDown()
   SelectionChanged(null, gCurrentElement, true);
   gDialog.rulesetsBox.selectedIndex = index;
   gDialog.rulesBox.selectedIndex = ruleIndex + 1;
+}
+
+function DeleteRule()
+{
+  var index = gDialog.rulesetsBox.selectedIndex;
+  if (index < 0) { // sanity case...
+    return;
+  }
+  var doc = gCurrentElement.ownerDocument;
+  var sources = doc.querySelectorAll(kITS_OWNER_ELEMENTS_SELECTOR);
+  var source = sources[index];
+  var itsDoc = source.getUserData("itsRules");
+  if (!itsDoc) // sanity case
+    return;
+
+  var ruleIndex = gDialog.rulesBox.selectedIndex;
+  var rule = gDialog.rulesBox.selectedItem.getUserData("rule");
+
+  rule.parentNode.removeChild(rule);
+
+  if (source.localName == "script")
+    SerializeITSDocToScriptElement(itsDoc, source);
+  else {
+    SerializeITSDocToFile(itsDoc, source);
+  }
+
+  gLastElement = null;
+  SelectionChanged(null, gCurrentElement, true);
+  gDialog.rulesetsBox.selectedIndex = index;
+  if (ruleIndex < gDialog.rulesBox.getRowCount())
+    gDialog.rulesBox.selectedIndex = ruleIndex;
+  else if (ruleIndex > 1)
+    gDialog.rulesBox.selectedIndex = ruleIndex - 1;
 }

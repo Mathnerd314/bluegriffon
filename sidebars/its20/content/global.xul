@@ -147,7 +147,7 @@
         <listcols>
           <listcol />
           <listcol flex="1"/>
-          <listcol flex="1"/>
+          <listcol />
         </listcols>
       </listbox>
       <hbox id="rulesToolbox" class="listboxBg" style="margin: 0px;">
