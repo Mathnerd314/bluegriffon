@@ -79,7 +79,7 @@ function MagicButton(node, aQueryLanguage, doc)
               sibling = sibling.previousElementSibling;
             }
           }
-          selector = node.nodeName + (sameNameCount ? ":nth-child(" + (count+1) + ")" : "") + selector;
+          selector = node.nodeName.toLowerCase() + (sameNameCount ? ":nth-child(" + (count+1) + ")" : "") + selector;
         }
   
         node = node.parentNode;
