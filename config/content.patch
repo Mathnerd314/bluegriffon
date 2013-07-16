@@ -1615,7 +1615,7 @@ diff --git a/editor/idl/nsIHTMLEditor.idl b/editor/idl/nsIHTMLEditor.idl
  [ptr] native Element (mozilla::dom::Element);
  
 -[scriptable, uuid(833f30de-94c7-4630-a852-2300ef329d7b)]
-+[scriptable, uuid(46BAFC7A-407F-45ED-8B4A-49D7D01F2974)]
++[scriptable, uuid(BFA533D9-358C-47CC-92FF-E89D5263D264)]
  
  interface nsIHTMLEditor : nsISupports
  {
@@ -2275,56 +2275,26 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
      // Getters must addref
      NS_ADDREF(*aReturn);
    }
-@@ -4953,16 +4952,48 @@ nsHTMLEditor::GetElementOrigin(nsIDOMEle
-   NS_ENSURE_TRUE(container, NS_OK);
-   nsPoint off = frame->GetOffsetTo(container);
-   aX = nsPresContext::AppUnitsToIntCSSPixels(off.x);
-   aY = nsPresContext::AppUnitsToIntCSSPixels(off.y);
- 
-   return NS_OK;
- }
- 
-+/* AString getMedium (); */
-+NS_IMETHODIMP
-+nsHTMLEditor::GetMedium(nsAString & _retval)
-+{
-+  nsCOMPtr<nsIPresShell> ps = GetPresShell();
-+
-+  if (ps && ps->GetPresContext())
-+  {
-+    nsIAtom *medium = ps->GetPresContext()->Medium();
-+    if (medium == nsGkAtoms::screen)
-+      _retval.AssignLiteral("screen");
-+    else
-+      _retval.AssignLiteral("print");
-+    return NS_OK;
-+  }
-+  return NS_ERROR_FAILURE;
-+}
-+
-+/* void setMedium (in AString aMedium); */
-+NS_IMETHODIMP
-+nsHTMLEditor::SetMedium(const nsAString & aMedium)
-+{
-+  nsCOMPtr<nsIPresShell> ps = GetPresShell();
-+
-+  if (ps && ps->GetPresContext())
-+  {
-+    ps->GetPresContext()->SetMedium(aMedium);
-+    return NS_OK;
-+  }
-+  return NS_ERROR_FAILURE;
-+}
-+
- nsresult
- nsHTMLEditor::EndUpdateViewBatch()
- {
-   nsresult res = nsEditor::EndUpdateViewBatch();
-   NS_ENSURE_SUCCESS(res, res);
- 
-   // We may need to show resizing handles or update existing ones after
-   // all transactions are done. This way of doing is preferred to DOM
-@@ -5429,18 +5460,26 @@ bool
+@@ -3625,17 +3624,17 @@ void nsHTMLEditor::IsTextPropertySetByCo
+   while (node)
+   {
+     nsCOMPtr<nsIDOMElement>element;
+     element = do_QueryInterface(node);
+     if (element)
+     {
+       nsAutoString tag, value;
+       element->GetTagName(tag);
+-      if (propName.Equals(tag, nsCaseInsensitiveStringComparator()))
++      if (propName.IsEmpty() || propName.Equals(tag, nsCaseInsensitiveStringComparator()))
+       {
+         bool found = false;
+         if (aAttribute && 0!=aAttribute->Length())
+         {
+           element->GetAttribute(*aAttribute, value);
+           if (outValue) *outValue = value;
+           if (!value.IsEmpty())
+           {
+@@ -5429,19 +5428,58 @@ bool
  nsHTMLEditor::IsEditable(nsIContent* aNode) {
    if (!nsPlaintextEditor::IsEditable(aNode)) {
      return false;
@@ -2353,6 +2323,38 @@ diff --git a/editor/libeditor/html/nsHTMLEditor.cpp b/editor/libeditor/html/nsHT
  nsHTMLEditor::GetEditorRoot()
  {
    return GetActiveEditingHost();
+ }
++
++NS_IMETHODIMP
++nsHTMLEditor::GetMedium(nsAString & outValue)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    nsIAtom* medium = ps->GetPresContext()->Medium();
++    if (medium == nsGkAtoms::screen)
++      outValue.AssignLiteral("screen");
++    else
++      outValue.AssignLiteral("print");
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
++NS_IMETHODIMP
++nsHTMLEditor::SetMedium(const nsAString& aMedium)
++{
++  nsCOMPtr<nsIPresShell> ps = GetPresShell();
++
++  if (ps && ps->GetPresContext())
++  {
++    ps->GetPresContext()->SetMedium(aMedium);
++    return NS_OK;
++  }
++  return NS_ERROR_FAILURE;
++}
++
 diff --git a/editor/libeditor/html/nsHTMLEditor.h b/editor/libeditor/html/nsHTMLEditor.h
 --- a/editor/libeditor/html/nsHTMLEditor.h
 +++ b/editor/libeditor/html/nsHTMLEditor.h
@@ -2985,36 +2987,42 @@ diff --git a/gfx/src/nsColor.h b/gfx/src/nsColor.h
 diff --git a/layout/base/nsPresContext.cpp b/layout/base/nsPresContext.cpp
 --- a/layout/base/nsPresContext.cpp
 +++ b/layout/base/nsPresContext.cpp
-@@ -2869,8 +2869,25 @@ nsRootPresContext::SizeOfExcludingThis(n
+@@ -1838,16 +1838,30 @@ nsPresContext::SetPaginatedScrolling(boo
  
-   // Measurement of the following members may be added later if DMD finds it is
-   // worthwhile:
-   // - mNotifyDidPaintTimer
-   // - mRegisteredPlugins
-   // - mWillPaintObservers
-   // - mWillPaintFallbackEvent
+ void
+ nsPresContext::SetPrintSettings(nsIPrintSettings *aPrintSettings)
+ {
+   if (mMedium == nsGkAtoms::print)
+     mPrintSettings = aPrintSettings;
  }
-+
+ 
 +void
-+nsPresContext::SetMedium(const nsAString & aMedium)
++nsPresContext::SetMedium(const nsAString& aMedium)
 +{
 +  if (aMedium.EqualsLiteral("screen")) {
 +    mMedium = nsGkAtoms::screen;
-+    mType = eContext_Galley;
-+    mPaginated = false;
-+  }
-+  else {
++    mType =  eContext_Galley;
++  } else {
 +    mMedium = nsGkAtoms::print;
-+    mType = eContext_PageLayout;
++    mType =  eContext_PageLayout;
 +    mPaginated = true;
 +  }
-+  //RebuildAllStyleData(NS_STYLE_HINT_REFLOW);
 +  MediaFeatureValuesChanged(eAlwaysRebuildStyle, NS_STYLE_HINT_REFLOW);
 +}
++
+ bool
+ nsPresContext::EnsureVisible()
+ {
+   nsCOMPtr<nsIDocShell> docShell(do_QueryReferent(mContainer));
+   if (docShell) {
+     nsCOMPtr<nsIContentViewer> cv;
+     docShell->GetContentViewer(getter_AddRefs(cv));
+     // Make sure this is the content viewer we belong with
 diff --git a/layout/base/nsPresContext.h b/layout/base/nsPresContext.h
 --- a/layout/base/nsPresContext.h
 +++ b/layout/base/nsPresContext.h
-@@ -301,16 +301,18 @@ public:
+@@ -300,16 +300,17 @@ public:
+   void SetImageAnimationMode(uint16_t aMode)
    { SetImageAnimationModeExternal(aMode); }
  #endif
  
@@ -3022,9 +3030,8 @@ diff --git a/layout/base/nsPresContext.h b/layout/base/nsPresContext.h
     * Get medium of presentation
     */
    nsIAtom* Medium() { return mMedium; }
++  void SetMedium(const nsAString& aMedium);
  
-+  void SetMedium(const nsAString & aMedium);
-+
    void* AllocateFromShell(size_t aSize)
    {
      if (mShell)
@@ -3032,7 +3039,6 @@ diff --git a/layout/base/nsPresContext.h b/layout/base/nsPresContext.h
      return nullptr;
    }
  
-   void FreeToShell(size_t aSize, void* aFreeChunk)
 diff --git a/layout/style/Loader.cpp b/layout/style/Loader.cpp
 --- a/layout/style/Loader.cpp
 +++ b/layout/style/Loader.cpp
@@ -3407,6 +3413,34 @@ diff --git a/toolkit/content/widgets/popup.xml b/toolkit/content/widgets/popup.x
            this._fadeTimer = setTimeout(function (self) {
              self.style.opacity = 0.2;
            }, fadeDelay, this);
+diff --git a/toolkit/content/widgets/scale.xml b/toolkit/content/widgets/scale.xml
+--- a/toolkit/content/widgets/scale.xml
++++ b/toolkit/content/widgets/scale.xml
+@@ -159,19 +159,21 @@
+         <body>
+         <![CDATA[
+           switch (which) {
+             case "curpos":
+               this.setAttribute("value", newValue);
+ 
+               // in the future, only fire the change event when userChanged
+               // or _userChanged is true
+-              var changeEvent = document.createEvent("Events");
+-              changeEvent.initEvent("change", true, true);
+-              this.dispatchEvent(changeEvent);
++              if (true /*this._userChanged*/) {
++                var changeEvent = document.createEvent("Events");
++                changeEvent.initEvent("change", true, true);
++                this.dispatchEvent(changeEvent);
++              }
+               break;
+ 
+             case "minpos":
+               this.setAttribute("min", newValue);
+               break;
+ 
+             case "maxpos":
+               this.setAttribute("max", newValue);
 diff --git a/toolkit/content/xul.css b/toolkit/content/xul.css
 --- a/toolkit/content/xul.css
 +++ b/toolkit/content/xul.css
