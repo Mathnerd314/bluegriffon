@@ -24,6 +24,15 @@
   </keyset>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
+    <hbox align="center"
+          class="indent">
+      <label value="&pageStyleMenu.label;"/>
+      <menulist id="stylesheetSetsMenulist"
+                sizetopopup="none"
+                oncommand="SelectStyleSet(this)">
+        <menupopup id="stylesheetSetsMenupopup"/>
+      </menulist>
+    </hbox>
     <tree id="contentsTree"
           flex="1"
           treelines="true"
@@ -34,6 +43,7 @@
         <treecol id="enabledCol"
                  label="&isStylesheetEnabled.label;"
                  editable="true"
+                 persist="width ordinal hidden"
                  type="checkbox"/>
         <splitter class="tree-splitter"/>
         <treecol id="urlCol"

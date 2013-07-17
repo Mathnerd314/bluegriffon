@@ -1,7 +1,6 @@
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 
 Components.utils.import("resource://app/modules/prompterHelper.jsm");
-Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/urlHelper.jsm");
 Components.utils.import("resource://app/modules/fileChanges.jsm");
 
@@ -115,6 +114,27 @@ function Inspect()
   if (!editor || !editor.document)
     return;
 
+  var sets = editor.document.styleSheetSets;
+  if (sets.length) {
+    gDialog.stylesheetSetsMenulist.disabled = false;
+    deleteAllChildren(gDialog.stylesheetSetsMenupopup);
+    var preferred = editor.document.preferredStyleSheetSet;
+    if (preferred) {
+      gDialog.stylesheetSetsMenulist.appendItem(preferred, preferred);
+      if (sets.length > 1)
+        gDialog.stylesheetSetsMenupopup.appendChild(document.createElement("menuseparator"));
+    }
+    for (var i = 0; i < sets.length; i++) {
+      var sset = sets.item(i);
+      if (sset != preferred)
+        gDialog.stylesheetSetsMenulist.appendItem(sset, sset);
+    }
+    // WARNING: plagged by https://bugzilla.mozilla.org/show_bug.cgi?id=894874
+    gDialog.stylesheetSetsMenulist.value = editor.document.selectedStyleSheetSet;
+  }
+  else
+    gDialog.stylesheetSetsMenulist.disabled = true;
+
   var treechildren = gDialog.contentsTree.querySelector("treechildren");
   if (treechildren)
     treechildren.parentNode.removeChild(treechildren);
@@ -130,15 +150,15 @@ function Inspect()
     if (s.nodeName.toLowerCase() == "style") {
       t1 = "<style>";
       t2 = "";
-      t3 = s.getAttribute("title");
-      t4 = s.getAttribute("media");
+      t3 = s.hasAttribute("title") ? s.getAttribute("title") : "";
+      t4 = s.hasAttribute("media") ? s.getAttribute("media") : "";
       tooltip = s.textContent;
     }
     else {
       t1 = s.getAttribute("href");
       t2 = ((s.getAttribute("rel").toLowerCase().trim() == "alternate stylesheet") ? "✔" : "");
-      t3 = s.getAttribute("title");
-      t4 = s.getAttribute("media");
+      t3 = s.hasAttribute("title") ? s.getAttribute("title") : "";
+      t4 = s.hasAttribute("media") ? s.getAttribute("media") : "";
       tooltip = "";
     }
     var cell0 = document.createElement("treecell");
@@ -385,8 +405,15 @@ function onTreeModified(aEvent)
   if (aEvent.target != gDialog.contentsTree) // sanity check
     return;
 
-  if (aEvent.attrName == "editing" && aEvent.attrName == 2) { // we started editing
+  if (aEvent.attrName == "editing" && aEvent.attrChange == 2) { // we started editing
     // stop it immediately
     gDialog.contentsTree.stopEditing(false);
   }
+}
+
+function SelectStyleSet(aList)
+{
+  var editor = gMain.EditorUtils.getCurrentEditor();
+  editor.document.selectedStyleSheetSet = aList.value;
+  Inspect();
 }

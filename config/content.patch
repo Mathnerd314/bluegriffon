@@ -150,7 +150,44 @@ diff --git a/content/base/src/nsCopySupport.cpp b/content/base/src/nsCopySupport
 diff --git a/content/base/src/nsDocument.cpp b/content/base/src/nsDocument.cpp
 --- a/content/base/src/nsDocument.cpp
 +++ b/content/base/src/nsDocument.cpp
-@@ -6385,16 +6385,23 @@ nsIDocument::GetInputEncoding(nsAString&
+@@ -5301,25 +5301,27 @@ nsIDocument::GetSelectedStyleSheetSet(ns
+     domSheet->GetDisabled(&disabled);
+     if (disabled) {
+       // Disabled sheets don't affect the currently selected set
+       continue;
+     }
+ 
+     sheet->GetTitle(title);
+ 
+-    if (aSheetSet.IsEmpty()) {
+-      aSheetSet = title;
+-      return;
+-    }
+-
+-    if (!title.IsEmpty() && !aSheetSet.Equals(title)) {
+-      // Sheets from multiple sets enabled; return null string, per spec.
+-      SetDOMStringToNull(aSheetSet);
+-      return;
++    if (!title.IsEmpty()) {
++      if (aSheetSet.IsEmpty()) {
++        aSheetSet = title;
++        return;
++      }
++  
++      if (!aSheetSet.Equals(title)) {
++        // Sheets from multiple sets enabled; return null string, per spec.
++        SetDOMStringToNull(aSheetSet);
++        return;
++      }
+     }
+   }
+ }
+ 
+ NS_IMETHODIMP
+ nsDocument::SetMozSelectedStyleSheetSet(const nsAString& aSheetSet)
+ {
+   SetSelectedStyleSheetSet(aSheetSet);
+@@ -6385,16 +6387,23 @@ nsIDocument::GetInputEncoding(nsAString&
  NS_IMETHODIMP
  nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
  {
