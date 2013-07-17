@@ -11,4 +11,5 @@ stylesheets.jar:
 * content/stylesheets/editor.xul                  (content/editor.xul)
   skin/classic/stylesheets/stylesheets-icon.png   (skin/stylesheets-icon.png)
   skin/classic/stylesheets/editor.css             (skin/editor.css)
+  skin/classic/stylesheets/stylesheets.css        (skin/stylesheets.css)
 

@@ -3,6 +3,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylesheets/skin/stylesheets.css" type="text/css"?>
 
 <!DOCTYPE window SYSTEM "chrome://stylesheets/locale/stylesheets.dtd">
 
@@ -23,11 +24,18 @@
   </keyset>
 
   <vbox id="mainBox" flex="1" style="visibility: hidden">
-    <tree id="contentsTree" flex="1" style="margin: 0px; margin-top: 4px; min-width: 200px; height: 200px"
+    <tree id="contentsTree"
+          flex="1"
           treelines="true"
+          editable="true"
           onselect="UpdateButtons()"
           ondblclick="OpenStylesheet()">
       <treecols>
+        <treecol id="enabledCol"
+                 label="&isStylesheetEnabled.label;"
+                 editable="true"
+                 type="checkbox"/>
+        <splitter class="tree-splitter"/>
         <treecol id="urlCol"
                  flex="1"
                  label="&url.col;"

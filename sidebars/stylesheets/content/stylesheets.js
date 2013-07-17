@@ -9,6 +9,8 @@ var gMain = null;
 var gDoc = null;
 var gEditor = null;
 
+var gMutationObserver = null;
+
 var gIsPanelActive = true;
 
 function Startup()
@@ -46,11 +48,25 @@ function Startup()
   gMain.NotifierUtils.addNotifierCallback("afterLeavingSourceMode",
                                           Inspect,
                                           window);
+  gDialog.contentsTree.addEventListener("DOMAttrModified", onTreeModified, true);
+  gMutationObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.target.getAttribute("class") == "enabledCheckbox") {
+        var treeitem = mutation.target.parentNode.parentNode;
+        var elt = treeitem.getUserData("element");
+        var sheet = elt.sheet;
+        sheet.disabled = !(mutation.target.getAttribute("value") == "true");
+      }
+    });    
+  });
   Inspect();
 }
 
 function Shutdown()
 {
+  gDialog.contentsTree.removeEventListener("DOMAttrModified", onTreeModified, true);
+  gMutationObserver.disconnect();
+
   gMain.NotifierUtils.removeNotifierCallback("tabClosed",
                                     Inspect,
                                     window);
@@ -125,6 +141,12 @@ function Inspect()
       t4 = s.getAttribute("media");
       tooltip = "";
     }
+    var cell0 = document.createElement("treecell");
+    cell0.setAttribute("value", s.sheet.disabled ? "false" : "true");
+    cell0.setAttribute("class", "enabledCheckbox");
+    var config = { attributes: true };
+    gMutationObserver.observe(cell0, config);
+
     var cell1 = document.createElement("treecell");
     cell1.setAttribute("label", t1);
     var cell2 = document.createElement("treecell");
@@ -133,6 +155,7 @@ function Inspect()
     cell3.setAttribute("label", t3);
     var cell4 = document.createElement("treecell");
     cell4.setAttribute("label", t4);
+    item.firstChild.appendChild(cell0);
     item.firstChild.appendChild(cell1);
     item.firstChild.appendChild(cell2);
     item.firstChild.appendChild(cell3);
@@ -355,4 +378,15 @@ function SaveFileContents(aSpec, aSource)
     FileChangeUtils.notifyFileModifiedByBlueGriffon(aSpec);
   }
   catch(e) {}
+}
+
+function onTreeModified(aEvent)
+{
+  if (aEvent.target != gDialog.contentsTree) // sanity check
+    return;
+
+  if (aEvent.attrName == "editing" && aEvent.attrName == 2) { // we started editing
+    // stop it immediately
+    gDialog.contentsTree.stopEditing(false);
+  }
 }
