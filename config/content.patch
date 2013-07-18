@@ -150,44 +150,29 @@ diff --git a/content/base/src/nsCopySupport.cpp b/content/base/src/nsCopySupport
 diff --git a/content/base/src/nsDocument.cpp b/content/base/src/nsDocument.cpp
 --- a/content/base/src/nsDocument.cpp
 +++ b/content/base/src/nsDocument.cpp
-@@ -5301,25 +5301,27 @@ nsIDocument::GetSelectedStyleSheetSet(ns
-     domSheet->GetDisabled(&disabled);
-     if (disabled) {
+@@ -5303,20 +5303,17 @@ nsIDocument::GetSelectedStyleSheetSet(ns
        // Disabled sheets don't affect the currently selected set
        continue;
      }
  
      sheet->GetTitle(title);
  
--    if (aSheetSet.IsEmpty()) {
--      aSheetSet = title;
+     if (aSheetSet.IsEmpty()) {
+       aSheetSet = title;
 -      return;
 -    }
 -
 -    if (!title.IsEmpty() && !aSheetSet.Equals(title)) {
--      // Sheets from multiple sets enabled; return null string, per spec.
--      SetDOMStringToNull(aSheetSet);
--      return;
-+    if (!title.IsEmpty()) {
-+      if (aSheetSet.IsEmpty()) {
-+        aSheetSet = title;
-+        return;
-+      }
-+  
-+      if (!aSheetSet.Equals(title)) {
-+        // Sheets from multiple sets enabled; return null string, per spec.
-+        SetDOMStringToNull(aSheetSet);
-+        return;
-+      }
++    } else if (!title.IsEmpty() && !aSheetSet.Equals(title)) {
+       // Sheets from multiple sets enabled; return null string, per spec.
+       SetDOMStringToNull(aSheetSet);
+       return;
      }
    }
  }
  
  NS_IMETHODIMP
- nsDocument::SetMozSelectedStyleSheetSet(const nsAString& aSheetSet)
- {
-   SetSelectedStyleSheetSet(aSheetSet);
-@@ -6385,16 +6387,23 @@ nsIDocument::GetInputEncoding(nsAString&
+@@ -6385,16 +6382,23 @@ nsIDocument::GetInputEncoding(nsAString&
  NS_IMETHODIMP
  nsDocument::GetMozSyntheticDocument(bool *aSyntheticDocument)
  {
@@ -2224,6 +2209,25 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        NS_ENSURE_SUCCESS(res, res);
  
        // append a <br> to it
+@@ -6990,16 +6960,18 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+         if (nodeAtom == nsEditProperty::dd || nodeAtom == nsEditProperty::dt)
+         {
+           int32_t itemOffset;
+           nsCOMPtr<nsIDOMNode> list = nsEditor::GetNodeLocation(aListItem, &itemOffset);
+ 
+           nsAutoString listTag((nodeAtom == nsEditProperty::dt) ? NS_LITERAL_STRING("dd") : NS_LITERAL_STRING("dt"));
+           nsCOMPtr<nsIDOMNode> newListItem;
+           NS_ENSURE_STATE(mHTMLEditor);
++          ClearCachedStyles();
++          mHTMLEditor->mTypeInState->ClearAllProps();
+           res = mHTMLEditor->CreateNode(listTag, list, itemOffset+1, getter_AddRefs(newListItem));
+           NS_ENSURE_SUCCESS(res, res);
+           res = mEditor->DeleteNode(aListItem);
+           NS_ENSURE_SUCCESS(res, res);
+           return aSelection->Collapse(newListItem, 0);
+         }
+ 
+         nsCOMPtr<nsIDOMNode> brNode;
 diff --git a/editor/libeditor/html/nsHTMLEditUtils.cpp b/editor/libeditor/html/nsHTMLEditUtils.cpp
 --- a/editor/libeditor/html/nsHTMLEditUtils.cpp
 +++ b/editor/libeditor/html/nsHTMLEditUtils.cpp
