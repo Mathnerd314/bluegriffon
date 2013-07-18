@@ -115,9 +115,9 @@ function Inspect()
     return;
 
   var sets = editor.document.styleSheetSets;
+  deleteAllChildren(gDialog.stylesheetSetsMenupopup);
   if (sets.length) {
     gDialog.stylesheetSetsMenulist.disabled = false;
-    deleteAllChildren(gDialog.stylesheetSetsMenupopup);
     var preferred = editor.document.preferredStyleSheetSet;
     if (preferred) {
       gDialog.stylesheetSetsMenulist.appendItem(preferred, preferred);
@@ -132,8 +132,11 @@ function Inspect()
     // WARNING: plagged by https://bugzilla.mozilla.org/show_bug.cgi?id=894874
     gDialog.stylesheetSetsMenulist.value = editor.document.selectedStyleSheetSet;
   }
-  else
+  else {
+    gDialog.stylesheetSetsMenulist.appendItem("--", "--");
+    gDialog.stylesheetSetsMenulist.value = "--";
     gDialog.stylesheetSetsMenulist.disabled = true;
+  }
 
   var treechildren = gDialog.contentsTree.querySelector("treechildren");
   if (treechildren)
