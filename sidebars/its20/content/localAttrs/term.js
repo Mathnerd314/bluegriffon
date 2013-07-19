@@ -95,6 +95,10 @@ function TermSectionIniter(aElt)
   }
   else {
     gDialog.deleteTermRule.removeAttribute("visible");
+    // default per section 8.1 of spec
+    if (!gDialog.yesTermTerminologyButton.hasAttribute("checked")
+        && !gDialog.noTermTerminologyButton.hasAttribute("checked"))
+    gDialog.noTermTerminologyButton.setAttribute("checked", "true");
   }
 }
 
@@ -102,6 +106,31 @@ function TermSectionIniter(aElt)
 /* apply the UI changes
  * 
  */
+function ToggleTerm(aElt)
+{
+  var checked   = aElt.hasAttribute("checked");
+  var value = (aElt.hasAttribute("value") ? aElt.getAttribute("value") : aElt.value);
+  if (!checked &&
+      (aElt.nodeName.toLowerCase() == "checkbox" || aElt.getAttribute("type") == "checkbox"))
+    value = null;
+  var group = aElt.getAttribute("group");
+
+  var others = [];
+  if (group)
+    others = document.querySelectorAll("[group='" + group + "']");
+
+  for (var i = 0; i < others.length; i++) {
+    var e = others[i];
+    if (e != aElt) {
+      if (group) {
+        e.removeAttribute("checked");
+      }
+    }
+  }
+
+  ApplyTermChanges(null);
+}
+
 function ApplyTermChanges(e)
 {
   if (e)
@@ -117,19 +146,20 @@ function ApplyTermChanges(e)
                      { property: "its-term", value: term },
                      { property: "its-term-info-ref", value: gDialog.termInfoRefCheckbox.checked
                                                              ? gDialog.termInfoRefMenulist.value.trim()
-                                                             : "" },
+                                                             : null },
                      { property: "its-term-confidence", value: gDialog.termConfidenceCheckbox.checked
                                                                ? gDialog.termConfidenceTextbox.value
-                                                               : "" }
+                                                               : null }
                    ]);
   }
   else {
     ApplyLocalITS( [
-                     { property: "its-term", value: "" },
-                     { property: "its-term-info-ref", value: "" },
-                     { property: "its-term-confidence", value: "0" }
+                     { property: "its-term", value: null },
+                     { property: "its-term-info-ref", value: null },
+                     { property: "its-term-confidence", value: null }
                    ]);
   }
+  ReflowGlobalRulesInUI(gCurrentElement, true, ["termRule"]);
 }
 
 /* user clicked on the deletion button for local attrs
@@ -138,9 +168,9 @@ function ApplyTermChanges(e)
 function TermSectionDeleter()
 {
   ApplyLocalITS( [
-                   { property: "its-term", value: "" },
-                   { property: "its-term-info-ref", value: "" },
-                   { property: "its-term-confidence", value: "" }
+                   { property: "its-term", value: null },
+                   { property: "its-term-info-ref", value: null },
+                   { property: "its-term-confidence", value: null }
                  ]);
   ReflowGlobalRulesInUI(gCurrentElement, true, ["termRule"]);
 }

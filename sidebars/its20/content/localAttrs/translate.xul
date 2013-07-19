@@ -70,10 +70,10 @@
         <spacer flex="1"/>
         <hbox>
 		      <toolbarbutton class="multibutton" label="&translatable.label;" value="yes" property="translate" type="checkbox"
-		                     id="translateYesButton" group="translate"
+		                     id="translateYesButton" group="translate" filter="translateRule"
 		                     oncommand="ToggleProperty(this)"/>
 		      <toolbarbutton class="multibutton" label="&notTranslatable.label;" value="no" property="translate" type="checkbox"
-		                     id="translateNoButton" group="translate"
+		                     id="translateNoButton" group="translate" filter="translateRule"
 		                     oncommand="ToggleProperty(this)"/>
         </hbox>
         <spacer flex="1"/>

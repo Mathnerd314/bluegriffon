@@ -157,20 +157,29 @@ function ApplyLocNoteChanges(e)
                     : (gDialog.alertLocNoteTypeButton.hasAttribute("checked")
                        ? "alert"
                        : "");
-  if (gDialog.locNoteRadio.selected) {
-    ApplyLocalITS( [
-                     { property: "its-loc-note-type", value: gDialog.locNoteTextbox.value ? locNoteType : "" },
-                     { property: "its-loc-note", value: gDialog.locNoteTextbox.value },
-                     { property: "its-loc-note-ref", value: "" }
-                   ]);
+  if (locNoteType) {
+    if (gDialog.locNoteRadio.selected) {
+      ApplyLocalITS( [
+                       { property: "its-loc-note-type", value: locNoteType },
+                       { property: "its-loc-note", value: gDialog.locNoteTextbox.value },
+                       { property: "its-loc-note-ref", value: null }
+                     ]);
+    }
+    else if (gDialog.locNoteRefRadio.selected) {
+      ApplyLocalITS( [
+                       { property: "its-loc-note-type", value: locNoteType },
+                       { property: "its-loc-note", value: null },
+                       { property: "its-loc-note-ref", value: gDialog.locNoteRefMenulist.value }
+                     ]);
+    }
   }
-  else if (gDialog.locNoteRefRadio.selected) {
+  else
     ApplyLocalITS( [
-                     { property: "its-loc-note-type", value: gDialog.locNoteRefMenulist.value ? locNoteType : "" },
-                     { property: "its-loc-note", value: "" },
-                     { property: "its-loc-note-ref", value: gDialog.locNoteRefMenulist.value }
+                     { property: "its-loc-note-type", value: null },
+                     { property: "its-loc-note", value: null },
+                     { property: "its-loc-note-ref", value: null }
                    ]);
-  }
+  ReflowGlobalRulesInUI(gCurrentElement, true, ["locNoteRule"]);
 }
 
 /* user clicked on the deletion button for local attrs
@@ -179,9 +188,34 @@ function ApplyLocNoteChanges(e)
 function LocNoteSectionDeleter()
 {
   ApplyLocalITS( [
-                   { property: "its-loc-note-type", value: "" },
-                   { property: "its-loc-note", value: "" },
-                   { property: "its-loc-note-ref", value: "" }
+                   { property: "its-loc-note-type", value: null },
+                   { property: "its-loc-note", value: null },
+                   { property: "its-loc-note-ref", value: null }
                  ]);
   ReflowGlobalRulesInUI(gCurrentElement, true, ["locNoteRule"]);
+}
+
+function ToggleLocNote(aElt)
+{
+  var checked   = aElt.hasAttribute("checked");
+  var value = (aElt.hasAttribute("value") ? aElt.getAttribute("value") : aElt.value);
+  if (!checked &&
+      (aElt.nodeName.toLowerCase() == "checkbox" || aElt.getAttribute("type") == "checkbox"))
+    value = null;
+  var group = aElt.getAttribute("group");
+
+  var others = [];
+  if (group)
+    others = document.querySelectorAll("[group='" + group + "']");
+
+  for (var i = 0; i < others.length; i++) {
+    var e = others[i];
+    if (e != aElt) {
+      if (group) {
+        e.removeAttribute("checked");
+      }
+    }
+  }
+
+  ApplyLocNoteChanges(null);
 }

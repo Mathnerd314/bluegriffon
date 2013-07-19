@@ -70,11 +70,11 @@
         <spacer flex="1"/>
         <hbox>
 	        <toolbarbutton class="multibutton left" label="&yesTermTerminology.label;" value="yes" property="its-term" type="checkbox"
-	                       id="yesTermTerminologyButton" group="term"
-	                       oncommand="ToggleProperty(this); ApplyTermChanges()"/>
+	                       id="yesTermTerminologyButton" group="term" filter="termRule"
+	                       oncommand="ToggleTerm(this); "/>
 	        <toolbarbutton class="multibutton right" label="&noTermTerminology.label;" value="no" property="its-term" type="checkbox"
-	                       id="noTermTerminologyButton" group="term"
-	                       oncommand="ToggleProperty(this); ApplyTermChanges()"/>
+	                       id="noTermTerminologyButton" group="term" filter="termRule"
+	                       oncommand="ToggleTerm(this);"/>
         </hbox>
         <spacer flex="1"/>
       </hbox>

@@ -212,26 +212,6 @@ function SelectionChanged(aArgs, aElt, aOneElementSelected)
 }
 
 
-var gIniters = {local: [], global: []};
-
-function RegisterIniter(aFn, aIsLocal)
-{
-  if (aIsLocal)
-    gIniters.local.push(aFn);
-  else
-    gIniters.global.push(aFn);
-}
-
-var gResetters = {local: [], global: []};;
-
-function RegisterResetter(aFn, aIsLocal)
-{
-    if (aIsLocal)
-    gResetters.local.push(aFn);
-  else
-    gResetters.global.push(aFn);
-}
-
 function ParseITSRulesDocuments(aLinksArray, aElt)
 {
   // reset
@@ -399,51 +379,87 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
       {
         // find all translate rules
         if (aFilters.indexOf("translateRule") != -1) {
-          var translateRules = aDoc.querySelectorAll("translateRule");
-          for (var translateRule of translateRules) {
-            // get the selector
-            var selector = ExpandParameters(translateRule.getAttribute("selector"), aDoc);
-            // does the current element match?
-            if (aElt.mozMatchesSelector(selector)) // yep...
-              translate = translateRule.getAttribute("translate");
+          var translateRules = null;
+          try {
+            translateRules = aDoc.querySelectorAll("translateRule");
           }
+          catch(e) {
+            if (aElt == gCurrentElement)
+              DisposableAlert(window,
+                              gDialog.its20Bundle.getString("CSSParsingError"),
+                              gDialog.its20Bundle.getString("CannotResolveCSS") + " " + selector,
+                              selector,
+                              true);
+          }
+          if (translateRules)
+            for (var translateRule of translateRules) {
+              // get the selector
+              var selector = ExpandParameters(translateRule.getAttribute("selector"), aDoc);
+              // does the current element match?
+              if (aElt.mozMatchesSelector(selector)) // yep...
+                translate = translateRule.getAttribute("translate");
+            }
         }
 
         // find all locNote rules
         if (aFilters.indexOf("locNoteRule") != -1) {
-          var locNoteRules = aDoc.querySelectorAll("locNoteRule");
-          for (var locNoteRule of locNoteRules) {
-            // get the selector and the rest
-            var selector = ExpandParameters(locNoteRule.getAttribute("selector"), aDoc);
-            // does the current element match?
-            if (aElt.mozMatchesSelector(selector)) { // yep...
-              locNoteType = locNoteRule.getAttribute("locNoteType");
-              if (locNoteRule.firstElementChild
-                  && locNoteRule.firstElementChild.localName == "locNote"
-                  && locNoteRule.firstElementChild.namespaceURI == kITS_NAMESPACE) {
-                locNote = locNoteRule.firstElementChild.innerHTML;
-                locNoteRef = "";
-              }
-              else if (locNoteRule.hasAttribute("locNoteRef")) {
-                locNote = "";
-                locNoteRef = locNoteRule.getAttribute("locNoteRef")
+          var locNoteRules = null;
+          try {
+            locNoteRules = aDoc.querySelectorAll("locNoteRule");
+          }
+          catch(e) {
+            if (aElt == gCurrentElement)
+              DisposableAlert(window,
+                              gDialog.its20Bundle.getString("CSSParsingError"),
+                              gDialog.its20Bundle.getString("CannotResolveCSS") + " " + selector,
+                              selector,
+                              true);
+          }
+          if (locNoteRules)
+            for (var locNoteRule of locNoteRules) {
+              // get the selector and the rest
+              var selector = ExpandParameters(locNoteRule.getAttribute("selector"), aDoc);
+              // does the current element match?
+              if (aElt.mozMatchesSelector(selector)) { // yep...
+                locNoteType = locNoteRule.getAttribute("locNoteType");
+                if (locNoteRule.firstElementChild
+                    && locNoteRule.firstElementChild.localName == "locNote"
+                    && locNoteRule.firstElementChild.namespaceURI == kITS_NAMESPACE) {
+                  locNote = locNoteRule.firstElementChild.innerHTML;
+                  locNoteRef = "";
+                }
+                else if (locNoteRule.hasAttribute("locNoteRef")) {
+                  locNote = "";
+                  locNoteRef = locNoteRule.getAttribute("locNoteRef")
+                }
               }
             }
-          }
         }
 
         // find all termRule rules
         if (aFilters.indexOf("termRule") != -1) {
-          var termRules = aDoc.querySelectorAll("termRule");
-          for (var termRule of termRules) {
-            // get the selectortermRule
-            var selector = ExpandParameters(termRule.getAttribute("selector"), aDoc);
-            // does the current element match?
-            if (aElt.mozMatchesSelector(selector)) { // yep...
-              term = termRule.getAttribute("term");
-              termInfoRef = termRule.getAttribute("termInfoRef");
-            }
+          var termRules = null;
+          try {
+            termRules = aDoc.querySelectorAll("termRule");
           }
+          catch(e) {
+            if (aElt == gCurrentElement)
+              DisposableAlert(window,
+                              gDialog.its20Bundle.getString("CSSParsingError"),
+                              gDialog.its20Bundle.getString("CannotResolveCSS") + " " + selector,
+                              selector,
+                              true);
+          }
+          if (termRules)
+            for (var termRule of termRules) {
+              // get the selectortermRule
+              var selector = ExpandParameters(termRule.getAttribute("selector"), aDoc);
+              // does the current element match?
+              if (aElt.mozMatchesSelector(selector)) { // yep...
+                term = termRule.getAttribute("term");
+                termInfoRef = termRule.getAttribute("termInfoRef");
+              }
+            }
         }
       }
       break;
@@ -468,7 +484,14 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
 	                                                      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
 	                                                      null);
 	            }
-            catch(e) {}
+            catch(e) {
+              if (aElt == gCurrentElement)
+                DisposableAlert(window,
+                                gDialog.its20Bundle.getString("XPathParsingError"),
+                                gDialog.its20Bundle.getString("CannotResolveXPath") + " " + selector,
+                                selector,
+                                true);
+            }
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
@@ -499,7 +522,14 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
                                                         XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
                                                         null);
               }
-            catch(e) {}
+            catch(e) {
+              if (aElt == gCurrentElement)
+                DisposableAlert(window,
+                                gDialog.its20Bundle.getString("XPathParsingError"),
+                                gDialog.its20Bundle.getString("CannotResolveXPath") + " " + selector,
+                                selector,
+                                true);
+            }
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
@@ -540,7 +570,14 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
                                                         XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
                                                         null);
               }
-            catch(e) {}
+            catch(e) {
+              if (aElt == gCurrentElement)
+                DisposableAlert(window,
+                                gDialog.its20Bundle.getString("XPathParsingError"),
+                                gDialog.its20Bundle.getString("CannotResolveXPath") + " " + selector,
+                                selector,
+                                true);
+            }
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
@@ -602,13 +639,21 @@ function ReflowGlobalRulesInUI(aElt, aForCurrentElementOnly, aFilter)
   if (aForCurrentElementOnly && gCurrentElement != aElt)
     return;
 
-  //reset
+  var filters = aFilter ? aFilter : kIMPLEMENTED_RULES;
+ //reset
   // show the local values
   if (aForCurrentElementOnly) {
-    for (var i = 0; i < gIniters.local.length; i++)
-      gResetters.local[i]();
-    for (var i = 0; i < gIniters.global.length; i++)
-      gResetters.global[i]();
+     for (var i = 0; i < filters.length; i++) {
+      var filter = filters[i];
+      switch (filter) {
+        case "translateRule": TranslateSectionResetter(); break;
+        case "locNoteRule":   LocNoteSectionResetter(); break;
+        case "termRule":      TermSectionResetter(); break;
+        case "global":        GlobalResetter(); break;
+
+        default: break; // should never happen
+      }
+    }
   }
 
   // reflow all ITS global rules in document traversal order
@@ -624,11 +669,20 @@ function ReflowGlobalRulesInUI(aElt, aForCurrentElementOnly, aFilter)
                             : kIMPLEMENTED_RULES);
   }
   // show the local values
-  for (var i = 0; i < gIniters.local.length; i++)
-    gIniters.local[i](aElt);
-  if (aForCurrentElementOnly)
-    for (var i = 0; i < gIniters.global.length; i++)
-      gIniters.global[i](aElt);
+   for (var i = 0; i < filters.length; i++) {
+    var filter = filters[i];
+    switch (filter) {
+      case "translateRule": TranslateSectionIniter(aElt); break;
+      case "locNoteRule":   LocNoteSectionIniter(aElt); break;
+      case "termRule":      TermSectionIniter(aElt); break;
+      case "global":
+        if (aForCurrentElementOnly)
+          GlobalIniter(aElt);
+        break;
+
+      default: break; // should never happen
+    }
+  }
 }
 
 function LoadRemoteResource(aLink, aURL, aElt)
@@ -725,7 +779,7 @@ function _onResizeEvent()
  */
 var NoWarnList = [];
 
-function DisposableAlert(aParent, aDialogTitle, aText, aHref)
+function DisposableAlert(aParent, aDialogTitle, aText, aHref, aIsSelector)
 {
   // early way out if we're already in the no-warning list
   if (NoWarnList.indexOf(aHref) != -1)
@@ -734,10 +788,12 @@ function DisposableAlert(aParent, aDialogTitle, aText, aHref)
   // show a dialog with a checkbox
   var rv = {value: false};
   PromptUtils.alertCheck(aParent, aDialogTitle, aText,
-                           aHref
-                             ? gDialog.its20Bundle.getString("DontWarnAgainForUrl")
-                             : gDialog.its20Bundle.getString("DontWarnAgainForInline"),
-                           rv);
+                           aIsSelector
+                           ? gDialog.its20Bundle.getString("DontWarnAgainForSelector")
+                           : (aHref
+                              ? gDialog.its20Bundle.getString("DontWarnAgainForUrl")
+                              : gDialog.its20Bundle.getString("DontWarnAgainForInline")),
+                            rv);
   // yes, user wants to add that URL to the no-warning list...
   if (rv.value)
     NoWarnList.push(aHref);
@@ -751,7 +807,7 @@ function GetMainValueFromITSRule(aRule)
   var rv = "";
   switch (aRule.localName) {
     case "translateRule":           rv = aRule.getAttribute("translate"); break;
-    case "locNoteRule":             rv = aRule.getAttribute("locNocType"); break;
+    case "locNoteRule":             rv = aRule.getAttribute("locNoteType"); break;
     case "termRule":                rv = aRule.getAttribute("term"); break;
     case "dirRule":                 rv = aRule.getAttribute("dir"); break;
     case "langRule":                rv = aRule.getAttribute("langPointer"); break;

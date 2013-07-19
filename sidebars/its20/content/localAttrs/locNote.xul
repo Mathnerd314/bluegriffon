@@ -71,10 +71,10 @@
         <hbox>
 	        <toolbarbutton class="multibutton" label="&descriptionLocNoteType.label;" value="description" property="its-loc-note-type" type="checkbox"
 	                       id="descriptionLocNoteTypeButton" group="locNoteType"
-	                       oncommand="ToggleProperty(this)"/>
+	                       oncommand="ToggleLocNote(this)"/>
 	        <toolbarbutton class="multibutton" label="&alertLocNoteType.label;" value="alert" property="its-loc-note-type" type="checkbox"
 	                       id="alertLocNoteTypeButton" group="locNoteType"
-	                       oncommand="ToggleProperty(this)"/>
+	                       oncommand="ToggleLocNote(this)"/>
         </hbox>
         <spacer flex="1"/>
       </hbox>

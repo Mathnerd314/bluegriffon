@@ -39,5 +39,6 @@
 const kIMPLEMENTED_RULES = [
   "translateRule",
   "locNoteRule",
-  "termRule"
+  "termRule",
+  "global"
 ];

@@ -44,33 +44,26 @@ function ToggleProperty(aElt)
   var value = (aElt.hasAttribute("value") ? aElt.getAttribute("value") : aElt.value);
   if (!checked &&
       (aElt.nodeName.toLowerCase() == "checkbox" || aElt.getAttribute("type") == "checkbox"))
-    value = "";
+    value = null;
   var property  = aElt.getAttribute("property");
-  var resetter  = aElt.getAttribute("resetter");
   var group     = aElt.getAttribute("group");
-  var agregator = aElt.getAttribute("agregator");
 
   var others = [];
-  if (agregator)
-    others = document.querySelectorAll("[agregator='" + agregator + "']");
-  else if (group)
+  if (group)
     others = document.querySelectorAll("[group='" + group + "']");
 
   for (var i = 0; i < others.length; i++) {
     var e = others[i];
     if (e != aElt) {
-      if (resetter == aElt.id
-          || resetter == e.id
-          || group) {
+      if (group) {
         e.removeAttribute("checked");
-      }
-      else {
-        if (agregator && e.hasAttribute("checked"))
-          value += " " + e.getAttribute("value");
       }
     }
   }
-  ApplyLocalITS([ { property: property, value: value} ]);
+
+  ApplyLocalITS([{ property: property, value: value }]);
+  if (aElt.hasAttribute("filter"))
+    ReflowGlobalRulesInUI(gCurrentElement, true, [aElt.getAttribute("filter")]);
 }
 
 function CheckToggle(aToggle, aChecked)
@@ -102,7 +95,7 @@ function ApplyLocalITS(aValues)
 
   for (var i = 0; i < aValues.length; i++) {
     var val = aValues[i];
-    if (val.value)
+    if (null != val.value)
       editor.setAttribute(gCurrentElement, val.property, val.value);
     else
       editor.removeAttribute(gCurrentElement, val.property);

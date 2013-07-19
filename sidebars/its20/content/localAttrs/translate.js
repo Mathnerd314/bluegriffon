@@ -62,8 +62,13 @@ function TranslateSectionIniter(aElt)
 
   // show a close button if we have local settings
   if (gCurrentElement == aElt) {
-    if ("yes" != translate && "no"  != translate)
+    if ("yes" != translate && "no"  != translate) {
       gDialog.deleteTranslateRule.removeAttribute("visible");
+      // default per section 8.1 of spec
+      if (!gDialog.translateYesButton.hasAttribute("checked")
+          && !gDialog.translateNoButton.hasAttribute("checked"))
+        gDialog.translateYesButton.setAttribute("checked", "true");
+    }
     else {
       gDialog.deleteTranslateRule.setAttribute("visible", "true");
     }
@@ -76,7 +81,7 @@ function TranslateSectionIniter(aElt)
 function TranslateSectionDeleter()
 {
   ApplyLocalITS( [
-                   { property: "translate", value: "" }
+                   { property: "translate", value: null }
                  ]);
   ReflowGlobalRulesInUI(gCurrentElement, true, ["translateRule"]);
 }
