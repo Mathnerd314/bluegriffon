@@ -460,11 +460,15 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             var nsResolver = aElt.ownerDocument.createNSResolver(translateRule);
   
             // get a snapshot of matching elements
-            var matches = aElt.ownerDocument.evaluate(selector,
-                                                      aElt.ownerDocument,
-                                                      nsResolver,
-                                                      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-                                                      null);
+            var matches = null;
+            try {
+	            matches = aElt.ownerDocument.evaluate(selector,
+	                                                      aElt.ownerDocument,
+	                                                      nsResolver,
+	                                                      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+	                                                      null);
+	            }
+            catch(e) {}
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
@@ -487,11 +491,15 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             var nsResolver = aElt.ownerDocument.createNSResolver(locNoteRule);
   
             // get a snapshot of matching elements
-            var matches = aElt.ownerDocument.evaluate(selector,
-                                                      aElt.ownerDocument,
-                                                      nsResolver,
-                                                      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-                                                      null);
+            var matches = null;
+            try {
+              matches = aElt.ownerDocument.evaluate(selector,
+                                                        aElt.ownerDocument,
+                                                        nsResolver,
+                                                        XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+                                                        null);
+              }
+            catch(e) {}
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
@@ -524,11 +532,15 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             var nsResolver = aElt.ownerDocument.createNSResolver(termRule);
   
             // get a snapshot of matching elements
-            var matches = aElt.ownerDocument.evaluate(selector,
-                                                      aElt.ownerDocument,
-                                                      nsResolver,
-                                                      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-                                                      null);
+            var matches = null;
+            try {
+              matches = aElt.ownerDocument.evaluate(selector,
+                                                        aElt.ownerDocument,
+                                                        nsResolver,
+                                                        XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+                                                        null);
+              }
+            catch(e) {}
             // is our current element in the results?
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
