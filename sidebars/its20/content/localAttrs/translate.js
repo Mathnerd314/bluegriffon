@@ -36,9 +36,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-RegisterResetter(TranslateSectionResetter, true);
-RegisterIniter(TranslateSectionIniter, true);
-
 function TranslateSectionResetter()
 {
   // reset the UI for local Translate attributes

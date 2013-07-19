@@ -68,18 +68,28 @@ function MagicButton(node, aQueryLanguage, doc)
         }
         else {
           var count = 0;
-          var sameNameCount = 0;
-          if (node.previousElementSibling) {
-            var sibling = node.previousElementSibling;
-            while (sibling)
-            {
-              count++;
-              if (sibling.localName == node.localName)
-                sameNameCount++;
-              sibling = sibling.previousElementSibling;
-            }
+          var sameNameCountBefore = 0, sameNameCountAfter = 0;
+          var sibling = node.previousElementSibling;
+          while (sibling) {
+            count++;
+            if (sibling.localName == node.localName
+                && sibling.namespaceURI == node.namespaceURI)
+              sameNameCountBefore++;
+            sibling = sibling.previousElementSibling;
           }
-          selector = node.nodeName.toLowerCase() + (sameNameCount ? ":nth-child(" + (count+1) + ")" : "") + selector;
+          var sibling = node.nextElementSibling;
+          while (sibling) {
+            if (sibling.localName == node.localName
+                && sibling.namespaceURI == node.namespaceURI)
+              sameNameCountAfter++;
+            sibling = sibling.nextElementSibling;
+          }
+
+          selector = node.nodeName.toLowerCase()
+                     + (sameNameCountBefore + sameNameCountAfter
+                        ? ":nth-child(" + (count+1) + ")"
+                        : "")
+                     + selector;
         }
   
         node = node.parentNode;
@@ -94,48 +104,49 @@ function MagicButton(node, aQueryLanguage, doc)
           prefix = "html";
           doc.documentElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:html", "http://www.w3.org/1999/xhtml");
         }
-	      selector = "//" + ComputeXPath(node, prefix).join("/");
+        while (node && node.nodeType == Node.ELEMENT_NODE) {
+          if (node.id) {
+            selector = prefix + ":" + node.nodeName.toLowerCase()
+                       + "[@id='" + node.id + "']"
+                       + selector;
+            break;
+          }
+          else {
+            var sameNameCountBefore = 0, sameNameCountAfter = 0;
+            var sibling = node.previousElementSibling;
+            while (sibling) {
+              if (sibling.localName == node.localName
+                  && sibling.namespaceURI == node.namespaceURI)
+                sameNameCountBefore++;
+              sibling = sibling.previousElementSibling;
+            }
+            var sibling = node.nextElementSibling;
+            while (sibling) {
+              if (sibling.localName == node.localName
+                  && sibling.namespaceURI == node.namespaceURI)
+                sameNameCountAfter++;
+              sibling = sibling.nextElementSibling;
+            }
+  
+            selector = prefix + ":" + node.nodeName.toLowerCase()
+                       + (sameNameCountBefore + sameNameCountAfter
+                          ? "[" + (sameNameCountBefore+1) + "]"
+                          : "")
+                       + selector;
+          }
+    
+          node = node.parentNode;
+          if (node
+              && node.nodeType == Node.ELEMENT_NODE)
+            selector = "/" + selector;
+        }
+        selector = "//" + selector;
 	    }
       break;
     default: break;
   }
   gDialog.selectorTextbox.value = selector;
   onSelectorPresent();
-}
-
-function  ComputeXPath(node, prefix, path)
-{
-  path = path || [];
-  if (node.parentNode && !node.id) {
-    path = ComputeXPath(node.parentNode, prefix, path);
-  }
-
-  if(node.previousSibling) {
-    var count = 1;
-    var sibling = node.previousSibling
-    do {
-      if(sibling.nodeType == 1 && sibling.nodeName == node.nodeName) {count++;}
-      sibling = sibling.previousSibling;
-    } while(sibling);
-    if(count == 1) {count = null;}
-  } else if(node.nextSibling) {
-    var sibling = node.nextSibling;
-    do {
-      if(sibling.nodeType == 1 && sibling.nodeName == node.nodeName) {
-        var count = 1;
-        sibling = null;
-      } else {
-        var count = null;
-        sibling = sibling.previousSibling;
-      }
-    } while(sibling);
-  }
-
-  if(node.nodeType == 1) {
-    path.push(prefix + ":" + node.nodeName.toLowerCase()
-              + (node.id ? "[@id='"+node.id+"']" : count > 0 ? "["+count+"]" : ''));
-  }
-  return path;
 }
 
 function GetPrefixForHTMLNamespace(aElt)

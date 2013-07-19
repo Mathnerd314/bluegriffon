@@ -43,9 +43,6 @@ Components.utils.import("resource://app/modules/l10nHelper.jsm");
 
 var gDocUrlScheme = null;
 
-RegisterResetter(GlobalResetter, false);
-RegisterIniter(GlobalIniter, false);
-
 function GlobalResetter()
 {
   RulesetsResetter();

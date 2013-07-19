@@ -40,9 +40,6 @@ Components.utils.import("resource://app/modules/cssHelper.jsm");
 Components.utils.import("resource://app/modules/editorHelper.jsm");
 Components.utils.import("resource://app/modules/l10nHelper.jsm");
 
-RegisterResetter(LocNoteSectionResetter, true);
-RegisterIniter(LocNoteSectionIniter, true);
-
 function LocNoteSectionResetter()
 {
   // reset the UI for local Localization Note attributes
