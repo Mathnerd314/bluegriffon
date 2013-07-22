@@ -2276,95 +2276,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
      return aSelection->Collapse(node, offset);
    }
  
-@@ -6619,16 +6586,19 @@ nsHTMLEditRules::ReturnInHeader(nsISelec
-   NS_ENSURE_SUCCESS(res, res);
- 
-   // split the header
-   int32_t newOffset;
-   NS_ENSURE_STATE(mHTMLEditor);
-   res = mHTMLEditor->SplitNodeDeep( aHeader, selNode, aOffset, &newOffset);
-   NS_ENSURE_SUCCESS(res, res);
- 
-+  nsCOMPtr<nsIDOMElement> headerElt = do_QueryInterface(aHeader);
-+  RemoveNonCopyableAttributes(headerElt);
-+
-   // if the leftand heading is empty, put a mozbr in it
-   nsCOMPtr<nsIDOMNode> prevItem;
-   NS_ENSURE_STATE(mHTMLEditor);
-   mHTMLEditor->GetPriorHTMLSibling(aHeader, address_of(prevItem));
-   if (prevItem && nsHTMLEditUtils::IsHeader(prevItem))
-   {
-     bool bIsEmptyNode;
-     NS_ENSURE_STATE(mHTMLEditor);
-@@ -6794,16 +6764,47 @@ nsHTMLEditRules::ReturnInParagraph(nsISe
-     res =  mHTMLEditor->CreateBR(parent, offset, address_of(brNode));
-     sibling = brNode;
-   }
-   nsCOMPtr<nsIDOMNode> selNode = aNode;
-   *aHandled = true;
-   return SplitParagraph(aPara, sibling, aSelection, address_of(selNode), &aOffset);
- }
- 
-+nsresult
-+nsHTMLEditRules::RemoveNonCopyableAttributes(nsIDOMElement * aElement)
-+{
-+  return NS_OK;
-+  NS_ENSURE_TRUE(aElement, NS_ERROR_NULL_POINTER);
-+  nsresult res = NS_OK;
-+  NS_ENSURE_STATE(mHTMLEditor);
-+
-+  nsCOMPtr<nsIDOMMozNamedAttrMap> attributes;
-+  aElement->GetAttributes(getter_AddRefs(attributes));
-+  NS_ENSURE_TRUE(attributes, NS_ERROR_FAILURE);
-+  uint32_t attrCount;
-+  attributes->GetLength(&attrCount);
-+  nsCOMPtr<nsIDOMAttr> attr;
-+  for (int32_t i = attrCount - 1; i >= 0; i--)   {
-+    if (NS_SUCCEEDED(attributes->Item(i, getter_AddRefs(attr))) && attr) {
-+      nsString attrName;
-+      if (NS_SUCCEEDED(attr->GetName(attrName))) {
-+        ToLowerCase(attrName);
-+          if (StringBeginsWith(attrName, NS_LITERAL_STRING("its-")) ||
-+              attrName.EqualsLiteral("translate") ||
-+              attrName.EqualsLiteral("id")) {
-+            res = mHTMLEditor->RemoveAttribute(aElement, attrName);
-+            NS_ENSURE_SUCCESS(res, res);
-+        }
-+      }
-+    }
-+  }
-+  return res;
-+}
-+
- ///////////////////////////////////////////////////////////////////////////
- // SplitParagraph: split a paragraph at selection point, possibly deleting a br
- //                       
- nsresult 
- nsHTMLEditRules::SplitParagraph(nsIDOMNode *aPara,
-                                 nsIDOMNode *aBRNode, 
-                                 nsISelection *aSelection,
-                                 nsCOMPtr<nsIDOMNode> *aSelNode, 
-@@ -6834,16 +6835,19 @@ nsHTMLEditRules::SplitParagraph(nsIDOMNo
-   }
- 
-   // remove ID attribute on the paragraph we just created
-   nsCOMPtr<nsIDOMElement> rightElt = do_QueryInterface(rightPara);
-   NS_ENSURE_STATE(mHTMLEditor);
-   res = mHTMLEditor->RemoveAttribute(rightElt, NS_LITERAL_STRING("id"));
-   NS_ENSURE_SUCCESS(res, res);
- 
-+  // remove ITS attributes
-+  RemoveNonCopyableAttributes(rightElt);
-+
-   // check both halves of para to see if we need mozBR
-   res = InsertMozBRIfNeeded(leftPara);
-   NS_ENSURE_SUCCESS(res, res);
-   res = InsertMozBRIfNeeded(rightPara);
-   NS_ENSURE_SUCCESS(res, res);
- 
-   // selection to beginning of right hand para;
-   // look inside any containers that are up front.
-@@ -6929,16 +6933,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6929,16 +6896,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
      }
      else
      {
@@ -2384,7 +2296,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        NS_ENSURE_SUCCESS(res, res);
  
        // append a <br> to it
-@@ -6959,16 +6966,20 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6959,16 +6929,17 @@ nsHTMLEditRules::ReturnInListItem(nsISel
    NS_ENSURE_STATE(mHTMLEditor);
    res = nsWSRunObject::PrepareToSplitAcrossBlocks(mHTMLEditor, address_of(selNode), &aOffset);
    NS_ENSURE_SUCCESS(res, res);
@@ -2394,9 +2306,6 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
    res = mHTMLEditor->SplitNodeDeep( aListItem, selNode, aOffset, &newOffset, false);
    NS_ENSURE_SUCCESS(res, res);
 +
-+  nsCOMPtr<nsIDOMElement> listItemElt = do_QueryInterface(aListItem);
-+  RemoveNonCopyableAttributes(listItemElt);
-+
    // hack: until I can change the damaged doc range code back to being
    // extra inclusive, I have to manually detect certain list items that
    // may be left empty.
@@ -2405,7 +2314,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
    mHTMLEditor->GetPriorHTMLSibling(aListItem, address_of(prevItem));
  
    if (prevItem && nsHTMLEditUtils::IsListItem(prevItem))
-@@ -6990,16 +7001,18 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6990,16 +6961,18 @@ nsHTMLEditRules::ReturnInListItem(nsISel
          if (nodeAtom == nsEditProperty::dd || nodeAtom == nsEditProperty::dt)
          {
            int32_t itemOffset;
@@ -2427,7 +2336,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
 diff --git a/editor/libeditor/html/nsHTMLEditRules.h b/editor/libeditor/html/nsHTMLEditRules.h
 --- a/editor/libeditor/html/nsHTMLEditRules.h
 +++ b/editor/libeditor/html/nsHTMLEditRules.h
-@@ -324,17 +324,19 @@ protected:
+@@ -324,17 +324,17 @@ protected:
    bool     IsEmptyInline(nsIDOMNode *aNode);
    bool     ListIsEmptyLine(nsCOMArray<nsIDOMNode> &arrayOfNodes);
    nsresult RemoveAlignment(nsIDOMNode * aNode, const nsAString & aAlignType, bool aChildrenOnly);
@@ -2437,8 +2346,6 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.h b/editor/libeditor/html/nsH
    void DocumentModifiedWorker();
  
 -// data members
-+  nsresult RemoveNonCopyableAttributes(nsIDOMElement * aElement);
-+
 +  // data members
  protected:
    nsHTMLEditor           *mHTMLEditor;
