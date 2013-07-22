@@ -59,7 +59,9 @@ function LocNoteSectionIniter(aElt)
   // according to the spec (section 8.3.2), we need one of the two attributes
   if (hasNote || hasNoteRef) {
     // reflect its-loc-note-type in UI
-    switch (aElt.getAttribute("its-loc-note-type")) {
+    switch (aElt.hasAttribute("its-loc-note-type")
+            ? aElt.getAttribute("its-loc-note-type").toLowerCase()
+            : "") {
       case "description":
         gDialog.descriptionLocNoteTypeButton.setAttribute("checked", "true");
         gDialog.alertLocNoteTypeButton.removeAttribute("checked");

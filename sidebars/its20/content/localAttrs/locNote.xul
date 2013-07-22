@@ -53,7 +53,7 @@
           context="sectionHeaderContext"
           id="locNoteSectionHeader"
           onclick="ToggleSection(event, this)"
-          position="4">
+          position="6">
       <image />
       <label value="&locNoteSectionHeader.label;"/>
       <spacer flex="1"/>
@@ -65,7 +65,7 @@
 
     <vbox class="section"
           id="locNoteSection"
-          position="5">
+          position="7">
       <hbox align="center">
         <spacer flex="1"/>
         <hbox>

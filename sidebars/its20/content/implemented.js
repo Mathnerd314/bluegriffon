@@ -37,6 +37,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 const kIMPLEMENTED_RULES = [
+  "annotatorsRef",
   "translateRule",
   "locNoteRule",
   "termRule",

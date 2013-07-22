@@ -145,6 +145,7 @@ hbox.csspropertiesHeader[open="true"] + .section {
   -moz-image-region: rect(0px, 42px, 14px, 28px);
 }
 
+#annotatorsRefBox,
 #rulesetsBox,
 #paramsBox,
 #rulesBox {
@@ -159,10 +160,20 @@ listitem.remote {
   font-style: italic;
 }
 
+#annotatorsRefBox listcell:nth-of-type(1),
 #rulesBox listcell:nth-of-type(1) {
   padding-right: 1em;
 }
 
+#annotatorsRefBox listcell:nth-of-type(2), 
 #rulesBox listcell:nth-of-type(2) {
   font-family: -moz-fixed;
+}
+
+listitem.ancestor {
+  font-style: italic;
+}
+
+listitem.ancestor:not([selected]) {
+  background-color: #f0f0f0;
 }

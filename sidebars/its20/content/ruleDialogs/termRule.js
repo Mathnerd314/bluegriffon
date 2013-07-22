@@ -55,7 +55,7 @@ function Startup()
 
   if (gRule) {
     gDialog.selectorTextbox.value = gRule.getAttribute("selector");
-    if (gRule.getAttribute("term") == "yes") {
+    if (gRule.getAttribute("term").toLowerCase() == "yes") {
       gDialog.yesTermButton.setAttribute("checked", "true");
       gDialog.noTermButton.removeAttribute("checked");
     }

@@ -8,6 +8,8 @@ its20.jar:
 * content/its20/its20.xul                        (content/its20.xul)
 * content/its20/its20.js                         (content/its20.js)
   content/its20/common.js                        (content/common.js)
+  content/its20/localAttrs/annotatorsRef.xul     (content/localAttrs/annotatorsRef.xul)
+  content/its20/localAttrs/annotatorsRef.js      (content/localAttrs/annotatorsRef.js)
   content/its20/localAttrs/translate.xul         (content/localAttrs/translate.xul)
   content/its20/localAttrs/translate.js          (content/localAttrs/translate.js)
   content/its20/localAttrs/locNote.xul           (content/localAttrs/locNote.xul)

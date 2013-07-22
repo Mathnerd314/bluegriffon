@@ -53,7 +53,7 @@
           context="sectionHeaderContext"
           id="termSectionHeader"
           onclick="ToggleSection(event, this)"
-          position="6">
+          position="8">
       <image />
       <label value="&termSectionHeader.label;"/>
       <spacer flex="1"/>
@@ -65,7 +65,7 @@
 
     <vbox class="section"
           id="termSection"
-          position="7">
+          position="9">
       <hbox align="center">
         <spacer flex="1"/>
         <hbox>

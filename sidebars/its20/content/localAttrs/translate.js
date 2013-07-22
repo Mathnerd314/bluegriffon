@@ -46,7 +46,9 @@ function TranslateSectionResetter()
 function TranslateSectionIniter(aElt)
 {
   // update the checkbox buttons
-  var translate = aElt.getAttribute("translate");
+  var translate = aElt.hasAttribute("translate")
+                  ? aElt.getAttribute("translate").toLowerCase()
+                  : "";
   Toggle(gDialog.translateYesButton, "yes" == translate);
   Toggle(gDialog.translateNoButton,  "no"  == translate);
 

@@ -55,7 +55,7 @@ function Startup()
 
   if (gRule) {
     gDialog.selectorTextbox.value = gRule.getAttribute("selector");
-    if (gRule.getAttribute("locNoteType") == "description") {
+    if (gRule.getAttribute("locNoteType").toLowerCase() == "description") {
       gDialog.descriptionLocNocTypeButton.setAttribute("checked", "true");
       gDialog.alertLocNocTypeButton.removeAttribute("checked");
     }

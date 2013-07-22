@@ -55,7 +55,9 @@ function TermSectionResetter()
 
 function TermSectionIniter(aElt)
 {
-  var term = aElt.getAttribute("its-term");
+  var term = aElt.hasAttribute("its-term")
+             ? aElt.getAttribute("its-term").toLowerCase()
+             : "";
   // only deal with it if @term is yes or no
   if (term == "yes" || term == "no") {
     // we can directly show the deletion button since according to

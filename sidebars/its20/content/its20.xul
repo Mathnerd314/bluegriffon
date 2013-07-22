@@ -43,6 +43,7 @@
 <?xml-stylesheet href="chrome://bluegriffon/skin/listboxBg.css" type="text/css"?>
 <?xml-stylesheet href="chrome://bluegriffon/skin/bluegriffonDialogs.css" type="text/css"?>
 
+<?xul-overlay href="chrome://its20/content/localAttrs/annotatorsRef.xul"?>
 <?xul-overlay href="chrome://its20/content/localAttrs/translate.xul"?>
 <?xul-overlay href="chrome://its20/content/localAttrs/locNote.xul"?>
 <?xul-overlay href="chrome://its20/content/localAttrs/term.xul"?>

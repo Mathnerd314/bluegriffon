@@ -138,5 +138,45 @@
         </rows>
       </grid>
     </panel>
+
+    <panel id="addAnnotatorsRefPanel"
+           level="floating"
+           noautohide="true"
+           orient="vertical"
+           type="arrow">
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row align="center">
+            <label value="&dataCategory.label;"/>
+            <menulist id="dataCategoryMenulist" style="min-width: 20em"
+                      oncommand="CheckAnnotatorsRefPanel()">
+              <menupopup onpopupshowing="ShowAnnotatorsRefDataCategories(this)"/>
+            </menulist>
+          </row>
+          <row align="center">
+            <label value="&processorIRI.label;"/>
+            <textbox id="processorIRITextbox"
+                     oninput="CheckAnnotatorsRefPanel()"/>
+          </row>
+          <row align="center">
+            <spacer/>
+            <hbox>
+              <spacer/>
+              <button label="&addAnnotatorsRefCancel.label;" oncommand="CloseAnnotatorsRefPanel();"/>
+              <button id="addAnnotatorsRefButton"
+                      disabled="true"
+                      default="true"
+                      oncommand="CreateNewAnnotatorsRef()"
+                      label="&addAnnotatorsRefOK.label;"/>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+                
+    </panel>
   </popupset>
 </overlay>

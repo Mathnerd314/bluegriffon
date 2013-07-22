@@ -397,7 +397,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
               var selector = ExpandParameters(translateRule.getAttribute("selector"), aDoc);
               // does the current element match?
               if (aElt.mozMatchesSelector(selector)) // yep...
-                translate = translateRule.getAttribute("translate");
+                translate = translateRule.getAttribute("translate").toLowerCase();
             }
         }
 
@@ -421,7 +421,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
               var selector = ExpandParameters(locNoteRule.getAttribute("selector"), aDoc);
               // does the current element match?
               if (aElt.mozMatchesSelector(selector)) { // yep...
-                locNoteType = locNoteRule.getAttribute("locNoteType");
+                locNoteType = locNoteRule.getAttribute("locNoteType").toLowerCase();
                 if (locNoteRule.firstElementChild
                     && locNoteRule.firstElementChild.localName == "locNote"
                     && locNoteRule.firstElementChild.namespaceURI == kITS_NAMESPACE) {
@@ -456,7 +456,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
               var selector = ExpandParameters(termRule.getAttribute("selector"), aDoc);
               // does the current element match?
               if (aElt.mozMatchesSelector(selector)) { // yep...
-                term = termRule.getAttribute("term");
+                term = termRule.getAttribute("term").toLowerCase();
                 termInfoRef = termRule.getAttribute("termInfoRef");
               }
             }
@@ -496,7 +496,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
                 if (matches.snapshotItem(i) == aElt) { // yes it is!
-                  translate = translateRule.getAttribute("translate");
+                  translate = translateRule.getAttribute("translate").toLowerCase();
                   break;
                 }
               }
@@ -534,7 +534,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
                 if (matches.snapshotItem(i) == aElt) { // yes it is!
-                  locNoteType = locNoteRule.getAttribute("locNoteType");
+                  locNoteType = locNoteRule.getAttribute("locNoteType").toLowerCase();
                   if (locNoteRule.firstElementChild
                       && locNoteRule.firstElementChild.localName == "locNote"
                       && locNoteRule.firstElementChild.namespaceURI == kITS_NAMESPACE) {
@@ -582,7 +582,7 @@ function ShowGlobalRulesInUI(aDoc, aElt, aFilters)
             if (matches && matches.snapshotLength) {
               for (var i = 0; i < matches.snapshotLength; i++) {
                 if (matches.snapshotItem(i) == aElt) { // yes it is!
-                  term = termRule.getAttribute("term");
+                  term = termRule.getAttribute("term").toLowerCase();
                   termInfoRef = termRule.getAttribute("termInfoRef");
                   break;
                 }
@@ -646,6 +646,7 @@ function ReflowGlobalRulesInUI(aElt, aForCurrentElementOnly, aFilter)
      for (var i = 0; i < filters.length; i++) {
       var filter = filters[i];
       switch (filter) {
+        case "annotatorsRef": AnnotatorsRefSectionResetter(); break;
         case "translateRule": TranslateSectionResetter(); break;
         case "locNoteRule":   LocNoteSectionResetter(); break;
         case "termRule":      TermSectionResetter(); break;
@@ -672,6 +673,7 @@ function ReflowGlobalRulesInUI(aElt, aForCurrentElementOnly, aFilter)
    for (var i = 0; i < filters.length; i++) {
     var filter = filters[i];
     switch (filter) {
+      case "annotatorsRef": AnnotatorsRefSectionIniter(aElt); break;
       case "translateRule": TranslateSectionIniter(aElt); break;
       case "locNoteRule":   LocNoteSectionIniter(aElt); break;
       case "termRule":      TermSectionIniter(aElt); break;

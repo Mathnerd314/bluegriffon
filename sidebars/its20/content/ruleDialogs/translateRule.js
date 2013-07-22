@@ -55,7 +55,7 @@ function Startup()
 
   if (gRule) {
     gDialog.selectorTextbox.value = gRule.getAttribute("selector");
-    if (gRule.getAttribute("translate") == "yes") {
+    if (gRule.getAttribute("translate").toLowerCase() == "yes") {
       gDialog.translateYesButton.setAttribute("checked", "true");
       gDialog.translateNoButton.removeAttribute("checked");
     }
