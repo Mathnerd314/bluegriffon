@@ -114,6 +114,9 @@
                  oninput="TermConfidenceTextboxChanged(this)"
                  oncommand="TermConfidenceTextboxChanged(this)"/>
       </hbox>
+      <description id="annotatorsRefWarningLabel"
+                   hidden="true"
+                   class="indent">&annotatorsRefWarning.label;</description>
     </vbox>
   </vbox>
 </overlay>

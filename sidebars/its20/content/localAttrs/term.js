@@ -99,8 +99,22 @@ function TermSectionIniter(aElt)
         && !gDialog.noTermTerminologyButton.hasAttribute("checked"))
     gDialog.noTermTerminologyButton.setAttribute("checked", "true");
   }
+
+  CheckAnnotatorsRef();
 }
 
+function CheckAnnotatorsRef()
+{
+  // Section 5.8 of the spec
+  if (gDialog.termConfidenceCheckbox.checked) { // we need an annotators ref
+    var ar = gDialog.annotatorsRefBox.querySelector("listcell[label='terminology']");
+    if (!ar) {
+      gDialog.annotatorsRefWarningLabel.removeAttribute("hidden");
+      return;
+    }
+  }
+  gDialog.annotatorsRefWarningLabel.setAttribute("hidden", "true");
+}
 
 /* apply the UI changes
  * 

@@ -177,3 +177,8 @@ listitem.ancestor {
 listitem.ancestor:not([selected]) {
   background-color: #f0f0f0;
 }
+
+#annotatorsRefWarningLabel {
+  color: red;
+  font-weight: bold;
+}

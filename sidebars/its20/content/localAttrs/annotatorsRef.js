@@ -90,6 +90,9 @@ function AnnotatorsRefSectionIniter(aElt)
 
     elt = elt.parentNode;
   }
+
+  // section 5.8 of spec
+  CheckAnnotatorsRef();
 }
 
 /* user clicked on the deletion button for local attrs
