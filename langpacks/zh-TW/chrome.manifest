@@ -1,5 +1,5 @@
 manifest chrome/zh-TW.manifest
 manifest browser/chrome.manifest application=bluegriffon@disruptive-innovations.com
 manifest webapprt/chrome.manifest application=bluegriffon@disruptive-innovations.com
-manifest metro/chrome.manifest application={99bceaaa-e3c6-48c1-b981-ef9b46b67d60}
+
 manifest bluegriffon/chrome.manifest application=bluegriffon@disruptive-innovations.com
