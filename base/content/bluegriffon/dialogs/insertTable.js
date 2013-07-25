@@ -18,11 +18,7 @@ function Startup()
   GetUIElements();
 
   try {
-    var args = window.arguments[0];
-    args instanceof Components.interfaces.nsIDialogParamBlock;
-    var objects = args.objects;
-    gNode = objects.queryElementAt(0,
-                                   Components.interfaces.nsIDOMElement);
+    gNode = window.arguments[0];
   }
   catch(e) { return; }
 
@@ -232,6 +228,7 @@ function ValidateData(aTabValue)
   if (gDataChanged) {
     var tab = aTabValue || gDialog.tabbox.selectedTab.value;
     var editor = EditorUtils.getCurrentEditor();
+    editor instanceof Components.interfaces.nsITableEditor;
     editor.beginTransaction();
     switch (tab) {
       case "table":
@@ -531,6 +528,7 @@ function UpdateCells(editor)
   var selection = editor.selection;
   var cells = GetSelectedCells(selection);
   // at this points cells array contains all the cells to impact
+  var newSelectedCells = [];
   for (var i = 0; i < cells.length; i++) {
     var c = cells[i];
 
@@ -558,8 +556,24 @@ function UpdateCells(editor)
     editor.doTransaction(txn);
     editor.incrementModificationCount(1);  
 
-    if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
-      editor.switchTableCellHeaderType(c);
+    if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td")) {
+      newSelectedCells.push(editor.switchTableCellHeaderType(c));
+    }
+  }
+  UpdateSelectedCells(editor, selection, newSelectedCells);
+}
+
+function UpdateSelectedCells(editor, aSelection, aArray)
+{
+  if (aArray.length) {
+    aSelection.removeAllRanges();
+    for (var i = 0; i < aArray.length; i++) {
+      var range = editor.document.createRange();
+      range.selectNode(aArray[i]);
+      aSelection.addRange(range);
+    }
+    gNode = aArray[0];
+    editor.checkSelectionStateForAnonymousButtons(editor.selection);
   }
 }
 
@@ -617,6 +631,7 @@ function UpdateColumns(editor)
     }
   }
 
+  var newSelectedCells = [];
   for (var i = 0; i < columnsCells.length; i++) {
     var c = columnsCells[i];
 
@@ -645,8 +660,9 @@ function UpdateColumns(editor)
     editor.incrementModificationCount(1);  
 
     if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
-      editor.switchTableCellHeaderType(c);
+      newSelectedCells.push(editor.switchTableCellHeaderType(c));
   }
+  UpdateSelectedCells(editor, selection, newSelectedCells);
 }
 
 function UpdateRows(editor)
@@ -661,6 +677,7 @@ function UpdateRows(editor)
   }
 
   // at this point the rows array has all the rows we need to impact
+  var newSelectedCells = [];
   for (var i = 0; i < rows.length; i++) {
     var r = rows[i];
 
@@ -711,11 +728,12 @@ function UpdateRows(editor)
       editor.incrementModificationCount(1);  
 
       if (c.nodeName.toLowerCase() != (gDialog.cellsHeadersCheckbox.checked ? "th" : "td"))
-        editor.switchTableCellHeaderType(c);
+        newSelectedCells.push(editor.switchTableCellHeaderType(c));
 
       c = c.nextElementSibling;
     }
   }
+  UpdateSelectedCells(editor, selection, newSelectedCells);
 }
 
 function Next()

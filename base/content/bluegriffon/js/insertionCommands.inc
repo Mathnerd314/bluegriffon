@@ -17,7 +17,8 @@ var cmdInsertOrEditTableCommand =
       var element = EditorUtils.getObjectForProperties(
             ["table", "thead", "tfoot", "tbody", "tr", "th", "td", "caption"]);
       if (element) {
-        OpenAppModalWindow(window, "chrome://bluegriffon/content/dialogs/insertTable.xul", "Tables", false, element); 
+        window.openDialog("chrome://bluegriffon/content/dialogs/insertTable.xul","_blank",
+                          "chrome,modal,titlebar,resizable=yes,dialog=no", element);
         return;
       }
     }
