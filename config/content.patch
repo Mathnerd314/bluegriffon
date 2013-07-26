@@ -3065,6 +3065,25 @@ diff --git a/editor/libeditor/html/nsTableEditor.cpp b/editor/libeditor/html/nsT
    }
  
    // Delete cells whose contents were moved
+@@ -2725,17 +2775,17 @@ nsHTMLEditor::GetCellDataAt(nsIDOMElemen
+   }
+   
+   nsTableOuterFrame* tableFrame = GetTableFrame(aTable);
+   NS_ENSURE_TRUE(tableFrame, NS_ERROR_FAILURE);
+ 
+   nsTableCellFrame* cellFrame =
+     tableFrame->GetCellFrameAt(aRowIndex, aColIndex);
+   if (!cellFrame)
+-    return NS_ERROR_FAILURE;
++    return NS_EDITOR_ELEMENT_NOT_FOUND;
+ 
+   *aIsSelected = cellFrame->IsSelected();
+   cellFrame->GetRowIndex(*aStartRowIndex);
+   cellFrame->GetColIndex(*aStartColIndex);
+   *aRowSpan = cellFrame->GetRowSpan();
+   *aColSpan = cellFrame->GetColSpan();
+   *aActualRowSpan = tableFrame->GetEffectiveRowSpanAt(aRowIndex, aColIndex);
+   *aActualColSpan = tableFrame->GetEffectiveColSpanAt(aRowIndex, aColIndex);
 diff --git a/editor/libeditor/html/nsWSRunObject.cpp b/editor/libeditor/html/nsWSRunObject.cpp
 --- a/editor/libeditor/html/nsWSRunObject.cpp
 +++ b/editor/libeditor/html/nsWSRunObject.cpp
