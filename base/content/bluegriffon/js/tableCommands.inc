@@ -695,7 +695,7 @@ var bgJoinTableCellsCommand =
     // Param: Don't merge non-contiguous cells
     try {
       EditorUtils.getCurrentTableEditor().joinTableCells(false);
-    } catch (e) {}
+    } catch (e) {alert(e)}
     window.content.focus();
   }
 };

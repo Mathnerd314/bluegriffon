@@ -365,7 +365,16 @@ var ComposerCommands = {
     var commandTable = this.getComposerCommandTable();
     if (!commandTable)
       return;
-    
+
+    commandTable.registerCommand("cmd_BGcopy",       cmdBGCopyCommand);
+    commandTable.registerCommand("cmd_BGcut",        cmdBGCutCommand);
+    commandTable.registerCommand("cmd_BGpaste",      cmdBGPasteCommand);
+    commandTable.registerCommand("cmd_BGundo",       cmdBGUndoCommand);
+    commandTable.registerCommand("cmd_BGredo",       cmdBGRedoCommand);
+    commandTable.registerCommand("cmd_BGselectAll",  cmdBGselectAllCommand);
+    commandTable.registerCommand("cmd_BGpasteNoFormatting",  cmdBGpasteNoFormattingCommand);
+    commandTable.registerCommand("cmd_BGdelete",     cmdBGdeleteCommand);
+
     commandTable.registerCommand("cmd_stopLoading", cmdStopLoading);
     commandTable.registerCommand("cmd_open",        cmdOpen);
     commandTable.registerCommand("cmd_openFile",    cmdOpenFile);
@@ -489,8 +498,6 @@ var ComposerCommands = {
     commandTable.registerCommand("cmd_structurePrevious", cmdStructurePreviousCommand);
 
     commandTable.registerCommand("cmd_commentOrPI",  cmdCommentOrPICommand);
-    
-    commandTable.registerCommand("cmd_encapsulate", cmdEncapsulateCommand);
   },
 
   setupFormatCommands: function setupFormatCommands()

@@ -370,3 +370,15 @@ function BespinChangeCallback()
   UpdateBadge();
 #endif
 }
+
+function BespinActivityCallback()
+{
+  ComposerCommands.goUpdateCommand("cmd_BGundo");
+  ComposerCommands.goUpdateCommand("cmd_BGredo");
+  ComposerCommands.goUpdateCommand("cmd_BGcopy");
+  ComposerCommands.goUpdateCommand("cmd_BGcut");
+  ComposerCommands.goUpdateCommand("cmd_BGpaste");
+  ComposerCommands.goUpdateCommand("cmd_BGselectAll");
+  ComposerCommands.goUpdateCommand("cmd_BGpasteNoFormatting");
+  ComposerCommands.goUpdateCommand("cmd_BGdelete");
+}

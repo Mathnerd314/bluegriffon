@@ -50,6 +50,8 @@
   <!ENTITY % ariaDTD         SYSTEM "chrome://bluegriffon/locale/aria.dtd" >
   <!ENTITY % baseMenuOverlayDTD SYSTEM "chrome://browser/locale/baseMenuOverlay.dtd">
   <!ENTITY % brandDTD        SYSTEM "chrome://branding/locale/brand.dtd" >
+  <!ENTITY % editMenuDTD     SYSTEM "chrome://global/locale/editMenuOverlay.dtd" >
+  %editMenuDTD;
   %tabEditorDTD;
   %baseMenuOverlayDTD;
   %bluegriffonDTD;

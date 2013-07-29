@@ -935,6 +935,7 @@ function ToggleViewMode(aElement)
     catch(e) {}
     sourceIframe.contentWindow.wrappedJSObject.installCodeMirror(BespinKeyPressCallback,
                                                  BespinChangeCallback,
+                                                 BespinActivityCallback,
                                                  theme,
                                                  null,
                                                  EditorUtils);

@@ -45,14 +45,14 @@
     <menu id="editMenu"   label="&editMenu.label;"   accesskey="&editMenu.accesskey;">
       <menupopup id="editMenuPopup">
         <!-- magic from chrome://global/content/editMenuOverlay.xul -->
-        <menuitem id="menu_undo" />
-        <menuitem id="menu_redo" />
+        <menuitem id="menu_BGundo" command="cmd_BGundo" key="key_BGundo"/>
+        <menuitem id="menu_BGredo" command="cmd_BGredo" key="key_BGredo"/>
         <menuseparator/>
-        <menuitem id="menu_cut" />
-        <menuitem id="menu_copy" />
-        <menuitem id="menu_paste"/>
-        <menuitem id="menu_pasteNoFormatting_cm" command="cmd_pasteNoFormatting"/>
-        <menuitem id="menu_delete"/>
+        <menuitem id="menu_BGcut"   command="cmd_BGcut"  key="key_BGcut"/>
+        <menuitem id="menu_BGcopy"  command="cmd_BGcopy" key="key_BGcopy"/>
+        <menuitem id="menu_BGpaste" command="cmd_BGpaste" key="key_BGpaste"/>
+        <menuitem id="menu_BGpasteNoFormatting_cm" command="cmd_BGpasteNoFormatting"/>
+        <menuitem id="menu_BGdelete"  command="cmd_BGdelete"/>
         <menuseparator/>
         <menu label="&select.label;">
           <menupopup>
@@ -71,7 +71,7 @@
                       command="cmd_structurePrevious"/>
           </menupopup>
         </menu>
-        <menuitem id="menu_selectAll" />
+        <menuitem id="menu_BGselectAll" command="cmd_BGselectAll" key="key_BGselectAll"/>
         <menuseparator/>
         <menuitem id="menu_copyHTMLCode"
                   label="&copyHTMLCodeCmd.label;"

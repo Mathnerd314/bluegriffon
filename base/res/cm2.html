@@ -90,6 +90,8 @@
         onChange: changeFunc,
         mode: "pophtmlmixed",
         onCursorActivity: function() {
+          if (gActivityCallback)
+            gActivityCallback();
           gEditor.setLineClass(hlLine, null);
           hlLine = gEditor.setLineClass(gEditor.getCursor().line, "activeline");
         }
@@ -132,10 +134,11 @@
   }
 
   var gInstalled = false;
-  function installCodeMirror(aKeyPressCallback, aChangeCallback, aTheme, aTagsArray, aEditorUtils) {
+  function installCodeMirror(aKeyPressCallback, aChangeCallback, aActivityCallback, aTheme, aTagsArray, aEditorUtils) {
     if (gInstalled) return;
     getEditableElement().addEventListener("keypress", aKeyPressCallback, true);
     gChangeCallback = aChangeCallback;
+    gActivityCallback = aActivityCallback;
     useTheme(aTheme);
     html_tags = aTagsArray;
     editorUtils = aEditorUtils;

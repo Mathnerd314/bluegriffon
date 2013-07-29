@@ -31,6 +31,14 @@
 #endif
 
   <key id="printkb"               key="&printCmd.commandkey;" observes="cmd_print" modifiers="accel"/>
+
+   <key id="key_BGundo"  key="&undoCmd.key;"  modifiers="accel" command="cmd_BGundo"/>  
+   <key id="key_BGredo"  key="&redoCmd.key;"  modifiers="accel" command="cmd_BGredo"/>  
+   <key id="key_BGcopy"  key="&copyCmd.key;"  modifiers="accel" command="cmd_BGcopy"/>  
+   <key id="key_BGcut"   key="&cutCmd.key;"   modifiers="accel" command="cmd_BGcut"/>  
+   <key id="key_BGpaste" key="&pasteCmd.key;" modifiers="accel" command="cmd_BGpaste"/>
+   <key id="key_BGselectAll" key="&selectAllCmd.key;" modifiers="accel" command="cmd_BGselectAll"/>  
+   <key id="key_BGdelete" key="&deleteCmd.key;" modifiers="accel" command="cmd_BGdelete"/>  
 </keyset>
 
 <!-- magic from chrome://global/content/editMenuOverlay.xul -->
@@ -64,6 +72,7 @@
             commandupdater="true"
             events="create,style,mode_switch"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this)">
+
   <command id="cmd_list"             oncommand="goDoCommand('cmd_list')"/>
   <command id="cmd_table"            oncommand="goDoCommand('cmd_table')"/>
   <command id="cmd_image"            oncommand="goDoCommand('cmd_image')"/>
@@ -146,8 +155,6 @@
   <command id="cmd_var"          state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_var')"/>
   <command id="cmd_tt"           state="false"     oncommand="ComposerCommands.doStyleUICommand('cmd_tt')"/>
 
-  <command id="cmd_encapsulate"                    oncommand="goDoCommand('cmd_encapsulate')"/>
-
   <command id="cmd_span"                           oncommand="goDoCommand('cmd_span')"/>
 
   <command id="cmd_paragraphState" state=""        oncommand="ComposerCommands.doStatefulCommand('cmd_paragraphState', event.target.value)"/>
@@ -186,40 +193,40 @@
             events="style,create"
             oncommandupdate="ComposerCommands.goUpdateComposerMenuItems(this);">
   <command id="cmd_selectionChanged"/>
-  <command id="cmd_undo" label="&undoCmd.label;" 
+  <command id="cmd_BGundo" label="&undoCmd.label;" 
            accesskey="&undoCmd.accesskey;"
-           oncommand="goDoCommand('cmd_undo')"
+           oncommand="goDoCommand('cmd_BGundo')"
            disabled="true"/>
-  <command id="cmd_redo" label="&redoCmd.label;"
+  <command id="cmd_BGredo" label="&redoCmd.label;"
            accesskey="&redoCmd.accesskey;"
-           oncommand="goDoCommand('cmd_redo')"
+           oncommand="goDoCommand('cmd_BGredo')"
            disabled="true"/>
-  <command id="cmd_cut" label="&cutCmd.label;"
+  <command id="cmd_BGcut" label="&cutCmd.label;"
            accesskey="&cutCmd.accesskey;"
-           oncommand="goDoCommand('cmd_cut')"
+           oncommand="goDoCommand('cmd_BGcut')"
            disabled="true"/>
-  <command id="cmd_copy" label="&copyCmd.label;"
+  <command id="cmd_BGcopy" label="&copyCmd.label;"
            accesskey="&copyCmd.accesskey;"
-           oncommand="goDoCommand('cmd_copy')"
+           oncommand="goDoCommand('cmd_BGcopy')"
            disabled="true"/>
-  <command id="cmd_paste" label="&pasteCmd.label;"
+  <command id="cmd_BGpaste" label="&pasteCmd.label;"
            accesskey="&pasteCmd.accesskey;"
-           oncommand="goDoCommand('cmd_paste')"
+           oncommand="goDoCommand('cmd_BGpaste')"
            disabled="true"/>
-  <command id="cmd_delete" label="&deleteCmd.label;"
+  <command id="cmd_BGdelete" label="&deleteCmd.label;"
            accesskey="&deleteCmd.accesskey;"
-           oncommand="goDoCommand('cmd_delete')"
+           oncommand="goDoCommand('cmd_BGdelete')"
            disabled="true"/>
-  <command id="cmd_selectAll" label="&selectAllCmd.label;"
+  <command id="cmd_BGselectAll" label="&selectAllCmd.label;"
            accesskey="&selectAllCmd.accesskey;"
-           oncommand="goDoCommand('cmd_selectAll')"
+           oncommand="goDoCommand('cmd_BGselectAll')"
            disabled="true"/>
   <command id="cmd_copyHTMLCode"
            oncommand="goDoCommand('cmd_copyHTMLCode')"
            disabled="true"/>
-  <command id="cmd_pasteNoFormatting" label="&pasteNoFormatting.label;"
+  <command id="cmd_BGpasteNoFormatting" label="&pasteNoFormatting.label;"
            accesskey="&pasteNoFormatting.accesskey;"
-           oncommand="goDoCommand('cmd_pasteNoFormatting')"
+           oncommand="goDoCommand('cmd_BGpasteNoFormatting')"
            disabled="true"/>
 
 </commandset>

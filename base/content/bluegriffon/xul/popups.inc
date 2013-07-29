@@ -166,17 +166,17 @@
                  onpopuphiding="CleanSpellCheckDictionaries()"/>
     </menu>
     <menuseparator/>
-    <menuitem id="cMenu_undo" key="key_undo"/>
-    <menuitem id="cMenu_redo" key="key_redo"/>
+    <menuitem id="cMenu_undo" key="key_BGundo" command="cmd_BGundo"/>
+    <menuitem id="cMenu_redo" key="key_BGredo" command="cmd_BGredo"/>
     <menuseparator/>
-    <menuitem id="cMenu_cut" key="key_cut"/>
-    <menuitem id="cMenu_copy" key="key_copy"/>
-    <menuitem id="cMenu_paste" key="key_paste"/>
+    <menuitem id="cMenu_cut" key="key_BGcut" command="cmd_BGcut"/>
+    <menuitem id="cMenu_copy" key="key_BGcopy" command="cmd_BGcopy"/>
+    <menuitem id="cMenu_paste" key="key_BGpaste" command="cmd_BGpaste"/>
     <menuitem label="&pasteNoFormatting.label;"
-              command="cmd_pasteNoFormatting"/>
-    <menuitem id="cMenu_delete" key="key_delete"/>
+              command="cmd_BGpasteNoFormatting"/>
+    <menuitem id="cMenu_delete" key="key_BGdelete" command="cmd_BGdelete"/>
     <menuseparator/>
-    <menuitem id="cMenu_selectAll" key="key_selectAll"/>
+    <menuitem id="cMenu_selectAll" key="key_BGselectAll"  command="cmd_BGselectAll"/>
     <menuseparator/>
     <menuitem id="cMenu_removeAllStyles"
               label="&removeAllStyles.label;"
