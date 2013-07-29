@@ -4,7 +4,7 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>fs@bluegriffon.com</em:id>
-    <em:version>1.0.1.7.2.99.20130722</em:version>
+    <em:version>1.0.1.7.2.99.20130729</em:version>
   
     <em:targetApplication>
       <!-- BlueGriffon -->
