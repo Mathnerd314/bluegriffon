@@ -2257,7 +2257,26 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        char specialChars[] = {TAB, nsCRT::LF, 0};
        while (unicodeBuf && (pos != -1) && (pos < (int32_t)inString->Length()))
        {
-@@ -4685,17 +4652,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
+@@ -3504,16 +3471,18 @@ nsHTMLEditRules::WillMakeBasicBlock(Sele
+   nsString tString(*aBlockType);
+ 
+   // contruct a list of nodes to act on.
+   nsCOMArray<nsIDOMNode> arrayOfNodes;
+   res = GetNodesFromSelection(aSelection, EditAction::makeBasicBlock,
+                               arrayOfNodes);
+   NS_ENSURE_SUCCESS(res, res);
+ 
++  ClearCachedStyles();
++
+   // Remove all non-editable nodes.  Leave them be.
+   int32_t listCount = arrayOfNodes.Count();
+   int32_t i;
+   for (i=listCount-1; i>=0; i--)
+   {
+     NS_ENSURE_STATE(mHTMLEditor);
+     if (!mHTMLEditor->IsEditable(arrayOfNodes[i]))
+     {
+@@ -4685,17 +4654,17 @@ nsHTMLEditRules::CreateStyleForInsertTex
                                                          0, -1);
          NS_ENSURE_SUCCESS(res, res);
        }
@@ -2276,7 +2295,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
      return aSelection->Collapse(node, offset);
    }
  
-@@ -6929,16 +6896,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6929,16 +6898,19 @@ nsHTMLEditRules::ReturnInListItem(nsISel
      }
      else
      {
@@ -2296,7 +2315,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
        NS_ENSURE_SUCCESS(res, res);
  
        // append a <br> to it
-@@ -6959,16 +6929,17 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6959,16 +6931,17 @@ nsHTMLEditRules::ReturnInListItem(nsISel
    NS_ENSURE_STATE(mHTMLEditor);
    res = nsWSRunObject::PrepareToSplitAcrossBlocks(mHTMLEditor, address_of(selNode), &aOffset);
    NS_ENSURE_SUCCESS(res, res);
@@ -2314,7 +2333,7 @@ diff --git a/editor/libeditor/html/nsHTMLEditRules.cpp b/editor/libeditor/html/n
    mHTMLEditor->GetPriorHTMLSibling(aListItem, address_of(prevItem));
  
    if (prevItem && nsHTMLEditUtils::IsListItem(prevItem))
-@@ -6990,16 +6961,18 @@ nsHTMLEditRules::ReturnInListItem(nsISel
+@@ -6990,16 +6963,18 @@ nsHTMLEditRules::ReturnInListItem(nsISel
          if (nodeAtom == nsEditProperty::dd || nodeAtom == nsEditProperty::dt)
          {
            int32_t itemOffset;
